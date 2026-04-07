@@ -281,6 +281,10 @@ function extractEquipment(data, filePath) {
   // Bulk
   base.blk = sys.bulk?.value ?? '';
 
+  // Weapon proficiency category (simple, martial, advanced) and group (sword, axe, etc.)
+  if (sys.category) base.wpnCat = sys.category;
+  if (sys.group) base.wpnGrp = sys.group;
+
   // Damage (weapons)
   if (sys.damage?.die) {
     base.dmg = `${sys.damage.dice || 1}${sys.damage.die} ${sys.damage.damageType || ''}`.trim();
