@@ -12,9 +12,14 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 <campaign-name>/
 ├── character-sheet.md    # Current stats, abilities, feats, equipment, spells
 ├── progression.md        # Level-up plans, build path, future feat/spell picks
-├── notes.md              # Session notes, story beats, important events
+├── world.md              # World-building, storyline, NPCs, locations, lore
 ├── tips.md               # Playstyle tips, tactics, combos, action economy
-└── dynamics.md           # Party dynamics, NPC relationships, plot threads
+├── dynamics.md           # Party dynamics, NPC relationships, plot threads
+├── style-guide.md        # Visual theme for session recap HTML (optional)
+└── sessions/
+    └── session-<N>-<MM>-<DD>-<YYYY>/
+        ├── recap.md      # Session recap — summary, events, loot, quotes
+        └── recap.html    # Styled HTML visual — timeline, character spotlights
 ```
 
 ## Campaigns
@@ -31,6 +36,8 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 - **Build discussions**: When discussing builds, reference specific feats, spells, and class features by name. Consider action economy and party synergy.
 - **System accuracy**: Be precise about which system (5e vs PF2e Remastered) rules apply. Do not mix rules between systems.
 - **Progression planning**: When planning levels, lay out feat/spell choices level by level.
-- **Session notes**: Keep notes concise but capture key decisions, loot, and story developments.
+- **Session processing**: Use `/process-session <campaign> <audio-file>` to transcribe recordings and generate session recaps (MD + HTML). The skill handles transcription, speaker mapping, recap generation, and proposes updates to world.md and dynamics.md.
+- **World file**: `world.md` tracks the campaign storyline, world-building, NPCs, and locations. Updated after each session.
+- **Style guides**: Each campaign can have a `style-guide.md` defining the HTML recap theme. Copy `style-guide-template.md` from the project root to create one.
 - **Tactics**: Focus on action economy, spell slot efficiency, and positioning.
 - **Ask Question Tool**: Use it regularly to help aid with thinking and asking questions about what Pax thinks.
