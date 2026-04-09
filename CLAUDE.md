@@ -30,6 +30,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `myrrindar/` | D&D 5e (2024 PHB) | Myrrindar — Winds of Warding | Fairy Bard (Mist) |
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) |
 | `raiders/` | D&D 5e | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
+| `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
 
 ## How to Help
 

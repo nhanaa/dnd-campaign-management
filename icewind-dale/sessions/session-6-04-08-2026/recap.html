@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 6 — The Hag's Cauldron</title>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+<style>
+  :root {
+    --bg-deep: #e8edf2;
+    --bg-card: #f4f7fa;
+    --bg-card-hover: #ffffff;
+    --border: #c4ced8;
+    --text: #2c3640;
+    --text-dim: #4a5a68;
+    --text-bright: #1a2530;
+    --red: #8b3a3a;
+    --red-glow: #8b3a3a22;
+    --blue: #2a5a8a;
+    --blue-glow: #2a5a8a22;
+    --green: #3a7a5a;
+    --green-glow: #3a7a5a22;
+    --purple: #6a4a8a;
+    --purple-glow: #6a4a8a22;
+    --teal: #3a7a7a;
+    --teal-glow: #3a7a7a22;
+    --gold: #3a6b8a;
+    --gold-dim: #5a8aaa;
+    --gold-glow: #3a6b8a22;
+    --avarath: #2a5a8a;
+    --kane: #2a6a4a;
+    --rathis: #5a3a7a;
+    --rune: #7a4a2a;
+    --thors: #7a3030;
+    --virel: #2a6a6a;
+  }
+
+  @keyframes frost-breathe {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.4; }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-deep);
+    background-image:
+      radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+  }
+
+  .frost-ambient {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 300px;
+    background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+    animation: frost-breathe 8s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: clamp(32px, 6vw, 54px);
+    font-weight: 400;
+    color: var(--text-bright);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  section { margin-bottom: 60px; }
+
+  .subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .subtitle span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin: 0 4px;
+  }
+
+  /* Composition Bar */
+  .composition-bar {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .comp-segment { transition: width 0.3s; }
+  .comp-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .comp-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+  }
+  .comp-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Party Cards */
+  .party-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .party-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--gold);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .party-card:hover {
+    box-shadow: 0 4px 16px #2a5a8a18;
+    border-color: #a0b0c0;
+    background: var(--bg-card-hover);
+  }
+  .party-card .name {
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text-bright);
+  }
+  .party-card .class {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .party-card .player {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .party-card .note {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 6px;
+  }
+  .party-card.npc {
+    opacity: 0.75;
+    border-left-style: dashed;
+  }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-event {
+    position: relative;
+    margin-bottom: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .timeline-event:hover {
+    box-shadow: 0 4px 16px #2a5a8a18;
+    border-color: #a0b0c0;
+  }
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -28px; top: 28px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg-deep);
+  }
+  .timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+  .timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+  .event-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .tag-combat { background: var(--red-glow); color: var(--red); }
+  .tag-exploration { background: var(--blue-glow); color: var(--blue); }
+  .tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+  .tag-lore { background: var(--teal-glow); color: var(--teal); }
+
+  .event-title {
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+  .event-body { color: var(--text); }
+  .event-body ul { padding-left: 20px; }
+  .event-body li { padding: 4px 0; }
+
+  /* Spotlight Cards */
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .spotlight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    border-left: 4px solid var(--gold);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .spotlight-card:hover {
+    box-shadow: 0 4px 16px #2a5a8a18;
+    border-color: #a0b0c0;
+  }
+  .spotlight-card .char-name {
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .spotlight-card ul { padding-left: 20px; }
+  .spotlight-card li { padding: 4px 0; }
+  .spotlight-card .highlight {
+    font-weight: 500;
+  }
+
+  /* Crit Box */
+  .crit-box {
+    background: linear-gradient(135deg, #dce8f0, #e8f0f6);
+    border: 1px solid #8aaabf;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .crit-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  /* Quotes */
+  .quote-card {
+    border-left: 3px solid var(--gold-dim);
+    background: #2a5a8a08;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    border-radius: 0 8px 8px 0;
+  }
+  .quote-text {
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .quote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Open Threads */
+  .thread-list { list-style: none; padding: 0; }
+  .thread-list li {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--gold);
+    transition: box-shadow 0.2s;
+  }
+  .thread-list li:hover {
+    box-shadow: 0 4px 16px #2a5a8a18;
+  }
+  .thread-title {
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+  .thread-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .thread-list li.cliffhanger {
+    border-left-color: var(--red);
+    background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+  }
+  .thread-list li.mystery {
+    border-left-color: var(--purple);
+  }
+  .thread-list li.lore-thread {
+    border-left-color: var(--teal);
+  }
+
+  /* Loot */
+  .loot-note {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    color: var(--text-dim);
+    text-align: center;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .party-grid { grid-template-columns: 1fr; }
+    .container { padding: 24px 16px 60px; }
+    .timeline { padding-left: 24px; }
+    .timeline-event { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>The Hag's Cauldron</h1>
+    <p class="subtitle">
+      <span>Session 6</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&D 5.5e</span>
+      <span>April 8, 2026</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:40%; background:var(--red);"></div>
+      <div class="comp-segment" style="width:20%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:30%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--teal);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--red);"></span>Combat 40%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Exploration 20%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 30%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Lore 10%</div>
+    </div>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 2</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--kane);">
+        <div class="name">Kane Whitefang</div>
+        <div class="class">Orc Druid 2</div>
+        <div class="player">Deiduke</div>
+      </div>
+      <div class="party-card npc" style="border-left-color: var(--rathis);">
+        <div class="name">Rathis Nox</div>
+        <div class="class">Elf Rogue 2</div>
+        <div class="player">NPC (DM-controlled)</div>
+        <div class="note">Player absent this session</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune Anstepa</div>
+        <div class="class">Tiefling Ranger 2</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 2</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Elf Wizard 2</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Evening at the White Lady Inn</div>
+        <div class="event-body">
+          <p>Bartaban, the elderly inn owner, gave the party free rooms for saving his bar from the poltergeist. The party split up for the evening &mdash; each taking rooms on different floors of the converted mansion.</p>
+          <ul>
+            <li><strong>Virel</strong> studied the murder evidence late into the night and suffered a mysterious magical effect &mdash; she failed a DC 10 Charisma save. The details were sent privately by the DM.</li>
+            <li><strong>Avarath</strong> talked with a local guard about Auril's endless winter. The guard mentioned she lives far north across the Sea of Moving Ice and suggested finding a Tempest Cleric for answers.</li>
+            <li><strong>Rune</strong> pressed the same guard about the murdered trapper. Nat 20 Insight revealed the guard was hiding something about Torg's Caravan. The guard deflected and left &mdash; Rune cast Message threatening him. Response: <em>"Be careful who you threaten."</em></li>
+            <li><strong>Avarath and Rune</strong> bonded over drinks, discussing the winter. Rune rolled nat 20 Religion, recalling the name <strong>"Island of Solstice"</strong> in connection to Auril.</li>
+            <li><strong>Kane</strong> talked to Selune (the moon) in his room, excited about Wild Shaping for the first time.</li>
+            <li><strong>Virel</strong> asked Bartaban about <strong>Drizzt</strong> &mdash; he once stayed at the inn, wrote extensively, asked about the White Lady, then vanished one night.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Setting Sail from Easthaven</div>
+        <div class="event-body">
+          <p>The party took a longboat northeast along the coast, searching for the missing Bunch o' Knuckle fishing crew. Kane fished off the back and caught a boot (nat 1 Survival).</p>
+          <p>After an hour, they spotted the crew's rowboat near 80-foot cliffs with four cave mouths. Thors rolled a <strong>nat 20 Survival</strong>: four clear humanoid footprints leading into the water-level cave, no signs of struggle &mdash; the crew entered willingly.</p>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Water Weird at the Frozen Waterfall</div>
+        <div class="event-body">
+          <p>Inside the cave, the party reached a 10-foot frozen waterfall. Kane rolled a <strong>nat 1</strong> climbing &mdash; his foot broke through thin ice and a serpentine creature grabbed his leg, dealing 8 cold damage.</p>
+          <ul>
+            <li>Rathis (nat 20 Strength) pulled Kane free; water poured through the hole</li>
+            <li>A <strong>Water Weird</strong> emerged &mdash; invisible in water, serpent-like with a draconic head</li>
+            <li>Virel used <strong>Shocking Grasp</strong> with advantage (water conductor) for 14 lightning damage</li>
+            <li>Kane wild shaped into a <strong>Deinonychus</strong> and tried speaking to it in Druidic</li>
+            <li>Thors' <strong>Sap</strong> weapon mastery gave the creature disadvantage, saving Virel from an attack</li>
+            <li>Party escaped by climbing above the waterfall where it couldn't follow</li>
+          </ul>
+          <p style="color: var(--text-dim); font-size: 14px;"><em>Lost: 1 javelin (Avarath), 1 spear (Thors) &mdash; dropped in the water</em></p>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Lore</span>
+        <div class="event-title">Frozen Giants and the Drowning Ritual</div>
+        <div class="event-body">
+          <p>Exploring the lower level, Rune discovered an open cavern &mdash; a former hot spring now frozen solid, with Auril's Rime visible through the open ceiling above. Beneath the ice lay the silhouettes of <strong>four frozen frost giants</strong>.</p>
+          <p>Virel identified them: elderly frost giants perform a <strong>drowning death ritual</strong> rather than die of old age or sickness. These giants drowned themselves in the hot spring, and the Rime froze the water over them.</p>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">The Old Woman and Her Cauldron</div>
+        <div class="event-body">
+          <p>Following the smell of cooked food, the party found an elderly woman stirring a cauldron of delicious-looking beef stew. Kane (as a tiny raptor) and Rune accepted bowls &mdash; it was genuinely good.</p>
+          <p>A faded <strong>blood trail</strong> led from behind the cauldron deeper into the caves. When Thors knocked his bowl away with a Monty Python quip, the woman threatened to call her "friend" &mdash; then <strong>transformed</strong>. Her jaw opened impossibly wide, her face peeled away, and a <strong>sea hag</strong> emerged: grayish-purple skin, bulging eyes, greasy black knotted hair.</p>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Sea Hag + Frost Giant Skeleton</div>
+        <div class="event-body">
+          <p>The hag's scream summoned her companion from the deeper caves.</p>
+          <h3 style="color: var(--red); margin-top: 12px;">Phase 1: The Sea Hag</h3>
+          <ul>
+            <li><strong>Frightening Presence</strong> (DC 11 WIS): Rune failed; Thors, Kane, Avarath passed</li>
+            <li>Thors: Action Surge for two hits (16 piercing) + Sap/Vex weapon masteries</li>
+            <li>Kane (Deinonychus): Pounce &mdash; bite + two claws for 17 damage</li>
+            <li>Rune: Longbow + Hunter's Mark for 7 damage</li>
+          </ul>
+          <div class="crit-box">
+            <div class="label">Killing Blow</div>
+            <p><strong>Avarath</strong> swung his maul into the hag's ribs and channeled <strong>Divine Smite</strong> through the strike &mdash; 15 radiant damage. She crumpled to the ground, dead in a single round.</p>
+          </div>
+
+          <h3 style="color: var(--red); margin-top: 20px;">Phase 2: Frost Giant Skeleton (CR 6)</h3>
+          <p>A massive skeleton with a huge axe emerged from deeper in the caves, bones clicking and cracking. It wailed with rage upon seeing the hag's body.</p>
+          <ul>
+            <li>Giant hit Avarath for 12 damage (3d12) and Thors for <strong>23 damage</strong> (out of 26 max HP)</li>
+            <li>DM intentionally skipped multi-attack &mdash; would have killed whoever was targeted</li>
+            <li>Rune tried speaking Giant: <em>"She's dead. You're free!"</em> &mdash; it roared in response</li>
+            <li>Party chipped away: Rune (14), Kane (15), Rathis (15), Virel (12), Thors (8)</li>
+            <li>Emergency healing: Rune &rarr; Healing Word on Thors (7 HP), Avarath &rarr; Lay on Hands (10 HP), Kane &rarr; Healing Word on himself (9 HP)</li>
+          </ul>
+          <div class="crit-box">
+            <div class="label">Critical Hit &mdash; Killing Blow</div>
+            <p><strong>Avarath</strong> rolled a <strong>natural 20</strong> with his maul. The skeleton was <strong>vulnerable to bludgeoning</strong> &mdash; 19 damage doubled to 38. He channeled <strong>Divine Smite</strong> with an extra d8 against undead for 19 radiant on top &mdash; <strong>57 total damage</strong>. The maul shattered its knee; the giant toppled and its ancient bones crumbled to dust.</p>
+            <p style="font-size: 14px; color: var(--text-dim); margin-top: 8px;">The DM confirmed: the party was not expected to survive this encounter.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Character Spotlights -->
+  <section>
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane</div>
+        <ul>
+          <li><span class="highlight">Two killing blows</span> &mdash; maul + Divine Smite on the hag, critical maul (19 bludgeoning doubled to 38) + Divine Smite (19 radiant) = 57 damage on the frost giant skeleton</li>
+          <li>Investigated Auril's winter with the guard; bonded with Rune over drinks discussing the Frostmaiden</li>
+          <li>Hesitated when saying "magic" to Rune &mdash; hinting at his deeper, personal connection to the winter</li>
+          <li>Almost retreated from the skeleton, got called out by Kane, turned around and crushed it</li>
+          <li>Cast Cure Wounds on Rune and used Lay on Hands on himself mid-combat</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--kane);">
+        <div class="char-name" style="color: var(--kane);">Kane Whitefang</div>
+        <ul>
+          <li><span class="highlight">Comedy king</span>: Nat 1 climbing (leg through ice), nat 1 fishing (caught a boot), nat 1 raptor perception (can't smell)</li>
+          <li>Tried diplomacy with every creature: Druidic with the Water Weird, called for peace with the hag</li>
+          <li>Wild Shaped into a Deinonychus &mdash; devastatingly effective with three attacks per turn</li>
+          <li>Ate the hag's people-stew as a tiny raptor holding a bowl: <em>"It's like Wendy's chili. It's made of old meat."</em></li>
+          <li>Talked to Selune (the moon) in his room like a kid showing a parent their drawing</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune Anstepa</div>
+        <ul>
+          <li><span class="highlight">Intelligence MVP</span>: Nat 20 Insight (guard is hiding something), nat 20 Religion (Island of Solstice)</li>
+          <li>Pressed the suspicious guard about the trapper murder and Torg's Caravan; cast Message to threaten him</li>
+          <li>Tried reasoning with the frost giant skeleton in Giant: "She's dead. You're free!"</li>
+          <li>Consistent ranged damage with Hunter's Mark throughout both major fights</li>
+          <li>Healed Thors with Healing Word when he was at 3 HP &mdash; possibly saving his life</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson</div>
+        <ul>
+          <li><span class="highlight">Tank of the session</span>: Took 23 damage from the frost giant (out of 26 max HP) and stayed standing</li>
+          <li>Dropped the Monty Python quote that triggered the entire hag encounter</li>
+          <li>Action Surge for double attacks on the hag; Sap mastery saved Virel from the Water Weird's attack</li>
+          <li>Nat 20 Survival tracking the fishermen's footprints into the caves</li>
+          <li>Used Second Wind to heal 6 HP while standing next to a furious frost giant skeleton</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae</div>
+        <ul>
+          <li><span class="highlight">Mysterious magical event</span>: Failed a Charisma save overnight while studying evidence &mdash; details unknown</li>
+          <li>Asked about Drizzt &mdash; learned he once stayed at the White Lady Inn years ago</li>
+          <li>Identified the frozen frost giants' drowning death ritual from her studies</li>
+          <li>Smart use of Shocking Grasp + water for advantage against the Water Weird (14 damage)</li>
+          <li>Voice of reason: <em>"Guys, we probably should run."</em> (No one listened.)</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card npc" style="border-left-color: var(--rathis); opacity: 0.8;">
+        <div class="char-name" style="color: var(--rathis);">Rathis Nox <span style="font-size: 12px; font-weight: 400; color: var(--text-dim);">(NPC)</span></div>
+        <ul>
+          <li>Nat 20 Strength check pulling Kane free from the Water Weird's grapple</li>
+          <li>Consistent sneak attack damage from hiding in both fights (11 + 15 damage)</li>
+          <li>Took 7 cold damage fleeing the Water Weird; barely made the waterfall climb (exactly DC 10)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot</h2>
+    <div class="loot-note">
+      No loot collected this session &mdash; the cave system exploration continues next session.<br>
+      <span style="font-size: 13px;">Lost: 1 javelin (Avarath), 1 spear (Thors) &mdash; claimed by the Water Weird's pool</span>
+    </div>
+  </section>
+
+  <!-- Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <div class="quote-text">"Strange women distributing bowls of soup in ice caves is no basis for a system of meeting people."</div>
+      <div class="quote-attr">Thors Ketterson &mdash; immediately before triggering a boss fight</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"If you guys would have just clearly eaten the people soup, we wouldn't be in this predicament."</div>
+      <div class="quote-attr">Kane Whitefang &mdash; as the frost giant skeleton enters</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I'll remember how helpful you were."</div>
+      <div class="quote-attr">Rune Anstepa &mdash; threatening the guard via Message</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Be careful who you threaten."</div>
+      <div class="quote-attr">The Easthaven Guard &mdash; responding via Message</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"It's an elemental. It's guarding this place. They're even-tempered. It's trying to protect its lair nest thing."</div>
+      <div class="quote-attr">Kane Whitefang (as a raptor) &mdash; trying to de-escalate</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Unwarranted violence has consequences."</div>
+      <div class="quote-attr">Kane Whitefang &mdash; after Thors and Avarath lose their weapons</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"The paladin is running away from the undead creature?"<br>"It's a tactical retreat, all right?"</div>
+      <div class="quote-attr">Kane & Avarath &mdash; before Avarath turned around and delivered the killing blow</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"It's either the hubris or the hit points."</div>
+      <div class="quote-attr">Rune Anstepa &mdash; on why wizards always go first</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"It's like Wendy's chili. It's made of old meat. The only part of cannibalism that's bad."</div>
+      <div class="quote-attr">Kane Whitefang &mdash; defending the hag's stew</div>
+    </div>
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="cliffhanger">
+        <div class="thread-title">What happened to the Bunch o' Knuckle crew?</div>
+        <div class="thread-desc">Four fishermen entered these caves 10 days ago. A blood trail behind the hag's cauldron leads deeper. The stew may have contained their remains. More cave to explore next session.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">What happened to Virel?</div>
+        <div class="thread-desc">Failed a mysterious DC 10 Charisma save overnight while studying evidence. Details sent privately by the DM. The party doesn't know yet.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Suspicious Easthaven Guard</div>
+        <div class="thread-desc">Tall, clean-shaven, short hair, expensive pocket watch. Hiding something about the trapper murder and Torg's Caravan. Threatened Rune via Message. Not a regular at the inn.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Island of Solstice</div>
+        <div class="thread-desc">Rune recalled this name (nat 20 Religion) in connection to Auril. Its significance and location remain unknown.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Drizzt's Connection to the White Lady Inn</div>
+        <div class="thread-desc">Drizzt visited years ago, stayed at the inn writing extensively in a book, asked about the White Lady legend, then vanished one night.</div>
+      </li>
+      <li>
+        <div class="thread-title">The Seance Clues are Connecting</div>
+        <div class="thread-desc">"Cauldron" &rarr; hag's cauldron. "Caves" &rarr; the coastal caves. "Invisible Dwarves" &rarr; duergar? "Ferry" &rarr; Easthaven Ferry frozen at the docks. The pieces are falling into place.</div>
+      </li>
+      <li>
+        <div class="thread-title">Three More Caves</div>
+        <div class="thread-desc">Only the water-level cave has been explored. Three higher caves (20-30 ft above the lake) remain, connected by an ice bridge visible from inside.</div>
+      </li>
+    </ul>
+  </section>
+
+  <footer style="text-align: center; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding-top: 20px; border-top: 1px solid var(--border);">
+    Rime of the Frostmaiden &mdash; Session 6 &mdash; April 8, 2026
+  </footer>
+
+</div>
+</body>
+</html>
