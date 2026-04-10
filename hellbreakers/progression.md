@@ -2,15 +2,16 @@
 
 ## Concept
 
-Tian Human (Dragonblood, Sovereign Dragon) Dueling Fighter. One jian, one free hand. Snagging Strike debuffer, Demoralize fear economy, Sure Strike crit-fisher. Bard (Warrior Muse) free archetype for Sure Strike, Courageous Anthem (party buff), and Dirge of Doom (enemy debuff). Occult tradition matches Sovereign Dragon blood. The dizi (bamboo flute) is the spellcasting focus, the melody a tribute to his lost brother Bai Feng.
+Tian Human (Dragonblood, Sovereign Dragon) Dueling Fighter. One jian (katana base, reflavored), one free hand. Snagging Strike debuffer → Slam Down/Crashing Slam at higher levels (with flanking handling Off-Guard). Demoralize fear economy, Sure Strike crit-fisher. Bard (Warrior Muse) free archetype for Sure Strike, Courageous Anthem (party buff), and Dirge of Doom (enemy debuff). Occult tradition matches Sovereign Dragon blood. The dizi (bamboo flute) is the spellcasting focus, the melody a tribute to his lost brother Bai Feng.
 
 ## Build Philosophy
 
-- **Dueling style** = one-handed jian + free hand. Dueling Parry for AC, Snagging Strike for Off-Guard, Demoralize for Frightened. Three tools, one free hand.
+- **Dueling style** = one-handed jian (katana: 1d6 S, deadly d8, two-hand d10, versatile P) + free hand. Dueling Parry for AC, Snagging Strike for Off-Guard (or Slam Down/Crashing Slam when flanking provides Off-Guard for free), Demoralize for Frightened. Three tools, one free hand.
 - **Bard Dedication (Warrior Muse)** = Sure Strike (crit fishing on Fighter accuracy), Courageous Anthem (+1 attack/damage/fear saves for whole party), Dirge of Doom (enemies Frightened, can't shake it). Occult tradition matches Sovereign Dragon. CHA-based, synergizes with face/Intimidation role.
 - **Martial Performance** = Striking while anthem is active extends duration by 1 round. The fighting IS the music.
 - **Dragonblood (Sovereign)** = fear immunity upgrade, Dragon Lore for free Intimidation + Diplomacy, future ancestry feats for resistances and breath weapon.
-- **Party role** = frontline tank/debuffer/buffer. Only melee frontliner. Controls battlefield with AoO + Snagging Strike Off-Guard + Demoralize Frightened + Courageous Anthem party buff.
+- **Hellbreaker Dedication (via Multitalented)** = Gained at level 9 through Human's Multitalented ancestry feat (Ancestry Paragon slot). Defy Hell stance at level 12 adds 2d8 spirit damage to Strikes — the anti-devil tool the party needs for Hell's Destiny. No Bard feats sacrificed.
+- **Party role** = frontline debuffer/buffer alongside Dragon Thaumaturge. Controls battlefield with AoO + Snagging Strike/Slam Down + Demoralize Frightened + Courageous Anthem party buff. Three melee bodies (Bai Jian, Thaumaturge, Construct) enable frequent flanking.
 
 ## Combat Loops
 
@@ -45,18 +46,20 @@ Tian Human (Dragonblood, Sovereign Dragon) Dueling Fighter. One jian, one free h
 **Anthem + offense:** Courageous Anthem → Sure Strike → Crashing Slam (Parry free). Party buffed, enemy prone, you crit-fished.
 **Breath turn:** Breath of the Dragon (30-ft cone vs Frightened Will saves) → Crashing Slam → Strike (Parry free)
 
-## Free Archetype Progression — Bard (Warrior Muse)
+## Free Archetype Progression — Bard (Warrior Muse) + Hellbreaker
+
+Bard fills levels 2-10. Hellbreaker Dedication comes free via Multitalented (Ancestry Paragon at 9), so Hellbreaker feats slot into free archetype at 12+ without sacrificing any Bard feats.
 
 | Level | Free Archetype Feat | What It Gives |
 |-------|-------------------|---------------|
-| 2 | **Bard Dedication (Warrior Muse)** | 2 occult cantrips, Performance trained, Warrior Muse access |
+| 2 | **Bard Dedication (Warrior Muse)** | 2 occult cantrips (Light, Guidance), Performance trained, Warrior Muse access |
 | 4 | **Basic Bard Spellcasting** | 1st-rank occult spell slot → **Sure Strike** |
 | 6 | **Basic Muse's Whispers → Martial Performance** | Striking while anthem active extends duration by 1 round |
 | 8 | **Anthemic Performance** | **Courageous Anthem** — +1 attack/damage/fear saves, 60-ft emanation, whole party |
 | 10 | **Advanced Muse's Whispers → Dirge of Doom** | Composition cantrip: enemies in 30-ft Frightened 1, can't reduce below 1 |
-| 12 | **Expert Bard Spellcasting** | Higher rank spell slots (up to 4th rank) |
-| 14 | **Occult Breadth** or **Advanced Muse's Whispers** | Expand slots or pick another Bard feat (Song of Strength, Rallying Anthem) |
-| 16+ | Flex | Options: Master Bard Spellcasting, Hellbreaker Dedication if desired |
+| 12 | **Defy Hell** (Hellbreaker) | Stance: Hellbreaker Strike = 2 actions, +2d8 spirit damage, +2 status vs mental. Anti-devil mode. |
+| 14 | **Expert Bard Spellcasting** or **Thorn in Hell's Side** | Higher rank spell slots OR crits with Hellbreaker Strike = Stunned 1 |
+| 16+ | Flex | Options: Master Bard Spellcasting, Return to the Pit! (Banishment 1/day) |
 
 ## Fighter Feat Progression
 
@@ -80,13 +83,13 @@ Tian Human (Dragonblood, Sovereign Dragon) Dueling Fighter. One jian, one free h
 ### Combat Flexibility Weapon Modes (Level 9+)
 Bai Jian carries multiple weapons. Daily flex feats enable different fighting styles:
 
-| Mode | Weapon | Flex Feat | When to Use |
-|------|--------|-----------|-------------|
-| **Dueling (default)** | Jian (longsword) | Anything situational | Most days — permanent feats cover this |
-| **Guan Yu (reach)** | Guandao (glaive) | Brutish Shove, Swipe, or Lunge | Open battlefields, chokepoints, multiple enemies |
-| **Archer (ranged)** | Composite shortbow | Point Blank Stance | Flying enemies, ranged-only encounters |
-| **Lockdown** | Jian | Combat Grab | Pinning casters, holding doorways |
-| **Anti-stealth** | Any | Blind-Fight | Invisible or concealed enemies |
+| Mode | Weapon | Stats | Flex Feat | When to Use |
+|------|--------|-------|-----------|-------------|
+| **Dueling (default)** | Jian (katana) | 1d6 S, deadly d8, versatile P | Anything situational | Most days — permanent feats cover this |
+| **Reach (Guan Yu)** | Naginata | 1d8 S, deadly d8, reach, versatile P | Brutish Shove, Swipe, or Lunge | Open battlefields, chokepoints, multiple enemies. Tian Xia weapon. |
+| **Nuclear** | Greatpick | 1d10 P, fatal d12 | Power Attack or Brutish Shove | Single-target boss deletion. Highest crit damage in the game. |
+| **Lockdown** | Jian | 1d6 S, deadly d8 | Combat Grab | Pinning casters, holding doorways |
+| **Anti-stealth** | Any | — | Blind-Fight | Invisible or concealed enemies |
 
 ## Ancestry Feat Progression — The Sovereign Dragon Path
 
@@ -100,7 +103,8 @@ The dragon feats are a separate power track that synergizes with the fear engine
 | 5 | Normal | **Traditional Resistances** | +1 status to AC/saves vs occult spells, +2 vs sleep/paralysis |
 | 7 | Paragon | **Breath of the Dragon** | 15-ft cone, mental damage, Will save. 4d4 at level 7. AoE the build was missing. Recharges in 1d4 rounds. |
 | 9 | Normal | **Formidable Breath** | Breath upgrades: 30-ft cone, d6s instead of d4s. 5d6 (17.5 avg) at level 9. |
-| 11 | Paragon | **Draconic Sight** | Low-light vision (long overdue, carry Light cantrip until then) |
+| 9 | Paragon | **Multitalented → Hellbreaker Dedication** | Free 2nd-level multiclass dedication (bypasses normal restriction). Devil Lore + Hellknight Lore + free Recall Knowledge on initiative. Unlocks Hellbreaker feats on free archetype slots. |
+| 11 | Paragon | **Draconic Sight** | Low-light vision (long overdue, carry Light cantrip until then). Retrain Light cantrip to Guidance or Message. |
 | 13 | Normal | **Debilitating Breath** | Failed breath save = **Stupefied 1** (mental damage type). Penalty to spell DCs, spell attacks, INT/WIS/CHA checks. |
 
 ### The Breath + Fear Combo (Level 9+)
@@ -146,15 +150,15 @@ Free AoE (no spell slots), recharges in 1d4 rounds, targets the save you're alre
 ## Key Spells (Bard — Occult)
 
 ### Cantrips (Level 2+)
-- **Detect Magic** — always useful
-- **Light** or **Prestidigitation** — utility pick (you're human, no darkvision)
+- **Light** — mandatory until Draconic Sight at level 11 (no darkvision). Cast before combat, lasts all day. Retrain at 11.
+- **Guidance** — 1 action, concentrate only (no hands needed). +1 status bonus to one roll for an ally. Use on 3rd action when Parry isn't needed and 3rd Strike would miss (MAP -10). Best cantrip for out-of-combat support in a 50/50 RP/combat campaign.
 
-### Compositions
-- **Courageous Anthem** (Level 8) — 1 action, +1 status to attack/damage/fear saves, 60-ft emanation, 1 round (extended by Martial Performance when you Strike)
-- **Dirge of Doom** (Level 10) — 1 action, enemies in 30-ft Frightened 1, can't reduce below 1. Feeds Shatter Defenses + Fearsome Brute.
+### Compositions (Focus Spells — Unlimited Use)
+- **Courageous Anthem** (Level 8) — 1 action, concentrate only. +1 status to attack/damage/fear saves, 60-ft emanation, 1 round (extended by Martial Performance when you Strike)
+- **Dirge of Doom** (Level 10) — 1 action, concentrate only. Enemies in 30-ft Frightened 1, can't reduce below 1. Feeds Shatter Defenses.
 
 ### Rank 1 (Level 4+)
-- **Sure Strike** — roll next attack twice, take better. THE reason for this archetype.
+- **Sure Strike** — 1 action, concentrate only. Roll next attack twice, take better. Ignores concealment. THE reason for this archetype. 10-minute immunity after use = once per fight nova.
 
 ### Higher Ranks (Level 12+)
 - TBD — occult spell list has strong debuffs: Slow, Synesthesia, etc.
@@ -184,8 +188,8 @@ Free AoE (no spell slots), recharges in 1d4 rounds, targets the save you're alre
 | **6** | Shatter Defenses + Martial Performance | Fear → permanent Off-Guard chain. Striking sustains anthem. |
 | **7** | Weapon Spec + Battlefield Surveyor + **Breath of the Dragon** | +3 damage, master Perception, 15-ft cone AoE. Dragon awakens. |
 | **8** | **Courageous Anthem** + Dueling Riposte | Party-wide +1 attack/damage + counterattack. The flute sings. |
-| **9** | Combat Flexibility + **Formidable Breath** | Daily flex feat + breath upgrades to 30-ft cone with d6s. |
+| **9** | Combat Flexibility + **Formidable Breath** + **Multitalented → Hellbreaker Dedication** | Daily flex feat + breath upgrades to 30-ft cone with d6s. Hellbreaker Dedication unlocked for free via Human Multitalented (Ancestry Paragon). |
 | **10** | **Dirge of Doom** + Crashing Slam | Enemies auto-Frightened + auto-prone on hit. Standing provokes Reactive Strike = free 4th attack. |
-| **12** | **Dueling Dance** + Expert Bard Spellcasting | Parry is free. Full 3 actions for offense + compositions. Peak Bai Jian. |
+| **12** | **Dueling Dance** + **Defy Hell** (Hellbreaker) | Parry is free. Hellbreaker Strikes deal 2d8 spirit damage — anti-devil mode online just as Hell's Destiny begins. |
 | **13** | Legendary swords + **Debilitating Breath** | Peak accuracy + breath inflicts Stupefied 1. The triple stack: Frightened + Off-Guard + Stupefied. |
-| **14** | Improved Dueling Riposte | Two reactions per round (AoO + Riposte). Untouchable. |
+| **14** | Improved Dueling Riposte + Expert Bard Spellcasting or Thorn in Hell's Side | Two reactions per round (AoO + Riposte). Higher spell slots OR stunned on Hellbreaker crit. |

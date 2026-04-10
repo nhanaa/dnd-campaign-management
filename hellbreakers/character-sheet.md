@@ -10,6 +10,7 @@
 - **Level**: 1
 - **Size**: Medium
 - **Speed**: 20 ft (25 base, -5 lamellar breastplate)
+- **Deity**: None (Atheists and Free Agents)
 - **Campaign**: Hellbreakers (Rise Up Isger and Join the Hellbreakers League!)
 - **System**: Pathfinder 2e Remastered
 - **Age**: 27
@@ -28,7 +29,7 @@
 
 ## Defenses
 
-- **AC**: 15 (10 + 1 level + 3 trained + 1 DEX cap) — **17 with Dueling Parry** (at level 2)
+- **AC**: 18 (10 + 3 proficiency + 1 DEX cap + 4 lamellar breastplate) — **20 with Dueling Parry** (at level 2)
 - **Max HP**: 20 (8 ancestry + 10 class + 2 CON)
 
 | Save | Prof | Modifier |
@@ -68,6 +69,7 @@
 | Diplomacy | Trained | +5 | Dragon Lore (overlap with Foreign Aid → free skill) |
 | Intimidation | Trained | +5 | Dragon Lore |
 | Acrobatics | Trained | +4 | Free skill from Diplomacy overlap |
+| Performance | Trained | +5 | Additional skill (for Bard Dedication at Lv2) |
 | Religion | Trained | +3 | Additional skill |
 | Survival | Trained | +3 | Additional skill |
 | Medicine | Trained | +3 | Additional skill |
@@ -87,17 +89,19 @@
 ## Equipment
 
 ### Weapons
-- **Jian** (Longsword): 1d8 S, versatile P — "The gentleman of weapons"
+- **Jian** (Katana): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons." Uncommon, Sword group.
 - **Javelin ×5**: 1d6 P, thrown 30 ft
 
 ### Armor
 - **Lamellar Breastplate**: +4 AC, DEX cap +1, check penalty -2, speed -5 ft. Composite group, laminar/hindering traits. Lacquered steel slats with silk cord.
 
 ### Gear
-- Bedroll, Rope (50 ft), Grappling Hook, Climbing Kit, Caltrops, Earplugs, Storage adjustment (on armor)
+- Backpack (holds 4 Bulk, first 2 don't count)
+  - Bedroll, Rope (50 ft), Waterskin, Chalk ×10, Flint & Steel, Rations ×2 (14 days), Torches ×5, Soap
+- Climbing Kit (50 ft rope, pulleys, pitons, hammer, grappling hook, crampons)
 
 ### Wealth
-- 3 gp, 9 sp, 8 cp
+- 3 gp, 4 sp
 
 ## Appearance
 

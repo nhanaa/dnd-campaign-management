@@ -6,7 +6,8 @@
 - **System**: Pathfinder 2e Remastered
 - **Setting**: Isger, Inner Sea region, Golarion
 - **Variant Rules**: Free Archetype, Gradual Ability Boost, Ancestry Paragon
-- **Theme**: Revolution against infernal tyranny. Gothic horror meets high fantasy.
+- **Theme**: Revolution against infernal tyranny. Gothic horror meets high fantasy. 50/50 combat and roleplay (flexible based on party decisions).
+- **Availability**: All Common and Uncommon options available. Rare options require DM approval — story-driven or fun reasons are usually accepted.
 - **GM**: Kaazz (StartPlaying)
 - **Schedule**: Weekly, Saturday 6:00 PM CDT, 3 hours
 - **Platform**: Foundry VTT (The Forge) + Discord
