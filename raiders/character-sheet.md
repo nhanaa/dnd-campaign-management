@@ -10,7 +10,7 @@
 | **Background** | Vigilant One |
 | **Alignment** | Neutral Good |
 | **Clan** | Hallharn |
-| **Glory Points** | 0 |
+| **Glory Points** | 1 |
 
 ## Ability Scores
 

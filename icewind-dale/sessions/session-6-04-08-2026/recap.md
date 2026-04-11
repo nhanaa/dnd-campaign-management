@@ -225,3 +225,53 @@ Following the smell of cooked food deeper into the caves, the party encountered 
 
 > "It's either the hubris or the hit points."
 > — **Rune**, on why wizards always go first
+
+---
+
+## Pax's Notes — Avarath's Journal
+
+*Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.*
+
+### What Avarath did this session
+
+- **Worked the room at the White Lady Inn** under the cover of "buddy-buddy" talk with a local guard. He played a slow, reserved hand — asking about the execution, about magic, about the Frostmaiden — never pressing when the guard went quiet. The guard noted him as *"reserved, as in he wants to keep to himself more than nerves. Doesn't trust you yet."* That's fine. That's the read Avarath wants people to have.
+- **Asked directly how to get an audience with Auril.** Out loud. To a stranger. This is the first time he has spoken the real goal to anyone in this world — and he buried it inside a casual conversation about the weather. The guard's answer (*"find a Tempest Cleric"*) is the first concrete lead he has.
+- **Hesitated on the word "magic"** when talking to Rune later, and the DM made a point of calling the hesitation out. Avarath is trying to understand the Rime without admitting *why* it matters to him.
+- **Sat in the corner of the inn "thinking about something deeply."** That is House Solvane's cold halls, replayed in the firelight.
+- **Healed Rune with Cure Wounds** on the way upstairs after drinks. Played it as grudging: *"sigh, and actually go cast a Cure Wound on him — just for fun. Well, not for fun, but yeah."* Pax's read: Avarath *wants* to like Rune, and he's not letting himself admit it.
+- **Water Weird fight**: thrown javelin into invisible water, *wasted it*. Held back after that — couldn't see the target. Important lesson — range weapons against invisible enemies in water are worthless.
+- **Stared down the sea hag** in her disguise. Said nothing. "Everett is going to stay back and just stare at the woman." Wanted to throw a javelin the moment she started monologuing and regretted not doing it: *"I was so tempted to just throw a javelin at her when she started talking, I should have done that."*
+- **Killing blow #1 — the hag.** Walked up, swung the maul, activated Divine Smite as a bonus action. In-character: *"let the divine smite force through her body. He doesn't like a creature this ugly."*
+- **The pivot moment.** The frost giant skeleton steps out of the deeper cave and Avarath locks eyes on it: *"I shall take down this creature next."* He said it out loud, in front of the party, before he knew it was CR 6. That wasn't bravado — that was a vow.
+- **Took 12 damage** from the giant's axe. The tactical retreat was a fake-out to heal with Lay on Hands (10 HP on himself) and come back.
+- **The line**: *"I'll never run from this guy. I shall take it down."*
+- **Killing blow #2 — the frost giant skeleton.** Crit with the maul. 19 bludgeoning doubled to 38 via vulnerability, plus Divine Smite (19 radiant with +1d8 vs undead). **57 damage.** Hit it in the knee, toppled it. Rune had predicted the knee hit. Avarath: *"Rune hit the nail on the head with that."* Then, smiling slightly: *"Basically, it's like, it's destiny, you know."*
+
+### Things Avarath knows that the party does not
+
+- **Auril is the reason he is here.** Not "the reason we're here" — the reason *he* is here. Icewind Dale is the closest lead he has found to whatever destroyed House Solvane. The Rime covering the sky looks and *feels* like what he watched freeze his home from the inside out.
+- **The guilt.** Avarath believes he may have drawn Auril's attention as a child through the forbidden moonlit pond. That is why asking for an audience with her is both his mission and his penance.
+- **The tactical retreat in the skeleton fight was a lie.** Pax played it as cowardice to needle Kane, but Avarath was buying time to heal, reset position, and then deliver the killing blow himself. He does not intend to share this with Kane.
+- **He is rationing spell slots aggressively.** Only 2 first-level slots, and he spent one on Cure Wounds for Rune in the inn — a "luxury" cast. The other on Divine Smite for the hag. He still has one Smite-free cast from Paladin's Smite (1/LR) that he did not use this session. Keep track of it going forward.
+- **The maul is now his signature weapon**, not the greatsword. Topple + vulnerability against skeletal undead was decisive this session. But the greatsword is still the last proof House Solvane existed — he cannot stop carrying it, even if the maul is doing the work in practice.
+
+### What Avarath is thinking about
+
+- **Find a Tempest Cleric.** This is the single most actionable lead from the session. Easthaven doesn't seem to have one. The next town along the route, or the capital of whatever passes for organized worship here, should be next.
+- **The Island of Solstice** — Rune's nat 20 Religion recall. If it's tied to Auril, it is *where Avarath is eventually going*. File the name.
+- **The audience question.** Auril is a god. A paladin asking a god for a face-to-face meeting is not the same as a cleric praying for advice. If it works at all, it works on her terms — and her terms will probably involve ordeal, loss, or a bargain. Be ready.
+- **The Sea of Moving Ice.** That is the physical obstacle between Avarath and the answer. Solving the coastal caves is peanuts compared to what crossing the Sea will take. Start thinking about boats, supplies, and who in the party actually wants to come.
+- **The mood rule:** Avarath leaked more this session than he meant to — the hesitation, the corner-sitting, the audience question. Tighten up. Rune in particular has noticed something, and Rune is smart.
+- **Rune specifically.** Drinks at the inn went well. Rune knows the land, has good Religion, good Insight, and pressed the guard with exactly the right instincts. If Avarath ever trusts one party member with the real reason he's in Icewind Dale, it will be Rune first. Not yet, though.
+- **Kane's needling** (*"The paladin is running away from the undead creature?"*) is going to become a running bit. Lean into it. Play it grumpy. It gives the rest of the party a reason to see Avarath as a rigid paladin stereotype rather than someone carrying a secret.
+- **Spell prep for next session.** Bless is always worth the slot. Consider swapping Wrathful Smite for something more broadly useful if the next fight is not single-target — Wrathful Smite is weaker than just Divine-Smiting the target. Discuss with the DM whether Shield of Faith fits the Oath.
+
+### Open questions for next session
+
+- What happens if a paladin prays to a hostile god? Is it answered?
+- Does Avarath's pond story connect to any of the séance clues? ("Cauldron," "Caves," "Invisible Dwarves," "Ferry" — none obviously fit, but the Rime connection might.)
+- **The Easthaven Ferry** is frozen near the inn. Is that a coincidence or is it the "Ferry" clue? Worth investigating before leaving Easthaven.
+- Drizzt stayed at the White Lady Inn and *asked about the White Lady*. Drizzt is Drizzt — if he was hunting the same kind of winter Avarath is, that is a massive signpost.
+- What did Virel learn from the murder evidence, and what *happened* to her when she failed the CHA save? Pax is not supposed to know, but Avarath should probably notice if she's acting different.
+- The guard with the pocket watch is lying about the murdered trapper. If the murders here are not Auril, they are something else — and something else in Icewind Dale is its own kind of lead.
+
