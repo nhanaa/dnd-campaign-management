@@ -9,7 +9,7 @@
 - **Class**: Fighter
 - **Level**: 1
 - **Size**: Medium
-- **Speed**: 20 ft (25 base, -5 lamellar breastplate)
+- **Speed**: 25 ft (base; Str 18 ≥ breastplate's Str 16 threshold → -5 speed penalty negated)
 - **Deity**: None (Atheists and Free Agents)
 - **Campaign**: Hellbreakers (Rise Up Isger and Join the Hellbreakers League!)
 - **System**: Pathfinder 2e Remastered
@@ -93,7 +93,7 @@
 - **Javelin ×5**: 1d6 P, thrown 30 ft
 
 ### Armor
-- **Lamellar Breastplate**: +4 AC, DEX cap +1, check penalty -2, speed -5 ft. Composite group, laminar/hindering traits. Lacquered steel slats with silk cord.
+- **Breastplate**: +4 AC, DEX cap +1, check penalty -2 (negated by Str 18 ≥ Str 16 threshold), speed -5 ft (negated by Str 18 ≥ Str 16 threshold). Composite group.
 
 ### Gear
 - Backpack (holds 4 Bulk, first 2 don't count)

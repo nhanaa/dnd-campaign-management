@@ -4,7 +4,7 @@
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Bard (Warrior Muse) | Pax |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Marshal (Dread) + Exemplar ⚠️ | Pax |
 | ??? | ??? | Dragon Thaumaturge | TBD | TBD |
 | ??? | Goblin | Alchemist | TBD | TBD |
 | Danger Dan | Goblin | Inventor (Construct innovation) | TBD | Cherry |
@@ -15,9 +15,9 @@
 - **Frontline**: Bai Jian (Fighter) + Dragon Thaumaturge — two melee fighters, both dragon-blooded
 - **Healing**: Catfolk Witch (Medic dedication)
 - **Damage**: Dragon Thaumaturge (Exploit Vulnerability + Strikes), Goblin Alchemist (bombs/mutagens), Goblin Inventor (construct)
-- **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14, Performance via Bard)
-- **Buffs**: Bai Jian (Courageous Anthem at level 8 — +1 attack/damage/fear saves party-wide), Goblin Alchemist (elixirs, mutagens)
-- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Dirge of Doom at level 10), Dragon Thaumaturge (Exploit Vulnerability)
+- **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14)
+- **Buffs**: Bai Jian (Dread Marshal Stance at level 4 — +1 status damage aura scaling with weapon dice to +2/+3/+4, Cadence Call party mobility at level 6, Steel Yourself ally emergency button at level 8, Victor's Wreath +1 status attack aura at level 16 if Additional Ikon), Goblin Alchemist (elixirs, mutagens)
+- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Dread Marshal crit-Frighten rider, Shatter Defenses Off-Guard chain, Breath of the Dragon AoE Will save), Dragon Thaumaturge (Exploit Vulnerability)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
 - **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Thaumaturge (Esoteric Lore — covers everything), Panacea (Religion, Occultism likely), Alchemist (Crafting likely)
 
@@ -34,20 +34,22 @@
 ### Bai Jian + Dragon Thaumaturge
 - Core frontline duo. Both dragon-blooded — narratively and mechanically aligned.
 - Thaumaturge uses Exploit Vulnerability for bonus damage; Bai Jian makes targets Off-Guard + Frightened so their Strikes land and crit.
-- Courageous Anthem buffs Thaumaturge's attacks further.
+- Dread Marshal Stance's +1 (scaling) status damage aura buffs the Thaumaturge's Strikes directly, since the Thaumaturge stays within the 15-ft aura as a melee frontliner.
 - Two melee threats with AoO/reaction pressure — enemies have nowhere safe to stand.
 
 ### Bai Jian + Panacea (Catfolk Witch — Divine, Medic)
-- Protect the healer at all costs. Stay within 30 ft when possible.
+- Protect the healer at all costs. Stay within 15 ft when possible to keep Panacea inside Dread Marshal's aura.
 - **Paradox of Opposites patron**: Trade Death for Life hex cantrip (free action economy healing). Familiar of Paired Perplexity = casting ANY hex inflicts **Stupefied 1** on a nearby enemy for free.
-- **Divine tradition**: Heal spell, Divine Lance (spirit damage cantrip), Protection, Restoration. Covers the party's divine gap.
+- **Divine tradition**: Heal spell, Divine Lance (spirit damage cantrip), Protection, Restoration. Covers the party's divine gap — which is why Bai Jian dropped Hellbreaker archetype entirely. Panacea's Banishment at rank 5 covers anti-devil needs.
 - **Debuff synergy**: Bai Jian's Frightened + Off-Guard reduce enemy saves → Panacea's divine spells land more often. Panacea's familiar Stupefied 1 stacks with Bai Jian's Frightened for -2 to enemy spell DCs/mental checks.
-- Medic dedication means reliable in-combat healing via Battle Medicine (no spell slot). Bai Jian is the primary damage sponge.
+- **Spirit damage overlap**: Bai Jian's Gleaming Blade ikon does spirit damage per weapon die (level 9+), Panacea does Divine Lance spirit damage — two spirit damage sources cover fiend encounters from both frontline and backline.
+- Medic dedication means reliable in-combat healing via Battle Medicine (no spell slot). Bai Jian is the primary damage sponge, with Battle Medicine (skill feat at level 10) as his personal backup self-heal when Panacea is out of reach.
 
 ### Bai Jian + Goblin Alchemist
 - Alchemist is squishy with mediocre attack accuracy. Bai Jian's AoO zone protects them.
-- Courageous Anthem patches the Alchemist's attack bonus (+1 to bomb Strikes).
-- Off-Guard from Snagging Strike helps bombs land.
+- Dread Marshal Stance's +1 status damage aura scales the Alchemist's bomb damage if they stay within 15 ft (common during fights — Alchemists often throw bombs from within the frontline).
+- Off-Guard from Snagging Strike / Crashing Slam Prone helps bombs land at reduced AC.
+- At level 16+ with Additional Ikon → Victor's Wreath empowered, the +1 status attack bonus covers the Alchemist's accuracy gap (the original reason for Courageous Anthem in the old plan).
 - Alchemist can hand out elixirs and mutagens — Bai Jian benefits from any STR/CON mutagens or healing elixirs.
 
 ### Bai Jian + Goblin Inventor (Danger Dan)
