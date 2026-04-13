@@ -96,7 +96,7 @@ body::before {
 | **Bai Jian** (Dueling Fighter) | Ivory | `--ivory` | `#d8cab0` | 白剑 "white blade" — the jian, silver, steel, Tian honor |
 | **Cyrathul** (Thaumaturge) | Violet | `--violet` | `#8a5aa4` | The purple dragon — Mirror Cloak, lunar observatory, twilight |
 | **Panacea** (Witch — Divine) | Teal | `--teal` | `#4a9088` | Catfolk witch, Paradox of Opposites, divine tradition, cool healer |
-| **Moog** (Alchemist) | Jade | `--jade` | `#5a9060` | Goblin alchemist — elixirs, bombs, herbs, acid |
+| **Moob** (Alchemist) | Jade | `--jade` | `#5a9060` | Goblin alchemist — elixirs, bombs, herbs, acid |
 | **Fang** (Inventor — Wing) | Rust | `--rust` | `#b06030` | Goblin inventor, wolf-motorcycle construct, fire from Wing's tailpipe |
 
 ## Component Notes

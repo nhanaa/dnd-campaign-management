@@ -15,7 +15,7 @@
 | **Bai Jian** | Human (Tian Dragonblood) — Dueling Fighter | Pax |
 | **Cyrathul** | Medium-sized winged Dragon — Thaumaturge (Mirror Cloak) | Snowgeen |
 | **Panacea** | Catfolk — Witch (Paradox of Opposites, Medic) | Bog Witch |
-| **Moog** | Goblin — Alchemist (Quick Bomber, Wallop Stick) | Harrgoth |
+| **Moob** | Goblin — Alchemist (Quick Bomber, Wallop Stick) | Harrgoth |
 | **Fang** | Goblin — Inventor (Construct: **Wing** the wolf-motorcycle) | Cherry |
 
 ---
@@ -38,26 +38,26 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 ### Act 1 — The Cadence Keg (Breachill)
 - Arrival to cheers and applause: Brynn Tate the barkeep comps the party's drinks on the house ("Caden is buying for everyone tonight"). The tower on the hill is still echoing with the aftermath of the Battle of Breachill.
-- **First impressions**: Bai Jian is bewildered by the medium-sized dragon in the corner booth. Fang rolls up on Wing. Moog fends off questions about his draconic mother. Panacea watches, quiet.
+- **First impressions**: Bai Jian is bewildered by the medium-sized dragon in the corner booth. Fang rolls up on Wing. Moob fends off questions about his draconic mother. Panacea watches, quiet.
 - **Ethran Howell** is pointed out in the corner, surrounded by townsfolk commiserating about his missing left arm.
 - **Storytelling Contest** ("Past Battles", judged by crowd reaction):
   - **Fang** exaggerates wildly (10-ft Hellknight, gauntlet-only kill). Crowd: polite golf clap.
-  - **Moog** intimidates with "bombs made from rendered enemy fat". Crowd: uncertain.
+  - **Moob** intimidates with "bombs made from rendered enemy fat". Crowd: uncertain.
   - **Cyrathul** recites "a battle I observed from my lunar observatory" via Esoteric Lore. The tavern is transfixed — none of them have ever seen a dragon before.
   - **Bai Jian** tells the solemn story of hunting an oni in Tian Xia, mentioning "the other person I fought beside."
-  - **Fang's encore** — ridden by Moog, Fang charges Wing through the common room doing wheelies. Bottles are popped. The roof nearly shakes down.
-  - **Winner: Fang.** Brynn awards **two top-shelf whiskeys.** Fang immediately chugs one flat on his back; Moog lays him on his side for safety.
+  - **Fang's encore** — ridden by Moob, Fang charges Wing through the common room doing wheelies. Bottles are popped. The roof nearly shakes down.
+  - **Winner: Fang.** Brynn awards **two top-shelf whiskeys.** Fang immediately chugs one flat on his back; Moob lays him on his side for safety.
 - Ethran takes his leave early, citing exhaustion. Plans to meet in the morning.
 - **Brynn gifts the party two minor healing potions** for the road.
-- Night rest: Bai Jian, Cyrathul, and Panacea take the military camp outside town. Moog and Fang camp in the refuse pile (hoping to scavenge parts for Wing).
+- Night rest: Bai Jian, Cyrathul, and Panacea take the military camp outside town. Moob and Fang camp in the refuse pile (hoping to scavenge parts for Wing).
 
 ### Act 2 — The Decree & The Road
 - **Morning of the 8th of Lamson.** The town's mood has flipped. A decree from *Stuart Hedvind VII* has been posted: cash rewards for turning in suspected rebels. Brynn Tate slams a copy down on the bar.
 - Ethran is somber and already peeling the Eagle Knight insignia off his breastplate. Plans change: no side stops, straight to Saringallow, everyone travels incognito. Any symbols of allegiance go in the wagon's locked trunk.
-- **Moog** fulfills his promise and quick-crafts a **numbing tonic** for Ethran's phantom pain from the missing arm. Ethran drinks it; color returns to his face.
-- Moog also preemptively melts the Chelaxian/Eagle insignia off his **Wallop Stick** with acid, then spars with Fang/Wing to make sure the rebalanced weapon still swings true.
-- Moog prepares a **Tenderizer Grenade** for Cyrathul ("makes anything taste amazing and off-guards them to bite attacks — you bite things, right?").
-- **Day 4 of travel** — the wagon stops in **Draymoor**, a muddy farming village. While Ethran restocks at the general store, four drunks wearing homemade Chelaxian badges swagger over. Moog plays the humble-goblin card ("you some officer of this town?"); Bai Jian de-escalates; Panacea watches ("I don't trust you, cat"). The badges back off without a fight. **+30 XP for defusing.**
+- **Moob** fulfills his promise and quick-crafts a **numbing tonic** for Ethran's phantom pain from the missing arm. Ethran drinks it; color returns to his face.
+- Moob also preemptively melts the Chelaxian/Eagle insignia off his **Wallop Stick** with acid, then spars with Fang/Wing to make sure the rebalanced weapon still swings true.
+- Moob prepares a **Tenderizer Grenade** for Cyrathul ("makes anything taste amazing and off-guards them to bite attacks — you bite things, right?").
+- **Day 4 of travel** — the wagon stops in **Draymoor**, a muddy farming village. While Ethran restocks at the general store, four drunks wearing homemade Chelaxian badges swagger over. Moob plays the humble-goblin card ("you some officer of this town?"); Bai Jian de-escalates; Panacea watches ("I don't trust you, cat"). The badges back off without a fight. **+30 XP for defusing.**
 - Ethran returns with an **Atrophy Bomb** and a **Potency Crystal** (party stash).
 - They press on for several more hours rather than sleep under Draymoor's watch. A quiet night of travel and a calm river camp follow.
 
@@ -65,7 +65,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - **Day 5/6** — the party arrives at the **North Kansira River** just before dusk. The ferry has just departed for the far bank. They settle in to wait.
 - Perception checks ping on the horizon — two large flying creatures, closing *fast*. Ethran, unarmed and one-armed, rolls initiative as party cheerleader.
 - **Combat: Two Dread Bats (undead)** — see Combat Encounters below.
-- After the fight, Moog harvests bat cartilage for **versatile vials** and quick-crafts a **healing potion for Panacea** in gratitude for her Divine Lance. Cyrathul quips: *"I'm just glad we got attacked before we got onto the ferry."*
+- After the fight, Moob harvests bat cartilage for **versatile vials** and quick-crafts a **healing potion for Panacea** in gratitude for her Divine Lance. Cyrathul quips: *"I'm just glad we got attacked before we got onto the ferry."*
 - **Otto the ferryman** returns, spooked by what he saw from midstream. He gossips: *"My cousin told me the dead have been mighty restless ever since all that god-stuff fell from the sky. She thinks it has something to do with the lich that lives on Lake Encarthan."* The party crosses without incident and rests at the inn on the far side.
 
 ### Act 4 — Saringallow & the Hellbreaker Basement
@@ -75,8 +75,8 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - **Rhokrag**, a tall hobgoblin, greets them first, a little too bluntly. **Zara**, a halfling, shoos him off and offers reheated pies. She is clearly exhausted and near tears about everything that's happening.
 - **News from HQ**: Alceo Demetrias and Phoebe Demetrias are currently in **Eladir**, dealing with the fallout of Hedvind's bounty decree.
 - **Ethran's Gift**: He drags his trunk down the stairs one-armed, opens it, and pulls out a **+1 Eagle Knight greatsword** with an eagle on the pommel. *"I can't swing it with only one arm. It would be better in your hands."* He commits to stepping back from the field and dedicating himself to strategy and training.
-- **Moog and Fang immediately pitch**: extract the +1 rune and transfer it to Bai Jian's jian. They also float the idea of building Ethran a **hydraulic goblin-tech prosthetic arm** that could wield a two-handed weapon again. Ethran looks surprised and pleased.
-- Bai Jian respectfully declines the greatsword itself ("it means a lot to him, maybe someone else can use it better") and *initially* agrees to leave his jian with Moog for the rune transfer — *"Just please, take care of my sword. It's very precious to me."* Then Moog hits his crafting check, realizes the transfer will take **a full day**, not an hour, and Zara immediately delivers the warehouse mission: *"I'd really like for you all to go check and make sure she's okay."* Kaazz confirms the urgency (*"you might need it, because I need you guys to do something for me first"*). **Transfer deferred.** Bai Jian keeps his jian. The +1 greatsword is leaned against one of the wine barrels at the workshop corner for later. Moog and Fang claim that corner as their alchemy/inventing space regardless — Wing parks inside.
+- **Moob and Fang immediately pitch**: extract the +1 rune and transfer it to Bai Jian's jian. They also float the idea of building Ethran a **hydraulic goblin-tech prosthetic arm** that could wield a two-handed weapon again. Ethran looks surprised and pleased.
+- Bai Jian respectfully declines the greatsword itself ("it means a lot to him, maybe someone else can use it better") and *initially* agrees to leave his jian with Moob for the rune transfer — *"Just please, take care of my sword. It's very precious to me."* Then Moob hits his crafting check, realizes the transfer will take **a full day**, not an hour, and Zara immediately delivers the warehouse mission: *"I'd really like for you all to go check and make sure she's okay."* Kaazz confirms the urgency (*"you might need it, because I need you guys to do something for me first"*). **Transfer deferred.** Bai Jian keeps his jian. The +1 greatsword is leaned against one of the wine barrels at the workshop corner for later. Moob and Fang claim that corner as their alchemy/inventing space regardless — Wing parks inside.
 
 ### Act 5 — The Everbloom Imports Warehouse (Cliffhanger)
 - New assignment from Zara: **Gertrude Middenhelm**, a punctual junior Hellbreaker, went out to inventory a scheduled delivery at the Everbloom Imports warehouse (a Hellbreaker cover) and *hasn't come back*. Please check on her.
@@ -116,18 +116,18 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - Affirmed the session's religious-tolerance moment with her most characteristic line yet: *"I agree. I like that answer."*
 - Also confirmed a strong stance on the Draymoor drunks: *"I agree. They're cat-haters."*
 
-### Moog
+### Moob
 - **Action economy MVP** of combat 1: **Bottled Lightning** (via Quick Bomber — strike + draw in one action, off-guard rider), **Create a Diversion** on the second bat, then a **Ghost Charge** via Quick Alchemy once Bai Jian confirmed undead — positive damage + splash bathed the whole party in light and inflicted **Enfeebled 1**. Capped with **Wallop Stick Parry** to close the turn.
 - **Goblin Scuttle** moved him behind Bai Jian without provoking.
 - Roleplay highlight: made **Ethran's numbing tonic** on the spot, warned him to drink it immediately before the 10-min quick-alchemy timer ran out, and re-approached him hours later with *"how's that numbing tonic, Baron?"* — first real cross-party bonding moment of the session.
-- Raised Fang from an egg in his lab — "and yeah, war happened." Fang calls Moog's abandoned weapon bunker "his garage for Wing".
+- Raised Fang from an egg in his lab — "and yeah, war happened." Fang calls Moob's abandoned weapon bunker "his garage for Wing".
 - Offered Cyrathul a **Tenderizer Grenade** seasoned for his draconic jaws: *"I hold it over your nose as well, like smelling salts. I hope this flavor is okay with you."*
 - Pitched the hydraulic prosthetic arm for Ethran; claimed the alchemy corner in the HQ basement.
 - **Caught the eye of Ina, the sun goddess.** Inspiration struck mid-craft and he invented a **star grenade** — *"she saw my craft and gave me inspiration."* He wants nothing to do with her clergy ("her priests let out solar radiation") but won't douse fires with water either — *"that'll just get her angry."*
 
 ### Fang
-- Dragged in on **Wing**, his wolf-motorcycle construct. Goblin-sized, dragonblooded (distinctly draconic teeth, revealed mid-sausage), raised by Moog.
-- Stole the tavern contest with a **wheelie reenactment** through the common room — Moog riding backwards on his back — culminating in two top-shelf whiskeys as the prize.
+- Dragged in on **Wing**, his wolf-motorcycle construct. Goblin-sized, dragonblooded (distinctly draconic teeth, revealed mid-sausage), raised by Moob.
+- Stole the tavern contest with a **wheelie reenactment** through the common room — Moob riding backwards on his back — culminating in two top-shelf whiskeys as the prize.
 - Immediately chugged one on top of the bar; stashed the other in Wing's side compartment.
 - Combat finisher: activated **Overdrive** mid-turn, crit-hit the second bat, *"slamming wings into it headfirst... rev the wheels on top of its head... and it turns into salsa on the ground."* Kaazz: *"You can just smell decay come out of this thing, and there's this ooze spraying everywhere from your wheels."*
 - Hatched-and-raised in Isger. Does not like water. Does not like baths. Smells like "motor oil and dirt" regardless.
@@ -174,9 +174,9 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 | Minor Healing Potion ×2 | Brynn Tate (Cadence Keg), gift | Party stash |
 | Atrophy Bomb | Draymoor general store (via Ethran) | Party stash |
 | Potency Crystal | Draymoor general store (via Ethran) | Party stash |
-| **Eagle Knight +1 Greatsword** | Ethran Howell, gift | Parked at the workshop corner in HQ. Rune transfer to Bai Jian's jian was proposed but deferred when Moog's crafting check turned up a full-day estimate and the warehouse mission took priority. To be revisited. |
-| Draconic-fuel healing potion | Moog quick-alchemied from dread bat cartilage | Given to Panacea |
-| Tenderizer Grenade | Moog (existing) | Given to Cyrathul |
+| **Eagle Knight +1 Greatsword** | Ethran Howell, gift | Parked at the workshop corner in HQ. Rune transfer to Bai Jian's jian was proposed but deferred when Moob's crafting check turned up a full-day estimate and the warehouse mission took priority. To be revisited. |
+| Draconic-fuel healing potion | Moob quick-alchemied from dread bat cartilage | Given to Panacea |
+| Tenderizer Grenade | Moob (existing) | Given to Cyrathul |
 
 **XP earned**: 40 (tavern contest win) + 30 (Draymoor deescalation) + 96 (dread bats) = **166 XP**
 
@@ -187,10 +187,10 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - 🪤 **The Warehouse Standoff**: Who are the four figures in the warehouse? Who is the "burly woman"? Is Gertrude Middenhelm alive, captured, or worse? (Picks up next session.)
 - 📜 **Hedvind VII's Bounty Decree**: A neighbor-against-neighbor witch hunt is about to escalate. Alceo and Phoebe are in Eladir trying to stop the fallout. Non-Hellbreaker civilians are already feeling the pressure.
 - 🦇 **The Lich on Lake Encarthan**: Otto the ferryman name-dropped a lich commanding the "restless dead" in the region. Dread bats may be only the start. Possible links to the "god-stuff fell from the sky" comment.
-- ⚔️ **Ethran Howell's Prosthetic**: Moog and Fang floated a hydraulic goblin-tech arm that could wield a two-hander. Promised but not yet built.
+- ⚔️ **Ethran Howell's Prosthetic**: Moob and Fang floated a hydraulic goblin-tech arm that could wield a two-hander. Promised but not yet built.
 - 🗡️ **The Deferred Rune Transfer**: The +1 rune extraction is a full-day craft. Bai Jian kept his jian when Zara's warehouse mission took priority. The greatsword is parked at the HQ workshop corner for after the job.
 - 🐉 **Bai Feng**: Still missing. Bai Jian has said nothing aloud about his brother yet, but mentioned "the other person I fought beside" during his tavern story. That thread is waiting to be pulled.
-- ☀️ **Ina, the Sun Goddess**: Has apparently caught **Moog's** eye — she inspired his star grenade formula. Moog wants nothing to do with her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
+- ☀️ **Ina, the Sun Goddess**: Has apparently caught **Moob's** eye — she inspired his star grenade formula. Moob wants nothing to do with her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
 
 ---
 
@@ -204,18 +204,18 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 > **Bai Jian** (about to hand his jian over for the rune transfer, before the craft turned out to be a full day and the warehouse mission came in): *"Just please, take care of my sword. It's very precious to me."*
 
-> **Moog** (re: his draconic mother): *"I don't want to have her come back and threaten to eat me again."*
+> **Moob** (re: his draconic mother): *"I don't want to have her come back and threaten to eat me again."*
 
 > **Cyrathul** (tavern contest): *"Could I recite a battle that I observed from my lunar observatory with esoteric lore? Just kind of like a play-by-play."*
 
-> **Moog** (on his backstory): *"I made an abandoned weapon bunker into my lab. And that's where I raised Fang — because his mom dropped his egg off. So it was our place and his garage for Wing. And yeah, war happened."*
+> **Moob** (on his backstory): *"I made an abandoned weapon bunker into my lab. And that's where I raised Fang — because his mom dropped his egg off. So it was our place and his garage for Wing. And yeah, war happened."*
 
 > **Cyrathul**: *"For a while, the majority of my life I was... I guess you could call me an observer from the moon, as most of my kind are. I just got tired of being unable to do things, so I took drastic measures, and now I am here."*
 
 > **Panacea** (on the Draymoor drunks): *"I agree. They're cat-haters."*
 
 > **Cyrathul** (narrating his own kill in third person): *"So is the dragon actually just holding the longsword? He has a sheathed longsword tucked behind a wing. He just takes it with his claw, draws it, and attacks through the mirror behind the bat."*
-> **Moog**: *"I was imagining a Sith situation."*
+> **Moob**: *"I was imagining a Sith situation."*
 
 > **Cyrathul** (post-combat): *"I'm just glad we got attacked before we got onto the ferry."*
 
@@ -238,12 +238,12 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - Turned the all-Draconic coincidence into a party tool: *"We can use that during mission. Communicate in front of enemies."* Party adopted it on the spot.
 - Told the oni-hunting story for the tavern contest. Referenced *"the other person I fought beside"* — first public hint at Bai Feng. Nobody pulled on it.
 - Framed his reason for joining to Ethran: *"I guess I can sympathize with the cause. My homeland is also ravaged by the greed of the dictatorship."*
-- Helped Moog defuse the four Chelaxian-badge drunks in Draymoor without violence. +30 XP.
+- Helped Moob defuse the four Chelaxian-badge drunks in Draymoor without violence. +30 XP.
 - **Crit opener on the lead dread bat** for 24 damage — *"I swing it across his wings and it just screeched out."* Missed the MAP follow-up.
-- **Second turn**: strode over to help Moog, remembered **Snagging Strike** this time. Off-Guard rider went through before Fang's crit finisher.
+- **Second turn**: strode over to help Moob, remembered **Snagging Strike** this time. Off-Guard rider went through before Fang's crit finisher.
 - Led the party to the HQ door: *"Let me lead the way then — sorry, I know the way around."*
 - **Declined the +1 Eagle Knight Greatsword** — *"Sure, I'm going to keep using my sword. It seems like his means a lot to him. Maybe someone else can have better use for this."*
-- Agreed to hand the jian over for the rune transfer with *"Just please, take care of my sword. It's very precious to me."* — then kept it when Moog's crafting check returned a full day and Zara delivered the warehouse mission. Greatsword parked at the workshop corner for later.
+- Agreed to hand the jian over for the rune transfer with *"Just please, take care of my sword. It's very precious to me."* — then kept it when Moob's crafting check returned a full day and Zara delivered the warehouse mission. Greatsword parked at the workshop corner for later.
 - Walked point into the warehouse trap. *"There's something amiss"* — opened the door anyway. Failed the reflex save, 14 damage, prone, off-guard.
 - Reminded Panacea she had a hero point when her Treat Wounds came up short — *"You have hero point. You have hero point."* She used hers for the reroll. Bai Jian added *"We don't want to waste it"* as a soft check, and she committed.
 
@@ -257,7 +257,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 - **Rune transfer is still pending.** The greatsword is parked at HQ. Full-day craft needed. After the warehouse job, prioritize going back to finish the extraction before the next mission leaves town.
 - **Snagging Strike as default.** Forgot it in combat 1, remembered it in combat 2. Make it the default whenever the off-hand is free — Off-Guard rider is free value for Cyrathul and Fang.
-- **Dread Marshal Stance at Lv4** is the party's damage ceiling unlock. Cyrathul and Moog are the main beneficiaries of the aura. Plan for it.
+- **Dread Marshal Stance at Lv4** is the party's damage ceiling unlock. Cyrathul and Moob are the main beneficiaries of the aura. Plan for it.
 - **Warehouse cliffhanger opener**: Sudden Charge into whoever looks most dangerous. Snagging Strike on the hit. Remember the hero point refill at session start.
 
 ### Open questions for next session

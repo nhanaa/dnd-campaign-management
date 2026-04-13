@@ -77,7 +77,7 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Cayden Cailean** — God of freedom, bravery, ale
 - **Arazni** — Goddess of the abused, undead, and the wronged
 - **Asmodeus** — God of tyranny, contracts, Hell. Worshipped by Chelaxian upper class. The enemy's patron.
-- **Ina** — Sun goddess. Has caught **Moog's** eye — she inspired his star-grenade formula mid-craft. Her priests are said to emit "solar radiation." Moog wants nothing to do with her clergy but won't douse fires with water either.
+- **Ina** — Sun goddess. Has caught **Moob's** eye — she inspired his star-grenade formula mid-craft. Her priests are said to emit "solar radiation." Moob wants nothing to do with her clergy but won't douse fires with water either.
 
 ## Session Log
 

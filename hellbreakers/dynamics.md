@@ -6,7 +6,7 @@
 |------|----------|-------|-----------|--------|
 | Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Marshal (Dread) + Exemplar ⚠️ | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) | TBD | Snowgeen |
-| Moog | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth |
+| Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry |
 | Panacea | Catfolk | Witch (Paradox of Opposites — Divine) | Medic | Bog Witch |
 
@@ -14,12 +14,12 @@
 
 - **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) — two melee fighters, both dragon-blooded
 - **Healing**: Panacea (Catfolk Witch — Medic dedication)
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moog (Quick Bomber bombs/mutagens), Fang (Wing construct)
-- **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moog (deception / humble-goblin routine)
-- **Buffs**: Bai Jian (Dread Marshal Stance at level 4 — +1 status damage aura scaling with weapon dice to +2/+3/+4, Cadence Call party mobility at level 6, Steel Yourself ally emergency button at level 8, Victor's Wreath +1 status attack aura at level 16 if Additional Ikon), Moog (elixirs, mutagens, numbing tonics)
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct)
+- **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
+- **Buffs**: Bai Jian (Dread Marshal Stance at level 4 — +1 status damage aura scaling with weapon dice to +2/+3/+4, Cadence Call party mobility at level 6, Steel Yourself ally emergency button at level 8, Victor's Wreath +1 status attack aura at level 16 if Additional Ikon), Moob (elixirs, mutagens, numbing tonics)
 - **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Dread Marshal crit-Frighten rider, Shatter Defenses Off-Guard chain, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
-- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (Religion, Occultism likely), Moog (Crafting, alchemy)
+- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (Religion, Occultism likely), Moob (Crafting, alchemy)
 
 ## Party Gaps
 
@@ -46,13 +46,13 @@
 - **Spirit damage overlap**: Bai Jian's Gleaming Blade ikon does spirit damage per weapon die (level 9+), Panacea does Divine Lance spirit damage — two spirit damage sources cover fiend encounters from both frontline and backline.
 - Medic dedication means reliable in-combat healing via Battle Medicine (no spell slot). Bai Jian is the primary damage sponge, with Battle Medicine (skill feat at level 10) as his personal backup self-heal when Panacea is out of reach.
 
-### Bai Jian + Moog (Goblin Alchemist)
-- Moog is squishy with mediocre attack accuracy. Bai Jian's AoO zone protects him.
-- Moog runs Quick Bomber (strike + draw in one action), Wallop Stick (parry), and Create a Diversion. Goblin Scuttle lets him reposition behind Bai Jian without provoking.
-- Dread Marshal Stance's +1 status damage aura scales Moog's bomb damage if he stays within 15 ft (common during fights — Alchemists often throw bombs from within the frontline).
+### Bai Jian + Moob (Goblin Alchemist)
+- Moob is squishy with mediocre attack accuracy. Bai Jian's AoO zone protects him.
+- Moob runs Quick Bomber (strike + draw in one action), Wallop Stick (parry), and Create a Diversion. Goblin Scuttle lets him reposition behind Bai Jian without provoking.
+- Dread Marshal Stance's +1 status damage aura scales Moob's bomb damage if he stays within 15 ft (common during fights — Alchemists often throw bombs from within the frontline).
 - Off-Guard from Snagging Strike / Crashing Slam Prone helps bombs land at reduced AC.
-- At level 16+ with Additional Ikon → Victor's Wreath empowered, the +1 status attack bonus covers Moog's accuracy gap (the original reason for Courageous Anthem in the old plan).
-- Moog hands out elixirs, mutagens, and numbing tonics — Bai Jian benefits from any STR/CON mutagens or healing elixirs. Moog also makes situational grenades like Tenderizer for Cyrathul's bite attacks.
+- At level 16+ with Additional Ikon → Victor's Wreath empowered, the +1 status attack bonus covers Moob's accuracy gap (the original reason for Courageous Anthem in the old plan).
+- Moob hands out elixirs, mutagens, and numbing tonics — Bai Jian benefits from any STR/CON mutagens or healing elixirs. Moob also makes situational grenades like Tenderizer for Cyrathul's bite attacks.
 
 ### Bai Jian + Fang (Goblin Inventor · Wing)
 - Wing the wolf-motorcycle serves as a secondary frontline body — Fang rides it into combat and commands it to stride + strike.
@@ -68,11 +68,11 @@
 
 ## Party Tie
 
-Established Session 1: Each party member was individually summoned by missive to the Cadence Keg in Breachill to meet wounded Eagle Knight **Ethran Howell**. They arrived the morning after the Battle of Breachill, which several of them fought in on the Hellbreaker side. Every member of the party speaks Draconic — Bai Jian proposed using it as combat shorthand, a party-wide habit now. **Moog raised Fang from an egg** in his abandoned-weapon-bunker lab, so those two share a pre-existing bond; the rest met at the tavern. Cyrathul is a literal winged dragon described by his player as "an observer from the moon" who "took drastic measures" to come down and act. Panacea watched most of the tavern scene in silence; she opens up only when asked directly.
+Established Session 1: Each party member was individually summoned by missive to the Cadence Keg in Breachill to meet wounded Eagle Knight **Ethran Howell**. They arrived the morning after the Battle of Breachill, which several of them fought in on the Hellbreaker side. Every member of the party speaks Draconic — Bai Jian proposed using it as combat shorthand, a party-wide habit now. **Moob raised Fang from an egg** in his abandoned-weapon-bunker lab, so those two share a pre-existing bond; the rest met at the tavern. Cyrathul is a literal winged dragon described by his player as "an observer from the moon" who "took drastic measures" to come down and act. Panacea watched most of the tavern scene in silence; she opens up only when asked directly.
 
 ## NPC Relationships
 
-- **Ethran Howell** — Former Eagle Knight, now Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1 ("I can't swing it with only one arm — it would be better in your hands"). Now stepping back from the field into a strategy/training role at the Saringallow HQ. Moog and Fang have offered to build him a hydraulic goblin-tech prosthetic arm. Bai Jian bonded with him over Moog's numbing tonic for his phantom pain.
+- **Ethran Howell** — Former Eagle Knight, now Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1 ("I can't swing it with only one arm — it would be better in your hands"). Now stepping back from the field into a strategy/training role at the Saringallow HQ. Moob and Fang have offered to build him a hydraulic goblin-tech prosthetic arm. Bai Jian bonded with him over Moob's numbing tonic for his phantom pain.
 - **Rhokrag** — Tall hobgoblin at the Saringallow HQ. First impression: a bit too brusque. Shooed off by Zara.
 - **Zara** — Halfling hostess at the Saringallow HQ. Warm and welcoming but visibly breaking under the Hedvind decree.
 - **Brynn Tate** — Cadence Keg barkeep. Comped the party's drinks and gifted 2 minor healing potions for the road. Ally.
@@ -87,10 +87,10 @@ Established Session 1: Each party member was individually summoned by missive to
 - **The Warehouse Standoff** (active): Gertrude Middenhelm is missing. Four figures wait in the Everbloom Imports warehouse. *"Like rats in a trap."* Picks up next session.
 - **Hedvind's Decree** (active): Steward Stuart Hedvind VII's citizen-bounty system is driving neighbor-against-neighbor witch hunts. Alceo and Phoebe are in Eladir trying to limit the damage. Public Hellbreaker operation is now untenable.
 - **The Lich on Lake Encarthan**: Ferryman Otto tipped the party off that a lich is commanding the restless dead in Isger. Likely source of the dread bats — and likely a recurring threat.
-- **Ina's Attention**: Moog has caught the sun goddess's eye — she inspired his star-grenade formula mid-craft. Wants no part of her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
-- **The Deferred +1 Rune Transfer**: Moog and Fang plan to extract the +1 rune from Ethran's gifted Eagle Knight greatsword and install it on Bai Jian's jian. Full-day craft. Proposed in Session 1 but deferred when Zara's warehouse mission took priority — the greatsword is parked at the HQ workshop corner, waiting for a full day of downtime between missions.
-- **Ethran's Prosthetic Arm**: Moog and Fang pitched a hydraulic goblin-tech replacement. Promised, not yet built.
+- **Ina's Attention**: Moob has caught the sun goddess's eye — she inspired his star-grenade formula mid-craft. Wants no part of her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
+- **The Deferred +1 Rune Transfer**: Moob and Fang plan to extract the +1 rune from Ethran's gifted Eagle Knight greatsword and install it on Bai Jian's jian. Full-day craft. Proposed in Session 1 but deferred when Zara's warehouse mission took priority — the greatsword is parked at the HQ workshop corner, waiting for a full day of downtime between missions.
+- **Ethran's Prosthetic Arm**: Moob and Fang pitched a hydraulic goblin-tech replacement. Promised, not yet built.
 - **The Lost Trail**: What happened to Bai Feng? What was the infernal creature the brothers were hunting? Is it connected to Cheliax? (Bai Jian hinted at it for the first time publicly in his tavern story — "the other person I fought beside.")
 - **The Hellbreakers' War**: Liberation of Isger from Chelaxian oppression.
-- **The Dragon Blood**: What does it mean to carry Sovereign Dragon heritage in a land saturated with infernal power? The party has FOUR dragon-adjacent characters (Bai Jian, Cyrathul, Moog's draconic mother, Fang's draconic teeth) — this can't be coincidence.
+- **The Dragon Blood**: What does it mean to carry Sovereign Dragon heritage in a land saturated with infernal power? The party has FOUR dragon-adjacent characters (Bai Jian, Cyrathul, Moob's draconic mother, Fang's draconic teeth) — this can't be coincidence.
 - **The Flute**: The dizi — Bai Feng's? Or something they played together? A thread for Pax to develop at the table.
