@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 6 — The Scapegoat's Gambit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eae4da;
+  --bg-card: #f2ede4;
+  --bg-card-hover: #f8f4ed;
+  --border: #c8bfb0;
+  --text: #2e2a24;
+  --text-dim: #5a5347;
+  --text-bright: #1a1714;
+  --red: #8a2c2c;
+  --red-glow: #8a2c2c22;
+  --blue: #4a6278;
+  --blue-glow: #4a627822;
+  --green: #4a6a3a;
+  --green-glow: #4a6a3a22;
+  --purple: #6a3a6a;
+  --purple-glow: #6a3a6a22;
+  --teal: #3a6a62;
+  --teal-glow: #3a6a6222;
+  --gold: #8a6a2c;
+  --gold-dim: #a07a3a;
+  --gold-glow: #8a6a2c22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 30% 100%, #d4c4a822 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 0%, #c8b89822 0%, transparent 40%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 110%, #c4884420 0%, transparent 55%);
+  animation: ember-glow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-glow {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.5; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'MedievalSharp', cursive;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.char-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-marwen { border-left-color: #7a2a3a; }
+.char-beast { border-left-color: #6a4a2a; }
+.char-caliban { border-left-color: #8a7a2c; }
+.char-rattle { border-left-color: #3a5a3a; }
+.char-bergatha { border-left-color: #4a3a6a; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2410;
+}
+
+.summary p { font-size: 16px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.intrigue::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-bottom: 6px;
+}
+
+.act-label.rp { color: var(--purple); }
+.act-label.explore { color: var(--blue); }
+.act-label.intrigue { color: var(--red); }
+.act-label.mystery { color: var(--teal); }
+
+.act h3 { margin-bottom: 14px; }
+
+.act ul { margin: 10px 0 0 18px; }
+
+.sub-list {
+  margin: 6px 0 6px 22px;
+  list-style: disc;
+}
+
+.sub-list li {
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+/* Spotlight cards */
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.spotlight-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.spotlight-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.spotlight-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.spotlight-card ul {
+  margin: 0 0 0 18px;
+}
+
+/* Loot */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.loot-item.magical {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 20px #8a6a2c11;
+  background: #f0e8da;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* Quotes */
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #8a6a2c08;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.quote-attr {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.quote-context {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Journal / Pax's Notes */
+.journal {
+  background: linear-gradient(135deg, #f4ede2, #efe8dc);
+  border: 1px solid #c0b8a8;
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2408;
+}
+
+.journal h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c8c0b0;
+}
+
+.journal-intro {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.journal ul { margin: 8px 0 16px 18px; }
+.journal li { padding: 4px 0; font-size: 15px; }
+
+/* Open threads */
+.thread-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.thread-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Cliffhanger */
+.cliffhanger {
+  background: linear-gradient(135deg, #e0d6c8, #ebe2d4);
+  border: 1px solid #a0906a;
+  border-radius: 6px;
+  padding: 28px 30px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cliffhanger h3 {
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.cliffhanger p {
+  font-style: italic;
+  font-size: 17px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .container { padding: 30px 16px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<header class="header">
+  <h1>The Scapegoat's Gambit</h1>
+  <div class="subtitle">Session 6 &mdash; Curse of the Crimson Throne</div>
+  <div class="meta-row">
+    <span class="meta-pill">April 12, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 42m</span>
+    <span class="meta-pill">Level 3 &rarr; 4</span>
+  </div>
+</header>
+
+<!-- Composition -->
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-rp" style="width:50%"></div>
+    <div class="comp-seg comp-explore" style="width:30%"></div>
+    <div class="comp-seg comp-puzzle" style="width:15%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 50%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Investigation 30%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Intrigue 15%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Downtime 5%</span>
+  </div>
+</section>
+
+<!-- Party -->
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-marwen">
+      <div class="char-name">Marwen (Fioren)</div>
+      <div class="char-class">Draconic Sorcerer (Rime) / Oracle Dedication</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-beast">
+      <div class="char-name">Beast</div>
+      <div class="char-class">Dragon Instinct Barbarian / Fighter</div>
+      <div class="char-player">Pol</div>
+    </div>
+    <div class="char-card char-caliban">
+      <div class="char-name">Caliban</div>
+      <div class="char-class">Warpriest of Iomedae / Paragon</div>
+      <div class="char-player">Hawke</div>
+    </div>
+    <div class="char-card char-rattle">
+      <div class="char-name">Rattle &amp; Ruin</div>
+      <div class="char-class">Dragon Eidolon Summoner / Beastmaster</div>
+      <div class="char-player">Joey</div>
+    </div>
+    <div class="char-card char-bergatha">
+      <div class="char-name">Bergatha Lizby</div>
+      <div class="char-class">Arcane Witch / Dandy</div>
+      <div class="char-player">Macabre_Barbie</div>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Following their audience with Queen Ileosa, the party enjoyed a week of downtime. Beast quietly arranged to anonymously send 800 gold to an old woman named Eliza Blythe, Caliban trained under Sabina and learned troubling details about the Grey Maidens, Bergatha threw herself into alchemical crafting, Rattle recruited a wolf named Lobo and invested his entire fortune, and Marwen gathered intelligence from the butcher shop owner Verik for the Spider King.</p>
+    <p>The downtime was shattered by news that a young artist named Trinia Sabor had been accused of assassinating the king. Cressida Kroft hired the party to find her before the mob could. Through disguises, invisibility, a water elemental familiar, and a telekinetic hand, the party located Trinia, interrogated her, and chose to hide her in a safe house rather than turn her over. They fabricated evidence pointing to the town of Harse and deceived Cressida &mdash; who saw through it but tacitly approved.</p>
+    <p>Two days later, the queen announced she had captured &ldquo;Trinia Sabor&rdquo; and would execute her publicly &mdash; confirming Bergatha&rsquo;s prediction. The session ended with the legendary vigilante <strong>Blackjack</strong> intervening at the last moment, freeing the prisoner and declaring <em>&ldquo;Down with the queen!&rdquo;</em> &mdash; plunging the city into another riot.</p>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section>
+  <h2>Key Events</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label rp">Act 1 &mdash; Roleplay / Downtime</div>
+      <h3>Downtime in Korvosa</h3>
+      <ul>
+        <li><strong>Beast at the Bank of Abadar</strong> &mdash; Visited Ishani Dhatri and anonymously arranged to send 800 gold to <strong>Eliza Blythe</strong>, an old woman near the docks. Payment plan of 10gp every two weeks. Asked Ishani not to reveal the source.</li>
+        <li><strong>Caliban&rsquo;s Training with Sabina</strong> &mdash; Week-long bootcamp at Castle Korvosa. Learned about the <strong>Grey Maidens</strong> (all-female elite guard), Royal Guard tensions with the Korvosan Guard, the <strong>Curse of the Crimson Throne</strong> (300 years of monarchs dying unnaturally), and that Rolth is Cressida&rsquo;s jurisdiction.</li>
+        <li><strong>Bergatha&rsquo;s Crafting</strong> &mdash; Lethargy potions, juggernaut mutagens, drakeheart mutagens, life-boosting oils, and a shiver cake for &ldquo;emergencies.&rdquo;</li>
+        <li><strong>Marwen&rsquo;s Intelligence Gathering</strong> &mdash; Visited butcher shop owner <strong>Verik</strong> (wanted, 50gp bounty). Learned he works for the <strong>Arkonas</strong> noble family who have interest in the throne. Intel shared with Beast, Bergatha, and Rattle &mdash; deliberately excluding Caliban.</li>
+        <li><strong>Rattle&rsquo;s Investments</strong> &mdash; Replaced boar companion Tusk with wolf <strong>Lobo</strong>. Invested full 1,035 gold with Ishani. Threatened: <em>&ldquo;If you fuck with my money, you will die faster.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label explore">Act 2 &mdash; Investigation</div>
+      <h3>The Hunt for Trinia Sabor</h3>
+      <ul>
+        <li>News broke: <strong>Trinia Sabor</strong>, a 22-year-old painter, accused of poisoning the king&rsquo;s tea during her portrait commission.</li>
+        <li>A guard &ldquo;witness&rdquo; confessed and died by suicide pill. Bergatha immediately called it a scapegoat: <em>&ldquo;That&rsquo;s a very neat bow on that loose end.&rdquo;</em></li>
+        <li><strong>Cressida Kroft</strong> briefed the party: she believes Trinia is innocent, the queen is consolidating power, the Grey Maidens are being formed. Gave the address: <strong>42 Moon Street, Midland</strong>.</li>
+        <li>Party voted unanimously to find Trinia themselves.</li>
+      </ul>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label explore">Act 3 &mdash; Investigation / Stealth</div>
+      <h3>Securing Trinia</h3>
+      <ul>
+        <li>Multi-layered infiltration of Trinia&rsquo;s apartment building:
+          <ul class="sub-list">
+            <li><strong>Bergatha &amp; Marwen</strong>: disguised as visitors with flowers and cake (the cake was drugged)</li>
+            <li><strong>Beast</strong>: invisible, climbing walls</li>
+            <li><strong>Caliban</strong>: stealthing via Follow the Expert</li>
+            <li><strong>Rattle</strong>: flying surveillance, sniffed for paint to identify the right window</li>
+          </ul>
+        </li>
+        <li><strong>Bergatha&rsquo;s familiar Lagunae</strong> scouted under the door and unlatched the window.</li>
+        <li><strong>Rattle used telekinetic hand</strong> to silently unlock three chain locks.</li>
+        <li>Interrogated Trinia &mdash; she claims innocence, no evidence found. Party <strong>voted 3-2 to question her</strong> before turning her over (Bergatha, Rattle, Marwen vs. Beast, Caliban). Later consensus: keep her in <strong>Jargon&rsquo;s safe house</strong> in North Point.</li>
+        <li>Bergatha disguised Trinia (dyed hair brunette, changed complexion) and gave her a <strong>Potion of Emergency Escape</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label mystery">Act 4 &mdash; Deception / Intrigue</div>
+      <h3>The Deception</h3>
+      <ul>
+        <li>Rattle staged the apartment as a rushed escape.</li>
+        <li>Bergatha had Trinia write a fake journal entry pointing to <strong>Harse</strong>, then used charcoal rubbing to create &ldquo;evidence.&rdquo;</li>
+        <li>Reported to Cressida: <em>&ldquo;She fled to Harse.&rdquo;</em> Cressida saw through it but tacitly approved: <em>&ldquo;If you&rsquo;re hiding her&hellip; keep it that way.&rdquo;</em></li>
+        <li>Cressida gave them <strong>Vencarlo Orisini&rsquo;s</strong> address for smuggling Trinia out. Party received <strong>50gp each</strong>.</li>
+        <li><strong>Party leveled up to 4.</strong></li>
+      </ul>
+    </div>
+
+    <div class="act intrigue">
+      <div class="act-label intrigue">Act 5 &mdash; Political Crisis</div>
+      <h3>The Execution and Blackjack</h3>
+      <ul>
+        <li>Two days later: the queen announced she found &ldquo;Trinia Sabor&rdquo; and would execute her at noon.</li>
+        <li>Beast <strong>punched a wall</strong> in Cressida&rsquo;s office: <em>&ldquo;The people in power still find some young innocent girl to put the blame on and kill publicly. How fucking typical.&rdquo;</em></li>
+        <li>The execution was staged as a <strong>grand spectacle</strong> &mdash; confetti, champagne, nobility in gowns. Queen Ileosa in lavish green-and-white silk, attended by <strong>Sabina</strong> and the new <strong>Grey Maidens</strong> in crimson-plumed plate.</li>
+        <li>The condemned woman was clearly <strong>not Trinia</strong> &mdash; a superficially similar scapegoat.</li>
+        <li><strong>Blackjack</strong> intervened &mdash; dagger in the executioner&rsquo;s hand, freed the prisoner, declared: <em>&ldquo;Long live Korvosa, down with the queen!&rdquo;</em></li>
+        <li><strong>Riot erupted. Session ended on cliffhanger.</strong></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Character Spotlights -->
+<section>
+  <h2>Character Spotlights</h2>
+
+  <div class="spotlight-card" style="border-left: 3px solid #7a2a3a;">
+    <div class="spotlight-name">Marwen (Fioren)</div>
+    <div class="spotlight-meta">Draconic Sorcerer (Rime) &bull; Pax</div>
+    <ul>
+      <li>Pitched reflavoring Flurry of Claws from fire to cold damage (approved by DM)</li>
+      <li>Visited <strong>Verik&rsquo;s butcher shop</strong> and established himself as an information broker</li>
+      <li>Learned the <strong>Arkonas</strong> noble family has interest in the throne &mdash; reported to the Spider King</li>
+      <li>Relayed intel to party excluding Caliban (&ldquo;too good-natured&rdquo;)</li>
+      <li>Voted to question Trinia before turning her over, disguised with Bergatha for the infiltration</li>
+      <li>Retrained Widen Spell &rarr; Reach Spell; took Intimidating Glare at level 4</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #6a4a2a;">
+    <div class="spotlight-name">Beast</div>
+    <div class="spotlight-meta">Dragon Instinct Barbarian &bull; Pol</div>
+    <ul>
+      <li>Anonymously donated 800gp to <strong>Eliza Blythe</strong> through Ishani &mdash; hidden compassion beneath the rough exterior</li>
+      <li>Reacted to Trinia&rsquo;s wanted poster: <em>&ldquo;She don&rsquo;t look like a killer to me&rdquo;</em> &mdash; stuck by that conviction throughout</li>
+      <li>Told Trinia while escorting her: <em>&ldquo;I&rsquo;m not a good man, but I would protect you if I can.&rdquo;</em></li>
+      <li>Punched a wall in Cressida&rsquo;s office: <em>&ldquo;The people in power still find some young innocent girl to put the blame on. How fucking typical.&rdquo;</em></li>
+      <li>Got drunk before the execution, but was struck by awe when Blackjack appeared &mdash; genuine inspiration</li>
+      <li>Took Reactive Strike at level 4</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #8a7a2c;">
+    <div class="spotlight-name">Caliban</div>
+    <div class="spotlight-meta">Warpriest of Iomedae &bull; Hawke</div>
+    <ul>
+      <li>Spent the entire week training with <strong>Sabina</strong> &mdash; primary source of Grey Maiden intel</li>
+      <li>Maintained diplomatic neutrality about the queen: <em>&ldquo;I would not cast judgment&hellip; as I have not seen anything for myself&rdquo;</em></li>
+      <li>Advocated for turning Trinia over to Cressida directly (overruled 3-2)</li>
+      <li>Stealthed through the apartment building via Follow the Expert</li>
+      <li>Questioned the convenience of the guard&rsquo;s confession and suicide</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #3a5a3a;">
+    <div class="spotlight-name">Rattle &amp; Ruin</div>
+    <div class="spotlight-meta">Dragon Eidolon Summoner &bull; Joey</div>
+    <ul>
+      <li>Replaced boar companion Tusk with wolf <strong>Lobo</strong></li>
+      <li>Invested entire 1,035gp with Ishani &mdash; the &ldquo;Vulture of Wall Street&rdquo;</li>
+      <li>Used scent to identify Trinia&rsquo;s window by the smell of paint</li>
+      <li>Used telekinetic hand to silently unlock three chain locks</li>
+      <li>Cast the deciding vote to question Trinia rather than hand her over immediately</li>
+      <li>Asked the hard question: <em>&ldquo;We saved this random person&hellip; do we still feel okay that another randomly accused person is just dying?&rdquo;</em></li>
+      <li>Took Terrifying Resistance and Tandem Movement at level 4</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #4a3a6a;">
+    <div class="spotlight-name">Bergatha Lizby</div>
+    <div class="spotlight-meta">Arcane Witch &bull; Macabre_Barbie</div>
+    <ul>
+      <li>Crafted extensively during downtime: lethargy potions, juggernaut mutagens, drakeheart mutagens, life-boosting oils, shiver cake</li>
+      <li>Immediately identified Trinia as a scapegoat: <em>&ldquo;That&rsquo;s a very neat bow on that loose end.&rdquo;</em></li>
+      <li>Led the party&rsquo;s tactical planning &mdash; disguises, approach strategy, safe house logistics</li>
+      <li>Delivered a powerful speech to Trinia: <em>&ldquo;I will fight for you. I will slay dragons for you. I will move mountains.&rdquo;</em></li>
+      <li>Masterminded the deception: fake journal entry, charcoal rubbing, staged apartment</li>
+      <li>Attempted to deceive Cressida &mdash; Cressida saw through it but tacitly approved</li>
+      <li>Comforted Beast: <em>&ldquo;This will not amount to nothing. This is the beginning of something.&rdquo;</em></li>
+      <li>Predicted the queen would find another scapegoat &mdash; proven correct</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Loot -->
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item">
+      <div class="loot-name">250 Gold (50gp each)</div>
+      <div class="loot-source">Cressida Kroft &mdash; Trinia investigation payment</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Greater Demon Mask (Level 10)</div>
+      <div class="loot-source">Queen&rsquo;s treasury reward &mdash; Marwen</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Star Orb Familiar</div>
+      <div class="loot-source">Ancestry Paragon feat &mdash; Marwen</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Lobo (Wolf Companion)</div>
+      <div class="loot-source">Beastmaster Dedication &mdash; Rattle</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Level Up: Party &rarr; Level 4</div>
+      <div class="loot-source">After completing the Trinia investigation</div>
+    </div>
+  </div>
+</section>
+
+<!-- Memorable Quotes -->
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I know the others, sure, they talk a big deal and everything, but you don&rsquo;t have to believe me. But I don&rsquo;t think you killed him, you know? And if anything, you were like a little mouse, really. You couldn&rsquo;t have done it.&rdquo;</div>
+    <div class="quote-attr">Beast</div>
+    <div class="quote-context">To Trinia while escorting her to the safe house &mdash; quiet compassion breaking through the rough exterior</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Fucking hell! Useless! It&rsquo;s all fucking useless! Do one good thing, try and do the right thing, and it&rsquo;s just&hellip; what the fuck is it all for? The people in power still find some young innocent girl to put the blame on and kill publicly. How fucking typical.&rdquo;</div>
+    <div class="quote-attr">Beast</div>
+    <div class="quote-context">Punching a wall in Cressida&rsquo;s office after learning the queen found another scapegoat</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;The entire time Blackjack showed up, Beast genuinely, even as the riot starts going, Beast genuinely looks almost awestruck. He was drunk, completely out of it, sad, miserable. But this genuinely &mdash; he feels and looks genuinely in awe.&rdquo;</div>
+    <div class="quote-attr">Beast</div>
+    <div class="quote-context">Beast&rsquo;s reaction to Blackjack&rsquo;s dramatic intervention &mdash; the first sign of genuine inspiration</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;If I believe in you, like I say I do, because I believe you did not do this, I will fight for you. I will slay dragons for you. I will move mountains. I will storm the gates of heaven and I will save you.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Bergatha&rsquo;s speech to Trinia &mdash; the DM immediately called for a deception check</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I think we lose this. I think there is nothing we can do to save that girl. But I think that this confirms our suspicion that the queen is someone to watch out for.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Cold political calculus after learning the queen will execute a scapegoat</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;This will not amount to nothing. This is the beginning of something. Trinia can become more to us. She can become a weapon. She is the seed to start new power for us.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Comforting Beast while framing Trinia as a political asset</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Well, Bergatha told me, invest shinies to get more shinies.&rdquo;</div>
+    <div class="quote-attr">Rattle</div>
+    <div class="quote-context">Explaining his investment strategy to Ishani at the Bank of Abadar</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;We all die eventually. But if you fuck with my money, you will die faster.&rdquo;</div>
+    <div class="quote-attr">Rattle</div>
+    <div class="quote-context">Threatening Ishani immediately after a sentimental moment</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Can I just ask if, like, we saved this random person from being executed because she was wrongfully accused, do we still feel okay that another randomly accused person is just dying and we don&rsquo;t feel like we should save her?&rdquo;</div>
+    <div class="quote-attr">Rattle</div>
+    <div class="quote-context">The moral question that cuts through Bergatha&rsquo;s political pragmatism</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;It is a&hellip; We are a peculiar bunch, but we share a common goal, and ultimately I think that&rsquo;s to the benefit of the city of Korvosa.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">To Sabina during training &mdash; diplomatic framing of the party</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I would not cast judgment on the queen, as I have not seen anything for myself.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">Maintaining impartiality when Sabina asks about the queen &mdash; principled restraint</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I&rsquo;m also with you. We cannot let an innocent person just be murdered on the streets.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">Moral clarity when the party commits to finding Trinia</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I don&rsquo;t need to work here, but I can&hellip; As you can see, I&rsquo;m a bit of a&hellip; Well, you can&rsquo;t really see, but I&rsquo;m a bit of an information broker myself.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Pitching himself to Verik at the butcher shop</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I vote we find her ourselves. And then we can decide for ourselves what to do with it.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Pragmatic independence when the party debates whether to investigate Trinia</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Since Trinia, the real Trinia, is alive, that means we have that against the Queen. She might still have that in the corner of her mind, that she actually didn&rsquo;t catch the real Trinia still.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Identifying the strategic value of holding Trinia &mdash; the queen&rsquo;s loose end is the party&rsquo;s leverage</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;If you&rsquo;re hiding her somewhere&hellip; that is fine. In fact, it&rsquo;s probably some relief for me.&rdquo;</div>
+    <div class="quote-attr">Cressida Kroft</div>
+    <div class="quote-context">Seeing through the party&rsquo;s deception but choosing to let it stand</div>
+  </div>
+
+  <div class="quote-block" style="border-left-color: var(--red);">
+    <div class="quote-text">&ldquo;Yes, indeed, my queen. Let us usher in justice, but let that be justice for Korvosa, not the shambles you call a monarchy. Long live Korvosa, down with the queen!&rdquo;</div>
+    <div class="quote-attr">Blackjack</div>
+    <div class="quote-context">The legendary vigilante&rsquo;s dramatic intervention at the execution &mdash; session-ending cliffhanger</div>
+  </div>
+</section>
+
+<!-- Pax's Notes -->
+<section>
+  <h2>Pax&rsquo;s Notes &mdash; Marwen&rsquo;s Journal</h2>
+  <div class="journal">
+    <p class="journal-intro"><em>Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Marwen did this session</h3>
+    <ul>
+      <li>Retrained <strong>Widen Spell</strong> into <strong>Reach Spell</strong> (cold damage reflavor for Flurry of Claws also approved)</li>
+      <li>Visited <strong>Verik&rsquo;s butcher shop</strong> and established himself as an information broker</li>
+      <li>Learned the <strong>Arkonas</strong> noble family has interest in the throne &mdash; Verik works for them</li>
+      <li>Relayed intel to Beast, Bergatha, and Rattle. <strong>Deliberately excluded Caliban</strong></li>
+      <li>Reported Verik&rsquo;s Arkonas connection to the <strong>Spider King</strong></li>
+      <li>Disguised with Bergatha for the Trinia infiltration</li>
+      <li>Took <strong>Intimidating Glare</strong> at level 4</li>
+    </ul>
+
+    <h3>Things Marwen knows that the party does not</h3>
+    <ul>
+      <li>The full extent of Verik&rsquo;s comments about &ldquo;interested people&rdquo; wanting the throne</li>
+      <li>Marwen&rsquo;s relationship with the Spider King is deeper than the party realizes</li>
+    </ul>
+
+    <h3>What Marwen is thinking about</h3>
+    <ul>
+      <li><strong>Cressida saw through the deception.</strong> She&rsquo;s smarter than the party gives her credit for</li>
+      <li><strong>The queen is dangerous.</strong> Grey Maidens, scapegoat execution, political theater &mdash; calculated operator, not a grieving widow</li>
+      <li><strong>Blackjack</strong> is a wild card. Useful ally or liability?</li>
+      <li><strong>Vencarlo Orisini</strong> &mdash; worth a visit soon</li>
+      <li>The Spider King / Arkonas angle: if they want the throne, that&rsquo;s a much bigger game</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>What happens in the riot? Is the condemned woman safe?</li>
+      <li>Can we make contact with <strong>Blackjack</strong>?</li>
+      <li>Should we visit <strong>Vencarlo</strong> before things escalate?</li>
+      <li>Is <strong>Sabina</strong> loyal to the queen or playing her own game?</li>
+      <li>What&rsquo;s Beast&rsquo;s connection to <strong>Eliza Blythe</strong>?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Open Threads -->
+<section>
+  <h2>Open Threads</h2>
+
+  <div class="thread-item">
+    <div class="thread-name">Blackjack</div>
+    <div class="thread-desc">Who is this legendary vigilante? Beast is inspired; Bergatha wants to ally with him.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">The Riot</div>
+    <div class="thread-desc">Session 7 opens mid-riot at the execution. Combat imminent.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Trinia Sabor</div>
+    <div class="thread-desc">Hidden in Jargon&rsquo;s North Point safe house. A political weapon against the crown.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Queen Ileosa</div>
+    <div class="thread-desc">Confirmed cunning political operator. Grey Maidens now public. Is she behind the king&rsquo;s death?</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Cressida Kroft</div>
+    <div class="thread-desc">Knows the party has Trinia. Tacit ally, but how far does her loyalty extend?</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Vencarlo Orisini</div>
+    <div class="thread-desc">Contact for smuggling Trinia out. Party hasn&rsquo;t visited yet.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Rolth</div>
+    <div class="thread-desc">Still at large. No progress this session.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">The Arkonas Noble Family</div>
+    <div class="thread-desc">Verik confirmed they have interest in the throne. Spider King connection.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Sable Company</div>
+    <div class="thread-desc">Leaderless (Seneschal missing). Constitutional power to override the monarchy.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Hell Knights</div>
+    <div class="thread-desc">Openly hostile to Queen Ileosa, preparing to leave the city.</div>
+  </div>
+</section>
+
+<!-- Cliffhanger -->
+<div class="cliffhanger">
+  <h3>To Be Continued&hellip;</h3>
+  <p>&ldquo;Long live Korvosa, down with the queen!&rdquo;<br>Blackjack vanishes into the chaos. The riot erupts. The party stands in the thick of it.</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -39,7 +39,7 @@ The "town" Hrolf remembered turned out to be three weather-beaten buildings — 
 - **Tactical debut**: DM introduces War Squad (4-man melee), Shield Wall Squad (3-man defensive), and Archer Squads firing AoE volleys from the enemy longship 100 ft offshore.
 - **Round 1 near-wipe**: First archer volley (DC 16 Dex, 9 piercing / half on success) drops Glug and Marzena, leaves Aesgor at 1 HP. Second volley (11 piercing) takes out Bardi of the crew.
 - **Hrolf and Siddhe arrive late** — Hrolf hands his potion to Glug, Siddhe attempts to stabilize and fails (twice).
-- **Turning point**: Aesgor at 1 HP walks up clutching his holy symbol and drops a war-squad raider with his light crossbow; Vidaltje stands the wall and drops two more with a 9-piercing crit; Tree-Hammer feeds his potion to Gaynor ("doing way too much healing for a barbarian").
+- **Turning point**: Aesgor at 1 HP walks up clutching his holy symbol and drops a war-squad raider with his light crossbow — *"Shoot the war squad — the one man left — with his light crossbow. 16, does that hit? 16 is a hit, yes. Damage: 10. Beautiful. You see, it's not so bad — you just killed another one."* Marzena stands the wall and drops two more with a 9-piercing crit; Tree-Hammer feeds his potion to Gaynor (*"I'm doing way too much healing for a barbarian"*).
 - **Enemy withdrawal**: The distant commander yells, *"We are done here. Let them die on the beach,"* and the enemy ships pull away from shore.
 - **Final cleanup**: Glug returns and joins the line; Tree-Hammer charges and javelins for 8; Marzena finishes the last man — *"Your friends chose the sea, you chose the soil. I'll make sure you're six feet down."*
 - **Siddhe's wake-up**: Earlier, the child had run onto Glug's chest and literally bit-slapped her conscious. ("Wake up! We still need you!")
@@ -47,9 +47,9 @@ The "town" Hrolf remembered turned out to be three weather-beaten buildings — 
 
 ### Act II — The Pyre and the Valkyries
 - Party builds a proper funeral pyre for the ~35–40 dead (their crew + enemy boarders). Hrolf insists: *"Warriors who fought in battle are to be burnt."*
-- **Aesgor alone** spots three grim-faced, armored women with bird-like wings and hair like flame in the smoke. They beat their wings once and vanish, returning one by one to collect the slain.
+- **Aesgor alone** spots three grim-faced, armored women appearing within the flames. The DM's narration: *"Large bird-like wings are tucked against their bodies. Their long hair erupts out from behind them as a flame itself."* They beat their wings once and vanish, returning one by one to collect the slain.
 - Gaynor, without prompting: *"The armies for the final battle are being reinforced with those deaths."*
-- **The Grayish Feather**: After the Valkyries are gone, Tree-Hammer sees something fall. Upon touching it, a vision: *"a beach caressed by the gentle waters of a silvery sea. It is warm and peaceful here."* Tree-Hammer: *"I'm reminded of an old word. **Luau.**"*
+- **The Grayish Feather**: After the Valkyries are gone, Tree-Hammer sees something fall. The DM: *"As you touch it, you have a brief glimpse of a beach caressed by the gentle waters of a silvery sea. It is warm and peaceful here."* Tree-Hammer, quietly: *"I'm reminded of an old word. **Luau.**"*
 - The party gains **1 Glory Point** for being the first generation to explore the misplaced tower of Kekel.
 
 ### Act III — Night in the Tower, and a Promise
@@ -142,7 +142,7 @@ The "town" Hrolf remembered turned out to be three weather-beaten buildings — 
 
 ### 1. The Beach Battle
 **Enemies**: War Squad (4), Shield Wall Squad (3), two Archer Squads (5 each) + commander on ship
-**Allies**: Hrolf, Siddhe, and 5 surviving Hallharn warriors (all useless — "they just slowed down the enemy by a turn")
+**Allies**: Hrolf, Siddhe, and 5 surviving Hallharn crew — **Yursa, Bardi, Dispute, Hercia, and Asta** (all useless — "they just slowed down the enemy by a turn")
 **Key moments**:
 - Round 1 archer volley drops half the party in one DC 16 Dex save (9 dmg / half)
 - Aesgor's 1 HP crossbow kill
@@ -251,7 +251,7 @@ The "town" Hrolf remembered turned out to be three weather-beaten buildings — 
 ### What Aesgor did this session
 - Walked out of Kekel **alongside Marzena** into the beach fight — "I shall lead. We'll go together."
 - Entered the fight with **zero spell slots** (burned in the tower last session). Most of the first combat was crossbow and Sacred Flame.
-- Dropped to **1 HP** from the first archer volley, then calmly walked forward and dropped a war-squad raider with his crossbow. *"With a hand clutching his entire body now that he's injured, he's just going to walk slowly up and shoot the war squad..."*
+- Dropped to **1 HP** from the first archer volley, then calmly walked forward and dropped a war-squad raider with his crossbow. *"With a hand clutching his entire body now that he's injured, he's just going to walk slowly up and shoot the war squad — the one man left — with his light crossbow. 16, does that hit? 16 is a hit, yes. Damage: 10. Beautiful. You see, it's not so bad — you just killed another one."*
 - **Drank his own healing potion** instead of saving Marzena (the party teased him as a "selfish cleric"). In-character: this was the right call — he still had to be standing to heal anyone later.
 - Later crossbow shots went wide. *"A school should just stick to spellcasting."*
 - **Only Aesgor saw the Valkyries.** Three grim-faced, armored women with bird-like wings and hair like flame, appearing in the pyre smoke to collect the slain. Nobody else noticed until he pointed it out. This is important — Vigilant One marking, maybe. The Rune of the Vigilant may be reacting to proximity to Ragnarok-adjacent events.

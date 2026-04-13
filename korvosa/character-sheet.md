@@ -7,7 +7,7 @@
 - **Background**: Street Urchin
 - **Class**: Sorcerer — Draconic Bloodline (Rime)
 - **Tradition**: Primal (Spontaneous)
-- **Level**: 3
+- **Level**: 4
 - **Alignment**: N
 - **Size**: Medium
 - **Speed**: 25 ft
@@ -16,50 +16,53 @@
 
 ## Ability Scores
 
-*Includes Gradual Ability Boosts (DEX at Lv2, CHA at Lv3)*
+*Includes Gradual Ability Boosts (DEX+CON at Lv2-5, CHA partial at Lv4 → +5 at Lv5)*
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 10 (+0) | 16 (+3) | 12 (+1) | 12 (+1) | 12 (+1) | 19 (+4) |
+| 10 (+0) | 16 (+3) | 14 (+2) | 12 (+1) | 12 (+1) | 19 (+4) |
 
 ## Defenses
 
-- **AC**: 18 (10 + 3 level + 2 trained + 3 DEX)
-- **Max HP**: 29 (8 ancestry + 7/level × 3)
-- **Resistances**: Cold 1 (Frozen Wind heritage)
+- **AC**: 19 (10 + 4 level + 2 trained + 3 DEX)
+- **Max HP**: 40 (8 ancestry + 8/level x 4)
+- **Resistances**: Cold 2 (Frozen Wind heritage)
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Trained | +6 |
-| Reflex | Trained | +8 |
-| Will | Expert | +8 |
+| Fortitude | Trained | +8 |
+| Reflex | Trained | +9 |
+| Will | Expert | +9 |
 
-- **Perception**: Trained (+6), Low-Light Vision
+- **Perception**: Trained (+7), Low-Light Vision
+- **Spell DC**: 22 | **Spell Attack**: +12
 
 ## Ancestry Features
 
 - **Kitsune**: Low-Light Vision, Change Shape (human form)
-- **Frozen Wind Heritage**: Cold resistance 1
+- **Frozen Wind Heritage**: Cold resistance = half level (min 1)
 
 ## Class Features
 
 - **Bloodline**: Draconic (Rime) — Primal tradition
-- **Blood Magic**: When you cast a bloodline spell or a spell from your spell slots, draconic blood magic triggers (cold-typed effect)
-- **Sorcerous Potency**: Additional spell slot per rank
-- **Signature Spells**: Hydraulic Push (1st), Sudden Bolt (2nd) — *plan to swap 1st-rank signature to Heal or Fear later (Fear at 3rd rank for group targeting)*
+- **Blood Magic**: Scaly Hide (+1 status AC for 1 round) OR Propelling Sorcery (free Step or push target 5 ft)
+- **Sorcerous Potency**: +rank status bonus to damage/healing from spell slot spells
+- **Signature Spells**: Heal (1st), Sudden Bolt (2nd)
 - **Focus Pool**: 1 point
   - **Flurry of Claws** (Focus Spell — dragon claws, 2 Strikes)
 
 ## Skills
 
 ### Trained
-- Deception (+9)
-- Diplomacy — **Expert** (+11) *(Skill Paragon)*
-- Intimidation (+9)
-- Nature (+6)
-- Society (+6)
-- Thievery (+8)
-- One City Lore (+6)
+- Acrobatics (+9)
+- Deception (+10)
+- Diplomacy — **Expert** (+12) *(Skill Paragon)*
+- Intimidation — **Expert** (+12)
+- Nature (+7)
+- Religion (+7) *(from Oracle Dedication)*
+- Society (+7)
+- Thievery (+9)
+- Korvosa Lore — **Expert** (+9)
 
 ## Feats
 
@@ -73,18 +76,21 @@
 ### Class Feats
 | Feat | Level | Source |
 |------|-------|--------|
-| Widen Spell | 2 | Class Feat |
+| Reach Spell | 2 | Class Feat *(retrained from Widen Spell)* |
+| Propelling Sorcery | 4 | Class Feat |
 
 ### Free Archetype
 | Feat | Level | Source |
 |------|-------|--------|
-| Bard Dedication | 2 | Free Archetype |
+| Oracle Dedication (Cosmos) | 2 | Free Archetype |
+| Basic Mysteries (Whispers of Weakness) | 4 | Free Archetype |
 
 ### Skill Feats
 | Feat | Level | Source |
 |------|-------|--------|
 | Pickpocket | 1 | Background (Street Urchin) |
 | Bon Mot | 2 | Skill Feat |
+| No Cause for Alarm | 4 | Skill Feat |
 
 ### General Feats
 | Feat | Level | Source |
@@ -98,38 +104,59 @@
 
 | Rank | Slots | Known |
 |------|-------|-------|
-| Cantrips | 5 | Frostbite, Electric Arc, Detect Magic, Prestidigitation, Shield |
-| 1st | 4 | Grease, Heal, Hydraulic Push, Fear |
-| 2nd | 3 | Sudden Bolt, Loose Time's Arrow, Rime Slick *(GM swap from Shatter — cold theme)* |
+| Cantrips | 5 | Frostbite, Electric Arc, Detect Magic, Prestidigitation, Shield + Ricochet, Dynamic Daze *(homebrew cantrips)* |
+| 1st | 4 | Grease, **Heal** *(signature)*, Hydraulic Push, Fear, Helpful Steps |
+| 2nd | 4 | **Sudden Bolt** *(signature)*, Loose Time's Arrow, Rime Slick, Blazing Bolt |
 
-*Level 3 repertoire swap still available.*
-
-### Occult (from Bard Dedication)
+### Divine (from Oracle Dedication — Cosmos)
 
 | Rank | Known |
 |------|-------|
-| Cantrips (2) | Haunting Hymn, Message |
+| Cantrips (2) | Needle Darts, Vitality Lash |
+
+**Curse**: Curse of the Sky's Call — when cursebound, Enfeebled equal to cursebound value + status penalty to saves/DCs vs forced movement
+
+**Whispers of Weakness** (1 action, cursebound) — target within 60 ft: learn all weaknesses + lowest save, +2 status to next attack vs that target
 
 ### Innate (from Kitsune Spell Familiarity)
 
 | Rank | Known |
 |------|-------|
-| Cantrip (1, prepared) | Ghost Sound *(considering switching to Daze)* |
+| Cantrip (1, prepared) | Ghost Sound / Daze / Forbidding Ward (choose daily) |
 
 ### Focus Spells (1 Focus Point)
 
 - **Flurry of Claws** (Bloodline Focus Spell)
 
+### Staff of Water (2 charges/day)
+
+- Cantrip: Spout
+- 1st (1 charge): Create Water, Hydraulic Push
+
 ## Equipment
 
-- **Gold**: 15 gp + Queen's reward (amount TBD)
-- **Greater Demon Mask** *(level 10, Queen's treasury reward)* — +2 item bonus to Intimidation, 1/day rank 3 Fear DC 29. Face slot.
-- *(Other gear TBD)*
+### Wealth
+- **PP**: 1 | **GP**: 234 | **SP**: 23 | **CP**: 22
 
-## Pending Retrains
+### Worn/Invested
+- **Greater Demon Mask** *(level 10, Queen's treasury reward)* — +2 item bonus to Intimidation, 1/day rank 3 Fear DC 29. Mask slot.
+- **Trusty Helmet** *(level 2)* — 1/day block Stupefied; Hunker Down (1 action) for +1 circ bonus to AC vs ranged. Head slot.
+- **Explorer's Clothing** — unarmored defense
 
-- **Bard Dedication → Oracle Dedication (Cosmos)** — retrain during downtime (ask GM about timing/cost before level 6; free retraining at level 6+)
-- **Widen Spell → Reach Spell** — retrain at level 6 (free)
+### Weapons
+- **Staff of Water** (1d4 B / 1d8 two-hand, fire resistance 2 while wielding)
+- Dagger (1d4 P, agile, finesse, thrown 10)
+- Sling (1d6 B, propulsive, range 50) + 20 Sling Bullets
+
+### Consumables
+- Healing Potion (Lesser) — 2d8+5 healing
+- Wand of Mystic Armor (Rank 1) — 1/day +1 item bonus to AC until next daily prep
+- Scroll of Acidic Burst (Level 1) — 2d6 acid, 5-ft emanation, basic Reflex
+
+### Adventuring Gear
+- Backpack (4 Bulk capacity, first 2 Bulk free)
+  - Rope (50 ft), Waterskin, Chalk (10), Flint & Steel, Rations (2 weeks), Torches (5), Bedroll, Soap
+- Caltrops (2), Thieves' Toolkit, Disguise Kit
 
 ## Variant Rules in Play
 

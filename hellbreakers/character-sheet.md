@@ -90,7 +90,8 @@
 
 ### Weapons
 - **Jian** (Katana): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons." Uncommon, Sword group.
-- **Javelin ×5**: 1d6 P, thrown 30 ft
+- **Lang Ya Chui** (Leiomano reflavor): 1d6 B, fatal d10, versatile S — "Wolf tooth mace." Uncommon, Club group. Swap-in for bludgeoning-weak enemies.
+- **Javelin ×2**: 1d6 P, thrown 30 ft
 
 ### Armor
 - **Breastplate**: +4 AC, DEX cap +1, check penalty -2 (negated by Str 18 ≥ Str 16 threshold), speed -5 ft (negated by Str 18 ≥ Str 16 threshold). Composite group.

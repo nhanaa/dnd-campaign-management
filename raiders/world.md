@@ -32,6 +32,16 @@
 - **Hrolf** — Veteran Hallharn warrior, commands what remains of the raiding party (~5–6 men). Same tribe as Aesgor. Damaged internally (no proficiency bonus on attacks, gains exhaustion easily). Respects strength and the old rites; personally burns the dead. Prayed to Hel directly after the zombie attack. His authority over the raiding party eroded after the ruined farmstead — he defers to the group now.
 - **Siddhe** — A small child magically displaced from another world. Grandparents still alive in her homeland, which she describes as endless green farmland. Was playing outside their house when a bright light carried her to Kekel. Traveling with the party; Aesgor has promised to return her home. Can bring downed allies back to consciousness (some kind of innate ability). Revived Glug in the beach fight by physically jumping on her chest and bit-slapping her awake.
 
+### Hallharn crew (surviving after the beach battle)
+The raiding party started at nearly 60 warriors. After the beach attack, only five named crew remain beside Hrolf:
+- **Yursa**
+- **Bardi** — Went down in round 2 of the beach fight (second archer volley).
+- **Dispute**
+- **Hercia**
+- **Asta**
+
+None of them proved useful in the beach battle. Hrolf's comment: *"They were literally meat shields. They just slowed down the enemy by a turn."*
+
 ### Enemies Encountered
 - **The Unknown Enemy Clan** — Unrecognized raider clan that attacked the party on the beach outside Kekel. Carries a clan shield bearing a stylized stalking predator — *tiger-shaped, but not definitively a tiger*. Unrecognized by any of the party, including Hrolf. Their commander ordered the withdrawal with: *"We are done here. Let them die on the beach."*
 - **The Tortured Zombie Raider** — A single animate corpse that attacked the party at the ruined farmstead past Kekel. Armed with battleaxe and shield, wore a rusted breastplate, had Undead Fortitude (AC 18). **No fingernails** — torn off, as if tortured before death. The dead are not supposed to rise in Grimnir. Hrolf was genuinely shaken and prayed to Hel.
