@@ -1,10 +1,10 @@
 # Progression — Mist (Fairy Bard, College of Eloquence)
 
-## Current: Level 2
+## Current: Level 3
 
-## Planned Subclass: College of Eloquence (Tasha's Cauldron of Everything)
+## Subclass: College of Eloquence (Tasha's Cauldron of Everything)
 
-*DM (Seerosaur) allows Tasha's and most other supplements alongside 2024 PHB base class.*
+*DM (Seerosaur) allows Tasha's, Strixhaven, and most other supplements alongside 2024 PHB base class.*
 
 ---
 
@@ -17,30 +17,32 @@
 - **Unsettling Words** (BA): Spend 1 Bardic Inspiration → target subtracts die from next save. Pairs with any ally's save spell.
 - **Fairy Magic**: *Faerie fire* (1/long rest, free, CHA-based). AoE advantage for allies, guarantees Silas's Sneak Attack.
 
-**Spells:**
-- Learn: **Hold Person** — Paralyzed = auto-crit within 5 ft. Talya and Silas shred the target. Use Unsettling Words first to tank their save.
-- Swap Charm Person → **Blindness/Deafness** — Non-concentration debuff. Blinded = disadvantage on their attacks + advantage on attacks against them. Stack on top of any concentration spell.
+**Spells (actual picks):**
+- Learned: **Hold Person**, **Heat Metal**, **Command**
+- Swapped: Tasha's Hideous Laughter → Command, Charm Person → Heat Metal, Prestidigitation → Mage Hand
+- Post-session swap: Bane → **Silvery Barbs** (Strixhaven) — reaction to force enemy reroll + give ally advantage. Non-concentration, covers Bane's defensive role better since Avon has Bless.
 
 | Spell | Lvl | Conc? | Role |
 |-------|-----|-------|------|
-| Bane | 1st | Yes | AoE debuff (-d4 attacks/saves) |
-| Tasha's Hideous Laughter | 1st | Yes | Single-target incapacitate |
+| Silvery Barbs | 1st | No | Reaction: force reroll + ally advantage |
 | Dissonant Whispers | 1st | No | Damage + forced movement → provokes OAs |
 | Healing Word | 1st | No | Emergency BA pickup |
+| Command | 1st | No | Instant single-target disable |
+| Faerie Fire | 1st | Yes | AoE advantage (Fairy Magic, 1/LR or slot) |
 | Hold Person | 2nd | Yes | Paralysis (auto-crits for melee allies) |
-| Blindness/Deafness | 2nd | **No** | Blinded debuff, stacks with concentration |
+| Heat Metal | 2nd | Yes | Anti-armor: no save on damage + disadvantage |
 
 ---
 
-### Level 4 — War Caster
+### Level 4 — Feat Decision
 
-**Feat: War Caster**
-- Advantage on concentration saves (~80% pass rate on DC 10 vs 55% without)
-- Vicious Mockery as opportunity attack — enemy disengages and eats disadvantage
-- Somatic components with hands full (hold lyre and cast)
+**Top feat options:**
+- **Fey Touched** (+1 CHA → 18, learn Misty Step + 1 divination/enchantment spell): CHA to 18 (DC 14, attack +6) AND Misty Step as a bonus action teleport escape. Best survivability + offense combo. Thematic for a Fairy.
+- **War Caster** (advantage on concentration saves, VM as opportunity attack, somatic with hands full): Protects Hold Person/Heat Metal concentration. ~80% pass rate on DC 10 vs 55% without.
+- **+1 CHA / +1 CON or DEX**: Raw stat boost. CHA 18 is the priority but the secondary stat is awkward (all odd numbers).
 
 **Spells:**
-- Learn: **Suggestion** — "I suggest you put down your weapon and leave." Removes a creature from a fight entirely. Also dominates social encounters. Concentration, but War Caster now protects it.
+- Learn: **Suggestion** — "I suggest you put down your weapon and leave." Removes a creature from a fight entirely. Also dominates social encounters with Silver Tongue backup.
 - New cantrip available (3rd Bard cantrip). Consider: **Minor Illusion** (creative distraction/deception tool) or **Mind Sliver** (INT save, d6 psychic + subtract d4 from next save — another debuff layer).
 
 ---
@@ -55,7 +57,7 @@
 
 **Spells:**
 - Learn: **Hypnotic Pattern** — The best AoE control spell in tier 2. 30-ft cube, WIS save or *incapacitated* and speed 0. Ends entire encounters. Use Unsettling Words on the scariest enemy first.
-- Swap consideration: Tasha's Hideous Laughter → **Slow** (if you want). Tasha's and Hold Person overlap as single-target concentration shutdowns. **Slow** hits up to 6 creatures: -2 AC, halved speed, no reactions, can only use Action OR Bonus Action. Creatures save individually each turn, so it stays sticky. *However*, Tasha's is still great for lower-slot use against one big target — your call.
+- Swap consideration: Command → **Slow** (if you want an AoE option). Slow hits up to 6 creatures: -2 AC, halved speed, no reactions, can only use Action OR Bonus Action. But Command is excellent non-concentration filler — your call.
 
 ---
 
@@ -66,7 +68,7 @@
 - **Universal Speech**: Speak to any creature regardless of language (PB uses/long rest). Amazing for social encounters in an unfamiliar world.
 
 **Spells:**
-- Learn: **Fear** (if you kept Tasha's) or **Slow** (if you swapped Tasha's out at 5). Both are elite AoE debuffs.
+- Learn: **Fear** or **Slow** (whichever you didn't take at 5). Both are elite AoE debuffs.
   - Fear: 30-ft cone, WIS save or frightened + forced dash away. Shuts down an advancing group.
   - Slow: 6 targets in 120 ft, WIS save. More surgical targeting, brutal debuff, individual saves to end.
 
@@ -135,20 +137,21 @@ Best options:
 | Spell | Source | Notes |
 |-------|--------|-------|
 | Vicious Mockery | Cantrip | Damage + disadvantage on next attack |
-| Prestidigitation | Cantrip | Utility / flavor |
-| Mind Sliver or Minor Illusion | Cantrip | Debuff or creative tool |
+| Mage Hand | Cantrip | 30 ft. manipulation |
+| Mind Sliver or Minor Illusion | Cantrip (Lv4) | Debuff or creative tool |
 | Druidcraft | Fairy Magic | Utility |
 | Faerie Fire | Fairy Magic | 1/long rest, free. AoE advantage. |
-| Enlarge/Reduce | Fairy Magic | 1/long rest, free. |
+| Enlarge/Reduce | Fairy Magic (Lv5) | 1/long rest, free. |
 
 ### Leveled Spells (Prepared)
 | Spell | Lvl | Conc? | Category |
 |-------|-----|-------|----------|
+| Silvery Barbs | 1st | No | Reaction: force reroll + ally advantage |
 | Dissonant Whispers | 1st | No | Damage + forced OAs |
 | Healing Word | 1st | No | Emergency heal |
-| Bane | 1st | Yes | AoE debuff |
-| Blindness/Deafness | 2nd | No | Non-conc debuff |
+| Command | 1st | No | Instant single-target disable |
 | Hold Person | 2nd | Yes | Paralysis |
+| Heat Metal | 2nd | Yes | Anti-armor damage + disadvantage |
 | Suggestion | 2nd | Yes | Combat/social removal |
 | Hypnotic Pattern | 3rd | Yes | AoE incapacitate |
 | Slow or Fear | 3rd | Yes | AoE debuff |
@@ -165,10 +168,12 @@ Best options:
 ## Build Decisions Tracker
 
 - [x] Bard College at Level 3 — **Eloquence** (Tasha's)
-- [x] Level 4 Feat — **War Caster**
+- [x] Level 3 Spells — Hold Person, Heat Metal, Command, Silvery Barbs (swapped Tasha's, Charm Person, Bane)
+- [x] Level 3 Cantrip — Mage Hand (replaced Prestidigitation)
+- [ ] Level 4 Feat — **Fey Touched** (CHA 18 + Misty Step) vs **War Caster** (concentration protection)
 - [ ] Level 4 Cantrip — Mind Sliver vs Minor Illusion
-- [ ] Level 5 Swap — Keep Tasha's or swap for Slow?
-- [ ] Level 8 Feat — Actor vs Skill Expert (or other +1 CHA half-feat)
+- [ ] Level 5 Swap — Command → Slow? Or keep Command as non-conc filler
+- [ ] Level 8 Feat — Actor vs Skill Expert (or other +1 CHA half-feat, only if Fey Touched taken at 4)
 - [ ] Level 10 Magical Secrets picks — Counterspell + Wall of Force (tentative)
 
 ## Key Thresholds

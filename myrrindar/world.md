@@ -13,14 +13,40 @@
 
 ## Key Locations
 
-- **Myrrindar** — Fully homebrew world, adventures, everything custom by Seerosaur
-- **Skybreeze** — Major metropolis, melting pot, campaign starting location
+- **Myrrindar** — A continent inhabited by all manner of mystical races. Major cities: Iliora (woodland, elves), Dun Caeldor (snowy fortress, dwarves), and Skybreeze (capital, all races). Not much is known beyond the northern mountain ranges where Dun Caeldor lies — expeditions beyond that point never return.
+- **Skybreeze** — Capital city on the east side of Myrrindar. Defined by the ring of magical wardstones around the city edge that ward off an Arcane Storm that threatened the city ~87 years ago. A Wardstone Festival is held annually. Governed by a Merchant Council. Districts: Noble District, Dock District, Church District, Market District (weapons/armor), The Commons (adventuring gear).
 - **Neulvyn** — Fairy settlement where Mist was born (player-named)
+- **Vale Tempest Hideout** — Secret underground complex accessed via a hidden door in an alley in central Skybreeze. Contains: lounge, secret room with Wardstone map, amulet assembly/enchanting room (staffed), brewery (unused), dining room, kitchen. Party discovered and partially cleared it in Sessions 2-3.
 
 ## NPCs
 
-*(To be filled as the campaign progresses)*
+- **Elias Whitmore** — Head Researcher at the Wind Institute. Maintains/investigates the wardstones. Wears an enchanted amulet (Enchantment magic, silver shield with black runes) placed by the Vale Tempest that suppresses his true thoughts. Without it, he questions the Wardstone narrative and experiences severe mental distress. Freed by party in Session 3 with amulet left on.
+- **Jensen** — Leader behind the Wardstone sabotage at the Festival (Session 1). Claims the wardstones are "sealing" something beneath Skybreeze. Escaped via smoke bomb. Currently at large.
+- **Rufus Dawnstrider** — Dock Foreman. Vale Tempest target, wears an enchanted amulet ("moderate success, reapplication recommended"). Mist knows him personally from the streets.
+- **Valo, Regina, Bildren** — City guards. Vale Tempest targets with amulets ("limited success, low awareness, stronger amulets recommended").
+- **Blitt** — Dragonborn, Vale Tempest member (Green Robe). Killed by party in Session 3.
+- **Avarian** — Drow, Vale Tempest member (Green Robe). Killed by party in Session 3.
+- **Garrett** — Vale Tempest member (Green Robe). Killed by party in Session 3.
+- **Fancy Robe Woman** — Unnamed Vale Tempest leader (or high-ranking member). Enchants the amulets. Still alive and unaware of what happened to the others (as of end of Session 3).
+- **Evrin** — Someone the party agreed to help pay back a debt; connected to the Whisper Prism quest.
+
+## Factions
+
+### Vale Tempest
+- Secret society dedicated to "protecting the truth" about the Wardstones
+- Believes the Wardstones protect Skybreeze from the Arcane Storm — considers any other narrative dangerous "lies"
+- Uses enchanted amulets to mind-control key citizens (researchers, dock workers, guards) into maintaining the Wardstone narrative
+- Members wear green robes; leaders have blue accents; insignia: clenched fist with wind around it; leader's symbol: thunderbolt within a cage
+- Has an amulet assembly operation in their hideout with a recent breakthrough making amulets stronger
+- Party killed several members in Session 3; the Fancy Robe woman and at least 2 others remain
 
 ## Story
 
-*(No sessions yet)*
+### Session 1 — Wardstone Festival
+The party met at Skybreeze for individual reasons. During the annual Wardstone Festival, an unknown faction (led by Jensen) attempted to sabotage a wardstone. The party stopped a distraction in the center square, then intercepted the actual disruption ritual in the northeast. Jensen escaped via smoke bomb. Two party members were downed. The party recovered at a nearby Meadery with help from a local cleric.
+
+### Session 2 — The Hidden Door
+The party agreed to pay back Evrin's debt and retrieve a Whisper Prism. They met with Elias Whitmore, noticed his amulet glowing and suppressing his thoughts. Silas lifted the amulet. Following Elias and a green-robed escort into an alley, the party discovered a secret door to a hideout. Inside: a room with a map of Skybreeze's wardstones (lines pointing to the city center), non-working amulets, and Vale Tempest members. Session ended with Blitt approaching the party in the secret corridor.
+
+### Session 3 — The Veiled Truth (4/13/26)
+Party confronted Vale Tempest members in the hideout. Won a combat in the lounge (2 KO'd, 2 surrendered). Interrogated the Blue Robe lieutenant who revealed the organization's name (Vale Tempest) and their mission to suppress "lies" about the Wardstones. Silas stealthily removed Elias's amulet — Elias started questioning the Wardstone narrative but collapsed in agony. Akasha wild-shaped into a mouse to scout the amulet assembly room. Silas found a journal listing five enchanted targets in the city. Party voted to kill the incapacitated Vale Tempest members, freed Elias (with amulet), and withdrew. Leveled up to 3.

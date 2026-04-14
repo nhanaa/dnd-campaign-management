@@ -4,11 +4,11 @@
 
 | Character | Level | Species | Class | Player |
 |-----------|-------|---------|-------|--------|
-| Akasha Amelia | 2 | Elf | Druid | AkashaAmelia |
-| Avon | 2 | Dragonborn | Cleric | Redundakitty |
-| **Mist** | **2** | **Fairy** | **Bard (Eloquence)** | **Paxmanz** |
-| Silas | 2 | Khoravar | Rogue | Aenian |
-| Talya | 2 | Tiefling | Monk | luckstang7 |
+| Akasha Amelia | 3 | Elf | Druid | AkashaAmelia |
+| Avon | 3 | Dragonborn | Cleric | Redundakitty |
+| **Mist** | **3** | **Fairy** | **Bard (Eloquence)** | **Paxmanz** |
+| Silas | 3 | Khoravar | Rogue | Aenian |
+| Talya | 3 | Tiefling | Monk | luckstang7 |
 
 ## Party Role Analysis
 
@@ -16,7 +16,7 @@
 - **Healing/Support**: Avon (Cleric), Mist (Bard — Healing Word, Bardic Inspiration)
 - **Caster/Control**: Akasha Amelia (Druid), Mist (Bard — debuffs)
 - **Face**: Mist (Deception +7, Persuasion +7)
-- **Scout**: Mist (Flight), Silas (Rogue)
+- **Scout**: Mist (Flight), Silas (Rogue), Akasha (Wild Shape recon)
 
 ### Synergy Notes
 
@@ -35,13 +35,22 @@
 ## Key NPCs
 
 - **Seerosaur** (DM): Creator of the homebrew world Myrrindar
+- **Elias Whitmore** — Head wind researcher, mind-controlled by Vale Tempest amulet. Party freed him (amulet still on). Knows the party as allies. Found at the Wind Institute.
+- **Rufus Dawnstrider** — Dock Foreman, Vale Tempest target. Mist knows him personally — direct lead for next session.
 
 ## NPC Relationships
 
-*None recorded yet.*
+- **Mist ↔ Rufus Dawnstrider**: Mist knows Rufus from the docks — "a cool dude." Direct lead for investigating the amulet targets.
+- **Party ↔ Elias Whitmore**: Elias knows the party but is still under amulet influence. Can be found at the Wind Institute.
+- **Party ↔ Vale Tempest**: Hostile. Party killed several members in their hideout. The surviving Fancy Robe woman will eventually discover the dead and come looking.
 
 ## Plot Threads
 
 - **Neulvyn**: Mist's fairy homeland — who kidnapped him and why? Are other fairies still captive? Does Neulvyn still exist?
 - **Skybreeze streets**: Mist grew up here as an urchin — likely has contacts, rivals, or debts in the city
 - **Captors**: Unknown who captured Mist from Neulvyn — potential recurring antagonist or reveal
+- **Vale Tempest**: Secret society using enchanted amulets to mind-control citizens into maintaining the Wardstone narrative. Party killed several members — retaliation expected.
+- **What's beneath Skybreeze?**: Jensen says the Wardstones seal something. The Vale Tempest says it's lies. Elias hinted at knowing but collapsed before revealing.
+- **Five enchanted targets**: Elias Whitmore, Rufus Dawnstrider, Valo, Regina, Bildren — all have mind-control amulets. Rufus is the most accessible lead (Mist knows him).
+- **Whisper Prism**: Party agreed to retrieve it from an old abandoned lab. Not yet pursued.
+- **Evrin's debt**: Party agreed to pay it back. Status unclear.

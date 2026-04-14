@@ -6,7 +6,8 @@
 - **Species**: Fairy (Fey creature type)
 - **Background**: Entertainer
 - **Class**: Bard
-- **Level**: 2
+- **Subclass**: College of Eloquence (TCoE)
+- **Level**: 3
 - **Alignment**: Chaotic Neutral
 - **Size**: Small
 - **Speed**: 30 ft. (Walking), 30 ft. (Flying)
@@ -23,9 +24,9 @@
 ## Defenses
 
 - **AC**: 13 (Leather Armor)
-- **Max HP**: 13
+- **Max HP**: 19
 - **Initiative**: +2
-- **Hit Dice**: 2d8
+- **Hit Dice**: 3d8
 - **Proficiency Bonus**: +2
 
 | Save | Proficient | Modifier |
@@ -61,15 +62,17 @@
 - **Creature Type**: Fey
 - **Size**: Small
 - **Flight**: 30 ft. flying speed (cannot use in medium or heavy armor)
-- **Fairy Magic**: Know *druidcraft* cantrip. At 3rd level: *faerie fire* (1/long rest). At 5th level: *enlarge/reduce* (1/long rest). Spellcasting modifier: **CHA**.
+- **Fairy Magic**: Know *druidcraft* cantrip. At 3rd level: *faerie fire* (1/long rest, or spell slots). At 5th level: *enlarge/reduce* (1/long rest). Spellcasting modifier: **CHA**. Save DC: DEX 13.
 - **Languages**: Common, Primordial
 
-## Class Features (Bard 2)
+## Class Features (Bard 3 — College of Eloquence)
 
 - **Bardic Inspiration** (d6, 3/Long Rest, Bonus Action): Inspire a creature within 60 ft. They gain a d6 to add to a failed d20 Test within the next hour.
 - **Spellcasting**: CHA-based, Spell DC 13, Spell Attack +5. Musical instrument as focus.
 - **Expertise**: 2 skill proficiencies gain double proficiency bonus (Deception, Persuasion).
 - **Jack of All Trades**: Add half proficiency bonus (+1) to non-proficient ability checks.
+- **Silver Tongue** (TCoE): When making a CHA (Persuasion) or CHA (Deception) check, treat a d20 roll of 9 or lower as a 10. *Minimum Deception/Persuasion roll is now 17.*
+- **Unsettling Words** (TCoE, Bonus Action): Expend one Bardic Inspiration use. Choose one creature within 60 ft. Roll the Bardic Inspiration die (1d6). The creature must subtract the number rolled from the next saving throw it makes before the start of your next turn.
 
 ## Feats
 
@@ -87,23 +90,31 @@
 | Spell | Source | Save/Atk | Range | Components | Duration |
 |-------|--------|----------|-------|------------|----------|
 | Vicious Mockery | Bard | WIS 13 | 60 ft. | V | Instantaneous |
-| Prestidigitation | Bard | — | 10 ft. | V, S | 1 hour |
+| Mage Hand | Bard | — | 30 ft. | V, S | 1 minute |
 | Druidcraft | Fairy Magic | — | 30 ft. | V, S | Instantaneous |
 
-### 1st Level (3 Slots)
+### 1st Level (4 Slots)
 
 | Spell | Source | Save/Atk | Range | Components | Duration | Notes |
 |-------|--------|----------|-------|------------|----------|-------|
-| Bane | Bard | CHA 13 | 30 ft. | V, S, M | Conc, up to 1 min | Debuff |
-| Tasha's Hideous Laughter | Bard | WIS 13 | 30 ft. | V, S, M | Conc, up to 1 min | Incapacitated + Prone |
-| Charm Person | Bard | WIS 13 | 30 ft. | V, S | 1 hour | Social |
+| Silvery Barbs | Bard | — | 60 ft. | V | Instantaneous | Reaction; force reroll + give ally advantage |
 | Dissonant Whispers | Bard | WIS 13 | 60 ft. | V | Instantaneous | Damage + forced movement |
 | Healing Word | Bard | — | 60 ft. | V | Instantaneous | Bonus Action heal |
+| Command | Bard | WIS 13 | 60 ft. | V | Instantaneous | Single-word command |
+| Faerie Fire | Fairy Magic | DEX 13 | 60 ft./20 ft. Cube | V | Conc, up to 1 min | 1/LR or spell slot; advantage on attacks vs affected |
+
+### 2nd Level (2 Slots)
+
+| Spell | Source | Save/Atk | Range | Components | Duration | Notes |
+|-------|--------|----------|-------|------------|----------|-------|
+| Hold Person | Bard | WIS 13 | 60 ft. | V, S, M | Conc, up to 1 min | Paralyzed; auto-crit within 5 ft. |
+| Heat Metal | Bard | CON 13 | 60 ft. | V, S, M | Conc, up to 1 min | Damage + disadvantage; no save on damage |
 
 ## Weapons
 
 | Weapon | Attack | Damage | Properties |
 |--------|--------|--------|------------|
+| Crossbow, Light | +4 | 1d8+2 Piercing | Simple, Ammunition, Loading, Range (80/320), Two-Handed, Slow |
 | Dagger | +4 | 1d4+2 Piercing | Simple, Finesse, Light, Thrown (20/60), Nick |
 | Unarmed Strike | +1 | 0 Bludgeoning | — |
 
@@ -120,6 +131,8 @@
 |------|-----|--------|
 | Leather Armor | 1 | 10 lb. |
 | Dagger | 1 | 1 lb. |
+| Crossbow, Light | 1 | 5 lb. |
+| Bolts | 20 | 1.5 lb. |
 | Case, Map or Scroll | 1 | 1 lb. |
 | Small Knife | 1 | — |
 | Perfume | 1 | — |
@@ -132,13 +145,14 @@
 | Oil | 8 | 8 lb. |
 | Rations | 9 | 18 lb. |
 | Bedroll | 1 | 7 lb. |
-| Bell | 1 | — |
 | Tinderbox | 1 | 1 lb. |
 | Waterskin | 1 | 5 lb. |
 | Bullseye Lantern | 1 | 2 lb. |
 | Costume | 3 | 12 lb. |
 
-**Weight Carried**: 85.5 lb. | **Encumbered**: 120 lb. | **Push/Drag/Lift**: 240 lb.
+**Gold**: 32 gp
+
+**Weight Carried**: 92 lb. | **Encumbered**: 120 lb. | **Push/Drag/Lift**: 240 lb.
 
 ## Backstory
 
