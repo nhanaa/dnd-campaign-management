@@ -86,11 +86,22 @@ Core rotation:
 | 2 | **Dueling Parry** | 1 action — +2 circumstance AC with one-handed weapon + free hand. Gates the Dueling Riposte chain. |
 | 4 | **Dual-Handed Assault** | 1-action flourish — Strike using two-hand grip. Jian's two-hand d10 + circumstance damage equal to weapon damage dice. Best personal damage flourish for jian. |
 | 6 | **Slam Down** | 2-action flourish — Strike + Athletics Trip check on hit. Alternative flourish to DHA. Prereq for Crashing Slam at level 10. |
-| 8 | **Dueling Riposte** | Reaction — free melee Strike when enemy crit-fails against you while Dueling Parry is active. Debuff-stacked crit-fail triggers fire ~2-3x per combat. |
+| 8 | **Dueling Riposte** *(or Shatter Defenses — see below)* | Reaction — free melee Strike when enemy crit-fails against you while Dueling Parry is active. Debuff-stacked crit-fail triggers fire ~2-3x per combat. |
 | 10 | **Crashing Slam** | Passive upgrade — Slam Down's Trip auto-succeeds on Strike hit (100% reliable Prone). Party-wide Off-Guard via Prone. |
 | 12 | **Dueling Dance** | Stance — Dueling Parry permanently active, no action cost. Build-defining action economy upgrade. |
 | 14 | *Flex* — **Improved Dueling Riposte** or **Blind-Fight** or **Positioning Assault** | Late-game flex slot |
 | 16+ | *Flex* | — |
+
+### Level 8 Alternative — Shatter Defenses
+
+**Pending decision post-Session 1**, depending on Kaazz's encounter style (3-body flanking frequency, boss-fight density, reach/flying threats).
+
+- **Shatter Defenses** (Lv 8 Fighter, requires master Intimidation + Weapon Specialization, both online at 8): Strike — on hit vs a Frightened target, the target becomes Off-Guard until end of your next turn, and Frightened persists past its normal duration.
+- **Why it competes with Riposte**: Build already generates Frightened constantly (Dread Marshal crit rider, Demoralize with Intimidating Prowess, Terrified Retreat). Converts that fear engine into **party-wide Off-Guard** on targets where flanking fails.
+- **Best when**: Boss fights (single Large target, awkward 3-body flanking), reach/flying enemies, Trip-immune targets, Thaumaturge ranged rounds.
+- **Worst when**: Trash fights with easy flanking — redundant with flanking's free Off-Guard.
+- **Trade-off vs Riposte**: Give up ~1-2 free reaction Strikes/combat in exchange for party-wide Off-Guard multiplier in the fights that matter most. If Shatter Defenses is taken, Dueling Parry becomes purely defensive (AC only) from Lv 2-11 until Dueling Dance makes it free at Lv 12 — no reactive payoff in the Dueling chain.
+- **Decision trigger**: After ~3-4 sessions, evaluate whether encounters typically allow 3-body flanking. If yes → keep Riposte. If bosses/reach/flying dominate → retrain to Shatter Defenses.
 
 ### Debuff Chain Priority
 - **Levels 1–5**: Snagging Strike (Off-Guard on hit)
