@@ -40,7 +40,7 @@
 - **The Rusty Anchor** — Shop where party sold gear
 - **Ferryan Feress** — Another shop visited
 - **White Lady Inn** — Former mansion converted to an inn. Owner: Bartaban (elderly man). Drizzt once stayed here, wrote in a book, asked about the White Lady legend. Rinaldo the halfling ran the séance here
-- **Easthaven Ferry** — Large boat frozen into the water at the docks near the White Lady Inn. Matches the séance clue "Ferry"
+- **Easthaven Ferry** — Large boat frozen into the ice at the docks near the White Lady Inn. Matches the séance clue "Ferry." Not abandoned — used as a covert base by invisible duergar. Party boarded in Session 7; cabin contained bedrolls (more than one occupant), a map of Icewind Dale marking Sun Blight Fortress and a duergar outpost near Kelvin's Cairn. Durth (Xardorok's son) was found invisible inside and captured. Other duergar likely return to this base.
 
 ### Wilderness & Points of Interest
 
@@ -48,10 +48,13 @@
 - **Mountain near Caer-Konig** — Yeti territory. Contains a cave system with a massive chasm (~80 ft. deep) crossed by a stone bridge. Site of the yeti encounter and rescue of Garrett's climbing party
 - **Upside-Down Tower** — Rumored ancient magical tower that fell from the sky and buried itself underground. Connected to the fallen wizard city. Dzaan was allegedly searching for it before his execution
 - **Coastal Caves (northeast of Easthaven)** — Four cave mouths in 80-foot cliffs along the coast. The Bunch o' Knuckle crew's rowboat was found here. Contains:
-  - Water-level cave with a frozen river path and a Water Weird guarding a frozen waterfall
+  - Water-level cave with a frozen river path and a Water Weird guarding a frozen waterfall (likely frozen/destroyed once the water froze over)
   - Former hot spring with four frozen frost giants (drowning death ritual), open to the sky with Auril's Rime visible above
   - A sea hag's lair with a cauldron and a frost giant skeleton servant (both destroyed by the party)
+  - A pile-of-bones room where the Bunch o' Knuckle crew was stripped of meat and eaten; contained a waterlogged chest with 600 gp
   - Three higher caves (20-30 ft up) connected by an ice bridge — unexplored
+- **Sun Blight Fortress** — Duergar fortress in the mountains around Icewind Dale. Xardorok's base. Contains the dragon and "the heart." Location revealed on a map recovered from the Easthaven Ferry (Session 7). Durth described it as "where dad is, where the dragon is, where the heart is." This is the module's endgame destination.
+- **Duergar outpost (near Kelvin's Cairn)** — Marked on the same map; unvisited. Likely a staging point for the duergar invasion.
 
 ## NPCs
 
@@ -62,6 +65,8 @@
 - **Captain Arlath** — Captain of the guard in Easthaven. Hired the party to scout the coastline for the missing fishing crew of the *Bunch o' Knuckle*. Payment: 5 gp each up front + Dzaan's belongings on completion
 - **Roark** — Innkeeper at The Uphill Climb (Caer-Dineval). Gave the party information about The Caer, Xardorok, and Dinev's Rest. Hopes the town stabilizes now that the duergar are gone
 - **Atenas Swift** — Runs Frozenfar Expeditions in Caer-Konig. Loaned climber's kits and provided Garrett's camp location
+- **Speaker Dennis Whalen** — Town Speaker of Easthaven. Human, 30s but looks 50 (dark circles, scraggly beard, fur coat). Hardworking, desperate to feed his people. Bought the Cauldron of Plenty for 10 family gemstones (500 gp each). One delivered immediately, nine promised in 2 days. Signed contract witnessed by Prudence. Keeps the cauldron guarded day and night. Wants the sale kept quiet
+- **Prudence** — Mousy young assistant to Speaker Whalen. Witnessed the cauldron contract signing. Tried the stew; liked it
 
 ### Rescued / Encountered
 
@@ -77,7 +82,7 @@
 - **Torg Icevein** — Runs Torg's Caravan, a shady traveling merchant outfit. Caravan left Bryn Shander in the middle of the night
 - **Vex** — Tiefling associated with Torg's Caravan, mentioned alongside Torg and Sephek in Bryn Shander evidence
 - **Xardorok** — Duergar warlord from the Underdark. Has "the heart of a dragon" and a plot to destroy Ten-Towns so duergar can live on the surface. Has multiple sons; one (Durth) was in Easthaven
-- **Durth** — Duergar, white beard in three braids. One of Xardorok's sons. Last seen in Easthaven
+- **Durth** — DECEASED (Session 7). Duergar, white beard with center braid. One of Xardorok's sons. Found invisible on the Easthaven Ferry using it as a covert base. Captured non-lethally after trying to Reduce and flee. Tortured in the White Lady Inn's wine cellar by Virel. Revealed Sun Blight Fortress location before demanding Rune execute him. Auto-crit longbow to the skull. Cannot be revived without Resurrection. His thesis line: "I don't want his love, I want his respect. And today I've lost it."
 - **Suspicious Easthaven Guard** — Tall, clean-shaven, short hair, expensive pocket watch. Present at the White Lady Inn after the séance. Knows something about the trapper murder and Torg's Caravan but deflected questions. Threatened Rune via Message: "Be careful who you threaten." Not a regular at the inn
 
 ### The Caer Cult (Levistus Worshippers)
@@ -123,6 +128,13 @@
 - A Tempest Cleric might know more about how to reach or stop her
 - The **Island of Solstice** is connected to Auril somehow — significance unknown
 
+### The Cauldron of Plenty
+- Rare wondrous item recovered from the sea hag's lair in the coastal caves
+- Pour water and stir for 1 minute → transforms into hearty hot stew
+- Feeds 4 people per gallon, 3 times per day; holds 30 gallons
+- Enough food for ~120 people daily
+- Now in Speaker Whalen's custody in Easthaven, guarded day and night. Whoever feeds Easthaven controls Easthaven
+
 ### Frost Giant Death Rituals
 - Elderly frost giants perform drowning rituals rather than die of old age or sickness
 - They seek deep water in hot springs or caves to end their lives
@@ -165,3 +177,12 @@ Roark noted black smoke and large winged creatures leaving The Caer. Party trave
 
 ### Session 6 — The Hag's Cauldron
 Evening at the White Lady Inn: Avarath learned about Auril's winter from a guard (lives across the Sea of Moving Ice, find a Tempest Cleric). Rune pressed the same guard about the trapper murder — nat 20 Insight revealed the guard is hiding something about Torg's Caravan; the guard threatened Rune via Message. Rune recalled the "Island of Solstice" (nat 20 Religion). Virel studied the murder evidence and suffered an unknown magical effect (failed CHA save). Virel asked Bartaban about Drizzt — he stayed at the inn years ago, wrote in a book about the White Lady, then vanished. Next morning, the party took a longboat northeast to search for the Bunch o' Knuckle crew. Found their rowboat near coastal caves with four cave mouths in 80-foot cliffs. Inside: fought a Water Weird at a frozen waterfall (Kane's leg grabbed through the ice), discovered four frozen frost giants in a former hot spring (drowning death ritual), and encountered a sea hag cooking stew in a cauldron with a blood trail behind her. When Thors refused her hospitality, she transformed and summoned a frost giant skeleton. Avarath killed both — Divine Smite on the hag, then a critical hit with his maul (19 bludgeoning doubled to 38 via vulnerability + 19 radiant Divine Smite = 57 damage) shattered the CR 6 skeleton. The party was not expected to survive. Session ended with the cave system not fully explored.
+
+### Session 7 — The Cauldron, The Ferry, and The Son
+Party finished looting the coastal caves: found a waterlogged chest with 600 gp, Dzaan's missing wizard bag (scroll of Fireball, gray Bag of Tricks, spell components), and confirmed the *Bunch o' Knuckle* crew were stripped of meat by the sea hag. Virel identified the sea hag's cauldron as the magical **Cauldron of Plenty**. Dragged it back to Easthaven. Speaker **Dennis Whalen** desperately offered 5,000 gp in family gemstones to buy it — signed contract witnessed by Prudence. Received first gemstone; nine more promised in 2 days.
+
+That evening, Virel revealed she wants to be a plague doctor / forensic specialist. Rune and Kane went ice fishing; Kane revealed his **Order of the Fang** affiliation (sent alone by druid chief Arendelle to investigate the cult). Rune cast Detect Magic on Virel — confirmed the soothsayer's necklace is still altering her. Kane's Insight 15 confirmed her alignment has shifted. The party joked through it with Lord of the Rings references; no one acted.
+
+Avarath walked the docks alone and connected the séance's "fairy" clue to the frozen **Easthaven Ferry**. In the morning, the full party boarded the ferry (Kane as a Giant Spider for overwatch). They found a map of Icewind Dale marking **Sun Blight Fortress** (Xardorok's base) and an invisible duergar. The duergar used Reduce to try to flee; Virel's Fire Bolt (10) + Kane's Giant Spider bite (15) + Rune's Ensnaring Strike restraint brought him down. Thors knocked him unconscious non-lethally with a sling.
+
+Back at the White Lady Inn, the party hauled the prisoner to the wine cellar. Virel led the interrogation, heating a corkscrew in Create Bonfire and driving it into the prisoner's eye. Kane Healing Word'd the prisoner twice to keep him alive for more torture. Avarath pleaded with him; Rune stood by the cellar door refusing to participate, bow ready. The prisoner was **Durth, Xardorok's son**. He revealed Sun Blight Fortress is where Xardorok is, where the dragon is, and where the heart is — then demanded Rune execute him. Auto-crit longbow to the skull. Durth dead, unrevivable. Session ended with Rune nocking a second arrow — pointed at no one, yet.

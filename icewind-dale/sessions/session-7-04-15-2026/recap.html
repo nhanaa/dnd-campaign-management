@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 7 — The Cauldron, The Ferry, and The Son</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #e8edf2;
+  --bg-card: #f4f7fa;
+  --bg-card-hover: #ffffff;
+  --border: #c4ced8;
+  --text: #2c3640;
+  --text-dim: #4a5a68;
+  --text-bright: #1a2530;
+  --red: #8b3a3a;
+  --red-glow: #8b3a3a22;
+  --blue: #2a5a8a;
+  --blue-glow: #2a5a8a22;
+  --green: #3a7a5a;
+  --green-glow: #3a7a5a22;
+  --purple: #6a4a8a;
+  --purple-glow: #6a4a8a22;
+  --teal: #3a7a7a;
+  --teal-glow: #3a7a7a22;
+  --gold: #3a6b8a;
+  --gold-dim: #5a8aaa;
+  --gold-glow: #3a6b8a22;
+  --avarath: #2a5a8a;
+  --kane: #2a6a4a;
+  --rathis: #5a3a7a;
+  --rune: #7a4a2a;
+  --thors: #7a3030;
+  --virel: #2a6a6a;
+}
+
+@keyframes frost-breathe {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+}
+
+.frost-ambient {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+  animation: frost-breathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+p { margin-bottom: 12px; }
+
+section { margin-bottom: 60px; }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.subtitle span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+}
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.comp-segment { transition: width 0.3s; }
+.comp-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+.comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.party-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.party-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+  background: var(--bg-card-hover);
+}
+.party-card .name {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+}
+.party-card .class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.party-card .player {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.timeline-event:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 28px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-deep);
+}
+.timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+.event-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.tag-combat { background: var(--red-glow); color: var(--red); }
+.tag-exploration { background: var(--blue-glow); color: var(--blue); }
+.tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+.tag-lore { background: var(--teal-glow); color: var(--teal); }
+
+.event-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.event-body { color: var(--text); }
+.event-body ul { padding-left: 20px; }
+.event-body li { padding: 4px 0; }
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.spotlight-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.spotlight-card .char-name {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.spotlight-card ul { padding-left: 20px; }
+.spotlight-card li { padding: 4px 0; }
+.spotlight-card .highlight {
+  font-weight: 500;
+}
+
+.crit-box {
+  background: linear-gradient(135deg, #dce8f0, #e8f0f6);
+  border: 1px solid #8aaabf;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.crit-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.quote-card {
+  border-left: 3px solid var(--gold-dim);
+  background: #2a5a8a08;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+.quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.thread-list { list-style: none; padding: 0; }
+.thread-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+.thread-list li:hover { box-shadow: 0 4px 16px #2a5a8a18; }
+.thread-title {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.thread-list li.cliffhanger {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+}
+.thread-list li.mystery { border-left-color: var(--purple); }
+.thread-list li.lore-thread { border-left-color: var(--teal); }
+
+.loot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.loot-table th,
+.loot-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.loot-table th {
+  background: #e8edf2;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.loot-table tr:last-child td { border-bottom: none; }
+.loot-table td.magical {
+  background: #edf2f8;
+  border-left: 3px solid var(--gold-dim);
+}
+
+.journal {
+  background: linear-gradient(135deg, #f0f4f8, #eaf0f5);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+.journal h3 {
+  color: var(--avarath);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.journal h3:first-child { margin-top: 0; }
+.journal ul { padding-left: 20px; }
+.journal li { padding: 4px 0; }
+.journal .intro {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .container { padding: 24px 16px 60px; }
+  .timeline { padding-left: 24px; }
+  .timeline-event { padding: 16px 20px; }
+  .journal { padding: 20px 22px; }
+}
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>The Cauldron, The Ferry, and The Son</h1>
+    <p class="subtitle">
+      <span>Session 7</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&amp;D 5.5e</span>
+      <span>April 15, 2026</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:15%; background:var(--red);"></div>
+      <div class="comp-segment" style="width:15%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:50%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--teal);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--gold);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--red);"></span>Combat 15%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Exploration 15%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 50%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Lore 10%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--gold);"></span>Loot 10%</div>
+    </div>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 2</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--kane);">
+        <div class="name">Kane Whitefang</div>
+        <div class="class">Orc Druid 2</div>
+        <div class="player">Deiduke</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune &Aacute;nstepa</div>
+        <div class="class">Tiefling Ranger 2</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 2</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Elf/Drow Wizard 2</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic; text-align: center;">Rathis Nox has departed the campaign.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">The Cave Cleanup</div>
+        <div class="event-body">
+          <p>With the sea hag and frost giant skeleton already dead from last session, the party searched the rest of the coastal cave.</p>
+          <ul>
+            <li><strong>Rune</strong> decapitated the hag for a trophy; hung the head from his belt</li>
+            <li><strong>Kane</strong> (still a raptor) devoured the leftover stew with a 19 Investigation &mdash; found a <strong>human finger</strong> in it. "Good thing I'm a raptor, or this might be cannibalism."</li>
+            <li>Found a <strong>"Bunch o' Knuckleheads"</strong> jacket patch among stripped bones &mdash; the crew's fate confirmed</li>
+            <li>Rune's Sleight of Hand 18 opened a waterlogged chest: <strong>600 gp</strong></li>
+            <li>Rune rolled <strong>26 Investigation</strong> on the hag's body &mdash; no items, but spotted the cauldron as magical</li>
+            <li><strong>Virel</strong> cast <em>Identify</em>: rare wondrous item, stew feeds 4/gallon, 30 gallons, 3x/day &mdash; can feed the whole town</li>
+            <li>Water Weird was likely frozen in place once the water source froze; no combat</li>
+            <li>Short rest. Thors volunteered to drag the 50-lb cauldron out.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Speaker Whalen and the Contract</div>
+        <div class="event-body">
+          <p>Back at the Easthaven town hall, the party met <strong>Speaker Dennis Whalen</strong> &mdash; a man in his 30s who looks 50, dark circles under his eyes, scraggly beard, heavy fur coat. Captain Arlath was already waiting.</p>
+          <ul>
+            <li>Whalen pleaded to buy the cauldron to feed the town. Offered <strong>10 family gemstones at 500 gp each = 5,000 gp</strong>. One now, nine in two days.</li>
+            <li>Thors (Insight): Whalen's intent was genuine. But Thors's caravan-guard instincts pushed for a written contract.</li>
+            <li>Whalen called in <strong>Prudence</strong>, a mousy young assistant, to witness. Avarath read it over ("copacetic") and all signed.</li>
+            <li>Virel briefly asked for 12 gemstones ("two each") before remembering the party had dropped to five.</li>
+            <li>Arlath delivered <strong>Dzaan's bag</strong>: spell components, a <strong>Scroll of Fireball</strong>, and a <strong>gray Bag of Tricks</strong> (1/day, d8 creature). Rune took the bag.</li>
+            <li>600 gp split &mdash; 120 gp each.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Ice Fishing With Kane</div>
+        <div class="event-body">
+          <p>Kane and Rune sat on the frozen lake with fishing rods &mdash; the first genuine one-on-one RP of the campaign.</p>
+          <ul>
+            <li>Kane revealed he belongs to the <strong>Order of the Fang</strong>, a druid circle of Selune; his druid chief Arendelle sent him north alone to investigate the cult</li>
+            <li>Rune confessed years of isolation; visibly envious of Kane's lasting religious connection</li>
+            <li>Kane caught three large trout and donated them to Bartaban for the inn's dinner</li>
+          </ul>
+          <div class="quote-card" style="margin-top: 12px;">
+            <div class="quote-text">"You're never alone when you have religion, Rune."</div>
+            <div class="quote-attr">&mdash; Kane</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Avarath Finds The Ferry</div>
+        <div class="event-body">
+          <p><strong>Avarath</strong> walked the docks alone, looking for leads. Connected the séance clue "ferry" to <strong>Easthaven Ferry</strong> &mdash; a completely frozen boat at the docks right in front of the White Lady Inn.</p>
+          <p>Failed Perception. Failed Investigation. Got up close to the boat and found nothing visible. Returned to the inn empty-handed but with the lead. <em>"This is not my job. I'll just let the curious people handle this."</em></p>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Lore</span>
+        <div class="event-title">The Plague Doctor Reveal</div>
+        <div class="event-body">
+          <p>Over dinner, <strong>Virel</strong> asked about local surgeons. When the party pressed her, she revealed:</p>
+          <div class="quote-card">
+            <div class="quote-text">"She wants to be a plague doctor. It stems from studying the evidence &mdash; she's interested in forensics. How people were killed, the style in which they were cut. Like a whole field of study."</div>
+            <div class="quote-attr">&mdash; Virel, in-character</div>
+          </div>
+          <p>The party filed this under "things about Virel we didn't know." Minutes later they would file it under "things that now feel sinister."</p>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">The Alignment Confrontation</div>
+        <div class="event-body">
+          <p>Rune opened with the 5,000 gp gem deal: "Deeply uncomfortable taking family gemstones off the speaker." Tried bribing Virel with the Fireball scroll. She refused.</p>
+          <ul>
+            <li><strong>Rune Insight 13</strong>, <strong>Kane Insight 15</strong> (advantage): Virel has <em>changed</em> since they left The Caer</li>
+            <li>DM confirmed: Virel failed a Wisdom save studying the evidence overnight; her alignment has shifted</li>
+            <li>The soothsayer's evocation necklace is still on her</li>
+            <li>Rune cast <em>Detect Magic</em> on Virel &mdash; she clocked it with Perception 19</li>
+            <li>Lord of the Rings derail: "Take the ring from her and throw it in Mount Doom"</li>
+            <li>Kane signaled Thors he'd grapple Virel on cue. Avarath was lost; Rune filled him in. No one acted.</li>
+          </ul>
+          <div class="quote-card" style="margin-top: 12px;">
+            <div class="quote-text">"How long do you think you'll survive here on your own?"</div>
+            <div class="quote-attr">&mdash; Rune, to Virel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Boarding the Frozen Ferry</div>
+        <div class="event-body">
+          <p>Morning of the next day, Virel convinced Rune to return to the ferry with the full party's help.</p>
+          <ul>
+            <li><strong>Kane</strong> wild-shaped into a <strong>Giant Spider</strong> and climbed the 20-ft mast for overwatch</li>
+            <li><strong>Virel</strong> cast Detect Magic (nothing within 30 ft)</li>
+            <li><strong>Brute</strong> (Rune's bear companion) carried the blindsight; Thors swung Rune and Virel around like a metal detector</li>
+            <li>Kane pre-webbed the floor in front of the cabin door</li>
+            <li>Rune opened the cabin: bedrolls, a large <strong>map of Icewind Dale</strong>, with a marking for <strong>Sun Blight Fortress</strong> &mdash; Xardorok's base</li>
+            <li>As Rune reached for the map, Brute's blindsight pinged an invisible duergar right beside him. "Don't you dare." &mdash; and initiative.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">The Invisible Duergar</div>
+        <div class="event-body">
+          <p><strong>Initiative:</strong> Rune 23 &rarr; Thors 17 &rarr; Virel 17 &rarr; Kane 14 &rarr; Avarath 5 &rarr; Duergar nat 1.</p>
+          <h3 style="color: var(--red); margin-top: 12px;">Round 1</h3>
+          <ul>
+            <li><strong>Rune:</strong> Pulls the map off the wall, flees the cabin. Duergar's OA (15) misses.</li>
+            <li><strong>Thors / Virel / Kane / Avarath:</strong> Hold actions. Virel's trigger is "Fireball" (she doesn't have it at level 2 &mdash; held attack resolves as Fire Bolt cantrip).</li>
+            <li><strong>Duergar:</strong> Uses <em>Reduce</em> (bonus action) to shrink to Tiny, then Dashes. Passes DC 13 Dex save on Kane's web (total 18 with +8 Tiny bonus).</li>
+          </ul>
+          <div class="crit-box">
+            <div class="label">Held Actions Resolve</div>
+            <p><strong>Virel's Fire Bolt</strong> &mdash; nat 20 with disadvantage (crit negated by disadvantage rule). <strong>10 fire damage</strong> (max d10).</p>
+            <p><strong>Kane's Giant Spider bite</strong> &mdash; hits on 15. <strong>8 piercing + 7 poison = 15 damage.</strong></p>
+            <p><strong>Total: 25 damage to the duergar.</strong> Still alive. Finishes movement past Avarath.</p>
+          </div>
+          <ul>
+            <li><strong>Avarath:</strong> Maul OA with disadvantage &mdash; rolls 11, miss.</li>
+          </ul>
+          <h3 style="color: var(--red); margin-top: 20px;">Round 2</h3>
+          <ul>
+            <li><strong>Rune:</strong> Longbow at Tiny target (disadvantage) &mdash; 25/24, hits on 24. <strong>7 piercing.</strong> Bonus: <em>Ensnaring Strike</em>. Duergar rolls <strong>nat 1</strong> on Strength save (with disadvantage). Restrained. Additional <strong>3 piercing</strong>. Turn total: 10 damage.</li>
+            <li><strong>Avarath:</strong> "I don't think we should kill him. Keep him alive."</li>
+            <li><strong>Thors:</strong> Sling shot, non-lethal. Restrained (advantage) + Tiny (disadvantage) cancel to normal. Hits on 15 for <strong>5 bludgeoning</strong>. Duergar drops from 4 HP to 0 &mdash; unconscious, alive.</li>
+          </ul>
+          <p style="color: var(--text-dim); font-size: 14px; margin-top: 12px;"><em>~50 seconds later the duergar returns to normal size, still unconscious. Kane wraps him in webs. Party hauls him to the White Lady Inn. Bartaban: "I'll just be upstairs then."</em></p>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">The Wine Cellar Interrogation</div>
+        <div class="event-body">
+          <p>The party dragged their prisoner into the White Lady Inn's wine cellar. Cement floor, drain. <strong>Virel</strong> took charge.</p>
+          <ul>
+            <li><strong>Virel</strong> cast <em>Create Bonfire</em> (cantrip), heated a metal corkscrew</li>
+            <li>Intimidation 17 &mdash; the prisoner refused: "You really think I'm going to give you information about my own father?" The party realized this was <strong>Durth, Xardorok's son</strong></li>
+            <li>Virel drove the corkscrew into his eye &mdash; <strong>Blinded</strong> condition. Follow-up intimidations failed (8, 11).</li>
+            <li><strong>Kane</strong> un-wild-shaped and cast <em>Healing Word</em>: +11 HP (to 12 HP)</li>
+            <li>Virel twisted the corkscrew: 5 piercing. Durth at 7 HP.</li>
+            <li><strong>Avarath</strong> Persuasion 10 &mdash; fails. <em>"Haven't you suffered enough?"</em></li>
+            <li>Virel twisted again: 5 piercing. Durth at <strong>2 HP</strong>.</li>
+            <li>Kane's second <em>Healing Word</em>: +10 HP (to 12 HP)</li>
+            <li>Virel Intimidation 17 with advantage &mdash; breaks him. "I'll tell you one thing."</li>
+            <li><strong>Thors turned away.</strong> <strong>Rune stood by the door</strong> with his bow nearby, challenging: "Are you really okay with this?"</li>
+            <li>Durth's terms: "You promised to put an arrow in my head as soon as I say it."</li>
+            <li>Information: "You know where the fortress is. That's where dad is. That's where the dragon is." Thors: "And that's where the heart is."</li>
+          </ul>
+          <div class="crit-box">
+            <div class="label">Auto-Crit &mdash; By Consent</div>
+            <p>DM ruled auto-crit because Durth was bound <em>and wanted to be killed</em>. Rune fired the longbow at point-blank range.</p>
+            <p>Transcript math: <strong>~22 damage.</strong> Enough to drop past Healing Word's reach. Durth cannot be revived without Resurrection.</p>
+            <p style="color: var(--text-dim); font-size: 14px; margin-top: 8px;"><em>Another arrow was already nocked as the session faded to black &mdash; pointed at no one yet.</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Character Spotlights -->
+  <section>
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane</div>
+        <ul>
+          <li><span class="highlight">Read the Whalen contract</span> before signing &mdash; "copacetic"</li>
+          <li><span class="highlight">Found the Easthaven Ferry</span> on his solo dock walk; connected the "ferry" séance clue to the frozen ship</li>
+          <li>Missed a Maul opportunity attack on the fleeing Tiny duergar (disadvantage, rolled 11)</li>
+          <li>Asked the party to keep Durth alive after Ensnaring Strike &mdash; "I don't think we should kill him."</li>
+          <li>Two in-character pleas to Durth during the torture; both Persuasion checks failed</li>
+          <li>Closing line to Thors: <em>"He seeks vengeance, not justice."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--kane);">
+        <div class="char-name" style="color: var(--kane);">Kane Whitefang</div>
+        <ul>
+          <li>Ate the hag's leftover stew (Investigation 19) and immediately found a human finger</li>
+          <li>Said a "Raptor Jesus prayer" for the Water Weird elemental on the way out</li>
+          <li><span class="highlight">Insight 15 on Virel</span>: "her alignment has changed"</li>
+          <li>Ice fishing confessional with Rune: revealed the Order of the Fang and druid chief Arendelle</li>
+          <li>Wild-shaped into a <strong>Giant Spider</strong>; pre-webbed the cabin floor; climbed the mast 20 ft</li>
+          <li>Giant Spider bite: 8 piercing + 7 poison = <strong>15 damage</strong> on the Tiny fleeing duergar</li>
+          <li>Un-shaped twice mid-torture to Healing Word the prisoner: +11 HP, then +10 HP</li>
+          <li>Lord of the Rings derail: "Throw one ring in Mount Doom"</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune &Aacute;nstepa</div>
+        <ul>
+          <li>Decapitated the hag; hung the head from his belt as proof</li>
+          <li>Sleight of Hand 18 to open the waterlogged chest &mdash; 600 gp</li>
+          <li>Investigation 26 on the hag &mdash; spotted the cauldron as magical before Virel cast Identify</li>
+          <li>Opened the ice-fishing RP with Kane; the emotional center of the session</li>
+          <li>Tried to bribe Virel with the Fireball scroll; refused. Then asked her, point-blank: <em>"How long do you think you'll survive here on your own?"</em></li>
+          <li>Opened the cabin door on the ferry; grabbed the Sun Blight Fortress map; blindsight (via Brute) caught the invisible duergar</li>
+          <li>Longbow 24 + <strong>Ensnaring Strike</strong>: <strong>10 damage</strong> total (7 + 3 from nat 1 restraint)</li>
+          <li>Stood by the cellar door with bow ready; challenged Thors directly during the torture</li>
+          <li><span class="highlight">Auto-crit longbow</span> to Durth's skull at point-blank range &mdash; ~22 damage, unrevivable</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson</div>
+        <ul>
+          <li>Solo Insight check on Speaker Whalen during negotiations &mdash; "He seems honest, but&hellip; contracts." Pushed for the signed agreement.</li>
+          <li>Investigation on the chest &mdash; no traps</li>
+          <li>Held his action at the hatch during combat, covering the lower deck</li>
+          <li><span class="highlight">Non-lethal sling KO</span> on the restrained Tiny duergar &mdash; 5 bludgeoning, dropped him alive at 0 HP</li>
+          <li>Carried the webbed prisoner from the ferry to the inn</li>
+          <li>Turned away from the torture scene: <em>"I wouldn't say okay with it, but it doesn't seem right."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae</div>
+        <ul>
+          <li>Identified the Cauldron of Plenty's magical properties</li>
+          <li>Pushed the party to sell the cauldron; satisfied only by gemstones</li>
+          <li><span class="highlight">Revealed her plague-doctor / forensics ambitions</span> &mdash; character-depth moment now tinted by the alignment shift</li>
+          <li>Refused Rune's Fireball-scroll bribe: "You're gonna try and manipulate me now?"</li>
+          <li>Perception 19 clocked Rune casting Detect Magic on her</li>
+          <li>Learned Alarm from a scroll during long rest (100 gp)</li>
+          <li>Fire Bolt nat-20 with disadvantage for 10 damage on the fleeing duergar</li>
+          <li><span class="highlight">Ran the wine cellar interrogation.</span> Create Bonfire + corkscrew + twist, twice. Final Intimidation 17 with advantage broke Durth.</li>
+          <li><em>"It's gonna go a little bit more gruesome at this point, because she's gonna enjoy it."</em></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot</h2>
+    <table class="loot-table">
+      <thead>
+        <tr><th>Item</th><th>Source</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sea hag's head</td><td>Rune (trophy)</td><td>Hung from belt</td></tr>
+        <tr><td>"Bunch o' Knuckleheads" patch</td><td>Cave bone pile</td><td>Confirms crew death</td></tr>
+        <tr><td>600 gp</td><td>Waterlogged chest</td><td>Split 120 gp per PC</td></tr>
+        <tr><td class="magical">Cauldron of Plenty <small>(rare wondrous item)</small></td><td>Sea hag's lair</td><td><strong>Sold</strong> to Speaker Whalen for 5,000 gp in gemstones</td></tr>
+        <tr><td class="magical">Ruby gemstone (500 gp)</td><td>Whalen down payment</td><td>Held by Virel</td></tr>
+        <tr><td>9 more gemstones (4,500 gp)</td><td>Whalen's family</td><td>Owed &mdash; due in 2 days</td></tr>
+        <tr><td>Signed contract</td><td>Whalen, Prudence</td><td>Thors's insistence</td></tr>
+        <tr><td class="magical">Scroll of Fireball</td><td>Dzaan's bag</td><td>Held by Rune</td></tr>
+        <tr><td class="magical">Gray Bag of Tricks</td><td>Dzaan's bag</td><td>1/day, d8 summoned creature</td></tr>
+        <tr><td>Spell components bag</td><td>Dzaan's bag</td><td>Generic components</td></tr>
+        <tr><td class="magical">Alarm (1st-level spell)</td><td>Magic shop (100 gp)</td><td>Virel learned from scroll</td></tr>
+        <tr><td>Map of Icewind Dale</td><td>Ferry cabin</td><td>Marks Sun Blight Fortress, Kelvin's Cairn outpost</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <div class="quote-text">"That's a bad time to start getting the moral scruples. We just murdered an old lady who offered us soup."</div>
+      <div class="quote-attr">&mdash; Kane, after Rune decapitated the hag</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Good thing I'm a raptor or this might be cannibalism."</div>
+      <div class="quote-attr">&mdash; Kane, finding a human finger in the stew</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"And this is the story of how Kane got the taste for human blood and is now a full human."</div>
+      <div class="quote-attr">&mdash; Thors, after the DM clarified the cauldron doesn't need people in the stew</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"You're never alone when you have religion, Rune."</div>
+      <div class="quote-attr">&mdash; Kane, ice-fishing with Rune</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"There's dark and slightly less dark."</div>
+      <div class="quote-attr">&mdash; Rune, asked if he liked living in Icewind Dale</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I just look around and not noticing anything. This is not my job. I'll just let the curious people handle this."</div>
+      <div class="quote-attr">&mdash; Avarath, giving up on the dock checks</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"She wants to be a plague doctor. It stems from studying the evidence &mdash; she's interested in forensics. How people were killed, the style in which they were cut."</div>
+      <div class="quote-attr">&mdash; Virel's first character-depth reveal</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"How long do you think you'll survive here on your own?"</div>
+      <div class="quote-attr">&mdash; Rune, to Virel</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Thors, you've been rather quiet in this conversation&hellip; whether or not we should tackle Virel and take one ring from her and throw Mount Doom. What are your thoughts on this?"</div>
+      <div class="quote-attr">&mdash; Kane, mid-party-fracture</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Brute in one hand, Virel in the other. Just spin it around."</div>
+      <div class="quote-attr">&mdash; Thors, on being the metal detector for invisible dwarves</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I mean, if not water, then I shall use wine, so. Alright."</div>
+      <div class="quote-attr">&mdash; Virel, improvising the torture bucket</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I prefer neither. What the fuck are you going to do to him?"</div>
+      <div class="quote-attr">&mdash; Rune, stopping the wine-or-snow bit cold</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Haven't you suffered enough? Just tell us the information. Maybe we can stop this."</div>
+      <div class="quote-attr">&mdash; Avarath, to Durth during the torture</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Like, if your dad is willing to kill you, does he really love you?"</div>
+      <div class="quote-attr">&mdash; Avarath's second attempt, going at psychology instead of pain</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I don't think love was ever a part of it. It's respect. I don't want his love &mdash; I want his respect. And today I've lost it."</div>
+      <div class="quote-attr">&mdash; Durth, the session's thesis line</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"This is Icewind Dale. We do everything the hard way."</div>
+      <div class="quote-attr">&mdash; Durth, refusing Virel's first intimidation</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He seeks vengeance, not justice."</div>
+      <div class="quote-attr">&mdash; Avarath, to Thors, closing the session</div>
+    </div>
+
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="cliffhanger">
+        <div class="thread-title">The Second Arrow</div>
+        <div class="thread-desc">Session ended with Rune nocking a second arrow after killing Durth. Not pointed at anyone yet. Who is it for?</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Virel's Alignment Shift</div>
+        <div class="thread-desc">The soothsayer's necklace is still on her. The party knows. No one has acted. Rune + Avarath uncomfortable; Kane signaling Thors to grapple on cue.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Durth's Body</div>
+        <div class="thread-desc">Lying in the wine cellar with a corkscrew in his eye. Bartaban is upstairs. The party needs a plan before sunrise.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Sun Blight Fortress</div>
+        <div class="thread-desc">Marked on the recovered map. Xardorok is there. The dragon is there. The heart is there. The endgame is now a concrete destination.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Xardorok's Response</div>
+        <div class="thread-desc">Durth is dead. His father will learn of this. Either political, personal, or both. Avarath is already enraged at Xardorok for the father-son dynamic.</div>
+      </li>
+      <li>
+        <div class="thread-title">5,000 gp Owed</div>
+        <div class="thread-desc">Speaker Whalen needs to deliver 9 more gemstones in 2 days. Good-faith exchange or setup?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Ferry Crew</div>
+        <div class="thread-desc">More bedrolls than one duergar could have used. The other invisible dwarves using the ferry as a base will come back.</div>
+      </li>
+      <li>
+        <div class="thread-title">The Fireball Scroll</div>
+        <div class="thread-desc">Rune has it. Didn't give it to Virel. Who does it go to?</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Cauldron as Political Leverage</div>
+        <div class="thread-desc">Whoever feeds Easthaven controls Easthaven. Whalen does. Does this come back?</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pax's Notes -->
+  <section>
+    <h2>Pax's Notes &mdash; Avarath's Journal</h2>
+    <div class="journal">
+      <p class="intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+      <h3>What Avarath Did This Session</h3>
+      <ul>
+        <li>Read over the Whalen contract before signing. Confirmed it was clean.</li>
+        <li>Went alone to investigate the docks. Connected the séance's "ferry" to the Easthaven Ferry. Failed both checks; still, the lead was mine.</li>
+        <li>Joined the party to revisit the ferry the next morning.</li>
+        <li>During combat with the invisible duergar: moved to investigate noises, Perception came up empty, held position. Missed a Maul opportunity attack on the Tiny fleeing dwarf (disadvantage, rolled 11).</li>
+        <li>Carried Durth back to the inn's wine cellar with the others.</li>
+        <li>When Virel drew the corkscrew: slapped Durth awake (one of mine, still not proud).</li>
+        <li>Spoke twice to Durth as Virel tortured him. Both Persuasion checks failed. He was never going to listen.</li>
+        <li>Did not stop Virel. Did not raise my sword to her. Did not leave the room.</li>
+        <li>At the end: told Thors I seek vengeance, not justice. Meant it.</li>
+      </ul>
+
+      <h3>Things Avarath Knows That The Party Does Not</h3>
+      <ul>
+        <li>I was the first to walk the docks. If I'd rolled better, maybe we'd have found the duergar in the evening, not the morning. Maybe Durth would not have had time to study the map. Maybe.</li>
+        <li>Durth's line about respect, not love, stayed with me. House Solvane was a family of quiet people who did not speak of love either. I know what it is to serve a name instead of a heart. I understand him more than I am comfortable with.</li>
+        <li>The necklace is still around Virel's neck. I saw it during the cellar scene. No one else seemed to look.</li>
+        <li>I do not trust Speaker Whalen as much as Thors or Kane. He was too eager. 5,000 gp of family stones to a stranger in one evening is either desperation or a trap, and I cannot tell which.</li>
+      </ul>
+
+      <h3>What Avarath Is Thinking About</h3>
+      <ul>
+        <li>I am failing at the oath I thought I was swearing. I swore to the empty halls of House Solvane, not to Virel, not to a ranger with a bow already drawn, not to a druid healing a man so another can hurt him again. I do not know what House Solvane would have called the room we were in tonight.</li>
+        <li>The father-killing-son dynamic. Xardorok would kill his own child for failure. My family was taken by something I may have let in. The difference matters. It has to matter.</li>
+        <li>I did not act against Virel tonight. I told myself it was because the dwarf was important. That was not the whole reason. I hesitated because I am not sure I can take her, and I am not sure the party would side with me if I tried.</li>
+        <li>Rune nocked a second arrow at the end. It was not pointed at anyone. Not yet. I should know what I will do before it points at someone.</li>
+        <li>Sun Blight Fortress. The dragon. The heart. This is what the soothsayer said. "Destroy the heart." The path is now literal. And whatever is driving the winter that took my home is tied to that same path.</li>
+      </ul>
+
+      <h3>Open Questions For Next Session</h3>
+      <ul>
+        <li>What do we do with Durth's body? A corkscrew is still in his eye. This does not stay hidden.</li>
+        <li>Does Speaker Whalen deliver the nine remaining gemstones in two days, or is the contract worth less than the paper?</li>
+        <li>How many other duergar use that ferry as a base? There were more bedrolls than one dwarf needed.</li>
+        <li>When does someone try to take the necklace off Virel? Is it me? Is it anyone?</li>
+        <li>Am I going to fire an arrow at Rune, or let Rune fire one at Virel, or let this party shatter in the wine cellar next week?</li>
+        <li>How does the cult in The Caer fit into the Xardorok plot? Avarice warned us about Vellynne. The soothsayer warned us about the heart. The cult is still there. None of it has connected yet &mdash; but it will.</li>
+        <li>Durth had respect, not love. If the party no longer respects each other, what holds us together?</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

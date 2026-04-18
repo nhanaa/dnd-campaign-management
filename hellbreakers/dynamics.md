@@ -68,7 +68,7 @@
 
 ## Party Tie
 
-Established Session 1: Each party member was individually summoned by missive to the Cadence Keg in Breachill to meet wounded Eagle Knight **Ethran Howell**. They arrived the morning after the Battle of Breachill, which several of them fought in on the Hellbreaker side. Every member of the party speaks Draconic — Bai Jian proposed using it as combat shorthand, a party-wide habit now. **Moob raised Fang from an egg** in his abandoned-weapon-bunker lab, so those two share a pre-existing bond; the rest met at the tavern. Cyrathul is a literal winged dragon described by his player as "an observer from the moon" who "took drastic measures" to come down and act. Panacea watched most of the tavern scene in silence; she opens up only when asked directly.
+Established Session 1: Each party member was individually summoned by missive to the Cadence Keg in Breachill to meet wounded Eagle Knight **Ethran Howell**. They arrived the morning after the Battle of Breachill, which several of them fought in on the Hellbreaker side. **Four of the five speak Draconic** — Bai Jian, Cyrathul, Moob, and Fang. Panacea doesn't, which shelved Bai Jian's proposal to use it as combat shorthand before it became a habit. **Moob raised Fang from an egg** in his abandoned-weapon-bunker lab, so those two share a pre-existing bond; the rest met at the tavern. Cyrathul is a literal winged dragon described by his player as "an observer from the moon" who "took drastic measures" to come down and act. Panacea watched most of the tavern scene in silence; she opens up only when asked directly.
 
 ## NPC Relationships
 

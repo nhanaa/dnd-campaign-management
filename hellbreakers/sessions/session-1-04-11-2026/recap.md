@@ -22,7 +22,7 @@
 
 ## Session Summary
 
-The Hellbreakers' newest recruits converge at the Cadence Keg in Breachill, the morning after the rout of the Hellknights of the Rack. Between mugs of free Caden-Kaelin ale and hot sausages, five strangers discover they have one thing in common: every single one of them speaks Draconic. A one-armed Eagle Knight named Ethran Howell briefs them on their first mission — a trip to the Hellbreakers' headquarters in Saringallow — and the night dissolves into a tavern storytelling contest that Fang wins by doing wheelies through the bar on his wolf-motorcycle.
+The Hellbreakers' newest recruits converge at the Cadence Keg in Breachill, the morning after the rout of the Hellknights of the Rack. Between mugs of free Caden-Kaelin ale and hot sausages, four of the five discover a shared language — Bai Jian, Cyrathul, Moob, and Fang all speak Draconic. Bai Jian floats the idea of using it as party combat shorthand, but Panacea doesn't speak it and the proposal quietly drops. A one-armed Eagle Knight named Ethran Howell briefs them on their first mission — a trip to the Hellbreakers' headquarters in Saringallow — and the night dissolves into a tavern storytelling contest that Fang wins by doing wheelies through the bar on his wolf-motorcycle.
 
 The next morning is colder. A new decree from Stuart Hedvind VII has gone up overnight, offering gold to any citizen willing to turn in a suspected Hellbreaker. Ethran peels the Eagle Knight insignia off his breastplate and pivots the mission: they'll travel incognito, straight for headquarters, no side stops. The road takes them through the tense farming village of Draymoor (where four drunk Chelaxian sympathizers are talked — not run — out of the party's way), past empty autumn fields, and finally to the ferry crossing at the North Kansira River. The ferry is mid-crossing when two winged shapes appear on the horizon, closing fast.
 
@@ -96,7 +96,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 ### Bai Jian
 - **Critical opener** on the lead dread bat for 24 damage — *"I swing it across his wings and it just screeched out."* Missed the MAP follow-up.
-- **Proposed the party's Draconic comms shorthand** in the tavern: *"We can all talk in Draconic. Communicate in front of enemies."* The party adopted it on the spot.
+- **Floated Draconic as party comms shorthand** in the tavern: *"We can all talk in Draconic. Communicate in front of enemies."* Shelved when Panacea pointed out she doesn't speak it — Bai Jian, Cyrathul, Moob, and Fang are the four who do.
 - Told the oni-hunting story for the tavern contest and dropped the session's first hint at Bai Feng — *"he told it with a bit of a solemn voice when he mentioned he was fighting with another person."*
 - **Declined the +1 Eagle Knight Greatsword** because it meant something to Ethran: *"Maybe someone else can have better use for this."* Agreed to a rune transfer — then kept his jian when the craft turned out to be a full day and Zara handed them the warehouse mission.
 - Walked point into the warehouse trap. Ate 14 damage and a prone condition. Reminded Panacea she had a hero point when her Treat Wounds roll came up short — *"You have hero point. You have hero point."* She used her own hero point for the reroll.
@@ -235,7 +235,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 - Entered the tavern quietly, took the booth instead of the bar, and let the goblins drive the banter. First line of the night was a measured food comment: *"I'm still not used to the food around here."*
 - Clocked the medium-sized dragon across the room and asked out loud: *"A dragon? What such creature is doing here?"* — then *"Well, your wings probably might get taller."*
-- Turned the all-Draconic coincidence into a party tool: *"We can use that during mission. Communicate in front of enemies."* Party adopted it on the spot.
+- Floated Draconic as a party combat shorthand: *"We can use that during mission. Communicate in front of enemies."* Got shelved — Panacea doesn't speak it, so it only covers four of five. A comms channel that excludes the healer is not a comms channel. Good instinct, wrong party comp; file it for later if a future party lines up.
 - Told the oni-hunting story for the tavern contest. Referenced *"the other person I fought beside"* — first public hint at Bai Feng. Nobody pulled on it.
 - Framed his reason for joining to Ethran: *"I guess I can sympathize with the cause. My homeland is also ravaged by the greed of the dictatorship."*
 - Helped Moob defuse the four Chelaxian-badge drunks in Draymoor without violence. +30 XP.
