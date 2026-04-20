@@ -4,7 +4,7 @@
 - **System:** Pathfinder 2e Remastered
 - **Campaign:** Curse of the Crimson Throne (Korvosa)
 
-## Story So Far (as of Level 4)
+## Story So Far (as of Level 5)
 
 ### Key Events
 - Defeated **Gaedren Lamm**
@@ -20,6 +20,17 @@
 - Queen Ileosa announced capture and public execution of "Trinia Sabor" — actually a scapegoat
 - **Blackjack** intervened at the execution, freed the condemned woman, declared "Down with the queen!" — riot erupted
 - **Party leveled up to 4**
+- **Execution Rescue**: Party aided Blackjack in rescuing the scapegoat (named **Trisha** by the party) from Palace Guards and the Executioner at the public execution
+- **Party leveled to 5** — Caliban retrained from Warpriest to **Champion** to fill Beast's frontline role
+- **Beast left the campaign** (Pol). Beast remains as Level 5 NPC, now in Harse with Trinia, Trisha, and Yargin.
+- **Two weeks downtime**: Rattle recruited were-rats ("King of Shinies"), Bergatha ran drug empire, Marwen traded intel with King of Spiders
+- **Rolth intel from King of Spiders**: Meeting with "R.D." (unknown, two initials), warehouse lab on main island, 500 platinum funding, Red Mantis assassins (~30-36) in city
+- **Urgathoa cultists** spotted in sewers alongside Red Mantis (skull-and-bug symbol) — reported by Rattle's were-rat network
+- **Visited Cressida** — shared Red Mantis and Urgathoa intel. Red Mantis don't perform regicide (code). Cressida cleared party of treason.
+- **Visited Vencarlo** — has Trisha (scapegoat). Marwen thinks Vencarlo is Blackjack (blind sense motive — uncertain).
+- **Escorted Trinia, Trisha, Beast, and Yargin to Harse** for safekeeping (400gp from Vencarlo)
+- **Grey Maidens deployed** — queen's new all-female elite guard under Sabina
+- **Plague hook**: Grau's niece Brianna sick with unknown disease in Trails End. Quarantine ship (black sails, yellow lights) sunk in harbor 3 days ago. Bergatha identified plague connection (crit success society).
 
 ## NPCs
 
@@ -34,7 +45,12 @@
 - **Blackjack** — Legendary vigilante. Appeared at the execution to free the condemned woman. Identity unknown
 - **Eliza Blythe** — Old woman near the docks. Beast's anonymous beneficiary (800gp via Ishani)
 - **Marcus Endron** — Interim leader of the Sable Company (Seneschal is missing)
-- **Queen Ileosa** — Young queen (25). Cunning political operator. Executed a scapegoat publicly. Forming the Grey Maidens
+- **Queen Ileosa** — Young queen (25). Cunning political operator. Executed a scapegoat publicly. Grey Maidens now deployed. Locked in palace for 2 weeks after Blackjack's intervention.
+- **Grau Soldado** — Korvosan Guard sergeant. Brother-in-law of Tayce. Cleaned up and sober. Brought party to his sick niece.
+- **Tayce Soldado** — Single mother, washerwoman in Trails End. Bergatha paid for her daughter's cure.
+- **Brianna Soldado** — 12-year-old, first known plague victim. Red pox, highly contagious.
+- **Trisha** — The scapegoat from the execution. Named by the party. Now in Harse with Trinia, Beast, and Yargin.
+- **R.D.** — Unknown figure meeting with Rolth. Two initials only. Identity unknown.
 
 ## Locations
 
@@ -45,13 +61,21 @@
 - **All the World's Meats (Verik's Butcher Shop)** — Arkonas-connected business, Marwen established a contact there
 - **Harse** — Nearby town; fabricated as Trinia's escape destination
 - **The Shingles** — Rooftop network in Midland used by daredevils and fugitives
+- **Trails End** — Poor neighborhood on the outskirts, mostly Orissian. Criminal element, dangerous. Grau and Tayce Soldado live here.
+- **Harse** — Small ranching town northeast of Korvosa, one day's journey. Trinia, Trisha, Beast, and Yargin staying with ranchers.
+- **Rattle's Property (Midland)** — 3-story building purchased by Rattle for rental income.
+- **Vencarlo's Apartment (Garrison Hill)** — Near Orisini Academy. Where Trisha was kept. Address from Blackjack's dagger.
 
 ## Pending Actions
 - ~~Receive Greater Demon Mask~~ (received)
 - ~~Retrain Bard → Oracle Dedication~~ (completed during downtime)
+- ~~Visit Vencarlo Orisini~~ (visited — has Trisha, party escorted both to Harse)
+- ~~Make contact with Blackjack~~ (met at execution; Vencarlo may be Blackjack)
+- ~~Check in on Trinia at the safe house~~ (moved to Harse with Trisha, Beast, Yargin)
 - Ask GM: do we use ABP skill potency, or just weapon/armor runes?
-- Ask GM: can Bard Dedication add Occult to spell list for staff casting purposes? (future reference — now Oracle Dedication, may be moot)
-- Visit **Vencarlo Orisini** — Cressida's contact for smuggling Trinia out
+- Investigate the **sunken quarantine ship** — survivors? cargo?
+- Find Rolth's **warehouse lab** on the main island
+- Check if Ishani's **Remove Disease** cures Brianna
+- Decide whether to reveal **Vencarlo = Blackjack** suspicion to the party
+- Use **were-rat network** to help locate the warehouse
 - Investigate Cressida Kroft's background — does she have a history of opposing the crown?
-- Check in on Trinia at the safe house
-- Make contact with **Blackjack** if possible

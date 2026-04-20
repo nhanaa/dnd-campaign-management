@@ -7,7 +7,7 @@
 - **Background**: Street Urchin
 - **Class**: Sorcerer — Draconic Bloodline (Rime)
 - **Tradition**: Primal (Spontaneous)
-- **Level**: 4
+- **Level**: 5
 - **Alignment**: N
 - **Size**: Medium
 - **Speed**: 25 ft
@@ -16,26 +16,26 @@
 
 ## Ability Scores
 
-*Includes Gradual Ability Boosts (DEX+CON at Lv2-5, CHA partial at Lv4 → +5 at Lv5)*
+*Includes Gradual Ability Boosts — Level 5 boosts: CON, WIS, DEX, CHA*
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 10 (+0) | 16 (+3) | 14 (+2) | 12 (+1) | 12 (+1) | 19 (+4) |
+| 10 (+0) | 18 (+4) | 16 (+3) | 12 (+1) | 14 (+2) | 20 (+5) |
 
 ## Defenses
 
-- **AC**: 19 (10 + 4 level + 2 trained + 3 DEX)
-- **Max HP**: 40 (8 ancestry + 8/level x 4)
+- **AC**: 20 (10 + 5 level + 1 trained + 4 DEX)
+- **Max HP**: 48 (8 ancestry + 6/level × 5 + 3 CON × 5... adjusted per Foundry)
 - **Resistances**: Cold 2 (Frozen Wind heritage)
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Trained | +8 |
-| Reflex | Trained | +9 |
-| Will | Expert | +9 |
+| Fortitude | Expert | +12 |
+| Reflex | Trained | +11 |
+| Will | Expert | +11 |
 
-- **Perception**: Trained (+7), Low-Light Vision
-- **Spell DC**: 22 | **Spell Attack**: +12
+- **Perception**: Trained (+9), Low-Light Vision
+- **Spell DC**: 23 | **Spell Attack**: +13
 
 ## Ancestry Features
 
@@ -45,7 +45,7 @@
 ## Class Features
 
 - **Bloodline**: Draconic (Rime) — Primal tradition
-- **Blood Magic**: Scaly Hide (+1 status AC for 1 round) OR Propelling Sorcery (free Step or push target 5 ft)
+- **Blood Magic**: Scaly Hide (+1 status AC for 1 round) — triggers when casting bloodline or sorcerous gift spells
 - **Sorcerous Potency**: +rank status bonus to damage/healing from spell slot spells
 - **Signature Spells**: Heal (1st), Sudden Bolt (2nd)
 - **Focus Pool**: 1 point
@@ -53,16 +53,16 @@
 
 ## Skills
 
-### Trained
-- Acrobatics (+9)
-- Deception (+10)
-- Diplomacy — **Expert** (+12) *(Skill Paragon)*
-- Intimidation — **Expert** (+12)
-- Nature (+7)
-- Religion (+7) *(from Oracle Dedication)*
-- Society (+7)
-- Thievery (+9)
-- Korvosa Lore — **Expert** (+9)
+### Trained / Expert
+- Acrobatics (+11)
+- Deception — **Expert** (+14)
+- Diplomacy — **Expert** (+14) *(Skill Paragon)*
+- Intimidation — **Expert** (+14)
+- Nature (+9)
+- Religion (+9) *(from Oracle Dedication)*
+- Society (+8)
+- Thievery (+11)
+- Korvosa Lore — **Expert** (+10)
 
 ## Feats
 
@@ -72,12 +72,13 @@
 | Shapechanger's Intuition | 1 | Ancestry Feat |
 | Kitsune Spell Familiarity | 1 | Ancestry Paragon |
 | Star Orb | 3 | Ancestry Paragon |
+| Kitsune Spell Mysteries | 5 | Ancestry Feat |
 
 ### Class Feats
 | Feat | Level | Source |
 |------|-------|--------|
 | Reach Spell | 2 | Class Feat *(retrained from Widen Spell)* |
-| Propelling Sorcery | 4 | Class Feat |
+| Enhanced Familiar | 4 | Class Feat *(retrained from Propelling Sorcery)* |
 
 ### Free Archetype
 | Feat | Level | Source |
@@ -89,7 +90,7 @@
 | Feat | Level | Source |
 |------|-------|--------|
 | Pickpocket | 1 | Background (Street Urchin) |
-| Bon Mot | 2 | Skill Feat |
+| Intimidating Glare | 2 | Skill Feat *(retrained from Bon Mot)* |
 | No Cause for Alarm | 4 | Skill Feat |
 
 ### General Feats
@@ -104,9 +105,10 @@
 
 | Rank | Slots | Known |
 |------|-------|-------|
-| Cantrips | 5 | Frostbite, Electric Arc, Detect Magic, Prestidigitation, Shield + Ricochet, Dynamic Daze *(homebrew cantrips)* |
-| 1st | 4 | Grease, **Heal** *(signature)*, Hydraulic Push, Fear, Helpful Steps |
-| 2nd | 4 | **Sudden Bolt** *(signature)*, Loose Time's Arrow, Rime Slick, Blazing Bolt |
+| Cantrips | 5 | Frostbite, Electric Arc, Detect Magic, Prestidigitation, Shield + Ricochet, Dynamic Daze *(homebrew)* + Stabilize *(via Cantrip Connection)* |
+| 1st | 4 | Grease, **Heal** *(signature)*, Fear, Helpful Steps, Sanctuary |
+| 2nd | 4 | **Sudden Bolt** *(signature)*, Dispel Magic, Rime Slick, Blazing Bolt |
+| 3rd | 3 | Ice Ball *(reflavored Fireball, cold)*, Haste *(bloodline gift)*, Slow |
 
 ### Divine (from Oracle Dedication — Cosmos)
 
@@ -118,25 +120,37 @@
 
 **Whispers of Weakness** (1 action, cursebound) — target within 60 ft: learn all weaknesses + lowest save, +2 status to next attack vs that target
 
-### Innate (from Kitsune Spell Familiarity)
+### Innate (from Kitsune Spell Familiarity + Kitsune Spell Mysteries)
 
 | Rank | Known |
 |------|-------|
 | Cantrip (1, prepared) | Ghost Sound / Daze / Forbidding Ward (choose daily) |
+| 1st (1/day, divine) | Bane / Illusory Object / Sanctuary (choose daily) |
 
 ### Focus Spells (1 Focus Point)
 
-- **Flurry of Claws** (Bloodline Focus Spell)
+- **Flurry of Claws** (Bloodline Focus Spell) — cold damage (reflavored from fire, DM approved)
 
 ### Staff of Water (2 charges/day)
 
 - Cantrip: Spout
 - 1st (1 charge): Create Water, Hydraulic Push
 
+## Star Orb (Familiar)
+
+- **Type**: Tiny stone, light Bulk (immobile unless given a Speed ability)
+- **Abilities per day**: 4 (base 2 + Enhanced Familiar)
+- **Locked**: Innate Surge (always counts against limit)
+- **Daily selection**:
+  1. **Innate Surge** (locked) — 1/day, recast an ancestry innate spell already cast today
+  2. **Cantrip Connection** — adds Stabilize to spell repertoire
+  3. **Familiar Focus** — 1/day, familiar uses 2 actions to restore 1 Focus Point
+  4. **Restorative Familiar** — 1/day, familiar uses 2 actions to heal you (2d8 HP at level 5)
+
 ## Equipment
 
 ### Wealth
-- **PP**: 1 | **GP**: 234 | **SP**: 23 | **CP**: 22
+- **PP**: 6 | **GP**: 413 | **SP**: 23 | **CP**: 22
 
 ### Worn/Invested
 - **Greater Demon Mask** *(level 10, Queen's treasury reward)* — +2 item bonus to Intimidation, 1/day rank 3 Fear DC 29. Mask slot.

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 2 — Night's Prize</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '✦'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-moob { border-left-color: var(--jade); }
+.char-fang { border-left-color: var(--rust); }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-moob { border-left-color: var(--jade); }
+.spotlight.s-fang { border-left-color: var(--rust); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '➤'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Night's Prize</h1>
+  <div class="subtitle">Session 2 — Hellbreakers · Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">April 18, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3.5 hours</span>
+    <span class="meta-pill">8 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:40%"></div>
+    <div class="comp-seg comp-rp" style="width:25%"></div>
+    <div class="comp-seg comp-social" style="width:15%"></div>
+    <div class="comp-seg comp-explore" style="width:10%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 40%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 25%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 15%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 10%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot / Mystery 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood · Dueling Fighter / Marshal / Exemplar</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Medium Dragon · Thaumaturge (Mirror Cloak)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk · Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-moob"><div class="char-name">Moob</div><div class="char-class">Goblin · Alchemist (Quick Bomber)</div><div class="char-player">Harrgoth</div></div>
+    <div class="char-card char-fang"><div class="char-name">Fang</div><div class="char-class">Goblin · Inventor · Construct: <em>Wing</em></div><div class="char-player">Cherry</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Picking up from the warehouse cliffhanger, the party made quick work of the Chelaxian loyalists who had captured <strong>Gertraud Middenhelm</strong>. After interrogating the sole survivor and sending him limping back with a warning, they rescued Gertraud, collected loot from the warehouse, and escorted her back to the Hellbreakers HQ at Saringallow.</p>
+    <p>The following day, <strong>Rhokrag</strong> briefed them on their next mission: intercept a Chelaxian cargo ship on the North Kansira River and seize supplies for the cause — but minimize killing. The party hatched a fake-prisoner ruse, with Moob and a disguised Cyrathul pretending to turn in "captured Hellbreaker" Bai Jian, while Fang and Panacea hid on the cliffs above. The deception got them on board, but the stealth team blew their cover when Wing knocked a boulder into the river.</p>
+    <p>What followed was a brutal Extreme-difficulty ship boarding against <strong>Captain Julenus Aedin</strong>, his animated armor bodyguard, and hardened swabbies. The animated armor resisted all physical damage types and Fang went down twice — once to the armor's glaive, once to a swabby's relentless fists. Moob's tenderizer grenades cracked the armor's resistance, Cyrathul bit the captain's neck clean through, and Bai Jian's grapple-reposition-shove sent the armor into the river. When the armor hit the water, its failsafe detonated — setting the entire ship ablaze. In the ensuing chaos, the party fought fires with water bombs, secured supplies, rescued trapped crew members, and barely escaped the sinking ship. Both goblins nearly drowned in the escape; Moob sacrificed HP to push Fang above water.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I · Combat · The Warehouse</div>
+      <div class="act-card">
+        <h3>Clearing the Cliffhanger</h3>
+        <ul>
+          <li>Combat opened with <strong>Panacea</strong> attempting to deceive the loyalists — <em>"Oh, hello, we just fell through the door"</em> — they didn't buy it. She moved forward and hit one with Needle Darts.</li>
+          <li><strong>Moob</strong> opened with a Tallow Bomb — persistent fire damage plus Goblin Burnit splash.</li>
+          <li><strong>Cyrathul</strong> placed a Mirror Cloak image for flanking and struck the leader hard.</li>
+          <li><strong>Bai Jian</strong> landed a critical Snagging Strike through the leader's face (<strong>25 damage</strong>) — the flanking off-guard from Cyrathul's mirror turned the hit into a crit. Then Sudden Charged the second loyalist for another crit (<strong>19 damage</strong>). <em>"You dare draw your weapon against me."</em></li>
+          <li>The third loyalist surrendered, throwing his crossbow down. <strong>Fang</strong> flew in on Wing and grabbed the dropped crossbow in his jaws.</li>
+          <li><strong>+88 XP.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act II · Roleplay · Interrogation &amp; Mercy</div>
+      <div class="act-card">
+        <h3>The Loyalist's Limp</h3>
+        <ul>
+          <li><strong>Bai Jian</strong> untied <strong>Gertraud</strong> while the party questioned the surviving loyalist.</li>
+          <li>The loyalist called them <em>"scum and vermin"</em> — <strong>Fang</strong> bit his ankle and hit the femoral artery. Cyrathul: <em>"Say it again. I'll bite you. Test me."</em></li>
+          <li><strong>Moob</strong> delivered the ultimatum: <em>"When it's your blood being spilled, it doesn't seem so heroic, does it?"</em> He healed the man just enough to walk with a limp.</li>
+          <li><strong>Panacea</strong> scowled behind Moob: <em>"I don't think you deserve healing."</em></li>
+          <li>The loyalist fled in terror. <strong>Fang</strong> rode Wing out the door and called after him: <em>"If you insult Moob or my friends again, I'm going to bite your other leg."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III · Faction · Loot &amp; Downtime</div>
+      <div class="act-card">
+        <h3>Hagrath's Forge &amp; the Rune Transfer</h3>
+        <ul>
+          <li><strong>Warehouse loot</strong>: Silver longsword, <strong>masquerade scarf</strong> (1/day disguise), <strong>whispering wire</strong> (remote communication).</li>
+          <li>Gertraud escorted back to HQ. <strong>Rhokrag</strong> promised a morning briefing.</li>
+          <li><strong>Blacksmith Hagrath</strong> in Traveler's Square: Cyrathul haggled the silver longsword sale to <strong>25gp</strong> (up from 22). Paid <strong>3.5gp</strong> for the +1 potency rune transfer from Ethran's greatsword onto Bai Jian's jian.</li>
+          <li><strong>Fang learned the dueling pistol formula</strong> from Hagrath overnight — bonding over shop talk and explosions. <em>"Bang would nod his head vigorously."</em></li>
+          <li>Moob and Fang earned income; Moob purchased non-lethal bomb formulas (water bombs) for the mission.</li>
+          <li>Cyrathul attempted dental hygiene with hempen rope — immediately sheared through it with dragon teeth, cutting his 50-foot rope down to 48. Moob: <em>"I swear, humans will get you very sick after you bite them. You have to floss every time you bite a human."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV · Faction · Rhokrag's Briefing</div>
+      <div class="act-card">
+        <h3>Hearts and Minds</h3>
+        <ul>
+          <li>Mission: Intercept a Chelaxian cargo ship at a river bottleneck, two days' travel upriver.</li>
+          <li>Rhokrag stressed minimal killing — <em>"We must refrain from killing as much as possible... In the coming weeks and months, we're going to need the people of Isger on our side."</em></li>
+          <li>Moob immediately flagged a problem: <em>"I actually might need to get a new formula if we're going to have to do non-lethal, because every bomb I can make is very lethal."</em></li>
+          <li><strong>Zara</strong> distributed <strong>10gp</strong> (2gp each) for mission supplies with a wink: <em>"You better come back with more than that in supplies."</em></li>
+          <li>Two days of uneventful travel. <strong>Hedvind bounty posters</strong> plastered on every village and farm they passed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V · Exploration · The Ambush Plan</div>
+      <div class="act-card">
+        <h3>The Prisoner Ruse</h3>
+        <ul>
+          <li>The party camped at a rocky outcropping overlooking a river bend — deep channel on one side, shallow on the other, ships forced close to the cliff.</li>
+          <li><strong>Bai Jian devised the plan</strong>: Moob and Cyrathul (disguised as a human via <strong>masquerade scarf</strong>) present "captured Hellbreaker" Bai Jian to flag down the ship. Fang and Panacea hide on the cliff for ambush support.</li>
+          <li>Cyrathul: <em>"We could pretend to be opportunist loyalists and accuse them of being rebels."</em> Bai Jian: <em>"What if we pretend we actually caught a Hellbreaker? Like a fake hostage situation?"</em></li>
+          <li>Panacea cast <strong>Guidance</strong> on Moob before the performance. Bai Jian hero-pointed his Performance check to sell the prisoner act.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act VI · Roleplay · Boarding the Night's Prize</div>
+      <div class="act-card">
+        <h3>Countrymen!</h3>
+        <ul>
+          <li>The ship — <em>red hull, black accents, Chelaxian flag, spiky gunwales</em> — dropped anchor and extended a boarding plank.</li>
+          <li><strong>Moob</strong> talked them aboard: <em>"Countrymen! I got a damn Hellbreaker. Can you help? You got manacles below deck?"</em></li>
+          <li><strong>Bai Jian</strong> played the struggling prisoner: <em>"Hey, release me, you scum."</em> Cyrathul (disguised): <em>"I take what I can get."</em></li>
+          <li>The ruse worked — until <strong>Wing knocked a boulder</strong> off the cliff, revealing Panacea and Fang. <em>"What's happening here? The rebels!"</em></li>
+          <li>Panacea: <em>"There goes the element of surprise."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII · Combat · Ship Combat (Extreme)</div>
+      <div class="act-card">
+        <h3>The Night's Prize</h3>
+        <p>Extreme-difficulty ship boarding against <strong>Captain Julenus Aedin</strong>, his animated armor bodyguard (all-physical-damage resistance + failsafe explosive), and two hardened swabbies. Fang went down twice. Cyrathul bit the captain to death. Bai Jian shoved the armor overboard.</p>
+        <p><em>See Combat Encounters below for round-by-round detail.</em> <strong>+128 XP (Extreme).</strong></p>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VIII · Mystery · The Burning Ship</div>
+      <div class="act-card">
+        <h3>Failsafe</h3>
+        <ul>
+          <li>The animated armor's failsafe detonated when it hit the water, setting the ship ablaze from below.</li>
+          <li><strong>Moob</strong>: Water bombs to fight fires (2 successes), looted the captain's coin purse, used Diplomacy to evacuate remaining crew — <em>"We didn't want to do this. Live to see another day."</em></li>
+          <li><strong>Cyrathul</strong>: Esoteric Lore to identify and secure valuable supplies from the cargo.</li>
+          <li><strong>Bai Jian</strong>: Athletics to rescue trapped crew members — lifted a collapsed wall, broke down a door. Secured supplies. Shouted to the rescued sailors: <em>"Go spread the words that the Hellbreakers is not all bad."</em></li>
+          <li><strong>Panacea</strong>: Crit athletics to leap from the cliff onto the burning deck — <em>"You watch this cat lady take two steps back and perfectly backflips, does a triple somersault in the air and lands on the deck."</em> Treated Fang's wounds. Secured supplies via Thievery.</li>
+          <li><strong>Fang</strong>: Crafting check to push Wing's wreckage off the ship into the water for later salvage.</li>
+          <li><strong>+70 bonus XP</strong> (40 crew rescue + 30 supplies).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IX · Combat · The Drowning</div>
+      <div class="act-card">
+        <h3>Grab Onto My Rope</h3>
+        <ul>
+          <li>The ship sank. <strong>Bai Jian</strong> and <strong>Cyrathul</strong> swam to shore easily.</li>
+          <li><strong>Moob</strong>, <strong>Fang</strong>, and <strong>Panacea</strong> struggled — goblins can't swim, cat hates water.</li>
+          <li>Panacea made it on her second attempt: <em>"I'm hissing and really pissed off about being wet, by the way."</em></li>
+          <li>Fang kept rolling 4s. <strong>Moob voluntarily took 5 damage</strong> (critical failure) to push Fang above water: <em>"I purposely will take a critical failure to bump up to help Fang because he's my child, basically."</em></li>
+          <li><strong>Bai Jian</strong> threw rope from shore (hero-pointed the athletics check). Both goblins grabbed on and were pulled to safety.</li>
+          <li>The Night's Prize crew watched from shore. <em>"I hope your friend doesn't die. You all saved us."</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 · Warehouse Fight</div>
+    <h3>Clearing the Cliffhanger</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3× Chelaxian Loyalists</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2 (decided in Round 1)</div></div>
+      <div><div class="combat-stat-label">Tactics</div><div class="combat-stat-value">Crossbows + "Fragilia!" leader</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">2 killed, 1 surrendered</div></div>
+    </div>
+    <h4>Round Highlights</h4>
+    <ul>
+      <li><strong>Panacea</strong>: Attempted Deception — failed. Moved forward, Needle Darts on a loyalist.</li>
+      <li><strong>Moob</strong>: Strode twice, Tallow Bomb — persistent fire + Goblin Burnit splash.</li>
+      <li><strong>Cyrathul</strong>: Mirror Cloak image for flanking, Exploit Vulnerability (failed Esoterica), struck the leader hard.</li>
+      <li><strong>Bai Jian</strong>: Critical Snagging Strike through the leader's face (<strong>25 damage</strong>) — flanking off-guard from Cyrathul's mirror turned it into a crit. Then Sudden Charged Loyalist 2 for another crit (<strong>19 damage</strong>). Two kills in one turn.</li>
+      <li>Loyalist 3 surrendered. <strong>Fang</strong> flew in on Wing, grabbed the crossbow in his jaws.</li>
+    </ul>
+    <p style="margin-top: 14px; color: var(--gold);"><strong>+88 XP each.</strong></p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 · Night's Prize Ship Boarding · Extreme</div>
+    <h3>Captain Aedin &amp; the Animated Armor</h3>
+    <p>The fake-prisoner ruse got three party members on deck. Wing knocked a boulder down, blowing the ambush team's cover. Four rounds of desperate ship combat followed.</p>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Captain Aedin · Animated Armor · 2× Swabbies</div></div>
+      <div><div class="combat-stat-label">Armor Traits</div><div class="combat-stat-value">All-physical resistance · Failsafe explosive</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">4 + skill challenge</div></div>
+      <div><div class="combat-stat-label">Downed</div><div class="combat-stat-value">Fang ×2 · Moob ×1</div></div>
+    </div>
+
+    <h4>Round 1 — Swabbies Neutralized</h4>
+    <ul>
+      <li><strong>Panacea</strong>: Needle Darts into the sails — shredded them.</li>
+      <li><strong>Swabby 1</strong>: Two punches at Bai Jian — one connected hard.</li>
+      <li><strong>Swabby 2</strong>: Stepped toward Moob, two swings — both sailed over his head.</li>
+      <li><strong>Moob</strong>: Tumbled Through Swabby 2's legs, strode to the stern, kicked the anchor winch free with a double-foot kick. Ship began drifting.</li>
+      <li><strong>Cyrathul</strong>: Dismissed disguise, unfurled dragon wings. Critically Demoralized the captain (<strong>Frightened 2</strong>) — <em>"Surrender now or you will all die."</em> Struck Swabby 1 with sword pommel (non-lethal).</li>
+      <li><strong>Bai Jian</strong>: Snagging Strike on Swabby 1 (non-lethal, off-guard), second strike knocked him out cold.</li>
+      <li><strong>Fang</strong> (on Wing): Rode onto the ship (70 ft movement), non-lethal wheel attack on Swabby 2 (hero-pointed). Goblin gauntlet crit — <em>"pitiful little goblin damage."</em> Swabby begged for mercy.</li>
+    </ul>
+
+    <h4>Round 2 — Captain &amp; Armor Emerge</h4>
+    <ul>
+      <li><strong>Captain Aedin</strong> emerged with the animated armor: <em>"What the hell do you think you're doing on my boat?"</em></li>
+      <li><strong>Animated Armor</strong>: Two glaive strikes on Fang — <strong>Fang went down</strong> (first down of the campaign).</li>
+      <li><strong>Captain</strong>: Dagger stab at Moob (one hit, one miss).</li>
+      <li><strong>Panacea</strong>: Moved closer on the rocks, 2-action Heal on Fang at range — brought him back.</li>
+      <li><strong>Swabby 2</strong>: Stood up, punched Wing twice — <em>"Consecutive serious punches."</em></li>
+      <li><strong>Moob</strong>: Critical Tenderizer Grenade on animated armor (11 acid + splash) — reduced its physical resistance, made it off-guard to bite attacks. Parry stance. Attempted non-lethal strike on captain (miss).</li>
+      <li><strong>Cyrathul</strong>: Strode to armor area. Attempted to bite the armor twice (off-guard from Tenderizer) — missed both, even after spending a hero point. <em>"I tried. That's my turn."</em></li>
+      <li><strong>Bai Jian</strong>: Flanked the armor, struck with piercing — minimal damage. <em>"Your sword pokes into the armor and doesn't really do much damage."</em> Moved away.</li>
+      <li><strong>Fang</strong>: Dismounted Wing (prone). Pressed the red button — <strong>Exploded Wing</strong> (2 actions). Armor critically succeeded the Reflex save (zero damage). Fang took self-damage. <em>"This is going horribly wrong in the best way."</em></li>
+    </ul>
+
+    <h4>Round 3 — The Turning Point</h4>
+    <ul>
+      <li><strong>Animated Armor</strong>: Three strikes at Cyrathul (one hit, two misses).</li>
+      <li><strong>Captain</strong>: First attack brought <strong>Moob down</strong>. DM redirected second attack to Cyrathul (retconned targeting a downed character).</li>
+      <li><strong>Panacea</strong>: Moved on the rocks, 2-action Heal on Moob at range — brought him back.</li>
+      <li><strong>Swabby 2</strong>: Attacked Fang/Wing area — brutal hits. <strong>Fang went down a second time</strong> (now Wounded 2).</li>
+      <li><strong>Moob</strong>: Stood up, Quick Alchemy Tenderizer Grenade on captain (hit — made captain off-guard to bites). Parry stance.</li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability on captain (failed, hero-pointed, succeeded — Personal Antithesis). Bit captain with jaws — hit. Second bite — hit. <strong>DM: "How do you want to do this?"</strong> <em>"He's nice and tasty. I'll just go straight for the neck."</em> <strong>Killing blow on Captain Aedin.</strong></li>
+      <li><strong>Bai Jian</strong>: Killed the remaining swabby — <em>"Pierce him through the stomach."</em> Lethal, no more non-lethal. Moved to animated armor, Grapple — success.</li>
+      <li><strong>Fang</strong>: Dying recovery check — <strong>natural 20</strong>. <em>"How about that?"</em> Stable at 0 HP.</li>
+    </ul>
+
+    <h4>Round 4 — Goodbye, Frickin' Armor</h4>
+    <ul>
+      <li><strong>Animated Armor</strong>: Tried to escape grapple three times — all failed.</li>
+      <li><strong>Panacea</strong>: Needle Darts on armor (hero-pointed, still resisted). Cast Guidance on Moob.</li>
+      <li><strong>Moob</strong>: Quick Alchemy bomb on armor (resisted). Create a Diversion — <em>"Hey shiny rust bucket, look what I'm doing to your master!"</em> (poured acid on the captain's corpse) — failed. Second attempt with words — succeeded.</li>
+      <li><strong>Cyrathul</strong>: Attempted Demoralize on armor (no mind — wasted). Exploit Vulnerability (crit fail — still got Personal Antithesis). Longsword strike — miss.</li>
+      <li><strong>Bai Jian</strong>: <strong>Reposition</strong> armor toward the edge → <strong>Step</strong> → <strong>Shove</strong> it overboard. <em>"Goodbye, frickin' armor."</em> Splash. Boom. <strong>Failsafe detonated</strong> — ship caught fire from below.</li>
+    </ul>
+    <p style="margin-top: 14px; color: var(--gold);"><strong>+128 XP (Extreme)</strong> + <strong>70 bonus XP</strong> (40 crew rescue + 30 supplies secured).</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian · the Measured Blade</h4>
+      <ul>
+        <li>Opened the warehouse fight with back-to-back critical hits (Snagging Strike + Sudden Charge), killing two loyalists in one turn. Cyrathul's Mirror Cloak flanking turned the first hit into a crit.</li>
+        <li>Volunteered as the fake prisoner for the boarding ruse — sold it with a hero-pointed Performance check.</li>
+        <li>Killed the troublesome swabby who kept critting the party — lethal strike after the situation escalated: <em>"There's no mercy. Pierce him through the stomach."</em></li>
+        <li>Grappled the animated armor, then used <strong>Reposition → Step → Shove</strong> to push it overboard — the tactical play that ended the Extreme encounter.</li>
+        <li>Rescued multiple trapped crew members from the burning ship — lifted a collapsed wall, broke down a door.</li>
+        <li>Threw the rope that saved both goblins from drowning.</li>
+        <li>Told the rescued sailors to spread word that <em>"the Hellbreakers are not all bad."</em></li>
+      </ul>
+    </div>
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul · the Lunar Observer</h4>
+      <ul>
+        <li>Placed Mirror Cloak duplicate for flanking in the warehouse fight — the off-guard turned Bai Jian's hit into a crit.</li>
+        <li>Dismissed the masquerade scarf disguise mid-combat, unfurled wings, and critically demoralized the ship captain (<strong>Frightened 2</strong>) — <em>"Surrender now or you will all die."</em></li>
+        <li>Tried to bite the animated armor in Round 2 — missed twice even with a hero point.</li>
+        <li>Exploited Vulnerability on Captain Aedin (Personal Antithesis), then <strong>bit him to death</strong> after Moob's tenderizer grenade made him off-guard to bites — <em>"He's nice and tasty. I'll just go straight for the neck."</em> (HDYWTD killing blow)</li>
+        <li>Secured supplies via Esoteric Lore on the burning ship.</li>
+      </ul>
+    </div>
+    <div class="spotlight s-panacea">
+      <h4>Panacea · the Quiet Hex</h4>
+      <ul>
+        <li>Opened both combats with Needle Darts — shredded the ship's sails on the DM's suggestion.</li>
+        <li>Shouted from the cliff: <em>"We have them surrounded!"</em> (attempted Demoralize from range)</li>
+        <li>Cast 2-action Heal at range twice to bring Fang back from dying.</li>
+        <li>Critical athletics to leap from the cliff to the burning ship — <em>"You watch this cat lady take two steps back and perfectly backflips, does a triple somersault in the air and lands on the deck."</em></li>
+        <li>Secured supplies via Thievery on the burning ship.</li>
+        <li>Hated every second of being wet: <em>"I'm hissing and really pissed off about being wet, by the way."</em></li>
+        <li>Withheld healing from the loyalist prisoner: <em>"I don't think you deserve healing."</em></li>
+      </ul>
+    </div>
+    <div class="spotlight s-moob">
+      <h4>Moob · the Action-Economy Machine</h4>
+      <ul>
+        <li>Opened the warehouse with a Tallow Bomb + Goblin Burnit (persistent fire + splash).</li>
+        <li>Delivered the mercy speech to the captured loyalist: <em>"When it's your blood being spilled, it doesn't seem so heroic, does it?"</em></li>
+        <li>Healed the loyalist just enough to walk with a limp, then sent him to spread the word.</li>
+        <li>Ran through a swabby's legs and kicked the anchor winch free (double-foot kick), stranding the ship.</li>
+        <li>Threw a critical Tenderizer Grenade at the animated armor (Round 2) — reducing its physical resistance. Threw a second at Captain Aedin (Round 3), enabling Cyrathul's killing bite.</li>
+        <li>Used water bombs every round to fight fires on the burning ship.</li>
+        <li>Evacuated remaining crew with Diplomacy: <em>"We didn't want to do this. Live to see another day."</em></li>
+        <li>Sacrificed 5 HP (voluntary critical failure on swim) to push Fang above water: <em>"I purposely will take a critical failure to bump up to help Fang because he's my child, basically."</em></li>
+      </ul>
+    </div>
+    <div class="spotlight s-fang">
+      <h4>Fang · the Overclocked Finisher</h4>
+      <ul>
+        <li>Rode Wing onto the ship at 70 feet of movement, ran over a swabby non-lethally.</li>
+        <li>Went down <strong>twice</strong> — first to the animated armor's glaive (first down of the campaign), second to the swabby's relentless fists in Round 3.</li>
+        <li>Rolled a natural 20 on a dying recovery check — <em>"How about that?"</em></li>
+        <li>Committed to the kamikaze play: exploded Wing (Explode innovation) next to the animated armor — armor critically succeeded the save and took zero damage. <em>"This is going horribly wrong in the best way."</em></li>
+        <li>Warned the captain: <em>"If you hit me, I'll blow up"</em> — then made good on the promise.</li>
+        <li>Pushed Wing's wreckage into the river to salvage later.</li>
+        <li>Learned the dueling pistol formula during downtime — bonded with Hagrath the blacksmith.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item"><div class="loot-name">Silver Longsword</div><div class="loot-source">Warehouse chest · Sold (25gp)</div><div class="loot-note">Haggled by Cyrathul at Hagrath's forge.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Masquerade Scarf</div><div class="loot-source">Gertraud (warehouse) → Cyrathul</div><div class="loot-note">1/day disguise. Used for the ship boarding ruse.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Whispering Wire</div><div class="loot-source">Warehouse chest → Panacea</div><div class="loot-note">Remote communication device.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Potency Rune</div><div class="loot-source">Ethran's greatsword → Bai Jian's jian</div><div class="loot-note">Paid 3.5gp to Hagrath for the transfer.</div></div>
+    <div class="loot-item"><div class="loot-name">Dueling Pistol Formula</div><div class="loot-source">Hagrath (overnight) → Fang</div><div class="loot-note">Level 0 weapon formula. Learned through overnight shop talk.</div></div>
+    <div class="loot-item"><div class="loot-name">Captain's Coin Purse</div><div class="loot-source">Captain Aedin → Moob</div><div class="loot-note">Looted during the fire.</div></div>
+    <div class="loot-item"><div class="loot-name">Cargo Supplies</div><div class="loot-source">Night's Prize → Hellbreakers</div><div class="loot-note">Crates of food, clothing, alchemical items.</div></div>
+    <div class="loot-item"><div class="loot-name">2gp each</div><div class="loot-source">Zara (HQ) → All</div><div class="loot-note">Mission supplies fund.</div></div>
+  </div>
+  <div class="xp-banner">
+    Experience · 88 warehouse · 128 ship (extreme) · 40 crew rescue · 30 supplies = <strong>286 XP each</strong>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "You dare draw your weapon against me."<span class="attribution">After critically striking through a loyalist's face for 25 damage</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Since the situation has escalated, there's no mercy. Pierce him through the stomach and take it out. Let the blood through his body."<span class="attribution">Killing the remaining swabby with lethal force after Fang was downed twice</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Goodbye, frickin' armor."<span class="attribution">Shoving the animated armor overboard — triggering the failsafe</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Go spread the words that the Hellbreakers is not all bad."<span class="attribution">Shouting to rescued crew as they jumped overboard from the burning ship</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "Surrender now or you will all die."<span class="attribution">Dismissing the disguise, unfurling dragon wings on the ship deck · Critical Demoralize, Frightened 2</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "He's nice and tasty. I can't resist myself. I'll just go straight for the neck."<span class="attribution">How-do-you-want-to-do-this on Captain Aedin, after Moob's tenderizer grenade</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "Wow, that's petty as hell. So much for the supplies."<span class="attribution">Reacting to the animated armor's failsafe detonation</span></blockquote>
+
+  <blockquote><strong>Moob:</strong> "When it's your blood being spilled, it doesn't seem so heroic, does it?"<span class="attribution">To the captured loyalist, before the mercy ultimatum</span></blockquote>
+
+  <blockquote><strong>Moob:</strong> "I swear, humans will get you very sick after you bite them. You have to floss every time you bite a human."<span class="attribution">Genuine medical advice to Cyrathul/Fang after the ankle-biting incident · Repeated twice</span></blockquote>
+
+  <blockquote><strong>Moob:</strong> "I purposely will take a critical failure to bump up to help Fang because he's my child, basically."<span class="attribution">Taking 5 damage to push Fang above the drowning water</span></blockquote>
+
+  <blockquote><strong>Fang:</strong> "If you insult Moob or my friends again, I'm going to bite your other leg."<span class="attribution">Riding Wing out the warehouse door to call after the fleeing loyalist</span></blockquote>
+
+  <blockquote><strong>Fang:</strong> "If you hit me, I'll blow up."<span class="attribution">Warning Captain Aedin · Then actually following through with Explode innovation</span></blockquote>
+
+  <blockquote><strong>Fang:</strong> "I could haggle. What's haggling? What skill is that?"<span class="attribution">Enthusiastically volunteering for a skill Fang has never used</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I don't think you deserve healing."<span class="attribution">Scowling at the captured loyalist while Moob handled the interrogation</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I'm hissing and really pissed off about being wet, by the way."<span class="attribution">After swimming to shore · Catfolk do not appreciate involuntary baths</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Fang's Recovery</strong> · Wing is at the bottom of the river — needs salvaging and repair. Fang was downed twice and is Wounded 2.</li>
+      <li><strong>Resupply Report</strong> · The party needs to return to Saringallow HQ with the secured cargo. Rhokrag and Zara are expecting results.</li>
+      <li><strong>Night's Prize Survivors</strong> · The crew swam to shore and watched the party rescue them. Bai Jian's speech may sow seeds of goodwill — or the survivors may report to authorities.</li>
+      <li><strong>The Animated Armor Failsafe</strong> · Who enchanted it? Why did a merchant ship have a self-destruct mechanism? This wasn't a simple cargo vessel.</li>
+      <li><strong>Hedvind Bounty Posters</strong> · Everywhere. Operating in the open is getting harder.</li>
+      <li><strong>The Lich on Lake Encarthan</strong> · Still looming from Session 1. The undead threat hasn't been addressed.</li>
+      <li><strong>Bai Feng</strong> · Still missing. No new leads this session.</li>
+      <li><strong>Ethran's Prosthetic Arm</strong> · Still promised, not built.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes — Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Crit-killed two loyalists in the warehouse fight. One through the face, one lost an arm.</li>
+    <li>Untied <strong>Gertraud</strong> first while the party dealt with the prisoner. Priorities.</li>
+    <li>Left the jian at <strong>Hagrath's</strong> forge overnight for the +1 potency rune transfer. Paid 3.5gp.</li>
+    <li>Volunteered as the fake prisoner. Sold the performance with a hero point.</li>
+    <li>Killed the remaining swabby with a lethal thrust — no more non-lethal after Fang went down twice.</li>
+    <li>Grappled the animated armor, then <strong>Reposition → Step → Shove</strong> it overboard. The move that won the fight.</li>
+    <li>Rescued trapped crew from the burning ship — lifted a collapsed wall, broke down a door.</li>
+    <li>Threw the rope that saved both goblins from drowning.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>Nothing secret this session. Everything was shared.</li>
+    <li>The animated armor's failsafe was unexpected. A merchant ship shouldn't have that kind of enchantment. Someone spent real money protecting that cargo — or that captain.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The armor's resistance.</strong> The jian couldn't cut it. Even piercing barely scratched it. <strong>Cyrathul</strong> killed the captain with Exploit Vulnerability + bite combo after Moob's Tenderizer — that's the playbook. But for constructs with no weakness, the party has no good answer without the alchemist's grenades.</li>
+    <li><strong>Non-lethal is expensive.</strong> The -2 circumstance penalty nearly cost the party against the swabbies. <strong>Rhokrag wants minimal killing</strong>, but the mission escalated fast. The captain and armor forced lethal response.</li>
+    <li><strong>Moob and Fang.</strong> Moob pushed Fang above water at cost to himself. That bond is real. Keep them close in formation — if one goes down, the other will take risks.</li>
+    <li><strong>Panacea's healing range.</strong> She had to spend actions repositioning twice to reach Fang with Heal. Only two Heal spell slots. The party needs to stay tighter or accept that ranged healing is limited.</li>
+    <li><strong>Bai Jian told the sailors to spread the word.</strong> Rhokrag wanted hearts and minds. Rescuing crew from a fire we partially caused is complicated — but they saw us save them. That has to count for something.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>What was the <strong>Night's Prize</strong> actually carrying? Who was Captain Aedin working for?</li>
+    <li>Will the surviving crew report to Chelaxian authorities? Will Bai Jian's speech matter?</li>
+    <li>Can <strong>Wing</strong> be salvaged from the river bottom?</li>
+    <li>How will <strong>Rhokrag</strong> react to the supplies — and the body count?</li>
+    <li><strong>Hagrath</strong> seemed friendly. Is he a potential Hellbreaker sympathizer, or just a merchant?</li>
+  </ul>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 48px;
+  padding: 32px 34px;
+  background: #3a2a30;
+  border: 1px solid var(--border-bright);
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040;
+}
+.pax-notes h2 { border-bottom-color: var(--border-bright); color: var(--amber); }
+.pax-notes h2::before { content: '✦'; color: var(--gold); }
+.pax-notes h3 { margin-top: 26px; margin-bottom: 12px; font-size: 15px; text-transform: uppercase; letter-spacing: 1.6px; color: var(--amber); font-weight: 600; }
+.pax-notes h3:first-of-type { margin-top: 14px; }
+.pax-notes .pax-intro { font-size: 14px; color: var(--text-dim); margin-bottom: 8px; padding-bottom: 16px; border-bottom: 1px dashed var(--border-bright); }
+.pax-notes ul { margin-left: 22px; }
+.pax-notes li { padding: 7px 0; color: var(--text); }
+.pax-notes strong { color: var(--text-bright); }
+.pax-notes em { color: var(--text-dim); }
+</style>
+
+</div>
+</body>
+</html>

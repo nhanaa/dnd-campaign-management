@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 7 — Blood and Blackjack</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eae4da;
+  --bg-card: #f2ede4;
+  --bg-card-hover: #f8f4ed;
+  --border: #c8bfb0;
+  --text: #2e2a24;
+  --text-dim: #5a5347;
+  --text-bright: #1a1714;
+  --red: #8a2c2c;
+  --red-glow: #8a2c2c22;
+  --blue: #4a6278;
+  --blue-glow: #4a627822;
+  --green: #4a6a3a;
+  --green-glow: #4a6a3a22;
+  --purple: #6a3a6a;
+  --purple-glow: #6a3a6a22;
+  --teal: #3a6a62;
+  --teal-glow: #3a6a6222;
+  --gold: #8a6a2c;
+  --gold-dim: #a07a3a;
+  --gold-glow: #8a6a2c22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 30% 100%, #d4c4a822 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 0%, #c8b89822 0%, transparent 40%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 110%, #c4884420 0%, transparent 55%);
+  animation: ember-glow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-glow {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.5; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'MedievalSharp', cursive;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.char-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-marwen { border-left-color: #7a2a3a; }
+.char-caliban { border-left-color: #8a7a2c; }
+.char-rattle { border-left-color: #3a5a3a; }
+.char-bergatha { border-left-color: #4a3a6a; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2410;
+}
+
+.summary p { font-size: 16px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.intrigue::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-bottom: 6px;
+}
+
+.act-label.combat { color: var(--red); }
+.act-label.rp { color: var(--purple); }
+.act-label.explore { color: var(--blue); }
+.act-label.intrigue { color: var(--red); }
+.act-label.mystery { color: var(--teal); }
+
+.act h3 { margin-bottom: 14px; }
+
+.act ul { margin: 10px 0 0 18px; }
+
+.sub-list {
+  margin: 6px 0 6px 22px;
+  list-style: disc;
+}
+
+.sub-list li {
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+/* Combat box */
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  background: #2e2a240a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.combat-stats .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.combat-stats .stat-value {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+/* Spotlight cards */
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.spotlight-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.spotlight-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.spotlight-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.spotlight-card ul {
+  margin: 0 0 0 18px;
+}
+
+/* Loot */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.loot-item.magical {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 20px #8a6a2c11;
+  background: #f0e8da;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.xp-banner {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+}
+
+/* Quotes */
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #8a6a2c08;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.quote-attr {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.quote-context {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Journal / Pax's Notes */
+.journal {
+  background: linear-gradient(135deg, #f4ede2, #efe8dc);
+  border: 1px solid #c0b8a8;
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2408;
+}
+
+.journal h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c8c0b0;
+}
+
+.journal-intro {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.journal ul { margin: 8px 0 16px 18px; }
+.journal li { padding: 4px 0; font-size: 15px; }
+
+/* Open threads */
+.thread-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.thread-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Cliffhanger */
+.cliffhanger {
+  background: linear-gradient(135deg, #e0d6c8, #ebe2d4);
+  border: 1px solid #a0906a;
+  border-radius: 6px;
+  padding: 28px 30px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cliffhanger h3 {
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.cliffhanger p {
+  font-style: italic;
+  font-size: 17px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .container { padding: 30px 16px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<header class="header">
+  <h1>Blood and Blackjack</h1>
+  <div class="subtitle">Session 7 &mdash; Curse of the Crimson Throne</div>
+  <div class="meta-row">
+    <span class="meta-pill">April 19, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 05m</span>
+    <span class="meta-pill">Level 4 &rarr; 5</span>
+  </div>
+</header>
+
+<!-- Composition -->
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:35%"></div>
+    <div class="comp-seg comp-explore" style="width:15%"></div>
+    <div class="comp-seg comp-puzzle" style="width:10%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--red)"></span>Combat 30%</span>
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 35%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Investigation 15%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Intrigue 10%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Downtime 10%</span>
+  </div>
+</section>
+
+<!-- Party -->
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-marwen">
+      <div class="char-name">Marwen (Fioren)</div>
+      <div class="char-class">Draconic Sorcerer (Rime) / Oracle Dedication</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-caliban">
+      <div class="char-name">Caliban</div>
+      <div class="char-class">Champion of Iomedae / Paragon</div>
+      <div class="char-player">Hawke</div>
+    </div>
+    <div class="char-card char-rattle">
+      <div class="char-name">Rattle &amp; Ruin</div>
+      <div class="char-class">Dragon Eidolon Summoner / Beastmaster</div>
+      <div class="char-player">Joey</div>
+    </div>
+    <div class="char-card char-bergatha">
+      <div class="char-name">Bergatha Lizby</div>
+      <div class="char-class">Arcane Witch / Dandy</div>
+      <div class="char-player">Macabre_Barbie</div>
+    </div>
+  </div>
+  <p style="margin-top:14px; font-size:13px; color:var(--text-dim); font-style:italic;">Beast (Pol) has left the campaign. Beast remains as a Level 5 NPC Barbarian in Harse.</p>
+</section>
+
+<!-- Summary -->
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The session opened mid-combat at the execution square, where the party fought Palace Guards and the Executioner to aid Blackjack&rsquo;s rescue of the scapegoat. Bergatha&rsquo;s Mist blanketed the battlefield in concealment, and her Floating Flood crushed guards&rsquo; heads in a devastating sustained assault. Marwen used Whispers of Weakness twice &mdash; first on a Palace Guard to identify electricity weakness (leading to an Electric Arc crit for 25 damage), then on the Executioner to identify fire weakness, setting up a Blazing Bolt crit for 39 damage. Rattle magnetically stripped the guards of platinum and daggers, and Caliban&rsquo;s Shielding Taunt and Champion&rsquo;s Reaction kept allies alive.</p>
+    <p>With the city calming after the queen&rsquo;s retreat into her palace, the party enjoyed two weeks of downtime. Rattle built a criminal empire, recruiting were-rats as mafioso and earning the title &ldquo;King of Shinies.&rdquo; Bergatha ran a burgeoning drug operation. Marwen traded intelligence with the King of Spiders, learning that Rolth is meeting with a mysterious figure known only as &ldquo;R.D.,&rdquo; has set up a laboratory in a warehouse on the main island, and that Red Mantis assassins &mdash; roughly 30&ndash;36 of them &mdash; are operating in the city&rsquo;s sewers. Caliban identified the skull symbol spotted by Rattle&rsquo;s were-rat informants as the unholy symbol of <strong>Urgathoa</strong>.</p>
+    <p>The party followed Blackjack&rsquo;s address to Vencarlo Orisini&rsquo;s apartment, where the scapegoat had been dropped off. Marwen&rsquo;s blind sense motive told him Vencarlo might be Blackjack. The party escorted Trinia, Trisha, Beast, and Yargin to Harse for safekeeping. Upon return, Grey Maidens were patrolling the streets &mdash; the queen&rsquo;s new all-female elite guard under Sabina. The session ended with a dire hook: Grau brought the party to his sick niece Brianna in Trails End, and Bergatha&rsquo;s critical success connected the unknown disease to a <strong>quarantine ship</strong> sunk in the harbor days ago &mdash; a plague may already be spreading through Korvosa.</p>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section>
+  <h2>Key Events</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label combat">Act I &mdash; Combat &mdash; The Execution Rescue</div>
+      <h3>Saving the Scapegoat</h3>
+      <ul>
+        <li>Party buffed with <strong>Bergatha&rsquo;s</strong> alchemical stores: Fury Cocktail (Caliban, grew Large), Drakeheart Mutagen (Bergatha, AC 23), Juggernaut Mutagen + Life-Boosting Oil (Rattle)</li>
+        <li>4 <strong>Palace Guards</strong> and the <strong>Executioner</strong> stood between Blackjack and the scapegoat &mdash; guards readied Reactive Strikes against Blackjack</li>
+        <li><strong>Bergatha</strong> cast <strong>Mist</strong> (Round 1) for battlefield-wide concealment, then <strong>Floating Flood</strong> (Round 2) &mdash; sustained it through multiple guards in Round 3, crushing heads &ldquo;like a soda can underwater.&rdquo; Drew first blood.</li>
+        <li><strong>Marwen</strong> used <strong>Whispers of Weakness</strong> twice: on a Palace Guard (electricity weakness &rarr; <strong>Electric Arc crit for 25 damage</strong>) then on the Executioner (fire weakness &rarr; <strong>Blazing Bolt crit for 39 damage</strong>)</li>
+        <li><strong>Rattle</strong> used <strong>Magnetic Attraction</strong> via Staff of Metal &mdash; stripped guards of <strong>25 platinum</strong>, daggers, and 6 pairs of manacles</li>
+        <li><strong>Caliban</strong> anchored the front with <strong>Shielding Taunt</strong> every round. <strong>Champion&rsquo;s Reaction (Glimpse of Redemption)</strong> enfeebled a guard and gave Ruin 6 DR. Multiple <strong>Shield Blocks</strong> absorbed hits.</li>
+        <li><strong>Blackjack</strong> escaped with the scapegoat, tossing Caliban a <strong>dagger with an address</strong> before leaping away via Potion of Leaping</li>
+        <li>DM introduced <strong>Galactic Hero Points</strong>: rerolls treat any die below 10 as 10</li>
+      </ul>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label rp">Act II &mdash; Level Up &mdash; 4 &rarr; 5</div>
+      <h3>Power Spike</h3>
+      <ul>
+        <li><strong>Marwen</strong>: 3rd-rank spells &mdash; <strong>Ice Ball</strong>, <strong>Haste</strong>, <strong>Slow</strong>. Kept Blazing Bolt as fire for diversification. Retrained Bon Mot &rarr; <strong>Intimidating Glare</strong>. DC now 22.</li>
+        <li><strong>Caliban</strong>: Retrained from Warpriest to <strong>Champion</strong> to fill Beast&rsquo;s frontline role. Attack expertise, shifting rune on bastard sword.</li>
+        <li><strong>Bergatha</strong>: Retrained Natural Ambition (Cauldron redundant). <strong>Apprentice Sea Witch</strong> ancestry feat. <strong>Bomb remote trigger</strong>. Learned <strong>Sight of Lethe</strong> recipe (memory-erasing poison).</li>
+        <li><strong>Rattle &amp; Ruin</strong>: 3rd-rank spells including Haste. Ruin upgraded to 2d8 damage.</li>
+        <li><strong>Beast</strong> stays as Level 5 NPC Barbarian &mdash; addicted to shiver from Bergatha&rsquo;s cake (virulent, stage 1).</li>
+      </ul>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label explore">Act III &mdash; Downtime &mdash; Two Weeks</div>
+      <h3>Empire Building</h3>
+      <ul>
+        <li><strong>Queen Ileosa</strong> retreated into her palace for two weeks. City calmed. <strong>Cressida Kroft</strong> cleared the party of treason via letter.</li>
+        <li><strong>Bergatha</strong> ran a <strong>drug empire</strong> &mdash; 42gp earnings, crafted 10 healing potions, learned Sight of Lethe recipe</li>
+        <li><strong>Rattle</strong> recruited <strong>were-rats</strong> as mafioso &mdash; earned the title <strong>&ldquo;King of Shinies.&rdquo;</strong> Were-rat informant reported: people in black robes with a <strong>skull-and-bug symbol</strong> and <strong>Red Mantis assassins</strong> moving through the sewers.</li>
+        <li><strong>Rattle</strong> bought a <strong>3-story rental property</strong> in Midland (300gp). Stock investment grew 5% (1,000 &rarr; 1,050gp). Distributed 5 platinum each to the party.</li>
+        <li><strong>Marwen</strong> met the <strong>King of Spiders</strong> &mdash; traded Verik/Arkonas intel for 40gp + Rolth intelligence. Learned: Rolth meeting with <strong>&ldquo;R.D.&rdquo;</strong> (two initials), new <strong>warehouse lab</strong> on the main island, <strong>500 platinum</strong> funding, ~30&ndash;36 <strong>Red Mantis assassins</strong> in the city.</li>
+        <li><strong>Caliban</strong> earned income via medicine. Cremated <strong>Zellara&rsquo;s head</strong> and spread her ashes per her wishes.</li>
+      </ul>
+    </div>
+
+    <div class="act intrigue">
+      <div class="act-label intrigue">Act IV &mdash; Intrigue &mdash; Cressida &amp; the Trust Debate</div>
+      <h3>How Much Do We Share?</h3>
+      <ul>
+        <li>Party visited <strong>Cressida</strong> at the Citadel &mdash; noticeably fewer female guards, poached by the Grey Maidens</li>
+        <li><strong>Caliban</strong> identified the skull symbol as <strong>Urgathoa&rsquo;s unholy symbol</strong> (religion check)</li>
+        <li>Party debated trust: <strong>Rattle</strong> distrusts Cressida (&ldquo;she&rsquo;s probably going to get recruited eventually&rdquo;), <strong>Marwen</strong> argues she&rsquo;s earned it. Consensus: share Red Mantis + Urgathoa intel, withhold mob details.</li>
+        <li>Cressida confirmed: <strong>Red Mantis don&rsquo;t perform regicide</strong> (part of their code). Someone with enormous wealth hired ~30+ elite assassins.</li>
+        <li><strong>Bergatha</strong> confirmed via underworld lore: Red Mantis complete every job, can&rsquo;t be bribed, but provide indirect aid for protected targets</li>
+        <li>Cressida on the warehouse: <em>&ldquo;If I had a gold piece for every suspicious warehouse report&hellip; There&rsquo;s just so many abandoned places.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label mystery">Act V &mdash; Mystery &mdash; Vencarlo &amp; Harse</div>
+      <h3>The Swordmaster&rsquo;s Secret</h3>
+      <ul>
+        <li>Followed Blackjack&rsquo;s address to an apartment near <strong>Orisini Academy</strong> on Garrison Hill</li>
+        <li><strong>Vencarlo Orisini</strong> answered &mdash; has the scapegoat (party named her <strong>Trisha</strong>). Claims Blackjack dropped her off.</li>
+        <li><strong>Marwen&rsquo;s sense motive was a blind roll</strong> &mdash; the DM told him he thinks Vencarlo is Blackjack, but it&rsquo;s unclear if this is genuine or crit-fail false confidence. Caliban and Rattle bought his story. Bergatha didn&rsquo;t bother checking.</li>
+        <li>Vencarlo offered <strong>400gp</strong> to escort Trisha to <strong>Harse</strong>. Party decided to move <strong>Trinia and Trisha</strong>, <strong>Beast</strong>, and <strong>Yargin</strong> together.</li>
+        <li>Disguised both women as men (&ldquo;<strong>Tristan</strong>&rdquo; and &ldquo;<strong>Trent</strong>&rdquo;) via Potion of Passing Fancy. Left at night posing as refugees.</li>
+        <li>All four safely delivered to ranchers in Harse. Yargin runs supply between Harse and Korvosa. Trinia and Trisha can be called back to testify against the queen.</li>
+        <li>Marwen shared Rolth warehouse intel with Vencarlo, withholding sources: <em>&ldquo;Let&rsquo;s just say I have my ways.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="act intrigue">
+      <div class="act-label intrigue">Act VI &mdash; Plot Hook &mdash; Grey Maidens &amp; the Plague</div>
+      <h3>A Sickness Stirs</h3>
+      <ul>
+        <li>Returned to Korvosa &mdash; <strong>Grey Maidens</strong> now publicly patrolling. Queen&rsquo;s decree: elite all-female military led by <strong>Sabina Marin</strong>.</li>
+        <li><strong>Grau Soldado</strong> arrived at Zellara&rsquo;s estate &mdash; cleaned up, sober, in proper armor. His niece <strong>Brianna</strong> (12) is sick with an unknown disease in <strong>Trails End</strong>.</li>
+        <li><strong>Caliban</strong> examined Brianna: unknown disease, <strong>highly contagious</strong>, potentially deadly, never seen before &mdash; red pox, veins bulging, constant coughing.</li>
+        <li><strong>Ishani Dhatri</strong> was already there but couldn&rsquo;t heal without 20gp. <strong>Bergatha</strong> paid (plus 1gp interest). Ishani will cast Remove Disease tomorrow.</li>
+        <li><strong>Tayce Soldado</strong> (Brianna&rsquo;s mother) mentioned: a <strong>black-sailed ship with yellow lantern lights</strong> entered the harbor ~3 days ago and was <strong>sunk by trebuchets</strong> in the night.</li>
+        <li><strong>Bergatha</strong> (critical success, society): yellow lights = <strong>quarantine signal</strong>. The ship was a plague vessel. Timeline correlates with Brianna&rsquo;s illness.</li>
+        <li><strong>Session ended on the plague hook</strong> &mdash; disease may already be spreading through Korvosa.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Combat -->
+<section>
+  <h2>Combat Encounters</h2>
+  <div class="combat-box">
+    <div class="combat-meta">The Execution Rescue &mdash; 4 Rounds</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">4 Palace Guards + 1 Executioner</div></div>
+      <div><div class="stat-label">Allies</div><div class="stat-value">Blackjack (fast healing)</div></div>
+      <div><div class="stat-label">Terrain</div><div class="stat-value">Grease + Mist concealment</div></div>
+      <div><div class="stat-label">Hero Points</div><div class="stat-value">Marwen 1, Caliban 1</div></div>
+    </div>
+
+    <h4>Round 1 &mdash; The Opening</h4>
+    <ul>
+      <li><strong>Blackjack</strong> stabbed a Palace Guard (hit). <strong>Executioner</strong> grappled Blackjack, missed headbutt, used Mark for Death. Guards readied Reactive Strikes.</li>
+      <li><strong>Rattle &amp; Ruin</strong>: Act Together &mdash; Ruin&rsquo;s dragon breath (DC 20 Reflex): Executioner <strong>failed</strong> (2d6 poison). Protect Companion on Ripper. Recharge: 4 rounds.</li>
+      <li><strong>Bergatha</strong>: Cast <strong>Mist</strong> &mdash; all creatures became concealed.</li>
+      <li><strong>Marwen</strong>: Cast <strong>Grease</strong> on 2 guards (both saved initially). Demoralized a guard &mdash; guard crit-failed. DM introduced <strong>Galactic Hero Points</strong> rule.</li>
+      <li><strong>Caliban</strong>: Grew Large (Fury Cocktail, 10-ft reach). <strong>Shielding Taunt</strong> on Executioner + 2 guards. Strike &mdash; missed.</li>
+    </ul>
+
+    <h4>Round 2 &mdash; Magnetic Heist and Lightning</h4>
+    <ul>
+      <li><strong>Palace Guard</strong>: Fell <strong>prone on Grease</strong> (2 actions wasted). Another hit Ruin for <strong>16 damage</strong>.</li>
+      <li><strong>Caliban</strong>: <strong>Champion&rsquo;s Reaction (Glimpse of Redemption)</strong> on the 16-damage hit &mdash; guard took <strong>Enfeebled</strong>, Ruin received <strong>6 DR</strong>.</li>
+      <li><strong>Rattle &amp; Ruin</strong>: <strong>Magnetic Attraction</strong> (Staff of Metal) &mdash; stripped guards of <strong>25 platinum</strong>, daggers, <strong>6 manacles</strong>. Ruin used Poison Claw Strike.</li>
+      <li><strong>Bergatha</strong>: Commanded <strong>Lagunae</strong> into water. Cast <strong>Floating Flood</strong> &mdash; initial cold damage on one guard.</li>
+      <li><strong>Marwen</strong>: <strong>Whispers of Weakness</strong> on a Palace Guard &mdash; <strong>electricity weakness</strong>, Reflex weakest save. <strong>Electric Arc</strong> crit: <strong>25 damage</strong>. Second guard took 8.</li>
+      <li><strong>Caliban</strong>: <strong>Shielding Taunt</strong>. <strong>Hero Pointed</strong> a strike &mdash; hit for 10. Demoralize Executioner &mdash; failed.</li>
+    </ul>
+
+    <h4>Round 3 &mdash; Fire and Flood</h4>
+    <ul>
+      <li><strong>Guards</strong>: Shielding Taunt <strong>downgraded a crit to a hit</strong> on Blackjack. Guard hit Caliban for 14 &mdash; <strong>Shield Blocked to 7</strong>. Guard tried to grapple Trisha &mdash; concealment failed.</li>
+      <li><strong>Blackjack</strong>: Took 2 Reactive Strikes (1 hit, 1 concealment miss). <strong>Feinted</strong> a guard, hit for <strong>30 damage</strong>.</li>
+      <li><strong>Rattle &amp; Ruin</strong>: <strong>Acid Arrow</strong> on Executioner &mdash; <strong>13 damage + 1d6 persistent acid</strong>. <em>&ldquo;Clothes burn away&hellip; the face behind the mask.&rdquo;</em> Ruin chomped a guard. Ripper hit for 12 + 17.</li>
+      <li><strong>Bergatha</strong>: Sustained <strong>Floating Flood</strong> through 3 guards &mdash; Guard 1: <strong>killed</strong> (<em>&ldquo;You draw first blood&rdquo;</em>). Guard 2: <strong>22 damage</strong>. Guard 3: near-max damage, <strong>killed</strong>. <em>&ldquo;Crushes it like a soda can underwater.&rdquo;</em></li>
+      <li><strong>Marwen</strong>: <strong>Whispers of Weakness</strong> on the Executioner &mdash; <strong>fire weakness</strong>. <strong>Blazing Bolt</strong> (Hero Pointed): <strong>CRIT for 39 damage</strong>. <em>&ldquo;Third-degree burn spreading throughout his chest.&rdquo;</em> Second target: hit for 18.</li>
+      <li><strong>Caliban</strong>: <strong>Shielding Taunt</strong>. Two strikes &mdash; hit for <strong>19 damage</strong>.</li>
+    </ul>
+
+    <h4>Round 4 &mdash; Cleanup and Escape</h4>
+    <ul>
+      <li><strong>Blackjack</strong>: Knocked out a guard. <em>&ldquo;I see that I am not the only true hero of Korvosa today.&rdquo;</em></li>
+      <li><strong>Rattle &amp; Ruin</strong>: <em>&ldquo;Fuck it. We ball.&rdquo;</em> Live Wire + Ripper &mdash; <strong>Ripper killed the final guard</strong> (12 + 17 damage).</li>
+      <li><strong>Blackjack</strong>: Final salute &mdash; silhouette in the mist. Princess-carried Trisha to the rooftops. Tossed Caliban a <strong>dagger with an address</strong>.</li>
+      <li><strong>Extraction</strong>: Bergatha used Potion of Emergency Escape (130-ft sprint). Party fled to Zellara&rsquo;s estate.</li>
+    </ul>
+
+    <p style="color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; margin-top:16px;">
+      Outcome &middot; All Palace Guards killed &middot; Executioner severely damaged &middot; Scapegoat rescued
+    </p>
+  </div>
+</section>
+
+<!-- Character Spotlights -->
+<section>
+  <h2>Character Spotlights</h2>
+
+  <div class="spotlight-card" style="border-left: 3px solid #7a2a3a;">
+    <div class="spotlight-name">Marwen (Fioren) &middot; the Fox in the Fog</div>
+    <div class="spotlight-meta">Draconic Sorcerer (Rime) &bull; Pax</div>
+    <ul>
+      <li>Used <strong>Whispers of Weakness</strong> twice: on a Palace Guard (electricity &rarr; Electric Arc crit for 25 damage) then on the Executioner (fire &rarr; Blazing Bolt crit)</li>
+      <li><strong>Critted Blazing Bolt</strong> on the Executioner for <strong>39 damage</strong> (hero pointed the roll)</li>
+      <li>Negotiated with the <strong>King of Spiders</strong> &mdash; traded intel for 40gp + Rolth intelligence. <em>&ldquo;Nothing is free in this world.&rdquo;</em></li>
+      <li>Learned critical intel: Rolth meeting with <strong>R.D.</strong>, warehouse lab on the main island, 500 platinum funding, Red Mantis in the city</li>
+      <li><strong>Sense motive on Vencarlo (blind roll)</strong> &mdash; thinks he is Blackjack, but can&rsquo;t be sure. Keeping it to himself.</li>
+      <li>Shared Rolth intel with Vencarlo, withholding sources: <em>&ldquo;Let&rsquo;s just say I have my ways.&rdquo;</em></li>
+      <li>Retrained Bon Mot &rarr; Intimidating Glare; gained Haste, Ice Ball, Slow at Level 5</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #8a7a2c;">
+    <div class="spotlight-name">Caliban &middot; the Immovable Bulwark</div>
+    <div class="spotlight-meta">Champion of Iomedae (retrained from Warpriest) &bull; Hawke</div>
+    <ul>
+      <li><strong>Shielding Taunt</strong> anchored every round &mdash; drew enemy attention, imposed off-guard, downgraded a crit to a hit</li>
+      <li><strong>Champion&rsquo;s Reaction (Glimpse of Redemption)</strong> enfeebled a Palace Guard and gave Ruin 6 DR</li>
+      <li><strong>Shield Blocked</strong> multiple times, absorbing significant frontline damage</li>
+      <li>Cut through indecision: <em>&ldquo;I think we established we were going to help Blackjack.&rdquo;</em></li>
+      <li>Identified <strong>Urgathoa&rsquo;s unholy symbol</strong> via religion check &mdash; key intelligence link</li>
+      <li>Cremated Zellara&rsquo;s head and spread her ashes per her wishes</li>
+      <li>Diagnosed Brianna&rsquo;s disease: highly contagious, potentially deadly, never seen before</li>
+      <li>Retrained to <strong>Champion</strong> to fill Beast&rsquo;s frontline role. Accepted Rattle&rsquo;s &ldquo;mafioso&rdquo; job &mdash; protection detail with a wing-shake</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #4a3a6a;">
+    <div class="spotlight-name">Bergatha Lizby &middot; the Witch Behind the Curtain</div>
+    <div class="spotlight-meta">Arcane Witch &bull; Macabre_Barbie</div>
+    <ul>
+      <li><strong>Mist</strong> gave battlefield-wide concealment &mdash; guards missed repeatedly throughout the fight</li>
+      <li><strong>Floating Flood</strong> killed multiple guards in sequence. Drew first blood. <em>&ldquo;Bergeth is a fucking murderer.&rdquo;</em></li>
+      <li>Ran the <strong>drug empire</strong> &mdash; 42gp earnings, crafted healing potions, learned Sight of Lethe recipe</li>
+      <li>Paid 20gp to Ishani for Brianna&rsquo;s cure &mdash; <em>&ldquo;I couldn&rsquo;t just let your baby wither and die in front of you&rdquo;</em> (while charging 1gp interest)</li>
+      <li><strong>Critical success on society</strong> identified the black-sailed ship as a quarantine plague vessel &mdash; the session&rsquo;s biggest revelation</li>
+      <li>Socially managed Rattle&rsquo;s outbursts with Distracting Flattery multiple times</li>
+      <li>Gained <strong>bomb remote trigger</strong> and <strong>Apprentice Sea Witch</strong> ancestry feat at Level 5</li>
+      <li>Gossip queen: <em>&ldquo;How would you want to bet that Cressida and Sabina had a thing once upon a time?&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #3a5a3a;">
+    <div class="spotlight-name">Rattle &amp; Ruin &middot; the King of Shinies</div>
+    <div class="spotlight-meta">Dragon Eidolon Summoner &bull; Joey</div>
+    <ul>
+      <li><strong>Magnetic Attraction</strong> via Staff of Metal stripped guards of 25 platinum, daggers, and 6 manacles</li>
+      <li>Act Together combat: dragon breath + Acid Arrow + Ruin strikes + Ripper attacks &mdash; efficient multi-target damage</li>
+      <li>Built a <strong>were-rat criminal organization</strong> &mdash; recruited neglected beastial races, earned the title &ldquo;King of Shinies&rdquo;</li>
+      <li>Were-rat informant delivered critical intel: Urgathoa cultists + Red Mantis assassins in the sewers</li>
+      <li>Bought <strong>rental property</strong> in Midland &mdash; <em>&ldquo;How do I make this city my bitch? You start with real estate.&rdquo;</em></li>
+      <li>Strategic planning for Harse: <em>&ldquo;We&rsquo;ll come back for them once Korvosa is safe, and when we need them to bring down this fucking bitch of a queen.&rdquo;</em></li>
+      <li>Offered Caliban a mafioso job with genuine sincerity beneath the comedy</li>
+      <li>Doesn&rsquo;t trust Cressida: <em>&ldquo;She is a woman in a position&hellip; she&rsquo;s probably going to get recruited eventually.&rdquo;</em></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Loot -->
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">25 Platinum Pieces</div>
+      <div class="loot-source">Magnetic Attraction from guards &mdash; Rattle</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">6 Pairs of Manacles + Daggers</div>
+      <div class="loot-source">Magnetic Attraction from guards &mdash; Rattle</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">400 Gold</div>
+      <div class="loot-source">Vencarlo Orisini &mdash; escort payment</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">40 Gold</div>
+      <div class="loot-source">King of Spiders &mdash; intel trade &mdash; Marwen</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">5 Platinum each</div>
+      <div class="loot-source">Rattle&rsquo;s distribution to party</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">10 Healing Potions</div>
+      <div class="loot-source">Bergatha crafting &mdash; 8 to stash, 2 kept</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">3-Story Building (Midland)</div>
+      <div class="loot-source">Property purchase (300gp) &mdash; Rattle</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Level Up: Party &rarr; Level 5</div>
+      <div class="loot-source">Milestone &mdash; execution rescue + downtime</div>
+    </div>
+  </div>
+  <p class="xp-banner">Milestone Progression &middot; Execution Rescue + Downtime = <strong>Level 5</strong></p>
+</section>
+
+<!-- Memorable Quotes -->
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I think we established we were going to help Blackjack.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">Cutting through party indecision at the start of the execution rescue</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I pocket it. Or I look at it, and then pocket it and say, alright, let&rsquo;s get the fuck out of here.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">After Blackjack tosses him the dagger with the address &mdash; decisive, no hesitation</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Bergeth is a fucking murderer.&rdquo; &rarr; &ldquo;I&rsquo;m just a woman. Oh, no. Oh, oh, oh.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">After Floating Flood crushed multiple guards &mdash; followed by feigning innocence in the mist</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;They didn&rsquo;t do anything. Innocent people.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Reacting to Palace Guards cutting down civilians in the mob</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Nothing is free in this world.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Negotiating with the King of Spiders &mdash; cold, transactional Marwen at his best</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;If they consent, I&rsquo;m doing it as a fucking attack!&rdquo;</div>
+    <div class="quote-attr">Rattle &amp; Ruin</div>
+    <div class="quote-context">On injecting people with Shiver &mdash; session opener energy</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Fuck it. We ball.&rdquo;</div>
+    <div class="quote-attr">Rattle &amp; Ruin</div>
+    <div class="quote-context">Committing to a risky play in the final round of combat</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Don&rsquo;t spend it all on fucking candy, I&rsquo;m watching you.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Mob boss energy to the were-rat informant after tossing him 5 gold</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;But&hellip; Let&rsquo;s just say I have my ways.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Keeping his intelligence sources close to the chest with Vencarlo</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Yeah, so there&rsquo;s followers of Urgathoa and the Red Mantises in the city. This is bad news.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">Summarizing the threat picture with understated clarity</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I mean, I&rsquo;m not for killing her, but we can cross that bridge when we get to it.&rdquo;</div>
+    <div class="quote-attr">Caliban</div>
+    <div class="quote-context">Pragmatic restraint when the party casually discusses killing Cressida</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;We tell them to stay there, lay low, and we&rsquo;ll come back for them once Korvosa is safe, and when we need them to bring down this fucking bitch of a queen.&rdquo;</div>
+    <div class="quote-attr">Rattle &amp; Ruin</div>
+    <div class="quote-context">Strategic planning with genuine conviction &mdash; Rattle at his most serious</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;How would you want to bet that Cressida and Sabina had a thing once upon a time?&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Social deduction meets gossip &mdash; peak Bergatha</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Worst case, we&rsquo;ll kill her with you.&rdquo;</div>
+    <div class="quote-attr">Marwen</div>
+    <div class="quote-context">Dark pragmatism in the Cressida trust debate &mdash; deadpan delivery</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;You know, if someone crosses us, we definitely have to kill them, you know?&rdquo;</div>
+    <div class="quote-attr">Rattle &amp; Ruin</div>
+    <div class="quote-context">Godfather roleplay that he can&rsquo;t deliver without laughing</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I couldn&rsquo;t just let your baby wither and die in front of you.&rdquo;</div>
+    <div class="quote-attr">Bergatha</div>
+    <div class="quote-context">Playing the benefactor while actually loan-sharking Grau&rsquo;s family</div>
+  </div>
+
+  <div class="quote-block" style="border-left-color: var(--red);">
+    <div class="quote-text">&ldquo;I see that I am not the only true hero of Korvosa today.&rdquo;</div>
+    <div class="quote-attr">Blackjack</div>
+    <div class="quote-context">Blackjack&rsquo;s salute to the party before leaping away with the scapegoat</div>
+  </div>
+</section>
+
+<!-- Pax's Notes -->
+<section>
+  <h2>Pax&rsquo;s Notes &mdash; Marwen&rsquo;s Journal</h2>
+  <div class="journal">
+    <p class="journal-intro"><em>Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Marwen did this session</h3>
+    <ul>
+      <li><strong>Whispers of Weakness</strong> twice &mdash; electricity on guards (Electric Arc crit 25 damage), fire on the Executioner (Blazing Bolt crit 39 damage)</li>
+      <li>Cast <strong>Grease</strong> to control the battlefield; <strong>Demoralized</strong> a guard (crit fail)</li>
+      <li>Met <strong>King of Spiders</strong> &mdash; traded Verik/Arkonas intel for 40gp + Rolth intelligence</li>
+      <li>Gathered information on the warehouse &mdash; narrowed to the main island</li>
+      <li><strong>Thinks Vencarlo is Blackjack</strong> (blind sense motive &mdash; could be genuine or false read)</li>
+      <li>Shared Rolth intel with Vencarlo without revealing sources</li>
+      <li>Retrained Bon Mot &rarr; <strong>Intimidating Glare</strong></li>
+      <li>Gained <strong>Haste</strong>, <strong>Ice Ball</strong>, <strong>Slow</strong> at Level 5; DC now 22</li>
+      <li>Earned 39gp income over 13 days</li>
+    </ul>
+
+    <h3>Things Marwen knows that the party does not</h3>
+    <ul>
+      <li><strong>Marwen thinks Vencarlo is Blackjack.</strong> DM said so after a blind sense motive &mdash; but blind rolls can mean crit-fail false confidence. His story did feel improvised. Caliban and Rattle bought it. Bergatha didn&rsquo;t check. Can&rsquo;t be 100% sure.</li>
+      <li>The full depth of the <strong>King of Spiders</strong> relationship &mdash; Marwen&rsquo;s intelligence network is growing beyond what the party sees</li>
+    </ul>
+
+    <h3>What Marwen is thinking about</h3>
+    <ul>
+      <li><strong>R.D.</strong> &mdash; two initials, meeting with Rolth, bankrolled with 500 platinum. Who? Nobility? Arkonas? The queen?</li>
+      <li><strong>The warehouse</strong> is on the main island somewhere. Too many to search blindly. Need Rolth to slip up, or better intel from Vencarlo&rsquo;s informants.</li>
+      <li><strong>Red Mantis</strong> don&rsquo;t do regicide. Then who are they here for? Who has the money for 30+ elite assassins?</li>
+      <li><strong>If Vencarlo is Blackjack</strong>, that&rsquo;s leverage &mdash; but also a powerful ally if handled right. Don&rsquo;t burn this. The blind roll means this could be wrong.</li>
+      <li><strong>The plague</strong> &mdash; if that ship was under quarantine and sank in the harbor, the disease could be in the water supply. Brianna might be patient zero.</li>
+      <li><strong>Haste</strong> opens up action economy. Who benefits most &mdash; Ruin for extra strikes, or Caliban for taunt + attack + shield?</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>Who is <strong>R.D.</strong>? What are they planning with Rolth?</li>
+      <li>Where is the <strong>warehouse lab</strong> specifically?</li>
+      <li>Is the <strong>plague</strong> connected to Rolth, the Urgathoa cultists, or the Red Mantis?</li>
+      <li>Did anyone <strong>survive</strong> the sunken quarantine ship?</li>
+      <li>Will Ishani&rsquo;s Remove Disease cure Brianna, or is this beyond normal healing?</li>
+      <li>Should Marwen reveal his Vencarlo/Blackjack suspicion to the party?</li>
+      <li>Can the <strong>were-rat network</strong> track down the warehouse?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Open Threads -->
+<section>
+  <h2>Open Threads</h2>
+
+  <div class="thread-item">
+    <div class="thread-name">Rolth&rsquo;s Warehouse</div>
+    <div class="thread-desc">New lab on the main island, meeting with &ldquo;R.D.&rdquo; (unknown identity). 500 platinum funding. Vencarlo&rsquo;s informants also searching.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Red Mantis Assassins</div>
+    <div class="thread-desc">~30&ndash;36 elite assassins in Korvosa&rsquo;s sewers. Don&rsquo;t perform regicide. Someone very wealthy hired them. Working alongside Urgathoa cultists.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">The Plague</div>
+    <div class="thread-desc">Unknown disease in Trails End. Quarantine ship (black sails, yellow lights) sunk in the harbor. Brianna&rsquo;s illness correlates. Ishani casting Remove Disease tomorrow.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Grey Maidens</div>
+    <div class="thread-desc">Queen&rsquo;s new elite all-female guard, now publicly patrolling. Led by Sabina. Recruiting attractive women from the Korvosan Guard.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Vencarlo = Blackjack?</div>
+    <div class="thread-desc">Marwen thinks Vencarlo is Blackjack (blind sense motive &mdash; could be genuine or false read). Keeping this to himself. Vencarlo also searching for Rolth&rsquo;s warehouse.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Harse Safe House</div>
+    <div class="thread-desc">Trinia, Trisha, Beast, and Yargin safely in Harse. Yargin runs supply between cities. Can be called back to testify against the queen.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Rattle&rsquo;s Empire</div>
+    <div class="thread-desc">Were-rat mafioso network growing. Rental property in Midland. Drug distribution via Bergatha&rsquo;s crafting. &ldquo;King of Shinies.&rdquo;</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Queen Ileosa</div>
+    <div class="thread-desc">Locked in palace for 2 weeks. Grey Maidens deployed. Approval split between commoners (against) and elites (for).</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Urgathoa Cultists</div>
+    <div class="thread-desc">People in black robes with skull-and-bug symbol in the sewers. Connection to Rolth and R.D. unknown.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Cressida Kroft</div>
+    <div class="thread-desc">Overworked, losing guards to Grey Maidens. Knows about Red Mantis and Urgathoa. Trust with reservations (especially Rattle).</div>
+  </div>
+</section>
+
+<!-- Cliffhanger -->
+<div class="cliffhanger">
+  <h3>To Be Continued&hellip;</h3>
+  <p>A black-sailed ship sinks in the harbor. A girl coughs blood in Trails End. And somewhere beneath Korvosa, men in crimson masks move through the dark.</p>
+  <p style="margin-top:12px; font-size:14px; color:var(--text-dim);">The plague has arrived.</p>
+</div>
+
+</div>
+</body>
+</html>

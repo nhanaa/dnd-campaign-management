@@ -405,6 +405,10 @@ After the subagent returns its combat review:
 
 Create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.html`
 
+**CRITICAL**: Do NOT delegate HTML generation to a subagent. Write it directly. Subagents consistently strip content and produce condensed versions that miss non-combat detail. The main agent must write the HTML itself.
+
+**Reference template**: Before writing, read the most recent existing `recap.html` in `<campaign>/sessions/` to use as the structural reference. Copy its CSS verbatim and match its HTML element structure exactly — same class names, same nesting, same component patterns.
+
 **Style Guide**: If `<campaign>/style-guide.md` exists, use its color palette, fonts, and component specs. If not, use a sensible default dark theme.
 
 **Readability Principles** (always apply):
@@ -417,16 +421,94 @@ Create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.html`
 - Paragraph spacing: 12px minimum
 - List item padding: 8px vertical minimum
 
-**HTML sections** (match the structure from the markdown but with visual enhancements):
-- Header with campaign/system info
-- Session composition bar (combat/exploration/roleplay/puzzle/loot breakdown)
-- Party cards with character colors from style guide
-- Timeline with color-coded event types
-- Character spotlight cards
-- Loot grid (magical items highlighted)
-- Memorable quotes (2-4 per PC, mixed types)
-- Pax's Notes — character journal section (styled per campaign style guide)
-- Open threads / cliffhanger
+#### HTML Structure (match exactly)
+
+The HTML must be a single self-contained file. Copy the CSS from the reference recap.html verbatim — do not create new classes or rename existing ones. The following documents the required structure using the Hellbreakers campaign as the canonical example. Other campaigns should follow the same patterns with their own style-guide colors.
+
+**1. Header** (`header.header`)
+- Sparkle via CSS `::before` pseudo-element (NOT an explicit `<span>`)
+- `<h1>` with session title (Cinzel Decorative)
+- `.subtitle` div — gold, italic, 17px, font-weight 500
+- `.meta-row` with `.meta-pill` spans for date, system, duration, in-game date
+
+**2. Session Composition Bar**
+- `.composition-bar` flex container with `.comp-seg` divs (`.comp-combat`, `.comp-rp`, `.comp-explore`, `.comp-social`, `.comp-loot`)
+- `.composition-legend` with `.legend-dot` spans
+
+**3. Party Cards**
+- `.party-grid` (CSS grid, `repeat(auto-fill, minmax(240px, 1fr))`)
+- `.char-card` with character-specific class (`.char-baijian`, `.char-cyrathul`, etc.) for left border color
+- Inner divs: `.char-name`, `.char-class`, `.char-player`
+
+**4. Session Summary**
+- `.summary` div wrapping `<p>` tags (NOT `<br><br>`)
+- Full narrative paragraphs from the recap.md Session Summary section
+
+**5. Timeline** (MOST IMPORTANT — this is where subagents consistently fail)
+- `.timeline` div with `border-left: 2px solid var(--border)`
+- Each act is a `.act` div with type class (`.combat`, `.rp`, `.explore`, `.social`, `.mystery`)
+- Timeline dot via `::before` pseudo-element, colored by type
+- `.act-label` div — JetBrains Mono, uppercase, e.g. "Act I · Combat · The Warehouse"
+- `.act-card` div — card background with full content inside:
+  - `<h3>` title for the act
+  - `<ul><li>` bullet lists with **ALL key events** from that act
+  - Include character names in `<strong>`, quotes in `<em>`, XP awards
+  - **Every act must have 4-8 detailed bullet points** — NOT a one-line summary
+  - The timeline is the narrative backbone. If it's thin, the whole recap feels empty.
+
+**6. Combat Encounters**
+- `.combat-box` with rose left border
+- `.combat-meta` div — JetBrains Mono, uppercase
+- `.combat-stats` grid — dark inner panel (`#160f12`) with stat label/value pairs
+- `<h4>` for each round header (e.g. "Round 1 — Swabbies Neutralized")
+- `<ul><li>` for each character's actions per round, with `<strong>` names
+- Include hit/miss/crit, damage numbers, conditions, hero points
+- Post-combat XP in gold-colored `<p>`
+
+**7. Character Spotlight**
+- `.spotlight-grid` (single column)
+- `.spotlight` divs with character class (`.s-baijian`, `.s-cyrathul`, etc.)
+- `<h4>` with character name + epithet (e.g. "Bai Jian · the Measured Blade")
+- `<ul><li>` with all spotlight bullets from recap.md
+
+**8. Loot**
+- `.loot-grid` (CSS grid, card layout — NOT a `<table>`)
+- `.loot-item` divs, with `.magical` class for magic items
+- Inner divs: `.loot-name`, `.loot-source`, `.loot-note`
+- `.xp-banner` after the grid — inline format: `Experience · X encounter1 · Y encounter2 = <strong>Z XP each</strong>`
+
+**9. Memorable Quotes**
+- `<blockquote>` elements (NOT divs)
+- `<strong>` for speaker name, quote text in italic (inherited from blockquote)
+- `<span class="attribution">` for context line
+
+**10. Open Threads**
+- `.threads` div wrapping a `<ul>`
+- Custom `➤` bullet via `li::before` in rose color
+- `<strong>` for thread names
+
+**11. Pax's Notes**
+- `<section class="pax-notes">` (NOT a div inside a section)
+- CSS for `.pax-notes` in a separate `<style>` block at the BOTTOM of the file (after content, before `</div></body>`)
+- `.pax-intro` paragraph with dashed border-bottom
+- `<h3>` for each subsection in amber/gold
+- `<ul><li>` for all bullet points
+
+**12. Cliffhanger** (if session ends on one)
+- `.cliffhanger` div with rose border, gradient background
+- `.label` span, `<p>` description, `.big-line` in Cinzel Decorative, `.speaker` span
+
+#### Content Completeness Checklist
+
+Before finishing the HTML, verify:
+- [ ] Every act in the timeline has 4+ bullet points (not one-line summaries)
+- [ ] All combat rounds are present with per-character actions
+- [ ] All quotes from recap.md are included
+- [ ] All spotlight bullets are included
+- [ ] All loot items are included
+- [ ] All open threads are included
+- [ ] All Pax's Notes subsections and bullets are included
+- [ ] The file renders correctly with no missing CSS classes
 
 ### Step 7: Propose Campaign File Updates
 

@@ -77,18 +77,22 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Zara** — Halfling hostess at the Saringallow HQ. Warm and welcoming but visibly breaking under the Hedvind decree.
 - **Brynn Tate** — Cadence Keg barkeep. Comped the party's drinks and gifted 2 minor healing potions for the road. Ally.
 - **Otto** — Ferryman on the North Kansira River. Tipped the party off about the lich on Lake Encarthan.
-- **Gertrude Middenhelm** — Junior Hellbreaker, currently missing in the Everbloom Imports warehouse. Active rescue objective.
+- **Gertraud Middenhelm** — Junior Hellbreaker. Rescued from the Everbloom Imports warehouse in Session 2. Grateful to the party — looted the loyalists' gear for the cause.
+- **Hagrath the Hammer** — Blacksmith in Traveler's Square, Saringallow. Transferred Bai Jian's +1 rune. Taught Fang the dueling pistol formula. Warm, fatherly rapport with the goblin inventor. Not confirmed as Hellbreaker sympathizer.
+- **Captain Julenus Aedin** — (Deceased) Captain of the Night's Prize. Killed by Cyrathul in Session 2.
 - **Alceo Demetrias** — Co-founder of the Hellbreakers League, cleric of Milani. Currently in Eladir.
 - **Phoebe Demetrias** — Co-founder of the Hellbreakers League. Currently in Eladir.
 - **Bai Feng** — Bai Jian's older brother, missing for 5 years. Last trail led to Isger.
 
 ## Key Plot Threads
 
-- **The Warehouse Standoff** (active): Gertrude Middenhelm is missing. Four figures wait in the Everbloom Imports warehouse. *"Like rats in a trap."* Picks up next session.
+- **The Warehouse Standoff** (resolved): Gertraud rescued. Three Chelaxian loyalists — two killed by Bai Jian, one released with a warning to spread the word.
 - **Hedvind's Decree** (active): Steward Stuart Hedvind VII's citizen-bounty system is driving neighbor-against-neighbor witch hunts. Alceo and Phoebe are in Eladir trying to limit the damage. Public Hellbreaker operation is now untenable.
 - **The Lich on Lake Encarthan**: Ferryman Otto tipped the party off that a lich is commanding the restless dead in Isger. Likely source of the dread bats — and likely a recurring threat.
 - **Ina's Attention**: Moob has caught the sun goddess's eye — she inspired his star-grenade formula mid-craft. Wants no part of her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
-- **The Deferred +1 Rune Transfer**: Moob and Fang plan to extract the +1 rune from Ethran's gifted Eagle Knight greatsword and install it on Bai Jian's jian. Full-day craft. Proposed in Session 1 but deferred when Zara's warehouse mission took priority — the greatsword is parked at the HQ workshop corner, waiting for a full day of downtime between missions.
+- **The +1 Rune Transfer** (completed): Transferred by blacksmith Hagrath in Saringallow for 3.5gp. Bai Jian's jian now has +1 potency.
+- **Night's Prize Aftermath** (active): The party sank a Chelaxian cargo ship and killed its captain. Crew members were rescued and released — Bai Jian told them to spread the word that "the Hellbreakers are not all bad." Whether this earns goodwill or brings heat remains to be seen. Wing is at the bottom of the river, needing salvage.
+- **The Animated Armor Mystery** (active): A merchant cargo ship had an animated armor bodyguard with a self-destruct failsafe. Expensive enchantment for a supply vessel. Who was Captain Aedin really working for?
 - **Ethran's Prosthetic Arm**: Moob and Fang pitched a hydraulic goblin-tech replacement. Promised, not yet built.
 - **The Lost Trail**: What happened to Bai Feng? What was the infernal creature the brothers were hunting? Is it connected to Cheliax? (Bai Jian hinted at it for the first time publicly in his tavern story — "the other person I fought beside.")
 - **The Hellbreakers' War**: Liberation of Isger from Chelaxian oppression.

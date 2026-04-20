@@ -52,6 +52,8 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Saringallow**: Hellbreakers League headquarters. HQ is in a nondescript mansion on the east side of town, hidden behind a false fireplace. Passphrase to enter: *"friends of the Rose."*
 - **Everbloom Imports Warehouse** (Saringallow docks): Hellbreaker cover operation. Isolated from the other warehouses by design. Currently compromised — site of an ambush in progress.
 - **Eladir**: City where Alceo and Phoebe Demetrias are currently operating to counter the Hedvind decree.
+- **Traveler's Square** (Saringallow): Shopping center with forges and blacksmiths. Level 5 town — common items level 5 or below available. Home of Hagrath the Hammer.
+- **North Kansira River Ambush Point**: Rocky outcropping at a river bend, two days' travel upriver from Saringallow. Deep channel on one side forces ships close to the cliff. Hellbreaker-scouted ambush site. Site of the Night's Prize boarding (Session 2).
 - **Lake Encarthan**: A lich is rumored to dwell here and command the restless dead flooding Isger (per ferryman Otto's cousin).
 
 ## Key NPCs
@@ -62,13 +64,17 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Ethran Howell**: Former Eagle Knight, now semi-permanent Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1. Stepping back from the field to run strategy and training out of the Saringallow HQ.
 - **Rhokrag**: Tall hobgoblin operative at the Saringallow HQ. Brusque first impression.
 - **Zara**: Halfling hostess at the Saringallow HQ. Warm-hearted but visibly breaking under the weight of the Hedvind decree.
-- **Gertrude Middenhelm**: Junior Hellbreaker who went to inventory a delivery at the Everbloom Imports warehouse and hasn't returned. Active missing-person objective.
+- **Gertraud Middenhelm**: Junior Hellbreaker. Rescued from the Everbloom Imports warehouse in Session 2. Grateful to the party — looted the loyalists' gear for the cause and tipped the party about warehouse security being compromised.
 - **Maire Phelan**: Key Hellbreakers member
 - **Xerra Bluebottle**: Key Hellbreakers member
 
 ### Allies / Civilian Contacts
 - **Brynn Tate**: Barkeep of the Cadence Keg in Breachill. Sympathetic to the Hellbreakers — gifted the party two minor healing potions in Session 1.
 - **Otto**: Ferryman on the North Kansira River. Spooked by the undead bat incident; dropped a lore tip about a lich on Lake Encarthan commanding the restless dead.
+- **Hagrath the Hammer**: Blacksmith in Traveler's Square, Saringallow. Transferred the +1 potency rune from Ethran's greatsword onto Bai Jian's jian for 3.5gp. Taught Fang the dueling pistol formula overnight — warm, fatherly rapport with the goblin inventor.
+
+### Enemies / Antagonists
+- **Captain Julenus Aedin** (deceased): Captain of the Night's Prize, a Chelaxian cargo ship. Killed by Cyrathul during the river ambush (Session 2). Fought with a dagger alongside an animated armor bodyguard with a failsafe explosive.
 
 ## Relevant Faiths
 
@@ -82,4 +88,7 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 ## Session Log
 
 ### Session 1 — Friends of the Rose (11 Apr 2026 · 7 Lamson 4726 AR)
-The party met at the Cadence Keg in Breachill the morning after the rout of the Hellknights of the Rack. After a tavern storytelling contest (won by Fang on a Wing-powered wheelie run), they were briefed by wounded Eagle Knight Ethran Howell. Overnight, Stuart Hedvind VII posted a bounty decree on all suspected Hellbreakers, forcing the party incognito. They traveled west-southwest, defused a confrontation with Chelaxian sympathizers in Draymoor, then killed two undead "dread bats" at the North Kansira ferry crossing before crossing to Saringallow. At the Hellbreaker HQ (hidden behind a fireplace in a nondescript mansion — passphrase *"friends of the Rose"*) they met Rhokrag and Zara, received Ethran's +1 Eagle Knight greatsword as a gift, and were sent to check on Gertrude Middenhelm at the Everbloom Imports warehouse. The session ended on a cliffhanger: Bai Jian tripped a hairline tripcord, took 14 damage, and the party rounded the corner to find four figures waiting — a burly woman in the back greeting them with *"like rats in a trap."*
+The party met at the Cadence Keg in Breachill the morning after the rout of the Hellknights of the Rack. After a tavern storytelling contest (won by Fang on a Wing-powered wheelie run), they were briefed by wounded Eagle Knight Ethran Howell. Overnight, Stuart Hedvind VII posted a bounty decree on all suspected Hellbreakers, forcing the party incognito. They traveled west-southwest, defused a confrontation with Chelaxian sympathizers in Draymoor, then killed two undead "dread bats" at the North Kansira ferry crossing before crossing to Saringallow. At the Hellbreaker HQ (hidden behind a fireplace in a nondescript mansion — passphrase *"friends of the Rose"*) they met Rhokrag and Zara, received Ethran's +1 Eagle Knight greatsword as a gift, and were sent to check on Gertraud Middenhelm at the Everbloom Imports warehouse. The session ended on a cliffhanger: Bai Jian tripped a hairline tripcord, took 14 damage, and the party rounded the corner to find four figures waiting — a burly woman in the back greeting them with *"like rats in a trap."*
+
+### Session 2 — Night's Prize (18 Apr 2026 · 8 Lamson 4726 AR)
+The party resolved the Everbloom warehouse cliffhanger in two rounds — Bai Jian crit-killed two loyalists, the third surrendered. After interrogating and releasing the survivor with a warning, they rescued Gertraud Middenhelm and escorted her back to HQ. Rhokrag briefed them on a supply-raid mission: intercept a Chelaxian cargo ship on the North Kansira River, minimize killing. The party hatched a fake-prisoner ruse — Moob and Cyrathul (disguised via masquerade scarf) presented "captured Hellbreaker" Bai Jian to board the Night's Prize. The deception worked until Wing knocked a boulder off the cliff. An Extreme-difficulty ship combat followed: Captain Julenus Aedin and his animated armor bodyguard (all-physical-damage resistance) proved devastating. Fang went down twice; Moob was downed once. Cyrathul killed the captain via Exploit Vulnerability + bite combo after Moob's tenderizer grenade; Bai Jian grappled the animated armor and shoved it overboard, triggering a failsafe explosion that set the ship ablaze. The party fought fires with water bombs, rescued trapped crew, secured supplies, and barely escaped the sinking ship — both goblins nearly drowned, with Moob sacrificing HP to save Fang. 286 XP earned (88 warehouse + 128 Extreme encounter + 70 bonus for crew rescue and supplies).

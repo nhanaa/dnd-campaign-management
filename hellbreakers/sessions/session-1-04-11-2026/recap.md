@@ -26,7 +26,7 @@ The Hellbreakers' newest recruits converge at the Cadence Keg in Breachill, the 
 
 The next morning is colder. A new decree from Stuart Hedvind VII has gone up overnight, offering gold to any citizen willing to turn in a suspected Hellbreaker. Ethran peels the Eagle Knight insignia off his breastplate and pivots the mission: they'll travel incognito, straight for headquarters, no side stops. The road takes them through the tense farming village of Draymoor (where four drunk Chelaxian sympathizers are talked — not run — out of the party's way), past empty autumn fields, and finally to the ferry crossing at the North Kansira River. The ferry is mid-crossing when two winged shapes appear on the horizon, closing fast.
 
-They turn out to be undead bats, and they never get a turn. Bai Jian crits on the lead bat. Cyrathul conjures a mirror image behind the second one, then reaches behind a wing, draws a sheathed longsword, and attacks *through* the mirror. Fang overclocks Wing, pops a wheelie, and grinds the second bat into the dirt. The party crosses the river, arrives in Saringallow, exchanges the Milani passphrase — "friends of the Rose" — and descends into the Hellbreaker basement to meet Rhokrag and Zara. Ethran gifts them his Eagle Knight greatsword, and they're immediately given a new job: junior Hellbreaker Gertrude Middenhelm went to inventory a delivery at the Everbloom Imports warehouse and hasn't come back. The party tracks her to a locked side door. Bai Jian opens it and trips a hairline cord. Crates fall. He hits the ground hard. Panacea treats his wounds. They round the corner — and find four figures waiting. The one in the back, a big burly woman, smiles.
+They turn out to be undead bats, and they never get a turn. Bai Jian crits on the lead bat. Cyrathul conjures a mirror image behind the second one, then reaches behind a wing, draws a sheathed longsword, and attacks *through* the mirror. Fang overclocks Wing, pops a wheelie, and grinds the second bat into the dirt. The party crosses the river, arrives in Saringallow, exchanges the Milani passphrase — "friends of the Rose" — and descends into the Hellbreaker basement to meet Rhokrag and Zara. Ethran gifts them his Eagle Knight greatsword, and they're immediately given a new job: junior Hellbreaker Gertraud Middenhelm went to inventory a delivery at the Everbloom Imports warehouse and hasn't come back. The party tracks her to a locked side door. Bai Jian opens it and trips a hairline cord. Crates fall. He hits the ground hard. Panacea treats his wounds. They round the corner — and find four figures waiting. The one in the back, a big burly woman, smiles.
 
 > *"Like rats in a trap."*
 
@@ -79,7 +79,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 - Bai Jian respectfully declines the greatsword itself ("it means a lot to him, maybe someone else can use it better") and *initially* agrees to leave his jian with Moob for the rune transfer — *"Just please, take care of my sword. It's very precious to me."* Then Moob hits his crafting check, realizes the transfer will take **a full day**, not an hour, and Zara immediately delivers the warehouse mission: *"I'd really like for you all to go check and make sure she's okay."* Kaazz confirms the urgency (*"you might need it, because I need you guys to do something for me first"*). **Transfer deferred.** Bai Jian keeps his jian. The +1 greatsword is leaned against one of the wine barrels at the workshop corner for later. Moob and Fang claim that corner as their alchemy/inventing space regardless — Wing parks inside.
 
 ### Act 5 — The Everbloom Imports Warehouse (Cliffhanger)
-- New assignment from Zara: **Gertrude Middenhelm**, a punctual junior Hellbreaker, went out to inventory a scheduled delivery at the Everbloom Imports warehouse (a Hellbreaker cover) and *hasn't come back*. Please check on her.
+- New assignment from Zara: **Gertraud Middenhelm**, a punctual junior Hellbreaker, went out to inventory a scheduled delivery at the Everbloom Imports warehouse (a Hellbreaker cover) and *hasn't come back*. Please check on her.
 - The warehouse is at Saringallow's dockside, isolated from the others by design. Front door is barred from inside. Muffled conversation is audible through the walls.
 - Party circles the building. Bai Jian spots a side door, opens it, and triggers a **hairline tripwire trap**. Crates fall. He eats **14 damage**, prone, off-guard. Reflex save failed. Cyrathul, deadpan: *"Well, there goes the element of surprise."*
 - **Panacea steps up with Battle Medicine** (Medic dedication) and successfully treats Bai Jian's wounds on her first Treat Wounds attempt of the campaign — a fumbled learning curve on the VTT, but it lands with a hero point reroll.
@@ -184,7 +184,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 
 ## Open Threads
 
-- 🪤 **The Warehouse Standoff**: Who are the four figures in the warehouse? Who is the "burly woman"? Is Gertrude Middenhelm alive, captured, or worse? (Picks up next session.)
+- 🪤 **The Warehouse Standoff**: Who are the four figures in the warehouse? Who is the "burly woman"? Is Gertraud Middenhelm alive, captured, or worse? (Picks up next session.)
 - 📜 **Hedvind VII's Bounty Decree**: A neighbor-against-neighbor witch hunt is about to escalate. Alceo and Phoebe are in Eladir trying to stop the fallout. Non-Hellbreaker civilians are already feeling the pressure.
 - 🦇 **The Lich on Lake Encarthan**: Otto the ferryman name-dropped a lich commanding the "restless dead" in the region. Dread bats may be only the start. Possible links to the "god-stuff fell from the sky" comment.
 - ⚔️ **Ethran Howell's Prosthetic**: Moob and Fang floated a hydraulic goblin-tech arm that could wield a two-hander. Promised but not yet built.
@@ -263,7 +263,7 @@ They turn out to be undead bats, and they never get a turn. Bai Jian crits on th
 ### Open questions for next session
 
 - **Who is the burly woman?** Chelaxian plant, Hedvind bounty hunter, turned Hellbreaker, or something else? The "rats in a trap" line implies she was expecting *someone* — possible intel leak inside HQ.
-- **Is Gertrude Middenhelm alive?** Rescue or recovery.
+- **Is Gertraud Middenhelm alive?** Rescue or recovery.
 - **When does the rune transfer actually happen?** Greatsword is parked at HQ, waiting for a full day of downtime between missions.
 - **Does Ethran come to the warehouse, or stay at HQ?** The gifted greatsword is still there if he changes his mind.
 - **The lich on Lake Encarthan.** Dread bats were likely its minions. Watch for more undead and remember Otto's exact phrasing.
