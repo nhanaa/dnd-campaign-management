@@ -10,6 +10,7 @@
 - **3/15/26**: Invited to campaign. Pax initially considered fighter/melee, settled on Bard.
 - **3/19/26**: Discussed backstory with DM — Fairy from a settlement, captured as a child, escaped to the streets of Skybreeze.
 - **4/4/26**: Named the fairy settlement **Neulvyn**.
+- **4/20/26**: Finalized Mist's backstory — captured by fae-traffickers while exploring outside Neulvyn with friends; sold to a noble collector in Skybreeze; escaped during a scandal by tricking a stranger into releasing him; survived on the streets; mentored briefly by an elven bard named **Eldrin** who taught him music and magic before leaving Skybreeze. Entire arc spans the last 2-3 years.
 
 ## Key Locations
 
@@ -29,8 +30,16 @@
 - **Garrett** — Vale Tempest member (Green Robe). Killed by party in Session 3.
 - **Fancy Robe Woman** — Unnamed Vale Tempest leader (or high-ranking member). Enchants the amulets. Still alive and unaware of what happened to the others (as of end of Session 3).
 - **Evrin** — Someone the party agreed to help pay back a debt; connected to the Whisper Prism quest.
+- **Eldrin** — Elven bard who mentored Mist on the streets of Skybreeze ~1-2 years ago. Taught him music and how to channel fae magic with intention. Left Skybreeze at some point; destination and reason unknown. Seen by Mist as the closest thing to family since Neulvyn — and the second person to vanish from his life.
+- **Mist's Unnamed Noble Captor** — Wealthy Skybreeze noble who purchased Mist from fae-traffickers and kept him as part of a private collection of fairies and mythical creatures. "Cared for" Mist in the sense of feeding and clothing him, but kept him caged. Caught in an unspecified scandal that collapsed his household; current fate unknown. Identity and house to be determined by DM.
 
 ## Factions
+
+### Fae Traffickers
+- Organized group specializing in capturing fairies and other magical creatures to sell to wealthy collectors.
+- Captured Mist as a child outside Neulvyn along with a group of his friends (~2-3 years ago).
+- Operational details unknown — equipped to ambush fae, knew Neulvyn's location. Likely still active.
+- Mist's captured friends' fates are unknown; they may still be in the traffickers' hands or sold to other collectors across Myrrindar.
 
 ### Vale Tempest
 - Secret society dedicated to "protecting the truth" about the Wardstones

@@ -37,6 +37,7 @@
 - **Seerosaur** (DM): Creator of the homebrew world Myrrindar
 - **Elias Whitmore** — Head wind researcher, mind-controlled by Vale Tempest amulet. Party freed him (amulet still on). Knows the party as allies. Found at the Wind Institute.
 - **Rufus Dawnstrider** — Dock Foreman, Vale Tempest target. Mist knows him personally — direct lead for next session.
+- **Eldrin** — Elven bard, Mist's former mentor. Taught Mist music and fae magic on the streets of Skybreeze before leaving the city. Whereabouts unknown. Emotionally significant to Mist.
 
 ## NPC Relationships
 
@@ -46,9 +47,11 @@
 
 ## Plot Threads
 
-- **Neulvyn**: Mist's fairy homeland — who kidnapped him and why? Are other fairies still captive? Does Neulvyn still exist?
-- **Skybreeze streets**: Mist grew up here as an urchin — likely has contacts, rivals, or debts in the city
-- **Captors**: Unknown who captured Mist from Neulvyn — potential recurring antagonist or reveal
+- **Neulvyn**: Mist's fairy homeland — does it still exist? Has anyone looked for him? Mist hasn't been back in 2-3 years.
+- **The Fae Traffickers**: Group that captured Mist and his childhood friends. Still likely active. Mist's friends may still be captive somewhere in Myrrindar.
+- **The Noble Captor**: Unnamed Skybreeze noble who kept Mist as a collection piece. Caught in a scandal that collapsed his household — current fate unknown. Could resurface in exile, imprisonment, or as a ghost of the past.
+- **Eldrin**: Elven bard who mentored Mist on the streets before vanishing from Skybreeze. Where did he go, and why did he leave? Potential future reunion — or revelation that Eldrin's departure wasn't his choice.
+- **Skybreeze streets**: Mist survived here by stealing, tricking, and performing — likely has contacts, rivals, and debts from that stretch.
 - **Vale Tempest**: Secret society using enchanted amulets to mind-control citizens into maintaining the Wardstone narrative. Party killed several members — retaliation expected.
 - **What's beneath Skybreeze?**: Jensen says the Wardstones seal something. The Vale Tempest says it's lies. Elias hinted at knowing but collapsed before revealing.
 - **Five enchanted targets**: Elias Whitmore, Rufus Dawnstrider, Valo, Regina, Bildren — all have mind-control amulets. Rufus is the most accessible lead (Mist knows him).

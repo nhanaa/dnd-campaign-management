@@ -19,12 +19,12 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 8 (-1) | 14 (+2) | 10 (+0) | 12 (+1) | 14 (+2) | 17 (+3) |
+| 8 (-1) | 14 (+2) | 14 (+2) | 10 (+0) | 12 (+1) | 17 (+3) |
 
 ## Defenses
 
 - **AC**: 13 (Leather Armor)
-- **Max HP**: 19
+- **Max HP**: 25
 - **Initiative**: +2
 - **Hit Dice**: 3d8
 - **Proficiency Bonus**: +2
@@ -33,16 +33,16 @@
 |------|------------|----------|
 | STR | No | -1 |
 | DEX | Yes | +4 |
-| CON | No | +0 |
-| INT | No | +1 |
-| WIS | No | +2 |
+| CON | No | +2 |
+| INT | No | +0 |
+| WIS | No | +1 |
 | CHA | Yes | +5 |
 
 ## Senses
 
-- **Passive Perception**: 13
-- **Passive Insight**: 13
-- **Passive Investigation**: 12
+- **Passive Perception**: 12
+- **Passive Insight**: 12
+- **Passive Investigation**: 11
 
 ## Skills
 
@@ -156,10 +156,23 @@
 
 ## Backstory
 
-- **Origin**: Born in **Neulvyn**, a Fairy settlement
-- **Trauma**: Captured/kidnapped during childhood — torn from the Fey community
-- **Escape**: Broke free and survived as a street urchin in **Skybreeze**, the massive melting-pot metropolis where the campaign begins
-- **Life on the streets**: Learned to deceive, perform, and charm to survive — explains Entertainer background, Expertise in Deception/Persuasion, and trust issues
+### Origin — Neulvyn
+Mist was born in **Neulvyn**, a Fairy settlement. As a child, he ventured outside the settlement with a group of friends, ignoring the warnings of the Neulvyn adults. There, the group was ambushed by a **trafficking ring** that specialized in capturing fairies and other magical creatures to sell to wealthy collectors. He knows little about the traffickers — only that they knew exactly where to find Neulvyn and were equipped for fae prey.
+
+### Captivity — The Noble's Manor
+Mist was sold to a **noble in Skybreeze** who was fascinated with fairies and other mythical creatures. He was *cared for* — fed, clothed, kept comfortable — but locked away in the manor as part of the noble's private collection. During his years in captivity, Mist studied the household: the servants' routines, the locks, the secret passages, and most of all, the way his captor's moods shifted. He learned when to perform and when to disappear.
+
+### The Escape
+The noble was eventually caught in a scandal, and the manor was thrown into chaos — appraisers cataloguing, clerks carting off debts, strangers in every room. Mist seized the opportunity. He **tricked one of the strangers into releasing him** from his cage, slipped away, and vanished into the streets of Skybreeze.
+
+### Survival on the Streets
+Mist survived by **any means necessary**: stealing, befriending strangers, using his fae charm and magic to trick people out of what he needed. The streets of Skybreeze taught him quickly, and he took to them like he'd been born there. Trust was a currency he learned to keep for himself.
+
+### The Mentor — Eldrin
+At some point, Mist talked his way into the company of an **elven bard named Eldrin**. Eldrin taught him to play music properly and showed him how to use his fae magic with more skill and intention than instinct alone had given him. For the first time since Neulvyn, Mist had someone who treated him as a person and not a curiosity or a mark. Then — one day — **Eldrin left Skybreeze.** Mist doesn't know where Eldrin went or why. It's the second time someone has vanished from his life.
+
+### The Timeline
+All of this — from Mist's capture to Eldrin's departure — happened within approximately the **last 2-3 years**. Mist is still new to the world outside his cage.
 
 ## Personality
 
