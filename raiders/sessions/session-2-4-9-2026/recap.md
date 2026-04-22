@@ -1,7 +1,7 @@
 # Session 2 Recap — Beach of the Slain and the Road to Nowhere
 
 **Date**: April 9, 2026
-**System**: D&D 5e (2024)
+**System**: D&D 5e (2014)
 **Duration**: ~2h 58m
 
 ---

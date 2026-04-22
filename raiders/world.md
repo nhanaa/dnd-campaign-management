@@ -1,7 +1,7 @@
 # World — Raiders of the Serpent Sea
 
 ## System
-- **System:** D&D 5e
+- **System:** D&D 5e (2014 PHB)
 - **Setting:** Grimnir — Norse mythology-inspired world born from the destruction of the Lost Lands
 - **Campaign Style:** Sandbox after level 2; leveling tied to completing certain campaign areas
 - **Theme:** Viking seafaring, survival against harsh elements, Ragnarok
