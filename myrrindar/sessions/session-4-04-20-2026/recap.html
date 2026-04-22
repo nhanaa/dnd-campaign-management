@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 — The Stillwind Lab | Myrrindar: Winds of Warding</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eaf2ea;
+  --bg-card: #f4f9f4;
+  --bg-card-hover: #ffffff;
+  --border: #b8d0b8;
+  --text: #243028;
+  --text-dim: #4a5e50;
+  --text-bright: #141e18;
+  --red: #9a4040;
+  --red-glow: #9a404022;
+  --blue: #4a80aa;
+  --blue-glow: #4a80aa22;
+  --green: #2e7a48;
+  --green-glow: #2e7a4822;
+  --purple: #7a5aaa;
+  --purple-glow: #7a5aaa22;
+  --teal: #3a8a8a;
+  --teal-glow: #3a8a8a22;
+  --gold: #3a8a5a;
+  --gold-dim: #5aaa7a;
+  --gold-glow: #3a8a5a22;
+  --mist: #7a5aaa;
+  --avon: #4a80aa;
+  --silas: #9a4040;
+  --akasha: #2e7a48;
+  --talya: #3a8a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 10% 20%, #c0e0cc33 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, #b0d0e033 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 0%, #d0e8f022 0%, transparent 40%);
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 30% -5%, #88c8e828 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 105%, #88c8a828 0%, transparent 50%);
+  animation: breeze-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes breeze-drift {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* -- Header -- */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 48px 32px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--purple), var(--teal), var(--gold));
+}
+
+.header-campaign {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 54px);
+  color: var(--text-bright);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.header-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.header-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.header-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--bg-deep);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* -- Section Titles -- */
+h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+/* -- Section -- */
+.section {
+  margin-bottom: 60px;
+}
+
+/* -- Composition Bar -- */
+.comp-bar-container {
+  margin-bottom: 60px;
+}
+
+.comp-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.comp-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  transition: flex-basis 0.3s;
+}
+
+.comp-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.comp-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* -- Cards -- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px #2e7a4815;
+  border-color: #90c0a0;
+}
+
+/* -- Party Cards -- */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.party-card {
+  position: relative;
+  padding-left: 20px;
+}
+
+.party-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 2px;
+}
+
+.party-card .pc-name { font-weight: 600; font-size: 17px; margin-bottom: 4px; }
+.party-card .pc-class { font-size: 14px; color: var(--text-dim); margin-bottom: 2px; }
+.party-card .pc-player { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+.party-card.mist::before { background: var(--mist); }
+.party-card.mist .pc-name { color: var(--mist); }
+.party-card.avon::before { background: var(--avon); }
+.party-card.avon .pc-name { color: var(--avon); }
+.party-card.silas::before { background: var(--silas); }
+.party-card.silas .pc-name { color: var(--silas); }
+.party-card.akasha::before { background: var(--akasha); }
+.party-card.akasha .pc-name { color: var(--akasha); }
+.party-card.talya::before { background: var(--talya); }
+.party-card.talya .pc-name { color: var(--talya); }
+
+/* -- Timeline -- */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-event {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.timeline-event:last-child { margin-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: -30px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--bg-card);
+}
+
+.timeline-dot.combat { border-color: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.timeline-dot.exploration { border-color: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.timeline-dot.roleplay { border-color: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.timeline-dot.puzzle { border-color: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+.timeline-dot.loot { border-color: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+
+.timeline-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+
+.timeline-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.tag-combat { background: var(--red); }
+.tag-exploration { background: var(--blue); }
+.tag-roleplay { background: var(--purple); }
+.tag-puzzle { background: var(--teal); }
+.tag-loot { background: var(--gold); }
+
+.timeline-body {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.timeline-body ul { list-style: none; padding: 0; }
+
+.timeline-body li {
+  padding: 8px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.timeline-body li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  color: var(--border);
+  font-size: 8px;
+  top: 12px;
+}
+
+/* -- Spotlight Cards -- */
+.spotlight-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.spotlight-card {
+  position: relative;
+  border-top: 3px solid;
+}
+
+.spotlight-card .spot-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.spotlight-card .spot-name { font-weight: 600; font-size: 18px; }
+.spotlight-card .spot-class { font-size: 14px; color: var(--text-dim); }
+
+.spotlight-card ul { list-style: none; padding: 0; }
+
+.spotlight-card li {
+  padding: 8px 0;
+  padding-left: 18px;
+  position: relative;
+  font-size: 15px;
+}
+
+.spotlight-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.spotlight-card.mist { border-color: var(--mist); }
+.spotlight-card.mist .spot-name { color: var(--mist); }
+.spotlight-card.mist li::before { background: var(--mist); }
+
+.spotlight-card.avon { border-color: var(--avon); }
+.spotlight-card.avon .spot-name { color: var(--avon); }
+.spotlight-card.avon li::before { background: var(--avon); }
+
+.spotlight-card.silas { border-color: var(--silas); }
+.spotlight-card.silas .spot-name { color: var(--silas); }
+.spotlight-card.silas li::before { background: var(--silas); }
+
+.spotlight-card.akasha { border-color: var(--akasha); }
+.spotlight-card.akasha .spot-name { color: var(--akasha); }
+.spotlight-card.akasha li::before { background: var(--akasha); }
+
+.spotlight-card.talya { border-color: var(--talya); }
+.spotlight-card.talya .spot-name { color: var(--talya); }
+.spotlight-card.talya li::before { background: var(--talya); }
+
+/* -- Combat Breakdown -- */
+.combat-section {
+  background: linear-gradient(135deg, #f9f2f2, var(--bg-card));
+  border: 1px solid #d4a0a0;
+}
+
+.combat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.combat-title { font-weight: 600; font-size: 18px; color: var(--red); }
+
+.combat-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  background: var(--red);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.combat-info {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: var(--bg-deep);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.combat-info p { margin-bottom: 4px; font-size: 14px; }
+.combat-info strong { color: var(--text-bright); }
+
+.round-block {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: 6px;
+  border-left: 3px solid var(--red);
+}
+
+.round-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.round-block ul { list-style: none; padding: 0; }
+
+.round-block li {
+  padding: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border-bottom: 1px solid #e8e0e0;
+}
+
+.round-block li:last-child { border-bottom: none; }
+.round-block .actor { font-weight: 600; display: inline; }
+
+.crit-highlight {
+  background: linear-gradient(135deg, #dceede, #e6f4e8);
+  border: 1px solid #7aba8a;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.combat-result {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #dceede, #e6f4e8);
+  border: 1px solid #7aba8a;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* -- Loot Grid -- */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.loot-item {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.loot-item.magical {
+  border-color: #5aaa7a;
+  background: #eaf6ee;
+  box-shadow: inset 0 0 20px #3a8a5a11;
+}
+
+.loot-name { font-weight: 600; font-size: 15px; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--gold); }
+.loot-detail { font-size: 13px; color: var(--text-dim); }
+
+/* -- Quotes -- */
+.quotes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #3a8a5a08;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.quote-text { font-style: italic; font-size: 15px; color: var(--text); margin-bottom: 6px; line-height: 1.7; }
+.quote-speaker { font-weight: 600; font-size: 14px; }
+.quote-context { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.quote-block.mist { border-left-color: var(--mist); background: #7a5aaa08; }
+.quote-block.mist .quote-speaker { color: var(--mist); }
+.quote-block.avon { border-left-color: var(--avon); background: #4a80aa08; }
+.quote-block.avon .quote-speaker { color: var(--avon); }
+.quote-block.silas { border-left-color: var(--silas); background: #9a404008; }
+.quote-block.silas .quote-speaker { color: var(--silas); }
+.quote-block.akasha { border-left-color: var(--akasha); background: #2e7a4808; }
+.quote-block.akasha .quote-speaker { color: var(--akasha); }
+.quote-block.talya { border-left-color: var(--talya); background: #3a8a8a08; }
+.quote-block.talya .quote-speaker { color: var(--talya); }
+.quote-block.dm { border-left-color: var(--text-dim); background: #4a5e5008; }
+.quote-block.dm .quote-speaker { color: var(--text-dim); }
+
+/* -- Journal Section -- */
+.journal-section {
+  background: linear-gradient(135deg, #faf6f0, #f5f0e8);
+  border: 1px solid #d4c8a8;
+  border-radius: 8px;
+  padding: 32px 28px;
+  position: relative;
+  box-shadow: inset 0 0 40px #d4c8a810;
+}
+
+.journal-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mist), #c4a8d8, var(--mist));
+  border-radius: 8px 8px 0 0;
+}
+
+.journal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.journal-icon { font-size: 22px; opacity: 0.7; }
+
+.journal-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--mist);
+  letter-spacing: 1px;
+}
+
+.journal-private {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #a09078;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #e8dcc8;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.journal-sub {
+  font-weight: 600;
+  font-size: 16px;
+  color: #6a5a44;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.journal-section ul { list-style: none; padding: 0; }
+
+.journal-section li {
+  padding: 8px 0;
+  padding-left: 16px;
+  position: relative;
+  font-size: 15px;
+  color: #3a3028;
+  line-height: 1.7;
+}
+
+.journal-section li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--mist);
+  opacity: 0.5;
+}
+
+/* -- Open Threads -- */
+.threads-list { list-style: none; padding: 0; }
+
+.thread-item {
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--teal);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.thread-item:last-child { margin-bottom: 0; }
+.thread-title { font-weight: 600; color: var(--text-bright); }
+.thread-desc { color: var(--text-dim); font-size: 14px; }
+
+/* -- Summary -- */
+.summary-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.summary-text p { margin-bottom: 12px; }
+.summary-text p:last-child { margin-bottom: 0; }
+
+strong { color: var(--text-bright); }
+
+/* -- Cliffhanger -- */
+.cliffhanger {
+  background: linear-gradient(135deg, #f9f2f2, #f4eaea);
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.cliffhanger .big-line {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 36px);
+  color: var(--red);
+  line-height: 1.3;
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: block;
+  margin-top: 8px;
+}
+
+/* -- Responsive -- */
+@media (max-width: 600px) {
+  .container { padding: 24px 16px 60px; }
+  .header { padding: 32px 20px 28px; }
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .header-meta { gap: 10px; }
+  .card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-campaign">Myrrindar: Winds of Warding</div>
+    <h1>The Stillwind Lab</h1>
+    <div class="header-subtitle">Session 4</div>
+    <div class="header-meta">
+      <span>D&amp;D 5e &mdash; 2024 PHB</span>
+      <span>April 20, 2026</span>
+      <span>~3h 8m</span>
+    </div>
+  </header>
+
+  <!-- COMPOSITION BAR -->
+  <div class="comp-bar-container section">
+    <h2>Session Composition</h2>
+    <div class="comp-bar">
+      <div class="comp-segment" style="flex-basis: 35%; background: var(--red);">35%</div>
+      <div class="comp-segment" style="flex-basis: 30%; background: var(--blue);">30%</div>
+      <div class="comp-segment" style="flex-basis: 20%; background: var(--purple);">20%</div>
+      <div class="comp-segment" style="flex-basis: 10%; background: var(--teal);">10%</div>
+      <div class="comp-segment" style="flex-basis: 5%; background: var(--gold);">5%</div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--red);"></div> Combat</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--blue);"></div> Exploration</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--purple);"></div> Roleplay</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--teal);"></div> Puzzle / Lore</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--gold);"></div> Loot</div>
+    </div>
+  </div>
+
+  <!-- PARTY -->
+  <div class="section">
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="card party-card mist">
+        <div class="pc-name">Mist</div>
+        <div class="pc-class">Fairy Bard (Eloquence)</div>
+        <div class="pc-player">Paxmanz</div>
+      </div>
+      <div class="card party-card avon">
+        <div class="pc-name">Avon</div>
+        <div class="pc-class">Dragonborn Cleric</div>
+        <div class="pc-player">Redundakitty</div>
+      </div>
+      <div class="card party-card silas">
+        <div class="pc-name">Silas</div>
+        <div class="pc-class">Khoravar Rogue</div>
+        <div class="pc-player">Aenian</div>
+      </div>
+      <div class="card party-card akasha">
+        <div class="pc-name">Akasha Amelia</div>
+        <div class="pc-class">Elf Druid</div>
+        <div class="pc-player">AkashaAmelia</div>
+      </div>
+      <div class="card party-card talya">
+        <div class="pc-name">Talya</div>
+        <div class="pc-class">Tiefling Monk</div>
+        <div class="pc-player">luckstang7</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSION SUMMARY -->
+  <div class="section">
+    <h2>Session Summary</h2>
+    <div class="summary-text">
+      <p>The party woke up the morning after their assault on the Vale Tempest hideout and gathered at a tavern near the docks to plan their next move. With heat on them from the killings, they decided to lay low and pursue the <strong>Whisper Prism</strong> &mdash; an artifact they owe <strong>Evrin</strong> as repayment for a debt. Avon had a surprising encounter with <strong>Carrie-Anne</strong>, a priestess of Bahamut who recognized him by reputation and invited him to the local temple. Meanwhile, Silas confronted a mysterious figure watching the party &mdash; an agent of Evrin's, reminding them that &ldquo;everyone doesn't like to wait.&rdquo;</p>
+      <p>After researching the <strong>Stillwind Lab</strong> at the library &mdash; where Mist sweet-talked a scholar into revealing details about the lab's construct defenses while Silas pocketed children's picture books &mdash; the party traveled northwest to the ancient arcane facility. Inside, they fought through crystal-headed constructs and wall-mounted turrets in a tense five-round combat, then navigated trapped hallways deeper into the lab. A lightning trap at the final door punished the party for not checking for traps, and when they finally reached the vault chamber, Silas's attempt to sneak in triggered a massive 10-foot guardian construct: <em>&ldquo;Prepare to be annihilated.&rdquo;</em></p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <!-- Act I -->
+      <div class="timeline-event">
+        <div class="timeline-dot roleplay"></div>
+        <div class="timeline-time">00:00 &ndash; 22:00</div>
+        <div class="timeline-title">Act I: The Morning After</div>
+        <span class="timeline-tag tag-roleplay">Roleplay</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Party reconvened at a tavern near the docks to plan their next move after the Vale Tempest killings</li>
+            <li>Decided to pursue the <strong>Whisper Prism</strong> for Evrin instead of investigating the amulet targets &mdash; too much heat on them</li>
+            <li><strong>Avon</strong> met <strong>Carrie-Anne</strong>, a priestess of Bahamut who recognized him by reputation from Sevra: <em>&ldquo;We've heard of your tales&rdquo;</em></li>
+            <li><strong>Silas</strong> spotted a suspicious figure watching the group, confronted him &mdash; the man delivered a message from Evrin: <em>&ldquo;Everyone doesn't like to wait. We're watching.&rdquo;</em></li>
+            <li>Silas revealed he used to be on the same crew as Evrin &mdash; Silas was the top member, Evrin was third and looked up to him</li>
+            <li>Party agreed to head northwest toward the Stillwind Lab, an abandoned arcane facility where the Whisper Prism is kept</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act II -->
+      <div class="timeline-event">
+        <div class="timeline-dot puzzle"></div>
+        <div class="timeline-time">22:00 &ndash; 46:00</div>
+        <div class="timeline-title">Act II: Library Research</div>
+        <span class="timeline-tag tag-puzzle">Puzzle / Lore</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Party visited the Skybreeze library to research the <strong>Stillwind Lab</strong></li>
+            <li><strong>Mist</strong> charmed a scholar using Silver Tongue (rolled 8 on d20, treated as 10, total 17 vs the scholar's nat 1) &mdash; extracted details about construct defenses, active traps, and possible treasure</li>
+            <li>The scholar warned: the lab was a construct-making facility abandoned 87 years ago during the Arcane Storm, still has active defenses</li>
+            <li><strong>Avon</strong> located a map showing the lab's exact position among the northwest ruins</li>
+            <li><strong>Silas</strong> searched for info on the Whisper Prism (failed), but stole three children's picture books &mdash; including <em>The Timid Owlbear</em> and <em>The Big Red Beholder</em> &mdash; with Sleight of Hand so high the books &ldquo;never existed&rdquo;</li>
+            <li>Party learned constructs are likely resistant to physical damage &mdash; need magic or elemental attacks</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act III -->
+      <div class="timeline-event">
+        <div class="timeline-dot exploration"></div>
+        <div class="timeline-time">46:00 &ndash; 58:00</div>
+        <div class="timeline-title">Act III: Preparation &amp; Travel</div>
+        <span class="timeline-tag tag-exploration">Exploration</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Mist</strong> haggled for grease at a general store &mdash; played a beautiful song (performance check) that reminded the shopkeeper of home, scored two bottles for the price of one</li>
+            <li><strong>Avon</strong> distributed oil from his supply of ten bottles and offered his Acid Breath Weapon as an elemental option</li>
+            <li>Party discussed damage types: Mist's Heat Metal, Avon's acid breath, Talya's Elemental Strikes</li>
+            <li>Traveled a couple hours northwest to the Stillwind Lab &mdash; an unassuming stone structure with a locked entrance</li>
+            <li><strong>Silas</strong> picked the front door lock (rolled 19) one-handed without even looking</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act IV -->
+      <div class="timeline-event">
+        <div class="timeline-dot exploration"></div>
+        <div class="timeline-time">58:00 &ndash; 84:00</div>
+        <div class="timeline-title">Act IV: Into the Stillwind Lab</div>
+        <span class="timeline-tag tag-exploration">Exploration</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Entered a blue-torch-lit stone room with three 4-foot <strong>crystal-headed constructs</strong> facing the far wall, faintly pulsing purple</li>
+            <li><strong>Silas</strong> scouted alone, stealthing in and using <strong>Minor Illusion</strong> (a glowing orb) to test the constructs &mdash; they reacted in eerie unison, stepping toward it together</li>
+            <li>Silas retreated unseen (stealth check at disadvantage after alerting them, still succeeded) and reported back</li>
+            <li><strong>Mist</strong> whispered to the group: <em>&ldquo;Must be those automatons I heard about&rdquo;</em></li>
+            <li>Party attempted group stealth entry &mdash; <strong>Avon's</strong> armor clanked on the doorframe, alerting all three constructs</li>
+            <li>Constructs demanded: <em>&ldquo;Confirm identity.&rdquo;</em> Avon name-dropped <strong>Elias Whitmore</strong> &mdash; wrong answer</li>
+            <li><em>&ldquo;INTRUDER! INTRUDER!&rdquo;</em> &mdash; high-pitched screeching, initiative rolled</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act V -->
+      <div class="timeline-event">
+        <div class="timeline-dot combat"></div>
+        <div class="timeline-time">84:00 &ndash; 148:00</div>
+        <div class="timeline-title">Act V: Crystal Constructs &amp; Turrets</div>
+        <span class="timeline-tag tag-combat">Combat</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Five-round combat against 3 crystal constructs and 2 wall-mounted turrets in the lab entrance</li>
+            <li><strong>Silas</strong> opened with a <span class="crit-highlight">CRIT</span> (double nat 20s) on turret 1 via Steady Aim &mdash; 20 damage, nearly one-shotting it</li>
+            <li><strong>Avon</strong> tanked nearly every hit (AC 18 with shield) while landing the session's most impactful action: <strong>Acid Breath Weapon</strong> that destroyed turret 2 and corroded construct A in one blast</li>
+            <li><strong>Talya</strong> activated <strong>Elemental Attunement (Acid)</strong> for the first time &mdash; discovered her 15-foot reach and punched holes through crystal constructs</li>
+            <li><strong>Mist</strong> debuffed turret 1 with Vicious Mockery (it shot into the ceiling next turn), healed Avon with Healing Word, and landed the killing crossbow bolt on construct B</li>
+            <li><strong>Akasha</strong> evolved from melee club+sickle attacks to <strong>Starry Wisp</strong> &mdash; landing the <span class="crit-highlight">CRIT</span> that killed the final construct</li>
+            <li>Party learned constructs resist piercing damage &mdash; magic and acid proved far more effective</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act VI -->
+      <div class="timeline-event">
+        <div class="timeline-dot puzzle"></div>
+        <div class="timeline-time">148:00 &ndash; 180:00</div>
+        <div class="timeline-title">Act VI: Deeper into the Lab</div>
+        <span class="timeline-tag tag-puzzle">Puzzle / Lore</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Silas</strong> picked an arcane-locked door using Mist's <strong>Bardic Inspiration</strong> to push past DC 15</li>
+            <li>Hallway fire trap triggered &mdash; <strong>Silas</strong> dodged with a handstand forward (DEX save 16). <strong>Avon</strong> looked back at the group with finger guns.</li>
+            <li>Storage room: <strong>Avon's</strong> Detect Magic revealed an <strong>Evocation trap</strong> in the center &mdash; party carefully avoided it</li>
+            <li>Room with six <strong>deactivated turrets</strong> (dim crystals) &mdash; Silas tested with Minor Illusion (a splitting image of Mist). No reaction.</li>
+            <li><strong>Akasha</strong> solved an arcane rune puzzle door that stumped Mist, Silas, and Avon</li>
+            <li>But the door was <strong>trapped</strong> &mdash; <strong>15 lightning damage</strong> to everyone in the hallway. Silas and Talya saved (7 damage); Mist, Avon, and Akasha took the full 15.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act VII -->
+      <div class="timeline-event">
+        <div class="timeline-dot exploration"></div>
+        <div class="timeline-time">180:00 &ndash; 188:00</div>
+        <div class="timeline-title">Act VII: The Vault &amp; Cliffhanger</div>
+        <span class="timeline-tag tag-exploration">Exploration</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Vault chamber revealed: two stone pillars, three pedestals with unidentified objects, and a massive <strong>10-foot guardian construct</strong></li>
+            <li>Party took a <strong>short rest</strong> in the previous room &mdash; hit dice healed everyone; <strong>Akasha</strong> learned the mechanic with help from the table</li>
+            <li><strong>Avon</strong> cast Detect Magic &mdash; only the construct glowed</li>
+            <li><strong>Silas</strong> attempted to sneak in for a surprise attack&hellip; kicked a rock</li>
+            <li>The construct rose to its full 10-foot height: <em>&ldquo;Prepare to be annihilated.&rdquo;</em></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CHARACTER SPOTLIGHTS -->
+  <div class="section">
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="card spotlight-card mist">
+        <div class="spot-header">
+          <div class="spot-name">Mist</div>
+          <div class="spot-class">the Silver-Tongued Trickster</div>
+        </div>
+        <ul>
+          <li>Charmed the library scholar with Silver Tongue &mdash; rolled an 8 on Deception (d20 becomes 10, total 17). Extracted full details on the lab's construct defenses, active traps, and possible treasure.</li>
+          <li>Played a beautiful performance for the shopkeeper that reminded her of home, haggling two bottles of grease for the price of one</li>
+          <li>Used <strong>Vicious Mockery</strong> to debuff a turret (it shot into the ceiling), then switched to crossbow to conserve spell slots &mdash; landed the killing blow on construct B</li>
+          <li>Kept Avon alive with <strong>Healing Word</strong> (8 HP restored) and fueled Silas with <strong>Bardic Inspiration</strong> at a critical moment (pushed a lock pick past DC 15)</li>
+          <li>Suggested tactical approaches: Silas scouting first, checking for traps, elemental damage priorities</li>
+          <li>Took 15 lightning damage from the hallway trap and dramatically flew to the back: <em>&ldquo;I've learned my lesson.&rdquo;</em></li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card avon">
+        <div class="spot-header">
+          <div class="spot-name">Avon</div>
+          <div class="spot-class">the Dragonborn Shield</div>
+        </div>
+        <ul>
+          <li>Met <strong>Carrie-Anne</strong>, a Bahamut priestess who recognized him by reputation from Sevra &mdash; hinted at a deeper story waiting at the temple</li>
+          <li>Served as the party's damage sponge with AC 18 &mdash; turrets and constructs targeted him almost exclusively</li>
+          <li>Landed the session's most impactful single action: <strong>Acid Breath Weapon</strong> that destroyed a turret and heavily damaged a construct in one blast</li>
+          <li>Cast <strong>Detect Magic</strong> ritually twice &mdash; identified the evocation trap in the storage room and scanned the vault chamber for threats</li>
+          <li>Healed himself with <strong>Cure Wounds</strong> mid-combat when no one else could reach him</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card silas">
+        <div class="spot-header">
+          <div class="spot-name">Silas</div>
+          <div class="spot-class">the Careful Hand</div>
+        </div>
+        <ul>
+          <li>Confronted Evrin's agent in the tavern with street-smart confidence: <em>&ldquo;Notice you were checking my crew out.&rdquo;</em></li>
+          <li>Revealed backstory: used to be the top member of Evrin's crew &mdash; Evrin was third and looked up to him</li>
+          <li>Stole three children's picture books from the library (Sleight of Hand so high the books &ldquo;never existed&rdquo;)</li>
+          <li>Scouted the lab's first room alone &mdash; used <strong>Minor Illusion</strong> to test constructs, then stealth-retreated without being detected</li>
+          <li>Landed a <span class="crit-highlight">CRIT</span> with Steady Aim on the first turret for 20 damage, nearly one-shotting it</li>
+          <li>Picked three locks throughout the lab, including an arcane-locked door with Bardic Inspiration</li>
+          <li>Used a Minor Illusion of Mist to test the deactivated turret room</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card akasha">
+        <div class="spot-header">
+          <div class="spot-name">Akasha Amelia</div>
+          <div class="spot-class">the Starry Newcomer</div>
+        </div>
+        <ul>
+          <li>Contributed melee damage with club + sickle combo in early combat rounds before switching to ranged magic</li>
+          <li>Used <strong>Starry Wisp</strong> in combat for the first time &mdash; <em>&ldquo;Can I do the starry thingy?&rdquo;</em></li>
+          <li>Scored the <span class="crit-highlight">CRIT</span> that killed the last construct, earning 4 stunt points (+2 AC carry-over)</li>
+          <li>Successfully solved an arcane rune puzzle door that stumped everyone else (including Mist and Silas)</li>
+          <li>Growing into the system as a newer player &mdash; figured out hit dice mechanics during the short rest with help from the party</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card talya">
+        <div class="spot-header">
+          <div class="spot-name">Talya</div>
+          <div class="spot-class">the Acid Fist</div>
+        </div>
+        <ul>
+          <li>Activated <strong>Elemental Attunement</strong> for the first time in combat &mdash; chose acid damage</li>
+          <li>Discovered her 15-foot reach with Elemental Strikes: <em>&ldquo;So I don't have to be all up in something's face to whack it, smack it, punch it.&rdquo;</em></li>
+          <li>Landed multiple acid-wreathed punches on constructs, including a devastating combo that punched a hole through one's chest</li>
+          <li>Air-punched the final construct from range, bloodying it for others to finish</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMBAT ENCOUNTER -->
+  <div class="section">
+    <h2>Combat Encounter</h2>
+    <div class="card combat-section">
+      <div class="combat-header">
+        <div class="combat-title">Crystal Constructs &amp; Turrets &mdash; Stillwind Lab</div>
+        <span class="combat-pill">5 Rounds</span>
+      </div>
+
+      <div class="combat-info">
+        <p><strong>Enemies:</strong> 3 crystal-headed constructs (4 ft., floating, melee, piercing resist) + 2 arcane turrets (wall-mounted, ranged)</p>
+        <p><strong>Initiative:</strong> Turret 1 &rarr; Avon &rarr; Akasha &rarr; Turret 2 &rarr; Silas &rarr; Construct A &rarr; Talya &rarr; Mist &rarr; Constructs B &amp; C</p>
+        <p><strong>Trigger:</strong> Avon's failed stealth + incorrect identity response (&ldquo;Elias Whitmore&rdquo; was not the password)</p>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 1</div>
+        <ul>
+          <li><span class="actor" style="color: var(--text-dim);">Turret 1</span> &mdash; Arcane Bolt at Avon &mdash; 15 to hit, <strong>miss</strong> (AC 18). Bolt deflected off chestplate.</li>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Moved to center, threw javelin at turret 1 &mdash; miss (hit the wall).</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Arrow at turret 1 &mdash; hit but low damage, &ldquo;just a scratch on the crystal.&rdquo;</li>
+          <li><span class="actor" style="color: var(--text-dim);">Turret 2</span> &mdash; Emerged from opposite wall. Arcane Bolt at Avon &mdash; 23 to hit, <strong>6 force damage</strong>.</li>
+          <li><span class="actor" style="color: var(--silas);">Silas</span> &mdash; Steady Aim + shortbow at turret 1 &mdash; <span class="crit-highlight">CRIT</span> (double nat 20s)! <strong>20 damage</strong>. Arrow into the arcane bolt barrel, turret nearly exploded.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Construct A</span> &mdash; Floated to Avon, slam &mdash; 21 to hit, <strong>7 bludgeoning damage</strong>. Avon at 12 HP.</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Activated <strong>Elemental Attunement (Acid)</strong>. First swing miss (7). Second hit turret 2 for <strong>7 acid damage</strong> &mdash; corroding.</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; <strong>Vicious Mockery</strong> on turret 1 (failed WIS save, rolled 5) &mdash; 3 psychic damage + disadvantage. Bonus: <strong>Healing Word</strong> on Avon for <strong>8 HP</strong>.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Constructs B &amp; C</span> &mdash; Entered late (rolled nat 1s). B attacked Avon &mdash; 16, miss (AC 18). C's attack abandoned by DM.</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 2</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; <strong>Acid Breath Weapon</strong> (15-ft cone) at construct A + turret 2. Both failed DC 12 DEX (construct rolled 1, turret rolled 9). <strong>Turret 2 DESTROYED</strong> &mdash; fell off wall. Construct A corroding.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Club + sickle combo on a construct &mdash; club hit for <strong>5</strong>, sickle hit for <strong>2</strong>. Total 7 damage.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Turret 1</span> &mdash; Arcane Bolt at Avon with <strong>disadvantage</strong> (Vicious Mockery) &mdash; rolled a 2. Shot into the ceiling.</li>
+          <li><span class="actor" style="color: var(--silas);">Silas</span> &mdash; Cunning Action disengage, moved, shortbow at turret 1 &mdash; miss. Purple flashes blinded him.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Construct A</span> &mdash; Swung at Avon &mdash; 16 to hit, miss (AC 18, shield making the difference).</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Elemental Strikes (acid) on construct B &mdash; first miss (11), second hit for <strong>4 acid</strong>.</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Crossbow at turret 1 for <strong>10 damage</strong> (DM initially applied resistance, then corrected &mdash; full force). Turret now bloodied. Bonus: <strong>Bardic Inspiration</strong> to Silas.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Constructs B &amp; C</span> &mdash; B at Akasha, miss. C hit <strong>Talya for 8 damage</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 3</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Melee strike on construct A &mdash; miss.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Club + sickle again &mdash; club hit but minimal damage, sickle miss.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Turret 1</span> &mdash; Arcane Bolt at Avon &mdash; total 13, miss.</li>
+          <li><span class="actor" style="color: var(--silas);">Silas</span> &mdash; Steady Aim + shortbow + sneak attack at turret 1 &mdash; hit. <strong>Turret 1 DESTROYED.</strong></li>
+          <li><span class="actor" style="color: var(--text-dim);">Construct A</span> &mdash; Hit Avon for <strong>6 damage</strong>. Avon at 14 HP.</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Acid punches on construct B &mdash; first hit for <strong>7 acid</strong>, second hit punched a hole through its chest.</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Crossbow at construct B &mdash; 15 to hit, 10 damage, bolt hit the exposed crystal. <strong>Construct B DESTROYED.</strong> <em>&ldquo;Take that, you stupid construct!&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--text-dim);">Construct C</span> &mdash; Swung at Akasha &mdash; miss.</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 4</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; <strong>Cure Wounds</strong> on himself &mdash; healed to 20 HP.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; <strong>Starry Wisp</strong> (first time in combat) &mdash; 15 to hit, radiant damage. Construct C now bloodied. <em>&ldquo;Can I do the starry thingy?&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--silas);">Silas</span> &mdash; Steady Aim + shortbow + sneak attack &mdash; <strong>15 total damage</strong>. Crystal shattered. <strong>Construct C DESTROYED.</strong></li>
+          <li><span class="actor" style="color: var(--text-dim);">Construct A</span> &mdash; Hit Avon for <strong>4 damage</strong>.</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Air-punched construct A from range &mdash; hit for <strong>9 acid</strong>, construct bloodied. Second swing miss.</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Crossbow at construct A &mdash; 22 to hit, 9 damage, but <strong>piercing resistance</strong> reduced it.</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 5</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Spear attack on construct A &mdash; hit for <strong>10 damage</strong>. Construct jittering with ~1 HP.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; <strong>Starry Wisp</strong> &mdash; <span class="crit-highlight">CRIT!</span> Max 8 radiant on 1 HP. <strong>Construct A DESTROYED.</strong> Earned 4 stunt points &rarr; +2 AC carry-over.</li>
+        </ul>
+      </div>
+
+      <div class="combat-result">
+        <strong>Result:</strong> All 3 constructs and 2 turrets destroyed in 5 rounds. Avon tanked the majority of hits (AC 18 with shield). Constructs resist piercing &mdash; magic and acid proved far more effective. No party members downed.<br><br>
+        <strong>Kill credit:</strong> Turret 2 &mdash; <span style="color: var(--avon); font-weight: 600;">Avon</span> (Acid Breath) &bull; Turret 1 &mdash; <span style="color: var(--silas); font-weight: 600;">Silas</span> (Sneak Attack) &bull; Construct B &mdash; <span style="color: var(--mist); font-weight: 600;">Mist</span> (Crossbow) &bull; Construct C &mdash; <span style="color: var(--silas); font-weight: 600;">Silas</span> (Sneak Attack) &bull; Construct A &mdash; <span style="color: var(--akasha); font-weight: 600;">Akasha</span> (Starry Wisp Crit)
+      </div>
+    </div>
+  </div>
+
+  <!-- LOOT -->
+  <div class="section">
+    <h2>Loot</h2>
+    <div class="loot-grid">
+      <div class="loot-item">
+        <div class="loot-name">The Timid Owlbear</div>
+        <div class="loot-detail">Children's picture book &bull; Stolen from Skybreeze Library by Silas</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">The Big Red Beholder</div>
+        <div class="loot-detail">Children's picture book &bull; Stolen from Skybreeze Library by Silas</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">2 Bottles of Grease</div>
+        <div class="loot-detail">General store &bull; Haggled by Mist (5 silver for 2)</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">Map of NW Ruins</div>
+        <div class="loot-detail">Skybreeze Library &bull; Found by Avon &bull; Includes Stillwind Lab location</div>
+      </div>
+      <div class="loot-item magical">
+        <div class="loot-name">Three Pedestal Objects (Unknown)</div>
+        <div class="loot-detail">Stillwind Lab vault &bull; Not yet retrieved &mdash; 10-foot guardian blocking access</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORABLE QUOTES -->
+  <div class="section">
+    <h2>Memorable Quotes</h2>
+    <div class="quotes-grid">
+
+      <div class="quote-block silas">
+        <div class="quote-text">&ldquo;So I'd approach him and I'd just be like, you know, notice that you were checking my crew out.&rdquo;</div>
+        <div class="quote-speaker">Silas</div>
+        <div class="quote-context">Confronting Evrin's agent in the tavern &mdash; street rogue energy.</div>
+      </div>
+
+      <div class="quote-block silas">
+        <div class="quote-text">&ldquo;Well, in the dark alleyways of the city, it's a big deal if you make a promise to somebody to do a job.&rdquo;</div>
+        <div class="quote-speaker">Silas</div>
+        <div class="quote-context">Explaining why Evrin has mercenaries watching them &mdash; his underworld code.</div>
+      </div>
+
+      <div class="quote-block silas">
+        <div class="quote-text">&ldquo;Anyway, they kind of like to stare at the wall, so I don't know that conversation's going to go very well.&rdquo;</div>
+        <div class="quote-speaker">Silas</div>
+        <div class="quote-context">Reporting back after scouting the constructs &mdash; deadpan delivery.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;I have always been fascinated with magical places.&rdquo;</div>
+        <div class="quote-speaker">Mist</div>
+        <div class="quote-context">Wide-eyed, deceiving the library scholar into sharing lab details &mdash; Silver Tongue doing the heavy lifting.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;Come on, I'll play you a song.&rdquo;</div>
+        <div class="quote-speaker">Mist</div>
+        <div class="quote-context">Haggling the shopkeeper for grease &mdash; rolled a beautiful performance that reminded her of home.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;Take that, you stupid construct. You aren't even that powerful, like the guy in the story told me.&rdquo;</div>
+        <div class="quote-speaker">Mist</div>
+        <div class="quote-context">After landing the killing crossbow bolt on a construct &mdash; classic Mist trash talk.</div>
+      </div>
+
+      <div class="quote-block avon">
+        <div class="quote-text">&ldquo;I'm actually a traveller from a long way away from Byron, a fishing village way in the southwest. And right now I'm just here on, well, what I believe is a mission from Bahamut himself.&rdquo;</div>
+        <div class="quote-speaker">Avon</div>
+        <div class="quote-context">Introducing himself to Carrie-Anne &mdash; sincere, reverent, a rare moment of vulnerability.</div>
+      </div>
+
+      <div class="quote-block avon">
+        <div class="quote-text">&ldquo;Elias Whitmore.&rdquo;</div>
+        <div class="quote-speaker">Avon</div>
+        <div class="quote-context">Confidently name-dropping the only mage he knows when the constructs demanded &ldquo;Confirm identity.&rdquo; It was not the password.</div>
+      </div>
+
+      <div class="quote-block avon">
+        <div class="quote-text">&ldquo;And I look back at the group, finger guns.&rdquo;</div>
+        <div class="quote-speaker">Avon</div>
+        <div class="quote-context">After Silas dodged the hallway fire trap &mdash; Avon's immediate RP response.</div>
+      </div>
+
+      <div class="quote-block talya">
+        <div class="quote-text">&ldquo;So I don't have to be all up in something's face to whack it, smack it, punch it.&rdquo;</div>
+        <div class="quote-speaker">Talya</div>
+        <div class="quote-context">Discovering the 15-foot reach on Elemental Strikes for the first time &mdash; genuine excitement.</div>
+      </div>
+
+      <div class="quote-block talya">
+        <div class="quote-text">&ldquo;Yeah, air punch.&rdquo;</div>
+        <div class="quote-speaker">Talya</div>
+        <div class="quote-context">Attacking the final construct from range with acid-wreathed fists &mdash; concise and satisfying.</div>
+      </div>
+
+      <div class="quote-block akasha">
+        <div class="quote-text">&ldquo;Can I do the starry thingy? I'm going to do the starry thingy again.&rdquo;</div>
+        <div class="quote-speaker">Akasha</div>
+        <div class="quote-context">Wholesome enthusiasm for Starry Wisp &mdash; right before landing the critical hit that killed the last construct.</div>
+      </div>
+
+      <div class="quote-block akasha">
+        <div class="quote-text">&ldquo;I think I might have done it wrong. I don't know how to do it.&rdquo;</div>
+        <div class="quote-speaker">Akasha</div>
+        <div class="quote-context">Learning hit dice during the short rest &mdash; the whole table helped walk her through it.</div>
+      </div>
+
+      <div class="quote-block dm">
+        <div class="quote-text">&ldquo;Prepare to be annihilated.&rdquo;</div>
+        <div class="quote-speaker">Vault Guardian</div>
+        <div class="quote-context">The session-ending cliffhanger &mdash; the 10-foot construct activating as Silas kicked a rock.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAX'S NOTES -->
+  <div class="section">
+    <div class="journal-section">
+      <div class="journal-header">
+        <div class="journal-icon">&#9998;</div>
+        <div class="journal-title">Pax's Notes &mdash; Mist's Journal</div>
+        <div class="journal-private">Private</div>
+      </div>
+
+      <h4 class="journal-sub">What Mist did this session</h4>
+      <ul>
+        <li>Pushed the group toward the <strong>Whisper Prism</strong> quest to lay low after the Vale Tempest killings</li>
+        <li>Extracted intel from the library scholar about the <strong>Stillwind Lab</strong> &mdash; constructs, active defenses, possible treasure. Silver Tongue made it easy.</li>
+        <li>Haggled grease from a shopkeeper with a performance check</li>
+        <li>Used <strong>Vicious Mockery</strong> to debuff a turret, then switched to crossbow to conserve spell slots</li>
+        <li>Kept <strong>Avon</strong> alive with <strong>Healing Word</strong> (8 HP) and boosted <strong>Silas</strong> with <strong>Bardic Inspiration</strong> (helped pick the arcane door)</li>
+        <li>Took 15 lightning damage from the hallway trap &mdash; should have insisted on trap checks</li>
+      </ul>
+
+      <h4 class="journal-sub">Things Mist knows that the party does not</h4>
+      <ul>
+        <li>The library scholar genuinely believed Mist was just a curious kid &mdash; Silver Tongue sold the act completely</li>
+        <li>Mist noticed that <strong>Evrin's agent</strong> specifically watched the group before being confronted &mdash; Evrin has eyes on them even when they're not on a job</li>
+        <li>The constructs seem to respond to some kind of <strong>identity protocol</strong> &mdash; &ldquo;Confirm identity&rdquo; wasn't just a password, it might require something physical or arcane</li>
+      </ul>
+
+      <h4 class="journal-sub">What Mist is thinking about</h4>
+      <ul>
+        <li><strong>Spell slot conservation</strong> worked well this fight, but the vault guardian is much bigger &mdash; may need to go all-in with Hold Person or Heat Metal</li>
+        <li><strong>Avon tanked everything</strong> &mdash; that can't last. Need to use Bane or Vicious Mockery more proactively to keep pressure off him</li>
+        <li>The <strong>three pedestal objects</strong> in the vault &mdash; one is likely the Whisper Prism, but what are the other two? Could be worth taking.</li>
+        <li><strong>Carrie-Anne</strong> knowing Avon by reputation is interesting &mdash; someone is telling stories about him. Who?</li>
+      </ul>
+
+      <h4 class="journal-sub">Open questions for next session</h4>
+      <ul>
+        <li>How do we beat a <strong>10-foot construct</strong> that resists piercing? Heat Metal if it's metal, Dissonant Whispers if it has a mind, Hold Person won't work on a construct.</li>
+        <li>What's on those <strong>three pedestals</strong>? Need to identify them &mdash; possibly with Detect Magic or Arcana checks.</li>
+        <li>Should we return the Whisper Prism to <strong>Evrin</strong> immediately, or is there leverage in holding it?</li>
+        <li><strong>Avon's temple visit</strong> &mdash; what do the Bahamut clerics know about him? Could be a sidequest hook.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OPEN THREADS -->
+  <div class="section">
+    <h2>Open Threads</h2>
+    <ul class="threads-list">
+      <li class="thread-item">
+        <div class="thread-title">The Vault Guardian</div>
+        <div class="thread-desc">A massive 10-foot construct activated and declared &ldquo;Prepare to be annihilated&rdquo; &mdash; combat begins next session.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Three Pedestal Objects</div>
+        <div class="thread-desc">Visible across the vault chamber but not yet identified. One is presumably the Whisper Prism.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Evrin's Watchers</div>
+        <div class="thread-desc">Evrin's agent reminded the party they're being monitored &mdash; &ldquo;Everyone doesn't like to wait. We're watching.&rdquo; The party needs to deliver.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Carrie-Anne &amp; the Temple of Bahamut</div>
+        <div class="thread-desc">Avon was recognized by a priestess who said &ldquo;we've heard of your tales&rdquo; &mdash; what do they know about him? He promised to visit.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Vale Tempest Retaliation</div>
+        <div class="thread-desc">Bodies left in the hideout. The Fancy Robe woman will eventually discover the dead &mdash; retaliation is coming.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Amulet Targets</div>
+        <div class="thread-desc">Rufus Dawnstrider, Valo, Regina, and Bildren still have mind-control amulets. Party chose to delay this thread.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Construct Piercing Resistance</div>
+        <div class="thread-desc">Crossbow and arrow damage is reduced. Party needs more magical/elemental options for the vault guardian.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CLIFFHANGER -->
+  <div class="section">
+    <div class="cliffhanger">
+      <span class="label">Cliffhanger</span>
+      <p>Silas crossed the vault threshold and kicked a loose stone. The massive guardian construct rose to its full ten-foot height, crystal head blazing solid purple.</p>
+      <div class="big-line">&ldquo;Prepare to be annihilated.&rdquo;</div>
+      <span class="speaker">&mdash; Vault Guardian, Stillwind Lab</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="text-align: center; padding: 40px 0 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
+    <p style="margin-bottom: 4px;">Myrrindar: Winds of Warding &bull; Session 4 &bull; April 20, 2026</p>
+    <p style="opacity: 0.6;">The Stillwind Lab awaits &bull; Identity not confirmed</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

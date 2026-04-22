@@ -18,6 +18,8 @@
 - **Skybreeze** — Capital city on the east side of Myrrindar. Defined by the ring of magical wardstones around the city edge that ward off an Arcane Storm that threatened the city ~87 years ago. A Wardstone Festival is held annually. Governed by a Merchant Council. Districts: Noble District, Dock District, Church District, Market District (weapons/armor), The Commons (adventuring gear).
 - **Neulvyn** — Fairy settlement where Mist was born (player-named)
 - **Vale Tempest Hideout** — Secret underground complex accessed via a hidden door in an alley in central Skybreeze. Contains: lounge, secret room with Wardstone map, amulet assembly/enchanting room (staffed), brewery (unused), dining room, kitchen. Party discovered and partially cleared it in Sessions 2-3.
+- **Stillwind Lab** — Ancient arcane laboratory northwest of Skybreeze, a couple hours walk. Used to manufacture constructs/automatons. Abandoned 87 years ago during the Arcane Storm. Still has active defenses: crystal-headed constructs (4 ft., piercing resistant), wall-mounted arcane turrets, fire and lightning traps, arcane-locked doors. Lit by blue torches. Contains a vault chamber with a massive 10-foot guardian construct and three pedestal objects (one likely the Whisper Prism). Partially explored by party in Session 4.
+- **Temple of Bahamut (Skybreeze)** — Bahamut temple in Skybreeze. Clerics there know of Avon from Sevra. Not yet visited.
 
 ## NPCs
 
@@ -32,6 +34,7 @@
 - **Evrin** — Someone the party agreed to help pay back a debt; connected to the Whisper Prism quest.
 - **Eldrin** — Elven bard who mentored Mist on the streets of Skybreeze ~1-2 years ago. Taught him music and how to channel fae magic with intention. Left Skybreeze at some point; destination and reason unknown. Seen by Mist as the closest thing to family since Neulvyn — and the second person to vanish from his life.
 - **Mist's Unnamed Noble Captor** — Wealthy Skybreeze noble who purchased Mist from fae-traffickers and kept him as part of a private collection of fairies and mythical creatures. "Cared for" Mist in the sense of feeding and clothing him, but kept him caged. Caught in an unspecified scandal that collapsed his household; current fate unknown. Identity and house to be determined by DM.
+- **Carrie-Anne** — Priestess of Bahamut at the Skybreeze temple. Recognized Avon by reputation from Sevra. Invited him to visit the temple. Bashful and reverent toward him. The Skybreeze clerics have "heard of his tales."
 
 ## Factions
 
@@ -59,3 +62,8 @@ The party agreed to pay back Evrin's debt and retrieve a Whisper Prism. They met
 
 ### Session 3 — The Veiled Truth (4/13/26)
 Party confronted Vale Tempest members in the hideout. Won a combat in the lounge (2 KO'd, 2 surrendered). Interrogated the Blue Robe lieutenant who revealed the organization's name (Vale Tempest) and their mission to suppress "lies" about the Wardstones. Silas stealthily removed Elias's amulet — Elias started questioning the Wardstone narrative but collapsed in agony. Akasha wild-shaped into a mouse to scout the amulet assembly room. Silas found a journal listing five enchanted targets in the city. Party voted to kill the incapacitated Vale Tempest members, freed Elias (with amulet), and withdrew. Leveled up to 3.
+
+### Session 4 — The Stillwind Lab (4/20/26)
+Party decided to pursue the Whisper Prism for Evrin, laying low after the Vale Tempest killings. At the tavern, Avon met Carrie-Anne (Bahamut priestess who recognized him from Sevra) and Silas confronted one of Evrin's agents watching the group. Researched the Stillwind Lab at the library — Mist charmed a scholar for intel, Avon found a map. Traveled to the lab, fought 3 crystal constructs and 2 turrets (5 rounds, no KOs). Navigated trapped hallways deeper into the lab — Akasha solved an arcane rune door but triggered a lightning trap (15 damage). Reached the vault chamber with three pedestals and a 10-foot guardian construct. Session ended on a cliffhanger: "Prepare to be annihilated."
+
+**Post-session:** Silas's player (Drew/Aenian) left the campaign that evening after a Discord rules dispute with the DM over 2024 stealth RAW (whether leaving cover breaks the Invisible condition conferred by Hide). In-fiction handling of Silas's departure is TBD. Party enters Session 5 at 4 players — combat is still solid (Avon is the true tank via heavy armor + shield + STR, Talya handles skirmisher melee), but the party loses dedicated skill coverage for lockpicking, trap detection, and stealth. Mist or Talya can absorb the stealth/sleight-of-hand lane if needed.
