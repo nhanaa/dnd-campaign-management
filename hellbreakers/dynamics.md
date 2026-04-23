@@ -4,7 +4,7 @@
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Marshal (Dread) + Exemplar ⚠️ | Pax |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Beastmaster (Isgeri Boarhound) + Thaumaturge | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) | TBD | Snowgeen |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry |
@@ -12,12 +12,13 @@
 
 ## Party Composition Notes
 
-- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) — two melee fighters, both dragon-blooded
+- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Isgeri Boarhound (Bai Jian's companion) — three melee bodies, two dragon-blooded
 - **Healing**: Panacea (Catfolk Witch — Medic dedication)
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct)
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct), Bai Jian (Crashing Slam + Advantageous Assault + Glimpse Vulnerability weakness)
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
-- **Buffs**: Bai Jian (Dread Marshal Stance at level 4 — +1 status damage aura scaling with weapon dice to +2/+3/+4, Cadence Call party mobility at level 6, Steel Yourself ally emergency button at level 8, Victor's Wreath +1 status attack aura at level 16 if Additional Ikon), Moob (elixirs, mutagens, numbing tonics)
-- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Dread Marshal crit-Frighten rider, Shatter Defenses Off-Guard chain, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize)
+- **Buffs**: Moob (elixirs, mutagens, numbing tonics)
+- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Crashing Slam auto-Prone, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (Lock Jaw auto-Grab)
+- **Detection**: Boarhound (precise fiend/undead scent 40 ft, telepathic link via Beastmaster Bond at level 10)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
 - **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (Religion, Occultism likely), Moob (Crafting, alchemy)
 
@@ -25,46 +26,47 @@
 
 - ~~No divine caster for anti-fiend spells~~ **SOLVED**: Panacea is a divine tradition Witch (Paradox of Opposites)
 - Two goblins — Small size may matter for some combat situations
-- Alchemist accuracy is mediocre — Off-Guard and Courageous Anthem from Bai Jian help patch this
+- Alchemist accuracy is mediocre — Off-Guard from Moob's own bombs + Crashing Slam Prone help patch this
 - No arcane or primal tradition — missing Dispel Magic (arcane) and environmental spells (primal)
-- Ranged damage is limited — Alchemist bombs (30 ft), Bai Jian javelins (30 ft), Witch spells (varies). Flying enemies at 60+ ft are a problem.
+- Ranged damage is limited — Alchemist bombs (30 ft), Bai Jian javelins (30 ft), Witch spells (varies). Flying enemies at 60+ ft are a problem. Felling Strike available via Combat Flexibility on specific days.
 
 ## Party Synergy
 
 ### Bai Jian + Cyrathul (Thaumaturge)
 - Core frontline duo. Both dragon-blooded — narratively and mechanically aligned (literal dragon + Tian dragonblood human).
-- Cyrathul uses Exploit Vulnerability for bonus damage; Bai Jian makes targets Off-Guard + Frightened so Cyrathul's Strikes land and crit.
-- Dread Marshal Stance's +1 (scaling) status damage aura buffs Cyrathul's Strikes directly, since Cyrathul stays within the 15-ft aura as a melee frontliner.
+- Cyrathul uses Exploit Vulnerability for bonus damage; Bai Jian makes targets Off-Guard (Snagging Strike) and Prone (Crashing Slam) so Cyrathul's Strikes land and crit.
 - Cyrathul's Mirror Cloak implement adds positional mispositioning — decoy images plus striking *through* the mirror (as seen in Session 1).
-- Two melee threats with AoO/reaction pressure — enemies have nowhere safe to stand.
+- Three melee threats with AoO/reaction pressure (Bai Jian, Cyrathul, Boarhound) — enemies have nowhere safe to stand.
+- Bai Jian's Glimpse Vulnerability (weakness 2) is personal only; Cyrathul runs his own Exploit Vulnerability. Two separate vulnerability systems running simultaneously.
 
 ### Bai Jian + Panacea (Catfolk Witch — Divine, Medic)
-- Protect the healer at all costs. Stay within 15 ft when possible to keep Panacea inside Dread Marshal's aura.
+- Protect the healer at all costs.
 - **Paradox of Opposites patron**: Trade Death for Life hex cantrip (free action economy healing). Familiar of Paired Perplexity = casting ANY hex inflicts **Stupefied 1** on a nearby enemy for free.
-- **Divine tradition**: Heal spell, Divine Lance (spirit damage cantrip), Protection, Restoration. Covers the party's divine gap — which is why Bai Jian dropped Hellbreaker archetype entirely. Panacea's Banishment at rank 5 covers anti-devil needs.
-- **Debuff synergy**: Bai Jian's Frightened + Off-Guard reduce enemy saves → Panacea's divine spells land more often. Panacea's familiar Stupefied 1 stacks with Bai Jian's Frightened for -2 to enemy spell DCs/mental checks.
-- **Spirit damage overlap**: Bai Jian's Gleaming Blade ikon does spirit damage per weapon die (level 9+), Panacea does Divine Lance spirit damage — two spirit damage sources cover fiend encounters from both frontline and backline.
+- **Divine tradition**: Heal spell, Divine Lance (spirit damage cantrip), Protection, Restoration. Covers the party's divine gap. Panacea's Banishment at rank 5 covers anti-devil needs.
+- **Debuff synergy**: Bai Jian's Off-Guard + Prone reduce enemy AC and action economy → Panacea's divine spells land more often. Panacea's familiar Stupefied 1 stacks with Frightened for debuff depth.
 - Medic dedication means reliable in-combat healing via Battle Medicine (no spell slot). Bai Jian is the primary damage sponge, with Battle Medicine (skill feat at level 10) as his personal backup self-heal when Panacea is out of reach.
+- Panacea can also heal the Boarhound — keeping the hound alive preserves Bai Jian's action economy investment.
 
 ### Bai Jian + Moob (Goblin Alchemist)
 - Moob is squishy with mediocre attack accuracy. Bai Jian's AoO zone protects him.
 - Moob runs Quick Bomber (strike + draw in one action), Wallop Stick (parry), and Create a Diversion. Goblin Scuttle lets him reposition behind Bai Jian without provoking.
-- Dread Marshal Stance's +1 status damage aura scales Moob's bomb damage if he stays within 15 ft (common during fights — Alchemists often throw bombs from within the frontline).
-- Off-Guard from Snagging Strike / Crashing Slam Prone helps bombs land at reduced AC.
-- At level 16+ with Additional Ikon → Victor's Wreath empowered, the +1 status attack bonus covers Moob's accuracy gap (the original reason for Courageous Anthem in the old plan).
+- Off-Guard from Snagging Strike / Crashing Slam Prone / Moob's own bombs helps bombs land at reduced AC. Moob reliably generates Off-Guard independently — Bai Jian doesn't need to cover this.
 - Moob hands out elixirs, mutagens, and numbing tonics — Bai Jian benefits from any STR/CON mutagens or healing elixirs. Moob also makes situational grenades like Tenderizer for Cyrathul's bite attacks.
 
 ### Bai Jian + Fang (Goblin Inventor · Wing)
-- Wing the wolf-motorcycle serves as a secondary frontline body — Fang rides it into combat and commands it to stride + strike.
-- Enemies caught between Bai Jian's AoO zone and Wing's reach have nowhere safe to go.
-- Snagging Strike Off-Guard benefits Wing's Strikes too.
+- Wing the wolf-motorcycle serves as a secondary frontline body — Fang rides it into combat and commands it to stride + strike. Fang + Wing act as one unit.
+- Enemies caught between Bai Jian's AoO zone, the Boarhound, and Wing's reach have nowhere safe to go.
+- Snagging Strike / Crashing Slam Off-Guard benefits Wing's Strikes too.
 - Fang's Overdrive gives Wing a massive damage spike round — deployed for finishing blows (see dread bat kill, Session 1).
 
-### Fear Economy
-- Bai Jian is the fear engine: Demoralize + Dirge of Doom + Shatter Defenses
-- The whole party benefits from enemies being Frightened (penalty to everything) and Off-Guard (-2 AC)
+### Lockdown Economy
+- Bai Jian generates Prone (Crashing Slam auto-Trip) and the Boarhound generates Grabbed (Lock Jaw auto-Grab)
+- Prone: -2 circumstance to attack rolls, must spend action to Stand (provokes Bai Jian's Reactive Strike), Off-Guard to melee
+- Grabbed: Off-Guard, immobilized, must spend action to Escape
+- Prone + Grabbed simultaneously = target is completely locked down, Off-Guard, and burning 2+ actions per round just to recover
+- Advantageous Assault capitalizes on locked-down targets with bonus damage + damage on miss
+- Demoralize is still available for Frightened stacking on top, but is no longer the build's central focus
 - Bai Jian is immune to fear himself (Dragonblood + Bravery), so enemy fear effects are one-directional
-- Cyrathul + Bai Jian debuff stacking = enemies are crippled before the backline even acts
 
 ## Party Tie
 

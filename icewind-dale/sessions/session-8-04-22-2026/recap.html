@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 8 — Ghosts, Thieves, and the Frost Maiden's Blade</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #e8edf2;
+  --bg-card: #f4f7fa;
+  --bg-card-hover: #ffffff;
+  --border: #c4ced8;
+  --text: #2c3640;
+  --text-dim: #4a5a68;
+  --text-bright: #1a2530;
+  --red: #8b3a3a;
+  --red-glow: #8b3a3a22;
+  --blue: #2a5a8a;
+  --blue-glow: #2a5a8a22;
+  --green: #3a7a5a;
+  --green-glow: #3a7a5a22;
+  --purple: #6a4a8a;
+  --purple-glow: #6a4a8a22;
+  --teal: #3a7a7a;
+  --teal-glow: #3a7a7a22;
+  --gold: #3a6b8a;
+  --gold-dim: #5a8aaa;
+  --gold-glow: #3a6b8a22;
+  --avarath: #2a5a8a;
+  --kane: #2a6a4a;
+  --rathis: #5a3a7a;
+  --rune: #7a4a2a;
+  --thors: #7a3030;
+  --virel: #2a6a6a;
+}
+
+@keyframes frost-breathe {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+}
+
+.frost-ambient {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+  animation: frost-breathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+p { margin-bottom: 12px; }
+
+section { margin-bottom: 60px; }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.subtitle span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+}
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.comp-segment { transition: width 0.3s; }
+.comp-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+.comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.party-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.party-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+  background: var(--bg-card-hover);
+}
+.party-card .name {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+}
+.party-card .class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.party-card .player {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.timeline-event:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 28px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-deep);
+}
+.timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+.event-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.tag-combat { background: var(--red-glow); color: var(--red); }
+.tag-exploration { background: var(--blue-glow); color: var(--blue); }
+.tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+.tag-lore { background: var(--teal-glow); color: var(--teal); }
+
+.event-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.event-body { color: var(--text); }
+.event-body ul { padding-left: 20px; }
+.event-body li { padding: 4px 0; }
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.spotlight-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.spotlight-card .char-name {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.spotlight-card ul { padding-left: 20px; }
+.spotlight-card li { padding: 4px 0; }
+.spotlight-card .highlight {
+  font-weight: 500;
+}
+
+.crit-box {
+  background: linear-gradient(135deg, #dce8f0, #e8f0f6);
+  border: 1px solid #8aaabf;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.crit-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.quote-card {
+  border-left: 3px solid var(--gold-dim);
+  background: #2a5a8a08;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+.quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.thread-list { list-style: none; padding: 0; }
+.thread-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+.thread-list li:hover { box-shadow: 0 4px 16px #2a5a8a18; }
+.thread-title {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.thread-list li.cliffhanger {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+}
+.thread-list li.mystery { border-left-color: var(--purple); }
+.thread-list li.lore-thread { border-left-color: var(--teal); }
+
+.loot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.loot-table th,
+.loot-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.loot-table th {
+  background: #e8edf2;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.loot-table tr:last-child td { border-bottom: none; }
+.loot-table td.magical {
+  background: #edf2f8;
+  border-left: 3px solid var(--gold-dim);
+}
+
+.journal {
+  background: linear-gradient(135deg, #f0f4f8, #eaf0f5);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+.journal h3 {
+  color: var(--avarath);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.journal h3:first-child { margin-top: 0; }
+.journal ul { padding-left: 20px; }
+.journal li { padding: 4px 0; }
+.journal .intro {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .container { padding: 24px 16px 60px; }
+  .timeline { padding-left: 24px; }
+  .timeline-event { padding: 16px 20px; }
+  .journal { padding: 20px 22px; }
+}
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>Ghosts, Thieves, and the Frost Maiden's Blade</h1>
+    <p class="subtitle">
+      <span>Session 8</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&amp;D 5.5e</span>
+      <span>April 22, 2026</span>
+      <span>~2h 53m</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:25%; background:var(--red);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:45%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--teal);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--gold);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--red);"></span>Combat 25%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Exploration 10%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 45%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Lore 10%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--gold);"></span>Loot 10%</div>
+    </div>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 2</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--kane);">
+        <div class="name">Kane Whitefang</div>
+        <div class="class">Orc Druid 2</div>
+        <div class="player">Deiduke</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune &Aacute;nstepa</div>
+        <div class="class">Tiefling Ranger 2</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 2</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Drow Wizard 2</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic; text-align: center;">Kane Whitefang died this session. Player is rolling a Warlock for next session.</p>
+  </section>
+
+  <!-- Session Summary -->
+  <section>
+    <h2>Session Summary</h2>
+    <p>The session opened with the party still standing over Durth's body in the wine cellar. Kane pushed for an immediate intervention on Virel's deteriorating behavior, and the party confronted her directly. Virel denied any change, but Avarath rolled a natural 20 on a Medicine check and identified the necklace as a curse requiring Greater Restoration &mdash; a 5th-level spell far beyond the party's reach. Virel reluctantly agreed to seek a healer in Easthaven.</p>
+    <p>At the town hall, the party found the door ajar and the building silent. Inside, they discovered a soaking-wet woman lashed to a demon-shaped ship figurehead &mdash; the White Lady ghost from the s&eacute;ance, bound to a statue made of the same dark evocation stone as the soothsayer's necklace. Avarath attacked first and asked questions never, triggering a two-round combat where the ghost resisted nearly everything &mdash; only Divine Smite dealt full damage. Kane summoned an octopus named Reginald as a distraction; the ghost possessed it and tried to flee, but Avarath and Rune killed the possessed octopus and the ghost in quick succession. Below the town hall, they found Speaker Whalen and the guards locked in cells &mdash; Prudence had betrayed them, hiring men to steal the Cauldron of Plenty and flee toward Targos.</p>
+    <p>That night, Rune stole the cursed necklace from Virel's bag while she tranced. He passed his Charisma save against its corruption, but barely. Hours later, Sephek Caltro &mdash; the serial killer the party had been hunting since session 1 &mdash; stabbed Kane through the stomach with an ice sword while he slept. Kane's Relentless Endurance and Wild Shape into Dinosuchus bought the party time, but Sephek Misty Stepped past Thors and struck Kane down permanently with a max-damage roll. The remaining party surrounded Sephek; Virel put him to sleep with a clutch Sleep spell. In the justice debate that followed, Thors wanted to cut off Sephek's hands, but the party realized Misty Step is verbal &mdash; hands don't matter. They gagged him, hooded him with a pillowcase to block line of sight, and turned him over to the Easthaven guards. Thors: "He's still turning him in. He's just turning less of him in." Kane is dead. His player is rolling a Warlock.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act I &mdash; The Virel Intervention</div>
+        <div class="event-body">
+          <p>With Durth's body still cooling in the wine cellar, the party turned inward. Kane demanded a reckoning on Virel's behavior.</p>
+          <ul>
+            <li>Kane opened with: <em>"Do we have an intervention for Virel now, or are we going to put this off for another torture or two?"</em></li>
+            <li><strong>Rune</strong> positioned himself between the party and the door, bow nocked but not aimed &mdash; a subtle statement of readiness</li>
+            <li>Virel insisted she felt no change: <em>"If anything, I have a clearer mind, a much more passionate mind"</em></li>
+            <li>The party debated who could help &mdash; Virel is the most magically inclined but also the compromised one</li>
+            <li><strong>Avarath rolled a natural 20 on Medicine</strong> &mdash; identified the necklace as a curse, recalled Greater Restoration from his family's library</li>
+            <li>DM confirmed: Greater Restoration is a 5th-level spell, far beyond the party's capabilities at level 2</li>
+            <li>Kane to Virel: <em>"You have a painkiller. We're opting to actually heal the wound."</em></li>
+            <li>Virel agreed to see a healer: <em>"Fine. I'll agree to it. And I'll comply."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Act II &mdash; The Town Hall Ghost</div>
+        <div class="event-body">
+          <p>The party headed to the town hall to ask Speaker Whalen about healers, but found something far worse waiting inside.</p>
+          <ul>
+            <li>Front door ajar, building silent. Rune took point, investigating room by room</li>
+            <li>Avarath checked Prudence's office: <em>"Looks like just a normal office to me. Totally clueless."</em></li>
+            <li><strong>Virel</strong> found two or three drops of dried blood near a back door (Investigation check)</li>
+            <li><strong>Rune</strong> heard banging and yelling from somewhere in the building (Perception nat 20)</li>
+            <li>Behind the back door: a room with stairs up and down, and a tall black ship figurehead carved into a winged demon &mdash; made of the same dark stone as the soothsayer's necklace</li>
+            <li>A scrawny woman in a white dress lashed to the figurehead, soaking wet but dripping no water. Rune cast Detect Magic &mdash; the figurehead radiated <strong>evocation</strong> magic; the woman did not</li>
+            <li>Avarath approached the sobbing figure. The head rose &mdash; a bear skull with a rictus grin, sobbing turning to cackling</li>
+            <li><strong>Avarath attacked immediately</strong>: <em>"I had enough of these ugly, creepy creatures in this goddamn place"</em> &mdash; 14 bludgeoning with maul, halved to 7 (resistance). DM revealed: <em>"This has nothing to do with anything that you're in here for. This is totally unrelated."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Act III &mdash; The Dungeon and the Betrayal</div>
+        <div class="event-body">
+          <p>With the ghost destroyed, the party followed the sounds of banging and yelling downstairs to discover a political betrayal.</p>
+          <ul>
+            <li>Speaker Whalen, Captain Arlath, and the guards were locked in the dungeon cells</li>
+            <li>Whalen explained: <strong>Prudence</strong> betrayed him &mdash; she called in men who held a knife to his throat; the guards surrendered to save his life</li>
+            <li>Prudence and her accomplices stole the <strong>Cauldron of Plenty</strong> and fled</li>
+            <li><strong>Rune</strong> picked the first lock (DC 15 Dexterity, passed exactly); Captain Arlath found keys in a snowbank for the second</li>
+            <li>Whalen couldn't pay the remaining 9 gemstones without the cauldron: <em>"I can't afford to just give my family's entire savings away with nothing to show for it"</em></li>
+            <li>Kane argued the contract was fulfilled: <em>"We have a contract. The cauldron was delivered."</em> DM revealed a clause Avarath missed &mdash; the cauldron must be present in 48 hours for full payment</li>
+            <li>A guard overheard the thieves mention <strong>Targos</strong> &mdash; conveniently the same town where the party needs to return for the murder bounty</li>
+            <li>Party learned there is a healer/temple on the south end of Easthaven, but it's closed for the night</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act IV &mdash; Night Events</div>
+        <div class="event-body">
+          <p>As the party settled in at the White Lady Inn, the night brought revelations, thefts, and a deadly visitor.</p>
+          <ul>
+            <li><strong>Virel's research</strong>: Discovered that the murder victims were people who paid off town officials to avoid the sacrifice lottery &mdash; connecting the killings to Auril's worship</li>
+            <li><strong>Virel's investigation on her bag</strong>: The necklace is gone. It's not in her bag anymore.</li>
+            <li><strong>Rune stole the necklace</strong> &mdash; snuck into Virel's room while she tranced, rolled successfully</li>
+            <li><strong>Rune's Charisma save (DC 10)</strong>: Rolled 13, passed. Felt the necklace's evil trying to creep in even wrapped in cloth, but pushed it away</li>
+            <li>DM: <em>"You now understand that wrapping it up didn't help Virel, and it did not help you either."</em></li>
+            <li><strong>Kane failed a Perception check</strong> (nat 1 with disadvantage, sleeping) &mdash; didn't hear someone entering the inn</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Act V &mdash; Sephek Caltro's Ambush</div>
+        <div class="event-body">
+          <p>The serial killer the party had been hunting since session 1 came for them first. Kane paid the ultimate price.</p>
+          <ul>
+            <li>Kane woke to a cold, piercing pain &mdash; a man he didn't recognize had stabbed him through the stomach with an ice sword. <em>"I heard you've been asking about me."</em></li>
+            <li><strong>Sephek's surprise round</strong>: First strike &mdash; 11 piercing, Kane drops to 0 HP, <strong>Relentless Endurance</strong> triggers (back to 1 HP). Second strike &mdash; 5 piercing, Kane drops to -4 HP (unconscious)</li>
+            <li>Kane bonus-action Wild Shaped into <strong>Dinosuchus</strong> (10 HP pool) and let out a raptor call</li>
+            <li>Thors heard it immediately (same floor, Perception 15); second-floor party members woke up; Rune (third floor) slept through initially</li>
+            <li><strong>Round 1</strong>: Avarath dashed downstairs; Thors interposed himself between Sephek and Kane with a Tavern Brawler push; Virel tried to burn a hole in the floor (DC 15 Fire Bolt, missed &mdash; <em>"You failed to save Raptor Jesus"</em>); Sephek <strong>Misty Stepped</strong> past Thors and <strong>killed Kane with a max-damage roll</strong> (13 piercing) &mdash; past negative max HP</li>
+            <li><strong>Round 2</strong>: Rune climbed out a third-floor window (Acrobatics 18); Avarath <strong>Fey Stepped</strong> into the room and <strong>Toppled Sephek prone</strong> (failed CON save DC 13); Thors attacked with advantage for 9 piercing. Sephek stood and swung twice &mdash; both missed. <em>"It doesn't have to be this way."</em> Rune: <strong><em>"I will never stop hunting you now."</em></strong></li>
+            <li><strong>Round 3</strong>: Rune dual-wielded for 16 damage; Avarath cast <strong>Bless</strong> + <strong>Divine Favor</strong> (pure buff turn); Thors landed 12 piercing (max damage) with Bless; <strong>Virel cast Sleep</strong> (DC 15 WIS save &mdash; Sephek rolled 10, failed) &mdash; combat ended</li>
+            <li>Kane is dead. Died in Wild Shape form (Dinosuchus). <em>"Raptor Jesus is always with us in spirit."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act VI &mdash; Justice for Sephek</div>
+        <div class="event-body">
+          <p>With Sephek unconscious and Kane dead, the party had to decide what justice looks like in Icewind Dale.</p>
+          <ul>
+            <li>Sephek woke up tied in a stress position (Thors, follower of Helm, <em>"doing the correct thing"</em>)</li>
+            <li>Avarath interrogated with Intimidation (advantage from full party) &mdash; failed twice, but Sephek talked anyway</li>
+            <li><strong>Sephek's confession</strong>: He has the "blessing of the Frostmaiden." He kills people who paid off town officials to avoid the sacrifice lottery &mdash; <em>"They deserved to die. I did what needed to be done."</em></li>
+            <li>Virel cast Detect Magic: Sephek's entire body emanated <strong>necromancy</strong> magic &mdash; he's undead. His ice sword is separate, painfully cold to bare hands</li>
+            <li>Detect Magic also revealed the <strong>necklace glowing on Rune's belt</strong> &mdash; Virel discovered the theft: <em>"You thief! You half-baked potato!"</em></li>
+            <li><strong>The justice debate</strong>: Virel wanted execution; Thors wanted justice through the system but also revenge for Kane; Rune argued <em>"If you want to hold him responsible for crimes, he needs to be able to fucking talk"</em></li>
+            <li>Thors wanted to cut off Sephek's hands &mdash; <em>"He's still turning him in. He's just turning less of him in."</em> Party realized Misty Step requires verbal components, not somatic &mdash; hands are irrelevant</li>
+            <li>Compromise: gag him (Rune's idea) + pillowcase over his head (blocks line of sight for Misty Step). Party walked Sephek to the town hall. Guards applied a caster's muzzle. Thors carried Kane's Dinosuchus body on his back.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Combat Encounters -->
+  <section>
+    <h2>Combat Encounters</h2>
+
+    <div class="timeline-event combat" style="position: relative; margin-bottom: 40px;">
+      <span class="event-tag tag-combat">Combat</span>
+      <div class="event-title">The White Lady Ghost &mdash; Town Hall (~36:00&ndash;72:00)</div>
+      <div class="event-body">
+        <p><strong>Enemies</strong>: 1 Ghost (the White Lady, bound to the Errtu figurehead)</p>
+        <p><strong>Resistances</strong>: Bludgeoning, piercing, fire, acid, lightning (half damage). Immune to grapple. Only radiant damage dealt full.</p>
+
+        <h3 style="color: var(--red); margin-top: 12px;">Round 1</h3>
+        <ul>
+          <li><strong>Virel</strong> (initiative 21): Fire Bolt hits (AC 11), 1 fire damage &rarr; halved to 0. Stays at range. <em>"I did damage, guys." "I think that's zero."</em></li>
+          <li><strong>Thors</strong>: Spear attack hits, 13 piercing (with Dueling) &rarr; halved to 6. Sap weapon property: ghost has disadvantage on next attack.</li>
+          <li><strong>Avarath</strong> (initiative 15): Maul hits (13 to hit), uses <strong>Divine Smite</strong>. 5 bludgeoning halved + 6 radiant (full) + 1 undead bonus = <strong>12 total damage</strong>. The only full-damage hit of the fight.</li>
+          <li><strong>Kane</strong>: Casts <strong>Primal Savagery</strong> (acid cantrip). 11 to hit, hits. 2 acid &rarr; halved to 1. <em>"One is infinitely more than zero, which is what I expected to do."</em></li>
+          <li><strong>Rune</strong>: Free action &mdash; Persuasion nat 20 on the ghost (<em>"Who or what are you?"</em>). Ghost responds: <em>"You brought me back."</em> DM confirms it's the White Lady from the s&eacute;ance. Then longbow: 22 hits, 8 piercing &rarr; halved to 4. Ghost is now bloodied.</li>
+          <li><strong>Ghost</strong>: Flies into Avarath, attempts Possession &mdash; Avarath CHA save <strong>18</strong>, resisted.</li>
+        </ul>
+
+        <h3 style="color: var(--red); margin-top: 20px;">Round 2</h3>
+        <ul>
+          <li><strong>Virel</strong>: Shocking Grasp (melee spell attack, 11 hits AC 11), 2 lightning &rarr; halved to 1. Moves away without provoking OA (Shocking Grasp prevents reactions).</li>
+          <li><strong>Thors</strong>: Spear attack hits (25), 13 piercing (Dueling) &rarr; halved to 6.</li>
+          <li><strong>Avarath</strong>: Maul hits (23), 6 bludgeoning &rarr; halved to 3. Saves spell slot this time &mdash; no Divine Smite.</li>
+          <li><strong>Kane</strong>: Casts <strong>Find Familiar</strong> &mdash; summons <strong>Reginald the Octopus</strong> (initiative 18, goes on Kane's turn). Tentacle hits (22), 1 bludgeoning &rarr; halved to 0. Grapple attempt fails (ghost immune). Kane orders Reginald to sing <em>"Under the Sea."</em></li>
+          <li><strong>Rune</strong>: Longbow hits (22), 8 piercing &rarr; halved to 4. Ghost "still alive, but barely."</li>
+          <li><strong>Ghost</strong>: Possesses <strong>Reginald</strong> (failed CHA save). Tries to flee as a haunted octopus.</li>
+          <li><strong>Avarath opportunity attack</strong>: Hits for 9 bludgeoning &mdash; kills the octopus. Ghost emerges at prior HP.</li>
+          <li><strong>Rune opportunity attack</strong>: 12 piercing. Ghost lets out a high-pitched scream and fades. <strong>Ghost destroyed.</strong></li>
+        </ul>
+
+        <div class="crit-box">
+          <div class="label">Aftermath</div>
+          <p>Figurehead identified as <strong>Errtu</strong> (Balor demon, terrorized Icewind Dale 100+ years ago). Same evocation stone as the soothsayer's necklace. Ghost was the White Lady from the s&eacute;ance &mdash; bound to the figurehead, visible only to the party because of the s&eacute;ance ritual.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-event combat" style="position: relative; margin-bottom: 40px;">
+      <span class="event-tag tag-combat">Combat</span>
+      <div class="event-title">Sephek Caltro's Ambush &mdash; White Lady Inn (~96:00&ndash;141:00)</div>
+      <div class="event-body">
+        <p><strong>Enemy</strong>: Sephek Caltro &mdash; humanoid (undead/necromancy), ice sword (d10+3 piercing), multi-attack, Misty Step (3/day), passive healing. DM later admitted he forgot to roll extra ice damage on every attack &mdash; Kane likely would have died even sooner.</p>
+
+        <h3 style="color: var(--red); margin-top: 12px;">Surprise Round</h3>
+        <ul>
+          <li><strong>Sephek</strong> stabs sleeping Kane &mdash; 11 piercing (Kane at 0 HP &rarr; <strong>Relentless Endurance</strong> brings him to 1 HP) + 5 piercing second strike (Kane drops to -4 HP, unconscious).</li>
+          <li><strong>Kane</strong> bonus-action Wild Shapes to <strong>Dinosuchus</strong> (10 HP pool) and lets out a raptor call. Sephek: <em>"I heard you've been asking about me."</em></li>
+        </ul>
+
+        <h3 style="color: var(--red); margin-top: 20px;">Round 1</h3>
+        <ul>
+          <li><strong>Avarath</strong> (init 15): Dashes from second floor to bottom of stairs (60 ft with Dash action). No action remaining. Yells <em>"What's going on?"</em></li>
+          <li><strong>Thors</strong> (same floor): Runs to Kane's room (30 ft movement), bonus-action <strong>Second Wind</strong> (heals HP). Unarmed strike &mdash; misses (9), uses <strong>Heroic Inspiration</strong> (Human trait) to reroll &mdash; hits (15). 6 bludgeoning + <strong>Tavern Brawler push</strong> 5 ft away from Kane. Interposes himself between Sephek and Kane.</li>
+          <li><strong>Virel</strong> (second floor): Attempts Fire Bolt on the floor to burn through to the first floor (DM gives DC 15) &mdash; misses. <em>"You failed to save Raptor Jesus."</em> Moves 30 ft toward stairs.</li>
+          <li><strong>Sephek</strong>: <strong>Misty Step</strong> (bonus action) past Thors to Kane. First attack: 24 hits, 9 damage &rarr; Dinosuchus drops, overflow carries to Kane's original form at -6 HP. DM: <em>"minus 7 would have killed you."</em> Second attack: 16 hits, <strong>max damage</strong> (d10 rolled 10 + 3 = <strong>13</strong>) &rarr; Kane at -13, exceeding negative max HP. <strong>Kane is permanently dead.</strong></li>
+          <li>Rune wakes from the noise of Virel's Fire Bolt hitting the floor (Perception check, passes).</li>
+        </ul>
+
+        <h3 style="color: var(--red); margin-top: 20px;">Round 2</h3>
+        <ul>
+          <li><strong>Rune</strong> (init 24, joined this round): Climbs out third-floor window &mdash; <strong>Acrobatics 18</strong>, passes. Uses Dash to get to ground floor (no attack action remaining). Bonus action: <strong>Hunter's Mark</strong> on Sephek.</li>
+          <li><strong>Avarath</strong>: <strong>Fey Step</strong> (bonus action, 30 ft teleport into room) + walks remaining 20 ft into melee. Maul attack: <strong>23 hits</strong>, 7 damage. <strong>Topple</strong>: Sephek fails CON save (DC 13) &mdash; <strong>knocked prone</strong>. <em>"You will pay for your crime."</em></li>
+          <li><strong>Thors</strong>: Advantage (prone target). Short sword: 14 hits, <strong>9 piercing damage</strong>. Stabs down with rage.</li>
+          <li><strong>Virel</strong>: Arrives on the first floor (Dash action to descend stairs). No action remaining for spells.</li>
+          <li><strong>Sephek</strong>: Stands up (half movement). Swings at Rune &mdash; 12 to hit, <strong>miss</strong>. Swings at Thors &mdash; 14 to hit, <strong>miss</strong>. <em>"It doesn't have to be this way. I'm doing the Frost Maiden's work. I'm sorry I had to kill your friend, but I needed to teach you a lesson so you'll stop hunting me."</em></li>
+          <li><strong>Rune</strong> responds: <strong><em>"I will never stop hunting you now."</em></strong></li>
+        </ul>
+
+        <h3 style="color: var(--red); margin-top: 20px;">Round 3</h3>
+        <ul>
+          <li><strong>Rune</strong>: Dual-wields short swords. First attack: 24 hits, 8 piercing. Vex property grants advantage on second attack: 21 hits, 4 piercing + 4 Hunter's Mark = <strong>16 total damage</strong> this turn.</li>
+          <li><strong>Avarath</strong>: Casts <strong>Bless</strong> (action) on self, Rune, and Thors. Casts <strong>Divine Favor</strong> (bonus action) for +1d4 on future weapon attacks. No attack this round &mdash; buffing the party instead.</li>
+          <li><strong>Thors</strong>: Short sword with Bless d4. Rolls 16 to hit (with Bless), hits. <strong>12 piercing</strong> (max damage). <em>"He just keeps cutting and yelling Kane's name."</em></li>
+          <li><strong>Virel</strong>: Casts <strong>Sleep</strong> (1st-level, DC 15 WIS save). Sephek rolls <strong>10</strong> &mdash; fails. <strong>Sephek collapses unconscious.</strong> Combat ends.</li>
+        </ul>
+
+        <div class="crit-box">
+          <div class="label">Aftermath</div>
+          <p>Party ties Sephek up in a stress position. Kane confirmed dead &mdash; died in Dinosuchus form, body remains as raptor. Sephek gagged, pillowcase hooded (blocks line of sight for Misty Step). Turned in to Easthaven guards who apply a caster's muzzle. Ice sword recovered &mdash; painfully cold to bare hands, radiates magic separate from Sephek's necromancy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Character Spotlights -->
+  <section>
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane &mdash; the Reluctant Paladin</div>
+        <ul>
+          <li>Rolled a <span class="highlight">natural 20 on Medicine</span> to identify Virel's necklace as a curse requiring Greater Restoration &mdash; recalled it from his family's library</li>
+          <li>Charged the White Lady ghost without hesitation (<em>"I had enough of these ugly, creepy creatures in this goddamn place"</em>)</li>
+          <li>Landed the key Divine Smite on the ghost &mdash; 12 damage (only radiant bypassed resistance)</li>
+          <li>Killed the possessed Reginald with an opportunity attack, freeing the ghost for Rune's finishing shot</li>
+          <li><span class="highlight">Fey Step</span> into the Sephek fight &mdash; teleported into position and <strong>Toppled Sephek prone</strong> with a maul hit, setting up the party's advantage attacks</li>
+          <li>Spent Round 3 buffing instead of attacking: <strong>Bless</strong> (action) on himself, Rune, and Thors + <strong>Divine Favor</strong> (bonus action) &mdash; enabled Thors' 12-damage max hit</li>
+          <li>Slapped Sephek twice during interrogation (Intimidation with advantage &mdash; failed both times)</li>
+          <li>Pragmatic in the justice debate: suggested cutting out tongue to prevent spellcasting before Rune proposed gagging</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--kane);">
+        <div class="char-name" style="color: var(--kane);">Kane Whitefang &mdash; Raptor Jesus (RIP)</div>
+        <ul>
+          <li>Opened the session pushing for the Virel intervention: <em>"Do we have an intervention for Virel now, or are we going to put this off for another torture or two?"</em></li>
+          <li>Hit the ghost with <strong>Primal Savagery</strong> (acid cantrip) for 1 damage &mdash; <em>"One is infinitely more than zero, which is what I expected to do"</em></li>
+          <li>Summoned <strong>Reginald the Octopus</strong> as a ghost distraction &mdash; 0 damage, failed grapple, but the ghost possessed him instead of a party member, enabling the kill</li>
+          <li>Referenced the absent rogue when the party needed to pick locks: <em>"We had a rogue that was really good at picking locks. He's doing his job."</em></li>
+          <li><span class="highlight">Relentless Endurance</span> saved his life from Sephek's first strike &mdash; immediately Wild Shaped into Dinosuchus for a 10 HP buffer</li>
+          <li>Died to Sephek's <strong>max damage roll</strong> (13 piercing) &mdash; dropped past negative max HP. <em>"Raptor Jesus is always with us in spirit."</em></li>
+          <li>Last living action: raptor call that woke the party and initiated the counterattack</li>
+          <li>Player (Deiduke) is rolling a <strong>Warlock</strong> for the next session</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune &Aacute;nstepa &mdash; the Moral Compass</div>
+        <ul>
+          <li>Positioned himself between the party and the door during the Virel intervention, bow nocked &mdash; <em>"I will add the reminder that Rune is currently between everyone and the door"</em></li>
+          <li>Rolled <span class="highlight">Perception nat 20</span> in the town hall &mdash; heard banging and yelling from the dungeon</li>
+          <li><strong>Killed the White Lady ghost</strong> with an opportunity attack longbow shot as it tried to flee in Reginald's body</li>
+          <li>Identified the figurehead as <strong>Errtu</strong> (Balor demon) &mdash; History check with Icewind Dale native advantage</li>
+          <li><span class="highlight">Stole the cursed necklace</span> from Virel's bag during the night; passed the Charisma save (13 vs DC 10)</li>
+          <li>Climbed out a <strong>third-floor window</strong> (Acrobatics 18) to reach the Sephek fight when the stairs were too slow</li>
+          <li>Told Sephek to his face mid-combat: <strong><em>"I will never stop hunting you now"</em></strong> &mdash; triggering Sephek's attack</li>
+          <li>Dual-wielded short swords against prone Sephek in Round 3 &mdash; 8 + 4 piercing + 4 Hunter's Mark = 16 damage in one turn</li>
+          <li>Led the justice argument: <em>"If you want to hold him responsible for crimes, he needs to be able to fucking talk"</em></li>
+          <li>Shut down Virel's escalation: <em>"Virel, go the fuck to sleep."</em> / <em>"Have a Snickers."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson &mdash; the Shield Between</div>
+        <ul>
+          <li>Found Kane bleeding out and <span class="highlight">interposed himself</span> between Sephek and Kane &mdash; Tavern Brawler unarmed strike (6 bludgeoning) + 5 ft push</li>
+          <li>Used <strong>Heroic Inspiration</strong> (Human trait) to reroll a missed unarmed attack &mdash; turned a 9 into a hit</li>
+          <li>After Sephek was toppled: attacked with advantage, <strong>max damage</strong> (12 piercing) with short sword</li>
+          <li>Investigated damage calculations mid-combat &mdash; corrected Dueling fighting style math for the DM</li>
+          <li>Follower of Helm: insisted on turning Sephek in for justice, not execution</li>
+          <li>Wanted to cut off Sephek's hands &mdash; <em>"He's still turning him in. He's just turning less of him in."</em> &mdash; party realized Misty Step is verbal, not somatic, so hands were left intact</li>
+          <li>Carried Kane's Dinosuchus body on his back to the town hall &mdash; <em>"He's not leaving Kane in the room by himself"</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae &mdash; the Cursed Wizard</div>
+        <ul>
+          <li>Denied the corruption during the intervention: <em>"I don't feel any different. If anything, I have a clearer mind."</em></li>
+          <li>Fire Bolt against the ghost: hit, rolled 1 on d10, halved to 0 &mdash; <em>"I did damage, guys."</em></li>
+          <li>Tried to <span class="highlight">burn a hole in the floor</span> with Fire Bolt to shortcut to Kane during the Sephek fight (DM gave DC 15, she missed) &mdash; <em>"You failed to save Raptor Jesus"</em></li>
+          <li>Cast <strong>Sleep</strong> on Sephek (DC 15 Wisdom save, he rolled 10) &mdash; ended the combat</li>
+          <li>Discovered Rune stole the necklace via Detect Magic: <em>"You thief! You half-baked potato!"</em></li>
+          <li>Researched murder evidence: discovered victims were people who dodged the sacrifice lottery</li>
+          <li>Argued for killing Sephek throughout the justice debate: <em>"If he's alive, he's still a problem"</em></li>
+          <li>Wanted to cut out Sephek's tongue &mdash; talked down by Rune</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot</h2>
+    <table class="loot-table">
+      <thead>
+        <tr><th>Item</th><th>Source</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="magical">Sephek's Ice Sword</td><td>Sephek Caltro</td><td>Magical ice weapon, painfully cold to hold bare-handed. In party's possession</td></tr>
+        <tr><td>1 gemstone (500 gp)</td><td>Speaker Whalen</td><td>Already received from Session 7. Remaining 9 contingent on recovering the Cauldron</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <div class="quote-text">"Do we have an intervention for Virel now, or are we going to put this off for another torture or two?"</div>
+      <div class="quote-attr">&mdash; Kane, opening the session with a dry call-out of the party's procrastination on the Virel problem</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I will add the reminder that Rune is currently between everyone and the door, and he does have an arrow knocked to his bow, but he's not aiming it."</div>
+      <div class="quote-attr">&mdash; Rune, positioning as a silent threat during the Virel intervention</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I had enough of these ugly, creepy creatures in this goddamn place."</div>
+      <div class="quote-attr">&mdash; Avarath, charging the White Lady ghost without hesitation</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I don't feel any different. If anything, I have a clearer mind, a much more passionate mind."</div>
+      <div class="quote-attr">&mdash; Virel, not recognizing her own corruption</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I'm going to Wild Shape into Dinosuchus because Raptor Jesus will save us all."</div>
+      <div class="quote-attr">&mdash; Kane, his last stand &mdash; going down and coming back as a dinosaur</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He's still turning him in. He's just turning less of him in."</div>
+      <div class="quote-attr">&mdash; Thors, peak lawful-but-practical energy during the justice debate</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He's my Riggs. I'm his Murtaugh. He's trying to get himself killed and I'm like, you can't do this."</div>
+      <div class="quote-attr">&mdash; Thors, describing the Kane/Thors dynamic, delivered right after Kane's death</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I will never stop hunting you now."</div>
+      <div class="quote-attr">&mdash; Rune, said directly to Sephek's face mid-combat after Kane's death</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Virel, go the fuck to sleep."</div>
+      <div class="quote-attr">&mdash; Rune, shutting down the torture debate with perfect comedic timing</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"You will pay for your crime."</div>
+      <div class="quote-attr">&mdash; Avarath, looking down at Sephek after Toppling him prone &mdash; the paladin who doesn't forgive</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Hey, I'm just trying to think of the most efficient way to prevent him from ever being a problem."</div>
+      <div class="quote-attr">&mdash; Virel, cursed pragmatism &mdash; the necklace influence on full display</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"You thief! You half-baked potato!"</div>
+      <div class="quote-attr">&mdash; Virel, discovering Rune stole the necklace &mdash; somewhere between rage and absurdity</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He's going to kind of give Avarath a snide look of like, I just don't know how you do it. You don't know how to do it right."</div>
+      <div class="quote-attr">&mdash; Thors, classic Thors-Avarath ribbing after Avarath's ghost damage gets halved</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Yeah, my whole pitch was like, if you want to hold him responsible for crimes, he needs to be able to fucking talk."</div>
+      <div class="quote-attr">&mdash; Rune, the pragmatic counterpoint when the party debated cutting out Sephek's tongue</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Raptor noise. Yeah, when I hear the raptor noise &mdash; ah, shit, shit's going down again. When is this going to end for me?"</div>
+      <div class="quote-attr">&mdash; Avarath, waking up to yet another crisis</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Playing pretend in D&amp;D? Nonsense."</div>
+      <div class="quote-attr">&mdash; Kane, meta-humor during the DM's apology about missing battle maps</div>
+    </div>
+
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="cliffhanger">
+        <div class="thread-title">Recover the Cauldron of Plenty</div>
+        <div class="thread-desc">Prudence and her accomplices stole it and fled toward Targos. Whalen will pay the remaining 9 gemstones (4,500 gp) if recovered. Contract clause requires cauldron present in 48 hours for payment.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Cure Virel's Curse</div>
+        <div class="thread-desc">Greater Restoration (5th level) needed. A healer/temple exists on the south end of Easthaven &mdash; closed at night, available in the morning.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Cursed Necklace</div>
+        <div class="thread-desc">Rune now carries it. Passed his CHA save (13 vs DC 10) but wrapping it didn't stop the corruption. The necklace will keep trying.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Virel Knows Rune Stole It</div>
+        <div class="thread-desc">Detect Magic revealed the necklace glowing on Rune's belt. "You thief!" Unresolved tension.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Kane's Death</div>
+        <div class="thread-desc">Kane Whitefang is permanently dead. Died to Sephek Caltro's max-damage roll. Player rolling a Warlock for next session. Body is in Dinosuchus form &mdash; Thors carried it to the town hall.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Sephek in Custody</div>
+        <div class="thread-desc">Turned in to Easthaven guards, gagged, hooded, muzzled. Undead (necromancy). Claims to serve Auril, killing lottery-dodgers. Can he be killed permanently? Ice sword separated from him.</div>
+      </li>
+      <li>
+        <div class="thread-title">Murder Bounty</div>
+        <div class="thread-desc">Hlin Trollbane in Targos offered 100 gp each for proof of Sephek's arrest or death. Need to return to Targos (which is also where Prudence fled with the cauldron).</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Errtu Figurehead</div>
+        <div class="thread-desc">Same evocation stone as the necklace. Depicts a Balor demon that terrorized Icewind Dale a century ago. Why is it in the town hall? Connection to the necklace and the cult?</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Sun Blight Fortress</div>
+        <div class="thread-desc">Xardorok's base with the dragon and the heart. Location known from the map. Party is not ready yet.</div>
+      </li>
+      <li>
+        <div class="thread-title">Durth's Body</div>
+        <div class="thread-desc">Still in the wine cellar of the White Lady Inn with a corkscrew in his eye. Not yet dealt with.</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pax's Notes -->
+  <section>
+    <h2>Pax's Notes &mdash; Avarath's Journal</h2>
+    <div class="journal">
+      <p class="intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+      <h3>What Avarath Did This Session</h3>
+      <ul>
+        <li>Pushed the Virel conversation forward with a <strong>nat 20 Medicine check</strong> &mdash; identified the necklace as a curse, named Greater Restoration as the cure</li>
+        <li>Attacked the White Lady ghost first, no hesitation &mdash; drew aggro and tanked the possession attempt (CHA save 18)</li>
+        <li>Landed <strong>Divine Smite</strong> for the only full-damage hit on the ghost (12 damage: 5 bludgeoning halved + 6 radiant + 1 undead bonus)</li>
+        <li>Killed the possessed Reginald with an opportunity attack, setting up Rune's finishing shot</li>
+        <li><strong>Fey Stepped</strong> into the Sephek fight and <strong>Toppled</strong> him prone with the maul &mdash; set up the entire party's advantage attacks</li>
+        <li>Spent Round 3 of the Sephek fight on pure buffs: <strong>Bless</strong> (self, Rune, Thors) + <strong>Divine Favor</strong> &mdash; no attack, but enabled Thors' max-damage hit</li>
+        <li>Failed both Intimidation checks on Sephek despite advantage &mdash; not Avarath's finest moment socially</li>
+        <li>Advocated for pragmatic measures (tongue removal) before settling on Rune's gag compromise</li>
+      </ul>
+
+      <h3>Things Avarath Knows That The Party Does Not</h3>
+      <ul>
+        <li>The figurehead stone and the necklace stone are the same material &mdash; this isn't coincidence. Both radiate evocation. Both connected to this town somehow.</li>
+        <li><strong>Avarath's family library</strong> had references to Greater Restoration and curses like Virel's. The Feywild court saw similar corruption before it fell. This resonates with his backstory.</li>
+        <li>The contract clause requiring the cauldron present in 48 hours &mdash; Avarath missed this on his investigation check. He signed a worse deal than he thought.</li>
+      </ul>
+
+      <h3>What Avarath Is Thinking About</h3>
+      <ul>
+        <li><strong>Kane is dead.</strong> The party lost its druid and secondary healer. Avarath is now the only source of healing (Lay on Hands, Cure Wounds). That's not enough.</li>
+        <li><strong>Virel is getting worse, not better.</strong> She argued for execution, torture, and mutilation all in one session. The necklace is accelerating. Getting to that healer in the morning is non-negotiable.</li>
+        <li><strong>Rune has the necklace now</strong> &mdash; and Virel knows. That's a fight waiting to happen. But Rune passed the save. For now.</li>
+        <li><strong>Sephek is undead.</strong> Necromancy through his whole body, ice sword, claims Auril's blessing. Is he even killable by normal means? The guards have him, but can they hold something like that?</li>
+        <li><strong>Targos is the next destination.</strong> The cauldron thieves went there, and Hlin Trollbane's bounty is there. Two birds, one road.</li>
+      </ul>
+
+      <h3>Open Questions For Next Session</h3>
+      <ul>
+        <li>Can the Easthaven healer actually cast Greater Restoration? It's 5th level &mdash; that's a powerful caster for a frontier town</li>
+        <li>What happens to Sephek's ice sword if he's separated from it long enough? Does it melt?</li>
+        <li>Who is Prudence working for? Random thieves don't steal magical cauldrons &mdash; there's an organization</li>
+        <li>Is the Errtu figurehead connected to the cult of Levistus in The Caer? Same type of dark stone</li>
+        <li>What does Kane's new Warlock bring to the party? Need to know the patron and role before planning tactics</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

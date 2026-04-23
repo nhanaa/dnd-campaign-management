@@ -66,7 +66,7 @@
 - **Roark** — Innkeeper at The Uphill Climb (Caer-Dineval). Gave the party information about The Caer, Xardorok, and Dinev's Rest. Hopes the town stabilizes now that the duergar are gone
 - **Atenas Swift** — Runs Frozenfar Expeditions in Caer-Konig. Loaned climber's kits and provided Garrett's camp location
 - **Speaker Dennis Whalen** — Town Speaker of Easthaven. Human, 30s but looks 50 (dark circles, scraggly beard, fur coat). Hardworking, desperate to feed his people. Bought the Cauldron of Plenty for 10 family gemstones (500 gp each). One delivered immediately, nine promised in 2 days. Signed contract witnessed by Prudence. Keeps the cauldron guarded day and night. Wants the sale kept quiet
-- **Prudence** — Mousy young assistant to Speaker Whalen. Witnessed the cauldron contract signing. Tried the stew; liked it
+- **Prudence** — Former assistant to Speaker Whalen. Betrayed him in Session 8: called in accomplices, held a knife to Whalen's throat, locked him and all guards in the dungeon cells, stole the Cauldron of Plenty. Fled toward Targos. Unknown affiliations or motive
 
 ### Rescued / Encountered
 
@@ -78,7 +78,7 @@
 
 ### Suspects & Villains
 
-- **Sephek Caltro** — Mercenary associated with Torg's Caravan. Prime suspect in three murders across Ten-Towns. Victims killed by piercing blade, wounds frozen over, no weapon recovered. Evidence places him in town during at least two killings
+- **Sephek Caltro** — CAPTURED (Session 8). Serial killer serving Auril. Undead — entire body radiates necromancy. Wields a magical ice sword (painfully cold, separate from his necromancy). Claims Auril's "blessing" — kills people who paid off town officials to avoid sacrifice lotteries. Never seen Auril but says she's "inside" him. Not dressed for cold. White crystal eyes, no pupils. Attacked Kane in his sleep, killed him. Captured alive via Sleep spell. In Easthaven guard custody with caster's muzzle. Former mercenary of Torg's Caravan. DM noted he can Misty Step 3/day, multi-attack, and heals passively
 - **Torg Icevein** — Runs Torg's Caravan, a shady traveling merchant outfit. Caravan left Bryn Shander in the middle of the night
 - **Vex** — Tiefling associated with Torg's Caravan, mentioned alongside Torg and Sephek in Bryn Shander evidence
 - **Xardorok** — Duergar warlord from the Underdark. Has "the heart of a dragon" and a plot to destroy Ten-Towns so duergar can live on the surface. Has multiple sons; one (Durth) was in Easthaven
@@ -152,11 +152,18 @@
 - Duergar can turn invisible; a staging group of five was found in Dinev's Rest awaiting orders to attack
 - The soothsayer's dying words: "Destroy the heart"
 
-### The Three Murders
+### The Three Murders — RESOLVED (Session 8)
 - Three murders in one month across Ten-Towns, all with the same MO: piercing blade, wounds frozen over, no weapon recovered
-- Victims: a halfling trapper (Easthaven), a dwarven glassblower (Bryn Shander), a shipbuilder (Targos — ice dagger in heart)
-- Prime suspect: Sephek Caltro of Torg's Caravan
-- No clear motive found in the Bryn Shander case
+- Victims: a halfling trapper (Easthaven), a dwarven glassblower (Bryn Shander), a shipbuilder (Targos — ice dagger in heart). Plus Kane Whitefang (Session 8)
+- Killer: **Sephek Caltro** — undead vessel of Auril. Claims her "blessing." Kills people who paid off town officials to avoid the sacrifice lottery
+- Motive: victims cheated the Auril sacrifice system by bribing officials to be excluded from the lottery. Sephek killed them as alternative sacrifices to the Frostmaiden
+- Sephek captured alive, turned in to Easthaven guards. Bounty collection from Hlin Trollbane in Targos pending
+
+### Errtu
+- Balor demon that terrorized Icewind Dale over a century ago
+- A ship figurehead depicting Errtu was found in the Easthaven town hall, made of the same dark evocation stone as the soothsayer's necklace
+- The White Lady ghost (from the séance) was bound to this figurehead
+- Connection between Errtu, the evocation stone, and the cult of Levistus is unknown
 
 ## Story
 
@@ -186,3 +193,12 @@ That evening, Virel revealed she wants to be a plague doctor / forensic speciali
 Avarath walked the docks alone and connected the séance's "fairy" clue to the frozen **Easthaven Ferry**. In the morning, the full party boarded the ferry (Kane as a Giant Spider for overwatch). They found a map of Icewind Dale marking **Sun Blight Fortress** (Xardorok's base) and an invisible duergar. The duergar used Reduce to try to flee; Virel's Fire Bolt (10) + Kane's Giant Spider bite (15) + Rune's Ensnaring Strike restraint brought him down. Thors knocked him unconscious non-lethally with a sling.
 
 Back at the White Lady Inn, the party hauled the prisoner to the wine cellar. Virel led the interrogation, heating a corkscrew in Create Bonfire and driving it into the prisoner's eye. Kane Healing Word'd the prisoner twice to keep him alive for more torture. Avarath pleaded with him; Rune stood by the cellar door refusing to participate, bow ready. The prisoner was **Durth, Xardorok's son**. He revealed Sun Blight Fortress is where Xardorok is, where the dragon is, and where the heart is — then demanded Rune execute him. Auto-crit longbow to the skull. Durth dead, unrevivable. Session ended with Rune nocking a second arrow — pointed at no one, yet.
+
+### Session 8 — Ghosts, Thieves, and the Frost Maiden's Blade
+Party confronted Virel about the necklace — Avarath identified it as a curse (nat 20 Medicine) requiring Greater Restoration (5th level). At the town hall, found the **White Lady ghost** bound to a ship figurehead depicting **Errtu** (Balor demon), made of the same dark evocation stone as the soothsayer's necklace. Avarath attacked first; ghost resisted everything except Divine Smite. Kane summoned Reginald the Octopus as a distraction; the ghost possessed Reginald and tried to flee; Avarath killed the octopus (opportunity attack) and Rune killed the ghost (opportunity attack longbow). DM confirmed the encounter was completely unrelated to any active quest.
+
+Below the town hall, found Speaker Whalen and guards locked in cells — **Prudence** had betrayed them, calling in accomplices who stole the **Cauldron of Plenty** and fled toward Targos. Whalen can't pay the remaining 9 gemstones without the cauldron (contract clause requires it present in 48 hours). A guard overheard the thieves mention Targos.
+
+That night: Virel researched murder evidence and discovered victims were people who paid off officials to avoid the sacrifice lottery. Rune stole the cursed necklace from Virel's bag while she tranced (passed CHA save DC 10). **Sephek Caltro** attacked Kane in his sleep with an ice sword — 11 piercing (Relentless Endurance saved him to 1 HP) then 5 more (unconscious). Kane Wild Shaped into Dinosuchus (raptor call woke the party). Sephek Misty Stepped past Thors and killed Kane with a max-damage roll (d10=10, +3=13) — permanently dead, past negative max HP. Thors interposed with Tavern Brawler + Heroic Inspiration. Avarath Fey Stepped in and Toppled Sephek prone. Rune climbed out a third-floor window (Acrobatics 18). Virel cast Sleep (Sephek failed WIS save). Three rounds plus surprise.
+
+Sephek interrogated: undead (necromancy), claims Auril's "blessing," kills lottery-dodgers, ice sword is separate. Virel's Detect Magic also revealed the necklace on Rune's belt — "You thief! You half-baked potato!" Justice debate: gagged, hooded, turned in to Easthaven guards with caster's muzzle. Thors carried Kane's Dinosuchus body to the town hall. Kane's player rolling a Warlock.
