@@ -4,7 +4,7 @@
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Beastmaster (Isgeri Boarhound) + Thaumaturge | Pax |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Beastmaster (Ren (Isgeri Boarhound)) + Thaumaturge | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) | TBD | Snowgeen |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry |
@@ -12,7 +12,7 @@
 
 ## Party Composition Notes
 
-- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Isgeri Boarhound (Bai Jian's companion) — three melee bodies, two dragon-blooded
+- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Ren (Isgeri Boarhound) (Bai Jian's companion) — three melee bodies, two dragon-blooded
 - **Healing**: Panacea (Catfolk Witch — Medic dedication)
 - **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct), Bai Jian (Crashing Slam + Advantageous Assault + Glimpse Vulnerability weakness)
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)

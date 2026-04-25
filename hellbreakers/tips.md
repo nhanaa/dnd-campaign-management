@@ -77,7 +77,7 @@ Parry is permanently free. All 3 actions are offensive:
 - 1 action (manipulate — provokes Reactive Strike from adjacent enemies)
 - Target gains weakness 2 to your weapon Strikes. Lasts until you Glimpse a different target.
 - One-time setup. Don't re-Glimpse the same target.
-- Only affects YOUR Strikes, not the hound's or allies'
+- Only affects YOUR Strikes, not Ren's or allies'
 - Best used turn 1 or 2 against a boss/priority target, then forget about it and Strike normally
 
 ### Dueling Parry
@@ -112,14 +112,14 @@ Parry is permanently free. All 3 actions are offensive:
 - Send hound ahead. It detects fiends/undead at 40 ft precise scent.
 - Hound telepathically reports what it finds without returning.
 - Daily prep: choose fiend or undead as designated foe for the day.
-- In guerrilla operations: use the hound to sweep buildings, corridors, ambush sites before the party enters.
+- In guerrilla operations: use Ren to sweep buildings, corridors, ambush sites before the party enters.
 
 ### Keeping the Hound Alive
 - Nimble Boarhound has decent AC (+Dex focus) but medium HP
-- Don't leave the hound exposed against enemies that can focus it down
-- Panacea can heal the hound (it's an animal, Heal spell works)
-- Battle Medicine works on the hound if you're adjacent
-- Position the hound to threaten flanking but not be the closest target
+- Don't leave Ren exposed against enemies that can focus it down
+- Panacea can heal Ren (it's an animal, Heal spell works)
+- Battle Medicine works on Ren if you're adjacent
+- Position Ren to threaten flanking but not be the closest target
 
 ## Breath of the Dragon (Level 7+)
 
@@ -133,8 +133,8 @@ Parry is permanently free. All 3 actions are offensive:
 
 - **Cyrathul (Thaumaturge)**: Core frontline partner. Both exploit vulnerabilities (yours via Glimpse, his via Exploit). Your Prone + his Strikes = crits.
 - **Moob (Alchemist)**: Covers Off-Guard independently via bombs. Your AoO zone protects him. Accept his elixirs/mutagens.
-- **Fang + Wing (Inventor)**: Secondary frontline unit. Enemies between you, Wing, and the hound have nowhere safe.
-- **Panacea (Witch Medic)**: Your lifeline. She can heal both you and the hound. Your Prone/Grab debuffs lower enemy saves for her spells.
+- **Fang + Wing (Inventor)**: Secondary frontline unit. Enemies between you, Wing, and Ren have nowhere safe.
+- **Panacea (Witch Medic)**: Your lifeline. She can heal both you and Ren. Your Prone/Grab debuffs lower enemy saves for her spells.
 
 ## Armor Plan
 
@@ -153,4 +153,4 @@ Parry is permanently free. All 3 actions are offensive:
 - Penalty types stack: Off-Guard (circumstance) + Frightened (status) + Prone (circumstance to attacks) all apply simultaneously.
 - **Flanking**: With 3+ melee bodies (you, Cyrathul, Fang+Wing, hound), flanking should be available most rounds.
 - **Jian (katana stats)**: 1d6 S, deadly d8, two-hand d10, versatile P. Lower base die than longsword but deadly d8 adds significant crit damage. The right choice for a crit-fishing Fighter.
-- **Command an Animal has the concentrate trait** — you cannot Command the hound while raging, confused, or under effects that block concentrate actions.
+- **Command an Animal has the concentrate trait** — you cannot Command Ren while raging, confused, or under effects that block concentrate actions.

@@ -101,6 +101,7 @@ Fighter's Combat Flexibility class feature lets you "rent" a 1st-8th level Fight
 
 ### Isgeri Boarhound Details
 
+- **Name**: Ren (刃) — "Blade edge." A working blade to complement Bai Jian's jian. The hunter and his cutting edge.
 - **Source**: Pathfinder #222: Hellbreakers (the AP Kaazz is running)
 - **Size**: Small → Medium (Mature) — stays Medium with Nimble
 - **Attacks**: Jaws 1d8 piercing (finesse) → 2d8 at Mature
