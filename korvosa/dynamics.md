@@ -6,12 +6,12 @@
 |------|----------|-------|-----------|---------------|--------|
 | Marwen (Fioren) | Kitsune (Frozen Wind) | Sorcerer — Draconic Rime (Primal) | Oracle Dedication (Cosmos) | Diplomacy | Pax |
 | Caliban | Orc (Aiuvarin, Elf Atavism — Desert Elf) | Champion of Iomedae | Guardian Dedication | Medicine | Hawke |
-| Rattle & Ruin | Awakened Animal (Medium) | Summoner — Dragon Eidolon (Poison, Arcane) | Beastmaster | — | Joey |
 | Bergatha Lizby | Human (Merfolk ancestry feats) | Witch (Arcane) | Dandy | Performance | Macabre_Barbie |
 
 ### Former Members
 - **Elias Vane** — Ranger (Archer Archetype, Stealth Paragon) — *left the party*
 - **Beast** — Dragonblood Fleshwarp Barbarian (Dragon Instinct / Fighter) — *left the campaign (Pol). Beast remains as Level 5 NPC in Harse, addicted to shiver.*
+- **Rattle & Ruin** — Awakened Animal Summoner, Dragon Eidolon (Poison, Arcane) — *left the campaign (Joey). Were-rat network and "King of Shinies" empire continue as NPC-run plot infrastructure.*
 
 ### Build Details (as of Level 5)
 
@@ -30,16 +30,6 @@
 - General: Toughness
 - Campaign: Battle Medicine, Continual Recovery, Group Taunt, Mighty Bulwark
 
-**Rattle & Ruin** — Awakened Animal Summoner, Dragon Eidolon (Poison, Arcane)
-- Free Archetype: Beastmaster Dedication → Mature Beastmaster Companion (Ripper the wolf)
-- Ancestry: Take Flight (1), Strong of Wing (5); Paragon: Natural Senses (1), Awakened Magic (3)
-- Class: Extend Boost, Tandem Movement
-- Skills: Intimidating Glare, Terrifying Resistance
-- General: Toughness
-- Spells (Arcane): Electric Arc, Live Wire, Telekinetic Hand, Protect Companion (cantrips); Acid Arrow, Mystic Armor, Umbral Extraction (rank 2); Haste, Horde of Underlings (rank 3)
-- Focus: Boost Eidolon, Evolution Surge, Extend Boost
-- Primal Innate: Caustic Blast (cantrip)
-
 **Bergatha Lizby** — Human Witch (Arcane)
 - Free Archetype: Dandy Dedication → Gossip Lore
 - Ancestry: Natural Ambition, Cackle, Apprentice Sea Witch
@@ -52,11 +42,12 @@
 
 ## Party Composition Notes
 
-- **Frontline**: Caliban (Champion) holds the front solo after Beast's departure
-- **Healing**: Marwen (Heal via Primal), Caliban (Champion lay on hands)
+- **Party size**: 3 PCs after Beast (Pol) and Rattle (Joey) departures. PF2e encounters need weak-adjustment or fewer enemies.
+- **Frontline**: Caliban (Champion) — sole frontline. No backup tank, no summon meatshield.
+- **Healing**: Marwen (Heal via Primal), Caliban (Lay on Hands, Battle Medicine)
 - **Ranged/Blasting**: Marwen (Sorcerer), Bergatha (Witch)
 - **Face/Social**: Marwen (Diplomacy Paragon), Bergatha (Performance/Dandy)
-- **Summoning**: Rattle & Ruin (Summoner + Beastmaster)
+- **Action economy gap**: Lost ~2 actions/turn from Eidolon. No more Tandem Movement, Boost Eidolon, or Horde of Underlings on the board.
 
 ## NPC Relationships
 

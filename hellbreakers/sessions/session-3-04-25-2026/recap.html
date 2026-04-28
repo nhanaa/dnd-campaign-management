@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 3 — The Waterspout Inn</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-moob { border-left-color: var(--jade); }
+.char-fang { border-left-color: var(--rust); }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-moob { border-left-color: var(--jade); }
+.spotlight.s-fang { border-left-color: var(--rust); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Waterspout Inn</h1>
+  <div class="subtitle">Session 3 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">April 25, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3 hours</span>
+    <span class="meta-pill">10 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:35%"></div>
+    <div class="comp-seg comp-rp" style="width:25%"></div>
+    <div class="comp-seg comp-social" style="width:20%"></div>
+    <div class="comp-seg comp-explore" style="width:10%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 35%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 25%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 20%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 10%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot / Mystery 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Medium Dragon &middot; Thaumaturge (Mirror Cloak)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-moob"><div class="char-name">Moob</div><div class="char-class">Goblin &middot; Alchemist (Quick Bomber)</div><div class="char-player">Harrgoth</div></div>
+    <div class="char-card char-fang"><div class="char-name">Fang</div><div class="char-class">Goblin &middot; Inventor &middot; Construct: <em>Wing</em></div><div class="char-player">Cherry</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Picking up on the shore of the North Kansira River after the Night's Prize sinking, the party dealt with the grateful ship crew, salvaged <strong>Wing</strong> from the riverbed, and fought off river snakes disturbed by the wreck. <strong>Moob</strong> played the charming goblin diplomat &mdash; tipping sailors, handing out elixirs, and asking the crew to spread good stories about the Hellbreakers in taverns. After healing up, distributing loot, and a two-day journey back to Saringallow, the party learned that <strong>Rhokrag</strong> had gone missing while investigating a rumored Hellknight regrouping at the Waterspout Inn.</p>
+    <p>Armed with healing potions from <strong>Marie</strong> and two new bomb recipes Moob reverse-engineered on the road, the party traveled two more days to the riverside inn &mdash; only to find it occupied by Chelaxian forces, with tents, a docked warship flying Chelaxian colors, and armed soldiers. After waiting until nightfall, an attempted negotiation went south fast, and the party tore through three Chelaxian soldiers in the camp before discovering worse inside: Marines on the ship, a Chelaxian navy captain, and a devil that could fly and spit webs.</p>
+    <p><strong>Bai Jian</strong> spotted Rhokrag &mdash; bruised, beaten, and tied to a chair in the ship's cabin &mdash; before leaping from the rigging to skewer the devil with a hero-pointed critical hit. The session ended on a cliffhanger: the ship captain and a crow's nest Marine still standing, sails on fire from <strong>Fang's</strong> explosions, and Rhokrag still bound.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; Shore Aftermath</div>
+      <div class="act-card">
+        <h3>The Grateful Crew</h3>
+        <ul>
+          <li>The party came ashore after the Night's Prize sinking alongside the surviving crew. <strong>Moob</strong> stepped up as spokesman &mdash; asked for their new "captain," got the story on the dead crew.</li>
+          <li>The boatswain handed over a <strong>Boatswain's Favorite</strong> (alchemical item) as thanks. Moob pocketed it to reverse-engineer.</li>
+          <li>Moob paid a different sailor gold and silvers to fetch a cart from a nearby farmstead: <em>"Whenever you're in the pub, speak about Moob, the goblin bomber hellbreaker who is loose with his coin and has a charming smile."</em></li>
+          <li><strong>Fang</strong> asked a sailor to help dive for Wing's wreckage, then handed him soap and a bedroll as gifts &mdash; pure goblin generosity.</li>
+          <li><strong>Panacea</strong> administered first aid, treating wounds across the party.</li>
+          <li><strong>Bai Jian</strong> interrogated a swabby about the captain and animated armor &mdash; learned Aedin bought it after the Battle of Breachill out of fear, and nobody tracked him.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; River Snakes</div>
+      <div class="act-card">
+        <h3>Disturbed Nest</h3>
+        <ul>
+          <li>Ten minutes after the wreck, the water started bubbling &mdash; two <strong>gliding river snakes</strong> emerged from the disturbed shipwreck nest.</li>
+          <li>Snake 1 burst out at <strong>Bai Jian</strong> with jaws wide; missed twice on aquatic ambush. Bai Jian and <strong>Cyrathul</strong> had delayed until it surfaced.</li>
+          <li><strong>Cyrathul</strong> placed his Mirror Cloak image and struck with longsword (solid damage). Bai Jian strode to the snake &mdash; Snagging Strike (miss), second strike (miss). <em>"Not a great start."</em></li>
+          <li><strong>Moob</strong> hero-pointed a mud bomb throw into a <strong>critical hit</strong>, killing Snake 1 outright: <em>"Have a mud cake."</em></li>
+          <li>Snake 2 lunged at <strong>Panacea</strong>, bit and poisoned her. She treated her own poison successfully, moved away, and attempted <strong>Trade Life for Death</strong> &mdash; snake critically succeeded the save.</li>
+          <li><strong>Fang</strong> activated Overdrive (failed, +1 fire only), then bit the snake with dragon teeth. <strong>Cyrathul</strong> finished it with Mirror + Exploit Vulnerability + longsword: <em>"I'll just appear next to him and slash its head off."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Exploration &middot; Wing Salvage &amp; Loot</div>
+      <div class="act-card">
+        <h3>Pulling Wing From the River</h3>
+        <ul>
+          <li>A sailor dove and roped Wing's wreckage; the party hauled it ashore. <strong>Moob</strong> gave Fang rust scrub: <em>"I got that specifically for your go-kart."</em></li>
+          <li><strong>Fang</strong> repaired Wing over the rest hour (multiple crafting checks, healed 10 HP). Also discovered tools and supplies stashed inside Wing &mdash; crossbow, top-shelf wine.</li>
+          <li>Loot distributed: <strong>Ring of Discretion</strong> to Bai Jian, <strong>Savior Spike talisman</strong> to Bai Jian's jian, Fine Compass to party stash (sold later).</li>
+          <li><strong>Panacea</strong> treated wounds on the goblins &mdash; critical success on Moob after treating Fang first. <em>"It's because it's your karma points for putting your son first."</em></li>
+          <li><strong>Moob</strong> and <strong>Fang</strong> sang a goblin sailing song that had nothing to do with sailing, because goblins don't get on ships. <em>"Boats, Buddha water."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV &middot; Faction &middot; Return to Saringallow</div>
+      <div class="act-card">
+        <h3>Rhokrag is Missing</h3>
+        <ul>
+          <li>Two-day journey back to HQ. Moob reverse-engineered the <strong>Boatswain's Favorite</strong> and <strong>Atrophy Bomb</strong> recipes during travel.</li>
+          <li>At HQ, <strong>Marie</strong> and <strong>Zara</strong> greeted them. <strong>Ethran Howell</strong> alerted the party: <strong>Rhokrag</strong> was missing.</li>
+          <li>Rhokrag had gone to investigate rumored <strong>Hellknight regrouping</strong> at the <strong>Waterspout Inn</strong>, a riverside tavern halfway between Saringallow and Logos. He had a non-league contact there.</li>
+          <li>He was supposed to return yesterday and never showed up. <strong>Bai Jian</strong> immediately volunteered: <em>"I don't think it's a good idea to just let him be if he's captured."</em></li>
+          <li><strong>Moob</strong> gave Zara a chicken-scratch recipe for <strong>goblin pickle juice bread</strong>: <em>"Trust me, you'll have goblins rushing up your counter. It's a family recipe."</em></li>
+          <li>Marie provided <strong>2 healing potions</strong>. Moob asked Panacea if calling her "the cat" was racist &mdash; she didn't mind. Moob and Fang then had a philosophical discussion about racial terminology: <em>"Humans are more touchy about it than most."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V &middot; Exploration &middot; The Road to Waterspout Inn</div>
+      <div class="act-card">
+        <h3>Chelaxian Occupied</h3>
+        <ul>
+          <li>Sold surplus gear for 2gp each; donated ship charts and writing set to the cause. Moob gave Ethran the fancy writing set as an office gift.</li>
+          <li>Two-day travel; uneventful &mdash; passing merchants and farmers with fall harvest.</li>
+          <li>On arrival: Chelaxian two-masted ship docked behind the inn, tents and banner by the river, no civilian activity. No one entering or leaving &mdash; unusual for mid-afternoon.</li>
+          <li>Decided to wait until nightfall. Moob injected himself with a <strong>Quicksilver Mutagen</strong> for stealth. <em>"You see my green skin kind of turn pearlescent white."</em></li>
+          <li>Approached at dusk. Cyrathul scouted and spotted three soldiers around a campfire. One spotted him back: <em>"Oza!"</em> Cyrathul: <em>"It's probably best that the dragon is the one who comes out."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; The Camp Fight</div>
+      <div class="act-card">
+        <h3>We Wanted to Talk</h3>
+        <ul>
+          <li><strong>Moob</strong> attempted diplomacy: <em>"We just wanted to stay the night. Can't we at least eat our cake?"</em> Soldiers: <em>"Get the fuck out of here. This is Chelaxian area right now."</em></li>
+          <li><strong>Fang</strong> drove Wing into a soldier, wheel-slammed him dead in one hit, then activated Overdrive and backed off taunting. <em>"I wasn't expecting him to flop over dead just like that."</em></li>
+          <li><strong>Bai Jian</strong> Sudden Charged the guisarme soldier &mdash; hero-pointed a <strong>critical hit</strong> (14 damage), then finished him with a second strike: <em>"We wanted to talk, and look what you've done."</em></li>
+          <li><strong>Cyrathul</strong> emerged from the darkness to strike the last soldier. <em>"A dragon coming from the darkness."</em> The soldier crit-tripped Cyrathul with his guisarme, then <strong>Punish the Fallen</strong> (8 total damage).</li>
+          <li><strong>Panacea</strong> cast a 2-action <strong>Heal</strong> at range on Cyrathul, keeping him in the fight.</li>
+          <li><strong>Fang</strong> drove Wing to the gangplank, Tokyo-drifted into the last soldier for a <strong>non-lethal knockout</strong>. Tried to remove the gangplank &mdash; failed (too well-secured).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII &middot; Combat &middot; The Ship Fight (Ongoing)</div>
+      <div class="act-card">
+        <h3>Webbing, Fire, and a Devil</h3>
+        <ul>
+          <li>Initiative continued. <strong>Bai Jian</strong> Demoralized a Marine (<strong>Frightened 1</strong>). <strong>Panacea</strong> hero-pointed Battle Medicine on Moob and cast <strong>Runic Weapon</strong> on his star grenade.</li>
+          <li><strong>Moob</strong> threw the enchanted <strong>Star Grenade</strong> &mdash; <strong>critical hit</strong>, 14 fire damage + cross-shaped splash. The Demoralized Marine caught the crit. Ship deck caught fire.</li>
+          <li>A dagger Marine charged down the gangplank. Another climbed to the crow's nest screaming: <em>"Wake up down there! We're under attack!"</em></li>
+          <li><strong>Fang</strong> dismounted and sent Wing to kill the frightened Marine (Demoralize enabled the hit at +0: <em>"the frightened did it"</em>).</li>
+          <li><strong>Bai Jian</strong> climbed the crow's nest, Snagging Strike on the Marine (5 damage, off-guard). Spotted <strong>Rhokrag</strong> tied to a chair: <em>"I saw him! He's captured over there!"</em></li>
+          <li><strong>Cyrathul</strong> Exploited Vulnerability on the <strong>devil</strong> &mdash; weakness 3 to holy. The devil flew from the cabin, webbed Bai Jian to the crow's nest and Cyrathul to the deck.</li>
+          <li>A <strong>Chelaxian navy captain</strong> kicked open the door: <em>"What the heck is going on on my ship?"</em> Fired at Bai Jian &mdash; missed. The crow's nest Marine attacked webbed Bai Jian &mdash; missed all 3 strikes.</li>
+          <li><strong>Fang</strong> hero-pointed Wing's attack on the mast (9 damage), then <strong>Exploded Wing</strong> &mdash; 5 fire damage, wood weakness bypassed hardness, sails caught fire. <em>"Timber!"</em></li>
+          <li><strong>Bai Jian</strong> escaped the webbing, climbed down the mast, and <strong>leaped from the rigging onto the devil</strong> &mdash; hero-pointed into a <strong>critical Snagging Strike</strong> (21 damage + 2d6 falling damage). <strong>Killed the devil.</strong> <em>"I slash at his body, then grab him by the neck and push him down into the ground with me."</em></li>
+          <li><strong>Cyrathul</strong> &mdash; still webbed to the deck &mdash; projected his Mirror Cloak to act at range: hero-pointed a longsword strike on the captain via mirror (hit). <strong>Panacea</strong> hit the captain with <strong>Needle Darts</strong>. <strong>Moob</strong> burned the web off Cyrathul with 1 fire splash, finally freeing him.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; River Snakes</div>
+    <h3>Disturbed Nest</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Gliding River Snakes</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Both killed</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Moob (1)</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Snake 1</strong>: Aquatic ambush on <strong>Bai Jian</strong> &mdash; missed twice, coiled on ground.</li>
+      <li><strong>Cyrathul</strong>: Placed Mirror Cloak image behind snake, longsword strike (hit, solid damage).</li>
+      <li><strong>Bai Jian</strong>: Strode to snake, Snagging Strike (miss), second strike (miss). <em>"Not a great start."</em></li>
+      <li><strong>Moob</strong>: Stood up, Quick Bomber mud bomb &mdash; hero-pointed &rarr; <strong>critical hit</strong>. <strong>Killed Snake 1.</strong> <em>"Have a mud cake."</em> Drew wallop stick.</li>
+      <li><strong>Snake 2</strong>: Aquatic ambush on <strong>Panacea</strong> &mdash; bit and poisoned her. Second bite (miss). Third bite (critical miss).</li>
+      <li><strong>Panacea</strong>: Treated poison on self (success). Moved away. <strong>Trade Life for Death</strong> cantrip &mdash; snake critically succeeded save.</li>
+      <li><strong>Fang</strong>: Overdrive (failed &mdash; +1 fire), bit the snake with dragon teeth (hit).</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Cyrathul</strong>: Mirror next to snake, Exploit Vulnerability (success), longsword &mdash; <strong>killing blow</strong>. <em>"Appear next to him and slash its head off."</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; Waterspout Inn (Continuous, 4 Rounds &mdash; Cliffhanger)</div>
+    <h3>Camp, Gangplank, and Ship</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3 Soldiers + 2 Marines + Devil + Captain</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">4 (ongoing)</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">3 soldiers, 1 marine, 1 devil</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Moob (1), Bai Jian (1), Panacea (1), Fang (1), Cyrathul (1)</div></div>
+    </div>
+    <p><em>Moob hero-pointed his initiative roll to go earlier &mdash; then delayed anyway to get healed. He reflected on this ruefully at session end.</em></p>
+
+    <h4>Round 1 &mdash; Camp</h4>
+    <ul>
+      <li><strong>Fang</strong>: Wing stride + wheel slam &mdash; <strong>instant kill</strong> on a soldier. Fang activated Overdrive (+4 INT mod, 1 min). Wing strode backwards.</li>
+      <li><strong>Moob</strong>: Atrophy Bomb (<strong>critical miss</strong>), second bomb (miss). <em>"1 in 400 chance... that feels awful."</em></li>
+      <li><strong>Gisarme Soldier</strong>: Swung at Moob &mdash; missed (range issue).</li>
+      <li><strong>Bai Jian</strong>: Sudden Charge &mdash; <strong>hero-pointed &rarr; crit</strong> (14 damage). Second strike &mdash; <strong>killing blow</strong>. <em>"We wanted to talk, and look what you've done."</em></li>
+      <li><strong>Cyrathul</strong>: Strode twice, longsword strike (hit). <em>"A dragon coming from the darkness."</em></li>
+      <li><strong>Last Soldier</strong>: Crit-tripped Cyrathul (3 dmg, Prone). <strong>Punish the Fallen</strong> (5 dmg, 0 MAP). Third strike at MAP.</li>
+      <li><strong>Panacea</strong>: 2-action <strong>Heal</strong> at range on Cyrathul &mdash; kept him in the fight.</li>
+      <li><strong>Fang</strong>: Wing Tokyo-drifted into last soldier &mdash; <strong>non-lethal knockout</strong>. Fang tried to pull gangplank (failed).</li>
+    </ul>
+
+    <h4>Round 2 &mdash; Transition to Ship</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: Strode toward ship. <strong>Demoralized</strong> a Marine (<strong>Frightened 1</strong>).</li>
+      <li><strong>Cyrathul</strong>: Stood from prone. <strong>Exploit Vulnerability</strong> on Marine (Personal Antithesis, no weakness).</li>
+      <li><strong>Panacea</strong>: <strong>Battle Medicine</strong> on Moob (<strong>hero-pointed</strong> &rarr; success). <strong>Runic Weapon</strong> on Moob's star grenade.</li>
+      <li><strong>Moob</strong> (delayed): Enchanted <strong>Star Grenade</strong> &mdash; <strong>critical hit</strong>. 14 fire + cross-shaped splash. Demoralized Marine caught the crit. Ship deck on fire.</li>
+      <li><strong>Dagger Marine</strong>: On fire. Threw dagger, stabbed with second.</li>
+      <li><strong>Second Marine</strong>: Climbed to crow's nest. <em>"Wake up down there! We're under attack!"</em></li>
+    </ul>
+
+    <h4>Round 3 &mdash; Ship Engagement</h4>
+    <ul>
+      <li><strong>Fang</strong>: Dismounted. Wing killed the frightened Marine (Demoralize hit at +0: <em>"the frightened did it"</em>).</li>
+      <li><strong>Bai Jian</strong>: Climbed crow's nest (Athletics 21). <strong>Snagging Strike</strong> on Marine (5 damage, off-guard). Called out: <em>"I saw him! He's captured over there!"</em></li>
+      <li><strong>Cyrathul</strong>: Strode to ship. <strong>Exploit Vulnerability</strong> on <strong>devil</strong> &mdash; weakness 3 to holy.</li>
+      <li><strong>Panacea</strong>: Attempted Battle Medicine on Moob (immune). Cast <strong>Forbidding Ward</strong> on Moob.</li>
+      <li><strong>Moob</strong>: Drank healing potion (2 actions). Bomb at crow's nest Marine (off-guard from Snagging Strike &mdash; hit, 8 damage).</li>
+    </ul>
+
+    <h4>Round 4 &mdash; Devil and Captain</h4>
+    <ul>
+      <li><strong>Devil</strong>: Flew from cabin. Webbed <strong>Bai Jian</strong> (immobilized in crow's nest) and <strong>Cyrathul</strong> (stuck to deck).</li>
+      <li><strong>Ship Captain</strong>: Kicked door open: <em>"What the heck is going on on my ship?"</em> Crossbow at Bai Jian &mdash; missed. Reloaded.</li>
+      <li><strong>Crow's Nest Marine</strong>: Attacked webbed Bai Jian with daggers &mdash; missed all 3. <em>"He's a stormtrooper."</em></li>
+      <li><strong>Fang</strong>: Wing struck mast (<strong>hero-pointed</strong>, 9 damage). Fang <strong>Exploded Wing</strong> &mdash; 5 fire (wood weakness bypassed hardness). Sails caught fire. <em>"Timber!"</em></li>
+      <li><strong>Bai Jian</strong>: Escaped webbing. Climbed down mast. <strong>Leaped from the rigging onto the devil</strong> &mdash; <strong>hero-pointed &rarr; critical Snagging Strike</strong> (21 + 2d6 falling damage). <strong>Killed the devil.</strong> No fall damage &mdash; devil cushioned the landing.</li>
+      <li><strong>Cyrathul</strong> (still webbed &mdash; acting via Mirror Cloak): Mirror on ship. Exploit Vulnerability on captain (failed). <strong>Hero-pointed</strong> longsword via mirror (hit).</li>
+      <li><strong>Panacea</strong>: <strong>Needle Darts</strong> at captain (hit, rolled 24). Sustained Forbidding Ward.</li>
+      <li><strong>Moob</strong>: Fire bomb at Cyrathul's web &mdash; <strong>1 fire splash destroyed web</strong>, finally freeing Cyrathul. Parried with wallop stick.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Measured Blade</h4>
+      <ul>
+        <li>Gave the session recap, earning a bonus hero point from the DM.</li>
+        <li>Interrogated ship crew about the captain and animated armor &mdash; intelligence gathering.</li>
+        <li>Immediately volunteered the party to rescue Rhokrag when Ethran reported him missing.</li>
+        <li>Sudden Charged and hero-pointed a crit to kill the guisarme soldier at the camp.</li>
+        <li>Demoralized a Marine on the ship (Frightened 1), enabling Moob's star grenade crit and Fang's finishing blow.</li>
+        <li>Climbed the crow's nest, struck the Marine, then spotted Rhokrag tied up and called it out to the party.</li>
+        <li><strong>The hero-point crow's nest leap</strong>: escaped webbing, climbed down the mast, and jumped from the rigging onto the devil for a critical Snagging Strike kill &mdash; the most cinematic moment of the session. DM ruled the devil cushioned his landing.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Moonlit Dragon</h4>
+      <ul>
+        <li>Killed Snake 2 via Mirror Cloak placement &rarr; Exploit Vulnerability &rarr; longsword strike.</li>
+        <li>Emerged from darkness to strike the last camp soldier &mdash; <em>"A dragon coming from the darkness."</em></li>
+        <li>Got crit-tripped by the guisarme soldier and took Punish the Fallen damage &mdash; worst hit of the fight.</li>
+        <li>Exploited Vulnerability on the devil and found weakness 3 to holy.</li>
+        <li>Hero-pointed a longsword strike on the ship captain.</li>
+        <li>Offered to mirror through keyholes to unlock doors during the stealth approach.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-moob">
+      <h4>Moob &middot; the Charming Bomber</h4>
+      <ul>
+        <li>Played the charming diplomat with the Night's Prize crew &mdash; tipped sailors, told them to spread good stories.</li>
+        <li>Hero-pointed a mud bomb into a critical hit that killed Snake 1 outright.</li>
+        <li>Reverse-engineered the Boatswain's Favorite and Atrophy Bomb recipes during travel.</li>
+        <li>Gave Fang rust scrub for Wing and Zara the goblin pickle juice bread recipe.</li>
+        <li>Hero-pointed his initiative roll at the Waterspout Inn &mdash; then delayed anyway. Reflected ruefully at session end.</li>
+        <li>Attempted diplomacy before the camp fight &mdash; shut down by hostile soldiers.</li>
+        <li>Threw a Runic Weapon-enchanted Star Grenade for a critical hit on the ship Marines.</li>
+        <li>Burned the webbing off Cyrathul with a precisely-aimed fire bomb (1 fire damage destroys web).</li>
+        <li>Provided tactical advice throughout &mdash; coaching Panacea on Assurance, Battle Medicine, feat builds.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-fang">
+      <h4>Fang &middot; the Goblin Gearhead</h4>
+      <ul>
+        <li>Gave soap and a bedroll to the crew &mdash; "childish wonder" generosity.</li>
+        <li>Repaired Wing over the rest hour with multiple crafting checks.</li>
+        <li>Goblin-sang a sailing song with Moob that had nothing to do with sailing.</li>
+        <li>Drove Wing into a camp soldier, killing him instantly with a wheel slam, then activated Overdrive.</li>
+        <li>Tokyo-drifted into the last camp soldier for a non-lethal knockout.</li>
+        <li>Tried to remove the ship's gangplank (failed &mdash; too well-secured).</li>
+        <li>Hero-pointed Wing's attack on the mast, then <strong>Exploded Wing</strong> to set the sails on fire &mdash; correctly identified wood's weakness to fire.</li>
+        <li>Called "timber" to warn the party about the burning mast.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Quiet Healer</h4>
+      <ul>
+        <li>Administered first aid to the party on shore after the shipwreck.</li>
+        <li>Treated Fang's and Moob's wounded conditions &mdash; critical success on Moob.</li>
+        <li>Got bitten and poisoned by Snake 2 &mdash; treated her own poison, attempted Trade Life for Death (snake crit saved).</li>
+        <li>Cast 2-action Heal at range to save Cyrathul after the crit-trip at the camp.</li>
+        <li>Hero-pointed Battle Medicine on Moob during the camp fight's second round.</li>
+        <li>Cast <strong>Runic Weapon</strong> on Moob's star grenade, enabling the critical hit.</li>
+        <li>Cast Forbidding Ward on Moob for protection; sustained it through the ship fight.</li>
+        <li>Hit the ship captain with <strong>Needle Darts</strong> from range.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Boatswain's Favorite</div><div class="loot-source">Night's Prize Crew</div><div class="loot-note">Level 2 alchemical item. Moob reverse-engineered the recipe during travel.</div></div>
+    <div class="loot-item"><div class="loot-name">Atrophy Bomb (recipe)</div><div class="loot-source">Night's Prize Salvage</div><div class="loot-note">Moob learned the formula on the second travel day.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Ring of Discretion</div><div class="loot-source">Night's Prize Salvage</div><div class="loot-note">Stealth/concealment ring. Given to Bai Jian.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Savior Spike (talisman)</div><div class="loot-source">Night's Prize Salvage</div><div class="loot-note">Activatable for +1 striking. Attached to Bai Jian's jian.</div></div>
+    <div class="loot-item"><div class="loot-name">Rust Scrub</div><div class="loot-source">Moob (Quick Alchemy)</div><div class="loot-note">Used on Wing to prevent rust after the river salvage.</div></div>
+    <div class="loot-item"><div class="loot-name">2 Healing Potions</div><div class="loot-source">Marie (HQ)</div><div class="loot-note">Pre-mission supplies. One to Panacea, one to Moob.</div></div>
+    <div class="loot-item"><div class="loot-name">Ship Charts + Writing Set</div><div class="loot-source">Night's Prize Salvage</div><div class="loot-note">Donated to Hellbreakers. Writing set given to Ethran as office gift.</div></div>
+  </div>
+  <div class="xp-banner">Sold Surplus &middot; Fine Compass + Work Clothes + Dagger = <strong>2gp each</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Moob</strong>: "Really? Just take it? Just whenever you're in the pub, speak about Moob, the goblin bomber hellbreaker who is loose with his coin and has a charming smile."
+    <span class="attribution">Tipping a sailor after the Night's Prize sinking &mdash; PR campaign, Moob-style.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Moob</strong>: "Have a mud cake."
+    <span class="attribution">Hero-pointed bomb throw into a critical hit, killing the river snake outright.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Moob</strong>: "Trust me, you'll have goblins rushing up your counter for pickle juice bread. It's a family recipe."
+    <span class="attribution">Giving Zara a goblin recipe at HQ. Cultural exchange at its finest.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Moob</strong>: "We just wanted to stay the night. We know it's closed, but can't we at least eat our cake?"
+    <span class="attribution">Last-ditch diplomacy before the Waterspout Inn fight. The Chelaxians were not interested.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Fang</strong>: "I will hand one of them like a bar of soap in my childish wonder. Here, you can have this."
+    <span class="attribution">Gifting a sailor soap after the shipwreck. Genuine goblin kindness.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Fang</strong>: "Stupid snake's in my way! I want my wings back! Om nom nom!"
+    <span class="attribution">Biting the river snake with dragon teeth while Wing sits waterlogged on the riverbed.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Fang</strong>: "I Tokyo drift and I slam my wheels into his legs, making him slam his head into the tent and knock himself out."
+    <span class="attribution">Non-lethal Wing takedown of the last camp soldier. Vehicular precision.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Fang</strong>: "I wasn't expecting him to flop over dead just like that, but okay."
+    <span class="attribution">After a wheel slam instantly killed a Chelaxian soldier. Wing doesn't mess around.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I would say since we're a party that went through life and death together, it's probably not a big deal."
+    <span class="attribution">On whether calling Panacea "the cat" is racist. The voice of reason.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "We wanted to talk, and look what you've done."
+    <span class="attribution">After crit-killing the guisarme soldier with a hero-pointed Sudden Charge.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I saw him! He's captured over there. We need to get over to that room."
+    <span class="attribution">Spotting Rhokrag tied up in the ship cabin from the crow's nest.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "I'll just kind of appear next to him and then slash its head off. And it'll like dissipate."
+    <span class="attribution">Killing the second river snake via Mirror Cloak + Exploit Vulnerability. Dragon efficiency.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "A dragon coming from the darkness."
+    <span class="attribution">Emerging to strike the last camp soldier at the Waterspout Inn. Terrifying.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "It's probably best that the dragon is the one who comes out."
+    <span class="attribution">Volunteering to be the first face the Chelaxian soldiers see when detected.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "It's because it's your karma points for putting your son first."
+    <span class="attribution">Critical success on Moob's treat wounds &mdash; he'd insisted she heal Fang before him.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "Okay, so I guess I better treat myself for poison, right?"
+    <span class="attribution">After getting bitten by a river snake. Calm under pressure.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "I'm going to throw a heal at that."
+    <span class="attribution">Ranged Heal on Cyrathul after the guisarme soldier's crit-trip. Clutch.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Rhokrag's Rescue</strong> &mdash; Alive but badly beaten, tied to a chair in the ship captain's cabin. Ship captain and crow's nest Marine still standing. Sails on fire.</li>
+      <li><strong>The Devil at the Waterspout Inn</strong> &mdash; A flying devil guarding a Chelaxian-occupied inn. Who summoned it? Is this standard military, or something worse?</li>
+      <li><strong>The Ship Captain</strong> &mdash; Chelaxian navy captain commands the docked warship. What intelligence does she hold?</li>
+      <li><strong>Hellknight Regrouping</strong> &mdash; Reports of Hellknights re-entering Isger after Breachill. Rhokrag's non-league contact may have been compromised.</li>
+      <li><strong>Night's Prize Survivors</strong> &mdash; Crew released with gold and instructions to spread good word about Hellbreakers.</li>
+      <li><strong>The Lich on Lake Encarthan</strong> &mdash; Still looming from Session 1. Undead threat unaddressed.</li>
+      <li><strong>Bai Feng</strong> &mdash; Still missing. No new leads.</li>
+      <li><strong>Ethran's Prosthetic Arm</strong> &mdash; Still promised by Moob and Fang, not yet built.</li>
+      <li><strong>The Dragon Blood</strong> &mdash; Four dragon-adjacent characters in one party. Still unexplored.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Cliffhanger</span>
+    <p>Top of Round 5. The ship captain stands in the doorway, crossbow reloaded. A Marine clings to the crow's nest above. The sails are on fire. And behind the captain, through the open cabin door, Rhokrag sits bound to a chair &mdash; a map of bruises and cuts.</p>
+    <span class="big-line">"What the heck is going on on my ship?"</span>
+    <span class="speaker">&mdash; Chelaxian Navy Captain</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Gave the session recap and earned a bonus hero point.</li>
+    <li>Interrogated the Night's Prize crew &mdash; learned the captain bought the animated armor out of fear post-Breachill.</li>
+    <li>Volunteered to rescue <strong>Rhokrag</strong> immediately when Ethran reported him missing.</li>
+    <li>Used a healing potion during the 10-minute rest before the snakes emerged.</li>
+    <li>Took the <strong>Ring of Discretion</strong> and <strong>Savior Spike</strong> talisman from the salvage.</li>
+    <li>Crit-killed the guisarme soldier with a hero-pointed Sudden Charge at the camp.</li>
+    <li><strong>Demoralized</strong> a Marine on the ship (Frightened 1), enabling Moob's star grenade crit.</li>
+    <li>Climbed the crow's nest, struck the Marine, then spotted <strong>Rhokrag</strong> &mdash; beaten and tied up.</li>
+    <li><strong>Escaped webbing, climbed down the mast, leaped from the rigging and killed the devil</strong> with a hero-pointed critical Snagging Strike.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>Saw <strong>Rhokrag</strong> in the ship cabin &mdash; beaten, bruised, tied to a chair. Behind him: an "imposing woman" in Chelaxian navy uniform and the devil (now dead).</li>
+    <li>The devil had <strong>weakness 3 to holy</strong> (Cyrathul's Exploit Vulnerability). Only <strong>Panacea</strong> can deal holy/spirit damage consistently (divine tradition).</li>
+    <li>Bai Jian will be absent next session (played as NPC by DM). The party needs to finish this fight without him.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The devil changes everything.</strong> A flying devil with web attacks guarding a Chelaxian-occupied inn is not standard military. Someone with infernal connections is running this operation. Connected to the infernal creature he and Bai Feng were hunting?</li>
+    <li><strong>Rhokrag walked into a trap.</strong> His "non-league contact" either sold him out or was already compromised.</li>
+    <li><strong>Demoralize is earning its keep.</strong> Frightened 1 on the Marine turned Moob's bomb into a crit and Fang's attack into a hit at +0. The Demoralize &rarr; enable-ally pipeline works.</li>
+    <li><strong>Panacea's ranged healing is critical.</strong> Ranged Heal, Runic Weapon, Forbidding Ward. She's enabling, not just healing.</li>
+    <li><strong>Moob's web-burn play.</strong> One fire splash to destroy webbing. Alchemist utility keeps proving its worth.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Can the party finish the ship captain and crow's nest Marine without Bai Jian?</li>
+    <li><strong>What does Rhokrag know?</strong> What did the Chelaxians beat out of him?</li>
+    <li><strong>Who is the ship captain?</strong> Connected to the devil, or was the devil someone else's asset?</li>
+    <li>Will the burning sails bring the ship down before they can rescue Rhokrag?</li>
+    <li>Is the "non-league contact" dead, turned, or a trap from the start?</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #3a2a30;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px #c8905018, 0 4px 20px #00000040;
+}
+.pax-notes h2 { border-bottom-color: var(--gold-dim); }
+.pax-notes h2::before { color: var(--gold); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

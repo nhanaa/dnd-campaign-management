@@ -75,7 +75,7 @@ Established Session 1: Each party member was individually summoned by missive to
 ## NPC Relationships
 
 - **Ethran Howell** — Former Eagle Knight, now Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1 ("I can't swing it with only one arm — it would be better in your hands"). Now stepping back from the field into a strategy/training role at the Saringallow HQ. Moob and Fang have offered to build him a hydraulic goblin-tech prosthetic arm. Bai Jian bonded with him over Moob's numbing tonic for his phantom pain.
-- **Rhokrag** — Tall hobgoblin at the Saringallow HQ. First impression: a bit too brusque. Shooed off by Zara.
+- **Rhokrag** — Tall hobgoblin at the Saringallow HQ. First impression: brusque. Went solo to investigate Hellknight regrouping at the Waterspout Inn via a non-league contact. Captured — found beaten and tied to a chair in Session 3. Rescue in progress.
 - **Zara** — Halfling hostess at the Saringallow HQ. Warm and welcoming but visibly breaking under the Hedvind decree.
 - **Brynn Tate** — Cadence Keg barkeep. Comped the party's drinks and gifted 2 minor healing potions for the road. Ally.
 - **Otto** — Ferryman on the North Kansira River. Tipped the party off about the lich on Lake Encarthan.
@@ -84,6 +84,7 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Captain Julenus Aedin** — (Deceased) Captain of the Night's Prize. Killed by Cyrathul in Session 2.
 - **Alceo Demetrias** — Co-founder of the Hellbreakers League, cleric of Milani. Currently in Eladir.
 - **Phoebe Demetrias** — Co-founder of the Hellbreakers League. Currently in Eladir.
+- **Marie Phelan** — Hellbreaker at Saringallow HQ. Briefed the party on Rhokrag's disappearance and the Waterspout Inn. Provided healing potions. Visibly worried about Rhokrag.
 - **Bai Feng** — Bai Jian's older brother, missing for 5 years. Last trail led to Isger.
 
 ## Key Plot Threads
@@ -93,10 +94,13 @@ Established Session 1: Each party member was individually summoned by missive to
 - **The Lich on Lake Encarthan**: Ferryman Otto tipped the party off that a lich is commanding the restless dead in Isger. Likely source of the dread bats — and likely a recurring threat.
 - **Ina's Attention**: Moob has caught the sun goddess's eye — she inspired his star-grenade formula mid-craft. Wants no part of her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
 - **The +1 Rune Transfer** (completed): Transferred by blacksmith Hagrath in Saringallow for 3.5gp. Bai Jian's jian now has +1 potency.
-- **Night's Prize Aftermath** (active): The party sank a Chelaxian cargo ship and killed its captain. Crew members were rescued and released — Bai Jian told them to spread the word that "the Hellbreakers are not all bad." Whether this earns goodwill or brings heat remains to be seen. Wing is at the bottom of the river, needing salvage.
+- **Night's Prize Aftermath** (partially resolved): Wing salvaged and repaired (Session 3). Crew released with gold and goodwill stories. Supplies delivered to HQ. Remaining question: will the survivors' word help or bring heat?
 - **The Animated Armor Mystery** (active): A merchant cargo ship had an animated armor bodyguard with a self-destruct failsafe. Expensive enchantment for a supply vessel. Who was Captain Aedin really working for?
 - **Ethran's Prosthetic Arm**: Moob and Fang pitched a hydraulic goblin-tech replacement. Promised, not yet built.
 - **The Lost Trail**: What happened to Bai Feng? What was the infernal creature the brothers were hunting? Is it connected to Cheliax? (Bai Jian hinted at it for the first time publicly in his tavern story — "the other person I fought beside.")
 - **The Hellbreakers' War**: Liberation of Isger from Chelaxian oppression.
 - **The Dragon Blood**: What does it mean to carry Sovereign Dragon heritage in a land saturated with infernal power? The party has FOUR dragon-adjacent characters (Bai Jian, Cyrathul, Moob's draconic mother, Fang's draconic teeth) — this can't be coincidence.
 - **The Flute**: The dizi — Bai Feng's? Or something they played together? A thread for Pax to develop at the table.
+- **Rhokrag's Rescue** (active, urgent): Found beaten and bound at the Waterspout Inn. Ship captain and crow's nest Marine still standing. Sails on fire. Bai Jian will be absent next session (DM-controlled NPC).
+- **The Devil at the Waterspout Inn** (active): A flying devil (weakness 3 to holy) was guarding Rhokrag. Killed by Bai Jian. Who summoned it? Standard Chelaxian military, or an infernal escalation? Possible connection to the infernal creature Bai Jian and Bai Feng were hunting.
+- **Rhokrag's Contact** (active): His "non-league contact" at the Waterspout Inn — dead, turned, or a trap from the start?

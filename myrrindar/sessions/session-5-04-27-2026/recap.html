@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 — The Whisper Prism | Myrrindar: Winds of Warding</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eaf2ea;
+  --bg-card: #f4f9f4;
+  --bg-card-hover: #ffffff;
+  --border: #b8d0b8;
+  --text: #243028;
+  --text-dim: #4a5e50;
+  --text-bright: #141e18;
+  --red: #9a4040;
+  --red-glow: #9a404022;
+  --blue: #4a80aa;
+  --blue-glow: #4a80aa22;
+  --green: #2e7a48;
+  --green-glow: #2e7a4822;
+  --purple: #7a5aaa;
+  --purple-glow: #7a5aaa22;
+  --teal: #3a8a8a;
+  --teal-glow: #3a8a8a22;
+  --gold: #3a8a5a;
+  --gold-dim: #5aaa7a;
+  --gold-glow: #3a8a5a22;
+  --mist: #7a5aaa;
+  --avon: #4a80aa;
+  --silas: #9a4040;
+  --akasha: #2e7a48;
+  --talya: #3a8a8a;
+  --loren: #c08040;
+  --loren-glow: #c0804022;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 10% 20%, #c0e0cc33 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, #b0d0e033 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 0%, #d0e8f022 0%, transparent 40%);
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 30% -5%, #88c8e828 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 105%, #88c8a828 0%, transparent 50%);
+  animation: breeze-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes breeze-drift {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* -- Header -- */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 48px 32px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--purple), var(--teal), var(--gold));
+}
+
+.header-campaign {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 54px);
+  color: var(--text-bright);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.header-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.header-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.header-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--bg-deep);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* -- Section Titles -- */
+h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+/* -- Section -- */
+.section {
+  margin-bottom: 60px;
+}
+
+/* -- Composition Bar -- */
+.comp-bar-container {
+  margin-bottom: 60px;
+}
+
+.comp-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.comp-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  transition: flex-basis 0.3s;
+}
+
+.comp-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.comp-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* -- Cards -- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px #2e7a4815;
+  border-color: #90c0a0;
+}
+
+/* -- Party Cards -- */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.party-card {
+  position: relative;
+  padding-left: 20px;
+}
+
+.party-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 2px;
+}
+
+.party-card .pc-name { font-weight: 600; font-size: 17px; margin-bottom: 4px; }
+.party-card .pc-class { font-size: 14px; color: var(--text-dim); margin-bottom: 2px; }
+.party-card .pc-player { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+.party-card.mist::before { background: var(--mist); }
+.party-card.mist .pc-name { color: var(--mist); }
+.party-card.avon::before { background: var(--avon); }
+.party-card.avon .pc-name { color: var(--avon); }
+.party-card.silas::before { background: var(--silas); }
+.party-card.silas .pc-name { color: var(--silas); }
+.party-card.akasha::before { background: var(--akasha); }
+.party-card.akasha .pc-name { color: var(--akasha); }
+.party-card.talya::before { background: var(--talya); }
+.party-card.talya .pc-name { color: var(--talya); }
+.party-card.loren::before { background: var(--loren); }
+.party-card.loren .pc-name { color: var(--loren); }
+
+.party-card.cameo {
+  border-style: dashed;
+  opacity: 0.92;
+}
+
+.cameo-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--loren);
+  background: var(--loren-glow);
+  padding: 2px 7px;
+  border-radius: 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* -- Timeline -- */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-event {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.timeline-event:last-child { margin-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: -30px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--bg-card);
+}
+
+.timeline-dot.combat { border-color: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.timeline-dot.exploration { border-color: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.timeline-dot.roleplay { border-color: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.timeline-dot.puzzle { border-color: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+.timeline-dot.loot { border-color: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+
+.timeline-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+
+.timeline-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.tag-combat { background: var(--red); }
+.tag-exploration { background: var(--blue); }
+.tag-roleplay { background: var(--purple); }
+.tag-puzzle { background: var(--teal); }
+.tag-loot { background: var(--gold); }
+
+.timeline-body {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.timeline-body ul { list-style: none; padding: 0; }
+
+.timeline-body li {
+  padding: 8px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.timeline-body li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  color: var(--border);
+  font-size: 8px;
+  top: 12px;
+}
+
+/* -- Spotlight Cards -- */
+.spotlight-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.spotlight-card {
+  position: relative;
+  border-top: 3px solid;
+}
+
+.spotlight-card .spot-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.spotlight-card .spot-name { font-weight: 600; font-size: 18px; }
+.spotlight-card .spot-class { font-size: 14px; color: var(--text-dim); }
+
+.spotlight-card ul { list-style: none; padding: 0; }
+
+.spotlight-card li {
+  padding: 8px 0;
+  padding-left: 18px;
+  position: relative;
+  font-size: 15px;
+}
+
+.spotlight-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.spotlight-card.mist { border-color: var(--mist); }
+.spotlight-card.mist .spot-name { color: var(--mist); }
+.spotlight-card.mist li::before { background: var(--mist); }
+
+.spotlight-card.avon { border-color: var(--avon); }
+.spotlight-card.avon .spot-name { color: var(--avon); }
+.spotlight-card.avon li::before { background: var(--avon); }
+
+.spotlight-card.silas { border-color: var(--silas); }
+.spotlight-card.silas .spot-name { color: var(--silas); }
+.spotlight-card.silas li::before { background: var(--silas); }
+
+.spotlight-card.akasha { border-color: var(--akasha); }
+.spotlight-card.akasha .spot-name { color: var(--akasha); }
+.spotlight-card.akasha li::before { background: var(--akasha); }
+
+.spotlight-card.talya { border-color: var(--talya); }
+.spotlight-card.talya .spot-name { color: var(--talya); }
+.spotlight-card.talya li::before { background: var(--talya); }
+
+.spotlight-card.loren { border-color: var(--loren); }
+.spotlight-card.loren .spot-name { color: var(--loren); }
+.spotlight-card.loren li::before { background: var(--loren); }
+
+/* -- Combat Breakdown -- */
+.combat-section {
+  background: linear-gradient(135deg, #f9f2f2, var(--bg-card));
+  border: 1px solid #d4a0a0;
+}
+
+.combat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.combat-title { font-weight: 600; font-size: 18px; color: var(--red); }
+
+.combat-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  background: var(--red);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.combat-info {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: var(--bg-deep);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.combat-info p { margin-bottom: 4px; font-size: 14px; }
+.combat-info strong { color: var(--text-bright); }
+
+.round-block {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: 6px;
+  border-left: 3px solid var(--red);
+}
+
+.round-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.round-block ul { list-style: none; padding: 0; }
+
+.round-block li {
+  padding: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border-bottom: 1px solid #e8e0e0;
+}
+
+.round-block li:last-child { border-bottom: none; }
+.round-block .actor { font-weight: 600; display: inline; }
+
+.crit-highlight {
+  background: linear-gradient(135deg, #dceede, #e6f4e8);
+  border: 1px solid #7aba8a;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.combat-result {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #dceede, #e6f4e8);
+  border: 1px solid #7aba8a;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* -- Loot Grid -- */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.loot-item {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.loot-item.magical {
+  border-color: #5aaa7a;
+  background: #eaf6ee;
+  box-shadow: inset 0 0 20px #3a8a5a11;
+}
+
+.loot-name { font-weight: 600; font-size: 15px; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--gold); }
+.loot-detail { font-size: 13px; color: var(--text-dim); }
+
+/* -- Quotes -- */
+.quotes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #3a8a5a08;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.quote-text { font-style: italic; font-size: 15px; color: var(--text); margin-bottom: 6px; line-height: 1.7; }
+.quote-speaker { font-weight: 600; font-size: 14px; }
+.quote-context { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.quote-block.mist { border-left-color: var(--mist); background: #7a5aaa08; }
+.quote-block.mist .quote-speaker { color: var(--mist); }
+.quote-block.avon { border-left-color: var(--avon); background: #4a80aa08; }
+.quote-block.avon .quote-speaker { color: var(--avon); }
+.quote-block.silas { border-left-color: var(--silas); background: #9a404008; }
+.quote-block.silas .quote-speaker { color: var(--silas); }
+.quote-block.akasha { border-left-color: var(--akasha); background: #2e7a4808; }
+.quote-block.akasha .quote-speaker { color: var(--akasha); }
+.quote-block.talya { border-left-color: var(--talya); background: #3a8a8a08; }
+.quote-block.talya .quote-speaker { color: var(--talya); }
+.quote-block.loren { border-left-color: var(--loren); background: #c0804008; }
+.quote-block.loren .quote-speaker { color: var(--loren); }
+.quote-block.dm { border-left-color: var(--text-dim); background: #4a5e5008; }
+.quote-block.dm .quote-speaker { color: var(--text-dim); }
+
+/* -- Journal Section -- */
+.journal-section {
+  background: linear-gradient(135deg, #faf6f0, #f5f0e8);
+  border: 1px solid #d4c8a8;
+  border-radius: 8px;
+  padding: 32px 28px;
+  position: relative;
+  box-shadow: inset 0 0 40px #d4c8a810;
+}
+
+.journal-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mist), #c4a8d8, var(--mist));
+  border-radius: 8px 8px 0 0;
+}
+
+.journal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.journal-icon { font-size: 22px; opacity: 0.7; }
+
+.journal-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--mist);
+  letter-spacing: 1px;
+}
+
+.journal-private {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #a09078;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #e8dcc8;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.journal-sub {
+  font-weight: 600;
+  font-size: 16px;
+  color: #6a5a44;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.journal-section ul { list-style: none; padding: 0; }
+
+.journal-section li {
+  padding: 8px 0;
+  padding-left: 16px;
+  position: relative;
+  font-size: 15px;
+  color: #3a3028;
+  line-height: 1.7;
+}
+
+.journal-section li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--mist);
+  opacity: 0.5;
+}
+
+/* -- Open Threads -- */
+.threads-list { list-style: none; padding: 0; }
+
+.thread-item {
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--teal);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.thread-item:last-child { margin-bottom: 0; }
+.thread-title { font-weight: 600; color: var(--text-bright); }
+.thread-desc { color: var(--text-dim); font-size: 14px; }
+
+/* -- Summary -- */
+.summary-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.summary-text p { margin-bottom: 12px; }
+.summary-text p:last-child { margin-bottom: 0; }
+
+strong { color: var(--text-bright); }
+
+/* -- Cliffhanger -- */
+.cliffhanger {
+  background: linear-gradient(135deg, #f9f2f2, #f4eaea);
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.cliffhanger .big-line {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 36px);
+  color: var(--red);
+  line-height: 1.3;
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: block;
+  margin-top: 8px;
+}
+
+/* -- Responsive -- */
+@media (max-width: 600px) {
+  .container { padding: 24px 16px 60px; }
+  .header { padding: 32px 20px 28px; }
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .header-meta { gap: 10px; }
+  .card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-campaign">Myrrindar: Winds of Warding</div>
+    <h1>The Whisper Prism</h1>
+    <div class="header-subtitle">Session 5</div>
+    <div class="header-meta">
+      <span>D&amp;D 5e &mdash; 2024 PHB</span>
+      <span>April 27, 2026</span>
+      <span>~2h 57m</span>
+      <span>5 Rounds &middot; Vault Guardian</span>
+    </div>
+  </header>
+
+  <!-- COMPOSITION BAR -->
+  <div class="comp-bar-container section">
+    <h2>Session Composition</h2>
+    <div class="comp-bar">
+      <div class="comp-segment" style="flex-basis: 45%; background: var(--red);">45%</div>
+      <div class="comp-segment" style="flex-basis: 30%; background: var(--purple);">30%</div>
+      <div class="comp-segment" style="flex-basis: 15%; background: var(--teal);">15%</div>
+      <div class="comp-segment" style="flex-basis: 7%; background: var(--blue);">7%</div>
+      <div class="comp-segment" style="flex-basis: 3%; background: var(--gold);">3%</div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--red);"></div> Combat</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--purple);"></div> Roleplay</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--teal);"></div> Puzzle / Lore</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--blue);"></div> Exploration</div>
+      <div class="comp-legend-item"><div class="comp-dot" style="background: var(--gold);"></div> Loot</div>
+    </div>
+  </div>
+
+  <!-- PARTY -->
+  <div class="section">
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="card party-card mist">
+        <div class="pc-name">Mist</div>
+        <div class="pc-class">Fairy Bard (Eloquence)</div>
+        <div class="pc-player">Paxmanz</div>
+      </div>
+      <div class="card party-card avon">
+        <div class="pc-name">Avon</div>
+        <div class="pc-class">Dragonborn Cleric</div>
+        <div class="pc-player">Redundakitty</div>
+      </div>
+      <div class="card party-card akasha">
+        <div class="pc-name">Akasha Amelia</div>
+        <div class="pc-class">Elf Druid</div>
+        <div class="pc-player">AkashaAmelia</div>
+      </div>
+      <div class="card party-card talya">
+        <div class="pc-name">Talya</div>
+        <div class="pc-class">Tiefling Monk</div>
+        <div class="pc-player">luckstang7</div>
+      </div>
+      <div class="card party-card loren cameo">
+        <div class="pc-name">Loren Lyster <span class="cameo-tag">Cameo</span></div>
+        <div class="pc-class">Human Barbarian (Path of the Zealot)</div>
+        <div class="pc-player">Helio</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSION SUMMARY -->
+  <div class="section">
+    <h2>Session Summary</h2>
+    <div class="summary-text">
+      <p>Session 5 picked up exactly where the cliffhanger left it: the Vault Guardian rising in the Stillwind Lab, Silas standing on a glowing tile he never noticed. The DM retconned a small mercy for Avon's active Detect Magic &mdash; the tile lit up just before Silas stepped on it &mdash; but Silas vanished anyway in a flash of arcane circle. The party was four, and then five: a blonde-haired Barbarian named <strong>Loren</strong> burst through the doors mid-combat, professional, taciturn, and in a hurry to get paid. Mist's Heat Metal cooked the construct from the inside while Avon's Spiritual Weapon battered it from outside, and Loren ended it with a savage greataxe to the neck. Two arcane turrets came with the construct, and the party traded reactive 10-foot pulses for steady acid punches and crossbow bolts until both pillars went silent.</p>
+      <p>After the dust settled, Mist used Mage Hand to investigate three pedestal items: a small <strong>Bag of Beans</strong> (later identified as magical, seven beans inside), a heavy chest holding 28 gold and two healing potions, and a mysterious orb with mist swirling inside its glass. When Avon channeled an Identify on the orb and Mist touched it at the same time, <strong>both characters disappeared</strong> &mdash; pulled into a frozen tableau of a battle and a ritual, every figure mid-action and silent, every spell suppressed. Avon memorized the scene; together they discovered they could <em>transpose</em> the figures by shoving them, and shoving the kneeling ritual victim hard enough flung them back to reality. The orb went dark.</p>
+      <p>Loren escorted the party to <strong>the Crowned Pheasant</strong>, an upscale tavern in the Noble District where <strong>Evrin</strong> waited in a black velvet tuxedo. He took the prism into a metal-lined box, paid them in their existing agreement, and pitched a long-term contract framed by a startlingly principled speech: <em>&ldquo;We don't shy away from dirty jobs, but I'd like to lift the bottom of this city up, not just the rich.&rdquo;</em> Mist's <strong>Persuasion 25</strong> earned an <em>&ldquo;I like your style, kid&rdquo;</em> and pried a <strong>signing bonus</strong> out of Evrin &mdash; but only for the long-term contract, not the original prism deal (Evrin: <em>&ldquo;I would not pay you a copper more than what we agreed&rdquo;</em>). Akasha shut down renegotiating the <em>prism</em> deal with <em>&ldquo;a deal is a deal,&rdquo;</em> but Mist's separate gambit landed: he agreed to the long-term contract and explicitly cashed in the promised bonus. The party left with a code phrase (<em>&ldquo;purchase a seagull&rdquo;</em>) and a free suite for the night. Mist privately warned Avon to keep the orb-vision a secret from Loren and Evrin &mdash; the party would investigate the frozen tableau themselves first.</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <!-- Act I -->
+      <div class="timeline-event">
+        <div class="timeline-dot puzzle"></div>
+        <div class="timeline-time">00:00 &ndash; 04:55</div>
+        <div class="timeline-title">Act I: Cliffhanger Resolution &amp; Initiative</div>
+        <span class="timeline-tag tag-puzzle">Puzzle / Lore</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Mist</strong> delivered the session 4 recap; the DM rewarded him with <strong>Inspiration</strong> for it</li>
+            <li>DM retconned a small mercy: <strong>Avon's</strong> active Detect Magic ritual revealed a glowing tile under Silas a split-second before he stepped on it &mdash; not enough time to stop him</li>
+            <li><strong>Silas</strong> stepped onto the tile; a magic circle flared; Silas vanished. The circle went inert.</li>
+            <li>The Vault Guardian turned and announced: <em>&ldquo;Prepare to be annihilated.&rdquo;</em></li>
+            <li>Initiative (Foundry tracker): <strong>Avon 21 &rarr; Mist 19 &rarr; Vault Guardian 17 &rarr; Akasha 14 &rarr; Top Turret 12 &rarr; Talya 10 &rarr; Lower Turret 10 &rarr; Loren Lyster 10</strong>. Akasha goes BEFORE Talya every round.</li>
+            <li>Construct described: large metal frame, encased arcane crystal in chest, helmet-capped, arcane striations across its body. <em>&ldquo;Clearly a metal one this time.&rdquo;</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act II -->
+      <div class="timeline-event">
+        <div class="timeline-dot combat"></div>
+        <div class="timeline-time">04:55 &ndash; 87:00</div>
+        <div class="timeline-title">Act II: The Vault Guardian (Combat)</div>
+        <span class="timeline-tag tag-combat">Combat</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Five-round combat against a 10-foot Vault Guardian and two arcane turrets that revealed mid-fight from the pillars (full breakdown below)</li>
+            <li><strong>Loren</strong> burst through the doors at minute ~30 of the session (Round 1 still in progress) &mdash; the DM abandoned the partial Round 1 and slotted her at her actual initiative (10 &mdash; last in the round) from Round 2 onward</li>
+            <li><strong>Mist's Silvery Barbs</strong> reaction nullified the Vault Guardian's natural-20 critical hit on Avon &mdash; the reroll still hit, but only as a normal hit, saving Avon's Spiritual Weapon concentration</li>
+            <li><strong>Mist sustained Heat Metal</strong> across Rounds 1-3 &mdash; the construct's casing glowed red, then began to melt</li>
+            <li><strong>Loren killed the Vault Guardian</strong> in Round 3 with Reckless Greataxe + Savage Attacker + max Divine Fury Radiant for <strong>19 damage</strong>: <em>&ldquo;sinks it like right into the neck&rdquo;</em></li>
+            <li>Friendly-fire pulse: Mist's crossbow bolt triggered the Top Turret's reactive arcane pulse (mechanic was unknown until that shot revealed it) &mdash; both Avon and Akasha rolled 6 on DC 13 DEX, took 10 damage each. Mist Healing-Worded Akasha 7 HP immediately</li>
+            <li><strong>Akasha killed the Top Turret</strong> in Round 4 with a clean club + sickle 1-2 punch</li>
+            <li><strong>Talya killed the Lower Turret</strong> in Round 5 with two acid Hadouken punches at 15-ft reach &mdash; <em>&ldquo;sounds like a bag of wet spaghetti as it hits the ground. Plop.&rdquo;</em></li>
+            <li>Nobody went down. DM: <em>&ldquo;You guys did a lot better than I was expecting.&rdquo;</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act III -->
+      <div class="timeline-event">
+        <div class="timeline-dot puzzle"></div>
+        <div class="timeline-time">87:00 &ndash; 108:00</div>
+        <div class="timeline-title">Act III: The Three Pedestals</div>
+        <span class="timeline-tag tag-puzzle">Puzzle / Lore</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Mist</strong> investigated all three pedestals via <strong>Mage Hand</strong>, cautious after taking the friendly-fire pulse to 1-HP-from-down range</li>
+            <li><strong>Whisper Prism</strong> (center pedestal): emits a cacophony of indecipherable whispers within ~10 feet. Mist dropped it and ran when the whispers started.</li>
+            <li><strong>Bag of Beans</strong> (left pillar, small leather bag): Mist's History 18 recognized it &mdash; planting beans one-by-one produces effects, dumping all of them causes them to explode. Seven beans inside. Mist pocketed the bag.</li>
+            <li><strong>Heavy chest</strong> (left of pillar, on floor): too heavy for Mage Hand. Talya investigated &mdash; unlocked. Inside: 28 gold and 2 healing potions.</li>
+            <li><strong>Mysterious orb</strong> (right pillar): swirling mist inside a glass sphere on a fitted holder</li>
+            <li><strong>Avon's</strong> Detect Magic ritual completed: Whisper Prism = Divination, Bag of Beans = Evocation/Conjuration mix, Orb = Conjuration</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act IV -->
+      <div class="timeline-event">
+        <div class="timeline-dot puzzle"></div>
+        <div class="timeline-time">108:00 &ndash; 130:00</div>
+        <div class="timeline-title">Act IV: The Frozen Tableau (Mist &amp; Avon Disappear)</div>
+        <span class="timeline-tag tag-puzzle">Puzzle / Lore</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Avon</strong> used <strong>Channel Divinity (Preserve Knowledge)</strong> to cast <strong>Identify</strong> on the orb without the 100-gp pearl. <strong>Mist</strong> touched the orb at the same time out of curiosity.</li>
+            <li><strong>Both vanished.</strong> <strong>Loren</strong> and <strong>Akasha</strong> simultaneously dove for the Whisper Prism on the floor &mdash; Akasha won the simultaneous DEX check and grabbed it. The whispers seemed to focus, trying to be heard, but stayed indecipherable.</li>
+            <li>Mist and Avon found themselves in <strong>two frozen scenes sharing one space</strong>: an outdoor battle (a fighter mid-leap with sword, an archer's arrows headed for a victim's back) and a sheared-in-half building with three robed figures conducting a ritual</li>
+            <li>Inside the ritual: a kneeling figure praying; a second figure with a morning star raised over their head; a stone pedestal with two objects, with a third (a <strong>red crystal in ornate gold housing</strong>) fallen on the floor next to it</li>
+            <li>Everything frozen, dead silent &mdash; no breeze. <strong>Mist's Mage Hand fizzled like a lighter clicking. Avon's Light spell did nothing.</strong> No magic in this place.</li>
+            <li><strong>Avon</strong> pinched his cheek (1 damage) &mdash; not a dream. <strong>Insight 19</strong>: committed every face, weapon, and architectural detail to memory for later research. Everything was foreign &mdash; no cultural or architectural match either character recognized.</li>
+            <li><strong>Avon</strong> poked the kneeling ritual victim with the blunt end of his spear &mdash; the body <strong>transposed</strong> sideways. A harder shove vacuumed both Mist and Avon back to reality.</li>
+            <li>They reappeared next to the orb &mdash; now an empty crystal sphere, the swirling mist gone. Time passage outside was minimal.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act V -->
+      <div class="timeline-event">
+        <div class="timeline-dot loot"></div>
+        <div class="timeline-time">130:00 &ndash; 142:00</div>
+        <div class="timeline-title">Act V: Loot Split &amp; Departure</div>
+        <span class="timeline-tag tag-loot">Loot</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Akasha Insight 22</strong> on Loren &mdash; fully truthful, no deception</li>
+            <li><strong>Loren</strong> refused her cut of the treasure (already compensated by Evrin)</li>
+            <li>7 gold each across the four PCs. Avon: <em>&ldquo;As a cleric, I probably shouldn't need potions.&rdquo;</em> Talya holding both healing potions for now.</li>
+            <li><strong>Mist</strong> pocketed the Bag of Beans, planning to plant them later</li>
+            <li>Party walked out of the Stillwind Lab without further incident, sun getting low</li>
+            <li>Mist tried to renegotiate the Whisper Prism deal now that Silas was gone &mdash; Loren refused to take the prism without the party, framing the original deal as binding</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act VI -->
+      <div class="timeline-event">
+        <div class="timeline-dot roleplay"></div>
+        <div class="timeline-time">142:00 &ndash; 167:00</div>
+        <div class="timeline-title">Act VI: The Crowned Pheasant (Noble District)</div>
+        <span class="timeline-tag tag-roleplay">Roleplay</span>
+        <div class="timeline-body">
+          <ul>
+            <li>Walking through Skybreeze, citizens gave the party friendly waves and thanks &mdash; word of the <strong>Wardstone Festival defense</strong> (Session 1) was spreading. Their hideout actions remained unknown.</li>
+            <li>Mist had never been to the Noble District before &mdash; buskers aren't welcome here. Stone floors, stained glass, very upscale tavern.</li>
+            <li><strong>Evrin</strong> waited at a private table in a <strong>black velvet tuxedo</strong>, speaking with practiced upscale diction &mdash; surprising for someone with his criminal background</li>
+            <li><strong>Loren</strong> delivered a professional debrief: prism retrieved, vision witnessed, Silas missing. Highlighted Akasha's focus on the prism, Mist and Avon's curiosity, and Talya's persistence in melee.</li>
+            <li>Evrin's reaction to Silas's absence: <strong>deeply concerned, hiding it</strong>. Mist and Loren both rolled Insight 17/21 to spot the hide.</li>
+            <li>Akasha pulled the prism out at the table &mdash; surrounding patrons started hearing the whispers, one woman started crying, several got up and left. Evrin: <em>&ldquo;put it away, put it away.&rdquo;</em></li>
+            <li>Akasha asked Evrin directly <em>&ldquo;why is it so important?&rdquo;</em> &mdash; honest answer: <em>&ldquo;What the ultimate destiny for this item is, I don't know. I just know that I needed to acquire it to get paid.&rdquo;</em></li>
+            <li><strong>Evrin's pitch:</strong> <em>&ldquo;I follow the same code as your compatriot [Silas]. We don't shy away from dirty jobs, but I'd like to turn my organization into something seen as legitimate. Lift the bottom up, not just the rich.&rdquo;</em></li>
+            <li><strong>Mist Persuasion 25</strong> won a long-term-contract signing bonus &mdash; Evrin: <em>&ldquo;I like your style, kid.&rdquo;</em></li>
+            <li><strong>Akasha shut down renegotiating the original prism deal:</strong> <em>&ldquo;The deal was for information that was already provided. So the time for renegotiations, I believe, has passed. Because a deal is a deal.&rdquo;</em></li>
+            <li><strong>Evrin parsed the two threads cleanly:</strong> <em>&ldquo;I absolutely would not pay you a copper more than what we agreed. However, what your friend is suggesting is that we enter a more long-term agreement, and in that case a signing bonus, I'm sure, would be more than acceptable.&rdquo;</em></li>
+            <li>Mist (Insight 6) was moved by the reformer speech and agreed to long-term work, then explicitly <strong>cashed in the signing bonus</strong>: <em>&ldquo;Alright, but remember the signing bonus I think you promised.&rdquo;</em></li>
+            <li>Talya agreed; <strong>Akasha extended an alliance but declined formal membership</strong>, retaining the option to say no; Avon stayed silent</li>
+            <li><strong>Code phrase to summon Evrin:</strong> leave a message with the barkeep asking to <em>&ldquo;purchase a seagull&rdquo;</em></li>
+            <li>Akasha placed the prism into Evrin's metal-lined box; Evrin took it, bowed, and left</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Act VII -->
+      <div class="timeline-event">
+        <div class="timeline-dot roleplay"></div>
+        <div class="timeline-time">167:00 &ndash; 177:00</div>
+        <div class="timeline-title">Act VII: Aftermath</div>
+        <span class="timeline-tag tag-roleplay">Roleplay</span>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Loren</strong> lingered, ate a small pie, answered Mist's questions about Evrin honestly: <em>&ldquo;I would not call dirty jobs noble. He goes about his dealings with high decorum and is honest, if not as a person himself.&rdquo;</em></li>
+            <li>Loren's primary work is security &mdash; once protected the traveling musician <strong>Sylvia Plath</strong> (Mist knows of her, with a flicker of professional jealousy)</li>
+            <li>DM retconned in Silas-backstory connection: Silas was a criminal with a moral code, Evrin was in his crew, looked up to him &mdash; trying to follow the same path</li>
+            <li><strong>Mist privately to Avon:</strong> keep the orb-vision secret from Loren and Evrin &mdash; <em>&ldquo;I'd rather we find out ourselves first.&rdquo;</em></li>
+            <li>Akasha enjoyed her turkey leg. Loren left with a small pie. Long rest in the upscale suite Evrin pre-paid for.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CHARACTER SPOTLIGHTS -->
+  <div class="section">
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="card spotlight-card mist">
+        <div class="spot-header">
+          <div class="spot-name">Mist</div>
+          <div class="spot-class">the Silver-Tongued Trickster</div>
+        </div>
+        <ul>
+          <li><strong>Silvery Barbs</strong> reaction saved Avon from a critical hit in Round 1 &mdash; the construct rerolled the lower of two d20s and <em>still</em> hit, but the crit was nullified</li>
+          <li>Cast <strong>Heat Metal (Lv 2)</strong> in Round 1 (8 fire damage on cast) and sustained it through Rounds 2-3 (7 then 8 on the sustain ticks) &mdash; the metal casing glowed red, then melted visibly. Auto-damage with no save. <strong>23 fire damage total</strong> across three rounds &mdash; quietly the highest sustained-damage source in the fight.</li>
+          <li><strong>Mage Hand</strong> investigation of all three pedestal items &mdash; touched the Whisper Prism first to test, ran when the whispers started, then opened the Bag of Beans bag at distance</li>
+          <li><strong>History 18</strong> &mdash; recognized the Bag of Beans from stories, knew the explode-vs-plant rules. Pocketed the bag with a wink: <em>&ldquo;Oh nobody wants those, just some ordinary beans, right anyway.&rdquo;</em></li>
+          <li>Touched the orb at the same time as Avon's Identify &mdash; vanished with him into the frozen tableau</li>
+          <li><strong>Persuasion 25 on Evrin</strong> &mdash; earned an <em>&ldquo;I like your style, kid&rdquo;</em> AND a <strong>signing bonus</strong> for the long-term contract. Akasha shut down renegotiating the <em>original prism deal</em> in parallel, but Evrin explicitly carved out the long-term-contract signing bonus as separate. Mist cashed it in: <em>&ldquo;alright, but remember the signing bonus I think you promised.&rdquo;</em></li>
+          <li>Privately warned Avon to keep the vision secret from Loren and Evrin &mdash; <em>&ldquo;I'd rather we find out ourselves first.&rdquo;</em></li>
+          <li>Friendly-fire moment: triggered the Top Turret's reactive pulse with a crossbow bolt (pulse mechanic was unknown until that shot revealed it) &rarr; 10 damage each to Akasha and Avon on failed DEX saves &rarr; immediate Healing Word apology for 7 HP</li>
+          <li>Helped Avon parse the in-melee disadvantage rule: <em>&ldquo;You can take more touch spells. I think Inflict Wounds or something like that would be pretty good.&rdquo;</em> &mdash; Bard spell knowledge offered as tactical advice across class lines.</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card avon">
+        <div class="spot-header">
+          <div class="spot-name">Avon</div>
+          <div class="spot-class">the Dragonborn Shield</div>
+        </div>
+        <ul>
+          <li><strong>Detect Magic ritual</strong> active throughout &mdash; caught Silas's tile a split-second too late, but spotted the magic schools on all three pedestal items (Divination, Evocation/Conjuration, Conjuration)</li>
+          <li><strong>Spiritual Weapon (Lv 2)</strong> sustained across the entire fight &mdash; the giant spiked mace landed multiple bonus-action hits</li>
+          <li>Tanked the construct's tether grab on Round 1 &mdash; STR save 12 broke the grapple cleanly the next round; held concentration through a near-fatal nat-20 hit (saved by Silvery Barbs)</li>
+          <li><strong>Channel Divinity</strong> used twice &mdash; once for <strong>Mind Spike</strong> precast on the Lower Turret (Round 5, 6 damage on save), once for <strong>Identify</strong> on the orb (no 100-gp pearl needed via Preserve Knowledge)</li>
+          <li><strong>Insight 19</strong> in the frozen tableau &mdash; committed every face, weapon, and piece of clothing to memory for later library research</li>
+          <li>Discovered the figures could be <strong>transposed</strong> by physical force &mdash; pinching his own cheek (1 damage) confirmed it wasn't a dream</li>
+          <li>Strategic voice throughout: <em>&ldquo;Just to basically face tank as I always have. I would suggest spreading out.&rdquo;</em></li>
+          <li>Distributed healing potions: <em>&ldquo;As a cleric, I probably shouldn't need potions. You should go to the frontline or someone who cannot heal themselves.&rdquo;</em></li>
+          <li>Earned <strong>DM Inspiration</strong> at [70:02] for honesty about a roll outcome &mdash; separate from Mist's earlier recap-intro Inspiration grant</li>
+          <li>Self-disciplined social moment during the Evrin Insight check: considered casting <strong>Guidance</strong> to support the roll, then declined &mdash; <em>&ldquo;It's probably too weird to use Guidance here, so I won't.&rdquo;</em> The tactician-Cleric voice catching itself before a casting tell in a tavern.</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card akasha">
+        <div class="spot-header">
+          <div class="spot-name">Akasha Amelia</div>
+          <div class="spot-class">the Druid Who Holds the Line</div>
+        </div>
+        <ul>
+          <li><strong>Upcast Guiding Bolt (Lv 2)</strong> opened the fight at 12 radiant damage &mdash; the bolt that triggered the arcane turrets to reveal themselves</li>
+          <li><strong>Healing Word on Talya for 7 HP</strong> in Round 3 &mdash; clutch save right after Talya took a 9-damage turret beam</li>
+          <li><strong>Killed the Top Turret</strong> with a clean club + sickle 1-2 punch in Round 4 &mdash; <em>&ldquo;Big purple bursts, and the half that you cut off clatters to the floor.&rdquo;</em></li>
+          <li>Took heavy damage across the fight &mdash; Round 3 Top Turret beam dropped her to 5 HP; Round 4 friendly-fire pulse from Mist would have dropped her to 0 if not for Avon's earlier Cure Wounds 13 HP</li>
+          <li><strong>Acrobatics dive for the prism</strong> &mdash; beat Loren by a hair and grabbed it just as Mist and Avon vanished. The whispers seemed to focus on her, trying to be heard, but stayed indecipherable.</li>
+          <li><strong>Insight 22 on Loren</strong> &mdash; read her as fully truthful before the party agreed to follow her</li>
+          <li>Held the prism through the entire Crowned Pheasant meeting &mdash; chose when to reveal it, asked Evrin directly <em>&ldquo;why is it so important?&rdquo;</em></li>
+          <li><strong>Refused the renegotiation gambit</strong> with the strongest principled voice of the night: <em>&ldquo;The deal was for information that was already provided. So the time for renegotiations, I believe, has passed. Because a deal is a deal.&rdquo;</em></li>
+          <li><strong>Declined formal membership in Evrin's organization</strong> &mdash; extended alliance instead, retaining the option to say no</li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card talya">
+        <div class="spot-header">
+          <div class="spot-name">Talya</div>
+          <div class="spot-class">the Acid Fist (and Dodge Tank)</div>
+        </div>
+        <ul>
+          <li>4'10&quot; Tiefling Monk &mdash; Akasha noted post-combat she's <em>&ldquo;only 4'10&quot;... I don't know if that makes a difference,&rdquo;</em> establishing she's small but, as Mist put it, <em>&ldquo;the monk lady... does not seem like someone to be messed with&rdquo;</em></li>
+          <li><strong>Elemental Attunement (Acid)</strong> for the entire fight &mdash; committed to the build choice from Session 4</li>
+          <li><strong>First-round acid hit on the Vault Guardian for 7 damage</strong> with Silvery Barbs advantage from Mist &mdash; <em>&ldquo;He's less armored than I am. Hit him!&rdquo;</em></li>
+          <li><strong>Dodge-tank loop</strong>: <em>&ldquo;I also got cheesed by using my dodge action every turn&rdquo;</em> &mdash; drew turret attention away from the casters</li>
+          <li><strong>Flurry of Blows</strong> in Round 2 (1 Focus point); held her last Focus point through the rest of the fight</li>
+          <li><strong>Killing blow on the Lower Turret</strong> in Round 5 with the second of two acid Hadouken punches at 15-ft reach &mdash; <em>&ldquo;sounds like a bag of wet spaghetti as it hits the ground. Plop.&rdquo;</em></li>
+          <li><strong>Nat 20 DEX save</strong> on the Vault Guardian's death explosion &mdash; took zero damage while Akasha took 3</li>
+          <li>Took 22 total damage across the fight (most of it from the two Lower Turret beams)</li>
+          <li>Received Mist's <strong>Bardic Inspiration</strong> in Round 5 &mdash; banked because both her killing-blow punches hit cleanly without needing the rider</li>
+          <li>Loren's debrief specifically singled her out: <em>&ldquo;the persistence of Talya just taking hit after hit again, or hitting the construct again and again.&rdquo;</em></li>
+        </ul>
+      </div>
+
+      <div class="card spotlight-card loren">
+        <div class="spot-header">
+          <div class="spot-name">Loren</div>
+          <div class="spot-class">the Blonde Contractor &middot; Cameo</div>
+        </div>
+        <ul>
+          <li>Burst through the doors at minute ~30 of the session (Round 1 still in progress) &mdash; the DM abandoned the partial Round 1 and slotted her at her actual initiative (10 &mdash; last in the round) from Round 2 onward</li>
+          <li><strong>Killing blow on the Vault Guardian</strong> in Round 3 with <strong>Reckless Greataxe + Savage Attacker + max Divine Fury Radiant</strong> = <strong>19 total damage</strong>. <em>&ldquo;Sinks it like right into the neck. Makes it all the way to about halfway through its body.&rdquo;</em></li>
+          <li>Professional, taciturn during combat: <em>&ldquo;all attention focused on the construct, not saying anything to these people yet. We're here for one thing.&rdquo;</em></li>
+          <li>Watched the prism the entire investigation: <em>&ldquo;this blonde lady has eyes on that prism at all times at zero, just in case.&rdquo;</em></li>
+          <li>Dove for the prism alongside Akasha &mdash; lost the simultaneous DEX check by a hair, recovered gracefully: <em>&ldquo;I was just trying to make sure that the prism didn't get hurt. Happy that you're holding it.&rdquo;</em></li>
+          <li>Formal introductions on the way out: extended a handshake to Mist, then Avon, then Talya (who'd been in combat the whole time with no name exchange)</li>
+          <li>Established the <strong>contractor-not-loyalist</strong> distinction with Evrin: <em>&ldquo;While I really do respect everyone as a boss, he is not my friend and it is not my business. I am just paid to get that prism back.&rdquo;</em></li>
+          <li>Backstory reveal: previously security for traveling musician <strong>Sylvia Plath</strong></li>
+          <li>Refused a treasure cut, refused payment from the party, professional throughout</li>
+          <li>Final read on Evrin: <em>&ldquo;I would not call dirty jobs noble. He goes about his dealings with a high level of decorum, and I know him to be honest in his dealings, if not as a person himself.&rdquo;</em></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMBAT ENCOUNTER -->
+  <div class="section">
+    <h2>Combat Encounter</h2>
+    <div class="card combat-section">
+      <div class="combat-header">
+        <div class="combat-title">The Vault Guardian &amp; Two Arcane Turrets &mdash; Stillwind Lab Vault</div>
+        <span class="combat-pill">5 Rounds</span>
+      </div>
+
+      <div class="combat-info">
+        <p><strong>Enemies:</strong> 1 Vault Guardian (large metal arcane construct, encased crystal core, helmet-capped) + 2 Arcane Turrets (pillar-mounted, reactive 10-ft arcane pulse on hit &mdash; DC 13 DEX, 10 dmg)</p>
+        <p><strong>Initiative</strong> (Foundry tracker): Avon 21 &rarr; Mist 19 &rarr; Vault Guardian 17 &rarr; <strong>Akasha 14</strong> &rarr; Top Turret 12 &rarr; Talya 10 &rarr; Lower Turret 10 &rarr; Loren Lyster 10. Akasha goes BEFORE Talya every round.</p>
+        <p><strong>Trigger:</strong> Silas vanished into a magic circle the moment combat began; the Guardian activated and announced <em>&ldquo;Prepare to be annihilated.&rdquo;</em> Loren joined at [30:37], slotted at her actual init (10, last in the round).</p>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 1 &mdash; Partial (abandoned at Loren's arrival)</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon (21)</span> &mdash; <strong>Spiritual Weapon (Lv 2)</strong> manifested a giant spiked mace. <strong>23 to hit, 7 force damage.</strong> <em>&ldquo;That puts a big dent in his shoulder.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--mist);">Mist (19)</span> &mdash; Flew to corner. <strong>Heat Metal (Lv 2)</strong> on the Guardian &mdash; auto-damage, no save: <strong>8 fire damage</strong>. Concentration begins. <em>&ldquo;He looks like he's made of metal.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--text-dim);">Vault Guardian (17)</span> &mdash; Arcane tether/grab on Avon &mdash; <span class="crit-highlight">NAT 20, total 22 (CRIT)</span>. <strong>Mist Silvery Barbs reaction (Lv 1)</strong> &mdash; reroll lower, still hits but normal hit only. <strong>8 damage to Avon (7 bludgeoning + 1 lightning).</strong> Avon grappled, pulled in. Guardian uppercut on Avon &mdash; Avon DEX-saves out. Avon CON save on Spiritual Weapon &mdash; passes.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha (14)</span> &mdash; <strong>Guiding Bolt upcast (Lv 2)</strong> &mdash; hits, <strong>12 radiant damage.</strong> Cracks Guardian's chest plating and triggers the two Arcane Turrets to reveal from the pillars.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Top Turret (12)</span> &mdash; Beam at Avon &mdash; angle blocked by pillar, shoots the floor. <strong>Misses.</strong></li>
+          <li><span class="actor" style="color: var(--talya);">Talya (10)</span> &mdash; <strong>Elemental Attunement (Acid)</strong>. Punched Guardian with Silvery Barbs advantage from Mist &mdash; <strong>17 hits, 7 acid damage.</strong> <em>&ldquo;He's less armored than I am. Hit him!&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--text-dim);">Lower Turret (10)</span> &mdash; Beam at Avon &mdash; 15 vs AC, <strong>misses</strong>.</li>
+          <li><em>Loren arrives at [30:37]; DM abandons partial Round 1 and restarts from the top with Loren slotted at her actual init (10, last).</em></li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 2 &mdash; Loren in the Order</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; STR save 12 &mdash; breaks grapple. Bonus: Spiritual Weapon attack &mdash; <strong>hits, 6 force damage.</strong> Action: <strong>Cure Wounds on himself</strong> (1&times; Lv 1 slot, &ldquo;almost max&rdquo;).</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Bonus: Heat Metal sustain &mdash; <strong>7 fire damage.</strong> Action: <strong>Dissonant Whispers (Lv 1)</strong> &mdash; Wis save DC 13, Guardian rolls <strong>19, saves.</strong> &#9888;&#65039; <strong>Rules miss:</strong> Dissonant Whispers does half damage on a successful save (3d6 &rarr; ~5 psychic). Both DM and Mist forgot to apply it &mdash; the construct should have taken half damage anyway. <em>&ldquo;Damn it. I hate save-or-suck though. I mean, it's not even sucking.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--text-dim);">Vault Guardian</span> &mdash; Tries to recharge tether &mdash; <strong>fails.</strong> Falls back to <strong>10-ft arcane burst</strong> (DC 10 CON). Avon takes 3, Talya rolls 9 &rarr; 1 damage. Low rolls all around.</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Action: Club on Top Turret (the one she's adjacent to) &mdash; hits, <strong>4 damage.</strong> Bonus: Sickle &mdash; <strong>misses (11).</strong></li>
+          <li><span class="actor" style="color: var(--text-dim);">Top Turret</span> &mdash; Beam on Akasha &mdash; hits, <strong>8 damage.</strong></li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Action: Punches Guardian &mdash; 19 hits (acid). Bonus: <strong>Flurry of Blows</strong> (1 Focus) &mdash; 1 hit, 1 miss.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Lower Turret</span> &mdash; Beam on Talya &mdash; hits, <strong>9 damage.</strong></li>
+          <li><span class="actor" style="color: var(--loren);">Loren</span> &mdash; Bursts in, sizes up the room. <em>&ldquo;All attention focused on the construct, not saying anything to these people yet.&rdquo;</em> Bonus: <strong>Enter Rage.</strong> Action: <strong>Reckless Greataxe</strong> &times;2. Hit 1: <strong>20 to hit, 10 weapon + 6 radiant Divine Fury = 16 total</strong>. Hit 2: misses (&ldquo;bats away&rdquo;).</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 3 &mdash; The Killing Blow</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Bonus: Spiritual Weapon &mdash; hits Guardian (force damage). Action: <strong>Disengage</strong> and move to rear behind Loren.</li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Bonus: Heat Metal sustain &mdash; <strong>8 fire damage.</strong> Action: Crossbow at Top Turret (the one Akasha is engaging) &mdash; <strong>15 hits, 9 damage.</strong></li>
+          <li><span class="actor" style="color: var(--text-dim);">Vault Guardian</span> &mdash; <em>&ldquo;Kind of done with his fancy tricks.&rdquo;</em> Slam on Talya &mdash; <strong>15 vs AC, misses.</strong></li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Action: Thorn Whip on Top Turret (in melee, disadvantage, accepted) &mdash; hits. Bonus: <strong>Healing Word on Talya &mdash; 7 HP</strong> (1&times; Lv 1 slot, clutch).</li>
+          <li><span class="actor" style="color: var(--text-dim);">Top Turret</span> &mdash; Beam on Akasha &mdash; <strong>18 hits, 10 damage.</strong> Akasha down to <strong>5 HP</strong>.</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Action: Punches Guardian &mdash; <strong>8 acid damage.</strong> Brings Guardian to ~14 HP.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Lower Turret</span> &mdash; Beam on Loren &mdash; <strong>misses (7).</strong></li>
+          <li><span class="actor" style="color: var(--loren);">Loren</span> &mdash; Bonus: Re-rage. Action: <strong>Reckless Greataxe with advantage &mdash; 21 to hit.</strong> Savage Attacker (rolls weapon damage twice, takes higher) &rarr; <strong>10+2 = 12 weapon</strong>. <strong>Divine Fury (Radiant) MAX d6+1 = 7 radiant</strong>. <span class="crit-highlight">Total 19 damage. KILLING BLOW on Vault Guardian.</span> <em>&ldquo;Sinks it like right into the neck. Makes it all the way to about halfway through its body.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--text-dim);">Vault Guardian death explosion</span> (Round 3&rarr;4 boundary) &mdash; Talya and Akasha DEX save. <strong>Talya NAT 20 &mdash; 0 damage.</strong> Akasha saves but takes <strong>3 damage</strong> (down to 12 HP).</li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 4 &mdash; Friendly Fire &amp; the Top Turret</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Bonus: Spiritual Weapon at Top Turret &mdash; <strong>misses.</strong> Action: Move to Akasha + <strong>Cure Wounds &mdash; 13 HP</strong> (1&times; Lv 1, Avon's last Lv 1 slot). DM: <em>&ldquo;That's a clutch heal on Akasha.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Action: Crossbow on Top Turret (the one near Akasha) &mdash; <strong>14 hits (vs AC 14), 4 damage.</strong> <strong>REACTION: Top Turret arcane pulse</strong> (DC 13 DEX, 10ft) &mdash; first pulse anyone has seen, mechanic unknown until now. Avon rolls 6, fails &mdash; <strong>10 damage</strong>. Akasha rolls 6, fails &mdash; <strong>10 damage</strong> (would have been 0 without Avon's Cure Wounds same round). Bonus: <strong>Healing Word on Akasha &mdash; 7 HP.</strong> <em>&ldquo;He's gonna feel bad.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; <strong>Arcana 21</strong> &mdash; correctly reads that the Top Turret won't pulse again (one-shot reaction). The still-untouched Lower Turret can still trigger one. Action: <strong>Club on Top Turret &mdash; 14 hits, MAX damage.</strong> Bonus: <strong>Sickle &mdash; hits.</strong> <span class="crit-highlight">TOP TURRET DESTROYED by Akasha.</span> <em>&ldquo;Big purple bursts, and the half that you cut off clatters to the floor.&rdquo;</em></li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Action: Punches Lower Turret from 15 ft (Elemental reach) &mdash; <strong>5 acid damage.</strong> Holds last Focus point.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Lower Turret</span> &mdash; Beam on Talya &mdash; <strong>19 hits, 3 damage.</strong></li>
+          <li><span class="actor" style="color: var(--loren);">Loren</span> &mdash; Insight 17 &mdash; reads the turret pulse as a one-time event. Charges Lower Turret. Action: <strong>Reckless Greataxe &mdash; misses (just under).</strong> Bonus: Re-rage. Backs up.</li>
+          <li><em>DM Inspiration to Avon at [70:02] for honesty about a roll outcome.</em></li>
+        </ul>
+      </div>
+
+      <div class="round-block">
+        <div class="round-label">Round 5 &mdash; The Hadouken</div>
+        <ul>
+          <li><span class="actor" style="color: var(--avon);">Avon</span> &mdash; Action: <strong>Channel Divinity (Preserve Knowledge)</strong> &rarr; precasts <strong>Mind Spike</strong> on Lower Turret (no slot/components). DC 13 Wis, turret rolls 18 &rarr; saves, half damage: <strong>6.</strong></li>
+          <li><span class="actor" style="color: var(--mist);">Mist</span> &mdash; Action: Crossbow on Lower Turret &mdash; <strong>misses, pings the back wall.</strong> Bonus: <strong>Bardic Inspiration to Talya</strong> (1&times; BI use; Talya banks it because both her punches landed cleanly without needing the rider).</li>
+          <li><span class="actor" style="color: var(--akasha);">Akasha</span> &mdash; Action: Thorn Whip on Lower Turret (range, no disadvantage now) &mdash; <strong>19 to hit, 1 damage.</strong> <strong>Lower Turret pulse triggers again</strong> &mdash; but no targets in 10ft, just a light show. Akasha's earlier Arcana read was wrong, but it costs nothing.</li>
+          <li><span class="actor" style="color: var(--text-dim);">Lower Turret</span> &mdash; Beam on Talya (closest) &mdash; <strong>19 hits, 9 damage.</strong> Akasha tries to remind Talya about Deflect Missiles &mdash; DM rules force damage isn't physical, denied.</li>
+          <li><span class="actor" style="color: var(--talya);">Talya</span> &mdash; Action: Punches Lower Turret from 15 ft &mdash; <strong>16 hits, 8 acid damage.</strong> Bonus: Second punch &mdash; hits. <span class="crit-highlight">LOWER TURRET DESTROYED by Talya.</span> <em>&ldquo;Hadouken!&rdquo;</em> (Avon's coining). DM: <em>&ldquo;Sounds like a bag of like wet spaghetti as it hits the ground&hellip; plop.&rdquo;</em></li>
+        </ul>
+      </div>
+
+      <div class="combat-result">
+        <strong>Result:</strong> Vault Guardian + 2 Arcane Turrets destroyed in 5 rounds. Nobody went down &mdash; Akasha came closest (5 HP after Round 3 turret beam, would have been 0 in Round 4 without Avon's Cure Wounds). DM: <em>&ldquo;You guys did a lot better than I was expecting.&rdquo;</em><br><br>
+        <strong>Kill credit:</strong> Vault Guardian &mdash; <span style="color: var(--loren); font-weight: 600;">Loren</span> (Reckless Greataxe + Savage Attacker + max Divine Fury Radiant, 19 damage neck shot) &bull; Top Turret &mdash; <span style="color: var(--akasha); font-weight: 600;">Akasha</span> (club + sickle 1-2 punch) &bull; Lower Turret &mdash; <span style="color: var(--talya); font-weight: 600;">Talya</span> (second acid Hadouken)<br><br>
+        <strong>DM Inspiration:</strong> <span style="color: var(--mist); font-weight: 600;">Mist</span> (recap intro) &bull; <span style="color: var(--avon); font-weight: 600;">Avon</span> (honesty about a roll)
+      </div>
+    </div>
+  </div>
+
+  <!-- LOOT -->
+  <div class="section">
+    <h2>Loot</h2>
+    <div class="loot-grid">
+      <div class="loot-item magical">
+        <div class="loot-name">Whisper Prism</div>
+        <div class="loot-detail">Stillwind Lab vault &middot; Center pedestal &middot; <strong>Handed to Evrin</strong> &middot; Whispers within ~10 ft &middot; Placed in metal-lined box</div>
+      </div>
+      <div class="loot-item magical">
+        <div class="loot-name">Bag of Beans (7)</div>
+        <div class="loot-detail">Stillwind Lab vault &middot; Left pillar &middot; <strong>Mist pocketed</strong> &middot; Plant one-by-one for effects, dump to explode</div>
+      </div>
+      <div class="loot-item magical">
+        <div class="loot-name">Mysterious Orb (depleted)</div>
+        <div class="loot-detail">Stillwind Lab vault &middot; Right pillar &middot; Triggered the frozen tableau when Avon's Identify + Mist's touch hit at the same time. Now empty.</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">Red Crystal in Gold Housing</div>
+        <div class="loot-detail">Frozen tableau (seen, not retrieved) &middot; Fallen off the ritual pedestal &middot; Avon committed it to memory</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">28 Gold</div>
+        <div class="loot-detail">Stillwind Lab chest &middot; 7 gp each across 4 PCs &middot; Loren refused her cut</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">2 Healing Potions</div>
+        <div class="loot-detail">Stillwind Lab chest &middot; Avon declined his share; Talya holding both for now</div>
+      </div>
+      <div class="loot-item magical">
+        <div class="loot-name">Signing Bonus from Evrin (promised)</div>
+        <div class="loot-detail">Long-term contract negotiation &middot; Won by <strong>Mist's Persuasion 25</strong> + agreeing to long-term work &middot; Amount/form TBD &mdash; Evrin deferred contract details to a future meeting</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">Suite at the Crowned Pheasant</div>
+        <div class="loot-detail">Pre-paid by Evrin &middot; Long rest &middot; Noble District tavern, very upscale</div>
+      </div>
+      <div class="loot-item">
+        <div class="loot-name">Code Phrase: &ldquo;purchase a seagull&rdquo;</div>
+        <div class="loot-detail">Crowned Pheasant barkeep &middot; Tell the barkeep this to summon Evrin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORABLE QUOTES -->
+  <div class="section">
+    <h2>Memorable Quotes</h2>
+    <div class="quotes-grid">
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;My plan is to use Heat Metal because he looks like he's made of metal.&rdquo;</div>
+        <div class="quote-speaker">Mist</div>
+        <div class="quote-context">Mist's tactical read on the Vault Guardian &mdash; and the burn engine that ran for three rounds.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;How do you have footsteps? Something's going on behind me.&rdquo;</div>
+        <div class="quote-speaker">Mist</div>
+        <div class="quote-context">Pure fairy panic alerting the party as Loren approached mid-boss-fight.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;He says, by the way, in the meantime, I'm just going to kind of blink at Avon. Blink, blink, blink. Blink, blink, blink. Yeah, Avon can interpret that however he wants, but that's what he's going to do.&rdquo;</div>
+        <div class="quote-speaker">Mist (covertly to Avon)</div>
+        <div class="quote-context">Telegraphing &ldquo;don't tell Evrin about the orb-vision&rdquo; while Loren is still in the room. The session's most Mist moment &mdash; covert, weird, unmistakable.</div>
+      </div>
+
+      <div class="quote-block mist">
+        <div class="quote-text">&ldquo;Alright, but remember the signing bonus I think you promised.&rdquo;</div>
+        <div class="quote-speaker">Mist (cashing in)</div>
+        <div class="quote-context">The capstone of a Persuasion 25. Akasha refused to renegotiate the prism deal &mdash; Mist won a separate signing bonus in parallel.</div>
+      </div>
+
+      <div class="quote-block avon">
+        <div class="quote-text">&ldquo;What the hell? That's weird. It's like some sort of, like, chess puzzle where you have to, like, move these statues.&rdquo;</div>
+        <div class="quote-speaker">Avon</div>
+        <div class="quote-context">Avon working out the transposition mechanic in the frozen tableau after his blunt-spear shove slid the morning-star victim sideways.</div>
+      </div>
+
+      <div class="quote-block avon">
+        <div class="quote-text">&ldquo;As a cleric, I probably shouldn't need potions. You should go to, like, either the frontline or someone who cannot heal themselves.&rdquo;</div>
+        <div class="quote-speaker">Avon</div>
+        <div class="quote-context">Avon distributing the two healing potions during loot split &mdash; quietly principled.</div>
+      </div>
+
+      <div class="quote-block akasha">
+        <div class="quote-text">&ldquo;I encourage him to continue to bring it closer because I'm curious what those whispers are from or about.&rdquo;</div>
+        <div class="quote-speaker">Akasha</div>
+        <div class="quote-context">Akasha pushing the party past Mist's hesitation to investigate the Whisper Prism. Drove the next scene.</div>
+      </div>
+
+      <div class="quote-block akasha">
+        <div class="quote-text">&ldquo;I feel like we already made a deal. And the deal was for information that was already provided. So the time for renegotiations, I believe, has passed. Because a deal is a deal.&rdquo;</div>
+        <div class="quote-speaker">Akasha</div>
+        <div class="quote-context">Akasha refusing to renegotiate the prism deal &mdash; strongest principled-RP line of the night.</div>
+      </div>
+
+      <div class="quote-block talya">
+        <div class="quote-text">&ldquo;He's less armored than I am. Hit him!&rdquo;</div>
+        <div class="quote-speaker">Talya</div>
+        <div class="quote-context">Talya goading the construct off Akasha &mdash; pure Monk tank RP.</div>
+      </div>
+
+      <div class="quote-block talya">
+        <div class="quote-text">&ldquo;I'll punch it from here because elemental nonsense is fun.&rdquo;</div>
+        <div class="quote-speaker">Talya</div>
+        <div class="quote-context">Talya leaning into the 15-ft reach &mdash; and into the Hadouken bit Avon coined.</div>
+      </div>
+
+      <div class="quote-block loren">
+        <div class="quote-text">&ldquo;Not to interrupt the flow too much, I want to make it very clear, this blonde lady has eyes on that prism at all times at zero, just in case.&rdquo;</div>
+        <div class="quote-speaker">Loren</div>
+        <div class="quote-context">Loren establishing she's a contractor with a job, not a friend.</div>
+      </div>
+
+      <div class="quote-block loren">
+        <div class="quote-text">&ldquo;I would not call dirty jobs noble, necessarily. I don't know if I have the same rose-colored glasses on that Evrin does. That being said, he goes about his dealings with a high level of decorum, and I know him to be honest in his dealings, if not as a person himself.&rdquo;</div>
+        <div class="quote-speaker">Loren</div>
+        <div class="quote-context">Loren's clear-eyed read on Evrin &mdash; the cleanest character framing of him in the session.</div>
+      </div>
+
+      <div class="quote-block dm">
+        <div class="quote-text">&ldquo;We don't shy away from dirty jobs... ultimately I'd like to turn my organization into something that's seen as a more legitimate operation. I want to raise the bottom up and lift the entire city, not just the rich.&rdquo;</div>
+        <div class="quote-speaker">Evrin (DM)</div>
+        <div class="quote-context">Evrin's pitch &mdash; an unexpected populist speech that moved Mist (Insight 6) and reframed the criminal patron as a reformer.</div>
+      </div>
+
+      <div class="quote-block dm">
+        <div class="quote-text">&ldquo;And as Silas stepped into the room and kicked that rock... I am going to retcon a smidge. Avon had just activated detect magic. So you did notice the tile is glowing. But before you could stop him, he steps on it. A magic circle appears and Silas disappears.&rdquo;</div>
+        <div class="quote-speaker">DM (Seerosaur)</div>
+        <div class="quote-context">The DM's cliffhanger-resolution retcon &mdash; gives Avon's ritual real weight while sealing Silas's exit.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAX'S NOTES -->
+  <div class="section">
+    <div class="journal-section">
+      <div class="journal-header">
+        <div class="journal-icon">&#9998;</div>
+        <div class="journal-title">Pax's Notes &mdash; Mist's Journal</div>
+        <div class="journal-private">Private</div>
+      </div>
+
+      <h4 class="journal-sub">What Mist did this session</h4>
+      <ul>
+        <li>Sustained <strong>Heat Metal</strong> for three rounds on the Vault Guardian &mdash; the steady damage that softened it for Loren's killing blow</li>
+        <li>Used <strong>Silvery Barbs</strong> to nullify the construct's natural-20 critical hit on Avon &mdash; single most impactful reaction of the fight</li>
+        <li>Used <strong>Mage Hand</strong> to investigate the Whisper Prism, Bag of Beans, and treasure chest before anyone else touched anything</li>
+        <li>Recognized the <strong>Bag of Beans</strong> from stories (History 18) and pocketed it quietly for later use</li>
+        <li>Touched the orb at the same time as Avon's Identify &mdash; vanished into the frozen tableau scene with him</li>
+        <li><strong>Won a signing bonus from Evrin</strong> &mdash; Persuasion 25, plus the agreement to join the long-term contract. Akasha killed renegotiation of the <em>original prism deal</em> (no extra copper there), but Evrin explicitly framed the long-term contract as a separate thing with a signing bonus. Mist cashed in the bonus on the spot.</li>
+        <li><strong>Privately warned Avon to keep the orb-vision secret</strong> from both Loren and Evrin. The party investigates this themselves first.</li>
+        <li>Friendly-fire moment: triggered the lower turret's reactive pulse with a crossbow bolt &mdash; 10 damage each to Akasha and Avon &mdash; apologized with Healing Word</li>
+      </ul>
+
+      <h4 class="journal-sub">Things Mist knows that the party does not</h4>
+      <ul>
+        <li>The frozen tableau showed <strong>a red crystal in ornate gold housing</strong> that had fallen off the ritual pedestal &mdash; Mist remembers this clearly. The party (other than Avon) does not.</li>
+        <li><strong>None of his magic worked in the tableau</strong> &mdash; Mage Hand fizzled like a lighter clicking. Wherever they went, it was a place where casting was suppressed.</li>
+        <li>Pinching cheeks works for pain &mdash; the tableau is not a dream. Whatever it is, it's <em>real</em> in some sense. The body of the morning-star victim transposed when shoved.</li>
+        <li><strong>Evrin was deeply concerned about Silas</strong> &mdash; Insight 17 caught the hide. He cares more than he lets on.</li>
+        <li><strong>Loren</strong> is a contractor, not an Evrin loyalist. Insight 21 and her own words: &ldquo;He is not my friend and it is not my business. I am just paid.&rdquo;</li>
+        <li>Loren previously did security for <strong>Sylvia Plath</strong> &mdash; Mist knows of her professionally and is jealous of her career.</li>
+        <li>The <strong>code phrase</strong> to summon Evrin from the Crowned Pheasant: <em>&ldquo;purchase a seagull&rdquo;</em> to the barkeep.</li>
+        <li>Evrin's pitch about &ldquo;lifting the bottom of the city&rdquo; moved Mist genuinely (Insight 6) &mdash; but he hasn't decided if it's true or theater yet.</li>
+      </ul>
+
+      <h4 class="journal-sub">What Mist is thinking about</h4>
+      <ul>
+        <li><strong>Silas vanished into a teleport circle</strong> &mdash; was it the Vault's defense, or someone targeting Silas specifically? If the latter, Mist's whole party might be marked.</li>
+        <li><strong>The frozen tableau is a vision worth investigating quietly.</strong> Library research is needed &mdash; Avon's Insight 19 captured faces, armor, and a red-crystal-in-gold-housing artifact. Before showing this to Evrin, see if anyone in Skybreeze recognizes any of the figures.</li>
+        <li><strong>Bag of Beans</strong> &mdash; planted one-by-one for unpredictable effects, or dumped to explode. With seven beans, that's seven free <em>something</em>s. Save them for emergencies, or test one in a controlled space (a field outside Skybreeze).</li>
+        <li><strong>Evrin's organization</strong> &mdash; long-term work could be steady income, network access, and a way to keep an eye on what he's actually doing. Mist's signing-bonus gambit failed but a long-term retainer with a reformer-criminal-patron is exactly the kind of network the campaign needs. Akasha declined formal membership; Mist is in.</li>
+        <li><strong>The Crowned Pheasant</strong> &mdash; fancy tavern in the Noble District where Mist isn't usually welcome. Now he has a free suite waiting. Use this. Buskers aren't allowed, but a contracted bard with Evrin's backing might find work here.</li>
+        <li><strong>Healing Word</strong> as a friendly-fire emergency reaction &mdash; proved useful again. Keep at least one slot held for it.</li>
+        <li><strong>Spiritual Weapon synergy with Avon</strong> &mdash; Avon stayed in melee range tanking the construct while Mist sustained Heat Metal from afar. That positioning works.</li>
+      </ul>
+
+      <h4 class="journal-sub">Open questions for next session</h4>
+      <ul>
+        <li><strong>What is the orb?</strong> Conjuration school. A vision-projector? A planar lens? Now empty &mdash; what triggered it, and can it be recharged?</li>
+        <li><strong>Who are the figures in the frozen tableau?</strong> Library research at the Skybreeze archives. Avon has the mental snapshot.</li>
+        <li><strong>What is the red crystal in the gold housing?</strong> It seemed important &mdash; the centerpiece of the ritual scene. If it falls off again, what happens? If they retrieve it, what does it do?</li>
+        <li><strong>What does Evrin actually do?</strong> &ldquo;Dirty jobs&rdquo; with a code, but what specifically? What's his &ldquo;city's bottom&rdquo; plan look like in practice?</li>
+        <li><strong>Where does Silas's debt go?</strong> With Silas gone, Mist tried to renegotiate. Evrin treated the original deal as binding regardless.</li>
+        <li><strong>Will Loren return?</strong> She implied yes &mdash; <em>&ldquo;if you end up working for Evrin or need an extra set of hands, I'd be available, provided he pays me to do so.&rdquo;</em></li>
+        <li><strong>What's beneath Skybreeze?</strong> Still no progress on the Vale Tempest's &ldquo;lies about the Wardstones&rdquo; thread. Rufus Dawnstrider, Valo, Regina, and Bildren are still mind-controlled.</li>
+        <li><strong>Carrie-Anne and the Bahamut Temple</strong> &mdash; Avon still hasn't visited. Worth a session arc.</li>
+        <li><strong>Vale Tempest retaliation</strong> &mdash; when does the Fancy Robe woman find the bodies?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OPEN THREADS -->
+  <div class="section">
+    <h2>Open Threads</h2>
+    <ul class="threads-list">
+      <li class="thread-item">
+        <div class="thread-title">Where did Silas go?</div>
+        <div class="thread-desc">Evrin was visibly concerned but hiding it. The teleport circle was deliberate &mdash; by whom? Is Silas alive somewhere?</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">The Frozen Tableau</div>
+        <div class="thread-desc">A snapshot of past, future, or another plane? Avon committed faces, armor, and clothes to memory for library research. Everything was foreign &mdash; no architectural or cultural match either character knew.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">The Red Crystal in Gold Housing</div>
+        <div class="thread-desc">The third object that had fallen off the ritual pedestal. Possibly the key to interrupting the ritual. Mist and Avon noticed it specifically.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">The Four Highlighted Scene Moments</div>
+        <div class="thread-desc">The stabbing fighter, the back-shot archer victim, the morning-star kneeler, and the fallen crystal. Why those four specifically?</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Evrin's Organization</div>
+        <div class="thread-desc">What is it really? The party is now informally on retainer (Akasha extended alliance, the rest agreed to long-term work). Mist + Avon don't trust enough to share the orb-vision yet.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Whose Code Does Evrin &ldquo;Follow&rdquo;?</div>
+        <div class="thread-desc">Claims to follow Silas's. The DM retconned in a backstory beat: Evrin was in Silas's crew, looked up to him, &ldquo;almost left with him.&rdquo;</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">The Wardstone Festival Fame</div>
+        <div class="thread-desc">The party is now publicly recognized for Session 1. Hideout actions still secret. Carrie-Anne and the Bahamut Temple still unvisited.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">The Whisper Prism in the Box</div>
+        <div class="thread-desc">Does the metal lining contain the whispers, or do they leak? Surrounding patrons in a tavern still heard them when the prism was uncovered briefly.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Bag of Beans</div>
+        <div class="thread-desc">Mist plans to plant them eventually. Each bean does something different.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Sylvia Plath</div>
+        <div class="thread-desc">Loren's old security gig &mdash; a traveling musician. Mist knows of her with jealousy. Possible future contact.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Vale Tempest Retaliation</div>
+        <div class="thread-desc">Still unresolved. The Fancy Robe woman is still alive somewhere.</div>
+      </li>
+      <li class="thread-item">
+        <div class="thread-title">Amulet Targets</div>
+        <div class="thread-desc">Rufus Dawnstrider, Valo, Regina, Bildren still mind-controlled. Party has not pursued this thread since Session 3.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="section">
+    <div class="cliffhanger">
+      <span class="label">End of Session 5</span>
+      <p>The party retired to their pre-paid suite at the Crowned Pheasant. The Whisper Prism delivered. Silas still missing. The vision of a frozen ritual burning quietly in Mist's and Avon's memories.</p>
+      <div class="big-line">&ldquo;I'd rather we find out ourselves first.&rdquo;</div>
+      <span class="speaker">&mdash; Mist, privately to Avon</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="text-align: center; padding: 40px 0 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
+    <p style="margin-bottom: 4px;">Myrrindar: Winds of Warding &bull; Session 5 &bull; April 27, 2026</p>
+    <p style="opacity: 0.6;">A deal is a deal &bull; The whispers continue beyond the box</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -93,22 +93,22 @@
 | Mage Hand | Bard | — | 30 ft. | V, S | 1 minute |
 | Druidcraft | Fairy Magic | — | 30 ft. | V, S | Instantaneous |
 
-### 1st Level (4 Slots)
+### 1st Level (4 Slots) — 3 prepared + Faerie Fire from Fairy Magic
 
 | Spell | Source | Save/Atk | Range | Components | Duration | Notes |
 |-------|--------|----------|-------|------------|----------|-------|
 | Silvery Barbs | Bard | — | 60 ft. | V | Instantaneous | Reaction; force reroll + give ally advantage |
-| Dissonant Whispers | Bard | WIS 13 | 60 ft. | V | Instantaneous | Damage + forced movement |
-| Healing Word | Bard | — | 60 ft. | V | Instantaneous | Bonus Action heal |
-| Command | Bard | WIS 13 | 60 ft. | V | Instantaneous | Single-word command |
-| Faerie Fire | Fairy Magic | DEX 13 | 60 ft./20 ft. Cube | V | Conc, up to 1 min | 1/LR or spell slot; advantage on attacks vs affected |
+| Dissonant Whispers | Bard | WIS 13 | 60 ft. | V | Instantaneous | 3d6 psychic + forced movement (triggers OAs from melee allies); half on save |
+| Healing Word | Bard | — | 60 ft. | V | Instantaneous | Bonus Action heal, 1d4 + 3 |
+| Faerie Fire | Fairy Magic | DEX 13 | 60 ft./20 ft. Cube | V | Conc, up to 1 min | 1/LR or spell slot; advantage on all attacks vs affected; AOE; standing concentration opener |
 
-### 2nd Level (2 Slots)
+### 2nd Level (2 Slots) — 3 prepared (rotate based on encounter)
 
 | Spell | Source | Save/Atk | Range | Components | Duration | Notes |
 |-------|--------|----------|-------|------------|----------|-------|
-| Hold Person | Bard | WIS 13 | 60 ft. | V, S, M | Conc, up to 1 min | Paralyzed; auto-crit within 5 ft. |
-| Heat Metal | Bard | CON 13 | 60 ft. | V, S, M | Conc, up to 1 min | Damage + disadvantage; no save on damage |
+| Shatter | Bard | CON 13 | 60 ft. / 10-ft Sphere | V, S, M | Instantaneous | 3d8 thunder AOE, half on save; works on constructs/objects/most creatures |
+| Suggestion | Bard | WIS 13 | 30 ft. | V, M | Conc, up to 8 hours | Charm; target with INT 8+ that can hear/understand language; combat or social use |
+| Invisibility | Bard | — | Touch | V, S, M | Conc, up to 1 hour | Utility; breaks on attack/cast; cast on Talya for stealth setup or self for solo scouting |
 
 ## Weapons
 

@@ -55,6 +55,8 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Traveler's Square** (Saringallow): Shopping center with forges and blacksmiths. Level 5 town — common items level 5 or below available. Home of Hagrath the Hammer.
 - **North Kansira River Ambush Point**: Rocky outcropping at a river bend, two days' travel upriver from Saringallow. Deep channel on one side forces ships close to the cliff. Hellbreaker-scouted ambush site. Site of the Night's Prize boarding (Session 2).
 - **Lake Encarthan**: A lich is rumored to dwell here and command the restless dead flooding Isger (per ferryman Otto's cousin).
+- **Waterspout Inn**: Riverside tavern with lodging, halfway between Saringallow and Logos. Two-story building, once painted bright blue, now faded gray. Currently occupied by Chelaxian forces — tents, a two-masted warship, and a Chelaxian banner. Site of Rhokrag's capture and the party's ongoing rescue mission (Session 3).
+- **Logos**: Town further along the road from Saringallow. Rhokrag's original destination before capture.
 
 ## Key NPCs
 
@@ -62,10 +64,10 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Alceo Demetrias**: Co-founder of the Hellbreakers, cleric of Milani. Currently in Eladir.
 - **Phoebe Demetrias**: Co-founder of the Hellbreakers. Currently in Eladir.
 - **Ethran Howell**: Former Eagle Knight, now semi-permanent Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1. Stepping back from the field to run strategy and training out of the Saringallow HQ.
-- **Rhokrag**: Tall hobgoblin operative at the Saringallow HQ. Brusque first impression.
+- **Rhokrag**: Tall hobgoblin operative. Went solo to the Waterspout Inn to investigate Hellknight regrouping via a non-league contact. Was supposed to return within a day — never came back. Found by the party in Session 3: beaten, bruised, tied to a chair in a Chelaxian ship cabin, guarded by a devil and a navy captain.
 - **Zara**: Halfling hostess at the Saringallow HQ. Warm-hearted but visibly breaking under the weight of the Hedvind decree.
 - **Gertraud Middenhelm**: Junior Hellbreaker. Rescued from the Everbloom Imports warehouse in Session 2. Grateful to the party — looted the loyalists' gear for the cause and tipped the party about warehouse security being compromised.
-- **Maire Phelan**: Key Hellbreakers member
+- **Marie Phelan**: Hellbreaker at Saringallow HQ. Briefed the party on Rhokrag's mission and the Waterspout Inn location. Provided 2 healing potions for the rescue mission.
 - **Xerra Bluebottle**: Key Hellbreakers member
 
 ### Allies / Civilian Contacts
@@ -75,6 +77,8 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 
 ### Enemies / Antagonists
 - **Captain Julenus Aedin** (deceased): Captain of the Night's Prize, a Chelaxian cargo ship. Killed by Cyrathul during the river ambush (Session 2). Fought with a dagger alongside an animated armor bodyguard with a failsafe explosive.
+- **Chelaxian Navy Captain** (unnamed, alive): Woman in Chelaxian navy uniform, commanding the warship docked at the Waterspout Inn. Guarding Rhokrag alongside a devil. Currently engaged in combat with the party (Session 3 cliffhanger).
+- **Zemaniah** (devil, deceased — name unknown to party): Flying devil with web attacks, guarding the Waterspout Inn ship cabin. Killed by Bai Jian in Session 3 via a critical Snagging Strike leap. Had weakness 3 to holy (identified by Cyrathul's Exploit Vulnerability).
 
 ## Relevant Faiths
 
@@ -92,3 +96,6 @@ The party met at the Cadence Keg in Breachill the morning after the rout of the 
 
 ### Session 2 — Night's Prize (18 Apr 2026 · 8 Lamson 4726 AR)
 The party resolved the Everbloom warehouse cliffhanger in two rounds — Bai Jian crit-killed two loyalists, the third surrendered. After interrogating and releasing the survivor with a warning, they rescued Gertraud Middenhelm and escorted her back to HQ. Rhokrag briefed them on a supply-raid mission: intercept a Chelaxian cargo ship on the North Kansira River, minimize killing. The party hatched a fake-prisoner ruse — Moob and Cyrathul (disguised via masquerade scarf) presented "captured Hellbreaker" Bai Jian to board the Night's Prize. The deception worked until Wing knocked a boulder off the cliff. An Extreme-difficulty ship combat followed: Captain Julenus Aedin and his animated armor bodyguard (all-physical-damage resistance) proved devastating. Fang went down twice; Moob was downed once. Cyrathul killed the captain via Exploit Vulnerability + bite combo after Moob's tenderizer grenade; Bai Jian grappled the animated armor and shoved it overboard, triggering a failsafe explosion that set the ship ablaze. The party fought fires with water bombs, rescued trapped crew, secured supplies, and barely escaped the sinking ship — both goblins nearly drowned, with Moob sacrificing HP to save Fang. 286 XP earned (88 warehouse + 128 Extreme encounter + 70 bonus for crew rescue and supplies).
+
+### Session 3 — The Waterspout Inn (25 Apr 2026 · ~10 Lamson 4726 AR)
+Picking up on shore after the Night's Prize sinking, the party dealt with the grateful crew (Moob tipped sailors to spread Hellbreaker goodwill), fought two river snakes from the disturbed wreck (Moob crit-killed one, Cyrathul Mirror-killed the other), salvaged Wing, and distributed loot. After a two-day return to Saringallow, Ethran and Marie reported Rhokrag missing — he'd gone to investigate Hellknight regrouping at the Waterspout Inn and never returned. The party traveled two more days to find the inn occupied by Chelaxian forces. After nightfall, diplomacy failed and combat erupted: three camp soldiers dispatched in Round 1, then Marines emerged from the docked warship. A flying devil webbed Bai Jian and Cyrathul; a Chelaxian navy captain appeared. Fang set the ship's sails on fire via Explode innovation. Bai Jian escaped webbing, leaped from the rigging, and killed the devil with a hero-pointed critical Snagging Strike — the session's defining moment. Session ended on cliffhanger: ship captain and crow's nest Marine still standing, sails burning, Rhokrag visible but still bound.

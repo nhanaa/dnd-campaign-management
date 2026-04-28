@@ -19,6 +19,42 @@ End-to-end pipeline: transcribe a session recording, generate a styled HTML reca
 - `--speakers N` — Number of speakers (players + DM). Optional, improves diarization accuracy.
 - `--session-number N` — Session number. If omitted, auto-detect from existing session folders.
 
+## Past-Session Pitfalls — read before every run
+
+These are concrete errors that have happened in real sessions. Scan this list every time you generate a recap. If any of these patterns shows up in your draft, stop and fix it before continuing.
+
+**Identity / pronouns:**
+- **Mist is he/him.** Fairy Bard, Myrrindar. Don't infer pronouns from the name — read the character-sheet Backstory section and use those pronouns. Ask Pax for cameo NPC pronouns if not stated.
+
+**Class-mechanic mismatches** (the diarization label is a *hint*, not authority — every quoted ability use must match the character's actual class):
+- **Guidance** = Cleric / Druid / Artificer cantrip. If quoted on a Bard/Monk/Barbarian/Rogue/Fighter speaker, that's bleed — check the actual class list before attributing.
+- **Spiritual Weapon, Cure Wounds, Channel Divinity, Mind Spike, Detect Magic ritual** = Cleric. Common bleed source onto Talya's bucket in Myrrindar (SPEAKER_05).
+- **Heat Metal, Dissonant Whispers, Silvery Barbs, Healing Word, Bardic Inspiration, Vicious Mockery** = Bard (Mist's lane).
+- **Guiding Bolt, Thorn Whip, Wild Shape, Starry Wisp** = Druid (Akasha's lane).
+- **Elemental Strikes/Attunement, Flurry of Blows, Patient Defense, Deflect Missiles** = Monk (Talya's lane).
+- **Rage, Reckless Attack, Savage Attacker, Divine Fury (Path of the Zealot)** = Barbarian (Loren).
+- **Touch-spell suggestions / Inflict Wounds advice** = Pax (Mist) frequently offers cross-class spell knowledge — check who's actually speaking.
+- **"Hadouken" coining** = Avon (a player joke, attributed to Avon in S5).
+
+**High-roll / negotiation outcomes:**
+- A high Persuasion roll plus a co-PC's "deal is a deal" refusal does NOT mean the high roll failed. Patrons frequently re-frame asks as separate parallel deals. Read the FULL exchange to the end of the scene before declaring an outcome.
+- If a PC says "remember the X you promised" later in the scene, the X was won — don't frame it as a loss.
+
+**Initiative & combat structure:**
+- **Ask Pax for the Foundry/Roll20 initiative tracker screenshot** (or roll log) before reconstructing combat. The transcript's "who spoke when" is unreliable — DMs flex tie-breaks, mis-call turns, and abandon partial rounds when players join late.
+- For late-joining cameo NPCs: "back at the top of the initiative" = restart from existing order with the new PC slotted at their actual roll. NOT a full re-roll. NOT "slotted at the top."
+- Common bug: inverting two PCs at adjacent inits (Akasha 14 / Talya 10 → don't write Talya before Akasha).
+
+**Damage numbers:**
+- If a damage tick number is "unstated" in the transcript (e.g. Heat Metal sustain on the cast turn), ASK PAX rather than writing "unstated." He tracks his own damage.
+
+**Quote selection:**
+- Don't fill the Mist quote slots with tactical-only lines (Heat Metal plan, sustain narration, persuasion attempt). Mix in character voice — panic moments, covert RP, comedy, schemes. The cleanup report's per-character quotable list is a *menu*, not the answer; pick the lines that show character, not the lines that are easy to defend.
+- Hard cap: 2-4 quotes per PC, 10-14 total. Count before finalizing.
+
+**Subagent reports are inputs, not authority:**
+- The cleanup, attribution-review, and combat-review subagents produce structured reports. Their outputs are advisory. The cleanup report explicitly flags caveats ("left as Talya but writer should double-check Cleric spells") — actually act on those caveats. Don't copy a quotable line from the report without verifying the speaker against transcript context.
+
 ## Pipeline Steps
 
 ### Step 1: Transcribe
@@ -83,7 +119,43 @@ For Icewind Dale:
 - Kane Whitefang ← Kane
 - Virel Talthrae ← Virel
 - Rathis Nox ← Rathis
-- Hrolf doesn't exist in Icewind Dale>
+- Hrolf doesn't exist in Icewind Dale
+
+For Myrrindar:
+**Characters / players:**
+- Mist ← Miss, Mr., Myst, Mast, Mister
+- Avon ← Avalon, Aven, Aaron, Avah, Avons, Aabon
+- Akasha ← Acosta, Akoshu, Akashia, Akashu, Akasi, Acoshia
+- Talya ← Talia, Tahlia, Tiia, **Kelly** (real S5 mishear — T→K substitution on "Talya's" → "Kelly's"), Tilly
+- Loren ← Lauren
+- Loren Lyster ← Loren Leister, Loren Lister
+- Seerosaur ← Sirosaur, Cirosaur, Sero, Ciro
+
+**NPCs / world:**
+- Evrin ← Everin, Everett, Everin
+- Vale Tempest ← Veiled Tempest, Vail Tempest, Vale Temptest
+- Wardstone(s) ← Ward stone, War stone, Wardston
+- Whisper Prism ← Whisper Prison, Whispering Prism, Wisper Prism
+- Skybreeze ← Sky breeze, Sky-breeze, Sky brees
+- Stillwind Lab ← Still Wind, Stillwind, Still-Wind
+- Crowned Pheasant ← Crown Pheasant, Crowned Peasant
+- Elias Whitmore ← Elias Whitmer, Eli Whitmore, Elias Witmore
+- Carrie-Anne ← Carrie Ann, Cary Ann, Karianne, Carry Anne, Carry on (context-fragile — only when followed by Bahamut/priestess context)
+- Bahamut ← Bahmut, Behmut, Bahomut
+- Eldrin ← Eldren, Aldrin, Aldren
+- Rufus Dawnstrider ← Rufus Donstrider, Roofus, Ruffus
+- Neulvyn ← Newlvin, Newlivin, Newlivian, Nulvyn
+- Sylvia Plath ← Silvia Plath, Sylvia Path
+
+**Note on `Kelly` (Myrrindar-specific):** "Kelly" is *not* a character in this campaign. Whisper repeatedly mis-transcribes "Talya's" as "Kelly's" (especially possessive form). If you see "Kelly" anywhere in the transcript, it is a mishear — most often referring to Talya. Confirm context before substituting; if the line is the Talya player narrating Talya's reaction in third person, normalize to "Talya's."
+
+**Tactical jargon mishears (any campaign):**
+- save-or-suck ← Sable sucks, Sable suck, save or sock (5e/PF2e tactical phrasing meaning "save spell that punishes the target on a failed save"). Whisper consistently mishears "save-or-" as "Sable" because of the soft consonant blend.
+- save-or-die ← Sable die, Save or dye
+- save-or-lose ← Sable lose, Save or loose
+- nat 20 / nat 1 ← natural 20, natural 1 (sometimes mishears as "Nat" name)
+- AoO / OA ← attack of opportunity (frequently mishears as "AOA" or run-on "attack opportunity")
+- AC ← AC (usually fine, but watch for "ACE" mishears in fast speech)>
 
 ## Cleaning rules
 1. **Name substitution** — replace all canonical variants in both speaker labels and dialogue text.
@@ -124,9 +196,42 @@ Before generating the recap, read these files for context:
 - `<campaign>/character-sheet.md` — The user's character details
 - `<campaign>/style-guide.md` — Visual theme for HTML (if it exists)
 
+### Step 4.5: Gather Session-Specific Facts from Pax
+
+**Before generating the recap, ask Pax for the inputs you'll need.** Doing this upfront prevents the grind-back-through cycle of correcting a recap after the fact.
+
+Use **AskUserQuestion** (not free-form text) and bundle these into a single question with multi-select:
+
+1. **Initiative tracker screenshot** — Foundry/Roll20 init order if any combat happened. Treat as authoritative for round structure.
+2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs (especially Mist)? If so, ask him to paste/screenshot it.
+3. **Ambiguous moments** — anything from this session that was confusing in the moment, e.g. "Silas's teleport — DM intent?" or "What was Loren's full name?"
+4. **Cameo NPC details** — pronouns, last names, anything not in dynamics.md.
+5. **Anything Pax wants to make sure is captured** — high-impact moments he wants the recap to land correctly (his persuasion wins, his character beats, etc.). This is a deliberate carve-out — Pax has historically been under-represented in recaps; ask him directly what he wants emphasized.
+
+If Pax says "skip / no extras," proceed. If he provides items, store them locally and reference them throughout Step 5.
+
 ### Step 5: Generate Session Recap (Markdown)
 
-Create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md` with:
+**Read the full picture before writing. Cheap shortcuts here turn into corrections you'll have to grind back through later.**
+
+**Required reads before drafting:**
+- The cleaned transcript at `/tmp/transcript-cleaned-<campaign>-s<N>.txt` — read it **end-to-end**, not just the per-character quote list from the cleanup report. The full linear read catches: (a) who said what in long exchanges, (b) negotiation re-framings, (c) class-mechanic bleed lines, (d) damage numbers you'd otherwise mark "unstated," (e) the iconic character moments that don't make the cleanup's quote list.
+- The cleanup report's flagged caveats — these are not informational; they are **action items**. If the report says "left as Talya but writer should verify Cleric spell attributions," that's a directive to do a class-mechanic pass over Talya's quoted lines.
+- The character sheet for every PC named in the recap — confirm pronouns, class features, and self-presentation notes from the Backstory section.
+
+Before declaring outcomes, applying pronouns, or framing scenes:
+
+1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (e.g. "Mist" sounds androgynous; the character sheet uses he/him). When in doubt about a cameo NPC's pronouns, ask Pax.
+
+2. **High rolls and negotiation outcomes** — when a PC makes a high check (Persuasion, Insight, etc.) or any pivotal roll, **read the full in-fiction exchange** before framing the result. Patrons and NPCs frequently re-frame an ask as a *separate* deal (e.g. "I won't pay more for the original deal, *but* for a long-term contract a signing bonus is acceptable"). One PC's refusal to renegotiate one thread does NOT close other threads. The earliest "no" is often not the final word — keep reading until the scene actually ends.
+
+3. **Initiative and combat structure** — if Pax can share the Foundry/Roll20 initiative tracker (screenshot or roll log), use it as the authoritative order. Do NOT infer init order from "who spoke when" in the transcript — DMs flex order on ties, mis-call turns, and abandon partial rounds when a player joins late. Ask Pax for the tracker if combat is ambiguous (per `feedback_dice_log.md`).
+
+4. **Cameo / late-joining NPCs** — confirm whether the DM re-rolled initiative or just slotted them in at their actual roll. Check the transcript for the DM saying "back at the top of the initiative" (= restart from existing order) vs. "everyone re-roll" (= full re-roll). These produce very different round structures.
+
+5. **Class features and mechanics** — every quoted casting/ability use should be matched to the character whose class supports it. Diarization mis-attribution is common; the transcript label is a hint, not ground truth. Cross-reference `<campaign>/dynamics.md` and `<campaign>/character-sheet.md` for class abilities.
+
+Once you have the full picture, create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md` with:
 
 ```markdown
 # Session <N> Recap — <Session Title>
@@ -169,19 +274,36 @@ Create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md` with:
 ```
 
 **Memorable Quotes Guidelines:**
-- Include **2-4 quotes per player character**. Every PC must be represented.
-- Don't just pick comedic one-liners. Include a **mix** of:
-  - In-character roleplay moments (personality, backstory, emotional beats)
-  - Impactful combat callouts or tactical moments
-  - Comedy/banter that actually landed at the table
-  - NPC/DM lines that were significant (1-2 max)
-- Each quote uses blockquote format with attribution and a context line:
-  ```
-  > **Character**: "Quote text"
-  *Context — when/why this quote happened*
-  ```
-- For multi-line exchanges, group them under a single context line.
-- Total: ~10-14 quotes per session (roughly one per 15-20 minutes of play).
+
+**Hard caps (count before finalizing):**
+- 2-4 quotes per PC. Every PC must be represented (≥2).
+- 1-2 NPC/DM quotes max.
+- **Total: 10-14 quotes**. Going over is a rule violation, not a stylistic choice.
+
+**Selection rubric** — for each PC, pick quotes that span 2-3 of these facets (NOT all combat-tactical):
+- (a) **Iconic character moment** — the one line that's unmistakably this PC. Often weird, covert, panicked, or emotionally specific.
+- (b) **Combat / tactical** — one strong line tied to the round-by-round.
+- (c) **RP / negotiation** — character voice in a social scene.
+- (d) **Comedy / banter that landed at the table.**
+- (e) **Plot beat / emotional weight** — a line that lands a story moment.
+
+**Anti-patterns to avoid:**
+- All-tactical Mist quotes. The cleanup report's quote list often skews tactical because tactical lines are easy to identify; the iconic-character-moment lines (panic, covert RP, schemes) require linear-reading the transcript and recognizing the *moment*, not the wording.
+- Picking the easy/safe quote when a punchier line exists 30 seconds later.
+- Picking quotes that all came from the same scene.
+
+**Format:**
+```
+> **Character**: "Quote text"
+*Context — when/why this quote happened*
+```
+Group multi-line exchanges under a single context line.
+
+**Self-check before finalizing the section:**
+1. Count total quotes. Cap is 14.
+2. Count per PC. Each PC has 2-4. No PC has 0-1.
+3. For each PC, list which facets (a-e) are covered. If a PC has only one facet (e.g. all tactical for Mist), swap one quote for a different facet.
+4. Class-mechanic check: every quoted casting/ability mention matches the speaker's class.
 
 **Pax's Notes Guidelines:**
 This section is written from Pax's character's perspective — factual, terse, tactical. Not interpretive or literary. It captures what the character did, knows, thinks, and wants to find out.
@@ -210,6 +332,36 @@ Voice rules:
 - **Bold** key names/concepts. *Italics* for in-character quotes only.
 - Match the voice from Raiders (Aesgor) and Icewind Dale (Avarath) recaps — direct, tactical, observational.
 - Do NOT invent thoughts or motivations. Only include what is evidenced in the transcript.
+
+### Step 5.4: Pre-Review Self-Audit (main agent — DO NOT SKIP)
+
+**Before spawning the review subagents, run this audit yourself.** The review subagents catch errors but they cost time and you can pre-empt half of their findings with a 60-second checklist. Going through this catches the same class of errors that grind the user back through corrections after the fact.
+
+For each item, scan the recap.md you just wrote:
+
+1. **Pronoun pass:** Search for "her" and "she" in any line referring to a male PC; "him" and "he" referring to a female PC. Mist is he/him.
+
+2. **Class-mechanic pass:** For every quoted casting / ability / feature, verify it matches the speaker's class:
+   - Open `<campaign>/dynamics.md` and `<campaign>/character-sheet.md` side by side with the recap
+   - For each quoted "I cast X" or "I use Y," ask: does this character actually have X/Y? If no, it's bleed — find the real speaker.
+   - Common bleed: Cleric spells (Spiritual Weapon, Cure Wounds, Channel Divinity, Mind Spike, Guidance) on a Monk/Bard/Barbarian's bucket = Cleric speaker bled in.
+
+3. **High-roll outcome pass:** For every Persuasion/Insight/Deception/Intimidation roll mentioned in the recap, search the cleaned transcript ±2 minutes around the roll. Read to the END of the scene. If the recap frames a high roll as a failure, double-check that the patron didn't carve out a separate parallel deal that succeeded.
+
+4. **Initiative pass** (if there was combat): If you have the tracker screenshot from Step 4.5, verify every round's order against it. Specifically check adjacent-init pairs (e.g. Akasha 14 vs Talya 10 — they should NOT be inverted).
+
+5. **Late-joiner placement:** Did anyone join combat partway through? Verify their actual init number, not "slotted at the top." Search the transcript for the DM's exact phrasing.
+
+6. **Damage numbers pass:** If you wrote "damage unstated" or "tick number not announced" anywhere, ask Pax (he tracks his own damage) before locking the section.
+
+7. **Quote section count + diversity:**
+   - Count total quotes — must be 10-14.
+   - Count per PC — each must have 2-4.
+   - For each PC, list the facet (a-e) of each of their quotes. If all are the same facet (e.g. all tactical), swap one for a different facet.
+
+8. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as Talya but writer should double-check..." style caveat, confirm you actually checked the affected lines.
+
+If any item fails, fix it BEFORE running the review subagents. The reviewers should be catching subtle errors, not the basics.
 
 ### Step 5.5: Attribution Review (subagent)
 
@@ -251,6 +403,12 @@ Did this event ACTUALLY HAPPEN, or was it proposed then deferred/cancelled?
 - Read the FULL sequence in the transcript, not just the proposal
 - "Let's do X" followed by "actually, let's do Y instead" means X did NOT happen
 - A plan discussed but interrupted by a new mission = deferred, not completed
+- **Negotiation re-framing**: when one PC refuses to renegotiate one thread, the patron may explicitly carve out a *different* thread that another PC wins. Read past the first refusal to the actual end of the scene. Don't frame a successful high-roll outcome (e.g. Persuasion 25 winning a signing bonus tied to a long-term contract) as a failure just because a co-PC shut down a parallel renegotiation. Each thread resolves independently.
+
+### 3a. Initiative & Round Structure Check
+- The transcript's "who spoke when" is not the authoritative initiative order. DMs flex on ties, mis-call turns, and abandon partial rounds when players join late.
+- If Pax can share the Foundry/Roll20 initiative tracker, use it as ground truth. Verify Akasha-vs-Talya ordering, late-joiner placement, and tie-breaks against the tracker before locking the combat reconstruction.
+- For late-joining cameo NPCs: confirm whether the DM said "back at the top of the initiative" (= restart from existing order, slot the new PC at their actual roll) vs "everyone re-roll" (= full re-roll). Default to the former if ambiguous.
 
 ### 4. Speaker Content-Fit Check
 Even if the transcript labels a line as SPEAKER_XX, does the CONTENT match?
@@ -307,9 +465,11 @@ Format:
 ```
 
 After the subagent returns its review:
-1. Fix all confirmed errors in the recap.
-2. For flagged/ambiguous items, use **AskUserQuestion** to ask the user before committing.
-3. Rebalance quotes and spotlights based on the distribution check.
+1. **The review is advisory, not authoritative.** Do not blindly apply fixes — verify each finding against the cleaned transcript yourself before changing the recap. The reviewer can also miss things or mis-suggest (e.g. propose attributing a Cleric line to Akasha when it's Avon).
+2. Fix all confirmed errors in the recap.
+3. For flagged/ambiguous items, use **AskUserQuestion** to ask the user before committing.
+4. Rebalance quotes and spotlights based on the distribution check.
+5. After applying fixes, re-scan for collateral damage: when you change one attribution, check that you didn't break a related sentence elsewhere (e.g. moving a quote from Talya to Avon may also require updating a spotlight bullet that references the same moment).
 
 **Do NOT proceed to HTML generation until all review items are resolved.**
 
@@ -367,6 +527,8 @@ Read the recap's Combat Encounters section AND any combat mentions in Character 
 8. **Damage numbers** — do the numbers in the recap match what the DM said?
 9. **Action economy violations** — does the recap describe more actions than the system allows per turn?
 10. **Round count** — does the recap say "quick 2-round fight" when it was actually 3 rounds?
+11. **Initiative order** — if the user can share a Foundry/Roll20 tracker screenshot, treat it as authoritative. The transcript "who spoke when" can mislead due to DM tie-flexing, mis-called turns, and abandoned partial rounds. Common mistake: inverting two PCs at adjacent inits (e.g. assuming Talya goes before Akasha when the tracker shows Akasha 14 and Talya 10).
+12. **Late-joiner placement** — if a cameo NPC joins mid-combat, verify their actual init roll vs. assuming they were "slotted at the top." Listen for the DM saying "back at the top of the initiative" (= restart existing order, place new PC at their roll) vs "everyone re-roll" (= full re-roll).
 
 ## Output
 
