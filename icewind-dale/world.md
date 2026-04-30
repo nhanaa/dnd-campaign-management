@@ -55,6 +55,8 @@
   - Three higher caves (20-30 ft up) connected by an ice bridge — unexplored
 - **Sun Blight Fortress** — Duergar fortress in the mountains around Icewind Dale. Xardorok's base. Contains the dragon and "the heart." Location revealed on a map recovered from the Easthaven Ferry (Session 7). Durth described it as "where dad is, where the dragon is, where the heart is." This is the module's endgame destination.
 - **Duergar outpost (near Kelvin's Cairn)** — Marked on the same map; unvisited. Likely a staging point for the duergar invasion.
+- **The Lost Spire** — The upside-down wizard tower from the ancient Netherese floating city, northeast of Easthaven along the lake. A 20-foot spur of smooth, shiny rock jutting from the tundra — part of a structure that continues underground. Entry via a 5-foot burrowed tunnel (claw/burrow markings, steep angle). Interior is inverted: sconces with magical flames burning downward, doors flush with ceilings, stairs collapsed from the inversion. Contains a library, workshop, alchemy room, laboratory with caged humanoid ant specimens, and a study room with permanent Silence. Dzaan (executed wizard, illusion school) used this as his base for a month before being caught. The original tower belonged to an ancient Netherese wizard with multiple disciplines studied throughout. Party exploring as of Session 9.
+- **Temple of Helm (Easthaven)** — Temple in southwest Easthaven. Symbol of Helm (gauntlet with eye) above the door. Run by Salen Para, an elven priestess. Has burial grounds and religious idol stock from multiple deities for proper burials. Kane buried here (Session 9).
 
 ## NPCs
 
@@ -98,6 +100,10 @@
 - **Gurgle** — Stone gargoyle messenger for Avarice. Has a best friend named Gargle
 - **Dzaan** — Wizard, Arcane Brotherhood member. Executed in Easthaven for murdering adventurers after finding a tower. Admitted guilt before death
 - **Vellynne** — "Nasty old woman with an eyepatch." Arcane Brotherhood member. Avarice warned the party to avoid her
+
+### Temple of Helm (Easthaven)
+- **Salen Para** — Elven priestess of Helm. Long blonde hair, armored, symbol of Helm on chest and gauntlet. Capable of Greater Restoration, Sending, Detect Good and Evil, and Anti-Magic Field. Cured Virel's chardalyn curse (Session 9) and took the amulet for destruction. Noted Virel's innate darkness even after the cure. Arranged Kane's burial and contacted Archdruid Arundel via Sending
+- **Nefarian Vanessa** — Elderly human jeweler in Easthaven. Very short, hunched, large glasses, cane. Bought the two family gemstones for 375 gp each (Session 9). Can make jewelry from gems — willing to pay above standard resale for quality stones
 
 ### Former Party Member
 
@@ -159,6 +165,12 @@
 - Motive: victims cheated the Auril sacrifice system by bribing officials to be excluded from the lottery. Sephek killed them as alternative sacrifices to the Frostmaiden
 - Sephek captured alive, turned in to Easthaven guards. Bounty collection from Hlin Trollbane in Targos pending
 
+### Chardalyn
+- A substance created when magical elements of the ancient Netherese floating city fused with Icewind Dale's ice over thousands of years
+- By its nature, many chardalyn objects are suffused with magic of the Lower Planes — considered desecrated objects
+- The soothsayer's necklace was chardalyn — it cursed Virel, shifting her alignment toward evil
+- Salen Para (Helm priestess, Easthaven) identified and destroyed the chardalyn amulet; cured Virel with Greater Restoration (Session 9)
+
 ### Errtu
 - Balor demon that terrorized Icewind Dale over a century ago
 - A ship figurehead depicting Errtu was found in the Easthaven town hall, made of the same dark evocation stone as the soothsayer's necklace
@@ -202,3 +214,14 @@ Below the town hall, found Speaker Whalen and guards locked in cells — **Prude
 That night: Virel researched murder evidence and discovered victims were people who paid off officials to avoid the sacrifice lottery. Rune stole the cursed necklace from Virel's bag while she tranced (passed CHA save DC 10). **Sephek Caltro** attacked Kane in his sleep with an ice sword — 11 piercing (Relentless Endurance saved him to 1 HP) then 5 more (unconscious). Kane Wild Shaped into Dinosuchus (raptor call woke the party). Sephek Misty Stepped past Thors and killed Kane with a max-damage roll (d10=10, +3=13) — permanently dead, past negative max HP. Thors interposed with Tavern Brawler + Heroic Inspiration. Avarath Fey Stepped in and Toppled Sephek prone. Rune climbed out a third-floor window (Acrobatics 18). Virel cast Sleep (Sephek failed WIS save). Three rounds plus surprise.
 
 Sephek interrogated: undead (necromancy), claims Auril's "blessing," kills lottery-dodgers, ice sword is separate. Virel's Detect Magic also revealed the necklace on Rune's belt — "You thief! You half-baked potato!" Justice debate: gagged, hooded, turned in to Easthaven guards with caster's muzzle. Thors carried Kane's Dinosuchus body to the town hall. Kane's player rolling a Warlock.
+
+### Session 9 — The Lost Spire
+Virel's chardalyn curse cured by **Salen Para**, a priestess of Helm at a temple in southwest Easthaven. Greater Restoration returned Virel's alignment to neutral evil (her original). Salen noted an innate darkness in Virel even after the cure. The chardalyn amulet was taken for destruction — identified as a substance created when the ancient floating city's magic fused with Icewind Dale's ice, suffused with magic of the Lower Planes.
+
+Party met **Jack** — a warforged warlock in jester robes and a white mask — at the temple. He was investigating Dzaan's connection to the Lost Spire. Jack heard a voice from his patron say "Don't tell them. Not yet" when he met the party. Patron and pact unknown. One arm is a dark black gauntlet with elongated fingers.
+
+Kane buried at the temple. Salen cast Sending to notify Archdruid Arundel of the Order of the Fang. Arundel will send someone to collect the body. Anti-magic field reverted Kane from Dinosuchus to orc form for burial.
+
+Party sold the two family gemstones for 750 gp total (375 each — Jack's nat 20 persuasion at the Easthaven jeweler). Upgraded armor: splint for Avarath and Thors (160 gp each with chainmail trade-in), studded leather for Jack. Purchased Boots of the Winterlands (Rune, Thors), healing potions (Virel ×2, Rune ×1). Virel received a +1 quarterstaff (retroactive DM award from Session 3). Rune gave Virel the Scroll of Fireball as a peace offering.
+
+Party chose the Lost Spire over Targos (48-hour cauldron deadline likely expiring). Uneventful travel northeast along the lake. The **Lost Spire** is a 20-foot spur of rock jutting from the tundra — part of the ancient Netherese floating city, impaled upside-down into the ground. Entry through a burrowed tunnel (claw markings — something carved it). Inside: inverted rooms with magical flames burning downward, upside-down stone wizard statues. Library (found *Mysteries of the Pharaoh* on Underdark telepathic creatures, *Wizards in the Hollow* on three Netherese wizards). Workshop (iron key found). Alchemy room (locked metal chest bolted to ceiling — four potions of resistance: fire, force, cold, acid). Laboratory (two damaged cages, one containing a molted humanoid ant carapace — four arms, hollow, not from the Underdark). More books: *Ajamar's Guide to the Fantastic* (children's illusion textbook), *The Unfettered Mind* (brain-in-a-jar consciousness transfer). Study room with permanent Silence spell ("not even a dangerous thing — just a study room"). Dzaan (executed wizard) was an illusion wizard who used this tower as his base. Session ended mid-exploration with no combat, no enemies encountered.

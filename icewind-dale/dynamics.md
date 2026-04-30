@@ -8,22 +8,24 @@
 | **Rune Ánstepa** | Tiefling | Ranger | 3 | givemedragons |
 | **Thors Ketterson** | Human | Fighter | 3 | KarlesTheAsterisk |
 | **Virel Talthrae** | Elf (Drow) | Wizard | 3 | anxiouspotato101 |
+| **Jack** | Warforged | Warlock | 3 | Deiduke |
 
-*Party leveled to 3 between Session 8 and Session 9. Avarath locked in Oath of Vengeance.*
+*Party leveled to 3 between Session 8 and Session 9. Avarath locked in Oath of Vengeance. Jack joined Session 9 — replacing Kane.*
 
 ## Party Composition Analysis
 
 **Frontline:** Avarath (Paladin), Thors (Fighter) — two heavy melee characters
 **Midline:** Rune (Ranger) — flexible damage and utility
-**Backline:** Virel (Wizard) — damage and control
+**Backline:** Virel (Wizard), Jack (Warlock) — damage and control
 
 ### Role Coverage
 
-- **Tank/Defender:** Avarath (AC 17, Lay On Hands), Thors (Fighter)
-- **Healing:** Avarath (Lay On Hands, Cure Wounds) — **sole healer** since Kane's death. Party badly needs healing support from new member
-- **Damage:** Thors, Avarath (Smite), Rune (longbow + Hunter's Mark, dual short swords in melee), Virel (cantrips + Sleep)
-- **Utility/Control:** Virel (Wizard — Sleep confirmed effective this session), Rune (Ranger spells, Detect Magic)
-- **Skills/Scouting:** Rune (Ranger, primary investigator and lockpicker since Rathis departed)
+- **Tank/Defender:** Avarath (AC 18 with splint + Defense), Thors (Fighter, splint armor)
+- **Healing:** Avarath (Lay On Hands, Cure Wounds) — still sole healer. Jack's warlock does not appear to bring healing
+- **Damage:** Thors, Avarath (Smite), Rune (longbow + Hunter's Mark, dual short swords in melee), Virel (cantrips + Sleep), Jack (warlock spells — unknown specifics)
+- **Utility/Control:** Virel (Wizard), Jack (Warlock — can see in magical darkness, unknown spell list), Rune (Ranger spells, Detect Magic)
+- **Skills/Scouting:** Rune (Ranger, primary investigator and lockpicker), Jack (CHA 20, +7 Persuasion — party's new social face)
+- **Social/Face:** Jack (CHA 20, +7 Persuasion) has displaced Avarath (CHA 16, +5) as the party's primary negotiator
 
 ### Confirmed Synergies
 
@@ -38,7 +40,7 @@
 |-----------|---------|-------|--------|--------|
 | **Athelas Daenan** | — | Healer (Selune) | — | Stayed behind in Caer-Dineval to monitor the cult (Session 4) |
 | **Rathis Nox** | Elf | Rogue | Senluyen | Departed the campaign (between Sessions 6 and 7) |
-| **Kane Whitefang** | Orc | Druid | Deiduke | Killed by Sephek Caltro in his sleep (Session 8). Died in Dinosuchus Wild Shape form. Player rolling a Warlock |
+| **Kane Whitefang** | Orc | Druid | Deiduke | Killed by Sephek Caltro in his sleep (Session 8). Died in Dinosuchus Wild Shape form. Buried at Temple of Helm in Easthaven (Session 9). Archdruid Arundel (Order of the Fang) notified via Sending; will send someone to collect the body |
 
 ## NPC Relationships
 
@@ -70,25 +72,24 @@
 ### Active Quests
 1. **Recover the Cauldron of Plenty** — Prudence stole it and fled toward Targos. Whalen will pay remaining 9 gemstones (4,500 gp) if recovered. Contract clause requires cauldron present in 48 hours. Conveniently, Targos is also where Hlin Trollbane awaits the murder bounty
 2. **Collect Murder Bounty** — Sephek captured and turned in to Easthaven guards. Need proof of arrest to show Hlin Trollbane in Targos for 100 gp each reward
-3. **Cure Virel's Curse** — Avarath identified the necklace as a curse requiring **Greater Restoration** (5th level, nat 20 Medicine). A healer/temple exists on the south end of Easthaven — available in the morning. Rune currently has the necklace (stole it from Virel). Virel knows
+3. **Explore the Lost Spire** — Party entered the upside-down Netherese tower northeast of Easthaven (Session 9). Mid-exploration — more levels below. Found books, potions, a laboratory with a molted humanoid ant carapace, and a permanent Silence study room. No enemies encountered yet. Burrowed tunnels suggest something lives or lived here
 4. **Destroy the Heart / Sun Blight Fortress** — The soothsayer's dying prophecy. Xardorok has "the heart of a dragon" and plans to destroy Ten-Towns. Durth confirmed the heart and dragon are at **Sun Blight Fortress** in the mountains. The heart must be destroyed. This is the module's endgame destination. Party is not ready yet
-5. **Dispose of Durth's Body** — Rune killed Durth in the White Lady Inn's wine cellar. Corkscrew still in his eye. Cannot stay hidden. Bartaban is upstairs
 
 ### Leads & Hooks
 - **Avarice's Favor** — She wants something from the party later. Unclear what. Could be an ally or a liability
 - **The Upside-Down Tower** — Dzaan died searching for it. Ancient wizard city relic buried underground. Avarice and Vellynne may also be interested
 - **The Séance Clues — ALL RESOLVED** — "Cauldron" = hag's cauldron ✓, "Caves" = coastal caves ✓, "Ferry" = Easthaven Ferry ✓, "Invisible Dwarves" = duergar ✓, "Something else here" = the White Lady ghost bound to the Errtu figurehead in the town hall ✓ (Session 8)
-- **The Soothsayer's Necklace — ACTIVE THREAT** — Evocation magic. Shifted Virel's alignment to evil. Rune stole it from Virel's bag in Session 8 (passed CHA save DC 10, rolled 13). Virel knows — discovered via Detect Magic. Wrapping it didn't help. Same evocation stone as the Errtu figurehead in the town hall. Cure identified: Greater Restoration
+- **The Soothsayer's Necklace — RESOLVED (Session 9)** — Chardalyn amulet. Was suffused with magic of the Lower Planes. Salen Para (priestess of Helm, Easthaven) cured Virel's curse with Greater Restoration and took the amulet for destruction. Virel's alignment returned to neutral evil (original). Salen noted Virel still has an innate darkness even after the cure
 - **More Invisible Duergar on the Ferry** — Bedrolls for more than one. The ferry crew will return to find Durth missing and the map gone
 - **Winged Creatures from The Caer** — Roark saw large winged creatures leaving the fortress. Unexplained
 - **The Cult of Levistus** — Still occupying The Caer. Athelas is watching them. Town Speaker Cranic hasn't been seen. Status unclear
 - **Island of Solstice** — Rune recalled this name in connection to Auril (nat 20 Religion). Significance and location unknown
 - **Drizzt's Book** — Drizzt once stayed at the White Lady Inn writing extensively in a book and asking about the White Lady legend. What was he researching?
-- **The Fireball Scroll** — Rune holds it. Virel refused the bribe. No one has committed to who should use it
+- **The Fireball Scroll** — Rune gave it to Virel as a peace offering (Session 9). She can use the scroll but can't learn Fireball until she gets 3rd-level spell slots (level 5)
 - **The Gray Bag of Tricks** — Rune has it. 1/day d8 creature summon. Not yet used
 - **The Errtu Figurehead** — Ship figurehead in Easthaven town hall depicting Errtu, a Balor demon that terrorized Icewind Dale a century ago. Made of the same dark evocation stone as the soothsayer's necklace. The White Lady ghost was bound to it. Connection to the cult of Levistus? Why is it in the town hall?
 - **Sephek's Ice Sword** — Magical ice weapon, painfully cold to bare hands. Radiates magic separate from Sephek's necromancy. In party's possession. Does it melt if separated from Sephek long enough?
-- **Jack — Deiduke's New Warlock** — **Warforged Warlock 3** replacing Kane. Rolled stats came in absurdly high: CHA 20, CON 19, DEX 18, WIS 13, STR 11, INT 11. HP 30. Unknown patron and pact. Warforged Integrated Protection stacks with DEX 18 for very high AC. CHA 20 means spell save DC 15 at level 3 (+5 attack/save mod). Party still needs dedicated healing — unclear if Jack brings any
+- **Jack — Deiduke's Warforged Warlock** — Joined the party Session 9. Jester robes (red/black diamond), white mask, permanent smile, inorganic movements. One arm is a dark black gauntlet with elongated fingers. Rolled stats: CHA 20, CON 19, DEX 18, WIS 13, STR 11, INT 11. +7 Persuasion at level 3. Can see in magical darkness. Heard a voice from his patron say "Don't tell them. Not yet" when he met the party — patron and pact unknown. Was investigating Dzaan and the Lost Spire at the Temple of Helm when the party arrived. Party's new social face — displaced Avarath (CHA 16, +5) as primary negotiator. No healing abilities apparent
 
 ### Resolved
 - **Find Garrett** — Rescued from the mountain. Climbing party casualties: Mukingo (dead), halfling and Asterisks (alive). Sled dogs saved

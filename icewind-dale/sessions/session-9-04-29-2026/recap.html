@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 9 &mdash; The Lost Spire</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #e8edf2;
+  --bg-card: #f4f7fa;
+  --bg-card-hover: #ffffff;
+  --border: #c4ced8;
+  --text: #2c3640;
+  --text-dim: #4a5a68;
+  --text-bright: #1a2530;
+  --red: #8b3a3a;
+  --red-glow: #8b3a3a22;
+  --blue: #2a5a8a;
+  --blue-glow: #2a5a8a22;
+  --green: #3a7a5a;
+  --green-glow: #3a7a5a22;
+  --purple: #6a4a8a;
+  --purple-glow: #6a4a8a22;
+  --teal: #3a7a7a;
+  --teal-glow: #3a7a7a22;
+  --gold: #3a6b8a;
+  --gold-dim: #5a8aaa;
+  --gold-glow: #3a6b8a22;
+  --avarath: #2a5a8a;
+  --kane: #2a6a4a;
+  --rathis: #5a3a7a;
+  --rune: #7a4a2a;
+  --thors: #7a3030;
+  --virel: #2a6a6a;
+  --jack: #5a3a5a;
+}
+
+@keyframes frost-breathe {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+}
+
+.frost-ambient {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+  animation: frost-breathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+p { margin-bottom: 12px; }
+
+section { margin-bottom: 60px; }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.subtitle span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+}
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.comp-segment { transition: width 0.3s; }
+.comp-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+.comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.party-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.party-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+  background: var(--bg-card-hover);
+}
+.party-card .name {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+}
+.party-card .class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.party-card .player {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.timeline-event:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 28px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-deep);
+}
+.timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+.event-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.tag-combat { background: var(--red-glow); color: var(--red); }
+.tag-exploration { background: var(--blue-glow); color: var(--blue); }
+.tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+.tag-lore { background: var(--teal-glow); color: var(--teal); }
+.tag-shopping { background: var(--gold-glow); color: var(--gold); }
+
+.event-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.event-body { color: var(--text); }
+.event-body ul { padding-left: 20px; }
+.event-body li { padding: 4px 0; }
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.spotlight-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.spotlight-card .char-name {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.spotlight-card ul { padding-left: 20px; }
+.spotlight-card li { padding: 4px 0; }
+.spotlight-card .highlight { font-weight: 500; }
+
+.quote-card {
+  border-left: 3px solid var(--gold-dim);
+  background: #2a5a8a08;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+.quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.thread-list { list-style: none; padding: 0; }
+.thread-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+.thread-list li:hover { box-shadow: 0 4px 16px #2a5a8a18; }
+.thread-title {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.thread-list li.cliffhanger {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+}
+.thread-list li.mystery { border-left-color: var(--purple); }
+.thread-list li.lore-thread { border-left-color: var(--teal); }
+
+.loot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.loot-table th,
+.loot-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.loot-table th {
+  background: #e8edf2;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.loot-table tr:last-child td { border-bottom: none; }
+.loot-table td.magical {
+  background: #edf2f8;
+  border-left: 3px solid var(--gold-dim);
+}
+
+.journal {
+  background: linear-gradient(135deg, #f0f4f8, #eaf0f5);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+.journal h3 {
+  color: var(--avarath);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.journal h3:first-child { margin-top: 0; }
+.journal ul { padding-left: 20px; }
+.journal li { padding: 4px 0; }
+.journal .intro {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .container { padding: 24px 16px 60px; }
+  .timeline { padding-left: 24px; }
+  .timeline-event { padding: 16px 20px; }
+  .journal { padding: 20px 22px; }
+}
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>The Lost Spire</h1>
+    <p class="subtitle">
+      <span>Session 9</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&amp;D 5.5e</span>
+      <span>April 29, 2026</span>
+      <span>~2h 48m</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:15%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:35%; background:var(--gold);"></div>
+      <div class="comp-segment" style="width:5%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:40%; background:var(--teal);"></div>
+      <div class="comp-segment" style="width:5%; background:var(--green);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 15%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--gold);"></span>Shopping 35%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Travel 5%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Exploration 40%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--green);"></span>Loot 5%</div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--red); font-style: italic; text-align: center;">Zero combat encounters in 168 minutes.</p>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 3 (Oath of Vengeance)</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune &Aacute;nstepa</div>
+        <div class="class">Tiefling Ranger 3</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 3</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Drow Wizard 3</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--jack);">
+        <div class="name">Jack</div>
+        <div class="class">Warforged Warlock 3</div>
+        <div class="player">Deiduke (new &mdash; replacing Kane)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Session Summary -->
+  <section>
+    <h2>Session Summary</h2>
+    <p>The session opened where Session 8 left off &mdash; the party heading to a temple in Easthaven to cure Virel's chardalyn curse. At a Temple of Helm, the priestess Salen Para identified the chardalyn amulet as a desecrated object suffused with magic from the Lower Planes, and cured Virel's curse with Greater Restoration in a matter of minutes. Inside the temple, the party met Jack &mdash; a warforged warlock in jester's robes and a permanent white mask &mdash; who was already there investigating the Lost Spire. Virel adopted him immediately; Avarath did not trust him. The party then buried Kane at the temple, with a Sending spell notifying his Archdruid Arundel of the Order of the Fang.</p>
+    <p>The bulk of the session &mdash; roughly an hour &mdash; was logistics: selling Speaker Whalen's family gemstones to a jeweler (Jack's nat 20 persuasion secured 375 gp each, well above the expected 250), buying splint armor for Avarath and Thors, boots of the Winterlands for Rune and Thors, healing potions for Virel, studded leather for Jack, and debating sled dog economics. The party decided to investigate the Lost Spire &mdash; the upside-down wizard tower northeast of Easthaven &mdash; before heading to Targos for the murder bounty and the stolen cauldron.</p>
+    <p>Travel to the tower was uneventful. The Lost Spire itself is a structure from the ancient Netherese floating city, impaled upside-down into the tundra. The party entered through a burrowed tunnel, slid down into inverted rooms lit by magical flames that burn downward, and explored a library, a workshop, and a laboratory. They found books on Netherese wizards, mind flayer-like creatures, illusion magic, and consciousness transfer &mdash; plus four potions of resistance and a mysterious iron key. The laboratory contained the molted carapace of a dead humanoid ant creature in a cage. A study room had a permanent Silence spell over it. The session ended mid-exploration with no combat encounters, no enemies, and no immediate danger.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act I &mdash; The Cure</div>
+        <div class="event-body">
+          <p>The party arrived at a Temple of Helm in southwest Easthaven to cure Virel's chardalyn curse.</p>
+          <ul>
+            <li>Avarath passed a Religion check (16, despite &minus;1 INT) to identify <strong>Helm's</strong> symbol &mdash; a gauntlet with an eye. DM ribbed him: <em>"You're a paladin, you have a minus one to religion."</em></li>
+            <li>Priestess <strong>Salen Para</strong> &mdash; an armored elven woman with long blonde hair &mdash; detected the evil in Virel's bag before it was even opened</li>
+            <li>Salen identified the amulet as <strong>chardalyn</strong> &mdash; magic from the ancient floating city fused with Icewind Dale's ice. Suffused with the magic of the Lower Planes; a desecrated object</li>
+            <li>Virel's reaction to being touched for the cure: <em>"Touch me and I will cut your hand off."</em></li>
+            <li>After hesitation, Virel allowed <strong>Greater Restoration</strong>. A glow passed through her body from shoulder to extremities. Alignment returned to neutral evil (her original)</li>
+            <li>Salen noticed Virel's <strong>innate darkness</strong> even after curing the curse &mdash; a brief moment of concern before shaking it off. The curse amplified something already there</li>
+            <li>Salen took the chardalyn amulet for proper destruction</li>
+            <li>Avarath on curing Virel: <em>"Do we have to? I mean, it's not like she's going to..."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act II &mdash; Meeting Jack</div>
+        <div class="event-body">
+          <p>Inside the temple, the party encountered a warforged jester who would become their newest member.</p>
+          <ul>
+            <li><strong>Jack</strong> was already at the temple, asking Salen about the wizard Dzaan and the Lost Spire</li>
+            <li>Warforged in jester robes (red and black diamond pattern), white mask, dreadlock-like jester hat. Inorganic, stiff movements. Permanent smile &mdash; impossible to read</li>
+            <li><strong>Rune</strong> (Perception 19) noticed one arm is a dark black gauntlet with elongated fingers &mdash; mechanical in nature. No weapons visible</li>
+            <li>Jack's introduction: <em>"My name is Jack. It's nice to meet you all. I'm told greetings are important."</em></li>
+            <li><strong>Virel</strong> instantly adopted him: <em>"I like this one. We should take him with us."</em> Meanwhile, <strong>Jack heard a voice only he could hear</strong>: <em>"Don't tell them. Not yet."</em> &mdash; patron unknown</li>
+            <li><strong>Avarath</strong> was suspicious: <em>"And what do you intend to do there?"</em> &mdash; <em>"Research."</em> / <em>"I don't trust this guy, but well."</em></li>
+            <li>Insight checks against Jack at disadvantage &mdash; his permanent mask means <em>"you might as well be looking at a picture"</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act III &mdash; Kane's Funeral</div>
+        <div class="event-body">
+          <p>The party laid Kane Whitefang to rest at the Temple of Helm, with a Sending spell notifying his druid order.</p>
+          <ul>
+            <li><strong>Thors</strong> had been carrying Kane's Dinosuchus raptor body since Session 8</li>
+            <li><strong>Rune</strong> asked about burial. <strong>Thors</strong> suggested contacting Kane's druid order: <em>"I wonder if we'd be able to send a notice to someone that would give him the burial he would like."</em></li>
+            <li>Rune provided the name: <strong>Archdruid Arundel, Order of the Fang</strong>. Salen cast <strong>Sending</strong> (25-word limit) to notify him</li>
+            <li>Arundel responded: <em>"I'm so sorry to hear that. If you can keep him there, I will send someone to collect him."</em></li>
+            <li>Salen created a coffin with <strong>Selune's</strong> symbol, then used an <strong>anti-magic field</strong> to revert Kane from Dinosuchus to his orc form for proper burial</li>
+            <li><strong>Thors'</strong> eulogy (somber-joking): <em>"I regret that he never paid me back."</em></li>
+            <li><strong>Rune</strong> placed a painted fishing lure on the coffin: <em>"We didn't know you for very long, but we all got hooked."</em></li>
+            <li><strong>Virel</strong> (awkwardly): <em>"He was a good comrade."</em></li>
+            <li><strong>Jack</strong> (after): <em>"If I should die, please don't do this. Just burn me like the wizard."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event" style="">
+        <span class="event-tag tag-shopping">Shopping</span>
+        <div class="event-title">Act IV &mdash; Shopping and Logistics</div>
+        <div class="event-body">
+          <p>The party spent roughly an hour on commerce and travel planning. Jack proved his worth as the party's new face.</p>
+          <ul>
+            <li><strong>Gem sale</strong>: Jack (CHA 20, +7 Persuasion) handled the jeweler. <strong>Nat 20 persuasion</strong> secured 375 gp each (750 total) &mdash; well above the expected 250 resale value. Jack immediately handed all money to Rune</li>
+            <li>Jack declined a tip: <em>"Good faith. To prove usefulness."</em></li>
+            <li>DM on Avarath's charisma: <em>"Your paladin is very charismatic, but he also has been rolling garbage on all charisma things since you met him."</em></li>
+            <li><strong>Virel</strong> claimed the gems as "ours." Jack: <em>"Who the fuck is we?"</em></li>
+            <li>Split: 15 platinum each + 15 party fund</li>
+            <li><strong>Purchases</strong>: Boots of the Winterlands (Rune, Thors &mdash; 75 gp each), Healing potions (Virel &times;2, Rune &times;1), Splint armor (Avarath, Thors &mdash; 160 gp each with chainmail trade-in), Studded leather (Jack &mdash; 30 gp + leather trade)</li>
+            <li><strong>Virel</strong> received a <strong>+1 quarterstaff</strong> &mdash; DM retroactively awarded it from the mountain rescue reward he forgot to send</li>
+            <li>At the blacksmith, the dwarven woman noticed Jack's torso is metal. Jack: <em>"It is an old war wound."</em></li>
+            <li>Sled dog economics debated extensively &mdash; 20 gp per sled, 50 gp per dog, each dog pulls 360 lbs. Tabled for Bryn Shander</li>
+            <li>DM explained the module structure above-table: <em>"The way the first two chapters of this book are designed is that you have to do a certain amount of quests..."</em></li>
+            <li>Party chose the <strong>Lost Spire</strong> (northeast, closer) over Targos (northwest, on-road). Jack led.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Travel</span>
+        <div class="event-title">Act V &mdash; Into the Wilderness</div>
+        <div class="event-body">
+          <p>The party left the safety of Easthaven for the first time, following the lake northeast toward the tower.</p>
+          <ul>
+            <li>Jack led the party along the lakeshore. About 8 hours of walking</li>
+            <li>DM rolled a d8 for random encounters &mdash; no encounter triggered. No blizzard either (blizzard die only rolls on encounter)</li>
+            <li>Rune navigated once they left the lakeshore (Survival check with advantage from Thors' help action &mdash; passed)</li>
+            <li>Avarath, tempting fate: <em>"Really, there's nothing going to happen, right?"</em></li>
+            <li><strong>Rune gave Virel the Scroll of Fireball</strong> during the walk &mdash; a peace offering for stealing the cursed necklace. <em>"It's a sign of trust."</em> Virel can use the scroll but can't learn it until level 5</li>
+            <li>Arrived in early evening: a <strong>20-foot irregularly shaped spur of rock</strong> jutting from the tundra. Smooth, shiny, utterly out of place &mdash; as if thrown into the ground</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Exploration</span>
+        <div class="event-title">Act VI &mdash; The Lost Spire</div>
+        <div class="event-body">
+          <p>The upside-down wizard tower from the ancient Netherese floating city, impaled into the tundra. Explored room by room with no enemies encountered.</p>
+          <ul>
+            <li><strong>Entry tunnel</strong>: A 5-foot diameter tunnel burrowed into the rock at a steep angle. Nature check revealed claw/burrow markings &mdash; something carved this. Not natural</li>
+            <li>Rune went first (Athletics fail &mdash; 2 bludgeoning on landing). Thors followed (Athletics 22, graceful). Avarath fine. Virel last &mdash; <em>"jets right past"</em> the catchers, lands on her tailbone</li>
+            <li><strong>Entry room</strong>: Upside-down sconces with magical flames burning <em>downward</em>. Two stone statues of a wizard in robes flanking an ajar wooden door 8 feet up</li>
+            <li><strong>Library</strong>: Most books destroyed by time. Found <em>Mysteries of the Pharaoh</em> (telepathic funnel-shaped Underdark creatures) and <em>Wizards in the Hollow</em> (three Netherese wizards &mdash; Avarath gave it to Virel)</li>
+            <li><strong>Workshop</strong>: Thors found a <strong>small iron key</strong> in the wreckage &mdash; too small for a door, possibly for a lockbox</li>
+            <li><strong>Alchemy room</strong>: Shattered glass, frozen liquids. A <strong>metal chest bolted to the ceiling</strong> (was the floor before inversion). Thors stacked broken tables (Survival 23), unlocked the chest with the key. <strong>Four potions tumbled out</strong> &mdash; all four PCs caught one (DEX save DC 10, all passed). Potions of Resistance: Fire (Avarath), Force (Rune, traded from Jack), Cold (Jack, traded from Rune), Acid (Thors)</li>
+            <li><strong>Laboratory</strong> (next level down via rope): Two damaged metal cages. One contained a <strong>dead humanoid ant creature</strong> &mdash; four arms, hollow carapace (molted, not dead). Not from the Underdark. The burrowed tunnels match its biology</li>
+            <li>More books: <em>Ajamar's Guide to the Fantastic</em> (illusion spells, children's textbook) and <em>The Unfettered Mind</em> (consciousness transfer into a brain in a jar &mdash; <em>"very absurd magic"</em>)</li>
+            <li><strong>Virel cast Detect Magic</strong> &mdash; heavy reading of <strong>illusory magic</strong> from a side room</li>
+            <li><strong>The Silence Room</strong>: Permanent Silence spell. No sound can be created or heard. DM: <em>"Not even a dangerous thing &mdash; just a study room where young wizards could study without distraction."</em></li>
+            <li>Session ended mid-exploration. More tower below. <strong>Thors</strong>: <em>"We're going to the upside down."</em></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Character Spotlights -->
+  <section>
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane &mdash; the Quiet Paladin</div>
+        <ul>
+          <li>Dry reluctance about curing Virel: <em>"Do we have to? I mean, it's not like she's going to..."</em></li>
+          <li>Passed a Religion check (16, despite &minus;1 INT) to identify Helm's symbol &mdash; DM ribbed him for the low modifier</li>
+          <li>Immediately suspicious of Jack: <em>"And what do you intend to do there?"</em> / <em>"I don't trust this guy, but well."</em></li>
+          <li>Bought splint armor (AC upgrade from 17 to 18 with Defense fighting style)</li>
+          <li>Found <em>Wizards in the Hollow</em> in the tower library &mdash; gave it to Virel without reading it</li>
+          <li>Caught a potion of resistance (fire) from the falling chest</li>
+          <li>Threw a rock into the tunnel to test its depth &mdash; pragmatic, simple</li>
+          <li>46 cleaned segments in 168 minutes. Mostly listened.</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune &Aacute;nstepa &mdash; the Steady Hand</div>
+        <ul>
+          <li>Delivered Kane's fishing-pun eulogy with a painted lure on the coffin: <em>"We didn't know you for very long, but we all got hooked."</em></li>
+          <li>Tender moment on Kane's wild shapes: <em>"They were all his true beautiful self."</em></li>
+          <li>On cold storage for Kane's body: <em>"That's the best part about living somewhere that has permafrost."</em></li>
+          <li>Gave Virel the <strong>Scroll of Fireball</strong> as a peace offering for stealing the cursed necklace</li>
+          <li>Bought <strong>Boots of the Winterlands</strong> &mdash; cold resistance, ignores ice/snow difficult terrain</li>
+          <li>First into the Lost Spire tunnel. Called up: <em>"Room's empty. Watch that last little bit."</em></li>
+          <li>Suggested Virel cast Mage Armor before going deeper &mdash; practical ranger awareness</li>
+          <li>Consistently offered help actions and scouted ahead throughout the tower</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson &mdash; the Shield Between (Still)</div>
+        <ul>
+          <li>Carried Kane's raptor body to the temple. Blocked the view while placing Kane in the coffin &mdash; <em>"He doesn't want people to see him doing that"</em></li>
+          <li>Eulogy: <em>"I regret that he never paid me back."</em></li>
+          <li>Suggested contacting Kane's Order of the Fang: <em>"I wonder if we'd be able to send a notice"</em></li>
+          <li>Volunteered to be the sled dog: <em>"We can save a dog and I'll just hook up to the harness."</em></li>
+          <li>Bought Boots of the Winterlands and splint armor</li>
+          <li>Found the <strong>iron key</strong> in the workshop wreckage</li>
+          <li>Stacked broken tables to reach the ceiling chest (Survival 23). Found 4 potions of resistance</li>
+          <li>Dove into the tunnel slide: <em>"He's just going to run and jump in like a slime."</em> Athletics 22</li>
+          <li><em>"We're going to the upside down."</em> &mdash; Stranger Things reference on entering the inverted tower</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--jack);">
+        <div class="char-name" style="color: var(--jack);">Jack &mdash; the Newcomer</div>
+        <ul>
+          <li>First introduction: <em>"My name is Jack. It's nice to meet you all. I'm told greetings are important."</em></li>
+          <li>Dark humor after Kane's funeral: <em>"If I should die, please don't do this. Just burn me like the wizard."</em></li>
+          <li><strong>Nat 20 persuasion</strong> selling the gemstones &mdash; secured 375 gp each. Immediately handed all money to Rune</li>
+          <li>Declined any payment: <em>"Good faith. To prove usefulness."</em></li>
+          <li><em>"Who the fuck is we?"</em> &mdash; when Virel claimed the party's gems as her own</li>
+          <li><em>"It is an old war wound."</em> &mdash; deflecting the blacksmith who noticed his body is metal</li>
+          <li><em>"I am very efficient with caloric intake."</em> &mdash; warforged not understanding why this is unsettling</li>
+          <li>Has a mysterious patron &mdash; heard a voice say <em>"Don't tell them. Not yet."</em> Unknown affiliation</li>
+          <li>Rolled stats: CHA 20, CON 19, DEX 18. +7 Persuasion at level 3. Party's new face</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae &mdash; Cured but Unchanged</div>
+        <ul>
+          <li>Curse removed by Salen Para's Greater Restoration &mdash; alignment returns to neutral evil (original)</li>
+          <li>Player compared Virel to Tywin Lannister (OOC): <em>"Do what it needs to get done. She's a drow."</em></li>
+          <li>Anti-social even in gratitude: stared Salen in the eye abnormally long, then said <em>"My thanks"</em></li>
+          <li>Instantly adopted Jack: <em>"I like this one. We should take him with us."</em></li>
+          <li><em>"He was a good comrade."</em> &mdash; her full eulogy for Kane</li>
+          <li>Received the Scroll of Fireball from Rune and a +1 quarterstaff (retroactive DM award)</li>
+          <li>Cast <strong>Detect Magic</strong> in the tower &mdash; found illusory magic in the study room</li>
+          <li>Asked smart questions about the wizard's school of magic and the laboratory specimens</li>
+          <li>Investigated the Silence room &mdash; noticed no sound at all, not even footsteps</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot</h2>
+    <table class="loot-table">
+      <thead>
+        <tr><th>Item</th><th>Recipient</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>750 gp (75 platinum)</td><td>Party</td><td>Two 500 gp gems sold at 375 each via Jack's nat 20. Split 15 plat each + 15 party fund</td></tr>
+        <tr><td>Splint Armor &times;2</td><td>Avarath, Thors</td><td>160 gp each (chainmail trade-in). AC 17 base</td></tr>
+        <tr><td>Studded Leather Armor</td><td>Jack</td><td>30 gp + leather armor trade</td></tr>
+        <tr><td>Boots of the Winterlands &times;2</td><td>Rune, Thors</td><td>75 gp each. Cold resistance, ignore ice/snow terrain</td></tr>
+        <tr><td>Healing Potion &times;3</td><td>Virel (&times;2), Rune (&times;1)</td><td>50 gp each. 2d4+2 HP</td></tr>
+        <tr><td class="magical">Potion of Resistance (Fire)</td><td>Avarath</td><td>Lost Spire chest</td></tr>
+        <tr><td class="magical">Potion of Resistance (Force)</td><td>Rune</td><td>Lost Spire chest (traded from Jack)</td></tr>
+        <tr><td class="magical">Potion of Resistance (Cold)</td><td>Jack</td><td>Lost Spire chest (traded from Rune)</td></tr>
+        <tr><td class="magical">Potion of Resistance (Acid)</td><td>Thors</td><td>Lost Spire chest</td></tr>
+        <tr><td class="magical">+1 Quarterstaff</td><td>Virel</td><td>DM retroactive award from mountain rescue</td></tr>
+        <tr><td class="magical">Scroll of Fireball</td><td>Virel</td><td>Peace offering from Rune. Can use; can't learn until level 5</td></tr>
+        <tr><td>Iron Key</td><td>Thors</td><td>Small, old. For a lockbox, not a door</td></tr>
+        <tr><td><em>Mysteries of the Pharaoh</em></td><td>Party</td><td>Telepathic funnel-shaped Underdark creatures</td></tr>
+        <tr><td><em>Wizards in the Hollow</em></td><td>Virel</td><td>Chronicles three Netherese wizards</td></tr>
+        <tr><td><em>Ajamar's Guide to the Fantastic</em></td><td>Party</td><td>Children's illusion textbook</td></tr>
+        <tr><td><em>The Unfettered Mind</em></td><td>Party</td><td>Brain-in-a-jar consciousness transfer</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <div class="quote-text">"Do we have to? I mean, it's not like she's going to..."</div>
+      <div class="quote-attr">&mdash; Avarath, on whether to cure Virel's curse. Dry reluctance &mdash; he liked her better quiet.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"And what do you intend to do there?"</div>
+      <div class="quote-attr">&mdash; Avarath, interrogating Jack on first meeting. The paladin who doesn't trust easily.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Touch me and I will cut your hand off."</div>
+      <div class="quote-attr">&mdash; Virel, to the priestess offering to cure her curse. Pure Virel.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He was a good comrade."</div>
+      <div class="quote-attr">&mdash; Virel, her full, complete, awkward eulogy for Kane. Very drow.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I like this one. We should take him with us."</div>
+      <div class="quote-attr">&mdash; Virel, instantly adopting Jack. Meanwhile, Jack heard his patron whisper: "Don't tell them. Not yet."</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I regret that he never paid me back."</div>
+      <div class="quote-attr">&mdash; Thors, Kane's eulogy. Somber-joking &mdash; he said it knowing it was funny, but meaning it too.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"We don't need to do it. We can save a dog and I'll just hook up to the harness."</div>
+      <div class="quote-attr">&mdash; Thors, volunteering to BE the sled dog. Peak Thors.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"We're going to the upside down."</div>
+      <div class="quote-attr">&mdash; Thors, on entering the inverted tower. Stranger Things energy.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"We didn't know you for very long, but we all got hooked."</div>
+      <div class="quote-attr">&mdash; Rune, Kane's fishing-pun eulogy. With a painted lure placed on the coffin.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Oh, I don't know. They were all his true beautiful self."</div>
+      <div class="quote-attr">&mdash; Rune, on which of Kane's wild shape forms to bury him in. Tender.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"That's the best part about living somewhere that has permafrost."</div>
+      <div class="quote-attr">&mdash; Rune, on cold storage for Kane's body. Dark practical humor.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"My name is Jack. It's nice to meet you all. I'm told greetings are important."</div>
+      <div class="quote-attr">&mdash; Jack, first introduction. Perfectly stilted warforged delivery.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"If I should die, please don't do this. Just burn me like the wizard."</div>
+      <div class="quote-attr">&mdash; Jack, after Kane's funeral. The new guy establishing boundaries.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Who the fuck is we?"</div>
+      <div class="quote-attr">&mdash; Jack, when Virel claimed the party's gemstones as hers to spend.</div>
+    </div>
+
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="cliffhanger">
+        <div class="thread-title">The Lost Spire &mdash; Mid-Exploration</div>
+        <div class="thread-desc">Session ended inside the upside-down tower with more levels below. The burrowed tunnels suggest something lives (or lived) here. The humanoid ant carapace was empty &mdash; molted, not dead. The iron key hasn't found its lock yet.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">Recover the Cauldron of Plenty</div>
+        <div class="thread-desc">Prudence stole it and fled toward Targos. 48-hour deadline likely expiring while the party explores the tower. Whalen may not pay even if recovered.</div>
+      </li>
+      <li>
+        <div class="thread-title">Collect Murder Bounty</div>
+        <div class="thread-desc">Hlin Trollbane in Targos, 100 gp each. Sephek captured. Need to return to Targos.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Jack's Patron</div>
+        <div class="thread-desc">Unknown. Jack heard a voice say "Don't tell them. Not yet" when he met the party. Dark gauntlet arm with elongated fingers. What is he?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Virel's Innate Darkness</div>
+        <div class="thread-desc">Salen noticed even after curing the chardalyn curse that Virel has a natural darkness. The curse amplified something already there.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Dzaan's Connection to the Spire</div>
+        <div class="thread-desc">The executed wizard lived in this tower for a month. He was an illusion wizard. What was he looking for?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Brain-in-a-Jar Book</div>
+        <div class="thread-desc"><em>The Unfettered Mind</em> describes transferring consciousness into a disembodied brain. Why is this book here?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Humanoid Ant</div>
+        <div class="thread-desc">Empty carapace in a cage. Not from the Underdark. The burrowed tunnels match its biology. If it molted, where did it go?</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Sun Blight Fortress</div>
+        <div class="thread-desc">Xardorok's endgame base. Location known. Party not ready.</div>
+      </li>
+      <li>
+        <div class="thread-title">Sephek in Custody</div>
+        <div class="thread-desc">Can Easthaven guards hold an undead? Still alive, gagged, muzzled.</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pax's Notes -->
+  <section>
+    <h2>Pax's Notes &mdash; Avarath's Journal</h2>
+    <div class="journal">
+      <p class="intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+      <h3>What Avarath Did This Session</h3>
+      <ul>
+        <li>Went to the Temple of Helm. Failed to identify Helm's symbol on a Religion check.</li>
+        <li>Stood by while Virel got cured. Didn't push for it &mdash; <em>"Do we have to?"</em></li>
+        <li>Met <strong>Jack</strong>. Did not trust him. Asked pointed questions. Accepted him anyway because the party wanted him.</li>
+        <li>Bought <strong>splint armor</strong> &mdash; AC now 18 (17 base + 1 Defense). Paid 160 gp with chainmail trade-in.</li>
+        <li>Caught a <strong>potion of resistance (fire)</strong> in the Lost Spire.</li>
+        <li>Found <em>Wizards in the Hollow</em> &mdash; gave it to Virel without reading it.</li>
+        <li>Threw a rock into the tunnel. Slid down. Caught potions. Mostly watched.</li>
+      </ul>
+
+      <h3>Things Avarath Knows That The Party Does Not</h3>
+      <ul>
+        <li>Nothing new this session. Avarath learned what everyone else learned.</li>
+      </ul>
+
+      <h3>What Avarath Is Thinking About</h3>
+      <ul>
+        <li><strong>Jack has CHA 20 and +7 Persuasion.</strong> Avarath has CHA 16 and +5. The DM explicitly pointed out that Avarath's charisma rolls have been "garbage." The party's new face is the robot jester. Avarath's social niche just evaporated.</li>
+        <li><strong>46 lines in 168 minutes.</strong> Avarath didn't have a reason to speak this session. No combat to fight. No social encounters to lead. No mysteries to solve. No moral dilemmas. He carried his sword through a shopping trip and a museum.</li>
+        <li><strong>The tower has no enemies.</strong> Dead bugs. Empty rooms. A silence spell that's "not even a dangerous thing." Avarath came to Icewind Dale to find what destroyed his home. He found a gift shop.</li>
+        <li><strong>The cauldron deadline is expiring.</strong> The 48-hour clause was already ticking when the party chose the tower over Targos. Whalen may refuse to pay even if they recover the cauldron.</li>
+        <li><strong>Jack's patron is unknown.</strong> Jack heard a voice say "don't tell them." He has a dark gauntlet arm with elongated fingers. Avarath's instinct was right &mdash; he doesn't trust this one.</li>
+      </ul>
+
+      <h3>Open Questions For Next Session</h3>
+      <ul>
+        <li>Is there anything in this tower worth the detour from Targos?</li>
+        <li>What made those burrowed tunnels? The humanoid ant thing molted &mdash; where is it now?</li>
+        <li>What is Jack's patron? What did the voice mean by "don't tell them"?</li>
+        <li>Can the cauldron deadline be salvaged, or did the party just lose 4,500 gp?</li>
+        <li>Will Avarath ever roll above a 12 on a social check?</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
