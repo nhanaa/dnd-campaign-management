@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 10 &mdash; Snow and Shadow</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #e8edf2;
+  --bg-card: #f4f7fa;
+  --bg-card-hover: #ffffff;
+  --border: #c4ced8;
+  --text: #2c3640;
+  --text-dim: #4a5a68;
+  --text-bright: #1a2530;
+  --red: #8b3a3a;
+  --red-glow: #8b3a3a22;
+  --blue: #2a5a8a;
+  --blue-glow: #2a5a8a22;
+  --green: #3a7a5a;
+  --green-glow: #3a7a5a22;
+  --purple: #6a4a8a;
+  --purple-glow: #6a4a8a22;
+  --teal: #3a7a7a;
+  --teal-glow: #3a7a7a22;
+  --gold: #3a6b8a;
+  --gold-dim: #5a8aaa;
+  --gold-glow: #3a6b8a22;
+  --avarath: #2a5a8a;
+  --kane: #2a6a4a;
+  --rathis: #5a3a7a;
+  --rune: #7a4a2a;
+  --thors: #7a3030;
+  --virel: #2a6a6a;
+  --jack: #5a3a5a;
+}
+
+@keyframes frost-breathe {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+}
+
+.frost-ambient {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+  animation: frost-breathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+p { margin-bottom: 12px; }
+
+section { margin-bottom: 60px; }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.subtitle span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+}
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.comp-segment { transition: width 0.3s; }
+.comp-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+.comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.party-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.party-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+  background: var(--bg-card-hover);
+}
+.party-card .name {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+}
+.party-card .class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.party-card .player {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.timeline-event:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 28px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-deep);
+}
+.timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+.event-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.tag-combat { background: var(--red-glow); color: var(--red); }
+.tag-exploration { background: var(--blue-glow); color: var(--blue); }
+.tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+.tag-lore { background: var(--teal-glow); color: var(--teal); }
+.tag-shopping { background: var(--gold-glow); color: var(--gold); }
+
+.event-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.event-body { color: var(--text); }
+.event-body ul { padding-left: 20px; }
+.event-body li { padding: 4px 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px 24px;
+  background: #f0e8ea;
+  border: 1px solid #e0c8cd;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 12px 0 16px;
+}
+.combat-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.combat-stat-row .label { color: var(--text-dim); }
+.combat-stat-row .value { color: var(--text-bright); font-weight: 500; }
+.combat-box h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 16px 0 8px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 4px;
+}
+.combat-box ul { padding-left: 20px; }
+.combat-box li { padding: 4px 0; }
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.spotlight-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.spotlight-card .char-name {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.spotlight-card ul { padding-left: 20px; }
+.spotlight-card li { padding: 4px 0; }
+.spotlight-card .highlight { font-weight: 500; }
+
+.quote-card {
+  border-left: 3px solid var(--gold-dim);
+  background: #2a5a8a08;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+.quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.thread-list { list-style: none; padding: 0; }
+.thread-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+.thread-list li:hover { box-shadow: 0 4px 16px #2a5a8a18; }
+.thread-title {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.thread-list li.cliffhanger {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+}
+.thread-list li.mystery { border-left-color: var(--purple); }
+.thread-list li.lore-thread { border-left-color: var(--teal); }
+
+.loot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.loot-table th,
+.loot-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.loot-table th {
+  background: #e8edf2;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.loot-table tr:last-child td { border-bottom: none; }
+.loot-table td.magical {
+  background: #edf2f8;
+  border-left: 3px solid var(--gold-dim);
+}
+
+.cliffhanger-box {
+  background: linear-gradient(135deg, #f4f7fa, #f8e8ec);
+  border: 1px solid var(--red);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.cliffhanger-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.cliffhanger-box p { font-size: 15px; }
+.cliffhanger-box .big-line {
+  font-family: 'Pirata One', cursive;
+  font-size: 22px;
+  color: var(--text-bright);
+  text-align: center;
+  margin: 16px 0 8px;
+  line-height: 1.4;
+}
+.cliffhanger-box .speaker {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.journal {
+  background: linear-gradient(135deg, #f0f4f8, #eaf0f5);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+.journal h3 {
+  color: var(--avarath);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.journal h3:first-child { margin-top: 0; }
+.journal ul { padding-left: 20px; }
+.journal li { padding: 4px 0; }
+.journal .intro {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .container { padding: 24px 16px 60px; }
+  .timeline { padding-left: 24px; }
+  .timeline-event { padding: 16px 20px; }
+  .journal { padding: 20px 22px; }
+  .combat-box { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>Snow and Shadow</h1>
+    <p class="subtitle">
+      <span>Session 10</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&amp;D 5.5e</span>
+      <span>May 6, 2026</span>
+      <span>~2h 47m</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:35%; background:var(--red);"></div>
+      <div class="comp-segment" style="width:25%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:25%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:10%; background:var(--teal);"></div>
+      <div class="comp-segment" style="width:5%; background:var(--green);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--red);"></span>Combat 35%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 25%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Exploration 25%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Mystery 10%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--green);"></span>Loot 5%</div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic; text-align: center;">Three combats, two big lore drops, one voice in Jack's head.</p>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 3 (Oath of Vengeance)</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune &Aacute;nstepa</div>
+        <div class="class">Tiefling Ranger 3</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 3</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Drow Wizard 3</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--jack);">
+        <div class="name">Jack</div>
+        <div class="class">Warforged Warlock 3</div>
+        <div class="player">Deiduke</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Session Summary -->
+  <section>
+    <h2>Session Summary</h2>
+    <p>The session opened on Floor 2 of the Lost Spire, where the party found a sealed tube containing a Scroll of Invisibility, a small brass key, and the magical signatures of necromancy and illusion bleeding from a side room. Through that door walked a tall, withered undead warrior and a man the rest of the party recognized immediately &mdash; Dzaan, the wizard publicly burned at the stake in Easthaven a month ago. He explained, calmly: he was a <em>simulacrum</em>, made of snow and shadow, and his time was running out without a "life spark" from a living creature. The lower floors of this tower held a Netherese chamber that could turn an illusion real. He needed one of them to volunteer. They refused. He ordered the wight, Krintas, to kill them.</p>
+    <p>The fight ran two rounds. Rune opened with a longbow shot for 25 damage, Avarath Fey Stepped in and Toppled Krintas prone, and Thors's Action-Surged spear strikes set off the fiery chains on his armor &mdash; restraining the wight while he burned. Krintas's life-drain touch knocked Virel's max HP down to 21. Jack's Hellish Rebuke punished a hit; Jack's Hold Person aimed at the simulacrum upstairs failed (DM ruled it a construct, not humanoid) before he switched to a dagger stab on Krintas. The simulacrum Misty Stepped to the level above on a held action when Krintas was bloodied, then cast Invisibility from upstairs the next round. Krintas burned to death restrained in Thors's chains; the simulacrum is still loose somewhere in the tower.</p>
+    <p>After a short rest, the party split. Virel and Jack searched the wizard's office and recovered four books, including <em>From Shadow to Substance</em> (a Netherese treatise on illusion-to-reality magic) and <em>Ventitas</em> (history of a sister flying-city that disintegrated over Cormanthor before this one &mdash; Uthred &mdash; fell). Virel attuned to a silver-framed wooden amulet bearing a triple-crescent symbol; she immediately sensed an inactive Shield Guardian, far southwest. Rune wandered into a small altar room, stepped within five feet of an upside-down stone altar, and watched its eight-pointed star transform into seven stars in a circle &mdash; Mystra's symbol. A flask of luminous blue liquid dropped from above into his hand.</p>
+    <p>Floor 3 was a basilisk. Thors hit the floor first, Jack second, and the basilisk came out from behind an overturned dining table before Avarath was even down the rope. Rune jumped, Hunter's Marked it, and dealt 22 damage in one turn. Jack pulled a greatsword that hadn't been there before &mdash; a prayer to his patron, a flash of purple energy, "Knight of Artorias" &mdash; and a tinkling laugh sounded only inside his head. The basilisk's petrification cone caught Rune in the restraint stage; he shook it off the next round and put an arrow through its eye.</p>
+    <p>The party long-rested in the basilisk's den. The next morning, Thors opened the north door into the rune-inscribed chamber the simulacrum had warned about. Jack opened the south door into a bedroom where a will-o'-wisp rose out of a long-dead wizard's nightgowned skeleton, tried to electrocute Rune, and faded. Behind the bed, Rune found an invisible chest. Jack's brass key from the previous floor unlocked it; inside was an ancient spellbook bearing the same rune as Virel's Shield Guardian &mdash; disintegrating on contact with air. The session ended in the chamber, with the disk. A voice in Jack's head: <em>"This magic could bring me forth&hellip; and together we can rule this realm, Jack."</em> No one else heard it.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Act I &mdash; Floor 2 Wizard's Lab</div>
+        <div class="event-body">
+          <p>The party continued mid-exploration of the inverted second-floor lab from Session 9, with Detect Magic still up.</p>
+          <ul>
+            <li>Inverted lab with arcane symbols on the (now-)ceiling, smashed alchemy equipment, a partially collapsed wall exposing a new room</li>
+            <li><strong>Virel</strong> found a sealed tube made of the same chardalyn-like material as the soothsayer's amulet, but inert. Contained a <strong>Scroll of Invisibility</strong></li>
+            <li><strong>Jack</strong> found a small brass key. Too small for any door</li>
+            <li>Virel's <strong>Detect Magic</strong> picked up two signatures from the room to the north &mdash; necromancy <em>and</em> illusion. They started moving toward the door</li>
+            <li>A voice from the other side: <em>"There's no need to panic. I'm not going to hurt you. How did you find the tower?"</em></li>
+            <li><strong>Thors</strong>, foreshadowing: <em>"Sounds normal. Almost too normal."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act II &mdash; Snow and Shadow</div>
+        <div class="event-body">
+          <p>Two figures walked through the door. The party recognized one of them immediately &mdash; the dead wizard from Easthaven. The negotiation was civilized for fourteen minutes, then it wasn't.</p>
+          <ul>
+            <li><strong>Krintas</strong> &mdash; a tall, withered humanoid undead. Wight, identified by Rune (Nature). Wights are former great warriors; they speak Common</li>
+            <li><strong>Dzaan</strong> &mdash; recognized by everyone except Jack on a History check. Looks identical to the wizard burned at the stake in Easthaven a month ago</li>
+            <li>Dzaan introduces himself: <em>"I suppose you could also call me Dzaan, but I'm not technically Dzaan. I am a simulacrum of the wizard Dzaan. Have you seen him? We've been waiting for him to return for about a tenday now."</em></li>
+            <li><strong>Rune</strong> (flat): <em>"He's dead."</em> / <strong>Avarath</strong>: <em>"He burned alive."</em></li>
+            <li><strong>The simulacrum's pitch</strong>:
+              <ul>
+                <li>This tower is a fragment of a Netherese flying city that crashed under the glacier 2,000 years ago. The rest is buried elsewhere under the ice</li>
+                <li>The lowest level contains a chamber that turns illusions into reality, but it requires a "life spark" from a living creature</li>
+                <li>Without it, the simulacrum dissolves in a couple of days</li>
+                <li>Dzaan's actual research goal: find <strong>Ythryn</strong> &mdash; a <em>separate</em> buried city &mdash; <em>"if I find Ythryn and find its magic within"</em></li>
+                <li>Krintas killed the original guides on Dzaan's order to keep the place a secret</li>
+              </ul>
+            </li>
+            <li>Avarath asks if he's lying. No signs of deception &mdash; the simulacrum is desperate</li>
+            <li><strong>Virel interrogates</strong>: <em>"Tell me, what is your association with the organization known as the Arcane Brotherhood?"</em> Confirms Dzaan was a member; <strong>two other Brotherhood wizards are out there doing similar research</strong>, plus a fourth tagalong (feminine pronoun) who has died</li>
+            <li><strong>Rune refuses</strong>: <em>"Yeah, I don't see any benefit to letting you be a real boy."</em></li>
+            <li><strong>Virel</strong> continues the Pinocchio bit: <em>"Well, you see, we get a grasshopper..."</em> (Jiminy Cricket &mdash; <em>if you become a real boy, we get a conscience figure</em>). <strong>Thors</strong> cuts in: <em>"I was literally looking at something like that. Nothing is free in this world."</em></li>
+            <li>The simulacrum: <em>"If you're not going to help us &mdash; princess and I are going to have to kill all five of you."</em></li>
+            <li><strong>Avarath</strong>: <em>"I don't like your attitude. It's an abomination. Get him."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Act III &mdash; The Wight Burns</div>
+        <div class="event-body">
+          <p>Two rounds. Rune opened with 25 damage, Avarath's Maul put Krintas prone, Thors's chestplate symbol triggered fiery chains for the first time. The simulacrum cut and ran.</p>
+          <ul>
+            <li><strong>Round 1</strong>: Rune Hunter's-Mark longbow (25 dmg) &rarr; Krintas drains Virel (HP max 23&rarr;21) &rarr; Jack Rebukes (5 fire) &rarr; Simulacrum Acid Splash (Avarath fails, 11 acid; Heroic Inspiration re-roll still failed) &rarr; Avarath Fey Step + Vow of Enmity + Topple (prone) &rarr; Thors spear + Action Surge + <strong>fiery chains restrain</strong> (DC 15 STR, fail) &rarr; <strong>Held action triggers: Simulacrum Misty Steps upstairs</strong> &rarr; Virel Shocking Grasp (2 lightning) &rarr; Jack Hold Person on the simulacrum fizzles (DM rules construct), dagger 7 piercing on Krintas</li>
+            <li>In Jack's head, alone, after the dagger stab: <em>"come on, let me kill you"</em></li>
+            <li><strong>Round 2</strong>: Rune dual short swords with Hunter's Mark per hit (DM clarified) &rarr; <strong>Krintas burns to death from restraint fire (12, max roll) before he can act</strong> &rarr; Simulacrum casts Invisibility from upstairs and flees</li>
+            <li><strong>Avarath chases</strong>: climbs the rope, Perception 19 &mdash; finds nothing. <strong>Lay on Hands</strong> self-heal</li>
+            <li>The simulacrum is loose somewhere in the tower. Or already gone</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Mystery</span>
+        <div class="event-title">Act IV &mdash; The Mark of Mystra</div>
+        <div class="event-body">
+          <p>Short rest. Two discoveries: Virel attuned to an amulet bonded to a Shield Guardian, and Rune walked into a Mystra altar.</p>
+          <ul>
+            <li>Jack: <em>"And I have warlock, so I will happily take that."</em> &mdash; warlock spell-slot recovery on short rest</li>
+            <li><strong>Thors decapitates Krintas's body</strong>: head goes UP the hole, body kicked DOWN. <em>"Yeah, Thors is just very distrusting of undead."</em> Skittering sounds rise from the next floor when the body lands</li>
+            <li><strong>Wizard's office</strong> (Virel + Jack search):
+              <ul>
+                <li>A four-inch silver-framed wooden disk <strong>amulet</strong> with a broom carved into its face. <strong>Triple-crescent + staff symbol</strong> &mdash; same as the entrance statues. Unidentified</li>
+                <li>Books: <em>From Shadow to Substance</em> (illusion-to-reality theory, Common); <em>Here Lies the King</em> (illusionist novel, Common); <em>Ventitas</em> (history of a Netherese city that disintegrated over <strong>Cormanthor</strong> before the fall of <strong>Uthred</strong> &mdash; the larger city this tower was part of); one untitled book in Elvish (Virel can't read it as a drow)</li>
+              </ul>
+            </li>
+            <li><strong>Virel attunes the amulet</strong> &mdash; immediately senses an <strong>inactive Shield Guardian</strong> bound to it. Far southwest of their current position</li>
+            <li><strong>Mystra's altar (Rune, alone)</strong>: an upside-down stone altar with an eight-pointed star carved into its eastern face. Stepping within five feet, the symbol transforms into <strong>seven eight-pointed stars in a circle with a flowing brick pattern</strong> &mdash; the symbol of <strong>Mystra</strong>. A small <strong>flask of glowing blue liquid</strong> falls from above (DC 10 Dex pass), lands in his hand</li>
+            <li>Outside the 5-foot radius, the altar reverts to one star. Inside, Mystra. The flask is unidentified &mdash; not like the resistance potions</li>
+            <li><strong>Avarath</strong> spent the rest hunting the upper level for the simulacrum. No trace</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Act V &mdash; The Basilisk's Den</div>
+        <div class="event-body">
+          <p>Down to Floor 3. A petrification ambush in a kitchen. Two rounds, ended by Rune's killing arrow narrated as a shot through the eye.</p>
+          <ul>
+            <li>Order down the rope: <strong>Thors first</strong>, <strong>Jack second</strong>, <strong>Avarath partway</strong>, <strong>Virel and Rune still up top</strong>. Floor 3 is a kitchen &mdash; rusty tableware, broken chairs, an overturned table</li>
+            <li>DM rolled a d4 for trigger timing &mdash; came up <strong>2</strong>, after Thors and Jack were down</li>
+            <li>A large reptilian <strong>basilisk</strong> emerged from behind the table, hissed</li>
+            <li>Nature checks &mdash; Thors, Jack, Avarath identify it. <strong>Avarath highest</strong>, learns: <em>petrification eyes</em></li>
+            <li><strong>Round 1</strong>: Rune jumps the rope (2 fall dmg), Hunter's Mark, longbow + Dreadful Strike for <strong>22 damage</strong>. <em>"Rangers baby."</em> &rarr; Avarath: Vow of Enmity + Maul + <strong>Divine Smite</strong>, 12 dmg, basilisk bloodied (Topple fails CON 13) &rarr; Jack pulls a greatsword that wasn't there: <strong>"Knight of Artorias"</strong>, 12 psychic, patron-laughs in his head &rarr; Thors swings Krintas's body as a club &mdash; misses, body comes apart &rarr; Basilisk bites Jack (miss), petrification cone DC 12 CON, <strong>Rune fails &mdash; restrained</strong></li>
+            <li><strong>Round 2</strong>: Virel <strong>Blur</strong> on herself, climbs down &rarr; Rune (restrained) 15-to-hit on regular AC, 10 piercing &rarr; <strong>kill</strong>, narrated as an arrow through the eye</li>
+            <li>DM: <em>"A guttural scream comes out of its mouth, and then both eyes close, and it flops to the ground."</em></li>
+            <li>Rune harvests with gloves on: <strong>3 claws, 2 venomous teeth, 1 intact eye</strong></li>
+            <li>DM aside: <em>"That fight was supposed to be a lot harder."</em> And: <em>"That was the mom or the dad. The baby's somewhere else, and he's going to team up with a yeti."</em></li>
+            <li>The cracked tall <strong>mirror in the next room</strong> would have countered the petrification cone if the party had cleared the bedroom first. They didn't</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Mystery</span>
+        <div class="event-title">Act VI &mdash; Long Rest, the Wisp, and the Voice</div>
+        <div class="event-body">
+          <p>The party long-rested in the basilisk's den. The next morning, two doors opened simultaneously. The session ended on a voice.</p>
+          <ul>
+            <li>Vote on rest: 3-2 for long rest. Rune sets <strong>Alarm</strong>. Jack, after the vote: <em>"I have forgotten that I require sleep as well. Let's go to sleep, fellow humans."</em></li>
+            <li>Uneventful night. Long rest restored HP, slots, and Virel's max HP back to 23</li>
+            <li>Morning: <strong>Thors opens the north door</strong> &rarr; <strong>The Chamber</strong>. Walls inscribed with cracked, broken interconnected runes. Ceiling bears swirling runes converging on a <strong>golden crystal disk, 5 feet in diameter</strong></li>
+            <li>Same moment: <strong>Jack opens the south door</strong> &rarr; <strong>The Bedroom</strong>:
+              <ul>
+                <li>Bed upside-down, rotting blankets, tall cracked <strong>mirror</strong> on the north wall</li>
+                <li><strong>Skeleton in a tattered nightgown</strong> under two dirt-clogged windows &mdash; rime-covered, long dead. Probably the wizard who lived here when the city fell</li>
+                <li>An <strong>illusory upside-down figure</strong> &mdash; the long-faced wizard from the entrance statues &mdash; stands on the ceiling, repeating phrases in <strong>Loross</strong> (ancient wizard language). Nobody at the table speaks it</li>
+                <li><strong>Rune searches the body</strong>: chest glows. <strong>A will-o'-wisp rises out of the skeleton.</strong> Jack identifies it on Nature 19. It tries to electrocute Rune (16 vs AC, miss &mdash; he feels the static raise his arm hairs), then fades when Virel calls others over</li>
+                <li><strong>Virel</strong>: <em>"Rune, this is known as a will-o'-wisp. We have to keep this from Thors. Thors will be very upset."</em></li>
+              </ul>
+            </li>
+            <li><strong>Avarath finds an invisible chest</strong> behind the bed &mdash; stubs his toe. <strong>Jack's brass key</strong> unlocks it; the chest becomes visible on unlock</li>
+            <li>The chest is airtight, watertight, room-temperature inside, with permanent invisibility magic. ~25 lbs. <em>"A really nice personal safe."</em> Inside: an ancient leather-bound spellbook with the <strong>same triple-crescent rune as Virel's Shield Guardian on its spine</strong> &mdash; <strong>disintegrates on contact with air</strong></li>
+            <li>The chest itself, they keep. Thors carries it</li>
+            <li><strong>Back in the chamber. The Voice.</strong> When Jack walks in, in his head only:
+              <ul>
+                <li><em>"I've seen this. I know. This magic could bring me forth. &hellip; I feel it needs repairs. This one is not good. The walls are great. But if we can find one from the city, I think that you could bring me forth and together we can rule this realm, Jack."</em></li>
+              </ul>
+            </li>
+            <li>Virel's Arcana check (DC 15, nailed): the chamber works as advertised &mdash; place an illusory object or creature under the disk, it becomes corporeal and real. But the cracked runes mean side effects are likely</li>
+            <li><strong>Vote on the chamber</strong>: Virel + Avarath want to keep it. Rune wants to destroy it. Thors votes evil disc. Jack stands silent in the middle of the room</li>
+            <li><strong>Virel</strong>, utilitarian: <em>"You think an old dying woman might want to provide for her family and give life to someone else?"</em></li>
+            <li><strong>Rune</strong>: <em>"Sounds like it's pretty powerful if it's worth killing people over."</em></li>
+            <li>Session ends mid-debate. The chamber is intact. The simulacrum is still loose. Jack's patron has spoken twice now</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Combat Encounters -->
+  <section>
+    <h2>Combat Encounters</h2>
+
+    <div class="combat-box">
+      <div class="combat-meta">Encounter 1 &middot; Krintas (Wight) &amp; Dzaan Simulacrum</div>
+      <div class="combat-stats">
+        <div class="combat-stat-row"><span class="label">Setting</span><span class="value">Floor 2 Lab</span></div>
+        <div class="combat-stat-row"><span class="label">Rounds</span><span class="value">2</span></div>
+        <div class="combat-stat-row"><span class="label">Surprise</span><span class="value">None</span></div>
+        <div class="combat-stat-row"><span class="label">Outcome</span><span class="value">Krintas dead, Sim escaped</span></div>
+        <div class="combat-stat-row"><span class="label">Init order</span><span class="value">Rune &rarr; Krintas &rarr; Sim &rarr; Avarath &rarr; Thors &rarr; Virel &rarr; Jack</span></div>
+      </div>
+      <h4>Round 1</h4>
+      <ul>
+        <li><strong>Rune</strong>: Hunter's Mark on Krintas, longbow 26-to-hit. <strong>12 piercing + 1 force (HM) + 12 psychic (Dreadful Strike) = 25 damage</strong></li>
+        <li><strong>Krintas</strong>: longbow at Jack &mdash; 18-to-hit, <strong>6 piercing + 8 necrotic = 14 damage</strong>. Multi-attack: walks up to <strong>Virel</strong> and touches her wrist (life-drain). Con save fails, <strong>2 necrotic + max HP 23&rarr;21 until long rest</strong></li>
+        <li><strong>Jack (reaction)</strong>: <strong>Hellish Rebuke</strong>. DC 13 Dex &mdash; Krintas saves (15), takes <strong>5 fire (half)</strong></li>
+        <li><strong>Simulacrum</strong>: Acid Splash on Avarath + Jack. Jack saves; <strong>Avarath fails (Heroic Inspiration re-roll still failed) &mdash; 11 acid damage</strong></li>
+        <li><strong>Avarath</strong>: <strong>Fey Step (Winter)</strong> &mdash; Frighten attempt on the simulacrum (saves). <strong>Channel Divinity &mdash; Vow of Enmity</strong> on Krintas. Maul w/ advantage, 21-to-hit, <strong>8 bludgeoning + Topple</strong> &mdash; Krintas fails Con save, prone</li>
+        <li><strong>Thors</strong>: spear w/ advantage on prone, <strong>5 piercing</strong>. <strong>Action Surge</strong> &mdash; second attack, <strong>8 piercing</strong>. Chestplate symbol glows &mdash; <strong>fiery chains erupt &mdash; 8 fire, DC 15 Strength save, Krintas fails (14), restrained, takes 2d6 fire each turn</strong></li>
+        <li><strong>Held action triggers</strong> &mdash; <strong>Simulacrum casts Misty Step</strong> to the level above (Krintas now bloodied). <em>"Krintas, it seems that this is turning on us. Apologies in advance."</em></li>
+        <li><strong>Virel</strong>: <strong>Shocking Grasp</strong> (touch, advantage on prone), <strong>2 lightning</strong></li>
+        <li><strong>Jack</strong>: tries Hold Person on the simulacrum upstairs &mdash; DM rules the simulacrum a construct, the spell fails. Substitutes target: Krintas with a normal dagger, 15-to-hit, <strong>7 piercing</strong>. Patron whisper, only Jack hears: <em>"come on, let me kill you"</em></li>
+      </ul>
+      <h4>Round 2</h4>
+      <ul>
+        <li><strong>Rune</strong>: dual short swords with Hunter's Mark on each (DM clarifies HM applies per hit). First: <strong>11 piercing + 4 force</strong>. Vex weapon mastery for advantage on the second: <strong>3 piercing + 4 force</strong></li>
+        <li><strong>Krintas (start of turn)</strong>: restraint chains burn for <strong>12 fire (max roll)</strong>. <strong>Krintas dies, burned out from the inside</strong>, before he can act</li>
+        <li><strong>Simulacrum (from upstairs)</strong>: casts <strong>Invisibility</strong>, flees. Detect Magic catches him briefly, then he's more than 30 feet out and the trail goes cold</li>
+        <li>Combat ends. Avarath chooses to chase: climbs the rope (full move), Perception 19 &mdash; finds nothing. <strong>Lay on Hands</strong> self-heal</li>
+      </ul>
+      <h4>Damage Totals</h4>
+      <ul>
+        <li><strong>Rune</strong>: 25 (R1) + 22 (R2) = <strong>47 damage to Krintas</strong></li>
+        <li><strong>Thors</strong>: 13 weapon + 8 fire (R1) + 12 fire restraint tick (R2) = <strong>kill credit</strong></li>
+        <li><strong>Avarath</strong>: 8 + Topple setup. 11 acid taken</li>
+        <li><strong>Jack</strong>: 5 fire (Rebuke) + 7 piercing = 12. 14 damage taken from Krintas longbow</li>
+        <li><strong>Virel</strong>: 2 lightning. 2 necrotic taken; max HP reduced 23&rarr;21</li>
+      </ul>
+    </div>
+
+    <div class="combat-box">
+      <div class="combat-meta">Encounter 2 &middot; Basilisk</div>
+      <div class="combat-stats">
+        <div class="combat-stat-row"><span class="label">Setting</span><span class="value">Floor 3 dining room</span></div>
+        <div class="combat-stat-row"><span class="label">Rounds</span><span class="value">2</span></div>
+        <div class="combat-stat-row"><span class="label">Surprise</span><span class="value">None &mdash; ambush mid-descent</span></div>
+        <div class="combat-stat-row"><span class="label">Outcome</span><span class="value">Killed (eye shot)</span></div>
+        <div class="combat-stat-row"><span class="label">DM note</span><span class="value">"Supposed to be a lot harder"</span></div>
+      </div>
+      <h4>Round 1</h4>
+      <ul>
+        <li><strong>Rune</strong>: jumps from rope (<strong>2 bludgeoning</strong> fall). Hunter's Mark, longbow 23-to-hit. <strong>6 piercing + 5 force + 11 psychic (Dreadful Strike) = 22 damage</strong></li>
+        <li><strong>Avarath</strong>: down rope, walks into melee. <strong>Channel Divinity Vow of Enmity</strong>, Maul + <strong>Divine Smite</strong> (1st-level slot), 18-to-hit advantage, <strong>12 total &mdash; basilisk bloodied</strong>. Topple fails (basilisk passes Con 13)</li>
+        <li><strong>Jack</strong>: <em>"Now I do the thing."</em> Reaches over his shoulder, grabs at empty air, mutters under his breath. Arm radiates purple energy. Eyes change. <strong>A greatsword appears</strong> &mdash; <em>"Knight of Artorias just kind of flings himself with the greatsword at the basilisk."</em> 23-to-hit, <strong>12 psychic damage</strong>. In the back of Jack's head only: a tinkling, delighted laugh &mdash; <em>"like someone on a rollercoaster, just having the time of their life"</em></li>
+        <li><strong>Thors</strong>: improvises Krintas's headless body as a great club &mdash; 13 to hit, miss. Body comes apart in his hands. Drops the legs, switches to spear two-handed</li>
+        <li><strong>Basilisk</strong>: bites Jack &mdash; 14 vs AC, miss. Eyes glow blue-green &mdash; petrification cone, DC 12 Con. Thors, Avarath, Rune save individually. <strong>Only Rune fails &mdash; restrained (stage 1 of petrification)</strong></li>
+      </ul>
+      <h4>Round 2</h4>
+      <ul>
+        <li><strong>Virel</strong>: peeks down through the hole (heavy cover, would shoot at disadvantage). Casts <strong>Blur</strong> on herself, climbs down</li>
+        <li><strong>Rune (restrained)</strong>: asks about called shots; DM rules a true eye-shot would need higher AC. 15-to-hit on regular AC. <strong>10 piercing</strong>, kills the basilisk. DM lets Rune narrate the killing-blow flavor: <em>"He'll try to take out at least one of its eyes &mdash; an arrow straight through."</em></li>
+      </ul>
+      <p style="margin-top:14px;"><strong>Harvested</strong>: 3 claws, 2 venomous teeth, 1 intact eye (gloves required &mdash; teeth poisonous)</p>
+    </div>
+
+    <div class="combat-box">
+      <div class="combat-meta">Encounter 3 &middot; Will-o'-Wisp</div>
+      <div class="combat-stats">
+        <div class="combat-stat-row"><span class="label">Setting</span><span class="value">Floor 3 bedroom</span></div>
+        <div class="combat-stat-row"><span class="label">Rounds</span><span class="value">N/A &mdash; single attack</span></div>
+        <div class="combat-stat-row"><span class="label">Trigger</span><span class="value">Rune searches the body</span></div>
+        <div class="combat-stat-row"><span class="label">Outcome</span><span class="value">Faded; somewhere in tower</span></div>
+      </div>
+      <ul>
+        <li>Wisp rises from the dead wizard's nightgowned skeleton. Jack identifies it on Nature 19</li>
+        <li>Single attack: 16 vs Rune AC, <strong>miss</strong>. Rune feels the static raise the hairs on his arm</li>
+        <li>Fades when Virel calls the others in. Currently somewhere in the tower</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Character Spotlights -->
+  <section>
+    <h2>Character Spotlights</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane &mdash; the Quiet Paladin</div>
+        <ul>
+          <li>Passed History to recognize the simulacrum as Dzaan; questioned the deal directly: <em>"Can Avarath see if he's lying?"</em></li>
+          <li><strong>Drew the line on the negotiation</strong>: <em>"I don't like your attitude. It's an abomination. Get him."</em> &mdash; committed the party to combat</li>
+          <li><strong>Combat MVP play vs Krintas</strong>: Fey Step into melee, Channel Divinity (Vow of Enmity), Maul with advantage, Topple succeeded &mdash; set up Thors and Rune for the rest of the round</li>
+          <li>Took the worst single hit of the fight &mdash; 11 acid from Acid Splash. Burned a Heroic Inspiration on the re-roll and still failed</li>
+          <li>After Krintas fell, climbed the rope to chase the Misty-Stepped simulacrum. Didn't find him. Spent the entire short rest searching the upper level. Still no trace</li>
+          <li><strong>Lay on Hands</strong> to self-heal after the climb</li>
+          <li>Floor 3: opened with Vow of Enmity + Smite + Maul, 12 damage, basilisk now bloodied</li>
+          <li>Found the <strong>invisible chest</strong> behind the bed in the wizard's bedroom &mdash; stubbed his toe on it</li>
+          <li><strong>Voted long rest</strong> &mdash; pragmatic, called for it twice. <em>"What's he going to do, leave?"</em></li>
+          <li>Ceded the amulet attunement to Virel (<em>"If you must&hellip; well, if nobody else has objections, she will attend to the amulet."</em>) &mdash; same pattern as the soothsayer's necklace, with full awareness this time</li>
+          <li>On the chamber: agrees with Virel, wants to take it. Doesn't push hard against Rune</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune &Aacute;nstepa &mdash; the Steady Hand</div>
+        <ul>
+          <li><strong>The simulacrum scene's voice of refusal</strong>: <em>"He's dead. He burned alive."</em> / <em>"Yeah, I don't see any benefit to letting you be a real boy."</em></li>
+          <li><strong>Combat MVP, both fights</strong>:
+            <ul>
+              <li>Krintas: 47 damage across two rounds (Hunter's Mark + Dreadful Strike + dual short swords)</li>
+              <li>Basilisk: 32 damage including the killing called-shot through the eye</li>
+              <li>DM, after the basilisk: <em>"Level three Rune is a DM's nightmare."</em></li>
+            </ul>
+          </li>
+          <li>Identified the wight (Nature). Watched as Jack ID'd the will-o'-wisp on a Nature 19 the second after it tried to electrocute him</li>
+          <li><strong>Stepped into Mystra's altar room</strong> alone &mdash; 5 feet from the upside-down altar, the eight-pointed star transformed into the seven-stars-in-a-circle. <strong>Caught the falling flask</strong> of glowing blue liquid (Dex save 11 vs DC 10)</li>
+          <li>Set the <strong>Alarm spell</strong> for the long rest watch</li>
+          <li>Will-o'-wisp moment: <em>"What the fuck is this? This is what I get for being really, really good in combat."</em></li>
+          <li><strong>The closing position on the chamber</strong> &mdash; the moral spine of the session: <em>"Rune has a very unpopular opinion. Fuck up that room. Destroy the golden disc. Make it unusable."</em> / <em>"Sounds like it's pretty powerful if it's worth killing people over."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson &mdash; the Shield Between</div>
+        <ul>
+          <li>Floated a tactical trap before initiative: <em>"Hey, hey, we're being all rash. Just come over here by the hole."</em> The plan was to lure the simulacrum and Krintas to the 12-foot drop and push them down (Virel: <em>"It's only 12 feet. It won't kill him."</em>). Combat was already declared by then</li>
+          <li><strong>Restraint chains</strong> (his armor's symbol &mdash; first time it triggered): Action Surge &rarr; second attack on Krintas &rarr; fiery chains &rarr; DC 15 Strength save &rarr; Krintas restrained, dies of fire ticks</li>
+          <li><strong>Decapitated Krintas's body</strong> post-fight: head up, body kicked down the hole. <em>"Yeah, Thors is just very distrusting of undead. Head went up, body went down."</em></li>
+          <li>Improvised Krintas's headless body as a great club against the basilisk &mdash; clean miss, body fell apart in his hands</li>
+          <li>Found the rune-inscribed <strong>Chamber</strong> first (north door)</li>
+          <li><em>"He's the key master. Are you the gatekeeper?"</em> &mdash; Ghostbusters, when Jack found the brass key matched the invisible chest</li>
+          <li>Strongest case against resting: <em>"In character, Thors is ready to keep going. He's not feeling any worse for wear. He's ready to go. And he doesn't want to be underground."</em></li>
+          <li>On the chamber: <em>"Evil disc."</em> &mdash; case closed</li>
+          <li>On the invisible chest: <em>"Turns out it's a wizard's laundry basket."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae &mdash; the Drow Wizard</div>
+        <ul>
+          <li><strong>Detect Magic</strong> carried the entire session &mdash; picked up the necromancy/illusion approaching the door, the amulet's resonance, the chamber's runes</li>
+          <li>Found the <strong>Scroll of Invisibility</strong> in the lab</li>
+          <li><strong>Interrogation pressure</strong> on the simulacrum: <em>"Tell me, what is your association with the organization known as the Arcane Brotherhood?"</em> &mdash; got the lore drop on two more Brotherhood wizards out there</li>
+          <li>Combat:
+            <ul>
+              <li>Took Krintas's life-drain &mdash; Con save failed, <strong>HP max reduced 23 &rarr; 21</strong> until long rest</li>
+              <li><strong>Shocking Grasp</strong> on prone Krintas (advantage from prone, touch spell), 2 lightning</li>
+              <li>Cast <strong>Blur</strong> on herself before climbing into the basilisk fight</li>
+            </ul>
+          </li>
+          <li><strong>Attuned the broom-symbol amulet</strong> during the short rest &mdash; instantly sensed the <strong>inactive Shield Guardian</strong> far southwest. Same rune appeared on the disintegrated spellbook in the chest</li>
+          <li>Asked the group's input first: <em>"I would like the group's input on this, as I'm told you make evil decisions."</em> &mdash; and <em>"I mean, there was a lot of blood last time."</em> &mdash; direct acknowledgment of the soothsayer's necklace fallout</li>
+          <li>The chamber pitch: <em>"Could be quite useful. Money. Power. Bring back the dead, maybe."</em> And the utilitarian sharper edge: <em>"You think an old dying woman might want to provide for her family and give life to someone else?"</em></li>
+          <li>Provoked Rune with deadpan: <em>"Only ranger science? Do you not also utilize magic from the same weave?"</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--jack);">
+        <div class="char-name" style="color: var(--jack);">Jack &mdash; the Patron Speaks</div>
+        <ul>
+          <li><strong>Found the small brass key</strong> on Floor 2 &mdash; payoff arrived a session later when it unlocked the invisible chest on Floor 3</li>
+          <li>Introduced himself to the simulacrum: <em>"We are exploring. My name is Jack &mdash; and who might you be?"</em> &mdash; and earlier, when the door opened: <em>"Well, that is actually my fault. Jack's going to slowly raise his hand."</em></li>
+          <li><strong>Hellish Rebuke</strong> as a reaction to Krintas's longbow shot &mdash; 5 fire (Krintas saved). Patron whisper after the dagger stab: <em>"come on, let me kill you"</em></li>
+          <li>Tried <strong>Hold Person on the simulacrum upstairs</strong> &mdash; caught the construct typing pre-cast (DM ruled the simulacrum a construct, so the spell would have failed). Substituted a dagger stab on Krintas instead</li>
+          <li><strong>Knight of Artorias greatsword reveal vs. the basilisk</strong> &mdash; first time the party (or the table) saw Jack's pact weapon. Reaches over his shoulder where there's nothing, mutters something, purple energy radiates from his arm, eyes change. <em>"Knight of Artorias just kind of flings himself with the greatsword at the basilisk."</em> 23-to-hit, 12 psychic damage. <strong>Patron's tinkling laughter</strong> in his head only &mdash; <em>"like someone on a rollercoaster"</em></li>
+          <li>Warforged moment after the long-rest debate: <em>"I have forgotten that I require sleep as well. Let's go to sleep, fellow humans."</em></li>
+          <li><strong>The chamber addressed him directly.</strong> <em>"This magic could bring me forth&hellip; and together we can rule this realm, Jack."</em> No one else heard it. Jack didn't share what he heard, didn't argue for or against the chamber out loud &mdash; just stood in the middle of the room while the others debated. Visibly considering. Rune read the silence anyway: <em>"about as blank and as hard to read as Jack's mask. And yet just peeking from behind it is not subtle"</em></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot</h2>
+    <table class="loot-table">
+      <thead>
+        <tr><th>Item</th><th>Recipient</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="magical">Scroll of Invisibility</td><td>Virel</td><td>Floor 2 lab. Sealed in inert chardalyn-material tube</td></tr>
+        <tr><td>Small brass key</td><td>Jack</td><td>Floor 2 lab. Unlocks the invisible chest on Floor 3</td></tr>
+        <tr><td class="magical">Silver-framed wooden amulet (broom)</td><td>Virel (attuned)</td><td>Bonded to an inactive <strong>Shield Guardian</strong> far SW. Triple-crescent + staff symbol matches the entrance statues and the disintegrated spellbook. Not Mystra's symbol</td></tr>
+        <tr><td><em>From Shadow to Substance</em></td><td>Party</td><td>Netherese treatise on illusion-to-reality magic. Common. Used by Virel for the chamber arcana check</td></tr>
+        <tr><td><em>Here Lies the King</em></td><td>Party</td><td>Illusionist novel. Common. Flavor</td></tr>
+        <tr><td><em>Ventitas</em></td><td>Party</td><td>History of the Netherese city Ventitas, which disintegrated over Cormanthor before Uthred fell. Common</td></tr>
+        <tr><td>Untitled book in Elvish</td><td>Party</td><td>Unread. Virel doesn't speak Elvish (drow)</td></tr>
+        <tr><td class="magical">Flask of glowing blue liquid</td><td>Rune</td><td>Mystra's altar (Floor 2 side room). Unidentified. Dropped from above when Rune stepped within 5 ft</td></tr>
+        <tr><td>Basilisk parts</td><td>Rune</td><td>3 claws, 2 venomous teeth, 1 intact eye. Crafting potential. Teeth poisonous &mdash; gloves required</td></tr>
+        <tr><td class="magical">Magical invisible chest</td><td>Party (Thors carrying)</td><td>Airtight, watertight, room-temp interior. Permanent invisibility on lock. ~25 lbs. <em>"Really nice personal safe."</em></td></tr>
+        <tr><td>(Disintegrated) ancient spellbook</td><td>&mdash;</td><td>From inside the invisible chest. Same rune on spine as Virel's Shield Guardian. Disintegrated on contact with air</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic;">No XP awarded mid-tower. The DM is bundling. Levels still 3.</p>
+  </section>
+
+  <!-- Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <div class="quote-text">"I don't like your attitude. It's an abomination. Get him."</div>
+      <div class="quote-attr">&mdash; Avarath, to the simulacrum, after the deal collapsed. The line that started the fight.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"What's he going to do, leave?"</div>
+      <div class="quote-attr">&mdash; Avarath, on the long-rest debate, after the simulacrum had Misty-Stepped + Invisibility'd away with an eight-hour head start.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"If you must&hellip; well, if nobody else has objections, she will attend to the amulet."</div>
+      <div class="quote-attr">&mdash; Avarath, ceding the amulet attunement to Virel &mdash; eyes wide open this time, after the soothsayer's necklace.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Yeah, I don't see any benefit to letting you be a real boy."</div>
+      <div class="quote-attr">&mdash; Rune, to the simulacrum begging for a "life spark." The Pinocchio framing kept showing up after.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"What the fuck is this? This is what I get for being really, really good in combat."</div>
+      <div class="quote-attr">&mdash; Rune, after the will-o'-wisp tried to electrocute him for searching a corpse. Petrification cone, life-drain wight, electric ghost. The DM agreed.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Rune has a very unpopular opinion. Fuck up that room. Destroy the golden disc. Make it unusable."</div>
+      <div class="quote-attr">&mdash; Rune, the closing argument on the illusion-to-reality chamber. The session ended with this still unresolved.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"I would like the group's input on this, as I'm told you make evil decisions&hellip; I mean, there was a lot of blood last time."</div>
+      <div class="quote-attr">&mdash; Virel, asking the party to vet the broom-symbol amulet. Self-aware about the soothsayer's necklace.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"You think an old dying woman might want to provide for her family and give life to someone else?"</div>
+      <div class="quote-attr">&mdash; Virel, pitching the chamber. The utilitarian framing &mdash; and the line that lost Rune.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Sounds normal. Almost too normal."</div>
+      <div class="quote-attr">&mdash; Thors, on the empty Floor 2. He was right.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"He's the key master. Are you the gatekeeper?"</div>
+      <div class="quote-attr">&mdash; Thors, Ghostbusters, when Jack's brass key turned out to fit the invisible chest.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Turns out it's a wizard's laundry basket."</div>
+      <div class="quote-attr">&mdash; Thors, on the magical invisible chest. The DM weighed in on his own laundry-room ergonomics for thirty seconds.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Well, that is actually my fault. Jack's going to slowly raise his hand."</div>
+      <div class="quote-attr">&mdash; Jack, after Virel announced &mdash; to the room with two undead in it &mdash; that Jack had found a brass key.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"Stance changes, eyes change a little bit, and Knight of Artorias just kind of flings himself with the greatsword at the basilisk."</div>
+      <div class="quote-attr">&mdash; Jack, first time the party (or the table) saw Jack's patron-weapon. The patron laughed in his head.</div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">"This magic could bring me forth&hellip; together we can rule this realm, Jack."</div>
+      <div class="quote-attr">&mdash; The voice in the chamber, only Jack heard. The session ended on it.</div>
+    </div>
+
+  </section>
+
+  <!-- Cliffhanger -->
+  <section>
+    <h2>Cliffhanger</h2>
+    <div class="cliffhanger-box">
+      <span class="label">Floor 3 Chamber &middot; Voice in Jack's head</span>
+      <p>The simulacrum is loose somewhere in the tower. The party stands in front of a five-foot golden disk that turns illusions into reality, with cracked runes that promise side effects. Rune wants to break it. Virel and Avarath want to keep it. Thors votes evil disc. Jack stands silent.</p>
+      <div class="big-line">"Together we can rule this realm, Jack."</div>
+      <span class="speaker">&mdash; The voice in the chamber. No one else heard it.</span>
+    </div>
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="cliffhanger">
+        <div class="thread-title">The Simulacrum is Loose</div>
+        <div class="thread-desc">Misty Stepped + Invisibility'd out of the fight on Floor 2. Eight-hour long rest gave him plenty of time to flee or wait. Detect Magic on wakeup didn't find him.</div>
+      </li>
+      <li class="cliffhanger">
+        <div class="thread-title">The Chamber</div>
+        <div class="thread-desc">Golden disk, illusion-to-reality, cracked runes (side effects likely). Virel + Avarath want to keep it. Rune wants to destroy it. Thors votes evil disc. Jack has been spoken to (twice now) but hasn't voted out loud.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Jack's Patron(s)</div>
+        <div class="thread-desc">Tinkling laugh after the Knight of Artorias greatsword turn. Voice in the chamber: "Together we can rule this realm, Jack." The Session 9 line was "Don't tell them. Not yet." Same entity, or different?</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Shield Guardian</div>
+        <div class="thread-desc">Inactive, far southwest. Bonded to Virel through the broom-symbol amulet. Same rune as the spellbook that disintegrated in the invisible chest &mdash; the dead wizard in the nightgown was its master.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">The Dead Wizard in the Nightgown</div>
+        <div class="thread-desc">Probably the original Netherese owner of this floor &mdash; went down in his sleep when the city fell 2,000 years ago. Will-o'-wisp emerging from his body suggests something lingered. Wisp now somewhere in the tower.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Loross</div>
+        <div class="thread-desc">Ancient wizard language. Repeating illusory message in the chamber. Nobody at the table speaks it. Comprehend Languages would crack it.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Mirror</div>
+        <div class="thread-desc">Plain mirror, but the DM specifically planted it as a basilisk counter. Other basilisk(s) "somewhere else" per the DM. Take the mirror?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Mystra's Altar</div>
+        <div class="thread-desc">Single flask delivered. Repeat visit possible? Does it deliver something else next time? Why is Mystra here at all?</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Other Brotherhood Wizards</div>
+        <div class="thread-desc">Two more out there doing similar Netherese-tower research. Plus Vellynne (already on the radar). Plus the dead "fourth tagalong" the simulacrum referred to with a feminine pronoun &mdash; possibly Avarice.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">Uthred / Ythryn</div>
+        <div class="thread-desc">This tower is a fragment of <strong>Uthred</strong> &mdash; the Netherese flying city that fell here. <strong>Ythryn</strong> is a separate buried city the simulacrum was actually trying to find. A working illusion-to-reality chamber may exist in Ythryn.</div>
+      </li>
+      <li>
+        <div class="thread-title">The Cauldron</div>
+        <div class="thread-desc">Still stolen. Still presumably 4,500 gp gone. Targos still on the route after the tower.</div>
+      </li>
+      <li>
+        <div class="thread-title">Sephek &amp; Sun Blight</div>
+        <div class="thread-desc">Sephek custody &mdash; can Easthaven hold him? Sun Blight Fortress &mdash; the endgame. Both still pending.</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pax's Notes -->
+  <section>
+    <h2>Pax's Notes &mdash; Avarath's Journal</h2>
+    <div class="journal">
+      <p class="intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+      <h3>What Avarath Did This Session</h3>
+      <ul>
+        <li>Recognized the simulacrum as Dzaan on a History check. Questioned him. Refused his deal.</li>
+        <li>Drew the line: <em>"It's an abomination. Get him."</em></li>
+        <li><strong>Fey Stepped (Winter)</strong> into melee on Krintas. Channel Divinity &rarr; <strong>Vow of Enmity</strong>. Maul + Topple. Set up Thors and Rune for the next two turns.</li>
+        <li>Took 11 acid damage from Acid Splash. Burned a <strong>Heroic Inspiration</strong> on the re-roll and still failed.</li>
+        <li>Climbed the rope to chase the simulacrum. Found nothing. <strong>Lay on Hands</strong> to self-heal.</li>
+        <li>Vow of Enmity + <strong>Divine Smite</strong> + Maul on the basilisk for 12 damage &mdash; bloodied it. Topple failed (Con save 13).</li>
+        <li>Found the <strong>invisible chest</strong> behind the bed.</li>
+        <li>Voted <strong>long rest</strong> (won 3-2). Burned a hit die during the short rest.</li>
+        <li>Agreed with Virel on keeping the chamber. Did not push back hard against Rune.</li>
+      </ul>
+
+      <h3>Things Avarath Knows That The Party Does Not</h3>
+      <ul>
+        <li>Nothing private. Everyone heard the same words from the simulacrum, the wisp, and the chamber. Jack heard the patron whisper alone &mdash; Avarath does not know that.</li>
+      </ul>
+
+      <h3>What Avarath Is Thinking About</h3>
+      <ul>
+        <li><strong>The simulacrum is still alive.</strong> He Misty Stepped to the floor above and went invisible. Eight-hour head start. Detect Magic on wakeup found nothing. He could be anywhere &mdash; back at the tower entrance, in another room on Floor 2, or already outside heading for one of the other Arcane Brotherhood wizards. Avarath wants him found.</li>
+        <li><strong>Two other Arcane Brotherhood wizards</strong> doing the same research. Plus Vellynne. Plus a fourth tagalong who "predeceased" &mdash; the simulacrum used a feminine pronoun, which lines up with Avarice (the Brotherhood contact in The Caer's basement, who has been silent since). The simulacrum's pitch &mdash; <em>"if I find Ythryn and find its magic within"</em> &mdash; is the same loop they're all chasing. The unnatural winter Avarath came here to investigate might be a side-effect of Netherese magic bleeding for 2,000 years. Or a separate problem. He doesn't know yet.</li>
+        <li><strong>The chamber should be destroyed.</strong> Rune is right. An illusion-to-reality device that requires a "life spark" &mdash; a person &mdash; to activate is a vector for abuse, not a tool for good. Virel's "old dying woman" pitch is the exact reasoning he's heard from cults his whole life. Avarath agreed with her in the moment because he wanted to take the device away from anyone else who might find it. But if the device can't be moved (the room IS the device), the only way to keep it out of the simulacrum's hands is to break it. He should reconsider.</li>
+        <li><strong>The Shield Guardian is far southwest.</strong> Virel has it bonded now. If they ever travel that direction, that's a major asset &mdash; <em>or</em> a major target if someone else gets there first. Same rune was on the spellbook that disintegrated. The dead wizard in the nightgown was the master. Whoever rebinds the Guardian inherits it.</li>
+        <li><strong>Jack heard something he didn't share.</strong> He stayed silent during the chamber vote &mdash; didn't argue keep, didn't argue destroy, just stood there. He pulled a magical greatsword the party had never seen &mdash; Knight of Artorias, his words &mdash; with a prayer to <em>some patron</em>. Whatever the chamber said to him in private, he chose not to repeat. Avarath's first instinct on Jack was right. He should ask Jack directly what he heard in there.</li>
+        <li><strong>Slot economy.</strong> Vow of Enmity (Channel Divinity), Topple (mastery), Fey Step (species), and Lay on Hands (paladin pool) all spent zero spell slots. Burned <strong>one 1st-level slot on the Smite vs. the basilisk</strong>. Long rest restored everything. He should be at full slots heading into Floor 3 morning two.</li>
+        <li><strong>The mirror.</strong> They left it. The DM said it would have countered the basilisk. The DM said there are more basilisks. They should grab the mirror before leaving the tower.</li>
+      </ul>
+
+      <h3>Open Questions For Next Session</h3>
+      <ul>
+        <li>Where is the simulacrum? Did he flee the tower or stay in it?</li>
+        <li>What does the flask of glowing blue liquid do? Identify or trial-and-error?</li>
+        <li>What is Jack's patron, and what did the chamber promise him specifically?</li>
+        <li>Does the chamber stay or get broken? Is it a vote or a fight?</li>
+        <li>What did the dead wizard in the nightgown research, and what was on the disintegrated spellbook?</li>
+        <li>Where is the second basilisk, and is the yeti pair-up real or DM ribbing?</li>
+        <li>Is the Shield Guardian recoverable on this campaign's timeline, or is "far southwest" outside the module?</li>
+        <li>Does Mystra's altar have anything else to offer? Does anyone else trigger it?</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

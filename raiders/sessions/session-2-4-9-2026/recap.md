@@ -15,7 +15,7 @@
 | Tree-Hammer (Beastborn) | Barbarian | SpasticWolf |
 | Gaynor (Human) | Warlock | Gaynor |
 | Glug (Grimnir) | Paladin | GluG |
-| **DM** | Odin Smash | — |
+| **DM** | Ogre Smash | — |
 
 **NPCs traveling with the party:** Hrolf (veteran Hallharn warrior) and Siddhe (the mysteriously displaced child from another world).
 

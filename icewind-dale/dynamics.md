@@ -62,17 +62,24 @@
 - **Xardorok** — Major threat. Duergar warlord plotting to destroy Ten-Towns. Location now known: **Sun Blight Fortress** (mountains of Icewind Dale). His son Durth was killed by the party in Session 7 — retaliation likely
 - **Vellynne** — Arcane Brotherhood member. Avarice warned against her. Not yet encountered
 - **Suspicious Easthaven Guard** — Hiding something about the trapper murder and Torg's Caravan. Threatened Rune via Message. Tall, clean-shaven, pocket watch. Potential lead or obstacle in the murder investigation
+- **Dzaan Simulacrum** — ESCAPED (Session 10). Illusory copy of Dzaan, made of "snow and shadow." Has full spellcasting up to ~3rd level (cast Acid Splash, Misty Step, Invisibility). Needs a "life spark" within days or dissolves. Aware of two more Brotherhood wizards doing similar Netherese-tower research. Current location: somewhere in the Lost Spire, or fled
 
 ### Deceased
 - **Durth** — Xardorok's son. Captured on the Easthaven Ferry (Session 7), executed by Rune in the wine cellar after revealing Sun Blight Fortress. His final line: "I don't want his love, I want his respect. And today I've lost it." Cannot be revived without Resurrection. Xardorok will learn of this
 - **The White Lady** — Ghost bound to the Errtu figurehead in Easthaven town hall. The woman from the séance (Session 5) — drowned, wearing white. Visible only to the party because of the séance. Destroyed by the party in Session 8. Figurehead made of same evocation stone as the soothsayer's necklace
+- **Krintas** — Wight, bodyguard of the Dzaan simulacrum. Killed the original guides who brought Dzaan to the Lost Spire. Burned to death in Thors's restraint chains in Session 10. Body decapitated by Thors (head up, body down)
 
 ## Plot Threads
 
 ### Active Quests
 1. **Recover the Cauldron of Plenty** — Prudence stole it and fled toward Targos. Whalen will pay remaining 9 gemstones (4,500 gp) if recovered. Contract clause requires cauldron present in 48 hours. Conveniently, Targos is also where Hlin Trollbane awaits the murder bounty
 2. **Collect Murder Bounty** — Sephek captured and turned in to Easthaven guards. Need proof of arrest to show Hlin Trollbane in Targos for 100 gp each reward
-3. **Explore the Lost Spire** — Party entered the upside-down Netherese tower northeast of Easthaven (Session 9). Mid-exploration — more levels below. Found books, potions, a laboratory with a molted humanoid ant carapace, and a permanent Silence study room. No enemies encountered yet. Burrowed tunnels suggest something lives or lived here
+3. **The Lost Spire — Mid-Exploration** — Cleared Floor 2 + most of Floor 3. **Dzaan simulacrum loose somewhere in the tower** (Misty Stepped + Invisibility'd from combat in S10). Chamber on Floor 3 (illusion-to-reality device) intact, debate unresolved. Other Floor 3 rooms still unexplored. Mirror in the bedroom (basilisk counter) not yet collected. The Loross illusory message in the chamber hasn't been translated
+4. **The Chamber Decision** — Vote on the illusion-to-reality device:
+   - Virel + Avarath: keep it (Virel pitches "old dying woman gives life to family")
+   - Rune: destroy it ("Sounds like it's pretty powerful if it's worth killing people over")
+   - Thors: "evil disc"
+   - Jack: silent — the chamber spoke to him alone. Hasn't voted out loud
 4. **Destroy the Heart / Sun Blight Fortress** — The soothsayer's dying prophecy. Xardorok has "the heart of a dragon" and plans to destroy Ten-Towns. Durth confirmed the heart and dragon are at **Sun Blight Fortress** in the mountains. The heart must be destroyed. This is the module's endgame destination. Party is not ready yet
 
 ### Leads & Hooks
@@ -89,7 +96,15 @@
 - **The Gray Bag of Tricks** — Rune has it. 1/day d8 creature summon. Not yet used
 - **The Errtu Figurehead** — Ship figurehead in Easthaven town hall depicting Errtu, a Balor demon that terrorized Icewind Dale a century ago. Made of the same dark evocation stone as the soothsayer's necklace. The White Lady ghost was bound to it. Connection to the cult of Levistus? Why is it in the town hall?
 - **Sephek's Ice Sword** — Magical ice weapon, painfully cold to bare hands. Radiates magic separate from Sephek's necromancy. In party's possession. Does it melt if separated from Sephek long enough?
-- **Jack — Deiduke's Warforged Warlock** — Joined the party Session 9. Jester robes (red/black diamond), white mask, permanent smile, inorganic movements. One arm is a dark black gauntlet with elongated fingers. Rolled stats: CHA 20, CON 19, DEX 18, WIS 13, STR 11, INT 11. +7 Persuasion at level 3. Can see in magical darkness. Heard a voice from his patron say "Don't tell them. Not yet" when he met the party — patron and pact unknown. Was investigating Dzaan and the Lost Spire at the Temple of Helm when the party arrived. Party's new social face — displaced Avarath (CHA 16, +5) as primary negotiator. No healing abilities apparent
+- **Jack — Deiduke's Warforged Warlock** — Joined the party Session 9. Jester robes (red/black diamond), white mask, permanent smile, inorganic movements. One arm is a dark black gauntlet with elongated fingers. Rolled stats: CHA 20, CON 19, DEX 18, WIS 13, STR 11, INT 11. +7 Persuasion at level 3. Can see in magical darkness. Heard a voice from his patron say "Don't tell them. Not yet" when he met the party — patron and pact unknown. Was investigating Dzaan and the Lost Spire at the Temple of Helm when the party arrived. Party's new social face — displaced Avarath (CHA 16, +5) as primary negotiator. No healing abilities apparent. Session 10: revealed a previously-unseen pact weapon — a greatsword summoned with a prayer ("Knight of Artorias"), purple-energy arm radiance, eyes change. Heard a tinkling laugh in his head when he hit the basilisk. The chamber on Floor 3 of the Lost Spire spoke to him alone: *"This magic could bring me forth… together we can rule this realm, Jack."* Did not share these whispers with the party. Did not vote on the chamber
+- **Two More Brotherhood Wizards** — The simulacrum confirmed in S10: two other Arcane Brotherhood wizards are out there doing the same Netherese-tower research as Dzaan. Plus a deceased "fourth tagalong" the simulacrum referred to with feminine pronouns (consistent with **Avarice**, who has been silent in The Caer's basement). Vellynne is still the named one to avoid
+- **Ythryn — A Separate Buried City** — Distinct from this tower (which is from Uthred). Dzaan's actual research target. May contain a working illusion-to-reality chamber. Location unknown
+- **The Tower Mirror** — A cracked tall mirror in the Floor 3 bedroom of the Lost Spire. The DM noted (above-table) it would have countered the basilisk's petrification cone. More basilisks reportedly nearby, possibly with a yeti
+- **The Shield Guardian** — Inactive, far southwest. Bonded to Virel via the broom-symbol amulet (S10). Same triple-crescent + staff rune as the disintegrated spellbook in the Floor 3 invisible chest — the dead wizard in the nightgown was the master. Recovery target
+- **Mystra's Altar (Lost Spire Floor 2)** — Single flask of glowing blue liquid delivered to Rune (S10). Repeat visits possible? Other party members trigger it?
+- **Loross — Ancient Wizard Language** — Repeating illusory message in the chamber. Comprehend Languages would crack it
+- **The Will-o'-Wisp** — Released from the dead Netherese wizard's nightgowned skeleton in the Floor 3 bedroom. Tried to electrocute Rune, missed, faded. Currently somewhere in the tower
+- **The Chamber's Side Effects** — The illusion-to-reality runes are cracked. Virel's Arcana check confirmed using the device would work but with likely negative side effects. Unspecified
 
 ### Resolved
 - **Find Garrett** — Rescued from the mountain. Climbing party casualties: Mukingo (dead), halfling and Asterisks (alive). Sled dogs saved

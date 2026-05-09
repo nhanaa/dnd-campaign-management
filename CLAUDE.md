@@ -26,11 +26,12 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 
 | Folder | System | Setting | Character |
 |--------|--------|---------|-----------|
-| `korvosa/` | Pathfinder 2e Remastered | Korvosa | Frozen Wind Kitsune — Draconic Sorcerer (Rime) |
+| `korvosa/` | Pathfinder 2e Remastered | Korvosa | Frozen Wind Kitsune — Draconic Sorcerer (Rime) | **ABANDONED** |
 | `myrrindar/` | D&D 5e (2024 PHB) | Myrrindar — Winds of Warding | Fairy Bard (Mist) |
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) |
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
+| `age-of-ashes/` | Pathfinder 2e Remastered | Alseta's Travelers — Age of Ashes | Human Dromaar — Earth/Wood Kineticist (Zane Alphire) |
 
 ## How to Help
 

@@ -1,4 +1,6 @@
-# World — Korvosa
+# World — Korvosa [ABANDONED]
+
+> **Campaign Status: Abandoned** — Closed out May 2026. Player attrition (Beast/Pol left, Rattle/Joey ghost-dropped) reduced the party to 3 PCs. Campaign ended at level 5, partway through Curse of the Crimson Throne.
 
 ## System
 - **System:** Pathfinder 2e Remastered
