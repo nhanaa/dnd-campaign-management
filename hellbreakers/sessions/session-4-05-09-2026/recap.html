@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 4 — Plans Ruined</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-moob { border-left-color: var(--jade); }
+.char-fang { border-left-color: var(--rust); }
+.char-ren { border-left-color: var(--gold); }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-moob { border-left-color: var(--jade); }
+.spotlight.s-fang { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Plans Ruined</h1>
+  <div class="subtitle">Session 4 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 9, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 42m</span>
+    <span class="meta-pill">~13 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:50%"></div>
+    <div class="comp-seg comp-rp" style="width:18%"></div>
+    <div class="comp-seg comp-social" style="width:16%"></div>
+    <div class="comp-seg comp-explore" style="width:10%"></div>
+    <div class="comp-seg comp-loot" style="width:6%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 50%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 18%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 16%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 10%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Mystery / Loot 6%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Medium Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren <em style="font-size:11px">(NEW)</em></div><div class="char-class">Boarhound &middot; Bai Jian's Beastmaster Companion</div><div class="char-player">Anonymous Donor</div></div>
+    <div class="char-card char-moob"><div class="char-name">Moob</div><div class="char-class">Goblin &middot; Alchemist <em style="font-size:11px">(DM-NPC, departed)</em></div><div class="char-player">Harrgoth</div></div>
+    <div class="char-card char-fang"><div class="char-name">Fang</div><div class="char-class">Goblin &middot; Inventor &middot; Wing <em style="font-size:11px">(DM-NPC, departed)</em></div><div class="char-player">Cherry</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The Waterspout cliffhanger resolved in one more round. Wing's mast-explosion finished the crow's-nest Marine on his way to the deck; the Chelaxian navy captain dropped <strong>Cyrathul</strong> with a third-action MAP rapier crit through his Mirror Cloak duplicate and was killed seconds later &mdash; <strong>Bai Jian</strong> crit-Snagging-Struck her open, then <strong>Panacea</strong> hero-pointed a Needle Darts reroll into the captain's throat. <strong>Rhokrag</strong> was untied, the ship looted, and the party fled into the dark to lick their wounds. Two days of road travel followed, broken by a vengeance ambush on the second night &mdash; Chelaxian survivors who'd tracked them from the inn &mdash; that Bai Jian opened by reading the encounter math out loud: <em>"I assume this was balanced for five people because there's no way."</em> The fight ran clean. The post-combat unraveled hard: Panacea's Battle Medicine crit-failed on Moob, killed him on the spot, then Bai Jian sprinted across the camp to pour the goblin's own emergency Elixir of Life down his throat before the Quick Alchemy timer ran out.</p>
+    <p>Saringallow was a soft landing &mdash; <strong>Zara</strong> crushed Rhokrag in a hug, the goblins set up an alchemy lab, and a boarhound had been delivered to the door for Bai Jian by an unnamed donor. Level-up was bought with Rhokrag's rescue XP: Bai Jian took his Beastmaster companion <strong>Ren</strong> (<em>"give me my dog"</em>), Cyrathul committed to <strong>Draconic Ravager</strong> and ditched the longsword, and Panacea took <strong>Medic Dedication</strong> with <strong>Assurance</strong> because &mdash; her words &mdash; <em>"I won't be killing any more moobs, hopefully."</em> A week of downtime followed, then an organization-wide briefing: Alceo and Phoebe were pleased, the Drumish trade lanes were buckling under raid pressure, but <strong>Hedvind</strong> was about to call in <strong>Thrune reinforcements</strong>. The new mandate from Eladir: ease off the raids, win hearts and minds in the Chitterwood villages, the Hellbreakers' first reputation point already in the bank from the Night's Prize sailors. The two goblin players left the table; in-fiction, Moob and Fang stayed behind at HQ.</p>
+    <p>The Wolf Point territory turned out to be a tangle. A <strong>Steel Circle</strong> bandit camp had taken over a farmstead a mile southeast of the Wolf Point tower; a stout dwarven chieftain greeted the party at twenty leveled crossbows and offered a parley after Cyrathul's Deception failed openly. Her terms: clear whatever was haunting the Wolf Point tower (her boys had spent one night there and come out shaking), and the Steel Circle would help with whatever the party needed. The party deferred the tower for intel and rode for <strong>Fernsby</strong>, where a villager named <strong>Lily</strong> showed them a desecrated village green &mdash; flowerbeds churned, oak tree chewed, no footprints, only sinuous impressions in the dirt. Cyrathul's Nature check caught it: <strong>snake tracks</strong>. Lily remembered hissing from a ravine outside town. The party rode out, found the ravine, and walked into a goblin-snake hybrid encounter that the DM rolled <strong>four nat 20s on in a row</strong> &mdash; Bai Jian was crit-bitten unconscious, Ren was crit-bitten down with two dying, Panacea's Battle Medicine pulled Bai Jian back (Treat Wounds got Ren post-combat), Cyrathul mopped the boss with <strong>Exploit Vulnerability</strong>, and the session ended on the hybrid boss's last words: <em>"Plans ruined!"</em> &mdash; and more goblin-ish voices echoing further down the ravine.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I &middot; Combat &middot; The Waterspout, Finished</div>
+      <div class="act-card">
+        <h3>Captain and Crow's Nest</h3>
+        <ul>
+          <li>DM cold-recapped Session 3 &mdash; Rhokrag tied below decks, devil dead under <strong>Bai Jian</strong>, captain at the door, Marine still in the crow's nest.</li>
+          <li><strong>Marine</strong>: dagger throws miss twice, holds his last dagger. <strong>Fang</strong> commands <strong>Wing &rarr; Explode</strong> at the base of the mast. Mast falls onto the next mast, falls onto the crow's nest. Marine flies out and falls to his death on the deck.</li>
+          <li><strong>Cyrathul</strong> caught by falling rigging &mdash; Reflex save fail, takes 1 damage. <em>"I'm in both spaces."</em></li>
+          <li><strong>Captain</strong>: action 1 swap rapier from heavy crossbow, action 2 Strike, action 3 MAP Strike &mdash; <strong>CRIT</strong> through the duplicate. Cyrathul DOWN.</li>
+          <li><strong>Bai Jian</strong>: change grip to two-handed, <strong>Snagging Strike &rarr; CRIT, 21 damage</strong>, captain off-guard. <em>"That's what you got for hitting my comrade. Now prepare to pay for your crime."</em></li>
+          <li><strong>Cyrathul (downed)</strong>: stays dying through the rest of the round.</li>
+          <li><strong>Panacea</strong>: stride up, <strong>Needle Darts</strong> at off-guard captain &mdash; initial miss, <strong>hero point reroll &rarr; 18 hits</strong>. <em>"The needles shoot out of Panacea's claws and go right through her jugular and decapitate her."</em> Captain killed.</li>
+          <li>Combat ends. Panacea attempts <strong>Treat Wounds</strong> on Cyrathul &mdash; poor roll. <strong>Moob</strong> jogs over and pours an <strong>Elixir of Life</strong> down Cyrathul's throat &mdash; that's what removes dying.</li>
+          <li>Bai Jian unties Rhokrag with an Interact action. Loot pass on the captain's cabin: gold + sailors' pay note, trinket treasures, <strong>harpy's talon</strong>, manacles. <strong>144 XP</strong> retroactive for captain + devil.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act II &middot; Roleplay &middot; The Long Night Out</div>
+      <div class="act-card">
+        <h3>Lick Our Wounds</h3>
+        <ul>
+          <li><strong>Rhokrag's</strong> exposition: the informant was Chelaxian bait. They tortured him for League intel; he didn't talk. The devil was a torture specialist <strong>Tilaax</strong> brought in.</li>
+          <li><strong>Cyrathul</strong>: <em>"I am in no condition to get in another big fight."</em> <strong>Panacea</strong>: <em>"Yeah, we need to go lick our wounds."</em></li>
+          <li>Party moves several hours into the dark before camping. Bai Jian first watch, Cyrathul second, Panacea third.</li>
+          <li>Bai Jian's perception catches faint flames and alarm bells from the inn boat (still burning) far behind them.</li>
+          <li>Long rest. Next day, traders' caravan passes &mdash; Saringallow &rarr; Logos &rarr; Cheliax. Camped again on the second night.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; Vengeance on the Road</div>
+      <div class="act-card">
+        <h3>Five-Person Encounter for Three</h3>
+        <ul>
+          <li>Panacea's watch &mdash; rustling on both sides. <em>"You killed the captain. You're gonna die for that!"</em> Initiative.</li>
+          <li><strong>Bai Jian</strong>, dry: <em>"I assume this was balanced for five people because there's no way."</em> DM confirms Moob and Fang are still in as NPCs.</li>
+          <li>~5 Chelaxian loyalists &mdash; a Marine with twin daggers, three crossbow loyalists, alchemist support. One dies named (per *"You killed Fred!"*).</li>
+          <li><strong>Bai Jian</strong>'s two crit-kills: a Sudden Charge stomach-slash mid-fight (<em>"You guys are just such nuisance"</em>), and a Sudden Charge crit on the last terrified loyalist late (minimum-damage critical, but enough).</li>
+          <li><strong>Cyrathul</strong>: <strong>Exploit Vulnerability</strong> on the cart-flanker. <em>"He has no weakness. Until he gets to the cart. Until now."</em> First strike rolled 0 damage; second strike killed him.</li>
+          <li><strong>Wing</strong> (Fang/DM) tire-slammed a wounded loyalist; <strong>Moob</strong>'s Quick-Alchemy alchemist fire kept tagging another with persistent damage.</li>
+          <li>One loyalist drops his crossbow, draws a mace, swings twice at Bai Jian (both ineffective), then collapses as the persistent fire on him burns through. <em>"His arm just runs out of energy and the fire consumes him."</em></li>
+          <li><strong>Combat ends.</strong> <strong>Panacea</strong>: <em>"Blackians aren't known for their smarts, I guess."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act IV &middot; Mystery &middot; Worst Healer Ever</div>
+      <div class="act-card">
+        <h3>Battle Medicine Disaster</h3>
+        <ul>
+          <li><strong>Panacea</strong> moves to <strong>Battle Medicine</strong> on Moob post-combat. Rolls a <strong>1 (crit fail)</strong>, then rolls max damage on the failure result. <strong>Moob dies on her hands.</strong></li>
+          <li><strong>Panacea</strong>, deadpan three-line cascade: <em>"Worst healer ever. Did you kill him? Wait, what? He's dead? There I go trying to help."</em></li>
+          <li><strong>Cyrathul</strong>, immediate cover: <em>"We'll just say he died from the Chalaxians."</em></li>
+          <li><strong>Bai Jian</strong> recovers Moob's still-warm Quick-Alchemy Elixir of Life from his hand (within the 10-minute window) and pours it down. Insufficient. Searches the pouch, finds a regular Elixir of Life, uses it. <strong>Moob revived</strong> &mdash; two elixirs across the recovery. First words: <em>"Don't touch me."</em></li>
+          <li>Long rest. Morning travel back to Saringallow, Moob brewing self-cocktails along the way and passing potions around.</li>
+          <li><strong>Rhokrag's road exposition</strong>: he overheard the captain telling her crew that <strong>Hellknight Alaya</strong> would pay handsomely for Hellbreaker intel. <em>"If there's a Hellknight out there hunting us down for revenge, we better tread carefully."</em></li>
+          <li><strong>80 XP for the rescue &rarr; level 2.</strong> Bai Jian: <em>"Give me my dog. I want my dog. At level two."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V &middot; Faction &middot; Saringallow Homecoming</div>
+      <div class="act-card">
+        <h3>Level Up, Sell Loot, Meet Ren</h3>
+        <ul>
+          <li>Level-up break. Foundry fought back &mdash; Free Archetype + Gradual Ability Boost slots had to be hand-toggled by the DM.</li>
+          <li><strong>Bai Jian</strong>: +1 CON. Picked up his Beastmaster companion <strong>Ren</strong> &mdash; a green boarhound, trained against Chelaxian forces.</li>
+          <li><strong>Cyrathul</strong>: committed to <strong>Draconic Ravager</strong>, dropped the longsword for good. <em>"I don't need any weapon besides me chomping on him."</em></li>
+          <li><strong>Panacea</strong>: <strong>Medic Dedication</strong> with <strong>Assurance</strong> &mdash; explicit reaction to the Moob incident. <em>"I took medic dedication with assurance, so I won't be killing any more moobs, hopefully."</em> Bai Jian: <em>"The hero that we need."</em></li>
+          <li>HQ welcome: <strong>Zara</strong> tackle-hugged Rhokrag (<em>"Oh, you found him! That's the hurt shoulder!"</em>), set pastries going. Goblins had already set up a new alchemy lab. <strong>Ren</strong> had been delivered to the HQ door by an unnamed donor &mdash; Zara: <em>"I'm not sure what brought it, but this dog showed up here at the door."</em></li>
+          <li><strong>Bai Jian</strong> recognized something in Ren and let it surface: <em>"I used to have a hunting buddy like this in the past, but he tried to not talk about it."</em> &mdash; first hint of the Bai Feng thread voiced in front of NPCs.</li>
+          <li><strong>Panacea</strong>, looking at Ren's gear setup: <em>"I prefer a human companion."</em></li>
+          <li>One week of downtime. Loot dump: ~65 gp split (10 each), studded leather, leather armors, rapier, heavy crossbow, light maces, smaller crossbows &mdash; sold. Bai Jian kept the harpy's talon, manacles retained, Cyrathul's longsword sold. <strong>Bai Jian bought a healer's toolkit (5 gp)</strong> to back up Panacea's reach &mdash; he's Trained in Medicine.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VI &middot; Faction &middot; Hearts and Minds</div>
+      <div class="act-card">
+        <h3>The Demetrias Pivot</h3>
+        <ul>
+          <li>Hellbreakers fill the basement at week's end. <strong>Rhokrag</strong> climbs onto a table with a folded sheet from Eladir.</li>
+          <li>Word from <strong>Alceo and Phoebe</strong>: pleased with the supply raids; the Drumish trade lanes are starting to limit their routes on the river. <em>"This will hurt Isger's economy more than Cheliax's, but it's a start."</em> Hedvind expected to escalate &mdash; likely <strong>Thrune soldiers</strong> incoming.</li>
+          <li><strong>Marie</strong>, from the sidelines: <em>"And tell you to stay away from boats from now on."</em></li>
+          <li><strong>New directive</strong>: ease back on raids, win the populace. Spread word, find out what people care about, help where you can &mdash; discreetly. <em>"This is our land. These are our people. This is our country."</em></li>
+          <li><strong>First reputation point</strong> banked &mdash; automatic, for rescuing the Night's Prize sailors. Reputation tracker visible on the Isger map.</li>
+          <li>Party assignment: the <strong>Chitterwood</strong> &mdash; Wolf Point, Verodia, Fernsby, Stumpfield, Umach.</li>
+          <li><strong>Goblins exit</strong>: <em>"The goblins stayed behind. They're not with you anymore."</em> Moob and Fang stay at HQ. <em>"We've been dying too much."</em> (Player departure absorbed cleanly into the fiction.)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VII &middot; Exploration &middot; The Chitterwood Road</div>
+      <div class="act-card">
+        <h3>Halflings, Sympathizers, and a Steel Circle</h3>
+        <ul>
+          <li>Two days' travel toward Wolf Point. Diplomacy/Society checks every day, one PC rolls each.</li>
+          <li><strong>Day 1 &mdash; halfling farmstead</strong>: success after Cyrathul self-cast Guidance. Halflings warn of Steel Circle bandits taking over Wolf Point. <em>"My granddaddy's granddaddy's been under Chiliacs rule. I'm real glad to see those Eagle Knights chase them out."</em> <strong>+1 reputation.</strong></li>
+          <li><strong>Recall Knowledge &mdash; the Steel Circle</strong>: large organized thieves' organization throughout southern Isger. Don't usually camp in one place. Currently at an abandoned farm ~1 mile southeast of Wolf Point.</li>
+          <li><strong>Day 2 &mdash; orchard farmstead</strong>: success. Excited about the Eagle Knight push. <strong>+1 reputation.</strong></li>
+          <li><strong>Day 3 &mdash; Chelaxian sympathizer farm</strong>: critical fail. Farmer reveals a Chelaxian flag and <em>"For Chiliacs"</em> badges. <em>"Get off my land."</em></li>
+          <li>Party arrives at the crossroads: Wolf Point tower visible from the hilltop, the abandoned-farm bandit camp visible to the south.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act VIII &middot; Roleplay &middot; Steel Circle Parley</div>
+      <div class="act-card">
+        <h3>Twenty Crossbows and a Tower Job</h3>
+        <ul>
+          <li>Decision: scout the bandit camp first. Stealth checks &mdash; failed (loose stones). Bird-call sentries reported the party's arrival.</li>
+          <li>Approached by a stout dwarven woman with bodyguards. <em>"That's far enough."</em> Twenty crossbows audibly cocked back from cover.</li>
+          <li><strong>Panacea</strong>, deadpan cover: <em>"Don't mind us. We were just looking for his dog."</em> <strong>Cyrathul</strong>: <em>"It looks like you found him."</em></li>
+          <li><strong>Diplomacy</strong> (Cyrathul, Make an Impression) &rarr; success. <strong>Deception</strong> (Cyrathul, on the cover story) &rarr; fail. Dwarven leader: <em>"A liar, huh? Not a good one. Though, you don't mind breaking some rules, huh?"</em></li>
+          <li>The leader pivoted: <em>"If you go up and remove any curse or creatures befouling Wolf Point, we'll help you do whatever you need."</em> Her crew had spent one night at the tower and come out shaking &mdash; terrible nightmares, <em>"hurt my head so bad."</em></li>
+          <li>The chief sold her sales pitch with her own bona fides: <em>"And I've seen a Leviathan once."</em> &mdash; even she's rattled.</li>
+          <li>Deal struck &mdash; party deferred the actual approach to gather intel first. <strong>30 XP</strong> for changing the bandits' attitude (avoided suicide-by-crossbow).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act IX &middot; Mystery &middot; Snake Tracks at Fernsby</div>
+      <div class="act-card">
+        <h3>The Garden, the Oak, the Ravine</h3>
+        <ul>
+          <li>Travel to Fernsby (~1 day). Stop at a triplex farmstead &mdash; friendly. Stop at another homestead &mdash; stubborn. <em>"I don't want nothing to do with Chillax. I don't want nothing to do with Isger."</em></li>
+          <li>Arrived at Fernsby &mdash; stone cottages, big oak in the village green. Several flowerbeds dug up; a bench upended; the oak chewed.</li>
+          <li>Met <strong>Lily</strong>, a Fernsby villager. <em>"You don't look like goblins to me. You know about the attack, right?"</em> Town blamed goblins.</li>
+          <li>Investigation: <strong>no footprints.</strong> Only sinuous impressions through the dirt. Cyrathul rolled <strong>Nature</strong> &rarr; these are <strong>snake tracks</strong>, not goblin tracks.</li>
+          <li><strong>Cyrathul</strong>: <em>"Goblin plus snake. Some sort of hybrid."</em> &mdash; the Ina-village investigation thread firing.</li>
+          <li>Lily added she'd heard hissing from a ravine on her daily walks &mdash; gave directions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act X &middot; Combat &middot; The Ravine</div>
+      <div class="act-card">
+        <h3>Plans Ruined</h3>
+        <ul>
+          <li>Two-hour travel to the ravine. <strong>Survival</strong> check &mdash; Bai Jian's hound nailed the snake-trail cleanly. Stealth on approach failed.</li>
+          <li>20-foot-high ravine walls. Brackish pool at the back. Skeletons of small wildlife around the pool.</li>
+          <li><strong>First encounter &mdash; two goblin-snake hybrids</strong> turn at the noise and immediately attack. Combat resolved in <strong>one round</strong> &mdash; Cyrathul max-damage Exploit-Vulnerability strike on the lead hybrid (claw to the face) closed it.</li>
+          <li>Then: <strong>"Plans ruined!"</strong> A bigger hybrid with two or three heads on its back arguing with each other, flanked by a viper and another helper. New initiative.</li>
+          <li>Boss had a <strong>Will-save aura</strong> &mdash; yammering voices, &minus;1 to perception/Will saves for one round.</li>
+          <li>Combat ran 3-4 rounds. The boss's <strong>opening attack on Bai Jian was a NAT 20 (#1)</strong> &mdash; decent damage but didn't drop him. Panacea's 2-action <strong>Heal spell</strong> put 12 HP on Bai Jian mid-fight; the boss kept crit-rolling &mdash; <strong>NAT 20 #2</strong> hit Bai Jian without dropping him (<em>"life of a fighter"</em>), then <strong>NAT 20 #3</strong> crit-bit him for 28 damage &rarr; <strong>DOWN</strong>, and on its very next attack the same boss <strong>NAT 20 #4</strong> crit-bit Ren &rarr; <strong>2 dying</strong>. DM, after: <em>"The DM just rolled four nat 20s in a row."</em></li>
+          <li><strong>Cyrathul</strong> mopped: Mirror Cloak flanking + Exploit Vulnerability + a two-strike chain off the Snagging-Strike off-guard finished the boss in Round 3. Demoralize on the viper landed (frightened). <strong>Panacea</strong> pulled Bai Jian back with <strong>Battle Medicine</strong> (2d8) and re-cast Trade Life for Death on the boss &mdash; the cantrip <strong>crit-failed</strong> (3 self-damage to Panacea, fast-healing rider applied to Bai Jian anyway). <strong>Bai Jian</strong> stood up next round and crit-killed the frightened helper for 22 damage. <em>"Your anger has cleaved that one into little snake bits."</em> Panacea closed with a Needle Darts crit (8 + 1 bleed) on the last hybrid.</li>
+          <li>Mid-turn realization from Bai Jian: <em>"Wait, I don't have Intimidating Glare though. Shit."</em> &mdash; Demoralize-without-glare wants a shared language; goblin-snake tongue is anyone's guess.</li>
+          <li><strong>Ren revived</strong> post-combat via Treat Wounds. He'd been 2 dying (from the crit), not dead. <em>"Alright, my boy. You're back."</em></li>
+          <li>DM closed the night before sweeping the rest of the ravine. <em>"We'll resolve whatever else is happening here in the ravine next week."</em> Goblin-ish voices still echoing further in.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; Waterspout Inn &middot; Round 2</div>
+    <h3>Captain and Crow's Nest</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Captain + Crow's Nest Marine</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1 (closing R2)</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Both killed</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Panacea (1)</div></div>
+    </div>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Marine (crow's nest)</strong>: dagger throw at Cyrathul &mdash; miss. Boot dagger throw &mdash; miss. Holds last dagger.</li>
+      <li><strong>Fang/Wing (DM)</strong>: commands <strong>Wing &rarr; Explode</strong> at the base of the mast. Mast falls onto the next mast, falls onto the crow's nest. Marine flies out and falls to his death on the deck.</li>
+      <li><strong>Cyrathul</strong>: caught by falling rigging &mdash; Reflex save fail, takes 1 damage. <em>"I'm in both spaces."</em></li>
+      <li><strong>Captain</strong>: action 1 swap rapier from heavy crossbow. Action 2 Strike on Cyrathul. Action 3 MAP Strike &rarr; <strong>CRIT</strong> through the duplicate. <strong>Cyrathul DOWN.</strong></li>
+      <li><strong>Bai Jian</strong>: change grip to two-handed (free Interact). <strong>Snagging Strike on captain &rarr; CRIT, 21 damage</strong>, captain off-guard. <em>"That's what you got for hitting my comrade. Now prepare to pay for your crime."</em></li>
+      <li><strong>Cyrathul (downed)</strong>: stays dying through the rest of the round.</li>
+      <li><strong>Panacea</strong>: stride toward Cyrathul. <strong>Needle Darts</strong> at off-guard captain &mdash; initial miss, <strong>HERO POINT reroll &rarr; 18 hits</strong>. Damage rolled &rarr; <strong>captain killed</strong>. Decapitation narration.</li>
+    </ul>
+    <h4>Post-combat</h4>
+    <ul>
+      <li><strong>Panacea</strong>: <strong>Treat Wounds</strong> on Cyrathul &mdash; poor roll, didn't take.</li>
+      <li><strong>Moob (DM)</strong>: pours an <strong>Elixir of Life</strong> down Cyrathul's throat &mdash; <em>"You're no longer dying."</em></li>
+      <li>Bai Jian unties Rhokrag with an Interact action.</li>
+    </ul>
+    <p style="color: var(--gold); margin-top: 12px;">Experience &middot; <strong>144 XP</strong> retroactive for captain + devil from S3.</p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; Chelaxian Road Ambush &middot; Second-night camp</div>
+    <h3>Five-Person Encounter for Three</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">~5 Loyalists (Marine + crossbows + alchemist)</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">Bai Jian Kills</div><div class="combat-stat-value">2 crit-kills (Sudden Charge ×2)</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">0</div></div>
+    </div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Marine ("yelling one")</strong>: 2 dagger Strikes on Bai Jian &mdash; both miss. Quick Alchemy &rarr; alchemist's fire thrown at Moob &rarr; persistent burn.</li>
+      <li><strong>Loyalist Marine #2</strong>: strides to Bai Jian; first dagger off-guard hit, second miss.</li>
+      <li><strong>Bai Jian</strong>: 2H grip &rarr; <strong>Snagging Strike &rarr; 11 damage</strong>, off-guard. Sudden Charge into flanking &rarr; MAP Strike &rarr; hit, <strong>5 damage</strong>.</li>
+      <li><strong>Loyalist crossbow</strong>: shoots Moob &mdash; miss. Reload. Second shot &rarr; <strong>hits Moob in the shoulder.</strong></li>
+      <li><strong>Panacea</strong>: <strong>Trade Life for Death</strong> on a loyalist (hit, damage). Fast Healing 1 rider on Bai Jian. Tries Needle Darts third action &mdash; allies block the line, doesn't fire.</li>
+      <li><strong>Loyalist crossbow #2</strong>: 5 ft from Bai Jian &mdash; Strikes/reloads/Strikes, both miss.</li>
+      <li><strong>Fang/Wing (DM)</strong>: Wing tire-charges a wounded loyalist &rarr; hit, "really hurt."</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Loyalist (1 HP)</strong>: crossbow shot at Moob &mdash; miss.</li>
+      <li><strong>Cyrathul</strong>: <strong>Exploit Vulnerability on the cart-flanker</strong>. <em>"He has no weakness. Until he gets to the cart. Until now."</em> First Strike &rarr; hits, <strong>0 damage</strong>. Second Strike &rarr; <strong>kills him.</strong></li>
+      <li><strong>Loyalist (Fred-mourner)</strong>: <em>"You killed Fred!"</em> &mdash; reload, fire, miss.</li>
+      <li><strong>Moob (DM)</strong>: Quick Alchemy &times; 2 &mdash; drinks an Elixir of Life on himself, throws an alchemist's fire at a loyalist.</li>
+      <li><strong>Bai Jian</strong>: <strong>Sudden Charge</strong> to a fresh loyalist &rarr; <strong>CRIT.</strong> Re-rolled critical damage &rarr; <strong>kills him</strong> with a stomach-slash and pass-through. <em>"You guys are just such nuisance."</em> Action 3 &mdash; strides over to the last guy and verbally intimidates: <em>"You are next, buddy. You're next."</em> (RP only &mdash; not a Demoralize action; no Intimidating Glare yet.)</li>
+      <li><strong>Panacea</strong>: 2-action <strong>Heal</strong> on Bai Jian &mdash; initial click hit save DC, redo &rarr; <strong>9 HP healed.</strong> Sustain on the cantrip.</li>
+    </ul>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Last loyalist</strong>: drops crossbow, draws mace, swings twice at Bai Jian (both ineffective). End of his turn, persistent fire kills him. <em>"His arm just runs out of energy and the fire consumes him."</em></li>
+      <li><strong>Bai Jian</strong>: <strong>Sudden Charge &rarr; CRIT &rarr; kills the last terrified loyalist.</strong> Minimum-damage critical (rolled a 1 and a 2 on the dice), enough to drop him.</li>
+    </ul>
+
+    <h4>Post-combat &mdash; Battle Medicine Disaster</h4>
+    <ul>
+      <li><strong>Panacea</strong>: Battle Medicine on Moob &rarr; <strong>1 (crit fail)</strong> &rarr; <strong>max damage</strong> on the failure result &rarr; <strong>Moob dies on her hands.</strong></li>
+      <li><strong>Bai Jian</strong>: sprints to Moob, retrieves the still-active Quick-Alchemy Elixir of Life from his hand and pours it down (within the 10-minute window). Searches the pouch, finds a regular Elixir of Life, uses it. <strong>Moob revived</strong> with two elixirs across the recovery. First words: <em>"Don't touch me."</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3a &middot; Goblin-Snake Skirmish &middot; Single Round</div>
+    <h3>Two Hybrids at the Ravine Mouth</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Goblin-Snake Hybrids</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Both killed</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Cyrathul (1)</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Panacea</strong>: <strong>Needle Darts</strong> (2 actions) &rarr; hit, no crit (an accidental Bless toggle wasn't actually active; DM removed retroactively). Action 3 &mdash; <strong>Trade Life for Death</strong> on hybrid (fail save), heals Bai Jian (Fast Healing rider). <strong>Stupefied 1</strong> rider on a hybrid via Familiar of Paired Perplexity.</li>
+      <li><strong>Hybrid 1</strong>: <strong>disgusting breath</strong> cone &mdash; Fortitude saves on Bai Jian (initial fail), Cyrathul (<strong>HERO POINT &rarr; success</strong>), Panacea (success). DM cleared without applying conditions.</li>
+      <li><strong>Bai Jian</strong>: Command Ren &rarr; bite first hybrid (hit). Sudden Charge &rarr; strike second hybrid &rarr; 10 damage.</li>
+      <li><strong>Hybrid 2</strong>: breath cone on Bai Jian (no condition), bite Bai Jian &rarr; hit.</li>
+      <li><strong>Cyrathul</strong>: stride. <strong>Exploit Vulnerability</strong>. Strike &rarr; <strong>MAX damage crit, kills the lead hybrid.</strong> <em>"I'll just rush up to him as he's breathing. At the bar, I'm just going to swash him with my claw and cut the face off."</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3b &middot; Goblin-Snake Boss Fight &middot; 3-4 Rounds</div>
+    <h3>"Plans Ruined!"</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Multi-Headed Boss + Helper + Viper</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3-4</div></div>
+      <div><div class="combat-stat-label">DM Crits</div><div class="combat-stat-value">4 NAT 20s in a row</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Bai Jian (1)</div></div>
+    </div>
+    <p><em>The boss had multiple heads on its back arguing with each other &mdash; yammering aura, &minus;1 to perception/Will saves in a radius. Opens with: <strong>"Plans ruined!"</strong></em></p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Cyrathul</strong>: bare strike attempt &rarr; likely miss/low.</li>
+      <li><strong>Boss</strong>: strides to Bai Jian &rarr; bite <strong>CRITs (NAT 20 #1)</strong>, decent damage on the roll, didn't drop him. Coils up (rattlesnake stance).</li>
+      <li><strong>Viper</strong>: bites <strong>Ren</strong> &rarr; Ren fails Fort save &rarr; <strong>poisoned, 1d8 persistent.</strong></li>
+      <li><strong>Helper</strong>: bites Bai Jian &rarr; Bai Jian Fort save <strong>HERO POINT &rarr; success, not poisoned</strong>. Helper's second bite &rarr; miss.</li>
+      <li><strong>Cyrathul</strong>: <strong>Mirror Cloak</strong> duplicate flanks the boss. <strong>Exploit Vulnerability</strong>. Strike &rarr; hit.</li>
+      <li><strong>Bai Jian</strong>: command Ren &rarr; <strong>Tumble Through</strong> (Acrobatics &rarr; success) around to flank &rarr; bite, 9 damage. <strong>Snagging Strike on the flanked target</strong> (Pax's recall: the boss; transcript ambiguous between boss and helper) &rarr; 10 damage, off-guard imposed. Free-action change grip.</li>
+      <li><strong>Boss aura fires</strong>: Cyrathul + Bai Jian Will saves &rarr; both take &minus;1 to perception/Will for one round.</li>
+      <li><strong>Panacea</strong>: 2 strides to close the gap, then <strong>2-action Heal SPELL &rarr; 12 HP on Bai Jian.</strong> (Heal spell, not Battle Medicine.)</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Boss</strong>: disgusting breath catches only Bai Jian &rarr; fail &rarr; <strong>Sickened 1</strong>. Bite &rarr; hit (no poison from boss).</li>
+      <li><strong>Viper / Helper</strong>: bite Ren (already poisoned), bite misses.</li>
+      <li><strong>Boss continued attacks</strong>: <strong>NAT 20 #2</strong> on Bai Jian &mdash; hits, deals damage, <em>does NOT drop him</em>. <em>"Life of a fighter."</em></li>
+      <li><strong>Cyrathul</strong>: <strong>Demoralize &rarr; CRIT</strong> &rarr; boss <strong>Frightened 2</strong>. Two strikes, both hit, <strong>both minimum damage</strong>. <em>"I rolled four minimum damages."</em></li>
+      <li><strong>Bai Jian</strong>: Snagging Strike &rarr; miss. <strong>Dueling Parry</strong> (+2 AC). Retch &rarr; <strong>removes Sickened</strong>.</li>
+      <li><strong>Panacea</strong>: stride up, <strong>Battle Medicine on Bai Jian</strong> (Assurance, success at "60") &rarr; <strong>2d8 healing</strong>. Strides back.</li>
+    </ul>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Boss bite NAT 20 #3</strong>: <strong>CRIT, 28 damage on Bai Jian &rarr; DOWN.</strong> Then turns to Ren.</li>
+      <li><strong>Boss bite NAT 20 #4</strong>: <strong>CRIT on Ren &rarr; Ren goes 2 dying.</strong> <em>"That's two nat 20 in a row?"</em> &mdash; back-to-back crits at [205:14] (Bai Jian down) and [206:02] (Ren down). The earlier two were the boss's opening bite in R1 and the R2 bite. DM at [216:11]: <em>"four nat 20s in a row."</em></li>
+      <li><strong>Cyrathul</strong>: Strike on boss &rarr; hits (off-guard from <strong>Mirror Cloak duplicate flanking</strong> with Cyrathul; the table called this as Snagging-Strike-still-active, but mechanically Bai Jian's R1 Snagging-Strike off-guard had expired at the start of his R2, and his R2 Snagging Strike missed). Second Strike &rarr; <strong>kills the boss.</strong> Action 3 &mdash; <strong>Demoralize on the viper</strong> (Intimidating Stare) &rarr; <strong>frightened.</strong></li>
+      <li><strong>Bai Jian (recovery)</strong>: dying recovery roll &rarr; success.</li>
+      <li><strong>Panacea</strong>: <strong>Battle Medicine #2 on Bai Jian</strong> &rarr; no longer dying. Then <strong>Trade Life for Death</strong> at the viper &rarr; <strong>CRIT FAIL.</strong> Panacea takes <strong>3 self-damage</strong>; rider effect still applies &rarr; Fast Healing on Bai Jian.</li>
+      <li><strong>Helper / Viper</strong>: continue biting Ren and others. Bai Jian stays <strong>prone</strong> deliberately. <em>"I should not look like a threat to them."</em></li>
+      <li>DM: <em>"The DM just rolled four nat 20s in a row."</em></li>
+    </ul>
+
+    <h4>Round 4 &mdash; Cleanup</h4>
+    <ul>
+      <li><strong>Cyrathul</strong>: <strong>Demoralize on the other helper</strong> (outcome unclear).</li>
+      <li><strong>Bai Jian</strong>: stand up (1 action) &rarr; strike the frightened helper &rarr; <strong>CRIT, 22 damage &rarr; kills it.</strong> <em>"Your anger has cleaved that one into little snake bits."</em> Mid-turn realization: <em>"Wait, I don't have Intimidating Glare though. Shit."</em> Walks up to flank for Cyrathul.</li>
+      <li><strong>Panacea</strong>: <strong>Needle Darts &rarr; CRIT</strong> on the last hybrid &rarr; 8 damage + 1 bleed &rarr; <strong>kills it.</strong></li>
+    </ul>
+
+    <h4>Post-combat</h4>
+    <ul>
+      <li><strong>Treat Wounds on Ren</strong> &rarr; Ren was 2 dying (from the boss's crit), <em>never dead</em> &rarr; revived. <em>"Alright, my boy. You're back. Back to life."</em></li>
+      <li>More goblin-ish voices echoing further down the ravine &mdash; combat to be resolved next session.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Steady Hand</h4>
+      <ul>
+        <li>Closed the inn fight in one strike &mdash; change grip &rarr; <strong>Snagging Strike crit, 21 damage</strong>, captain off-guard.</li>
+        <li>Delivered the only RP beat of the inn fight: <em>"That's what you got for hitting my comrade. Now prepare to pay for your crime."</em></li>
+        <li>Untied Rhokrag, ran inventory on the cabin, decided the party should retreat to lick wounds rather than push deeper.</li>
+        <li>Took first watch on the hard night.</li>
+        <li>Read the road ambush math out loud &mdash; <em>"balanced for five people"</em> &mdash; and proceeded to crit-kill two of them via Sudden Charge: the <em>"You guys are just such nuisance"</em> stomach-slash mid-fight, and the last terrified loyalist late (minimum-damage critical).</li>
+        <li>Sprint-grabbed Moob's still-warm Quick-Alchemy Elixir of Life AND searched up a regular Elixir of Life in his pouch. Two elixirs, two-stage save.</li>
+        <li>Bought CON +1, took <strong>Ren</strong> as his Beastmaster companion. First in-fiction reference to a hunting partner he doesn't talk about &mdash; Bai Feng thread surfaced for the first time in front of NPCs.</li>
+        <li>Bought a <strong>healer's toolkit (5 gp)</strong> at HQ to back up Panacea's reach &mdash; he's Trained in Medicine.</li>
+        <li>In the boss fight: ate the boss's opening NAT 20 in R1 (decent roll, didn't drop), then a second NAT 20 in R2 (<em>"life of a fighter"</em>), then went DOWN on the boss's third NAT 20 in R3 (28 damage). Dueling Parry came up too late.</li>
+        <li>After Panacea's Battle Medicine pulled him back up, stayed prone deliberately &mdash; <em>"I should not look like a threat to them."</em></li>
+        <li>Stood up next round and crit-killed the frightened helper for 22 damage with the boss already dead. Caught the build gap mid-turn &mdash; no Intimidating Glare yet, so Demoralize was off the action menu against snake-tongue targets.</li>
+        <li>Closed the session laughing: <em>"I'm running right back to town. I ain't doing shit here anymore."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Patient Dragon</h4>
+      <ul>
+        <li>Took the captain's rapier crit on her third-action MAP attack early in the inn fight and went down. Moob's Elixir of Life removed dying after combat ended.</li>
+        <li>Drove the post-fight retreat call &mdash; <em>"I am in no condition to get in another big fight."</em></li>
+        <li>Gave the gallows-humor cover to Panacea's Battle Medicine disaster: <em>"We'll just say he died from the Chalaxians."</em></li>
+        <li>Killed the cart-flanker on the road via <strong>Exploit Vulnerability</strong> (no innate weakness; off-guard from flanking carried the math) &mdash; first strike rolled 0 damage, second strike finished him.</li>
+        <li>Committed to <strong>Draconic Ravager</strong> at level 2 &mdash; full pivot to natural weapons. <em>"I don't need any weapon besides me chomping on him."</em></li>
+        <li>Did the heavy talking at the Steel Circle parley &mdash; Make an Impression succeeded, Deception failed, but the bandit chief took the failed lie as a green-light for the tower-clearing trial offer. The chief sold the tower's terror with her own credentials: <em>"And I've seen a Leviathan once."</em></li>
+        <li>Snake-track Nature check at Fernsby &mdash; caught the goblin-snake hybrid theory before the encounter. <em>"Are they goblin snake hybrids? Holy cow, we were right."</em></li>
+        <li>In the skirmish: stride + Exploit Vulnerability + max-damage strike &rarr; killed the lead hybrid in a single turn. <em>"I'll just rush up to him as he's breathing. At the bar, I'm just going to swash him with my claw and cut the face off."</em></li>
+        <li>In the boss fight: Mirror Cloak flanking placement (boss off-guard from the Mirror duplicate + Cyrathul flank), four straight minimum-damage rolls (<em>"I rolled four minimum damages"</em>), then a clean two-strike chain in Round 3 that finished the boss. Demoralize on the viper landed (frightened).</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Hero We Need</h4>
+      <ul>
+        <li>Killed the inn captain with a hero-pointed Needle Darts reroll on an off-guard 18 &mdash; narrated as a decapitation. Best opening kill of the night.</li>
+        <li>Attempted Treat Wounds on Cyrathul during the inn-fight cleanup; the roll was poor and the actual revive came from Moob's Elixir of Life.</li>
+        <li><strong>Trade Life for Death</strong> + Fast Healing 1 sustained on Bai Jian during the road ambush.</li>
+        <li>Crit-failed Battle Medicine on Moob post-combat. Rolled max damage on the failure result. Killed him. Took it on the chin as character growth: <em>"I took medic dedication with assurance, so I won't be killing any more moobs, hopefully."</em></li>
+        <li>Threaded the Steel Circle parley with the deadpan cover line of the night: <em>"Don't mind us. We were just looking for his dog."</em></li>
+        <li>In the skirmish: opened initiative with Needle Darts (no crit because of an inactive Bless misclick), Trade Life for Death on Bai Jian (Fast Healing 1 rider), <strong>Stupefied 1</strong> rider on a hybrid via Familiar of Paired Perplexity.</li>
+        <li>Three clutch supports on Bai Jian in the boss fight: 2-action <strong>Heal spell</strong> (12 HP) mid-fight, then <strong>Battle Medicine</strong> (2d8) after his crit-down, then a re-cast <strong>Trade Life for Death</strong> that <em>crit-failed</em> but still applied the Fast Healing rider (cost her 3 self-damage; rider applied to Bai Jian anyway).</li>
+        <li>Closed the encounter with a <strong>Needle Darts crit</strong> (8 damage + 1 bleed) on the last hybrid helper.</li>
+        <li>Best week-truth quote: <em>"Every time we try to avoid battle, we end up in it."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-ren">
+      <h4>Ren &middot; the Boarhound (NEW)</h4>
+      <ul>
+        <li>Delivered to the HQ door by an unnamed donor; trained specifically against Chelaxian forces.</li>
+        <li>Survival check + scent-tracking the snake-trail at Fernsby &mdash; clean roll, "no problem following."</li>
+        <li>First combat: bit a hybrid head off (commanded), <strong>tumble-through</strong> to the boss at the boss's reach, bit again.</li>
+        <li>Got bitten by the viper, failed the poison Fort save (1d8 persistent). Got crit-bitten by the boss, dropped to 2 dying.</li>
+        <li>Revived post-combat via Treat Wounds &mdash; was dying, not dead. <em>"Alright, my boy. You're back."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-moob">
+      <h4>Moob &middot; the DM-NPC who Died and Came Back (departed)</h4>
+      <ul>
+        <li>Quick-Alchemied alchemist fire and persistent-damage-killed a loyalist on the road.</li>
+        <li>Died face-down in his own camp at Panacea's Battle Medicine roll (1 + max damage) &mdash; then was rescued from his own pouch reserves by Bai Jian.</li>
+        <li>Made self-cocktails during morning travel back to Saringallow.</li>
+        <li>Stayed at HQ at the start of the new arc with Fang. Last in-fiction line on waking from the elixir: <em>"Don't touch me."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-fang">
+      <h4>Fang &middot; the Goblin Gearhead (departed)</h4>
+      <ul>
+        <li>Commanded Wing on the <strong>Explode</strong> action that brought the inn's mast down on the Marine and triggered the kill.</li>
+        <li>Wing tire-slammed at least one road-ambush loyalist.</li>
+        <li>Stayed at HQ at the start of the new arc with Moob.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item"><div class="loot-name">Gold (~30 gp)</div><div class="loot-source">Inn Ship Cabin</div><div class="loot-note">Sailors' pay note recovered with it.</div></div>
+    <div class="loot-item"><div class="loot-name">Trinket Treasures</div><div class="loot-source">Captain's Deck</div><div class="loot-note">Gold-laced. Sold for gold at Saringallow.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Harpy's Talon</div><div class="loot-source">Captain's Drawer</div><div class="loot-note">Magical. Bai Jian retained.</div></div>
+    <div class="loot-item"><div class="loot-name">Manacles</div><div class="loot-source">Inn (Rhokrag's Restraints)</div><div class="loot-note">Retained for the party.</div></div>
+    <div class="loot-item"><div class="loot-name">Studded Leather + Leather Armor &times; 3</div><div class="loot-source">Loyalists</div><div class="loot-note">Sold.</div></div>
+    <div class="loot-item"><div class="loot-name">Rapier + Heavy Crossbow</div><div class="loot-source">Inn Captain</div><div class="loot-note">Sold.</div></div>
+    <div class="loot-item"><div class="loot-name">Light Maces + Smaller Crossbows</div><div class="loot-source">Loyalists</div><div class="loot-note">Sold.</div></div>
+    <div class="loot-item"><div class="loot-name">Cyrathul's Longsword</div><div class="loot-source">Old Gear</div><div class="loot-note">Sold (Draconic Ravager pivot).</div></div>
+    <div class="loot-item magical"><div class="loot-name">Ren the Boarhound</div><div class="loot-source">HQ Door &mdash; Anonymous Donor</div><div class="loot-note">Trained specifically against Chelaxian forces. Bai Jian's Beastmaster companion.</div></div>
+    <div class="loot-item"><div class="loot-name">Healer's Toolkit</div><div class="loot-source">Saringallow (5 gp)</div><div class="loot-note">Cyrathul. Backfills Panacea's reach.</div></div>
+    <div class="loot-item"><div class="loot-name">~35 gp</div><div class="loot-source">Road Ambush + Stash</div><div class="loot-note">Distributed (~10 gp each).</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; 144 inn (S3) &middot; 80 Rhokrag &middot; 30 Steel Circle &middot; +daily reputation bonuses = <strong>Level 2 reached</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "My gen's gonna say, that's what you got for hitting my comrade. Now prepare to pay for your crime."
+    <span class="attribution">Inn fight Round 2. Snagging Strike crit on the captain after she dropped Cyrathul.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I assume this was balanced for five people because there's no way."
+    <span class="attribution">Initiative on the road ambush. The DM confirmed Moob and Fang were still in.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Give me my dog. I want my dog. At level two."
+    <span class="attribution">Out-of-character impatience for Ren the boarhound during the level-up break.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I'm running right back to town. I ain't doing shit here anymore."
+    <span class="attribution">Final line of session, after Ren is revived and the DM teases more goblin voices in the ravine.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "We'll just say he died from the Chalaxians."
+    <span class="attribution">Immediate cover for Panacea's crit-failed Battle Medicine that killed Moob.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Are they goblin snake hybrids? Holy cow, we were right."
+    <span class="attribution">The Ina-village investigation paying off when the ravine's first hybrids attacked.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "I'll just rush up to him as he's breathing. At the bar, I'm just going to swash him with my claw and cut the face off."
+    <span class="attribution">Killing-blow narration on the lead skirmish hybrid. Pure Draconic Ravager energy.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Steel Circle Chief</strong>: "And I've seen a Leviathan once."
+    <span class="attribution">The dwarven bandit chief selling the Wolf Point tower's terror with her own bona fides &mdash; even she's rattled.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "The needles shoot out of Panacea's claws and go right through her jugular and decapitate her."
+    <span class="attribution">Hero-pointed Needle Darts reroll that killed the inn captain.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "Worst healer ever. Did you kill him? Wait, what? He's dead? There I go trying to help."
+    <span class="attribution">Three-line cascade after the Battle Medicine roll killed Moob post-ambush.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "I took medic dedication with assurance, so I won't be killing any more moobs, hopefully."
+    <span class="attribution">Level-up announcement at the Saringallow downtime break. Character growth as a punchline.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "Don't mind us. We were just looking for his dog."
+    <span class="attribution">Cover line at the Steel Circle bandit camp under twenty crossbows.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Marie</strong>: "And tell you to stay away from boats from now on."
+    <span class="attribution">Heckle from the sidelines at the Hellbreakers organization meeting, after Rhokrag thanked his rescuers.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Hellknight Alaya</strong> &mdash; newly named. The captain told her crew Alaya would pay handsomely for League intel. Rhokrag has never heard of her. Hunting Hellbreakers.</li>
+      <li><strong>The Wolf Point Tower curse</strong> &mdash; Steel Circle bandits spent one night there and came out shaking with nightmares. Deal struck: clear the tower, get Steel Circle support. Party has not yet approached it.</li>
+      <li><strong>Steel Circle</strong> &mdash; large organized thieves group throughout southern Isger. Camped southeast of Wolf Point. Now provisional allies-of-convenience pending the tower job.</li>
+      <li><strong>The Goblin-Snake Hybrids</strong> &mdash; more voices ahead in the ravine. Were they sent? By whom? Hybrid creatures don't usually self-spawn. Connection to the Ina-domain investigation suggested by Cyrathul's <em>"we were right"</em> line.</li>
+      <li><strong>The Drumish trade lane</strong> &mdash; Drumish merchants pulling routes off the river under raid pressure. Hedvind expected to escalate; <strong>Thrune soldiers may be incoming.</strong></li>
+      <li><strong>Hearts and Minds &mdash; the Chitterwood Tour</strong> &mdash; Wolf Point, Verodia, Fernsby (in progress), Stumpfield, Umach. Hearts and minds, not raids.</li>
+      <li><strong>Tilaax</strong> &mdash; Cheliax's infernal contracts. Specifically named by Rhokrag as the source of devil-summoning expertise.</li>
+      <li><strong>Ren</strong> &mdash; anonymous donor at HQ. Who? Why specifically a Chelaxian-trained boarhound? Worth a Diplomacy / Society check next time the party is back at HQ.</li>
+      <li><strong>Bai Jian's Hunting Past</strong> &mdash; surfaced briefly in front of Zara when meeting Ren. <em>"I used to have a hunting buddy like this in the past, but he tried to not talk about it."</em> Bai Feng thread is now visible to NPCs.</li>
+      <li><strong>Moob and Fang at HQ</strong> &mdash; staying behind. Working on the alchemy lab. Ethran's prosthetic arm still pending.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Cliffhanger</span>
+    <p>Bai Jian on his feet after dying once, Ren back from two dying, the boss snake in pieces, the viper frightened and motionless. The ravine is silent for one moment. Then, from deeper in &mdash; further down the cleft &mdash; goblin-ish voices start arguing again.</p>
+    <span class="big-line">"Plans ruined!"</span>
+    <span class="speaker">&mdash; The Multi-Headed Hybrid, last words</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Closed the inn fight with a single Snagging Strike crit on the captain after she dropped Cyrathul. Sustained Off-Guard for Panacea's killing blow.</li>
+    <li>Untied Rhokrag. Walked the party out of the burning ship.</li>
+    <li>Pushed for a cautious withdrawal from the inn, several hours into the dark before camping.</li>
+    <li>Took first watch. Saw the inn boat still burning behind them.</li>
+    <li>Read the road ambush math out loud, got proven right, killed two of them anyway &mdash; both via Sudden Charge crits (mid-fight stomach-slash and the last terrified loyalist).</li>
+    <li>Sprint-pickup of Moob's still-active Elixir of Life from his dying hand. Searched Moob's pouch for the second elixir. Two-stage save on a man Panacea had just killed.</li>
+    <li>Bought CON +1 at level 2. Took the Beastmaster boarhound &mdash; <strong>Ren</strong>, gifted at HQ by an unknown donor.</li>
+    <li>Mentioned the Bai Feng thread out loud for the first time in front of Zara: <em>"I used to have a hunting buddy like this in the past, but he tried to not talk about it."</em></li>
+    <li>At Steel Circle parley, deferred to Cyrathul for talking. Stayed in support.</li>
+    <li>Hound rolled survival to track the snake-trail at Fernsby &mdash; clean.</li>
+    <li>In the boss fight: ate the boss's opening NAT 20 in R1 (decent roll, didn't drop), then a second NAT 20 in R2 (<em>"life of a fighter"</em>), then went down on the boss's third NAT 20 in R3 (28 damage). The boss's <em>next</em> attack &mdash; fourth nat 20 &mdash; crit-bit Ren to 2 dying. Panacea's Battle Medicine pulled Bai Jian back, Treat Wounds got Ren post-combat; Bai Jian stood up next round and crit-killed the frightened helper for 22.</li>
+    <li>Realized mid-turn at the boss fight that Demoralize-as-action against snake-tongue creatures requires <strong>Intimidating Glare</strong>, which the build doesn't have yet.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>The Bai Feng-shaped weight he just acknowledged in front of Zara wasn't just sentimental &mdash; Ren is the first non-human companion he's worked alongside since Lingshen. He's deciding whether to lean into that or hold the line.</li>
+    <li>Rhokrag's word on <strong>Hellknight Alaya</strong>: this Hellknight is the thread that connects the inn captain's torture-for-information operation back to the larger Chelaxian intelligence apparatus. Alaya is now the highest-priority named adversary &mdash; possibly the same regrouping the party has been hunting since Session 1.</li>
+    <li>Moob's death was not battlefield damage. It was Panacea's Battle Medicine roll. Bai Jian heard Panacea's <em>"worst healer ever"</em> line on top of seeing the dice. The party's healing reliability dropped one rung that night even after the Medic dedication, and he's the primary damage sponge.</li>
+    <li>Bai Jian has now seen two crit-fail Battle Medicines in the campaign. This is a calculation about who's the right reach for emergency in-combat heals.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>Ren</strong>: who actually delivered him to HQ? Anonymous donors don't usually deliver Chelaxian-trained boarhounds. This is either a Hellbreakers operational gift (Marie? Rhokrag setting it up before the inn job?) or someone outside the League who knows what Bai Jian is hunting. Worth pressing Zara or Rhokrag about it next time at HQ.</li>
+    <li><strong>Intimidating Glare</strong> is the gap. Demoralize without it requires a shared language with the target &mdash; fine on Chelaxian humans, broken against goblin-snake hybrids whose tongue is anyone's guess. Next-level pickup or skill feat.</li>
+    <li>The boss-snake's yammering aura made sense the moment its multiple heads were visible. Will-save aura encounters with &minus;1 perception are dangerous because Bai Jian is only Trained in Will. Cluster of multi-headed hybrids = book the Will save scrolls or rely on Cyrathul's hero-points for fortitude/will saves.</li>
+    <li><strong>Hellknight Alaya</strong> &mdash; whoever she is, the connection to Bai Feng is now a real possibility. Bai Feng disappeared chasing an infernal creature. Alaya operates infernal-adjacent. Don't write the connection in stone yet, but track it.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>What's in the <strong>Wolf Point tower</strong> that gave the Steel Circle nightmares?</li>
+    <li>Is the goblin-snake ravine a one-off, or is something <strong>breeding</strong> them? More goblin-ish voices ahead &mdash; how many more?</li>
+    <li><strong>Hellknight Alaya</strong>: name, face, current location? Who's the contact in Saringallow that has intel?</li>
+    <li><strong>Tilaax</strong> &mdash; should the party press Rhokrag on whether the captain's torture-devil was a one-off or part of an Asmodean intelligence ring?</li>
+    <li><strong>Hedvind's Thrune escalation</strong> &mdash; what's the timeline before Thrune soldiers arrive in Isger? Does the Chitterwood tour matter if Thrune is six weeks out?</li>
+    <li><strong>Moob</strong> &mdash; does he still trust Panacea? <em>"Don't touch me"</em> could have been comedy or could have been damage.</li>
+    <li>Who delivered <strong>Ren</strong>?</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #3a2a30;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px #c8905018, 0 4px 20px #00000040;
+}
+.pax-notes h2 { border-bottom-color: var(--gold-dim); }
+.pax-notes h2::before { color: var(--gold); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>

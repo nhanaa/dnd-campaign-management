@@ -52,13 +52,15 @@
 
 ## Defenses
 
-| | Rank | Total |
+At L3, trained proficiency = +5 (level 3 + 2), expert = +7 (level 3 + 4).
+
+| | Calculation | Total |
 |---|---|---|
-| AC | trained + Dex 4 + Leather 1 | **18** |
-| Fortitude | trained (1) + Con 1 | **+5** |
-| Reflex | expert (2) + Dex 4 | **+11** |
-| Will | expert (2) + Wis 1 | **+8** |
-| Perception | trained (1) + Wis 1 | **+5** |
+| AC | 10 + Dex 4 + trained 5 + Leather 1 | **20** |
+| Fortitude | trained 5 + Con 1 | **+6** |
+| Reflex | expert 7 + Dex 4 | **+11** |
+| Will | expert 7 + Wis 1 | **+8** |
+| Perception | trained 5 + Wis 1 | **+6** |
 
 ---
 
@@ -66,17 +68,17 @@
 
 | Skill | Rank | Mod | Notes |
 |---|---|---|---|
-| Acrobatics | trained | +8 | +1 Bracelet of Dashing → +9 |
-| Athletics | trained | +4 | Background |
+| Acrobatics | trained | +9 | +1 Bracelet of Dashing → **+10** |
+| Athletics | trained | +5 | Background |
 | Deception | expert | +10 | |
-| Engineering Lore | trained | +4 | Background |
-| Intimidation | trained | +7 | Intimidating Glare for stareDemoralize |
-| Occultism | trained | +4 | |
+| Engineering Lore | trained | +5 | Background |
+| Intimidation | trained | +8 | Intimidating Glare → no language penalty |
+| Occultism | trained | +5 | |
 | Performance | expert | +10 | Powers Dance of the Mousedeer |
-| Religion | trained | +5 | RK vs ghosts/spirits |
-| Stealth | expert | +11 | Initiative stat |
-| Survival | trained | +5 | Forest hinterland uptime |
-| Thievery | trained | +8 | Thief racket grants training |
+| Religion | trained | +6 | RK vs ghosts/spirits |
+| Stealth | expert | +11 | Initiative stat (+13 with Incredible Initiative) |
+| Survival | trained | +6 | Forest hinterland uptime |
+| Thievery | trained | +9 | Thief racket grants training |
 | *Crafting* | *untrained* | — | |
 
 **Skill Paragon (homebrew)**: TBD which skill was selected. The +increase at L3 likely went to one of the expert skills (Stealth/Deception/Performance).

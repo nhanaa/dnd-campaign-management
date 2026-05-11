@@ -7,7 +7,7 @@
 - **Heritage**: Dragonblood (Sovereign Dragon)
 - **Background**: Foreign Aid
 - **Class**: Fighter
-- **Level**: 1
+- **Level**: 2
 - **Size**: Medium
 - **Speed**: 25 ft (base; Str 18 ≥ breastplate's Str 16 threshold → -5 speed penalty negated)
 - **Deity**: None (Atheists and Free Agents)
@@ -23,22 +23,22 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 18 (+4) | 12 (+1) | 14 (+2) | 10 (+0) | 10 (+0) | 14 (+2) |
+| 18 (+4) | 12 (+1) | 16 (+3) | 10 (+0) | 10 (+0) | 14 (+2) |
 
-*Gradual Ability Boosts: DEX at Lv2, then CHA/CON/WIS over Lv3-5*
+*Gradual Ability Boosts: CON at Lv2 (taken — deviated from original DEX-first plan after S4 boss fight crit-down). Remaining: DEX/CHA/WIS over Lv3-5.*
 
 ## Defenses
 
-- **AC**: 18 (10 + 3 proficiency + 1 DEX cap + 4 lamellar breastplate) — **20 with Dueling Parry** (at level 2)
-- **Max HP**: 20 (8 ancestry + 10 class + 2 CON)
+- **AC**: 19 (10 + 4 proficiency + 1 DEX cap + 4 breastplate) — **21 with Dueling Parry**
+- **Max HP**: 34 (8 ancestry + 20 class [10×2] + 6 CON [3×2])
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert | +7 |
-| Reflex | Expert | +6 |
-| Will | Trained | +3 |
+| Fortitude | Expert | +9 |
+| Reflex | Expert | +7 |
+| Will | Trained | +4 |
 
-- **Perception**: Expert (+5)
+- **Perception**: Expert (+6)
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
 
 ## Heritage Features
@@ -60,19 +60,20 @@
 
 - **Snagging Strike** (1st): 1 action — Make a Strike with one hand free. On hit, target is Off-Guard until start of your next turn.
 - **Sudden Charge** (1st, via Natural Ambition): 2 actions — Stride twice, then Strike.
+- **Dueling Parry** (2nd): 1 action — While wielding a one-handed melee weapon with no other weapons or shields in your other hand, gain +2 circumstance bonus to AC until the start of your next turn.
 
 ## Skills
 
 | Skill | Prof | Modifier | Source |
 |-------|------|----------|--------|
-| Athletics | Trained | +7 | Fighter class |
-| Diplomacy | Trained | +5 | Dragon Lore (overlap with Foreign Aid → free skill) |
-| Intimidation | Trained | +5 | Dragon Lore |
-| Acrobatics | Trained | +4 | Free skill from Diplomacy overlap |
-| Performance | Trained | +5 | Additional skill (for Bard Dedication at Lv2) |
-| Religion | Trained | +3 | Additional skill |
-| Survival | Trained | +3 | Additional skill |
-| Medicine | Trained | +3 | Additional skill |
+| Athletics | Trained | +8 | Fighter class |
+| Diplomacy | Trained | +6 | Dragon Lore (overlap with Foreign Aid → free skill) |
+| Intimidation | Trained | +6 | Dragon Lore |
+| Acrobatics | Trained | +5 | Free skill from Diplomacy overlap |
+| Nature | Trained | +4 | Retrained from Performance at Lv2 (Beastmaster Dedication prereq) |
+| Religion | Trained | +4 | Additional skill |
+| Survival | Trained | +4 | Additional skill |
+| Medicine | Trained | +4 | Additional skill |
 
 ### Lore Skills
 - Dragon Lore (Trained) — from Dragon Lore feat
@@ -80,6 +81,12 @@
 
 ### Skill Feats
 - **No Cause for Alarm** (Background): 3 actions — Reduce Frightened on allies in 10-ft emanation via Diplomacy check
+- **Assurance (Athletics)** (2nd): Flat result of 12 (10 + 2 trained) on Athletics checks instead of rolling. Avoids nat-1 fails on Trip / Grapple / Shove / Climb at low DCs.
+
+## Free Archetype
+
+- **Beastmaster Dedication** (2nd): Gain a young animal companion. Trained in Nature.
+  - **Companion**: Ren — Isgeri Boarhound (see below)
 
 ## Languages
 
@@ -100,13 +107,26 @@
 - Backpack (holds 4 Bulk, first 2 don't count)
   - Bedroll, Rope (50 ft), Waterskin, Chalk ×10, Flint & Steel, Rations ×2 (14 days), Torches ×5, Soap
 - Climbing Kit (50 ft rope, pulleys, pitons, hammer, grappling hook, crampons)
+- **Healer's Toolkit** (5 gp, bought at Saringallow downtime) — required for Treat Wounds / Battle Medicine. Trained in Medicine.
+- **Harpy's Talon** (kept from inn captain's drawer) — magical, properties pending identification.
 
 ### Wealth
-- 3 gp, 4 sp
+- ~18 gp, 4 sp (post-S4 inn loot split + road ambush split – healer's toolkit purchase)
+
+## Animal Companion — Ren the Isgeri Boarhound (Young)
+
+- **Source**: Pathfinder #222: Hellbreakers (AP-specific companion)
+- **Heritage**: Isgeri Boarhound — Nimble companion type
+- **Size**: Small (Young) → Medium at Mature (level 4)
+- **Speed**: 40 ft
+- **Senses**: Foe scent (precise, 40 ft, vs. designated fiend or undead, refresh daily) + scent (imprecise, 40 ft)
+- **Attacks**: Jaws 1d8 piercing (finesse) → 2d8 at Mature
+- **Action economy**: Acts on Bai Jian's turn. **Command an Animal** (1 action, Nature check) → hound takes 2 actions. Otherwise Stride or Strike (1 action), no Support action until Mature.
+- **Acquisition**: Anonymous donor delivered Ren to Hellbreakers HQ in Saringallow during the week of downtime. Trained against Chelaxian forces. Donor unknown — open thread.
 
 ## Appearance
 
-A tall, lean swordsman. Warm tan skin with a faint golden undertone. Black hair pulled back in a practical half-knot. Deep amber-gold eyes with a draconic gleam that most people can't quite place. No horns, no scales — the dragon blood is internal, only surfacing in moments of intensity. Wears a lacquered steel lamellar breastplate over dark traveling robes with silk cord ties. A straight jian on his back. Everything about him says "long road."
+A tall, lean swordsman. Warm tan skin with a faint golden undertone. Black hair pulled back in a practical half-knot. Deep amber-gold eyes with a draconic gleam that most people can't quite place. No horns, no scales — the dragon blood is internal, only surfacing in moments of intensity. Wears a lacquered steel breastplate over dark traveling robes with silk cord ties. A straight jian on his back. Everything about him says "long road."
 
 ## Backstory
 

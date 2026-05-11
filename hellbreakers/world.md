@@ -57,6 +57,11 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 - **Lake Encarthan**: A lich is rumored to dwell here and command the restless dead flooding Isger (per ferryman Otto's cousin).
 - **Waterspout Inn**: Riverside tavern with lodging, halfway between Saringallow and Logos. Two-story building, once painted bright blue, now faded gray. Currently occupied by Chelaxian forces — tents, a two-masted warship, and a Chelaxian banner. Site of Rhokrag's capture and the party's ongoing rescue mission (Session 3).
 - **Logos**: Town further along the road from Saringallow. Rhokrag's original destination before capture.
+- **Wolf Point**: Hilltop tower at the southern edge of the Chitterwood. Currently abandoned by the Chelaxian soldiers who'd been stationed there. Local rumor: the tower induces nightmares in anyone who spends a night inside. Steel Circle bandits camped one night, came out shaking.
+- **Wolf Point Bandit Camp**: Abandoned farmstead ~1 mile southeast of the Wolf Point tower, currently held by a Steel Circle band led by a stout dwarven woman. Provisional allies-of-convenience pending the tower-clearing job.
+- **Fernsby**: Quaint Chitterwood village — thatched cottages, large oak in the village green. Recent goblin-blamed desecration (chewed oak, dug-up flowerbeds) actually traces to goblin-snake hybrid tracks from a nearby ravine.
+- **The Goblin-Snake Ravine** (near Fernsby): Stone-outcropping shaded ravine, 20-ft walls, brackish pool at the back surrounded by skeletons of small wildlife. Active hybrid lair. Multi-headed boss hybrid killed in S4; more hybrids further in (cliffhanger).
+- **Verodia, Stumpfield, Umach**: Other Chitterwood villages on the party's hearts-and-minds tour route. Not yet visited.
 
 ## Key NPCs
 
@@ -78,7 +83,21 @@ As of the **8th of Lamson, 4726**, Steward **Stuart Hedvind VII** has escalated 
 ### Enemies / Antagonists
 - **Captain Julenus Aedin** (deceased): Captain of the Night's Prize, a Chelaxian cargo ship. Killed by Cyrathul during the river ambush (Session 2). Fought with a dagger alongside an animated armor bodyguard with a failsafe explosive.
 - **Chelaxian Navy Captain** (unnamed, alive): Woman in Chelaxian navy uniform, commanding the warship docked at the Waterspout Inn. Guarding Rhokrag alongside a devil. Currently engaged in combat with the party (Session 3 cliffhanger).
-- **Zemaniah** (devil, deceased — name unknown to party): Flying devil with web attacks, guarding the Waterspout Inn ship cabin. Killed by Bai Jian in Session 3 via a critical Snagging Strike leap. Had weakness 3 to holy (identified by Cyrathul's Exploit Vulnerability).
+- **Zemaniah** (devil, deceased — name unknown to party): Flying devil with web attacks, guarding the Waterspout Inn ship cabin. Killed by Bai Jian in Session 3 via a critical Snagging Strike leap. Had weakness 3 to holy (identified by Cyrathul's Exploit Vulnerability). Per Rhokrag, he was a torture specialist Tilaax brought in for the interrogation.
+- **Hellknight Alaya** (alive, location unknown): Hellknight reportedly hunting the Hellbreakers. The Waterspout Inn captain told her crew Alaya would pay handsomely for League intel. Rhokrag has never heard of her. May connect to the regrouping operation Bai Jian and Bai Feng were originally hunting.
+- **Tilaax**: Cheliax's infernal-contracts apparatus. Specifically named by Rhokrag as the source of the torture-specialist devil at the Waterspout Inn. Will keep showing up.
+- **The Multi-Headed Hybrid** (deceased): Goblin-snake hybrid boss with multiple heads on its back arguing with itself. Yammering Will-save aura. Last words: *"Plans ruined!"* Killed by Cyrathul in the Fernsby ravine (S4).
+
+### Allies of Convenience
+- **Steel Circle Dwarven Chief** (unnamed, alive): Stout dwarven woman commanding a 20-strong bandit band southeast of Wolf Point. Pragmatic, gallows-humored. Open to the deal: clear the Wolf Point tower's curse → mutual support. *"And I've seen a Leviathan once."*
+- **Lily of Fernsby** (alive, sympathetic civilian): Helpful local who showed the party the desecrated village green and remembered hissing from the ravine on her daily walks. Friendly to the cause.
+
+## Active Faction State (as of ~13 Lamson 4726)
+
+- **Drumish trade-route pullback**: Drumish merchants pulling routes off the river under Hellbreaker raid pressure. Hurting Isger's economy more than Cheliax's, but it's a start.
+- **Hedvind's Thrune escalation**: Hedvind expected to call in **Thrune soldiers** in response to the Drumish pullback. Timeline unclear but soon.
+- **Hearts-and-Minds directive** (Demetrias, from Eladir): Ease back on raids, win the Chitterwood populace. Spread word, find out what people care about, help where you can — discreetly. *"This is our land. These are our people. This is our country."*
+- **Hellbreaker reputation tracker**: 1 point banked (Night's Prize sailors), additional per-day rep gained on the Chitterwood tour.
 
 ## Relevant Faiths
 
@@ -99,3 +118,6 @@ The party resolved the Everbloom warehouse cliffhanger in two rounds — Bai Jia
 
 ### Session 3 — The Waterspout Inn (25 Apr 2026 · ~10 Lamson 4726 AR)
 Picking up on shore after the Night's Prize sinking, the party dealt with the grateful crew (Moob tipped sailors to spread Hellbreaker goodwill), fought two river snakes from the disturbed wreck (Moob crit-killed one, Cyrathul Mirror-killed the other), salvaged Wing, and distributed loot. After a two-day return to Saringallow, Ethran and Marie reported Rhokrag missing — he'd gone to investigate Hellknight regrouping at the Waterspout Inn and never returned. The party traveled two more days to find the inn occupied by Chelaxian forces. After nightfall, diplomacy failed and combat erupted: three camp soldiers dispatched in Round 1, then Marines emerged from the docked warship. A flying devil webbed Bai Jian and Cyrathul; a Chelaxian navy captain appeared. Fang set the ship's sails on fire via Explode innovation. Bai Jian escaped webbing, leaped from the rigging, and killed the devil with a hero-pointed critical Snagging Strike — the session's defining moment. Session ended on cliffhanger: ship captain and crow's nest Marine still standing, sails burning, Rhokrag visible but still bound.
+
+### Session 4 — Plans Ruined (9 May 2026 · ~13 Lamson 4726 AR)
+The Waterspout cliffhanger resolved in one more round — Wing's mast-explosion finished the crow's-nest Marine; Bai Jian crit-Snagging-Struck the captain open and Panacea hero-pointed Needle Darts into her throat. Rhokrag rescued and freed. Two days of road travel followed; on the second night, ~5 Chelaxian survivors ambushed the camp. Combat closed cleanly, but Panacea's post-combat Battle Medicine crit-failed and killed Moob — Bai Jian saved him with Moob's own Quick-Alchemy Elixir of Life from his hand and a regular elixir from his pouch. Rhokrag named **Hellknight Alaya** as the captain's Hellbreaker-bounty employer. Level 2 reached. At Saringallow HQ: Cyrathul committed to Draconic Ravager, Panacea took Medic Dedication + Assurance, Bai Jian +CON and gained the Beastmaster boarhound **Ren** (anonymous donor). Hellbreakers' first reputation point banked from the Night's Prize sailors. New mandate from Eladir: ease back on raids, win hearts and minds in the Chitterwood — Wolf Point, Verodia, Fernsby, Stumpfield, Umach. The two goblin players left the table; Moob and Fang stayed at HQ. The Wolf Point territory turned out a Steel Circle bandit camp (offered a tower-clearing trial deal), a Chelaxian-sympathizer farmstead, friendly halfling/orchard farmsteads, and Fernsby — where Cyrathul's Nature check identified snake tracks (not goblins) as the source of the village green's desecration. Two-stage goblin-snake combat at the ravine: a single-round skirmish, then a boss fight with a multi-headed hybrid (yammering Will-save aura). DM rolled four nat 20s in a row — Bai Jian and Ren both crit-downed and revived (Battle Medicine on Bai Jian, Treat Wounds on Ren). Cyrathul mopped the boss with Exploit Vulnerability. Cliffhanger: more goblin voices echoing further into the ravine.

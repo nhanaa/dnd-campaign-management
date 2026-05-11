@@ -4,11 +4,16 @@
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) | Beastmaster (Ren (Isgeri Boarhound)) + Thaumaturge | Pax |
-| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) | TBD | Snowgeen |
-| Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth |
-| Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry |
-| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) | Medic | Bog Witch |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 2 | Beastmaster (Ren active) + Thaumaturge | Pax |
+| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 2 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
+| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 2 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
+| Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
+| Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
+
+## Companions
+
+- **Ren** — Bai Jian's Beastmaster boarhound (acquired S4, level 2). Green boarhound trained specifically against Chelaxian forces. Delivered to the HQ door by an unnamed donor. Uses Tumble Through reliably; bites do meaningful damage. Crit-downed by the goblin-snake boss in S4; revived via Treat Wounds.
+- **Wing** — Fang's wolf-motorcycle construct. Stayed at HQ when Fang did.
 
 ## Party Composition Notes
 
@@ -86,6 +91,10 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Phoebe Demetrias** — Co-founder of the Hellbreakers League. Currently in Eladir.
 - **Marie Phelan** — Hellbreaker at Saringallow HQ. Briefed the party on Rhokrag's disappearance and the Waterspout Inn. Provided healing potions. Visibly worried about Rhokrag.
 - **Bai Feng** — Bai Jian's older brother, missing for 5 years. Last trail led to Isger.
+- **Hellknight Alaya** — (active threat) Hellknight hunting the Hellbreakers. Captain of the Waterspout Inn ship cited her as the bounty-payer. Identity, face, location all unknown. Likely connected to the broader Chelaxian intelligence apparatus.
+- **Steel Circle Bandit Chief** — (provisional ally) Stout dwarven woman commanding ~20 bandits southeast of Wolf Point. Pragmatic, gallows-humored. Deal: party clears the Wolf Point tower's nightmare-causing curse, Steel Circle helps with whatever the party needs. *"And I've seen a Leviathan once."*
+- **Lily of Fernsby** — (sympathetic civilian) Showed the party the desecrated village green; remembered hissing from a ravine on her daily walks. Friendly contact.
+- **Tilaax** — (active threat) Cheliax's infernal-contracts faction. Source of the torture devil at Waterspout Inn. Will recur.
 
 ## Key Plot Threads
 
@@ -101,6 +110,12 @@ Established Session 1: Each party member was individually summoned by missive to
 - **The Hellbreakers' War**: Liberation of Isger from Chelaxian oppression.
 - **The Dragon Blood**: What does it mean to carry Sovereign Dragon heritage in a land saturated with infernal power? The party has FOUR dragon-adjacent characters (Bai Jian, Cyrathul, Moob's draconic mother, Fang's draconic teeth) — this can't be coincidence.
 - **The Flute**: The dizi — Bai Feng's? Or something they played together? A thread for Pax to develop at the table.
-- **Rhokrag's Rescue** (active, urgent): Found beaten and bound at the Waterspout Inn. Ship captain and crow's nest Marine still standing. Sails on fire. Bai Jian will be absent next session (DM-controlled NPC).
-- **The Devil at the Waterspout Inn** (active): A flying devil (weakness 3 to holy) was guarding Rhokrag. Killed by Bai Jian. Who summoned it? Standard Chelaxian military, or an infernal escalation? Possible connection to the infernal creature Bai Jian and Bai Feng were hunting.
-- **Rhokrag's Contact** (active): His "non-league contact" at the Waterspout Inn — dead, turned, or a trap from the start?
+- **Rhokrag's Rescue** (resolved S4): Captain killed by Panacea, crow's-nest Marine killed by Wing's mast-fall. Rhokrag freed. Bai Feng-hunt thread now connects to Hellknight Alaya via the captain's intel.
+- **The Devil at the Waterspout Inn** (resolved S4): Rhokrag confirmed the devil was a torture specialist Tilaax brought in for the interrogation. Connection to broader infernal intelligence apparatus active.
+- **Rhokrag's Contact** (resolved S4): Confirmed it was a Chelaxian setup from the start — the contact was the bait.
+- **Hellknight Alaya** (active, urgent): Newly named Hellknight hunting the Hellbreakers. Possibly connected to the regrouping the party has been hunting since S1 — and possibly to Bai Feng's disappearance.
+- **The Wolf Point Tower** (active): Causes nightmares. Steel Circle deal pending. Party must approach to fulfill the parley terms.
+- **The Goblin-Snake Hybrids** (active): More hybrid voices ahead in the ravine (S4 cliffhanger). Hybrid creatures don't usually self-spawn — who or what is making them? Connection to the Ina-domain investigation.
+- **Hedvind's Thrune Escalation** (active): Drumish trade routes pulling back under raid pressure → Hedvind expected to call in Thrune soldiers. Timeline unknown.
+- **Hearts and Minds Tour** (active): New mandate from Demetrias — ease back on raids, win Chitterwood villages. First rep point banked. Party assigned Wolf Point, Verodia, Fernsby, Stumpfield, Umach.
+- **Ren's Provenance** (open mystery): Anonymous donor delivered a Chelaxian-trained boarhound to HQ. Who? Why?
