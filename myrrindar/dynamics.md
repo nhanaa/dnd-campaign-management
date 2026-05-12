@@ -4,10 +4,11 @@
 
 | Character | Level | Species | Class | Player |
 |-----------|-------|---------|-------|--------|
-| Akasha Amelia | 3 | Elf | Druid | AkashaAmelia |
-| Avon | 3 | Dragonborn | Cleric | Redundakitty |
-| **Mist** | **3** | **Fairy** | **Bard (Eloquence)** | **Paxmanz** |
-| Talya | 3 | Tiefling | Monk | luckstang7 |
+| Akasha Amelia | 4 | Elf | Druid (Circle of Stars) | AkashaAmelia |
+| Avon | 4 | Dragonborn | Cleric (Knowledge) | Redundakitty |
+| **Mist** | **4** | **Fairy** | **Bard (Eloquence)** | **Paxmanz** |
+| Talya | 4 | Tiefling | Monk | luckstang7 |
+| **Jaethal Dionaea** | **4** | **Fairy** | **Warlock (Archfey — Yarnspinner)** | **Tobias** |
 
 ### Departed
 - **Silas** (Khoravar Rogue, played by Aenian/Drew) — Player left the campaign on 2026-04-20 after a Discord rules dispute with the DM over 2024 stealth RAW. In-fiction resolution pending (how Silas exits the story is TBD between DM and party).
@@ -16,16 +17,18 @@
 
 The party formally introduced themselves to each other for the first time over breakfast at the Crowned Pheasant.
 
-- **Avon** — Born in **Byron**, a coastal fishing village. Ex-guard. Trained on spears (carries 10 javelins, 7 left). A wandering sage introduced him to the wider world; he traveled toward Skybreeze. In **Sevra**, he intervened in a road fight, lost badly, was taken in by the local clerics — became a **Cleric of Bahamut**. A vision from Bahamut a month ago directed him to Skybreeze, warning of "some sort of danger."
+- **Avon** *(major update S7)* — Born in **Byron**, a coastal fishing village. Ex-guard. Trained on spears (carries 10 javelins, 7 left). A wandering sage introduced him to the wider world; he traveled toward Skybreeze. In **Sevra**, he intervened in a road fight, lost badly, was taken in by the local clerics — became a **Cleric of Bahamut** (Knowledge domain). A vision from Bahamut a month ago directed him to Skybreeze, warning of "some sort of danger." **What Sethrix revealed in S7**: the Sevra "scuffle" was not random. The cloaked figure was a **Karadim** operative collecting a debt from **Lady Saraveth**, a Skybreeze noble. **Avon *died* in that fight.** **Borenthal** — the cleric who took him in — *resurrected* him; Borenthal recognized Avon without being told his name. The day Avon died was the day Bahamut chose him as his champion. Avon now plans a return trip to Sevra to thank Borenthal properly.
 - **Akasha Amelia** — Raised in the **Whispering Canopy** in northwestern Myrrindar. Heard the heartbeat of the forest as a child — taken in by the **Circle of the Stars** as their only apprentice. Quiet life broken when a creeping blight began withering the oldest oaks from the inside. Tasked by elders to find the source. Carries a staff carved from a fallen branch of the **mother tree**. Came to Skybreeze on the elders' guidance — *"the answers I seek can be found with the deep bloom and Skybreeze."*
 - **Mist** — Born in the fairy settlement of **Neulvyn**. Captured by fae traffickers as a child. Sold to a Skybreeze noble. Escaped during a scandal. Survived on the streets. Mentored briefly by an elven bard named **Eldrin**, then alone again. (Stopped his Session-6 telling here — has not yet shared Eldrin or the noble's manor with the party.)
 - **Talya** — Was on a ship with a sailor crew. **Got swept off the ship in a storm** ("don't know if it sank, don't know if they made it"), washed up near a **monastery** that took her in. From there, decided to *"explore the land for a change."* Old crew unaccounted for.
+- **Jaethal Dionaea** *(introduced S7)* — Fairy from the **Feywild**, her first time in the material plane. Bound to the Archfey **Yarnspinner** (spider-shaped, story-collector). Yarnspinner sent her to the material plane for "something urgent" — Jaethal's working theory: the blight. Ladybug-shell wings, cuttlefish W-shaped eyes, long blonde hair, coral pink overalls. Met the party in a Skybreeze street; Mist clocked her as a fellow fairy on sight. Pitched the patron to High Warden Sethrix as a gentle Archfey — *"he's really nice. He likes telling stories, mostly to animals."*
 
 ## Party Role Analysis
 
 - **Frontline/Tank**: Avon (STR Cleric, heavy armor + shield — true tank despite cleric class), Talya (Monk — skirmisher/secondary melee)
-- **Healing/Support**: Avon (Cleric), Mist (Bard — Healing Word, Bardic Inspiration)
-- **Caster/Control**: Akasha Amelia (Druid), Mist (Bard — debuffs)
+- **Healing/Support**: Avon (Cleric), Mist (Bard — Healing Word, Bardic Inspiration), Akasha (Druid — Cure Wounds, Healing Word, Starry Form Chalice rider)
+- **Caster/Control**: Akasha Amelia (Druid), Mist (Bard — debuffs), **Jaethal (Warlock — save-or-suck illusions, control via Phantasmal Force / Hideous Laughter)**
+- **Mobility / positional rescue**: **Jaethal (Misty Step variants — Taunting / Refreshing / standard)**, Mist (Flight), Akasha (Wild Shape recon)
 - **Face**: Mist (Deception +7, Persuasion +7)
 - **Scout/Stealth**: Mist (Flight, potential Bardic Expertise pivot), Akasha (Wild Shape recon), Talya (Monk Dex)
 - **Skill Monkey** *(gap since Silas)*: Talya or Mist can absorb Stealth and Sleight of Hand coverage; no dedicated lockpicker/trap-finder currently
@@ -38,6 +41,10 @@ The party formally introduced themselves to each other for the first time over b
 - **Bane + Cleric/Druid Save Spells**: Bane reduces enemy saves by 1d4, boosting the hit rate of Avon and Akasha's save-or-suck spells.
 - **Two Healers**: Avon (Cleric) is primary healer with Channel Divinity + heavy slots; Mist's Healing Word is emergency/Bonus Action backup — don't overlap.
 - **Eloquence Unsettling Words**: At Lv3, spending a Bardic Inspiration use to subtract from an enemy's save pairs perfectly with the Cleric and Druid throwing save-based spells.
+- **Jaethal's Taunting Misty Step** *(S7)*: Wis save 14 → fail = target has disadvantage on attacks against non-Jaethal targets. Round 1 opener; covers the front-liners (Avon, Talya) for a full round.
+- **Jaethal's Phantasmal Force** *(S7)*: Int save 14 → fail = the illusion blinds the target (e.g. drowning in honey for two rounds vs the hag). Pairs with Mist's Dissonant Whispers (forces a 2nd Wis save) and Talya's OA setups.
+- **Akasha Starry Form (Chalice)** *(S7)*: Wild Shape bonus action → glowing + 3 temp HP. When she heals one creature, also heals another within 30 ft for 1d8+Wis. **Two-PC heal on a single turn** — the clutch swing in the S7 hag/mound fight.
+- **Mist Silvery Barbs**: Reaction to nullify enemy crits. Save Jaethal-class allies from one-shot-kill rolls; remember it doesn't prevent the *follow-up* attack.
 
 ## Mist's Role
 
@@ -53,8 +60,13 @@ The party formally introduced themselves to each other for the first time over b
 - **Rufus Dawnstrider** — Dock Foreman, Vale Tempest target. Mist knows him personally — direct lead for amulet investigation.
 - **Eldrin** — Elven bard, Mist's former mentor. Taught Mist music and fae magic on the streets of Skybreeze before leaving the city. Whereabouts unknown. Emotionally significant to Mist.
 - **Evrin** — Patron. Currently out of town; barkeep at the Crowned Pheasant says "will be in touch." Long-term contract details TBD.
-- **Carrie-Anne** *(updated S6)* — Bahamut priestess. Personal interest in Avon registers (Akasha caught the disappointment when she answered Carrie-Anne's question instead of Avon). Lead role for Avon's clerical network. Named **Cleric Mavericks** as the temple's keeper of Wardstone history.
-- **Cleric Mavericks** *(introduced S6 by mention)* — Senior Bahamut cleric in Skybreeze, keeper of the storm/Wardstone history. Not yet met.
+- **Carrie-Anne** *(updated S7)* — Bahamut priestess. Personal interest in Avon registers (Akasha caught the disappointment when she answered Carrie-Anne's question instead of Avon). Aspiring paladin. Mist invited her to join the party on a future "save people / maybe even save the city" mission; she accepted in principle. Lead role for Avon's clerical network.
+- **Cleric Mavericks** *(introduced S6 by mention)* — One of several Bahamut clerics in the Skybreeze cathedral. Not the special Wardstone-history keeper after all (Sethrix filled that role directly in S7).
+- **High Warden Sethrix** *(introduced S7)* — Silver dragonborn, head of the Skybreeze Temple of Bahamut. Knows the Wardstone truth independently. Sheltering Rowan in protective custody. Warned the party off Tibbles Briarthorne. Quiet ally — keep public interactions respectful.
+- **Borenthal** *(mentioned S7)* — Bahamut cleric in Sevra. Avon's mentor. Resurrected Avon after the Karadim ambush. Open thread — Avon plans a return trip.
+- **Lady Saraveth** *(mentioned S7)* — Skybreeze noblewoman saved by Avon's intervention in Sevra. Owes the Karadim a debt. Status alive, current whereabouts unknown.
+- **Cleric Janice, Cleric Pilgrim** *(mentioned S7)* — Bahamut clerics in the Skybreeze temple. Cathedral cameos.
+- **Yarnspinner** *(introduced S7)* — Jaethal's Archfey patron. Spider-shaped, story-collector. Sent Jaethal to the material plane for "something urgent" (probably the blight). Open question on his actual agenda.
 - **Thalren Deepbloom** *(introduced S6)* — Herbalist. Gave Akasha the **Seed of Renewal**. En route to Iliora to investigate the world-tree blight himself.
 - **Tibbles Briarthorne** *(introduced S6)* — Wizard's Tower library custodian and builder of the owl-pedestal system (denies it). Performative defender of the official Wardstone narrative; performs, doesn't believe.
 - **Lady Avesna** *(named S6, retroactive)* — The "Fancy Robe woman" from Session 3. Channeler-rank Vale Tempest. Per Rowan, "not the violent type." Status post-S3-raid unknown.
@@ -76,6 +88,12 @@ The party formally introduced themselves to each other for the first time over b
 - **Mist ↔ Tibbles Briarthorne** *(established S6)*: Antagonistic / unresolved. Mist's Insight Nat-20 (with Avon's Guidance) confirmed Briarthorne is performing the official Wardstone narrative, not believing it. Briarthorne forcibly ejected the party from the library and sealed the doorway with a force field. Future library access requires bypassing him.
 - **Avon ↔ Carrie-Anne** *(updated S6)*: Carrie-Anne's interest in Avon is personal in addition to clerical. Akasha's read: when Carrie-Anne asked *"what do you want with him"* and Akasha answered, Carrie-Anne's face flickered with disappointment that Avon hadn't been the one to answer. Avon is unaware (or pretending to be). Carrie-Anne is also the party's introduction to **Cleric Mavericks** at the Bahamut temple.
 - **Party ↔ Vale Tempest** *(updated S6)*: Hostile but more nuanced. The magic-suppression faction (Avesna, Rowan, the dead S3 members) is non-violent; the violent faction is dangerous. The party killed the non-violent faction in S3, so the original hideout is now likely held by the dangerous faction. Rowan is a defector and a witness.
+- **Party ↔ High Warden Sethrix** *(established S7)*: Quiet allied. Sethrix knows the Wardstone truth, shelters Rowan, warned party off Briarthorne. Avon's "champion of Bahamut" arc is now formally landed at the temple level. Keep future visits private and respectful.
+- **Avon ↔ Borenthal** *(established S7)*: Mentor / resurrector. Avon plans to return to Sevra to thank him. Open thread.
+- **Avon ↔ Lady Saraveth** *(established S7)*: Avon saved her life in Sevra without knowing who she was. She is a Skybreeze noble who owed the Karadim a debt. Open thread.
+- **Party ↔ Jaethal Dionaea** *(established S7)*: Newly joined party member. Mist welcomed her first (*"haven't seen one of us in a while"*). Akasha gave the formal Skybreeze welcome. Avon gave her the player journal access. Smooth integration.
+- **Jaethal ↔ Rowan** *(established S7)*: Jaethal gave Rowan the regenerating Witchlight cupcake at goodbye. Small but emotionally specific — Jaethal as the party's gentleness.
+- **Mist ↔ Carrie-Anne** *(updated S7)*: Mist pitched her on joining the party for a future "save people / maybe even save the city" mission. She accepted in principle (*"if I don't have any duties here, I would love to"*). Active recruitment thread.
 
 ## Plot Threads
 
@@ -88,7 +106,14 @@ The party formally introduced themselves to each other for the first time over b
 - **Jensen's faction** *(reframed S6)* — Separate from Vale Tempest. Trying to destroy a Wardstone. Motive: reveal-the-truth? release-what's-buried? Sabotage? Unknown.
 - **Thalren Deepbloom in Iliora** *(activated S6)* — Investigating the blight himself. Multi-week round trip. The seed of renewal is the only reliable connection.
 - **Tibbles Briarthorne** *(introduced S6)* — Library custodian, knowledge gatekeeper, performer of the official narrative. Independent? Vale Tempest? Compromised? Unknown.
-- **Carrie-Anne / Cleric Mavericks** *(active S6)* — Now an active lead via Rowan-shelter request. Carrie-Anne's personal interest in Avon adds a layer.
+- **Carrie-Anne / Cleric Mavericks** *(updated S7)* — Carrie-Anne accepted Mist's pitch to join a future save-the-city mission. Mavericks is just another cathedral cleric (Sethrix has filled the Wardstone-history-keeper role).
+- **The Karadim** *(introduced S7)* — Continental-scale sinister organization. Came for Lady Saraveth in Sevra. Permeate Mirandar especially west. *"Few would dare interrupt."* Separate axis from Vale Tempest. Threat scope unknown.
+- **Lady Saraveth** *(introduced S7)* — Skybreeze noble Avon saved in Sevra. Owes the Karadim a debt. Status alive but whereabouts unknown.
+- **Avon's "Champion of Bahamut" arc** *(formalized S7)* — Borenthal resurrected Avon after the Karadim ambush. Sethrix: *"Bahamut will call on you one day."* Long pre-written track. Watch for how it interacts with party autonomy.
+- **Borenthal in Sevra** *(introduced S7)* — Avon's mentor / resurrector. Avon planning a return trip.
+- **The blight's eastern source** *(activated S7)* — Akasha's Nature Nat 20 pulled her east, not toward Iliora's mother tree. The hag's swamp was downstream, not the source. Source east of the Iliora receiving circle, fiendish/dark-magic origin per Avon's Religion check.
+- **Yarnspinner's agenda** *(introduced S7)* — Jaethal's Archfey patron sent her here for "something urgent." Suspicious timing relative to the blight. Open question on his actual goal.
+- **Sethrix's allyship** *(introduced S7)* — Quiet ally. Knows the Wardstone truth. Shelters Rowan. Won't speak publicly. Future temple visits private.
 
 ### Mist-Specific
 
