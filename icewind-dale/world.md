@@ -60,6 +60,8 @@
   - **Floor 3:** Dining room/kitchen (basilisk's den; basilisk killed Session 10), bedroom (dead wizard skeleton + will-o'-wisp + invisible chest with disintegrated spellbook), and the **illusion-to-reality chamber** — the lowest level. The chamber is a small room with cracked rune-inscribed walls and a 5-ft golden crystal disk on the (former) ceiling. Functions as an illusion-to-reality device using a "life spark" from a living creature. Cracked runes mean side effects likely. An illusory upside-down wizard recites maintenance instructions in **Loross** (an ancient wizard language).
   - **Status:** The Dzaan simulacrum escaped Session 10 combat (Misty Step + Invisibility) and is loose somewhere in the tower or already gone. The party is still mid-exploration; chamber's fate undecided.
 - **Temple of Helm (Easthaven)** — Temple in southwest Easthaven. Symbol of Helm (gauntlet with eye) above the door. Run by Salen Para, an elven priestess. Has burial grounds and religious idol stock from multiple deities for proper burials. Kane buried here (Session 9).
+- **Easthaven Apothecary** — Small creepy shop in Easthaven run by an elderly woman. Potion ingredients in jars and bottles lining the walls, potions behind the counter. Recognizes basilisk parts on sight; quotes finished potions (cure/cause petrification) at ~50 gp market. Initial offer for a basilisk eye was 15 gp, settled at 20 gp under threat of being walked to Bryn Shander (Session 11). Holds a hard line on prices
+- **The Chardalyn Cave (east of the lakeshore between the Lost Spire and Easthaven, unvisited)** — Reported by Timon (Session 11). A cave where men corrupted by chardalyn weaponize the stones, speak broken common, and act violent and frightening. Timon recommended putting them out of their misery — connects directly to Xardorok's chardalyn plot, likely a scout or staging cell
 
 ## NPCs
 
@@ -75,6 +77,9 @@
 
 ### Rescued / Encountered
 
+- **Timon** — Werebear. Met on the lakeshore between the Lost Spire and Easthaven (Session 11), fishing through the ice in polar bear form. Shifts between polar bear / hybrid / human forms. Eyepatch that looks like Oakley sunglasses, dreaded beard. Friendly, generous, shared fish with the party at his fire. Sleeps in full polar bear form for warmth. Searching for **Oya Minartok** (a famous local werebear legend) — believes she may be his mother. Reported a chardalyn-corruption cave to the east. Rune Insight 20 confirmed he is genuinely good
+- **Oya Minartok** — Famous local werebear legend. Mentioned by Timon (Session 11) as someone he is searching for; he believes she may be his mother. The party can ask around the Ten-Towns for more info. Not yet encountered
+- **Easthaven Apothecary Woman** — Elderly human, hunched, very short. Runs the Easthaven apothecary. Recognizes Underdark crafting ingredients on sight. Refused to budge above 20 gp on the basilisk eye. Polite but unyielding (Session 11)
 - **Bartaban** — Elderly owner of the White Lady Inn in Easthaven. Met Drizzt years ago when he stayed at the inn. Grateful to the party for saving his bar from the poltergeist; gave free rooms
 - **Rinaldo** — Halfling bard who ran the séance at the White Lady Inn. Nearly catatonic during the poltergeist fight, recovered afterward
 - **Garrett** — Human guide, ruggedly handsome, deep red hair and beard. Rescued from the mountain after a yeti attack. Three of his climbing party were lost: Mukingo (male goliath, killed), a female halfling (survived), and Asterisks (female tiefling, survived). Denied knowing anything about Torg's Caravan
@@ -133,11 +138,13 @@
 - Dzaan was searching for this tower before his execution
 
 ### Auril's Domain
-- Auril lives far north across the Sea of Moving Ice in some kind of fortress or temple
+- Auril lives far north across the **Sea of Moving Ice** in some kind of fortress or temple
+- The **Sea of Moving Ice** is the far-north ocean of Icewind Dale, ringed with islands hidden behind mists and storms. Largely unreachable from the Ten-Towns. Rune confirmed it to Virel (Session 11) as the coldest part of the Dale
 - The endless winter started two years ago — one day the sun simply didn't rise
 - An aurora-like barrier (Auril's Rime) covers the sky, blocking sunlight
 - A Tempest Cleric might know more about how to reach or stop her
 - The **Island of Solstice** is connected to Auril somehow — significance unknown
+- **Auril's religious profile** (revealed by Virel's Religion 22 in Session 11): lesser god, embodies winter's cruelty, hoards beauty by freezing it so it can't grow or age. Evil-aligned. Famously **wanted to live amongst mortals** and is said to live somewhere in Icewind Dale. Most people in the Dale resent her — no public worship, no temple. The Ten-Towns each appease her differently (light, food, sacrifice lotteries) without claiming her as a god
 
 ### The Cauldron of Plenty
 - Rare wondrous item recovered from the sea hag's lair in the coastal caves
@@ -196,6 +203,18 @@
 - Floor 2 of the Lost Spire contains a small altar room with an upside-down stone altar bearing an eight-pointed star
 - Stepping within 5 feet of the altar reveals the Mystra symbol (seven eight-pointed stars in a circle with a flowing brick pattern). A flask of glowing blue liquid drops into the visitor's hand
 - Significance unknown. Why is Mystra represented here? Single-use or repeat?
+
+### Jack's Organization (Session 11)
+- Jack (Warforged Warlock) is part of an organization that requires him to maintain "selective information gathering"
+- The organization has a pre-arranged account at Easthaven postal services — letters Jack sends are billed back to them
+- Jack confirmed: not human, identifies as a creature, mask is metal and cannot be removed unwillingly, mask was designed by an unknown maker, hollow chest plate
+- Affiliation, goals, and what Jack is reporting on remain unknown
+- Pax's working theory (OOC): intelligence-agency-style entity (the "Jack's from the CIA" framing)
+
+### Werebears in Icewind Dale (Session 11)
+- **Timon** is the first confirmed werebear encountered. Friendly, generous, eats raw fish in his hybrid form
+- **Oya Minartok** is a famous local werebear legend, possibly Timon's mother. He has been hunting her trail through the Dale
+- Werebears can polymorph between human, hybrid (humanoid bear-form), and full polar bear. Full polar bear is warmer for them; they can fish through ice in full form
 
 ### Errtu
 - Balor demon that terrorized Icewind Dale over a century ago
@@ -264,3 +283,18 @@ Floor 3 was a basilisk encounter. Two-round combat. Rune dealt 22 damage R1 with
 Long rest in the basilisk's den. Next morning, Thors opened the north door (the rune-inscribed **chamber** — golden 5-ft crystal disk, illusion-to-reality device, but cracked walls/runes mean side effects likely). Jack opened the south door (bedroom — rime-covered skeleton in a nightgown, a cracked tall mirror, an illusory upside-down wizard reciting **Loross**, an ancient wizard language no one at the table speaks). A **will-o'-wisp** rose out of the dead wizard's body when Rune searched it, tried to electrocute him (16 vs AC, miss), and faded. Avarath found an invisible chest behind the bed; Jack's brass key unlocked it. Inside: an ancient leather-bound spellbook bearing the same triple-crescent rune as the Shield Guardian, which disintegrated on contact with air. The chest itself stays.
 
 Session ended in the chamber. A voice in Jack's head, only Jack hears: *"This magic could bring me forth… and together we can rule this realm, Jack."* Virel + Avarath want to keep the chamber. Rune wants to destroy it ("Sounds like it's pretty powerful if it's worth killing people over"). Thors votes "evil disc." Jack stands silent. The simulacrum is still loose somewhere in the tower.
+
+### Session 11 — Dead Dads and the Werebear's Fire
+Party climbed back up out of the Lost Spire and ran into six bugbears sheltering from a blizzard on Floor 1. Jack tried diplomacy first — offered four rations to the leader **Brack**, rolled an 18 Persuasion, bought ten minutes. Brack pivoted to demanding 15 gold. Rune cast Thaumaturgy Booming Voice and tried Intimidation; rolled low; the bugbears laughed. Initiative.
+
+The fight ran one round plus the top of round two. Jack opened with Hold Person on Brack — wisdom save failed, paralyzing the leader the entire fight. Thors used a previously-unseen ability to grow medium-to-large, contested a grapple (lost 13 vs 15), Action Surge punch missed. Virel cast Magic Missile (1st level) for 10 force damage. Avarath Fey Stepped (Winter) — both nearby bugbears saved (14, 12), no frighten — then auto-crit the paralyzed Brack with the greatsword for 17 damage (no Smite, bonus action gone to Fey Step). Jack walked up top of round 2 and finished Brack with the Knight of Artorias greatsword for 23 magical radiant. Then **Persuasion 26** on the remaining three bugbears: *"You stay down there until we leave. You get to live. Or you can die up here."* All five bugbears (three above, two who had gone down to eat the dead basilisk earlier) fled down the hole together. **Party took zero damage.**
+
+Short rest, blizzard cleared by 1 p.m. Climbed out of the burrow tunnel (Rune Acrobatics 12 with crampons, dropped a rope), and started the eight-to-ten-hour walk along the lakeshore to Easthaven. Random encounter check ~7-8 p.m. rolled a polar bear breaking through the ice — but it stood up on two legs, waved, and shifted into a **werebear's hybrid form**. A man named **Timon** (one-eyed, dreaded beard, eyepatch like Oakley sunglasses), who had built a fire and caught a haul of fish, offered to share. Rune Insight Nat 20 — fully genuine. **Timon is searching for Oya Minartok**, a famous local werebear legend he believes may be his mother. He volunteered a quest hook about a **cave east of the lakeshore** where men corrupted by chardalyn have weaponized the stones and turned violent — suggested putting them out of their misery. Thors pushed back on the framing; the DM walked it back to a question of degree of corruption.
+
+Then the fire scene tipped over. Virel asked Timon about Drizzt: *"He knew my father. Who died."* First time she had volunteered her father story in front of the party. Avarath called the party out: *"I think it's the first time anybody's asked. It's a failure on all of you."* What followed was a thirty-minute round-robin lore drop. **Avarath's father died about two years ago, cause unknown — the search is what brought him to Icewind Dale.** Thors never knew his father, raised by his mother and grandmother alone. **Rune's whole village in the Spine of the World vanished while he was on a one-month trading trip** — no bodies, no messages, just gone. Jack short-circuited into AOL dial-up sounds. Timon, casually: *"My dad was just a tiny little man."* The DM broke character to call it his favorite scene of the campaign so far.
+
+**Thors then revealed he is from the Sword Coast** — specifically Neverwinter ("you never really see a winter that often"). He pulled his cloak in and showed a gray cloak underneath: his old guard cloak. He's in hiding from something, won't say what.
+
+**Virel pivoted to interrogating Jack's mask.** Physically tapped his face: cold metal. His shoulder: hollow. *"For someone as charismatic as you, you are not very convincing."* She demanded one no-omission question for the party. Avarath: *"Lying by omission is still lying."* Question chosen: *"Are you human?"* Jack: *"Evidently not so. I would not identify as what you would call a human."* Jack admitted to being part of **an organization that requires selective information gathering** and pays his postal bills through a pre-arranged account. Avarath, OOC: *"Oh my god, Jack's from the CIA. He's here for regime change."*
+
+Timon turned full polar bear overnight; Rune used him as a pillow. Walked into Easthaven mid-morning. Jack sent a letter to Bryn Shander on his organization's account. Rune sold Brack's morningstar (9 gp). Virel asked about Sephek's "Frostmaiden" reference from Session 8 — religion check 22 expanded Auril: lesser god of winter's cruelty, hoards beauty by freezing it, wanted to live amongst mortals, said to live somewhere in Icewind Dale. **Rune confirmed to Virel that the Sea of Moving Ice is the coldest part of the Dale.** Apothecary scene — basilisk eye initially 15 gp, Virel computed (History advantage) the finished potions sell for 50 gp, intimidation failed, Rune threatened Bryn Shander, settled at 20 gp. Avarath spent the shopping run drinking off-screen (DM canonized: dead-dads scene was too fresh). Thors bought a halberd (15 gp, Cleave, reach). Avarath bought a lance (haggled to 13 gp, Topple, reach). Session out.

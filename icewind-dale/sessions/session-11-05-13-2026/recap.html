@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 11 &mdash; Dead Dads and the Werebear's Fire</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #e8edf2;
+  --bg-card: #f4f7fa;
+  --bg-card-hover: #ffffff;
+  --border: #c4ced8;
+  --text: #2c3640;
+  --text-dim: #4a5a68;
+  --text-bright: #1a2530;
+  --red: #8b3a3a;
+  --red-glow: #8b3a3a22;
+  --blue: #2a5a8a;
+  --blue-glow: #2a5a8a22;
+  --green: #3a7a5a;
+  --green-glow: #3a7a5a22;
+  --purple: #6a4a8a;
+  --purple-glow: #6a4a8a22;
+  --teal: #3a7a7a;
+  --teal-glow: #3a7a7a22;
+  --gold: #3a6b8a;
+  --gold-dim: #5a8aaa;
+  --gold-glow: #3a6b8a22;
+  --avarath: #2a5a8a;
+  --kane: #2a6a4a;
+  --rathis: #5a3a7a;
+  --rune: #7a4a2a;
+  --thors: #7a3030;
+  --virel: #2a6a6a;
+  --jack: #5a3a5a;
+}
+
+@keyframes frost-breathe {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, #cad8e822 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #b8c8d822 0%, transparent 50%);
+}
+
+.frost-ambient {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -10%, #a0c4e033 0%, transparent 60%);
+  animation: frost-breathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+p { margin-bottom: 12px; }
+
+section { margin-bottom: 60px; }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.subtitle span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+}
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.comp-segment { transition: width 0.3s; }
+.comp-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.comp-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+.comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.party-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.party-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+  background: var(--bg-card-hover);
+}
+.party-card .name {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+}
+.party-card .class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.party-card .player {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.timeline-event:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 28px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-deep);
+}
+.timeline-event.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.timeline-event.exploration::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.timeline-event.roleplay::before { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.timeline-event.lore::before { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+.timeline-event.shopping::before { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+
+.event-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.tag-combat { background: var(--red-glow); color: var(--red); }
+.tag-exploration { background: var(--blue-glow); color: var(--blue); }
+.tag-roleplay { background: var(--purple-glow); color: var(--purple); }
+.tag-lore { background: var(--teal-glow); color: var(--teal); }
+.tag-shopping { background: var(--gold-glow); color: var(--gold); }
+
+.event-title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.event-body { color: var(--text); }
+.event-body ul { padding-left: 20px; }
+.event-body li { padding: 4px 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px 24px;
+  background: #f0e8ea;
+  border: 1px solid #e0c8cd;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 12px 0 16px;
+}
+.combat-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.combat-stat-row .label { color: var(--text-dim); }
+.combat-stat-row .value { color: var(--text-bright); font-weight: 500; }
+.combat-box h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 16px 0 8px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 4px;
+}
+.combat-box ul { padding-left: 20px; }
+.combat-box li { padding: 4px 0; }
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.spotlight-card:hover {
+  box-shadow: 0 4px 16px #2a5a8a18;
+  border-color: #a0b0c0;
+}
+.spotlight-card .char-name {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.spotlight-card ul { padding-left: 20px; }
+.spotlight-card li { padding: 4px 0; }
+.spotlight-card .highlight { font-weight: 500; }
+
+.quote-card {
+  border-left: 3px solid var(--gold-dim);
+  background: #2a5a8a08;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+.quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.thread-list { list-style: none; padding: 0; }
+.thread-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+.thread-list li:hover { box-shadow: 0 4px 16px #2a5a8a18; }
+.thread-title {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.thread-list li.cliffhanger {
+  border-left-color: var(--red);
+  background: linear-gradient(135deg, #f4f7fa, #f8f0f0);
+}
+.thread-list li.mystery { border-left-color: var(--purple); }
+.thread-list li.lore-thread { border-left-color: var(--teal); }
+
+.loot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.loot-table th,
+.loot-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.loot-table th {
+  background: #e8edf2;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.loot-table tr:last-child td { border-bottom: none; }
+.loot-table td.magical {
+  background: #edf2f8;
+  border-left: 3px solid var(--gold-dim);
+}
+
+.cliffhanger-box {
+  background: linear-gradient(135deg, #f4f7fa, #f8e8ec);
+  border: 1px solid var(--red);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.cliffhanger-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.cliffhanger-box p { font-size: 15px; }
+.cliffhanger-box .big-line {
+  font-family: 'Pirata One', cursive;
+  font-size: 22px;
+  color: var(--text-bright);
+  text-align: center;
+  margin: 16px 0 8px;
+  line-height: 1.4;
+}
+.cliffhanger-box .speaker {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.journal {
+  background: linear-gradient(135deg, #f0f4f8, #eaf0f5);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+.journal h3 {
+  color: var(--avarath);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.journal h3:first-child { margin-top: 0; }
+.journal ul { padding-left: 20px; }
+.journal li { padding: 4px 0; }
+.journal .intro {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .container { padding: 24px 16px 60px; }
+  .timeline { padding-left: 24px; }
+  .timeline-event { padding: 16px 20px; }
+  .journal { padding: 20px 22px; }
+  .combat-box { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="frost-ambient"></div>
+<div class="container">
+
+  <!-- Header -->
+  <header style="text-align:center; margin-bottom: 48px;">
+    <h1>Dead Dads and the Werebear's Fire</h1>
+    <p class="subtitle">
+      <span>Session 11</span>
+      <span>Rime of the Frostmaiden</span>
+      <span>D&amp;D 5.5e</span>
+      <span>May 13, 2026</span>
+      <span>~2h 53m</span>
+    </p>
+  </header>
+
+  <!-- Composition Bar -->
+  <section>
+    <h2>Session Composition</h2>
+    <div class="composition-bar">
+      <div class="comp-segment" style="width:50%; background:var(--purple);"></div>
+      <div class="comp-segment" style="width:15%; background:var(--teal);"></div>
+      <div class="comp-segment" style="width:15%; background:var(--blue);"></div>
+      <div class="comp-segment" style="width:12%; background:var(--red);"></div>
+      <div class="comp-segment" style="width:8%; background:var(--gold);"></div>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--purple);"></span>Roleplay 50%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--teal);"></span>Lore 15%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--blue);"></span>Exploration 15%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--red);"></span>Combat 12%</div>
+      <div class="comp-legend-item"><span class="comp-dot" style="background:var(--gold);"></span>Shopping 8%</div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic; text-align: center;">One bugbear stomp, three lore drops at a werebear's fire, one mask cracked.</p>
+  </section>
+
+  <!-- Party -->
+  <section>
+    <h2>The Party</h2>
+    <div class="party-grid">
+      <div class="party-card" style="border-left-color: var(--avarath);">
+        <div class="name">Avarath Solvane</div>
+        <div class="class">Eladrin Paladin 3 (Oath of Vengeance)</div>
+        <div class="player">Paxmanz</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--rune);">
+        <div class="name">Rune &Aacute;nstepa</div>
+        <div class="class">Tiefling Ranger 3</div>
+        <div class="player">givemedragons</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--thors);">
+        <div class="name">Thors Ketterson</div>
+        <div class="class">Human Fighter 3</div>
+        <div class="player">KarlesTheAsterisk</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--virel);">
+        <div class="name">Virel Talthrae</div>
+        <div class="class">Drow Wizard 3</div>
+        <div class="player">anxiouspotato101</div>
+      </div>
+      <div class="party-card" style="border-left-color: var(--jack);">
+        <div class="name">Jack</div>
+        <div class="class">Warforged Warlock 3</div>
+        <div class="player">Deiduke</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Session Summary -->
+  <section>
+    <h2>Session Summary</h2>
+    <p>The party climbed back up out of the Lost Spire and walked into six bugbears taking shelter from a blizzard on the top floor. Jack went up the rope first, offered the leader &mdash; Brack &mdash; four rations, rolled an 18 Persuasion, and bought ten minutes of peace. Brack pivoted to demanding 15 gold to let the party stay. Rune cast Booming Voice via Thaumaturgy and tried to intimidate the bugbears into walking away; the bugbears laughed. <em>"Dice tell a story."</em> Initiative was rolled.</p>
+    <p>The fight ran one full round plus the top of round two. Jack opened with Hold Person on Brack &mdash; wisdom save failed &mdash; paralyzing the leader before he ever got to swing. Thors used a previously-unseen ability to grow from medium to large, fills four squares, and tried to grapple a second bugbear (lost the contested check 13 vs 15, then missed his Action Surge punch). Virel cast Magic Missile at 1st level for 10 force damage. Avarath Fey Stepped (Winter) into the room, missed two frighten saves, and crit the paralyzed Brack for 17 with the greatsword (no Smite, bonus action gone to Fey Step). Top of round 2, Jack walked up and put the Knight of Artorias greatsword through Brack for 23 magical radiant &mdash; kill confirmed. Then Jack rolled a 26 Persuasion on the remaining three bugbears: <em>"You stay down there until we leave. You get to live. Or you can die up here and then we can go and kill your friends. Choose."</em> They hopped down the hole, met two more bugbears coming up with the basilisk meat, and the whole group fled together. The party took zero damage. The DM, deflated: <em>"That's how poorly I was rolling."</em></p>
+    <p>After a short rest waiting out the blizzard, the party climbed out of the burrow tunnel and started the eight-to-ten-hour walk along the lakeshore back to Easthaven. The encounter check at the midpoint rolled a polar bear breaking through the ice &mdash; but it stood up on two legs, waved, and shifted into a werebear's hybrid form. A man named <strong>Timon</strong>, one-eyed with an eyepatch that looks like sunglasses, dreaded beard, polar-bear-shaped. He'd built a fire, caught a haul of fish, and offered to share. Rune's Insight 20 confirmed he was genuine. Timon revealed he is hunting for <strong>Oya Minartok</strong>, a famous local werebear legend who he believes may be his mother. He asked the party about strange black crystal rocks &mdash; chardalyn &mdash; and described a cave somewhere east where men corrupted by the stones had turned violent and were wielding the rocks as weapons. He suggested putting them out of their misery.</p>
+    <p>Then the fire scene tipped over into the heart of the session. Virel asked Timon about Drizzt. <em>"He knew my father. Who died."</em> It was the first time Virel had volunteered anything about her family in front of the whole party. Avarath, dry: <em>"I think it's the first time anybody's asked. &hellip; It's true. It's a failure on all of you."</em> What followed was a thirty-minute round-robin lore drop. Avarath's father died about two years ago, cause unknown &mdash; the search is what brought him to Icewind Dale. Thors never knew his father, raised by his mother and grandmother alone. Rune's whole village in the Spine of the World vanished while he was on a one-month trading trip &mdash; no bodies, no messages, just gone. Jack short-circuited into AOL dial-up sounds. Timon, casual: <em>"My dad was just a tiny little man. Very small. I could put my dad on my shoulders."</em> The DM broke character to tell the table this was his favorite scene of the campaign so far.</p>
+    <p>Thors then revealed &mdash; pulling his outer cloak in, showing the gray cloak underneath &mdash; that he is not from the Dales. He's from the Sword Coast. <em>"Where I'm from, you never really see a winter that often."</em> The "never winter" pun was unmistakable. He's in hiding from something. Virel then pivoted from one mask to another and went after Jack. She physically walked up and tapped his face: cold metal. Then his shoulder: hollow. <em>"For someone as charismatic as you, you are not very convincing."</em> She demanded one no-omission question. Jack accepted. She asked: <em>"Are you human?"</em> Jack: <em>"Evidently not so."</em> Avarath cut through Jack's defense that he was technically only omitting, not lying: <em>"Lying by omission is still lying."</em> Jack closed the scene by admitting he belongs to an organization that requires him to control what he shares. Avarath, out of character: <em>"Oh my god, Jack's from the CIA. He's here for regime change."</em></p>
+    <p>The party slept by Timon's fire &mdash; he turned full polar bear for warmth, and Rune used him as a pillow. They walked into Easthaven by mid-morning. Jack sent a letter to Bryn Shander through his pre-arranged organization account. Rune sold Brack's morningstar (9 gp). Virel asked about Sephek's "Frostmaiden" reference; a religion check (22) confirmed Auril is a lesser god who hoards beauty in ice, wanted to live amongst mortals, and is said to live somewhere in Icewind Dale. Virel pressed Rune for the coldest part of the Dale; he made her come with him to an apothecary as the price. The apothecary lowballed the basilisk eye at 15 gp; Virel computed (history with advantage) that the finished potions sell for 50 gp; her intimidation rolled low; Rune threatened to take it to Bryn Shander, and the apothecary settled at 20 gp. On the way out Rune told Virel about the <strong>Sea of Moving Ice</strong> &mdash; the far north of Icewind Dale, an ocean ringed with mist-and-storm-hidden islands. <em>"I saved you from being swindled."</em></p>
+    <p>Avarath spent the entire shopping run drinking off-screen. The DM, narrating: <em>"That conversation about your parents really hit Avarath hard. His loss is way fresher than the rest of yours."</em> Avarath: <em>"You guys open the wound. That is healing."</em> Thors bought a halberd (15 gp, Cleave, reach). Avarath bought a lance (haggled to 13 gp, Topple, reach). The smith referred to Rune and Virel as a married couple, "always arguing." Session out.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-event combat">
+        <span class="event-tag tag-combat">Combat</span>
+        <div class="event-title">Act I-III &mdash; The Bugbear Floor</div>
+        <div class="event-body">
+          <p>Six bugbears took shelter from a blizzard on the top floor. Jack tried diplomacy. Rune tried intimidation. Then the fight lasted one round.</p>
+          <ul>
+            <li><strong>Jack casts Armor of Agathys</strong> on himself before climbing up (2nd-level slot &mdash; Warlock 3 Pact Magic is all 2nd-level; 10 temp HP plus a 10-cold counter that never triggered)</li>
+            <li>Rune stealth-peeks: six bugbears soaked from snow, rooting around for food. Blizzard outside</li>
+            <li>Avarath proposes waiting it out. <strong>Jack:</strong> <em>"There are five of us and six of them. Why do we suddenly seek pacifist route?"</em></li>
+            <li><strong>Avarath flips on a dime:</strong> <em>"You're right. Let's go. Let's go. Let's kill them."</em> Then OOC: <em>"Avarath has been affected by our mysterious warlock. You don't even need to roll persuasion. It's already a nat 20."</em></li>
+            <li><strong>Jack volunteers as emissary.</strong> Code word: <em>"flamingo."</em> Walks up, bows: <em>"Ahem. Might I be of assistance in your investigation?"</em></li>
+            <li>Bugbear leader: <em>"I am Brack."</em> Jack offers four rations from his pack. <strong>Persuasion 18 with advantage.</strong> Brack accepts. Two lower bugbears leap down the hole to eat the dead basilisk on Floor 3</li>
+            <li><strong>Brack reframes:</strong> <em>"I am the leader. We came in looking for food and for treasures. &hellip; Good fighters work for gold."</em> Mercenary pivot. Then: <em>"You can stay. Fifteen gold."</em></li>
+            <li><strong>Rune (sea hag head still dangling from his belt for visual flavor):</strong> <em>"How about we just leave each other the fuck alone and we all stay?"</em></li>
+            <li><strong>Rune casts Thaumaturgy &rarr; Booming Voice</strong> for advantage on Intimidation. <em>"You're not even close to the scariest thing I would have killed today. &hellip; You can stay. Or you can leave. Or you can die."</em> Rolled low. Bugbears laughed. <em>"Dice tell a story."</em> Initiative</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event exploration">
+        <span class="event-tag tag-exploration">Exploration</span>
+        <div class="event-title">Act IV &mdash; Out of the Tower, Onto the Road</div>
+        <div class="event-body">
+          <p>Short rest in the tower while the blizzard cleared. Then the burrow tunnel was the harder problem &mdash; climbing earth, not stone.</p>
+          <ul>
+            <li><strong>Rune climbs the burrow tunnel first</strong> &mdash; crampons on, Acrobatics 12 makes it, throws a rope down. Hour to get everyone up. Two p.m.</li>
+            <li>Discussion of destination: Targos (cauldron / Hlin Trollbane bounty) or Easthaven. <strong>Jack has a letter to send to Bryn Shander</strong></li>
+            <li>Decision: <strong>Easthaven first.</strong> Has the postal service, stores, Kane's body, and is on the route to Targos. Eight-to-ten-hour walk along the lakeshore</li>
+            <li><strong>Random encounter check.</strong> Virel rolls a 6. <em>"This is what happens when I'm voluntold &mdash; six owlbears attack."</em> Thors confirms with the d20. Encounter triggers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act V &mdash; Timon the Werebear</div>
+        <div class="event-body">
+          <p>The encounter rolled wasn't owlbears. It was a polar bear breaking through the ice to fish &mdash; who stood up on two legs and waved.</p>
+          <ul>
+            <li>About halfway, ~7-8 p.m., the party sees a <strong>polar bear breaking through the ice</strong>. It pulls a fish up, drops it, sees the party, stands on two legs, <strong>waves</strong></li>
+            <li>Thors: <em>"It could offer me a Coca-Cola."</em> Jack: <em>"A legally distinct soda product."</em></li>
+            <li>The bear shifts into a <strong>werebear hybrid form</strong> &mdash; more humanoid, walks upright. Approaches with hands out. <em>"Don't be scared. Just saying hi to some fellow travelers. Do you need my assistance? Would you like some fish?"</em></li>
+            <li><strong>Rune Insight Nat 20</strong> &mdash; fully genuine. Just a nice guy with a fire and a haul of fish</li>
+            <li>The bear introduces himself as <strong>Timon</strong> (DM riffing Monty Python: <em>"There are some who call me&hellip; Tim"</em>). Eyepatch that looks like Oakley sunglasses. Dreaded beard. Half-eats raw fish, half-cooks for the party</li>
+            <li><strong>Timon is searching for Oya Minartok</strong> &mdash; a famous local werebear legend. He believes she may be his mother</li>
+            <li><strong>Timon volunteers a quest hook.</strong> <em>"Have you guys seen any of those strange rocks? Shiny, sort of crystal-like black rock. &hellip; I sense corruption when I see them."</em> &mdash; <strong>chardalyn</strong></li>
+            <li>He describes a <strong>cave far east</strong> &mdash; men corrupted by the rocks, violent, broken-common, wielding the stones as weapons. Suggests putting them out of their misery</li>
+            <li>Avarath: <em>"Sounds like something we can help with."</em></li>
+            <li><strong>Thors pushes back:</strong> <em>"Wait, so you're suggesting that if someone gets corrupted by those rocks, it's humane to get rid of them?"</em> The DM walks back: it's a question of degree of corruption</li>
+            <li>Rune connects Timon's "corrupting rocks" to the soothsayer's amulet and the Errtu figurehead. Same stone</li>
+            <li>Virel asks Timon if he's ever seen <strong>Drizzt</strong>. Timon: <em>"That was before my time. I was very young when he was around."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act VI &mdash; Dead Dads</div>
+        <div class="event-body">
+          <p>The heart of the session. Thirty minutes of round-robin backstory in front of a fisherman with one eye. The DM broke character to call it his favorite scene of the campaign.</p>
+          <ul>
+            <li>Jack pivots: <em>"Virel, what is your fascination with this Drizzt character?"</em> <strong>Virel: <em>"He knew my father. Who died."</em></strong></li>
+            <li>Jack to Rune: <em>"Did you know of this?"</em> Rune (flat): No</li>
+            <li><strong>Avarath: <em>"I think it's the first time anybody's asked. &hellip; It's true. It's a failure on all of you."</em></strong></li>
+            <li>DM: <em>"This is the first time Virel's ever shown anything about her father."</em></li>
+            <li>Avarath, downbeat: <em>"He got killed, so. &hellip; By something I'm not sure myself. I'm trying to find out. &hellip; It happened about two years ago."</em> DM confirms above the table: Avarath's loss is the freshest. Virel's was decades ago</li>
+            <li><strong>Thors:</strong> <em>"My dad? I never met him. &hellip; I was raised by my mother by herself for the longest time that I can remember."</em> DM, quietly: <em>"For some reason, that one felt way sadder than all the dead dads."</em></li>
+            <li>Avarath: <em>"Maybe that one just hit way closer to home."</em></li>
+            <li><strong>Rune's lore drop.</strong> <em>"I came back after a trading trip and they were gone. &hellip; I couldn't find any messages that would have indicated where they went. I didn't find anyone that was dead or dying. They were just gone."</em> Gone for a month. Nothing since</li>
+            <li>Thors: <em>"That is intriguing."</em> Rune: <em>"That's a word for it. &hellip; I've spent the last five years really trying hard not to think about that word."</em></li>
+            <li><strong>Jack short-circuits.</strong> <em>"I am from many places."</em> (silence) <em>"Just blue screen, just short circuit."</em> Virel: <em>"Is there a little steam coming out from his ears?"</em> Jack: <em>"No, but there's a very silent AOL dial-up sound."</em></li>
+            <li>Timon, in the silence: <em>"My dad was just a tiny little man. Very small. I could put my dad on my shoulders."</em></li>
+            <li>DM, breaking character: <em>"This is my favorite thing that's happened so far in all of the playing that we've done in this campaign."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Lore</span>
+        <div class="event-title">Act VII &mdash; Thors's Other Cloak</div>
+        <div class="event-body">
+          <p>Thors pulled his outer cloak in to keep warm and revealed a second one underneath. He didn't try to hide it; he tried to hide it.</p>
+          <ul>
+            <li>Jack asks Thors about his mother. Raised by mother and grandmother. Kept him away from people for a while, then he left to work as a guard</li>
+            <li><em>"I did things as a guard."</em> He pulls his cloak in &mdash; <strong>a second, gray cloak underneath.</strong> <em>"He tries to keep that one kind of covered up. He wears it because he's proud of it, but he's also kind of hiding it at the same time."</em></li>
+            <li><strong>Thors: <em>"Let's just say where I'm from, you never really see a winter that often."</em></strong> Jack, OOC: <em>"For anyone not picking it up &mdash; it's on the Sword Coast."</em></li>
+            <li>Thors is from <strong>Neverwinter.</strong> The second cloak is the guard cloak &mdash; proud of it, but actively concealing it</li>
+            <li>Jack: <em>"Temperate usually brings more population. It is actually statistically more likely that he would be here in a cold place as there would be less people to look for him."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event roleplay">
+        <span class="event-tag tag-roleplay">Roleplay</span>
+        <div class="event-title">Act VIII &mdash; The Mask Comes Off (Sort Of)</div>
+        <div class="event-body">
+          <p>Virel went after the next mask. She got cold metal twice and one no-omission question. She used the question well.</p>
+          <ul>
+            <li>Virel: <em>"You don't sleep like we do."</em> Jack: <em>"Neither do you, elf."</em></li>
+            <li><strong>Jack:</strong> <em>"I remain horizontal for a period of exactly six hours."</em> Doesn't eat. <em>"If you put terrible fuel into an engine, the engine will corrupt."</em></li>
+            <li><strong>Virel walks up and physically taps Jack's face. Cold metal.</strong> <em>"Why this mask?"</em> Jack: <em>"Easier to hide my face. Easier than not hiding."</em></li>
+            <li>Virel Insight 19. DM: <em>"You definitely get the feeling he's leaving stuff out based on the tone of his voice."</em></li>
+            <li>Virel pokes Jack's shoulder. <em>"That's hollow."</em> Jack: <em>"It would have been metal hitting metal."</em> Virel: <em>"For someone as charismatic as you, you are not very convincing."</em></li>
+            <li><strong>Avarath: <em>"Lying by omission is still lying."</em></strong></li>
+            <li>Jack: <em>"I will allow one question in which I will not withhold any information. Choose your words carefully."</em> One question for the whole party</li>
+            <li>Avarath, on Virel's father's name: <em>"His name was Dad. Face in the crowd, what can I say?"</em> &mdash; turning Jack's earlier line back on him</li>
+            <li><strong>Virel asks: <em>"Are you human?"</em></strong> Jack: <em>"Evidently not so. &hellip; I am identifiable as a creature. However, &hellip; I would not identify as what you would call a human."</em></li>
+            <li>Jack's closer: <em>"I am part of an organization that requires that I maintain a level of selective information gathering. Please know that it is never done in an attempt to manipulate or take advantage of any of your trust. I greatly enjoy hearing about all of your dead fathers."</em></li>
+            <li><strong>Avarath (OOC):</strong> <em>"Oh my god, Jack's from the CIA. He's here for regime change."</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event lore">
+        <span class="event-tag tag-lore">Lore</span>
+        <div class="event-title">Act IX &mdash; Sleep and the Frost Maiden</div>
+        <div class="event-body">
+          <p>Timon turned full polar bear. Rune used him as a pillow. Easthaven the next morning. Then Virel cashed in the Frostmaiden lead.</p>
+          <ul>
+            <li>Timon goes full polar bear to stay warm. <strong>Rune leans on him like a pillow.</strong> <em>"Hey, you lie down with bears, you stay warm."</em> Avarath: <em>"And that's how I met your father."</em></li>
+            <li>Coziest night's sleep in a long time. Timon already fishing in the morning. Waves with polar bear paws as the party leaves</li>
+            <li>Three-four hour walk to Easthaven, mid-morning arrival</li>
+            <li><strong>Jack sends a letter</strong> &mdash; pre-arranged account through his organization, bill goes to them. Sled-dog couriers in Icewind Dale (too cold for ravens)</li>
+            <li>Rune sells Brack's morningstar to the dwarven smith. Persuasion 9 gp (initial offer 8)</li>
+            <li><strong>Virel raises Sephek's "Frostmaiden" reference</strong> from Session 8. <strong>Religion check 22.</strong> Auril is a lesser god, embodies winter's cruelty, hoards beauty by freezing it, evil-aligned, <strong>wanted to live amongst mortals &mdash; said to live somewhere in Icewind Dale</strong></li>
+            <li>No confirmation, no temple, no public worship in the Ten-Towns &mdash; resentment runs too deep</li>
+            <li>Virel asks Rune for the coldest part of the Dale. Rune: <em>"What's in it for me?"</em></li>
+            <li>Rune is going to an apothecary anyway. She comes with as the price</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-event shopping">
+        <span class="event-tag tag-shopping">Shopping</span>
+        <div class="event-title">Act X &mdash; The Apothecary, the Eye, and the Sea of Moving Ice</div>
+        <div class="event-body">
+          <p>One basilisk eye, one underpaying apothecary, one walk-out threat, and one geography lesson on the way out.</p>
+          <ul>
+            <li>Easthaven apothecary, run by a little old woman. Lined with potion ingredients</li>
+            <li>Rune produces the <strong>basilisk eye</strong>. She grabs it, examines: <em>"I can turn it into a potion to cure petrification or a poison to cause it."</em> Initial offer: <strong>15 gp</strong></li>
+            <li><strong>Virel calculates.</strong> History with advantage &mdash; from Menzoberranzan, knows basilisks from the Underdark, knows the finished potion's market price. Confirmed: <strong>50 gp range with other ingredients</strong></li>
+            <li><em>"Virel's going to intimidate her. To trade for more gold. Minimum 50 gold."</em> Intimidation rolled poorly. DC 15. Failed</li>
+            <li>Rune: <em>"We will just take this to Bryn Shander. We're headed there anyway."</em></li>
+            <li>Apothecary cracks: <em>"How about 20?"</em> Persuasion call. <strong>Final: 20 gp.</strong> Rune polite nod on the way out</li>
+            <li>Rune, on the way out, tells Virel about the <strong>Sea of Moving Ice</strong> &mdash; far north Icewind Dale, an ocean ringed with mist-and-storm-hidden islands. <em>"I guess I'll tell you since you tried and failed to get me a deal in there. But you tried, and that's what's important. I saved you from being swindled."</em></li>
+            <li>Avarath had spent the entire shopping run drinking. DM canonized: <em>"That conversation about your parents really hit Avarath hard. He needed to get a drink. His loss is way fresher than the rest of yours &mdash; he's like two years out."</em></li>
+            <li><strong>Avarath: <em>"You guys open the wound. That is healing."</em></strong></li>
+            <li><strong>Thors at the smithy:</strong> buys a <strong>freshly-made halberd</strong> for 15 gp &mdash; reach, Cleave mastery</li>
+            <li><strong>Avarath: <em>"Can I buy the lance?"</em></strong> Persuasion haggle &mdash; bought for <strong>13 gp.</strong> Topple mastery, reach</li>
+            <li>Smith identifies Rune and Virel as a married couple: <em>"They've been in here a few times. I think they're like a married couple or something. They're always arguing."</em></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Combat Encounters -->
+  <section>
+    <h2>Combat Encounters</h2>
+
+    <div class="combat-box">
+      <div class="combat-meta">Encounter &middot; The Bugbear Floor &middot; 1 round + Round-2 Top &middot; Lost Spire (Floor 1)</div>
+      <div class="combat-stats">
+        <div class="combat-stat-row"><span class="label">Enemies</span><span class="value">6 Bugbears (Brack + 5)</span></div>
+        <div class="combat-stat-row"><span class="label">Rounds</span><span class="value">1 + Top of 2</span></div>
+        <div class="combat-stat-row"><span class="label">Party damage taken</span><span class="value">0</span></div>
+        <div class="combat-stat-row"><span class="label">Killed</span><span class="value">Brack (Jack)</span></div>
+        <div class="combat-stat-row"><span class="label">Fled</span><span class="value">5 bugbears (down the hole)</span></div>
+        <div class="combat-stat-row"><span class="label">Slots spent</span><span class="value">Jack 2&times;2nd, Virel 1st</span></div>
+      </div>
+
+      <p><strong>Init:</strong> Jack &rarr; Thors &rarr; Virel &rarr; Brack (save tick) &rarr; front-line bugbear (vs Thors) &rarr; Rune &rarr; corner bugbear &rarr; bottom-right bugbear (vs Virel) &rarr; Avarath. Two bugbears went DOWN to eat the basilisk before initiative; they came back UP during Jack's round-2 Persuasion and joined the retreat without entering combat.</p>
+
+      <h4>Round 1</h4>
+      <ul>
+        <li><strong>Jack:</strong> <strong>Hold Person on Brack.</strong> DC 15 WIS. <strong>Brack fails by miles &mdash; paralyzed.</strong> Bonus action summons the Knight of Artorias greatsword. <em>"Brack, don't make us do this."</em> Follow-up Intimidation: <strong>18</strong> &mdash; Brack visibly frightened behind the paralysis</li>
+        <li><strong>Thors:</strong> Uses a previously-unseen ability to <strong>enlarge from medium to large</strong> (fills four squares, advantage on STR checks). Tries to <strong>grapple</strong> the adjacent bugbear &mdash; contested STR &mdash; <strong>lost, 13 vs bugbear's 15.</strong> <strong>Action Surge</strong> &rarr; giant fist punch &mdash; DM ruled bugbear AC higher than 12, <strong>miss</strong>. Net: 0 damage. Pushed the corner bugbear with his new size</li>
+        <li><strong>Virel:</strong> <strong>Magic Missile (1st level)</strong> &mdash; three darts on bottom-right bugbear. <strong>10 magical force damage</strong> (2 + 4 + 4, each dart d4+1)</li>
+        <li><strong>Brack:</strong> Auto-fails Hold Person save again. <strong>Paralyzed another round</strong></li>
+        <li><strong>Front-line bugbear (vs Thors):</strong> "Grab" attack &mdash; <strong>16 to hit &mdash; miss.</strong> (Wouldn't have worked anyway &mdash; Bugbear Grab needs a smaller target)</li>
+        <li><strong>Rune:</strong> Walks up to Brack. Attacks against paralyzed = advantage + auto-crit on hit
+          <ul>
+            <li><strong>Short sword #1:</strong> auto-crit. <strong>Max d6+5 = 11 + d6 crit (6) = 17 piercing</strong></li>
+            <li><strong>Short sword #2 (offhand, Vex mastery &mdash; advantage on second swing):</strong> <strong>6+1 = 7 piercing</strong></li>
+            <li><strong>Dreadful Strike</strong> (Ranger 3 feature &mdash; 2d6 psychic on a second swing): <strong>10 psychic</strong></li>
+            <li><strong>Total: 34 damage on Brack</strong></li>
+          </ul>
+        </li>
+        <li><strong>Corner bugbear:</strong> Moves to Thors. Club &mdash; <strong>13 to hit &mdash; miss</strong> (vs enlarged AC)</li>
+        <li><strong>Bottom-right bugbear:</strong> Swings at Virel &mdash; <strong>14 to hit. Misses</strong> (Mage Armor up = 15 AC). Virel about to cast Shield; Jack: <em>"So don't waste your spell slot."</em></li>
+        <li><strong>Avarath:</strong> <em>"You guys are useless, not worth anything."</em> <strong>Fey Step (Winter)</strong> &mdash; bonus action &mdash; teleport into the room. Frighten effect &mdash; DC 13 WIS. Both nearby bugbears save (14, 12). No frighten. <em>(RAW note: 2024 PHB Eladrin Winter Fey Step targets ONE creature within 5 ft; the table ran it as AoE. Worth a clarifying conversation with the DM.)</em> Action: greatsword on paralyzed Brack &mdash; auto-crit &mdash; <strong>2d6+3 (15) + d6 crit (2) = 17 slashing.</strong> <strong>No Divine Smite</strong> (bonus action gone to Fey Step). Avarath, deflated mid-math: <em>"Forgot they nerfed the crap out of paladins."</em> Then moves to a new square</li>
+      </ul>
+
+      <h4>Round 2 &mdash; The Kill and the Scene Closer</h4>
+      <ul>
+        <li><strong>Jack:</strong> Walks up to Brack. Greatsword &mdash; <strong>21 to hit, 23 magical radiant damage. Brack dies.</strong></li>
+        <li>Jack moves into Brack's space, faces the three remaining bugbears: <em>"The rest of you may join him, or you may go down the hole. These are your choices. You stay down there until we leave. You get to live. Or you can die up here and then we can go and kill your friends. Choose."</em></li>
+        <li><strong>Persuasion 26</strong> (advantage, Jack's pick of skill: <em>"because I don't mean it menacingly"</em>)</li>
+        <li>The DM, quietly: <em>"As you're talking, I had just rolled initiative for the other two coming up with the basilisk."</em> From the hole below: <em>"We got meat."</em> The remaining three nod to each other and hop down. <strong>All five bugbears flee together</strong></li>
+        <li>Combat ends mid-round. <strong>Zero damage taken by the party</strong></li>
+      </ul>
+
+      <h4>Damage Breakdown (all on Brack)</h4>
+      <ul>
+        <li><strong>Rune:</strong> 34 (twin short swords + Dreadful Strike, auto-crit on the first hit)</li>
+        <li><strong>Jack:</strong> 23 (Knight of Artorias greatsword, killing blow)</li>
+        <li><strong>Avarath:</strong> 17 (greatsword auto-crit, no Smite)</li>
+        <li><strong>Virel:</strong> 10 (Magic Missile on bottom-right bugbear, who survived and fled)</li>
+        <li><strong>Thors:</strong> 0 (grapple lost, Action Surge punch missed)</li>
+        <li><strong>Brack total damage: 74 across 3 attackers</strong></li>
+      </ul>
+
+      <p><strong>Hold Person is broken at low levels.</strong> Brack was paralyzed the entire fight. DM mid-combat: <em>"I think the whole person is broken, for sure."</em> Virel, deadpan: <em>"Dare they."</em></p>
+
+      <p><em>No XP awarded mid-tower. DM bundling. Levels still 3.</em></p>
+    </div>
+  </section>
+
+  <!-- Character Spotlight -->
+  <section>
+    <h2>Character Spotlight</h2>
+    <div class="spotlight-grid">
+
+      <div class="spotlight-card" style="border-left-color: var(--avarath);">
+        <div class="char-name" style="color: var(--avarath);">Avarath Solvane &middot; Two Years Out</div>
+        <ul>
+          <li>Picked up on Floor 2 climbing back up &mdash; passed the climbing check easily</li>
+          <li><strong>Pre-combat pivot:</strong> from <em>"Maybe we should wait it out then"</em> to <em>"You're right. Let's go. Let's go. Let's kill them."</em> the second Jack made the case. Self-aware: <em>"Avarath has been affected by our mysterious warlock."</em></li>
+          <li>Coached Rune's intimidation flavor: <em>"Rune smash."</em></li>
+          <li><strong>Combat:</strong> scowled at the bugbears (<em>"You guys are useless, not worth anything"</em>); Fey Step (Winter) into the middle of the room; both frighten saves succeeded; auto-crit greatsword on paralyzed Brack for 17; no Smite (bonus action gone)</li>
+          <li><strong>The "failure on all of you" line.</strong> After Virel volunteered her father story to Timon, Avarath called the whole party out: <em>"I think it's the first time anybody's asked. &hellip; It's true. It's a failure on all of you."</em></li>
+          <li><strong>Avarath's own father lore drop.</strong> <em>"It happened about two years ago. &hellip; And I was hoping that I could find a clue for in Icewind Dale."</em> The freshest grief at the table. Matches Avarath's House Solvane backstory &mdash; the unnatural winter that wiped out his court was about two years ago</li>
+          <li><em>"His name was Dad. Face in the crowd, what can I say?"</em> &mdash; turning Jack's earlier deflection back on him</li>
+          <li><strong>The moral line on Jack:</strong> <em>"Lying by omission is still lying."</em></li>
+          <li><em>"And that's how I met your father."</em> &mdash; capping the polar-bear-pillow image</li>
+          <li><strong>Drinking off-screen during the shopping run.</strong> DM canonized: <em>"That conversation really hit Avarath hard."</em> Avarath: <em>"You guys open the wound. That is healing."</em></li>
+          <li>Bought a <strong>lance</strong> at 13 gp via persuasion haggle. Topple mastery + reach &mdash; pairs with Maul for prone-setup utility</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--rune);">
+        <div class="char-name" style="color: var(--rune);">Rune &Aacute;nstepa &middot; The Cold-Country Survivor</div>
+        <ul>
+          <li>Stealth-peeked the bugbear floor first. Six count, blizzard outside &mdash; clean intel</li>
+          <li>Preferred resolution all along: <em>"How about we just leave each other the fuck alone and we all stay?"</em></li>
+          <li><strong>Intimidation attempt:</strong> Thaumaturgy &rarr; Booming Voice for advantage. <em>"You're not even close to the scariest thing I would have killed today."</em> Rolled low. <em>"Dice tell a story."</em></li>
+          <li><strong>Combat MVP again:</strong> 34 damage on the paralyzed Brack &mdash; twin short swords, both crit-on-hit (auto-crit on paralyzed), max-rolled the first, Dreadful Strike on the second</li>
+          <li>Climbed out of the burrow first &mdash; crampons, Acrobatics 12, dropped a rope</li>
+          <li><strong>Insight 20 (Nat 20) on Timon</strong> &mdash; fully genuine, no threat</li>
+          <li><strong>The disappearance story.</strong> <em>"I came back after a trading trip and they were gone. &hellip; I didn't find anyone that was dead or dying. They were just gone."</em> One month away. The deepest unresolved hook on the board</li>
+          <li>Thors: <em>"That is intriguing."</em> Rune: <em>"That's a word for it. &hellip; I've spent the last five years really trying hard not to think about that word."</em></li>
+          <li><strong>The polar-bear pillow.</strong> <em>"Hey, you lie down with bears, you stay warm."</em></li>
+          <li>Drove the apothecary scene &mdash; leveraged Virel's wizardly history check, threatened to walk the eye to Bryn Shander, closed at 20 gp. Told Virel about the <strong>Sea of Moving Ice</strong> on the way out as payment</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--thors);">
+        <div class="char-name" style="color: var(--thors);">Thors Ketterson &middot; The Neverwinter Cloak</div>
+        <ul>
+          <li><em>"Good God, the yeti speak common now."</em> &mdash; first line of the session, on hearing broken common from the bugbear floor</li>
+          <li><strong>Combat: enlarges from medium to large.</strong> Fills four squares. Tries to grapple &mdash; loses the contested STR (13 vs 15). Action Surge punch missed. Zero damage all round, but his size kept two bugbears from clean lanes. (Source of the Enlarge effect: a previously-unseen ability or item &mdash; needs clarification)</li>
+          <li><strong>Pushed back on Timon's "kill the corrupted men" framing:</strong> <em>"Wait, so you're suggesting that if someone gets corrupted by those rocks, it's humane to get rid of them?"</em> The only PC at the table to question Timon's quest hook</li>
+          <li><strong>Dead dads contribution.</strong> <em>"My dad? I never met him. &hellip; I was raised by my mother by herself for the longest time that I can remember."</em> DM, quietly: <em>"For some reason, that one felt way sadder than all the dead dads."</em></li>
+          <li><strong>The cloak reveal.</strong> Pulled his cloak closer, showed the gray cloak underneath. <em>"I did things as a guard."</em> Then: <em>"Let's just say where I'm from, you never really see a winter that often."</em> Thors is from <strong>Neverwinter</strong>. In hiding. The second cloak is the guard cloak &mdash; proud of it, actively concealing it</li>
+          <li><strong>Help-actioned Virel's interrogation of Jack</strong> &mdash; physically saddled up behind her like an enabling parent</li>
+          <li>Bought a <strong>halberd</strong> at 15 gp &mdash; pairs with his enlarged form for cleave reach</li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--virel);">
+        <div class="char-name" style="color: var(--virel);">Virel Talthrae &middot; The Frostmaiden Track</div>
+        <ul>
+          <li><strong>Magic Missile</strong> at 1st level on a bottom-right bugbear &mdash; 10 force. <em>"I shall do the magic of the missile."</em></li>
+          <li>Took zero damage &mdash; Mage Armor (15 AC) absorbed the only swing aimed her way</li>
+          <li><strong>Volunteered her father's existence to Timon.</strong> <em>"He knew my father. Who died."</em> Triggered the entire dead-dads scene</li>
+          <li>Asked Timon about Drizzt &mdash; same lead since Session 6. No new info from Timon, but the lore is now table knowledge</li>
+          <li><strong>Jack interrogation.</strong> Walked up, physically tapped his face (cold metal), tapped his shoulder (hollow). Demanded one no-omission question. Asked: <em>"Are you human?"</em> Got: <em>"Evidently not so."</em></li>
+          <li><strong>The Frostmaiden religion check (22).</strong> Auril is a lesser god of winter's cruelty, hoards beauty in ice, wanted to live amongst mortals &mdash; said to live somewhere in Icewind Dale. Followed up with: <em>"Do we by any chance know where the coldest part of Icewind Dale is?"</em></li>
+          <li><strong>The apothecary scene:</strong> computed (History advantage) that the basilisk eye potions sell for 50 gp; intimidation rolled low; Rune closed at 20 gp. Bargained Rune for the Frostmaiden location info</li>
+          <li>Edgy Naruto/Shikamaru bit landed at the table. Rune: <em>"Edgy."</em> Virel: <em>"Shikamaru &mdash; what a drag."</em></li>
+        </ul>
+      </div>
+
+      <div class="spotlight-card" style="border-left-color: var(--jack);">
+        <div class="char-name" style="color: var(--jack);">Jack &middot; The Organization</div>
+        <ul>
+          <li><strong>Cast Armor of Agathys</strong> before going up the rope &mdash; anticipating cold-aligned bugbears (it never triggered)</li>
+          <li><strong>Bugbear diplomat:</strong> walked up alone, bowed, <em>"Ahem. Might I be of assistance in your investigation?"</em> Set "flamingo" as the code word. Persuasion 18 &mdash; bought ten minutes and the meal</li>
+          <li><strong>Combat MVP:</strong> <strong>Hold Person on Brack turn 1</strong> &mdash; fight effectively over. Summoned the Knight of Artorias greatsword (bonus action), intimidation 18 follow-up. Greatsword on Brack for 23 magical radiant (kill). <strong>Persuasion 26 on the survivors</strong> &mdash; all five bugbears fled together</li>
+          <li><em>"You stay down there until we leave. You get to live. Or you can die up here and then we can go and kill your friends. Choose."</em></li>
+          <li><strong>Short-circuited on the dead-dads question.</strong> <em>"I am from many places."</em> (silence) Virel: <em>"Is there a little steam coming out from his ears?"</em> Jack: <em>"No, but there's a very silent AOL dial-up sound."</em></li>
+          <li><strong>The mask interrogation.</strong> Allowed one no-omission question. Confirmed: not human; identifiable as a creature; the mask is metal, cannot be removed unwillingly, designed by an unknown maker. <em>"I remain horizontal for a period of exactly six hours."</em></li>
+          <li><strong>The organization reveal.</strong> <em>"I am part of an organization that requires that I maintain a level of selective information gathering."</em> Pays his postal bills through a pre-arranged account</li>
+          <li><em>"I greatly enjoy hearing about all of your dead fathers."</em> &mdash; the line that flipped the warmth of the dead-dads scene into something quietly off-putting</li>
+          <li><em>"The demon greatsword that makes psychic and radiant damage."</em> &mdash; first time he named his pact weapon's damage profile in front of the party</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Loot -->
+  <section>
+    <h2>Loot &amp; Equipment</h2>
+    <table class="loot-table">
+      <thead>
+        <tr><th>Item</th><th>Source</th><th>Recipient</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Morningstar (bugbear-made)</td>
+          <td>Brack's body</td>
+          <td>Sold</td>
+          <td>9 gp to the Easthaven dwarven smith</td>
+        </tr>
+        <tr>
+          <td>Basilisk eye (Session 10)</td>
+          <td>Harvested S10</td>
+          <td>Sold</td>
+          <td>20 gp from the Easthaven apothecary. Used in petrification cure/cause potions (market value ~50 gp finished)</td>
+        </tr>
+        <tr>
+          <td>Halberd (freshly made)</td>
+          <td>Easthaven dwarven smith</td>
+          <td>Thors</td>
+          <td>15 gp. Cleave mastery, reach. Pairs with enlarged form</td>
+        </tr>
+        <tr>
+          <td>Lance (freshly made)</td>
+          <td>Easthaven dwarven smith</td>
+          <td>Avarath</td>
+          <td>13 gp (haggled from 15 via persuasion). Topple mastery, reach</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim); font-style: italic; text-align: center;">No XP awarded &mdash; DM is bundling. Levels still 3.</p>
+  </section>
+
+  <!-- Memorable Quotes -->
+  <section>
+    <h2>Memorable Quotes</h2>
+
+    <div class="quote-card">
+      <p class="quote-text">"Avarath has been affected by our mysterious warlock. &hellip; You don't even need to roll persuasion. It's already a nat 20. Let's go. Let's kill them."</p>
+      <p class="quote-attr"><strong>Avarath</strong> &middot; Pre-combat, the moment Jack pointed out the party outnumbered the bugbears. Pax flipping on a dime, fully aware of the bit.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"It's the first time anybody's asked. &hellip; It's true. It's a failure on all of you."</p>
+      <p class="quote-attr"><strong>Avarath</strong> &middot; To the whole party, after Virel volunteered her father lore to Timon. The line that opened the dead-dads scene.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Lying by omission is still lying."</p>
+      <p class="quote-attr"><strong>Avarath</strong> &middot; Cutting through Jack's "he's not technically lying, just omitting" defense in the mask interrogation. Vengeance Paladin moral clarity.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"You guys open the wound. That is healing."</p>
+      <p class="quote-attr"><strong>Avarath</strong> &middot; Drinking off-screen after the dead-dads scene. The DM canonized the moment &mdash; his loss is two years out, fresher than the rest.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"How about we just leave each other the fuck alone and we all stay?"</p>
+      <p class="quote-attr"><strong>Rune</strong> &middot; To Brack, when the leader demanded 15 gold. The Rune solution to most encounters.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"I came back after a trading trip and they were gone. &hellip; I didn't find anyone that was dead or dying. They were just gone. &hellip; I've spent the last five years really trying hard not to think about that word."</p>
+      <p class="quote-attr"><strong>Rune</strong> &middot; The lore drop. One month away. No trace of his people since.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Hey man, you lie down with bears, you stay warm."</p>
+      <p class="quote-attr"><strong>Rune</strong> &middot; Using polymorphed Timon as a pillow at the campfire. Avarath capped: "And that's how I met your father."</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Good God, the yeti speak common now."</p>
+      <p class="quote-attr"><strong>Thors</strong> &middot; First line of the session. Hearing broken common from the bugbear floor above.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Let's just say where I'm from, you never really see a winter that often."</p>
+      <p class="quote-attr"><strong>Thors</strong> &middot; The Neverwinter reveal, gray guard cloak peeking out under the outer one. Tongue-in-cheek pun confirmed at the table.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Wait, so you're suggesting that if someone gets corrupted by those rocks, it's humane to get rid of them?"</p>
+      <p class="quote-attr"><strong>Thors</strong> &middot; To Timon, on the chardalyn-corrupted men. The only PC to push back on the quest hook's framing.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"He knew my father. Who died."</p>
+      <p class="quote-attr"><strong>Virel</strong> &middot; To Timon, about Drizzt. First time the party heard anything about Virel's family. Triggered the entire dead-dads scene.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"Are you human?"</p>
+      <p class="quote-attr"><strong>Virel</strong> &middot; Her one no-omission question. Cut every other angle. Answer: "Evidently not so."</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"The rest of you may join him, or you may go down the hole. These are your choices. You stay down there until we leave. You get to live. Or you can die up here and then we can go and kill your friends. Choose."</p>
+      <p class="quote-attr"><strong>Jack</strong> &middot; To the three surviving bugbears after killing Brack. Persuasion 26 with advantage. All five fled.</p>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">"I greatly enjoy hearing about all of your dead fathers."</p>
+      <p class="quote-attr"><strong>Jack</strong> &middot; The line that flipped the dead-dads scene from warm to quietly off-putting. Avarath OOC: "Jack's from the CIA. He's here for regime change."</p>
+    </div>
+  </section>
+
+  <!-- Open Threads -->
+  <section>
+    <h2>Open Threads</h2>
+    <ul class="thread-list">
+      <li class="lore-thread">
+        <div class="thread-title">The Chardalyn Cave</div>
+        <div class="thread-desc">Timon described a cave far east where men corrupted by chardalyn have turned violent, broken-common, and weaponized the stones. Suggests putting them out of their misery. Connects Timon's hook to Xardorok's chardalyn plot &mdash; likely scout caches or staging cells. Quest hook for a later detour.</div>
+      </li>
+      <li>
+        <div class="thread-title">Oya Minartok</div>
+        <div class="thread-desc">A famous local werebear legend. Timon believes she may be his mother. He's been searching for her. The party can ask around the Ten-Towns.</div>
+      </li>
+      <li class="lore-thread">
+        <div class="thread-title">The Sea of Moving Ice</div>
+        <div class="thread-desc">Rune's confirmation that the coldest part of the Dale lies far north &mdash; an ocean ringed with mist-and-storm-hidden islands. Auril is said to live somewhere in Icewind Dale. Virel is starting to track her.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Jack's Organization</div>
+        <div class="thread-desc">Confirmed as a real entity. Pays his postal account. Requires "selective information gathering." Avarath's CIA framing is half joke, half working theory. What is it, what does it want, and what is Jack reporting back?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Jack Is Not Human</div>
+        <div class="thread-desc">Confirmed. Identifies as a creature. Metal mask (cannot be removed unwillingly), hollow shoulder, six-hour horizontal rest, no food. Warforged is on the table for the party even if they haven't said the word. Patron and pact weapon still unnamed.</div>
+      </li>
+      <li>
+        <div class="thread-title">Thors's Neverwinter Past</div>
+        <div class="thread-desc">Confirmed in hiding from something on the Sword Coast. The gray cloak is his guard cloak &mdash; <em>"I did things as a guard."</em> He's proud of it and concealing it. Open: what specifically is he running from?</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Virel's Father</div>
+        <div class="thread-desc">Knew Drizzt. Died decades ago. Cause unknown. She's in Icewind Dale to chase the Drizzt lead. No new info this session, but the lore is now table knowledge.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Avarath's Father</div>
+        <div class="thread-desc">Died ~2 years ago. Avarath came to Icewind Dale chasing a clue. The unnatural winter (also ~2 years ago) is the suspected cause. He's the freshest grief at the party. No clue has surfaced yet.</div>
+      </li>
+      <li class="mystery">
+        <div class="thread-title">Rune's Vanished Village</div>
+        <div class="thread-desc">Spine of the World alpine village. Disappeared while he was on a one-month trading trip. No bodies, no messages, no leads in five-plus years. The deepest unresolved hook now on the board.</div>
+      </li>
+      <li>
+        <div class="thread-title">Cauldron of Plenty in Targos</div>
+        <div class="thread-desc">Still missing. Prudence still loose. Whalen's contract clock has already expired. 4,500 gp on the table if recovered.</div>
+      </li>
+      <li>
+        <div class="thread-title">Hlin Trollbane Bounty</div>
+        <div class="thread-desc">Targos. Sephek capture is paid pickup; still pending.</div>
+      </li>
+      <li>
+        <div class="thread-title">Dzaan Simulacrum</div>
+        <div class="thread-desc">Still loose, still has spell slots, still needs a life spark within days. Not heard from this session.</div>
+      </li>
+      <li>
+        <div class="thread-title">The Illusion-to-Reality Chamber</div>
+        <div class="thread-desc">Left intact in the Lost Spire. Unresolved vote (Virel + Avarath keep, Rune destroy, Thors evil disc, Jack silent).</div>
+      </li>
+      <li>
+        <div class="thread-title">Shield Guardian</div>
+        <div class="thread-desc">Far southwest. Bonded to Virel. Significantly further southwest than Easthaven, even before they walked.</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pax's Notes -->
+  <section>
+    <h2>Pax's Notes &mdash; Avarath's Journal</h2>
+    <div class="journal">
+      <p class="intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+      <h3>What Avarath Did This Session</h3>
+      <ul>
+        <li>Climbed back up out of the Lost Spire (clean check)</li>
+        <li>Pre-combat: voted to wait out the bugbears, then flipped to <em>"let's kill them"</em> the second Jack pointed out the party outnumbered them</li>
+        <li><strong>Combat:</strong> Fey Step (Winter) into the middle of the bugbear room. Frighten effect on two targets &mdash; both saved. Greatsword auto-crit on the paralyzed Brack &mdash; 17 damage. No Divine Smite (bonus action gone to Fey Step). Moved to a new position</li>
+        <li>Called the whole party out for never asking Virel about her father in seven prior sessions: <em>"It's a failure on all of you."</em></li>
+        <li><strong>Volunteered his own father's death</strong> &mdash; about two years ago, cause unknown, the reason he came to Icewind Dale. First time the party heard it</li>
+        <li>Drew the moral line on Jack: <em>"Lying by omission is still lying."</em></li>
+        <li>Capped Jack's "face in the crowd" line by giving Virel's father the same treatment: <em>"His name was Dad."</em></li>
+        <li><strong>Drank off-screen during the entire Easthaven shopping run.</strong> DM canonized: the dead-dads scene was too fresh</li>
+        <li>Bought a <strong>lance</strong> at 13 gp (haggled from 15). Topple mastery + reach</li>
+        <li>Capped the night with <em>"And that's how I met your father"</em> after Rune used polymorphed Timon as a pillow</li>
+      </ul>
+
+      <h3>Things Avarath Knows That the Party Does Not</h3>
+      <ul>
+        <li><strong>Avarath's child-self at the forbidden pond</strong> &mdash; the secret the DM gave Pax at character creation. Whatever was on the other side of the pond saw him. Years later, when House Solvane was destroyed by the same unnatural winter, Avarath knew he was partly at fault. The "two years ago" timing he gave the party at Timon's fire matches the campaign's two-year winter onset. Avarath is not just searching for his father &mdash; he is searching for what he, as a child, <em>let through</em>. The party heard "my father died, cause unknown." They did not hear the guilt</li>
+        <li>Avarath has not told the party that the winter that killed his court was magical, not natural</li>
+        <li>Avarath has not told the party that the latest lead he was following before joining them pointed to Icewind Dale specifically &mdash; he came here on a hunch</li>
+      </ul>
+
+      <h3>What Avarath Is Thinking About</h3>
+      <ul>
+        <li><strong>The dead-dads scene was the first session that felt like a session.</strong> The bugbear fight was a stomp; the loot was 50 gold and a couple of weapons. What actually happened: every PC at the table dropped a piece of backstory in front of an NPC fisherman with one eye. Avarath is the only one whose loss is two years out &mdash; everyone else's is decades. That makes him the most likely to act, and the most likely to break composure when it surfaces. The drinking afterward was the right call &mdash; but only because nobody else needed it</li>
+        <li><strong>Avarath should pull on the "two years ago" thread directly.</strong> The unnatural winter in Icewind Dale started two years ago. House Solvane's destruction was two years ago. The DM has been seeding Auril material since Session 5 &mdash; the rime, the s&eacute;ance, Sephek's "Frostmaiden blessing." Virel's religion check just told the party Auril <em>wanted to live amongst mortals</em> and is said to live somewhere in the Dale. If Auril is the source of Avarath's winter, then everything from Sephek to the soothsayer to Xardorok's chardalyn plot is downstream of her. Avarath's quest has been pointed at her the whole time. He just didn't know it yet</li>
+        <li><strong>Jack is part of an organization.</strong> That's now confirmed, not speculated. The CIA framing got the laugh but the actual question is: who employs Jack, what are they reporting on, and is the party the target or the cover? Avarath should treat anything Jack volunteers as a signal, including the silences. Jack short-circuited on the dead-dads question &mdash; that wasn't acting; that was Jack's process not having a routine for it</li>
+        <li><strong>Thors is from Neverwinter and in hiding.</strong> Lawful guard cloak hidden under another cloak. He did "things" as a guard. The whole Sword Coast just got added to Avarath's mental map of where the rest of the party's debts come from. If Thors's past catches up to them, it catches up on the road</li>
+        <li><strong>Virel's father knew Drizzt and died decades ago.</strong> The Drizzt lead has been her actual quest since Session 6. Avarath should help her, not just because she's a party member &mdash; because Drizzt is in this region's lore (the White Lady Inn book) and the trail is recoverable. This is a quest with traction</li>
+        <li><strong>Rune's people vanished. Five years ago. No bodies.</strong> No messages. That isn't a normal kidnapping, that isn't a normal exodus. The Frostmaiden taking people to the Sea of Moving Ice is on the table now &mdash; Rune's village was in the Spine of the World, the cold-edge of the Dale. There may be a much bigger story behind his quietness. Avarath should not ask him about it directly. Rune was already done before the conversation started</li>
+        <li><strong>Slot economy stayed clean.</strong> Two long rests in three days (basilisk's den, Timon's fire). Walked into Easthaven with full slots. Fight burned zero slots for Avarath. Lance + maul is a strong combo &mdash; Topple on hit with the lance, Topple on hit with the maul, greatsword for graze on miss. The new weapon mastery isn't redundant &mdash; Topple at reach makes a real difference setting up the rangers and rogues at the table</li>
+      </ul>
+
+      <h3>Open Questions for Next Session</h3>
+      <ul>
+        <li>What is the source of Thors's Enlarge ability? Magic item from earlier loot, a recent feat, or something else? Worth asking him directly</li>
+        <li>Targos cauldron / Hlin bounty &mdash; push for it next session or detour to Bryn Shander first? Jack's letter is to Bryn Shander, which suggests the warlock has something pending there</li>
+        <li>The chardalyn cave Timon mentioned &mdash; east. Worth pinpointing on the map? Connects to Xardorok</li>
+        <li>Oya Minartok &mdash; does anyone in the Ten-Towns know her? Roark? The temple? Worth a casual ask</li>
+        <li>Sephek &mdash; still in Easthaven custody? Avarath did not check in this trip. Worth a swing by the guards next time in town</li>
+        <li>Dzaan simulacrum &mdash; radio silence. Did he leave the Dale, or is he hunting another life spark nearby?</li>
+        <li>The Sea of Moving Ice &mdash; is the party going north? Virel is pulling that direction. Avarath should be pulling that direction too, for his own reasons</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

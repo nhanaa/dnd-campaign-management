@@ -136,7 +136,6 @@ The DM was vague but explicit on two points:
 | **Dot** | Peach Leshy Druid (Animal/Cultivation) | Branch unarmed strikes (Leshy ancestry), Ray of Frost, Healing Plaster cantrips. Has a sapling companion + leshy familiar. |
 | **Atlacoya** | Chameleon Lizardfolk Investigator (Alchemical Sciences) | Devise a Stratagem + Pursue a Lead specialist. Quick Tincture brews Elixirs of Life on demand. Has had Crimson Stain visions. |
 | **Myo Jun-Yeong** (rendered "Joon Young" in earlier transcripts) | Human Duskwalker Sorcerer (Psychopomp bloodline) + Soul Warden + Familiar Master | **Holds the divine spell tradition slot.** Pharasma cathedral upbringing. 7 ft, pale blue skin, glowing yellow eyes, wears his joseung saja guardian's reaper robes. Two-year memory gap from a monastery exorcism. |
-| **Ramon** | (class TBD) | Newest member before Pax. Party may restore the village inn as his home. |
 
 There were originally six PCs at the festival; two have left the campaign and been replaced (Ramon and Mo).
 
