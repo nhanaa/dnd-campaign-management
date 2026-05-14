@@ -1,6 +1,6 @@
 # Progression — Mist (Fairy Bard, College of Eloquence)
 
-## Current: Level 3
+## Current: Level 4
 
 ## Subclass: College of Eloquence (Tasha's Cauldron of Everything)
 
@@ -34,16 +34,52 @@
 
 ---
 
-### Level 4 — Feat Decision
+### Level 4 — Feat Decision ✅ DONE (S7, May 11 2026)
 
-**Top feat options:**
-- **Fey Touched** (+1 CHA → 18, learn Misty Step + 1 divination/enchantment spell): CHA to 18 (DC 14, attack +6) AND Misty Step as a bonus action teleport escape. Best survivability + offense combo. Thematic for a Fairy.
-- **War Caster** (advantage on concentration saves, VM as opportunity attack, somatic with hands full): Protects Hold Person/Heat Metal concentration. ~80% pass rate on DC 10 vs 55% without.
-- **+1 CHA / +1 CON or DEX**: Raw stat boost. CHA 18 is the priority but the secondary stat is awkward (all odd numbers).
+**Feat: Fey Touched** (PHB-2024)
+- +1 CHA: 17 → 18 (Spell DC 13→14, Spell Attack +5→+6, BI uses 3→4/LR)
+- Bonus spell pick: **Command** (1st-level Enchantment, Bard list) — Always Prepared, free 1/LR cast or with slots
+- **Misty Step** — Always Prepared, free 1/LR cast or with slots. Solves the "stuck mid-flight, can't reposition" gap.
 
-**Spells:**
-- Learn: **Suggestion** — "I suggest you put down your weapon and leave." Removes a creature from a fight entirely. Also dominates social encounters with Silver Tongue backup.
-- New cantrip available (3rd Bard cantrip). Consider: **Minor Illusion** (creative distraction/deception tool) or **Mind Sliver** (INT save, d6 psychic + subtract d4 from next save — another debuff layer).
+**New Cantrip: True Strike** (Bard)
+- Self-range, 1A, V/S/M
+- Make one weapon attack using CHA mod (+4 attack, +4 damage) instead of STR/DEX
+- Can replace weapon damage type with Radiant
+- Scales: +1d6 radiant at Lv5, +2d6 at Lv11, +3d6 at Lv17
+- Practical effect on Mist's Dagger: **+6 to hit, 1d4+4 piercing/radiant** (vs normal Dagger's +4 to hit, 1d4+2 piercing)
+
+**Spell Changes:**
+- **Added (L2)**: **Cloud of Daggers** — 5-ft cube, 4d4 slashing per turn, no save, concentration. Pair with forced movement (Dissonant Whispers, Command "Approach") to lock enemies in damage zone.
+- **Added (L2)**: **Phantasmal Force** — INT save, **2d8 psychic per turn** (avg 9), concentration. **Fills the INT-save gap in Mist's coverage matrix.** Overlap with Jaethal is irrelevant because Unsettling Words → INT save -d6 makes Mist's land rate ~85% vs Jaethal's ~65% on the same target. Damage-per-turn parity with Cloud of Daggers, plus control rider (target effectively blinded/distracted by phantasm).
+- **Dropped (L2)**: Shatter, Suggestion, Heat Metal
+  - Shatter → replaced by Cloud of Daggers (better AoE pressure)
+  - Suggestion → Jaethal has it; ceded the lane
+  - Heat Metal → swappable per encounter (campaign-appropriate)
+- **Kept**: Hold Person (combat control), Invisibility (utility/stealth setup)
+- **L1 prep unchanged**: Silvery Barbs, Dissonant Whispers, Healing Word
+
+**Save Coverage Matrix at Lv4:**
+| Save | Spells |
+|------|--------|
+| WIS | Vicious Mockery, Dissonant Whispers, Command, Hold Person |
+| DEX | Faerie Fire |
+| **INT** | **Phantasmal Force** ← addresses biggest gap |
+| CON | (gap — Lv5 priority) |
+| CHA | (gap — minor) |
+
+**Combat Identity Update**: Mist now has THREE attack modes:
+1. **Cantrip control**: Vicious Mockery (WIS save, 1d4 + disadvantage on attacker)
+2. **Dagger melee** (NEW): True Strike + Dagger at +6/1d4+4 radiant — dive-bomb attack mode for the flying fairy
+3. **Leveled spell control**: Dissonant Whispers, Hold Person, Cloud of Daggers, etc.
+
+**Stat Snapshot at Lv4:**
+- HP 32 (up from 25)
+- AC 13 (unchanged)
+- CHA 18 (+4) — DC 14, Attack +6
+- Deception/Persuasion +8 (floor 18 with Silver Tongue, up from floor 17)
+- Bardic Inspiration 4/LR (up from 3)
+- Spell slots: 4 L1 + 3 L2 (Lv4 progression)
+- Prep slots used: 6 of 8 (room for 2 more if desired)
 
 ---
 
@@ -170,10 +206,16 @@ Best options:
 - [x] Bard College at Level 3 — **Eloquence** (Tasha's)
 - [x] Level 3 Spells — Hold Person, Heat Metal, Command, Silvery Barbs (swapped Tasha's, Charm Person, Bane)
 - [x] Level 3 Cantrip — Mage Hand (replaced Prestidigitation)
-- [ ] Level 4 Feat — **Fey Touched** (CHA 18 + Misty Step) vs **War Caster** (concentration protection)
-- [ ] Level 4 Cantrip — Mind Sliver vs Minor Illusion
-- [ ] Level 5 Swap — Command → Slow? Or keep Command as non-conc filler
-- [ ] Level 8 Feat — Actor vs Skill Expert (or other +1 CHA half-feat, only if Fey Touched taken at 4)
+- [x] Level 4 Feat — **Fey Touched** (CHA 17→18 + Command always-prep + Misty Step always-prep)
+- [x] Level 4 Cantrip — **True Strike** (CHA-based weapon attack, scales with radiant damage)
+- [x] Level 4 Spell Add — **Cloud of Daggers** (L2, replaces Shatter)
+- [x] Level 4 Spell Add — **Phantasmal Force** (L2, fills INT-save coverage gap)
+- [x] Level 4 Drops — Shatter, Suggestion, Heat Metal
+- [ ] Level 5 Spell Pick — **Hypnotic Pattern** (WIS AoE incapacitate) + **Stinking Cloud** (CON AoE — completes the save coverage matrix)
+- [ ] Level 5 Prep Bump — Bard goes from 7 to 9 prep slots; room to add **Detect Magic** (ritual utility) without dropping anything
+- [ ] Level 6 Spell Pick — Slow OR Fear (WIS) + Universal Speech feature unlocks
+- [ ] Level 8 Feat — Actor vs Skill Expert (CHA 18→19 via half-feat) — or save for L12 +2 ASI to 20
+- [ ] Level 9 Spell Pick — **Synaptic Static** (INT, non-concentration AoE damage + lingering debuff — the debuff king's crown spell)
 - [ ] Level 10 Magical Secrets picks — Counterspell + Wall of Force (tentative)
 
 ## Key Thresholds

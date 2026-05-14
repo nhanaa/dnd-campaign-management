@@ -44,6 +44,10 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 - **Tactics**: Focus on action economy, spell slot efficiency, and positioning.
 - **Ask Question Tool**: Use it regularly to help aid with thinking and asking questions about what Pax thinks.
 
+## 5.5e (2024) rules discipline
+
+When discussing any campaign that uses **D&D 5.5e / 2024 PHB** (`myrrindar/`, `icewind-dale/`, and any future 2024 tables), **always double-check mechanics against the 2024 rules before stating them as fact.** Your training prior leans heavily toward 2014 5e, and you will silently default to 2014 mechanics — encounter budgets (no x1.5 monster multiplier in 2024; per-character XP budgets with Low/Moderate/High tiers), concentration rules (Spiritual Weapon, Hunter's Mark, etc. changed), spell scaling (Cure Wounds 2d8 base, Healing Word 2d4 base), class-feature levels (Monk Stunning Strike at Lv5 not Lv3), and subclass features have all shifted. Verify before critiquing tactics, planning levels, or estimating encounter difficulty. If you can't verify, hedge explicitly ("in 2014 this was X; I'm not sure if 2024 changed it") rather than asserting confidently.
+
 ## Interpretation discipline
 
 When reviewing Pax's tactical or RP decisions in a session:
