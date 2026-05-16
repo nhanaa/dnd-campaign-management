@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 5 — Ghosts Who Were Never There</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-mo { border-left-color: var(--shadow); }
+.char-mingbao { border-left-color: var(--jade); }
+.char-junyeong { border-left-color: var(--cyan); }
+.char-mingxi { border-left-color: var(--amber); opacity: 0.55; }
+.char-dot { border-left-color: var(--jade); opacity: 0.55; }
+.char-atlacoya { border-left-color: var(--violet); opacity: 0.7; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-mo { border-left-color: var(--shadow); }
+.spotlight.s-mingbao { border-left-color: var(--jade); }
+.spotlight.s-junyeong { border-left-color: var(--cyan); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Ghosts Who Were Never There</h1>
+  <div class="subtitle">Session 5 &mdash; Season of Ghosts &middot; Willowshore, Shenmen</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 15, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 56m</span>
+    <span class="meta-pill">Toilday, Sarenith 16 &middot; 7108 IC</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-rp" style="width:30%"></div>
+    <div class="comp-seg comp-combat" style="width:28%"></div>
+    <div class="comp-seg comp-mystery" style="width:20%"></div>
+    <div class="comp-seg comp-social" style="width:15%"></div>
+    <div class="comp-seg comp-explore" style="width:7%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 30%</span>
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 28%</span>
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery / Lore 20%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social / Town 15%</span>
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 7%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-mo"><div class="char-name">Mo <em style="font-size:11px">(NEW)</em></div><div class="char-class">Small Wayang &middot; Rogue (Thief) + Spirit Warrior FA</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-mingbao"><div class="char-name">Ming Bao</div><div class="char-class">Human Tian-Shu &middot; Monk + Bard Dedication (Maestro)</div><div class="char-player">Minon</div></div>
+    <div class="char-card char-junyeong"><div class="char-name">Jun-Yeong</div><div class="char-class">Human Duskwalker &middot; Psychopomp Sorcerer / Soul Warden / Familiar Master</div><div class="char-player">Rommy</div></div>
+    <div class="char-card char-mingxi"><div class="char-name">Mingxi</div><div class="char-class">Half-Tengu Magus <em style="font-size:11px">(erased &mdash; in-fiction)</em></div><div class="char-player">Karter</div></div>
+    <div class="char-card char-dot"><div class="char-name">Dot</div><div class="char-class">Peach Leshy Druid <em style="font-size:11px">(erased &mdash; in-fiction)</em></div><div class="char-player">&mdash;</div></div>
+    <div class="char-card char-atlacoya"><div class="char-name">Atlacoya</div><div class="char-class">Chameleon Lizardfolk Investigator <em style="font-size:11px">(absent &mdash; Kugaptee visions)</em></div><div class="char-player">Rafael</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Mo's first session with the party arrives in the wake of a violation that has no rules for it: <strong>Mingxi the Magus and Dot the Druid simply no longer existed.</strong> Not killed, not taken &mdash; <em>erased</em>. Willowshore moves through its days as if it has always been three party members short. Only Ming Bao, Jun-Yeong, and the animist Kageyuri still remember them, and even Kageyuri's adoptive mother Eliza is starting to forget. <strong>Ming Bao</strong>, who watched a red star detonate over the village on the first night of this whole disaster, spends the morning sliding down a slow existential ramp &mdash; <em>maybe none of us noticed, maybe I died that day, maybe this is just the trip</em> &mdash; while <strong>Jun-Yeong</strong> patches him together with Pharasma's sober rituals and offers to drink in honor of the lost. <strong>Mo</strong>, finally meeting the party he watched relight the Eternal Lantern from a Willowshore rooftop, slots in as the local-kid newcomer who proves the rule: he has never met Mingxi or Dot, and he knows every face in this town.</p>
+    <p>The party rides east into the <strong>Specterwood</strong> to investigate <strong>Fan Hongrui</strong>'s three-year-old death site, hoping for a lead on the governor. They get something else. After a clean two-encounter fight against thatchlings &mdash; vegetation-trapped souls denied reincarnation &mdash; and a phantom wolf, they find the inn ruin and the singing within. Hongrui's spirit is still here, still seventeen, still circling the dream of a crimson butterfly. Jun-Yeong takes point in Aklo, plays his daegeum, and the party buries the four travelers' bodies in a proper grave. Hongrui passes on, leaves them her <strong>gratitude</strong> in cloak form, and gives them the name that has been whispering in every spirit's mind since the first day of summer: <strong>Kugaptee</strong>. Before they can process it, two new undead &mdash; eyeless, broken-bladed, bleeding red butterflies from their ribcages &mdash; emerge from the tree line. The party stealths away.</p>
+    <p>They return to a Willowshore that has been hit again. <strong>Kum Sun-Chung's ranch</strong> is smoldering ash &mdash; magically set ablaze, with a crimson butterfly carved into the surviving fence. Eliza arrives in a panic: <strong>Kageyuri is missing</strong>, last seen leaving with a "half-Tengu, half-human man" who fits Mingxi exactly. Ming Bao tracks them on a nat 20 Survival check to the abandoned <strong>Lumber Camp</strong>, now occupied by a noppera-bo cult of Kugaptee with cells of captured Willowshore farmers. Mo's first real scout work pays out: he maps the camp room by room, identifies two meditating occultists chanting "Kugaptee" telepathically over a thatchling-effigy, spots a second pair of occultists lounging in an adjacent room, finds a secret door. The party ambushes the chanting pair &mdash; Mo's Crushing-rune crit batters the first, Ming Bao's Crushing-rune crit batters the second, and <strong>Jun-Yeong delivers both killing blows</strong> (eunjangdo to the chest, then a needle darts cleanup). In the next room they free <strong>Kum Meng-Sung</strong>, the stable master's kidnapped son &mdash; the fire was a distraction. As they prep to extract him, <strong>Shinzo</strong> appears in his on-cue, possibly-too-on-cue way, gifts them a noppera-bo hood, takes the boy home, and remarks in passing that Mingxi and Dot <em>"are still of this world, even if their spirits may have been erased."</em> Session ends on a second ambush: Mo stealth-stabs one of the lounging occultists clean through the throat for an instant kill, the party scrums the survivor down to 1 HP, and Ming Bao Flurries the kill before catching the body mid-fall to keep the camp's stealth intact.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; The Erasure</div>
+      <div class="act-card">
+        <h3>Haunted by Ghosts of People Who Were Never There</h3>
+        <ul>
+          <li>Cold open: <strong>Ming Bao</strong> &mdash; <em>"Haunted by ghosts of people who were never there."</em> Jun-Yeong sets the frame: only he, Ming Bao, and the animist Kageyuri remember Mingxi and Dot.</li>
+          <li><strong>Reintroductions at the Cerulean Tea House</strong>: Jun-Yeong introduces himself as a Boneyard sorcerer two years gone from his own life. Ming Bao gives the deadpan monk pitch: <em>"Mostly I punch people, get hit in the face, and now I can patch up some of your wounds."</em> Mo describes himself in third person &mdash; Wayang street kid raised by Willowshore.</li>
+          <li><strong>Yami the tea-house cat</strong>: White cat with night-glowing eyes. Mo's Nature check to pet her: failure (with a hero-point reroll to 10). She telepathically chooses Jun-Yeong, asks him to keep her secret, gifts the party a <strong>Lesser Talisman Cord</strong> from a hidden crate. Eyes are glowing in a well-lit room; Jun-Yeong's anti-undead unjangdo also lights up nearby. Definitely not just a cat.</li>
+          <li><strong>Ming Bao's spiral begins</strong>: As the morning conversation circles back to Mingxi and Dot, Ming Bao asks <em>"Wait, are there other people who are missing? What if none of us noticed?"</em> &mdash; Kageyuri goes wide-eyed in real time.</li>
+          <li><strong>Mo confirms the erasure</strong>: <em>"I swear, I never met them before, and usually I'm pretty good at keeping track of new people coming into that town."</em> The newcomer's "I don't know them" is the proof.</li>
+          <li><strong>Jun-Yeong's offer</strong>: <em>"After we return from the forest, if you would like to have a drink in the honor of Mingxi and Dot, I would be happy to join you in that. An important part of the cycle is mourning."</em></li>
+          <li><strong>The dream exchange</strong>: <em>"I usually dream of dying."</em> [pause] <em>"Oh no, they're not nightmares. I simply dream of dying. It's part of the cycle."</em></li>
+          <li>Visit to <strong>Kageyuri at Eliza's</strong> &mdash; pale skin, violet hair, fetchling-coded animist. She also remembers Mingxi and Dot. Parts ways at Ugly Cute's shrine.</li>
+          <li><strong>Walking instead of riding</strong>: Granny Hu's five horses are now three. Ming Bao volunteers to walk; Mo walks with him to keep him company. <em>"There's a lot more mental focus on walking."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act II &middot; Exploration &middot; Into the Specterwood</div>
+      <div class="act-card">
+        <h3>Rules of Engagement, Then Fog</h3>
+        <ul>
+          <li>Party enters the Specterwood under thickening fog. <strong>Mo</strong> on Stealth (Avoid Notice), <strong>Ming Bao</strong> on Scout (+1 init to all), <strong>Jun-Yeong</strong> running Detect Magic.</li>
+          <li>Jun-Yeong's unjangdo glows &mdash; undead within 100 ft.</li>
+          <li><strong>Jun-Yeong's rules briefing</strong>, posted to chat: <em>"Don't call a ghost a ghost. Address them with friendly greetings if you must. Do not pat people on the head or shoulders. Avoid bodies of water when a ghost is nearby. Don't eat food that has two stick-like objects protruding from it."</em></li>
+          <li>Ming Bao starts hearing childlike giggling in his mind. Mo passive-Seeks and finds the source: two visible <strong>thatchlings</strong> woven from sticks and Pharasma-blue thread, plus an invisible spirit (the Phantom Wolf). Initiative.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; Thatchlings &amp; Phantom Wolf</div>
+      <div class="act-card">
+        <h3>"Slashing and Burning Them Should Work"</h3>
+        <ul>
+          <li>Mo Stealth init 26 &rarr; <strong>Surprise Attack</strong> activates &rarr; all enemies off-guard to Mo round 1.</li>
+          <li>Mo Overwhelming Combination on the first thatchling for 8 damage after bludgeoning resistance, then Dance of the Mousedeer Performance crit (greater cover, +4 AC).</li>
+          <li>Jun-Yeong Boneyard Lore crit success &mdash; <em>weak to fire and slashing, lowest save Fortitude.</em> Casts Guidance on Ming Bao.</li>
+          <li>Ming Bao switches to Tiger Stance, flanks, Flurry of Blows: crit + hit for 14 slashing. Roars: <em>"I've already killed your kind, I know your weight and measure!"</em></li>
+          <li>Round 2: Mo rapier crit destroys the bloodied thatchling. <em>"It almost feels like you're punching solid wood,"</em> the DM said earlier &mdash; the rapier's piercing punched through anyway.</li>
+          <li>Jun-Yeong casts Sepulchral Mask (10-ft emanation, DC 19 Will). Wolf fails (4 mental), thatchling saves (2 mental), both take +2 vitality from psychopomp blood magic.</li>
+          <li>Round 3: Mo flanks the Phantom Wolf and dual-Strikes it for 21 damage &mdash; killed. The "last thatchling" walks back into Jun-Yeong's sustained mask, fails the save, takes <strong>22 mental damage</strong> &mdash; destroyed.</li>
+          <li>Outcome: clean win. Mo 7, Ming Bao 8, Jun-Yeong 3 damage taken. Hero points spent: Mo 1.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IV &middot; Roleplay &middot; Loot, Acupuncture, and Sashim</div>
+      <div class="act-card">
+        <h3>Mo Joins the Party Properly</h3>
+        <ul>
+          <li>Ming Bao Treats Mo (+11 HP, full). Fails on himself. Eventually Treats Jun-Yeong for +8.</li>
+          <li>Loot pickup from "the characters who aren't here anymore" &mdash; the party divides Mingxi and Dot's leftover gear: Mo claims a <strong>Crushing rune</strong> for his rapier and the <strong>Predictable Silver Piece</strong>; Ming Bao puts a Crushing rune on his Handwraps; Mingxi's cold-iron katana is held untouched as a memorial. Jun-Yeong gives Mo his frost vials and a soothing tonic.</li>
+          <li>Mo asks Ming Bao to teach him acupuncture: "Where did you learn that? That's pretty cool." Ming Bao &mdash; "I learned it at the temple."</li>
+          <li>Jun-Yeong offers instead: <em>"Most of my medicinal knowledge is anatomy. Taxidermy. Considering it would be helpful to know where to strike."</em> They book a Willowshore tour exchange.</li>
+          <li>Sashim reveal: <em>"His name was Sashim. I'm told that Duskwalkers often have a psychopomp guardian. He was mine. But since we've been separated, he... it's possible he's gone to the Boneyard. He might already be aware of what's happening here. Or... or he might have already rejoined the cycle. Either way, I can't imagine the wall would keep him out."</em></li>
+          <li>Mo, drifting: <em>"Mo has started to kind of lost what he's still pretending to understand everything."</em> Jun-Yeong clarifies: <em>"A Jeoseung Saja is a reaper of souls."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery &middot; Hongrui's Requiem</div>
+      <div class="act-card">
+        <h3>The Canary Inn, the Cursed Cloak, the Crimson Butterfly</h3>
+        <ul>
+          <li>At the inn ruins, an old <strong>red cloak</strong> in the grass. Mo's Perception (Foundry low-reroll auto from 9 &rarr; 21) identifies the <strong>curse trait</strong> &mdash; a duplicate meant for grave robbers. Jun-Yeong takes it for Remove Curse later.</li>
+          <li>Inside: a teenage girl sings to four thatchlings about the crimson butterfly. Mo Perception pegs her as undead. Jun-Yeong opens with Aklo. Diplomacy 24 + Ming Bao Aid 16 &rarr; success. Her form ripples: she's a thatchling with blood on its branches. She is <strong>Fan Hongrui</strong>.</li>
+          <li>Hongrui's story confirmed: governor's guards barred the inn doors. First fire flushed them out. Second time they barred her in. She and her three companions (Chi Hong Shin, Na Shi Hong Ban, Misuki Ban Yong) burned together.</li>
+          <li>Jun-Yeong Undead Lore (+1 Nosoi Skull): bury the bodies properly to release them.</li>
+          <li>Mo and Ming Bao dig four graves. Jun-Yeong plays daegeum (Performance 17 success, channeling Eliza's "epic raves" style). Hongrui's voice softens.</li>
+          <li>Hongrui's revelation: <em>"There is a voice that ruminates in every spirit's mind in this place. It started on the first day of summer. One calling itself Kugaptee."</em></li>
+          <li>Before fading, Hongrui manifests <strong>"Hongrui's Gratitude"</strong> &mdash; a magical cloak Jun-Yeong wears immediately. His outfit is now blue-black-red and "drippy." Her warning: <em>"There is a great evil lurking on the outskirts of this hell at this very moment."</em></li>
+          <li><strong>Two new undead</strong> emerge from the tree line: elongated bodies, oversized arms, no eyes, broken weapons held together by crimson energy, <strong>red butterflies pouring from open ribcages</strong>. Jun-Yeong's Undead Lore + Religion both succeed but yield no recognition &mdash; new undead type.</li>
+          <li>Jun-Yeong realizes (worryingly) he speaks Aklo. Eavesdrops: <em>"They should be there, ready to feast on any souls that come this way, but... I did sense living beings."</em> The two split up to search.</li>
+          <li>Party stealths south. Successfully evades. Heads back to Willowshore.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Mystery &middot; Crisis at Home</div>
+      <div class="act-card">
+        <h3>The Stable Fire and the Carving</h3>
+        <ul>
+          <li>Late afternoon arrival back in Willowshore. Ugly Cute greets the party: <em>"I did see a fire near out the west in the town."</em></li>
+          <li><strong>Kum Sun-Chung's ranch</strong> is smoldering ruins. The stable master is rounding up livestock with help from the guard.</li>
+          <li>Jun-Yeong Detect Magic: an <strong>ignition spell</strong> &mdash; magic-induced fire. Short list of suspects in town: Eliza, Jubay, Granny Hu &mdash; none would.</li>
+          <li>Ming Bao crafting check: success. Jun-Yeong holds the nails. Mo's intimidating glare scatters the livestock deeper into the forest <em>(DM joke)</em>.</li>
+          <li>Discovery: a <strong>crimson butterfly carved into the surviving fence</strong>. The Crimson Stain motif is now inside Willowshore.</li>
+          <li>Theory crystallizing: noppera-bo cult sabotage. Ming Bao recalls: <em>"A number of those faceless people we ran into were capable of magic. They mostly were casting spells to fill us with fear..."</em> Mo extends it: <em>"If they can cast that kind of spell, surely a simple fire spell is not out of the possibility."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VII &middot; Mystery &middot; Kageyuri Vanishes</div>
+      <div class="act-card">
+        <h3>The Mingxi-Impostor and the Lumber Camp</h3>
+        <ul>
+          <li><strong>Eliza arrives in a panic</strong>: <em>"Have any of you seen Kageyuri?"</em> She hasn't returned since morning. Mid-conversation, Eliza falters about Kageyuri's friends &mdash; even <em>she</em> is starting to forget Mingxi. The erasure is spreading.</li>
+          <li>Diplomacy/Society in downtown Willowshore: witnesses describe Kageyuri leaving with a "half-Tengu, half-human man" &mdash; <strong>Mingxi's exact description</strong>. Headed west.</li>
+          <li>Ming Bao's <strong>Survival nat 20</strong>: tracks two pairs of footprints to the abandoned <strong>Lumber Camp</strong>.</li>
+          <li>Mo's working theory, voiced to the party: <em>"The one that made the governor disappear and the one that made your friends disappear might be two different forces."</em> Ming Bao: <em>"Maybe. But then we have two overwhelmingly powerful things going on."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VIII &middot; Exploration &middot; The Scouting Run</div>
+      <div class="act-card">
+        <h3>Mo Maps the Camp</h3>
+        <ul>
+          <li>Night. Crescent moon. Ming Bao drinks a <strong>Lesser Darkvision Elixir</strong>.</li>
+          <li>Mo with Jun-Yeong's <strong>Guidance</strong> &mdash; Stealth blind, succeeds. Mo finds a <strong>secret door</strong> in the fence (extraction route).</li>
+          <li>Layout he sketches via the message cantrip: four noppera-bo grunts around a campfire in telepathic meditation; two occultists in a longhouse chanting <em>"Kugaptee, Kugaptee"</em> over a misshapen wooden effigy of a four-armed twig-headed figure (almost certainly a thatchling totem); five captive farmers held in a separate building under four noppera-bo guards; a second longhouse with <strong>two more occultists lounging</strong>. No sign of Kageyuri yet.</li>
+          <li>Mo and Jun-Yeong recognize the cult is praying to <strong>Kugaptee</strong> &mdash; the same name Hongrui revealed at the inn ruin. The party connects: the noppera-bo rebel's "they worship her" was leadership change to Kugaptee.</li>
+          <li>Decision: ambush the two chanting occultists first (isolated from the rest of the camp).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IX &middot; Combat &middot; The Chanting Occultists</div>
+      <div class="act-card">
+        <h3>Two Crushing-Rune Crits, Then Jun-Yeong Cleans Up</h3>
+        <ul>
+          <li>Mo opens the door silently. The two occultists are meditating &mdash; off-guard for round 1 since they can't see and Mo's stealth was clean.</li>
+          <li>Round 1: Ming Bao Stumbling Stance drop-init, Flurry on Occultist B (crit miss first roll, then hit, then hit at MAP-8) for 11 combined damage. Jun-Yeong miscasts Bless to self-only, corrects to whole party. Occultist B casts Fear on Ming Bao &mdash; <strong>Ming Bao crit-saves, spell backfires, B becomes Frightened</strong>.</li>
+          <li>Mo enters, Demoralize (regular Intimidation, since noppera-bo can't see his glare): <strong>25 success, Occultist A Frightened 1</strong>. Overwhelming Combination, miss on first &rarr; hero-point reroll &rarr; <strong>CRIT for 27 damage with Sneak Attack + Deadly d8</strong>. <strong>Crushing rune procs</strong>: Clumsy + Enfeebled + Off-guard from Unbalancing Blow stacked on A.</li>
+          <li>Occultist A casts Phantom Pain on Mo &mdash; Mo fails save, 4 mental + 1d4 persistent.</li>
+          <li>Round 2: Ming Bao Stumbling Swing crit on Occultist B (Bless, Frightened) for 14 damage &mdash; <strong>Crushing rune procs again</strong>: Clumsy + Enfeebled on B.</li>
+          <li><strong>Jun-Yeong steps into melee and finishes both</strong>: Eunjangdo ritual-dagger stab on A for 3 damage &mdash; <em>"And he immediately goes down."</em> Turns and lobs Needle Darts (MAP) on B for 6 damage &mdash; <em>"It may be a healer, but kills two people back to back."</em></li>
+          <li>Mo never got a Round 2 turn. Combat over in two rounds.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act X &middot; Social &middot; Kum Meng-Sung Rescue + Shinzo</div>
+      <div class="act-card">
+        <h3>The Boy, the Hood, and the Wry Grin</h3>
+        <ul>
+          <li>Adjoining room: gagged on the floor, a 17-year-old boy in a rice-farmer's hat &mdash; <strong>Kum Meng-Sung</strong>, son of Kum Sun-Chung. The stable fire was a distraction to mask the kidnapping.</li>
+          <li>Mo cuts the ropes. <em>"Good thing that we found you. Did they take you? Did they kidnap you? Like, how did you get here?"</em></li>
+          <li>Ming Bao asks the boy to bleed for them &mdash; verifies he's human, not a noppera-bo. He bleeds red.</li>
+          <li><strong>Shinzo arrives.</strong> Cart, crow on shoulder, smile too on-cue. Ming Bao knifes him next to verify he's not noppera-bo either. He bleeds. He smiles wider.</li>
+          <li>Shinzo gifts a <strong>noppera-bo hood</strong> "on the house" &mdash; perfect disguise when invested.</li>
+          <li>Jun-Yeong: <em>"You are sent by Pharasma herself. Thank you, friend."</em> Shinzo just gives a wry grin and nods.</li>
+          <li>Shinzo confirms he remembers Mingxi and Dot &mdash; <em>"Mingxi had quite the coin purse on him after all"</em> (laugh that doesn't reach the eyes).</li>
+          <li>Shinzo's parting line, walking off into the dark with Kum Meng-Sung in tow: <em>"Mingxi and Dot are still of this world, even if, well, their spirits may have been erased."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act XI &middot; Combat &middot; The Lounging Pair</div>
+      <div class="act-card">
+        <h3>Pre-Init Throat Stab + Body Sling</h3>
+        <ul>
+          <li>Plan: take the second pair of occultists' clothes for the disguise infiltration. Mo opens the door, Stealth holds, slips behind both unseen.</li>
+          <li><strong>Pre-init</strong>: Mo Overwhelming-Combinations &mdash; rapier crit (25) for <strong>35 damage</strong>, fist miss. Mage 1 killed before he could roll init. DM: <em>"You just stabbed him through the throat. He's dead, bro."</em></li>
+          <li>Initiative on Mage 2: Ming Bao charges into Stumbling Stance, single Strike hit. Jun-Yeong needle darts &mdash; bloodied. Mo Demoralize 20 success (Frightened 1) + a whiffed Overwhelming Combination &rarr; Mage 2 at <strong>1 HP</strong>. No hero point this time.</li>
+          <li>Mage 2 strides toward the door &mdash; about to step outside and alert the camp.</li>
+          <li>Ming Bao moves, Flurries the kill, <strong>catches the body before it hits the floor</strong>. Camp stealth intact.</li>
+          <li><strong>Pendant of the Occult</strong> drops at the effigy &mdash; Mo claims it (free Guidance cantrip + 1 Occultism).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; Specterwood &middot; ~49:20&ndash;73:00</div>
+    <h3>Thatchlings &amp; Phantom Wolf</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3 Thatchlings + 1 Phantom Wolf</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Mo (1)</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Mo 7 &middot; Ming Bao 8 &middot; Jun-Yeong 3</div></div>
+    </div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Mo</strong> (Stealth init 26, Surprise Attack): Stride to flank &rarr; <strong>Overwhelming Combination</strong> on Thatchling 1 &mdash; rapier auto-hit (off-guard) for 9 piercing, fist hero-point reroll hits for 7 bludgeoning (DM clarified <em>"not a crit, just a hit"</em>). Combined 16 raw &rarr; halved to <strong>8 damage</strong> by T1's bludgeoning resistance. Third action: <strong>Dance of the Mousedeer</strong> on T1, Performance 30 crit &rarr; greater cover (+4 AC, +4 Stealth).</li>
+      <li><strong>Thatchling 1</strong>: Frond strike on Mo &rarr; hit by 1 for <strong>7 damage</strong>. Frond again &rarr; crit miss. Strides away.</li>
+      <li><strong>Jun-Yeong</strong>: Stride toward Ming Bao &rarr; <strong>Recall Knowledge (Boneyard Lore) crit success</strong> &mdash; <em>weak to fire/slashing, lowest save Fortitude</em>. Lore dump shared in chat. <strong>Casts Guidance</strong> on Ming Bao.</li>
+      <li><strong>Ming Bao</strong>: Free Tiger Stance switch (slashing) &rarr; Stride to flank &rarr; <strong>Flurry of Blows (Tiger Claw)</strong>: crit + hit for <strong>14 slashing combined</strong>. T1 bloodied. RP roar: <em>"I've already killed your kind, I know your weight and measure!"</em></li>
+      <li><strong>Phantom Wolf</strong> reveals from tree line: Stride + jaws &mdash; first miss, second hit for <strong>8 damage to Ming Bao</strong> (number not stated, inferred from post-combat HP).</li>
+      <li><strong>Thatchling 2</strong>: Forces Will save on Ming Bao &mdash; Ming Bao saves. Follow-up Strike misses.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Phantom Wolf</strong>: Charges from tree line. First attack miss; second attack &mdash; claw scratch on <strong>Jun-Yeong</strong> for <strong>3 damage</strong> (back-applied at the table).</li>
+      <li><strong>Mo</strong>: Stride to flank T1 &rarr; Demoralize T1 &mdash; <strong>fails (12)</strong>. <em>"Mo is a bit disappointed today. His usual intimidation doesn't work very well &mdash; I guess it's because these are creatures that are kind of... not very emotional."</em> Rapier Strike &rarr; <strong>CRIT (30)</strong> &rarr; T1 destroyed (damage number not stated; T1 already low). Unbalancing Blow self-procs.</li>
+      <li><strong>Thatchling 2</strong>: Two Strikes on Jun-Yeong &mdash; crit miss + miss.</li>
+      <li><strong>Jun-Yeong</strong>: <strong>Casts Sepulchral Mask</strong> (10-ft emanation, DC 19 Will). Wolf fails &rarr; 4 mental. T2 saves &rarr; 2 mental. <strong>Psychopomp blood magic</strong> applies +2 vitality to each.</li>
+      <li><strong>Ming Bao</strong>: Flanks Wolf with Mo &rarr; Flurry (Tiger Claw): crit + hit + 1d4 persistent bleed. Wolf bloodied to near-zero. Raise a Shield.</li>
+    </ul>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Phantom Wolf</strong>: Casts Bay/Fear effect on Ming Bao (DC 14 Will). Ming Bao saves on RP grounds (<em>"man with a mission"</em>).</li>
+      <li><strong>Mo</strong>: Stride to flank Wolf &rarr; Demoralize &mdash; fails (13) &rarr; <strong>Overwhelming Combination</strong> on Wolf (flanked, off-guard): rapier hit (17) + fist hit at MAP (14) &rarr; combined 21 raw &rarr; <strong>17 damage dealt</strong> (Phantom Wolf resisted some physical). <strong>Wolf killed by Mo.</strong></li>
+      <li><strong>Thatchling 2</strong>: walks back into Jun-Yeong's emanation &mdash; fails save &rarr; <strong>22 mental damage</strong> (sustained mask) &rarr; destroyed. Jun-Yeong killed T2.</li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li>All enemies dead. <strong>Killing blows</strong>: T1 = Mo (R2 rapier crit). Wolf = Mo (R3 dual-Strike, 21 dmg). T2 = Jun-Yeong (R3 Sepulchral Mask sustain, 22 dmg).</li>
+      <li><strong>Treat Wounds after</strong>: Ming Bao heals Mo +11 (full); fails on himself (10); later Treats Jun-Yeong for +8. Jun-Yeong has no Medicine training (plans Battle Medicine at L4).</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; Lumber Camp Longhouse &middot; ~194:30&ndash;205:30</div>
+    <h3>The Two Chanting Occultists</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Noppera-bo Occultists</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Mo (1)</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Mo 4 mental + 1d4 persistent</div></div>
+    </div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Ming Bao</strong>: Drops into Drunken/Stumbling Stance (reaction-init) &rarr; Stride (free) &rarr; <strong>Flurry of Blows</strong> on Occultist B: <strong>CRIT MISS (rolled 2)</strong>, hit (15), hit (19, MAP -8). <strong>11 damage combined</strong>. Raise a Shield.</li>
+      <li><strong>Jun-Yeong</strong>: Stride &rarr; casts <strong>Bless</strong> (target-fumble to self only, corrected to whole party, 15-ft emanation, +1 status to attacks).</li>
+      <li><strong>Occultist B</strong>: No longer off-guard &rarr; casts <strong>Fear on Ming Bao</strong> &rarr; <strong>Ming Bao crit-saves</strong> &rarr; <strong>spell backfires, B becomes Frightened 1</strong>. Staff strike on Ming Bao &mdash; misses.</li>
+      <li><strong>Mo</strong>: Stride into room &rarr; <strong>Demoralize</strong> on Occultist A (regular Intimidation, not Glare &mdash; noppera-bo can't see his face): <strong>25 success &rarr; Frightened 1</strong>. <strong>Overwhelming Combination</strong>: first attack misses &rarr; <strong>hero-point reroll</strong> &rarr; <strong>CRIT for 27 damage</strong> (Sneak Attack + Deadly d8, Bless +1 active). <strong>Crushing rune procs</strong>: Clumsy 1 + Enfeebled 1 + Off-guard from Unbalancing Blow. A at death's door.</li>
+      <li><strong>Occultist A</strong> (Frightened, Clumsy, Enfeebled, Off-Guard): casts <strong>Phantom Pain on Mo</strong>, Mo fails Will save &rarr; <strong>4 mental + 1d4 persistent mental</strong>. Staff strike on Mo &mdash; miss.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Ming Bao</strong>: <strong>Stumbling Swing on Occultist B</strong>: <strong>CRIT</strong> (Bless +1, B Frightened) for <strong>14 damage</strong> with <strong>Crushing rune procs</strong> (Clumsy + Enfeebled on B). Follow-up strikes miss. Raise a Shield.</li>
+      <li><strong>Jun-Yeong</strong>: Stride into melee &rarr; <strong>Eunjangdo ritual-dagger stab on Occultist A</strong>: hit (19), <strong>3 damage</strong>. DM: <em>"And he immediately goes down."</em> <strong>Occultist A KILLED.</strong> Turns &rarr; <strong>Needle Darts on Occultist B</strong> at MAP: hit (16), <strong>6 damage</strong> (rolled 1,2,2,1 on d4s) &rarr; <strong>Occultist B KILLED.</strong> DM: <em>"It may be a healer, but kills two people back to back."</em></li>
+      <li><strong>Combat ends</strong>. Mo's R2 turn never came.</li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li><strong>Killing blows</strong>: Occultist A = Jun-Yeong (Eunjangdo). Occultist B = Jun-Yeong (Needle Darts). Mo and Ming Bao softened both targets with Crushing-rune crits; Jun-Yeong finished them.</li>
+      <li>No PC damage outside Mo's Phantom Pain hit. Persistent mental ticked once for 1 damage in cleanup.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3 &middot; Lumber Camp Second Longhouse &middot; ~224:40&ndash;230:10</div>
+    <h3>Pre-Init Throat Stab + the Body Sling</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Noppera-bo Occultists (lounging)</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1 (after pre-init kill)</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">0</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">None</div></div>
+    </div>
+
+    <h4>Pre-initiative</h4>
+    <ul>
+      <li><strong>Mo</strong>: Opens door, Stealth 20 succeeds &mdash; slips behind both occultists unseen. <strong>Overwhelming Combination</strong>: rapier <strong>CRITICAL HIT (rolled 25)</strong> on Mage 1 for <strong>35 damage</strong> (Sneak Attack + Deadly d8 on the +1 Crushing Rapier, doubled). Fist whiffs (12). Mage 1 hadn't rolled init &mdash; <strong>instant kill before the target could act</strong>. DM: <em>"You just stabbed him through the throat. He's dead, bro."</em> Then: <em>"They're mages. You get to jump on them. It's a foregone conclusion."</em></li>
+    </ul>
+
+    <h4>Initiative against Mage 2</h4>
+    <ul>
+      <li><strong>Ming Bao</strong>: Charges into Stumbling Stance, single Strike hit. <em>"Okay, only one hit. Wait, wait, wait. He's not dead yet."</em></li>
+      <li><strong>Jun-Yeong</strong>: <strong>Needle Darts</strong> on Mage 2 &mdash; bloodied but not dead.</li>
+      <li><strong>Mo</strong>: <strong>Demoralize 20 success &rarr; Frightened 1.</strong> Overwhelming Combination &mdash; both attacks whiff/low damage. Mage 2 at <strong>1 HP</strong>. No hero point.</li>
+      <li><strong>Mage 2</strong>: Strides toward door &mdash; <em>"about to step out and alert everyone else."</em></li>
+      <li><strong>Ming Bao</strong>: Move + <strong>Flurry of Blows</strong> &mdash; kills Mage 2 &rarr; <strong>catches the body before it hits the floor</strong> to keep the camp's stealth intact.</li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li>Killing blows: Mage 1 = Mo (pre-init throat stab). Mage 2 = Ming Bao (finishing Flurry).</li>
+      <li><strong>Pendant of the Occult</strong> drops at the effigy &mdash; Mo claims it.</li>
+      <li>Two sets of occultist robes/face-skins acquired for the planned disguise infiltration.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-mo">
+      <h4>Mo &middot; the Local Kid Who Knows Every Face</h4>
+      <ul>
+        <li>Joined the party at the Cerulean Tea House, gave his third-person self-introduction &mdash; Wayang street kid raised by Willowshore, lifted some things from Kageyuri once (<em>"Well, I might have... taken certain things from you, but you don't need to know that"</em>), feels indebted to the town that took him in.</li>
+        <li><strong>Confirmed the erasure as the control case</strong>: <em>"I swear, I never met them before, and usually I'm pretty good at keeping track of new people coming into that town."</em> The newcomer's "I don't know them" gave Ming Bao and Jun-Yeong the proof.</li>
+        <li>Yami the cat chose Jun-Yeong over Mo (the cat-petting Nature whiff becomes a small running joke). Mo eventually gets to pat the cat as a "one concession."</li>
+        <li><strong>Round-1 combat debut</strong>: Stealth init 26 + Surprise Attack &mdash; all enemies off-guard. Overwhelming Combination: rapier auto-hit (9 piercing) + fist hero-point-rerolled hit (7 bludgeoning &mdash; DM clarified <em>"not a crit, just a hit"</em>). Combined 16 raw &rarr; halved to <strong>8 damage</strong> by thatchling bludgeoning resistance.</li>
+        <li><strong>Dance of the Mousedeer Performance 30 crit</strong> on the same thatchling &rarr; greater cover, +4 AC.</li>
+        <li><strong>R2 killing blow on Thatchling 1</strong>: rapier crit (30) &rarr; <em>"most of this damage just immediately pierces through... it doesn't matter as it immediately falls."</em> Unbalancing Blow self-procced.</li>
+        <li><strong>Demoralize whiffs</strong>: Intimidating Glare failed twice in this combat on low rolls (12 vs thatchling, 13 vs Phantom Wolf). The DM RP'd the misses as the targets being "not very emotional"; Mo took it on the chin in-character: <em>"Mo is a bit disappointed today."</em></li>
+        <li><strong>R3 killing blow on the Phantom Wolf</strong>: Overwhelming Combination (rapier hit + fist hit, flanked off-guard) &rarr; 21 raw, 17 dealt after the wolf's physical resistance. Wolf killed.</li>
+        <li><strong>The Crushing-rune rapier crit (Encounter 2)</strong>: Round 1 of the chanting-occultist ambush. Demoralize 25 success (Frightened 1) &rarr; Overwhelming Combination with hero-point-rerolled rapier crit for <strong>27 damage</strong> &mdash; Off-Guard, Frightened 1, Clumsy 1, Enfeebled 1 stacked on the occultist from one strike. Purple blood spurts.</li>
+        <li><strong>The full scouting montage</strong>: This was Mo's lane &mdash; mapped the lumber camp room by room with Stealth-and-Sneak. Found the secret door, identified the cultist effigy, recognized the captive farmers' tunics, set up the ambush with hand signals via darkvision and the message cantrip.</li>
+        <li><strong>The pre-initiative Overwhelming Combination crit (Encounter 3)</strong>: Stealth 20 into the second-pair occultists' lounging room. Overwhelming Combination &mdash; rapier crit (25) for <strong>35 damage</strong> with Sneak Attack + Deadly d8 on the +1 Crushing Rapier, doubled. Fist miss. Mage 1 dead before he could roll init.</li>
+        <li><strong>Demoralize on the second-pair occultist</strong>: Intimidation 20 &rarr; Frightened 1, setting up Ming Bao's flurry kill. (The whiffed Overwhelming Combination that followed left the occultist at 1 HP &mdash; not Mo's best dice night.)</li>
+        <li><strong>Loot wins</strong>: Crushing rune on rapier, Predictable Silver Piece, Pendant of the Occult (free Guidance cantrip + 1 Occultism).</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mingbao">
+      <h4>Ming Bao &middot; the Existential Through-line</h4>
+      <ul>
+        <li>Carries the session's emotional weight. He's the PC who knew Mingxi and Dot best. Most of his lines this session are him losing his grip on reality and walking himself back.</li>
+        <li><strong>The crystallization</strong>: <em>"Wait, are there other people who are missing? Are we actually sure when we came back the population of the town is actually the population we remember?"</em> &mdash; Kageyuri goes wide-eyed at this in real time.</li>
+        <li><strong>The "trip" hypothesis</strong>: <em>"Maybe I died that day. Maybe... maybe this is just the trip. Maybe that's why nothing makes sense."</em> &mdash; Jun-Yeong responds with a crit Boneyard Lore reassurance. Ming Bao chooses to believe it.</li>
+        <li><strong>The morning therapeutic jam session</strong> (in town, not at the requiem): Volunteers to play music alongside Jun-Yeong on the walk out &mdash; <em>"It's hard to hyperventilate when you're doing breathing exercises."</em> Pure RP, no rolls. The DM, watching: <em>"I feel bad for fucking Ming Bao."</em></li>
+        <li><strong>Tiger Stance combat lead (Encounter 1)</strong>: Tiger Claw crit + hit on the first thatchling for 14 damage. Tiger Claw flurry on the Phantom Wolf with persistent bleed.</li>
+        <li><em>"I've already killed your kind, I know your weight and measure!"</em> &mdash; combat roar at the Phantom Wolf, RP only.</li>
+        <li><strong>Crushing-rune crit (Encounter 2)</strong>: Stumbling Swing crit for 14 damage on Occultist B with Bless +1 and B Frightened &mdash; Clumsy + Enfeebled stacked.</li>
+        <li><strong>Crit-saves Fear</strong> in Encounter 2 &mdash; spell backfires on Occultist B, who becomes Frightened 1 itself.</li>
+        <li><strong>The childhood-trauma bit</strong>: <em>"That's what they taught me at the monastery. Idle hands and idle bodies lead to bad thoughts. That's why when you went slow, they started beating you."</em> [beat] <em>"It's not traumatic. I'm a good person, and it made me who I am, so it must have been good."</em> [beat] <em>"No, I'm joking."</em></li>
+        <li><strong>nat 20 Survival</strong> tracking Kageyuri and the Mingxi-impostor's footprints to the lumber camp. <em>"Ming Bao locks in because this is his friend!"</em></li>
+        <li><strong>Quiet steering</strong>: <em>"Maybe a foreign priest at the Temple of Pharasma could offer some guidance on that part"</em> &mdash; gently routing the unknown-undead lore questions toward Jun-Yeong's expertise without making it about him.</li>
+        <li><strong>The slung body (Encounter 3)</strong>: Flurries the dying second-pair occultist (1 HP, striding to alert the camp), kills him with a punch, <strong>catches the falling corpse</strong> before it hits the floor.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-junyeong">
+      <h4>Jun-Yeong &middot; the Theatrical Death-Cult Voice</h4>
+      <ul>
+        <li>The reintroduction: <em>"I am a sorcerer who possesses mysterious power from the Boneyard. Previous to that, I was a regular cleric until I disappeared two years ago and only appeared the other day in front of the monastery stairs, made my way back here, and was told, you've been gone for two years."</em></li>
+        <li>The deadpan Duskwalker bit: <em>"I usually dream of dying."</em> [Mo and Ming Bao stiffen.] <em>"Oh no, they're not nightmares. I simply dream of dying. It's part of the cycle."</em></li>
+        <li><strong>The mourning offer to Ming Bao</strong> &mdash; the session's emotional anchor &mdash; see Memorable Quotes.</li>
+        <li><strong>Recall Knowledge crit (Encounter 1)</strong>: Boneyard Lore crit success &mdash; weak to fire/slashing, lowest save Fortitude, full lore dump shared.</li>
+        <li><strong>First Sepulchral Mask cast</strong>: 10-ft emanation, DC 19 Will. Phantom Wolf fails (4 mental), Thatchling 2 saves (2 mental). Psychopomp blood magic adds +2 vitality to each.</li>
+        <li><strong>Sepulchral Mask sustain kills the last thatchling</strong>: T2 walks back into the emanation on its own turn, fails the save, takes <strong>22 mental damage</strong> &mdash; destroyed. Round 3 of Encounter 1.</li>
+        <li><strong>The Aklo problem</strong>: When the two new undead emerge from the tree line and start talking, Jun-Yeong realizes he understands them. <em>"There is something that bothers me. I don't know where I learned how to speak that language from earlier."</em> The two-year gap is still actively bleeding into him.</li>
+        <li><strong>The Hongrui requiem</strong>: Took point on Diplomacy 24 success. When Hongrui's form revealed itself as a thatchling, he didn't flinch. Played the daegeum for her bodies as they buried them.</li>
+        <li><strong>The Sashim reveal</strong>, to Mo, with no prompting: <em>"His name was Sashim. I'm told that Duskwalkers often have a psychopomp guardian. He was mine. But since we've been separated, he... it's possible he's gone to the Boneyard. He might already be aware of what's happening here. Or... or he might have already rejoined the cycle. Either way, I can't imagine the wall would keep him out."</em></li>
+        <li><strong>Both Encounter 2 killing blows are his</strong>: Strides into melee R2 and stabs Occultist A (Mo's crit target, at death's door) with the <strong>Eunjangdo ritual dagger</strong> for 3 damage &mdash; <em>"And he immediately goes down."</em> Turns and lobs <strong>Needle Darts</strong> at MAP onto Occultist B (Ming Bao's Crushing-rune crit target, also at death's door) for 6 damage &mdash; kill. DM: <em>"It may be a healer, but kills two people back to back."</em></li>
+        <li><strong>The "sent by Pharasma" line to Shinzo</strong>: Said sincerely. Shinzo grinned. Jun-Yeong did not yet clock what that grin meant.</li>
+        <li><strong>Bless</strong> deployed first turn of the lumber-camp ambush &mdash; accidentally targeted himself only, corrected to whole party.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Lesser Talisman Cord</div><div class="loot-source">Yami the Cat &middot; Cerulean Tea House</div><div class="loot-note">Preserves talismans of a chosen magical school on activation. Party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Crushing Rune</div><div class="loot-source">Party Stash (Mingxi's leftover gear)</div><div class="loot-note">Applied to Mo's +1 rapier. Crit hits inflict Clumsy 1 + Enfeebled 1 to end of next turn.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Crushing Rune</div><div class="loot-source">Party Stash (Mingxi's leftover gear)</div><div class="loot-note">Applied to Ming Bao's Handwraps of Mighty Blows. Same effect.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Predictable Silver Piece</div><div class="loot-source">Party Stash</div><div class="loot-note">Mo. Cheat Fate 1/day &mdash; coin always lands on the chosen side. Flavorful.</div></div>
+    <div class="loot-item"><div class="loot-name">Mingxi's Cold-Iron Katana</div><div class="loot-source">Mingxi's leftover gear</div><div class="loot-note">Kept untouched in the party stash as a memorial. <em>"The proof that means she was here."</em></div></div>
+    <div class="loot-item"><div class="loot-name">4&times; Frost Vial (Lesser)</div><div class="loot-source">Mingxi's leftover gear &mdash; Jun-Yeong &rarr; Mo</div><div class="loot-note">Cold precision damage on off-guard targets. Bombs.</div></div>
+    <div class="loot-item"><div class="loot-name">Lesser Darkvision Elixir &times; 3</div><div class="loot-source">Party Stash</div><div class="loot-note">Ming Bao took 1 (the token human). Three left in stash.</div></div>
+    <div class="loot-item"><div class="loot-name">Lesser Soothing Tonic</div><div class="loot-source">Ming Bao &rarr; Mo</div><div class="loot-note">Fast Healing 2 for 1 minute &mdash; guaranteed 10 HP.</div></div>
+    <div class="loot-item"><div class="loot-name">Feather Token (Wooden Ladder)</div><div class="loot-source">Party Stash</div><div class="loot-note">20-ft ladder, consumable. Unused this session.</div></div>
+    <div class="loot-item"><div class="loot-name">Flask of Fellowship</div><div class="loot-source">Party Stash</div><div class="loot-note">Make an Impression bonus.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Hongrui's Gratitude</div><div class="loot-source">Fan Hongrui's Spirit (after the requiem)</div><div class="loot-note">Jun-Yeong (worn). Magical cloak, command-activated 1/day. The cursed twin (a duplicate meant for grave robbers) is in Jun-Yeong's pack to be Remove-Cursed in Willowshore.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Noppera-bo Hood</div><div class="loot-source">Shinzo (on the house)</div><div class="loot-note">Investing it makes the wearer appear as a faceless noppera-bo version of themselves. Perfect disguise. One only.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Pendant of the Occult</div><div class="loot-source">Noppera-bo Occultist (Encounter 3)</div><div class="loot-note">Mo. +1 Occultism, can cast Guidance as an occult innate spell.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; Hero points unchanged &middot; <strong>Party doubles in level next session</strong> (DM compensation for the three-PC loss; Shinzo's promised reinforcements arrive)</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Ming Bao</strong>: "Haunted by ghosts of people who were never there."
+    <span class="attribution">Cold open. The thesis statement of the session, said before the DM had even started.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong>: "Wait, are there other people who are missing? Are we actually sure when we came back the population of the town is actually the population we remember? ... What if we just didn't notice? What if none of us noticed?"
+    <span class="attribution">The crystallization moment &mdash; Kageyuri goes wide-eyed in real time as Ming Bao puts the horror into words.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong>: "Maybe I died that day. Maybe... maybe this is just the trip. Maybe that's why nothing makes sense."
+    <span class="attribution">The "are we dead" hypothesis. Jun-Yeong crits Boneyard Lore to comfort him: "I feel strongly that we are not dead. At least not presently."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong>: "That's what they taught me at the monastery. Idle hands and idle bodies lead to bad thoughts. That's why when you went slow, they started beating you." <em>[beat]</em> "It's not traumatic. I'm a good person, and it made me who I am, so it must have been good." <em>[beat]</em> "No, I'm joking."
+    <span class="attribution">The deadpan childhood-trauma reveal, immediately walked back. Ming Bao stays Ming Bao.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong>: "I usually dream of dying."<br>
+    <strong>Mo</strong>: "Well, that's not good."<br>
+    <strong>Jun-Yeong</strong>: "Oh no, they're not nightmares. I simply dream of dying. It's part of the cycle."
+    <span class="attribution">Asked about red butterfly dreams. The Duskwalker deadpan that defined Jun-Yeong's voice this session.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong>: "After we return from the forest, if you would like to have a drink in the honor of Mingxi and Dot, I would be happy to join you in that. An important part of the cycle is mourning, and while we don't know for sure that they have passed, it would be best to honor their memory all the same, as long as we remember them."
+    <span class="attribution">To Ming Bao, extending Pharasma's mourning rites for friends nobody else remembers. The emotional anchor of the session.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong> (to Fan Hongrui, mid-requiem): "But it is gladdening to hear that you think of better days hearing my song. I would want you to focus on that, and not on this pain that you've been through."
+    <span class="attribution">Sustaining calm conversation with the thatchling that used to be the girl who burned in this inn three years ago.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong> (to Shinzo): "You are sent by Pharasma herself. Thank you, friend."
+    <span class="attribution">Sincerely. Shinzo grinned. Jun-Yeong did not yet clock what that grin meant.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (third person, walking east): "Mo actually is kind of excited because he's a warrior and this is like up his alley."<br>
+    <strong>Jun-Yeong</strong>: "Do not be too eager. No one is immune to death. Well, almost no one."
+    <span class="attribution">Mo's first real character statement about combat. Jun-Yeong's Duskwalker correction lands the campaign's tonal contrast in one exchange.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (to Jun-Yeong, who had moved behind him for cover from the Phantom Wolf): "I don't think that you, a seven-foot man, hiding behind a small guy like Mo is a good idea."
+    <span class="attribution">Battlefield positioning RP, mid-Encounter 1.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (after the failed Demoralize on the thatchling): "Mo is a bit disappointed today. His usual intimidation doesn't work very well &mdash; I guess it's because these are creatures that are kind of... not very emotional."
+    <span class="attribution">In-character reflection on the limits of Intimidating Glare. Plants don't scare.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (to Kum Meng-Sung after cutting his bonds): "Good thing that we found you. Did they take you? Did they kidnap you? Like, how did you get here?"
+    <span class="attribution">Mo's first real heroic beat in the campaign &mdash; the kid he didn't know existed, freed from people he didn't know existed three hours ago.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Shinzo</strong>: "Mingxi and Dot are still of this world, even if, well, their spirits may have been erased."
+    <span class="attribution">Parting line, walking off into the dark with Kum Meng-Sung in tow. The session's ominous payoff &mdash; left unexplained.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Kugaptee</strong> &mdash; confirmed as the entity speaking telepathically to spirits in the Specterwood since the first day of summer. The noppera-bo cult worships it. Likely the Crimson Stain. Identity still unknown (god? devil? something else?).</li>
+      <li><strong>The new undead with red butterflies</strong> &mdash; broken-weapon, eyeless humanoids emerging from the Specterwood. Jun-Yeong's Undead Lore + Religion yielded no recognition. <strong>A new type of undead the party cannot identify.</strong> They are searching for thatchlings, presumably to feed Kugaptee.</li>
+      <li><strong>Kageyuri still missing</strong> &mdash; last seen leaving with a Mingxi-impersonator (likely a noppera-bo). Possibly held at the lumber camp. Rescue planned for next session.</li>
+      <li><strong>The 5 captive Willowshore farmers</strong> &mdash; held in a separate building at the lumber camp. To be rescued.</li>
+      <li><strong>Mingxi and Dot's spirits "erased"</strong> &mdash; Shinzo's hint: their souls have been erased but their bodies <em>"are still of this world."</em> Mechanism unclear. Even Eliza is starting to forget &mdash; the erasure is <strong>spreading</strong>.</li>
+      <li><strong>The fire at Kum Sun-Chung's ranch</strong> &mdash; magically-induced ignition spell. Confirmed sabotage. The crimson butterfly carved into the fence ties it to the noppera-bo cult. <strong>The cult is operating inside Willowshore proper now</strong>, not just in the woods.</li>
+      <li><strong>The disguise infiltration plan</strong> &mdash; only one noppera-bo hood from Shinzo, plus two sets of stolen occultist clothes. Mo in the hood (Expert Deception), Ming Bao in occultist clothes, Jun-Yeong as ranged backup. Goal: rescue Kageyuri + farmers without triggering the full camp.</li>
+      <li><strong>Yami</strong> &mdash; temple cat with night-glowing eyes, telepathic to Jun-Yeong only, gifting magic items. Definitely not just a cat. Identity TBD.</li>
+      <li><strong>Shinzo</strong> &mdash; mysterious merchant who keeps showing up exactly when needed, remembers Mingxi and Dot perfectly, grinned when Jun-Yeong said "sent by Pharasma." The party is now openly suspicious.</li>
+      <li><strong>Sashim</strong> &mdash; Jun-Yeong's missing Jeoseung Saja guardian. Could already be back in the Boneyard, or already reincarnated, or active and aware of Willowshore's situation from the other side of the wall. Long-arc thread.</li>
+      <li><strong>Atlacoya's Kugaptee visions</strong> &mdash; he's been locked in his room with "ramblings about Kugaptee." His visions align exactly with what the party just heard from Hongrui. Strong signal he's been on the right track all along.</li>
+      <li><strong>The governor (Heh Shan-Bao)</strong> &mdash; still missing. Hongrui's spirit had no info on him post-death. Ming Bao's theory: governor's disappearance and the Mingxi/Dot erasure are <strong>two different forces</strong>, both feeding into the Crimson Stain.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Cliffhanger</span>
+    <p>Two occultists dead in the lounging room, one of them with Mo's rapier hole through his throat, the other with Ming Bao's fist through his ribs and Ming Bao's other arm wrapped around his collapsing body so it wouldn't make a sound when it hit the floor. The Pendant of the Occult is in Mo's hand. The noppera-bo hood is in his other pocket. Kageyuri is somewhere in this camp. And in the dark behind the lumber yard, somewhere past the campfire and the meditation circle and the room with the five farmers, the voice of every spirit in Shenmen is still whispering the same name into the back of every ghost in the Specterwood.</p>
+    <span class="big-line">"Kugaptee. Kugaptee. Kugaptee."</span>
+    <span class="speaker">&mdash; The cult's chant, what Mo heard at the effigy</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Mo's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Mo did this session</h3>
+  <ul>
+    <li>Joined the party at the Cerulean Tea House. Met Ming Bao the monk and Jun-Yeong the seven-foot sorcerer who dreams of dying.</li>
+    <li>Met <strong>Yami</strong> &mdash; a cat in the tea house. Eyes glow in the light, knife glows around her. Cat picked Jun-Yeong over Mo. Cat gave the party a Lesser Talisman Cord. Cat is not a cat.</li>
+    <li>Rode out east with Ming Bao and Jun-Yeong toward the Canary Inn ruins to look for leads on the witch Fan Hongrui.</li>
+    <li>Killed a thatchling with a crit rapier strike to the chest. Killed a Phantom Wolf with a dual-Strike for 21 damage. Helped Jun-Yeong finish the third thatchling via Sepulchral Mask sustain.</li>
+    <li>Watched Jun-Yeong put Fan Hongrui's spirit to rest at the inn ruin. They buried four bodies. She gave Jun-Yeong a cloak before fading.</li>
+    <li>Returned to town to find Kum Sun-Chung's ranch torched, a crimson butterfly carved on the fence.</li>
+    <li>Tracked the kidnapper of <strong>Kageyuri</strong> (the animist) to the Lumber Camp on Ming Bao's nat 20.</li>
+    <li>Scouted the entire Lumber Camp room by room &mdash; secret door, two chanting occultists, four campfire grunts, captive farmers in another building, second lounging-occultist pair.</li>
+    <li>Ambushed the chanting occultists with Ming Bao and Jun-Yeong. Mo's rapier crit + Ming Bao's Stumbling Swing crit dropped both to death's door; Jun-Yeong finished both with eunjangdo + needle darts. Took 4 mental + 1 persistent from the Phantom Pain spell.</li>
+    <li>Rescued Kum Meng-Sung (Kum Sun-Chung's 17-year-old son, kidnapped during the fire distraction).</li>
+    <li>Ambushed the second pair of occultists. Stealth Overwhelming Combination rapier crit for 35 damage killed Mage 1 before he could act. Demoralized the survivor; Ming Bao Flurried to finish. Took a Pendant of the Occult off the second pair.</li>
+  </ul>
+
+  <h3>Things Mo knows that the party does not</h3>
+  <ul>
+    <li><strong>Mo never met Mingxi or Dot.</strong> Confirmed as the control case &mdash; Ming Bao and Jun-Yeong now believe the erasure is real and not selective amnesia.</li>
+    <li><strong>Yami is suspicious.</strong> Eyes glow in well-lit rooms. Jun-Yeong's anti-undead unjangdo glowed near her. She telepathically speaks only to Jun-Yeong and asked him to keep her a secret. She gifted the party a magic item from a hidden crate she clearly knew was there. She probably isn't a cat.</li>
+    <li><strong>Shinzo is suspicious.</strong> Appears at exactly the right moment, every time. Remembers Mingxi and Dot when no one else does. Grinned wrong when Jun-Yeong called him sent-by-Pharasma. His parting line about Mingxi and Dot's <em>spirits</em> being erased while their bodies are <em>still of this world</em> &mdash; he knew more than he was telling.</li>
+    <li><strong>Zheng Peng</strong>, the constable, knows what Mo did as a kid. Hasn't told anyone in three years. Mo will need to figure out how to be helpful to the watch without putting Zheng Peng in a position to publicly recognize him.</li>
+    <li>Mo admitted casually to Kageyuri that he had stolen things from her before. She didn't seem to care. Worth noting for if/when she returns from kidnapping.</li>
+  </ul>
+
+  <h3>What Mo is thinking about</h3>
+  <ul>
+    <li><strong>The Crushing rune on the rapier is the build's new floor.</strong> Crits stack Clumsy 1 + Enfeebled 1 + Off-Guard (from Unbalancing Blow). Off-guard is self-perpetuating; clumsy and enfeebled stack into the next round's attacks. Two crits in a row should be lethal for almost anything at level 3.</li>
+    <li><strong>Demoralize whiffed twice on bad rolls (12, 13)</strong>, not a mechanical issue. Worked fine on the noppera-bo occultist (25 vs DC, Frightened 1). Intimidating Glare is still the right tool against unintelligent enemies &mdash; just need to actually roll above the DC.</li>
+    <li><strong>Pendant of the Occult is a free Guidance cantrip.</strong> +1 status to any one roll, every encounter, free. Solid pickup. Should remember to cast it on Ming Bao's Treat Wounds rolls &mdash; those keep whiffing.</li>
+    <li><strong>Predictable Silver Piece is funny.</strong> Flip the coin, always lands on the chosen side. Going to find a social use for this &mdash; maybe a "lucky charm" routine on a guard.</li>
+    <li><strong>The party needs a tank.</strong> Three squishies &mdash; Mo (AC 20, 38 HP), Jun-Yeong (cloth, 7-foot target), Ming Bao (better but still d8 + shield). Two new players joining next session per Shinzo's promise. Should advocate for someone to take frontline duties.</li>
+    <li><strong>The disguise infiltration plan</strong>: Mo has Expert Deception (+10) and the noppera-bo hood will land him in disguise. Jun-Yeong said he's the worst liar (true). Ming Bao is more of a diplomat. <strong>Mo should be the one in the hood</strong>, with Ming Bao as the second disguise via stolen occultist clothes. Jun-Yeong as ranged backup.</li>
+    <li><strong>The undead with butterflies are the new problem.</strong> Jun-Yeong couldn't ID them with Undead Lore + Religion. Whatever they are, they're tied to Kugaptee, and the party should expect to fight them soon.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>Where is Kageyuri?</strong> Most likely held inside the building Mo hasn't checked yet (the one with the captive farmers). Possibly already noppera-bo'd. The Mingxi-impersonator who took her is presumably still there too.</li>
+    <li><strong>What does Kugaptee want with souls?</strong> Hongrui said it speaks to spirits. The cultists chant its name over a thatchling-effigy. Thatchlings are made from denied-reincarnation souls. Working theory: Kugaptee is <strong>harvesting souls before they can reincarnate</strong> and turning them into thatchlings to feed itself. The captured farmers, Kum Meng-Sung, and possibly Kageyuri are the next batch.</li>
+    <li><strong>Is the Mingxi-impersonator the cult leader?</strong> The "her" the noppera-bo rebel wanted dead might be the same figure now wearing Mingxi's face. The leadership change the noppera-bo rebel mentioned happened recently &mdash; could line up with "first day of summer" when Kugaptee started speaking to spirits.</li>
+    <li><strong>What's the connection between the governor and Kugaptee?</strong> Fan Hongrui's spirit had no info on the governor's disappearance. Hongrui's dying curse and the manor vanishing might not be cause-and-effect &mdash; they might both be <strong>symptoms</strong> of Kugaptee gaining strength. Ming Bao's "two forces" theory.</li>
+    <li><strong>Should the party trust Shinzo at all?</strong> Helpful in three meaningful ways (the hood, taking Kum Meng-Sung home, remembering Mingxi/Dot). Also clearly not what he says he is. Mo's read: use him, don't trust him, never tell him anything that isn't already public.</li>
+    <li><strong>What is Yami?</strong> A spirit familiar that found Jun-Yeong? Sashim in another form? Pharasma's messenger? Worth a follow-up &mdash; maybe ask Jun-Yeong in private.</li>
+    <li><strong>What does Atlacoya know?</strong> He's been having Kugaptee visions while everyone else thought he was just crazy. He was right. The party owes him an apology and a sit-down when he's lucid.</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

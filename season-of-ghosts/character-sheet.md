@@ -44,7 +44,7 @@
 - L5 planned: Cha, Con
 
 **HP**: 38 (8 ancestry + 8/lvl Rogue × 3 + Con × 3)
-**Speed**: 25 ft
+**Speed**: 30 ft (25 ft base + 5 ft Fleet)
 **Size**: Small
 **Senses**: Darkvision (color)
 
@@ -76,7 +76,7 @@ At L3, trained proficiency = +5 (level 3 + 2), expert = +7 (level 3 + 4).
 | Occultism | trained | +5 | |
 | Performance | expert | +10 | Powers Dance of the Mousedeer |
 | Religion | trained | +6 | RK vs ghosts/spirits |
-| Stealth | expert | +11 | Initiative stat (+13 with Incredible Initiative) |
+| Stealth | expert | +11 | Initiative stat |
 | Survival | trained | +6 | Forest hinterland uptime |
 | Thievery | trained | +9 | Thief racket grants training |
 | *Crafting* | *untrained* | — | |
@@ -113,7 +113,7 @@ At L3, trained proficiency = +5 (level 3 + 2), expert = +7 (level 3 + 4).
 - **L3** — *Slink Away* (Feats+): 1-action — choose an observer, Hide + Sneak away from them with cover bonus, immune for 1 minute.
 
 ### General
-- **L3** — *Incredible Initiative*: +2 circumstance to initiative rolls.
+- **L3** — *Fleet*: Speed increases by 5 ft. (At session 5 Pax confirmed Fleet was taken instead of Incredible Initiative.)
 
 ### Free Archetype
 - **L2** — *Spirit Warrior Dedication* (Tian Xia, uncommon, requires Tian Xia origin):
@@ -167,7 +167,7 @@ No need to spend on fundamental runes.
 
 ## Combat Profile
 
-**Initiative**: Stealth +11 + **Incredible Initiative +2 circumstance** = **+13 average**, pushing Mo to act before most enemies.
+**Initiative**: Stealth +11 (no Incredible Initiative — L3 General is Fleet). Still very high init for round-1 Surprise Attack.
 
 **Surprise Attack** triggers when Stealth-init places Mo above the target's initiative — round 1, that target is off-guard, enabling Sneak Attack.
 

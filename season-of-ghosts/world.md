@@ -57,7 +57,7 @@ Every attempt to cross failed. Marking the ground, tying ropes to a person stand
 ### Willowshore side projects
 
 - **Tea house**: Party is opening one. Strange given the circumstances, but the DM says it's a deliberate morale play — somewhere people can decompress.
-- **Inn restoration**: Discussed as a potential home for the party's newest member (**Ramon**, joined recently).
+- **Inn restoration**: Discussed as a morale-driven side project.
 
 ### Ugly Cute and the red butterflies
 
@@ -101,16 +101,37 @@ The party suspects this curse — and Fan Hongrui's death — may be why the gov
 
 ---
 
+## Session 5 — The Erasure and Kugaptee Named
+
+**Mo joins the party.** Three sessions after the invasion, Mingxi the Magus and Dot the Druid are simply *erased* — most of Willowshore has no memory of them ever existing. Only Ming Bao, Jun-Yeong, and Kageyuri still remember; Eliza is starting to forget too. The party rides to the Canary Inn ruin at the eastern fog wall to investigate Fan Hongrui's death, expecting a lead on the governor. They get a different answer.
+
+At the inn ruin, the party fights thatchlings (vegetation-trapped souls denied reincarnation) and a Phantom Wolf, then performs a proper burial requiem for Hongrui's spirit and her three companions (Chi Hong Shin, Na Shi Hong Ban, Misuki Ban Yong). Jun-Yeong gains **Hongrui's Gratitude** (cloak). Hongrui reveals the name that has been whispering into every spirit's mind since the first day of summer: **Kugaptee**. Two new undead emerge from the tree line — eyeless humanoids with broken weapons held together by crimson energy, red butterflies pouring from their open ribcages. Unknown undead type. The party sneaks away.
+
+Returning to Willowshore, they find **Kum Sun-Chung's ranch torched** (magic-induced ignition spell, crimson butterfly carved into the surviving fence — the cult is operating inside the town now) and **Kageyuri missing**. Witnesses describe her leaving with a half-Tengu, half-human man — Mingxi's exact description. Ming Bao's nat 20 Survival tracks them to the abandoned **Lumber Camp**, now occupied by a noppera-bo cult worshipping Kugaptee with cells of captured Willowshore farmers. Mo scouts the camp, the party ambushes the two chanting occultists (Jun-Yeong kills both with Eunjangdo + Needle Darts), rescues Kum Meng-Sung from the next room, hands him off to Shinzo, then ambushes a second pair of lounging occultists for the disguise gear. Session ends mid-infiltration: one occultist throat-stabbed pre-init by Mo's Overwhelming Combination crit for 35; the other slung to the floor by Ming Bao.
+
+**New plot threads:** Kugaptee named (likely = Crimson Stain). New unknown undead with red-butterfly motif. Mingxi-impersonator running the noppera-bo cult. Kageyuri kidnapped. The erasure is spreading (Eliza losing memory of Mingxi).
+
+**Resolved:** Fan Hongrui's spirit laid to rest. The Canary Inn investigation closed at that thread — Hongrui had no information about the governor's disappearance.
+
+---
+
 ## Standing Mysteries / Open Threads
 
-1. **What happened to Governor Heh Shan-Bao?** Manor and man both vanished without trace.
-2. **What is the Crimson Stain?** A deity, devil, or something else? Cult is actively sacrificing townsfolk to it.
-3. **Why the recurring red imagery?** Firework, butterflies, visions, the cult's name.
+1. **What happened to Governor Heh Shan-Bao?** Manor and man both vanished without trace. Hongrui's spirit (S5) had no information — those threads may not be cause-and-effect.
+2. **What is the Crimson Stain?** S5: name revealed as **Kugaptee**. Still unknown what Kugaptee actually is (god? devil? psychopomp gone wrong?).
+3. **Why the recurring red imagery?** Firework, butterflies, visions, the cult's name. Now also the carved-butterfly vandalism on Kum Sun-Chung's fence.
 4. **The fog wall.** What's enforcing it, and how do they break out — assuming they can?
-5. **Fan Hongrui's curse.** Connection to current events all but confirmed; the inn is the next investigation site.
+5. ~~**Fan Hongrui's curse.**~~ **S5: spirit laid to rest.** Her dying curse on the governor may have been the seed, but she herself had no info on the governor's fate. Closed at this end.
 6. **The reincarnation hint.** Governor's speech: "no matter how many cycles, how many repeats of this tragedy" — strongly implies the village has been through this before.
-7. **The rebel deal.** When the cult returns from "the monastery" (almost certainly Tan Sugi), the noppera-bo signals.
-8. **The missing-monk monastery.** Zhi Hui (the figure the governor played) ran the monastery to the northwest. It hasn't yet appeared on screen but is referenced in the festival's framing — the monastery is almost certainly Tan Sugi (canon Book 2 location).
+7. **The rebel deal.** When the cult returns from "the monastery" (almost certainly Tan Sugi), the noppera-bo signals. (S5 update: the cult is now at the **Lumber Camp**, not the monastery — leadership change.)
+8. **The missing-monk monastery.** Zhi Hui (the figure the governor played) ran the monastery to the northwest. Tan Sugi (canon Book 2 location). Also where Jun-Yeong vanished two years ago.
+9. **Kugaptee** — the named entity. What is it, and is it the Crimson Stain itself or a herald of it?
+10. **The new red-butterfly undead** — eyeless, broken-weapon, ribcage butterflies. Unknown to Boneyard/Religion. Apparently looking for thatchlings to deliver to the cult.
+11. **The erasure mechanic** — bodies still of this world (per Shinzo), spirits erased. Spreading to more witnesses (Eliza losing Mingxi). Driven by what?
+12. **Yami the cat** — identity unknown. Speaks to Jun-Yeong only. Gifts magic items.
+13. **Shinzo** — too on-cue. What is he and what's his actual agenda?
+14. **The Mingxi-impersonator** — running the cult, or a low-rank impostor? The "her" the noppera-bo rebel wanted dead might be the same figure now wearing Mingxi's face.
+15. **Sashim** — Jun-Yeong's missing psychopomp guardian. Possibly aware from the Boneyard side. Long arc.
 
 ---
 
@@ -137,7 +158,7 @@ The DM was vague but explicit on two points:
 | **Atlacoya** | Chameleon Lizardfolk Investigator (Alchemical Sciences) | Devise a Stratagem + Pursue a Lead specialist. Quick Tincture brews Elixirs of Life on demand. Has had Crimson Stain visions. |
 | **Myo Jun-Yeong** (rendered "Joon Young" in earlier transcripts) | Human Duskwalker Sorcerer (Psychopomp bloodline) + Soul Warden + Familiar Master | **Holds the divine spell tradition slot.** Pharasma cathedral upbringing. 7 ft, pale blue skin, glowing yellow eyes, wears his joseung saja guardian's reaper robes. Two-year memory gap from a monastery exorcism. |
 
-There were originally six PCs at the festival; two have left the campaign and been replaced (Ramon and Mo).
+There were originally six PCs at the festival; Mo joined to replace one of the departed PCs.
 
 ---
 
@@ -152,10 +173,19 @@ There were originally six PCs at the festival; two have left the campaign and be
 | **Yong Wu-Xiu** | Blacksmith. (DM also mentioned a **Huo Tianxia** as a second prominent blacksmith — possibly homebrew or AP NPC; canon AP has Yong Wu-Xiu as the kitsune blacksmith.) |
 | **Zotaku** | Ratfolk fishkeeper at the river. Pax floated "ratfolk solidarity" as an RP angle with Mo. |
 | **Zhi Hui** | Legendary monastery keeper to the northwest. Died ~50 years into her tenure. Almost certainly the founder of Tan Sugi Monastery in canon — the figure the governor's festival role honors. Not a live NPC; her legacy is the framing device. |
-| **Fan Hongrui** | Lung Wa rebel/fugitive who died in the inn fire 3 years ago. Cursed the governor with her dying breath. Her death site is the party's next destination. |
+| **Fan Hongrui** | Lung Wa rebel/fugitive who died in the inn fire 3 years ago. Cursed the governor with her dying breath. **S5: spirit laid to rest** at the Canary Inn by the party's requiem. Gave Jun-Yeong "Hongrui's Gratitude" (cloak) before fading. Had no information about the governor's disappearance — that thread closed at this end. |
 | **Ugly Cute** | Animated stone guardian of Willowshore's gates. Vanished during the invasion, recovered at the Gorge of Fangs and Teeth. Now back with the party. Source of the red-butterfly vision. |
 | **Noppera-bo rebel** | Faceless yokai who offered the party an alliance against the Crimson Stain cult's leader. |
-| **The Crimson Stain** | Unknown deity/entity worshipped by the invaders. Recurring red motif. Receiving sacrificed villagers. |
+| **The Crimson Stain** | Unknown deity/entity worshipped by the invaders. Recurring red motif. Receiving sacrificed villagers. **S5: name revealed — Kugaptee.** |
+| **Kugaptee** | Entity whispering into the mind of every spirit in the Specterwood since the first day of summer. Worshipped by the noppera-bo cult (replaced their prior leadership). Strongly suspected to be (or be tied to) the Crimson Stain. Identity TBD — god? devil? psychopomp gone wrong? |
+| **Yami** | White cat at the Cerulean Tea House. Eyes glow in well-lit rooms. Telepathic to Jun-Yeong only; asked to be kept secret. Gave the party a Lesser Talisman Cord from a hidden crate. Jun-Yeong's anti-undead unjangdo glowed near her. Definitely not just a cat. |
+| **Kageyuri** | Eliza's adopted animist daughter. Pale skin, violet hair, pearly-white non-human eyes. Fetchling-coded. One of three people in town who still remembers Mingxi and Dot. **S5: kidnapped** — last seen leaving with a Mingxi-impersonator, presumably held at the Lumber Camp. |
+| **Eliza** | Kageyuri's mother figure. Childhood friend of Jun-Yeong. **S5: showing the first sign of the erasure** — faltered mid-sentence trying to remember Kageyuri's friends. |
+| **Shinzo** | Mysterious traveling merchant. Cart, sun-crow on shoulder, smile too on-cue. Appears at exactly the moments the party needs him. Remembers Mingxi and Dot when no one else does. Gave the party a noppera-bo hood "on the house" in S5. Grinned wrong when Jun-Yeong called him "sent by Pharasma." Working stance: use, don't trust. |
+| **Sashim** | Jun-Yeong's missing Jeoseung Saja (psychopomp) guardian. Last seen at the monastery to the northwest two years ago when Jun-Yeong vanished. Possibly back in the Boneyard, possibly reincarnated, possibly aware of Willowshore's situation from the other side. Long-arc thread. |
+| **Kum Sun-Chung** | Stable master west of Willowshore. **S5: his ranch was magically set ablaze** as a distraction to cover his son's kidnapping. |
+| **Kum Meng-Sung** | His 17-year-old son. Kidnapped during the fire and held at the Lumber Camp. **S5: rescued by the party**, handed off to Shinzo for safe return home. |
+| **Crimson Butterfly Undead (unknown type)** | Eyeless, broken-weapon humanoids encountered at the Canary Inn in S5. Red butterflies pour from open ribcages. Broken weapons held together by crimson energy. Jun-Yeong's Undead Lore + Religion both succeed but yield no recognition — new undead type. Apparently looking for thatchlings, presumably to deliver souls to Kugaptee. |
 
 ---
 
@@ -166,8 +196,11 @@ There were originally six PCs at the festival; two have left the campaign and be
 - **Gorge of Fangs and Teeth** — Ugly Cute's origin site. Where the party recovered him.
 - **The fog wall (east)** — sealed border. Cannot be crossed by any tested method.
 - **Karahai** — fortress town on the eastern coast. Currently unreachable; was the destination of the party's failed expedition.
-- **The northeastern roadside inn** — site of Fan Hongrui's death. Also at the fog wall border. Next planned destination.
-- **The monastery to the northwest** — almost certainly Tan Sugi (canon Book 2 setting). Where Zhi Hui served. The cult is currently there.
+- **The Canary Inn (northeast)** — site of Fan Hongrui's death and S5 requiem. Bodies now properly buried. Cult is operating just outside the ruins (two new red-butterfly undead seen there).
+- **The Lumber Camp (west of Willowshore)** — abandoned camp now occupied by the noppera-bo cult of Kugaptee. Two pairs of occultists, four campfire grunts, five captive Willowshore farmers, a thatchling-effigy in one longhouse. Mo has scouted the layout including a secret door in the fence. **Cult base of operations as of S5.**
+- **The Specterwood** — forest east of Willowshore. Fog-thick this summer. Now hosts thatchlings (souls denied reincarnation), Phantom Wolves, and the new red-butterfly undead type.
+- **Kum Sun-Chung's ranch (west)** — stable master's land. Torched magically in S5 as a distraction. Crimson butterfly carved into the surviving fence — first sign of cult presence inside Willowshore proper.
+- **The monastery to the northwest** — almost certainly Tan Sugi (canon Book 2 setting). Where Zhi Hui served, where Jun-Yeong vanished two years ago with his guardian Sashim. The cult was previously operating from there.
 
 ---
 
