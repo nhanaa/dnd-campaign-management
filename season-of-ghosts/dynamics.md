@@ -15,14 +15,14 @@
 - **Pattern**: 2-action Spellstrike combo + Arcane Cascade stance + Shield cantrip for AC.
 - **Profile**: Glass cannon — eats damage every fight (poison saves, prone, dropped weapons), but lands the lethal blows.
 - **Worship**: Pharasma. Northridge-leaning. Awkward isolated woodcarver-scholar.
-- **Mo connection**: Yong Wu-Xiu (Mo's mentor) is professional rivals with Huo Tian-Zhe (Mingxi's tie at Second Best smithy). Mild RP tension lane.
+- **Mo connection**: ~~Yong Wu-Xiu (Mo's mentor) is professional rivals with Huo Tian-Zhe~~ — stale; Mo's mentor is now Zataku (W22 ratfolk fisher), not Wu-Xiu. The Mingxi-Wu-Xiu rivalry hook is no longer relevant to Mo. Mingxi is also ERASED in-fiction.
 
 ### Ming Bao (Minon) — Human Tian-Shu Monk
 - **Lane**: Crit-chainer. Stance switcher (Tiger Claw → Stumbling Swing for Backstabber).
 - **Pattern**: Multiple agile-finesse unarmed Strikes per round, scaling on off-guard via Backstabber. 30+ dmg crits routine.
 - **Personality**: Schmoozer. Wrestles enemies into "boston crabs." Bows to teammates after fights ("You have saved me").
 - **Mo flank partner**: When Ming Bao engages melee, his Stumbling Swing creates the off-guard window Mo's Sneak Attack needs. **Optimal flanking partner.**
-- **Mo workplace overlap**: Both work at Eternal Blaze Ironworks under Yong Wu-Xiu. Pre-existing in-fiction relationship.
+- **Mo workplace overlap**: ~~Both work at Eternal Blaze Ironworks under Yong Wu-Xiu~~ — stale; Mo doesn't work at the forge. Mo grew up at the riverbank (Zataku's fishery, W22) and the back-alleys, not Eternal Blaze. The natural Ming Bao ↔ Mo overlap is now *the small Tian-Shu community in town*, not workplace.
 
 ### Dot — Peach Leshy Druid (Animal/Cultivation Order)
 - **S5 status: ERASED in-fiction.** Same mechanism as Mingxi. Body presumed still in the world; spirit gone from memory.
@@ -81,13 +81,13 @@ The party is *already* an off-guard-heavy team. Mo's build slots in as the dedic
 
 ### Mo's anchor NPCs
 
-#### Yong Wu-Xiu (W1, Eternal Blaze Ironworks)
-- Female kitsune blacksmith. Inherited the smithy from her father a decade ago.
-- Stoic, demanding. Closest thing Mo has to family.
-- Never made him feel like a foundling — just put him to work cleaning the forge floor when he was small.
-- Mo's Shadow of the Smith heritage activates here flavorfully.
-- **Other party member at Eternal Blaze**: Ming Bao (Monk) works alongside.
-- **Professional rival**: Huo Tian-Zhe (Mingxi's connection at Second Best smithy).
+#### Zataku (W22, Fisheries) — primary mentor since 2026-05-17 swap
+- Observant female ratfolk fisher. Willowshore's foremost fish keeper. Weather-sense knack she has never explained.
+- The ratfolk fisher Mo's mother trusted his care to on her way back to the Netherworld; her name was the last thing his mother pressed into his hand before leaving.
+- Has been feeding Mo scraps from the fishery ponds for years without ever asking why his mother had sent him. **Knows more about Mo's mother's departure than she has ever said aloud.**
+- Wordless ratfolk-Wayang solidarity — being small and strange in this town is something two outsiders can carry together.
+- Wares: dried/smoked fish and shrimp, fertilizer, fishing gear, insect bait. Mo grew up around all of it.
+- **No PC overlap** — different geography (river/fishery) than Ming Bao's forge, no other PC anchors at W22.
 
 #### Zheng Peng (W15, Imperial Watch Officer)
 - Male human, commands the Willowshore barracks.
@@ -103,15 +103,15 @@ The party is *already* an off-guard-heavy team. Mo's build slots in as the dedic
 
 ### Major Campaign NPCs (party-relevant)
 
-#### Old Matsuki
-- 101-year-old Southbank patriarch. Superstitious, traditionalist.
+#### Old Matsuki Shou
+- 101-year-old Southbank patriarch (W6 Matsuki Estate). Nostalgic male carpenter, once apprenticed at Tan Sugi monastery.
 - Living history of Willowshore. Trusts Ugly Cute the stone guardian.
-- Excluded as a player NPC tie per Orion. Background figure.
+- Excluded as a player NPC tie per **Player's Guide p.11** (Paizo rule for all SoG PCs, not table-specific). Background figure.
 
 #### Granny Hu
 - North-side village elder. Pragmatic — militia, trade, supply.
-- Constantly clashes with Old Matsuki ideologically.
-- Excluded as a player NPC tie per Orion.
+- Northridge faction spokeswoman. Constantly clashes with Old Matsuki ideologically.
+- Excluded as a player NPC tie per **Player's Guide p.11** (same Paizo rule).
 - Has dirt on Kim Gu-won (Kofusachi cleric) — reluctant Exchange Manager.
 
 #### Heh Shan-Bao (Governor)

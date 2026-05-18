@@ -1,10 +1,13 @@
 # World — Rime of the Frostmaiden
 
+> **Status:** Pax left this campaign on **2026-05-16** (after Session 11). World notes preserved as reference; not actively maintained. See [lessons.md](lessons.md).
+
 ## System
 - **System:** D&D 5.5e (2024 PHB)
 - **Module:** Rime of the Frostmaiden
 - **DM:** HeyDrewHayes
 - **Start Date:** April 2026
+- **End Date (for Pax):** 2026-05-16 (after Session 11)
 
 ## Key Locations
 

@@ -1,5 +1,7 @@
 # Avarath Solvane
 
+> **Status:** Pax left this campaign on **2026-05-16** (after Session 11). Files preserved as reference; not actively maintained. See [lessons.md](lessons.md) for context. Avarath is dormant — could return as a cameo if Drew uses the "went south alone" exit.
+
 **Paladin 2** | Eladrin | Noble | Lawful Neutral
 **System:** D&D 5.5e (2024 PHB) | **Campaign:** Rime of the Frostmaiden
 **Player:** Paxmanz (nhanpro7d)

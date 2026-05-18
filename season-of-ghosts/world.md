@@ -167,11 +167,15 @@ There were originally six PCs at the festival; Mo joined to replace one of the d
 | NPC | Role |
 |-----|------|
 | **Heh Shan-Bao** | Governor of Willowshore. Played Zhi Hui at the festival; manor vanished overnight. Currently missing. Three years ago, deliberately failed to arrest Fan Hongrui — likely the load-bearing decision behind everything happening now. |
-| **Old Matsuki** | Village elder (south side). 101 yo. Superstitious, traditionalist, agriculture-and-folklore focused. Trusts Ugly Cute. Slight drinker. |
-| **Granny Hu** | Village elder (north side). Pragmatic — militia, trade routes, supply chain. Real name not yet revealed. Constantly clashes with Matsuki ideologically. |
-| **Shang Peng** | Village constable. NPC Pax's character has personal history with — caught Mo lying/stealing as a kid more than once and let him off because he understood Mo's situation. *Pre-existing relationship.* |
-| **Yong Wu-Xiu** | Blacksmith. (DM also mentioned a **Huo Tianxia** as a second prominent blacksmith — possibly homebrew or AP NPC; canon AP has Yong Wu-Xiu as the kitsune blacksmith.) |
-| **Zotaku** | Ratfolk fishkeeper at the river. Pax floated "ratfolk solidarity" as an RP angle with Mo. |
+| **"Old" Matsuki Shou** | Village elder (south side, W6 Matsuki Estate). Nostalgic male human carpenter, once apprenticed at Tan Sugi monastery. 101 yo. Spokesman for the Southbank faction. Trusts Ugly Cute. Slight drinker. **Excluded as PC backstory tie per Player's Guide p.11.** |
+| **Granny Hu** | Village elder (north side). Pragmatic — militia, trade routes, supply chain. Spokeswoman for the Northridge faction. Has blackmail leverage on the Exchange Manager. **Excluded as PC backstory tie per Player's Guide p.11.** |
+| **Zheng Peng** | Stoic male human watch officer, W15 Downtown Willowshore. Commands the imperial barracks south of the manor. **Mo's anchor NPC** — caught Mo lying/stealing as a kid more than once and let him off because he understood Mo's situation. *Pre-existing relationship.* |
+| **Yong Wu-Xiu** | Industrious *female* kitsune blacksmith at W1 Eternal Blaze Ironworks. Inherited the forge from her father about a decade ago. Wares: metalworks, adventuring gear (especially cookware), metal armor/weapons/shields. (DM mentioned a **Huo Tian-Zhe** at W18 Second Best as a rival smith — Wu-Xiu tasked him with dam maintenance, so the rivalry is functional, not hostile.) |
+| **Zataku** | Observant *female* ratfolk fisher at W22 Fisheries. Willowshore's foremost fish keeper; her weather-sense gives her an edge in the trade. Wares: dried/smoked fish and shrimp, fertilizer, fishing gear, insect bait. **Mo's anchor NPC** — the ratfolk fisher Mo's mother trusted his care to on her way back to the Netherworld. |
+| **Jin** | Mysterious female elf herbalist at W4 Graveside Manners. Once a pilgrim before settling in Willowshore. Canon AP NPC, no live engagement yet. |
+| **Elizeth Candora** | Empathetic female human cleric at W10 Lady of Souls. Canon AP NPC, no live engagement yet. |
+| **Kim Gu-won** | Patient male human Kofusachi cleric, W21 Ceiba-Duyue Exchange Manager. Reluctantly took the post — Granny Hu has blackmail on him. Canon AP NPC. |
+| **Rajul Samudra** | Serene male nagaji shipwright at W23 Dock. Brought in by the Ceiba-Duyue Exchange for boat-building. Canon AP NPC. |
 | **Zhi Hui** | Legendary monastery keeper to the northwest. Died ~50 years into her tenure. Almost certainly the founder of Tan Sugi Monastery in canon — the figure the governor's festival role honors. Not a live NPC; her legacy is the framing device. |
 | **Fan Hongrui** | Lung Wa rebel/fugitive who died in the inn fire 3 years ago. Cursed the governor with her dying breath. **S5: spirit laid to rest** at the Canary Inn by the party's requiem. Gave Jun-Yeong "Hongrui's Gratitude" (cloak) before fading. Had no information about the governor's disappearance — that thread closed at this end. |
 | **Ugly Cute** | Animated stone guardian of Willowshore's gates. Vanished during the invasion, recovered at the Gorge of Fangs and Teeth. Now back with the party. Source of the red-butterfly vision. |
@@ -206,7 +210,7 @@ There were originally six PCs at the festival; Mo joined to replace one of the d
 
 ## Notes for Pax
 
-- DM said your backstory matters most for *interpersonal relationships with townsfolk*, not large lore reasons. You're a local kid, not an outsider. Lean into Shang Peng (constable) and Zotaku (ratfolk fishkeeper) as your two anchor NPCs — he wants you to have NPCs you naturally seek out.
+- DM said your backstory matters most for *interpersonal relationships with townsfolk*, not large lore reasons. You're a local kid, not an outsider. Anchor NPCs: **Zheng Peng** (constable, W15) and **Zataku** (female ratfolk fisher, W22 Fisheries) — both canon Player's Guide NPCs Pax has tied Mo's backstory to.
 - You hid through the invasion as a civilian; the joining hook is that the party inspired you and you're tagging along now.
 - DM is encouraging investment in *Holy* and *Fire* damage and confirmed *Cold Iron* matters for the fey.
 - The campaign vibe so far has been **"Silent Hill — small town, can't leave, things are wrong, slow uncovery."** Heavy RP between combat scenes; long fireside conversations.

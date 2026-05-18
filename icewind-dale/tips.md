@@ -1,5 +1,7 @@
 # Tactics & Tips — Avarath Solvane
 
+> **Status:** Pax left this campaign on **2026-05-16** (after Session 11). Tips preserved as reference; not actively maintained. See [lessons.md](lessons.md).
+
 ## Action Economy Overview (Paladin 2)
 
 | Slot | Options |

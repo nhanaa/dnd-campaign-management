@@ -1,5 +1,7 @@
 # Progression Plan — Avarath Solvane
 
+> **Status:** Pax left this campaign on **2026-05-16** (after Session 11 at Paladin 2). Plan preserved as reference; not actively maintained. See [lessons.md](lessons.md).
+
 ## Current: Paladin 2 (Oath of Vengeance at 3)
 
 **Subclass:** Oath of Vengeance — confirmed

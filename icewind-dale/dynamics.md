@@ -1,5 +1,7 @@
 # Party Dynamics — Rime of the Frostmaiden
 
+> **Status:** Pax left this campaign on **2026-05-16** (after Session 11). Notes preserved as reference; not actively maintained. See [lessons.md](lessons.md).
+
 ## The Party
 
 | Character | Species | Class | Level | Player |
