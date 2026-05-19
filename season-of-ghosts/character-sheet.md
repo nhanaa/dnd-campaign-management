@@ -192,12 +192,13 @@ No need to spend on fundamental runes.
 
 **Sustained**: critical hits proc Unbalancing Blow → target off-guard until end of next turn → consecutive Sneak Attack rounds without re-positioning.
 
-**Off-guard generation toolkit** (5 ways to generate Sneak Attack conditions):
+**Off-guard generation toolkit** (6 ways to generate Sneak Attack conditions):
 1. **Surprise Attack** — round 1 from Stealth init, target off-guard automatically
-2. **Flank with Mars (incoming Guardian)** — reliable melee flank partner, off-guard while standing opposite
+2. **Flank with Ming Bao or Mars (S6 Commander on Terra Cotta Automaton)** — reliable melee flank partners, off-guard while standing opposite
 3. **Dance of the Mousedeer** → Hide → Strike from Hidden — 3-action self-Hide setup chain
 4. **Smokescreens** → smoke ball → throw at feet, Hidden from outside-smoke creatures, Sneak/Strike
 5. **Inscribe Shadow Pamor** → Strike → Dazzled rider on target (concealment-vs-target for 1 round)
+6. **Two's apparition CC (S6)** — Tangle Vine pin, Fear-frightened, Charm — capitalize on positionally-vulnerable or shaken targets
 
 **Mode A combat (vs corporeal enemies — humanoids, noppera-bo, cultists)**:
 - Sneak Attack works normally. OC + Unbalancing Blow crit-chain is full power.

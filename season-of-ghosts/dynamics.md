@@ -44,20 +44,48 @@
 - **Personality**: 7 ft, pale blue skin, glowing yellow eyes. Soft-spoken, sullen, self-deprecating. Two-year memory gap from a monastery exorcism. Wears reaper robes.
 - **Mo connection**: Both quiet, both adopted by Willowshore as oddities. Likely natural rapport.
 
+### Two the Third (player TBD) — Dokkaebi Goblin Animist (Liturgist) + Campfire Chronicler FA — **NEW S6**
+- **Lane**: Mode B / non-precision damage source + apparition utility caster + Liturgist Song of Invocation 1st (bardic-equivalent party buff).
+- **Apparitions**: Witch in the Reeds (Tangle Vine, Charm, Create Food, Nymph's Grace focus) + acid-themed second apparition (Caustic Blast, Grim Tendrils, Acid Grip).
+- **Pattern**: Phantom Visage 1A illusion appearance-change (infiltration); Apparition Sense auto-detects spirits/undead; Divine prepared slate covers Needle Darts ×2 cantrip, L1 Elysian Whimsy + Fear, L2 Noise Blast.
+- **Profile**: Wis 18 / Cha 14, AC 20, HP ~33, Will +9. Expert in Occultism (+11) and Thievery (+11) at L3. Innate occult Figment cantrip (Dokkaebi). Goblin Scuttle reaction (move adjacent when ally Strides past).
+- **Joining hook**: Arrived via Shinzo, per DM's S5 promise. (Personal arc TBD.)
+- **Mo connection**:
+  - **Shadow-folk smalls pair**: Wayang + Dokkaebi Goblin, both shadow/illusion-leaning Small humanoids. Thematic overlap — lean into Mo's Tian Xia diasporic / Willowshore-local flavor to differentiate.
+  - **Infiltration partner**: Phantom Visage (Two, 1A illusion) + Ring of Discretion + Disguise Kit (Mo, planned) = layered disguise team for cult/town ops.
+  - **Mode B coverage**: Two's acid apparition blasts ignore precision immunity — fills the gap where Mo's Sneak Attack zeroes out vs phantoms / swarms / elementals / thatchlings.
+  - **RK lane handoff**: Two carries Occultism + Apparition Sense for spirit/undead RK; Mo deprioritizes Religion training (sheet flag).
+  - **Skill overlap (temporary)**: Two Expert in Thievery at L3 ties/leads Mo by 2 at L3; Mo's L4 Skill Increase closes the gap, L7 Master pulls ahead permanently (Rogue cadence is 2× non-Rogue's skill-increase pace).
+
+### Mars's Commander (Mars) — Commander + Cavalier Dedication + Medic Dedication (via Pledge to Cause) + Terra Cotta Automaton mount — **NEW S6**
+- **Class details TBD** — full sheet not yet locked. Build philosophy confirmed in Discord with Orion 2026-05-18.
+- **Lane**: Mobile frontline anchor + battlefield tactics multiplier + party healer.
+- **Pattern**: Banner-carrying mounted Commander. Tactics actions grant allies free/reaction Strikes/Strides/Steps. Cavalier mount (Terra Cotta Automaton — Tian Xia construct) provides reach + durability + thematic fit. Medic Order grants Battle Medicine + Treat Wounds bonuses + eventually Doctor's Visitation.
+- **Pledge to Cause ruling**: Orion confirmed Cavalier's Pledge to Cause feature unlocks Medic as a second dedication without spending an additional dedication feat slot — flavor read on a "pledged healer-cavalier" cause. Free Archetype already covers Cavalier; Pledge mechanic frees the Medic slot.
+- **Joining hook**: Arrived via Shinzo, per DM's S5 promise. (Personal arc TBD.)
+- **Mo connection**:
+  - **Flank partner #2**: Mars (and the Automaton if it's a fighting mount) gives Mo a second reliable melee flank body. Mo no longer relies solely on Ming Bao for off-guard via flanking.
+  - **Action economy multiplier**: Commander Tactics signal allies to take free-action Strikes/Strides/Steps on Mars's turn — Mo's per-round Strike count rises without spending feat slots.
+  - **Healing safety net**: Medic Order Battle Medicine + later Doctor's Visitation = Mo's planned healing-potion budget can be cut.
+  - **Mounted banner = mobile anchor**: Mars repositions fast; Mo doesn't need to babysit a static frontline.
+  - **Tank role filled**: Mo returns to round-1 stealth opener role without doing tank-adjacent work as the de facto first-engager.
+
 ---
 
 ## Damage Threat Hierarchy
 
 | PC | Output | Trigger |
 |---|---|---|
-| Mingxi | **Highest spike** — 50-dmg Spellstrike crits | 2-action combo on off-guard |
+| ~~Mingxi~~ | (erased S5 — body extant, spirit/memory wiped) | — |
 | Ming Bao | **Most consistent** — multi-attack stance crits, 30+ regular | Off-guard via Backstabber |
 | Mo | **Round-1 burst + sustained off-guard chains** | Surprise Attack init + Unbalancing Blow proc; Crushing-rune crit landed 27-dmg + 35-dmg one-shots in S5 |
-| Dot | Mid-tier, utility lane | Branch + Ray of Frost |
+| ~~Dot~~ | (erased S5 — body extant, spirit/memory wiped) | — |
 | Atlacoya | Setup-driven spike | Devise a Stratagem |
 | Jun-Yeong | **S5: confirmed killer** — Eunjangdo + Needle Darts cleanup, double-KO on the chanting occultists | Spell slots, focus, ranged finishes |
+| **Two (S6)** | **Mode B / precision-immune damage king + soft CC** | Caustic Blast + Acid Grip apparition slate; Tangle Vine pin; Fear/Charm/Noise Blast utility |
+| **Mars (S6)** | **Force multiplier — grants allies free Strikes/Strides via Tactics** | Commander Tactics + Banner radius; mounted reach/charge on Terra Cotta Automaton |
 
-**S5 roster note:** With Mingxi and Dot erased and Atlacoya locked in his room with Kugaptee visions, party is down to 3 PCs (Mo, Ming Bao, Jun-Yeong). **No frontline tank.** DM has promised reinforcements next session via Shinzo (two new players + Atlacoya re-join). Until then, Mo's stealth-first opener is doing the work a tank would normally do.
+**S6 roster note:** Reinforcements have arrived via Shinzo. Active party = Mo (Rogue), Ming Bao (Monk), Jun-Yeong (Sorcerer/Soul Warden), Atlacoya (Investigator — returning from his locked room), Two (Animist), Mars (Commander). **6 PCs.** Real frontline (Mars + Automaton), three off-guard generators (Mo, Ming Bao, Mars-via-Tactics), dedicated healing (Medic + Heal slots), Mode B precision-immunity coverage (Two's acid apparition blasts), and spirit/undead RK via Two's Occultism + Apparition Sense. Mingxi and Dot remain erased in-fiction; recovery thread open.
 
 ---
 
@@ -67,13 +95,14 @@ The party already runs heavy off-guard discipline. Mo joining adds a *third* off
 
 | Generator | Source | Mo's interaction |
 |---|---|---|
-| **Backstabber/flanking** | Ming Bao Stumbling Swing | Flank with Ming Bao for 2× sneak-attack opportunities per round |
-| **Spell debuffs** | Mingxi spells, Jun-Yeong spells | Mo's Strike capitalizes |
-| **Surprise Attack init** | Mo's Stealth round 1 | Sets the table for Mingxi/Ming Bao to follow without their own setup |
+| **Backstabber/flanking** | Ming Bao Stumbling Swing; **Mars + Automaton (S6)** | Flank partners doubled — Mo + Ming Bao, Mo + Mars, Mo + Automaton all create off-guard windows |
+| **Spell debuffs** | Jun-Yeong spells; **Two apparition slate (S6)** — Fear, Tangle Vine, Charm | Mo's Strike capitalizes on Frightened/pinned/charmed targets |
+| **Commander Tactics (S6)** | Mars's class actions | Mars signals → Mo takes free-action Strike on Mars's turn (extra Sneak Attack die per fight if off-guard exists) |
+| **Surprise Attack init** | Mo's Stealth round 1 | Sets the table for the whole party to follow without spending their own setup |
 | **Unbalancing Blow** | Mo's crits | Self-perpetuating off-guard chain |
 | **Dance of the Mousedeer** | Mo's Performance | Cover for Hide → re-engage hidden |
 
-The party is *already* an off-guard-heavy team. Mo's build slots in as the dedicated "round-1 opener + sustained-off-guard maintainer."
+The party is *already* an off-guard-heavy team and S6's reinforcements double down on it — Mars adds tactical setup actions, Two adds spell-based soft CC. Mo's build slots in as the dedicated "round-1 opener + sustained-off-guard maintainer," now supported by two new generators rather than carrying the whole load.
 
 ---
 
