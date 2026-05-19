@@ -94,24 +94,32 @@ The party formally introduced themselves to each other for the first time over b
 - **Party ↔ Jaethal Dionaea** *(established S7)*: Newly joined party member. Mist welcomed her first (*"haven't seen one of us in a while"*). Akasha gave the formal Skybreeze welcome. Avon gave her the player journal access. Smooth integration.
 - **Jaethal ↔ Rowan** *(established S7)*: Jaethal gave Rowan the regenerating Witchlight cupcake at goodbye. Small but emotionally specific — Jaethal as the party's gentleness.
 - **Mist ↔ Carrie-Anne** *(updated S7)*: Mist pitched her on joining the party for a future "save people / maybe even save the city" mission. She accepted in principle (*"if I don't have any duties here, I would love to"*). Active recruitment thread.
+- **Akasha ↔ Calith** *(established S8)*: Older brother / patrol guard at Iliora. Initially overprotective; shifted to genuine respect after hearing about Skybreeze. Avon caught the shift (Akasha didn't). Calith refused to let Akasha out of his sight given the blight crisis: *"What are you kidding? I'm not going to let you out of my sight."*
+- **Party ↔ Pindle** *(established S8)*: Aspiring adventurer-researcher volunteering as guide. Genuine (Mist Insight 15, Talya Insight 18). Fragile — nearly killed by quasits, saved by Jaethal's temp HP. The party is protective of him. Currently with the party east of Iliora.
+- **Akasha ↔ Liriel** *(established S8)*: Childhood friend guiding Deepbloom east of Iliora. Not yet encountered. Akasha knows her hangout spot northeast of the city.
+- **Jaethal ↔ Talya** *(established S8)*: Jaethal drew a sketch of Talya's S7 hag-stomp and showed it to her. Small character moment building a friendship.
+- **Mist ↔ Jaethal** *(established S8)*: Busked a duet at Iliora's gates; creative partnership forming. Mist tried to teach Jaethal to busk; Jaethal prefers performing for fun.
 
 ## Plot Threads
 
-### Active / High Priority *(updated S6)*
+### Active / High Priority *(updated S8)*
 
 - **What is buried beneath Skybreeze?** *(massively upgraded S6)* — Per Rowan: massive, not from this world. The Wardstones bury it. Public knowledge would empty the city. Suppressed knowledge exists in the Wizard's Tower library (dark embossed books). Library is gatekept by Briarthorne.
-- **The Akasha Blight / World Tree** *(activated S6)* — Mother tree in Iliora is infected. Unnatural — requires powerful magic. Will spread underground via root network if not contained. Akasha's primary quest. Thalren is investigating in person; Akasha holds the **seed of renewal**.
+- **The Akasha Blight / World Tree** *(updated S8)* — The world tree **Idranthusin** is diminished — Akasha can feel it. Mother tree infected, blight spreading. The hag east of the teleport circle was a symptom, not the source. Patrols going missing, fiends (quasits) in the eastern forest, strange laughter and roars at night. Akasha holds the **seed of renewal**. Thalren Deepbloom + Liriel are somewhere east researching.
 - **Rowan's safety / the Temple of Bahamut** *(activated S6)* — Will the temple shelter him? Cleric Mavericks's stance unknown. Vale Tempest "always knows" what their members do — secondary tracking method possibly exists beyond the robe.
 - **Vale Tempest schism + post-S3 hideout** *(updated S6)* — The original hideout is now likely run by the violent faction. The five amulet-targets (Rufus, Valo, Regina, Bildren, Elias) are still in play. **Lady Avesna**'s status pending.
 - **Jensen's faction** *(reframed S6)* — Separate from Vale Tempest. Trying to destroy a Wardstone. Motive: reveal-the-truth? release-what's-buried? Sabotage? Unknown.
-- **Thalren Deepbloom in Iliora** *(activated S6)* — Investigating the blight himself. Multi-week round trip. The seed of renewal is the only reliable connection.
+- **Thalren Deepbloom + Liriel** *(updated S8)* — Deepbloom arrived at Iliora hours before the party, took Liriel (Akasha's childhood friend) as a guide, and headed east to research the blight. Current whereabouts unknown. The party is on their trail.
 - **Tibbles Briarthorne** *(introduced S6)* — Library custodian, knowledge gatekeeper, performer of the official narrative. Independent? Vale Tempest? Compromised? Unknown.
 - **Carrie-Anne / Cleric Mavericks** *(updated S7)* — Carrie-Anne accepted Mist's pitch to join a future save-the-city mission. Mavericks is just another cathedral cleric (Sethrix has filled the Wardstone-history-keeper role).
 - **The Karadim** *(introduced S7)* — Continental-scale sinister organization. Came for Lady Saraveth in Sevra. Permeate Mirandar especially west. *"Few would dare interrupt."* Separate axis from Vale Tempest. Threat scope unknown.
 - **Lady Saraveth** *(introduced S7)* — Skybreeze noble Avon saved in Sevra. Owes the Karadim a debt. Status alive but whereabouts unknown.
 - **Avon's "Champion of Bahamut" arc** *(formalized S7)* — Borenthal resurrected Avon after the Karadim ambush. Sethrix: *"Bahamut will call on you one day."* Long pre-written track. Watch for how it interacts with party autonomy.
 - **Borenthal in Sevra** *(introduced S7)* — Avon's mentor / resurrector. Avon planning a return trip.
-- **The blight's eastern source** *(activated S7)* — Akasha's Nature Nat 20 pulled her east, not toward Iliora's mother tree. The hag's swamp was downstream, not the source. Source east of the Iliora receiving circle, fiendish/dark-magic origin per Avon's Religion check.
+- **The blight's eastern source** *(updated S8)* — Hag was a symptom (Akasha Nature 11: the forest called her to rid it of the hag, pull now gone). The source is further east. Massive claw marks, uprooted trees, giant fiendish footprint, and quasits in the eastern forest. Avon's **Augury returned Woe** for a straight fight with the large fiend. The party has a **bound, sleeping quasit** for interrogation (speaks Common).
+- **The silver incense mystery** *(introduced S8)* — Avon's Sevra temple incense burned silver during Jaethal's Find Familiar, leaving an unexplained silvery hue on the fairy dragon familiar. Connection to Bahamut? To the temple? To the blight?
+- **Iliora's crisis** *(introduced S8)* — Patrols going missing, strange laughter and roars at night, no animal sounds, fiends in the eastern forest. Calith: *"Idranthusin is weeping."* The hag effigies appear both at the S7 cottage and deeper east — possible coven territory.
+- **The silver spoon dates** *(introduced S8)* — Found on the hag. Dates ranging 60 years back, some future. One matches an Iliora elder's funeral. Needs research — library (blocked by Briarthorne) or Iliora's elders.
 - **Yarnspinner's agenda** *(introduced S7)* — Jaethal's Archfey patron sent her here for "something urgent." Suspicious timing relative to the blight. Open question on his actual goal.
 - **Sethrix's allyship** *(introduced S7)* — Quiet ally. Knows the Wardstone truth. Shelters Rowan. Won't speak publicly. Future temple visits private.
 
