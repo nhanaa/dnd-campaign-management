@@ -39,14 +39,26 @@
 
 ### NPCs at Nowhere
 - **Egill** — Female tiefling. Curled horns, golden eyes, pointed teeth, light red skin. Formerly a ship's quartermaster. Squats by a hide lean-to at the edge of town, dropping fingernails and toenails into a fire to thwart the coming of the ship of the dead. Has a dread vision of a ship of nails (Naglfar). Offers to assemble a crew for **8 gp**. *"Knows a thing or two"* and will share for the right price (incl. a **Captain Thornbeard** rumor — confirmed in transcript, DM-narrated). Sold her **map of the world** to **the Dealer** at the Raid Leader's Hall.
-- **Celorfin** — Male elf, **missing one arm**. Steward of the docks (arranges faering crossings, 1 cp/person). Racist toward half-orcs; despises the refugees in the camps. Confirmed the **Whar** raiding party was in Nowhere a week before the party's arrival, bartering weapons for wheat. Witnessed the Oath of Fellowship and called it dramatic.
+- **Celorfin** — Male elf, **missing one arm**. Steward of the docks (arranges faering crossings, 1 cp/person). Refuses to hire dragonborn or half-orcs — the major employer in town. Despises the refugees in the camps. Confirmed the **Whar** raiding party was in Nowhere a week before the party's arrival, bartering weapons for wheat. Witnessed the Oath of Fellowship and called it dramatic.
 - **Beowyln** — Female dwarf, Jarl of Nowhere. Long silver braided hair and beard. Found at the Great Hall (#8), which doubles as the **jailhouse** and a **house of worship with alcoves for each member of the Stone Court**. Trains her guards by knocking them flat. Offers paid dirt-work on **Toki** (the refugee leader). Philosophy: *"I gotta put them on their toes, even though I put them on their asses."*
-- **Toki** — Halfling. Leader of the refugee tents outside Nowhere (#6). *"More of a troublemaker than anything else."* Beowyln wants legal cover to arrest her.
+- **Toki** — Female halfling. De facto leader of the refugee tents outside Nowhere (#6). Has been agitating her fellow tent dwellers to get them accepted into town; her constant demands have caused trouble for the Jarl and for Alwel's business. Convinced that if the Jarl would listen to reason and start accepting these families, doors would open. Can assemble a crew at no cost if the families get jobs and proper shelter. Two levers: **creating employment** (Celorfin at the docks refuses to hire dragonborn or half-orcs — the major employer in town; alternatively, jobs with the Jarl as town guards or for the shipbuilders) and **improving housing** (the Jarl has forbidden new homes due to "scarcity of wood"). Beowyln wants legal cover to arrest her.
 - **Peron and Garsh** — Married couple running Shipyard #11. Peron is a human male; Garsh is a half-orc male. Sitting on an almost-complete **Explorer-class longship** whose captain skipped payment (1,000 gp to finish, 6,500 gp new). Can also make **minor upgrades** to existing ships.
 - **Kinickan the Rune Thrower** — Male wicker mystic. Nine-foot figure of blue-black wood, thin arms, long white tunic. In a tree grove at #12. Draws a second rune beneath each PC's birth rune and tattoos it on the palm with a vision attached. **Kin to the wicker sentries from Kekel** (DM said so explicitly). *"There are things that even I cannot speak of."* Trust the visions, not him. **Insists Hrolf is right about Siddhe — protect her until she reaches the volv.**
-- **Captain Thornbeard** — Named only as a rumor by Egill (confirmed in transcript). Likely festival-challenge target. Egill won't share without payment.
-- **The Dealer** — Operates out of the **Raid Leader's Hall**, a *private club* somewhere in Nowhere. Bought Egill's map of the world. Hall location not disclosed by Egill (she can't enter it).
-- **Sculpty the Grey** — Mentioned in passing. A creditor in Nowhere whom a beggar owed coin to.
+- **Captain Hadd** (of the Ravenship) — Blond-haired human male. The Ravenship is an older but still seaworthy vessel with a raven-headed prow. Hadd has been raid leader for six months after winning the ship from its previous captain. Once served on several Knattle raids including one against the Ravenship and her former owner; his brother died in that battle, driving him to claim the longship. Still dislikes several crew members for their role in his brother's death — gives them unpleasant tasks and throws them into danger first. Crew cautious of him but recent raids have made them happy enough. Left the Knattle clan because he could not tolerate a dwarf being the jarl. Known for taking risks; will do anything to win a challenge. Lurx has said he's a terrible leader and not very smart.
+- **Captain Lurx** (of the Ship of Vipers) — Female gnome. The Ship of Vipers is an older but still seaworthy vessel; the snake-head prow has recently been rebuilt. Lurx has been captain for many years, inheriting the vessel from her parents, as they inherited it from theirs. Lost a duel to Skuti and was spared because he felt it would stain his honor to kill a drunken woman. Crew is content but weary — little loot in recent raids. In love with a woman at an outpost she captured recently; shows interest in wanting to retire to live with her lover.
+- **Captain Skuti** (of the Grey) — Middle-aged human with sun-brown skin, missing half his left hand. The Grey is the youngest longship in the docks, constructed from fine-milled boards of silver-white pine, prow adorned with the figurehead of a one-eyed goat. Crew is proud of him but past few raids have gone poorly. Has been asking for money back from many people who owe him. Some worry he has more gold than he should — suspicion that he's stealing from his own crew. (Confirmed same as **Sculpty the Grey** from session 3.)
+- **Alwel, the Dealer** — Female "half"-orc (tall, blonde, elongated jaw, oversized teeth hinting at orc ancestry). Operates out of the **Raid Leader's Hall**. Has access to items of interest that change frequently; currently selling a **Potion of Healing for 30 gp**. Bought Egill's map of the world (best offer so far: 70 gp). Willing to trade her **Map of the Known World** in exchange for ridding her of the nuisance Toki — if Toki is no longer a bother, she no longer needs the map.
+- **Sculpty the Grey** — See **Captain Skuti** above. Confirmed same person.
+- **Zelan** — Female innkeeper of the **Eye of the Storm** feasting hall (#4). Tuss race (same as Aesgor). Sabertooth-from-X-Men build, matronly graying hair, yellow teeth. Wears a leather-belt amulet of two crossed wooden hammers — the symbol of the **twin gods Nark and Idin** (not on the Stone Court roster). Husband died in a raid ("tried to catch an arrow with his throat"). Genuinely warm. Gave up the Raid Leaders' Hall password ("Mother's Milk") and intel on captains Skuti and Hadd. Has overheard Lurx disparaging Hadd: *"Hadd is a terrible leader and not very smart."*
+- **Rufus** — Male half-elf intermediary at the Raid Leaders' Hall. Handles Alwel's dealings. *"I can always use more companionship."* Responsive to being bought drinks — the wordplay glass-refill was his signal to share info.
+- **Oryx** — Male half-orc carpenter. Longship sank a few weeks back; looking for crew work. **Builder**-class crew specialist (half-time fortifications, minor ship repairs). Marzena gave him a blood-scrawled hip-dagger as a business card. Soft retainer — will join when the party has a ship.
+- **Sven** (deceased) — Young human raider. Challenged Tree-Hammer to a 1v1 duel at the Nowhere docks to prove himself for a ship berth. Killed over six rounds. Brother lives in **Tunnarg**. Body burned on a raft.
+
+### New Allies (Session 5)
+- **Vanth** — Human male, Circle of the Devourer Druid. Transported to Grimnir from another world via a flash of light. Carries a broken lightning-struck staff (planar anchor). Kinickan confirmed his arrival was foretold. Gave Kinickan an acorn; Kinickan cradled it. Needs to travel the Serpent Sea to find staff fragments. Player: Alex.
+
+### Named Enemies
+- **King Cenric** — King of the Baendur. Commissioned Asvard to murder GluG's step-family. Reason unknown. His face appears on Baendur coins found in Asvard's desk.
 
 ### Hallharn crew (surviving after the beach battle)
 The raiding party started at nearly 60 warriors. After the beach attack, only five named crew remain beside Hrolf:
@@ -59,7 +71,7 @@ The raiding party started at nearly 60 warriors. After the beach attack, only fi
 None of them proved useful in the beach battle. Hrolf's comment: *"They were literally meat shields. They just slowed down the enemy by a turn."*
 
 ### Enemies Encountered
-- **The Whar** (formerly "Unknown Enemy Clan") — Named in Session 3 by Celorfin the steward of the docks. Their raiding party was in Nowhere about a week before the party arrived, bartering weapons for wheat. Their clan sigil has been changed (the predator sigil from the beach was an old logo). Their leader is named **Gulli** — he led the beach attack, and Hrolf has sworn to hunt him down and kill him **before the snows melt**. Whar commander's withdrawal order at the beach: *"We are done here. Let them die on the beach."*
+- **The Whar** (formerly "Unknown Enemy Clan") — Named in Session 3 by Celorfin the steward of the docks. Their raiding party was in Nowhere about a week before the party arrived, bartering weapons for wheat. Their clan sigil keeps changing — predator (beach attack) → dancing horse → **wolf** (current, as of Session 4). Pattern of identity-laundering. Their leader is named **Gulli** — he led the beach attack, and Hrolf has sworn to hunt him down and kill him **before the snows melt**. Whar commander's withdrawal order at the beach: *"We are done here. Let them die on the beach."*
 - **The Tortured Zombie Raider** — A single animate corpse that attacked the party at the ruined farmstead past Kekel. Armed with battleaxe and shield, wore a rusted breastplate, had Undead Fortitude (AC 18). **No fingernails** — torn off, as if tortured before death. The dead are not supposed to rise in Grimnir. Hrolf was genuinely shaken and prayed to Hel.
 
 ## Locations
@@ -71,7 +83,8 @@ None of them proved useful in the beach battle. Hrolf's comment: *"They were lit
 - **Nowhere (the real town)** — River town further up the tributary northeast of Kekel, two banks divided by the river. Wooden homes, half a dozen longships, farmland ringing sparse forest. Faerings (copper-per-ride rowboats) ferry between banks. Numbered map hooks: **#1** Egill at the edge of town; **#2** Celorfin at the docks; **#4** Eye of the Storm Feasting Hall (inn); **#6** Refugee tents (Toki); **#7** Shops/market (mundane goods, pawn shops at quarter value); **#8** Great Hall (Jarl Beowyln — also jailhouse and Stone Court house of worship with alcoves per god); **#11** Shipyard (Peron + Garsh + abandoned Explorer-class, also minor upgrades); **#12** Kinickan's grove. Longship market ~6,500 gp new.
 - **Falgore** — Place of white marble. Where the woman who cursed Gaynor still stands "everlasting" (per Kinickan). Specific named destination.
 - **The Well of Wisdom** — Home of the **Volva**. Tree-Hammer's destination per Kinickan; the gray feather is the key.
-- **The Raid Leader's Hall** — A *private club* somewhere in Nowhere. Home of **the Dealer**. Egill cannot enter it. Exact location not disclosed.
+- **The Raid Leader's Hall (#5)** — A private captains' club up a series of rickety stairs at the back of an unusually tall building. Password entry: **"Mother's Milk"** (obtained from Zelan). Eight round tables repurposed from polished raider shields, brazier of colored smoke on each, a wicker bartender kin to Kinickan. Home of **Alwel the Dealer** and meeting place for captains including Hadd Thornbeard. **Rufus** the half-elf intermediary handles Alwel's dealings.
+- **Tunnarg** — Named only as the home of Sven's brother. Location unknown.
 
 ## Story
 
@@ -95,6 +108,22 @@ The party's boat was sabotaged; they killed the saboteurs and reached a ruined t
 - **Level 2.** All five PCs.
 - **Market and close.** Gaynor intimidates the gem merchant (22 Intimidation) for half-value on the moonstone, rest sold at quarter. 18 gp + 5 sp per member. Drunken-mead-horn moment narrowly avoided a bar fight. Path forward: festival, Captain Thornbeard.
 
+### Session 4 — The Dealer, the Duel, and the Pivot
+- **Retconned campfire vision.** The iron bust face tried to speak from the flames, failed, saw Siddhe and *smiled*. Kaleidoscopic visions: a great ship beneath a starless sky (Naglfar), an upside-down tower from a field of lava, a mass of serpents rising.
+- **Eye of the Storm.** The party met innkeeper **Zelan** (twin gods Nark and Idin amulet), learned about captains Skuti and Hadd, secured the password to the Raid Leaders' Hall ("Mother's Milk"), learned about the Varang **Asvard** (warehouse #3), and recruited half-orc carpenter **Oryx** as a soft retainer.
+- **Raid Leaders' Hall.** Glug and Gaynor met **Rufus** the half-elf intermediary and **Alwel** the Dealer (female "half"-orc). Alwel offered to trade her **Map of the Known World** if the party rids her of Toki's disruption. Aesgor overheard Hadd say Lurx is retiring for love.
+- **The Pikey Camp.** The party crossed the river at night to confront Toki. Seeing children in the camp flipped the plan from assassination to mediation. **Toki** offered a **free crew** if the party brokers jobs (Celorfin won't hire dragonborn/half-orcs; Jarl won't allow new housing). Glug's mediation pitch earned DM inspiration.
+- **The Sven Duel.** Tree-Hammer defeated a young raider (**Sven**) in a 1v1 over six rounds. Sven's body burned on a raft — second pyre of the morning.
+- **Three Captain Dossiers.** The party gathered full intel on **Captain Lurx** (retiring gnome, Ship of Vipers), **Captain Hadd** (blond human, Ravenship, left Knattle clan, brother's death), and **Captain Skuti** (middle-aged human, The Grey, suspicion of skimming). Festival plan: borrow Lurx's ship, challenge Hadd for pink slips or via the Thinker's Game.
+- **Whar update.** Clan sigil changed again — now a **wolf** (previously predator, then dancing horse).
+
+### Session 5 — The Warehouse and the King's Coin
+- **Aesgor's divine vision.** A white raven from the Stone Court directs Aesgor to an alleyway where a stranger (**Vanth**) is being robbed by five clanless raiders. The party rescues him.
+- **Vanth joins.** Human **Circle of the Devourer Druid** from another world, transported to Grimnir by a flash of light. Carries a lightning-struck staff identified by Kinickan as a **planar anchor** — broken, fragments scattered across the Serpent Sea. Needs to find and reassemble them to open a portal home.
+- **The Warehouse Raid.** GluG leads the party to Asvard's warehouse. Multi-floor combat against five thugs (Gerald, Billy, Terry, Gordy, Sweetcheeks). All thugs killed. Asvard cornered in his upper-floor office.
+- **Asvard's confession.** Under a binding oath of safe passage, Asvard reveals that **King Cenric of the Baendur** commissioned the murder of GluG's family. Two **Baendur coins** bearing the king's likeness found in Asvard's desk. Asvard leaves alive per the oath.
+- **GluG's vision decoded (partial).** *"The Varang, the king, and drawn swords"* — the Varang is Asvard, the king is Cenric. The drawn swords remain.
+
 ## Party Loot (Shared)
 - 18 gp + 5 silver per party member (Session 3 market — sold most of the Kekel gems/inks/ruby/diamond dust/pearls)
 - Augury bones (Gaynor — *"those sell the future"*, retained)
@@ -102,5 +131,6 @@ The party's boat was sabotaged; they killed the saboteurs and reached a ruined t
 - White raven feather (from Kekel — retained as novelty)
 - Iron bust of a handsome man with lips sewn shut (from Kekel — still unexplained)
 - Rusted breastplate (from the zombie — reeks of death, CON saves vs vomiting while worn, **unclaimed**)
-- Healing potion × 1 (on Aesgor's belt — last of three from Kekel)
+- ~~Healing potion~~ — used on GluG during the warehouse fight (Session 5)
+- 25 silver (including 2 Baendur coins with King Cenric's face) — from Asvard's desk (Session 5)
 - Birth-runes drawn by Kinickan (Session 3): one second rune per PC, palm-side, with vision attached.

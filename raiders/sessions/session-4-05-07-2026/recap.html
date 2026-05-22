@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 4 — The Dealer, the Duel, and the Pivot</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #d0d4da;
+  --bg-card: #dce0e6;
+  --bg-card-hover: #e8ecf0;
+  --border: #9aa4b0;
+  --text: #181e26;
+  --text-dim: #3a4450;
+  --text-bright: #0a1018;
+  --red: #7a2020;
+  --red-glow: #7a202028;
+  --blue: #1e4a6e;
+  --blue-glow: #1e4a6e22;
+  --green: #2e5a42;
+  --green-glow: #2e5a4222;
+  --purple: #4a3a6a;
+  --purple-glow: #4a3a6a22;
+  --teal: #2e5868;
+  --teal-glow: #2e586822;
+  --gold: #4a6880;
+  --gold-dim: #5a7a94;
+  --gold-glow: #4a688022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 90%, #8a9aae1a 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #7a8a9e1a 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, #90a0b010 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 40% 110%, #3a6a8a1a 0%, transparent 55%),
+    radial-gradient(ellipse at 60% -10%, #6a8aaa14 0%, transparent 45%);
+  animation: sea-swell 7s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes sea-swell {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'Uncial Antiqua', serif;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 19px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #7a8a9a;
+  box-shadow: 0 4px 16px #181e2620;
+}
+
+.char-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-aesgor { border-left-color: #1e4a6e; }
+.char-marzena { border-left-color: #2e5a68; }
+.char-treemaster { border-left-color: #2e5a42; }
+.char-gaynor { border-left-color: #4a3a6a; }
+.char-glug { border-left-color: #7a2020; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #181e2610;
+}
+
+.summary p { font-size: 17px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+.act.social::before { background: var(--green); box-shadow: 0 0 8px var(--green-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin-bottom: 6px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.act-card ul { margin-left: 18px; }
+
+/* Combat boxes */
+.combat-box {
+  background: linear-gradient(135deg, #c4ccd6, #d4dce4);
+  border: 1px solid #6a7a8e;
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 22px 26px;
+  margin: 20px 0;
+}
+
+.combat-box h3 { color: var(--text-bright); }
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Spotlight cards */
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 22px 26px;
+  transition: all 0.2s ease;
+}
+
+.spotlight:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 4px 16px #181e2620;
+}
+
+.spotlight.s-aesgor { border-left-color: #1e4a6e; }
+.spotlight.s-marzena { border-left-color: #2e5a68; }
+.spotlight.s-treemaster { border-left-color: #2e5a42; }
+.spotlight.s-gaynor { border-left-color: #4a3a6a; }
+.spotlight.s-glug { border-left-color: #7a2020; }
+
+.spotlight h4 { font-size: 18px; }
+
+/* Loot grid */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.loot-item.magical {
+  border-color: #5a7a94;
+  background: #dae2ea;
+  box-shadow: inset 0 0 16px #4a688014;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+
+.loot-note { font-size: 14px; color: var(--text-dim); }
+
+.xp-banner {
+  margin-top: 18px;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #cdd5dd, #d8dfe6);
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+.xp-banner strong { font-family: 'Rajdhani', sans-serif; font-size: 15px; letter-spacing: 0.5px; text-transform: none; }
+
+/* Quotes */
+blockquote {
+  border-left: 3px solid var(--gold-dim);
+  background: #1e4a6e0c;
+  padding: 16px 22px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+  color: var(--text);
+}
+
+blockquote .attribution {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-top: 8px;
+}
+
+blockquote em { color: var(--text-dim); font-size: 14px; }
+
+/* Open threads */
+.threads {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+
+.threads ul { margin-left: 20px; }
+
+/* NPC dossier cards */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.dossier {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 20px 24px;
+  transition: all 0.2s ease;
+}
+
+.dossier:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 4px 16px #181e2620;
+}
+
+.dossier.d-ship { border-left-color: var(--blue); }
+.dossier.d-social { border-left-color: var(--green); }
+.dossier.d-danger { border-left-color: var(--red); }
+
+.dossier h4 { margin-bottom: 8px; }
+.dossier ul { margin-left: 18px; margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Dealer, the Duel, and the Pivot</h1>
+  <div class="subtitle">Session 4 &mdash; Raiders of the Serpent Sea</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 7, 2026</span>
+    <span class="meta-pill">D&amp;D 5e (2014)</span>
+    <span class="meta-pill">~2h 51m</span>
+    <span class="meta-pill">Level 2</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-rp" style="width:45%"></div>
+    <div class="comp-seg comp-explore" style="width:25%"></div>
+    <div class="comp-seg comp-combat" style="width:15%"></div>
+    <div class="comp-seg comp-puzzle" style="width:10%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 45%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Exploration 25%</span>
+    <span><span class="legend-dot" style="background:var(--red)"></span>Combat 15%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Investigation 10%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Loot 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-aesgor">
+      <div class="char-name">Aesgor</div>
+      <div class="char-class">Tuss &middot; Cleric (Discovery Domain)</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-marzena">
+      <div class="char-name">Marzena</div>
+      <div class="char-class">Elf &middot; Fighter</div>
+      <div class="char-player">Vidaltje</div>
+    </div>
+    <div class="char-card char-treemaster">
+      <div class="char-name">Tree-Hammer</div>
+      <div class="char-class">Beastborn &middot; Barbarian</div>
+      <div class="char-player">SpasticWolf</div>
+    </div>
+    <div class="char-card char-gaynor">
+      <div class="char-name">Gaynor</div>
+      <div class="char-class">Human &middot; Warlock</div>
+      <div class="char-player">Gaynor</div>
+    </div>
+    <div class="char-card char-glug">
+      <div class="char-name">Glug</div>
+      <div class="char-class">Grimnir &middot; Paladin</div>
+      <div class="char-player">GluG</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The party finally settles into Nowhere proper &mdash; a meal at the <strong>Eye of the Storm</strong> feasting hall, a private-club errand at the <strong>Raid Leaders' Hall</strong>, a midnight expedition across the river to the refugee camp, a long rest, and a busy festival-eve morning of dock-side intelligence work. The arc of the night is pivot after pivot: away from killing <strong>Toki</strong> the halfling refugee leader (who turns out to be an unpaid activist, not a criminal), toward a free crew through mediation; from &ldquo;Alwel the Dealer wants Toki gone&rdquo; to &ldquo;Alwel's map is the prize, and <em>gone</em> might just mean <em>gone with us</em>.&rdquo;</p>
+    <p><strong>Glug</strong> carries the Raid Leaders' Hall &mdash; gets the door password (&ldquo;Mother's Milk&rdquo;) from the innkeeper Zelan, identifies their target Varang (<strong>Asvard</strong>) by playing a wordplay drink-refill game with the half-elf intermediary <strong>Rufus</strong>, and later proposes the mediation-with-Toki idea that earns DM inspiration on the spot. <strong>Gaynor</strong> runs telepathic negotiation with <strong>Alwel the Dealer</strong>, a female &ldquo;half&rdquo;-orc who reads the room like a casino floor. <strong>Marzena</strong> drags the party across the river, then talks them off the assassination ledge once she sees the kids. <strong>Aesgor</strong> spends the session as the dry chorus &mdash; Guidance-cantripping with full RP theatre, voicing Sven's challenge, heckling the duel, and reframing Glug's overshare at the docks. <strong>Tree-Hammer</strong> wins a 1v1 duel against a self-promoting raider over six rounds, the flunky failing every shield-push before Tree-Hammer puts an axe to his neck.</p>
+    <p>The session ends just past midnight on festival-eve. Three captain dossiers are now in hand &mdash; <strong>Skuti</strong>, <strong>Hadd</strong>, <strong>Lurx</strong> &mdash; all three with material weaknesses. The path forward: festival-day at the <strong>Feast of Serpents</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; The Eye of the Storm (Feasting Hall #4)</div>
+      <div class="act-card">
+        <h3>Settling In at Nowhere</h3>
+        <ul>
+          <li><strong>Forgotten campfire vision (retconned in).</strong> DM rolls back to a campfire from two sessions ago. The fire turns unnatural; <strong>the iron bust face</strong> (lips sewn shut, in Marzena's pack) tries to speak from the flames, fails, sees Siddhe and <em>smiles</em>. The fire explodes into kaleidoscopic visions: <em>a great ship beneath a starless sky; an upside-down tower rising from a field of lava; a mass of serpents.</em></li>
+          <li><strong>The innkeeper Zelan.</strong> Sabertooth-from-X-Men build, matronly graying hair, yellow teeth. Wears an amulet of two crossed wooden hammers &mdash; the symbol of the <strong>twin gods Nark and Idin</strong>. Husband died in a raid years back. The fish stew smells horrendous and tastes phenomenal.</li>
+          <li><strong>Two ship dossiers from Zelan.</strong> <strong>The Grey</strong> &mdash; Captain <strong>Skuti</strong> (S-K-U-T-I), middle-aged, missing half his hand, crew loves him. <strong>The Raven Ship</strong> &mdash; Captain <strong>Hadd Thornbeard</strong> (H-A-D-D), six months in command, crew say he's <em>quite courageous.</em></li>
+          <li><strong>The shadow-puppet myth.</strong> A thin man in green casts shadow puppets of giants, serpents, horses, and warriors clashing &mdash; a re-enactment of <em>A Wild World</em>, the creation myth of <strong>Mirgal</strong> murdered, his body made into the world Grimnir.</li>
+          <li><strong>Asvard, the unemployable Varang.</strong> Beat a man to death for no reason, takes any job, renting warehouse #3 in the dock district.</li>
+          <li><strong>Oryx the half-orc carpenter.</strong> Marzena slips him a hip-dagger business card with her name scrawled in someone else's blood. <em>Builder</em>-class crew specialist, on soft retainer.</li>
+          <li><strong>The password &mdash; Mother's Milk.</strong> Aesgor casts Guidance with full RP wand-and-vein theatre: <em>&ldquo;Mr. Gaynor. Please stand still. This is my stick. Injected into his vein.&rdquo;</em> Gaynor assists with Help action. Glug rolls 14 with advantage. They're in.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act II &middot; Roleplay &middot; The Raid Leaders' Hall (Private Club #5)</div>
+      <div class="act-card">
+        <h3>The Dealer and the Map</h3>
+        <ul>
+          <li><strong>The captains' room.</strong> Eight shield-tables, braziers of colored smoke, a wicker bartender kin to <strong>Kinickan</strong> serving drinks with extending wooden fingers. <strong>Hadd Thornbeard</strong> at one table; <strong>Rufus</strong> the half-elf alone at a corner table.</li>
+          <li><strong>Rufus and the wordplay game.</strong> Glug fishes for Asvard's location. Rufus picks up his drink, repeats <em>&ldquo;Asvar, Asvar,&rdquo;</em> finishes it, sets the glass down empty, stares at it. Glug refills it. Rufus warms up: <em>the Dockmaster knows everybody.</em></li>
+          <li><strong>The Hadd / Lurx leak.</strong> Aesgor overhears Hadd say: <em>&ldquo;Lurks is looking to retire. That's funny what love will do for you.&rdquo;</em> First mention of <strong>Captain Lurx</strong> and her retirement leverage.</li>
+          <li><strong>Alwel arrives.</strong> Female &ldquo;half&rdquo;-orc &mdash; tall, blonde, elongated jaw, oversized teeth. Trails her fingers down Gaynor's back as she passes. Reads the entire room. Gaynor opens telepathically: <em>&ldquo;I heard from a little bird with horns that you're in possession of a map.&rdquo;</em> Best offer on the map so far: <strong>70 gold</strong>. Her stock changes frequently &mdash; currently has a <strong>Potion of Healing for 30 gp</strong>.</li>
+          <li><strong>The Toki ask.</strong> Alwel would rather trade than sell: if <strong>Toki</strong> is no longer a bother, she'll hand over the <strong>Map of the Known World</strong> outright. As she leaves she <strong>winks at Tree-Hammer</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III &middot; Social &middot; The Pikey Camp, by Night (#6)</div>
+      <div class="act-card">
+        <h3>The Pivot</h3>
+        <ul>
+          <li><strong>Marzena launches the night raid.</strong> <em>&ldquo;It's the perfect time to commit crime, baby.&rdquo;</em> No PC has Stealth proficiency. They go anyway. One copper per crossing.</li>
+          <li><strong>The camp.</strong> Multi-colored canvas tents, fire pits, skewered rabbits. Half-orcs, dragonborn, tieflings &mdash; about thirty people. An angry halfling ranting about the Jarl stomps off when she sees the party.</li>
+          <li><strong>The kids who change the plan.</strong> Half-orc and halfling children run up selling foraged berries. The half-orc child sprints back yelling <em>&ldquo;we have money for food now!&rdquo;</em></li>
+          <li><strong>Confronting Toki.</strong> De facto leader of the refugee camp. She's been agitating to get families accepted into town. Celorfin refuses to hire dragonborn or half-orcs &mdash; the major employer. The Jarl has forbidden new homes due to &ldquo;scarcity of wood.&rdquo; <em>&ldquo;We're just asking for basic human rights.&rdquo;</em></li>
+          <li><strong>The moral pivot.</strong> Marzena flips first. Glug: <em>&ldquo;There were kids around there. I'm not really into stabbing kids.&rdquo;</em> Tree-Hammer names the vote: <em>&ldquo;Three of the five of us have decided that killing this person is not the option.&rdquo;</em> Gaynor holds out: <em>&ldquo;I'll quite happily fry a fucking halfling.&rdquo;</em></li>
+          <li><strong>Glug's mediation pitch &mdash; DM inspiration.</strong> <em>&ldquo;Perhaps we could be the mediators.&rdquo;</em> DM grants <strong>inspiration</strong> on the spot.</li>
+          <li><strong>Toki's counter-offer.</strong> If the party brokers homes and jobs, <strong>Toki can assemble a crew at no cost.</strong> Two levers: employment (Celorfin, the Jarl, the shipbuilders) and housing (Jarl's wood ban).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; Long Rest, Funeral, and the Sven Duel</div>
+      <div class="act-card">
+        <h3>The Morning of Two Pyres</h3>
+        <ul>
+          <li><strong>Long-rest tells.</strong> Aesgor's Tuss-Afflicted die: 15 &mdash; safe. But for the second long rest in a row, Gaynor catches him grabbing his head in pain and trying to hide it. Aesgor cover-stories it as a hangover.</li>
+          <li><strong>Zelan's slip.</strong> Lurx has been overheard <strong>disparaging Hadd</strong>: <em>&ldquo;Hadd is a terrible leader and not very smart.&rdquo;</em></li>
+          <li><strong>Morning funeral.</strong> A warrior who died in a brawl burns on a raft. Aesgor: <em>&ldquo;He will go to Valhalla.&rdquo;</em></li>
+          <li><strong>Sven's challenge.</strong> A young raider challenges Tree-Hammer to a 1v1 duel. Aesgor voices the threat for the table: <em>&ldquo;I challenge you to a duel. I'm gonna eat your fucking liver!&rdquo;</em></li>
+          <li><strong>The duel.</strong> See <strong>Combat</strong> section below. Tree-Hammer wins over six rounds. Sven fails every shield-push attempt. Final blow: <em>&ldquo;I will one-hit knock him, cut out his legs from underneath him, and then I'll put the second axe to his neck.&rdquo;</em></li>
+          <li><strong>Second pyre.</strong> Sven's body burns. Two funerals in one morning.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V &middot; Investigation &middot; The Three Captain Dossiers</div>
+      <div class="act-card">
+        <h3>Intelligence Gathering at the Docks</h3>
+        <ul>
+          <li><strong>Celorfin greets them.</strong> <em>&ldquo;You guys are really putting coins in my pocket for all these faerings.&rdquo;</em> Aesgor sends Glug to ask about Asvard; Glug's confessional (<em>&ldquo;I kill people, and he's on the list&rdquo;</em>) sours the conversation. Aesgor takes over the interviews.</li>
+        </ul>
+
+        <div class="dossier-grid">
+          <div class="dossier d-ship">
+            <h4>Captain Lurx &mdash; Ship of Vipers</h4>
+            <ul>
+              <li>Female <strong>gnome</strong>. Inherited the ship from her parents, as they inherited it from theirs.</li>
+              <li>Ship is older but seaworthy; snake-head prow recently rebuilt.</li>
+              <li>Crew is content but <strong>weary</strong> &mdash; little loot in recent raids.</li>
+              <li>Lost a duel to <strong>Skuti</strong> and was spared &mdash; he felt it would stain his honor to kill a drunken woman.</li>
+              <li>Overheard saying <strong>Hadd is a terrible leader and not very smart.</strong></li>
+              <li><strong>In love</strong> with a woman at a captured outpost. Wants to <strong>retire</strong> to live with her lover.</li>
+            </ul>
+          </div>
+
+          <div class="dossier d-danger">
+            <h4>Captain Hadd &mdash; The Ravenship</h4>
+            <ul>
+              <li><strong>Blond-haired human male.</strong> Raven-headed prow, older but seaworthy.</li>
+              <li>Raid leader for <strong>six months</strong> after winning the ship from the previous captain.</li>
+              <li>Served on several <strong>Knattle</strong> raids (led by <strong>Horar Longspear</strong>, a dwarf). Fought the Ravenship's former crew.</li>
+              <li><strong>Brother died in that fight.</strong> Hadd then determined to claim the longship as his prize.</li>
+              <li>Still <strong>dislikes several crew members</strong> for their role in his brother's death &mdash; gives them unpleasant tasks and throws them into danger first.</li>
+              <li>Left the Knattle clan because he <strong>could not tolerate a dwarf being the jarl.</strong></li>
+              <li>Known for <strong>taking risks</strong>; will do anything to win a challenge.</li>
+            </ul>
+          </div>
+
+          <div class="dossier d-ship">
+            <h4>Captain Skuti &mdash; The Grey</h4>
+            <ul>
+              <li><strong>Middle-aged human</strong>, sun-brown skin, <strong>missing half his left hand.</strong></li>
+              <li>The Grey is the <strong>youngest longship</strong> in the docks &mdash; fine-milled silver-white pine, figurehead of a <strong>one-eyed goat.</strong></li>
+              <li>Crew is <strong>proud</strong> of him, but past few raids have gone poorly.</li>
+              <li>Has been <strong>demanding loan repayments</strong> from many people around Nowhere.</li>
+              <li>Some worry he has <strong>too much gold</strong> &mdash; suspicion he's <strong>stealing from his own crew.</strong></li>
+              <li>Confirmed same as <strong>Sculpty the Grey</strong> from session 3.</li>
+            </ul>
+          </div>
+        </div>
+
+        <ul style="margin-top: 18px;">
+          <li><strong>The festival plan crystallizes.</strong> Borrow Lurx's ship (love-story persuasion), provoke Hadd at the captains' table, <strong>race for pink slips</strong>. Backup: the <strong>Thinker's Game</strong>. Aesgor: <em>&ldquo;Challenge a man to the Thinker's Game. He's a dumbass.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat</h2>
+
+  <div class="combat-box">
+    <h3>Tree-Hammer vs Sven</h3>
+    <div class="combat-meta">1v1 Duel &middot; Day 14, mid-morning &middot; Nowhere docks &middot; 6 rounds</div>
+    <p>A young raider challenges <strong>Tree-Hammer</strong> to prove himself and earn a ship berth. Tree-Hammer rages. Sven attempts his shield-push ability every single round &mdash; <strong>fails every time</strong> against Tree-Hammer's rage-advantage STR saves.</p>
+    <ul>
+      <li><strong>Rounds 1&ndash;3:</strong> Sven cannot hit or push. Tree-Hammer chips away. Gaynor catches Tree-Hammer's missing +2 rage damage modifier. <em>&ldquo;Everyone starts laughing at him because the little guy is just not letting him move.&rdquo;</em></li>
+      <li><strong>Round 4:</strong> Sven lands a <strong>crit</strong> plus a follow-up. Tree-Hammer's HP drops into real trouble.</li>
+      <li><strong>Rounds 5&ndash;6:</strong> Sven's dice go cold again. Tree-Hammer lands the kill blow.</li>
+    </ul>
+    <p><strong>Finishing move:</strong> <em>&ldquo;I will one-hit knock him, cut out his legs from underneath him, and then I'll put the second axe to his neck.&rdquo;</em></p>
+    <p><strong>No spell slots burned. No other PCs in the fight.</strong> Tree-Hammer ate one crit. Sven's body burns on a raft &mdash; second pyre of the morning.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-aesgor">
+      <h4>Aesgor &middot; The Dry Chorus</h4>
+      <ul>
+        <li><strong>Guidance with full theatre.</strong> <em>&ldquo;Mr. Gaynor. Please stand still. This is my stick. Injected into his vein.&rdquo;</em> &mdash; the cleanest in-character spellcasting RP of the campaign.</li>
+        <li><strong>Voices Sven for the table.</strong> <em>&ldquo;I challenge you to a duel. I'm gonna eat your fucking liver!&rdquo;</em></li>
+        <li><strong>Sends Glug at Celorfin</strong>, then rescues the conversation when Glug's confessional sours it. Takes over the Raven-crew interview and walks out with three solid pieces of Hadd intel.</li>
+        <li><strong>Heckles Sven.</strong> <em>&ldquo;Squirrel begins frothing at the mouth and goes rabid.&rdquo;</em> / <em>&ldquo;I have a chicken hand, dumbass.&rdquo;</em> / <em>&ldquo;This is peak form of 1v1!&rdquo;</em></li>
+        <li><strong>Makes the Thinker's Game the play.</strong> <em>&ldquo;Challenge a man to the Thinker's Game. He's a dumbass.&rdquo;</em></li>
+        <li><strong>Morning headache, hidden again.</strong> Second long rest in a row Gaynor catches the flinch. Tuss-Afflicted die didn't fire (15). Something else is causing it.</li>
+        <li>Manifested <strong>no</strong> spell slots this session. They are full going into festival day.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-marzena">
+      <h4>Marzena &middot; Crime-Time Conscience</h4>
+      <ul>
+        <li><strong>Self-introduction of the year.</strong> <em>&ldquo;Marzena is a confection often used in the decoration of cakes. My name is Marzena.&rdquo;</em></li>
+        <li><strong>The blood-business-card.</strong> Hands Oryx the half-orc carpenter a hip-dagger with her name scrawled in someone else's blood.</li>
+        <li><strong>Drives the night raid.</strong> <em>&ldquo;It's the perfect time to commit crime, baby.&rdquo;</em> No stealth proficiency. They go anyway.</li>
+        <li><strong>First to flip on Toki.</strong> <em>&ldquo;I have a gut feeling that these pikeys, these carnies, are not going to be the assholes that everybody else is making them out to be.&rdquo;</em></li>
+        <li><strong>Pushes the question.</strong> <em>&ldquo;Is there a path to mediation?&rdquo;</em> &mdash; opens the door for Glug's inspiration moment.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-treemaster">
+      <h4>Tree-Hammer &middot; Axe Diplomat</h4>
+      <ul>
+        <li><strong>Names the pivot moment.</strong> <em>&ldquo;Three of the five of us have decided that killing this person is not the option they want to go with.&rdquo;</em></li>
+        <li><strong>Strategic synthesis.</strong> <em>&ldquo;Captain Lurx, who we heard is retiring, has a ship and a crew. We can get both.&rdquo;</em></li>
+        <li><strong>Pre-duel barb.</strong> <em>&ldquo;My next of kin is the forest. You can tell any tree you want.&rdquo;</em></li>
+        <li><strong>Wins the duel ugly.</strong> Forgets rage damage modifier round 1; Gaynor flags it; fixes it mid-fight. Sven cannot land a shield-push for love or money.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-gaynor">
+      <h4>Gaynor &middot; Telepathic Negotiator</h4>
+      <ul>
+        <li><strong>Telepathic mafia work.</strong> Opens with Alwel in her head: <em>&ldquo;I heard from a little bird with horns that you're in possession of a map.&rdquo;</em> Rufus, watching: <em>&ldquo;I didn't see your mouth move, but&hellip; aye.&rdquo;</em></li>
+        <li><strong>Mafia framing of the Toki ask.</strong> <em>&ldquo;We can't have these kinds of ne'er-do-wells in law-abiding towns like this, can we?&rdquo;</em></li>
+        <li><strong>Catches Tree-Hammer's missing rage damage.</strong> Saved at least ten total damage over the duel.</li>
+        <li><strong>Designs the festival heist.</strong> Spill a drink on Hadd, provoke a challenge, <strong>race for pink slips</strong> with sabotage.</li>
+        <li><strong>The hold-out vote.</strong> Last to flip on Toki. <em>&ldquo;I'll quite happily fry a fucking halfling.&rdquo;</em> Eventually concedes when the math works.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-glug">
+      <h4>Glug &middot; Dual-Oath Mediator</h4>
+      <ul>
+        <li><strong>Carries the Raid Leaders' Hall.</strong> Password, Asvard wordplay, dealer setup &mdash; all through him.</li>
+        <li><strong>Discovers the Dual Oath.</strong> <em>&ldquo;Let's just say I have another oath&hellip; two oaths are better.&rdquo;</em> Shows the second scarred palm.</li>
+        <li><strong>Confessional self-introductions.</strong> <em>&ldquo;I kill people, and he's on the list.&rdquo;</em> / <em>&ldquo;I follow the goddess Lucha&hellip; my god tells me to kill people.&rdquo;</em></li>
+        <li><strong>The mediation pitch (inspiration).</strong> <em>&ldquo;Perhaps we could be the mediators.&rdquo;</em> DM hands inspiration on the spot.</li>
+        <li><strong>The &ldquo;kids around&rdquo; pivot.</strong> <em>&ldquo;I'm not really into stabbing kids. There's really no honor in that.&rdquo;</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Leads</h2>
+  <div class="loot-grid">
+    <div class="loot-item">
+      <div class="loot-name">Password: Mother's Milk</div>
+      <div class="loot-source">Zelan &middot; 5 gp + Guidance + Help</div>
+      <div class="loot-note">Entry to the Raid Leaders' Hall. Party is now in the captain network.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Asvard's Location</div>
+      <div class="loot-source">Zelan &middot; Extra gold</div>
+      <div class="loot-note">Renting warehouse #3 in Nowhere's dock district.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Half-Orc Carpenter Retainer (Oryx)</div>
+      <div class="loot-source">Eye of the Storm</div>
+      <div class="loot-note">Soft contract &mdash; will join when the party has a ship. Builder-class crew specialist.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Lurx's Loaner Ship (proposed)</div>
+      <div class="loot-source">Captain Lurx</div>
+      <div class="loot-note">If party closes the persuasion angle. The Ship of Vipers is the leverage object for the festival pink-slip race.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Toki's Free Crew (proposed)</div>
+      <div class="loot-source">Refugee Camp Negotiation</div>
+      <div class="loot-note">Toki assembles a crew at no cost if party brokers homes + jobs with the Jarl and Celorfin. Beats Egill (8 gp).</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Potion of Healing (option)</div>
+      <div class="loot-source">Alwel (the Dealer)</div>
+      <div class="loot-note">30 gp, paid in advance, delivered next day. Nobody bought.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Map of the Known World (conditional)</div>
+      <div class="loot-source">Alwel (the Dealer)</div>
+      <div class="loot-note">Free if Toki is no longer a bother. Current best offer: 70 gp.</div>
+    </div>
+  </div>
+  <div class="xp-banner">
+    <strong>No Glory awarded. No XP awarded.</strong>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    "Mr. Gaynor. It's Mr. Warlock. Please stand still. This is my stick. Injected into his vein."
+    <span class="attribution">&mdash; Aesgor, casting Guidance with full wand-and-vein theatre during the password negotiation</span>
+  </blockquote>
+
+  <blockquote>
+    "I challenge you to a duel. I'm gonna eat your fucking liver!"
+    <span class="attribution">&mdash; Aesgor, voicing the NPC's challenge for the table</span>
+  </blockquote>
+
+  <blockquote>
+    "Challenge a man to the Thinker's Game. He's a dumbass."
+    <span class="attribution">&mdash; Aesgor, reading the obvious lever the moment Hadd's intelligence weakness is announced</span>
+  </blockquote>
+
+  <blockquote>
+    "Marzena is a confection often used in the decoration of cakes. My name is Marzena."
+    <span class="attribution">&mdash; Marzena, self-introduction to Oryx the half-orc carpenter</span>
+  </blockquote>
+
+  <blockquote>
+    "It's the perfect time to commit crime, baby. Let's go rent a boat, cross the river, and then fucking sneak into the pikey town."
+    <span class="attribution">&mdash; Marzena, launching the night-raid plan with no stealth proficiency in the party</span>
+  </blockquote>
+
+  <blockquote>
+    "I have a gut feeling that these pikeys, these carnies, are not going to be the assholes that everybody else is making them out to be &mdash; but that's my opinion."
+    <span class="attribution">&mdash; Marzena, the first vote to flip away from the Toki assassination</span>
+  </blockquote>
+
+  <blockquote>
+    "My next of kin is the forest. You can tell any tree you want."
+    <span class="attribution">&mdash; Tree-Hammer, pre-duel barb to Sven's request for next-of-kin</span>
+  </blockquote>
+
+  <blockquote>
+    "Well, it seems like there are three of the five of us who have decided that killing this person is not the option they want to go with."
+    <span class="attribution">&mdash; Tree-Hammer, naming the table's actual position</span>
+  </blockquote>
+
+  <blockquote>
+    "I heard from a little bird with horns that you're in possession of a map."
+    <span class="attribution">&mdash; Gaynor, telepathic open to Alwel. Never moves his lips</span>
+  </blockquote>
+
+  <blockquote>
+    "What we do is we go back into that place, walk past the table, we deliberately spill a drink on him when it gets a bit heated, and we just re-challenge him to fucking ship off or some shit."
+    <span class="attribution">&mdash; Gaynor, the festival pink-slip-race plan in one breath</span>
+  </blockquote>
+
+  <blockquote>
+    "Let's just say I have another oath. So now I kind of have two oaths. So it's kind of hard for me to balance them, but I got to kind of go both oaths at the same time, like just go hard at them both."
+    <span class="attribution">&mdash; Glug, showing the second scarred palm. First public airing of the dual-oath</span>
+  </blockquote>
+
+  <blockquote>
+    "Perhaps we could be the mediators and say, hey, all they need is homes. So let's help them with that and problem solved."
+    <span class="attribution">&mdash; Glug, the line that got DM inspiration on the spot</span>
+  </blockquote>
+
+  <blockquote>
+    "We're just asking for basic human rights, even though she's halfway."
+    <span class="attribution">&mdash; DM (as Toki). The line that flipped the room</span>
+  </blockquote>
+
+  <blockquote>
+    "Lurks is looking to retire. That's funny what love will do for you."
+    <span class="attribution">&mdash; Hadd Thornbeard (overheard). Free intel for the festival angle</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Feast of Serpents &mdash; tomorrow.</strong> Day 1 of festival. Three captains will be there &mdash; Lurx, Hadd, Skuti. Festival challenges: tug-of-war, drinking, the Thinker's Game, ship-challenge for pink slips.</li>
+      <li><strong>The Lurx persuasion.</strong> Love-struck retiring gnome who lost a duel to Skuti and got spared. Approach via love story. She's the loaner-ship lever.</li>
+      <li><strong>The Hadd takedown.</strong> Weakness: intelligence (per Lurx) and grief (his brother). Left the Knattle clan because he couldn't tolerate a dwarf jarl. Takes risks, will do anything to win a challenge. The Thinker's Game is the obvious trap.</li>
+      <li><strong>The Skuti audit.</strong> Where is the gold coming from? Crew adores him but one sailor suspects skimming. The youngest longship &mdash; fine silver-white pine, one-eyed goat figurehead. Leverage on the Jarl side.</li>
+      <li><strong>Mediating Toki &harr; Jarl.</strong> Employment (Celorfin hires no dragonborn or half-orcs; Jarl guards; shipbuilders) and housing (Jarl's wood ban). Toki can assemble a free crew if both are solved.</li>
+      <li><strong>Alwel's Toki-out clause.</strong> If Toki <em>leaves with the party as crew</em>, that's still <em>no longer a bother in town</em>. Worth pressure-testing the exact wording.</li>
+      <li><strong>Asvard.</strong> Renting warehouse #3. Glug's second oath has him on a list. Celorfin holds the keys; the Jarl patrols.</li>
+      <li><strong>The fire-vision (retconned in).</strong> The iron bust face smiled at Siddhe. Visions: starless-sky ship (Naglfar), upside-down tower from lava, a mass of serpents rising.</li>
+      <li><strong>The Whar's third sigil &mdash; wolf.</strong> Predator &rarr; dancing horse &rarr; wolf. Pattern of identity-laundering.</li>
+      <li><strong>Aesgor's hidden morning pain.</strong> Two long rests in a row. Not the Tuss-Afflicted die. Something else.</li>
+      <li><strong>Glug's &ldquo;Lucha.&rdquo;</strong> Goddess named for the first time. Not on the Stone Court roster.</li>
+      <li><strong>The twin gods Nark and Idin.</strong> Zelan's amulet. Not previously surfaced.</li>
+      <li><strong>The Knattle clan and Horar Longspear.</strong> Hadd's former clan. New entry on the raider-clan map.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Aesgor's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Aesgor did this session</h3>
+  <ul>
+    <li>Cast <strong>Guidance</strong> twice in social encounters: on Glug for the <strong>Mother's Milk</strong> password roll (succeeded with advantage from Gaynor's Help), and on Gaynor for the Vipers-crew interview (3 pieces of intel).</li>
+    <li><strong>Stepped in for Glug</strong> at the Raven Ship after Glug's confessional was souring the conversation. Took over the questions himself and got: six-month captaincy, Knattle-clan history, brother-killed grievance, <em>&ldquo;doesn't always make the best choices.&rdquo;</em></li>
+    <li>Voiced <strong>Sven's</strong> NPC threat and heckled the duel with three different beats.</li>
+    <li>Eulogized strangers: <em>&ldquo;He will go to Valhalla.&rdquo;</em></li>
+    <li><strong>Long-rest Tuss-Afflicted die: 15.</strong> Safe. Hangover faked to cover the morning headache.</li>
+    <li>Manifested <strong>no</strong> spell slots. They are full going into festival day.</li>
+    <li>Voted to NOT kill Toki. Pitched the <strong>Thinker's Game</strong> as the optimal challenge against Hadd.</li>
+  </ul>
+
+  <h3>Things Aesgor knows that the party does not</h3>
+  <ul>
+    <li>The morning-headache <em>is not</em> a hangover. Two long rests in a row. The Tuss-Afflicted die didn't fire either time. It only happens since the rune-throwing.</li>
+    <li><strong>Kinickan said the visions are to be trusted, not him.</strong> The fire-vision may be related: the iron bust face <em>smiled at Siddhe</em>. Whoever-he-is now knows the child is with the party.</li>
+    <li>The fire-vision ship is almost certainly <strong>Naglfar</strong>. Aesgor has the synthesis but no character has rolled the History to confirm.</li>
+    <li>Gaynor caught the morning-headache flinch. So at least Gaynor knows something is off.</li>
+  </ul>
+
+  <h3>What Aesgor is thinking about</h3>
+  <ul>
+    <li><strong>The Whar are still hiding.</strong> Wolf mascot now. They keep changing flag. Gulli is alive. The oath clock is running.</li>
+    <li><strong>Alwel's Toki clause is exploitable.</strong> Nothing requires Toki to be dead. If she leaves with us as crew, she's no longer in town.</li>
+    <li><strong>Skuti has too much gold</strong> for a man chasing old debts. Leverage with the Jarl.</li>
+    <li><strong>Hadd is the right target.</strong> The Thinker's Game with Aesgor's WIS 17 / proficiency in Religion / Insight bonus is the cleanest angle. Pink-slip race with Lurx's loaner is the backup.</li>
+    <li>The party still has the <strong>iron bust</strong>, <strong>white raven feather</strong>, and Tree-Hammer's <strong>gray feather</strong> unresolved. Festival wins us the ship that gets us to the Volva.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>What is &ldquo;Lucha&rdquo;?</strong> Glug's goddess. Not on the Stone Court roster.</li>
+    <li><strong>Who are Nark and Idin?</strong> Twin gods on Zelan's amulet. Religion check.</li>
+    <li><strong>Who is Horar Longspear?</strong> Knattle clan. Possible alliance or rival to the Hallharn.</li>
+    <li><strong>What does the second oath force Glug to do to Asvard?</strong></li>
+    <li><strong>Did the iron-bust face smile because of Siddhe specifically?</strong> Yes per DM. Why?</li>
+    <li><strong>What's wrong with my mornings?</strong></li>
+  </ul>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: #dae2ea;
+  border: 1px solid #5a7a94;
+  border-left: 4px solid #1e4a6e;
+  border-radius: 8px;
+  box-shadow: inset 0 0 24px #4a688014;
+}
+.pax-notes h2 { border-bottom-color: #5a7a94; }
+.pax-notes h3 {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #0a1018;
+}
+.pax-notes h3:first-of-type { margin-top: 14px; }
+.pax-notes .pax-intro {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.pax-notes ul { margin-left: 22px; }
+.pax-notes li { padding: 6px 0; }
+</style>
+
+</div>
+</body>
+</html>

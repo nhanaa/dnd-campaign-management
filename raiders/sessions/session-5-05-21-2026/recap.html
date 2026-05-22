@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 5 — The Warehouse and the King's Coin</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #d0d4da;
+  --bg-card: #dce0e6;
+  --bg-card-hover: #e8ecf0;
+  --border: #9aa4b0;
+  --text: #181e26;
+  --text-dim: #3a4450;
+  --text-bright: #0a1018;
+  --red: #7a2020;
+  --red-glow: #7a202028;
+  --blue: #1e4a6e;
+  --blue-glow: #1e4a6e22;
+  --green: #2e5a42;
+  --green-glow: #2e5a4222;
+  --purple: #4a3a6a;
+  --purple-glow: #4a3a6a22;
+  --teal: #2e5868;
+  --teal-glow: #2e586822;
+  --gold: #4a6880;
+  --gold-dim: #5a7a94;
+  --gold-glow: #4a688022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 90%, #8a9aae1a 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #7a8a9e1a 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, #90a0b010 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 40% 110%, #3a6a8a1a 0%, transparent 55%),
+    radial-gradient(ellipse at 60% -10%, #6a8aaa14 0%, transparent 45%);
+  animation: sea-swell 7s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes sea-swell {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'Uncial Antiqua', serif;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 19px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #7a8a9a;
+  box-shadow: 0 4px 16px #181e2620;
+}
+
+.char-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-aesgor { border-left-color: #1e4a6e; }
+.char-marzena { border-left-color: #2e5a68; }
+.char-treemaster { border-left-color: #2e5a42; }
+.char-gaynor { border-left-color: #4a3a6a; }
+.char-glug { border-left-color: #7a2020; }
+.char-vanth { border-left-color: #3a6a3a; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #181e2610;
+}
+
+.summary p { font-size: 17px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+.act.social::before { background: var(--green); box-shadow: 0 0 8px var(--green-glow); }
+.act.investigate::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin-bottom: 6px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.act-card ul { margin-left: 18px; }
+
+/* Combat boxes */
+.combat-box {
+  background: linear-gradient(135deg, #c4ccd6, #d4dce4);
+  border: 1px solid #6a7a8e;
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 22px 26px;
+  margin: 20px 0;
+}
+
+.combat-box h3 { color: var(--text-bright); }
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Spotlight cards */
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 22px 26px;
+  transition: all 0.2s ease;
+}
+
+.spotlight:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 4px 16px #181e2620;
+}
+
+.spotlight.s-aesgor { border-left-color: #1e4a6e; }
+.spotlight.s-marzena { border-left-color: #2e5a68; }
+.spotlight.s-treemaster { border-left-color: #2e5a42; }
+.spotlight.s-gaynor { border-left-color: #4a3a6a; }
+.spotlight.s-glug { border-left-color: #7a2020; }
+.spotlight.s-vanth { border-left-color: #3a6a3a; }
+
+.spotlight h4 { font-size: 18px; }
+
+/* Loot grid */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.loot-item.magical {
+  border-color: #5a7a94;
+  background: #dae2ea;
+  box-shadow: inset 0 0 16px #4a688014;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+
+.loot-note { font-size: 14px; color: var(--text-dim); }
+
+.xp-banner {
+  margin-top: 18px;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #cdd5dd, #d8dfe6);
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+.xp-banner strong { font-family: 'Rajdhani', sans-serif; font-size: 15px; letter-spacing: 0.5px; text-transform: none; }
+
+/* Quotes */
+blockquote {
+  border-left: 3px solid var(--gold-dim);
+  background: #1e4a6e0c;
+  padding: 16px 22px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+  color: var(--text);
+}
+
+blockquote .attribution {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-top: 8px;
+}
+
+blockquote em { color: var(--text-dim); font-size: 14px; }
+
+/* Open threads */
+.threads {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+
+.threads ul { margin-left: 20px; }
+
+/* Cliffhanger */
+.cliffhanger {
+  text-align: center;
+  padding: 48px 32px;
+  margin-bottom: 60px;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #c4ccd6, #d4dce4);
+  box-shadow: 0 0 24px var(--red-glow);
+}
+
+.cliffhanger p {
+  font-size: 17px;
+  color: var(--text);
+  max-width: 640px;
+  margin: 0 auto 24px;
+  line-height: 1.75;
+}
+
+.cliffhanger .big-line {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--red);
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Warehouse and the King&rsquo;s Coin</h1>
+  <div class="subtitle">Session 5 &mdash; Raiders of the Serpent Sea</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 21, 2026</span>
+    <span class="meta-pill">D&amp;D 5e (2014)</span>
+    <span class="meta-pill">~3 hours</span>
+    <span class="meta-pill">Level 2</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:60%"></div>
+    <div class="comp-seg comp-rp" style="width:20%"></div>
+    <div class="comp-seg comp-explore" style="width:10%"></div>
+    <div class="comp-seg comp-puzzle" style="width:5%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--red)"></span>Combat 60%</span>
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 20%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Exploration 10%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Investigation 5%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Loot 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-aesgor">
+      <div class="char-name">Aesgor</div>
+      <div class="char-class">Tuss &middot; Cleric (Discovery Domain)</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-gaynor">
+      <div class="char-name">Gaynor</div>
+      <div class="char-class">Human &middot; Warlock</div>
+      <div class="char-player">Gaynor</div>
+    </div>
+    <div class="char-card char-marzena">
+      <div class="char-name">Marzena</div>
+      <div class="char-class">Elf &middot; Fighter</div>
+      <div class="char-player">Vidaltje</div>
+    </div>
+    <div class="char-card char-treemaster">
+      <div class="char-name">Tree-Hammer</div>
+      <div class="char-class">Beastborn &middot; Barbarian</div>
+      <div class="char-player">SpasticWolf</div>
+    </div>
+    <div class="char-card char-glug">
+      <div class="char-name">GluG</div>
+      <div class="char-class">Grimnir &middot; Paladin</div>
+      <div class="char-player">GluG</div>
+    </div>
+    <div class="char-card char-vanth">
+      <div class="char-name">Vanth <span style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--green); letter-spacing:1px;">(NEW)</span></div>
+      <div class="char-class">Human &middot; Druid (Circle of the Devourer)</div>
+      <div class="char-player">Alex</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>A divine vision from the Stone Court pulled Aesgor into an alleyway rescue that introduced the party to <strong>Vanth</strong> &mdash; a druid from another world, transported to Grimnir by a flash of light and carrying a broken lightning-struck staff that serves as his planar anchor. <strong>Kinickan the Rune Thrower</strong> confirmed that Vanth&rsquo;s arrival was foretold, and that reuniting the staff&rsquo;s fragments &mdash; scattered across the Serpent Sea &mdash; is the only way home. Vanth joined the party, bound by necessity and a fresh debt of gratitude.</p>
+    <p>With the new ally in tow, the party turned to unfinished business: <strong>GluG&rsquo;s hunt for Asvard</strong>, the Varang mercenary who murdered her step-family. A pitched warehouse battle across two floors left Asvard&rsquo;s hired thugs dead and Asvard himself cornered. Under a binding oath of safe passage, Asvard revealed the name behind the contract: <strong>King Cenric of the Baendur</strong>. Two Baendur coins bearing the king&rsquo;s likeness confirmed the connection. GluG now knows who ordered her family&rsquo;s death &mdash; a king, not a common thug.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act mystery">
+      <div class="act-label">Act I &middot; Mystery &middot; The White Raven&rsquo;s Call</div>
+      <div class="act-card">
+        <h3>Divine Vision</h3>
+        <ul>
+          <li>A striking <strong>white raven</strong> lands on a building and locks eyes with Aesgor, triggering a divine vision: a well-dressed stranger surrounded by five ruffians in a Nowhere alleyway.</li>
+          <li>Aesgor tells the party <em>&ldquo;I can&rsquo;t ignore that&rdquo;</em> and rushes toward the vision&rsquo;s location. The party follows.</li>
+          <li>The stranger is <strong>Vanth</strong> &mdash; a human in spring clothes, carrying a lightning-struck staff, clearly not from Grimnir.</li>
+          <li>The Stone Court directed Aesgor specifically to save this stranger. This was not coincidence.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; Street Fight: Rescuing Vanth</div>
+      <div class="act-card">
+        <h3>Five Clanless Raiders</h3>
+        <ul>
+          <li>Five clanless raiders attempt to rob Vanth. The party intervenes.</li>
+          <li>Vanth proves capable immediately, casting <strong>Faerie Fire</strong> from his staff and outlining three enemies in crimson light.</li>
+          <li>Tree-Hammer <strong>rages</strong> in squirrel form, hurling javelins and dual-wielding axes with &ldquo;violent chittering of success.&rdquo;</li>
+          <li>Aesgor drops one raider with a crossbow bolt. Marzena drops another with a 13-damage crossbow shot. Gaynor finishes a third with Hex + Eldritch Blast.</li>
+          <li>Tree-Hammer kills the fourth. The fifth surrenders and flees &mdash; Aesgor lets him go: <em>&ldquo;I hope this is a good lesson for you. Now, go away.&rdquo;</em></li>
+          <li>City guards arrive, recognize the ruffians as known troublemakers, and escort Vanth to Kinickan.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act III &middot; Roleplay &middot; Vanth Meets the Rune Thrower</div>
+      <div class="act-card">
+        <h3>The Displaced Druid</h3>
+        <ul>
+          <li>Kinickan confirms Vanth&rsquo;s arrival was foretold by the bones.</li>
+          <li>Vanth&rsquo;s <strong>lightning-struck staff</strong> is identified as a <strong>planar anchor</strong> &mdash; broken, with fragments scattered across the Serpent Sea. Reassembling it could open a portal home.</li>
+          <li>Kinickan warns: <em>&ldquo;You must keep this guarded with your life.&rdquo;</em></li>
+          <li>Vanth gives Kinickan an acorn. Kinickan cradles it like a child.</li>
+          <li>The party takes a <strong>short rest</strong>, during which Vanth shares his backstory: a traveling caravan doing &ldquo;the Lord&rsquo;s work,&rdquo; transported by a flash of light. Tree-Hammer heals during the rest (Hit Die: 8 HP).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; The Warehouse Raid</div>
+      <div class="act-card">
+        <h3>Ground Floor</h3>
+        <ul>
+          <li>GluG leads the party to the warehouse district to find <strong>Asvard</strong>, the Varang who murdered her step-family.</li>
+          <li>Marzena&rsquo;s <strong>Perception 21</strong> identifies the inactive warehouse. GluG retrieves the key from Celorfin.</li>
+          <li>GluG kicks things off: eyes go black, <strong>Thaumaturgy</strong>-amplified voice booms through the warehouse, and she declares her presence.</li>
+          <li>The party fights <strong>Gerald, Billy, Terry, Gordy, and Sweetcheeks</strong> across stacked crates and narrow aisles.</li>
+          <li>GluG&rsquo;s <strong>Command (Flee)</strong> sends Terry running to the back corner (Wisdom save 4 vs DC 12).</li>
+          <li>Vanth tries <strong>Poison Spray</strong> (&ldquo;pocket sand&rdquo;) on a thug &mdash; resisted.</li>
+          <li>Tree-Hammer scrambles over crates using his Beastborn <strong>climb speed</strong>, dual-axes in hand &mdash; but has <strong>no rages left</strong> from the street fight and an earlier use.</li>
+          <li>Aesgor unleashes a <strong>Guiding Bolt</strong> on Billy for <strong>21 radiant damage</strong>, leaving him staggering &mdash; <em>&ldquo;I&rsquo;m gonna cast a real spell this time.&rdquo;</em></li>
+          <li>Gaynor&rsquo;s <strong>Dissonant Whispers</strong> racks Gerald with 12 psychic damage, forcing him to flee &mdash; Gaynor triggers an Eldritch Blast OA via <strong>Warcaster</strong>.</li>
+          <li>Vanth heals Tree-Hammer with <strong>Cure Wounds</strong> (10 HP) when the barbarian drops low.</li>
+          <li>Aesgor uses the party&rsquo;s <strong>healing potion on GluG</strong> (8 HP) &mdash; <em>&ldquo;Maybe it&rsquo;s time to be a healer.&rdquo;</em></li>
+          <li>GluG returns the favor with <strong>Lay on Hands</strong> on Tree-Hammer (10 HP).</li>
+        </ul>
+
+        <h3>Second Floor Push</h3>
+        <ul>
+          <li>Gordy flees upstairs screaming <em>&ldquo;Boss, we&rsquo;re being attacked!&rdquo;</em> The party pursues &mdash; Gaynor up the stairs, Vanth via Thorn Whip range, Aesgor listening at the door.</li>
+          <li>Vanth lands a <strong>Thorn Whip critical hit</strong> on Gordy, pulling him through stacked crates for bonus d6 damage.</li>
+          <li>Tree-Hammer climbs a timber beam to pop out next to Gordy: <em>&ldquo;Hey, I&rsquo;m back.&rdquo;</em></li>
+          <li>Gordy <strong>shoves Tree-Hammer off the crates</strong> (contested Athletics), but Tree-Hammer&rsquo;s Beastborn <strong>fall damage reduction</strong> (30 ft) means he lands unharmed: <em>&ldquo;I&rsquo;ll be back!&rdquo;</em></li>
+          <li>Vanth <strong>Wild Shapes into a giant badger</strong> and squeezes into Asvard&rsquo;s office.</li>
+          <li>Asvard closes and locks the door on the badger. Marzena, Tree-Hammer, Aesgor, GluG, and Gaynor all take turns smashing it &mdash; Gaynor&rsquo;s Eldritch Blast finally splinters it open.</li>
+          <li>Inside, <strong>Asvard</strong> fires his heavy crossbow at Aesgor (14 vs AC 18 &mdash; miss) and attacks badger-Vanth with a mace.</li>
+          <li>Vanth&rsquo;s <strong>Primal Protection: Protruding Spines</strong> triggers &mdash; 11 piercing damage + 5-foot push on Asvard when he lands a hit.</li>
+          <li>Marzena wades in with dual axes: <em>&ldquo;I&rsquo;m shielding you, Aesgor&rdquo;</em> &mdash; lands both hits on Sweetcheeks for 13 damage.</li>
+          <li>Sweetcheeks goes down screaming <em>&ldquo;I have always loved you, Asvard!&rdquo;</em> He replies: <em>&ldquo;I don&rsquo;t even know your name.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act V &middot; Roleplay &middot; The Oath and the King&rsquo;s Name</div>
+      <div class="act-card">
+        <h3>GluG Confronts Asvard</h3>
+        <ul>
+          <li>Asvard drops his weapons. GluG confronts him: <em>&ldquo;My name is GluG. You killed my step-family. Prepare to die.&rdquo;</em></li>
+          <li>Asvard offers a deal: he&rsquo;ll tell the truth under a <strong>binding oath</strong> if the party swears to let him leave unharmed.</li>
+          <li>The party swears. Vanth stays cautious: <em>&ldquo;I ain&rsquo;t got no pony in this room. That&rsquo;s between y&rsquo;all.&rdquo;</em></li>
+          <li>Asvard reveals: <strong>King Cenric of the Baendur</strong> commissioned the murder of GluG&rsquo;s family. The reason is unknown &mdash; <em>&ldquo;I&rsquo;m not sure how they upset the king, but that Baendur king really wanted them out of the way.&rdquo;</em></li>
+          <li>GluG: <em>&ldquo;You&rsquo;ve kept your oath. We will keep ours. But I will see you again.&rdquo;</em></li>
+          <li>Asvard leaves with his weapons. The oath holds.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act investigate">
+      <div class="act-label">Act VI &middot; Investigation &middot; The King&rsquo;s Coin</div>
+      <div class="act-card">
+        <h3>Post-Combat Loot</h3>
+        <ul>
+          <li>Gaynor searches Asvard&rsquo;s office (Investigation 15) and finds <strong>25 silver pieces</strong> &mdash; two of which are <strong>Baendur coins</strong> bearing the face of <strong>King Cenric</strong>.</li>
+          <li>Gaynor&rsquo;s History check (17) confirms the likeness. Physical proof connecting the king to Asvard.</li>
+          <li>Vanth acquires winter clothing from the warehouse stores.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat</h2>
+
+  <div class="combat-box">
+    <h3>Combat 1 &mdash; Street Ruffians (5 Clanless Raiders)</h3>
+    <div class="combat-meta">Initiative: Gaynor 22.14 &gt; Vanth 22 &gt; Tree-Hammer 18.14 &gt; Aesgor 17.14 &gt; Marzena 15.14 &gt; GluG 11.13</div>
+    <div class="combat-meta">Enemies: 5 clanless raiders (low HP, ~5 each, AC ~11)</div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> Eldritch Blast (13) &rarr; miss</li>
+      <li><strong>Vanth:</strong> Faerie Fire (DC 14) on 3 raiders &mdash; saves 13, 4, 12 &rarr; all three fail. Three enemies outlined in crimson, granting advantage on attacks against them.</li>
+      <li><strong>Raiders:</strong> Two skeggoex attacks on Vanth (11, 8) &rarr; both miss</li>
+      <li><strong>Tree-Hammer:</strong> Rages. Javelin (8 &rarr; miss, 21 &rarr; hit) &mdash; 10 piercing on Green</li>
+      <li><strong>Aesgor:</strong> Light crossbow (22 &rarr; hit) &mdash; 6 piercing. <strong>Kills Green.</strong></li>
+      <li><strong>Marzena:</strong> Light crossbow (24 &rarr; hit) &mdash; 13 piercing. <strong>Kills Red.</strong></li>
+      <li><strong>GluG:</strong> Spear with advantage (7, 19 &rarr; hit) &mdash; 6 piercing + 2 Inflict Harm (Cruel) = 8 damage on Orange</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Raiders:</strong> Skeggoex attacks (10, 9) &rarr; both miss</li>
+      <li><strong>Gaynor:</strong> Hex on Orange + Eldritch Blast (25 &rarr; hit) &mdash; force + hex damage. <strong>Kills Orange</strong> (DM: &ldquo;He had five hit points&rdquo;).</li>
+      <li><strong>Vanth:</strong> Poison Spray (DC 14) on Blue &rarr; Con save 20 (success). No damage.</li>
+      <li><strong>Raider:</strong> Attack (7) &rarr; miss</li>
+      <li><strong>Tree-Hammer:</strong> Dual skeggoex &mdash; main (15 &rarr; hit, 5 slashing), off-hand (19 &rarr; hit, 4 slashing) = 9 total. <strong>Kills Blue.</strong></li>
+      <li><strong>Aesgor:</strong> Lets Purple go. <em>&ldquo;I hope this is a good lesson for you.&rdquo;</em></li>
+      <li><strong>Gaynor:</strong> Eldritch Blast on fleeing Purple (11 &rarr; miss, 25 &rarr; hit but raider blocks with shield) &rarr; Purple escapes</li>
+    </ul>
+
+    <p><strong>Result:</strong> 4 killed, 1 fled. No party damage taken. Tree-Hammer used 1 rage.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 2 &mdash; Asvard&rsquo;s Warehouse</h3>
+    <div class="combat-meta">Initiative: Gaynor 21.14 &gt; Vanth 19.14 &gt; Tree-Hammer 13.14 &gt; Marzena 12.14 &gt; Aesgor 7.14 &gt; GluG 4.13</div>
+    <div class="combat-meta">Enemies: Gerald (mace, multi-attack), Billy (heavy crossbow/mace), Terry (crossbow), Gordy (mace), Sweetcheeks (mace, multi-attack), Asvard (heavy crossbow +1, mace)</div>
+
+    <h4>Ground Floor &mdash; Round 1</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> Hex on thug + Eldritch Blast (23 &rarr; hit) &mdash; 4 force + 5 hex = 9 damage</li>
+      <li><strong>Vanth:</strong> Holds action</li>
+      <li><strong>Tree-Hammer:</strong> &ldquo;Ooga booga, you get the axe&rdquo; &mdash; skeggoex (23 &rarr; hit, 6 slashing), off-hand (10 &rarr; miss)</li>
+      <li><strong>Gerald</strong> attacks Tree-Hammer: 19 &rarr; hit for <strong>7 bludgeoning</strong>. <em>&ldquo;Stay down, you rabid animal.&rdquo;</em></li>
+      <li><strong>Gordy</strong> flees to the back, screaming <em>&ldquo;Arm yourselves! We have intruders!&rdquo;</em></li>
+      <li><strong>Marzena:</strong> Repositioning (too far to engage)</li>
+      <li><strong>Aesgor:</strong> Sacred Flame on thug &mdash; dex save <strong>natural 1</strong> &rarr; auto-fail, radiant damage</li>
+      <li><strong>GluG:</strong> Cruel drive active (climb speed). Climbs crates, throws spear at Gerald from above &mdash; <strong>miss</strong>. Uses Thaumaturgy to amplify voice.</li>
+    </ul>
+
+    <h4>Ground Floor &mdash; Round 2 (Billy and Terry Enter)</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> Repositions only</li>
+      <li><strong>Vanth:</strong> Poison Spray (&ldquo;pocket sand&rdquo;) on a thug &mdash; <strong>Con save success</strong>, no damage</li>
+      <li><strong>Billy</strong> (enters): Heavy crossbow at Marzena &mdash; 15 vs AC 16, <strong>miss</strong></li>
+      <li><strong>Terry</strong> (enters): Heavy crossbow at GluG &mdash; 15 &rarr; hit, <strong>9 piercing</strong>. GluG takes a heavy hit.</li>
+      <li><strong>Tree-Hammer:</strong> Axes on target (no rages left &mdash; used both previously). Mediocre damage.</li>
+      <li><strong>Gerald</strong> attacks Tree-Hammer again: <strong>two hits</strong>, significant bludgeoning. Tree-Hammer badly hurt.</li>
+      <li><strong>Marzena:</strong> Crossbow on Gerald (17 &rarr; hit, 8 piercing)</li>
+      <li><strong>Aesgor:</strong> <strong>Guiding Bolt</strong> on Billy (+5, roll 16 &rarr; hit) &mdash; <strong>21 radiant damage</strong>. Billy staggers. Next attacker has advantage. <em>&ldquo;I&rsquo;m gonna cast a real spell this time.&rdquo;</em></li>
+      <li><strong>GluG:</strong> <strong>Command (Flee)</strong> on Terry &mdash; Wisdom save <strong>4</strong> vs DC 12 &rarr; fail. Terry spends her turn fleeing to the back corner. GluG climbs down behind Marzena.</li>
+    </ul>
+
+    <h4>Ground Floor &mdash; Round 3</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> <strong>Dissonant Whispers</strong> on Gerald &mdash; Wisdom save 9 vs DC 13 &rarr; fail. <strong>12 psychic damage</strong> + forced movement. Gaynor triggers <strong>Warcaster OA</strong>: Eldritch Blast (16 &rarr; hit). Gerald at 1 HP.</li>
+      <li><strong>Vanth:</strong> <strong>Cure Wounds</strong> on Tree-Hammer &mdash; <strong>10 HP</strong> recovered</li>
+      <li><strong>Tree-Hammer:</strong> Scrambles over crates via climb speed. Skeggoex on Billy &mdash; hit. <strong>Kills Billy.</strong> Crosses aisle, crossbow on Gerald (17 &rarr; hit) &mdash; <strong>Kills Gerald.</strong> Two kills in one turn.</li>
+      <li><strong>Marzena:</strong> Dual axes &mdash; main (15 &rarr; hit, 7 slashing), off-hand (21 &rarr; hit, 6 slashing) = 13 total</li>
+      <li><strong>Aesgor:</strong> Healing potion on GluG &mdash; <strong>8 HP</strong> recovered. <em>&ldquo;Maybe it&rsquo;s time to be a healer.&rdquo;</em></li>
+      <li><strong>GluG:</strong> Spear (16 &rarr; hit, 4 piercing + 2 Cruel). <strong>Lay on Hands</strong> on Tree-Hammer &mdash; <strong>10 HP</strong>. Climbs crates, attempts to hide (Stealth 5/6 with advantage &rarr; fails &mdash; &ldquo;your head is stuck in a box and your arse is waving around&rdquo;).</li>
+      <li><strong>Gordy</strong> disappears upstairs, pounding on door: <em>&ldquo;Boss, we&rsquo;re being attacked!&rdquo;</em></li>
+    </ul>
+
+    <h4>Ground Floor &mdash; Round 4 (Transition)</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> Moves upstairs. Holds Eldritch Blast. Lights pipe. <em>&ldquo;I guess we should wait for the fish.&rdquo;</em></li>
+      <li><strong>Vanth:</strong> Moves to stairs. Holds Thorn Whip.</li>
+      <li><strong>Sweetcheeks</strong> enters. Attacks Marzena &mdash; <strong>miss</strong> twice.</li>
+      <li><strong>Tree-Hammer:</strong> Eagle Dives off crates. Skeggoex hits (18 &rarr; hit, 8 slashing), off-hand miss.</li>
+      <li><strong>Marzena:</strong> Dual axes on Sweetcheeks &mdash; main (15 &rarr; hit, 7 slashing), off-hand (21 &rarr; hit, 6 slashing) = 13 total</li>
+      <li><strong>Aesgor:</strong> Dashes upstairs through allies</li>
+      <li><strong>GluG:</strong> Thaumaturgy, spear on Sweetcheeks (hit, 6 piercing + 2 Cruel). Command (Flee) on Sweetcheeks &mdash; Wisdom save <strong>18</strong> vs DC 12 &rarr; <strong>succeeds</strong>.</li>
+    </ul>
+
+    <h4>Second Floor &mdash; Round 5</h4>
+    <ul>
+      <li><strong>Gaynor:</strong> Holds action (smoking pipe upstairs)</li>
+      <li><strong>Vanth:</strong> Holds Thorn Whip</li>
+      <li><strong>Sweetcheeks</strong> attacks Tree-Hammer: <strong>two max-damage hits &mdash; 8 + 8 = 16 bludgeoning</strong>. Tree-Hammer barely standing.</li>
+      <li><strong>Gordy</strong> opens the door. Vanth&rsquo;s held Thorn Whip triggers &mdash; miss.</li>
+      <li><strong>Tree-Hammer:</strong> Axes on Gordy &mdash; 13 hit (8 slashing), off-hand 19 hit (2 slashing) = 10 total</li>
+      <li><strong>Asvard</strong> fires heavy crossbow at Aesgor (13+1=14 vs AC 18 &rarr; <strong>miss</strong>)</li>
+      <li><strong>Sweetcheeks</strong> attacks Marzena: hits for 13 bludgeoning total</li>
+      <li><strong>Aesgor:</strong> <strong>Cure Wounds</strong> on Tree-Hammer &mdash; <strong>11 HP</strong> recovered. <em>&ldquo;I&rsquo;m gonna be a good player.&rdquo;</em></li>
+      <li><strong>GluG:</strong> Command (Flee) on Sweetcheeks &mdash; Wisdom save <strong>18</strong> vs DC 12 &rarr; <strong>succeeds</strong>. Stabs with spear instead.</li>
+    </ul>
+
+    <h4>Second Floor &mdash; Round 6</h4>
+    <ul>
+      <li><strong>Gordy</strong> <strong>shoves Tree-Hammer</strong> off crates (Athletics 10 vs Tree-Hammer&rsquo;s 9 &rarr; success). Tree-Hammer falls 10 ft but Beastborn racial reduces fall by 30 ft &mdash; <strong>no damage</strong>. <em>&ldquo;I&rsquo;ll be back!&rdquo;</em></li>
+      <li><strong>Gaynor:</strong> Hex on Gordy. Eldritch Blast (13 &rarr; miss)</li>
+      <li><strong>Vanth:</strong> <strong>Thorn Whip critical hit</strong> (25 &rarr; crit) on Gordy &mdash; 3+6 piercing + d6 box damage (5) = <strong>14 total</strong>. Pulls Gordy through stacked crates.</li>
+      <li><strong>Asvard</strong> fires at Aesgor again (9 &rarr; miss)</li>
+      <li><strong>Tree-Hammer:</strong> Climbs timber beam (15 ft). Axes on Gordy &mdash; 16 hit (7 slashing), 11 miss. <strong>Kills Gordy</strong> (accumulated damage).</li>
+      <li><strong>Marzena:</strong> Walks through Vanth&rsquo;s space. Dual axes on Sweetcheeks &mdash; 25 hit (9 slashing), 23 hit (8 slashing) = 17 total. <em>&ldquo;I&rsquo;m shielding you, Aesgor.&rdquo;</em></li>
+      <li><strong>Sweetcheeks</strong> attacks Marzena: 13 bludgeoning</li>
+      <li><strong>Aesgor:</strong> Sacred Flame on Sweetcheeks &mdash; dex save 12 vs DC 13 &rarr; <strong>fail</strong>. 6 radiant.</li>
+      <li><strong>GluG:</strong> Spear on Sweetcheeks (23 &rarr; hit, 8 piercing + 2 Cruel)</li>
+      <li><strong>Gaynor:</strong> Moves Hex to Sweetcheeks. Eldritch Blast (16/23 &rarr; hit) &mdash; 6 necrotic + 4 force. <strong>Kills Sweetcheeks.</strong> <em>&ldquo;I have always loved you, Asvard!&rdquo;</em> / <em>&ldquo;I don&rsquo;t even know your name.&rdquo;</em></li>
+    </ul>
+
+    <h4>Second Floor &mdash; Round 7 (Door Assault)</h4>
+    <ul>
+      <li><strong>Marzena:</strong> Second Wind (3+2 = 5 HP). Axes on door &mdash; <em>&ldquo;Here&rsquo;s Johnny.&rdquo;</em> Door half-destroyed.</li>
+      <li><strong>Aesgor:</strong> Warhammer on door (8 &rarr; miss). <em>&ldquo;You haven&rsquo;t used that in so long you&rsquo;ve forgotten how to swing it.&rdquo;</em></li>
+      <li><strong>GluG:</strong> Club on door (15 &rarr; hit, 4 bludgeoning + 2 Cruel)</li>
+      <li><strong>Gaynor:</strong> Eldritch Blast on door (21 &rarr; hit). <strong>Door destroyed.</strong></li>
+      <li><strong>Vanth:</strong> <strong>Wild Shapes into a giant badger.</strong> Enters Asvard&rsquo;s office.</li>
+      <li><strong>Asvard:</strong> Closes and locks the door on the badger. <em>&ldquo;You made a mistake, monster.&rdquo;</em> Mace attacks: 16 &rarr; hit (5 bludgeoning), second hit (6 bludgeoning). Badger takes 11 total.</li>
+      <li>Vanth&rsquo;s <strong>Primal Protection: Protruding Spines</strong> triggers &mdash; <strong>11 piercing damage</strong> + pushes Asvard 5 feet into boxes.</li>
+    </ul>
+
+    <h4>Second Floor &mdash; Round 8</h4>
+    <ul>
+      <li>Party smashes door again (Tree-Hammer axes, Marzena axes, Aesgor misses, GluG club, Gaynor Eldritch Blast)</li>
+      <li><strong>Vanth (Badger):</strong> Bite (15 &rarr; hit, 2 piercing), Claws (17 &rarr; hit, 3+9 = 12 slashing) = <strong>14 total damage</strong></li>
+      <li><strong>Asvard:</strong> Mace on badger (13 &rarr; hit, 6 bludgeoning). Badger form drops. Vanth reverts.</li>
+      <li>Vanth&rsquo;s <strong>Primal Protection: Bulbous Shell</strong> triggers &mdash; +3 AC</li>
+      <li>Asvard&rsquo;s second mace attack (8 &rarr; miss due to increased AC)</li>
+      <li><strong>Asvard surrenders.</strong> <em>&ldquo;What do you want from me?&rdquo;</em></li>
+    </ul>
+
+    <p><strong>Result:</strong> 5 thugs killed (Gerald, Billy, Terry, Gordy, Sweetcheeks). Asvard surrenders under oath. No PCs dropped to 0.</p>
+    <p><strong>Healing used:</strong> Vanth Cure Wounds on Tree-Hammer (10), Aesgor healing potion on GluG (8), GluG Lay on Hands on Tree-Hammer (10), Aesgor Cure Wounds on Tree-Hammer (11), Marzena Second Wind (5). Tree-Hammer Hit Die during short rest (8).</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-aesgor">
+      <h4>Aesgor (Pax) &middot; The Reluctant Healer</h4>
+      <ul>
+        <li>Received a divine vision from the Stone Court &mdash; a white raven directing him to save a stranger</li>
+        <li>Killed a raider with crossbow in the street fight (22 to hit, 6 piercing)</li>
+        <li>Cast <strong>Guiding Bolt</strong> for 21 radiant damage on Billy &mdash; his biggest hit of the campaign</li>
+        <li>Used the party&rsquo;s healing potion on <strong>GluG</strong> (8 HP) and <strong>Cure Wounds</strong> on <strong>Tree-Hammer</strong> (11 HP)</li>
+        <li>Cast Sacred Flame twice in the warehouse fight, including forcing a natural 1 on the dex save</li>
+        <li>Missed a crossbow shot on Gordy due to cover, missed a warhammer swing on the door</li>
+        <li>Held his shield and listened at the door before the Asvard confrontation</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-gaynor">
+      <h4>Gaynor &middot; The Hexblade&rsquo;s Reach</h4>
+      <ul>
+        <li>Consistent Hex + Eldritch Blast damage throughout both combats</li>
+        <li><strong>Dissonant Whispers</strong> on Gerald: 12 psychic damage + forced movement, then Warcaster OA Eldritch Blast</li>
+        <li><strong>Killed Sweetcheeks</strong> with Hex + Eldritch Blast &mdash; <em>&ldquo;I have always loved you, Asvard!&rdquo;</em> / <em>&ldquo;I don&rsquo;t even know your name.&rdquo;</em></li>
+        <li>Eldritch Blast splintered the locked door to Asvard&rsquo;s office</li>
+        <li>Found the <strong>25 silver and 2 Baendur coins</strong> in Asvard&rsquo;s desk (Investigation 15, History 17)</li>
+        <li>Smoking a pipe while waiting for GluG to catch up: <em>&ldquo;I guess we should wait for the fish.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-marzena">
+      <h4>Marzena (Vidaltje) &middot; The Sharpshooter</h4>
+      <ul>
+        <li>Crossbow kill in the street fight (24 to hit, 13 piercing)</li>
+        <li>Perception 21 identified the correct warehouse &mdash; best roll of the group</li>
+        <li>Dual-axe attacks on Sweetcheeks: 17 damage in one exchange (25 and 23 to hit &mdash; both landing)</li>
+        <li><em>&ldquo;I&rsquo;m shielding you, Aesgor&rdquo;</em> &mdash; positioned to protect the cleric</li>
+        <li>Second Wind for a disappointing 3 (+2 level = 5 HP)</li>
+        <li>Axe attack on the locked door &mdash; <em>&ldquo;Here&rsquo;s Johnny&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-treemaster">
+      <h4>Tree-Hammer (SpasticWolf) &middot; The Rabid Squirrel</h4>
+      <ul>
+        <li><strong>Raged</strong> in the street fight &mdash; javelin for 10 damage, dual axes finish blue</li>
+        <li>&ldquo;One swing, two swings, followed by violent chittering of success&rdquo; &mdash; the squirrel barbarian&rsquo;s signature</li>
+        <li>Used Beastborn <strong>climb speed</strong> to scramble over warehouse crates repeatedly</li>
+        <li>Assassin&rsquo;s Creed Eagle Dived off a six-foot pile of crates onto Terry</li>
+        <li>Got <strong>shoved off the crates</strong> by Gordy but negated fall damage with Beastborn racial (reduce fall by 30 ft)</li>
+        <li>Took heavy hits: 7 from Gerald, 8+8 from Sweetcheeks (two max damage rolls), but kept fighting</li>
+        <li>Readied axes and let the party handle the Asvard diplomacy</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-glug">
+      <h4>GluG &middot; The Avenger</h4>
+      <ul>
+        <li>This was <strong>GluG&rsquo;s session</strong>. Everything in the warehouse was her quest.</li>
+        <li>Eyes went black, <strong>Thaumaturgy</strong>-amplified voice boomed: <em>&ldquo;Asvard, your ancestors are calling for you. Do you hear them?&rdquo;</em></li>
+        <li><strong>Command (Flee)</strong> on Terry &mdash; Wisdom save 4 vs DC 12, sent her running</li>
+        <li>Second Command on Sweetcheeks &mdash; save 18, resisted</li>
+        <li>Used <strong>Lay on Hands</strong> (10 HP) on Tree-Hammer after the barbarian dropped low</li>
+        <li>Climbed crates, jumped the railing to the second floor, pounded on Asvard&rsquo;s door</li>
+        <li>Confronted Asvard: <em>&ldquo;My name is GluG. You killed my step-family. Prepare to die.&rdquo;</em></li>
+        <li>Extracted the truth under oath: <strong>King Cenric of the Baendur</strong> ordered the hit</li>
+        <li><em>&ldquo;You&rsquo;ve kept your oath. We will keep ours. But I will see you again.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-vanth">
+      <h4>Vanth (Alex) &middot; The Displaced Druid (NEW)</h4>
+      <ul>
+        <li><strong>First session.</strong> Transported to Grimnir from another world by a flash of light.</li>
+        <li>Cast <strong>Faerie Fire</strong> in his first combat turn &mdash; all three targeted raiders failed their saves</li>
+        <li><strong>Circle of the Devourer</strong> subclass: Primal Protection triggered twice vs Asvard
+          <ul>
+            <li><strong>Protruding Spines:</strong> 11 piercing damage + pushed Asvard 5 feet</li>
+            <li><strong>Bulbous Shell:</strong> +3 AC until end of next turn</li>
+          </ul>
+        </li>
+        <li><strong>Thorn Whip critical hit</strong> on Gordy &mdash; pulled him through stacked crates</li>
+        <li><strong>Wild Shaped into a giant badger</strong> for the Asvard fight &mdash; bite + claws for 14 damage</li>
+        <li>Healed Tree-Hammer with <strong>Cure Wounds</strong> (10 HP) when the barbarian was critical</li>
+        <li>Gave Kinickan an acorn. Kinickan cradled it like a child.</li>
+        <li>Lightning-struck staff identified as a <strong>planar anchor</strong> &mdash; fragments scattered across the Serpent Sea</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Leads</h2>
+  <div class="loot-grid">
+    <div class="loot-item">
+      <div class="loot-name">25 Silver Pieces</div>
+      <div class="loot-source">Asvard&rsquo;s desk &middot; Investigation 15</div>
+      <div class="loot-note">Found by Gaynor in the warehouse office after Asvard&rsquo;s surrender.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">2 Baendur Coins</div>
+      <div class="loot-source">Among the 25 silver &middot; History 17</div>
+      <div class="loot-note">Bear the face of <strong>King Cenric</strong>. Physical proof connecting the king to Asvard and GluG&rsquo;s murdered family.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Winter Clothing</div>
+      <div class="loot-source">Warehouse stores &middot; For Vanth</div>
+      <div class="loot-note">Vanth arrived in spring clothes from another world. Now dressed for Grimnir.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Aesgor:</strong> &ldquo;I can&rsquo;t ignore that. I will tell the party I have to go somewhere. If you can help, please follow me. But I really have to go.&rdquo;
+    <span class="attribution">&mdash; Aesgor receives a divine vision of Vanth being robbed and immediately drops everything to respond.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Aesgor:</strong> &ldquo;I hope this is a good lesson for you. Now, go away.&rdquo;
+    <span class="attribution">&mdash; Letting the last raider flee after the street fight &mdash; mercy from a cleric who could have ended it.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Gaynor:</strong> &ldquo;He lived. That&rsquo;s what he did.&rdquo;
+    <span class="attribution">&mdash; When the DM asks what the raider did to deserve being hexed.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Tree-Hammer:</strong> &ldquo;Hey, Alex, you&rsquo;re going to learn something real quick. We don&rsquo;t have any healers.&rdquo;
+    <span class="attribution">&mdash; Tree-Hammer warning the new guy after taking heavy hits &mdash; the party&rsquo;s running joke about Aesgor refusing to heal.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Gaynor:</strong> &ldquo;You should have thought about that before swearing our oath, huh?&rdquo;
+    <span class="attribution">&mdash; To Asvard as he leaves &mdash; a reminder that the oath cuts both ways.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Tree-Hammer:</strong> &ldquo;One swing, two swings, followed by violent chittering of success.&rdquo;
+    <span class="attribution">&mdash; Tree-Hammer in squirrel form, narrating his dual-axe kills.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Tree-Hammer:</strong> &ldquo;I&rsquo;m a blacksmith!&rdquo;
+    <span class="attribution">&mdash; Correcting Gerald&rsquo;s characterization while actively chopping into him.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Tree-Hammer:</strong> &ldquo;OPEN THE FUCKING DOOR!&rdquo;
+    <span class="attribution">&mdash; After Asvard locks himself in with badger-Vanth. The most Tree-Hammer moment of the session.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>GluG:</strong> &ldquo;My name is GluG. You killed my step-family. Prepare to die.&rdquo;
+    <span class="attribution">&mdash; The Inigo Montoya moment. GluG confronts Asvard with black eyes and Thaumaturgy-amplified voice.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>GluG:</strong> &ldquo;You&rsquo;ve kept your oath. We will keep ours. But I will see you again.&rdquo;
+    <span class="attribution">&mdash; Measured restraint from someone who wanted blood. The oath holds &mdash; for now.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Marzena:</strong> &ldquo;There we go, motherfucker!&rdquo;
+    <span class="attribution">&mdash; Marzena&rsquo;s crossbow bolt punches clean through the red raider&rsquo;s back in the street fight. 13 damage, instant kill.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Marzena:</strong> &ldquo;I&rsquo;m shielding you, Aesgor. And can I do my off? Holy shit.&rdquo;
+    <span class="attribution">&mdash; Positioning to protect the cleric, then landing both axe hits on Sweetcheeks.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Vanth:</strong> &ldquo;Well, seeing as y&rsquo;all did just save my life, I would say that&rsquo;s probably better in numbers. Apologies. Raised by bears and such.&rdquo;
+    <span class="attribution">&mdash; Vanth&rsquo;s introduction to the party &mdash; polite, southern, and immediately endearing.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Vanth:</strong> &ldquo;I&rsquo;m a druid, bitch! I have wild shape.&rdquo;
+    <span class="attribution">&mdash; Vanth&rsquo;s first wild shape &mdash; transforming into a giant badger to squeeze into Asvard&rsquo;s locked office.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>King Cenric of the Baendur</strong> ordered GluG&rsquo;s family murdered. Why? The Baendur are the non-raider peoples, historically subjugated by the Witchking. What does a Baendur king want with a Grimnir fish-person&rsquo;s family? GluG&rsquo;s Kinickan vision &mdash; <em>&ldquo;the Varang, the king, and drawn swords&rdquo;</em> &mdash; is now half-decoded: the king is Cenric.</li>
+      <li><strong>Asvard is alive and free.</strong> The oath protects him, but he promised nothing about the future. He knows the party&rsquo;s faces, their capabilities, and GluG&rsquo;s vendetta. <em>&ldquo;I&rsquo;ll remember you all.&rdquo;</em></li>
+      <li><strong>The Feast of Serpents</strong> is tomorrow (in-game). Three captains, ship challenges, the party&rsquo;s path to a longship. The DM offered: continue gathering intel on captains, or jump to the festival.</li>
+      <li><strong>Vanth&rsquo;s planar anchor</strong> &mdash; the lightning-struck staff is broken. Fragments scattered across the Serpent Sea. Vanth needs a ship as badly as the rest of the party.</li>
+      <li><strong>The Oath of Fellowship clock</strong> &mdash; Aesgor, Gaynor, and Marzena are still sworn to kill Gulli before the snows melt.</li>
+      <li><strong>Twice you must walk those halls</strong> &mdash; Aesgor&rsquo;s vision still points back to Kekel.</li>
+      <li><strong>GluG&rsquo;s dual oath</strong> &mdash; the Asvard oath is resolved (information extracted), but the vendetta against King Cenric is just beginning.</li>
+      <li><strong>Vanth&rsquo;s Circle of the Devourer</strong> &mdash; primal spirits manifest as defensive mutations (spines, shell). The party has seen two forms. What else does this druid bring?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="cliffhanger">
+  <p>King Cenric of the Baendur ordered GluG&rsquo;s family murdered. The Varang, the king, and drawn swords &mdash; the vision is half-decoded.</p>
+  <div class="big-line">A king, not a common thug.</div>
+</div>
+
+<section class="pax-notes">
+  <h2>Pax&rsquo;s Notes &mdash; Aesgor&rsquo;s Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Aesgor did this session</h3>
+  <ul>
+    <li>Received a <strong>divine vision</strong> from the Stone Court via white raven &mdash; directed to save a stranger</li>
+    <li>Killed a raider with crossbow in the street fight</li>
+    <li>Cast <strong>Guiding Bolt</strong> for 21 radiant in the warehouse &mdash; biggest hit so far</li>
+    <li>Used the party&rsquo;s healing potion on <strong>GluG</strong> and <strong>Cure Wounds</strong> on <strong>Tree-Hammer</strong></li>
+    <li>Cast Sacred Flame twice; forced one natural 1 on the dex save</li>
+    <li>Let the fleeing raider go in the street fight</li>
+    <li>Swore the oath to let <strong>Asvard</strong> leave unharmed</li>
+  </ul>
+
+  <h3>Things Aesgor knows that the party does not</h3>
+  <ul>
+    <li>The <strong>white raven</strong> was a clear divine communication &mdash; the Stone Court directed Aesgor specifically to save Vanth. This was not coincidence.</li>
+    <li>Aesgor is the only one with established connections to divine visions (the rune, the valkyries). Vanth&rsquo;s arrival being tied to a Stone Court directive may mean Vanth is important to whatever is coming.</li>
+    <li>The <strong>Baendur</strong> connection is interesting: the Witchking historically subjugated the Baendur. Now a Baendur king is commissioning murders of Grimnir families. The political landscape may be shifting.</li>
+  </ul>
+
+  <h3>What Aesgor is thinking about</h3>
+  <ul>
+    <li><strong>King Cenric</strong> &mdash; a Baendur king ordering hits on Grimnir families is unusual. The Baendur have historically been the weaker faction. What changed?</li>
+    <li><strong>GluG&rsquo;s restraint</strong> &mdash; she swore the oath and let Asvard walk. That cost her something. Aesgor respects the discipline but wonders how long it holds.</li>
+    <li><strong>The Feast of Serpents</strong> is tomorrow. The ship challenges are the priority. Vanth needs a ship too &mdash; another ally with a reason to help.</li>
+    <li>Still only used <strong>1 of 2 spell slots</strong> in the street fight (Sacred Flame is a cantrip), but burned both slots in the warehouse (Guiding Bolt + Cure Wounds). Need to be more strategic with slot conservation.</li>
+    <li><strong>Healing potion is gone.</strong> The last one from Kekel. Need to buy more &mdash; Alwel has them for 30 gp.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Why did the <strong>Stone Court</strong> want Vanth saved? What role does he play?</li>
+    <li><strong>King Cenric</strong> &mdash; is this connected to the broader political tensions? The Witchking, the Baendur, the raiders?</li>
+    <li>The <strong>Feast of Serpents</strong> plan: borrow Lurx&rsquo;s ship, challenge Hadd via Thinker&rsquo;s Game or pink-slip race. Is the party ready?</li>
+    <li>Vanth&rsquo;s <strong>staff fragments</strong> &mdash; where to even start looking? The Serpent Sea is vast.</li>
+    <li>Asvard is free and angry. Will he come back with reinforcements?</li>
+  </ul>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: #dae2ea;
+  border: 1px solid #5a7a94;
+  border-left: 4px solid #1e4a6e;
+  border-radius: 8px;
+  box-shadow: inset 0 0 24px #4a688014;
+}
+.pax-notes h2 { border-bottom-color: #5a7a94; }
+.pax-notes h3 {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #0a1018;
+}
+.pax-notes h3:first-of-type { margin-top: 14px; }
+.pax-notes .pax-intro {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.pax-notes ul { margin-left: 22px; }
+.pax-notes li { padding: 6px 0; }
+</style>
+
+</div>
+</body>
+</html>
