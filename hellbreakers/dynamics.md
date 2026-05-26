@@ -114,8 +114,11 @@ Established Session 1: Each party member was individually summoned by missive to
 - **The Devil at the Waterspout Inn** (resolved S4): Rhokrag confirmed the devil was a torture specialist Tilaax brought in for the interrogation. Connection to broader infernal intelligence apparatus active.
 - **Rhokrag's Contact** (resolved S4): Confirmed it was a Chelaxian setup from the start — the contact was the bait.
 - **Hellknight Alaya** (active, urgent): Newly named Hellknight hunting the Hellbreakers. Possibly connected to the regrouping the party has been hunting since S1 — and possibly to Bai Feng's disappearance.
-- **The Wolf Point Tower** (active): Causes nightmares. Steel Circle deal pending. Party must approach to fulfill the parley terms.
-- **The Goblin-Snake Hybrids** (active): More hybrid voices ahead in the ravine (S4 cliffhanger). Hybrid creatures don't usually self-spawn — who or what is making them? Connection to the Ina-domain investigation.
+- **The Wolf Point Tower** (resolved S5): Nightmare source was a Drude (Feywild). Killed by Ren. Steel Circle deal fulfilled — Runa Bloodhammer's band moved back to the keep, will target only Chelaxians.
+- **The Goblin-Snake Hybrids / Hissrath** (resolved S4-S5): Battle plan found in Goblin revealed the Hissrath were framing Stumpfield goblins for Fernsby attacks. Boss killed S4; battle plan recovered and translated S5. Fernsby and Stumpfield both informed.
 - **Hedvind's Thrune Escalation** (active): Drumish trade routes pulling back under raid pressure → Hedvind expected to call in Thrune soldiers. Timeline unknown.
-- **Hearts and Minds Tour** (active): New mandate from Demetrias — ease back on raids, win Chitterwood villages. First rep point banked. Party assigned Wolf Point, Verodia, Fernsby, Stumpfield, Umach.
+- **Hearts and Minds Tour** (mostly complete): 10+ reputation — Hellbreakers now **favorable** in the Chitterwood. Fernsby, Stumpfield, Wolf Point won. Remaining: Umach. Vordia is Chelaxian-loyal (visited but not won).
 - **Ren's Provenance** (open mystery): Anonymous donor delivered a Chelaxian-trained boarhound to HQ. Who? Why?
+- **The Follower** (active, S5): Someone tracking the party. Bai Jian spotted a figure ~2 miles back on the trail. Same presence as rustling at the Wolf Point camp. Party shook them via Survival + Ren. Identity unknown — Hellknight Alaya's agent? Chelaxian scout?
+- **Bright Embers Orphanage** (active, S5): Abandoned Asmodean orphanage east of Vordia. Sisters of the Golden Erinyes departed — why? Haunts cleansed (Attic Whisperer killed), but building not fully explored. Asmodean murals and pentagrams suggest infernal connection. Vordia constable was evasive.
+- **Harpy's Talon** (consumed S5): Used on the Attic Whisperer. Persistent bleed wasted on undead. Gone from inventory.

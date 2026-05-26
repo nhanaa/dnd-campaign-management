@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 1 — Into the Ebon Tower</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>Into the Ebon Tower</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 1</div>
+<div class="meta-row">
+  <span class="meta-pill">May 24, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 50m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:45%"></div>
+  <div class="comp-seg comp-rp" style="width:10%"></div>
+  <div class="comp-seg comp-explore" style="width:20%"></div>
+  <div class="comp-seg comp-social" style="width:15%"></div>
+  <div class="comp-seg comp-loot" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax · New Player</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>Tivael joined the party at Talmandor's Bounty as shadow-tainted dinosaurs attacked the settlement. After a violent welcome, the party descended through the Azlanti elevator into a Dero-controlled rail junction, where a shrewd negotiation with the deposed leader Zovi yielded critical intelligence about the Ebon Tower, its master Nizca, and the traitorous inventor Degg. The path deeper led through a haunted medical wing — poltergeists of ancient Azlanti doctors trapped during a long-forgotten calamity — and past clockwork defenders still guarding ruins that no longer need protecting.</p>
+  <p>The tiny dragon scholar played his pipes, scattered force-claws through incorporeal ghosts, read Azlanti medical papers the rest of the party couldn't decipher, and proved that the smallest member of the party might be the most impactful.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act combat">
+    <div class="act-label">Act I · Combat · Talmandor's Bounty</div>
+    <div class="act-card">
+      <h3>Shadow-Tainted Pachycephalosaurus × 3</h3>
+      <ul>
+        <li><strong>Tivael</strong> joined the fight mid-attack — "Protect me" — and opened with <strong>Dirge of Doom + Recall Knowledge + Bon Mot</strong> in a single turn. The textbook Bard opener.</li>
+        <li>RK revealed: no weaknesses/resistances, best save Fort, worst save <strong>Will</strong>.</li>
+        <li><strong>Ferrok</strong> opened with Sure Strike + Horizon Thunder Sphere Spellstrike (3-action) for <strong>56 damage</strong> — the biggest single hit of the session.</li>
+        <li><strong>Shadow Expulsion</strong> (30-ft cone, void AoE) hit the party twice — 30 and 40 raw damage. Tivael took 55 total.</li>
+        <li><strong>Tivael's Flurry of Claws</strong> crit on the first target for <strong>34 damage</strong> (slashing + force). First blood for the tiny dragon.</li>
+        <li><strong>Raylta</strong> crit with Needle Darts for 34 damage — "Is it because of the ring? Oh my god, the power is getting to my head."</li>
+        <li><strong>Bargrum</strong> intercepted a hit meant for Ferrok, absorbing 16 damage. Business as usual.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act II · Exploration · The Descent</div>
+    <div class="act-card">
+      <h3>Through Underheaven to the Elevator</h3>
+      <ul>
+        <li>Party resupplied at Talmandor's Bounty and distributed loot from previous sessions.</li>
+        <li>Descended through Underheaven, the Bleeding Palace, and loaded into the Azlanti elevator.</li>
+        <li>Emerged at an underground rail junction with tracks running in multiple directions.</li>
+        <li><strong>Bael</strong> used Four Winds to reposition the party into formation before exploration.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · Dero Sentries + Magister</div>
+    <div class="act-card">
+      <h3>The Rail Junction Defenders</h3>
+      <ul>
+        <li><strong>Tivael</strong> used Lingered Courageous Anthem for the first time, then switched to Rallying Anthem when AoE pressure mounted.</li>
+        <li>Dero Magister cast <strong>Noise Blast</strong> — sonic AoE, Fort save — Deafening most of the party.</li>
+        <li>Deafened compositions require a <strong>flat check</strong> to cast (auditory trait). Tivael managed to keep Rallying Anthem running.</li>
+        <li><strong>Agonizing Despair</strong> hit Bargrum for 17 mental damage + Frightened 2.</li>
+        <li><strong>Tivael</strong> used <strong>Electric Arc</strong> against two targets and <strong>Daze</strong> (from Pipes of Compulsion) for mental damage.</li>
+        <li>Bael's Flying Flame hit the Magister + Sentry B for 20 damage each — "It's finally happening! The year of the spellcasters!"</li>
+        <li><strong>Ferrok</strong> crit for 40 damage on a Dero Sentry. The table went "O.O"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · Negotiation with Zovi</div>
+    <div class="act-card">
+      <h3>The Deposed Dero Leader</h3>
+      <ul>
+        <li>Met <strong>Zovi</strong>, a Dero leader deposed by <strong>Degg</strong> (traitorous inventor) and stuck underground.</li>
+        <li><strong>Bargrum</strong> insisted on formal terms before accepting information — "I think it would be distasteful for Bargrum to not come to terms."</li>
+        <li><strong>Tivael</strong> took point on diplomacy: "From my good friend here, I want to propose a term before we move forward with any further deal."</li>
+        <li>Terms agreed: Zovi's people stay underground, no undead, information provided. Mutual non-interference.</li>
+        <li>Intel gained: <strong>Degg</strong> is Nizca's lackey, invented the <strong>Shadow Beacon</strong>. Tower layout revealed — medical wing → cell block → admin wing → Ebon Tower → Nizca at the top.</li>
+        <li><strong>Ferrok</strong> delivered the threat: "If we see you behind us, we'll assume the agreement is null."</li>
+        <li>Zovi's parting words: <em>"When you gut Degg, tell him Zovi says hi."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Haunted Medical Wing</div>
+    <div class="act-card">
+      <h3>Poltergeists × 3</h3>
+      <ul>
+        <li>Three incorporeal undead — the ghosts of <strong>Azlanti doctors</strong> (Elimaria, Beliana, Fernius) trapped during an ancient calamity.</li>
+        <li><strong>Telekinetic Storm</strong> devastated the backline — <strong>Raylta took 60 damage</strong> (32 + 28) from focused strikes.</li>
+        <li><strong>Ferrok</strong> applied Ghost Oil to his weapon — smart tactical adaptation for incorporeal enemies.</li>
+        <li><strong>Tivael's Flurry of Claws</strong> (force damage) crit for <strong>37 damage</strong> against a poltergeist. Force bypasses incorporeal resistance.</li>
+        <li><strong>Worm's Repast</strong> landed on Poltergeist C — Off-Guard condition applied, Fort save targeting.</li>
+        <li>Bargrum intercepted a <strong>40-damage</strong> Telekinetic Storm hit meant for Ferrok.</li>
+        <li><strong>Raylta</strong>: "I love the bromance up there. We're fighting for our lives down here."</li>
+        <li>Raylta's rank 4 AoE Heal for <strong>59 HP</strong> saved the party from collapse — "Here's my Hail Mary."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI · Exploration · Traps and Treasures</div>
+    <div class="act-card">
+      <h3>The Preserved Azlanti Wing</h3>
+      <ul>
+        <li>A cursed statue triggered <strong>"Let Me Out!"</strong> — Bargrum saved against 34 mental damage.</li>
+        <li><strong>Tivael</strong> attempted Dispel Magic (rank 2) on enchanted doors — needed 26, failed even with hero point.</li>
+        <li><strong>Bargrum</strong> touched the door: <strong>Telepathic Jolt</strong> — 40 mental damage + Stupefied 1 for 24 hours. "Wait, what spells?"</li>
+        <li>The key opened the door to a pristine Azlanti sitting room preserved through time.</li>
+        <li><strong>Tivael read the Medical Papers</strong> (Azlanti) — Dr. Elimaria's account of being trapped with two colleagues after a calamity. The three poltergeists were these doctors.</li>
+        <li>Found: Aeon Stones, healing equipment, a 100gp romance novel, and a duplicate Cloak of Illusions (Tivael already owns one).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII · Combat · Clockwork Soldiers × 3</div>
+    <div class="act-card">
+      <h3>Ancient Azlanti Constructs</h3>
+      <ul>
+        <li>Three constructs with <strong>physical resistance 5</strong> — Needle Darts and Strikes reduced.</li>
+        <li>One destroyed instantly by environmental trap (100 damage).</li>
+        <li><strong>Tivael's Electric Arc</strong> dealt <strong>33 damage</strong> to one — electricity bypasses physical resistance.</li>
+        <li>Constructs used <strong>Activate Defenses</strong> (+2 AC to self or adjacent ally) — tactical shielding.</li>
+        <li>Grindy multi-round fight. Bargrum's shield took 11 damage from blocking.</li>
+        <li>Session ended with the last construct falling. Party battered, pressing deeper.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Scholar Dragon ★</h4>
+    <ul>
+      <li>First session — opened with the textbook Bard sequence: Dirge of Doom + RK + Bon Mot.</li>
+      <li>Flurry of Claws crits: 34 damage (crit) vs dinosaur, 37 damage vs poltergeist. Force damage bypassed both physical resistance and incorporeal.</li>
+      <li>Rallying Anthem (Lingered) during the Dero fight — smart defensive composition when AoE pressure spiked.</li>
+      <li>Took point on Zovi negotiation using Master Diplomacy.</li>
+      <li>Read Azlanti medical papers — connected the poltergeists to the trapped doctors.</li>
+      <li>Electric Arc devastated Clockwork Soldiers (33 damage, bypasses physical resistance).</li>
+      <li>Took 55 void damage from Shadow Expulsion + 14 sonic from Noise Blast. Survived.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum Stonefist · the Unbreaking Wall</h4>
+    <ul>
+      <li>Intercepted constantly — absorbed hits for Ferrok, Bael, and Raylta throughout.</li>
+      <li>Took 40 mental damage + Stupefied 24 hours from a trapped door. "Wait, what spells?"</li>
+      <li>Led negotiation structure with Zovi — insisted on formal terms before accepting intel.</li>
+      <li>Volunteered to test every dangerous thing in the dungeon.</li>
+      <li>Shield took cumulative heavy damage from blocking across multiple fights.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok the Unyielding · the Thunder Blade</h4>
+    <ul>
+      <li>Sure Strike + Horizon Thunder Sphere Spellstrike for 56 damage — session's biggest hit.</li>
+      <li>Applied Ghost Oil for incorporeal poltergeists — smart adaptation.</li>
+      <li>Delivered the ultimatum to Zovi: "If we see you behind us, the agreement is null."</li>
+      <li>Crit for 40 damage against a Dero Sentry. Table reaction: "O.O"</li>
+      <li>Had mic trouble at session start — "Have you guys heard me at all?" "No."</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta Cailleach · the Battered Oracle</h4>
+    <ul>
+      <li>Took the most total damage — 60 from poltergeist focus fire, 40 from void AoE, 14 each from sonic and physical.</li>
+      <li>Rank 4 AoE Heal for 59 HP — "Here's my Hail Mary" — saved the party from collapse.</li>
+      <li>Crit Needle Darts for 34 — "Is it because of the ring? The power is getting to my head."</li>
+      <li>Divine Lance effective against poltergeists (spirit damage, crit for 20).</li>
+      <li>Pushed to Cursebound 2 / Enfeebled 2 by session end from healing pressure.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · the Flame Walker</h4>
+    <ul>
+      <li>Four Winds repositioned the party at the start of dungeon exploration.</li>
+      <li>Flying Flame hit Dero Magister + Sentry for 20 damage each in one cast.</li>
+      <li>Thermal Nimbus provided consistent chip damage (4 fire/round) and fire resistance.</li>
+      <li>Crit failed Treat Wounds at session end, hero pointed, still failed. "I explode before he can help me."</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Security Badge</div>
+    <div class="loot-source">Dero Magister · Level 7</div>
+    <div class="loot-note">+1 Intimidation. Daily: Authoritative Command (1A, force target to stop + drop items, Will save). Claimed by Tivael.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Aeon Stone (Crescent)</div>
+    <div class="loot-source">Medical Wing · Level 6</div>
+    <div class="loot-note">Dim light 5ft. Daily: Moonbeam — 100-ft line, 4d12 spirit (silver) damage. Claimed by Bael.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Aeon Stone (Vital Amplification)</div>
+    <div class="loot-source">Medical Vault · Level 7</div>
+    <div class="loot-note">+1 HP per 10 healed. Resistance 5 void (resonant). Claimed by Bargrum.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Battle Medic's Baton</div>
+    <div class="loot-source">Medical Vault · Level 3</div>
+    <div class="loot-note">+1 Medicine. Battle Medicine immunity reduced to 1 hour. Claimed by Raylta.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Healer's Gloves</div>
+    <div class="loot-source">Medical Vault · Level 4</div>
+    <div class="loot-note">+1 Medicine. Daily: 2d6+7 healing touch. Claimed by Raylta.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">+1 Striking Kukri / Bola</div>
+    <div class="loot-source">Dero Combat · Level 4</div>
+    <div class="loot-note">Party stash. Kukri: agile, finesse, trip. Bola: nonlethal, ranged trip.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Romance Novel / Painting</div>
+    <div class="loot-source">Sitting Room</div>
+    <div class="loot-note">100gp + 50gp value. Novel in Azlanti. Painting of two young girls.</div>
+  </div>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "Protect me."
+  <span class="attribution">First words in character, looking up at the party of Medium and Large creatures.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "This is too scary. I feel too powerful. Is it because of the ring? Oh my god, the power is getting to my head."
+  <span class="attribution">After critting with Needle Darts, attributing it to the Ring of Magic Might.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "24 hours?! Are you okay? All my spells — I can't cast them now! Wait, what spells? Honestly..."
+  <span class="attribution">After being Stupefied 1 for 24 hours. The Guardian has no spells.</span>
+</blockquote>
+
+<blockquote>
+  <strong>DM</strong>: "When you gut Degg, tell him Zovi says hi."
+  <span class="attribution">Zovi's parting words as the party departs for the Ebon Tower.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "Have you guys heard me at all since I've been on the call?" / <strong>DM</strong>: "No."
+  <span class="attribution">Discovering his mic was muted the entire pre-session.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "I love the bromance up there. We're fighting for our lives down here."
+  <span class="attribution">On the Bargrum-Ferrok frontline dynamic while the backline eats Telekinetic Storm.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "It is always a good experience to challenge yourself. If you want to grow, you have to push yourself to the limit."
+  <span class="attribution">The scholar dragon's take on dungeon crawling — growth through adversity.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Oh my god. Here we go. I'm all out of nudges. Here's my Hail Mary."
+  <span class="attribution">Before casting rank 4 AoE Heal for 59 HP — saving the party from collapse.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "I did see the undead. So it would be nice to have that information, but I think it would be distasteful for Bargrum to not come to terms."
+  <span class="attribution">The Guardian's moral deliberation about negotiating fairly with Zovi.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "Just to be clear, if we see you behind us, we'll assume the agreement is null."
+  <span class="attribution">Establishing the threat in the Zovi negotiation.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Shadow Beacon</strong> — Nizca's device to blot out the sun. Located at the Ebon Tower's heights. Must be destroyed.</li>
+  <li><strong>Degg</strong> — Traitorous Dero inventor, Nizca's lackey. Zovi wants him dead.</li>
+  <li><strong>Nizca</strong> — Vampire at the top. Controls the shadow pall. Final boss.</li>
+  <li><strong>Cursed Statue</strong> — "Let Me Out!" Something trapped inside. Party left it alone.</li>
+  <li><strong>Zovi's Agreement</strong> — Will the deposed Dero keep her word?</li>
+  <li><strong>The Path Forward</strong> — Cell block → administrative wing → Ebon Tower heights.</li>
+  <li><strong>Dr. Elimaria</strong> — The poltergeists were trapped Azlanti doctors. Their story is told.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Road Ahead</span>
+  <p>The clockwork soldiers lie broken. The medical wing is cleared. Above, the Ebon Tower waits — filled with Dero, vampires, shadows, and at its peak, Nizca and the Shadow Beacon.</p>
+  <div class="big-line">"So, like any barrier, I shall remove it from play."</div>
+  <span class="speaker">— Nizca, on the sun</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Joined the party during a dinosaur attack. Opened with Dirge of Doom + RK + Bon Mot.</li>
+  <li>Flurry of Claws crit for 34 (vs dinosaur) and 37 (vs poltergeist). Force damage is the real deal.</li>
+  <li>Used Rallying Anthem during Dero fight — correct call for AoE pressure.</li>
+  <li>Took point on Zovi negotiation. Master Diplomacy earned its keep.</li>
+  <li>Read Azlanti medical papers. Connected poltergeists to trapped doctors.</li>
+  <li>Electric Arc crushed Clockwork Soldiers (33 damage, bypasses physical resistance).</li>
+  <li>Took 55 void + 14 sonic + 15-16 physical = ~85 total damage across the session. Survived, but barely.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li><strong>Security Badge</strong> — daily Authoritative Command (1A, force target to stop + drop items, Will save). Haven't used it yet.</li>
+  <li>The medical papers' emotional weight — Elimaria was a priest who just wanted to see the sun again. In a campaign where the sun is being blotted out, that resonates.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li><strong>Void damage</strong> — Shadow Expulsion hit everyone for 15-40. Vital Amplification Aeon Stone (resist 5 void) went to Bargrum. Understandable, but Tivael is also vulnerable.</li>
+  <li><strong>Deafened shuts down compositions</strong> — Noise Blast Deafened the party. Auditory compositions require flat checks while Deafened. Need a plan for this.</li>
+  <li><strong>Tower layout is known</strong> — medical wing (cleared) → cell block → admin wing → Ebon Tower → Nizca. Long road ahead.</li>
+  <li><strong>Constructs have physical resistance</strong> — Electric Arc and force damage bypass it. Prioritize these if more appear.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What's in the cell block? Prisoners "too dangerous to free"?</li>
+  <li>Who are "Nizca's allies" in the administrative wing?</li>
+  <li>Will Zovi keep her word?</li>
+  <li>When to use the Crescent Aeon Stone's Moonbeam (100-ft line, silver spirit damage)?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

@@ -23,9 +23,9 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 18 (+4) | 12 (+1) | 16 (+3) | 10 (+0) | 10 (+0) | 14 (+2) |
+| 18 (+4) | 12 (+1) | 16 (+3) | 10 (+0) | 12 (+1) | 14 (+2) |
 
-*Gradual Ability Boosts: CON at Lv2 (taken — deviated from original DEX-first plan after S4 boss fight crit-down). Remaining: DEX/CHA/WIS over Lv3-5.*
+*Gradual Ability Boosts: CON + WIS at Lv2 (taken — CON deviated from original DEX-first plan after S4 boss fight crit-down; WIS added via GAB). Remaining: DEX/CHA over Lv3-5.*
 
 ## Defenses
 
@@ -36,9 +36,9 @@
 |------|------|----------|
 | Fortitude | Expert | +9 |
 | Reflex | Expert | +7 |
-| Will | Trained | +4 |
+| Will | Trained | +5 |
 
-- **Perception**: Expert (+6)
+- **Perception**: Expert (+7)
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
 
 ## Heritage Features
@@ -70,10 +70,9 @@
 | Diplomacy | Trained | +6 | Dragon Lore (overlap with Foreign Aid → free skill) |
 | Intimidation | Trained | +6 | Dragon Lore |
 | Acrobatics | Trained | +5 | Free skill from Diplomacy overlap |
-| Nature | Trained | +4 | Retrained from Performance at Lv2 (Beastmaster Dedication prereq) |
-| Religion | Trained | +4 | Additional skill |
-| Survival | Trained | +4 | Additional skill |
-| Medicine | Trained | +4 | Additional skill |
+| Nature | Trained | +5 | Retrained from Performance at Lv2 (Beastmaster Dedication prereq) |
+| Survival | Trained | +5 | Additional skill |
+| Medicine | Trained | +5 | Retrained from Religion at Lv2 (Treat Wounds) |
 
 ### Lore Skills
 - Dragon Lore (Trained) — from Dragon Lore feat
@@ -108,7 +107,7 @@
   - Bedroll, Rope (50 ft), Waterskin, Chalk ×10, Flint & Steel, Rations ×2 (14 days), Torches ×5, Soap
 - Climbing Kit (50 ft rope, pulleys, pitons, hammer, grappling hook, crampons)
 - **Healer's Toolkit** (5 gp, bought at Saringallow downtime) — required for Treat Wounds / Battle Medicine. Trained in Medicine.
-- **Harpy's Talon** (kept from inn captain's drawer) — magical, properties pending identification.
+- ~~**Harpy's Talon**~~ — consumed in S5 against the Attic Whisperer. Activated persistent bleed on strike, but undead don't bleed. Wasted.
 
 ### Wealth
 - ~18 gp, 4 sp (post-S4 inn loot split + road ambush split – healer's toolkit purchase)

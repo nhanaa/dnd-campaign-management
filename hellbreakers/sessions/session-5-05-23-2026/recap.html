@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 5 — Bright Embers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-ren { border-left-color: var(--gold); }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Bright Embers</h1>
+  <div class="subtitle">Session 5 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 23, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 12m</span>
+    <span class="meta-pill">~18 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:35%"></div>
+    <div class="comp-seg comp-rp" style="width:15%"></div>
+    <div class="comp-seg comp-social" style="width:22%"></div>
+    <div class="comp-seg comp-explore" style="width:18%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 35%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 15%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 22%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 18%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Mystery / Loot 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Medium Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound &middot; Bai Jian's Beastmaster Companion</div><div class="char-player">Anonymous Donor</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The session opened in the aftermath of the ravine boss fight. The party found a Hissrath battle plan written in Goblin &mdash; the goblin-snake hybrids had been framing Stumpfield's goblins for attacks on Fernsby to trigger a village-on-village war. A Goblin-speaking man in Fernsby translated the note and rewarded the party with a <strong>+1 weapon potency rune</strong>. With the Fernsby mystery solved, the party headed for Wolf Point to fulfill the Steel Circle deal.</p>
+    <p>Wolf Point was wrong from the first moment. No birds, no mice, no life of any kind on the hilltop. <strong>Bai Jian</strong> and <strong>Cyrathul</strong> fell asleep and were immediately wracked by nightmares &mdash; Bai Jian chasing his brother endlessly as he was ripped away, Cyrathul watching adventurers cart off his entire hoard. <strong>Panacea</strong> heard unnatural squawking, then a voice: <em>&ldquo;You're all gonna die here.&rdquo;</em> The party tracked the sounds to a pair of <strong>Mitflits</strong> on a rooftop and a <strong>Drude</strong> &mdash; a wolf-like Feywild creature with human eyes that was the source of the nightmares. Bai Jian long-jumped onto the roof and nearly cleaved a Mitflit in half; Cyrathul finished it like sliced salami. <strong>Ren</strong> killed the Drude &mdash; flanking throat rip, dog on dog. Life returned to the hilltop by morning.</p>
+    <p>The party rode down to honor the Steel Circle deal. <strong>Runa Bloodhammer</strong> inspected the Drude's head, went wide-eyed, and upheld her word: the Steel Circle would restrict their banditry to Chelaxian targets only. <em>&ldquo;Ride wild, my friends.&rdquo;</em> The hearts-and-minds tour continued through farmsteads and breweries toward <strong>Stumpfield</strong> &mdash; a goblin-human art commune where a cooperative sculpture drew the party in. <strong>Eric the goblin</strong> read the Hissrath battle plan, burst into tears, and hugged Bai Jian around the waist. The party hit <strong>10 reputation points</strong> &mdash; the Hellbreakers were now viewed favorably across the Chitterwood.</p>
+    <p>Someone was following them. Bai Jian's perception caught a figure two miles back on the trail. Bai Jian rolled Survival and used Ren to lead a merry chase through the forest, shaking the pursuit. They arrived at <strong>Vordia</strong> &mdash; flags of Cheliax and Asmodeus on every building &mdash; and blended in to gather intelligence. Three separate sources pointed to the same place: the <strong>Bright Embers Orphanage</strong>, run by the Sisters of the Golden Erinyes. The orphanage was an Asmodean ruin. Downstairs, haunted toys and ectoplasmic silverware. Upstairs, an <strong>Attic Whisperer</strong> &mdash; a skeletal child-thing that stole Bai Jian's voice, enfeebled him, and bit deep. Cyrathul crushed its skull in his jaws. Every door in the building unlocked at once. The orphanage was cleansed.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act social">
+      <div class="act-label">Act I &middot; Faction &middot; Ravine Aftermath &amp; Fernsby</div>
+      <div class="act-card">
+        <h3>The Hissrath Battle Plan</h3>
+        <ul>
+          <li>Party searched the goblin-snake lair. Found a tonic and a <strong>note in Goblin</strong> on a makeshift desk &mdash; drawings of a town on fire and goblin-snake hybrids advancing on another settlement.</li>
+          <li><strong>Cyrathul</strong>: <em>&ldquo;We lost our people that did&rdquo;</em> &mdash; on no one speaking Goblin after Moob and Fang's departure.</li>
+          <li>Returned to Fernsby. <strong>Lily</strong> fetched a Goblin-speaking man who translated: the <strong>Hissrath</strong> was framing Stumpfield's goblins as scapegoats for Fernsby's attacks.</li>
+          <li><strong>Reward</strong>: +1 weapon potency rune (crystal). Cyrathul needs Handwraps of Mighty Blows to use it &mdash; not available in Fernsby.</li>
+          <li><strong>Bai Jian</strong> encouraged reconciliation: <em>&ldquo;It's always better to have peace among the people.&rdquo;</em></li>
+          <li><strong>+1 reputation point</strong> for solving Fernsby's problem. Party rested the night, fed and sheltered.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act II &middot; Exploration &middot; The Road to Wolf Point</div>
+      <div class="act-card">
+        <h3>Hearts and Minds</h3>
+        <ul>
+          <li>Two days' travel toward Wolf Point with Diplomacy checks at each farmstead.</li>
+          <li><strong>Day 1</strong>: <strong>Bai Jian</strong> rolled Diplomacy &mdash; crit success. Farm family enthusiastically pro-Hellbreaker. Offered their barn and whiskey. No watch needed.</li>
+          <li><strong>Day 2</strong>: <strong>Cyrathul</strong> rolled &mdash; average. Cold-shoulder farmer, too busy with the final harvest to talk.</li>
+          <li>Overnight watch &mdash; Bai Jian and Ren caught rustling in the trees. Investigated, found nothing. Woke Cyrathul for second watch; no further incident.</li>
+          <li><strong>Day 3</strong>: Arrived at Wolf Point as the sun went down. Devoid of all life &mdash; no birds on rooftops, no mice in buildings, no evening birdsong.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act III &middot; Mystery &middot; The Nightmare Tower</div>
+      <div class="act-card">
+        <h3>Wolf Point After Dark</h3>
+        <ul>
+          <li>Party set up camp. <strong>Panacea</strong> took first watch. Bai Jian and Cyrathul fell asleep.</li>
+          <li><strong>Nightmares hit immediately</strong>: Bai Jian dreamed of his brother being kidnapped and ripped away &mdash; chasing endlessly, never catching up. Cyrathul dreamed of adventurers stripping his secret hoard bare.</li>
+          <li><strong>Panacea's first perception</strong> (18): squawking cries and moans from the north. <em>&ldquo;Like the Lost Boys doing a really bad interpretation of a crow.&rdquo;</em> Party investigated, found nothing. Sounds stopped when they stood up.</li>
+          <li>Went back to sleep. <strong>Nightmares resumed, harder to fall back asleep.</strong></li>
+          <li><strong>Panacea's second perception</strong>: sounds now from the south. A voice: <em>&ldquo;You're all gonna die here.&rdquo;</em> Panacea woke everyone.</li>
+          <li>Panacea cast Light on Cyrathul. Initiative rolled &mdash; nothing visible yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; Mitflits &amp; the Drude</div>
+      <div class="act-card">
+        <h3>Nightmare Dog</h3>
+        <ul>
+          <li>Two <strong>Mitflits</strong> on a rooftop shot darts from the dark &mdash; 2 hit Bai Jian for 1 damage each.</li>
+          <li><strong>Bai Jian</strong>: long-jumped onto the roof (Athletics success), struck a Mitflit &mdash; <strong>8 damage</strong>, <em>&ldquo;almost cleaved it in half.&rdquo;</em></li>
+          <li><strong>Cyrathul</strong>: moved up to the rooftop, struck the same Mitflit &mdash; <strong>killed it</strong>. <em>&ldquo;Sliced salami on top of the house.&rdquo;</em></li>
+          <li><strong>Panacea</strong>: Needle Darts at the second Mitflit &mdash; <strong>10 damage, killed it</strong>. Both Mitflits dead in one round.</li>
+          <li>The <strong>Drude</strong> appeared &mdash; wolf-like Feywild creature with glowing human eyes, Cheshire-cat blinks. Psychic pressure aura targeted Panacea &mdash; she <strong>succeeded</strong> (patron experience).</li>
+          <li><strong>Bai Jian</strong>: Sudden Charge at the Drude &mdash; <strong>missed</strong> (psychic headache interference).</li>
+          <li><strong>Cyrathul</strong>: Exploit Vulnerability (PA active), stride + strike &mdash; <strong>16 damage</strong>.</li>
+          <li><strong>Panacea</strong>: Divine Lance missed. Trade Death for Life &mdash; <strong>4 damage</strong> on failed Fort save. Fast healing on Bai Jian. <strong>Stupefied 1</strong> on the Drude via familiar.</li>
+          <li><strong>Drude</strong>: bit Cyrathul (9 damage), psychic eye-stare &mdash; Cyrathul <strong>failed Will save</strong>, 2 damage + frightened.</li>
+          <li><strong>Bai Jian</strong>: commanded Ren to stride + bite. Ren flanked the Drude &mdash; <strong>killing blow</strong>. <em>&ldquo;Ren rips the throat out of it. Dog on dog.&rdquo;</em></li>
+          <li><strong>93 XP</strong> (Severe). Post-combat: Panacea's patron hinted Feywild origin. Mitflit stash: short sword, Lord of Milani talisman, bomb. Overnight &mdash; life returned to the hilltop.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V &middot; Faction &middot; Steel Circle Fulfilled</div>
+      <div class="act-card">
+        <h3>Ride Wild</h3>
+        <ul>
+          <li>Morning. Rode to the Steel Circle camp. <strong>Cyrathul</strong> threw the Drude's head at <strong>Runa Bloodhammer</strong>'s feet.</li>
+          <li>Runa's eyes went wide: <em>&ldquo;I didn't know you guys were playing with Feywild up there.&rdquo;</em></li>
+          <li><strong>Deal honored</strong>: Steel Circle will stop robbing countryside people, stick to those flying the Chelaxian flag.</li>
+          <li><strong>Runa</strong>: <em>&ldquo;I trust you won't be telling the authorities where we are.&rdquo;</em> <strong>Cyrathul</strong>: <em>&ldquo;No, no, we're not fans of the authorities ourselves.&rdquo;</em> <strong>Runa</strong>: <em>&ldquo;Ride wild then, my friends, ride wild!&rdquo;</em></li>
+          <li><strong>+1 reputation point, +30 XP.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VI &middot; Faction &middot; Stumpfield</div>
+      <div class="act-card">
+        <h3>Art, Wine, and Vindication</h3>
+        <ul>
+          <li>Multi-day travel. Halfling brewery: three women, all for the Hellbreakers. All the mead they could drink. Sugar hangover.</li>
+          <li>Welcoming farmsteads. <strong>10 reputation points reached</strong> &mdash; Hellbreakers now viewed as <strong>favorable</strong> in the Chitterwood. +10 XP.</li>
+          <li>Three-family village painted a Hellbreaker flag and hung it behind the fireplace. <strong>Bai Jian</strong> cautioned: <em>&ldquo;Try not to be too noticeable.&rdquo;</em></li>
+          <li><strong>Stumpfield</strong>: goblin-human art commune. Wagons-as-homes, traveling-festival atmosphere. Cooperative sculpture of a four-legged wicker animal.</li>
+          <li>Bai Jian painted a <strong>Tian spirit symbol</strong>. Panacea added <strong>pine-sprig whiskers</strong> (<em>&ldquo;to make it cat-like&rdquo;</em>). Cyrathul embedded a <strong>silver coin</strong> in a clay lump.</li>
+          <li><strong>Eric the goblin</strong> read the Hissrath battle plan. Eyes went huge. Tears. Hugged Bai Jian around the waist. Gave the party a <strong>healing potion</strong>. Wine and fire-juggling.</li>
+          <li><strong>Jeb's sculpture</strong>: a woman holding a crystal, staring at the sky. Actually exquisite &mdash; worth several gold. Eric's stick-figure paintings: <em>not</em> exquisite. <strong>Cyrathul</strong>: <em>&ldquo;Inspirational.&rdquo;</em></li>
+          <li><strong>Bai Jian</strong> asked about Hellknight activity. Eric pointed to <strong>Vordia</strong> &mdash; the Chelaxian-loyal town.</li>
+          <li>+1 automatic reputation for solving the goblin-snake problem.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VII &middot; Exploration &middot; The Follower &amp; Vordia</div>
+      <div class="act-card">
+        <h3>Undercover in Chelaxian Territory</h3>
+        <ul>
+          <li>Multi-day travel toward Vordia. More hearts-and-minds checks &mdash; mixed results.</li>
+          <li><strong>Bai Jian's perception</strong> caught a figure following ~2 miles back. Same as the rustling at Wolf Point. <em>&ldquo;Someone definitely is keeping track of us.&rdquo;</em></li>
+          <li><strong>Bai Jian</strong> rolled Survival; Ren led a merry chase through the forest. Pursuer lost.</li>
+          <li>Scared dwarf couple near Vordia took down their Chelaxian flag: <em>&ldquo;The only reason we had it is safety.&rdquo;</em></li>
+          <li><strong>Vordia</strong>: bustling Chelaxian-loyal town. Flags of Cheliax and Asmodeus everywhere. Party went undercover.</li>
+          <li><strong>Three intel sources</strong> all pointed to the <strong>Bright Embers Orphanage</strong>: a sour-faced man, Panacea's crit-success gossip, and Cyrathul chatting up a concerned local woman. The <strong>Sisters of the Golden Erinyes</strong> had been doing <em>&ldquo;weird stuff with the kids.&rdquo;</em></li>
+          <li>Constable confirmed the teens' story. Gave directions &mdash; half a day's travel east.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VIII &middot; Mystery &middot; Bright Embers Orphanage &mdash; Haunts</div>
+      <div class="act-card">
+        <h3>Playroom and Dining Room</h3>
+        <ul>
+          <li>Arrival: walled yard, two-story building hunched in on itself. Curtains drawn, door ajar. Faded seesaw, stunted trees, no sign of life. <em>&ldquo;Bright Embers Orphanage, est. 4701 AR.&rdquo;</em></li>
+          <li>Entered. Scuffed floors, crooked doors. Footsteps of invisible children running around.</li>
+          <li><strong>Playroom haunt</strong>: toy box burst open, expelled broken toys. <strong>Cyrathul</strong> struck it &mdash; barely chipped. Then <strong>Esoteric Lore</strong> &mdash; success. <em>&ldquo;Playtime is over.&rdquo;</em> Box slammed shut, crying inside. <strong>10 XP.</strong></li>
+          <li><strong>Dining room haunt</strong>: plates and silverware floated, ectoplasmic ghost children flung food.</li>
+          <li><strong>Panacea</strong>: Occultism &mdash; partial success. <strong>Bai Jian</strong>: Intimidation &mdash; ghost child dropped its food and disappeared. <strong>Cyrathul</strong>: Occultism &mdash; failed; ghost children stuck out their tongues.</li>
+          <li><strong>Panacea</strong>: Occultism &mdash; rolled 7, <strong>hero-pointed</strong> into success. All twelve ghosts became visible, shouted <em>&ldquo;Boo!&rdquo;</em>, and vanished.</li>
+          <li><strong>Damage</strong>: Panacea 12 (fork + plate), Cyrathul 14 (plates). Party healed with potions and Treat Wounds.</li>
+          <li><strong>Panacea</strong>: <em>&ldquo;Well, at least I didn't kill him &mdash; like I did Moob. That is true.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IX &middot; Combat &middot; The Attic Whisperer</div>
+      <div class="act-card">
+        <h3>Lights Out</h3>
+        <ul>
+          <li>Second floor: sparse rooms, wooden cots, red pentagrams on walls. Communal bedroom &mdash; canine skull on a bed next to a stuffed bear.</li>
+          <li><strong>The skull stood up.</strong> Bony hand reached out. Initiative &mdash; <strong>it went first.</strong></li>
+          <li><strong>Attic Whisperer</strong>: touched Bai Jian &mdash; <strong>10 damage, stole his voice</strong>. Bit &mdash; <strong>10 more damage</strong>, Fort save succeeded. Third attack &mdash; crit miss.</li>
+          <li><strong>Haunt</strong>: nun's voice screamed <em>&ldquo;Lights out!&rdquo;</em> &mdash; <strong>Cyrathul blinded</strong> by supernatural darkness.</li>
+          <li><strong>Bai Jian</strong>: enfeebled and stupefied. Commanded Ren &rarr; grapple (success). Struck with <strong>Harpy's Talon &mdash; hit, 18 damage (talisman consumed, bleed wasted on undead)</strong>. <strong>Dueling Parry</strong> for +2 AC.</li>
+          <li><strong>Cyrathul</strong>: <strong>Esoteric Lore</strong> exorcised the darkness (blindness removed). Stride + bite &mdash; 12 damage. Entered the aura &mdash; failed Will save, <strong>stupefied 1</strong>.</li>
+          <li><strong>Panacea</strong>: <strong>3-action Heal</strong> (emanation) &mdash; 4 HP to all allies, 4 vitality damage to the undead.</li>
+          <li>Round 2: Attic Whisperer hit Bai Jian (5 damage), missed twice (grapple + Dueling Parry). Haunt fired again &mdash; Bai Jian <strong>succeeded Will save</strong>.</li>
+          <li><strong>Bai Jian</strong>: Ren bites (6 damage). <strong>Hero-pointed</strong> a trip attempt. Jian strike &mdash; 6 damage.</li>
+          <li><strong>Cyrathul</strong>: Exploit Vulnerability + bite &mdash; 8 damage. Second bite &mdash; <strong>killed it. Skull shattered in his jaws.</strong></li>
+          <li>Every door unlocked. Silverware crashed downstairs. Spiritual energy exhaled. <strong>Orphanage cleansed.</strong></li>
+          <li><strong>106 XP</strong> (Severe). Session ended in the orphanage. Bai Jian: <em>&ldquo;I'm not down this time.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; Wolf Point &middot; Night</div>
+    <h3>Mitflits &amp; the Drude</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Mitflits + 1 Drude</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">4</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">All killed</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">0</div></div>
+    </div>
+    <h4>Round 1 &mdash; Delays &amp; Darts</h4>
+    <ul>
+      <li><strong>Panacea</strong>: Cast Light on Cyrathul. Seek &mdash; nothing visible.</li>
+      <li><strong>Bai Jian &amp; Cyrathul</strong>: delayed waiting for light.</li>
+      <li><strong>Mitflits</strong>: 4 darts from rooftop &mdash; 2 miss, 2 hit Bai Jian for <strong>1 damage each</strong>.</li>
+    </ul>
+    <h4>Round 2 &mdash; Rooftop Blitz</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: long jump onto roof (2 actions). Strike Mitflit &mdash; <strong>hit, 8 damage</strong>.</li>
+      <li><strong>Cyrathul</strong>: moved up, struck same Mitflit &mdash; <strong>killed it</strong>.</li>
+      <li><strong>Panacea</strong>: Needle Darts at second Mitflit &mdash; <strong>10 damage, killed it</strong>.</li>
+      <li><strong>Drude appeared</strong>. Psychic aura targeted Panacea &mdash; Will save <strong>success</strong>.</li>
+    </ul>
+    <h4>Round 3 &mdash; The Nightmare Beast</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: Sudden Charge at Drude &mdash; <strong>miss</strong> (psychic interference).</li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability (PA active). Stride + bite &mdash; <strong>16 damage</strong> (13 + 3 PA).</li>
+      <li><strong>Panacea</strong>: Divine Lance miss. <strong>Trade Death for Life</strong> &mdash; 4 damage (failed Fort). Fast healing on Bai Jian. Stupefied 1 on Drude.</li>
+      <li><strong>Drude</strong>: bit Cyrathul (9 damage). Psychic eye-stare &mdash; Cyrathul <strong>failed Will save</strong>, 2 damage + frightened.</li>
+    </ul>
+    <h4>Round 4 &mdash; Ren's Kill</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: Command Ren &rarr; stride + bite (flanking). <strong>Ren killed the Drude</strong> &mdash; throat rip.</li>
+    </ul>
+    <p style="color: var(--gold); margin-top: 12px;">Experience &middot; <strong>93 XP</strong> (Severe)</p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; Bright Embers Orphanage &middot; Playroom</div>
+    <h3>Playtime Is Over</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Type</div><div class="combat-stat-value">Haunt</div></div>
+      <div><div class="combat-stat-label">Method</div><div class="combat-stat-value">Esoteric Lore</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Exorcised</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">0</div></div>
+    </div>
+    <ul>
+      <li>Toy box burst open, expelled cracked toys.</li>
+      <li><strong>Cyrathul</strong>: struck the box &mdash; barely chipped. <strong>Esoteric Lore</strong> &mdash; great success. <em>&ldquo;Playtime is over.&rdquo;</em></li>
+      <li>Box slammed shut. Crying inside.</li>
+    </ul>
+    <p style="color: var(--gold); margin-top: 12px;">Experience &middot; <strong>10 XP</strong> (Trivial)</p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3 &middot; Bright Embers Orphanage &middot; Second Floor</div>
+    <h3>The Attic Whisperer</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Attic Whisperer + Darkness Haunt</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Bai Jian Damage Taken</div><div class="combat-stat-value">25+ HP</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Bai Jian (1)</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Attic Whisperer</strong> (went first): touch &mdash; 10 damage, <strong>stole Bai Jian's voice</strong>, enfeebled 1. Bite &mdash; 10 damage, Fort save succeeded. Third attack &mdash; crit miss.</li>
+      <li><strong>Haunt</strong>: <em>&ldquo;Lights out!&rdquo;</em> &mdash; Cyrathul <strong>blinded</strong>.</li>
+      <li><strong>Bai Jian</strong>: stupefied 1 from aura, enfeebled still active. Command Ren &rarr; grapple (<strong>success</strong>). <strong>Harpy's Talon &mdash; hit, 18 damage (talisman consumed).</strong> Dueling Parry. Enfeebled wore off end of turn.</li>
+      <li><strong>Cyrathul</strong>: Esoteric Lore exorcised darkness. Bite &mdash; <strong>12 damage</strong>. Entered aura &mdash; <strong>stupefied 1</strong>.</li>
+      <li><strong>Panacea</strong>: 3-action Heal &mdash; 4 HP each to allies, 4 vitality to undead.</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Attic Whisperer</strong>: hit Bai Jian (5 damage). Two more attacks &mdash; both missed (grapple + Dueling Parry).</li>
+      <li><strong>Haunt</strong>: <em>&ldquo;Lights out!&rdquo;</em> again &mdash; Bai Jian <strong>succeeded Will save</strong>.</li>
+      <li><strong>Bai Jian</strong>: Ren bites (6 damage). <strong>Hero-pointed trip</strong>. Jian strike &mdash; 6 damage.</li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability + bite &mdash; 8 damage. Second bite &mdash; <strong>killed it. Skull shattered.</strong></li>
+    </ul>
+    <h4>Post-combat</h4>
+    <ul>
+      <li>All doors unlocked. Silverware crashed. Orphanage cleansed.</li>
+      <li>Panacea (Occultism): 12 orphans slept here. Attic Whisperer was the anchor for all haunts.</li>
+    </ul>
+    <p style="color: var(--gold); margin-top: 12px;">Experience &middot; <strong>106 XP</strong> (Severe)</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Hunter's Instinct</h4>
+      <ul>
+        <li>Encouraged Fernsby villagers to reconcile with goblins: <em>&ldquo;It's always better to have peace among the people.&rdquo;</em></li>
+        <li>Painted a Tian spirit symbol on the Stumpfield sculpture &mdash; a piece of home on the road.</li>
+        <li>Perception caught the follower ~2 miles back on the trail. Connected it to the Wolf Point rustling.</li>
+        <li>Asked Eric about Hellknight activity &mdash; got the Vordia lead.</li>
+        <li>Long-jumped onto the rooftop and nearly cleaved a Mitflit in one strike.</li>
+        <li>Commanded Ren to flank and kill the Drude &mdash; the boarhound's first solo kill.</li>
+        <li>Against the Attic Whisperer: took 25+ damage, had his voice stolen, was enfeebled and stupefied simultaneously. Commanded Ren to grapple, then struck with <strong>Harpy's Talon</strong> for the first time &mdash; hit, 18 damage. Talisman consumed; bleed wasted on undead.</li>
+        <li>Used Dueling Parry to survive follow-up attacks. Hero-pointed a trip attempt.</li>
+        <li>Treated his own wounds post-combat with his healer's toolkit.</li>
+        <li>Post-session: realized grapple was suboptimal &mdash; tripping would have wasted the creature's actions more effectively.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Lorekeeper</h4>
+      <ul>
+        <li>Threw the Drude's head at Runa Bloodhammer's feet. Sealed the Steel Circle alliance. Runa asked for discretion; Cyrathul reassured: <em>&ldquo;No, no, we're not fans of the authorities ourselves.&rdquo;</em></li>
+        <li>Embedded a silver coin in the Stumpfield sculpture &mdash; understated, characterful.</li>
+        <li>Rolled Survival to shake the follower &mdash; Ren led the chase as decoy.</li>
+        <li>Exploit Vulnerability on the Drude (PA active) &mdash; 16 damage. Took 9 bite + 2 psychic + frightened from the Drude's retaliation.</li>
+        <li>Exorcised <strong>two haunts</strong> in the orphanage via Esoteric Lore: playroom toy box and the second-floor darkness.</li>
+        <li><strong>Killed the Attic Whisperer</strong> by crushing its skull in his jaws. All haunts collapsed when it died.</li>
+        <li>Took 14 damage from a thrown plate in the dining room haunt.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Quiet Anchor</h4>
+      <ul>
+        <li>Took first watch at Wolf Point. Caught both rounds of anomalous sounds. Woke the party both times.</li>
+        <li>Cast Light to illuminate the dark hilltop &mdash; enabled the Mitflit fight.</li>
+        <li>Needle Darts killed the second Mitflit in one shot. Trade Death for Life on the Drude &mdash; 4 damage + fast healing + Stupefied via familiar.</li>
+        <li>Hero-pointed an Occultism check to banish the dining room haunt. Ghost children shouted <em>&ldquo;Boo!&rdquo;</em> and vanished.</li>
+        <li>Cast 3-action Heal against the Attic Whisperer &mdash; healed allies and dealt vitality damage to undead.</li>
+        <li>Took 12 damage from ectoplasmic silverware.</li>
+        <li>Pragmatic reads throughout: <em>&ldquo;Sounds like it could be a ghost thing like before.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-ren">
+      <h4>Ren &middot; the Boarhound</h4>
+      <ul>
+        <li><strong>First kill</strong>: ripped the Drude's throat out while flanking. Dog on dog. Redemption after the S4 debut.</li>
+        <li>Led the merry chase through the forest to shake the pursuer (Bai Jian's Survival roll).</li>
+        <li>Grappled the Attic Whisperer in the orphanage &mdash; enabled Bai Jian's strikes and limited the creature's attacks.</li>
+        <li>Two bites in Round 2 dealt 6 damage.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">+1 Weapon Potency Rune</div><div class="loot-source">Fernsby Goblin-Speaker</div><div class="loot-note">Crystal. Needs Handwraps of Mighty Blows for Cyrathul.</div></div>
+    <div class="loot-item"><div class="loot-name">Short Sword</div><div class="loot-source">Mitflit Stash (Wolf Point)</div><div class="loot-note">Party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Lord of Milani Talisman</div><div class="loot-source">Mitflit Stash (Wolf Point)</div><div class="loot-note">Consumable &mdash; spirit damage.</div></div>
+    <div class="loot-item"><div class="loot-name">Bomb</div><div class="loot-source">Mitflit Stash (Wolf Point)</div><div class="loot-note">Bai Jian took for ranged option.</div></div>
+    <div class="loot-item"><div class="loot-name">Minor Healing Potion</div><div class="loot-source">Eric (Stumpfield)</div><div class="loot-note">Used on Cyrathul at orphanage.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; 93 Drude (Severe) &middot; 10 Playroom (Trivial) &middot; 106 Attic Whisperer (Severe) &middot; 30 Steel Circle &middot; 10 Rep milestone = <strong>~249+ XP</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "No, I don't think so. We lost our people that did."
+    <span class="attribution">On no one speaking Goblin anymore &mdash; a quiet epitaph for Moob and Fang.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Maybe it will be better. It's always better to have peace among the people."
+    <span class="attribution">Encouraging Fernsby's villagers to reconcile with the goblins.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "You're all gonna die here &mdash; oh wait, what? It's just a voice you heard? Okay, well, now I'm gonna be waking people up because it's not just the birds anymore."
+    <span class="attribution">First watch at Wolf Point, processing the threat in real time.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Do you think we may be being followed? Do you remember about the information about there being a Hellknight out there hunting down the Hellbreakers?"
+    <span class="attribution">Morning after the nightmares, connecting the rustling to Hellknight Alaya.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Runa Bloodhammer</strong>: "I trust you won't be telling the authorities where we are."<br>
+    <strong>Cyrathul</strong>: "No, no, we're not fans of the authorities ourselves."<br>
+    <strong>Runa</strong>: "Ride wild then, my friends, ride wild!"
+    <span class="attribution">Sealing the Steel Circle alliance. Runa asks for discretion; Cyrathul reassures her.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I'm more of an art enjoyer than an artist."
+    <span class="attribution">At the Stumpfield sculpture. Understated.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Well, it's not a bird, that's for sure."
+    <span class="attribution">Esoteric Lore result on the mysterious squawking at Wolf Point.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "Just some weird noises that were unnatural coming from the north that were trying to sound natural but did not."
+    <span class="attribution">Describing the Drude's fake bird calls to the waking party.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "We probably should have taken a hostage."
+    <span class="attribution">After the Mitflits were both dead in one round.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "If I reposition this guy, can I just throw him off the building?"
+    <span class="attribution">Tactical creativity on the rooftop. Answer: grapple first.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Inspirational."
+    <span class="attribution">On Eric's terrible stick-figure paintings. Diplomatic.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I'm not down this time."
+    <span class="attribution">Final line. Progress.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Follower</strong> &mdash; Bai Jian spotted someone trailing ~2 miles back. Same presence as the Wolf Point rustling. Hellknight Alaya? A Chelaxian scout? Party shook them but they're still out there.</li>
+      <li><strong>Bright Embers Orphanage</strong> &mdash; Attic Whisperer dead, haunts collapsed, but the building isn't fully explored. Sisters of the Golden Erinyes abandoned it &mdash; why? Asmodean murals and pentagrams suggest infernal influence.</li>
+      <li><strong>Vordia</strong> &mdash; deep in Chelaxian-loyal territory. The party went undercover. Constable was evasive about the orphanage. Complicit or negligent?</li>
+      <li><strong>Hellknight Alaya</strong> &mdash; Eric pointed to Vordia for Hellknight activity. The follower may be connected.</li>
+      <li><strong>Steel Circle Alliance</strong> &mdash; Runa Bloodhammer's band will target only Chelaxians from the Wolf Point keep. Deal sealed.</li>
+      <li><strong>Hearts and Minds</strong> &mdash; 10+ reputation. Hellbreakers viewed favorably. Remaining: Umach. Stumpfield and Fernsby won.</li>
+      <li><strong>The +1 Rune</strong> &mdash; Cyrathul needs Handwraps of Mighty Blows. Not available in rural villages.</li>
+      <li><strong>Hedvind's Thrune Escalation</strong> &mdash; still ticking. Thrune soldiers may arrive while the party tours the countryside.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Cliffhanger</span>
+    <p>The orphanage is quiet. Every door stands open. The silverware is still on the floor downstairs. But the second floor hasn't been fully searched, and the party is battered &mdash; Bai Jian voiceless, Cyrathul stupefied, everyone bleeding. The Sisters of the Golden Erinyes are gone. But something brought that Attic Whisperer here. And someone is still following them on the road.</p>
+    <span class="big-line">"I'm not down this time."</span>
+    <span class="speaker">&mdash; Bai Jian, progress</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Searched the Hissrath lair. Encouraged Fernsby to reconcile with goblins.</li>
+    <li>Rolled crit-success Diplomacy &mdash; family offered barn, whiskey, full support.</li>
+    <li>Took watch on the road with Ren. Caught rustling &mdash; investigated, found nothing.</li>
+    <li><strong>Nightmares at Wolf Point</strong>: chasing Bai Feng endlessly. Woken by Panacea when sounds escalated.</li>
+    <li>Long-jumped onto the rooftop, nearly cleaved a Mitflit, then Sudden Charged the Drude (missed).</li>
+    <li>Commanded Ren for the killing blow on the Drude &mdash; flanking throat rip.</li>
+    <li>Spotted the follower. Connected it to the Wolf Point rustling. Rolled Survival and used Ren to shake the tail.</li>
+    <li>Went undercover in Vordia. Gathered intel on the orphanage.</li>
+    <li>Against the Attic Whisperer: took 25+ damage, lost his voice, was enfeebled and stupefied. Commanded Ren to grapple. Struck with <strong>Harpy's Talon</strong> (hit, 18 damage &mdash; talisman consumed, bleed wasted on undead). Used Dueling Parry. Hero-pointed a trip.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>The nightmare was specific: <strong>Bai Feng being kidnapped and ripped away</strong>. Whether the Drude read his mind or something else fed it that image, it hit too close to home.</li>
+    <li>The follower is real. Two sightings across multiple days. This is surveillance, not coincidence. If it's Hellknight Alaya's people, they now know the party's route and combat capability.</li>
+    <li>The <strong>Harpy's Talon is gone</strong> &mdash; consumed on a strike against the Attic Whisperer. Persistent bleed wasted on undead. Lesson: save consumable talismans for living targets.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The follower</strong>: next time, don't run &mdash; set a trap.</li>
+    <li><strong>Vordia</strong>: the party went undercover as Chelaxian sympathizers. If anyone recognized them, cover is blown.</li>
+    <li><strong>The orphanage</strong> is Asmodean &mdash; murals of friendly devils, pentagrams, nuns of Asmodeus. The Attic Whisperer was a dead child. This may connect to Tilaax or the broader infernal apparatus.</li>
+    <li><strong>Grapple vs. Trip</strong>: tripping wastes the creature's action standing (provoking Reactive Strike). Grapple lets them still attack. Trip first next time.</li>
+    <li><strong>Cyrathul's Esoteric Lore</strong> is the party's best tool against haunts. Two exorcisms in one dungeon.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>What's in the <strong>rest of the orphanage</strong>?</li>
+    <li>Who are the <strong>Sisters of the Golden Erinyes</strong> and why did they leave?</li>
+    <li>Is the <strong>follower</strong> still tracking them? Should the party set a trap?</li>
+    <li>Does the <strong>Vordia constable</strong> know more than he let on?</li>
+    <li>Can the party find <strong>Handwraps of Mighty Blows</strong> for Cyrathul?</li>
+    <li><strong>Hellknight Alaya</strong> &mdash; is the follower connected?</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #3a2a30;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px #c8905018, 0 4px 20px #00000040;
+}
+.pax-notes h2 { border-bottom-color: var(--gold-dim); }
+.pax-notes h2::before { color: var(--gold); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

@@ -31,6 +31,8 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) | **LEFT 2026-05-16** |
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
+| `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
+| `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | Tivael — House Drake Dragonet — Maestro Bard / Sorcerer (Draconic) |
 
 ## How to Help
 
