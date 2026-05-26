@@ -198,7 +198,7 @@ No need to spend on fundamental runes.
 3. **Dance of the Mousedeer** → Hide → Strike from Hidden — 3-action self-Hide setup chain
 4. **Smokescreens** → smoke ball → throw at feet, Hidden from outside-smoke creatures, Sneak/Strike
 5. **Inscribe Shadow Pamor** → Strike → Dazzled rider on target (concealment-vs-target for 1 round)
-6. **Two's apparition CC (S6)** — Tangle Vine pin, Fear-frightened, Charm — capitalize on positionally-vulnerable or shaken targets
+6. **Riddle's apparition CC (S6)** — Tangle Vine pin, Fear-frightened, Charm (Occult slate) — capitalize on positionally-vulnerable or shaken targets
 
 **Mode A combat (vs corporeal enemies — humanoids, noppera-bo, cultists)**:
 - Sneak Attack works normally. OC + Unbalancing Blow crit-chain is full power.
