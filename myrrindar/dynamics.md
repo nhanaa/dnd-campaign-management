@@ -48,10 +48,11 @@ The party formally introduced themselves to each other for the first time over b
 
 ## Mist's Role
 
-- **Primary**: Face / Social lead (Deception +7, Persuasion +7) — Silver Tongue floor 17 makes the floor of social rolls extremely high
+- **Primary**: Face / Social lead (Deception +8, Persuasion +8) — Silver Tongue floor 18 makes the floor of social rolls extremely high
 - **Secondary**: Support caster (Bardic Inspiration, Healing Word, debuffs)
 - **Tertiary**: Aerial scout / spotter (Flight + Small size)
 - **As of S6**: Mist has shared the Neulvyn / kidnapping arc with the party; Eldrin and the noble's manor remain unshared. The **frozen tableau / orb-vision** also remains a Mist+Avon-only secret.
+- **As of S9** *(spotlight notes)*: Two sessions running in the Iliora arc with zero Persuasion/Deception rolls — Silver Tongue lane is structurally bypassed by Akasha's family ties (NPCs) and Jaethal/Avon's mind-magic (locks). The **Insight 22 on Deepbloom** was the session's actual Mist win — Eloquence Bard's expertise stack landing where it should. **Unsettling Words was wasted** on Deepbloom's WIS save (DM resolved the save as a clean fail before the debuff applied). Mist's combat kit (Phantasmal Force, Heat Metal, Cloud of Daggers) dark for a second session in a row. See `project_mist_spotlight_frustration.md` memory; the build-pivot strategy and retirement contingency are documented there.
 
 ## Key NPCs
 
@@ -61,6 +62,10 @@ The party formally introduced themselves to each other for the first time over b
 - **Eldrin** — Elven bard, Mist's former mentor. Taught Mist music and fae magic on the streets of Skybreeze before leaving the city. Whereabouts unknown. Emotionally significant to Mist.
 - **Evrin** — Patron. Currently out of town; barkeep at the Crowned Pheasant says "will be in touch." Long-term contract details TBD.
 - **Carrie-Anne** *(updated S7)* — Bahamut priestess. Personal interest in Avon registers (Akasha caught the disappointment when she answered Carrie-Anne's question instead of Avon). Aspiring paladin. Mist invited her to join the party on a future "save people / maybe even save the city" mission; she accepted in principle. Lead role for Avon's clerical network.
+- **Pelletheria** *(introduced S9)* — Akasha's mother, elf of Iliora. Warm host. Pulled Calith off patrols out of fear. Akasha's privacy: catches her instantly. *"That's a very eclectic bunch."*
+- **Shonda** *(introduced S9)* — Akasha's sister, elf of Iliora. Cooks at home; took Avon's roast about her cooking with mild dignity.
+- **Equatia** *(introduced S9)* — Corrupted forest spirit at Akasha's childhood grove. Calmed (not cured) by Akasha's appeal + Jaethal's Sylvan song. Still in the grove. *"It's hard to fight it. Help me."*
+- **Skizgrit** *(deceased S9)* — Quasit demon, charmed by Jaethal, befriended briefly, executed when the charm dropped. Returned to the Nine Hells.
 - **Cleric Mavericks** *(introduced S6 by mention)* — One of several Bahamut clerics in the Skybreeze cathedral. Not the special Wardstone-history keeper after all (Sethrix filled that role directly in S7).
 - **High Warden Sethrix** *(introduced S7)* — Silver dragonborn, head of the Skybreeze Temple of Bahamut. Knows the Wardstone truth independently. Sheltering Rowan in protective custody. Warned the party off Tibbles Briarthorne. Quiet ally — keep public interactions respectful.
 - **Borenthal** *(mentioned S7)* — Bahamut cleric in Sevra. Avon's mentor. Resurrected Avon after the Karadim ambush. Open thread — Avon plans a return trip.
@@ -99,24 +104,34 @@ The party formally introduced themselves to each other for the first time over b
 - **Akasha ↔ Liriel** *(established S8)*: Childhood friend guiding Deepbloom east of Iliora. Not yet encountered. Akasha knows her hangout spot northeast of the city.
 - **Jaethal ↔ Talya** *(established S8)*: Jaethal drew a sketch of Talya's S7 hag-stomp and showed it to her. Small character moment building a friendship.
 - **Mist ↔ Jaethal** *(established S8)*: Busked a duet at Iliora's gates; creative partnership forming. Mist tried to teach Jaethal to busk; Jaethal prefers performing for fun.
+- **Akasha ↔ Pelletheria** *(established S9)*: Mother-daughter. Warm, but Pelletheria reads Akasha instantly — caught her in seconds when she faked enjoying the family stew. Worried about Calith; pulled him off patrols.
+- **Akasha ↔ Shonda** *(established S9)*: Sister relationship. Shonda did most of the cooking that Akasha gagged on. Mild background tension, mostly comic.
+- **Akasha ↔ Calith** *(updated S9)*: Brother moment landed. Akasha: *"I knew I could count on you, bro."* Calith, hand on her shoulder: *"Because I got your back, sis."* The first time Akasha's family-of-origin landed on-screen with the party present.
+- **Akasha ↔ Liriel** *(updated S9)*: Reunion. Liriel ran to Akasha weeping after the Equatia rescue (*"I don't know where you came from, but thank you"*). Now with the party; will likely return to Iliora to settle.
+- **Party ↔ Deepbloom** *(updated S9)*: Trust broken. Deepbloom believed the party was helping him until they cornered him for quarantine. *"I knew I couldn't trust you."* He wrote out the equipment list but with hostility. Future cooperation depends on whether the buried-blight fear is resolved.
+- **Party ↔ Skizgrit** *(established and resolved S9)*: Brief friendship (charmed); ended in execution. Jaethal kept the portrait. No long-term consequences (demon is back in Hell).
 
 ## Plot Threads
 
-### Active / High Priority *(updated S8)*
+### Active / High Priority *(updated S9)*
 
 - **What is buried beneath Skybreeze?** *(massively upgraded S6)* — Per Rowan: massive, not from this world. The Wardstones bury it. Public knowledge would empty the city. Suppressed knowledge exists in the Wizard's Tower library (dark embossed books). Library is gatekept by Briarthorne.
-- **The Akasha Blight / World Tree** *(updated S8)* — The world tree **Idranthusin** is diminished — Akasha can feel it. Mother tree infected, blight spreading. The hag east of the teleport circle was a symptom, not the source. Patrols going missing, fiends (quasits) in the eastern forest, strange laughter and roars at night. Akasha holds the **seed of renewal**. Thalren Deepbloom + Liriel are somewhere east researching.
+- **The Akasha Blight / World Tree** *(updated S9)* — The world tree **Idranthusin** is diminished. Mother tree infected, blight spreading. The hag east of the teleport circle was a symptom. **Equatia, a forest spirit Akasha knew as a child, is corrupted by the Blight** — calmed but not cured. **Deepbloom himself shows Blight contamination** (Detect Magic confirmed) and a buried physical wrongness he doesn't understand. The Blight may be infectious through contact. Akasha holds the **seed of renewal**.
 - **Rowan's safety / the Temple of Bahamut** *(activated S6)* — Will the temple shelter him? Cleric Mavericks's stance unknown. Vale Tempest "always knows" what their members do — secondary tracking method possibly exists beyond the robe.
 - **Vale Tempest schism + post-S3 hideout** *(updated S6)* — The original hideout is now likely run by the violent faction. The five amulet-targets (Rufus, Valo, Regina, Bildren, Elias) are still in play. **Lady Avesna**'s status pending.
 - **Jensen's faction** *(reframed S6)* — Separate from Vale Tempest. Trying to destroy a Wardstone. Motive: reveal-the-truth? release-what's-buried? Sabotage? Unknown.
-- **Thalren Deepbloom + Liriel** *(updated S8)* — Deepbloom arrived at Iliora hours before the party, took Liriel (Akasha's childhood friend) as a guide, and headed east to research the blight. Current whereabouts unknown. The party is on their trail.
+- **Thalren Deepbloom (quarantined S9)** — Deepbloom is now in a study/library quarantine room in Iliora, guarded. He has Blight contamination on bag/samples/face (Avon Detect Magic) and a buried physical wrongness (Mist Insight 22 + Avon Detect Thoughts probe). Trust broken: *"I knew I couldn't trust you."* Wrote out an equipment list (half real reagents, half snacks/ales) for the party to retrieve from his Skybreeze shop. Open: can his condition be cured? What does he know he's not telling?
+- **Liriel (rescued S9)** — Akasha's childhood friend, rescued from Equatia's grove. Provided eyewitness account of the **cavern east** with the Barlgura. Now in Iliora with the party. Open: will she join longer-term, or return to a normal Iliora life?
 - **Tibbles Briarthorne** *(introduced S6)* — Library custodian, knowledge gatekeeper, performer of the official narrative. Independent? Vale Tempest? Compromised? Unknown.
 - **Carrie-Anne / Cleric Mavericks** *(updated S7)* — Carrie-Anne accepted Mist's pitch to join a future save-the-city mission. Mavericks is just another cathedral cleric (Sethrix has filled the Wardstone-history-keeper role).
 - **The Karadim** *(introduced S7)* — Continental-scale sinister organization. Came for Lady Saraveth in Sevra. Permeate Mirandar especially west. *"Few would dare interrupt."* Separate axis from Vale Tempest. Threat scope unknown.
 - **Lady Saraveth** *(introduced S7)* — Skybreeze noble Avon saved in Sevra. Owes the Karadim a debt. Status alive but whereabouts unknown.
 - **Avon's "Champion of Bahamut" arc** *(formalized S7)* — Borenthal resurrected Avon after the Karadim ambush. Sethrix: *"Bahamut will call on you one day."* Long pre-written track. Watch for how it interacts with party autonomy.
 - **Borenthal in Sevra** *(introduced S7)* — Avon's mentor / resurrector. Avon planning a return trip.
-- **The blight's eastern source** *(updated S8)* — Hag was a symptom (Akasha Nature 11: the forest called her to rid it of the hag, pull now gone). The source is further east. Massive claw marks, uprooted trees, giant fiendish footprint, and quasits in the eastern forest. Avon's **Augury returned Woe** for a straight fight with the large fiend. The party has a **bound, sleeping quasit** for interrogation (speaks Common).
+- **The blight's eastern source** *(updated S9)* — Hag was a symptom. **Equatia's grove corruption** is a symptom (calmed not cured). **Deepbloom's contamination** is a symptom. The Barlgura is east, in a deep cavern (per Liriel's eyewitness). **Hag coven** is somewhere northeast (fairy dragon scout) — they brought the Barlgura to feed on the Blight. The actual source of the Blight is still unidentified.
+- **The Barlgura and the cavern** *(established S9)* — Large invisible-capable fiend east in a deep cavern. Howls and grunts heard. No useful elemental weaknesses. Avon's Augury says Woe. Open: avoid permanently, or come back with a plan?
+- **The hag coven** *(established S9)* — Northeast of the toad-clearing. Brought the Barlgura to the area; feeds on the corruption. Untouched as of S9.
+- **Skybreeze shop retrieval** *(introduced S9)* — Deepbloom's Craftsman's District shop holds the reagents and instruments the party needs to ferry back. **Vale Tempest are presumed to be watching it** (per Deepbloom's warning). Future infiltration job.
 - **The silver incense mystery** *(introduced S8)* — Avon's Sevra temple incense burned silver during Jaethal's Find Familiar, leaving an unexplained silvery hue on the fairy dragon familiar. Connection to Bahamut? To the temple? To the blight?
 - **Iliora's crisis** *(introduced S8)* — Patrols going missing, strange laughter and roars at night, no animal sounds, fiends in the eastern forest. Calith: *"Idranthusin is weeping."* The hag effigies appear both at the S7 cottage and deeper east — possible coven territory.
 - **The silver spoon dates** *(introduced S8)* — Found on the hag. Dates ranging 60 years back, some future. One matches an Iliora elder's funeral. Needs research — library (blocked by Briarthorne) or Iliora's elders.
