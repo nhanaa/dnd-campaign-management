@@ -40,6 +40,9 @@ The Shadow Tower is controlled by **Nizca**, a vampire seeking to expand the sha
 ### Book 3, Session 1 — Into the Ebon Tower
 The party returned to Talmandor's Bounty with prisoners, fought shadow-tainted dinosaurs on the surface (Tivael's first fight), then descended via the Azlanti elevator deeper into the underground. Emerged at a Dero-controlled rail junction. Negotiated with **Zovi**, a deposed Dero leader, gaining intelligence about the Ebon Tower layout and its defenders. Pressed through a haunted medical wing (poltergeists of trapped Azlanti doctors), past traps and cursed artifacts, and through clockwork soldier defenses. Currently in the Azlanti prison complex, heading toward the cell block and administrative wing above.
 
+### Book 3, Session 2 — The Long Climb
+The party cleared the medical wing dungeon level: defeated **Zatrine** the Lamia (disguised as a fleeing prisoner) and three bandit accomplices (Aguilar, Ularette, Iverness) in the cell block, destroyed three Living Graffiti + a Clockwork Soldier in a side chamber, and wiped a stairwell of voracious Shadows (Greater Shadow + 4 lesser). **Leveled to 8** and took a long rest. Climbed 100 feet up to the **Shadow Tower lobby**; destroyed three larger Clockwork Sentries. Surprised seven **Tokainen's Chosen** mid-blackjack in a side lounge and wiped them. Session ended on a cliffhanger — Ferrok kicked open a door and woke up a dormitory of guards. DM telegraphed three sessions left of Shades of Blood before transition to Ruby Phoenix.
+
 ## Key NPCs
 
 - **Nizca**: Big bad. Vampire controlling the Shadow Tower / Ebon Tower. Goal: block all sunlight on Golarion. Located at the top of the tower with Degg.
@@ -50,6 +53,8 @@ The party returned to Talmandor's Bounty with prisoners, fought shadow-tainted d
 - **Nalushae Meronis**: Level 8 vampire arcane caster (defeated, Book 2). Lightning Bolt specialist. Had a journal in Azlanti. Special vulnerability to her vampire nettles.
 - **Glormungost**: Level 6 vampire (recurring). Low Will, immune to fear. Physical resistance 5, bludgeoning resistance 5. Fast Healing 7.
 - **Dr. Elimaria**: Ancient Azlanti doctor and priest of Issachar. Trapped in the medical wing with colleagues Beliana and Fernius during a calamity. All three became poltergeists. Their story was found in medical papers (read by Tivael in Azlanti).
+- **Zatrine** (defeated, Session 2): Lamia who ambushed the party disguised as a freed prisoner in the Azlanti cell block. Cast Agonizing Despair, Noise Blast, and Vampiric Feast. Killed by Bael's one-action fire blast after Ferrok's 108-damage Sure Strike + Horizon Thunder Sphere Spellstrike crit softened her. Had a +1 Striking Fearsome Scimitar and +1 Resilient Explorer's Clothing. *"Impatient fuckers, aren't you all."*
+- **Tokainen**: Named higher-up referenced by the Chosen ("Tokainen's gonna want him"). Identity unknown — vampire lieutenant or cult leader serving Nizca. The seven Chosen all bore identical **Cataclysm Brand** marks on their left cheeks — likely batch-branded by Tokainen or an apparatus. Not yet encountered.
 
 ## Key Locations
 
@@ -61,6 +66,7 @@ The party returned to Talmandor's Bounty with prisoners, fought shadow-tainted d
 - **The Ebon Tower / Shadow Tower**: Nizca's base, source of the shadow clouds. Connected to Bleeding Palace via Azlanti elevator. The party has entered the lower levels. Layout (per Zovi): rail junction → medical wing (cleared) → cell block → administrative wing (Nizca's allies) → Ebon Tower heights (Dero) → vampires/shadows → Nizca and Degg at the top.
 - **The Shadow Beacon**: Device at the top of the Ebon Tower generating the shadow pall over the sky. Built by Degg. Must be destroyed to restore sunlight.
 - **Rail Junction**: Underground hub with multiple tracks. Western track = elevator from Bleeding Palace. Southern track = medical wing. Other tracks unexplored.
+- **Shadow Tower Lobby**: Grand entrance hall (100 ft up the spiral stairwell from the medical wing). Polished black marble, walls tiled in green and gold, vaulted 40-ft ceiling, two three-tiered fountains running clean, geometric crystal sculptures. Two life-size armored Azlanti sentinel statues flank a sword-and-polearm garden growing from the floor. Multiple halls and doors branch off — the gambling lounge (cleared) and a sleeping-guards dormitory (cliffhanger) are the only ones explored so far.
 
 ## The Party
 
@@ -118,7 +124,15 @@ The party returned to Talmandor's Bounty with prisoners, fought shadow-tainted d
 - **Dero Sentries**: Focused Blow (extra damage on next Strike). Language: Undercommon (not Common — Demoralize in Common may fail depending on specific Dero).
 - **Dero Magister**: Noise Blast (sonic AoE, Fort save, Deafened on failure). Agonizing Despair (mental damage + Frightened, Will save). Deafened shuts down auditory compositions.
 - **Poltergeists**: Incorporeal. Telekinetic Storm (multi-target physical strikes, up to 3d12 per target focused). Site Bound (can't leave 120 ft from origin). Immune to: paralyzed, precision, unconscious. Force damage and spirit damage bypass incorporeal.
-- **Clockwork Soldiers**: Constructs. Physical resistance 5. Activate Defenses (+2 circumstance AC to self or adjacent ally). Stupefied 1 on hit. Electricity bypasses physical resistance.
+- **Clockwork Soldiers**: Constructs. Physical resistance 5. Activate Defenses (+2 circumstance AC to self or adjacent ally). Stupefied 1 on hit. Electricity weakness — electricity bypasses physical resistance.
+
+### Session 2 New Enemies
+- **Lamia (Zatrine)**: Upper-half human, lower-half serpent. Spell list: Agonizing Despair (occult, Will save, mental + Frightened), Noise Blast (sonic AoE, Fort), Vampiric Feast (touch, void, heals caster for half damage dealt). High HP — survived a 108-damage Spellstrike crit + a 35-damage Heal-scroll-equivalent of damage before falling.
+- **Bandit Rogues (Aguilar, Ularette, Iverness)**: Rogue thugs. Feint + strike combos. Nimble Dodge (reaction +2 AC, can downgrade crit to hit). +1 Striking Short Sword + Short Bow + Lesser Darkvision Elixir each.
+- **Living Graffiti**: Constructs that peel off mural walls. Best save Reflex, worst Fort. NOT mindless (Demoralize and Bon Mot work). Standard construct immunities. No known weakness exposed (the Clockwork Soldier paired with them was the electricity-weak one, not the Graffiti themselves).
+- **Shadow / Greater Shadow**: Incorporeal undead. Resistant to all damage except **force, ghost touch, vitality, spirit**. Best Reflex / worst Fort. NOT mindless. **Steal Shadow** (Enfeebled stacking up to 3 — at 3+, shadow is separated; spawns a shadow spawn). Decreases by 1 per hour.
+- **Clockwork Sentry**: Larger, multi-armed clockwork construct. **Tackle** (stride + fist + trip), **Sudden Seize** (reaction grapple on manipulate/move actions), **Pneumatic Swing** (warhammer reach 10 ft, knockdown trip-rider). Electricity weakness 10.
+- **Tokainen's Chosen**: Azlanti-descent humans in matching uniforms, identical **Cataclysm Brand** burn on left cheek. **Cataclysm Brand** 1/hour, 60-ft range, 10-ft burst, 6d6 fire + persistent 1d4 fire on failed save. **Take 'Em Down** (guisarme: Trip + Strike, same MAP). Bola side-arm. Likely weak to lightning.
 
 ### Key Patterns
 - Enemies target party Fort saves most often (Divine Wrath, Harm, Enervation, Drink Blood, Shadow Expulsion, Noise Blast)

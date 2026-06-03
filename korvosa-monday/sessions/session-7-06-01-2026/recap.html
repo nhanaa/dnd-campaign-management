@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 7 — A Rhinoceros Man in the Sewers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eae4da;
+  --bg-card: #f2ede4;
+  --bg-card-hover: #f8f4ed;
+  --border: #c8bfb0;
+  --text: #2e2a24;
+  --text-dim: #5a5347;
+  --text-bright: #1a1714;
+  --red: #8a2c2c;
+  --red-glow: #8a2c2c22;
+  --blue: #4a6278;
+  --blue-glow: #4a627822;
+  --green: #4a6a3a;
+  --green-glow: #4a6a3a22;
+  --purple: #6a3a6a;
+  --purple-glow: #6a3a6a22;
+  --teal: #3a6a62;
+  --teal-glow: #3a6a6222;
+  --gold: #8a6a2c;
+  --gold-dim: #a07a3a;
+  --gold-glow: #8a6a2c22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 30% 100%, #d4c4a822 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 0%, #c8b89822 0%, transparent 40%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 110%, #c4884420 0%, transparent 55%);
+  animation: ember-glow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-glow {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.5; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'MedievalSharp', cursive;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.char-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-izka { border-left-color: #4a6278; }
+.char-kukulan { border-left-color: #4a6a3a; }
+.char-delights { border-left-color: #6a3a6a; }
+.char-meeg { border-left-color: #a07a3a; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2410;
+}
+
+.summary p { font-size: 16px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.intrigue::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-bottom: 6px;
+}
+
+.act-label.combat { color: var(--red); }
+.act-label.rp { color: var(--purple); }
+.act-label.explore { color: var(--blue); }
+.act-label.intrigue { color: var(--red); }
+.act-label.mystery { color: var(--teal); }
+
+.act h3 { margin-bottom: 14px; }
+
+.act ul { margin: 10px 0 0 18px; }
+
+.sub-list {
+  margin: 6px 0 6px 22px;
+  list-style: disc;
+}
+
+.sub-list li {
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+/* Combat box */
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  background: #2e2a240a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.combat-stats .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.combat-stats .stat-value {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+/* Spotlight cards */
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.spotlight-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.spotlight-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.spotlight-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.spotlight-card ul {
+  margin: 0 0 0 18px;
+}
+
+/* Loot */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.loot-item.magical {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 20px #8a6a2c11;
+  background: #f0e8da;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.xp-banner {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+}
+
+/* Quotes */
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #8a6a2c08;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.quote-attr {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.quote-context {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Journal / Pax's Notes */
+.journal {
+  background: linear-gradient(135deg, #f4ede2, #efe8dc);
+  border: 1px solid #c0b8a8;
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2408;
+}
+
+.journal h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c8c0b0;
+}
+
+.journal-intro {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.journal ul { margin: 8px 0 16px 18px; }
+.journal li { padding: 4px 0; font-size: 15px; }
+
+/* Open threads */
+.thread-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.thread-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Cliffhanger */
+.cliffhanger {
+  background: linear-gradient(135deg, #e0d6c8, #ebe2d4);
+  border: 1px solid #a0906a;
+  border-radius: 6px;
+  padding: 28px 30px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cliffhanger h3 {
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.cliffhanger p {
+  font-style: italic;
+  font-size: 17px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .container { padding: 30px 16px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<header class="header">
+  <h1>A Rhinoceros Man in the Sewers</h1>
+  <div class="subtitle">Session 7 &mdash; Curse of the Crimson Throne &middot; Monday Group</div>
+  <div class="meta-row">
+    <span class="meta-pill">June 1, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 06m</span>
+    <span class="meta-pill">Level 5</span>
+    <span class="meta-pill">Izka joins the party</span>
+  </div>
+</header>
+
+<!-- Composition -->
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:45%"></div>
+    <div class="comp-seg comp-rp" style="width:25%"></div>
+    <div class="comp-seg comp-explore" style="width:18%"></div>
+    <div class="comp-seg comp-loot" style="width:12%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--red)"></span>Combat 45%</span>
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 25%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Investigation 18%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Downtime &amp; Loot 12%</span>
+  </div>
+</section>
+
+<!-- Party -->
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-izka">
+      <div class="char-name">Izka</div>
+      <div class="char-class">Kashrishi (Sylph) Magus (Inexorable Iron) / Cavalier</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-kukulan">
+      <div class="char-name">Kukulan</div>
+      <div class="char-class">Iruxi (Lizardfolk) Monk &mdash; Star Athlete / Wrestler</div>
+      <div class="char-player">Kulan</div>
+    </div>
+    <div class="char-card char-delights">
+      <div class="char-name">Delights Qlomaind</div>
+      <div class="char-class">Nagaji Necromancer / Champion</div>
+      <div class="char-player">Matt</div>
+    </div>
+    <div class="char-card char-meeg">
+      <div class="char-name">Meeg</div>
+      <div class="char-class">Goblin Thaumaturge / Exemplar</div>
+      <div class="char-player">DM-run (Derek out)</div>
+    </div>
+  </div>
+  <p style="margin-top:14px; font-size:13px; color:var(--text-dim); font-style:italic;">Caliban (Hawke) was absent. With Derek also out, the DM (Orion) ran Meeg as an NPC the entire session &mdash; and Meeg promptly stole the first fight.</p>
+</section>
+
+<!-- Summary -->
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The group&rsquo;s hunt for the source of Korvosa&rsquo;s spreading <strong>blood veil</strong> plague led them into the sewers, where Urgothoan cultists and a warren of were-rats were pushing contaminated coin into the city. The fight was a meat-grinder &mdash; and the night&rsquo;s first surprise was that <strong>Meeg, run by the DM, became an unkillable wall</strong>, holding the chokepoint and dropping enemies with his chakrams while nobody could land a hit on him. Kukulan grappled, tripped, and tried to <em>recruit</em> the were-rats, going down twice under the crits of their leader <strong>Grig</strong>. Into the chaos rode a stranger on a small dragon &mdash; <strong>Izka</strong>, a self-described &ldquo;rhinoceros man&rdquo; and graduate of the Acadamae &mdash; who picked off cultists, then chased down and killed the fleeing Grig before the party even learned his name.</p>
+    <p>What followed was a comedy of introductions. The party is functionally illiterate; Izka can read; that, more than anything, earned him a permanent spot. Delights pegged him as a &ldquo;horned freak, kill stealer, and a nerd,&rdquo; then decided the group was &ldquo;absolutely fucked without Izka&rdquo; and welcomed him aboard. After looting the warren and a market run for their level-5 gear, they visited <strong>Ishani Dhatri&rsquo;s</strong> church, now an overwhelmed plague ward, traded an encrypted Urgothoan text for 300 gold, and learned how dire the outbreak has become &mdash; only 20% of the afflicted recover, and the head physician everyone calls the &ldquo;Nicolas Cage doctor&rdquo; has gone missing.</p>
+    <p>A rumor of a noble <strong>gala</strong> at the <strong>Carowind Manor</strong> &mdash; held in defiance of the plague &mdash; sent them over the wall of a gated community and through a locked front door, behind which the partygoers had already turned to undead. On the balcony waited the necromancer <strong>Jolistina Susperi</strong>, who had crashed the party to build &ldquo;the perfect zombie&rdquo; for someone named <strong>Rolth</strong>. It was meant to be an extreme, multi-round fight. It lasted about as long as it took Izka to roll his crits: a Sure-Struck Horizon Thunder Sphere that vaporized the entire Shambler Troop, a crit guisarme Strike that finished Jolistina, and a Spellstrike crit on the wall-busting Zombie Hulk. A lone survivor, the noble <strong>Dante Kerouan</strong>, crawled out of a bathtub to give them the name that ties it all together.</p>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section>
+  <h2>Key Events</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label combat">Act I &middot; Combat &middot; The Rat Warren</div>
+      <h3>Grig, Who Makes All the Rules</h3>
+      <ul>
+        <li>The party tracked the plague into the <strong>sewers</strong>, cornering <strong>Grig</strong> &mdash; &ldquo;the biggest rat who makes all the rules&rdquo; &mdash; leader of a were-rat warren working with <strong>Urgothoan cultists</strong> to spread blood veil through tainted coin. Grig stalled for reinforcements; the fight kicked off.</li>
+        <li>The DM dropped <strong>Izka</strong> into the encounter as a passing stranger &mdash; &ldquo;you just happen to be here and hear all this fighting.&rdquo; He rode in on <strong>Po</strong>, his dragonet mount, and opened with a Spellstrike for 23.</li>
+        <li><strong>Meeg</strong> (DM-run) anchored the chokepoint and became the runaway MVP &mdash; chakram strikes, Exploit Vulnerability, and an unbroken streak of enemies whiffing on him. <em>&ldquo;Meeg&rsquo;s the Wonderwall.&rdquo;</em></li>
+        <li><strong>Kukulan</strong> repeatedly tried to <em>spare</em> the were-rats &mdash; &ldquo;Stand back, rats, this isn&rsquo;t your fight&rdquo; &mdash; even promising to pay Ishani to cure their disease, but they wouldn&rsquo;t break from Grig.</li>
+        <li>Kukulan <strong>went down twice</strong>: first focused by the rats (<strong>Meeg&rsquo;s rank-2 heal scroll</strong> revived him), then grappled and restrained by Grig to <strong>Dying 3</strong> (<strong>Delights&rsquo; healing potion</strong> patched him afterward).</li>
+        <li><strong>Izka chased the fleeing Grig</strong>, dismounted Po, and cut him down with a melee Strike &mdash; the killing blow on the boss the party had spent the whole fight agonizing over.</li>
+      </ul>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label rp">Act II &middot; Roleplay &middot; First Impressions</div>
+      <h3>&ldquo;I Am a Rhinoceros Man&rdquo;</h3>
+      <ul>
+        <li>With Grig dead, the party turned on the stranger. Delights shook him: &ldquo;Who are you?&rdquo;</li>
+        <li>Izka introduced himself as a <strong>graduate of the Acadamae</strong>, Korvosa&rsquo;s College of Wizards &mdash; and immediately ran aground on the fact that <strong>the rest of the party can&rsquo;t read.</strong></li>
+        <li>Delights&rsquo; verdict: &ldquo;On top of being a horned freak and a kill stealer, you&rsquo;re also a nerd? Get him!&rdquo; &mdash; but after a huddle, he reversed: &ldquo;Izka is attentive, and Izka can read. I think we need Izka in this group more than I thought.&rdquo; Izka was made a <strong>permanent member.</strong></li>
+        <li>Comedy beats: Izka explaining what a rhinoceros is for five straight minutes; the <strong>Kashrishi telepathy</strong> discussion; Delights elbowing Izka in the horn.</li>
+      </ul>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label explore">Act III &middot; Investigation &middot; The Plague Ward</div>
+      <h3>Ishani&rsquo;s Overwhelmed Temple</h3>
+      <ul>
+        <li><strong>Level-up to 5</strong>, a market run (the plague-emptied market gave generous buy prices), and gear shopping. Izka&rsquo;s potency crystal put him at <strong>AC 23</strong>.</li>
+        <li>Visit to <strong>Ishani Dhatri&rsquo;s church</strong> &mdash; now an expansive medical wing packed with cots, masked clerics of Abadar, Sarenrae, and others treating <strong>blood veil</strong> victims.</li>
+        <li>The party handed over the <strong>encrypted Urgothoan text</strong> looted from the sewer; Ishani bought it for <strong>300 gp</strong> for the temple library and flagged that it&rsquo;s <strong>encrypted</strong> &mdash; he offered to research it.</li>
+        <li>Worldbuilding learned: only ~<strong>20% of the afflicted recover</strong>; it hits lower-class <strong>Shoanti and Varisians</strong> hardest, while <strong>Kelids</strong> (who quarantined by cutting off Highbridge) are largely untouched.</li>
+        <li>The missing &ldquo;Nicolas Cage&rdquo; head physician (<strong>Dr. Davaulus</strong>) is rumored to be in a secret Midland laboratory or near the university in North Point; <strong>Blackjack</strong> is trying to track him.</li>
+      </ul>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label combat">Act IV &middot; Combat &middot; The Carowind Gala</div>
+      <h3>A Party of the Dead</h3>
+      <ul>
+        <li>A noble <strong>gala</strong> at the <strong>Carowind Manor</strong> in <strong>South Shore</strong> &mdash; thrown despite the plague, with the popular performer <strong>Ruan</strong> invited &mdash; became the next lead.</li>
+        <li>Turned away at the gate by <strong>Grey Maidens</strong>, the party went over the wall: Delights&rsquo; &ldquo;Helpful Steps&rdquo; stairs and Kukulan flying up on his new <strong>dragon wings.</strong></li>
+        <li>Behind the locked front door, the partygoers had <strong>mutated into undead.</strong> The necromancer <strong>Jolistina Susperi</strong> appeared on a balcony 15 ft up, taunted the party, loosed a <strong>Shambler Troop</strong>, and retreated behind her minions.</li>
+        <li><strong>Kukulan flew up to the balcony</strong> to engage Jolistina directly &mdash; grappling and flurrying her as she Feinted to stay slippery.</li>
+        <li><strong>Izka cast Sure Strike, then Spellstruck Horizon Thunder Sphere &mdash; and crit</strong>, the explosion wiping out the entire <strong>Shambler Troop</strong> at once. (<em>&ldquo;Izka saying kamehameha, and then all of them are dead.&rdquo;</em>)</li>
+        <li>A <strong>Zombie Hulk</strong> with a 15-ft reach burst through a wall (late to the fight). Izka hit Jolistina with <strong>Force Fang</strong> to recharge, then <strong>Spellstruck Gouging Claw for 35</strong> to soften her, and <strong>finished her the next turn with a plain guisarme crit Strike</strong>; he then <strong>crit the Hulk with a Spellstrike</strong>, which Delights&rsquo; thralls put down. Two Magus crits collapsed an &ldquo;extreme&rdquo; encounter almost instantly.</li>
+        <li>The survivor, <strong>Dante Kerouan</strong> (a minor noble of the manor&rsquo;s family, hiding in a bathtub), revealed Jolistina&rsquo;s obsession: she was building &ldquo;the perfect zombie&rdquo; to make <strong>Rolth</strong> fall in love with her.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Combat -->
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; The Rat Warren (Sewers)</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">Grig + ~4 Were-rats, 2 Urgothoan Cultists, Rat Swarm, Giant Rat</div></div>
+      <div><div class="stat-label">MVP</div><div class="stat-value">Meeg (DM-run) &mdash; the Wonderwall</div></div>
+      <div><div class="stat-label">Down</div><div class="stat-value">Kukulan &times;2 (rats; Grig to Dying 3)</div></div>
+      <div><div class="stat-label">Kill</div><div class="stat-value">Grig &rarr; Izka (melee Strike)</div></div>
+    </div>
+    <p style="font-size:13px; color:var(--text-dim); font-style:italic;">Initiative (tracker): Cultist &rarr; Izka &rarr; Were-rat &rarr; Delights &rarr; Meeg &rarr; Were-rat &rarr; Cultist &rarr; Were-rat &rarr; Were-rat &rarr; Rat Swarm &rarr; Grig &rarr; Giant Rat. (Kukulan fought as well &mdash; placement near Grig, to confirm.)</p>
+    <p style="font-size:13px; color:var(--text-dim); font-style:italic;">A long, chaotic fight &mdash; beats below run chronologically rather than as clean rounds.</p>
+    <h4>Izka (on Po)</h4>
+    <ul>
+      <li>Rides up and <strong>Spellstrikes a cultist with Gouging Claw for 23</strong>, then casts <strong>Shield.</strong> A cultist later tags him for <strong>9 + a Daze</strong>, then <strong>6</strong> more.</li>
+      <li>A <strong>26-damage Gouging Claw Spellstrike</strong> &mdash; &ldquo;a giant claw forming out of his body, pierced through a rat&rdquo; &mdash; then he <strong>enters Arcane Cascade.</strong></li>
+      <li><strong>Commands Po for two strikes</strong>, recharges, and <strong>burns a hero point</strong> to Spellstrike an unaware cultist; later a <strong>13 + 3 splash</strong> Spellstrike blows another cultist up.</li>
+      <li><strong>Crit-trips Grig</strong> (boosted by <strong>Community Knowledge</strong>), then &mdash; kill left to the others, two actions to spare &mdash; sits back to <strong>grab popcorn.</strong></li>
+    </ul>
+    <h4>Kukulan</h4>
+    <ul>
+      <li><strong>Wolf Stance + Flurry</strong>; first grapple on Grig fails (&ldquo;made of sterner stuff&rdquo;) but the Flurry lands <strong>19</strong>. Repeatedly <strong>trips</strong> rats and tries to <strong>talk the warren down.</strong></li>
+      <li><strong>Stunning Fist (Wolf Jaws) for 34</strong> puts Grig at death&rsquo;s door (Grig resists the stun).</li>
+      <li><strong>Goes down twice</strong> &mdash; revived by <strong>Meeg&rsquo;s rank-2 heal scroll</strong>, then by <strong>Delights&rsquo; healing potion (18)</strong> after Grig grapples and restrains him to <strong>Dying 3.</strong></li>
+    </ul>
+    <h4>Delights &amp; Meeg</h4>
+    <ul>
+      <li><strong>Delights</strong>: Mirror Image; a regretted <strong>Bane</strong>; a stream of <strong>thralls</strong> and <strong>Bone Spear</strong> AoEs (13, then 15 that kills the rat swarm + 12); Guidance; a hero-point reroll; the clutch potion on Kukulan.</li>
+      <li><strong>Meeg</strong> (DM-run): the <strong>&ldquo;Wonderwall&rdquo;</strong> &mdash; holds the chokepoint essentially untouched, Chakram + Exploit Vulnerability, <strong>guts a were-rat dead</strong>, and heals Kukulan off the floor.</li>
+      <li>The warren is ground down; one or two rats are spared. Grig flees; <strong>Izka chases on Po, dismounts, and finishes him with a Strike.</strong></li>
+    </ul>
+    <p style="color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; margin-top:16px;">
+      Outcome &middot; Warren cleared &middot; Grig killed &middot; one cultist &amp; a few rats escaped
+    </p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; The Carowind Manor Gala</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">Jolistina Susperi, a Shambler Troop, a Zombie Hulk (late)</div></div>
+      <div><div class="stat-label">Opener</div><div class="stat-value">Shambler onslaught &mdash; 5-ft emanation, no save</div></div>
+      <div><div class="stat-label">Kills</div><div class="stat-value">Shambler Troop, Jolistina &rarr; Izka; Hulk &rarr; Izka crit + Delights&rsquo; thralls</div></div>
+      <div><div class="stat-label">Hero Move</div><div class="stat-value">Kukulan flies to the balcony</div></div>
+    </div>
+    <p style="font-size:13px; color:var(--text-dim); font-style:italic;">Initiative (tracker): Shambler Troop &rarr; Jolistina Susperi &rarr; Kukulan &rarr; Izka &rarr; Delights. Zombie Hulk joined later, bursting through a wall.</p>
+    <ul>
+      <li>The party climbs the wall (<strong>Delights&rsquo; Helpful Steps</strong> + <strong>Kukulan&rsquo;s dragon-wing flight</strong>); Kukulan picks the lock, and the doors open on <strong>mutated undead partygoers.</strong></li>
+      <li>The <strong>Shambler Troop</strong> opens with a shambling onslaught (5-ft emanation, no save). <strong>Jolistina</strong> appears on a balcony ~15 ft up, taunts the party, looses her minions, and <strong>withdraws.</strong></li>
+      <li><strong>Kukulan</strong>: Flurry into the Shambler Troop, then <strong>dragon-wing flight 20 ft up to the balcony</strong> to engage Jolistina &mdash; grapples and flurries her, hammering her for <strong>22</strong> with a stun. She Feints to stay off-guard and stabs back.</li>
+      <li><strong>Izka</strong>: <strong>Sure Strike &rarr; Spellstrike (Horizon Thunder Sphere) &rarr; crit.</strong> The blast <strong>wipes the entire Shambler Troop</strong> in one action.</li>
+      <li><strong>Zombie Hulk</strong> smashes through a wall (15-ft reach) and swings at Kukulan on entry &mdash; <strong>misses</strong>; on a later swing Kukulan <strong>Shield Blocks</strong> (10 reduced).</li>
+      <li><strong>Delights</strong>: thralls; a <strong>muscle-barrier thrall</strong> granting Kukulan temp HP and +1 Athletics; a &ldquo;dream of home&rdquo; effect that fizzles on the freshly-made undead.</li>
+      <li><strong>Izka</strong>: <strong>Force Fang</strong> (conflux, recharges Spellstrike) &rarr; Spellstrike Gouging Claw on Jolistina for <strong>35</strong>, softening her; the next turn, with his Spellstrike spent, a <strong>plain guisarme Strike crit &mdash; the killing blow on Jolistina.</strong></li>
+      <li><strong>Izka</strong> then <strong>crits the Zombie Hulk with a Spellstrike</strong> (<em>&ldquo;Double it and give it to the next person&rdquo;</em>); Delights&rsquo; thralls finish it. <strong>Two Magus crits end the encounter.</strong></li>
+    </ul>
+    <p style="color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; margin-top:16px;">
+      Outcome &middot; Jolistina &amp; the gala threats destroyed &middot; one survivor: Dante Kerouan
+    </p>
+  </div>
+</section>
+
+<!-- Character Spotlights -->
+<section>
+  <h2>Character Spotlights</h2>
+
+  <div class="spotlight-card" style="border-left: 3px solid #4a6278;">
+    <div class="spotlight-name">Izka &middot; the Rhinoceros Man</div>
+    <div class="spotlight-meta">Magus (Inexorable Iron) / Cavalier &bull; Pax</div>
+    <ul>
+      <li>Crashed the sewer fight as a total stranger, Spellstruck a cultist for 23, and shielded up.</li>
+      <li>Worked Po hard in the warren: a 26-damage Gouging Claw Spellstrike, a hero-point Spellstrike on an unaware cultist, and a 13 + splash that blew up another.</li>
+      <li><strong>Crit-tripped Grig</strong> (boosted by Community Knowledge), then &mdash; kill left to the others, two actions to spare &mdash; sat back to <strong>grab popcorn.</strong></li>
+      <li><strong>Killed the fleeing Grig</strong> by dismounting Po and running him down with a Strike &mdash; instantly branding himself the party&rsquo;s &ldquo;kill stealer.&rdquo;</li>
+      <li>Talked his way from &ldquo;kill this guy&rdquo; to permanent party member on the strength of being the only one who can read.</li>
+      <li><strong>Crit the Horizon Thunder Sphere Spellstrike</strong> to delete the entire Shambler Troop in one shot.</li>
+      <li>Hit <strong>Jolistina Susperi</strong> with <strong>Force Fang</strong> to recharge, then <strong>Spellstruck Gouging Claw for 35</strong> to soften her, and <strong>crit-killed her with a plain guisarme Strike</strong>; then a <strong>Spellstrike crit on the Zombie Hulk.</strong> (<em>&ldquo;This man rolls all the 19s in the world on his Spellstrikes.&rdquo;</em>)</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #4a6a3a;">
+    <div class="spotlight-name">Kukulan &middot; the Merciful Wrestler</div>
+    <div class="spotlight-meta">Monk &mdash; Star Athlete / Wrestler &bull; Kulan</div>
+    <ul>
+      <li>Wolf Stance, Flurry of Blows, and a relentless campaign of grapples and trips through the rat warren.</li>
+      <li>Tried repeatedly to <strong>spare and recruit</strong> the were-rats, even offering to fund their cure &mdash; and genuinely mourned Grig&rsquo;s death (&ldquo;we could have still saved him&rdquo;).</li>
+      <li>Took a brutal streak of crits and <strong>went down twice</strong> &mdash; revived by Meeg&rsquo;s heal scroll, then by Delights&rsquo; potion after Grig restrained him to Dying 3 &mdash; and <strong>sprang right back in</strong> both times.</li>
+      <li>Used his new <strong>dragon wings</strong> to fly straight up to Jolistina&rsquo;s balcony &mdash; the move that, per the DM, short-circuited a fight meant to last rounds.</li>
+      <li>The party&rsquo;s would-be face: shirtless flexing, a six-foot top hat, a monocle, and a Blackjack tattoo he&rsquo;s saving to show the Queen.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #6a3a6a;">
+    <div class="spotlight-name">Delights Qlomaind &middot; the Opportunologist</div>
+    <div class="spotlight-meta">Nagaji Necromancer / Champion &bull; Matt</div>
+    <ul>
+      <li>Mirror Image, thralls, Bone Spear AoEs, and a regretted Bane (&ldquo;I baned myself&rdquo;) through the warren.</li>
+      <li>The party&rsquo;s social engine and chief comedian &mdash; ran the &ldquo;is Izka worth keeping&rdquo; deliberations and ultimately drafted him.</li>
+      <li>At the manor: the <strong>Helpful Steps</strong> wall-climb, a clutch <strong>muscle-barrier thrall</strong> feeding Kukulan temp HP, and a failed &ldquo;make it dream of home&rdquo; against a creature &ldquo;born a second ago.&rdquo;</li>
+      <li>Insists, to the necromancer&rsquo;s face, that he&rsquo;s &ldquo;not a necromancer &mdash; an opportunologist.&rdquo;</li>
+    </ul>
+  </div>
+
+  <div class="spotlight-card" style="border-left: 3px solid #a07a3a;">
+    <div class="spotlight-name">Meeg &middot; the Wonderwall <span style="font-weight:400; font-size:13px; color:var(--text-dim);">(DM-run)</span></div>
+    <div class="spotlight-meta">Goblin Thaumaturge / Exemplar &bull; Orion</div>
+    <ul>
+      <li>Held the sewer chokepoint as an immovable wall &mdash; Chakram + Exploit Vulnerability, racking up kills while enemies whiffed on him turn after turn.</li>
+      <li>Dropped his weapon to <strong>heal Kukulan</strong> off the floor with a rank-2 scroll at the critical moment.</li>
+      <li>Quietly the most effective combatant of the first fight, to the DM&rsquo;s open amazement.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Loot -->
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">+1 Weapon</div>
+      <div class="loot-source">Looted from Grig, the rat-warren boss</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Bravo&rsquo;s Brew</div>
+      <div class="loot-source">Grig &mdash; save-support consumable</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Healing Potions &times;3</div>
+      <div class="loot-source">Grig &mdash; &ldquo;used zero of them&rdquo;</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">300 Gold</div>
+      <div class="loot-source">Ishani Dhatri &mdash; for the encrypted Urgothoan text</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Staff of the Dead</div>
+      <div class="loot-source">Party stash &mdash; claimed by Delights</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Necklace / Bracelet (~600 gp)</div>
+      <div class="loot-source">Dante Kerouan &mdash; the gala survivor</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Level Up &rarr; 5</div>
+      <div class="loot-source">Milestone during the session</div>
+    </div>
+  </div>
+  <p class="xp-banner">Milestone Progression &middot; Rat Warren + Carowind Gala = <strong>Level 5</strong></p>
+</section>
+
+<!-- Memorable Quotes -->
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I am a rhinoceros man.&rdquo;</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">Introducing himself to a party that has never seen a rhinoceros &mdash; or a book</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I&rsquo;ll leave the rest to you. I&rsquo;m just gonna sit back and grab popcorn.&rdquo;</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">After crit-tripping Grig and deciding the kill could wait</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I have no performance, I have no charisma. I am a very uncharismatic man.&rdquo;</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">Declining the persona mask during the loot split</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;You shouldn&rsquo;t have created such an abomination.&rdquo;</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">To Jolistina, mid-kill</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Grig, I&rsquo;m not going to kill you, but I am going to break every bone in your body.&rdquo;</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">Opening negotiations with the were-rat boss</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;He killed Grig, and I feel like we could have still saved him.&rdquo;</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">Privately mourning the boss Izka ran down &mdash; moments after meeting Izka</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;My median for skill check rolls is four.&rdquo;</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">On his lifelong relationship with the d20</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Perhaps this is all the invitation I need.&rdquo; <span style="font-style:normal;">(takes off his shirt and flexes)</span></div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">Attempting to bluff past the Grey Maidens at the gala gate</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;I&rsquo;m not a necromancer. I&rsquo;m an opportunologist. I provide people with opportunities.&rdquo;</div>
+    <div class="quote-attr">Delights Qlomaind</div>
+    <div class="quote-context">To Jolistina, who offered to &ldquo;share notes&rdquo;</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;So on top of being a horned freak and a kill stealer, you&rsquo;re also a nerd? Get him!&rdquo;</div>
+    <div class="quote-attr">Delights Qlomaind</div>
+    <div class="quote-context">First impressions of Izka</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;We don&rsquo;t need enablers in this party. We just need people willing to tell the cold, hard truth. All right &mdash; except for Kulan. He&rsquo;s very sensitive.&rdquo;</div>
+    <div class="quote-attr">Delights Qlomaind</div>
+    <div class="quote-context">Party philosophy</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">&ldquo;Meeg has just been fucking sitting here like a wall, holding the line. Like, holy shit.&rdquo;</div>
+    <div class="quote-attr">Meeg <span style="font-style:normal; font-weight:400;">(DM, on his own NPC)</span></div>
+    <div class="quote-context">The DM, genuinely amazed at how Meeg was carrying the fight</div>
+  </div>
+
+  <div class="quote-block" style="border-left-color: var(--red);">
+    <div class="quote-text">&ldquo;I was invited here, and I had my own fun. Is that a bad thing to do?&rdquo;</div>
+    <div class="quote-attr">Jolistina Susperi</div>
+    <div class="quote-context">The necromancer, greeting her uninvited guests from the balcony</div>
+  </div>
+</section>
+
+<!-- Open Threads -->
+<section>
+  <h2>Open Threads</h2>
+
+  <div class="thread-item">
+    <div class="thread-name">Rolth</div>
+    <div class="thread-desc">Gaedren Lamm&rsquo;s son. Jolistina was building &ldquo;the perfect zombie&rdquo; to win his love; he is apparently still active in Korvosa. The party&rsquo;s prime lead now.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">The Missing Physician</div>
+    <div class="thread-desc">The &ldquo;Nicolas Cage&rdquo; head doctor (Dr. Davaulus) has vanished &mdash; rumored secret lab in Midland or near the university in North Point. Blackjack is tracking him.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Blood Veil</div>
+    <div class="thread-desc">Still spreading; only ~20% recovery; Ishani&rsquo;s temple is heading toward forced triage. The encrypted Urgothoan text may explain how it entered the city.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Ruan, the Performer</div>
+    <div class="thread-desc">The popular East Shore performer invited to the gala; his whereabouts after the attack are unknown.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">The Coin Vector</div>
+    <div class="thread-desc">The plague is suspected to spread via tainted coin &mdash; and the party just pocketed several sacks of it.</div>
+  </div>
+  <div class="thread-item">
+    <div class="thread-name">Izka &amp; the Acadamae</div>
+    <div class="thread-desc">The party&rsquo;s new, and only literate, member is a graduate of Korvosa&rsquo;s College of Wizards &mdash; a door the rest of the group can&rsquo;t open.</div>
+  </div>
+</section>
+
+<!-- Pax's Notes -->
+<section class="pax-notes">
+  <h2>Pax&rsquo;s Notes &mdash; Izka&rsquo;s Journal</h2>
+  <div class="journal">
+    <p class="journal-intro"><em>Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Izka did this session</h3>
+    <ul>
+      <li>Arrived in Korvosa &ldquo;after some jobs outside the city,&rdquo; stumbled into the sewer fight, and pitched in against the Urgothoan cultists.</li>
+      <li>Killed the fleeing were-rat boss <strong>Grig</strong> (dismounted Po, ran him down with a Strike). Earned the party&rsquo;s &ldquo;kill stealer&rdquo; label immediately.</li>
+      <li>Got himself adopted into the party &mdash; mostly because he&rsquo;s the only literate one. Presented as a graduate of the <strong>Acadamae</strong>, the College of Wizards.</li>
+      <li>Traded the Urgothoan text to <strong>Ishani Dhatri</strong> for 300 gp; backed Ishani&rsquo;s price honestly.</li>
+      <li>At the gala: Sure Strike &rarr; <strong>Horizon Thunder Sphere Spellstrike crit</strong> wiped the Shambler Troop; <strong>Force Fang</strong> (recharge) &rarr; <strong>Gouging Claw Spellstrike for 35</strong> softened <strong>Jolistina</strong>, then a <strong>plain crit Strike finished her</strong>; a <strong>Spellstrike crit</strong> on the Zombie Hulk. The crit streak ended the fight.</li>
+    </ul>
+
+    <h3>Things Izka knows that the party does not</h3>
+    <ul>
+      <li><strong>The party is illiterate.</strong> This is leverage and liability both &mdash; Izka is now the de facto reader, researcher, and face for anything written.</li>
+      <li><strong>Meeg (the goblin) is dangerous.</strong> He held the entire sewer chokepoint untouched. Do not underestimate him when his player returns.</li>
+      <li><em>(Player meta &mdash; cross-table.)</em> Pax played this exact AP on the old <strong>Sunday Korvosa</strong> table (same DM, Orion). Things that line up and differ:
+        <ul class="sub-list">
+          <li><strong>Blackjack</strong>: on the Sunday table his identity was never officially revealed &mdash; Pax&rsquo;s character only <em>guessed</em> it (Vencarlo), confirmed out of game. Here this group already knows him as &ldquo;the guy who runs the fencing academy,&rdquo; actively tracking the missing plague doctor.</li>
+          <li><strong>Trinia / the scapegoat</strong>: both tables saved the real Trinia <em>and</em> the execution scapegoat, with Blackjack spiriting them to a safe house. Same beat.</li>
+          <li><strong>The plague</strong>: the Sunday group stopped <em>right before</em> blood veil broke out &mdash; Izka is picking the story back up one beat later than where Pax left it.</li>
+          <li><strong>The Acadamae</strong>: the Sunday group &ldquo;never went to the Acadamae at all.&rdquo; This table hasn&rsquo;t yet either &mdash; but Izka is a graduate of it, which may be a thread worth pulling.</li>
+          <li><strong>Rolth</strong>: same antagonist thread in both &mdash; Gaedren Lamm&rsquo;s necromancer son, still at large, with cultists building horrors in his name.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>What Izka is thinking about</h3>
+    <ul>
+      <li><strong>Crit fishing is the win condition.</strong> Sure Strike into a big-rank Spellstrike crit deleted the Shambler Troop; the kills came on crits all night &mdash; including a plain guisarme Strike crit to finish Jolistina once the Spellstrike was spent. Keep a reliable attack-roll spell loaded and bank Sure Strike for the spike turns.</li>
+      <li><strong>Po can&rsquo;t fly.</strong> The wings are decorative for now. Kukulan&rsquo;s flight and Delights&rsquo; stair/rope tricks cover vertical movement &mdash; plan around Po being a ground mount in vertical urban fights.</li>
+      <li>This party kills first and asks questions never. Kukulan wants to spare everyone; Delights wants to rob everyone. Izka can be the one who actually <em>reads the room</em> (and the documents).</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>Who and where is <strong>Rolth</strong> now, and what is he building?</li>
+      <li>Where did the <strong>&ldquo;Nicolas Cage&rdquo; doctor</strong> go &mdash; Midland lab, or North Point near the university (the Acadamae)?</li>
+      <li>What does the <strong>encrypted</strong> Urgothoan text say once Ishani cracks it?</li>
+      <li>The plague spreads by <strong>coin</strong> &mdash; and the party is now flush with looted and gifted coin. Is that a risk?</li>
+      <li>Does Izka&rsquo;s Acadamae background open a door the rest of the party can&rsquo;t?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Cliffhanger -->
+<div class="cliffhanger">
+  <h3>To Be Continued&hellip;</h3>
+  <p>A manor full of the dead, a necromancer building a gift of corpses, and a noble crawling from a bathtub with a single name.</p>
+  <p style="margin-top:12px; font-size:14px; color:var(--text-dim);">&ldquo;She was always yapping about how Rolth would fall in love with her&hellip;&rdquo;</p>
+</div>
+
+</div>
+</body>
+</html>

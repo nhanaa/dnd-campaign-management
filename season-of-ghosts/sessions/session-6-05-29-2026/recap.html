@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 6 — The Zealot's Sacrifice</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-mo { border-left-color: var(--shadow); }
+.char-mingbao { border-left-color: var(--jade); }
+.char-junyeong { border-left-color: var(--cyan); }
+.char-riddle { border-left-color: var(--lantern); }
+.char-zhao { border-left-color: var(--blood-orange); }
+.char-mingxi { border-left-color: var(--amber); opacity: 0.55; }
+.char-dot { border-left-color: var(--jade); opacity: 0.55; }
+.char-atlacoya { border-left-color: var(--violet); opacity: 0.4; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-mo { border-left-color: var(--shadow); }
+.spotlight.s-mingbao { border-left-color: var(--jade); }
+.spotlight.s-junyeong { border-left-color: var(--cyan); }
+.spotlight.s-riddle { border-left-color: var(--lantern); }
+.spotlight.s-zhao { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+
+.departure-box { background: var(--bg-card); border: 1px solid var(--violet); border-left: 3px solid var(--violet); border-radius: 6px; padding: 18px 22px; margin: 20px 0; box-shadow: inset 0 0 16px var(--violet-glow); }
+.departure-box .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--violet); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 8px; display: block; }
+.departure-box em { color: var(--text); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Zealot's Sacrifice</h1>
+  <div class="subtitle">Session 6 &mdash; Season of Ghosts &middot; Willowshore, Shenmen</div>
+  <div class="meta-row">
+    <span class="meta-pill">May 29, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 30m</span>
+    <span class="meta-pill">Wealday, Sarenith 17 &rarr; Rova 1</span>
+    <span class="meta-pill">Book One Closes</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:35%"></div>
+    <div class="comp-seg comp-mystery" style="width:25%"></div>
+    <div class="comp-seg comp-rp" style="width:20%"></div>
+    <div class="comp-seg comp-social" style="width:15%"></div>
+    <div class="comp-seg comp-explore" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 35%</span>
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery / Lore 25%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 20%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social / Town 15%</span>
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-mo"><div class="char-name">Mo</div><div class="char-class">Small Wayang &middot; Rogue (Thief) + Spirit Warrior FA</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-mingbao"><div class="char-name">Ming Bao</div><div class="char-class">Human Tian-Shu &middot; Monk + Bard Dedication</div><div class="char-player">Minon</div></div>
+    <div class="char-card char-junyeong"><div class="char-name">Myo Jun-Yeong</div><div class="char-class">Human Duskwalker &middot; Psychopomp Sorcerer / Soul Warden</div><div class="char-player">Rommy</div></div>
+    <div class="char-card char-riddle"><div class="char-name">Riddle <em style="font-size:11px">(NEW)</em></div><div class="char-class">Skyborn Tengu &middot; Liturgist Animist + Campfire Chronicler FA</div><div class="char-player">new player</div></div>
+    <div class="char-card char-zhao"><div class="char-name">Zhao Lishen <em style="font-size:11px">(NEW)</em></div><div class="char-class">Mage Automaton &middot; Commander on Riding Drake "Qian Siam"</div><div class="char-player">Mars</div></div>
+    <div class="char-card char-atlacoya"><div class="char-name">Atlacoya</div><div class="char-class">Chameleon Lizardfolk Investigator <em style="font-size:11px">(LEFT campaign)</em></div><div class="char-player">Rafael</div></div>
+    <div class="char-card char-mingxi"><div class="char-name">Mingxi</div><div class="char-class">Half-Tengu Magus <em style="font-size:11px">(erased &mdash; in-fiction; reappears at session end)</em></div><div class="char-player">Karter</div></div>
+    <div class="char-card char-dot"><div class="char-name">Dot</div><div class="char-class">Peach Leshy Druid <em style="font-size:11px">(erased &mdash; in-fiction)</em></div><div class="char-player">&mdash;</div></div>
+  </div>
+  <div class="departure-box">
+    <span class="label">Departure &middot; Atlacoya</span>
+    <p><strong>Atlacoya (Rafael) left the campaign between sessions.</strong> Written off-screen in a single DM line: <em>"Atlacoya has joined the rest of your friends in the beyond. That is all I can say."</em> Jun-Yeong delivers the only eulogy, on the road home: <em>"We may not have seen exactly eye to eye, but he was the first one who spoke to me of the Crimson Butterflies. I remember his drawings. Surely those haven't disappeared along with him."</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Session 6 closes Book One. The party &mdash; now <strong>five PCs strong</strong>, with two newcomers arriving via Shinzo's late-night recruiting run &mdash; completes the noppera-bo disguise infiltration of the lumber camp and walks straight into the BBEG of the arc: <strong>Zoudou the Zealous</strong>, the faceless cult leader the rebels had warned about from the start. The "her." Mo (in the noppera-bo hood from S5) and Ming Bao (bound as Mo's "captive") sell the disguise long enough to be marched into the inner ritual site, where <strong>Mugirou</strong> &mdash; the noppera-bo rebel, named for the first time this session &mdash; drops the pretense and joins them openly. <strong>Riddle</strong> (Skyborn Tengu Animist) and <strong>Zhao Lishen</strong> (Mage Automaton Commander on a terracotta Riding Drake named Qian Siam) arrive from the south side of the camp escorted by Shinzo, who hands them off at the treeline with a wordless tip of the hat and the promise <em>"a great trial lies ahead of you."</em></p>
+    <p>The fight is uglier than S5's clean ambush. Zoudou is mid-ritual on <strong>Kageyuri</strong>, who is bound at the shrine, with a darkening silhouette behind her &mdash; something cosmically wrong, banging against a wall of fog like glass at an aquarium with three-headed necks and many-fisted arms. Zhao opens with a textbook Commander turn (Gather to Me! &rarr; flanking &rarr; Set-Up Strike for 10 damage and off-guard); the team converges; the small-fry occultists and grunts go down quickly under Mo's Crushing-rune chains (a 44-damage Overwhelming Combination crit on the Occultist; Ming Bao's flurry-and-shield-raise dance; Jun-Yeong's two-action Heal-vs-Living to keep Mo upright). Then Zoudou casts Darkness, drops the Trickster into stealth-bow harassment mode, and conjures a hazard &mdash; a wickerwork demigod-effigy that uses her spell slots to cast <strong>Noise Blast</strong> (24 damage to three party members) and <strong>Harm</strong> (a 30-foot emanation that, after Jun-Yeong rerolls his failed save with a hero point, kills one of her own Occultists outright and ticks down everyone in range).</p>
+    <p>The Hail Mary that kills Zoudou's own ally also signals she has run out of cards. <strong>Riddle</strong> communes with the agitated spirits trapped inside the hazard-effigy on a critical Occultism success, singing them quiet for a round (and catching a flash of <strong>golden light</strong> behind the silhouette &mdash; a separate figure trapped in there with Kugaptee, fighting it). The spell-pump goes offline. Mo demoralizes Zoudou to Frightened 1. The party drops her into single digits. Rather than be captured, <strong>Zoudou stabs herself in the heart, screams "Kugaptee!" into the void</strong>, and the trees beyond the fog wall begin to shake. The thing on the other side gets through. It comes out as a 15-foot eyeless wicker-helmed <em>fiend</em>, ribcage bulging with red butterflies, and one-shots the fleeing Trickster mid-sentence (76 damage from a Ruined Great Katana, Reach 15, Unholy) as a demonstration. The party runs.</p>
+    <p>They are saved by ghosts they didn't know they had. Ming Bao, fleeing the map, feels a hand on his shoulder and a familiar voice &mdash; <em>"I'll take care of this. I always have."</em> It's <strong>Mingxi</strong>. Erased from everyone's memory but his own, alive enough to wield the Tengu form he died in, alive enough to 1v1 the demigod-aspect long enough for the party to clear the treeline. The downtime is heavy: Yami the temple cat finally drops a name &mdash; <em>"That Kugaptee finally showed his face... he is a demigod"</em> &mdash; everyone at the table shares the same dream of Tan Sugi Monastery and a five-pronged claw of red butterflies in the sky; Riddle's apparitions panic the first time he tries to scry on Kugaptee and beg him not to speak the name aloud; and Eliza translates the Chthonian half of <strong>Zoudou's Tattered Ledger</strong> &mdash; the cult was hunting <em>reincarnated souls</em> specifically, and the ledger names <strong>Kageyuri, Ming Bao, and Jun-Yeong</strong> as targets. Sixty days of in-fiction downtime later, Book Two opens on Toilday, Rova 1st, and "a lot of spiders" on the landing page.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act social">
+      <div class="act-label">Act I &middot; Social &middot; The Disguise Holds</div>
+      <div class="act-card">
+        <h3>"Yes, These Are the Captives for Our Glorious Cook of Tea"</h3>
+        <ul>
+          <li><strong>Cold open / S5 recap by Jun-Yeong</strong>. Hero points for everyone. DM, recalling S5's red-butterfly undead: <em>"those things are horrifying."</em> Mo: <em>"That's the true final boss of Season of Ghosts."</em></li>
+          <li><strong>Mo's infiltration plan</strong>: Mo dons the noppera-bo hood from Shinzo (height auto-adjusts from 3'8" to 6'). Ming Bao and Jun-Yeong tied loosely with Jun-Yeong's rope as "captives." Mo plays the jailer: <em>"You guys can struggle a little bit right here. Oh, you want me to put on a performance? Here you go &mdash; for the spectators, just in case."</em></li>
+          <li><strong>Selling it face-to-face</strong>: Mo marches the "captives" past one of Zoudou's grunts. The grunt asks telepathically <em>"are these more captives for the ritual?"</em> Mo answers in mind: <em>"Yes, these are the captives for the great Kugaptee."</em> Disguise holds.</li>
+          <li><strong>Mugirou named at last</strong>. The grunt who steps aside to whisper to Mo and Ming Bao is the rebel ally from prior sessions, finally named: <em>"It's me, Mugirou. What happened? How did you get captured?"</em> He warns the party: <em>"my leader returned, but what she brought with her are abominations. Creatures that spew red butterflies."</em> Mugirou commits openly and marches them as "sacrifices" to the inner ritual site as cover.</li>
+          <li><strong>Atlacoya written off</strong>. Jun-Yeong, on Riddle's introduction: <em>"I'm surprised not to see Atlacoya."</em> DM, with a "sad sheepish smile": <em>"Atlacoya has joined the rest of your friends in the beyond. That is all I can say."</em> Mo, who never met him, deadpans: <em>"These friends of yours, are you sure they're actually real?"</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act II &middot; Roleplay &middot; Two New PCs Arrive</div>
+      <div class="act-card">
+        <h3>Shinzo's Late-Night Recruiting Run</h3>
+        <ul>
+          <li><strong>Riddle introduced (via Shinzo at his outskirts hut)</strong>. 10 PM. Riddle (bird-mannerisms, talks to spirits visible only to himself) accepts the recruitment the instant Shinzo proves he can also see the apparitions: <em>"You can see them too? You're not my friend, yes? Good, that's good. A friend of my friend is, well, also my friend. That's how it works, right?"</em></li>
+          <li><strong>Zhao Lishen awakened (flashback cutscene)</strong>. Shinzo touches the shoulder of a terracotta statue standing in front of the governor's vanished manor. The statue and its companion riding drake awaken together. The terracotta salutes; the drake speaks telepathically: <em>"As Zhao says, we are the will of the emperor made manifest. We are Zhao Lishen and Qian Siam."</em></li>
+          <li><strong>The three-way meet-up</strong>. Mo, Ming Bao, and Jun-Yeong meet Riddle and Zhao at the edge of the lumber camp under Shinzo's escort. Ming Bao, deep in his "everyone I know is disappearing" mood, struggles through introductions: <em>"Sir, ma'am, I'm sorry, I'm not good at telling gender under the plumage."</em> Then to Zhao: <em>"Are you made of rocks? Um, no. No, you're pottery, aren't you?"</em></li>
+          <li><strong>Shinzo departs</strong> with his black-furred horse and his sun-crow on his shoulder. <em>"A great trial lies ahead of you. Do not fail it."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Shrine</div>
+      <div class="act-card">
+        <h3>Zoudou the Zealous and the Thing Behind the Fog</h3>
+        <ul>
+          <li>Mugirou leads the party to the ritual site. A faceless woman, Zoudou, mid-ritual on bound Kageyuri, red dagger glowing, fire fingers dripping. Behind her, a wall of fog acting like aquarium glass &mdash; <em>"this loud banging noise, almost as though glass threatening to shatter,"</em> three-headed necks and many fists pressed against it from the far side.</li>
+          <li>Zoudou stops the ritual to size the party up: <em>"You all look familiar. Have I met you before?"</em> Ming Bao asks permission to scream: <em>"Does anyone have anything they want to say before I have an emotional outburst?"</em> Jun-Yeong: <em>"If you don't, I'm going to."</em> Riddle, deeply confused but trying to help, offers Ming Bao a hug: <em>"We just met, but if it helps you, you can hold me. My feathers are quite soft."</em></li>
+          <li>Combat starts (see Combat Encounter section for the full round-by-round).</li>
+          <li><strong>Zoudou's suicide.</strong> Cornered, she stabs herself in her own heart and screams <em>"Kugaptee!"</em> The trees beyond the fog wall begin to shake. The party hears a roar.</li>
+          <li><strong>The 15-foot demigod-aspect comes through.</strong> Eyeless humanoid in a wicker helm, broken sword, ribcage bulging with red butterflies. Stops at Mo, then turns to the fleeing Trickster triumphantly: <em>"I told you you were gonna &mdash;"</em> and Critical Hits the Trickster mid-sentence for <strong>76 damage</strong> with a Ruined Great Katana (Reach 15, Unholy).</li>
+          <li><strong>Mingxi appears.</strong> As Ming Bao Strides off the map, he feels a hand on his shoulder. <em>"I'll take care of this. I always have."</em> Mingxi 1v1s the demigod-aspect alone, buying the party time. DM cuts the music. The clashing of blades continues behind them as the party clears the treeline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IV &middot; Roleplay &middot; The Road Home</div>
+      <div class="act-card">
+        <h3>Ming Bao Sits in the Road</h3>
+        <ul>
+          <li>Zhao and Jun-Yeong Battle-Medicine the party to full as they walk back to Willowshore. The demigod-aspect does not pursue.</li>
+          <li>Ming Bao runs ahead, then is found sitting cross-legged in the middle of the road staring up at the night sky. <em>"It looks so much like the night sky when I saw the crimson light. When all this started. I saw Mingxi."</em></li>
+          <li><strong>Ming Bao's hell hypothesis</strong>: <em>"I think we all died that night and this is hell. And we just finally ran across each other before going to our own private prisons."</em> Jun-Yeong: <em>"This is not hell. Hell is run by devils. That seemed more keen to the creatures we saw before. Which tells me that, even if we were dead, we're probably lost in the river."</em></li>
+          <li><strong>Jun-Yeong to Kageyuri</strong>: <em>"I wish to tend to Kageyuri for a moment."</em> Ming Bao: <em>"It's okay. You should do that. Dead children shouldn't be alone."</em> (Kageyuri is alive &mdash; the line is about the dead they've already buried, but the rhythm of grief carries.) Jun-Yeong walks Kageyuri home to Eliza himself.</li>
+          <li>Kageyuri thought she heard Mingxi too. Ming Bao confirms what he saw. They share one of the few moments where someone <em>believes</em> him about the erasure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery &middot; Tan Sugi Dream &amp; Yami's Reveal</div>
+      <div class="act-card">
+        <h3>Everyone Dreams the Same Dream</h3>
+        <ul>
+          <li><strong>The shared dream.</strong> The DM narrates a dream none of the PCs realize they shared until later: a Tengu man with feathers growing from his arms (Mingxi) in front of the great Sugi Tree at <strong>Tan Sugi Monastery</strong>, the world flickering between intact and ruined, the sky a five-fingered claw of red butterflies. Riddle, Mo, Ming Bao, Jun-Yeong, and Zhao all wake disturbed.</li>
+          <li><strong>Riddle's gift to Ming Bao</strong>: <em>"a little, well, a talisman. For good luck. You know, I seem like I need it."</em> Mechanically Root magic from Riddle's daily preparations.</li>
+          <li><strong>Yami names Kugaptee</strong>. At the Cerulean Tea House, the temple cat finally speaks to the whole party. <em>"That Kugaptee finally showed his face... or an aspect of him. You obliterated that noppera-bo. I mean, he is a demigod."</em> She doesn't know where her own knowledge comes from &mdash; only that <em>"it started on the first day of summer. Everything happens on the first day of summer."</em></li>
+          <li><strong>Jun-Yeong's nightmare report</strong>: <em>"I dreamt differently last night. I saw Tan Sugi. I haven't seen that place since I woke up. Mingxi was there. In front of the sugi tree. It kept flickering back and forth &mdash; from the way I remember it, to ruin."</em> Yami: <em>"That's scary."</em></li>
+          <li><strong>Mo finally pets the cat</strong>. Stealth 29 beats Yami's perception; she gives a very-human sigh: <em>"I suppose you did."</em> Mo sits down with his smug face.</li>
+          <li><strong>Riddle tries to scry on Kugaptee</strong>. His apparitions react with instinctive panic, shake their heads no-no-no-no, and beg him not to speak the name aloud. <em>"I think it's best we be careful. Rather than talk about his name willy-nilly like that."</em> Riddle agrees.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Mystery &middot; The Tattered Ledger</div>
+      <div class="act-card">
+        <h3>The Cult Has Been Hunting Reincarnated Souls</h3>
+        <ul>
+          <li>The party returns to the lumber camp the next day. Every noppera-bo is dead &mdash; cleaved in half by the demigod-aspect during its rampage. The cage of farmers is intact; all bleed red. <em>"This demon from the woods, they slaughtered all the faceless men in this place."</em></li>
+          <li><strong>Loot from Zoudou</strong>: <strong>Fiend's Hunger</strong> (unique +1 silver dagger), the <strong>Tattered Ledger</strong>, and a <strong>Twisted Knot of Wood</strong> religious symbol of Kugaptee. Jun-Yeong checks Fiend's Hunger for curses, then formally hands it off to Mo.</li>
+          <li><strong>Mugirou's status</strong>: alive but separated. Was at the camp briefly, then moved on, being hunted himself.</li>
+          <li><strong>Eliza translates the Chthonian half</strong>. Jun-Yeong reads the Aklo half. The Chthonian half is the load-bearing reveal: Zoudou had been hunting <em>reincarnated souls</em> specifically &mdash; <em>"a creature whose soul has been reincarnated several times, a discovery that I think I've made while examining this Kageyuri woman."</em> The ledger names targets: <strong>Kageyuri, Ming Bao, Jun-Yeong</strong>. Mo is not named.</li>
+          <li><strong>Sanpachi lore (Jun-Yeong's deep cut)</strong>: With his Sanpachi-specific lore training, Jun-Yeong recognizes the philosophy &mdash; <em>"essentially Buddhism. You are judged based on your actions in life. Depending on those actions, you have positive or negative karma, which will influence your next life. This will repeat until you reach Samsara, your perfected form. Then you move on to Pharasma's Court."</em></li>
+          <li><strong>Kugaptee's profile</strong>. Eliza summarizes from the Chthonian sections. <strong>Anathema</strong>: perform a burial ritual meant to provide peace to the dead, remove a curse from anyone other than yourself. <strong>Edicts</strong>: curse living creatures, defile graveyards and pastoral natural regions. <strong>Areas of concern</strong>: curses, defiled graves, haunted wildlands, seasonal disasters. The implication: Kugaptee forcibly pulls spirits <em>out of</em> the cycle, and what gets pulled becomes <em>something else entirely</em> &mdash; ghosts, thatchlings, phantoms, wraiths, shadows, or spectres.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VII &middot; Social &middot; Shinzo and the 60-Day Skip</div>
+      <div class="act-card">
+        <h3>Book One Closes</h3>
+        <ul>
+          <li><strong>Shinzo arrives</strong> with his black horse and his sun-crow. <em>"I see all of you are safe and sound after the trials of last night. You passed as I knew you would."</em> Jun-Yeong, sharper now: <em>"You were testing us. Why?"</em> Shinzo deflects to "I'm but a merchant."</li>
+          <li><strong>Riddle's Aura Sight on Shinzo</strong>: Friendly. Relieved and willing to help. Physically healthy and athletic. <strong>No magical aura registers.</strong> By aura, he is fully human. Riddle stares at the raven; the raven stares back: <em>"They're communicating."</em></li>
+          <li><strong>Jun-Yeong references Sashim</strong> aloud for the first time around Shinzo: <em>"He reminds me of my friend, actually. Sashim. He's a Jeoseung Saja. We went out into the Specterwood every year. Before, he would always protect me. I never had a reason to fear for myself when he was near."</em> Shinzo nods, says nothing.</li>
+          <li><strong>Level 4.</strong> The party advances. Mo takes Intimidation &rarr; Expert and a Wisdom boost. Riddle attunes apparitions (Art / Fey / Ocean / Sailing lores trained for the day; <strong>Ming Bao</strong> stored as a root). Mo's Smokescreens feat now auto-creates <strong>2 Lesser Smoke Balls per day</strong>.</li>
+          <li><strong>60 days of in-fiction downtime</strong>. Earn Income tasks. DM doubles all Earn Income results this stretch (standing ruling, not crit-driven). Mo's one successful Deception (24) → 48 gp at Task Level 4 → <strong>doubled to 96 gp total</strong>. Jun-Yeong fails Occultism, succeeds at a second job. Computers Lore rolls become a running gag.</li>
+          <li><strong>Book Two landing page reveal</strong>. The DM brings up the Book 2 cover. Mo, Riddle, Jun-Yeong, simultaneously: <em>"A lot of spiders. That's a lot of spiders."</em> Book One closes after seven sessions; Book Two opens in autumn.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Coda &middot; Roleplay &middot; The Starlit Sentinels Pitch</div>
+      <div class="act-card">
+        <h3>Riddle Writes a Play</h3>
+        <ul>
+          <li>Post-session at the Tea House: Riddle, Ming Bao, Mo (no Zhao). Riddle pitches a play for the upcoming <strong>Long Night Festival</strong>: a traditional <strong>Starlit Sentinels</strong> story &mdash; heroes chosen by each zodiac star to defend against evil. Ming Bao vetoes "no <em>Chronicle of the Waterleaf</em>, the governor is missing or dead, bad taste."</li>
+          <li><strong>Riddle auditions himself</strong>: <em>"A starlit sentinel with wings, right?"</em> Mo backs him up: <em>"You do have wings."</em></li>
+          <li><strong>Mo and Jun-Yeong commit to the cast</strong>: Mo: <em>"Mo's gonna break out into a dance. He just loves to dance."</em> Jun-Yeong: <em>"I'm also fond of writing poetry. Poetry will be very depressing."</em></li>
+          <li><strong>Shizu remembered</strong>. Ming Bao mentions a former PC, Shizu &mdash; <em>"She was a magic girl. Cut a laser out of her sword."</em> Not Mingxi; a separately erased / written-off PC. Ming Bao still remembers her; Mo doesn't know the name.</li>
+          <li><strong>Ming Bao's monastery outburst</strong>. In response to the butler NPC's advice to interview the governor's old staff, Ming Bao snaps: <em>"I want answers! Life was good here! Then it all went to shit! I grew up in the monastery, I got into fights, I left because I thought it'd be better, it was worse, and they hit me in the monastery, and then I ended up here, and it was wonderful for like five years, and then a light showed up in the sky, and now people are missing!"</em> Riddle offers to cast Calm. Ming Bao: <em>"If you cast magic on me, I'm going to teach you what a Boston Crab is."</em></li>
+          <li><strong>Book Two hook seeded</strong>. The butler NPC tells the party the governor was a thaumaturge; his manor's locks didn't work for him on the night of the festival (locks changed in the hours before); a skeleton crew of four trusted staff was there that night. <em>"Creepy, magical tomfoolery."</em> Queued for Book 2's first downtime activity.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounter</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Zoudou's Ritual Site &middot; Lumber Camp Inner Shrine &middot; 5 Rounds</div>
+    <h3>The Zealot's Sacrifice</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Zoudou + Trickster + 2 Occultists + Grunt(s) + Hazard-Effigy</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">5 (+ flight)</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Zhao, Jun-Yeong, Ming Bao, Riddle &middot; 1 each</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Mo brought to 2 HP &middot; Ming Bao to dying &middot; drake downed once</div></div>
+    </div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Zhao Lishen</strong>: <strong>Gather to Me!</strong> tactic (free Stride for all squadmates inside the 30-ft banner aura). All four other PCs reposition into flanking. Commands Qian Siam to Stride x2; mounted, drake Support Benefit active (+1d4 fire on melee hits). Third action: <strong>Set-Up Strike</strong> on the Grunt &mdash; Katana hit for <strong>10 damage</strong>, Grunt off-guard to next attack.</li>
+      <li><strong>Trickster</strong>: Stride into greater-cover hiding spot &rarr; <strong>Hide</strong> (+4 darkness cover) &rarr; Bow Ming Bao (off-guard from ambush) for <strong>9 damage</strong>.</li>
+      <li><strong>Grunt</strong>: Naginata strike on Zhao for <strong>7 damage</strong>. Stride back to protect Zoudou. <strong>Demoralize Zhao</strong>: <em>"You'll join the rest of your town. Statue. Thing. What are you?"</em> Zhao: <em>"It would not dignify the monster with a response."</em></li>
+      <li><strong>Mo</strong>: <strong>Overwhelming Combination on the Grunt</strong> &mdash; rapier Strike <strong>misses</strong> (<em>"I just rolled really badly. We'll see. I still have one more"</em>) &rarr; fist Strike at MAP <strong>CRITICAL HIT for 22 damage</strong>. Grunt's <strong>Reactive Strike</strong> on Mo's Stride hits Mo for <strong>7 damage</strong> (minimum). DM: <em>"Well, no, I'm in danger. That'll be 25, as it spills its pink blood everywhere."</em> <strong>Grunt dies. Killing blow: Mo.</strong></li>
+      <li><strong>Occultist</strong>: Strikes Ming Bao for <strong>11 damage</strong>, attempts Crowd Control reposition &rarr; <strong>fails</strong>. Later in the round, casts <strong>Phantom Pain on Mo</strong> &rarr; Mo Will save <strong>26 &rarr; success &rarr; 5 mental, no persistent</strong>. <em>"Wait, Phantom Pain..." "Only 5. That's nothing compared to the Massive."</em></li>
+      <li><strong>Ming Bao</strong>: Stride x2 + <strong>Flurry of Blows</strong> on the Occultist &mdash; both hit for <strong>11 damage combined</strong> (NOT a crit). No Raise a Shield this round.</li>
+      <li><strong>Jun-Yeong</strong>: Stride (25 ft). Casts <strong>Bless</strong> (5-ft emanation, +1 status to allies' attacks, expands +5 ft per sustain). No attack.</li>
+      <li><strong>Kageyuri</strong>: Bound. Attempts DC 25 Athletics to break chains &rarr; <strong>fails</strong>.</li>
+      <li><strong>Riddle</strong>: Flies in. Declares Discomforting Whispers, DM warns it doesn't discriminate, allows a swap. Riddle picks a single-target attack cantrip &rarr; spell-attack roll <strong>20 &rarr; hit for 10 mental damage</strong> (likely killed a second Grunt &mdash; specific cantrip not named).</li>
+      <li><strong>Mugirou</strong>: Stride to Trickster, draws blade, <strong>Strikes Trickster &mdash; MISS</strong>.</li>
+      <li><strong>Zoudou the Zealous</strong>: Casts <strong>Darkness</strong> (Heightened 4, 20-foot burst) over the ritual site. Anyone without greater darkvision is concealed. Noppera-bo unaffected (sightless / hearing-based).</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Zhao Lishen</strong>: Pulls an <strong>Everlight Crystal</strong> (Interact) &rarr; magical bright light <strong>dispels the Darkness</strong> outright. Then <strong>Pincer Attack</strong> tactic (free Step for squadmates; off-guard if they step adjacent &mdash; Mo uses the granted Step). Final: <strong>Battle Medicine on himself</strong>, <strong>hero-points the roll</strong> &rarr; heals <strong>34 HP</strong> (full). Drops the crystal in his mouth for the duration of combat.</li>
+      <li><strong>Trickster</strong>: Hides under cover &rarr; Bow Mo (off-guard, then no off-guard) &rarr; Mo Nimble-Dodges, ends at <strong>2 HP</strong>. Mo: <em>"Goodbye guys. It was nice knowing you."</em></li>
+      <li><strong>Mo</strong>: Action 1: <strong>Demoralize the Occultist</strong> &rarr; <strong>fails</strong> (<em>"I'm not rolling great today"</em>). Action 2: <strong>Overwhelming Combination on the Occultist</strong> &rarr; first Strike misses &rarr; second Strike &rarr; <strong>CRITICAL HIT</strong>, DM: <em>"let me combine both of that into 44 damage. He's barely alive."</em> Crushing rune procs (Clumsy 1 + Enfeebled 1). Action 3: <strong>Demoralize Zoudou</strong> with Intimidating Glare &rarr; <strong>success at 23 &rarr; Zoudou Frightened 1</strong>.</li>
+      <li><strong>Occultist #1</strong> (barely alive from Mo's 44-dmg crit): casts <strong>Phantom Pain on Ming Bao</strong> as a parting shot &rarr; Ming Bao takes <strong>5 mental</strong>. Staff strike &mdash; miss.</li>
+      <li><strong>Ming Bao</strong>: <strong>Stumbling Stance</strong> &rarr; <strong>Flurry of Blows</strong> on the bloodied Occultist &mdash; DM: <em>"That's pretty good. That's a one dead noob parable."</em> <strong>Killing blow on Occultist #1: Ming Bao.</strong> Raise a Shield.</li>
+      <li><strong>Jun-Yeong</strong>: <strong>Two-action Heal vs Living on Mo</strong> (psychopomp blood magic adds a vitality rider). Third action: <strong>Guidance on Riddle</strong>.</li>
+      <li><strong>Kageyuri</strong>: Athletics fail again.</li>
+      <li><strong>Riddle</strong>: With Guidance up, casts <strong>Grim Tendrils</strong> (1st-rank line, void + persistent bleed, Fortitude save). DM: <em>"Two casters... let us see the rolls... 18, 18, both of them."</em> Both targets save partially; persistent bleed sticks. One target drops to <strong>1 HP</strong> + bleed. <em>"Spectral arms almost start grasping and clawing at the visible bleeding wounds."</em></li>
+      <li><strong>Zoudou (Hail Mary)</strong>: Casts <strong>Harm</strong> (heightened, 30-ft emanation, basic Fortitude DC 19). <strong>Jun-Yeong fails save &rarr; hero-points reroll &rarr; partial fail &rarr; 16 void.</strong> Mo half (8), Zhao 16, Riddle 8, Ming Bao half, Kageyuri 16 (bound, full), Mugirou 8, <strong>Qian Siam (drake) downed</strong>. <strong>Occultist #2</strong> (1 HP from Riddle's Grim Tendrils): <strong>full 32 void &rarr; explodes from the dark energy.</strong> <strong>Killing blow on Occultist #2: Zoudou's own Harm.</strong></li>
+      <li><strong>Hazard-effigy (end of round)</strong>: <strong>Noise Blast</strong> (10-ft burst, 2d10 sonic, basic Fortitude). DM: <em>"Double 10s!"</em> <strong>24 sonic damage</strong> to multiple PCs. Mo: <em>"Ow. Okay, I should've frickin' hero-pointed that."</em> (He did not.)</li>
+    </ul>
+
+    <h4>Round 3 (the breaking point &mdash; and Zoudou's last)</h4>
+    <ul>
+      <li><strong>Dying Occultist (persistent bleed)</strong>: <strong>Unbreakable Will</strong> save. Phantom Pain on Ming Bao &rarr; <em>"just 5 mental."</em> Then two-handed Staff strike on Ming Bao &rarr; <strong>Ming Bao Shield Blocks all of it.</strong> DM: <em>"It tried its best, but it got completely fucked by shield block."</em> Then <strong>bleeds out</strong> at end of turn.</li>
+      <li><strong>Trickster</strong>: Hides vs Mugirou (fails, no off-guard) &rarr; strikes Mugirou for <strong>3 damage</strong> &rarr; moves left.</li>
+      <li><strong>Hazard-effigy</strong>: <strong>Fear</strong> on a spellcaster &rarr; <strong>Riddle Frightened 1</strong>.</li>
+      <li><strong>Zhao Lishen</strong>: <strong>Gather to Me!</strong> again (free Stride for melee to flank Zoudou). Grants Mo a free reaction. <strong>Battle Medicine on Qian Siam</strong> (the drake) &mdash; revived at wounded 1.</li>
+      <li><strong>Mo</strong>: <strong>Overwhelming Combination on Zoudou</strong> (Jun-Yeong: <em>"please stab the woman"</em> &mdash; Mo confirms: <em>"actually, she doesn't have sight, right?"</em>) &rarr; both hit for <strong>22 damage combined</strong>. Then <strong>Dance of the Mousedeer</strong> (Performance 27 vs Zoudou's Perception) &rarr; <strong>success &rarr; standard cover (+2 AC)</strong>. Last action: considered Trip, swapped to a rapier Strike at full MAP (&minus;10) &rarr; <strong>Critical Miss (rolled 4)</strong>.</li>
+      <li><strong>Mugirou</strong>: Strides away from the archer (heavily wounded).</li>
+      <li><strong>Ming Bao</strong>: <strong>Inner Upheaval</strong> (1-action focus spell, +1d6 force) + <strong>Flurry of Blows on the Trickster</strong> &rarr; <strong>hero-points one Flurry reroll</strong> &rarr; hits &rarr; <strong>11 damage</strong>. <strong>Trip on the Trickster</strong> at full MAP &rarr; <strong>Critical Failure &rarr; Ming Bao falls prone</strong> (<em>"Worst case, I fall prone. Yay, I fall prone!"</em>). Jun-Yeong: <em>"Bing Bao, face flats. You haven't been drinking, have you?"</em></li>
+      <li><strong>Jun-Yeong</strong>: <strong>One-action Heal on Kageyuri</strong> for <strong>9 HP</strong>. Then Religion to disable the hazard &rarr; <strong>Foundry low-reroll fails</strong>. <em>"Screaming ghosts just start to appear right in your face."</em></li>
+      <li><strong>Riddle (clutch round)</strong>: Tries the disable check with <strong>Occultism</strong> instead &rarr; <strong>Critical Success (~28)</strong>. Sings the trapped spirits a soothing melody. <strong>Hazard goes silent &mdash; no more spell-pumps from Zoudou for the next round.</strong> Catches a flash of <strong>golden light</strong> behind the silhouette &mdash; <em>"a separate figure trapped fighting Kugaptee. Its arms are now bound."</em> Final action: <strong>Eldritch Lance on Zoudou</strong> &rarr; hit with reroll for <strong>11 damage</strong>.</li>
+      <li><strong>Zoudou</strong>: Step up, switch to blade &rarr; <strong>Strike on Ming Bao</strong> &mdash; hit ("great damage"). Second Strike &rarr; <strong>Ming Bao Shield Blocks</strong>. Final action: <strong>stabs herself in her own heart</strong>. <em>"Kuga-ti!"</em> Trees beyond the fog wall begin to shake. <strong>Killing blow on Zoudou: self.</strong></li>
+    </ul>
+
+    <h4>Round 4 (the collapse)</h4>
+    <ul>
+      <li><strong>Trickster</strong>: Final bow shots &mdash; <strong>drops Mugirou</strong> ("Big pal's down!"). Declares he's running.</li>
+      <li><strong>Zhao Lishen</strong>: <strong>Battle Medicine on Ming Bao</strong> (who was dying) &rarr; heals <strong>48 HP</strong>. Then Strides to Kageyuri and <strong>cuts her ropes</strong> with his shield spike.</li>
+      <li><strong>Mo (the moment)</strong>: Sees the Trickster shoot Mugirou. <em>"Walk at that guy &mdash; like, 'you dare shoot at my friend? Prepare to pay.' I'm just gonna hit him twice."</em> <strong>Overwhelming Combination on the Trickster</strong> &rarr; Mo accidentally rolls crit damage on the fist when it was just a hit &rarr; DM halves the fist back down &rarr; <strong>26 damage total</strong>.</li>
+      <li><strong>Jun-Yeong + Kageyuri</strong>: Adjacent in initiative, both run off the map together. <em>"Beat it! Let's go!"</em></li>
+      <li><strong>Riddle</strong>: Flies away. <em>"We can befriend each other when you're dead too, but that would be not ideal for you, right?"</em></li>
+      <li><strong>Ming Bao</strong>: Stands up (from R3 prone), Interact to pick up shield, Strides.</li>
+      <li><strong>Dying enemy grapples Mo</strong>: <em>"If I'm gonna die, you're coming with me."</em> Mo grappled; the enemy then dies/flees.</li>
+      <li><strong>Zhao Lishen</strong>: Gather to Me! for the drake &rarr; mounts &rarr; commands drake Stride x2 (90 ft) &rarr; out.</li>
+    </ul>
+
+    <h4>Round 5 (the cliffhanger)</h4>
+    <ul>
+      <li><strong>The 15-foot demigod-aspect of Kugaptee arrives</strong>: wicker-helmed entity, ribcage bulging with red butterflies, broken sword (Reach 15 ft, Unholy). Charges forward, stops at Mo, then turns to the fleeing Trickster <em>triumphantly</em>: <em>"I told you you were gonna &mdash;"</em> and <strong>Critical Hits the Trickster mid-sentence for 76 damage</strong> with a Ruined Great Katana.</li>
+      <li><strong>Mo</strong> confirms the demigod has no Reactive Strike &rarr; safely Strides off the map.</li>
+      <li><strong>Ming Bao</strong>: As he begins his 105-ft escape Stride, feels a familiar hand on his shoulder. <em>"I'll take care of this. I always have."</em> <strong>Mingxi</strong> intervenes &mdash; half-human, half-Tengu, dead-or-erased &mdash; and 1v1s the demigod-aspect.</li>
+      <li>DM cuts the music. The party clears the treeline. The clashing of blades continues behind them as everything goes quiet.</li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li><strong>Zoudou dead by suicide.</strong> Two Occultists dead (one by Mo+Ming Bao crit-and-finish, one by Zoudou's own Harm friendly fire). At least one Grunt dead by Mo (possibly a second by Riddle). Trickster killed by the demigod-aspect mid-flee. Kageyuri rescued, alive, returned to Eliza. Mugirou alive but separated.</li>
+      <li><strong>Hero points spent</strong>: Zhao 1 (R2 Battle Medicine self-heal), Jun-Yeong 1 (R2 Harm Fort save), Ming Bao 1 (R3 Flurry reroll), Riddle 1 (R3 Eldritch Lance reroll, ambiguous &mdash; could be Foundry low-reroll), Mo 0.</li>
+      <li><strong>Killing blows</strong>: Grunt = Mo (R1 fist crit). Occultist #1 = Ming Bao (R2 Flurry after Mo's 44-dmg crit softened). Occultist #2 = Zoudou (R2 Harm friendly fire). Trickster = the demigod-aspect (R5 Crit, 76 dmg). Zoudou = self (R3 ritual suicide).</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-mo">
+      <h4>Mo &middot; The Disguise-Wearer, the Friend-Defender</h4>
+      <ul>
+        <li><strong>The infiltration plan worked.</strong> Mo wore the noppera-bo hood from Shinzo (auto-resized from 3'8" to 6'). Tied Ming Bao and Jun-Yeong loosely with Jun-Yeong's rope as "captives." Marched them past Zoudou's lieutenant face-to-face: <em>"Yes, these are the captives for the great Kugaptee."</em></li>
+        <li><strong>R1 Overwhelming Combination on the Grunt</strong>: rapier missed, fist crit for <strong>22 damage</strong>. The Grunt's Reactive Strike on Mo's Stride hit for 7. Mo took the killing blow as the Grunt collapsed in pink blood.</li>
+        <li><strong>R2 was Mo's big damage round.</strong> Demoralize Occultist whiffed. <strong>Overwhelming Combination CRIT on the Occultist for 44 damage combined</strong> (Crushing rune procs Clumsy + Enfeebled). Then <strong>Demoralize Zoudou (23 success) &rarr; Frightened 1</strong>. Brought down to 2 HP from accumulated Trickster bow shots + Phantom Pain &mdash; <em>"Goodbye guys. It was nice knowing you."</em></li>
+        <li><strong>R3 OC on Zoudou herself</strong> after Jun-Yeong called the target (<em>"please stab the woman"</em>): both hit for 22 combined. Then Dance of the Mousedeer Performance 27 for +2 AC cover. Last action: considered Trip, swapped to a rapier Strike at full MAP &rarr; Critical Miss.</li>
+        <li><strong>R4 "dare shoot at my friend"</strong>: An archer shot Mugirou. Mo lost composure: <em>"You dare shoot at my friend? Prepare to pay."</em> Two Strikes on the Trickster for <strong>26 damage</strong> (DM halved Mo's fist back down after Mo accidentally rolled crit damage). Out of character for Mo, exactly because Mugirou matters now.</li>
+        <li><strong>Yami pet, finally.</strong> Stealth 29 beat the cat's perception. Yami sighed <em>"I suppose you did."</em> Mo sat down with his smug face.</li>
+        <li><strong>Earn Income: one successful Deception (24) → 48 gp at Task Level 4 → DM doubles per his standing ruling → 96 gp total.</strong> Mo now has ~176 gp &mdash; enough for Ghost Touch rune + Ring of Discretion + Disguise Kit.</li>
+        <li><strong>Daily prep: Smokescreens now auto-creates 2 Lesser Smoke Balls per day</strong> (Expert Stealth).</li>
+        <li><strong>Got Fiend's Hunger</strong> &mdash; the unique +1 silver dagger, returning property, d6 not d4. Activate (1/day, on critical hit vs fiend): Avenging Soul. Mo hid it in his pocket.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mingbao">
+      <h4>Ming Bao &middot; The PC Who Has Lost the Most Friends</h4>
+      <ul>
+        <li><strong>Took emotional point twice this session.</strong> First, the introductions to Riddle and Zhao while Atlacoya's absence was still being processed: <em>"Sir, ma'am, I'm sorry, I'm not good at telling gender under the plumage."</em> To Zhao: <em>"Are you made of rocks? Um, no. No, you're pottery, aren't you?"</em></li>
+        <li><strong>Asked for permission to scream</strong> before combat: <em>"Does anyone have anything they want to say before I have an emotional outburst?"</em> Jun-Yeong: <em>"If you don't, I'm going to."</em></li>
+        <li><strong>R1 Flurry of Blows on the Occultist</strong> for 11 damage combined. <strong>R2 Stumbling Stance + Flurry</strong> killed the Occultist that Mo's 44-dmg crit had brought to "barely alive" &mdash; <em>"That's a one dead noob parable."</em></li>
+        <li><strong>R3 Inner Upheaval + Flurry on the Trickster</strong> for 11 damage with a hero-point reroll. Then Trip at full MAP &rarr; Critical Failure &rarr; <strong>fell prone</strong> (<em>"Yay, I fall prone!"</em>). Jun-Yeong: <em>"Bing Bao, face flats. You haven't been drinking, have you?"</em></li>
+        <li><strong>Reactive Shield Block</strong> twice this combat &mdash; once on Zoudou's R3 Strike, once on the dying Occultist's R3 staff strike (the latter absorbed all damage and the Occultist bled out).</li>
+        <li><strong>Nearly died</strong>; Zhao's R4 Battle Medicine for 48 HP brought him back.</li>
+        <li><strong>The hell hypothesis on the road home</strong>: <em>"I think we all died that night and this is hell. And we just finally ran across each other before going to our own private prisons."</em></li>
+        <li><strong>Saw Mingxi at the shrine.</strong> One of two people who heard the <em>"I'll take care of this. I always have."</em> line.</li>
+        <li><strong>Coda monastery dump</strong>: <em>"I want answers! Life was good here! Then it all went to shit! I grew up in the monastery, I got into fights, I left because I thought it'd be better, it was worse..."</em> Threatened to teach Riddle a Boston Crab if Riddle cast Calm on him.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-junyeong">
+      <h4>Jun-Yeong &middot; The Pharasmin Voice of Reason</h4>
+      <ul>
+        <li><strong>Opened the session with a clean S5 recap</strong> &mdash; earned the bonus hero point for the table.</li>
+        <li><strong>Combat-opening psalm</strong>: <em>"We will not resume the cycle today."</em></li>
+        <li><strong>R1 Bless</strong> (5-ft emanation, +1 status to allies' attacks). <strong>R2 two-action Heal vs. Living on Mo</strong> (psychopomp blood magic +1 vitality rider). <strong>R3 one-action Heal on Kageyuri</strong> for 9 HP.</li>
+        <li><strong>R2 Harm save fail &rarr; hero-pointed reroll</strong> &mdash; partial fail still, 16 void taken.</li>
+        <li><strong>Tried to disarm the Kugaptee hazard with Religion</strong> &mdash; Foundry low-reroll fails. Riddle picked up the slack with Occultism.</li>
+        <li><strong>Wrote off Atlacoya</strong> on the road home: <em>"I remember Atlacoya. We may not have seen exactly eye to eye, but he was the first one who spoke to me of the Crimson Butterflies. I remember his drawings. Surely those haven't disappeared along with him."</em></li>
+        <li><strong>Reported the new nightmare</strong>: <em>"I used to have pleasant dreams of dying. Not horrific dreams of, well, also dying, but violently. In the presence of crimson butterflies."</em></li>
+        <li><strong>Sanpachi Lore deep cut</strong>: explained the reincarnation philosophy to the party &mdash; <em>"essentially Buddhism. You are judged based on your actions in life... This will repeat until you reach Samsara, your perfected form. Then you move on to Pharasma's Court."</em> &mdash; making the Tattered Ledger reveal mean something specific.</li>
+        <li><strong>Handed Fiend's Hunger to Mo</strong> after checking it for curses: <em>"Any evil that was in this dagger has already vanished from it, most likely with the life of its previous wielder. I don't see any reason why you shouldn't have it, Mo."</em></li>
+        <li><strong>Mentioned Sashim to Shinzo</strong> aloud for the first time: <em>"He reminds me of my friend, actually. Sashim. He's a Jeoseung Saja... I never had a reason to fear for myself when he was near."</em> Shinzo nods, says nothing.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-riddle">
+      <h4>Riddle &middot; The Apparition-Talker</h4>
+      <ul>
+        <li><strong>Joined the party via Shinzo's late-night knock</strong>. <em>"You can see them too? You're not my friend, yes? Good, that's good. A friend of my friend is, well, also my friend. That's how it works, right?"</em></li>
+        <li><strong>Bird mannerisms throughout</strong>: perches on chairs, fluffs up when surprised, speaks to spirits no one else can see (until Shinzo, then Kageyuri, then Yami all surprise him by being able to see them too).</li>
+        <li><strong>R1 spell-swap moment</strong>: declared Discomforting Whispers, learned it doesn't discriminate, swapped to a single-target attack cantrip &rarr; hit for 10 mental (likely killed a second Grunt).</li>
+        <li><strong>R2 Grim Tendrils (heightened) line</strong> caught both Occultists. 18 to each on saves; persistent bleed stuck. One Occultist dropped to 1 HP &mdash; Zoudou's Harm then finished her.</li>
+        <li><strong>R3 was Riddle's defining moment</strong>: Frightened by the hazard's Fear, then crit'd Occultism (~28) to disarm the hazard-effigy. Communed with the trapped spirits, sang them a soothing melody, saw a flash of <strong>golden light</strong> &mdash; a separate figure trapped fighting Kugaptee inside the silhouette. The hazard went silent for the next round.</li>
+        <li><strong>R3 Eldritch Lance on Zoudou</strong> with a reroll &mdash; 11 damage. <em>"Tendrils, almost like blades of some unseen energy, try to pierce her."</em></li>
+        <li><strong>R4 farewell to the dying</strong>: <em>"We can befriend each other when you're dead too, but that would be not ideal for you, right?"</em></li>
+        <li><strong>Tried to scry on Kugaptee</strong> the next morning &mdash; his apparitions panicked and shook their heads no-no-no-no, begged him not to speak the name aloud.</li>
+        <li><strong>Aura Sight on Shinzo</strong>: friendly, healthy, athletic, <strong>no magical aura at all</strong>. Riddle and Shinzo's raven stared each other down in silence.</li>
+        <li><strong>Coda: pitched a Starlit Sentinels play</strong> for the Long Night Festival. Auditioned himself as a winged zodiac sentinel.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zhao">
+      <h4>Zhao Lishen &middot; The Will of the Emperor Made Manifest</h4>
+      <ul>
+        <li><strong>Awakening cinematic</strong>: a terracotta statue in front of the governor's vanished manor, awakened by Shinzo touching its shoulder. Spoke telepathically through the riding drake: <em>"As Zhao says, we are the will of the emperor made manifest. We are Zhao Lishen and Qian Siam."</em></li>
+        <li><strong>R1 Commander textbook turn</strong>: Gather to Me! (free Stride for all squadmates inside the 30-ft banner aura), Command Drake x2 to flank, Set-Up Strike on the Grunt for 10 damage + off-guard.</li>
+        <li><strong>Refused to dignify telepathic intimidation</strong>: <em>"It would not dignify the monster with a response."</em></li>
+        <li><strong>R2 clutch tactical play</strong>: Everlight Crystal dispelled Zoudou's Darkness; Pincer Attack tactic granted free Steps for off-guard; <strong>Battle Medicine on himself (hero-pointed) &rarr; 34 HP back, fully healed</strong>. Then mouth-carried the Everlight Crystal for the rest of combat.</li>
+        <li><strong>R3 Gather to Me! again</strong> for melee to flank Zoudou. <strong>Battle Medicine on his mount Qian Siam</strong> (downed by Zoudou's Harm) &mdash; <em>"makes some sort of sense"</em> &mdash; drake stood back up.</li>
+        <li><strong>R4 saved Ming Bao's life</strong>: Battle Medicine on the dying monk for <strong>48 HP</strong>. Then cut Kageyuri's ropes with his shield spike.</li>
+        <li><strong>R4 mounted escape</strong>: Gather to Me drake &rarr; mounted &rarr; Stride x2 (90 ft) clear of the demigod-aspect.</li>
+        <li><strong>Offered the spare Crushing Rune from the party stash</strong> for his Katana, plus a Repair Toolkit for his Construct body.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Fiend's Hunger</div><div class="loot-source">Zoudou the Zealous (looted from her corpse)</div><div class="loot-note">Mo. Unique +1 low-grade silver dagger, d6 not d4, returning. Activate 1/day on critical hit vs fiend: Avenging Soul (Will save or sickened/slowed). Jun-Yeong cleared it of curses before handoff.</div></div>
+    <div class="loot-item"><div class="loot-name">Tattered Ledger</div><div class="loot-source">Zoudou (her writing in mixed Aklo/Chthonian)</div><div class="loot-note">Jun-Yeong (Aklo half), Eliza translated the Chthonian half. <strong>Names Kageyuri, Ming Bao, Jun-Yeong as targets of Kugaptee for being multi-reincarnated.</strong> Reveals Kugaptee's edicts + anathema.</div></div>
+    <div class="loot-item"><div class="loot-name">Twisted Knot of Wood</div><div class="loot-source">Zoudou</div><div class="loot-note">Religious symbol of Kugaptee (1 sp value, ritual use). Party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Everlight Crystal</div><div class="loot-source">Zhao Lishen (already owned, dropped this fight)</div><div class="loot-note">20-foot magical bright light. Dispels rank-or-lower magical darkness. Made Zoudou's Darkness a non-issue in R2.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Crushing Rune</div><div class="loot-source">Party stash (originally Mingxi's gear)</div><div class="loot-note">Offered to Zhao Lishen for his +1 Katana. Crit hits inflict Clumsy 1 + Enfeebled 1 to end of next turn.</div></div>
+    <div class="loot-item"><div class="loot-name">Repair Toolkit</div><div class="loot-source">Party stash</div><div class="loot-note">Offered to Zhao for self-repair (he's a Mage Automaton Construct).</div></div>
+    <div class="loot-item"><div class="loot-name">Root of Ming Bao (Riddle's apparition)</div><div class="loot-source">Riddle's daily prep</div><div class="loot-note">Riddle's L4 temporary apparition root. RP-flavor: Riddle stores Ming Bao as an apparition root for the day.</div></div>
+    <div class="loot-item"><div class="loot-name">Talisman Pouch (Root Magic)</div><div class="loot-source">Riddle &rarr; Ming Bao</div><div class="loot-note"><em>"A little, well, a talisman. For good luck. You know, I seem like I need it."</em> Small fey-pouch of herbs gifted at dawn after the Tan Sugi dream.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; All five PCs reach <strong>Level 4</strong> &middot; Mo Earn Income &nbsp;<strong>96 gp</strong> (Deception success, DM-doubled per standing ruling)</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Mo</strong> (in noppera-bo disguise, marching Ming Bao and Jun-Yeong as "captives"): "Very natural &mdash; I'm trying to control these prisoners, make them fall in line. You guys can struggle a little bit right here. Oh, you want me to put on a performance? Here you go &mdash; for the spectators, just in case."
+    <span class="attribution">Mo selling the disguise infiltration to the front-gate grunts. Pure Wayang trickster, fully in character.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (to a grunt asking telepathically if Ming Bao and Jun-Yeong are sacrifices): "Yes, these are the captives for the great Kugaptee."
+    <span class="attribution">Mo holding the disguise face-to-face with one of Zoudou's lieutenants, completely casual.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo</strong> (when an archer shoots Mugirou): "Walk at that guy &mdash; like, 'you dare shoot at my friend? Prepare to pay.' I'm just gonna hit him twice. Beat him. Let's kill him. Beat him to death with hammers &mdash; what the hell."
+    <span class="attribution">Mo's only loud-aggro moment of the session. Mugirou matters to Mo now, and Mo's character voice cracks the moment the rebel takes a hit.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong>: "Does anyone have anything they want to say before I have an emotional outburst?"<br>
+    <strong>Jun-Yeong</strong>: "If you don't, I'm going to."
+    <span class="attribution">Asking permission to start combat with a scream after Zoudou implies recognition. The "before I have an emotional outburst" line is Ming Bao at his most Ming Bao.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong> (on the road back, sitting in the road, staring up at the night sky): "I think we all died that night and this is hell. And we just finally ran across each other before going to our own private prisons."
+    <span class="attribution">Ming Bao's working theory after seeing Mingxi at the shrine. Jun-Yeong's reply: "This is not hell. Hell is run by devils. That seemed more keen to the creatures we saw before. Which tells me that, even if we were dead, we're probably lost in the river."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Ming Bao</strong> (coda RP, after the butler suggests interviewing the governor's old staff): "I want answers! Life was good here! Then it all went to shit! I grew up in the monastery, I got fights, I left because I thought it'd be better, it was worse, and they hit me in the monastery, and then I ended up here, and it was wonderful for like five years, and then a light showed up in the sky, and now people are missing!"
+    <span class="attribution">Ming Bao's full backstory dump in a panic spiral, into the coda's quiet tea house. Riddle offered a Calm spell. Ming Bao: "If you cast magic on me, I'm going to teach you what a Boston Crab is."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong> (combat-opening declaration as the party readies to attack the shrine): "We will not resume the cycle today."
+    <span class="attribution">Jun-Yeong's Pharasmin combat psalm. Said once, as the party converges on Zoudou &mdash; also a promise about Kageyuri at the altar.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong> (eulogy for Atlacoya, on the road home): "I remember Atlacoya. We may not have seen exactly eye to eye, but he was the first one who spoke to me of the Crimson Butterflies. I remember his drawings. Surely those haven't disappeared along with him."
+    <span class="attribution">A quiet acknowledgment of Rafael's exit. Jun-Yeong is the only person who got to say goodbye on screen.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jun-Yeong</strong> (the morning after the fight, to Yami): "I used to have pleasant dreams of dying. Not horrific dreams of, well, also dying, but violently. In the presence of crimson butterflies."
+    <span class="attribution">Peak Duskwalker characterization. The "pleasant dreams of dying" is the kind of line you can only deliver if you've spent the last six sessions building Jun-Yeong's voice.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Riddle</strong> (first meeting with Shinzo at his outskirts hut): "I didn't expect visitors. Nobody told me nobody's coming. And I don't know you. Sorry. Not a lot of visitors here. Not a lot of visitors here. And my friends did not tell anybody was coming."
+    <span class="attribution">Riddle's entrance. The doubled "my friends did not tell" lands the apparition-talker affectation immediately &mdash; and Shinzo's "I can see them too" lands his recruitment in two lines.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Riddle</strong> (mid-combat, to a dying noppera-bo): "Yes, yes, I can know you're... We can befriend each other when you're dead too, but that would be not ideal for you, right?"
+    <span class="attribution">The apparition-talker bargaining with a soul about to be one. The "befriend you when you're dead too" framing is Riddle's character thesis in one sentence.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Riddle</strong> (calming the spirits trapped in the hazard-effigy, after his Occultism crit): "It's quite alright. You'll be fine. We're not your enemies. Not any of you. We wish you no harm. What's been done to you is horrible. We wish to just bring peace to this place."
+    <span class="attribution">Riddle's clutch round-3 disable. The hazard goes silent for one round &mdash; Zoudou's spell-pump goes offline.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhao Lishen</strong> (awakening cinematic, spoken telepathically through the riding drake): "We are the will of the emperor made manifest. We are Zhao Lishen and Qian Siam."
+    <span class="attribution">The terracotta statue's first words after standing for years in front of the governor's vanished manor. Best entrance line of the session.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhao Lishen</strong> (after a noppera-bo grunt demoralizes him telepathically with "Statue. Thing. What are you?"): "It would not dignify the monster with a response."
+    <span class="attribution">Zhao's first combat line. Set the tone for the rest of his fights &mdash; terse, in-character, unbothered by the things faceless men think of him.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mingxi</strong> (one line, to Ming Bao, hand on his shoulder, as the party flees the demigod-aspect): "I'll take care of this. I always have."
+    <span class="attribution">The closing beat of Act III. The friend nobody else remembers stepping in to die again, this time on purpose, so the rest can get out.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Kugaptee is a demigod (confirmed)</strong>. What the party fought was only one <em>aspect</em>. Yami confirms via her unexplained knowledge. The full Kugaptee is on the other side of the fog wall, banging glass.</li>
+      <li><strong>Mingxi is fighting Kugaptee right now (off-screen)</strong>. Held the demigod-aspect 1v1 long enough for the party to escape. Status unknown. Ming Bao and Kageyuri both saw him.</li>
+      <li><strong>The party is being hunted for being reincarnated</strong>. The ledger names Kageyuri, Ming Bao, and Jun-Yeong specifically. <strong>Mo is not named</strong> (Zoudou's spies hadn't caught up to him). Riddle and Zhao are also unknown to the cult.</li>
+      <li><strong>Kugaptee's edicts and anathema are known</strong>. Edicts: curse living creatures, defile graveyards and pastoral natural regions. Anathema: perform burial rituals, remove curses for others. Pharasma is functionally his anti-deity. Areas of concern: curses, defiled graves, haunted wildlands, seasonal disasters.</li>
+      <li><strong>The shared dream</strong>. All five PCs dreamt the same dream at Tan Sugi Monastery with Mingxi at the Sugi Tree and a five-fingered claw of red butterflies for a sky. Almost certainly a Kugaptee seer effect.</li>
+      <li><strong>Mugirou is alive but separated</strong>. Was at the lumber camp briefly after the demigod cleared it, then moved on, being hunted himself. Still an ally; current location unknown.</li>
+      <li><strong>The Tan Sugi Monastery thread escalates</strong>. Jun-Yeong's two-year memory gap, Mingxi being seen <em>there</em>, and the demigod-aspect's silhouette matching the shape Kugaptee takes in the dream &rarr; Tan Sugi is almost certainly Book 2's main location.</li>
+      <li><strong>The governor (Heh Shan-Bao) was a thaumaturge</strong> (butler NPC, coda). His manor's locks were changed on the night of the festival. Skeleton crew of four trusted servants is alive and interviewable. Queued for Book 2's first downtime activity.</li>
+      <li><strong>Yami's source of knowledge</strong>. She knows things she shouldn't. <em>"It started on the first day of summer."</em> That phrase is becoming a load-bearing motif.</li>
+      <li><strong>Shinzo confirmed <em>human</em> by Aura Sight</strong>. No magical aura. Either a perfect mundane disguise on something cosmic, or actually human and doing something else weird. Mo's read holds: use, don't trust.</li>
+      <li><strong>Atlacoya is gone</strong> &mdash; written out off-screen. His drawings of Crimson Butterflies presumably still in his rented house, but Eliza's renter records will probably be retconned by the erasure.</li>
+      <li><strong>The 5 captive farmers from S5 were freed</strong> &mdash; not by the party, but by the demigod-aspect rampaging through the camp after Zoudou's suicide. All bleed red. All alive.</li>
+      <li><strong>Riddle's apparitions are afraid of Kugaptee by name</strong>. Don't say it out loud.</li>
+      <li><strong>Long Night Festival pending</strong> (a few weeks out at session's end). Riddle's <em>Starlit Sentinels</em> play is in pre-production. Mo committed to dancer-poet. Ming Bao volunteered as a sentinel.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Cliffhanger</span>
+    <p>Zoudou's body crumpled at the shrine with her own dagger in her heart. The wall of fog behind her shattering inward as something fifteen feet tall walks through, broken sword trailing, wicker helm tilted to one side, ribcage opening and closing around a flock of red butterflies. It stops at Mo, considers, then turns to the fleeing Trickster with what is unmistakably the body language of a god being amused.</p>
+    <span class="big-line">"I told you you were gonna&mdash;"</span>
+    <span class="speaker">&mdash; The Demigod-Aspect of Kugaptee, mid-sentence as it Critical-Hits the Trickster for 76 damage</span>
+    <p style="margin-top: 18px;">And as Ming Bao Strides for the treeline, the hand on his shoulder is a hand he hasn't felt in three sessions. The voice is the voice nobody else remembers anymore.</p>
+    <span class="big-line">"I'll take care of this. I always have."</span>
+    <span class="speaker">&mdash; Mingxi, dead-or-erased, stepping in to 1v1 a demigod so the rest can get out</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Mo's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Mo did this session</h3>
+  <ul>
+    <li>Wore the noppera-bo hood from Shinzo. Tied Ming Bao and Jun-Yeong as loose "captives." Marched them past Zoudou's lieutenant face-to-face. Sold "captives for the great Kugaptee." Disguise held.</li>
+    <li>Met <strong>Mugirou</strong> for the first time as an actual person &mdash; the noppera-bo rebel who's been an anonymous ally since the lumber camp scout. Cares about him now.</li>
+    <li>Met <strong>Riddle</strong> (Skyborn Tengu Animist, talks to spirits) and <strong>Zhao Lishen</strong> (mage automaton commander on a terracotta riding drake named Qian Siam). Both joined via Shinzo. Party is 5 PCs now.</li>
+    <li>Heard Atlacoya is gone. DM said <em>"joined the rest of your friends in the beyond."</em> Never met him. Could not pretend to grieve. Asked the party <em>"are you sure they're actually real?"</em></li>
+    <li>R1 combat: Overwhelming Combination on the Grunt &mdash; rapier missed, fist crit for 22 &rarr; Grunt's Reactive Strike on Mo for 7 &rarr; Grunt dies (killing blow: Mo).</li>
+    <li>R2 was Mo's heavy hit: Overwhelming Combination CRIT on the Occultist for <strong>44 damage</strong>. Demoralize Zoudou (Intimidation 23 &rarr; Frightened 1). Got down to 2 HP from Trickster bow shots + Phantom Pain.</li>
+    <li>R3 OC on <strong>Zoudou</strong> (per Jun-Yeong's call: <em>"please stab the woman"</em>) for 22 damage combined. Dance of the Mousedeer for +2 AC. Last action: considered Trip, swapped to rapier Strike at full MAP &rarr; Critical Miss.</li>
+    <li>R4 lost composure when the Trickster shot Mugirou. <em>"You dare shoot at my friend? Prepare to pay."</em> Two Strikes on the Trickster for 26 damage (DM halved fist back down &mdash; accidentally rolled crit damage on a hit).</li>
+    <li>Looted <strong>Fiend's Hunger</strong> from Zoudou after Jun-Yeong checked it for curses. Returning d6 silver dagger. Hidden away in Mo's pocket.</li>
+    <li>Petted <strong>Yami</strong> for the first time. Stealth 29 vs the cat's perception. Mo sat down with his smug face.</li>
+    <li>Earn Income: one successful Deception (24) &rarr; 48 gp at Task Level 4 &rarr; DM doubles per his standing ruling &rarr; <strong>96 gp total</strong>.</li>
+    <li>Daily prep: Smokescreens now creates <strong>2 Lesser Smoke Balls per day</strong> automatically.</li>
+    <li>Coda: Stayed at the Tea House. Heard about a former PC called <strong>Shizu</strong> Mo never met. Watched Ming Bao melt down. Standard tea house evening.</li>
+  </ul>
+
+  <h3>Things Mo knows that the party does not</h3>
+  <ul>
+    <li><strong>Mugirou is the noppera-bo rebel's actual name.</strong> On the side that wants to bring down Kugaptee's cult. Treat as ally and friend; protective reaction on the archer was instinctive but the right call.</li>
+    <li><strong>Kugaptee is a demigod, not a god.</strong> Per Yami's unexplained knowledge. What the party fought was an <em>aspect</em>. The actual Kugaptee is on the other side of the fog wall.</li>
+    <li><strong>The party is being hunted for being reincarnated.</strong> Zoudou's ledger names Kageyuri, Ming Bao, Jun-Yeong specifically. Mo is <strong>not</strong> named. Mo's spies-haven't-caught-up-yet status is a temporary advantage &mdash; stay below the radar.</li>
+    <li><strong>Riddle and Zhao are unknown to the cult.</strong> They joined too late for the spies to clock. Same temporary advantage as Mo's.</li>
+    <li><strong>Mingxi is still around somehow.</strong> Held a 15-foot demigod-aspect 1v1 to give us time to flee. Could be a soul that didn't fully erase. The "I'll take care of this. I always have" beat is the most important thing that happened tonight, and only Ming Bao really heard it.</li>
+    <li><strong>Yami knows things she shouldn't, and her knowledge started on the first day of summer.</strong> Same date as Kugaptee's voice in spirits' minds. Same date as Ming Bao seeing the red firework. <em>"Everything happens on the first day of summer."</em></li>
+    <li><strong>Shinzo registers as completely mundane on Aura Sight</strong> (Riddle ran it). Either a perfect disguise on something cosmic, or actually human and doing something else weird. Use him, don't trust him.</li>
+    <li><strong>Mo got handed Fiend's Hunger by Jun-Yeong.</strong> Didn't earn it on his own. Came with an in-fiction inheritance vibe. Don't lose it.</li>
+  </ul>
+
+  <h3>What Mo is thinking about</h3>
+  <ul>
+    <li><strong>The disguise infiltration *worked*</strong> for the second session in a row. The hood + Mo's expert Deception is genuinely game-changing for this campaign. Should plan around infiltrations as a primary mode for Mo.</li>
+    <li><strong>Crushing rune still doing work</strong>. R2's 44-damage Overwhelming Combination crit on the Occultist + Clumsy + Enfeebled + Off-Guard from Unbalancing Blow. Worth pushing for the Ghost Touch rune (75 gp) as the next priority. Now sitting on 96+ gp from Earn Income plus the existing reserve.</li>
+    <li><strong>Mo is third in damage now</strong>. Zhao's Commander Tactics + Riding Drake support give him reliable 10+ damage Setup Strikes that grant off-guard. Ming Bao's flurry crits remain absurd. Mo's role shifts to <em>off-guard maintainer + infiltration specialist + scout</em>, not "damage king." That's fine. Better, actually.</li>
+    <li><strong>Mugirou is the first NPC Mo cares about that isn't Ming Bao or Jun-Yeong.</strong> First ally the cult has been actively trying to kill in front of Mo. Cult's response to friends = kill them. Worth internalizing.</li>
+    <li><strong>The 60-day downtime + Earn Income set Mo up well financially.</strong> 96 gp + the existing reserve = can lock in Ring of Discretion (15 gp), Disguise Kit (2 gp), Ghost Touch rune (75 gp). Total ~92 gp. Should do it before Book 2 starts.</li>
+    <li><strong>Fiend's Hunger Avenging Soul (1/day, on critical hit vs fiend)</strong>: Will save or target sickened/slowed. Mo just learned Kugaptee is fiend-adjacent. Fiend's Hunger may have a target in Book 2.</li>
+    <li><strong>The 'reincarnated souls' thread is interesting from a Mo angle.</strong> Mo isn't on the list. That implies Mo either isn't a reincarnated soul, or hasn't been cataloged.</li>
+    <li><strong>Should ask Orion about Mo's mother</strong>. The Sanpachi reincarnation lore + the cult of soul-harvesting + Mo's missing mother <em>who could not cross from the Netherworld</em> may be related.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>Did Mingxi survive the 1v1?</strong> If so, in what form? The DM has now twice confirmed Mingxi's body is somewhere in the world while his spirit is erased from memory. The fact that he can physically engage a demigod-aspect implies he has a body that fights. Is he in Tan Sugi?</li>
+    <li><strong>Why is Kageyuri at the top of Zoudou's list?</strong> <em>"I think I've made [this discovery] while examining this Kageyuri woman."</em> What did Zoudou see in her that wasn't in Ming Bao or Jun-Yeong? Tied to Eliza? Tied to Tan Sugi (Kageyuri is also an animist, like Riddle, with apparitions of her own)?</li>
+    <li><strong>What is the wall of fog actually made of?</strong> Yami referred to <em>"that wall of ghosts behind us."</em> If the fog wall is spirits Kugaptee has bound, breaking out means freeing them. Ask Riddle &mdash; his apparitions seem to know.</li>
+    <li><strong>What did the *golden light* behind the hazard-silhouette mean?</strong> Riddle saw a separate figure trapped inside fighting Kugaptee. Could be Pharasma or her agent. Could be a captive god.</li>
+    <li><strong>Tan Sugi Monastery in Book 2?</strong> Shared dream + Jun-Yeong's two-year gap + Mingxi seen there &rarr; almost certainly. Mo should pre-study any maps the party can find before going in.</li>
+    <li><strong>What's the deal with Shizu</strong> (the former PC Ming Bao mentioned in the coda &mdash; "magic girl with a laser sword")? Erased like Mingxi/Dot/Atlacoya, or left for unrelated reasons? Ask Ming Bao quietly.</li>
+    <li><strong>What does the Long Night Festival entail?</strong> Riddle's Starlit Sentinels play is queued. Mo committed to dance + depressing poetry. Festival is "within a few weeks" of session-end &mdash; early Book 2. Need to be ready.</li>
+    <li><strong>Should Mo finally tell Zataku what happened?</strong> Sanpachi lore + cult of soul-harvesting are exactly the kind of thing a ratfolk fisher with weather-sense might know about. Worth a careful conversation. <em>("Going to visit the rat lady" was on the to-do list at session end.)</em></li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

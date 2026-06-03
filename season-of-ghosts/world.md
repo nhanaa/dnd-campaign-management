@@ -12,7 +12,7 @@
 
 The campaign is set in **Willowshore**, a small village in the haunted forest country of **Shenmen** in **Tian Xia** (Pathfinder's east-continent analog). Roughly three years before the AP began, the **Imperial Lung Wa** dynasty that once governed the region collapsed under a schism — its fall is recent enough that the village still carries the political residue.
 
-In-game date: the AP opened on **the last day of spring, 7108 IC** (Imperial / Tian Xia calendar). The party is currently in the early summer that follows.
+In-game date: the AP opened on **the last day of spring, 7108 IC** (Imperial / Tian Xia calendar). **Post-S6: Toilday, Rova 1st, 7108 IC** — Book 1 (summer) closed via a 60-day timeskip, Book 2 (autumn) opens.
 
 The village sits in a forest infested with spirits, haunts, and incorporeal threats. Every spring, Willowshore performs the **Reenactment Festival** — a ritual play where six volunteers are "abducted" by costumed ghost-actors so the real spirits outside town will see Willowshore as a poor target and look elsewhere. The governor traditionally plays the role of **Zhi Hui**, the legendary keeper of an ancient monastery to the northwest (likely **Tan Sugi Monastery** in the AP canon) who founded the tradition. Willowshore historically thrived because monks from the monastery passed through and spent coin in town.
 
@@ -115,23 +115,55 @@ Returning to Willowshore, they find **Kum Sun-Chung's ranch torched** (magic-ind
 
 ---
 
+## Session 6 — The Zealot's Sacrifice (Book 1 Closes)
+
+**Two new PCs join via Shinzo's recruiting run.** **Riddle** (Skyborn Tengu Liturgist Animist + Campfire Chronicler, talks to invisible apparitions, lives on the outskirts) is recruited at his hut at 10 PM the night of the lumber-camp infiltration. **Zhao Lishen** (Mage Automaton Commander on Riding Drake "Qian Siam") awakens in front of the governor's vanished manor when Shinzo touches his shoulder — the fall of Lung Wa three years ago having been the catalyst for his awakening, the merchant's touch the trigger. Telepathically through the drake: *"We are the will of the emperor made manifest. We are Zhao Lishen and Qian Siam."*
+
+**Atlacoya (Rafael) is written off-screen.** Jun-Yeong asks where he is. DM: *"Atlacoya has joined the rest of your friends in the beyond. That is all I can say."* Jun-Yeong delivers the only eulogy on the road home.
+
+**The disguise infiltration completes.** Mo (in the noppera-bo hood from S5) marches Ming Bao and Jun-Yeong into the inner ritual site as "captives for the great Kugaptee." Mugirou — the noppera-bo rebel from prior sessions, **finally named** — drops the act and joins openly. Riddle and Zhao Lishen arrive from the south with Shinzo's escort. The party walks into Zoudou the Zealous's ritual site: a faceless cult leader (the "her" the rebels had warned about) mid-ritual on bound Kageyuri, with a wickerwork hazard-effigy of Kugaptee behind her and a wall of fog acting like aquarium glass — something with three-headed necks and many fists pressing against it from outside.
+
+**The fight closes Book 1.** Mo deals 44 damage in a single Overwhelming Combination crit on an Occultist (R2). Ming Bao Flurries the survivor. Zhao's Everlight Crystal dispels Zoudou's Darkness; Battle Medicine saves Mo (R2) and Ming Bao (R4, from dying, 48 HP). Riddle's Grim Tendrils + a clutch R3 Occultism Crit Success silences the hazard-effigy — and reveals a flash of **golden light** behind the silhouette, a separate figure trapped fighting Kugaptee. Mo Demoralizes Zoudou to Frightened 1. Cornered, Zoudou stabs herself in her own heart, screams *"Kugaptee!"*, and signals through. **The trees beyond the fog wall begin to shake.** A 15-foot demigod-aspect of Kugaptee comes through — wicker helm, ribcage bulging with red butterflies, Ruined Great Katana (Reach 15, Unholy). It one-shots the fleeing Trickster mid-sentence (76 damage Critical Hit). The party runs.
+
+**Mingxi reappears.** As Ming Bao Strides off the map, he feels a hand on his shoulder and hears Mingxi's voice: *"I'll take care of this. I always have."* Mingxi 1v1s the demigod-aspect off-screen so the party can clear the treeline. Status of that fight: unknown.
+
+**Downtime: Yami names Kugaptee a demigod.** All 5 PCs share the same dream (Mingxi at Tan Sugi Monastery, sky a five-fingered claw of red butterflies). Riddle's apparitions panic the first time he tries to scry on Kugaptee. The party returns to the camp the next day: every noppera-bo dead (cleaved by the demigod-aspect), 5 captive farmers freed and alive. Loot from Zoudou: **Fiend's Hunger** (unique +1 silver dagger, to Mo), **Tattered Ledger** (half Aklo / half Chthonian), **Twisted Knot of Wood** religious symbol. Eliza translates the Chthonian half: the cult was hunting **reincarnated souls** specifically. Named targets: **Kageyuri, Ming Bao, Jun-Yeong**. Mo not named. Kugaptee's edicts (curse the living, defile graveyards) and anathema (burial rituals, removing curses for others) revealed; Pharasma is functionally his anti-deity.
+
+**Shinzo returns.** Jun-Yeong, sharper now: *"You were testing us. Why?"* Shinzo deflects. Riddle runs Aura Sight on him — **completely mundane human, no magical aura at all.** Jun-Yeong mentions Sashim aloud for the first time; Shinzo nods, says nothing.
+
+**60-day timeskip closes Book 1.** Harvest-focused downtime. Mo earns 96 gp (Deception success doubled per DM's standing Earn Income ruling). Riddle picks up Aura Sight as his L2 archetype feat. All 5 PCs reach **Level 4**. Toilday, Rova 1st. Book Two opens — landing page: "a lot of spiders."
+
+**Coda:** Post-session RP at the tea house. Riddle pitches a **Starlit Sentinels** play for the upcoming **Long Night Festival**. Mo commits to a dance; Jun-Yeong to depressing poetry. Ming Bao mentions a former PC named **Shizu** (Mo never met her — separately written-off character). Ming Bao has a backstory-dump panic in response to a butler NPC's question; Riddle offers a Calm spell; Ming Bao threatens a Boston Crab. The butler reveals the governor was a **skilled thaumaturge** whose manor's locks were changed in the hours before the festival night. Book 2 hook.
+
+**New plot threads (S6):** Kugaptee is a demigod, not a god, and what the party fought was only one aspect. The cult is hunting multi-reincarnated souls (3 PCs named). The shared dream of Tan Sugi escalates that monastery as Book 2's main location. Mingxi is somehow still around enough to engage a demigod-aspect 1v1. Shinzo registers as fully human by aura. Mugirou is alive but separated, being hunted.
+
+**Resolved (S6):** Zoudou the Zealous (the "her" the rebels referenced) killed by ritual suicide. Lumber Camp cleared. Kageyuri rescued and returned to Eliza. 5 captive farmers freed (by the demigod-aspect, not the party). Disguise infiltration plan worked exactly as designed.
+
+---
+
 ## Standing Mysteries / Open Threads
 
-1. **What happened to Governor Heh Shan-Bao?** Manor and man both vanished without trace. Hongrui's spirit (S5) had no information — those threads may not be cause-and-effect.
-2. **What is the Crimson Stain?** S5: name revealed as **Kugaptee**. Still unknown what Kugaptee actually is (god? devil? psychopomp gone wrong?).
-3. **Why the recurring red imagery?** Firework, butterflies, visions, the cult's name. Now also the carved-butterfly vandalism on Kum Sun-Chung's fence.
-4. **The fog wall.** What's enforcing it, and how do they break out — assuming they can?
-5. ~~**Fan Hongrui's curse.**~~ **S5: spirit laid to rest.** Her dying curse on the governor may have been the seed, but she herself had no info on the governor's fate. Closed at this end.
-6. **The reincarnation hint.** Governor's speech: "no matter how many cycles, how many repeats of this tragedy" — strongly implies the village has been through this before.
-7. **The rebel deal.** When the cult returns from "the monastery" (almost certainly Tan Sugi), the noppera-bo signals. (S5 update: the cult is now at the **Lumber Camp**, not the monastery — leadership change.)
-8. **The missing-monk monastery.** Zhi Hui (the figure the governor played) ran the monastery to the northwest. Tan Sugi (canon Book 2 location). Also where Jun-Yeong vanished two years ago.
-9. **Kugaptee** — the named entity. What is it, and is it the Crimson Stain itself or a herald of it?
-10. **The new red-butterfly undead** — eyeless, broken-weapon, ribcage butterflies. Unknown to Boneyard/Religion. Apparently looking for thatchlings to deliver to the cult.
-11. **The erasure mechanic** — bodies still of this world (per Shinzo), spirits erased. Spreading to more witnesses (Eliza losing Mingxi). Driven by what?
-12. **Yami the cat** — identity unknown. Speaks to Jun-Yeong only. Gifts magic items.
-13. **Shinzo** — too on-cue. What is he and what's his actual agenda?
-14. **The Mingxi-impersonator** — running the cult, or a low-rank impostor? The "her" the noppera-bo rebel wanted dead might be the same figure now wearing Mingxi's face.
-15. **Sashim** — Jun-Yeong's missing psychopomp guardian. Possibly aware from the Boneyard side. Long arc.
+1. **What happened to Governor Heh Shan-Bao?** Manor and man both vanished without trace. **S6 (butler NPC)**: he was a thaumaturge; his manor's locks were changed in the hours before the festival night; he sent staff home and kept a skeleton crew of four. Surviving staff are alive and interviewable — Book 2's first downtime activity.
+2. **Kugaptee = demigod (S6 confirmed via Yami).** What the party fought was one aspect. The full Kugaptee is on the other side of the fog wall. Came into being roughly 1000 years ago per Yami (recent on cosmic scale). Edicts: curse the living, defile graveyards / pastoral natural regions. Anathema: perform burial rituals, remove curses for others. Pharasma functionally his anti-deity.
+3. **Why the recurring red imagery?** Firework, butterflies, visions, cult name, carved-butterfly vandalism, S6 demigod-aspect's butterfly-ribcage form, S6 shared-dream sky as five-fingered claw of red butterflies.
+4. **The fog wall.** S6 (Yami): *"that wall of ghosts behind us"* — likely composed of bound spirits. Breaking out may mean freeing them. The demigod-aspect came through when Zoudou sacrificed herself, suggesting the wall is permeable from outside with the right ritual cost.
+5. ~~**Fan Hongrui's curse.**~~ RESOLVED S5.
+6. **The reincarnation hint, escalated S6.** Governor's "no matter how many cycles" speech + S6's ledger reveal that the cult is hunting multi-reincarnated souls implies Willowshore has been through this cycle before, possibly many times. **Named targets in S6 ledger: Kageyuri, Ming Bao, Jun-Yeong.** (Mo, Riddle, Zhao not named — Mo's spies hadn't caught up, others joined too late.)
+7. ~~**The rebel deal.**~~ Effectively resolved S6 — Zoudou ("the her") killed, the rebel-faction noppera-bo (Mugirou) survived and is now the surviving local noppera-bo.
+8. **Tan Sugi monastery (S6 escalated).** Zhi Hui's old domain. Where Jun-Yeong vanished two years ago. **S6 shared dream: all 5 PCs dreamt of Mingxi at the Sugi Tree, world flickering between intact and ruined.** Almost certainly Book 2's primary location.
+9. ~~**Kugaptee — what is it?**~~ Partially answered S6: demigod, ~1000 years old. Origin and goals beyond "harvest reincarnated souls / break the cycle" still unknown.
+10. **The new red-butterfly undead** — eyeless, broken-weapon, ribcage butterflies. S6 confirmed connection to Kugaptee via the demigod-aspect's matching wicker-helmed butterfly-ribcage form. Likely one form of "something else entirely" pulled-spirits become per Zoudou's ledger.
+11. **The erasure mechanic** — bodies still of this world (per Shinzo), spirits erased. **S6: Mingxi reappeared physically** at the cliffhanger and 1v1'd a demigod-aspect — implies the erased aren't entirely gone; their bodies retain combat capability. Atlacoya now also erased/written off-screen.
+12. **Yami the cat** — S6: spoke to whole party for the first time. Knows things she shouldn't ("It started on the first day of summer"). Identity still TBD.
+13. **Shinzo** — S6 Aura Sight: completely mundane human, no magical aura. Either perfect cosmic disguise or actually human and doing something else weird. Sees Riddle's apparitions, can also see Kageyuri's. Crossed the fog wall (the only entity that does).
+14. ~~**The Mingxi-impersonator.**~~ Was Zoudou (the "her") all along — she ran the cult while wearing Mingxi's face when convenient. Dead S6.
+15. **Sashim** — Jun-Yeong's missing Jeoseung Saja guardian. S6: Jun-Yeong mentions Sashim aloud to Shinzo; Shinzo nods silently. Long arc.
+16. **(S6 new) The golden light behind the silhouette.** When Riddle disabled the hazard-effigy on his Occultism Crit, he saw a flash of golden light: a separate figure trapped inside the silhouette fighting Kugaptee. Could be Pharasma or her agent. Could be a captive god.
+17. **(S6 new) Riddle's apparitions fear Kugaptee by name.** When Riddle tried to scry on Kugaptee, his apparitions panicked and begged him not to speak the name aloud.
+18. **(S6 new) The Long Night Festival.** Within a few weeks of session-end. Riddle's Starlit Sentinels play in pre-production. Riddle = winged sentinel, Mo = dance, Jun-Yeong = depressing poetry, Ming Bao = volunteer sentinel.
+19. **(S6 new) Mugirou's whereabouts.** Survived combat at the lumber camp but was being hunted by something afterward. Location unknown.
+20. **(S6 new) Why Kageyuri specifically?** Zoudou's ledger: *"a discovery that I think I've made while examining this Kageyuri woman."* What about her stood out compared to Ming Bao or Jun-Yeong? Tied to Eliza? Tied to Tan Sugi (Kageyuri is also an animist)?
+21. **(S6 new) Atlacoya's drawings.** His house presumably still has the Crimson Butterfly drawings, but the erasure may already be retconning Eliza's renter records.
 
 ---
 
@@ -147,18 +179,20 @@ The DM was vague but explicit on two points:
 
 ---
 
-## Party Roster (current, ~level 3)
+## Party Roster (current, level 4, post-S6)
 
 | Character | Class | Notes |
 |-----------|-------|-------|
-| **Mo** | Wayang Rogue (Thief, Shadow of the Smith) + Spirit Warrior FA | Pax's PC, age 17. DEX/CHA build, low STR. Hid through the invasion as a civilian. Knows Zheng Peng (the constable) from past run-ins for petty mischief. Off-guard chainer via Surprise Attack init + Unbalancing Blow + Overwhelming Combination 2-Strike combo. |
-| **Mingxi** (Míngxī Rijn) | Half-Tengu Magus (Inexorable Iron, two-handed STR) + Animist FA | **Spike-damage king.** 2-action Spellstrike combo, glass cannon — eats damage every fight (poison, prone, dropped katana) but lands 50-damage Spellstrike crits. Wields a cold iron + wounding katana. Worships Pharasma. Northridge-leaning. |
-| **Ming Bao** | Human Tian-Shu Monk | **Crit-chainer.** Stance switcher (Tiger Claw → Stumbling Swing for Backstabber synergy on off-guard targets). Lands 30+ damage crits. Took first watch on festival night and was knocked unconscious by the red firework. Wrestles enemies into "boston crabs" between scenes. |
-| **Dot** | Peach Leshy Druid (Animal/Cultivation) | Branch unarmed strikes (Leshy ancestry), Ray of Frost, Healing Plaster cantrips. Has a sapling companion + leshy familiar. |
-| **Atlacoya** | Chameleon Lizardfolk Investigator (Alchemical Sciences) | Devise a Stratagem + Pursue a Lead specialist. Quick Tincture brews Elixirs of Life on demand. Has had Crimson Stain visions. |
-| **Myo Jun-Yeong** (rendered "Joon Young" in earlier transcripts) | Human Duskwalker Sorcerer (Psychopomp bloodline) + Soul Warden + Familiar Master | **Holds the divine spell tradition slot.** Pharasma cathedral upbringing. 7 ft, pale blue skin, glowing yellow eyes, wears his joseung saja guardian's reaper robes. Two-year memory gap from a monastery exorcism. |
+| **Mo** | Wayang Rogue (Thief, Shadow of the Smith) + Spirit Warrior FA | Pax's PC, age 17. DEX/CHA build, low STR. Hid through the invasion as a civilian. Knows Zheng Peng (the constable) from past run-ins for petty mischief. Off-guard chainer via Surprise Attack init + Unbalancing Blow + Overwhelming Combination 2-Strike combo. **S6**: 44-dmg crit on Occultist, 22-dmg crit on Zoudou, rescued Mugirou from an archer. Holds Fiend's Hunger now. Not named in Zoudou's reincarnation ledger. |
+| **Ming Bao** | Human Tian-Shu Monk + Bard Dedication | **Crit-chainer.** Stance switcher (Tiger Claw → Stumbling Swing for Backstabber synergy on off-guard targets). Lands 30+ damage crits. Took first watch on festival night and was knocked unconscious by the red firework. **S6**: named in Zoudou's reincarnation ledger; nearly died (saved by Zhao's 48-HP Battle Medicine); Shield-Blocked Zoudou twice; heard Mingxi at the shrine. |
+| **Myo Jun-Yeong** (rendered "Joon Young" in earlier transcripts) | Human Duskwalker Sorcerer (Psychopomp bloodline) + Soul Warden + Familiar Master | **Holds the divine spell tradition slot.** Pharasma cathedral upbringing. 7 ft, pale blue skin, glowing yellow eyes, wears his joseung saja guardian's reaper robes. Two-year memory gap from a monastery exorcism. **S6**: named in Zoudou's reincarnation ledger; opened combat with *"We will not resume the cycle today"*; eulogized Atlacoya; Sanpachi-lore-bearer; mentioned Sashim aloud to Shinzo. |
+| **Riddle** *(NEW S6)* | Skyborn Tengu Liturgist Animist + Campfire Chronicler FA | Age 20, He/Him, 5'0". Background: Empty Whispers. Eldritch Lance + Grim Tendrils + Apparition Sense + Aura Sight. **S6**: clutch Occultism Crit (~28) disabled the Kugaptee hazard-effigy; ran Aura Sight on Shinzo (registers human); apparitions afraid of Kugaptee by name. |
+| **Zhao Lishen** *(NEW S6, Mars)* | Mage Automaton Commander + Cavalier Dedication + Medic Dedication | Terracotta-warrior construct on Riding Drake "Qian Siam." Awakened by Shinzo at the governor's vanished manor. Banner-carrying mounted Commander; Battle Medicine via Medic. **S6**: opened with Set-Up Strike on Grunt; Everlight Crystal dispelled Zoudou's Darkness; saved Ming Bao's life (48-HP Battle Medicine). |
+| ~~**Atlacoya**~~ | Chameleon Lizardfolk Investigator (Alchemical Sciences) | **LEFT campaign S6**. DM line: *"Atlacoya has joined the rest of your friends in the beyond."* Jun-Yeong's eulogy: *"he was the first one who spoke to me of the Crimson Butterflies."* |
+| ~~**Mingxi**~~ (Míngxī Rijn) | Half-Tengu Magus (Inexorable Iron, two-handed STR) + Animist FA | **Erased in-fiction S5. Reappeared S6** at the cliffhanger — hand on Ming Bao's shoulder: *"I'll take care of this. I always have."* 1v1'd the demigod-aspect off-screen to let the party escape. Status: ambiguously still alive. |
+| ~~**Dot**~~ | Peach Leshy Druid (Animal/Cultivation) | **Erased in-fiction S5.** Body extant somewhere; spirit/memory wiped. Has not reappeared. |
 
-There were originally six PCs at the festival; Mo joined to replace one of the departed PCs.
+Active party post-S6 = **5 PCs** (Mo, Ming Bao, Jun-Yeong, Riddle, Zhao Lishen). Mingxi and Dot remain erased; Mingxi has now physically reappeared once. Atlacoya gone from active play. There were originally six PCs at the festival; the roster has shifted significantly through erasures and player departures.
 
 ---
 
@@ -166,7 +200,7 @@ There were originally six PCs at the festival; Mo joined to replace one of the d
 
 | NPC | Role |
 |-----|------|
-| **Heh Shan-Bao** | Governor of Willowshore. Played Zhi Hui at the festival; manor vanished overnight. Currently missing. Three years ago, deliberately failed to arrest Fan Hongrui — likely the load-bearing decision behind everything happening now. |
+| **Heh Shan-Bao** | Governor of Willowshore. Played Zhi Hui at the festival; manor vanished overnight. Currently missing. Three years ago, deliberately failed to arrest Fan Hongrui — likely the load-bearing decision behind everything happening now. **S6 (butler NPC)**: was a skilled thaumaturge; on the festival night his manor's locks were changed in the hours before; sent staff home and kept skeleton crew of four. Surviving staff alive and interviewable (Book 2 first downtime). |
 | **"Old" Matsuki Shou** | Village elder (south side, W6 Matsuki Estate). Nostalgic male human carpenter, once apprenticed at Tan Sugi monastery. 101 yo. Spokesman for the Southbank faction. Trusts Ugly Cute. Slight drinker. **Excluded as PC backstory tie per Player's Guide p.11.** |
 | **Granny Hu** | Village elder (north side). Pragmatic — militia, trade routes, supply chain. Spokeswoman for the Northridge faction. Has blackmail leverage on the Exchange Manager. **Excluded as PC backstory tie per Player's Guide p.11.** |
 | **Zheng Peng** | Stoic male human watch officer, W15 Downtown Willowshore. Commands the imperial barracks south of the manor. **Mo's anchor NPC** — caught Mo lying/stealing as a kid more than once and let him off because he understood Mo's situation. *Pre-existing relationship.* |
@@ -179,17 +213,20 @@ There were originally six PCs at the festival; Mo joined to replace one of the d
 | **Zhi Hui** | Legendary monastery keeper to the northwest. Died ~50 years into her tenure. Almost certainly the founder of Tan Sugi Monastery in canon — the figure the governor's festival role honors. Not a live NPC; her legacy is the framing device. |
 | **Fan Hongrui** | Lung Wa rebel/fugitive who died in the inn fire 3 years ago. Cursed the governor with her dying breath. **S5: spirit laid to rest** at the Canary Inn by the party's requiem. Gave Jun-Yeong "Hongrui's Gratitude" (cloak) before fading. Had no information about the governor's disappearance — that thread closed at this end. |
 | **Ugly Cute** | Animated stone guardian of Willowshore's gates. Vanished during the invasion, recovered at the Gorge of Fangs and Teeth. Now back with the party. Source of the red-butterfly vision. |
-| **Noppera-bo rebel** | Faceless yokai who offered the party an alliance against the Crimson Stain cult's leader. |
-| **The Crimson Stain** | Unknown deity/entity worshipped by the invaders. Recurring red motif. Receiving sacrificed villagers. **S5: name revealed — Kugaptee.** |
-| **Kugaptee** | Entity whispering into the mind of every spirit in the Specterwood since the first day of summer. Worshipped by the noppera-bo cult (replaced their prior leadership). Strongly suspected to be (or be tied to) the Crimson Stain. Identity TBD — god? devil? psychopomp gone wrong? |
+| **Mugirou the Rebel** *(S6: named)* | Faceless yokai rebel-faction noppera-bo, finally named in S6. Joined the party openly in the lumber camp ambush. Fought alongside through the Zoudou fight; dropped at end of combat ("big pal's down!") but survived. Status post-S6: alive but separated, being hunted by something. First non-party NPC Mo has visibly protected in combat. |
+| **Zoudou the Zealous** *(S6: BBEG, DECEASED)* | Faceless cult leader. The "her" the rebels had been warning about since early sessions. Mid-ritual on Kageyuri when the party arrived at the lumber camp shrine. Killed herself in a ritual suicide (R3 of S6 combat) to summon the demigod-aspect of Kugaptee through the fog wall. Body looted: Fiend's Hunger dagger (to Mo), Tattered Ledger (with the reincarnation-targets reveal), Twisted Knot of Wood (religious symbol of Kugaptee). |
+| ~~**The Crimson Stain**~~ | Resolved S5/S6: same as **Kugaptee**. |
+| **Kugaptee** *(S6: DEMIGOD confirmed)* | Demigod, ~1000 years old (per Yami). What the party fought at Zoudou's shrine was only one aspect; the full Kugaptee is on the other side of the fog wall. **Edicts**: curse the living, defile graveyards. **Anathema**: perform burial rituals, remove curses for others. **Areas of concern**: curses, defiled graves, haunted wildlands, seasonal disasters. **Pharasma is functionally his anti-deity.** Forcibly pulls spirits out of the cycle; what gets pulled becomes "something else entirely" (ghosts, thatchlings, phantoms, wraiths, shadows, spectres). Started speaking to spirits on the first day of summer (same day as the red firework, same day as Yami's unexplained knowledge). |
 | **Yami** | White cat at the Cerulean Tea House. Eyes glow in well-lit rooms. Telepathic to Jun-Yeong only; asked to be kept secret. Gave the party a Lesser Talisman Cord from a hidden crate. Jun-Yeong's anti-undead unjangdo glowed near her. Definitely not just a cat. |
-| **Kageyuri** | Eliza's adopted animist daughter. Pale skin, violet hair, pearly-white non-human eyes. Fetchling-coded. One of three people in town who still remembers Mingxi and Dot. **S5: kidnapped** — last seen leaving with a Mingxi-impersonator, presumably held at the Lumber Camp. |
-| **Eliza** | Kageyuri's mother figure. Childhood friend of Jun-Yeong. **S5: showing the first sign of the erasure** — faltered mid-sentence trying to remember Kageyuri's friends. |
-| **Shinzo** | Mysterious traveling merchant. Cart, sun-crow on shoulder, smile too on-cue. Appears at exactly the moments the party needs him. Remembers Mingxi and Dot when no one else does. Gave the party a noppera-bo hood "on the house" in S5. Grinned wrong when Jun-Yeong called him "sent by Pharasma." Working stance: use, don't trust. |
+| **Kageyuri** | Eliza's adopted animist daughter. Pale skin, violet hair, pearly-white non-human eyes. Fetchling-coded. One of three people in town who still remembers Mingxi and Dot. **S6: RESCUED** from Zoudou's shrine, returned to Eliza. Named in Zoudou's ledger as a multi-reincarnated soul — specifically the discovery Zoudou made first. Has apparitions of her own (per S6 — Shinzo saw them too). Confirmed she also heard Mingxi at the shrine. |
+| **Eliza / Elizeth Candora** | Kageyuri's mother figure. Childhood friend of Jun-Yeong. **S5: first sign of erasure** — faltered remembering Kageyuri's friends. **S6**: translated the Chthonian half of Zoudou's Tattered Ledger (she's the only one in town who can read Chthonian). Knows about Sanpachi reincarnation philosophy and is researching Kugaptee further as a personal project. |
+| **Shinzo** | Mysterious traveling merchant. Cart, sun-crow on shoulder, black horse named Kree. Appears at exactly the moments the party needs him. Remembers Mingxi and Dot when no one else does. Gave the party a noppera-bo hood "on the house" in S5. Recruited Riddle and awakened Zhao Lishen in S6. **S6 Riddle's Aura Sight**: completely mundane human, no magical aura registers. Can see Riddle's apparitions and Kageyuri's apparitions. Crossed the fog wall (the only entity that does). Working stance: use, don't trust. |
 | **Sashim** | Jun-Yeong's missing Jeoseung Saja (psychopomp) guardian. Last seen at the monastery to the northwest two years ago when Jun-Yeong vanished. Possibly back in the Boneyard, possibly reincarnated, possibly aware of Willowshore's situation from the other side. Long-arc thread. |
 | **Kum Sun-Chung** | Stable master west of Willowshore. **S5: his ranch was magically set ablaze** as a distraction to cover his son's kidnapping. |
 | **Kum Meng-Sung** | His 17-year-old son. Kidnapped during the fire and held at the Lumber Camp. **S5: rescued by the party**, handed off to Shinzo for safe return home. |
-| **Crimson Butterfly Undead (unknown type)** | Eyeless, broken-weapon humanoids encountered at the Canary Inn in S5. Red butterflies pour from open ribcages. Broken weapons held together by crimson energy. Jun-Yeong's Undead Lore + Religion both succeed but yield no recognition — new undead type. Apparently looking for thatchlings, presumably to deliver souls to Kugaptee. |
+| **Crimson Butterfly Undead (unknown type)** | Eyeless, broken-weapon humanoids encountered at the Canary Inn in S5. Red butterflies pour from open ribcages. Broken weapons held together by crimson energy. Jun-Yeong's Undead Lore + Religion both succeed but yield no recognition — new undead type. **S6 escalation**: the demigod-aspect of Kugaptee that came through Zoudou's ritual matches this form exactly (wicker helm, butterfly ribcage, broken sword) — they are likely lesser aspects / heralds of Kugaptee himself. |
+
+| **Demigod-Aspect of Kugaptee** *(S6 first appearance)* | 15-foot wicker-helmed entity, ribcage bulging with red butterflies, Ruined Great Katana (Reach 15ft, Unholy property). Came through the fog wall after Zoudou's ritual suicide. One-shot the fleeing Trickster for 76 damage Critical Hit ("I told you you were gonna —"). Engaged 1v1 by Mingxi off-screen at session's end; outcome unknown. One *aspect* of Kugaptee per Yami — the full demigod is still on the other side of the fog wall. |
 
 ---
 
@@ -201,7 +238,7 @@ There were originally six PCs at the festival; Mo joined to replace one of the d
 - **The fog wall (east)** — sealed border. Cannot be crossed by any tested method.
 - **Karahai** — fortress town on the eastern coast. Currently unreachable; was the destination of the party's failed expedition.
 - **The Canary Inn (northeast)** — site of Fan Hongrui's death and S5 requiem. Bodies now properly buried. Cult is operating just outside the ruins (two new red-butterfly undead seen there).
-- **The Lumber Camp (west of Willowshore)** — abandoned camp now occupied by the noppera-bo cult of Kugaptee. Two pairs of occultists, four campfire grunts, five captive Willowshore farmers, a thatchling-effigy in one longhouse. Mo has scouted the layout including a secret door in the fence. **Cult base of operations as of S5.**
+- **The Lumber Camp (west of Willowshore)** — was the cult base of operations. **S6: CLEARED.** Zoudou's ritual site at the inner shrine; all noppera-bo at the camp killed (most by the demigod-aspect's rampage after Zoudou's suicide). Five captive farmers freed, alive. Mugirou survived but moved on. Site is now a graveyard.
 - **The Specterwood** — forest east of Willowshore. Fog-thick this summer. Now hosts thatchlings (souls denied reincarnation), Phantom Wolves, and the new red-butterfly undead type.
 - **Kum Sun-Chung's ranch (west)** — stable master's land. Torched magically in S5 as a distraction. Crimson butterfly carved into the surviving fence — first sign of cult presence inside Willowshore proper.
 - **The monastery to the northwest** — almost certainly Tan Sugi (canon Book 2 setting). Where Zhi Hui served, where Jun-Yeong vanished two years ago with his guardian Sashim. The cult was previously operating from there.

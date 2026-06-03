@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 2 — The Long Climb</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Long Climb</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 2</div>
+<div class="meta-row">
+  <span class="meta-pill">May 31, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 35m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 7 → 8</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:65%"></div>
+  <div class="comp-seg comp-rp" style="width:8%"></div>
+  <div class="comp-seg comp-explore" style="width:15%"></div>
+  <div class="comp-seg comp-social" style="width:5%"></div>
+  <div class="comp-seg comp-loot" style="width:7%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The party patched themselves up after the previous session's clockwork ambush and pushed deeper into the Azlanti prison's medical wing. What looked like a frightened survivor — a cowering woman in tattered robes among the malfunctioning stasis tubes — was a Lamia named <strong>Zatrine</strong>, hidden among three bandit accomplices (Aguilar, Ularette, Iverness) who had been freed when the pods failed. Ferrok opened with a crit Ignition Spellstrike chain on the bandit Iverness — 85 damage dropped him before he ever got a turn. Round 3, Ferrok unloaded a <strong>108-damage Sure Strike + Horizon Thunder Sphere Spellstrike on Zatrine herself</strong>, and Bael denied Ferrok the killing blow round 4 with a one-action fire blast that made the DM groan: <em>"And here comes Bael with a steel chair."</em></p>
+  <p>Past the cell block, a Clockwork Soldier and three Living Graffiti — peeled straight off the murals — ambushed them in a small chamber. Tivael survived being repeatedly punched by paintings, with the iconic line <em>"Why'd you hit me, you stupid painting?"</em> and a brand-new chosen tactic: insult enemies as part of a turn that already includes Recall Knowledge. With the medical wing cleared, the party climbed the spiral stairwell — and met four lesser Shadows and a Greater Shadow swirling down toward them. Bargrum couldn't intercept void damage. Raylta's heightened Moonlight Ray crit the Greater Shadow for <strong>88 damage</strong>, vaporizing it.</p>
+  <p>After a long rest and the party's promotion to <strong>level 8</strong>, they ascended the final hundred feet into the Shadow Tower lobby. Three larger Clockwork Sentries — multi-armed, with grab reactions and pneumatic warhammers — proceeded to grapple Bargrum, Raylta, and Bael in succession before Bael's Lightning Dash chain finished them. A few doors deeper, the party heard Azlanti voices shouting "Hit me!" through a closed door — seven of <strong>Tokainen's Chosen</strong> playing blackjack. Bargrum opened with <em>"Oh, no calls for alarm. What's the buy-in?"</em> and rolled initiative when they refused. The session ended just after the fight cleared, when Ferrok kicked open a door instead of opening it normally and woke up a dormitory full of guards. <em>"That's where we call the session, folks."</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act explore">
+    <div class="act-label">Act I · Cleanup · The Medical Wing</div>
+    <div class="act-card">
+      <h3>Patching Up and Pushing Through</h3>
+      <ul>
+        <li>Session opened post-clockwork-fight. Ferrok drank a potion to skip another Treat Wounds risk; <strong>Bael invested an Aeon Stone of Vital Amplification</strong> (+1 HP per 10 healed). The DM and Bargrum spent five minutes nailing down its automation in Foundry.</li>
+        <li>The party found a deep pit full of giant <strong>frogs</strong> — content as long as the party stayed above. A magitek control panel went untouched: "If you push the wrong button, you're scared." A <strong>cryo chamber</strong>: "It's a cryo chamber like Demolition Man" (Bargrum).</li>
+        <li><strong>Bael's first Lightning Dash deployment</strong>: a security gate required 5 badges; the party had 4. Bael declared "What if I turn into lightning and teleport?" and zapped past the trap. DM: "You're not really in physical form enough for it to register you."</li>
+        <li>A long-dead <strong>sailor's body</strong> in a corner — frost-blasted, not Azlanti, likely a Talmandor's Bounty prisoner who came through here months ago. No loot.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Lamia Ambush</div>
+    <div class="act-card">
+      <h3>Zatrine the Lamia + Aguilar, Ularette, Iverness</h3>
+      <ul>
+        <li>A cowering woman in tattered robes called out <em>"Go away! Go away!"</em> and claimed to have woken up with everything broken. Ferrok declined to trust her: <em>"They didn't put nice people in here."</em></li>
+        <li>Several armed figures sprang from behind the cells. The "prisoner" grimaced: <strong>"Impatient fuckers, aren't you all."</strong> She transformed into a <strong>Lamia</strong> (upper-half human, lower-half serpent) — name in-fiction: <strong>Zatrine</strong>. Surprise round — party initiative.</li>
+        <li><strong>Aguilar's turn</strong>: tumbled past Bael, feinted (success → off-guard), struck (Bael Nimble Dodged the crit to a normal hit). <strong>Zatrine</strong> then cast <strong>Agonizing Despair</strong> on Ferrok — Will save failed, Frightened 1.</li>
+        <li><strong>Ferrok's round-1 finisher</strong>: crit Ignition Spellstrike on <strong>the bandit Iverness</strong> for 62 damage (38 weapon-crit + 24 fire), followed by a normal Strike for 23 more — <strong>85 damage dropped Iverness before he ever got a turn</strong>. Raylta: <em>"Oh, that guy didn't get a turn. — Way to go, Ferrok."</em></li>
+        <li>Bael's two-action <strong>Four Winds</strong> repositioned Ferrok, Raylta, and Bargrum. Tivael placed his composition aura, cast <strong>Courageous Anthem + Lingering Composition</strong> (success — 3 rounds), and Demoralized Ularette in Common (success).</li>
+        <li>Round 2: Tivael's silver <strong>Needle Darts (19)</strong> + Bael's blast (13) + Thermal Nimbus persistent fire (7) put down Aguilar. Raylta crit Needle Darts on Ularette ("low-rate thieves").</li>
+        <li>Round 3 BIG HIT: Zatrine cast Noise Blast (Ferrok failed save, 20 sonic). Ferrok burned <strong>Sure Strike + Horizon Thunder Sphere Spellstrike — crit on Zatrine for 108 damage</strong>: <em>"Whatever glass was left on these containment bays just shatters and showers the floor."</em></li>
+        <li>Raylta double-tapped Heal scrolls on Ferrok (41 then 35) to keep him standing through Zatrine's Vampiric Feast. Bael's Demoralize on Zatrine — <strong>critical failure</strong>.</li>
+        <li>Round 4: With Zatrine at ~10 HP, Ferrok's Force Fang missed. <strong>Bael moved in and finished her with a one-action blast — kill stolen.</strong> DM: <em>"And here comes Bael with a steel chair."</em> Ularette cleared on cleanup.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · The Living Murals</div>
+    <div class="act-card">
+      <h3>Clockwork Soldier + 3 Living Graffiti</h3>
+      <ul>
+        <li>The Soldier activated as the party entered the chamber. Three <strong>Living Graffiti</strong> peeled off the walls. Tivael was standing right by one when it started crawling out.</li>
+        <li><strong>Tivael Recalled Knowledge</strong>: full constructs, best save Reflex / worst Fort, NOT mindless (Demoralize and Bon Mot work), construct immunities (bleed, death, sickened). The <strong>Clockwork Soldier</strong> in the room specifically had electricity weakness; the Graffiti's weakness was not exposed.</li>
+        <li><strong>Iconic Tivael moment</strong>: hit by a painting, Tivael attempted Bon Mot — <em>"Why'd you hit me, you stupid painting?"</em> — and the <strong>failure made the joke</strong>. The painting is too 2D to be insulted by being called dumb. DM, deadpan as the painting: <em>"Well, thank you, Captain Obvious."</em> The painting then specifically targeted Tivael with paint as petty revenge.</li>
+        <li>Ferrok's pair of crit Ignition Spellstrikes ended Graffiti C (34 + 36 = 70 crit, plus 26 cleanup) and Graffiti A (32 + 32 crit + 17 persistent fire). <em>"Burn up the painting."</em></li>
+        <li>Raylta's crit Needle Darts on Graffiti B for 38 damage — pinned to the wall but not destroyed; finished it off several rounds later. DM: <em>"If he was on the internet, would he be on Pinterest after that?"</em></li>
+        <li><strong>Bargrum's tank RP</strong>: with Ferrok flanked, "Bargrum will heroically stride up to interpose himself between and look up at Ferrok and say, <em>stay behind me, I'll protect you.</em>" Ferrok, in character, walked through his legs.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · The Shadow Stairwell</div>
+    <div class="act-card">
+      <h3>Greater Shadow + Shadow A/B/C/D</h3>
+      <ul>
+        <li>The party climbed the spiral stairwell upward. Out of the dark, four lesser Shadows and a much larger quadrupedal Greater Shadow descended toward them. Music change.</li>
+        <li><strong>Bargrum's helplessness moment</strong>: <em>"I cannot intercept this damage because it is void. So good luck. Have fun, everyone."</em> Raylta: <em>"Shit. I'm shit out of luck. Welcome to my world. No intercepts in sight."</em></li>
+        <li>Shadow C stole Ferrok's shadow with Steal Shadow (Enfeebled 1). Raylta: <em>"You have a really big shadow."</em> DM, in NPC voice: <strong>"Big tasty shadow."</strong> Then breaking: <em>"I have to admit, if something came up to me and said, 'you've got a real nice shadow,' I don't know if I'd know how to respond to that."</em></li>
+        <li>Tivael's shadow also got stolen: <em>"Yeah, take it. I don't care. Take it. Like a little snake. The ugly shadow."</em> Then Tivael RK'd: incorporeal undead, weak only to <strong>force, ghost touch, vitality, spirit</strong>, best Reflex / worst Fort, not mindless. Tivael landed a Bon Mot on a Shadow afterward — "the ugly shadow" insult stuck (-2 Will).</li>
+        <li><strong>Bael's cross-PC follow-up</strong>: <em>"Nice — okay, it has a minus two Will save, so I will follow up on Tivael's insult and try to intimidate it."</em> Demoralize landed; then started Thermal Nimbus + fire blast (incorporeal resistance ate the damage).</li>
+        <li><strong>First Dragonet Breath of the campaign</strong> — 20-ft cone (Inhale, Exhale!), mental + silver. Shadow C crit failed, B failed, C succeeded. Resistance ate the damage but the silver-mental debuff held.</li>
+        <li><strong>Bael's Aeon Stone of the Crescent activation</strong>: <em>"I'll grab one of the particles flying around my head... And I'll yell, Moonbeam attack!"</em> 100-ft line, 4d12 spirit silver. Shadow B and C took 26 each; D saved for 13. Raylta: <em>"What the fuck? I have Moonbeam. <strong>That's my thing!</strong>"</em> Ferrok: "Bael is Moon Knight."</li>
+        <li><strong>Raylta's revenge</strong>: <em>"I'm not going to let you upstage me. I also cast Moonlight Ray on the one guy. On the one fucking guy at rank four."</em> — <strong>crit on the Greater Shadow for 88 damage. Destroyed.</strong> Bargrum: <em>"Nice moon laser."</em></li>
+        <li><strong>Bael's Ash Strider through Shadow B</strong> — smoke-form polymorph overflow, 26 fire damage, destroyed. ("I'll turn into smoke and pass through B.") Tivael's <strong>Flurry of Claws crit on Shadow A</strong> for 14 force damage — destroyed (force bypasses incorporeal). Ferrok's Gouging Claw Spellstrike crit on Shadow D — destroyed.</li>
+        <li>Fight cleared. The stairs continued up another ~100 feet, into the Shadow Tower proper. <strong>The party leveled up to 8</strong> and took a long rest before climbing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Lobby Sentries</div>
+    <div class="act-card">
+      <h3>3 Clockwork Sentries (Shadow Tower Lobby)</h3>
+      <ul>
+        <li>Climbing 100 feet up, the party entered a grand lobby: polished black marble, green-and-gold tiled walls, vaulted ceiling 40 feet up, two three-tiered fountains running clear, geometric crystal sculptures, and two life-size Azlanti sentinel statues flanking a garden of swords-and-polearms growing from the floor.</li>
+        <li>Their security badges did <strong>not</strong> work up here. Three much larger <strong>Clockwork Sentries</strong> activated. <em>"Surrender your weapons and come quietly."</em> They didn't wait for a response.</li>
+        <li><strong>Sentry abilities</strong>: Tackle (stride+fist+trip), Sudden Seize (reaction grapple on manipulate/move), Pneumatic Swing (warhammer reach 10 ft), Knockdown rider. Electricity weakness 10.</li>
+        <li><strong>Ferrok's level-8 power flex</strong>: <em>"All right. I'll go big or go home, right?"</em> — Conflux Spellstrike (Force Fang) chained into a Horizon Thunder Sphere Spellstrike. Both hit; HTS exploited electricity weakness.</li>
+        <li><strong>Tivael's first Fortissimo Composition of the campaign</strong>: rolled 31 — Success → Courageous Anthem bumped from +1 to <strong>+2 status</strong> for the party (Crit Success would've been +3).</li>
+        <li>Bael's <strong>Lightning Dash for 33 damage</strong> hit Sentry B — survived the pass. Bargrum and Raylta both grappled simultaneously by separate sentries with Sudden Seize.</li>
+        <li>Raylta tried to Heal Bargrum while grabbed — flat check DC 5, rolled a 2, <strong>burned a hero point</strong>, succeeded, healed 29.</li>
+        <li>Bargrum's biggest play: <strong>Intercept Attack + Disarming Intercept crit</strong>, wrenching a sentry's halberd off its arm.</li>
+        <li><strong>Bael's second Lightning Dash for 50 damage</strong> ripped through and finished Sentry C — the kill: <em>"Lightning that arcs across the ground instead of through the air :D"</em>. Ferrok's new Reactive Strike caught Sentry C on the move earlier in the fight.</li>
+        <li>Loot: 18 pairs of average manacles — the manacle joke begins.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Gambling Cult</div>
+    <div class="act-card">
+      <h3>7 Tokainen's Chosen (Lounge / Poker Game)</h3>
+      <ul>
+        <li>Bargrum looked for traps. Tivael listened at the door. Through it: Azlanti voices — <em>"Hit me! Motherfucker! Take this one. Double or nothing."</em> — <strong>Blackjack.</strong></li>
+        <li>The party walked into a comfortable burgundy lounge. Seven humans of clearly Azlanti descent, all in matching uniforms, all with the <strong>same burn mark on their left cheek</strong>.</li>
+        <li><strong>Bargrum's RP moment of the session</strong>: <em>"Bargrum will just say, oh, no calls for alarm. What's the buy-in?"</em> A Chosen replied after a beat: <strong>"Ah, maybe a few fingers of yours."</strong> Bargrum: <em>"Seems like a steep price. Is that what everyone else is putting in the pot as well?"</em> Another Chosen: <strong>"Just shut up and grab him. Tokainen's gonna want him."</strong> Roll initiative.</li>
+        <li><strong>Bael went first</strong> (Chosen were on break, weapons sheathed). Narrating: "Nonchalantly raise a finger by his side, and you will see a small orange bead appear above his finger. He flicks his finger forwards, and as it flies, it just gets bigger and bigger and bigger until it explodes in the middle of the room in a 20-foot burst." — <strong>Solar Detonation</strong>, 6d6 fire + 2d6 vitality, hit all 7 Chosen for 8-34 damage each. Chosen C crit failed (blinded 1 min); others dazzled or saved.</li>
+        <li>The Tokainen <strong>Cataclysm Brand</strong> — once per hour, 60-ft range, 10-ft burst, 6d6 fire + persistent 1d4 fire on a failed save — turned the lounge into a fire pit. Two Chosen ignited the burst pattern; persistent fire latched onto Raylta and Tivael.</li>
+        <li><strong>Raylta's "I failed again" run</strong>: failed three persistent-fire saves in a row, then accepted a hero point from Bael for one. <em>"Let's see you watch me fail. Ah, I failed again. Oh, Bael."</em></li>
+        <li><strong>Tivael played it safe</strong> — moved out of the burst pattern around a corner, cast Rallying Anthem, attempted Fortissimo (just-failed). Spent the rest of the fight as ranged anchor: Demoralize, Needle Darts, then Flurry of Claws.</li>
+        <li><strong>Tivael's Flurry of Claws</strong>: non-crit prong on <strong>Chosen B for 27 damage finished B</strong> (softened by Solar Detonation + Lava Bomb + persistent fire). Crit prong on Chosen E for <strong>60 damage</strong> only bloodied E — full HP, couldn't drop him.</li>
+        <li>Ferrok stretched reach + crit Ignition Spellstrike on Chosen A for 86 cumulative damage (kill). Bael's <strong>Lava Bomb (Eternal Eruption)</strong> hit 5 Chosen for 8-17 fire each. Bargrum used a hero point on a missed Strike; reroll connected.</li>
+        <li><strong>Bargrum's second crit Disarming Intercept</strong> on Chosen F's glaive: <em>"Oh, fuck your eyes!"</em> Bael's birdie-Flying Flame closed out the fight.</li>
+        <li>Cards <strong>glued to the underside of the table</strong> — someone was cheating, classic.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VII · Cliffhanger · The Wrong Door</div>
+    <div class="act-card">
+      <h3>Session-End Surprise</h3>
+      <ul>
+        <li>45 minutes remained. Two more doors in the hallway. Ferrok declared he'd kick the door open.</li>
+        <li>DM: <em>"You open the door to a dormitory full of sleeping guards who all shoot at you."</em></li>
+        <li>Ferrok: <em>"It wouldn't have woken up if you just open it normally."</em> DM: <em>"Fuck. They wouldn't have woken up, but you know."</em></li>
+        <li><strong>Session called.</strong> Next session opens with surprise round against a dormitory of now-awake guards.</li>
+        <li>DM telegraphed: <strong>three sessions left of Shades of Blood</strong>, then transition to <strong>Ruby Phoenix</strong>. A new StartPlaying link goes out at end of next session for the next arc.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Painting-Insulting Scholar Dragon ★</h4>
+    <ul>
+      <li><strong>Recall Knowledge × 2</strong>: clean reads on Living Graffiti (constructs, demoralize-able, no exposed weakness — the Clockwork Soldier in the room was the electricity-weak one) and Shadows (incorporeal undead, force/ghost-touch/vitality/spirit only, not mindless). Party trusted both reads immediately.</li>
+      <li><strong>First Fortissimo Composition of the campaign</strong> — rolled 31 (Success), +2 status from Courageous Anthem instead of the usual +1. Spent five minutes figuring out the Foundry effect application UI.</li>
+      <li><strong>First Dragonet Breath of the campaign</strong> deployed — 20-ft cone with Inhale, Exhale!, hit three shadows (crit fail / fail / success). Resistance ate the damage but the silver-mental debuff landed.</li>
+      <li><strong>Flurry of Claws — two kills this session</strong>: Shadow A (14 force — force bypasses incorporeal). And the <strong>non-crit prong on Chosen B (27 damage) finished an already-softened target</strong>. The crit prong on Chosen E for 60 damage was the campaign's biggest Flurry hit — but only bloodied E (full HP, couldn't drop). Force damage continues to be the right call.</li>
+      <li><strong>Insult-painting Bon Mot failed in the Paint fight — and the failure made the joke</strong>. Painting too 2D to be insulted by being called dumb. The successful cross-PC <strong>Bon Mot + Demoralize combo</strong> with Bael actually happened later in the Shadow fight: Tivael's "ugly shadow" Bon Mot landed → Bael's "follow up on Tivael's insult" Demoralize.</li>
+      <li><strong>Tactical safety call</strong>: identified the Cataclysm Brand burst pattern and removed himself from it instead of powering through. Spent the rest of the fight as ranged anchor.</li>
+      <li>Claimed <strong>Zatrine's +1 Resilient Explorer's Clothing</strong> — needs rune transfer from his existing clothing. Will pair with Scales of Steel.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum Stonefist · the Tank Who Couldn't Tank Void</h4>
+    <ul>
+      <li><strong>"I cannot intercept this damage because it is void. So good luck."</strong> — the cleanest moment of tank helplessness in the campaign. The Shadow stairwell stripped his role until Bael's Moonbeam cleared it.</li>
+      <li><strong>"Stay behind me, I'll protect you"</strong> to Ferrok — best in-character tank line of the session, funnier because Ferrok is the largest party member.</li>
+      <li><strong>"Oh, no calls for alarm. What's the buy-in?"</strong> — opening seven hostile Azlanti cultists with a friendly poker invitation. Did not work, but played to the last possible beat.</li>
+      <li><strong>Two crit Intercept + Disarming Intercept this session</strong> — once on a Clockwork Sentry halberd in the lobby, once on a Tokainen Chosen's glaive. Both wrenched the weapons free; the second earned an "oh, fuck your eyes!"</li>
+      <li><strong>Spent a hero point</strong> on a missed Strike late in the Tokainen fight; the reroll connected.</li>
+      <li>Took most of the grapple punishment in the Sentry fight — pinned prone for two rounds with Tackle + Sudden Seize stacking before standing.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok the Unyielding · the Thunder Blade (Level 8 Edition)</h4>
+    <ul>
+      <li><strong>108-damage Sure Strike + Horizon Thunder Sphere Spellstrike crit on Zatrine the Lamia</strong> — the biggest single hit of the session and possibly the campaign so far.</li>
+      <li><strong>Round-1 finisher</strong> on the bandit Iverness — crit Ignition Spellstrike chain for 85 damage, dropped him before his turn.</li>
+      <li><strong>"I'll go big or go home, right?"</strong> — Conflux Spellstrike chained into a Horizon Thunder Sphere Spellstrike on a Clockwork Sentry. Electricity weakness 10 paid out.</li>
+      <li>Two crit Ignition Spellstrikes in the Living Graffiti fight; both kill shots. <em>"Burn up the painting."</em></li>
+      <li><strong>Gained Reactive Strike at level 8</strong>. Paid for itself in the Tokainen fight, interrupting Chosen G's weapon-draw manipulate.</li>
+      <li>Ate Agonizing Despair + Noise Blast + Vampiric Feast from Zatrine across rounds; Raylta's double-tap Heal scrolls (41 + 35) kept him standing.</li>
+      <li>Most-targeted party member — Zatrine's spells, sentry grapples, Cataclysm Brand burst all aimed at him. Drank multiple potions in the back half.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · the Lightning Phoenix</h4>
+    <ul>
+      <li><strong>Lightning Dash × 4 this session</strong>: security-gate skip, 33 damage on Sentry B (didn't kill), 21 damage on Sentry A, <strong>50 damage finishing Sentry C — the kill</strong>.</li>
+      <li><strong>Ash Strider through Shadow B</strong> in the stairwell — smoke-form polymorph overflow, 26 fire, destroyed. <em>"I'll turn into smoke and pass through B."</em></li>
+      <li><strong>Solar Detonation alpha-strike</strong> on the Tokainen's Chosen poker game — 6d6 fire + 2d6 vitality, 20-ft burst, hit all 7 Chosen.</li>
+      <li><strong>"Moonbeam attack!"</strong> — Aeon Stone of the Crescent 1/day Moonbeam. Hit Shadow B and C for 26 each; D saved for 13. Drew Raylta's <em>"That's my thing!"</em></li>
+      <li>Lava Bomb (Eternal Eruption) toss in the Tokainen fight: 5d6 fire saved/half across five Chosen.</li>
+      <li>Self-aware mediocrity gag during the Shadow fight: <em>"I'll just throw myself in front of every attack."</em> / "Don't do that. I believe in you." Incorporeal resistance hurt his damage output that fight.</li>
+      <li>Demoralize on Zatrine — <strong>critical failure</strong>. Took the −2 self-penalty for 1 minute.</li>
+      <li><strong>Steal-killed Zatrine</strong> with a one-action fire blast just before Ferrok could land Force Fang.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta Cailleach · the Battered Healer Returns</h4>
+    <ul>
+      <li><strong>Rank 4 heightened Moonlight Ray crit on the Greater Shadow for 88 damage</strong> — biggest single divine hit of the session. <em>"On the one fucking guy at rank four."</em></li>
+      <li><strong>3rd-rank Heal scrolls × 2</strong> on Ferrok (41 + 35) — double-tapped him through Zatrine's Vampiric Feast.</li>
+      <li>Crit Needle Darts on Living Graffiti B for 38 — Pinterest joke. Took several more rounds before B finally fell.</li>
+      <li><strong>Failed three persistent-fire saves in a row</strong> during the Tokainen fight. Took a hero point from Bael on one. <em>"Let's see you watch me fail. Ah, I failed again. Oh, Bael."</em></li>
+      <li><strong>Grappled by a Clockwork Sentry while casting Heal</strong> — flat check DC 5, rolled a 2, hero-pointed the flat check, succeeded, healed Bargrum for 29.</li>
+      <li><em>"Welcome to my world. No intercepts in sight."</em> — clean callback to her position in the party.</li>
+      <li>The poker-arrest improv: <em>"You are under arrest for gambling."</em> Did not land, but the joke was the joke.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Resilient Explorer's Clothing</div>
+    <div class="loot-source">Zatrine · Level 8</div>
+    <div class="loot-note">Comfort, Invested. Tivael — needs rune transfer from his existing clothing. AC 25 + resilient bonus to saves.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Fearsome Scimitar</div>
+    <div class="loot-source">Zatrine · Level 5</div>
+    <div class="loot-note">Forceful, Sweep. 260 gp. Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Eternal Eruption (Lava Bomb)</div>
+    <div class="loot-source">Tokainen's Lounge · Level 5</div>
+    <div class="loot-note">5d6 fire on save. Reforms in 2d4 hours after thrown. 160 gp. Time-magic reloading bomb.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Virtuoso Lute</div>
+    <div class="loot-source">Tokainen's Lounge · Level 3</div>
+    <div class="loot-note">+1 item bonus to Performance with this instrument. 50 gp. Party stash.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">3× +1 Striking Short Sword + Short Bow</div>
+    <div class="loot-source">Aguilar / Ularette / Iverness · Level 4</div>
+    <div class="loot-note">Plus 3× lesser darkvision elixir. Party stash.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">7× +1 Guisarme / 7× +1 Bola</div>
+    <div class="loot-source">Tokainen's Chosen · Level 2</div>
+    <div class="loot-note">Reach, Trip / Ranged Trip, Thrown. Party stash.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">32 pairs Average Manacles</div>
+    <div class="loot-source">Sentries + Chosen</div>
+    <div class="loot-note">~1000 gp value. The party is now equipped for industrial-scale prisoner-taking.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Prime Arcidux Board Game</div>
+    <div class="loot-source">Tokainen's Lounge</div>
+    <div class="loot-note">200 gp. Three-player Azlanti strategy game, fallen into obscurity. Tivael speaks Azlanti.</div>
+  </div>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>DM (as Zatrine)</strong>: "Impatient fuckers, aren't you all."
+  <span class="attribution">The fake-prisoner Lamia drops her cover after Ferrok and Bargrum spring her trap a beat too early.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "Just cut him down." — <strong>Raylta</strong>: "Oh, that guy didn't get a turn. — Way to go, Ferrok."
+  <span class="attribution">Ferrok crit Ignition Spellstrike chain on the bandit Iverness round 1 — 85 damage dropped him before he ever acted.</span>
+</blockquote>
+
+<blockquote>
+  <strong>DM</strong>: "And here comes Bael with a steel chair. I'm like, what the fuck? I didn't pay for you to get the kill."
+  <span class="attribution">Bael one-shot Zatrine from low HP with a one-action blast, denying Ferrok the finish.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "Why'd you hit me, you stupid painting?" — <strong>DM (as painting)</strong>: "Well, thank you, Captain Obvious."
+  <span class="attribution">Tivael's Bon Mot failed — and the failure made the joke. The painting is too 2D to be insulted by being called dumb.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I will follow up on Tivael's insult and try to intimidate it... Last action, I'll blast it with a fire spell."
+  <span class="attribution">Cross-PC RP in the Shadow stairwell: after Tivael's "the ugly shadow" Bon Mot landed, Bael chained a Demoralize on the same Shadow.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Bargrum will heroically stride up to interpose himself between and look up at Ferrok and say, stay behind me, I'll protect you."
+  <span class="attribution">The dwarf protecting the minotaur. Best in-character tank line of the session.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "I cannot intercept this damage because it is void. So good luck. Have fun, everyone." — <strong>Raylta</strong>: "Shit. I'm shit out of luck. Welcome to my world. No intercepts in sight."
+  <span class="attribution">The Shadow stairwell stripped Bargrum's tank lane; the party briefly remembers how scary not having an interceptor is.</span>
+</blockquote>
+
+<blockquote>
+  <strong>DM</strong>: "Big tasty shadow."
+  <span class="attribution">Shadow C stealing Ferrok's shadow. DM, after delivering the line: "I have to admit, if something came up to me and said, 'you've got a real nice shadow,' I don't know if I'd know how to respond to that."</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "Yeah, take it. I don't care. Take it. Like a little snake. The ugly shadow."
+  <span class="attribution">Tivael lets a shadow steal his shadow without fuss. Doesn't think much of it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I'll grab one of the particles flying around my head. And I'll yell, Moonbeam attack!" — <strong>Raylta</strong>: "What the fuck? I have Moonbeam. <strong>That's my thing!</strong>"
+  <span class="attribution">Bael's Aeon Stone of the Crescent activation hits three shadows; Raylta loudly objects to having her signature spell stolen.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "I'm not going to let you upstage me. I also cast Moonlight Ray on the one guy. <strong>On the one fucking guy at rank four.</strong>"
+  <span class="attribution">Heightened rank 4 Moonlight Ray. Crit on the Greater Shadow for 88 damage. Destroyed.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Oh, no calls for alarm. What's the buy-in?" — <strong>DM (as Chosen)</strong>: "Ah, maybe a few fingers of yours."
+  <span class="attribution">Opening seven hostile Azlanti cultists with a friendly poker invitation. Did not work.</span>
+</blockquote>
+
+<blockquote>
+  <strong>DM (as Chosen)</strong>: "Just shut up and grab him. Tokainen's gonna want him."
+  <span class="attribution">First mention of Tokainen in the campaign.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "It wouldn't have woken up if you just open it normally." — <strong>DM</strong>: "Fuck. They wouldn't have woken up, but you know."
+  <span class="attribution">The session-end cliffhanger: Ferrok kicks open a dormitory door, wakes everyone inside, surprise round next session.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Tokainen</strong> — A named higher-up the Chosen reported to ("Tokainen's gonna want him"). Likely a vampire lieutenant or cult leader serving Nizca. First reference in the campaign.</li>
+  <li><strong>The Cataclysm Brand</strong> — Cult mark with a 1/hour fire-burst activation. Replicable? Tied to Tokainen specifically?</li>
+  <li><strong>The Sleeping Dormitory</strong> — Ferrok kicked open the door at session end. Surprise round next session against a roomful of guards. Tokainen's Chosen too, or different?</li>
+  <li><strong>Magitek Control Panel</strong> (medical wing) — Left untouched. May summon more constructs.</li>
+  <li><strong>Killer Frogs in the Pit</strong> — Content as long as the party stays above. Won't be revisited unless someone falls in.</li>
+  <li><strong>Shadow Tower Lobby — Unexplored Halls</strong> — Two large polearm-and-sword-garden statues, dense greenery, multiple halls and doors. Only one door explored (lounge).</li>
+  <li><strong>Nizca</strong> — At the top of the Shadow Tower. DM telegraphed three sessions left of Shades of Blood. Presumably the final boss.</li>
+  <li><strong>Ruby Phoenix Transition</strong> — DM will send a new StartPlaying link at end of next session for the Ruby Phoenix arc. Same group continuing; Tivael will be level 10 by AP end.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Wrong Door</span>
+  <p>Seven Tokainen's Chosen lie dead in the burning lounge. The cards under the table tell a story of cheating. The party feels their level-8 power, exhales — and Ferrok kicks open the next door.</p>
+  <div class="big-line">"It wouldn't have woken up if you just open it normally."</div>
+  <span class="speaker">— Ferrok, after the DM's surprise round announcement</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Recalled Knowledge twice: Living Graffiti (constructs, not mindless, best Reflex/worst Fort — no exposed weakness on the Graffiti; only the Clockwork Soldier in the room was electricity-weak) and Shadows (incorporeal undead, only force/ghost-touch/vitality/spirit, not mindless). Party trusted both reads.</li>
+  <li>First <strong>Fortissimo Composition</strong> of the campaign — rolled 31 (Success → +2 status, not the +3 Crit Success would have given). Took five minutes to figure out the Foundry effect application UI.</li>
+  <li>First <strong>Dragonet Breath</strong> of the campaign — 20-ft cone with Inhale-Exhale!, hit three shadows (crit fail / fail / success). Resistance ate the damage but the silver-mental debuff applied.</li>
+  <li><strong>Flurry of Claws — two kills this session</strong>: Shadow A (14 force — force bypassed incorporeal). And the <strong>non-crit prong on Chosen B (27 damage) finished an already-softened target</strong>. The crit prong on Chosen E for 60 damage was the campaign's biggest Flurry hit but only bloodied E (full HP).</li>
+  <li><strong>Bon Mot in Paint fight failed — the failure was the bit</strong>. Painting too 2D to be insulted by being called dumb. The successful Bon Mot + cross-PC Demoralize combo with Bael actually happened in the <strong>Shadow fight</strong> ("the ugly shadow" → Bael's "follow up on Tivael's insult").</li>
+  <li>Claimed Zatrine's <strong>+1 Resilient Explorer's Clothing</strong> (needs rune transfer from his existing clothing). Strict upgrade once swapped.</li>
+  <li>Repositioned out of the Tokainen burst-pattern early. Kept persistent fire to a minimum.</li>
+  <li>Took the most damage of anyone in the Shadow fight (Steal Shadow + multiple Shadow Hand strikes). Void/spirit damage type still hits hard despite resistance to incorporeal.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li>The <strong>Resilient runes on Zatrine's clothing</strong> are standard imperial issue per the Azlanti markings Tivael read. Rune transfer should be straightforward (1 hour of work).</li>
+  <li><strong>"Big Tasty Shadow"</strong>: When the Shadow stole Tivael's, it was too small for anything substantial. "Like a little snake" was literal.</li>
+  <li><strong>Cataclysm Brand uniformity</strong>: All 7 Chosen had identical brands and identical 1/hour limits. Same magical signature on each cheek — they're branded as a batch. Either Tokainen herself does this or there's an apparatus.</li>
+  <li><strong>Cards glued to the underside of the table</strong>: Bael spotted them; the others may not have shared. Someone in that lounge was cheating.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li><strong>Dragonet Breath recharge is 1d4 rounds</strong>: Inhale-Exhale! makes it significantly better, but mental-silver damage is wasted on most non-undead. Save for vampires + Nizca's vampires when they appear.</li>
+  <li><strong>Fortissimo + Courageous Anthem stacking</strong> is the new default opener for big fights. Critical Success = +3, Success = +2 (today's result). Pair with Lingering and the party gets a multi-round +2 attack/damage/fear-save buff.</li>
+  <li><strong>Flurry of Claws prong assignment matters</strong>: the crit prong (60 force) bounced off Chosen E (full HP). The non-crit prong (27) finished an already-softened Chosen B. Lesson: target the *softened* enemy with the second prong (high MAP makes a crit less likely anyway), and pick the highest-HP enemy for the first prong where the crit might one-shot.</li>
+  <li><strong>Persistent fire is a problem at scale</strong>: 7 Cataclysm Brand activations turned the Tokainen fight into a damage soak. Raylta failed three saves in a row. Need a Cleanse Affliction or persistent-damage counter.</li>
+  <li><strong>Bael's stolen Moonbeam</strong>: Same item Tivael recommended Bael claim in session 1. The +1 spirit lance has been pulling its weight. Tivael's not jealous; Raylta is. Don't poke that hornet's nest.</li>
+  <li><strong>Position discipline against AoE</strong>: Best repositioning session yet — flew over enemies, moved out of burst patterns, didn't get caught in any cone he couldn't see. Stay airborne whenever possible.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who is Tokainen?</strong> First mention this session. Vampire lieutenant? Cult leader? Nizca's second?</li>
+  <li><strong>The Cataclysm Brand</strong>: Tokainen-specific, or a broader Chosen-of-Nizca cult mark? Removable from corpses for study?</li>
+  <li><strong>The dormitory cliffhanger</strong>: How many guards? Same Tokainen brand or different type? Surprise round favors the party.</li>
+  <li><strong>Unexplored halls in the Shadow Tower lobby</strong>: Three sessions left of Shades of Blood per the DM. Big remaining map. Where exactly is Nizca?</li>
+  <li><strong>Prime Arcidux Board Game</strong>: 3-player Azlanti strategy. Cultural lore Tivael could read up on. Worth keeping rather than selling.</li>
+  <li><strong>Ruby Phoenix transition</strong>: New StartPlaying link end of next session. Same group continuing — Tivael will hit level 10 by AP end.</li>
+</ul>
+
+</section>
+
+</body>
+</html>

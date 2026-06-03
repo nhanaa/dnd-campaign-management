@@ -55,6 +55,46 @@ These are concrete errors that have happened in real sessions. Scan this list ev
 **Subagent reports are inputs, not authority:**
 - The cleanup, attribution-review, and combat-review subagents produce structured reports. Their outputs are advisory. The cleanup report explicitly flags caveats ("left as Talya but writer should double-check Cleric spells") — actually act on those caveats. Don't copy a quotable line from the report without verifying the speaker against transcript context.
 
+## Foundational Principle: Capability-Constrained Attribution
+
+**The transcript is not gospel. Whisper hallucinates, misattributes, and conflates. Pyannote diarization splits one speaker into multiple labels and merges multiple speakers into one. The rolls log Pax pastes is a global dump, not a per-speaker log — attribution must be back-derived.**
+
+Every attribution in the recap (a spell cast, a skill check, a damage number, a quote, a kill credit) must satisfy **all five capability tests** below. If even one fails, the attribution is wrong — find the actual character. Do **not** paper over with hedge phrases ("X deadpans an offer to cast Y" when X can't cast Y).
+
+### The five capability tests
+
+1. **Can this character actually do this thing?** — Cross-reference `<campaign>/character-sheet.md` and `<campaign>/dynamics.md`. A Rogue cannot cast Calm Emotions. A Barbarian does not have Channel Divinity. A Sorcerer is not trained in Battle Medicine without Medic Dedication. *If the attributed character lacks the class feature, feat, item, or skill, the attribution is wrong.*
+
+2. **Does the math match?** — The Foundry/Roll20 rolls log records the stat modifier breakdown (e.g. "Intelligence +2, Expert +8, Pendant +1, 1d20 + 11"). That fingerprint identifies the roller. Compare the modifier components against each PC's character sheet. *Example: a Lore check rolled at INT +2 / Expert +8 cannot be a PC whose char sheet has INT 10 / no Lore training. The roll belongs to someone else.*
+
+3. **Is the character physically able right now?** — Track HP and conditions across the encounter. A PC at 2 HP cannot take 5 damage and "save" — they would have dropped. A character who's currently Restrained can't reposition. *If the attributed action requires capability the character has been actively stripped of, re-check the target.*
+
+4. **Is this their lane?** — The party's dynamics.md assigns explicit roles (RK lane, healing lane, off-guard generation, infiltration, etc.). When the recap attributes an action that belongs to another PC's designated lane, treat it as suspect. *Example: if dynamics.md says "Riddle carries spirit/undead RK," then a Recall Knowledge attribution on Mo (no Lore training, INT 10) is wrong — Riddle did it.*
+
+5. **Does this match their voice?** — Players have RP fingerprints. Third-person self-reference ("Mo's gonna..."), distinctive phrasings ("not a lot of visitors here. Not a lot of visitors here."), preferred jargon, gallows humor patterns. A line that doesn't match the character's established voice in 5+ sessions is likely misattributed.
+
+### Why the transcript misleads
+
+- **Whisper mishears proper nouns** as common phrases ("Kugaptee" → "cook of tea") that then get treated as "the table canonized" jokes. They didn't. The mishear is a transcription artifact, not a real beat.
+- **Whisper mis-attributes speakers** when two voices have similar register. The speaker label is a hint; the *content* of the line is the truth.
+- **Pyannote diarization** can split one speaker across SPEAKER_00 + SPEAKER_03 (especially if their cadence shifts), or merge two speakers into one SPEAKER_xx. Check segment counts against expected player count; investigate any discrepancy.
+- **The rolls log is global, not per-speaker.** Pax pastes the whole Foundry dump. Attribution-by-proximity ("Mo got the 96 gp callout, so Mo also rolled the Boneyard Lore check next to it") is wrong — back-derive from stat fingerprints.
+
+### When ambiguous: ask, don't guess
+
+If after running the five capability tests an attribution is still ambiguous between two PCs, use **AskUserQuestion** rather than picking. The cost of a wrong attribution (Pax has to correct it, sometimes multiple times) is much higher than the cost of one extra question.
+
+### Concrete error patterns this prevents (illustrative, not exhaustive)
+
+- Attributing a divine spell to a non-divine-caster PC (the spell exists in the transcript, but the speaker label is wrong).
+- Crediting a Lore-skill Earn Income roll to the wrong PC because their name was nearby in the DM's narration.
+- Attributing a high-damage hit to the PC with the loudest dice reaction when the actual damage roll math fits another PC's weapon.
+- Putting a kill credit on the PC who did the "softening" hit when another PC actually rolled the finishing blow.
+- Putting Recall Knowledge or a system-specific knowledge action on a PC whose stats and party lane both rule them out.
+- Inventing a "running joke" out of a Whisper mishear that was never actually said at the table.
+
+The reviewer subagents in Steps 5.5 and 5.6 enforce these tests systematically. The main agent's Step 5.4 pre-audit catches them before the reviewers run.
+
 ## Pipeline Steps
 
 ### Step 1: Transcribe
@@ -337,29 +377,40 @@ Voice rules:
 
 **Before spawning the review subagents, run this audit yourself.** The review subagents catch errors but they cost time and you can pre-empt half of their findings with a 60-second checklist. Going through this catches the same class of errors that grind the user back through corrections after the fact.
 
-For each item, scan the recap.md you just wrote:
+**Step 0 — Build the capability matrix.** Before the per-item checks, write out (in your head or scratch space) a one-row-per-PC table covering each PC's: class + key features, primary spell list / tradition (if any), trained skills, key items currently held (especially items that grant rolls or innate spells), stat fingerprint (the modifier components that would appear in their rolls log entries: e.g. STR/DEX/CON/INT/WIS/CHA + proficiency tier per skill), and explicit lane assignment per dynamics.md. **This matrix is your reference for all subsequent attribution checks.** It takes about 2 minutes and prevents the entire class of errors covered in the Foundational Principle section.
+
+For each item below, scan the recap.md you just wrote:
 
 1. **Pronoun pass:** Search for "her" and "she" in any line referring to a male PC; "him" and "he" referring to a female PC. Mist is he/him.
 
-2. **Class-mechanic pass:** For every quoted casting / ability / feature, verify it matches the speaker's class:
-   - Open `<campaign>/dynamics.md` and `<campaign>/character-sheet.md` side by side with the recap
-   - For each quoted "I cast X" or "I use Y," ask: does this character actually have X/Y? If no, it's bleed — find the real speaker.
-   - Common bleed: Cleric spells (Spiritual Weapon, Cure Wounds, Channel Divinity, Mind Spike, Guidance) on a Monk/Bard/Barbarian's bucket = Cleric speaker bled in.
+2. **Class-mechanic pass:** For every quoted casting / ability / feature, verify it matches the speaker's class against your capability matrix:
+   - For each quoted "I cast X" or "I use Y," ask: **does this character actually have X/Y?** If no, it's bleed — find the real speaker.
+   - **Class-contradiction = misattribution, not flavor.** If you wrote "Mo deadpans an offer to cast Calm" and Mo is a no-spellcaster Rogue, the line isn't Mo's — it's the actual divine caster's. Don't hedge ("deadpans," "jokingly offers," "who has no spellcasting") to paper over the conflict. Fix the speaker.
+   - Common bleed: divine spells on a martial PC's bucket; class-specific actions (Channel Divinity, Flurry of Blows, Spellstrike, Rage, Hex) on the wrong class.
 
-3. **High-roll outcome pass:** For every Persuasion/Insight/Deception/Intimidation roll mentioned in the recap, search the cleaned transcript ±2 minutes around the roll. Read to the END of the scene. If the recap frames a high roll as a failure, double-check that the patron didn't carve out a separate parallel deal that succeeded.
+3. **Roll-fingerprint pass:** For every skill check or roll quoted in the recap (especially Earn Income, Recall Knowledge, Lore checks), cross-check the roll modifier against the attributed PC's character sheet:
+   - The Foundry/Roll20 rolls log Pax may paste records the modifier breakdown verbatim (e.g. "Intelligence +2, Expert +8, item bonus +1, 1d20 + 11"). The fingerprint identifies the actual roller.
+   - If the rolls log says "INT +2 / Expert in Boneyard Lore" but the attributed PC has INT 10 and no Boneyard Lore training, **the attribution is wrong** — find the PC whose sheet matches the fingerprint.
+   - Pax's pasted rolls log is a **global dump**, not a per-speaker log. Do not attribute rolls to a PC just because their name appeared nearby in the DM's narration (e.g. don't assume "Mo gets 96 gp" means Mo rolled every Earn Income check in that block).
 
-4. **Initiative pass** (if there was combat): If you have the tracker screenshot from Step 4.5, verify every round's order against it. Specifically check adjacent-init pairs (e.g. Akasha 14 vs Talya 10 — they should NOT be inverted).
+4. **Lane-discipline pass:** For each attributed action, check whether dynamics.md assigns that action's lane to a different PC. If it does, default to the lane-owner unless the transcript is unambiguous otherwise. *Example: if dynamics.md says "Riddle carries spirit/undead RK," don't credit Mo (no Lore training, INT 10) with the Recall Knowledge unless the transcript is explicit that Mo rolled it.*
 
-5. **Late-joiner placement:** Did anyone join combat partway through? Verify their actual init number, not "slotted at the top." Search the transcript for the DM's exact phrasing.
+5. **High-roll outcome pass:** For every Persuasion/Insight/Deception/Intimidation roll mentioned in the recap, search the cleaned transcript ±2 minutes around the roll. Read to the END of the scene. If the recap frames a high roll as a failure, double-check that the patron didn't carve out a separate parallel deal that succeeded.
 
-6. **Damage numbers pass:** If you wrote "damage unstated" or "tick number not announced" anywhere, ask Pax (he tracks his own damage) before locking the section.
+6. **Initiative pass** (if there was combat): If you have the tracker screenshot from Step 4.5, verify every round's order against it. Specifically check adjacent-init pairs (e.g. Akasha 14 vs Talya 10 — they should NOT be inverted).
 
-7. **Quote section count + diversity:**
-   - Count total quotes — must be 10-14.
-   - Count per PC — each must have 2-4.
-   - For each PC, list the facet (a-e) of each of their quotes. If all are the same facet (e.g. all tactical), swap one for a different facet.
+7. **HP-state plausibility pass:** For each attributed damage event in combat, check whether the attributed target could physically survive it given their HP coming in. A PC at 2 HP who "saves" a 12-damage Phantom Pain didn't take that hit — re-check the target. A PC who took a "5 mental, no persistent" save outcome wasn't dropped to 2 HP by it. This pass catches transposed Phantom Pain / Heat Metal / similar single-target spell targets.
 
-8. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as Talya but writer should double-check..." style caveat, confirm you actually checked the affected lines.
+8. **Late-joiner placement:** Did anyone join combat partway through? Verify their actual init number, not "slotted at the top." Search the transcript for the DM's exact phrasing.
+
+9. **Damage numbers pass:** If you wrote "damage unstated" or "tick number not announced" anywhere, ask Pax (he tracks his own damage) before locking the section.
+
+10. **Quote section count + diversity:**
+    - Count total quotes — must be 10-14.
+    - Count per PC — each must have 2-4.
+    - For each PC, list the facet (a-e) of each of their quotes. If all are the same facet (e.g. all tactical), swap one for a different facet.
+
+11. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as Talya but writer should double-check..." style caveat, confirm you actually checked the affected lines.
 
 If any item fails, fix it BEFORE running the review subagents. The reviewers should be catching subtle errors, not the basics.
 
@@ -378,64 +429,97 @@ You are reviewing a D&D/PF2e session recap for attribution accuracy. Your job is
 - Party roster: <campaign>/dynamics.md
 - Campaign system: <D&D 5e | D&D 5.5e | PF2e Remastered>
 
+## Step 0 (REQUIRED before reviewing) — Build the capability matrix
+
+Before scanning any recap claim, **read all PC character sheets and the dynamics.md** and build a one-row-per-PC matrix in your scratch space covering:
+
+- Class + key class features (e.g. "Rogue (Thief) — Sneak Attack, Surprise Attack, Nimble Dodge")
+- Spell tradition + spell list (if any) — divine / occult / arcane / primal. **A no-spellcaster PC cannot cast spells.**
+- Trained skills + proficiency tier per skill (Trained / Expert / Master / Legendary)
+- Stat fingerprint (STR/DEX/CON/INT/WIS/CHA modifiers) — these will appear in any rolls log Pax pastes
+- Key items currently held (especially items that grant rolls, innate spells, or bonuses — e.g. "Pendant of the Occult held by X")
+- Explicit lane assignment per dynamics.md (RK lane, healing lane, infiltration, off-guard generation, etc.)
+
+**This matrix is your reference for every check below.** Reviews that skip this step generate false-positives and miss real errors.
+
 ## Review Checklist
 
-For EVERY attributed action, spotlight bullet, and quote in the recap:
+For EVERY attributed action, spotlight bullet, and quote in the recap, run the **five capability tests** (from the Foundational Principle section of the skill):
 
-### 1. Class Feature Check
-Does this action match the character's class? Cross-reference dynamics.md.
-- Only Thaumaturges use Exploit Vulnerability
-- Only Alchemists craft bombs/elixirs/mutagens
-- Only Witches cast hexes
-- Only Inventors use Overdrive / command constructs
-- Only Clerics/divine casters use Channel Divinity / divine spells
-- If a spotlight says "Character X identified the weakness" — verify X is the class that does that
+### 1. Capability Check — Can this character actually do this thing?
+Cross-reference the matrix:
+- A PC without spellcasting cannot cast spells. A character offering to "cast Calm" is not the no-caster PC.
+- A class-specific ability belongs to that class. Examples (system-agnostic): channel-divinity-style features = divine caster; sneak-attack precision damage = Rogue / Investigator-style class; flurry / monastic stance abilities = Monk; bardic-inspiration-style features = Bard.
+- An item-granted ability (e.g. "innate Guidance from Pendant of the Occult") belongs to the holder of that item.
+- **Class-contradiction = misattribution.** Don't accept the speaker label when it conflicts with capability. Find the actual speaker.
 
-### 2. Mechanical Check
-Does this make system sense?
-- Hero points are PERSONAL (PF2e) — you cannot spend yours on someone else's roll
-- Rune transfers require a full day of downtime — did it actually happen or just get proposed?
-- Spell slots are per-character
+### 2. Roll-Fingerprint Check — Does the math match?
+For any skill check, attack roll, or save with a stated modifier in the recap or rolls log:
+- Decompose the modifier (e.g. "1d20 + 11" with breakdown "Intelligence +2, Expert +8, Pendant +1").
+- Match the components to the PC whose sheet fits: INT 14 + Expert in this skill + holds the relevant item.
+- **If the fingerprint doesn't match the attributed PC, the attribution is wrong.** Find the PC whose sheet matches.
+- **The rolls log Pax pastes is a global dump, not a per-speaker log.** Do not attribute a roll to a PC just because their name appears nearby in narration.
+
+### 3. Class Feature / Mechanic Sanity Check
+Does the action make system sense?
+- Hero points are personal (PF2e) — you cannot spend yours on someone else's roll.
+- Rune transfers require a full day of downtime — was the in-fiction time available?
+- Spell slots are per-character.
 - Action economy: did the character have enough actions to do what's described?
+- Status bonuses don't stack (PF2e) — Bless and Inner Upheaval both giving +1 status to attacks means only one applies. Don't double-count.
 
-### 3. Narrative Sequence Check
+### 4. Lane Discipline Check
+For each attributed action, ask: **does dynamics.md assign this action's lane to a different PC?** If yes, default to the lane-owner unless the transcript is unambiguous otherwise.
+- Example pattern: if dynamics.md says "PC X carries the spirit/undead Recall Knowledge lane," then RK attributions on other PCs need transcript proof. Don't credit a different PC just because their name is nearby in the rolls log.
+- Healing attributions belong to designated healers unless the transcript is explicit.
+- Infiltration / scout actions belong to the stealth specialist unless the transcript is explicit.
+
+### 5. HP-State Plausibility Check
+Track each PC's HP across the encounter from the transcript. For each attributed damage event, ask: **could this PC physically survive this hit given their HP coming in?**
+- A PC at 2 HP cannot "save" a 12-damage Phantom Pain — they would have dropped to 0 or below. The target was someone else.
+- A PC who's currently Restrained / Grabbed / Stunned cannot take the action attributed.
+- A character whose damage outcome was "5 mental, no persistent" (a successful save) was not the one brought low by that same hit — those are mutually exclusive states.
+- **This pass catches transposed targets** on single-target spells like Phantom Pain, Heat Metal, Inflict Wounds.
+
+### 6. Speaker-Content-Fit Check (Whisper / pyannote distrust)
+Even if the cleaned transcript labels a line as a particular speaker, **does the content match the named PC?** The diarization label is a hint, not the truth.
+- **Whisper mishears proper nouns** as ordinary phrases (the campaign deity's name → some common phrase). Don't canonize a Whisper artifact as a "table running joke" — verify with the user before treating the mishear as in-fiction.
+- **Whisper invents plausible-sounding content** that wasn't said — be skeptical of any line that doesn't match the speaker's known voice patterns.
+- **Pyannote diarization splits one speaker** across multiple SPEAKER_xx labels when their cadence shifts, and merges multiple speakers into one when voices are similar. Check segment counts against the expected player count.
+- A line about a specific class ability belongs to that class's player, regardless of the diarization label.
+- A line in a distinctive RP voice (doubled phrases, third-person self-reference, characteristic jargon) belongs to that PC's player.
+- **If the speaker label conflicts with content, content wins.** Find the actual speaker.
+
+### 7. Narrative Sequence Check
 Did this event ACTUALLY HAPPEN, or was it proposed then deferred/cancelled?
-- Read the FULL sequence in the transcript, not just the proposal
-- "Let's do X" followed by "actually, let's do Y instead" means X did NOT happen
-- A plan discussed but interrupted by a new mission = deferred, not completed
-- **Negotiation re-framing**: when one PC refuses to renegotiate one thread, the patron may explicitly carve out a *different* thread that another PC wins. Read past the first refusal to the actual end of the scene. Don't frame a successful high-roll outcome (e.g. Persuasion 25 winning a signing bonus tied to a long-term contract) as a failure just because a co-PC shut down a parallel renegotiation. Each thread resolves independently.
+- Read the FULL sequence in the transcript, not just the proposal.
+- "Let's do X" followed by "actually, let's do Y instead" means X did NOT happen.
+- A plan discussed but interrupted by a new mission = deferred, not completed.
+- **Negotiation re-framing**: when one PC refuses to renegotiate one thread, the patron may explicitly carve out a *different* thread that another PC wins. Read past the first refusal to the actual end of the scene. Don't frame a successful high-roll outcome as a failure just because a co-PC shut down a parallel renegotiation. Each thread resolves independently.
 
-### 3a. Initiative & Round Structure Check
+### 7a. Initiative & Round Structure Check
 - The transcript's "who spoke when" is not the authoritative initiative order. DMs flex on ties, mis-call turns, and abandon partial rounds when players join late.
-- If Pax can share the Foundry/Roll20 initiative tracker, use it as ground truth. Verify Akasha-vs-Talya ordering, late-joiner placement, and tie-breaks against the tracker before locking the combat reconstruction.
+- If Pax can share the Foundry/Roll20 initiative tracker, use it as ground truth. Verify adjacent-init pairs, late-joiner placement, and tie-breaks against the tracker before locking the combat reconstruction.
 - For late-joining cameo NPCs: confirm whether the DM said "back at the top of the initiative" (= restart from existing order, slot the new PC at their actual roll) vs "everyone re-roll" (= full re-roll). Default to the former if ambiguous.
 
-### 4. Speaker Content-Fit Check
-Even if the transcript labels a line as SPEAKER_XX, does the CONTENT match?
-- A line about "my craft" or grenades → probably the Alchemist, not the Fighter
-- A line about "my wings" → probably the dragon/winged character
-- A line referencing a specific class ability → belongs to that class's player
-- Diarization sometimes merges the tail of one speaker into the next
-
-### 5. Quote Ownership Check
+### 8. Quote Ownership Check
 For every memorable quote in the recap:
-- Find the exact line in the cleaned transcript
-- Verify the speaker label matches
-- If the transcript says Speaker A but the content fits Speaker B, FLAG IT
-- Do NOT assume the recap writer got it right — they have overridden correct labels before
+- Find the exact line in the cleaned transcript.
+- Verify the speaker label matches AND the content fits the matrix (capability + voice).
+- If the transcript says Speaker A but the content fits Speaker B per the matrix, **trust the matrix, not the label**. The recap writer has overridden correct labels before.
 
-### 6. Quote Distribution Check
+### 9. Quote Distribution Check
 Count quotes per character in the recap:
-- Every PC must have 2-4 quotes — no exceptions
-- If any PC has 0-1 quotes, scan that character's transcript lines individually for quotable moments
-- Quotes should be a MIX: roleplay, combat, comedy — not all one type
-- Do not let high-volume speakers crowd out lower-volume ones
+- Every PC must have 2-4 quotes — no exceptions.
+- If any PC has 0-1 quotes, scan that character's transcript lines individually for quotable moments.
+- Quotes should be a MIX: roleplay, combat, comedy — not all one type.
+- Do not let high-volume speakers crowd out lower-volume ones.
 
-### 7. Spotlight Proportion Check
+### 10. Spotlight Proportion Check
 Count spotlight bullets per character:
-- Should be roughly equal (within ±2 bullets)
-- No PC should consistently be the thinnest spotlight
-- If a character has significantly fewer bullets, check if the transcript supports more
+- Should be roughly equal (within ±2 bullets).
+- No PC should consistently be the thinnest spotlight.
+- If a character has significantly fewer bullets, check if the transcript supports more.
 
 ## Output
 
@@ -458,10 +542,13 @@ Format:
 <For any PC with <2 quotes, provide 2-3 candidate quotes from the transcript with timestamps>
 
 ## Guardrails
+- **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns ("Kugaptee" → "cook of tea"), invents plausible-sounding content, and pyannote diarization misattributes speakers regularly (especially when voices have similar register). **The capability matrix you built in Step 0 is stronger evidence than the speaker label.** When they conflict, trust the matrix.
+- **Don't canonize Whisper artifacts.** If a "running joke" in the recap is actually a Whisper mishear of an in-fiction name, flag it as a transcription artifact, not a real beat.
 - Be adversarial. Assume the recap has errors until proven otherwise.
-- Every flagged item must cite a specific transcript timestamp.
+- Every flagged item must cite a specific transcript timestamp AND the capability test that fails.
 - Do NOT rewrite the recap — just report findings. The main agent will fix.
-- If something is genuinely ambiguous, say so and recommend asking the user.
+- **When an attribution is ambiguous between two PCs, flag for user confirmation rather than guessing.** A wrong guess costs the user a correction cycle; a flag costs one question.
+- Do NOT hedge known errors. If a Rogue is attributed casting a spell, the answer is "the speaker is the actual caster, not the Rogue" — never "Mo deadpans an offer to cast Calm" or similar paper-over language.
 ```
 
 After the subagent returns its review:
@@ -488,7 +575,24 @@ You are reviewing the combat encounters in a D&D/PF2e session recap for accuracy
 - Cleaned transcript: /tmp/transcript-cleaned-<campaign>-s<N>.txt
 - Generated recap: <campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md
 - Party roster: <campaign>/dynamics.md (includes class features and action abilities)
+- PC character sheets in <campaign>/ (typically `character-sheet.md` for Pax's PC; others may have separate files or be summarized in dynamics.md)
 - Campaign system: <D&D 5e | D&D 5.5e | PF2e Remastered>
+
+## Step 0 (REQUIRED before reconstructing) — Build the capability matrix
+
+Before touching the transcript, **read all PC character sheets and the dynamics.md** and build a one-row-per-PC matrix in your scratch space:
+
+- Class + key class features (especially damage-relevant: Sneak Attack, Spellstrike, Flurry of Blows, etc.)
+- Weapons + runes/properties (e.g. "+1 Crushing Rapier, d6 piercing, Deadly d8")
+- Spell tradition + spell list (if any). **A no-spellcaster PC cannot cast spells. Don't attribute spells to them no matter what Whisper says.**
+- Trained skills + proficiency tier
+- Stat fingerprint (STR/DEX/CON/INT/WIS/CHA) — these appear in rolls log entries
+- Key items currently held (especially items granting innate spells or roll bonuses — e.g. "Pendant of the Occult: +1 Occultism + innate Guidance, held by Mo")
+- HP at session start + AC
+- Hero point count entering the session (returning PCs typically 1; new PCs typically 2; recap-presenter may get +1)
+- Lane assignment per dynamics.md (RK lane, healing lane, off-guard generation, infiltration, frontline tank, etc.)
+
+**Every attribution you make in the reconstruction must be consistent with this matrix.** If a transcript line says "PC X cast Phantom Pain" but PC X has no occult spellcasting, find the actual caster. If the rolls log shows "INT +2 / Expert in Boneyard Lore" but no PC in the matrix has that fingerprint, flag it — the roll might be from an NPC, an item, or a PC sheet you don't have access to.
 
 ## Step 1: Reconstruct Each Combat
 
@@ -496,14 +600,15 @@ For every combat encounter in the transcript, build a round-by-round breakdown:
 
 ### Per Round, Per Character:
 - **Initiative order** (who went when, including delays)
-- **Each action** taken (action 1, action 2, action 3 — PF2e has 3 actions per turn)
+- **Each action** taken (action 1, action 2, action 3 — PF2e has 3 actions per turn; 5e has 1 action + 1 bonus action + movement)
 - **Reactions** used (Attack of Opportunity, Goblin Scuttle, Shield Block, etc.)
 - **Free actions** (Exploit Vulnerability rider, familiar abilities, etc.)
 - **Hit/miss/crit** for every attack roll
 - **Damage numbers** when stated by the DM
 - **Conditions applied** (off-guard, frightened, enfeebled, stupefied, prone, etc.)
-- **Hero point usage** — who spent them, on what roll, what the reroll result was
+- **Hero point usage** — who spent them, on what roll, what the reroll result was. **Distinguish hero point rerolls from Foundry low-reroll automation** — they are different mechanics. Hero points are explicitly stated ("I hero point that"); Foundry low-rerolls fire automatically when a roll falls below a threshold and are not the same as a player spending a hero point.
 - **Enemy turns** — what enemies did, who they targeted, hit or miss
+- **HP state per PC** — track HP across the rounds. A PC at low HP who "saves" a damaging hit didn't take that hit; re-check the target.
 
 ### Per Combat Summary:
 - Total rounds
@@ -517,18 +622,22 @@ For every combat encounter in the transcript, build a round-by-round breakdown:
 Read the recap's Combat Encounters section AND any combat mentions in Character Spotlight, Key Events, and Pax's Notes. Flag:
 
 ### Errors to check:
-1. **Conflated rounds** — actions from different rounds described as one sequence
-2. **Invented actions** — things described in the recap that never happened in the transcript (e.g., a Demoralize that was considered but not executed)
-3. **Missing enemy turns** — "the enemy never got a turn" when it actually did
-4. **Wrong kill attribution** — who actually landed the killing blow?
-5. **Missing kills** — did a character kill multiple enemies but only get credit for one?
-6. **Hero point omissions** — every hero point spent in combat must be noted
-7. **Condition tracking** — were conditions (off-guard, frightened, etc.) correctly attributed to the right source?
-8. **Damage numbers** — do the numbers in the recap match what the DM said?
-9. **Action economy violations** — does the recap describe more actions than the system allows per turn?
-10. **Round count** — does the recap say "quick 2-round fight" when it was actually 3 rounds?
-11. **Initiative order** — if the user can share a Foundry/Roll20 tracker screenshot, treat it as authoritative. The transcript "who spoke when" can mislead due to DM tie-flexing, mis-called turns, and abandoned partial rounds. Common mistake: inverting two PCs at adjacent inits (e.g. assuming Talya goes before Akasha when the tracker shows Akasha 14 and Talya 10).
-12. **Late-joiner placement** — if a cameo NPC joins mid-combat, verify their actual init roll vs. assuming they were "slotted at the top." Listen for the DM saying "back at the top of the initiative" (= restart existing order, place new PC at their roll) vs "everyone re-roll" (= full re-roll).
+1. **Capability misattributions** — every quoted ability, spell, or feature must match the named PC's capability matrix. A divine spell quoted on a no-spellcaster PC = misattribution, find the actual caster. A class-specific feature on the wrong class = misattribution.
+2. **Roll-fingerprint mismatches** — attack rolls, damage rolls, and skill checks with stated modifiers must match the attributed PC's stat fingerprint. If "Mo's Overwhelming Combination crit for 44 damage" decomposes to weapon dice + sneak attack + Crushing rune that all fit Mo's sheet, attribution is correct. If a 44-damage Stumbling Swing crit is attributed to a Monk who doesn't have Crushing rune on their Handwraps, re-check the source.
+3. **HP-state impossibilities** — a PC at 2 HP who "saves" a 12-damage Phantom Pain didn't take that hit; check who the actual target was. A PC currently Grabbed cannot Stride. A PC who used a Reaction this round cannot Shield Block as another Reaction unless they have multi-reaction features.
+4. **Conflated rounds** — actions from different rounds described as one sequence. Watch especially for round-3 actions getting duplicated into a fabricated round-4.
+5. **Invented actions** — things described in the recap that never happened in the transcript (e.g., a Demoralize that was considered but not executed; a Strike that was rolled but not connected).
+6. **Missing enemy turns** — "the enemy never got a turn" when it actually did.
+7. **Wrong kill attribution** — who actually landed the killing blow? The PC who softened a target is not the killer; the PC whose final hit dropped it is.
+8. **Missing kills** — did a character kill multiple enemies but only get credit for one?
+9. **Hero point omissions or over-counts** — every hero point spent in combat must be noted, but Foundry low-reroll automation is NOT a hero point spend. Distinguish carefully: explicit "I hero point that" = spent; automatic reroll on low result = Foundry feature, not hero point.
+10. **Condition tracking** — were conditions (off-guard, frightened, etc.) correctly attributed to the right source? Status-bonus stacking rules apply (don't double-count two same-type bonuses).
+11. **Damage numbers** — do the numbers in the recap match what the DM said? Don't invent specific damage numbers when the DM said "barely alive" or similar narrative-only descriptions; mark them as unstated and ask the user.
+12. **Action economy violations** — does the recap describe more actions than the system allows per turn? PF2e is 3 actions + 1 reaction; 5e is 1 action + 1 bonus action + 1 reaction + movement. Free actions and reactions don't count against the action total.
+13. **Round count** — does the recap say "quick 2-round fight" when it was actually 3 rounds?
+14. **Initiative order** — if the user can share a Foundry/Roll20 tracker screenshot, treat it as authoritative. The transcript "who spoke when" can mislead due to DM tie-flexing, mis-called turns, and abandoned partial rounds. Common mistake: inverting two PCs at adjacent inits.
+15. **Late-joiner placement** — if a cameo NPC joins mid-combat, verify their actual init roll vs. assuming they were "slotted at the top." Listen for the DM saying "back at the top of the initiative" (= restart existing order, place new PC at their roll) vs "everyone re-roll" (= full re-roll).
+16. **Damage attribution swaps** — when a "softened then finished" sequence happens (PC A does big damage, PC B kills), make sure the big damage stays with PC A in the recap, not transposed to PC B. The transcript will usually have the DM saying "let me combine both of that into N damage" right after the killing PC's hit — that N belongs to the *attacker who rolled*, not the next speaker.
 
 ## Output
 
@@ -549,11 +658,15 @@ Format:
 <Provide a corrected version of the Combat Encounters section with round-by-round accuracy. Include per-character action sequences, hit/miss results, and enemy turns.>
 
 ## Guardrails
+- **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns, invents plausible-sounding content, and the cleaned transcript's speaker labels are based on pyannote diarization that misattributes regularly. **Capability + roll-fingerprint + HP-state plausibility are stronger evidence than the speaker label.** When they conflict, trust the capability matrix, not Whisper.
+- **Build the capability matrix (Step 0) before doing anything else.** If you skip it, your reconstruction will have the same misattributions the recap has.
+- **Cross-check every roll modifier against PC sheets.** The rolls log Pax pastes is global, not per-speaker — back-derive attribution from stat fingerprints, not from text proximity.
 - Reconstruct from the transcript FIRST, then compare. Do not read the recap first — that biases you toward confirming it.
 - Every claim must cite a transcript timestamp.
 - If the transcript is ambiguous about round boundaries, note it and give your best reconstruction.
 - Do NOT skip enemy turns. If an enemy acted, it must appear in the reconstruction.
-- Track ALL hero point usage — these are mechanically significant and players care about them.
+- Track ALL hero point usage — distinguish from Foundry low-reroll automation, which is NOT a hero point.
+- **When ambiguous between two PCs, flag for user confirmation rather than guessing.** Guessing wrong costs the user a correction cycle; asking costs one question.
 ```
 
 After the subagent returns its combat review:

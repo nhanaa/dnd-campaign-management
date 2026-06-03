@@ -23,22 +23,22 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 18 (+4) | 12 (+1) | 16 (+3) | 10 (+0) | 12 (+1) | 14 (+2) |
+| 18 (+4) | 12 (+1) | 14 (+2) | 10 (+0) | 14 (+2) | 10 (+0) |
 
-*Gradual Ability Boosts: CON + WIS at Lv2 (taken — CON deviated from original DEX-first plan after S4 boss fight crit-down; WIS added via GAB). Remaining: DEX/CHA over Lv3-5.*
+*Rebuilt at L2 to fit the new party — WIS boosted (Nature/Medicine/Survival/Will), CHA dropped (no diplomat/face role needed). All boosts come from L1 sources (Ancestry: STR/CON, Background: STR/WIS, Class: STR, Free L1: STR/DEX/CON/WIS). Next ability boost slot is L5 — planned: WIS again, then DEX/STR/CHA fill.*
 
 ## Defenses
 
 - **AC**: 19 (10 + 4 proficiency + 1 DEX cap + 4 breastplate) — **21 with Dueling Parry**
-- **Max HP**: 34 (8 ancestry + 20 class [10×2] + 6 CON [3×2])
+- **Max HP**: 32 (8 ancestry + 20 class [10×2] + 4 CON [2×2])
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert | +9 |
+| Fortitude | Expert | +8 |
 | Reflex | Expert | +7 |
-| Will | Trained | +5 |
+| Will | Trained | +6 |
 
-- **Perception**: Expert (+7)
+- **Perception**: Expert (+8)
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
 
 ## Heritage Features
@@ -66,21 +66,21 @@
 
 | Skill | Prof | Modifier | Source |
 |-------|------|----------|--------|
-| Athletics | Trained | +8 | Fighter class |
-| Diplomacy | Trained | +6 | Dragon Lore (overlap with Foreign Aid → free skill) |
-| Intimidation | Trained | +6 | Dragon Lore |
-| Acrobatics | Trained | +5 | Free skill from Diplomacy overlap |
-| Nature | Trained | +5 | Retrained from Performance at Lv2 (Beastmaster Dedication prereq) |
-| Survival | Trained | +5 | Additional skill |
-| Medicine | Trained | +5 | Retrained from Religion at Lv2 (Treat Wounds) |
+| Athletics | Trained | +8 | Fighter class L1 choice |
+| Diplomacy | Trained | +4 | Foreign Aid background |
+| Intimidation | Trained | +4 | Dragon Lore feat |
+| Medicine | Trained | +6 | Fighter additional skill |
+| Nature | Trained | +6 | Fighter additional skill (Beastmaster prereq) |
+| Survival | Trained | +6 | Fighter additional skill |
 
 ### Lore Skills
-- Dragon Lore (Trained) — from Dragon Lore feat
-- Lingshen Lore (Trained) — from Foreign Aid background
+- **Dragon Lore** (Trained, +4) — from Additional Lore (Dragon Lore feat)
+- **Lingshen Lore** (Trained, +4) — from Foreign Aid background
+- **Demon Lore** (Trained, +4) — free skill from Dragon Lore's Diplomacy overlap
 
 ### Skill Feats
 - **No Cause for Alarm** (Background): 3 actions — Reduce Frightened on allies in 10-ft emanation via Diplomacy check
-- **Assurance (Athletics)** (2nd): Flat result of 12 (10 + 2 trained) on Athletics checks instead of rolling. Avoids nat-1 fails on Trip / Grapple / Shove / Climb at low DCs.
+- **Quick Jump** (2nd): High Jump and Long Jump become 1 action instead of 2, and skip the initial Stride / 10-ft requirement. Mobility shim that pairs with Sudden Charge and Reactive Strike positioning.
 
 ## Free Archetype
 
@@ -95,12 +95,20 @@
 ## Equipment
 
 ### Weapons
-- **Jian** (Katana): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons." Uncommon, Sword group.
+- **Jian +1** (Katana base, reflavored): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons." Uncommon, Sword group. **+1 potency rune** grants +1 item bonus to attack rolls.
 - **Lang Ya Chui** (Leiomano reflavor): 1d6 B, fatal d10, versatile S — "Wolf tooth mace." Uncommon, Club group. Swap-in for bludgeoning-weak enemies.
+- **Shortsword**: 1d6 P, agile, finesse, versatile S. Off-hand option / backup blade.
 - **Javelin ×2**: 1d6 P, thrown 30 ft
 
+### Consumables
+- **Silverscrap Bomb (Lesser)** ×1: Martial bomb, 2d4 piercing + 2 splash (silver for weakness/resistance purposes), 20-ft range, +1 item bonus to attack. Anti-fiend/anti-lycanthrope panic button.
+- **Potency Crystal**: Talisman, free-action activate before a Strike. Affixed weapon becomes a +1 striking weapon for that Strike and until end of turn (+1 attack, 2 damage dice). Use on a Lang Ya Chui crit-fish or a critical-moment jian Strike.
+
 ### Armor
-- **Breastplate**: +4 AC, DEX cap +1, check penalty -2 (negated by Str 18 ≥ Str 16 threshold), speed -5 ft (negated by Str 18 ≥ Str 16 threshold). Composite group.
+- **Breastplate**: +4 AC, DEX cap +1, check penalty -2 (negated by Str 18 ≥ Str 16 threshold), speed -5 ft (negated by Str 18 ≥ Str 16 threshold). Plate group.
+
+### Worn Magic Items
+- **Ring of Discretion** (invested): Magically conceals worn armor and sheathed weapons — either invisible or illusory ordinary clothes. Dropped the instant you wield an affected weapon (re-engages after sheathing for 1 minute). DC 15 Seek to disbelieve. Frees Bai Jian to walk into civilian spaces in breastplate without drawing attention — useful for the Hellbreakers' undercover operations in Isger.
 
 ### Gear
 - Backpack (holds 4 Bulk, first 2 don't count)
@@ -110,7 +118,7 @@
 - ~~**Harpy's Talon**~~ — consumed in S5 against the Attic Whisperer. Activated persistent bleed on strike, but undead don't bleed. Wasted.
 
 ### Wealth
-- ~18 gp, 4 sp (post-S4 inn loot split + road ambush split – healer's toolkit purchase)
+- 19 gp, 9 sp, 8 cp
 
 ## Animal Companion — Ren the Isgeri Boarhound (Young)
 
@@ -120,7 +128,7 @@
 - **Speed**: 40 ft
 - **Senses**: Foe scent (precise, 40 ft, vs. designated fiend or undead, refresh daily) + scent (imprecise, 40 ft)
 - **Attacks**: Jaws 1d8 piercing (finesse) → 2d8 at Mature
-- **Action economy**: Acts on Bai Jian's turn. **Command an Animal** (1 action, Nature check) → hound takes 2 actions. Otherwise Stride or Strike (1 action), no Support action until Mature.
+- **Action economy**: Acts on Bai Jian's turn. Spend 1 action to **command Ren** → hound takes 2 actions (no roll required for a bonded animal companion). If uncommanded, Ren does nothing on his turn except Stride toward Bai Jian if more than 30 ft away and use his Reaction if applicable. Young companion can Stride, Strike, or use its **Support** benefit (foe-scent rider: +1 attack and +1d6 piercing on Bai Jian's Strikes against the designated foe). **Advanced Maneuver — Lock Jaws (auto-Grab on a successful bite) — unlocks at Mature (L4 via Mature Beastmaster feat).**
 - **Acquisition**: Anonymous donor delivered Ren to Hellbreakers HQ in Saringallow during the week of downtime. Trained against Chelaxian forces. Donor unknown — open thread.
 
 ## Appearance

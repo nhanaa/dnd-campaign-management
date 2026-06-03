@@ -7,6 +7,7 @@
 | Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 2 | Beastmaster (Ren active) + Thaumaturge | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 2 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
 | Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 2 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
+| Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane (or Primal) dedication granting Electric Arc. Battle Medicine trained. Has a stance (likely Mountain Stance per S6 "familiar stance" callout). | crackrockcowboy — *JOINED S6 (2026-05-30)* |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
 
@@ -17,9 +18,12 @@
 
 ## Party Composition Notes
 
-- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Ren (Isgeri Boarhound) (Bai Jian's companion) — three melee bodies, two dragon-blooded
+- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Rama (Monk, joined S6) + Ren (Isgeri Boarhound) — four melee bodies, two dragon-blooded
 - **Healing**: Panacea (Catfolk Witch — Medic dedication)
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct), Bai Jian (Crashing Slam + Advantageous Assault + Glimpse Vulnerability weakness)
+- **Healing backup**: Rama (Battle Medicine trained — explicitly offered as backup on S6 debut)
+- **Non-lethal lead**: Rama (Monk Flurry of Blows is non-lethal by default with no -2 penalty). Use Rama when sisters/captives need restraint, not the rest of the party at -2.
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct), Bai Jian (Crashing Slam + Advantageous Assault + Glimpse Vulnerability weakness), Rama (Flurry of Blows + Electric Arc cantrip)
+- **Cantrip-range damage (NEW S6)**: Rama (Electric Arc — chains two targets, arcane/primal)
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
 - **Buffs**: Moob (elixirs, mutagens, numbing tonics)
 - **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Crashing Slam auto-Prone, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (Lock Jaw auto-Grab)
@@ -77,6 +81,8 @@
 
 Established Session 1: Each party member was individually summoned by missive to the Cadence Keg in Breachill to meet wounded Eagle Knight **Ethran Howell**. They arrived the morning after the Battle of Breachill, which several of them fought in on the Hellbreaker side. **Four of the five speak Draconic** — Bai Jian, Cyrathul, Moob, and Fang. Panacea doesn't, which shelved Bai Jian's proposal to use it as combat shorthand before it became a habit. **Moob raised Fang from an egg** in his abandoned-weapon-bunker lab, so those two share a pre-existing bond; the rest met at the tavern. Cyrathul is a literal winged dragon described by his player as "an observer from the moon" who "took drastic measures" to come down and act. Panacea watched most of the tavern scene in silence; she opens up only when asked directly.
 
+**Session 6 addendum**: **Rama** arrived as a Hellbreakers contact dispatched from Saringallow by Rhokrag, sent to investigate the Bright Embers Orphanage. He was trapped behind a stuck door when the party finished cleansing the haunts. Bai Jian recognized Rhokrag's name and vouched for him. **Panacea**, the table's first-time TTRPG player, speaks Diabolic — which became combat-relevant in the kitchen scene where the sister cursed in Diabolic through a wall.
+
 ## NPC Relationships
 
 - **Ethran Howell** — Former Eagle Knight, now Hellbreaker. Lost his left arm at the Battle of Breachill fighting two Hellknights. Gifted the party his +1 Eagle Knight greatsword in Session 1 ("I can't swing it with only one arm — it would be better in your hands"). Now stepping back from the field into a strategy/training role at the Saringallow HQ. Moob and Fang have offered to build him a hydraulic goblin-tech prosthetic arm. Bai Jian bonded with him over Moob's numbing tonic for his phantom pain.
@@ -95,6 +101,9 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Steel Circle Bandit Chief** — (provisional ally) Stout dwarven woman commanding ~20 bandits southeast of Wolf Point. Pragmatic, gallows-humored. Deal: party clears the Wolf Point tower's nightmare-causing curse, Steel Circle helps with whatever the party needs. *"And I've seen a Leviathan once."*
 - **Lily of Fernsby** — (sympathetic civilian) Showed the party the desecrated village green; remembered hissing from a ravine on her daily walks. Friendly contact.
 - **Tilaax** — (active threat) Cheliax's infernal-contracts faction. Source of the torture devil at Waterspout Inn. Will recur.
+- **Sister Sylvie** — (sympathetic ally, S6) Young woman of the Sisters of the Golden Erinyes, red habit emblazoned with a five-pointed star, missing her ring finger. Was the party's "follower" for several days (mystery resolved). Came forward in S6 to warn the party about Viro Ahala's imposter operation and the devil-summoning ritual. Going to reopen the Bright Embers Orphanage. Asked the party not to kill her sisters at the Lucent mission (partially honored — 2 dead, 3 captured). Her name was kept out of the interrogation to protect her.
+- **Sister Endreah** — (captive, alive, S6) Head sister of the Lucent mission, tall and thin. Surrendered after Bai Jian one-shot-killed Velavi and Cyrathul crit-Demoralized her to Frightened 2. Manacled and left tied up at the mission with two other unconscious sisters. Believes Cheliax has been "nothing but good for this country." May come for the party later.
+- **Viro Ahala** — (active threat, URGENT, S6) Imposter Hell Knight, not actually a member of the Order. Deceived Sister Endreah and the Golden Erinyes order to source a ritual that will summon a powerful devil to serve his ambitions. **Has entered the Chitterwood to find a safe location to enact the ritual. The ritual targets "Isger's goblin problem, starting in the east."** Takes several weeks to prepare; he left several days before S6. **Distinct from Hellknight Alaya — confirmed two separate antagonists.**
 
 ## Key Plot Threads
 
@@ -113,12 +122,17 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Rhokrag's Rescue** (resolved S4): Captain killed by Panacea, crow's-nest Marine killed by Wing's mast-fall. Rhokrag freed. Bai Feng-hunt thread now connects to Hellknight Alaya via the captain's intel.
 - **The Devil at the Waterspout Inn** (resolved S4): Rhokrag confirmed the devil was a torture specialist Tilaax brought in for the interrogation. Connection to broader infernal intelligence apparatus active.
 - **Rhokrag's Contact** (resolved S4): Confirmed it was a Chelaxian setup from the start — the contact was the bait.
-- **Hellknight Alaya** (active, urgent): Newly named Hellknight hunting the Hellbreakers. Possibly connected to the regrouping the party has been hunting since S1 — and possibly to Bai Feng's disappearance.
+- **Hellknight Alaya** (active, urgent): Newly named Hellknight hunting the Hellbreakers. Possibly connected to the regrouping the party has been hunting since S1 — and possibly to Bai Feng's disappearance. **(UPDATED S6: Confirmed NOT the same person as Viro Ahala. Two separate Hell-Knight-themed antagonists. Alaya still active and unknown.)**
 - **The Wolf Point Tower** (resolved S5): Nightmare source was a Drude (Feywild). Killed by Ren. Steel Circle deal fulfilled — Runa Bloodhammer's band moved back to the keep, will target only Chelaxians.
 - **The Goblin-Snake Hybrids / Hissrath** (resolved S4-S5): Battle plan found in Goblin revealed the Hissrath were framing Stumpfield goblins for Fernsby attacks. Boss killed S4; battle plan recovered and translated S5. Fernsby and Stumpfield both informed.
 - **Hedvind's Thrune Escalation** (active): Drumish trade routes pulling back under raid pressure → Hedvind expected to call in Thrune soldiers. Timeline unknown.
-- **Hearts and Minds Tour** (mostly complete): 10+ reputation — Hellbreakers now **favorable** in the Chitterwood. Fernsby, Stumpfield, Wolf Point won. Remaining: Umach. Vordia is Chelaxian-loyal (visited but not won).
+- **Hearts and Minds Tour** (mostly complete): 10+ reputation — Hellbreakers now **favorable** in the Chitterwood. Fernsby, Stumpfield, Wolf Point won. Remaining: **Umok** (last hearts-and-minds stop). Vordia is Chelaxian-loyal (visited but not won).
 - **Ren's Provenance** (open mystery): Anonymous donor delivered a Chelaxian-trained boarhound to HQ. Who? Why?
-- **The Follower** (active, S5): Someone tracking the party. Bai Jian spotted a figure ~2 miles back on the trail. Same presence as rustling at the Wolf Point camp. Party shook them via Survival + Ren. Identity unknown — Hellknight Alaya's agent? Chelaxian scout?
+- **The Follower** (RESOLVED S6): It was **Sister Sylvie** of the Golden Erinyes, trying to find safe ground to approach the party. She presented herself outside Vordia in S6 and explained the Viro Ahala situation. Mystery closed. **Hellknight Alaya remains separately at large** — not the follower.
+- **The Lucent Mission Raid (S6)**: Golden Erinyes mission half a day south of Vordia in the foothills of the Aspodel Mountains. Party raided S6: 2 sisters dead (Panacea crit-Needle-Darts gardener; Cyrathul lethal-chomped kitchen sister; Bai Jian crit-eviscerated training-room sister), 3 captured and manacled (gardener, training-room sister, Sister Endreah), 1 summoned devil (Velavi) one-shotted by Bai Jian's Potency-Crystal Sudden Charge for 37 crit damage. The three sleeping sisters will wake — window to act before the order regroups.
+- **Viro Ahala's Chitterwood Ritual** (active, URGENT, S6): Devil-summoning ritual targeting Isger's goblin populations, "starting in the east." Viro is days into the Chitterwood, finding a safe location. Ritual takes weeks. **The party has ~2-3 weeks to find and stop him.**
+- **The Eastern Chitterwood Goblin Threat (S6)**: Viro's ritual targets goblins. **Stumpfield** (goblin-human art commune on the Chitterwood's east edge) is in the line of fire. Eric needs warning. Affects Bai Jian's Fernsby promise about peace among the people.
+- **The Lintel** (active mystery, S6): Draft letter recovered from the Bright Embers Orphanage mentions "another sister in the Lintel." Unknown location/order. May be a sister network across multiple missions.
+- **Bright Embers Reopening (S6)**: Sister Sylvie will return to reopen the orphanage as a children's home. May be a future contact point.
 - **Bright Embers Orphanage** (active, S5): Abandoned Asmodean orphanage east of Vordia. Sisters of the Golden Erinyes departed — why? Haunts cleansed (Attic Whisperer killed), but building not fully explored. Asmodean murals and pentagrams suggest infernal connection. Vordia constable was evasive.
 - **Harpy's Talon** (consumed S5): Used on the Attic Whisperer. Persistent bleed wasted on undead. Gone from inventory.

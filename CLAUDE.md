@@ -26,7 +26,8 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 
 | Folder | System | Setting | Character |
 |--------|--------|---------|-----------|
-| `korvosa/` | Pathfinder 2e Remastered | Korvosa | Frozen Wind Kitsune — Draconic Sorcerer (Rime) | **ABANDONED** |
+| `korvosa (abandoned)/` | Pathfinder 2e Remastered | Korvosa | Frozen Wind Kitsune — Draconic Sorcerer (Rime) | **ABANDONED** |
+| `korvosa-monday/` | Pathfinder 2e Remastered | Curse of the Crimson Throne (Korvosa) — Monday group | Izka — Kashrishi (Sylph) Magus (Inexorable Iron) / Cavalier | **JOINED 2026-06-01 @ S7** |
 | `myrrindar/` | D&D 5e (2024 PHB) | Myrrindar — Winds of Warding | Fairy Bard (Mist) |
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) | **LEFT 2026-05-16** |
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
