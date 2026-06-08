@@ -8,7 +8,7 @@
 - **Background**: Student of the Ancients
 - **Class**: Bard (Maestro + Enigma via Multifarious Muse)
 - **Archetype**: Sorcerer (Draconic — Rune Dragon, Arcane tradition). Arcane chosen for: force damage on Flurry of Claws, Eldritch Researcher path to Expert Sorcerer Spellcasting, and full access to Grease/Enlarge/Hidebound (all arcane/primal).
-- **Level**: 7
+- **Level**: 8
 - **Size**: Tiny
 - **Speed**: 20 ft base (+10 ft from Wand of Tailwind daily = 30 ft effective)
 - **Deity**: Desna (Song of the Spheres)
@@ -26,16 +26,16 @@
 
 ## Defenses
 
-- **AC**: 25 (10 + 9 trained unarmored + 3 DEX cap + 2 Scales of Steel + 1 EC potency)
-- **Max HP**: 78 (8 ancestry + 7 × (8 class + 3 CON))
+- **AC**: 26 (10 + 10 trained unarmored + 3 DEX cap + 2 Scales of Steel + 1 EC potency)
+- **Max HP**: 88
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert (Canny Acumen) | +14 |
-| Reflex | Expert | +14 |
-| Will | Expert | +13 |
+| Fortitude | Expert (Canny Acumen) | +15 |
+| Reflex | Expert | +15 |
+| Will | Expert | +14 |
 
-- **Perception**: Expert (+13, +15 with Incredible Initiative for initiative)
+- **Perception**: Expert (+14, +16 with Incredible Initiative for initiative)
 - **Vision**: Darkvision
 
 ### Defensive Layers
@@ -61,13 +61,13 @@
 - **Composition Cantrips**: Courageous Anthem, Rallying Anthem, Dirge of Doom
 - **Focus Spells**: Lingering Composition, Counter Performance
 - **Signature Spells**: Phantom Pain (R1), Worm's Repast (R2), Wooden Double (R3), Biting Words (R4)
-- **Expert Spellcaster** (level 7): Expert in occult spell attack/DC
+- **Expert Spellcaster** (gained level 7): Expert in occult spell attack/DC
 
 ## Archetype — Sorcerer (Draconic, Rune Dragon)
 
 - **Tradition**: Arcane
 - **Bloodline**: Draconic (Rune Dragon) — force damage, Arcana skill
-- **Basic Sorcerer Spellcasting**: 1 rank 1 slot + 1 rank 2 slot (arcane spontaneous)
+- **Basic Sorcerer Spellcasting**: 1 rank 1 + 1 rank 2 + 1 rank 3 slot (arcane spontaneous; rank-3 slot unlocked at level 8). +1 rank-1 slot from Bloodline Breadth.
 - **Basic Bloodline Spell**: Flurry of Claws (focus spell, 2 targets, slashing + force)
 - **Blood Magic**: +1 status bonus to AC for 1 round on bloodline spell cast
 - **Focus Points**: 3 (Lingering Composition + Counter Performance + Flurry of Claws)
@@ -89,6 +89,7 @@
 | 2 | Multifarious Muse (Enigma) → Bardic Lore |
 | 4 | Rallying Anthem |
 | 6 | Dirge of Doom |
+| 8 | Fortissimo Composition (Focus, upgrade composition cantrip status bonus to +2/+3) |
 
 ## Free Archetype Feats
 
@@ -97,6 +98,7 @@
 | 2 | Sorcerer Dedication (Draconic Rune Dragon, arcane) |
 | 4 | Basic Sorcerer Spellcasting |
 | 6 | Basic Bloodline Spell (Flurry of Claws) |
+| 8 | Bloodline Breadth (extra arcane spell slots from the Sorcerer archetype) |
 
 ## Skill Feats
 
@@ -106,6 +108,7 @@
 | 2 | Bon Mot |
 | 4 | Virtuosic Performer (Winds) |
 | 6 | Assurance (Medicine) |
+| 8 | Evangelize (Master Diplomacy vs Will DC → Stupefied; stacks with Bon Mot) |
 
 ## General Feats
 
@@ -137,7 +140,7 @@
 
 ## Spellcasting
 
-### Occult Spontaneous (Bard) — Expert DC 25
+### Occult Spontaneous (Bard) — Expert DC 26 (27 with Ring of Magic Might; spell attack +17, +18 under Courageous Anthem)
 
 **Cantrips (5):** Needle Darts, Telekinetic Projectile, Shield, Warp Step, Detect Magic
 
@@ -147,19 +150,21 @@
 
 **Rank 3 (3 slots, 3 known):** Wooden Double [SIG], Infectious Ennui, Fear (heightened from R1 to R3 for 5 targets)
 
-**Rank 4 (2 slots, 2 known):** Biting Words [SIG] (heightened from R1), Summon Fey
+**Rank 4 (3 slots, 2 known):** Biting Words [SIG] (heightened from R1), Summon Fey
 
 ### Arcane Spontaneous (Sorcerer Archetype) — Trained
 
 **Cantrips (2):** Electric Arc, Frostbite
 
-**Rank 1 (1 slot, 1 known):** Sure Strike [SIG]
+**Rank 1 (2 slots, 2 known):** Sure Strike, Overselling Flourish *(2nd slot + Overselling Flourish from Bloodline Breadth, L8)*
 
 **Rank 2 (1 slot, 1 known):** Hidebound
 
+**Rank 3 (1 slot, 1 known):** Fireball *(rank-3 slot unlocked at L8 via Basic Sorcerer Spellcasting)*
+
 ### Focus Spells (3 FP)
 
-**Occult (Bard):** Lingering Composition (free action spellshape), Counter Performance (reaction), Courageous Anthem (cantrip), Rallying Anthem (cantrip), Dirge of Doom (cantrip)
+**Occult (Bard):** Lingering Composition (free action spellshape), Counter Performance (reaction), Fortissimo Composition (upgrade composition status bonus), Courageous Anthem (cantrip), Rallying Anthem (cantrip), Dirge of Doom (cantrip)
 
 **Arcane (Sorcerer):** Flurry of Claws (2A, 2 targets, slashing + force)
 

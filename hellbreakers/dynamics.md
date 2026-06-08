@@ -7,7 +7,7 @@
 | Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 2 | Beastmaster (Ren active) + Thaumaturge | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 2 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
 | Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 2 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
-| Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane (or Primal) dedication granting Electric Arc. Battle Medicine trained. Has a stance (likely Mountain Stance per S6 "familiar stance" callout). | crackrockcowboy — *JOINED S6 (2026-05-30)* |
+| Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane dedication (Electric Arc), Battle Medicine. | crackrockcowboy — *JOINED S6 · **DIED S7 (2026-06-06)** — DM-controlled after the player departed; crit-failed a Hell Hound's breath, dropped to dying, never revived, body left in the Chitterwood.* |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
 
@@ -18,12 +18,12 @@
 
 ## Party Composition Notes
 
-- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Rama (Monk, joined S6) + Ren (Isgeri Boarhound) — four melee bodies, two dragon-blooded
-- **Healing**: Panacea (Catfolk Witch — Medic dedication)
-- **Healing backup**: Rama (Battle Medicine trained — explicitly offered as backup on S6 debut)
-- **Non-lethal lead**: Rama (Monk Flurry of Blows is non-lethal by default with no -2 penalty). Use Rama when sisters/captives need restraint, not the rest of the party at -2.
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Moob (Quick Bomber bombs/mutagens), Fang (Wing construct), Bai Jian (Crashing Slam + Advantageous Assault + Glimpse Vulnerability weakness), Rama (Flurry of Blows + Electric Arc cantrip)
-- **Cantrip-range damage (NEW S6)**: Rama (Electric Arc — chains two targets, arcane/primal)
+- **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Ren (Isgeri Boarhound) — three melee bodies, two dragon-blooded. *(Rama, the 4th, died S7.)*
+- **Healing**: Panacea (Catfolk Witch — Medic dedication). **Now the party's sole healer** since Rama's death — no Battle Medicine backup. A real fragility going into the Viro hunt.
+- ~~**Healing backup**: Rama~~ — gone (died S7).
+- ~~**Non-lethal lead**: Rama~~ — gone (died S7). The party is back to taking the -2 for non-lethal, or relying on Intimidation/surrender (as with the Iskari Slayer captive, S7). **Two new members join S8** — possible non-lethal/healing replacements.
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; now also **Fleet** for reach, taken L3). *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
+- **Cantrip-range damage**: none currently — Rama's Electric Arc died with him. Panacea's Divine Lance (spirit, 30 ft) is the only reliable ranged option besides Bai Jian's thrown holy water/javelins.
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
 - **Buffs**: Moob (elixirs, mutagens, numbing tonics)
 - **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Crashing Slam auto-Prone, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (Lock Jaw auto-Grab)
@@ -103,7 +103,12 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Tilaax** — (active threat) Cheliax's infernal-contracts faction. Source of the torture devil at Waterspout Inn. Will recur.
 - **Sister Sylvie** — (sympathetic ally, S6) Young woman of the Sisters of the Golden Erinyes, red habit emblazoned with a five-pointed star, missing her ring finger. Was the party's "follower" for several days (mystery resolved). Came forward in S6 to warn the party about Viro Ahala's imposter operation and the devil-summoning ritual. Going to reopen the Bright Embers Orphanage. Asked the party not to kill her sisters at the Lucent mission (partially honored — 2 dead, 3 captured). Her name was kept out of the interrogation to protect her.
 - **Sister Endreah** — (captive, alive, S6) Head sister of the Lucent mission, tall and thin. Surrendered after Bai Jian one-shot-killed Velavi and Cyrathul crit-Demoralized her to Frightened 2. Manacled and left tied up at the mission with two other unconscious sisters. Believes Cheliax has been "nothing but good for this country." May come for the party later.
-- **Viro Ahala** — (active threat, URGENT, S6) Imposter Hell Knight, not actually a member of the Order. Deceived Sister Endreah and the Golden Erinyes order to source a ritual that will summon a powerful devil to serve his ambitions. **Has entered the Chitterwood to find a safe location to enact the ritual. The ritual targets "Isger's goblin problem, starting in the east."** Takes several weeks to prepare; he left several days before S6. **Distinct from Hellknight Alaya — confirmed two separate antagonists.**
+- **Zagnub** — (ally, S7) Thorngrip goblin scout — tall, razor-toothed, relentlessly cheerful. First contact: *"Relax, Longshanks. If we wanted to kill you, we would have done so."* Hates devils; guides the party through the Chitterwood and to the Slayer camp. Self-declared *"best friends."* Panacea: *"He's like Jar Jar Binks."*
+- **Bracknap** — (ally, conditional, S7) Ancient Thorngrip goblin **ancestor-speaker** — spectral goblins stand behind him; the ancestors tell him things. Wary of humans (Goblin War). Will lead the party to the man in black **only after** they drive off the Iskari Slayers. Gave an oil of potency. A new deep-Chitterwood power the party must keep on-side.
+- **Ion Marbleberg** — (ally, S7) Umok's gnome captain of the guard. Suspicious of outsiders and goblins until the party cleared the Hell Hounds; gifted his family's Bracers of Missile Deflection and agreed to shelter Grizzo.
+- **Grizzo** — (sympathetic, S7) Burned goblin survivor of the Hell Hounds; now living openly in fire-scarred Umok under the gnomes' protection. A fragile hearts-and-minds foothold.
+- **The Iskari Slayers** — (active threat, S7) Human goblin-hunters out to finish the Goblinblood Wars; would-be slavers. Three routed and still loose in the Chitterwood; two killed/captured. Driving them off is Bracknap's price for guidance.
+- **Viro Ahala** — (active threat, URGENT, S6–S7; **confirmed in the Chitterwood**) Imposter Hell Knight, not actually a member of the Order. Deceived Sister Endreah and the Golden Erinyes order to source a ritual that will summon a powerful devil to serve his ambitions. **Has entered the Chitterwood to find a safe location to enact the ritual. The ritual targets "Isger's goblin problem, starting in the east."** Takes several weeks to prepare; he left several days before S6. **Distinct from Hellknight Alaya — confirmed two separate antagonists.** **(S7 update: tracked into the Chitterwood via boot prints from Umok; the party found only a *practice* ritual stump that spawned Orts, not the true working. Bracknap's ancestors will point the way once the Iskari Slayers are dealt with.)**
 
 ## Key Plot Threads
 
@@ -126,7 +131,11 @@ Established Session 1: Each party member was individually summoned by missive to
 - **The Wolf Point Tower** (resolved S5): Nightmare source was a Drude (Feywild). Killed by Ren. Steel Circle deal fulfilled — Runa Bloodhammer's band moved back to the keep, will target only Chelaxians.
 - **The Goblin-Snake Hybrids / Hissrath** (resolved S4-S5): Battle plan found in Goblin revealed the Hissrath were framing Stumpfield goblins for Fernsby attacks. Boss killed S4; battle plan recovered and translated S5. Fernsby and Stumpfield both informed.
 - **Hedvind's Thrune Escalation** (active): Drumish trade routes pulling back under raid pressure → Hedvind expected to call in Thrune soldiers. Timeline unknown.
-- **Hearts and Minds Tour** (mostly complete): 10+ reputation — Hellbreakers now **favorable** in the Chitterwood. Fernsby, Stumpfield, Wolf Point won. Remaining: **Umok** (last hearts-and-minds stop). Vordia is Chelaxian-loyal (visited but not won).
+- **Hearts and Minds Tour** (COMPLETE, S7): ~18 reputation — *"highly regarded everywhere."* Fernsby, Stumpfield, Wolf Point, and now **Umok** (the last stop) all won. Even Chelaxian-loyal Vordia is softening (flags coming down). Tour objective met.
+- **Thorngrip Alliance** (active, S7): Hidden deep-Chitterwood goblin town now allied. Ancestor-speaker **Bracknap** will guide the party to Viro **after** they finish driving off the Iskari Slayers. Potential recurring base; scout **Zagnub** is a reliable forest guide.
+- **The Iskari Slayers** (active, S7): Three genocidal goblin-hunters routed but still loose in the Chitterwood; two killed/captured. Bracknap's favor is mostly fulfilled — but the runners could regroup or find Thorngrip.
+- **Rama's Death** (open loose end, S7): Rama died in the Hell Hound fight and his body was left in the woods — no burial, no word sent to **Rhokrag**, who dispatched him from Saringallow. An unsettled debt with the HQ.
+- **Two New Members** (incoming, S8): The DM and Bracknap both foreshadowed two new "Longshanks." The party is holding the 250-gp / level-6 shield and a spare potency rune in the stash for them.
 - **Ren's Provenance** (open mystery): Anonymous donor delivered a Chelaxian-trained boarhound to HQ. Who? Why?
 - **The Follower** (RESOLVED S6): It was **Sister Sylvie** of the Golden Erinyes, trying to find safe ground to approach the party. She presented herself outside Vordia in S6 and explained the Viro Ahala situation. Mystery closed. **Hellknight Alaya remains separately at large** — not the follower.
 - **The Lucent Mission Raid (S6)**: Golden Erinyes mission half a day south of Vordia in the foothills of the Aspodel Mountains. Party raided S6: 2 sisters dead (Panacea crit-Needle-Darts gardener; Cyrathul lethal-chomped kitchen sister; Bai Jian crit-eviscerated training-room sister), 3 captured and manacled (gardener, training-room sister, Sister Endreah), 1 summoned devil (Velavi) one-shotted by Bai Jian's Potency-Crystal Sudden Charge for 37 crit damage. The three sleeping sisters will wake — window to act before the order regroups.

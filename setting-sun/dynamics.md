@@ -82,3 +82,26 @@
 - **Lightning is the new electricity-weakness lever**: Bael's Lightning Dash × 4 in two encounters (3 against electricity-weak constructs). Tivael's Electric Arc covered the Reflex-save AoE lane. Ferrok's Horizon Thunder Sphere brought the single-target crits. The party now has three viable electricity damage sources — plays well against constructs especially.
 - **Sudden Seize is a problem**: Clockwork Sentries grappled Bargrum (multiple times prone), Raylta (mid-Heal cast), and Tivael (snatched out of the air). Manipulate actions trigger it; flat-check on grabbed spell casting becomes routine. Raylta hero-pointed a flat check this session.
 - **Prong assignment on Flurry of Claws**: target the *softened* enemy with the second prong (high MAP makes crit less likely there); reserve the first prong for the highest-HP target where a crit might one-shot. This session's lesson — the crit prong bounced off Chosen E (full HP), and the non-crit prong finished Chosen B (softened).
+
+## Character Relationships (Session 3 Observations)
+
+- **Tivael's debuff lane paid off huge**: a **rank-1 Fear crit-fail (nat 1)** sent the vampire lord Xarbaene fleeing (Frightened 3) and broke the salon fight open — proof that even a cheap save-or-suck is worth firing at a high-value single target. Also: first **Wooden Double** (ate an ogre crit) and first **Summon Fey unicorn** (emergency heal-bot, rank-3 Heal then died tanking) of the campaign. Tivael remains the RK/knowledge anchor (Crafting on the clockwork archive, read the Nin scripture in Azlanti, RK'd the ogres).
+- **Ferrok is still the damage sponge — now to a dangerous degree**: the 7-Chosen wave's Take 'Em Down loop (trip → prone → stab) put him on the floor repeatedly. Kept up only by Raylta's Heals + Bael's Healer's Gloves + Vital Beacon. His clutch output held: killed Ilnaphrae, and a Sure Strike + Briny Bolt Spellstrike "one shot, one kill" on Chosen F.
+- **Raylta nearly died and the healing economy cracked**: Cursebound 2 / Enfeebled 2 by the final fight, one hit from death repeatedly, she had to step **three times** out of reach into Bargrum's intercept umbrella. Single-healer fragility is now a live risk — Tivael's Summon Fey unicorn as a backup healer directly addresses it. Also the party's conscience: her "Oh, I thought they were undead. Oh, my bad" turned the thrall fight from a slaughter into a rescue.
+- **Bargrum is the load-bearing wall** (DM: "Bargrum doesn't die. We've established this."): Group/Shielding Taunt + Intercept + **Energy Interceptor** (eating Cataclysm Brand fire) carried both Chosen fights. Boulder Roll/trip control on the ogres + globsters.
+- **Bael diversified into support + electricity**: two kills (fleeing Xarbaene flaming bow; Chosen G birdie), but the bigger story is the pivot — Healer's Gloves, real-time Treat Wounds, Thermal Nimbus fire-resist bubble for the backline, and switching from fire to **lightning** once the globsters' electricity weakness surfaced. His final Solar Detonation mostly whiffed saves — the alpha-strike isn't guaranteed value against high-save groups.
+
+## Session 3 — New Enemy Save Profiles (learned via RK or combat)
+
+- **Globsters**: Mindless oozes. **Immune to crits** (crit riders still apply), **weak to electricity**, very high HP. Nauseating Slap = Fort save or stacking sickened. Grab tendrils.
+- **Favored Thralls**: Enslaved humans (not undead). Lord's Blessing buff within 25 ft of master. Rescuable.
+- **Hurkum & Ogenni (ogres)**: Best **Fort** / worst **Reflex**. Reach 10 + reactive strike. Sweeping Hook + Punting Kick punish prone/tripped targets.
+- **Ilnaphrae & Xarbaene (vampire lords)**: Repeating crossbows, Turn to Mist, silver-vulnerable (Xarbaene fled, then ate Raylta's silver Moonlight Ray 56 + Moonbeam 18 → Bael finish). Standard vampire silver/fire/vitality plan worked.
+
+## Session 3 — Key Patterns
+
+- **Electricity is now a confirmed lever against oozes too** (not just constructs). Tivael's Electric Arc / Bael's lightning cracked the globsters after fire stalled. RK oozes *before* committing to a damage type — the table guessed fire and wasted rounds.
+- **Mental debuffs are dead weight vs mindless enemies** (globsters ate Tivael's Dirge/Fear). Reserve Fear/Dirge/Bon Mot for the Chosen and the Warden; use Worm's Repast / Electric Arc / Needle Darts on mindless/construct foes.
+- **Persistent fire (Cataclysm Brand) remains the party's worst unanswered threat**: a 7-Chosen wave with synchronized bursts is a near-TPK. Spreading out + Thermal Nimbus + the defensive Rallying Anthem mitigate but don't solve it — a Cleanse Affliction / persistent-damage counter would change these fights.
+- **Single-healer fragility is now load-bearing**: Raylta at Cursebound 2 nearly died while being the only healer. Tivael's Summon Fey unicorn (a second vitality-heal source) is the emerging answer; keep a rank-4 slot for it on hard fights.
+- **The ghost-bear problem ahead**: the Warden's incorporeal guardian needs **force / ghost touch / vitality / silver**. The party has only **one ghost oil** for a melee-heavy roster — Tivael's Flurry of Claws (force) and Raylta's vitality/silver will carry that fight unless they stock more oils.

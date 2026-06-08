@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 7 — Fire-Free Zone</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-rama { border-left-color: var(--ember); }
+.char-ren { border-left-color: var(--gold); }
+.char-card.fallen { opacity: 0.74; }
+.char-card.fallen .char-name::after { content: ' \2020'; color: var(--rose); font-size: 14px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-rama { border-left-color: var(--ember); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Fire-Free Zone</h1>
+  <div class="subtitle">Session 7 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">Jun 6, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 11m</span>
+    <span class="meta-pill">~22 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:42%"></div>
+    <div class="comp-seg comp-rp" style="width:22%"></div>
+    <div class="comp-seg comp-social" style="width:16%"></div>
+    <div class="comp-seg comp-explore" style="width:14%"></div>
+    <div class="comp-seg comp-loot" style="width:6%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 42%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 22%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 16%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 14%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 6%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Moon Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-rama fallen"><div class="char-name">Rama</div><div class="char-class">Human Monk &middot; DM-run &mdash; fell in the Hell Hound fight</div><div class="char-player">crackrockcowboy &middot; Departed</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound &middot; Bai Jian's Beastmaster Companion</div><div class="char-player">Anonymous Donor</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The party turned for home after the Lucent mission and spent the first hour cashing out. Back in <strong>Vordia</strong> they reported the orphanage cleansed, pocketed 20 gold from a grateful (and unsettlingly cheerful) Asmodean townsperson, and sold off the haul &mdash; the Robe of the Erinyes, the unholy text, the ebony statue of Asmodeus, a fistful of donated trinkets. Reputation ticked to <strong>17</strong> &mdash; <em>"highly regarded everywhere"</em> &mdash; and the Chelaxian flags over Vordia were quietly coming down, twenty become ten. Then it was on toward <strong>Umok</strong>, the last hearts-and-minds stop, with one farmstead feeding them sweetbreads and another chasing Panacea off with pitchforks (<em>"damn catfolk, always stealing"</em>).</p>
+    <p>Umok turned out to be a fire-free gnome village &mdash; magic lights, no open flame anywhere, boarhounds the locals literally talk to &mdash; still gun-shy forty years after the Goblinblood Wars burned it flat. The gnomes were blaming goblins for a string of woodland fires when a badly-burned goblin, <strong>Grizzo</strong>, staggered into the square and collapsed. Panacea kept her breathing; Bai Jian read her trail back into the trees. Her story: <em>"Fire dogs. Huge fire dogs chased me."</em> The party talked the captain of the guard out of throwing her to the mob and went to see for themselves &mdash; a raging forest fire fought to a standstill, and then, in a hundred-foot circle of charred stumps, the fire dogs themselves: <strong>two Hell Hounds</strong>.</p>
+    <p>It went badly fast. Rama charged in alone and, when the second hound's breath caught both him and Cyrathul, crit-failed his save and went up like he'd been doused in gasoline. Bai Jian had already cut the first hound clean in half on a Sudden Charge crit; Cyrathul &mdash; left at death's door by that same breath &mdash; Exploited the second's cold weakness and tore its head off, but with Panacea's heals spent keeping <em>him</em> upright, <strong>no one reached Rama in time. He died of his burns</strong>, and the party left a body in the woods. They carried a hound's head back to Umok as proof the goblins were innocent, collected <strong>Bracers of Missile Deflection</strong>, and got a tip: a figure in all-black armor had been stalking west, deeper into the Chitterwood.</p>
+    <p>They followed the boot prints in. At a petrified stump ringed with ritual candles and crystal shards, four devils &mdash; <strong>Orts</strong> &mdash; boiled out of a hollow. Cyrathul read them cold (weak to holy, resistant to everything physical <em>except silver</em>), Bai Jian opened with holy water and called the silver weakness to Panacea, who turned her Needle Darts silver and detonated the things one by one. The stump was an amateur's practice ritual &mdash; not Viro Ahala's real working, but his trail. The fight pushed the party to <strong>level 3</strong>. Then twenty pairs of red eyes opened in the trees: <strong>Zagnub</strong> of the Thorngrip Goblins, all teeth and good cheer, inviting his new <em>"Longshanks"</em> friends home.</p>
+    <p>Thorngrip is a hidden goblin town behind a wall of living thorns, built up the trunk of an enormous sequoia, ruled by an ancient ancestor-speaker named <strong>Bracknap</strong> with a crowd of spectral goblins at his back. His ancestors confirmed the party hunts the man in black &mdash; and Bracknap will point the way, <em>after</em> a favor: a band of human bigots calling themselves the <strong>Iskari Slayers</strong> has come to finish the Goblinblood Wars. The party found their camp, intimidated the first three drunks into bolting, and then had to fight when two more and a war-wolf came back. Bai Jian tore one in half, Cyrathul snacked the wolf, and the last man surrendered on his knees &mdash; Bai Jian very nearly executing him over the word <em>"slaving"</em> before a missed swing made the mercy decision for him. They manacled him, handed him to a delighted Zagnub, and the goblins led them back toward Thorngrip. Next week: the man in black, and two new faces at the table.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act social">
+      <div class="act-label">Act I &middot; Faction / Loot &middot; Cashing Out in Vordia</div>
+      <div class="act-card">
+        <h3>Reputation 17</h3>
+        <ul>
+          <li>Recap of S6. The DM confirmed the table's read: <strong>Viro Ahala is an impersonator</strong> &mdash; not a true Hell Knight, just a man who stole the armor and has been fooling people.</li>
+          <li>Hero-point reset: everyone starts at 1 (Rama allotted 2 as the newer character). A post-break bonus point becomes relevant in the Ort fight.</li>
+          <li>Three uneventful hours back to <strong>Vordia</strong>. The party reported the Bright Embers haunt cleansed; the cheerfully Asmodean local (<em>"Hail Asmodeus, wonderful"</em>) handed over <strong>20 gp</strong>.</li>
+          <li><strong>Loot sale.</strong> Debated the optics of selling the sisters' <strong>Robe of the Erinyes</strong> (55 gp) before agreeing it came from an abandoned orphanage and belonged to no one. Sold the unholy text, the ebony Asmodeus statue, and the donated trinkets. Kept a spare short sword and the darts. (<em>"We need money for our operation."</em>)</li>
+          <li>Striking runes discussed and shelved &mdash; level-4 items, out of reach until they level.</li>
+          <li><strong>Reputation &rarr; 17.</strong> <em>"Highly regarded everywhere."</em> Vordia's twenty Chelaxian flags were down to ten; townsfolk whispering, <em>"I heard they're gonna free us."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act II &middot; Roleplay / Exploration &middot; The Road to Umok</div>
+      <div class="act-card">
+        <h3>The Fire-Free Zone</h3>
+        <ul>
+          <li>Hearts-and-minds at farmsteads en route. One family, swayed by the party's reputation, put them up and packed <strong>sweetbreads</strong> for the road. A second crit-failed introduction &mdash; <em>"damn catfolk, always stealing from us"</em> &mdash; ended in pitchforks.</li>
+          <li><strong>Umok</strong>: a quaint gnome village ringed with <em>"now entering the Umok fire-free zone, please extinguish all flames"</em> signs. Forty years after the Goblinblood Wars burned the region down, the gnomes cook, light, and live entirely by magic &mdash; no open flame within 500 yards.</li>
+          <li>A gnome conversed with a passing boarhound, then crouched and "talked" to <strong>Ren</strong> the same way &mdash; the hound's eyes lit up, tail wagging, like two old friends catching up.</li>
+          <li>Bai Jian's Diplomacy to make a good impression landed at <strong>19</strong> after a false start (<em>"the problem is I got zero&hellip; wait, wasn't I trained in Diplomacy?"</em>). The gnomes blamed recent woodland fires on goblins and pointed toward <strong>Ion Marbleberg</strong>, captain of the guard.</li>
+          <li><strong>Grizzo</strong>, a badly-burned goblin, stumbled into the square and collapsed (<em>"Firebringers! I knew it!"</em>). Panacea Treated her Wounds; Bai Jian read her trail back into the woods.</li>
+          <li>Calming Grizzo (Cyrathul Diplomacy, Bai Jian aiding): <em>"Fire dogs. Huge fire dogs chased me."</em> The party convinced Ion to shelter Grizzo under guard rather than expel her, and rode out to investigate the fires themselves.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Forest Fire &amp; The Hell Hounds</div>
+      <div class="act-card">
+        <h3>Where the Fire Dogs Live</h3>
+        <ul>
+          <li>The trail led half a mile north to a <strong>raging forest fire</strong> &mdash; run as a <strong>victory-point skill challenge</strong>. The party scrambled a patchwork of checks: Cyrathul's lore, Panacea buffing with Guidance and shooting down dry branches with Needle Darts, Bai Jian and Ren digging a firebreak. Comic beat: Ren's paws were too small to move enough dirt, so Bai Jian dug while the hound "supervised." Contained &mdash; <strong>60 XP and a reputation point.</strong></li>
+          <li>Charred dog footprints led to a hundred-foot circle of burned stumps. A failed group Perception meant the party walked in distracted &mdash; <em>"you don't see them before they see you."</em> <strong>Two Hell Hounds.</strong></li>
+          <li><strong>Bai Jian</strong> Sudden-Charged into a flank and <strong>crit-killed the first Hell Hound &mdash; sliced it clean in half</strong>, the body exploding into smoke.</li>
+          <li>The second hound's breath caught <strong>Cyrathul and Rama</strong>. <strong>Rama crit-failed</strong>, took double, <em>"burned up like someone poured gasoline over him,"</em> and dropped to dying. Cyrathul took the full hit too &mdash; <em>"death's door, still standing."</em></li>
+          <li>With heals spent keeping the badly-burnt Cyrathul up, <strong>Rama was never revived.</strong> <strong>Cyrathul</strong> Exploited the second hound's cold weakness, bit its neck and tore its head off with a claw.</li>
+          <li><strong>Rama died of his burns</strong> &mdash; the party left his body in the forest. His player had departed; the DM-run guest body exits the campaign here.</li>
+          <li>Back in Umok, a hound's head as proof. Captain Ion handed over <strong>Bracers of Missile Deflection</strong> and 10 gp, cleared Grizzo to stay, and pointed them to the <strong>Rubber Ducky</strong> &mdash; a tavern with no outside door, where a firewatch gnome described <strong>a figure in all-black armor</strong> stalking out the western gate, far past the patrol line. Long rest.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat / Mystery &middot; Into the Chitterwood</div>
+      <div class="act-card">
+        <h3>The Practice Ritual</h3>
+        <ul>
+          <li>Resupply: Panacea swapped in <strong>Rousing Splash</strong>; Bai Jian bought <strong>two holy water</strong> flasks from the temple and kept one in hand, ready to throw.</li>
+          <li>Into the <strong>Chitterwood</strong> &mdash; old-growth pine and maple, no roads, only game trails. Bai Jian's Survival picked up the black-armored figure's heavy boot prints and tracked them deep.</li>
+          <li>They found a <strong>petrified stump</strong> ringed with ritual candles and crystal shards, boot prints churned all around, a crack leading to an underground hollow. <strong>Four devils &mdash; Orts &mdash; poured out.</strong></li>
+          <li>Cyrathul crit his Exploit Vulnerability and read the full block; Bai Jian flagged the silver weakness; Panacea's silver Needle Darts started blowing the Orts apart while Bai Jian, Ren, and Cyrathul cleaned up. <strong>Party reached level 3.</strong></li>
+          <li>The stump read as an <strong>amateur practice ritual</strong> &mdash; <em>"the first kid's try"</em> at summoning devils &mdash; that birthed the Orts. <strong>Not</strong> Viro's true working, but his trail.</li>
+          <li>The hollow held a <strong>gleaming shield (~250 gp, level-6 item)</strong> and a stash of valuable <strong>ritual supplies</strong>. Bai Jian pocketed the shield for the party stash and briefly mused about going sword-and-board.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Roleplay / Mystery &middot; Thorngrip &amp; Bracknap</div>
+      <div class="act-card">
+        <h3>The Ancestors' Welcome</h3>
+        <ul>
+          <li>Panacea spotted <strong>~20 red eyes</strong> in the trees. <strong>Zagnub</strong> of the Thorngrip Goblins stepped out &mdash; tall, grinning, deliberately unarmed: <em>"Relax, Longshanks. If we wanted to kill you, we would have done so."</em> Devils are no friends of his either. He invited the party home.</li>
+          <li>Half a day through trackless brush, swinging vine-to-vine after the goblins, to <strong>Thorngrip</strong>: a hidden town behind an impenetrable <strong>wall of living thorns</strong>, built up the trunk of a colossal <strong>sequoia</strong>, rooftops kept below the wall line so it can't be spotted from outside.</li>
+          <li><strong>Bracknap</strong>, an ancient goblin ancestor-speaker, met them at a shrine &mdash; a flash of blue light in his eyes and the barest glimpse of <strong>a crowd of spectral goblins standing behind him</strong>. Wary of humans since he was a child in the Goblin War.</li>
+          <li>The ancestors already knew the party hunts the man in black. Cyrathul made the impression (hero-pointed; Bai Jian aided). Reward: an <strong>oil of potency</strong>.</li>
+          <li>Bracknap's favor: drive off the <strong>Iskari Slayers</strong>, a human band that has come to <em>"finish what was started during the Goblinblood Wars"</em> &mdash; a threat to every goblin in the Chitterwood, Thorngrip included.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat / Roleplay &middot; The Iskari Slayers</div>
+      <div class="act-card">
+        <h3>War Never Ends</h3>
+        <ul>
+          <li>Zagnub guided them toward the Slayer camp &mdash; five tents, whiskey bottles jammed neck-first in the dirt, the men drunk.</li>
+          <li>The first three Slayers were openly genocidal: <em>"goblins are filth&hellip; we are going to clear the Chitterwood out of them"</em>; on whether goblins could be useful, <em>"maybe as slaves."</em> <strong>Cyrathul's Intimidation (hero-pointed, 23)</strong> carried the whole rout solo &mdash; Bai Jian's aid whiffed &mdash; and over a few rounds all three fled. <strong>50 XP.</strong> The camp gave up <strong>2 lesser healing potions</strong> and a pouch of stolen trinkets.</li>
+          <li>Two more Slayers returned with crossbows and a <strong>war-wolf</strong>. Cyrathul's Deception didn't hold, and combat broke.</li>
+          <li><strong>Bai Jian</strong> used <strong>Fleet</strong> to close 30 ft, struck, then struck again at MAP &mdash; <strong>hero-pointed into a crit and tore the man in half.</strong> <em>"You should have left when you had the chance."</em></li>
+          <li><strong>Cyrathul</strong> Exploited the wolf (no weaknesses &mdash; <em>"he's a wolf"</em>) and crit-bit it for <strong>19</strong>; <strong>Panacea</strong> Battle-Medicined Cyrathul and hexed the wolf, routing the healing back to him.</li>
+          <li><strong>Bai Jian + Ren</strong> dropped the last Slayer to his knees: <em>"Mercy."</em> Bai Jian swung again over the <em>"slaving"</em> talk and <strong>missed</strong> &mdash; which preserved the party's clean reputation. The survivor was manacled and handed to <strong>Zagnub</strong> (<em>"we won't hurt him too much"</em>).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>The Forest Fire</h3>
+    <div class="combat-meta">Victory-Point Skill Challenge &middot; Start 5 VP &middot; &minus;1 VP / phase</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Format</div><div class="combat-stat-value">Skill challenge</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Contained</div></div>
+      <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">60 XP + 1 rep</div></div>
+    </div>
+    <ul>
+      <li><strong>Cyrathul</strong> &mdash; lore checks; a failed first attempt, then succeeded by identifying which trees would catch next and hacking them down to wall off the spread.</li>
+      <li><strong>Panacea</strong> &mdash; cast <strong>Guidance</strong> on the party each round; shot dry branches down with <strong>Needle Darts</strong>; Nature checks to clear brush. (<em>"I'm not equipped for this."</em>)</li>
+      <li><strong>Bai Jian + Ren</strong> &mdash; Athletics/Survival to dig a firebreak. Ren kept failing &mdash; <em>"his paws just aren't big enough"</em> &mdash; so Bai Jian dug while the hound directed.</li>
+      <li>Charred dog tracks led north to the Hell Hounds.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>Hell Hounds (2)</h3>
+    <div class="combat-meta">Initiative: Rama &middot; Hell Hound &middot; Panacea &middot; Cyrathul &middot; Bai Jian &middot; Hell Hound</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Hell Hounds</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian, Cyrathul</div></div>
+      <div><div class="combat-stat-label">Casualty</div><div class="combat-stat-value">Rama (died)</div></div>
+      <div><div class="combat-stat-label">Weakness</div><div class="combat-stat-value">Cold 5</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Rama</strong> (improvised stance) charged into reach; the first hound breathed fire (<strong>11 dmg</strong>) and bit him.</li>
+      <li><strong>Panacea</strong> &mdash; Divine Lance (missed), repositioned for hex range.</li>
+      <li><strong>Cyrathul</strong> &mdash; attacked twice, bite missed.</li>
+      <li><strong>Bai Jian</strong> &mdash; <strong>Sudden Charge into a flank &rarr; natural crit, killing the first Hell Hound</strong> (cut in half). Not hero-pointed.</li>
+      <li>The <strong>second Hell Hound</strong> breathed fire on <strong>Cyrathul and Rama</strong> (Reflex). <strong>Rama crit-failed &rarr; double damage &rarr; dying.</strong> Cyrathul took the regular hit and ended <em>"at death's door &mdash; still standing."</em></li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li>The second hound kept worrying the downed Rama (<em>"so tasty it didn't want to pull away"</em>); Rama failed his recovery.</li>
+      <li><strong>Panacea</strong> healed <strong>Cyrathul</strong> &mdash; the triage call that sealed Rama's fate (Cyrathul was the one still up and salvageable).</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Exploit Vulnerability (cold weakness 5)</strong>, bite + claw (<strong>12</strong> with the weakness) &rarr; <strong>decapitated the second Hell Hound.</strong></li>
+    </ul>
+    <p><strong>Aftermath:</strong> <strong>Rama died of his burns</strong>, never revived. Recall Knowledge: Hell Hounds, immune to fire and visual effects. Panacea used <strong>Life Boost</strong> to finish healing Cyrathul.</p>
+    <p style="font-size:13px;color:var(--text-dim);"><em>Damage beyond the stated 11-point breath and 12-point claw was not individually announced; reconstructed from hit/crit calls.</em></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>The Orts (4 &mdash; including 1 Elite)</h3>
+    <div class="combat-meta">Initiative: Bai Jian &middot; Cyrathul &middot; Panacea &middot; Ort &middot; Elite Ort &middot; Ort &middot; Ort</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">4 Orts (1 Elite)</div></div>
+      <div><div class="combat-stat-label">Weaknesses</div><div class="combat-stat-value">Holy 3 / Silver</div></div>
+      <div><div class="combat-stat-label">Immune</div><div class="combat-stat-value">Fire, Mental</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Level 3</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; advanced and <strong>threw holy water at the Elite Ort, spending a hero point to hit</strong> (searing splash). Then <strong>Dueling Parry</strong>.</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>crit Exploit Vulnerability</strong>: <em>weak holy 3; resist physical except silver; resist poison; immune fire &amp; mental.</em> Bit (hero-pointed the reroll to land), but physical resistance blunted it (<em>"chewing on sandpaper"</em>).</li>
+      <li><strong>Panacea</strong> &mdash; switched to <strong>silver Needle Darts</strong> (on Bai Jian's prompt) and shredded the Elite Ort; tagged a second with a cantrip; healed Bai Jian; Trade-Life-for-Death hex <strong>saved against</strong> (no effect).</li>
+      <li><strong>Orts</strong> (slow, 20 ft) closed and flailed &mdash; misses, including a <strong>crit-miss</strong> on Bai Jian.</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; commanded <strong>Ren</strong> (Support: +1 attack, +1d6) and Struck.</li>
+      <li><strong>Cyrathul</strong> &mdash; Exploit-crit a second Ort, bit (<strong>13</strong>) + claw &rarr; <strong>obliterated it.</strong></li>
+      <li><strong>Panacea</strong> &mdash; crit with silver Needle Darts on a third; second Trade-Life-for-Death hex.</li>
+      <li><strong>Bai Jian + Ren</strong> &mdash; finished the last Ort, Ren's Strike softening it, Bai Jian's leaping spin driving the jian through its skull.</li>
+    </ul>
+    <p><strong>Outcome:</strong> all four Orts down. <strong>Party reaches level 3.</strong> The stump was an amateur practice ritual that spawned them. Loot: <strong>shield (~250 gp)</strong> + ritual supplies.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>The Iskari Slayers</h3>
+    <div class="combat-meta">Phase 1: Intimidation rout &middot; Phase 2: 2 Slayers + War-Wolf (init reconstructed)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Phase 1</div><div class="combat-stat-value">3 routed (50 XP)</div></div>
+      <div><div class="combat-stat-label">Phase 2</div><div class="combat-stat-value">2 Slayers + Wolf</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian, Cyrathul</div></div>
+      <div><div class="combat-stat-label">Captive</div><div class="combat-stat-value">1 (to the goblins)</div></div>
+    </div>
+    <h4>Phase 1 &mdash; Social Rout</h4>
+    <ul>
+      <li>The first three Slayers were driven off without a fight via repeated <strong>Intimidation</strong> &mdash; <strong>Cyrathul hero-pointed to 23</strong> and carried it solo (Bai Jian's aid attempts failed, no bonus). <strong>50 XP.</strong> Camp looted: 2 lesser healing potions, pouch of stolen trinkets.</li>
+    </ul>
+    <h4>Phase 2 &mdash; Combat</h4>
+    <ul>
+      <li><strong>Cyrathul</strong> &mdash; strode and bit the lead Slayer (Esoteric Lore: utterly unremarkable).</li>
+      <li><strong>Slayer 1</strong> &mdash; drew a short sword, missed, then cut Cyrathul across the chest.</li>
+      <li><strong>Bai Jian</strong> &mdash; <strong>Fleet</strong>-closed 30 ft, Struck, then Struck at MAP &rarr; <strong>hero-pointed crit &rarr; tore Slayer 1 in half.</strong></li>
+      <li><strong>War-Wolf</strong> bit Cyrathul; <strong>Gar</strong> (Slayer 2) dropped his bow for a short sword and missed into Bai Jian's <strong>Dueling Parry</strong> (AC 20).</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Battle Medicine</strong> on Cyrathul; <strong>Trade-Life-for-Death</strong> hex on the wolf, healing routed to Cyrathul.</li>
+      <li><strong>Cyrathul</strong> &mdash; Exploited the wolf (no weaknesses), <strong>crit-bit it for 19</strong>, flanked Gar.</li>
+      <li><strong>Bai Jian + Ren</strong> &mdash; dropped Gar to his knees (<em>"Mercy"</em>). Bai Jian's finishing swing over the <em>"slaving"</em> talk <strong>missed</strong> &mdash; reputation preserved. Gar manacled and handed to the goblins.</li>
+    </ul>
+  </div>
+
+  <div class="xp-banner">
+    Experience &middot; Forest Fire 60 &middot; Slayer Rout 50 &middot; Hell Hounds &amp; Orts (combat) = <strong>Level 3</strong> &middot; Reputation &asymp; 18
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the White Blade</h4>
+      <ul>
+        <li><strong>Sudden Charge crit &mdash; cut a Hell Hound clean in half</strong> on a natural 20, before the fight could turn.</li>
+        <li>Tracked Grizzo's trail in Umok, read the black-armored figure's boot prints into the Chitterwood, and dug the firebreak when Ren couldn't.</li>
+        <li>Opened the Ort fight with <strong>thrown holy water (hero-pointed)</strong> and called the <strong>silver weakness</strong> to Panacea &mdash; the read that broke the fight open.</li>
+        <li>Ran the <strong>Ren Support combo</strong> all through the Ort and Slayer fights; finished multiple enemies.</li>
+        <li><strong>Fleet + hero-point crit &mdash; tore an Iskari Slayer in half.</strong> Nearly executed the surrendered one over slaver talk; a missed swing kept the reputation clean.</li>
+        <li>Pocketed the 250-gp shield; floated a sword-and-board retrain.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Moon Dragon</h4>
+      <ul>
+        <li><strong>Decapitated the second Hell Hound</strong> with an Exploit-Vulnerability cold strike &mdash; after surviving its breath at death's door himself.</li>
+        <li>Crit his Exploit Vulnerability on the Orts and read the entire stat block, handing the party the silver line that won the fight.</li>
+        <li><strong>Crit-bit the war-wolf for 19</strong> and flanked the last Slayer for Bai Jian's finish.</li>
+        <li>Carried the entire Slayer rout solo on repeated Intimidation (hero-pointed to 23).</li>
+        <li>Deadpan diplomat all night: corrected a genocidal drunk on the nature of war (<em>"war&hellip; does, in fact, usually end"</em>) and leaned on <em>"I am a dragon"</em> to explain why the first three Slayers bolted.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Catfolk Witch</h4>
+      <ul>
+        <li>Stepped up the instant a burned goblin collapsed &mdash; <em>"I'm here"</em> &mdash; and kept Grizzo alive with Treat Wounds.</li>
+        <li>Carried the healing load all session: kept Cyrathul up through two fights (Heal, Life Boost, Battle Medicine).</li>
+        <li><strong>Silver Needle Darts</strong> were the Orts' undoing &mdash; a crit that <em>"exploded it all over the place."</em></li>
+        <li>Buffed the fire challenge with Guidance and felled branches with darts; learned <em>"save-or-suck"</em> the hard way when her hex bounced off a save.</li>
+        <li>Still-learning energy throughout &mdash; questions, Foundry crashes, and the session's best read on Zagnub: <em>"He's like Jar Jar Binks."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-rama">
+      <h4>Rama &middot; Fallen in the Chitterwood</h4>
+      <ul>
+        <li>Run by the DM after his player's departure. Charged the Hell Hounds alone and ate the first breath weapon.</li>
+        <li>The second hound's breath crit-failed him &mdash; double damage, up in flames, down to dying.</li>
+        <li>With the party's heals committed elsewhere, <strong>he was never revived. He died of his burns</strong>, and his body was left in the forest &mdash; a quiet end to a guest at the table.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-ren">
+      <h4>Ren &middot; the Boarhound</h4>
+      <ul>
+        <li>Tried gamely to dig a firebreak &mdash; paws too small, but he supervised.</li>
+        <li>Held a wordless "conversation" with a gnome who talks to boarhounds.</li>
+        <li>His <strong>Support benefit</strong> (+1 attack, +1d6) fed Bai Jian's finishing Strikes through both the Ort and Slayer fights.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Bracers of Missile Deflection</div><div class="loot-source">Ion Marbleberg &middot; Umok</div><div class="loot-note">Family heirlooms; reward for clearing the Hell Hounds.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Shield (~250 gp, level-6)</div><div class="loot-source">Orts' Ritual Hollow</div><div class="loot-note">6 hardness, 36 HP. Kept in the party stash for future members.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Oil of Potency</div><div class="loot-source">Bracknap &middot; Thorngrip</div><div class="loot-note">Reward for agreeing to drive off the Slayers.</div></div>
+    <div class="loot-item"><div class="loot-name">2&times; Holy Water</div><div class="loot-source">Umok Temple (purchased)</div><div class="loot-note">Bai Jian. One thrown at the Elite Ort.</div></div>
+    <div class="loot-item"><div class="loot-name">Ritual Supplies</div><div class="loot-source">Orts' Ritual Hollow</div><div class="loot-note">Valuable cache stashed in the stump.</div></div>
+    <div class="loot-item"><div class="loot-name">2&times; Lesser Healing Potion</div><div class="loot-source">Iskari Slayer Camp</div><div class="loot-note">Found in the tents.</div></div>
+    <div class="loot-item"><div class="loot-name">Pouch of Stolen Trinkets</div><div class="loot-source">Iskari Slayer Camp</div><div class="loot-note">Looted from the slavers.</div></div>
+    <div class="loot-item"><div class="loot-name">30 gp + loot sale</div><div class="loot-source">Vordia</div><div class="loot-note">20 gp haunt reward + 10 gp Umok; Robe of the Erinyes (55 gp), unholy text, Asmodeus statue, trinkets sold.</div></div>
+  </div>
+  <div class="xp-banner">
+    Forest Fire 60 &middot; Slayer Rout 50 &middot; Hell Hounds + Orts &rarr; <strong>Level 3</strong> &middot; Reputation &asymp; 18
+  </div>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The man in black / Viro Ahala</strong> &mdash; confirmed in the Chitterwood. The stump was only a <em>practice</em> ritual; the real working is still ahead. Bracknap's ancestors will point the way once the Slayers are dealt with.</li>
+      <li><strong>The Iskari Slayers</strong> &mdash; three fled into the woods, one manacled and given to the goblins. The three runners are still loose. Bracknap's favor is <em>mostly</em> fulfilled.</li>
+      <li><strong>Thorngrip &amp; Bracknap</strong> &mdash; a new goblin ally hub behind the thorn wall. Bracknap speaks for the ancestors (spectral goblins, blue-light eyes). Could become a recurring base deep in the Chitterwood.</li>
+      <li><strong>Zagnub</strong> &mdash; enthusiastic goblin scout, self-declared <em>"best friends"</em> with the party. Guide and comic relief; knows the forest cold.</li>
+      <li><strong>Grizzo</strong> &mdash; burned goblin cleared to stay in Umok under the gnomes' care. A small Hearts-and-Minds win that could sour if the fires continue.</li>
+      <li><strong>Rama's death</strong> &mdash; the party left a body in the woods. No burial, no word sent to Rhokrag, who dispatched him. A loose end with the Saringallow HQ.</li>
+      <li><strong>The party shield &amp; Bai Jian's build</strong> &mdash; Bai Jian floated retraining into sword-and-board. The 250-gp / level-6 shield sits in the stash; he lacks Shield Block to use it well.</li>
+      <li><strong>Two new players</strong> join next session &mdash; Bracknap foreshadowed <em>"new Longshanks,"</em> and the party stash is being held for future members.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "It's a monk. How hard can it be? Just enter a stance and just punch, I guess."<span class="attribution">Volunteering to run Rama's first turn for the DM &mdash; moments before Rama charges in and gets torched.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "So much for flanking. I trusted him. No. No."<span class="attribution">Watching Rama crit-fail the Hell Hound's breath and go up in flames right beside him.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "You should have left when you had the chance."<span class="attribution">After hero-pointing a crit that tore the lead Iskari Slayer in half.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Good thing I missed."<span class="attribution">After dropping the last Slayer to his knees and swinging anyway over the "slaving" talk &mdash; the miss is the only reason the party kept its clean reputation.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I lived to be munched another day."<span class="attribution">Surviving the Hell Hound's jaws on a topped-off heal.</span></blockquote>
+
+  <blockquote><strong>Iskari Slayer:</strong> "War never ends."<br><strong>Cyrathul:</strong> "I think that's actually one of its defining features. It does, in fact, usually end."<span class="attribution">Cyrathul, deadpan, correcting a genocidal drunk mid-standoff.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "They were a bit scared of me, I guess &mdash; which makes sense. I am a dragon."<span class="attribution">Explaining to the returning Slayers why their friends bolted.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I'm here."<span class="attribution">The quiet, still-learning new player stepping up the instant a burned goblin collapses and someone calls for a medic.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "What does save-or-suck mean?"<span class="attribution">Mid-combat, after her hex fizzles on a save &mdash; earnest first-timer energy.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "He's like Jar Jar Binks."<span class="attribution">On Zagnub, the relentlessly cheerful goblin scout. Not wrong.</span></blockquote>
+
+  <blockquote><strong>Zagnub:</strong> "Relax, Longshanks. If we wanted to kill you, we would have done so."<span class="attribution">Twenty goblins in the trees, one grinning scout, a deeply mixed reassurance.</span></blockquote>
+
+</section>
+
+<section>
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <section class="pax-notes">
+    <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Bai Jian did this session</h3>
+    <ul>
+      <li>Reported the Bright Embers cleansing in <strong>Vordia</strong>; sold the sisters' relics for operating funds. Reputation hit <strong>17</strong>.</li>
+      <li>Tracked <strong>Grizzo</strong>'s trail in Umok; helped calm her; convinced the gnome captain to shelter a goblin instead of expelling her.</li>
+      <li>Dug the firebreak in the forest-fire challenge (Ren too small to dig &mdash; directed him instead).</li>
+      <li><strong>Sudden Charge crit &mdash; cut a Hell Hound in half.</strong> The second hound's breath caught Cyrathul and Rama; Rama crit-failed and dropped. We never got back to him.</li>
+      <li>Opened the Ort fight with <strong>thrown holy water (hero-pointed)</strong>; called the <strong>silver weakness</strong> to Panacea, which broke the fight open.</li>
+      <li>Ran the <strong>Ren Support combo</strong> through the Ort and Slayer fights; finished multiple Orts.</li>
+      <li><strong>Fleet + hero-point crit &mdash; tore an Iskari Slayer in half.</strong> Tried to execute the last (surrendered) Slayer over slaver talk; missed, which kept the reputation clean.</li>
+      <li>Pocketed the <strong>250-gp shield</strong>; floated a possible sword-and-board retrain.</li>
+    </ul>
+
+    <h3>Things Bai Jian knows that the party does not</h3>
+    <ul>
+      <li>The stump in the woods was a <em>practice</em> ritual &mdash; Viro's real working hasn't happened yet. We're early, not late.</li>
+      <li>The Umok firewatch gnome put the man in black going <strong>out the western gate, past the patrol line.</strong> That bearing matched the boot prints we tracked.</li>
+      <li>Bracknap saw we'd traveled with goblins <em>before we said so</em> &mdash; the ancestors tell him things. Don't assume anything we hide from him stays hidden.</li>
+      <li>We left <strong>Rama's body</strong> in the forest. Rhokrag sent him. That conversation is still owed.</li>
+    </ul>
+
+    <h3>What Bai Jian is thinking about</h3>
+    <ul>
+      <li>I almost killed a man on his knees. The miss made the choice for me. Anathema is anathema &mdash; <em>cruelty toward the powerless</em> &mdash; but the slaver word got under my skin. Watch that.</li>
+      <li>Holy water + silver covers fiends, but I carry exactly two flasks and one's gone. Need a silver source that isn't Panacea's darts. The <strong>Silverscrap Bomb</strong> is still in the bag.</li>
+      <li>The shield is good and I can't use it right &mdash; no Shield Block. Either retrain for it or hand it to one of the two new members coming. Probably the latter.</li>
+      <li>Ren's Support is carrying my action economy. Lock Jaws at level 4 (Mature) turns him from a +1d6 into a grappler. Worth pushing toward.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>Where is Viro Ahala performing the <em>real</em> ritual, and how long until it fires? "Weeks" was the estimate &mdash; how many are left?</li>
+      <li>Will Bracknap's ancestors give a direction, or another favor? How far does goblin trust extend before it asks for blood?</li>
+      <li>Three Iskari Slayers are still loose in the Chitterwood. Do they regroup, or run for good?</li>
+      <li>Who are the two new Longshanks the ancestors keep hinting at &mdash; and do they arrive before or after we corner the man in black?</li>
+      <li>Does anyone at the Saringallow HQ need to hear that Rama is dead?</li>
+    </ul>
+  </section>
+</section>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes .pax-intro { color: var(--text-dim); padding-bottom: 14px; margin-bottom: 18px; border-bottom: 1px dashed var(--border-bright); }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+.pax-notes strong { color: var(--text-bright); }
+</style>
+
+</div>
+</body>
+</html>

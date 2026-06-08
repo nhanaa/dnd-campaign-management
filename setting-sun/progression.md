@@ -1,17 +1,21 @@
 # Progression — Tivael
 
-## Current Level: 7 (entering at 8)
+## Current Level: 8 (as of Session 3, 2026-06-07)
 
-## Level 8 Plan
+## Level 8 Picks
 
-### Class Feat (Bard 8)
-TBD — evaluate options at level 8
+### Class Feat (Bard 8) — ✅ TAKEN
+**Fortissimo Composition** — Focus spell. Spend a Focus Point to upgrade a composition cantrip's status bonus (+2 on success, +3 on crit success). The anthem-upgrade Tivael has been rolling since hitting level 8.
 
-### Skill Feat 8
+### Skill Feat 8 — ✅ TAKEN
 **Evangelize** — 1A, Master Diplomacy vs Will DC, Stupefied 1/2. Requires deity (Desna). Non-resource debuff that stacks with Bon Mot.
 
-### Free Archetype 8
-**Expert Sorcerer Spellcasting** or another Sorcerer archetype feat. Evaluate options — Expert Sorcerer Spellcasting gives rank 3 arcane slot at level 12.
+### Free Archetype 8 — ✅ TAKEN
+**Bloodline Breadth** — +1 spell slot and +1 repertoire spell for each archetype rank below your top two (at L8, that's rank 1 only → a 2nd rank-1 slot + 1 rank-1 spell known). (Expert Sorcerer Spellcasting still comes later at level 12, after Master Arcana at 11.)
+
+### Level 8 Sorcerer-Archetype Spell Picks — ✅
+- **Rank 3 (new slot from Basic Spellcasting at L8): Fireball** — the build's first real arcane AoE (6d6 fire, 20-ft burst, basic Reflex). Note the campaign's many high-Reflex enemies; pair with Bael/Tivael off-guard + save debuffs.
+- **Rank 1 (new slot from Bloodline Breadth): Overselling Flourish** — reaction when damaged; Will save → Dazzled (success) / Dazzled + Off-Guard (failure). No action cost; hands the martials off-guard on whoever hits Tivael.
 
 ### Ability Boosts (Level 10)
 TBD — likely DEX, CON, INT, CHA or WIS

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 3 — The Court, the Cooks, and the Globster Slog</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Court, the Cooks, and the Globster Slog</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 3</div>
+<div class="meta-row">
+  <span class="meta-pill">June 7, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 55m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 8</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:60%"></div>
+  <div class="comp-seg comp-rp" style="width:10%"></div>
+  <div class="comp-seg comp-explore" style="width:18%"></div>
+  <div class="comp-seg comp-social" style="width:7%"></div>
+  <div class="comp-seg comp-loot" style="width:5%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The "tri-ultimate" session of Shades of Blood picked up exactly where the last cliffhung: Ferrok's kicked-in door had woken a dormitory of <strong>Tokainen's Chosen</strong>, and the party — minus Raylta, whose player hadn't arrived yet — fought them prone, unarmored, and weaponless. Bael opened with a Solar Detonation that blinded the room, Tivael's Flurry of Claws crit for 64, and four PCs cleared the dorm before the fifth even logged in. Raylta arrived to a pile of corpses: <em>"Oh awesome, I came right on time."</em></p>
+  <p>Deeper into the floor, the party crashed a vampire's salon — two preening lords, <strong>Ilnaphrae</strong> and <strong>Xarbaene</strong>, lounging with a piano, a painting, and a court of enslaved human thralls. Bargrum traded insults (<em>"the only garbage I see here is you"</em>), and the fight turned on <strong>Tivael's rank-1 Fear landing a natural 1 on Xarbaene — Frightened 3 and fleeing</strong>. Ferrok cut down Ilnaphrae; Raylta softened the fleeing Xarbaene with a silver Moonbeam; and Bael finished him in the hallway with a flaming bow conjured "from the remaining fire." Mid-fight the party realized the thralls were enslaved humans, not undead — Raylta's mortified <em>"Oh, I thought they were undead. Oh, my bad"</em> — and they spared the survivors.</p>
+  <p>The middle was exploration: a clockwork prisoner-records archive (they looked up <strong>Nizca Iricold</strong>, the non-binary Strigoi mastermind, and confirmed via Augury that her at-large human lover <strong>Lagrassi</strong> is still alive), a scripture book of the vampire god <strong>Nin</strong>, a captive engineer <strong>Aruneth</strong> (and his fox familiar <strong>Kikiri</strong>), and a put-upon kitchen staff the party kept accidentally menacing. Aruneth named the floor boss — the Warden <strong>Tokainen</strong>, a meteor-hammer fighter-caster with a ghostly bear guardian. The back half was two grinding fights: four crit-immune <strong>globsters</strong> plus two ogres (Hurkum and Ogenni), then — as the party tried to evacuate freed prisoners — a second wave of <strong>seven Tokainen's Chosen</strong> that nearly broke them. Ferrok went down repeatedly, Raylta hit Cursebound 2 and danced on death's edge, and Tivael summoned a unicorn as an emergency heal-bot. They won, armed the freed prisoners with looted guisarmes, and sprinted for safety. The Warden still waits.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act combat">
+    <div class="act-label">Act I · Combat · The Dormitory</div>
+    <div class="act-card">
+      <h3>Tokainen's Chosen, Asleep (4 PCs)</h3>
+      <ul>
+        <li>Direct continuation of the S2 cliffhanger. The DM ruled the woken Chosen start <strong>prone, without armor, without weapons, at −4 initiative</strong> — the party got a strong jump.</li>
+        <li><strong>Bargrum tried to defuse it</strong>, "ruling diplomacy for initiative" — <em>"don't worry about it, just go back to sleep,"</em> then <em>"Oops, sorry about that, clumsy me."</em> It didn't take.</li>
+        <li><strong>Bael opened with Solar Detonation</strong> — the "small bead above the finger" that swelled into a room-filling blast. One Chosen crit-failed (blinded a minute); the rest were dazzled or blinded (treating the floor as difficult terrain).</li>
+        <li><strong>Tivael's Flurry of Claws crit</strong> for <strong>64 on Chosen F</strong> and 50 on Chosen B (force), on top of Courageous Anthem + Lingering, a Telekinetic Projectile, Electric Arc, and silver Needle Darts. On a kill: <em>"Now they're going to sleep forever. Never wake up again."</em></li>
+        <li>The Chosen still popped <strong>Cataclysm Brand</strong> repeatedly (one threw it blind), but <strong>Bargrum's Energy Interceptor</strong> ate the fire for Bael, and Ferrok's Gouging Claw Spellstrikes mopped up.</li>
+        <li>Bargrum dropped the final Chosen: <em>"Down he goes… that was probably all my luck for the session, so it's up to you guys now."</em></li>
+        <li><strong>Raylta's player arrived right after</strong> — <em>"Hello. Oh, welcome."</em> / Raylta: <em>"Oh awesome, I came right on time… sorry guys."</em> / Tivael, reassuring: <em>"No disaster has happened."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Vampires' Court</div>
+    <div class="act-card">
+      <h3>Ilnaphrae &amp; Xarbaene + Favored Thralls</h3>
+      <ul>
+        <li>A furnished salon: grand piano, harp, fine art. Two vampires — one playing piano while a human "danced," one drinking blood, one painting — plus human <strong>Favored Thralls</strong>. <em>"Look what delightful morsels visit our court, Ilnaphrae…"</em></li>
+        <li><strong>Bargrum's banter</strong>: <em>"First of all, I am more of a sour, less sweet. Second, we're here to clear,"</em> and <em>"you're speaking as if our lives are garbage, but the only garbage I see here is you."</em> Ferrok: <em>"the dead should stay dead. That's why we're here."</em></li>
+        <li><strong>Ilnaphrae</strong> produced a <strong>repeating crossbow</strong> (5 shots before reload, 120-ft range) and targeted the squishy Tivael; <strong>Bargrum intercepted.</strong></li>
+        <li><strong>Tivael's setup crit</strong>: Courageous Anthem + Lingering Composition — <strong>crit success at DC 24 → 4-round party buff</strong>. Ferrok self-Hasted into Arcane Cascade.</li>
+        <li><strong>Xarbaene turned to mist</strong> and floated to the backline; thralls buffed by <strong>Lord's Blessing</strong> swarmed Bargrum and Tivael.</li>
+        <li><strong>THE moment</strong>: after a Biting Words round (hero-pointed the reroll — <em>"I'll [use a] hero point. I hate this."</em>), Tivael cast a <strong>rank-1 Fear on Xarbaene → natural 1, critical failure: Frightened 3 + fleeing.</strong> <em>"It's a crit fail?! It's fleeing!"</em> — Raylta, incredulous: <em>"At rank 1?"</em></li>
+        <li><strong>Ferrok killed Ilnaphrae</strong> — Force Fang to recharge, then an Ignition Spellstrike (rerolled the miss): <em>"She is down."</em></li>
+        <li><strong>The chase on Xarbaene</strong>: Raylta had already tagged him with a silver <strong>Moonlight Ray (56)</strong> in the salon; now she shot the fleeing vampire with a <strong>Moonbeam (18)</strong> over Bargrum's head — <em>"Flee, coward. Oh, the provoke is so good"</em> / <em>"I do a finger gun and I just shoot right above Bargrum to get to him."</em> Bael finished him: <em>"He will raise up his arms, conjure a flaming bow, and using the remaining fire in the hallway, shoot him down."</em></li>
+        <li><strong>The thrall reckoning</strong>: the DM flagged the thralls as enslaved, not undead. Raylta, horrified — <em>"Oh, I thought they were undead. Oh, my bad"</em> — and the party stopped, <strong>Bargrum administering first aid to spare the survivors.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act III · Explore · The Archive &amp; the God Nin</div>
+    <div class="act-card">
+      <h3>Prisoner Records, Augury, and a Vampire God's Doctrine</h3>
+      <ul>
+        <li><strong>Clockwork records archive</strong>: a wall of clockwork filing cabinets. <strong>Tivael (Crafting) and Ferrok (Society) both succeeded</strong> (Ferrok: "I'll do society so I can feel like I'm helping" — <em>"Hey, there we go, you ARE helping!"</em>) and realized it's a <strong>prisoner-records system keyed to per-prisoner ciphers</strong>.</li>
+        <li><strong>Nizca</strong> → <em>Nizca Iricold, non-binary Strigoi vampire.</em> Methodical, obsessive, aloof. <strong>Known accomplice: their lover Lagrassi, a male human — still at large.</strong> Zatrine and Nalushae were also looked up; the current vampires were <strong>not</strong> in the records (followers, not former prisoners).</li>
+        <li><strong>An exploding door</strong> (Furious Explosion trap, 5d10 fire) caught the whole party when Bargrum tried a key; <strong>Bargrum intercepted for Raylta.</strong> Ferrok, deadpan: <em>"We're used to getting exploded on at this point."</em> (The key worked fine — "it's just a prank.")</li>
+        <li><strong>The book of Nin</strong> ("The Immaculate Solution"): scripture for the vampire god <strong>Nin</strong>, whose symbol is <strong>made of silver</strong>. The doctrine — <strong>overcoming vampire weaknesses through "logic, experimentation, and determination."</strong> Bael: <em>"if you want to be resistant to fire, you gotta burn yourself every day. That's how I am."</em></li>
+        <li><strong>Augury</strong> (new Aeon Stone): <em>"Is Lagrassi still alive?"</em> → <strong>Yes.</strong> Nizca's obsession isn't delusional — the lover lives, somewhere outside the tower.</li>
+        <li><strong>The garbage room</strong>: a tarp-covered chest triggered a <strong>Stinkface Surprise</strong> trap; Tivael saved. Inside: a haul of Aeon Stones (a <strong>Sprouting Aeon Stone</strong>, +8 temp HP on vitality heal → Bargrum), a Glittering Mask, and a mundane bracelet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · The Captive Engineer &amp; the Kitchen</div>
+    <div class="act-card">
+      <h3>Kikiri, Aruneth, and the Cooks They Kept Menacing</h3>
+      <ul>
+        <li><strong>Kikiri</strong>: a little fox/snake <strong>familiar</strong> found tidying a captive's room, who begged the party to save its master and pointed them to the northern workshop.</li>
+        <li><strong>Aruneth</strong>, the captive <strong>engineer</strong>: forced to maintain the tower's clockwork soldiers, guarded by a multi-armed construct. After the party's clumsy "we are your saviors" routine, he agreed to be freed once the Warden is dead.</li>
+        <li><strong>The intel</strong>: the floor boss is the Warden, <strong>Tokainen</strong> — a fighter-caster wielding a <strong>meteor hammer</strong>, with a guardian: <strong>an ethereal, ghostly bear.</strong> Currently praying at the giant <strong>Nin statue</strong> in the north room. Clockwork soldiers are weak to <strong>electricity</strong> (or bypassed by adamantine). <strong>Degg</strong> is on the top floor with Nizca, never leaves.</li>
+        <li><strong>The kitchen</strong>: a human head chef berating two sous-chefs — <strong>not enemies</strong>, just prison staff. The party's running gag of menacing the people they're saving peaked here: demanding <em>"a slow-cooked brisket"</em> and <em>"beef bourguignon,"</em> warning of "loud noises." DM: <em>"I'm loving the pattern of you all just being antagonistic toward the people you're trying to save."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Globster Slog</div>
+    <div class="act-card">
+      <h3>4 Globsters + Hurkum &amp; Ogenni</h3>
+      <ul>
+        <li>Passing a glass-less <strong>magical aquarium</strong>, four globster oozes slithered out — <strong>immune to critical hits</strong> (but taking crit <em>riders</em> like persistent fire), <strong>weak to electricity</strong> (discovered late), with grabbing tendrils and <strong>Nauseating Slap</strong> (stacking sickened), and enormous HP.</li>
+        <li><strong>Round-2 reinforcements</strong>: two ogres, <strong>Hurkum</strong> and <strong>Ogenni</strong>, the prisoners' guards. <em>"How'd they get out? We was watching them the whole time."</em> Ferrok: <em>"I'd rather fight them now than behind us when we fight the boss."</em> Tivael RK'd the ogres: <strong>best Fortitude, worst Reflex.</strong></li>
+        <li><strong>Tivael's first Wooden Double</strong>: Hurkum's crit triggered the reaction — the wooden block ate the ~57-damage hit (+25 HP absorbed) and Tivael stepped clear. <em>"Never used that spell."</em></li>
+        <li>A <strong>6-round grind</strong> — "bags of hit points that live to go forward and attack." Bargrum tanked and Boulder-Rolled, Bael chained Solar Detonations + Flying Flame birdies, Ferrok burned them with Ignition Spellstrikes (still igniting despite crit-immunity), Raylta nudged everyone topped up.</li>
+        <li><strong>Tivael's Electric Arc exposed the electricity weakness</strong> (<em>"big damage!"</em>); Bael pivoted to lightning. <strong>Ogenni</strong> fell to Bargrum's strikes; <strong>Hurkum</strong> to Bael's blasts; the last globster finally dropped to Ferrok — Tivael: <em>"Bring us home, Ferrok"</em> / <em>"It's down. Oh, finally. Finally. Oh my god."</em></li>
+        <li>Afterward the party freed <strong>7–8 abducted prisoners</strong> (sailors, not Aslanti), sending them out single-file. Call-center jokes: <em>"has everyone been meeting their KPIs?"</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Second Wave</div>
+    <div class="act-card">
+      <h3>7 Tokainen's Chosen (the near-TPK)</h3>
+      <ul>
+        <li>As the party tried to <strong>evacuate the prisoners and retreat to rest</strong>, a fresh squad of <strong>seven Chosen</strong> intercepted. <em>"Stop right there!"</em> — brands heating up — DM (Chosen): <em>"Kill the dwarf first."</em> Bargrum: <em>"from where we're standing, it seems more like you're the problem."</em></li>
+        <li><strong>The hardest fight of the session.</strong> Seven <strong>Cataclysm Brands</strong> meant relentless fire AoE (DM: <em>"We're a month out from 4th of July. Let's get some fireworks going."</em>), plus <strong>Take 'Em Down</strong> trip-strikes that kept PCs prone.</li>
+        <li><strong>Ferrok's collapse-and-rise loop</strong>: tripped → stabbed → dropped, repeatedly. Kept alive by Raylta's Heals, Bael's Healer's Gloves, and his own grit. Clutch: <strong>Sure Strike + Briny Bolt Spellstrike = "one shot, one kill" on Chosen F.</strong></li>
+        <li><strong>Raylta on the edge</strong>: Cursebound 2 / Enfeebled 2, repeatedly one hit from death, she <strong>stepped three times</strong> out of reach into Bargrum's intercept umbrella. <em>"I trust my team. Three times. I've never done that before."</em></li>
+        <li><strong>Tivael summoned a unicorn</strong> (Summon Fey) as a heal-bot — it cast a rank-3 Heal on Bael, then died tanking. Raylta: <em>"You know it's bad when we summon the unicorn."</em> Tivael also dropped <strong>Biting Words for 62 on Chosen A</strong>, a Flurry of Claws on B and C, Hidebound on himself, and a string of Demoralizes.</li>
+        <li><strong>Bael's clutch kill</strong>: a Flying Flame birdie "through his skull" finished Chosen G. <strong>Bargrum doesn't die</strong> — the immovable anchor — DM's words exactly.</li>
+        <li>All seven ground out (Tivael: <em>"We're suffering, guys"</em>). Loot: <strong>21× +1 Bola + 21× +1 Guisarme</strong> — handed to the freed prisoners (the "we build an army" bit). Party sprinted to safety to rest. <strong>Session called.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VII · Mystery · The Warden Waits</div>
+    <div class="act-card">
+      <h3>Still to Come</h3>
+      <ul>
+        <li>The Warden <strong>Tokainen</strong> — meteor-hammer fighter-caster with a ghostly bear guardian — remains un-fought, praying at the Nin statue in the north room. Next session's likely centerpiece.</li>
+        <li>The <strong>ghost bear</strong> is incorporeal — the party will want force / ghost touch / vitality / silver. They have <strong>only one ghost oil.</strong></li>
+        <li><strong>Aruneth and Kikiri</strong> await rescue, contingent on killing the Warden.</li>
+        <li>The DM is leaning toward <strong>three sessions left</strong> of Shades of Blood; the Ruby Phoenix StartPlaying link goes out next week. ("There's actually still a chonky bit to go.")</li>
+        <li>Severe Foundry lag plagued the whole session ("6 gigs of RAM"); the DM will switch to low-res maps next week.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Tokainen's Chosen Dormitory · 4 PCs · ~5 rounds</div>
+  <h4>Setup</h4>
+  <p>Direct continuation of the S2 cliffhanger. Six Chosen woke prone, unarmored, weaponless, at −4 initiative. Initiative: Chosen F, <strong>Bargrum, Tivael, Bael</strong>, Chosen B/D, <strong>Ferrok</strong>, Chosen C/A/E. Raylta's player absent — joined after.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li>Chosen F stood, grabbed a guisarme, strode in. <strong>Bargrum</strong> Shielding-Taunted the three nearest. <strong>Tivael</strong> cast Courageous Anthem + Lingering (3 rounds) + Telekinetic Projectile (15).</li>
+    <li><strong>Bael's Solar Detonation</strong> filled the room — one crit-fail (blinded 1 min), the rest dazzled/blinded. Blinded enemies treated the floor as difficult terrain. <strong>Ferrok</strong> stepped through the doorway (a reactive strike missed due to dazzle).</li>
+  </ul>
+  <h4>Rounds 2–5</h4>
+  <ul>
+    <li><strong>Tivael's Flurry of Claws crit</strong> — 64 on Chosen F (32 × 2) and 50 on Chosen B (force). Then Electric Arc on A+B, Demoralize, and Needle Darts.</li>
+    <li>The Chosen popped <strong>Cataclysm Brand</strong> repeatedly (one blind, splitting the burst). <strong>Bargrum's Energy Interceptor</strong> ate the fire for Bael; Defensive Advance strikes ground the line.</li>
+    <li><strong>Ferrok</strong> Gouging Claw Spellstrikes finished the cluster. <strong>Bael</strong> Thermal Nimbus + blasts + a flaming birdie. Bargrum dropped the last Chosen.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Six Chosen dead, no PC seriously hurt. Loot: 7× +1 Guisarme, 7× +1 Bola, locker supplies (Potion of Leaping, Salve of Antiparalysis, Moderate Healing Potions, an ancient golden necklace). Raylta arrived immediately after.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Ilnaphrae &amp; Xarbaene + Favored Thralls · 5 PCs · 4 rounds</div>
+  <h4>Setup</h4>
+  <p>Two vampire lords + several human Favored Thralls in the salon. Initiative: <strong>Ilnaphrae, Tivael, Ferrok, Bargrum, Raylta, Bael, Xarbaene</strong>, Thrall B/A/C.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Ilnaphrae</strong> fired her repeating crossbow at squishy Tivael; <strong>Bargrum intercepted</strong> (and again on the second shot's target). <strong>Tivael</strong> Courageous Anthem + Lingering — <strong>crit success (DC 24), 4 rounds</strong> — then Shield. <strong>Ferrok</strong> self-Hasted + Arcane Cascade. <strong>Raylta</strong> held back and cast Benediction.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Bael Solar Detonation</strong> on the thrall cluster (48 to Thrall A, 12 to B, splash to Ilnaphrae). <strong>Xarbaene</strong> feinted Bargrum, struck, then <strong>Turned to Mist</strong> and floated to the backline. Thralls (Lord's Blessing) swarmed Bargrum and Tivael.</li>
+  </ul>
+  <h4>Round 3 — the swing</h4>
+  <ul>
+    <li><strong>Tivael</strong> Biting Words (hero-point reroll), then a <strong>rank-1 Fear on Xarbaene → natural 1, crit fail → Frightened 3 + fleeing.</strong> <strong>Raylta</strong> had already tagged Xarbaene with a silver <strong>Moonlight Ray (56)</strong> in the salon. <strong>Ferrok</strong> Force Fang → Ignition Spellstrike (rerolled) <strong>killed Ilnaphrae.</strong> <strong>Bael</strong> demoralized and blasted thralls down.</li>
+  </ul>
+  <h4>Round 4 — the chase</h4>
+  <ul>
+    <li><strong>Xarbaene fled</strong>, provoking. <strong>Raylta</strong> chased with a silver <strong>Moonbeam (18)</strong> over Bargrum (the finger-gun shot); <strong>Tivael</strong> Telekinetic Projectile killed a thrall; <strong>Ferrok</strong> beheaded another (<em>"Off with his head"</em>). <strong>Bael killed the fleeing Xarbaene with a conjured flaming bow.</strong></li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Both vampires destroyed (silver + burned). The party stopped killing thralls on realizing they were enslaved, and first-aided the survivors. Loot: two Resilient Leather Armors, +1 Striking Frost Rapier, +1 Striking Shock Rapier, two +1 Repeating Crossbows, an <strong>Agate Ellipsoid Aeon Stone</strong> (Augury) and a <strong>Preserving Aeon Stone</strong> (Raylta), a Potion of Quickness, gold, and art objects.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · 4 Globsters + Hurkum &amp; Ogenni · 5 PCs · 6 rounds</div>
+  <h4>Setup</h4>
+  <p>By the magical aquarium. Four globsters round 1; the ogres Hurkum and Ogenni joined round 2. Initiative: <strong>Hurkum (R2), Ogenni (R2)</strong>, Globster C/A, <strong>Bael, Bargrum</strong>, Globster D/B (Tivael, Ferrok, Raylta also in order).</p>
+  <h4>Globster profile</h4>
+  <p><strong>Immune to crits</strong> (still take crit riders — persistent fire/bleed), grab tendrils, <strong>Nauseating Slap</strong> (stacking sickened), very high HP, <strong>weak to electricity</strong> (discovered round ~5). Mindless — mental debuffs are wasted on them.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>A globster grabbed/sickened Raylta. <strong>Bael</strong> Solar Detonations + Flying Flame birdies. <strong>Bargrum</strong> Shielding-Taunted and Boulder-Roll tripped. <strong>Tivael</strong> RK'd the ogres (best Fort / worst Reflex), then leaned into Electric Arc once the globsters' electricity weakness surfaced (<em>"That's why you recall knowledge, kids"</em>).</li>
+    <li><strong>Tivael's first Wooden Double</strong> absorbed Hurkum's crit (+25 HP block, step away). Both ogres had <strong>reach + reactive strike</strong>, and Ogenni chained Sweeping Hook + Punting Kick.</li>
+    <li><strong>Ferrok</strong> Ignition Spellstrikes (igniting despite crit-immunity); <strong>Bael</strong> pivoted to lightning; <strong>Raylta</strong> nudged everyone topped up.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p><strong>Ogenni</strong> dropped to Bargrum's strikes after heavy debuffs; <strong>Hurkum</strong> to Bael's blasts; the final globster fell to Ferrok (<em>"It's down. Oh, finally."</em>) at round 6. Party badly attrited; freed 7–8 abducted prisoners afterward.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · 7 Tokainen's Chosen, Second Wave · 5 PCs · the near-TPK</div>
+  <h4>Setup</h4>
+  <p>The party tried to evacuate prisoners and retreat; a second squad of seven Chosen intercepted. <em>"Kill the dwarf first."</em> Initiative: Chosen B/E, <strong>Raylta, Ferrok</strong>, Chosen G, <strong>Tivael, Bael</strong>, Chosen C/A/D/F.</p>
+  <h4>The threat pattern</h4>
+  <p>Seven <strong>Cataclysm Brands</strong> = relentless fire AoE bunched on whoever clustered (<em>"healing provokes aggro"</em>), plus <strong>Take 'Em Down</strong> trip-strikes that kept PCs prone. The session's near-death fight.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Ferrok</strong> tripped → stabbed → dropped, repeatedly; stayed up via Raylta's Heals, Bael's Healer's Gloves, and Vital Beacon supplication. Clutch: <strong>Sure Strike + Briny Bolt Spellstrike = "one shot, one kill" on Chosen F</strong> (42 weapon + 60 Briny Bolt).</li>
+    <li><strong>Raylta</strong>, Cursebound 2 / Enfeebled 2, one hit from death repeatedly, <strong>stepped three times</strong> out of reach into Bargrum's intercept range (<em>"I trust my team"</em>); burned Heals, Nudges, Healer's Gloves, a Potion Patch.</li>
+    <li><strong>Tivael</strong>: Biting Words (62 on Chosen A), Flurry of Claws on B + C (Demoralize first), <strong>Summon Fey unicorn</strong> as a heal-bot (rank-3 Heal on Bael, then tanked a fatal hit), Hidebound on self, repeated Demoralizes.</li>
+    <li><strong>Bael</strong>: Solar Detonations (the last mostly whiffed the saves — the "Pass. Pass. Pass…" wall), Flying Flame birdies (<strong>killed Chosen G</strong> "through his skull"), Demoralize, Healer's Gloves, Treat Wounds, Thermal Nimbus.</li>
+    <li><strong>Bargrum</strong>: the immovable anchor — Group/Shielding Taunt to pull the squad, Intercept after Intercept for Raylta, trips, Defensive Advance. <em>"Bargrum doesn't die. We've established this."</em></li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>All seven Chosen killed after a long, brutal slog (Tivael: <em>"We're suffering, guys"</em>). Loot: 21× +1 Bola + 21× +1 Guisarme — handed to the freed prisoners. Party sprinted to safety to rest. Session called.</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Fear That Made a Vampire Run ★</h4>
+    <ul>
+      <li><strong>Critical-failed a vampire lord with a rank-1 Fear.</strong> The session's defining play: a <em>rank-1</em> Fear on Xarbaene rolled a <strong>natural 1 → Frightened 3 + fleeing</strong>, turning the back half of the salon fight into a chase the party won. (Raylta: <em>"At rank 1?!"</em>)</li>
+      <li><strong>Flurry of Claws crit (64) in the dormitory</strong> — opened the session's first fight by force-clawing Chosen F for 64 (crit) and Chosen B for 50.</li>
+      <li><strong>Courageous Anthem crit success</strong> (DC 24) for a 4-round party buff — his second straight session leading with a strong Lingering Composition.</li>
+      <li><strong>First Wooden Double of the campaign</strong> (globster fight) — Hurkum's crit hit the wooden block instead of Tivael, who stepped clear.</li>
+      <li><strong>First Summon Fey / unicorn of the campaign</strong> (final fight) — a panic heal-bot that landed a rank-3 Heal on Bael before dying as a meat shield. The right call in a fight that nearly TPK'd.</li>
+      <li><strong>Damage when it mattered</strong>: Biting Words (62 on Chosen A, 33 earlier), Flurry of Claws on two Chosen, the Electric Arc that exposed the globsters' weakness, Telekinetic Projectile kills, dorm-clearing Needle Darts.</li>
+      <li><strong>Knowledge lane</strong>: succeeded the Crafting check on the clockwork archive (Ferrok took Society), read the Nin scripture, RK'd the ogres. <em>"I'm scary due to knowledge. Make sure to study, guys."</em> / <em>"Knowledge is power."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum Stonefist · the Wall That Doesn't Die</h4>
+    <ul>
+      <li><strong>"Bargrum doesn't die. We've established this."</strong> — the DM's own verdict after the dwarf soaked an entire squad of Chosen onto himself with Group/Shielding Taunt and Intercept.</li>
+      <li><strong>Diplomacy-for-initiative</strong> on the sleeping dorm — <em>"just go back to sleep"</em> / <em>"Oops, sorry about that, clumsy me"</em> — a great failed bit that still set the tone.</li>
+      <li><strong>Energy Interceptor</strong> carried both Chosen fights, eating Cataclysm Brand fire bound for Bael, Raylta, and Tivael.</li>
+      <li><strong>Intercept + the railing rescue</strong>: in the final fight he repeatedly stepped/strode into range to take Raylta's hits when she was one stab from death.</li>
+      <li><strong>Boulder Roll / trips</strong> kept the ogres and Chosen off-balance through the slog.</li>
+      <li><strong>The insult war</strong> with the vampires — <em>"the only garbage I see here is you"</em> — and the gentler beat after, administering first aid to the freed thralls.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok the Unyielding · Down Five Times, Still Swinging</h4>
+    <ul>
+      <li><strong>Killed Ilnaphrae</strong> with a Force-Fang-recharged Ignition Spellstrike (rerolled the miss to land it).</li>
+      <li><strong>"One shot, one kill"</strong> — Sure Strike + Briny Bolt Spellstrike vaporized Chosen F in the brutal final fight, exactly when the party needed a body off the board.</li>
+      <li><strong>Took the most punishment, again</strong> — Take 'Em Down tripped and stabbed him to the floor repeatedly; he kept standing back up. <em>"I think I'm going down regardless."</em> … and did, more than once.</li>
+      <li><strong>Reach stance</strong> (10-ft bastard sword) let him strike from relative safety late in fights.</li>
+      <li><strong>Voice of the mission</strong> — <em>"the dead should stay dead. That's why we're here"</em> — and the party trauma deadpan, <em>"We're used to getting exploded on at this point."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · The Doctor Who Explodes</h4>
+    <ul>
+      <li><strong>Two clean kills</strong>: the flaming-bow finish on the fleeing Xarbaene (<em>"using the remaining fire in the hallway, shoot him down"</em>) and the birdie-through-the-skull on Chosen G.</li>
+      <li><strong>Solar Detonation as the universal opener</strong> — blinded the whole dorm round 1 and alpha-struck the vampire thralls; it whiffed most saves on the final Chosen squad (won on single-target grind, not the alpha).</li>
+      <li><strong>Pivoted to support</strong> in the grindy back half: Healer's Gloves on Ferrok, real-time Treat Wounds, Thermal Nimbus fire-resist bubble, Salve of Antiparalysis on standby.</li>
+      <li><strong>Adapted to electricity</strong> once the globsters' weakness surfaced, switching from fire to lightning.</li>
+      <li><strong>In-character all session</strong>: <em>"In that case, I shall explode,"</em> <em>"if you want to be resistant to fire, you gotta burn yourself every day,"</em> and <em>"Room service. Any occupants, please show yourself."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta Cailleach · One Hit From Death, All Fight</h4>
+    <ul>
+      <li><strong>Softened and chased Xarbaene</strong> with two silver hits — Moonlight Ray (56) in the salon, then a Moonbeam (18) finger-gun over Bargrum's head — betting correctly on his silver weakness and setting up Bael's kill.</li>
+      <li><strong>The conscience of the party</strong> — <em>"Oh, I thought they were undead. Oh, my bad"</em> — the line that pivoted the thrall fight from slaughter to rescue.</li>
+      <li><strong>Carried the heal load</strong> through two attrition fights: Nudge the Scales near-cooldown, multiple rank-3 Heals, Healer's Gloves, a Potion Patch (<em>"Oh, it was only 20? Goddammit. Cheap potion"</em>), and a pre-cast Vital Beacon reservoir.</li>
+      <li><strong>Cursebound 2 / Enfeebled 2</strong> by the final fight, repeatedly one hit from going down — <em>"I trust my team. Three times. I've never done that before"</em> — stepping out of reach into Bargrum's intercept umbrella.</li>
+      <li>Still found the <strong>finger-gun comedy</strong> with Bargrum: <em>"High five. We've blown our finger guns. Jackpot."</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Frost Rapier</div>
+    <div class="loot-source">Xarbaene</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Shock Rapier</div>
+    <div class="loot-source">Ilnaphrae</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Aeon Stone (Agate Ellipsoid)</div>
+    <div class="loot-source">Xarbaene</div>
+    <div class="loot-note">Augury 1/day (used to confirm Lagrassi is alive). Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Aeon Stone (Preserving)</div>
+    <div class="loot-source">Ilnaphrae</div>
+    <div class="loot-note">Innate Stabilize cantrip. Raylta claimed.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Aeon Stone (Sprouting)</div>
+    <div class="loot-source">Garbage-room chest</div>
+    <div class="loot-note">+8 temp HP when healed by a vitality effect. Bargrum (now orbiting 3 stones).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Potion of Quickness</div>
+    <div class="loot-source">Vampire salon</div>
+    <div class="loot-note">Free Haste. Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">"The Immaculate Solution"</div>
+    <div class="loot-source">Office desk</div>
+    <div class="loot-note">Nin scripture — vampire weakness "perfection" doctrine. Tivael reads Azlanti.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">2× Resilient Leather Armor + 2× +1 Repeating Crossbow</div>
+    <div class="loot-source">Ilnaphrae / Xarbaene</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Locker supplies</div>
+    <div class="loot-source">Dormitory</div>
+    <div class="loot-note">Potion of Leaping (Raylta), Salve of Antiparalysis (Bael), Moderate Healing Potions (Ferrok, Tivael), ancient golden necklace.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">28× +1 Guisarme / +1 Bola</div>
+    <div class="loot-source">Tokainen's Chosen (both waves)</div>
+    <div class="loot-note">7+7 from the dorm, 21+21 from the second wave — being handed to the freed prisoners. "We build an army."</div>
+  </div>
+</div>
+<div class="xp-banner">No level-up this session — the party remains <strong>Level 8</strong> (leveled in S2). XP was not announced on-stream.</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "Now they're going to sleep forever. Never wake up again."
+  <span class="attribution">Finishing a Tokainen's Chosen in the opening dormitory fight — they really should have stayed asleep.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "It's a crit fail?! It's fleeing!" — <strong>Raylta</strong>: "At rank 1?"
+  <span class="attribution">A rank-1 Fear lands a natural 1 on the vampire lord Xarbaene — Frightened 3 and running. The play that broke the salon fight open.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I'm scary due to knowledge. That's why — make sure to study, guys."
+  <span class="attribution">After Recall Knowledge and the archive checks. Later, on his way out: "Knowledge is power."</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "You're speaking as if our lives are garbage, but the only garbage I see here is you."
+  <span class="attribution">Trading insults with the vampire lords before the salon fight.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Oops, sorry about that. Clumsy me."
+  <span class="attribution">Trying — and failing — to talk the woken Chosen back to sleep at the top of the session.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "The dead should stay dead. That's why we're here."
+  <span class="attribution">The mission statement, delivered to a pair of preening vampires.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "We're used to getting exploded on at this point."
+  <span class="attribution">After an office door detonates 5d10 fire on the whole party. It was, in fact, just a prank.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "In that case, I shall explode."
+  <span class="attribution">Bael's answer to most situations, healing and otherwise.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "He will raise up his arms, conjure a flaming bow, and using the remaining fire in the hallway, shoot him down."
+  <span class="attribution">The cinematic finish on the fleeing vampire Xarbaene.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Oh, I thought they were undead. Oh, my bad."
+  <span class="attribution">The realization that the "enemies" were enslaved humans — the line that turned a slaughter into a rescue.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "I trust my team. Three times. I've never done that before. That fucking sucks."
+  <span class="attribution">One hit from death in the final fight, stepping three times out of reach into Bargrum's intercept umbrella.</span>
+</blockquote>
+
+<blockquote>
+  <strong>DM</strong>: "We're a month out from 4th of July. Let's get some fireworks going."
+  <span class="attribution">Seven Tokainen's Chosen popping their Cataclysm Brands in unison.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Warden, Tokainen</strong> — the floor boss, still un-fought. A fighter-caster with a meteor hammer and a ghostly bear guardian, praying at the Nin statue in the north room. (Is this the same Tokainen the Chosen serve, or a namesake?)</li>
+  <li><strong>The ghost bear</strong> — incorporeal; the party will want force / ghost touch / vitality / silver (Tivael's Flurry of Claws force, Needle Darts silver, Raylta's silver Moonlight, Bael's one ghost oil).</li>
+  <li><strong>Aruneth (engineer) + Kikiri (familiar)</strong> — awaiting rescue, contingent on killing the Warden.</li>
+  <li><strong>The clockwork archive</strong> — any named NPC can now be looked up for prison records (ciphers permitting). Worth revisiting with new names.</li>
+  <li><strong>Nin, the vampire god</strong> — doctrine of perfecting vampires past their weaknesses (silver-immunity theory). Are Nizca's elite vampires Nin-enhanced? Will silver stop working up the tower?</li>
+  <li><strong>Nizca Iricold &amp; Lagrassi</strong> — Nizca is non-binary Strigoi; their human lover Lagrassi is confirmed alive and at large (Augury). How is a "human" alive after a thousand-year-old record? Immortal? Turned?</li>
+  <li><strong>Degg</strong> — on the top floor with Nizca, never leaves. Built the Shadow Beacon.</li>
+  <li><strong>Freed prisoners ("our own army")</strong> — the party handed ~28 looted guisarmes/bolas to the rescued sailors. Mostly a running table joke, not a real strategic plan.</li>
+  <li><strong>Three sessions left</strong> of Shades of Blood per the DM, then the Ruby Phoenix StartPlaying link (same group, fresh Foundry page for new players).</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Warden Waits</span>
+  <p>Two vampire lords, six globsters, two ogres, and thirteen Tokainen's Chosen lie dead behind them. The party limps back to rest, an army of freed prisoners clutching looted guisarmes at their heels — and somewhere north, the Warden Tokainen keeps praying at a silver-faced god, a ghostly bear at his side.</p>
+  <div class="big-line">"I still haven't even met the boss yet."</div>
+  <span class="speaker">— Tivael, mid-fight, four combats deep</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Opened the dormitory fight with Courageous Anthem + Lingering, a Flurry of Claws crit (64 on Chosen F, 50 on B), then ground Chosen down with Telekinetic Projectile, Electric Arc, Demoralize, and Needle Darts. Four of us cleared the room before Raylta's player even logged in.</li>
+  <li><strong>Crit-failed Xarbaene with a <em>rank-1</em> Fear (natural 1) → Frightened 3 + fleeing.</strong> This won the salon fight — and it was a rank-1 slot. Fear's crit-fail rider (Frightened 3 + fleeing for 1 round) is brutal on a single high-value target even unheightened; keep a cheap Fear ready for the Warden.</li>
+  <li>Courageous Anthem + Lingering <strong>crit success</strong> (DC 24) → 4-round party buff. Best possible opener; the DC at level 8 is 24.</li>
+  <li><strong>First Wooden Double ever</strong> — Hurkum's ogre crit hit the wooden block instead of me (+25 HP absorbed, stepped clear). Remember it requires a Step on trigger.</li>
+  <li><strong>First Summon Fey (unicorn) ever</strong> — used it as an emergency heal-bot in the final fight (rank-3 Heal on Bael, then it died tanking). Good panic button; the unicorn casts, not me, so I keep my actions for buffs/debuffs.</li>
+  <li>Biting Words carried real damage (62 on Chosen A, 33 earlier; the rank-4 8d6 sonic adds up over its 3 attacks). Flurry of Claws on two Chosen (force).</li>
+  <li><strong>Electric Arc exposed the globsters' electricity weakness</strong> — the table didn't RK them, and I stumbled into it. RK the oozes next time before guessing.</li>
+  <li>Knowledge lane: passed the Crafting check on the clockwork archive (Ferrok took Society); read the Nin scripture (Azlanti); RK'd the ogres (worst Reflex).</li>
+  <li>Spent a hero point on the Biting Words reroll. Survived the AoE back half on Shield + Hidebound + staying spread out.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li><strong>Nin's doctrine</strong> (read the scripture myself, in Azlanti): the vampire god's whole project is <em>overcoming vampire weaknesses through logic, experimentation, and determination</em> — the silver symbol is the tell. If Nizca's vampires are Nin-enhanced, <strong>silver may stop working</strong> on the deeper ones. Don't assume silver Needle Darts / Moonlight always bypass resistance up the tower.</li>
+  <li><strong>Lagrassi is alive</strong> (Augury: yes). Nizca's lover, a "human" listed at large in a thousand-year-old record. Not an ordinary man — likely immortal or turned. Nizca's entire plan may be about reaching him.</li>
+  <li><strong>The clockwork archive</strong> keys records to per-prisoner ciphers. With a name, we can pull anyone's file. Keep a running list of names to look up (and we can come back).</li>
+  <li>The thralls in the salon were <strong>enslaved humans, not undead</strong> — I clocked it a beat late too. For the Warden's room, confirm what's actually undead before opening with anti-undead tools.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li><strong>The Warden (Tokainen) + ghost bear</strong>: incorporeal guardian means <strong>force / ghost touch / vitality / silver</strong> only. My <strong>Flurry of Claws (force)</strong> is premium here, and silver Needle Darts. We have <strong>one</strong> ghost oil between us — that's a problem for a melee-heavy party against an ethereal bear. Buy/loot more, or lean on Raylta's vitality and my force.</li>
+  <li><strong>Mental debuffs are wasted on mindless enemies</strong> (the globsters ate my Dirge/Fear for nothing). Save Dirge/Fear/Bon Mot for the Chosen and the Warden (intelligent); use Worm's Repast / Electric Arc / Needle Darts on mindless or construct foes.</li>
+  <li><strong>Persistent fire from the Chosen is still the worst incoming damage.</strong> Seven brands = unavoidable AoE. Rallying Anthem + spreading out + Bael's Thermal Nimbus helped, but we have no real persistent-damage counter. A Cleanse Affliction source would change these fights.</li>
+  <li><strong>Summon Fey unicorn as a second healer</strong> worked — it offloads heals so Raylta isn't the single point of failure (she nearly died in the Chosen wave at Cursebound 2). Keep a rank-4 slot for it on hard fights.</li>
+  <li>Handed the freed prisoners ~28 looted guisarmes/bolas — the "we have our own army" bit. (Just a joke at the table, not an actual plan.)</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Is the Warden "Tokainen" the same Tokainen</strong> the Chosen keep invoking, or a namesake? If the same, the brands and the meteor-hammer boss are one cult.</li>
+  <li><strong>How do we beat the ghost bear</strong> with one ghost oil? Front-load Flurry of Claws on it and let Raylta's vitality do the rest?</li>
+  <li><strong>Can we actually free Aruneth and Kikiri</strong> after the Warden, and will Aruneth turn the clockwork soldiers off — or on, for us?</li>
+  <li><strong>What is Lagrassi</strong>, and does finding him matter to stopping Nizca, or is it a separate lever?</li>
+  <li><strong>Does silver still work</strong> up the tower if Nin's project succeeded on the elite vampires? Keep a backup damage type (force, fire, vitality) ready.</li>
+  <li>Three sessions left of Shades of Blood — then Ruby Phoenix. Tivael's likely 10th level by the transition.</li>
+</ul>
+
+</section>
+
+</body>
+</html>
