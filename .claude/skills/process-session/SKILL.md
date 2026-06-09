@@ -48,8 +48,15 @@ These are concrete errors that have happened in real sessions. Scan this list ev
 **Damage numbers:**
 - If a damage tick number is "unstated" in the transcript (e.g. Heat Metal sustain on the cast turn), ASK PAX rather than writing "unstated." He tracks his own damage.
 
+**Roleplay representation (the most common failure — see Foundational Principle #2):**
+- The pipeline reliably nails combat math and under-serves roleplay. Half the table is RP; the recap must be too. Build every Character Spotlight from the **Roleplay Inventory** (Step 5), not from whatever lines were loudest.
+- **Never characterize a player by their combat one-trick, a fumble, or their self-deprecating jokes.** A sharp roleplayer must read as sharp. (Real failure: Izka — a deft diplomat/arcanist — was written as a "lame" one-trick because his RP was overlooked. It took multiple correction passes.)
+- Dig for the quiet players' RP; it hides in mechanical chatter. Cover everyone, not just Pax.
+- Don't fabricate or pad RP, and **never source a quote/beat from a VAD-merged run-on or a `[cleaned]` rewrite** (see the Fabrication Guard in Step 5). Two beats had to be retracted last session for exactly this.
+
 **Quote selection:**
 - Don't fill the Mist quote slots with tactical-only lines (Heat Metal plan, sustain narration, persuasion attempt). Mix in character voice — panic moments, covert RP, comedy, schemes. The cleanup report's per-character quotable list is a *menu*, not the answer; pick the lines that show character, not the lines that are easy to defend.
+- Each PC's quotes should be their *strongest, most-characterful* lines — not their easiest or loudest. A self-deprecating combat aside is rarely a PC's best line.
 - Hard cap: 2-4 quotes per PC, 10-14 total. Count before finalizing.
 
 **Subagent reports are inputs, not authority:**
@@ -94,6 +101,26 @@ If after running the five capability tests an attribution is still ambiguous bet
 - Inventing a "running joke" out of a Whisper mishear that was never actually said at the table.
 
 The reviewer subagents in Steps 5.5 and 5.6 enforce these tests systematically. The main agent's Step 5.4 pre-audit catches them before the reviewers run.
+
+## Foundational Principle #2: Faithful Roleplay Representation
+
+**Attribution accuracy (above) is necessary but NOT sufficient. A recap that gets every hit, spell, and kill credited correctly and still represents the players' roleplay poorly is a FAILED recap.** This pipeline has historically over-invested in combat-mechanical accuracy and under-invested in roleplay — to the point of making sharp players read as flat, "lame," or one-note. That is the single most common quality failure, and it is just as serious as a wrong kill credit.
+
+The table is ~50/50 RP and combat (Pax's stated preference). The recap must reflect that balance. Roleplay is not flavor you sprinkle on after the combat math — it is **half the session**, and it deserves the same depth of sourcing, the same per-character rigor, and its own review pass.
+
+### What faithful roleplay representation requires
+
+1. **Represent each player at their best, in their own register.** Find each character's *sharpest* in-fiction moments — the clever line, the shrewd negotiation, the principled stand, the deduction, the relationship beat — not just the loudest or easiest-to-quote one. A player who delivered a deft diplomatic exchange should not be characterized by a self-deprecating combat aside.
+
+2. **Never reduce a character to a single note.** Do NOT build a character's portrayal out of (a) their self-deprecating jokes, (b) a fumble or whiff, or (c) their combat one-trick. Those can appear, but only alongside their actual agency and voice. If your spotlight for a PC reads as "lame," "one-note," or "comic relief only," you have mischaracterized a real person's play — go back and dig.
+
+3. **Capture comedy and character voice, not just plot and mechanics.** The bits, the running gags, the deadpan, the distinctive phrasings, the in-character RP — these ARE the session for half the table. A recap that captures every plot beat and zero jokes has missed half of what happened.
+
+4. **Cover every player, not just Pax.** Pax gets the dedicated "Pax's Notes" journal, but every other player deserves a Character Spotlight with real depth — their RP, their agency, their comedy — proportional to what they actually did, not to dice volume or who spoke loudest.
+
+5. **Do not fabricate or pad RP.** A shorter, true spotlight beats a padded one. Never invent a beat, and never source a quote or RP claim from a garbled/merged/hand-rewritten transcript line (see the fabrication guard in Step 5). Every RP beat must trace to a verifiable, single-speaker line.
+
+This principle is enforced by a dedicated **Roleplay Inventory** (Step 5), specific **Character Spotlight Guidelines** (Step 5), RP checks in the **Step 5.4 self-audit**, and a dedicated **Roleplay-Coverage Review subagent (Step 5.6b)** — the RP-side equivalents of the capability matrix and combat review.
 
 ## Pipeline Steps
 
@@ -259,6 +286,8 @@ If Pax says "skip / no extras," proceed. If he provides items, store them locall
 - The cleanup report's flagged caveats — these are not informational; they are **action items**. If the report says "left as Talya but writer should verify Cleric spell attributions," that's a directive to do a class-mechanic pass over Talya's quoted lines.
 - The character sheet for every PC named in the recap — confirm pronouns, class features, and self-presentation notes from the Backstory section.
 
+> **FABRICATION GUARD (read every time).** The cleanup subagent (Step 2.5) does two things that are *fabrication risks* downstream: it **VAD-merges** short segments into run-on lines, and it **hand-rewrites** heavily-garbled passages. A merged or rewritten line can splice multiple speakers together or invent phrasing that was never said. **Never source a quote, a character beat, or an attributed action from a merged run-on blob or a `[cleaned]`-tagged rewrite.** Before you put any quote or RP claim in the recap, confirm it is a clean, single-speaker line — if a line reads as a run-on splice of several speakers (e.g. a 4-line block that swerves topic and voice), do NOT attribute it to anyone; drop it or use only the clearly-attributable fragment, and if it matters, check the raw SRT at `dnd-transcription/transcripts/<name>.srt`. Past failures: a fabricated "self-detonation" beat and a fabricated player line ("never wash this hand again") both came from rewritten/merged blobs and had to be retracted. When in doubt, leave it out.
+
 Before declaring outcomes, applying pronouns, or framing scenes:
 
 1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (e.g. "Mist" sounds androgynous; the character sheet uses he/him). When in doubt about a cameo NPC's pronouns, ask Pax.
@@ -270,6 +299,8 @@ Before declaring outcomes, applying pronouns, or framing scenes:
 4. **Cameo / late-joining NPCs** — confirm whether the DM re-rolled initiative or just slotted them in at their actual roll. Check the transcript for the DM saying "back at the top of the initiative" (= restart from existing order) vs. "everyone re-roll" (= full re-roll). These produce very different round structures.
 
 5. **Class features and mechanics** — every quoted casting/ability use should be matched to the character whose class supports it. Diarization mis-attribution is common; the transcript label is a hint, not ground truth. Cross-reference `<campaign>/dynamics.md` and `<campaign>/character-sheet.md` for class abilities.
+
+6. **Build a Roleplay Inventory (REQUIRED — the RP equivalent of the combat capability matrix).** Before writing, walk the transcript chronologically and, **per character (scan each player individually, not by dice/speaking volume)**, list their notable NON-combat beats with timestamps: in-character decisions, negotiations/social rolls, deductions, principled or moral stands, relationship beats, distinctive voice/phrasings, comedy and running gags. Do this for EVERY player including the quiet ones — lower-volume speakers often carry the best RP buried in mechanical chatter. This inventory is what the Character Spotlight and Memorable Quotes are built from. Skipping it is how players end up flat or one-note. (For a session this is ~5–15 beats per character; if you have fewer than 3 for anyone, you haven't dug hard enough — re-scan their lines.)
 
 Once you have the full picture, create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md` with:
 
@@ -295,7 +326,7 @@ Once you have the full picture, create `<campaign>/sessions/session-<N>-<MM>-<DD
 <Chronological list of major plot points, organized by scene/act>
 
 ## Character Spotlight
-<Per-character notable actions, organized by character name>
+<Per-character section. For EACH player character, lead with roleplay/character, not just mechanics — see Character Spotlight Guidelines below. Combat is one facet, not the whole entry.>
 
 ## Combat Encounters
 <For each combat: enemies, key rolls, dramatic moments>
@@ -312,6 +343,24 @@ Once you have the full picture, create `<campaign>/sessions/session-<N>-<MM>-<DD
 ## Pax's Notes — <Character Name>'s Journal
 <See Pax's Notes guidelines below>
 ```
+
+**Character Spotlight Guidelines:**
+
+This section is where roleplay representation lives or dies. Build each PC's entry from the **Roleplay Inventory**, not from whatever lines were easiest to remember.
+
+**Per PC, the spotlight must cover (in roughly this priority):**
+1. **Who they were this session** — their sharpest character/voice moment and their in-fiction *agency*: a decision they drove, a negotiation they ran, a deduction, a moral stand, a relationship beat. Lead with this.
+2. **Their comedy / running gags** — if they were funny, show it. The bits are half of why people play.
+3. **Their combat contribution** — accurate and credited (see combat review), but as ONE facet, not the entire entry.
+
+**Hard rules (violating these = a failed spotlight, fix before continuing):**
+- **No character reduced to one note.** If a PC's entry is built only from their combat one-trick, a fumble, or self-deprecating jokes, it is wrong. A player who roleplayed sharply must read as sharp. Self-deprecation and whiffs may appear *alongside* real agency, never *as* the characterization.
+- **Lead with character, not mechanics.** A spotlight that opens with damage numbers and never shows the person has buried the lede.
+- **Every PC gets real depth**, proportional to what they actually did — not to dice volume or who spoke loudest. The quiet player who ran one brilliant scene gets that scene.
+- **Epithets must flatter or fit, never diminish.** The one-line epithet (e.g. "Bai Jian · the Measured Blade") should capture something true and good about the character, not reduce them to a joke.
+- **Pull the actual lines.** Quote or paraphrase their real words from the transcript (verified single-speaker — see fabrication guard). Do not invent representative-sounding dialogue.
+
+**Self-check:** read each PC's spotlight as if you were that player. If it would make them feel flat, one-note, or like a punchline, you have mischaracterized them — return to their Roleplay Inventory and rebuild around their best material.
 
 **Memorable Quotes Guidelines:**
 
@@ -411,6 +460,15 @@ For each item below, scan the recap.md you just wrote:
     - For each PC, list the facet (a-e) of each of their quotes. If all are the same facet (e.g. all tactical), swap one for a different facet.
 
 11. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as Talya but writer should double-check..." style caveat, confirm you actually checked the affected lines.
+
+12. **Roleplay-coverage pass (DO NOT SKIP — this is the one that gets missed):** For EACH player character, read their Character Spotlight as if you were that player.
+    - **One-note check:** Is the entry built only from combat, a fumble, or self-deprecating jokes? If yes, it's a fail — rebuild from their Roleplay Inventory around their real agency and voice.
+    - **Best-material check:** Is their *sharpest* RP moment from the inventory actually present, or did you settle for the easiest line? A deft negotiation/deduction/character beat must not be dropped in favor of a loud combat aside.
+    - **Comedy check:** If they were funny this session, is any of it on the page?
+    - **Depth-parity check:** Is every PC's spotlight comparably substantive (relative to what they actually did), or is one player thin because they spoke less? Quiet ≠ less spotlight.
+    - **Epithet check:** Does the one-line epithet flatter/fit, or diminish?
+
+13. **Fabrication pass:** For every quote and every distinctive RP beat in the recap, confirm it traces to a clean, single-speaker transcript line — NOT a VAD-merged run-on or a `[cleaned]`/rewritten blob (see the Fabrication Guard in Step 5). Any beat you can't trace to a verifiable line gets cut.
 
 If any item fails, fix it BEFORE running the review subagents. The reviewers should be catching subtle errors, not the basics.
 
@@ -564,7 +622,7 @@ After the subagent returns its review:
 
 Spawn a **second general-purpose subagent** to review combat encounters specifically. The recap writer has a demonstrated pattern of collapsing multi-round combat into narrative summaries, merging actions from different rounds, inserting actions that never happened, and understating contributions. This subagent reconstructs the actual combat from the transcript and compares it against the recap.
 
-**Run this in parallel with Step 5.5** — both review subagents are independent.
+**Run this in parallel with Steps 5.5 and 5.6b** — all three review subagents are independent.
 
 **Subagent prompt template:**
 
@@ -674,7 +732,61 @@ After the subagent returns its combat review:
 2. Fix any combat-related errors in Character Spotlight, Key Events, and Pax's Notes.
 3. If anything is ambiguous, use **AskUserQuestion** to confirm with the user.
 
-**Do NOT proceed to HTML generation until both review subagents (5.5 and 5.6) are resolved.**
+Then resolve the Roleplay-Coverage Review (Step 5.6b) as well — all three reviews (5.5, 5.6, 5.6b) gate HTML generation together.
+
+### Step 5.6b: Roleplay-Coverage Review (subagent)
+
+Spawn a **third general-purpose subagent** dedicated to roleplay coverage — the RP-side equivalent of the combat review. Steps 5.5 and 5.6 verify combat math and attribution; **neither one checks whether the players' roleplay was represented well**, which is the pipeline's most common quality failure. This subagent exists to catch flat, one-note, under-represented, or fabricated RP before the recap is finalized.
+
+**Run this in parallel with 5.5 and 5.6** — all three reviews are independent.
+
+**Subagent prompt template:**
+
+```
+You are auditing the ROLEPLAY / out-of-combat coverage of a D&D/PF2e session recap. Combat mechanics are out of scope (other reviewers handle that). Your job: independently inventory the session's roleplay, then check whether the recap represents each player faithfully and well.
+
+## Inputs
+- Cleaned transcript: /tmp/transcript-cleaned-<campaign>-s<N>.txt
+- Generated recap: <campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md
+- Roster + roles: <campaign>/dynamics.md
+- Character sheets in <campaign>/
+
+## Step 1 — Independent Roleplay Inventory (do this BEFORE reading the recap)
+Walk the transcript chronologically. For EACH player character — scanning each individually, NOT by speaking volume — list their notable non-combat beats with [MM:SS]: in-character decisions, negotiations/social rolls, deductions, moral/principled stands, relationship beats, distinctive voice/phrasings, comedy and running gags. Verify speaker by content/voice, not just the label (the cleaned transcript mislabels constantly when the DM voices NPCs). Lower-volume players often have the best RP buried in mechanical chatter — dig for it.
+
+## Step 2 — Diff against the recap
+Read the recap's Character Spotlight, Key Events, Memorable Quotes, and (for the Pax PC) Pax's Notes. Report:
+- **MISSING RP beats** — notable moments per character the recap omits.
+- **ONE-NOTE / FLAT characterizations** — any PC built only from combat, a fumble, or self-deprecating jokes. Name them and say what's missing. (This is the highest-priority finding — it's the failure this review exists to catch.)
+- **THIN / UNDER-REPRESENTED players** — anyone whose RP coverage is light relative to what they actually did, especially quieter players.
+- **MIS-ATTRIBUTED RP** — a line/beat credited to the wrong character (content/voice over label).
+- **FABRICATED / UNVERIFIABLE RP** — any quote or beat in the recap you cannot trace to a clean, single-speaker transcript line. Flag anything that looks sourced from a merged run-on or a rewritten `[cleaned]` blob.
+- **EPITHET check** — does each spotlight epithet flatter/fit or diminish?
+- **Quote-quality check** — are the selected quotes each PC's strongest, most-characterful options, or just the easy/loud ones? Suggest specific swaps with timestamps.
+
+## Output
+Write to /tmp/rp-review-<campaign>-s<N>.md:
+### Roleplay inventory (per character, with timestamps)
+### One-note / flat characterizations (highest priority)
+### Missing RP beats (per character)
+### Thin / under-represented players
+### Mis-attributed or fabricated RP
+### Quote / epithet suggestions
+### Ranked fixes
+
+## Guardrails
+- Read like the player. If a spotlight would make that player feel flat, one-note, or like a punchline, say so explicitly.
+- Cite a timestamp for every beat. Do NOT rewrite the recap — report.
+- Never invent beats to "improve" coverage; if a player genuinely did little RP, say that rather than padding.
+```
+
+After the subagent returns its RP review:
+1. Rebuild any flat/one-note spotlight around the player's real agency and voice (per Character Spotlight Guidelines).
+2. Add missing RP beats; fix mis-attributions; **cut any fabricated/unverifiable line**.
+3. Rebalance quotes toward each PC's strongest, most-characterful options.
+4. Re-read each spotlight as that player before finalizing.
+
+**Do NOT proceed to HTML generation until all THREE review subagents (5.5, 5.6, 5.6b) are resolved.**
 
 ### Step 6: Generate HTML Visual
 

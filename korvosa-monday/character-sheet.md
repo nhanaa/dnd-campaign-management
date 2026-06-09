@@ -9,7 +9,7 @@
 - **Class**: Magus (Inexorable Iron hybrid study)
 - **Archetype**: Cavalier (mounted combatant)
 - **Skill Paragon**: Society (campaign variant)
-- **Level**: 5
+- **Level**: 6
 - **Deity**: Good Neighbors (the Fey)
 - **Key Ability**: Strength
 - **Campaign**: Curse of the Crimson Throne (Korvosa) — Monday group
@@ -28,16 +28,16 @@
 
 ## Defenses
 
-- **AC**: 23 (10 + 6 Full Plate + 7 trained [2 + level 5] + 0 DEX)
-- **Max HP**: 63 (8 ancestry + 5 × [8 Magus + 3 CON])
+- **AC**: 24 (10 + 6 Full Plate + 8 trained [2 + level 6] + 0 DEX) — *combat log showed AC 24; verify any item bonus against Foundry*
+- **Max HP**: ~80 (8 ancestry + 6 × [8 Magus + 3 CON] = 74, **+6 Toughness**) — *verify in Foundry; Toughness also lowers the Dying value*
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert | +12 (9 + CON 3) |
-| Reflex | Expert (Reflex Expertise, L5) | +9 (9 + DEX 0) |
-| Will | Expert | +11 (9 + WIS 2) |
+| Fortitude | Expert | +13 (10 + CON 3) |
+| Reflex | Expert (Reflex Expertise, L5) | +10 (10 + DEX 0) |
+| Will | Expert | +12 (10 + WIS 2) |
 
-- **Perception**: Trained (+9). Initiative uses Perception.
+- **Perception**: Trained (+10). Initiative uses Perception.
 - **Vision**: Darkvision (Sylph)
 - **Wind Tempered**: +1 circumstance to saves vs air & electricity; a success vs an *air* effect becomes a critical success.
 
@@ -52,7 +52,8 @@
 - **Arcane Cascade** (1A stance): +force/elemental damage on melee Strikes after casting. While in it and wielding a two-handed melee weapon, **Inexorable Iron** grants temp HP = ½ level (min 1) on entry and at the start of each turn.
 - **Conflux Spells** (focus): Thunderous Strike (Inexorable Iron), Force Fang (from feat).
 - **Weapon Expertise** (L5) — expert in your weapons.
-- **Studious Spells / Devastating Spellstrike**: see feats.
+- **Cavalier's Charge** (Cavalier archetype, **swapped in for Devastating Spellstrike at L6, DM-approved**): Command the mount to Stride twice and Strike one enemy along the way at +1 — reach-and-crit delivery from the saddle.
+- **Reactive Strike** (L6 Magus feat): reach AoO against movers/manipulators/ranged attackers.
 
 ## Feats by Level
 
@@ -60,50 +61,61 @@
 |-------|--------|------|
 | 1 | Ancestry | Open Mind (→ extra access; see build) |
 | 1 | Skill | Streetwise · Titan Wrestler · Community Knowledge |
-| 1 | General | Armor Proficiency (Heavy) · Fleet |
+| 1 | General | ~~Armor Proficiency (Heavy)~~ → **Toughness** (retrained at L6; Champion Ded now grants armor prof) · Fleet |
 | 1 | Background | Recognize Spell |
 | 2 | Class (Archetype) | **Cavalier Dedication** — young animal companion mount |
 | 2 | Class | **Force Fang** (conflux spell) |
 | 4 | Class (Archetype) | **Impressive Mount** — mount becomes mature |
-| 4 | Class | **Devastating Spellstrike** |
+| 4 | Class | ~~Devastating Spellstrike~~ → **Cavalier's Charge** (swapped at L6, DM-approved) |
 | 5 | Ancestry | Unlock Secret |
+| 6 | Class (Magus) | **Reactive Strike** |
+| 6 | Class (Archetype) | **Champion Dedication** (grants armor proficiency; durability toward L8 Champion reaction) |
+| 6 | Skill | **Alchemical Crafting** (also trained **Crafting** + **Intimidation** via skill increases) |
 
-> Free Archetype appears to be on (Cavalier dedication at L2, Impressive Mount at L4 alongside Devastating Spellstrike). Confirm whether the table uses Free Archetype variant.
+> Free Archetype is **on**. Cavalier line (Dedication L2, Impressive Mount L4) runs alongside the new Champion Dedication (L6). Plan: keep stacking the Champion archetype toward the **L8 reaction**.
 
 ## Mount (Cavalier)
 
-- **Cavalier Dedication** grants a young animal companion with the *mount* ability.
-- **Impressive Mount** upgrades it to a **mature** companion (acts on its own even without Command an Animal during an encounter).
-- **TODO**: record which animal companion is the mount (e.g., riding horse / boar / other ≥ one size larger). Not stored in the build export.
+- **Mount: Po** — Izka's **dragonet** companion (the mount). Mature (via Impressive Mount); acts on its own and grants the **Riding Dragonet support benefit** (Strikes in its reach deal +1d4 bludgeoning from the wing-buffet).
+- **Cavalier Dedication** grants the companion with the *mount* ability; **Impressive Mount** upgraded it to mature.
+- **Note**: Po is a **ground mount in play** — no fly Speed yet, so he's for flank/charge setups (Cavalier's Charge), not vertical urban fights.
 
 ## Skills
 
-Trained = +7 (2 + lvl 5), Expert = +9.
+Trained = +8 (2 + lvl 6), Expert = +10.
 
 | Skill | Prof | Modifier |
 |-------|------|----------|
-| Athletics | Expert | +13 (9 + STR 4) — Titan Wrestler (grapple larger foes) |
-| Society | Expert (Skill Paragon) | +12 (9 + INT 3) — Streetwise |
-| Arcana | Trained | +10 (7 + INT 3) |
-| Occultism | Trained | +10 (7 + INT 3) |
-| Religion | Trained | +10 (7 + INT 3) |
-| Nature | Trained | +9 (7 + WIS 2) |
-| Diplomacy | Trained | +8 (7 + CHA 1) |
+| Athletics | Expert | +14 (10 + STR 4) — Titan Wrestler (grapple larger foes) |
+| Society | Expert (Skill Paragon) | +13 (10 + INT 3) — Streetwise |
+| Arcana | Trained | +11 (8 + INT 3) |
+| Occultism | Trained | +11 (8 + INT 3) |
+| Religion | Trained | +11 (8 + INT 3) |
+| Crafting | Trained (L6) | +11 (8 + INT 3) — **Alchemical Crafting** feat |
+| Nature | Trained | +10 (8 + WIS 2) |
+| Diplomacy | Trained | +9 (8 + CHA 1) |
+| Intimidation | Trained (L6) | +9 (8 + CHA 1) |
 
 - **Lore**: Academia Lore (Student of Magic)
 
 ## Spellcasting — Arcane Prepared (Magus), INT
 
-- **Spell DC**: 20 (10 + 7 trained + INT 3) · **Spell attack**: +10
-- At L5 a Magus casts up to **rank 3** (highest two ranks have 2 slots each; lower ranks reduced).
+- **Spell DC**: 21 (10 + 8 trained + INT 3) · **Spell attack**: +11
+- At L6 a Magus casts up to **rank 3** (still trained spellcasting; Expert at L9).
+- **Legacy spells allowed** (DM Orion's house rule) — spellbook expanded with pre-Remaster options.
 
 **Spellbook — Cantrips:** Detect Magic, Gouging Claw, Ignition, Live Wire, Needle Darts, Shield, Acid Splash, Telekinetic Projectile (+ Guidance via Pendant of the Occult)
 
-**Rank 1:** Sure Strike, Horizon Thunder Sphere, Grease, Hydraulic Push, Eat Fire
+**Rank 1:** Sure Strike, **Shocking Grasp**, Horizon Thunder Sphere, Grease, Hydraulic Push, Eat Fire
 
-**Rank 2:** Hidebound, Blood Vendetta
+**Rank 2:** **Acid Arrow**, **Blazing Bolt**, **Invisibility**, Hidebound, Blood Vendetta
 
-**Rank 3:** Wooden Double, Wall of Thorns
+**Rank 3:** **Haste**, Wooden Double, Wall of Thorns
+
+> Legacy/expanded list still being filled in (shocking grasp, blazing bolt, haste, acid arrow named so far — more to come).
+
+### Currently Prepared (as of S8)
+- **Sure Strike** · **Shocking Grasp** · **Invisibility** · **Acid Arrow** (loaded for the Spellstrike crit-fishing + utility plan)
 
 ### Focus Spells (1 FP)
 - **Thunderous Strike** (Inexorable Iron conflux) — ranged Spellstrike-friendly bolt; recharges Spellstrike.
@@ -114,8 +126,9 @@ Trained = +7 (2 + lvl 5), Expert = +9.
 | Item | Notes |
 |------|-------|
 | Full Plate | AC +6, heavy (Armor Proficiency [Heavy] feat); check penalty −3 |
-| Guisarme | Reach (10 ft) two-handed polearm — enables Inexorable Iron temp HP and reach Spellstrike |
-| Blazing Banner | Cavalier banner item |
+| +1 Striking Fearsome Guisarme | Reach (10 ft) two-handed polearm — enables Inexorable Iron temp HP and reach Spellstrike; Fearsome (crit → frightened) |
+| Clay Sphere (spellheart) | Affixed to the guisarme; grants **Gouging Claw**. After casting a morph/polymorph spell (Gouging Claw) it makes the weapon versatile B/P/S and **steps up the weapon damage die** until end of next turn |
+| Blazing Banner | Cavalier banner item — +1d4 persistent fire on crits |
 | Lifting Belt | + STR/Athletics for lifting/encumbrance |
 | Belt of Good Health | save support |
 | Bracelet of Dashing | +5 ft Speed |

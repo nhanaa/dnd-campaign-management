@@ -25,7 +25,7 @@ The group's investigation into Korvosa's spreading **blood veil** plague led the
 
 What followed was a comedy of introductions. The party is functionally illiterate; Izka can read; that, more than anything, earned him a permanent spot. Delights pegged him as a "horned freak, kill stealer, and a nerd," then decided the group was "absolutely fucked without Izka" and welcomed him aboard. After looting the warren and a market run for their level-5 gear, they visited **Ishani Dhatri's** church, now an overwhelmed plague ward, traded an encrypted Urgothoan text for 300 gold, and learned how dire the outbreak has become — only 20% of the afflicted recover, and the head physician everyone calls the "Nicolas Cage doctor" has gone missing.
 
-A rumor of a noble **gala** at the **Carowind Manor** — held in defiance of the plague — sent them over the wall of a gated community and through a locked front door, behind which the partygoers had already turned to undead. On the balcony waited the necromancer **Jolistina Susperi**, who had crashed the party to build "the perfect zombie" for someone named **Rolth**. It was meant to be an extreme, multi-round fight. It lasted about as long as it took Izka to roll his crits: a Sure-Struck Horizon Thunder Sphere that vaporized the entire Shambler Troop, a crit guisarme Strike that finished Jolistina, and a Spellstrike crit on the wall-busting Zombie Hulk. A lone survivor, the noble **Dante Kerouan**, crawled out of a bathtub to give them the name that ties it all together: **Rolth**.
+A rumor of a noble **gala** at the **Carowyn Manor** — held in defiance of the plague — sent them over the wall of a gated community and through a locked front door, behind which the partygoers had already turned to undead. On the balcony waited the necromancer **Jolistina Susperi**, who had crashed the party to build "the perfect zombie" for someone named **Rolth**. It was meant to be an extreme, multi-round fight. It lasted about as long as it took Izka to roll his crits: a Sure-Struck Horizon Thunder Sphere that vaporized the entire Shambler Troop, a crit guisarme Strike that finished Jolistina, and a Spellstrike crit on the wall-busting Zombie Hulk. A lone survivor, the noble **Dante Carowyn**, crawled out of a bathtub to give them the name that ties it all together: **Rolth**.
 
 ---
 
@@ -52,15 +52,15 @@ A rumor of a noble **gala** at the **Carowind Manor** — held in defiance of th
 - The party handed over the **encrypted Urgothoan text** looted from the sewer; Ishani bought it for **300 gp** for the temple library and flagged that it's **encrypted** — he offered to research it.
 - Worldbuilding learned: only ~**20% of the afflicted recover**; it hits lower-class **Shoanti and Varisians** hardest, while **Kelids** (who quarantined by cutting off Highbridge) are largely untouched. The missing "Nicolas Cage" head physician (**Dr. Davaulus**) is rumored to be in a secret Midland laboratory or near the university in North Point; **Blackjack** is trying to track him.
 
-### Act IV — The Carowind Gala (Combat)
-- A noble **gala** at the **Carowind Manor** in **South Shore** — thrown despite the plague, with the popular performer **Ruan** invited — became the next lead.
+### Act IV — The Carowyn Gala (Combat)
+- A noble **gala** at the **Carowyn Manor** in **South Shore** — thrown despite the plague, with the popular performer **Ruan** invited — became the next lead.
 - Turned away at the gate by **Grey Maidens**, the party went over the wall: Delights' "Helpful Steps" stairs and Kukulan flying up on his new **dragon wings.**
 - Behind the locked front door, the partygoers had **mutated into undead.** On a balcony 15 ft up waited the necromancer **Jolistina Susperi**, who taunted the party, loosed a **Shambler Troop**, and retreated behind her minions.
 - **Kukulan flew up to the balcony** to engage Jolistina directly — grappling and flurrying her as she Feinted to stay slippery.
 - **Izka cast Sure Strike, then Spellstruck Horizon Thunder Sphere — and crit**, the explosion wiping out the entire **Shambler Troop** at once.
 - Izka recharged with **Force Fang** and Spellstruck Jolistina with Gouging Claw for **35**, softening her; the next turn, with his Spellstrike spent, a **plain guisarme Strike crit — the killing blow on Jolistina.**
 - A **Zombie Hulk** with a 15-ft reach burst through a wall (a late addition to the fight). Izka **crit it with a Spellstrike** ("Double it and give it to the next person"), and Delights' thralls finished it off. What was billed as an extreme encounter ended almost instantly.
-- The survivor, **Dante Kerouan** (a minor noble of the manor's family, hiding in a bathtub), revealed Jolistina's obsession: she was building "the perfect zombie" to make **Rolth** fall in love with her.
+- The survivor, **Dante Carowyn** (a minor noble of the manor's family, hiding in a bathtub), revealed Jolistina's obsession: she was building "the perfect zombie" to make **Rolth** fall in love with her.
 
 ---
 
@@ -130,7 +130,7 @@ The fight was already underway when the DM dropped Izka in. It ran long and chao
 
 **Resolution:** the warren is ground down; one or two rats are spared. Grig, beaten and tripped, **flees**. **Izka chases on Po, dismounts, and finishes him with a Strike** — then drags the body back to the party. **Kill credit: Izka.** (He considered Needle Darts first, then chose to dismount and Strike.)
 
-### Encounter 2 — The Carowind Manor Gala (Zombie Outbreak)
+### Encounter 2 — The Carowyn Manor Gala (Zombie Outbreak)
 **Enemies**: Jolistina Susperi (necromancer boss), a Shambler Troop, and a Zombie Hulk (late arrival).
 **Initiative**: Shambler Troop → Jolistina Susperi → Kukulan → Izka → Delights Qlomaind. **Zombie Hulk joined later (burst through a wall).**
 
@@ -155,7 +155,7 @@ The fight was already underway when the DM dropped Izka in. It ran long and chao
 | Healing potions ×3 | Grig | "Bro had three healing potions and used zero of them" |
 | Urgothoan encrypted text | Sewer cultists | **Sold to Ishani Dhatri for 300 gp**; flagged as encrypted |
 | Staff of the Dead | Party stash | Claimed by Delights |
-| Necklace/bracelet | Dante Kerouan | Gift from the survivor, ~600 gp at market |
+| Necklace/bracelet | Dante Carowyn | Gift from the survivor, ~600 gp at market |
 
 **Level up to 5** during the session.
 

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 8 — The Hospice of the Maiden</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #eae4da;
+  --bg-card: #f2ede4;
+  --bg-card-hover: #f8f4ed;
+  --border: #c8bfb0;
+  --text: #2e2a24;
+  --text-dim: #5a5347;
+  --text-bright: #1a1714;
+  --red: #8a2c2c;
+  --red-glow: #8a2c2c22;
+  --blue: #4a6278;
+  --blue-glow: #4a627822;
+  --green: #4a6a3a;
+  --green-glow: #4a6a3a22;
+  --purple: #6a3a6a;
+  --purple-glow: #6a3a6a22;
+  --teal: #3a6a62;
+  --teal-glow: #3a6a6222;
+  --gold: #8a6a2c;
+  --gold-dim: #a07a3a;
+  --gold-glow: #8a6a2c22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 30% 100%, #d4c4a822 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 0%, #c8b89822 0%, transparent 40%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 110%, #c4884420 0%, transparent 55%);
+  animation: ember-glow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-glow {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.5; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-family: 'MedievalSharp', cursive;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.15;
+  color: var(--text-bright);
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Section headings */
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+
+section { margin-bottom: 60px; }
+
+p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+ul { margin: 10px 0 18px 22px; }
+li { padding: 8px 0; color: var(--text); }
+
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); }
+
+/* Composition bar */
+.composition-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 20px 0 14px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--red); }
+.comp-explore { background: var(--blue); }
+.comp-rp { background: var(--purple); }
+.comp-puzzle { background: var(--teal); }
+.comp-loot { background: var(--gold); }
+
+.composition-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Party cards */
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.char-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.char-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.char-class {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.char-player {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.char-izka { border-left-color: #4a6278; }
+.char-kukulan { border-left-color: #4a6a3a; }
+.char-delights { border-left-color: #6a3a6a; }
+.char-meeg { border-left-color: #a07a3a; }
+.char-ishani { border-left-color: #3a6a62; }
+
+/* Summary */
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2410;
+}
+
+.summary p { font-size: 16px; line-height: 1.75; }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.act {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+  border: 2px solid var(--bg-deep);
+}
+
+.act.rp::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.act.combat::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.explore::before { background: var(--blue); box-shadow: 0 0 8px var(--blue-glow); }
+.act.intrigue::before { background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.act.mystery::before { background: var(--teal); box-shadow: 0 0 8px var(--teal-glow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-bottom: 6px;
+}
+
+.act-label.combat { color: var(--red); }
+.act-label.rp { color: var(--purple); }
+.act-label.explore { color: var(--blue); }
+.act-label.intrigue { color: var(--red); }
+.act-label.mystery { color: var(--teal); }
+
+.act h3 { margin-bottom: 14px; }
+
+.act ul { margin: 10px 0 0 18px; }
+
+.sub-list {
+  margin: 6px 0 6px 22px;
+  list-style: disc;
+}
+
+.sub-list li {
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+/* Combat box */
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  background: #2e2a240a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.combat-stats .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.combat-stats .stat-value {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+/* Spotlight cards */
+.spotlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.spotlight-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #b0a890;
+  box-shadow: 0 4px 16px #2e2a2412;
+}
+
+.spotlight-name {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.spotlight-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.spotlight-card ul {
+  margin: 0 0 0 18px;
+}
+
+/* Loot */
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.loot-item.magical {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 20px #8a6a2c11;
+  background: #f0e8da;
+}
+
+.loot-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.loot-source {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.xp-banner {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+}
+
+/* Quotes */
+.quote-block {
+  border-left: 3px solid var(--gold-dim);
+  background: #8a6a2c08;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.quote-attr {
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.quote-context {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Journal / Pax's Notes */
+.journal {
+  background: linear-gradient(135deg, #f4ede2, #efe8dc);
+  border: 1px solid #c0b8a8;
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: 0 2px 12px #2e2a2408;
+}
+
+.journal h3 {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c8c0b0;
+}
+
+.journal-intro {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.journal ul { margin: 8px 0 16px 18px; }
+.journal li { padding: 4px 0; font-size: 15px; }
+
+/* Open threads */
+.thread-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.thread-name {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.thread-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Cliffhanger */
+.cliffhanger {
+  background: linear-gradient(135deg, #e0d6c8, #ebe2d4);
+  border: 1px solid #a0906a;
+  border-radius: 6px;
+  padding: 28px 30px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cliffhanger h3 {
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.cliffhanger p {
+  font-style: italic;
+  font-size: 17px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .party-grid { grid-template-columns: 1fr; }
+  .loot-grid { grid-template-columns: 1fr; }
+  .container { padding: 30px 16px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<header class="header">
+  <h1>The Hospice of the Maiden</h1>
+  <div class="subtitle">Session 8 &mdash; Curse of the Crimson Throne &middot; Monday Group</div>
+  <div class="meta-row">
+    <span class="meta-pill">June 8, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 00m</span>
+    <span class="meta-pill">Level 5 &rarr; 6</span>
+    <span class="meta-pill">The Doctor Falls</span>
+  </div>
+</header>
+
+<!-- Composition -->
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:45%"></div>
+    <div class="comp-seg comp-rp" style="width:27%"></div>
+    <div class="comp-seg comp-explore" style="width:20%"></div>
+    <div class="comp-seg comp-loot" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--red)"></span>Combat 45%</span>
+    <span><span class="legend-dot" style="background:var(--purple)"></span>Roleplay 27%</span>
+    <span><span class="legend-dot" style="background:var(--blue)"></span>Investigation 20%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Downtime &amp; Loot 8%</span>
+  </div>
+</section>
+
+<!-- Party -->
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-izka">
+      <div class="char-name">Izka</div>
+      <div class="char-class">Kashrishi (Sylph) Magus (Inexorable Iron) / Cavalier</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-kukulan">
+      <div class="char-name">Kukulan</div>
+      <div class="char-class">Iruxi (Lizardfolk) Monk &mdash; Star Athlete / Wrestler</div>
+      <div class="char-player">Kulan</div>
+    </div>
+    <div class="char-card char-delights">
+      <div class="char-name">Delights Qlomaind</div>
+      <div class="char-class">Nagaji Necromancer / Champion</div>
+      <div class="char-player">Matt</div>
+    </div>
+    <div class="char-card char-meeg">
+      <div class="char-name">Meeg</div>
+      <div class="char-class">Goblin Thaumaturge / Exemplar &mdash; "the Cromulent Knight"</div>
+      <div class="char-player">Derek</div>
+    </div>
+    <div class="char-card char-ishani">
+      <div class="char-name">Ishani Dhatri</div>
+      <div class="char-class">Abadar Cleric &mdash; NPC follower (DM-run healer)</div>
+      <div class="char-player">DM-run</div>
+    </div>
+  </div>
+  <p style="margin-top:16px; font-size:14px; color:var(--text-dim);"><em>Derek returned, so Meeg was player-run this session. Caliban (Hawke) left the table for good &mdash; the party recruited the Abadar priest Ishani Dhatri as a DM-run healer to fill the gap. DM: Orion.</em></p>
+</section>
+
+<!-- Summary -->
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>With Jolistina dead and the Carowyn gala behind them, the party turned to the one thread still open: the missing head physician, <strong>Dr. Davaulus</strong> &mdash; the "Nicolas Cage doctor." The lead ran through <strong>Blackjack</strong> &mdash; and Izka finally caught up to what the rest of the party already knew: the vigilante is <strong>Vencarlo Orsini</strong>, the fencing master, one and the same. His tracking sigil had gone quiet at a refurbished warehouse "hospice" on the West Dock &mdash; people walked in, nobody walked out. He couldn't go in himself, so he sent the party. They strong-armed the temple's <strong>Ishani Dhatri</strong> into coming as a healer (over a relentless tide of "beat off / aftercare" jokes that visibly aged the poor cleric), donned plague masks, and walked in the front door as a fake <strong>hospice inspection</strong> &mdash; a bit Meeg improvised on the spot and rode all the way to a body count.</p>
+    <p>The inspection cracked the place open. A "Sarenrae" priest who knew the secret handshake but not a single farmer's aphorism; masked "Queen's Physicians" who were really the doctor's private muscle; and <strong>Reiner</strong> himself, all plastered smile and twitching eye, who led them upstairs and then refused a handshake one beat too long. The fight that followed was a grind &mdash; Kukulan soaked crit after crit (keeping up his bit about always dying), Reiner revealed an inexplicable bard's <strong>Courageous Anthem</strong>, threw <strong>Fear</strong> and a <strong>Fireball</strong> that caught his own physician, and tried to turn invisible and flee. It ended on a stupid, perfect note: <strong>Meeg cracked open a scroll of Acidic Burst on himself</strong>, Reiner <strong>crit-failed the save twice</strong>, and the doctor &mdash; whom Kukulan had been carefully trying to keep alive &mdash; simply died on the floor.</p>
+    <p>With Reiner dead, the last surviving Queen's Physician &mdash; prone and surrendering &mdash; pointed them to an elevator and "the bottom floors." Down it went, into a lightless <strong>Urgathoan temple</strong> of scythe murals and cultists playing blackjack around a crate where they were "making a blade to kill people." The party bluffed, gathered that the operation was commissioned by <strong>nobility &mdash; someone royal</strong>, reports addressed to "<strong>A</strong>," then masked up and cut them down. A dying cultist crawled toward <strong>Rolth</strong> before bleeding out, finally pinning the necromancer's location to this temple. One more room &mdash; two explosive <strong>sulfur zombies</strong> over a <strong>glass floor</strong> above a pit of dozens of bodies &mdash; ended with Kukulan smashing the glass to drop one zombie into the pit and pinning the other for the party to kill safely. They leveled to <strong>6</strong> somewhere in the middle of all of it, and walked out having killed the doctor, traced the plague up toward the crown, and found where Rolth has been hiding the whole time.</p>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section>
+  <h2>The Story</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label rp">Act I &middot; Downtime &middot; Loose Ends at the Manor</div>
+      <div class="act-card">
+        <h3>Loose Ends at the Manor</h3>
+        <ul>
+          <li>The party is squatting in the dead noble <strong>Roran Carowyn's</strong> manor &mdash; the S7 gala house. Roran fled, traumatized and never coming back; he offered to sell the deed for <strong>400 gp</strong>, but the party just decided to live there for free.</li>
+          <li><strong>Delights</strong> raised a thrall of the dead <strong>Jolistina</strong> to interrogate her &mdash; no languages, no answers, just a corpse staring. <strong>Kukulan</strong> "helped" by crushing her head.</li>
+          <li>The only live lead on the plague is the <strong>missing doctor</strong>, and the road to him runs through <strong>Blackjack</strong>. They set out for the Orsini Academy to summon him.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label rp">Act II &middot; Roleplay &middot; The Man Behind Blackjack</div>
+      <div class="act-card">
+        <h3>The Man Behind Blackjack</h3>
+        <ul>
+          <li>After dark, the (quarantine-closed) <strong>Orsini fencing Academy</strong>. Kukulan presses his face to the glass; <strong>Trinia</strong> answers; inside is <strong>Vencarlo Orsini</strong>.</li>
+          <li>Kukulan flexes his <strong>Blackjack chest tattoo</strong> and produces a deck of cards (and, when Vencarlo arrives with takeout, hurls it at him yelling "<strong>hit me!</strong>" &mdash; Vencarlo catches it). Vencarlo confirms it: <em>"Me and Blackjack are one and the same."</em> <strong>Izka</strong>, the newcomer, genuinely didn't know &mdash; the rest of the party already did ("Oh, does he not know? I assumed he knew").</li>
+          <li>The <strong>literacy scene</strong>: Kukulan vouches that Izka "knows how to read and everything," prompting Vencarlo to note Kukulan <em>doesn't</em> &mdash; and <strong>Delights</strong> to clarify he's a literate arcane caster who only plays dumb "in solidarity with my brother Kukulan, who is so stupid." Kukulan, wounded ("I'm street smart &mdash; it's a different kind of intelligence"), fake-sobs off to "borrow a room."</li>
+          <li>Backstory beats land: <strong>Trinia</strong> (here, at his house) is a recent <strong>Acadamae expellee</strong> &mdash; framed for the king's death ("regicide") two weeks ago &mdash; while Izka's a ten-year alum; the knighthood "that means nothing"; the execution where "Kukulan killed so many people" (the one guard who survived).</li>
+          <li><strong>The hook:</strong> the tracking sigil (from "Morris") stopped at a <strong>warehouse-hospice at the West Dock (grid G9)</strong>. Windows boarded, entrance guarded, and <em>no one ever comes out</em> &mdash; not the doctor, not his masked physicians. Blackjack can't go in as a wanted anti-royalist. The party can.</li>
+          <li>They crash at Vencarlo's empty house (no kitchen &mdash; he buys them pot pie and <strong>Cooperative Waffles Greater</strong>). Kukulan tries to "inherit the Blackjack title" in a card game but <strong>loses the Games Lore roll</strong>; instead the party &mdash; several of them Queen's knights &mdash; formally make <strong>Izka their squire</strong> to fit the newcomer in.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label rp">Act III &middot; Roleplay &middot; Recruiting Ishani</div>
+      <div class="act-card">
+        <h3>Recruiting Ishani &amp; the Inspection Plan</h3>
+        <ul>
+          <li>They strong-arm <strong>Ishani Dhatri</strong> out of the plague temple to serve as a healer ("there's about to be a lot of casualties at this hospice"). The comedy runs hot: Ishani is fragile (41 HP, 14 AC unarmored), the "stop wearing armor, that's what a <em>real</em> healer does" bit, and the party's unending "beat off / aftercare" innuendo.</li>
+          <li><strong>Ishani's mechanics</strong>: one action/round (+2 if Commanded), <strong>Battle Medicine</strong> + four rank-3 Heals. Handed a <strong>Wand of Mystic Armor</strong> and <strong>Dust of Disappearance</strong>. <strong>Meeg</strong> preps <strong>Root Magic</strong> on Kukulan (+1 vs the first spell save).</li>
+          <li>The warehouse is ~50 ft tall and sealed. They go in the front as a <strong>hospice inspection</strong>, wearing Ishani's plague masks. Meeg runs the bit as <strong>"Meeg, the Cromulent Knight."</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label mystery">Act IV &middot; Investigation &middot; Phonies in the Plague Ward</div>
+      <div class="act-card">
+        <h3>Phonies in the Plague Ward</h3>
+        <ul>
+          <li>A muscular masked <strong>receptionist</strong> (obviously a thug) lets them wait and fetches the doctor. Inside: a vast triage hall of <strong>blood veil</strong> victims, masked <strong>Queen's Physicians</strong>, and a <strong>"Sarenrae" priest</strong>.</li>
+          <li><strong>Meeg works the phonies.</strong> The fake Sarenite dodges a handshake ("I've been touching sick people") &mdash; Meeg: "Very good. <strong>You passed your first test.</strong>" Kukulan, meanwhile, plays germ-theory expert ("Germ theory is something I'm very knowledgeable in" &mdash; <em>steps six feet back</em>). The Sarenite knows the secret dap but <strong>fails the real aphorism</strong> ("the sun and <em>what</em> are needed to grow?"); Meeg's Sense Motive + <strong>Esoteric Lore</strong> confirm the robes are fake ("I don't like people who pretend to be something they're not"), and he leaves his familiar, <strong>"Cousin Lush," as a spy</strong> on the impostor.</li>
+          <li><strong>Reiner</strong> (the "Nicolas Cage" doctor) appears, half-recognizes them from "the Citadel," and leads them upstairs to his office &mdash; two Queen's Physicians and two Grey Maidens flanking.</li>
+          <li>He claims no royal funding; Sense Motive says he's lying. He refuses Kukulan's handshake, and <strong>initiative drops.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label combat">Act V &middot; Combat &middot; "He Hates All of You"</div>
+      <div class="act-card">
+        <h3>The Doctor's Office</h3>
+        <ul>
+          <li>The whole operation throws down: <strong>Reiner</strong>, 2 Grey Maiden foot soldiers, 2 Queen's Physicians. (Full round-by-round in <strong>Combat Encounters</strong> below.)</li>
+          <li>Reiner reveals a bard's <strong>Courageous Anthem</strong>, lands <strong>Fear</strong> on the entire party, and throws a <strong>Fireball</strong> that catches Izka, Kukulan, Po &mdash; and his own Queen's Physician.</li>
+          <li>It ends when <strong>Meeg pops a scroll of Acidic Burst on himself</strong>: Reiner <strong>crit-fails the Reflex twice and dies</strong>, taking a Grey Maiden with him. Kukulan had gone non-lethal to keep the doctor alive &mdash; too late.</li>
+          <li>With Reiner dead, the <strong>last surviving Queen's Physician</strong> &mdash; prone and surrendering &mdash; points to an <strong>elevator</strong> down to "the temple" and "the bottom floors," warns them off the southern room (~a dozen <strong>Varisian</strong> plague victims strapped to beds), and admits "what you seek is in the bottom floors."</li>
+          <li>Loot: <strong>Plaguebringer's masks</strong>, a note addressed to "<strong>A</strong>" ("send all reports to A down below"), an <strong>elevator button-key</strong>. <strong>The party levels to 6.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label mystery">Act VI &middot; Investigation &middot; The Temple Below</div>
+      <div class="act-card">
+        <h3>The Temple Below</h3>
+        <ul>
+          <li>The elevator descends a full minute into a dark <strong>Urgathoan temple</strong> &mdash; scythe murals, obvious iconography (Izka's Religion check). The party is blind in the dark; Izka glows his horn, Ishani and Delights light a torch.</li>
+          <li>Four cultists are <strong>playing blackjack</strong> around a crate where they're "<strong>making a blade to kill people</strong>." Bluffing as new recruits, the party learns the job came from <strong>nobility &mdash; someone royal</strong> ("not the king"), reports going to "<strong>A</strong>."</li>
+          <li>Kukulan &mdash; who can't read &mdash; "deduces" the handler must be <strong>Sabina</strong> because "A and S are almost next to each other" (a bit, born of his illiteracy). The players half-seriously float <strong>Queen Ileosa</strong>; nothing's proven.</li>
+          <li>Kukulan <strong>disables the door lock</strong> to seal the gamblers, then the party masks up (four <strong>Plaguebringer's masks</strong> + a <strong>Masquerade Scarf</strong>) and bluffs the next chamber &mdash; until "Blackjack" sets the cultists off and the fight starts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label combat">Act VII &middot; Combat &middot; Where Rolth Is</div>
+      <div class="act-card">
+        <h3>Where Rolth Is</h3>
+        <ul>
+          <li>Cultists of Urgathoa, a Harpy Skeleton, and Queen's Physicians fall fast to Izka's Spellstrikes, Kukulan's Snagging-Strike/Stunning-Blows, Delights' thralls, and Meeg's Exploit Vulnerability. (Round-by-round below.)</li>
+          <li>An <strong>Abaddon priest</strong> was present but sat the fight out in the back chamber.</li>
+          <li><strong>The Rolth reveal:</strong> a dying Cultist of Urgathoa crawls toward <strong>Rolth</strong> and bleeds out at the door &mdash; confirming Rolth is down here. <em>"Well, now we know where Rolth is."</em></li>
+          <li>The last room: a <strong>glass floor over a pit of dozens of bodies</strong>, guarded by two explosive <strong>sulfur zombies</strong> (weak to vitality; Death Throes ~27 dmg, 30-ft burst). Kukulan smashes the "bulletproof" glass and <strong>drops one zombie into the pit</strong>, then grapples and pins the second so the party can kill it safely &mdash; its death-explosion deals a trivial 13 damage.</li>
+          <li>Aftermath: Ishani de-cloaks; Kukulan admits he wrecked the elevator (Delights' <strong>Helpful Steps</strong> can climb them out, 120 ft); the DM credits the whole run to Meeg's improvised health-inspector bit.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Combat Encounters -->
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; The Doctor's Office (Hospice, upstairs)</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">Reiner + 2 Grey Maidens + 2 Queen's Physicians</div></div>
+      <div><div class="stat-label">Init Quirk</div><div class="stat-value">Reiner rolled Deception; Meeg's Twitchy +4, crit-starts at 32</div></div>
+      <div><div class="stat-label">Killing Blow</div><div class="stat-value">Meeg &mdash; Acidic Burst scroll (Reiner double crit-fail)</div></div>
+    </div>
+    <h4>How it played</h4>
+    <ul>
+      <li><strong>Opening:</strong> Grey Maidens draw and <strong>reposition Kukulan</strong> off the doctor (dragged "over the table"). A <strong>Queen's Physician</strong> uses <strong>Medical Malpractice</strong> to mark a target, then <strong>crits Izka for 15</strong>, chewing through his 10 False Vitality temp HP.</li>
+      <li><strong>Meeg:</strong> Exploit Vulnerability + Esoteric-Lore RK on the foot soldiers (lowest save = Reflex), Intimidate, <strong>Chakram for 23</strong> (into a Grey Maiden) &mdash; then his biggest hit of the fight, a <strong>Liar's Hidden Blade Chakram that chunks Reiner for 30</strong> ("half his health").</li>
+      <li><strong>Kukulan:</strong> Wolf Stance + Flurry; grapples/trips Reiner and a Grey Maiden; <strong>Stunning Blows</strong>. Soaks a streak of crits (a <strong>24 from a Grey Maiden's longsword</strong>, a <strong>28 from a Queen's Physician's scalpel</strong>) &mdash; <strong>Meeg's rank-2 Heal scroll (25)</strong> early and <strong>Ishani's Battle Medicine (25)</strong> later keep topping him off. The Grey Maiden burns turns just standing back up after his trips ("local woman hater").</li>
+      <li><strong>Izka:</strong> mounted on Po &mdash; a <strong>Gouging Claw Spellstrike crit-kills a Grey Maiden Foot Soldier</strong> (36 + bleed, "she's fucking dead, bro") and he enters <strong>Arcane Cascade</strong>; <strong>Force Fang &rarr; Gouging Claw Spellstrike chunks a Queen's Physician for 35</strong>; a <strong>Cavalier's Charge crits another Grey Maiden for 40</strong>; a mounted Spellstrike puts <strong>29 into Reiner</strong>. (He ate a 15 Medical-Malpractice crit and the 21 Fireball along the way.)</li>
+      <li><strong>Delights:</strong> <strong>Hypnotic Lure</strong> pulls a physician in, <strong>Taunt</strong>, thralls, <strong>Muscle Barrier</strong> feeding Kukulan temp HP and +1 Athletics, and a fight-defining <strong>Wall of Shadow</strong> to cut off Reiner's escape.</li>
+      <li><strong>Ishani</strong> (NPC, acting last): keeps Kukulan up with a mid-fight <strong>Battle Medicine (25)</strong>, takes a Grey Maiden's blade across the chest (10), refuses to fall back ("I need to stand tall still for all of you"), and at one point &mdash; out of options &mdash; just <strong>clubs a Grey Maiden over the head with a sack of coins</strong> ("I panicked&hellip; I hit him with my coins").</li>
+      <li><strong>Reiner's escalation:</strong> reveals <strong>Courageous Anthem</strong>; casts <strong>Fear</strong> (rank 3 &mdash; frightened 2 to the whole party, Ishani included); punches; throws a <strong>Fireball</strong> (while Grabbed) that catches Izka, Kukulan, Po, and <em>his own Queen's Physician</em> (Meeg blunts it with <strong>Amulet's Abeyance</strong>); tries <strong>Battle Medicine</strong> (can't see &mdash; auto-fails); casts <strong>Invisibility</strong> and scrambles.</li>
+      <li><strong>Resolution:</strong> <strong>Meeg pops a scroll of Acidic Burst on himself.</strong> <strong>Reiner crit-fails the Reflex &mdash; two crit fails &mdash; and dies</strong>, taking a Grey Maiden foot soldier with him; the last Queen's Physician is left dying, and Izka takes only 3. Kukulan had gone non-lethal to keep Reiner alive for questioning &mdash; just too late.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 &middot; The Urgathoan Temple (bottom floor)</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">2 Cultists of Urgathoa, Harpy Skeleton, 2 Queen's Physicians (Abaddon priest sat out)</div></div>
+      <div><div class="stat-label">Biggest Hit</div><div class="stat-value">Kukulan &mdash; 48-dmg Wolf Jaws crit (drops a Physician)</div></div>
+      <div><div class="stat-label">Plot Beat</div><div class="stat-value">Rolth's location revealed by a dying cultist</div></div>
+    </div>
+    <h4>How it played</h4>
+    <ul>
+      <li>A cultist summons a skeleton to reinforce the line.</li>
+      <li><strong>Izka:</strong> a <strong>Gouging Claw Spellstrike chunks a cultist (25)</strong> &mdash; <em>"Holy shit, I'm so efficient"</em> &mdash; into <strong>Arcane Cascade</strong>; <strong>Force Fang finishes another cultist</strong>; and a <strong>Reactive Strike</strong> (new L6 reaction) <strong>crits a mover for 22</strong> (+ persistent fire).</li>
+      <li><strong>Kukulan:</strong> Flurry &rarr; <strong>Snagging Strike</strong> (off-guard) &rarr; a <strong>48-damage Wolf Jaws crit</strong> that crit-fails its save and <strong>drops a Queen's Physician</strong> (the night's biggest hit); later uses <strong>Stand Still</strong> to clip the Harpy Skeleton mid-move (7). <strong>Meeg:</strong> Exploit Vulnerability + <strong>Intimidating Glare</strong> + Chakram (26).</li>
+      <li><strong>Delights</strong> runs the back line: Thralls, <strong>Bone Spear</strong>, and &mdash; crucially &mdash; <strong>Grim Tendrils (12) + a Thrall (15)</strong> that soften the <strong>Harpy Skeleton</strong> down for the finish.</li>
+      <li><strong>The Harpy Skeleton</strong> screams (<strong>Shriek</strong> &mdash; 4d10 mental in a cone, hitting Po, the party, <em>and both its own cultists for 10 each</em>) when its master dies, and maneuvers over the beds, <strong>shrugging off piercing</strong> ("we need magic against it"). With Delights' 27 already on it, <strong>Izka's Ignition Spellstrike</strong> &mdash; fire, the magic he'd called for &mdash; <strong>destroys it for 26</strong>.</li>
+      <li><strong>Ishani</strong> closes the fight with a <strong>rank-3 group Heal</strong> (12 each to Izka, Delights, and Meeg).</li>
+      <li><strong>Rolth reveal:</strong> a dying <strong>Cultist of Urgathoa</strong> crawls toward <strong>Rolth</strong> ("I need to get to Rolth!") and bleeds out at the door &mdash; confirming Rolth is down here.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3 &middot; The Glass Floor (sulfur zombies)</div>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemies</div><div class="stat-value">2 Sulfur Zombies (explosive; weak to vitality)</div></div>
+      <div><div class="stat-label">Death Throes</div><div class="stat-value">~27 dmg, 30-ft burst</div></div>
+      <div><div class="stat-label">Party Damage Taken</div><div class="stat-value">13 (final death-explosion)</div></div>
+    </div>
+    <p style="font-size:13px; color:var(--text-dim); margin-bottom:14px;"><em>No Foundry roll data was captured for this fight &mdash; reconstructed from the audio.</em></p>
+    <h4>Setup</h4>
+    <ul>
+      <li>The room is a <strong>glass floor over a pit of dozens of bodies</strong> &mdash; like a glass bridge, it cracks under too much weight. <strong>Izka</strong>, full on spell slots, calls his shot: <em>"Don't worry, I have my full spell slots, so I'll be quick."</em></li>
+    </ul>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Kukulan</strong> goes for the shortcut &mdash; smash the floor and drop them in. The glass is "basically bulletproof" and only cracks at first, but his second Athletics swing <strong>caves in half the floor and one sulfur zombie drops into the pit</strong> &mdash; gone, no explosion ("goodbye corpse&hellip; that part's no longer a problem").</li>
+      <li><strong>Izka</strong> directs <strong>Ishani</strong> to get the far door open, then &mdash; riffing on his one-trick (<em>"I'm so lame, I just do the same thing all the time"</em>) &mdash; does the same thing anyway: a <strong>Spellstrike with Telekinetic Projectile</strong> as the payload (the guisarme delivering the cantrip), and raises <strong>Shield</strong>.</li>
+      <li><strong>Delights</strong> tumbles across the glass (Acrobatics DC 15), flanks, and <strong>Taunts</strong> the zombie.</li>
+      <li><strong>Meeg</strong> climbs onto a bed and <strong>Exploits Vulnerability</strong> &mdash; "it fucking hates vitality" &mdash; with a free Recall Knowledge flagging its <strong>Death Throes</strong> (27 damage, 30-ft burst on death).</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Kukulan</strong> walks up and <strong>grapples</strong> the last zombie to drag it pit-ward (Meeg: <em>"German suplex into the pit!"</em>). The zombie <strong>tries to Escape twice and fails both.</strong></li>
+      <li><strong>Izka</strong>, acting right after it, unloads on the pinned, flanked target &mdash; <strong>three guisarme Strikes land, the fourth misses</strong> &mdash; then deliberately <strong>leaves the kill to Delights</strong> (<em>"the light will finish it"</em>) so the death-explosion goes off on the party's terms, not in his face.</li>
+      <li><strong>Delights</strong> steps back and summons <strong>two thralls</strong> flanking; their slash drops the zombie. Its <strong>Death Throes</strong> detonate for only <strong>13 damage</strong> to the party (Kukulan had it restrained and shrugged the blast). Won "in record time."</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Character Spotlight -->
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight-card">
+      <div class="spotlight-name">Izka</div>
+      <div class="spotlight-meta">The Acadamae Blade &middot; Pax</div>
+      <ul>
+        <li>The party's actual <strong>face and brain.</strong> Held his own with the prickly <strong>Trinia</strong> as a gracious ten-year <strong>Acadamae</strong> alum &mdash; taking her shade with a smile (<em>"I will pretend I didn't notice that"</em>) and flipping it into sympathy (<em>"you don't seem like a person that would get caught in such a thing&hellip; who would try to blame you on that?"</em>).</li>
+        <li>The only one who actually studied magic &mdash; and he let the illiterate party know it. When Kukulan figured the cultists could "just teleport out," Izka set him straight: <em>"As someone who is well-versed in the art of arcane, I can assure you that it's not that simple&hellip; the spell is the whole thing, you know."</em></li>
+        <li>The measured counterweight to the party's brutality: caught <strong>Reiner's</strong> verbal slip mid-interview (<em>"don't think I didn't catch that"</em>), and when Kukulan moved to break the surrendering physician's legs, <strong>talked the man down instead</strong> (<em>"This guy is not too used to this violence method&hellip; so why do you not want to talk about it?"</em>). As the lone literate PC, he read the note to <strong>"A"</strong> and IDed the <strong>Urgathoan</strong> iconography below.</li>
+        <li>A devastating Spellstrike chassis on a dragon: <strong>Combat 1</strong> brought a <strong>Gouging Claw crit-kill</strong> on a Grey Maiden (36), a <strong>Cavalier's Charge crit</strong> (40), a <strong>Force Fang &rarr; Gouging Claw</strong> into a Physician (35), and 29 into Reiner &mdash; all while shielding the healer (<em>"Hey, don't hit the healer! Ishani, get down!"</em>).</li>
+        <li>His Acadamae schooling as a weapon: clocked that the <strong>Harpy Skeleton</strong> shrugged off steel &mdash; <em>"I learned about it in school; we need magic against it"</em> &mdash; and <strong>switched to an Ignition Spellstrike to destroy it.</strong></li>
+        <li>So reliable the DM admitted he'd "never seen a single Spellstrike miss all night" &mdash; which Izka, ever the self-aware one-tracker, shrugged off as "lame" even while deleting everything he touched (a Telekinetic-Projectile Spellstrike + three guisarme Strikes set up the last <strong>sulfur zombie</strong> in <strong>Combat 3</strong>).</li>
+        <li>Closed the Rolth thread with a corpse-side one-liner: <em>"That's very good information, Mr. Already Dead."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight-card">
+      <div class="spotlight-name">Kukulan</div>
+      <div class="spotlight-meta">Down Once a Fight, Up Twice &middot; Kulan</div>
+      <ul>
+        <li>Wolf Stance, Flurry, and a relentless grapple/trip campaign on Reiner and the Grey Maidens; <strong>Stunning Blows</strong> kept the doctor staggered.</li>
+        <li>Soaked a streak of crits in <strong>Combat 1</strong> (kept up his "it's not real combat unless I'm dying" bit) &mdash; a 24 from a Grey Maiden's longsword and a 28 from a Physician's scalpel, patched by <strong>Meeg's scroll (25)</strong> and <strong>Ishani's Battle Medicine (25)</strong>.</li>
+        <li><strong>Combat 2's heaviest hitter:</strong> a <strong>48-damage Wolf Jaws crit</strong> (two crit fails on the save) dropped a Queen's Physician outright &mdash; the single biggest hit of the night &mdash; and a <strong>Stand Still</strong> reaction clipped the Harpy Skeleton mid-move.</li>
+        <li>In <strong>Combat 3</strong>, smashed the bulletproof glass floor to <strong>drop one sulfur zombie into the pit</strong>, then grappled and pinned the second so the party could detonate it safely.</li>
+        <li>The merciful grappler: ran the <strong>fake-Sarenite trap</strong> ("the sun and what are needed to grow?"), tried to take <strong>Reiner alive</strong> before the Acidic Burst made it moot, and momentarily played earnest doctor ("We need to get these patients out of here, stat!" &mdash; Delights: "you sound more like a doctor than he does").</li>
+        <li>The table's comedy engine: the recurring <strong>feminism bit</strong> ("I had to lecture this man about feminism," using Roran's misogyny as cover for squatting his house), <strong>germ theory</strong> ("Germ theory is something I'm very knowledgeable in" &mdash; <em>walks away</em> six feet), the "stop wearing armor, that's what a <em>real</em> healer does" coaching of Ishani, threw his deck at Blackjack yelling "<strong>hit me!</strong>", and named his mount after the Queen he idolizes.</li>
+        <li>The "deduction engine": as the illiterate one, gravely concluded the "A" handler must be <strong>Sabina</strong> ("A and S are almost next to each other"), then spiraled into suspecting Blackjack &mdash; all "fueled entirely by <strong>Blue's Clues</strong>." Also bluffed the cultists cold ("It's called gathering information, Ishani").</li>
+      </ul>
+    </div>
+
+    <div class="spotlight-card">
+      <div class="spotlight-name">Delights Qlomaind</div>
+      <div class="spotlight-meta">The Opportunologist &middot; Matt</div>
+      <ul>
+        <li>Tried (and failed) to interrogate Jolistina's corpse; reframed a plague ward as "an opportunity."</li>
+        <li>Combat engine all night: <strong>Hypnotic Lure</strong> + <strong>Taunt</strong> to pull and pin foes, <strong>Thralls</strong>, <strong>Muscle Barrier</strong> feeding Kukulan temp HP and +1 Athletics, and the clutch <strong>Wall of Shadow</strong> to box in Reiner's escape. In Combat 2, his <strong>Grim Tendrils + a Thrall (27)</strong> softened the Harpy Skeleton down for the kill, and his thralls finished the last sulfur zombie.</li>
+        <li>The session's driest deadpan &mdash; and almost none of it made the plot summary: the <strong>Blackjack bat-signal bit</strong> ("light a large lantern&hellip; a symbol of a large tube like what a blackjack is&hellip; and 21 on a card"), <strong>"Welcome to my life, babe"</strong> at Vencarlo's empty bachelor house, the sharpest delivery of the aftercare gag ("if you don't play your cards right, we're going to beat you off too"), and his signature <strong>"Got one word: Helpful. Two words: Helpful Step."</strong></li>
+        <li>The necromancer who hates necromancers ("Necromancers, yuck") and the only PC besides Izka who can read &mdash; a fact he clarified mainly to dunk on Kukulan ("in solidarity with my brother Kukulan, who is so stupid").</li>
+        <li>Connected the plot dots out loud &mdash; "someone royal&hellip; and those guards were playing <strong>blackjack</strong>" &mdash; then deadpanned his Blue's Clues correction: <em>"I watched Indigo Inquiries."</em></li>
+        <li>Quietly leveled into <strong>Champion</strong> and kept the running commentary going all night.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight-card">
+      <div class="spotlight-name">Meeg</div>
+      <div class="spotlight-meta">The Cromulent Knight &middot; Derek (player-run again)</div>
+      <ul>
+        <li><strong>Improvised the entire hospice-inspection con</strong> &mdash; "Meeg, the Cromulent Knight" &mdash; and rode it the whole way, flashing his <strong>knightly crest</strong> as his all-purpose prop ("if there's one thing about knights, they always speak some truth").</li>
+        <li>The throughline under the con: <strong>an inspector who hates phonies.</strong> He clocked the fake Sarenrae priest by content and character &mdash; "Very good, <strong>you passed your first test</strong>" (when the priest dodged a handshake), <em>"I don't like people who pretend to be something they're not,"</em> and the capstone once the fight started: <em>"Fake priests, fake doctors&hellip; they're not even sick."</em> Even left his familiar, <strong>"Cousin Lush," as a spy</strong> on the impostor.</li>
+        <li>Did the actual detective work: <strong>Sense Motive (Perception)</strong> and <strong>Esoteric Lore</strong> to expose the fake robes, <strong>Exploit Vulnerability + RK</strong> all session feeding the party weaknesses and lowest saves.</li>
+        <li>Combat: crit his initiative off <strong>Twitchy</strong> (+4 vs the doctor's Deception); opening <strong>Chakram (23)</strong> then a <strong>Liar's Hidden Blade Chakram that chunked Reiner for 30</strong>; the <strong>rank-2 Heal scroll</strong> that revived Kukulan; and the fight-ender &mdash; a <strong>scroll of Acidic Burst</strong> that crit-fail-deleted Reiner.</li>
+        <li>Read the <strong>sulfur zombies' Death Throes</strong> in Combat 3 and called Kukulan's grapple: <em>"German suplex into the pit!"</em> The DM's verdict: the inspector bit "annoyed the receptionist enough that she made it the doctor's problem, which got him killed."</li>
+      </ul>
+    </div>
+
+    <div class="spotlight-card">
+      <div class="spotlight-name">Ishani Dhatri</div>
+      <div class="spotlight-meta">Best Boy &middot; DM-run NPC healer</div>
+      <ul>
+        <li>Recruited under duress and mortified by the party's vocabulary &mdash; but gamely played along with the inspection bit ("It's not up to my standards, and that's saying something").</li>
+        <li>Actually earned his keep: a mid-Combat-1 <strong>Battle Medicine (25)</strong> that kept Kukulan standing, a Combat-2 <strong>rank-3 group Heal (12 each)</strong>, and <strong>Invisibility</strong> to slip the party past the lower cultists. Stuck between two melee men all of the first fight, he took a blade across the chest (10), refused to fall back ("I need to stand tall still for all of you"), and once just <strong>clubbed a Grey Maiden with a sack of coins</strong> ("I panicked &mdash; I hit him with my coins").</li>
+        <li>The conscience nobody asked for: objected to the <em>killing</em>, not just the jokes ("I don't know why we're killing these people"), and &mdash; after the party tried to apologize and dragged him into a bit &mdash; flatly declined ("&hellip;You're no fun"). Got left holding the bag when Izka funneled cultists his way ("It was a tactical maneuver, Ishani").</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Loot -->
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Plaguebringer's Masks &times;4</div>
+      <div class="loot-source">Hospice / temple &middot; 160 gp each; sellable as plague protection (~300 gp)</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Note Addressed to "A"</div>
+      <div class="loot-source">Reiner's office &middot; "send all reports to A down below"</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Elevator Button-Key</div>
+      <div class="loot-source">Reiner &middot; unlocks the lift to the temple</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Reiner's Button Key</div>
+      <div class="loot-source">Reiner &middot; lift to area G1</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Full Plate (Korvosa insignia)</div>
+      <div class="loot-source">Queen's Physician &middot; looted by Delights</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Cooperative Waffles (Greater)</div>
+      <div class="loot-source">Vencarlo Orsini &middot; Aid / Follow-the-Expert bonus</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Wand of Mystic Armor &middot; Dust of Disappearance</div>
+      <div class="loot-source">Party stash &rarr; handed to Ishani</div>
+    </div>
+  </div>
+  <p class="xp-banner">Milestone Progression &middot; The Doctor's Office + The Temple Below + The Glass Floor = <strong>Level 6</strong></p>
+</section>
+
+<!-- Quotes -->
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <div class="quote-block">
+    <div class="quote-text">"As someone who is well-versed in the art of arcane, I can assure you that it's not that simple&hellip; the spell is the whole thing, you know."</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">To Kukulan, who figured the cultists could just teleport in and out &mdash; Izka being the only one who actually studied magic.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Well, now we know where Rolth is. That's very good information, Mr. Already Dead."</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">To the cultist who bled out mid-confession.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Hey, don't hit the healer! What the hell? Ishani, get down!"</div>
+    <div class="quote-attr">Izka</div>
+    <div class="quote-context">Protecting the party's borrowed cleric.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"I don't know if it's a real combat if I'm not dying at least once during it."</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">After taking another crit, on schedule.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"I've been waiting to beat you off for a long time, Doctor. We should have done this a long time ago."</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">Opening negotiations with Reiner &mdash; the table's running gag at full volume.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"This is a yes-and party, not a no-but party."</div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">The table's whole ethos, stated outright.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Germ theory is something I'm very knowledgeable in." <em>(walks away, six feet)</em></div>
+    <div class="quote-attr">Kukulan</div>
+    <div class="quote-context">To the fake Sarenrae priest who wouldn't shake hands "because it would spread."</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"No, I'm a necromancer. I mean, yes, I'm an arcane caster, and I do know how to read. I was just looking to be in solidarity with my brother Kukulan, who is so stupid."</div>
+    <div class="quote-attr">Delights</div>
+    <div class="quote-context">Clarifying his literacy to Vencarlo, at Kukulan's expense.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"It's an opportunity, is what it is."</div>
+    <div class="quote-attr">Delights</div>
+    <div class="quote-context">On being told a hospice full of dying people is depressing.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Nobody wants to go along with it, and that's fine. I'm not bitter. I'll go along with it."</div>
+    <div class="quote-attr">Delights</div>
+    <div class="quote-context">The opportunologist, processing rejection.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Hello, I'm Meeg, the Cromulent Knight."</div>
+    <div class="quote-attr">Meeg</div>
+    <div class="quote-context">Introducing the inspection persona that would carry the entire dungeon.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Monks only want one thing, and it's disgusting."</div>
+    <div class="quote-attr">Meeg</div>
+    <div class="quote-context">On Kukulan, to Vencarlo.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"I don't like people who pretend to be something they're not."</div>
+    <div class="quote-attr">Meeg</div>
+    <div class="quote-context">On the fake Sarenrae priest &mdash; the whole inspection con's thesis in one line.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"German suplex into the pit! &hellip;Blackslinger."</div>
+    <div class="quote-attr">Meeg</div>
+    <div class="quote-context">Narrating Kukulan's grapple on the sulfur zombie.</div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"It's Reiner's turn, but Reiner's going to stay still. He hates all of you. Have you ever considered that?"</div>
+    <div class="quote-attr">Reiner (DM)</div>
+    <div class="quote-context">The doctor, declining to surrender.</div>
+  </div>
+
+</section>
+
+<!-- Open Threads -->
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <div class="thread-item">
+      <div class="thread-name">Rolth &mdash; located at last</div>
+      <div class="thread-desc">His location is finally confirmed: down in the Urgathoan temple beneath the hospice. The cultists were "making a blade to kill people" in his name. The party is closing on him.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">"A" / the handler &mdash; reaching the crown</div>
+      <div class="thread-desc">Reports were sent "to A down below," and the cultists confirm the commission came from nobility, someone royal. Kukulan's "Sabina" guess is just an illiterate gag (A&asymp;S); the players <em>suspect</em> Queen Ileosa but have no proof. Either way, the conspiracy points at the crown.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">Dr. Davaulus (Reiner) &mdash; DEAD</div>
+      <div class="thread-desc">The "Nicolas Cage doctor" thread is closed. His hospice was a front; the masked "Queen's Physicians" were his private operation, not the Queen's.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">The Ustalav connection</div>
+      <div class="thread-desc">The temple cultists said they were "assigned here from Ustalav." Outside muscle, imported for the job.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">The glass-floor pit</div>
+      <div class="thread-desc">Dozens of bodies under the floor. A mass grave, a zombie reservoir, or raw material for whatever Rolth is building.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">Blackjack = Vencarlo Orsini</div>
+      <div class="thread-desc">The group already knew his identity; Izka (the newcomer) only now caught up. The party formally made <strong>Izka their squire</strong>; Kukulan tried to inherit the Blackjack title but lost the card game.</div>
+    </div>
+    <div class="thread-item">
+      <div class="thread-name">The strapped-down plague victims</div>
+      <div class="thread-desc">A dozen Varisians tied to beds in the southern room. Cures-in-progress, or carriers being cultivated?</div>
+    </div>
+  </div>
+</section>
+
+<!-- Pax's Notes -->
+<section class="pax-notes">
+  <div class="journal">
+    <h2 style="border:none; margin-bottom:6px;">Pax's Notes &mdash; Izka's Journal</h2>
+    <p class="journal-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+    <h3>What Izka did this session</h3>
+    <ul>
+      <li>Helped run down the missing-doctor lead through <strong>Blackjack</strong> &mdash; who (Izka finally learned) is <strong>Vencarlo Orsini</strong>, the fencing master. <strong>Trinia</strong>, at his house, is the recent Acadamae expellee (framed for the king's death); Izka's a ten-year alum. The party formally made <strong>Izka their squire</strong>.</li>
+      <li>Infiltrated the <strong>West Dock hospice (G9)</strong> as a fake inspection, masked up with the party.</li>
+      <li><strong>Combat 1</strong>: mounted Force Fang &rarr; Gouging Claw Spellstrike crit-killed a Grey Maiden Foot Soldier; entered Arcane Cascade; <strong>Cavalier's Charge crit</strong> on another Grey Maiden; protected <strong>Ishani</strong> from focus fire.</li>
+      <li><strong>Combat 2</strong>: Gouging Claw Spellstrikes + a Force Fang killed cultists; a <strong>Reactive Strike</strong> on a mover; and an <strong>Ignition Spellstrike destroyed the Harpy Skeleton</strong> once I clocked that piercing did nothing to it.</li>
+      <li><strong>Combat 3</strong>: same one-trick, different spell &mdash; Spellstrike with Telekinetic Projectile + Shield, then three Strikes (last missed) on the pinned zombie before handing the kill (and its Death Throes blast) to Delights. Kukulan smashed the glass to drop the other zombie into the pit.</li>
+      <li><strong>Leveled to 6.</strong></li>
+    </ul>
+
+    <h3>Things Izka knows that the party does not</h3>
+    <ul>
+      <li><strong>The conspiracy reaches the crown.</strong> The cultists said the job came from <em>royalty</em> &mdash; nobility, high up. The note to "A," the Grey Maidens, the "Queen's Physicians" that aren't really the Queen's: my read is <strong>Ileosa</strong>, though it's unproven. Kukulan can't read and keeps joking it's "Sabina" (A&asymp;S) &mdash; don't let that become the party's working theory.</li>
+      <li><strong>The temple cultists were making "a blade to kill people"</strong> for <strong>Rolth</strong> &mdash; and <strong>Rolth's lair is down there.</strong> Reiner's hospice fed the same operation; the doctor and the necromancer were one machine.</li>
+      <li><strong>Ishani is fragile but loyal.</strong> 41 HP, 14 AC under the armor. Worth protecting, and worth not telling everything to &mdash; he's a temple cleric, not a co-conspirator.</li>
+      <li><em>(Player meta &mdash; cross-table.)</em> On the old Sunday Korvosa table (same DM), the "Nicolas Cage doctor" / <strong>Davaulus</strong> beat ran differently. Here the group found and <strong>killed</strong> him outright, and the trail to Ileosa is opening earlier than where Pax left the Sunday story.</li>
+    </ul>
+
+    <h3>What Izka is thinking about</h3>
+    <ul>
+      <li><strong>The one-trick is the win condition &mdash; own it.</strong> Spellstrike &rarr; Cascade &rarr; recharge, every turn, and it hasn't missed. The build now has <strong>Cavalier's Charge</strong> (swapped in for Devastating Spellstrike) for reach-and-crit on the mount, the <strong>Clay Sphere spellheart</strong> affixing Gouging Claw to the guisarme, and at L6, <strong>Reactive Strike</strong> to punish movers and <strong>Champion Dedication</strong> for durability. The plan: L8 grabs the <strong>Champion reaction</strong>, and then I'm goated.</li>
+      <li><strong>Po is still a ground mount.</strong> Great for flank/charge setups (Cavalier's Charge, dragon support 1d4), useless for the vertical fights &mdash; Kukulan flies, Delights stairs.</li>
+      <li><strong>Protect the healer.</strong> Ishani's the only reason Kukulan survived Combat 1's crit streak. Keep him out of melee reach and command him for the extra actions.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li><strong>Where exactly is Rolth</strong>, and what is the "blade to kill people" he's building down here?</li>
+      <li><strong>Who is "A"</strong> &mdash; Sabina relaying for Ileosa, or someone else? How far up does this go before we can prove it?</li>
+      <li><strong>What's under the glass floor</strong> &mdash; dozens of bodies for <em>what</em>?</li>
+      <li><strong>The strapped-down Varisians</strong> in the southern room &mdash; cures, carriers, or fuel?</li>
+      <li>Does outing <strong>Ileosa</strong> blow up the party? Kukulan worships her and Izka is a sworn knight. This is going to get complicated.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
