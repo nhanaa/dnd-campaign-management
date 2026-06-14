@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 8 — The Ancestor's Crystal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-sammy { border-left-color: var(--amber); }
+.char-ren { border-left-color: var(--gold); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ember); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-sammy { border-left-color: var(--amber); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Ancestor's Crystal</h1>
+  <div class="subtitle">Session 8 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">Jun 13, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 12m</span>
+    <span class="meta-pill">~25 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:26%"></div>
+    <div class="comp-seg comp-explore" style="width:22%"></div>
+    <div class="comp-seg comp-social" style="width:12%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 26%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 22%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 12%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot / Mystery 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Moon Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome &middot; Wizard (generalist) / Blessed One &middot; <span class="new-badge">NEW</span></div><div class="char-player">Scott Smith</div></div>
+    <div class="char-card char-sammy"><div class="char-name">Sammy Shadowfoot</div><div class="char-class">Halfling &middot; Bard (Polymath) &middot; <span class="new-badge">NEW</span></div><div class="char-player">fallernon</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound &middot; Bai Jian's Beastmaster Companion</div><div class="char-player">&mdash;</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Two new faces fell in with the party on the goblin trails this session &mdash; <strong>Zanthar Melodune III</strong>, a small, white-bearded gnome wizard with a hammer too big for him and no real plan (<em>"a rebel without a clue"</em>), and <strong>Sammy Shadowfoot</strong>, a halfling bard with a lute, a trusty frying pan, and a grudge against the Chelaxian Guard. Both had been sent east to Swiftrun, stumbled onto the same lead the party was chasing &mdash; a false Hell Knight named <strong>Vero Ahala</strong> gathering devils for a ritual in the Chitterwood &mdash; and decided the cause was worth a detour. Back at Thorngrip the ancestor-speaker <strong>Bracknap</strong> welcomed the whole group as true friends of the town, opened the gate to them for good, and laid out the job: Vero's ritual has clouded him from the ancestors' sight, but the woods themselves can find him. He handed over a cloudy <strong>Crystal Pendant</strong> and a map to three sacred "sites of subtle power" &mdash; each one corrupted by the ritual, each one now dangerous &mdash; and asked the party to carry the crystal to all three so it could read the disturbance and point the way.</p>
+    <p>Before they left, Bai Jian made a quiet trade at the goblin smithy: he gave up his <strong>jian</strong> &mdash; the blade he'd carried for years &mdash; for a <strong>falcata</strong> better suited to the cause, asking only that the smith take care of the old sword. Then it was out into the forest. The <strong>Little Tree</strong> site woke a corrupted complex trap and an enraged grizzly bear; Bai Jian tanked and killed the bear while the party pried hellfire fingers off the tree's roots. The <strong>Moss Pond</strong> rippled open into a planar trap with two regenerating moss-sloths from the Plane of Wood; Cyrathul read their fire weakness, Sammy danced the trap quiet with her lute, and the party ground the sloths back into moss. The <strong>Hungry Hole</strong> &mdash; an old goblin wizard's botched spacious-pouch turned into a hungry extradimensional mouth &mdash; tried to inhale Bai Jian and Cyrathul off the edge, but a few clean occultism checks peeled the corruption away. At each site the crystal drank in a thread of magic and glowed warmer and greener.</p>
+    <p>They brought it back to Bracknap, who held it, went pale, and saw it: <em>"The caves! The Hell-Human Vero is in the caves!"</em> The caves are <strong>Stagfall</strong>, named for the grandmother whose stag-shaped sacrifice once led human hunters away from his tribe &mdash; and now defiled by Vero's ritual. Bracknap marked the hidden cave on the map, and the tribe's elders gifted Bai Jian a <strong>rune of striking</strong> for his new blade. The party found the cave behind a grove that looked like a stag's antlers, stepped into the dark, and hit three web-spitting devils &mdash; <strong>Insidiators</strong>. Fighting half-blind until Sammy cast Light, they cut the devils down one by one, Bai Jian capping it with a 60-damage falcata crit that took the last devil's head clean off and sent it rolling out the cave mouth like a bowling ball. Past a hastily-piled rubble wall, a circular cavern opened with four tunnels, a shattered statue of an armored figure, and &mdash; coiled on a pile of rocks &mdash; a slithering snake-like creature. The session ended there, on the threshold of Vero's lair.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; Two New Longshanks</div>
+      <div class="act-card">
+        <h3>Friends of the Rose</h3>
+        <ul>
+          <li>Session zero for the two newcomers. <strong>Kaazz</strong> (DM) introduced himself; the three returning players re-introduced; Bai Jian recapped Session 7 (Umok, the Hell Hounds and Rama's death, the Orts, the Iskari Slayers, Thorngrip).</li>
+          <li>On the trail back to Thorngrip the party met <strong>Zanthar Melodune III</strong> (gnome wizard) and <strong>Sammy Shadowfoot</strong> (halfling bard) traveling together &mdash; introduced organically in-fiction.</li>
+          <li>Sammy hailed them with the Hellbreaker passphrase: <em>"Are you friends of Rose?"</em> Zanthar, bewildered at the armed strangers in the deep woods: <em>"Why are we in the woods?"</em></li>
+          <li>The two had been dispatched <strong>east to Swiftrun</strong>, ran into trouble, and learned <strong>Vero Ahala</strong> is gathering Hell Knights for a ritual in the Chitterwood. Shared goal &rarr; the party folded them in, <strong>Panacea</strong> vouching for the link: <em>"The trust goes up now for me. We're looking for the same person."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act II &middot; Roleplay / Faction &middot; Thorngrip, the Smithy, and the Crystal</div>
+      <div class="act-card">
+        <h3>The Ancestor-Speaker's Errand</h3>
+        <ul>
+          <li>Back through the thorn wall into <strong>Thorngrip</strong>. Bracknap, ghostly ancestors flickering at his back, named the party <strong>friends of Thorngrip</strong> &mdash; <em>"Our home is your home"</em> &mdash; and Zagnub showed them the hidden lever so they could come and go freely.</li>
+          <li><strong>The jian trade.</strong> Bai Jian visited <strong>Gug</strong>, the gruff goblin smith, and traded in his longtime <strong>jian</strong> for a <strong>falcata</strong>, asking to transfer his +1 potency rune &mdash; a genuine farewell: <em>"Please take care of that sword. It meant a lot to me."</em></li>
+          <li><strong>Bracknap's quest.</strong> Vero's ritual has <em>"obscured him from our ancestors' sight,"</em> but three nearby <strong>sites of subtle power</strong> &mdash; disturbed by the ritual &mdash; can reveal him. He handed over the <strong>Crystal Pendant</strong>: carry it to all three and he can see Vero's location.</li>
+          <li>The three sites: the <strong>Hungry Hole</strong> (a bottomless pit), <strong>Little Tree</strong> (a sapling that never grows or dies, fed by magic), and <strong>Moss Pond</strong> (a rippling patch of moss tied to the Chitterwood's essence).</li>
+          <li><strong>Panacea</strong> reasoned a fighter should carry it (<em>"if they place it and something comes out, they'll be right there"</em>); the party agreed <strong>Bai Jian</strong> &mdash; most HP, <em>"least chance of immediate death"</em> &mdash; would be the bearer.</li>
+          <li>Overnight rest while Gug worked the rune; the falcata waited at the door in the morning. Quiet downtime shopping (Ren's barding, rations).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Little Tree &amp; The Grizzly Bear</div>
+      <div class="act-card">
+        <h3>Hellfire in the Roots</h3>
+        <ul>
+          <li>Half an hour southeast to a small, vibrant <strong>sapling</strong> radiating peace &mdash; but the peace was wrong. The tree pulsed <strong>big-and-small</strong> in a magical flux, washing nearby PCs with Will saves (Slowed / Off-Guard, a shrinking effect).</li>
+          <li>It was a <strong>complex trap</strong>: hellfire "fingers" had reached through a planar crack and gripped the tree's roots, draining its magic. The flux <strong>woke a giant grizzly bear</strong>, which locked onto Bai Jian and charged.</li>
+          <li>The party split focus &mdash; disarming the trap (Nature/Occultism) while fighting the bear. <strong>Sammy</strong>, brand new and partly fighting through a laggy connection, dropped a <strong>Courageous Anthem</strong> to buff the team. The tree even shrank Sammy down to pixie size for a round.</li>
+          <li><strong>Bai Jian</strong> tanked the bear, <strong>Dueling Parry</strong> up, and cut it down with two crits (25, then a 36-damage kill). He then <strong>disarmed the final trap component himself</strong> &mdash; spotting a smoldering ember-coal at the tree's base and stamping it out.</li>
+          <li>With the corruption gone, the tree radiated peace and "thanked" the party psychically. Bai Jian held out the crystal: an invisible tendril of magic drifted into it, and it <strong>glowed warm.</strong> The tree spat up a <strong>spacious pouch</strong> and <strong>rare mushrooms.</strong> Bai Jian skinned the bear for a pelt.</li>
+          <li><strong>+30 XP</strong> for earning Bracknap's trust, plus the site XP.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat / Exploration &middot; The Moss Pond</div>
+      <div class="act-card">
+        <h3>A Crack to the Plane of Wood</h3>
+        <ul>
+          <li>An hour-and-a-half west to a <strong>large patch of undulating moss</strong> "floating" with no water beneath it. Bai Jian, learning from the tree, scouted ahead alone with the crystal (<em>"let me approach it, because I have decent save"</em>).</li>
+          <li>The moss <strong>speared spikes</strong> up at Bai Jian and Ren the moment they reached the center (piercing + poison; both saved, one via hero point). A planar shimmer &mdash; the <strong>Plane of Wood</strong> converging &mdash; and <strong>two moss-sloths</strong> appeared. The moss itself was a corrupted complex trap.</li>
+          <li><strong>Cyrathul</strong> read the sloths: <strong>from the Plane of Wood, weak to fire, regenerate each turn unless they take fire damage.</strong> His Exploit Vulnerability triggered the fire weakness on his bite/claw.</li>
+          <li><strong>Sammy</strong> &mdash; by now DM-operated, her Wi-Fi having dropped &mdash; <strong>disabled the moss trap</strong> with an occultism check; the DM narrated her turn (a trance, a few bars on the lute, a spin and a dance, the field going calm) and her sung Courageous Anthem: <em>"You can do it!"</em></li>
+          <li><strong>Bai Jian</strong> Snagging-Struck the sloths off-guard (<em>"Off-guard, baby"</em>) and ground them down with the falcata &mdash; normal hits of <strong>12, 16, and 11</strong> (lifted by the exploited weakness; no crit of his own). A moss spear later <strong>crit <em>him</em></strong> on a nat 20 for <strong>18</strong> (<em>"I need some healing, guys"</em>). On the off-guard target, <strong>Zanthar</strong> crit with <strong>Hand of the Apprentice</strong>, hurling his oversized hammer. <strong>Panacea</strong> kept Bai Jian topped (ranged Heal, <strong>Life Boost</strong> fast healing); the sloths "melted back into moss."</li>
+          <li>Crystal out again: it drank the pond's magic and turned <strong>bright vibrant green.</strong> Loot from the dissolving sloths: a <strong>smuggler's padlock</strong> and consumables.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery / Exploration &middot; The Hungry Hole</div>
+      <div class="act-card">
+        <h3>The Mouth That Cannot Be Filled</h3>
+        <ul>
+          <li>Two hours east to a perfect <strong>40-foot circle of barren dirt</strong> around a plain hole &mdash; no grass, no encroaching branches, an eerie inhaling sound. As Bai Jian and Cyrathul approached, an unseen force tried to <strong>drag them toward the edge</strong> (Fortitude saves). No creatures &mdash; just the hazard.</li>
+          <li><strong>Cyrathul</strong> Recall-Knowledge'd it: long ago a <strong>goblin wizard</strong> tried to make his own spacious pouch out here and instead tore open a <strong>hole to an extradimensional space</strong> &mdash; now warped by Vero's ritual into a hungry mouth.</li>
+          <li>The party disarmed it cleanly with occultism &mdash; <strong>Cyrathul</strong> slapped a hellfire hand away; <strong>Zanthar</strong> (guidance up, hero-pointed) peeled the last fingers off and ended the encounter.</li>
+          <li>Bai Jian, dragged to the lip, stepped back rather than test the legend he'd joked about back in Thorngrip &mdash; that a goblin who falls through comes out the other side of the world (<em>"maybe if I fall into the hole, I can just come back home,"</em> he'd grinned, needling his own faraway Tian Xia origin).</li>
+          <li>The hole belched up a <strong>low-grade talisman</strong> and <strong>20 gold.</strong> Crystal out one last time: it went <strong>crystal-clear and vibrant green</strong>, glowing with warm radiant energy. <strong>All three sites done.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Mystery / Faction &middot; Bracknap's Warning &amp; Stagfall</div>
+      <div class="act-card">
+        <h3>The Stag's Sacrifice</h3>
+        <ul>
+          <li>Back to Thorngrip. Bracknap held the charged crystal, his eyes flashing from calm blue to <strong>alarmed red</strong>: <em>"The caves! The Hell-Human Vero is in the caves!"</em></li>
+          <li><strong>The Stagfall lore.</strong> Before Thorngrip existed, his tribe was hunted by humans at the end of the Goblinblood Wars. His <strong>grandmother used the power of the woods to transform into a mighty stag</strong> and led the hunters away, dying so the rest could escape. The survivors raised the thorn wall and named the caves <strong>Stagfall</strong> in her honor. Now Vero defiles them.</li>
+          <li>Bracknap, <em>"trembling with anger,"</em> sent the party to stop him &mdash; marking the hidden cave on the map (behind a grove of stag-antler trees) and warning the crystal <strong>still has power left</strong>, <em>"it will be very useful."</em></li>
+          <li>The tribe's <strong>elders gifted a rune of striking</strong>, which <strong>Gug applied to Bai Jian's falcata</strong> (6 gp 5 sp). Overnight rest and a goblin grog send-off.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII &middot; Combat &middot; Into the Caves: The Insidiators</div>
+      <div class="act-card">
+        <h3>Three Devils in the Dark</h3>
+        <ul>
+          <li>Three hours to a rocky hill whose trees, at the right angle, look like a <strong>stag's antlers</strong> over black, gnarled brush. A small cave hid behind a tall tree.</li>
+          <li>The party crept into the <strong>dark</strong> chamber &mdash; Bai Jian has no darkvision &mdash; and <strong>three devils (Insidiators)</strong> were waiting, hidden in the corner.</li>
+          <li><strong>Cyrathul</strong> opened with a crit Exploit Vulnerability and read the block: <strong>resist all physical except silver, resist poison, immune to fire, weak to holy</strong> &mdash; the read that defined the fight. An Insidiator cast <strong>Bane</strong> (&minus;1 attacks) and <strong>webbed Cyrathul</strong> (immobilized); a second web at Bai Jian missed.</li>
+          <li><strong>Panacea</strong> cast <strong>Light</strong> so the party could finally see, then blew an Insidiator apart with <strong>silver Needle Darts</strong> (<em>"foo, foo, foo, all come out the back"</em>). <strong>Zanthar</strong> Electric-Arced the cluster. <strong>Cyrathul</strong> Mirror'd in, off-guarded a second devil, and tore it apart with chomp + claw.</li>
+          <li><strong>Sammy</strong> cast <strong>Light</strong> so the party could finally see. <strong>Bai Jian</strong> closed and <strong>critted the last Insidiator &mdash; base dice maxed ("Double 12") for 63, 60 after resistance</strong> &mdash; a massive-damage instant kill. <em>"I just do a spin and just cut his head clean off."</em> The head rolled out the cave mouth past the newcomers.</li>
+          <li>Three devils, all turned to ash. Past a <strong>hastily-piled rubble wall</strong> (Ren "showed them how to dig"), a circular cavern with <strong>four tunnels</strong>, a <strong>moss alcove</strong>, a <strong>shattered statue of an armored figure</strong> &mdash; and on a pile of rocks, a <strong>slithering snake-like creature.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <p style="color:var(--text-dim);font-size:14px;">Damage and to-hit values are from the session's roll log where stated. Attribution is by character capability (class / feature / weapon), not by the transcript's speaker labels &mdash; which merged the two new players into the returning PCs this session.</p>
+
+  <div class="combat-box">
+    <h3>Site 1 &mdash; The Little Tree (Complex Trap + Grizzly Bear)</h3>
+    <div class="combat-meta">Initiative: Panacea &middot; Grizzly Bear &middot; Bai Jian &middot; Zanthar &middot; Cyrathul &middot; Sammy</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Threats</div><div class="combat-stat-value">Complex trap + Bear</div></div>
+      <div><div class="combat-stat-label">Trap Effect</div><div class="combat-stat-value">Will save: Slow / Off-Guard / shrink</div></div>
+      <div><div class="combat-stat-label">Bear Kill</div><div class="combat-stat-value">Bai Jian (36 crit)</div></div>
+      <div><div class="combat-stat-label">Final Disable</div><div class="combat-stat-value">Bai Jian (Nature)</div></div>
+    </div>
+    <ul>
+      <li><strong>Trap</strong> &mdash; disarmed over several rounds (Nature/Occultism). <strong>Cyrathul</strong> separated the hellish magic with occultism (success, hero-pointed); <strong>Sammy</strong> held the line with <strong>Courageous Anthem</strong>; <strong>Bai Jian</strong> landed the <strong>final disable</strong> with a Nature check, stamping out the corrupting ember-coal at the tree's roots.</li>
+      <li><strong>Bear</strong> &mdash; locked onto Bai Jian, used a <strong>Rush</strong> (move twice + Strike), hitting him for <strong>5</strong>, then a follow-up bite for <strong>11.</strong></li>
+      <li><strong>Bai Jian</strong> &mdash; raised <strong>Dueling Parry</strong>, took <strong>Ren</strong>'s Support (+1 / +1d6), and <strong>crit the bear for 25</strong>, then later <strong>crit again for 36 &mdash; the killing blow.</strong> Closed his turn with <strong>Battle Medicine on himself (healed 11).</strong></li>
+      <li><strong>Cyrathul</strong> &mdash; Exploited the bear: <strong>no weaknesses.</strong></li>
+      <li><strong>Panacea</strong> &mdash; hit it with <strong>Needle Darts for 11</strong>; her <strong>Trade Life for Death</strong> hex was saved against (no effect).</li>
+    </ul>
+    <p><strong>Outcome:</strong> bear dead, trap cleansed, tree at peace. Crystal charged (glowed warm). Loot: spacious pouch, rare mushrooms, bear pelt. <strong>+30 XP</strong> for Bracknap's trust + site XP.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Site 2 &mdash; The Moss Pond (Complex Trap + 2 Moss-Sloths)</h3>
+    <div class="combat-meta">Initiative reconstructed from transcript + rolls (no tracker provided)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Threats</div><div class="combat-stat-value">Planar trap + 2 Sloths</div></div>
+      <div><div class="combat-stat-label">Sloth Weakness</div><div class="combat-stat-value">Fire (regen w/o it)</div></div>
+      <div><div class="combat-stat-label">Trap Disable</div><div class="combat-stat-value">Sammy (Occultism)</div></div>
+      <div><div class="combat-stat-label">Trap Effect</div><div class="combat-stat-value">Moss spikes: pierce + poison</div></div>
+    </div>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; scouted onto the moss alone with the crystal; the first spear volley both saved (he hero-pointed Ren's). <strong>Snagging-Struck</strong> the sloths for <strong>12, 16, and 11</strong> &mdash; normal falcata hits lifted by the exploited weakness, <strong>no crit</strong>. A later moss spear <strong>crit Bai Jian for 18</strong> (a nat 20), prompting his heal call.</li>
+      <li><strong>Cyrathul</strong> &mdash; Recall-Knowledge'd the sloths (Plane of Wood; weak fire; regenerate without fire) and Exploited the fire weakness, biting and clawing through their regeneration for <strong>18</strong> and <strong>14</strong> &mdash; the chomp + claw that finished the second sloth.</li>
+      <li><strong>Sammy</strong> (DM-operated on a Wi-Fi drop) &mdash; <strong>disabled the moss trap</strong> with an occultism check (lute + dance), then sang <strong>Courageous Anthem.</strong></li>
+      <li><strong>Zanthar</strong> &mdash; crit the off-guard sloth (set up by Bai Jian's Snagging Strike) with <strong>Hand of the Apprentice</strong> (hurled hammer) for <strong>9</strong> after resistance.</li>
+      <li><strong>Panacea</strong> &mdash; ranged <strong>Heal</strong> on Bai Jian and <strong>Life Boost</strong> fast healing; Needle Darts mostly missed (a misclick targeted Bai Jian &mdash; no harm).</li>
+    </ul>
+    <p><strong>Outcome:</strong> both sloths reduced back to moss; trap disabled. Crystal charged (bright green). Loot: smuggler's padlock + consumables.</p>
+  </div>
+
+  <div class="combat-box" style="border-left-color: var(--ember); box-shadow: inset 0 0 24px var(--ember-glow);">
+    <h3>Site 3 &mdash; The Hungry Hole (Hazard)</h3>
+    <div class="combat-meta">Initiative: Zanthar &middot; the Pit &middot; Cyrathul &middot; Bai Jian &middot; Panacea &middot; Sammy</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Threat</div><div class="combat-stat-value">Inhaling pit (no creatures)</div></div>
+      <div><div class="combat-stat-label">Effect</div><div class="combat-stat-value">Fort save: dragged to edge</div></div>
+      <div><div class="combat-stat-label">Disabled By</div><div class="combat-stat-value">Cyrathul + Zanthar</div></div>
+    </div>
+    <ul>
+      <li>No creatures &mdash; a corrupted <strong>inhaling pit</strong> (an old goblin wizard's botched spacious-pouch) that drags approaching PCs toward the edge.</li>
+      <li><strong>Cyrathul</strong> Recall-Knowledge'd the hole's origin and slapped away a hellfire hand (occultism success). <strong>Zanthar</strong> (guidance up, hero-pointed) peeled off the last fingers and <strong>ended the encounter.</strong> Bai Jian was dragged to the lip but stepped back.</li>
+      <li><strong>Outcome:</strong> corruption removed; the hole belched up a low-grade talisman + 20 gold. Crystal fully charged (crystal-clear, vibrant green).</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>Stagfall Caves &mdash; 3 Insidiators (web devils)</h3>
+    <div class="combat-meta">Initiative: Cyrathul &middot; Bai Jian &middot; Insidiator &middot; Insidiator &middot; Sammy &middot; Zanthar &middot; Insidiator &middot; Panacea</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3 Insidiators</div></div>
+      <div><div class="combat-stat-label">Resist / Immune</div><div class="combat-stat-value">Physical (not silver), poison; fire</div></div>
+      <div><div class="combat-stat-label">Weakness</div><div class="combat-stat-value">Holy</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Panacea, Cyrathul, Bai Jian</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Cyrathul</strong> &mdash; crit <strong>Exploit Vulnerability</strong>, read the full block, bit through the weakness for <strong>10.</strong></li>
+      <li><strong>Bai Jian</strong> &mdash; took <strong>Ren</strong>'s Support but the cave was <strong>dark</strong> (flat checks vs hidden devils); he whiffed in the black.</li>
+      <li>The <strong>Insidiators</strong> cast <strong>Bane</strong> on the party (&minus;1 attacks &mdash; why Bai Jian's later crit reads +12, not his usual +13) and spat <strong>web at Cyrathul, immobilizing the dragon</strong>; a second web at <strong>Bai Jian missed</strong> (<em>"goes clear over your head"</em>).</li>
+      <li><strong>Sammy</strong> &mdash; cast <strong>Light</strong> so the party could finally see.</li>
+      <li><strong>Zanthar</strong> &mdash; moved up and <strong>Electric Arc'd</strong> the cluster (both saved &rarr; 3 each).</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Panacea</strong> &mdash; moved in and <strong>silver Needle Darts</strong> an Insidiator apart for <strong>10</strong> &mdash; a kill (<em>"foo, foo, foo, all come out the back; it crumbles to the ground"</em>).</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Mirror'd</strong>, off-guarded a second devil, chomp + claw'd it apart (10 + 7 = <strong>17</strong>) &mdash; a kill (<em>"crumples like paper"</em>).</li>
+      <li><strong>Bai Jian</strong> &mdash; closed and <strong>critted the last Insidiator: base dice maxed ("Double 12") for 63 &rarr; 60 after physical resistance &rarr; massive-damage instant kill.</strong> <em>"I just do a spin and just cut his head clean off."</em></li>
+    </ul>
+    <p><strong>Outcome:</strong> all three devils dead and turned to ash; Bane dropped when its bearer died. Past a rubble wall the party found the four-tunnel cavern, the shattered armored statue, and a <strong>slithering snake-like creature</strong> &mdash; <strong>session ends on the cliffhanger.</strong></p>
+  </div>
+
+  <div class="xp-banner">
+    Experience &middot; Bracknap's Trust +30 &middot; Moss Pond 60 (Low) &middot; Little Tree / Hungry Hole / Stagfall (sites + combat) = <strong>Level 3</strong>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the White Blade, Reforged</h4>
+      <ul>
+        <li>Volunteered to carry and place the <strong>Crystal Pendant</strong> at every site and made himself the point man at each hazard (<em>"let me approach it, I have decent save"</em>) &mdash; eating the bear's charge, the moss spikes, and the Hungry Hole's pull so the squishier members didn't have to.</li>
+        <li><strong>Solo-killed the grizzly bear</strong> (Dueling Parry, two crits &mdash; 25 then 36 &mdash; self-Battle-Medicine afterward "because I never get to use it") and personally <strong>disarmed the Little Tree's last trap component</strong> by stamping out the corrupting ember at its roots.</li>
+        <li>The session's quiet heart: the <strong>jian trade.</strong> After years carrying the "gentleman of weapons," he gave it to Gug for a <strong>falcata</strong> &mdash; a one-handed fatal blade that fits his free-hand Dueling build &mdash; asking only that the smith <em>"take care of that sword. It meant a lot to me."</em></li>
+        <li>The trade paid off at once: Bracknap's elders gifted a <strong>rune of striking</strong>, and in Stagfall the new +1 striking falcata crit with its <strong>base dice maxed ("Double 12") for 63 &mdash; 60 after resistance</strong> &mdash; a massive-damage instant decapitation of the last Insidiator. <em>"I just do a spin and just cut his head clean off."</em></li>
+        <li>Spent real table-time <strong>mentoring the two newcomers</strong> through their first turns.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Dragon's Eye</h4>
+      <ul>
+        <li>The party's knowledge engine at every site: read the <strong>moss-sloths</strong> (Plane of Wood, weak fire, regenerating), the <strong>Hungry Hole</strong> (a goblin wizard's spacious-pouch gone wrong), and &mdash; most decisively &mdash; the <strong>Insidiators</strong> (resist physical except silver, resist poison, immune fire, weak holy), the single read that shaped the whole cave fight.</li>
+        <li>His Exploit Vulnerability and Mirror Cloak chomp-and-claw closed out a moss-sloth and a cave devil.</li>
+        <li>Before any fighting, flagged the party's one real fragility &mdash; invoking Rama's death from a failed treatment check to make sure someone could heal after a battle: <em>"that could be a real problem when you go out after a battle and no one knows how to heal the wounds."</em></li>
+        <li>Trademark deadpan all night: offered to scout the Hungry Hole because he <em>"can arrest fall as well,"</em> and when there was nothing useful left to do at the Little Tree, simply announced he would <em>"stand there menacingly."</em></li>
+        <li>His Exploit on the grizzly turned up the session's first comedic letdown: <em>"He has no weaknesses."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Steady Hand</h4>
+      <ul>
+        <li>The party's sole healer, holding three fights together without backup &mdash; kept <strong>Bai Jian topped</strong> across the bear, the sloths, and the cave (ranged Heal, <strong>Life Boost</strong> fast-healing, downtime Battle Medicine).</li>
+        <li>In the pitch-black Stagfall cave &mdash; once Sammy's Light let everyone see &mdash; she waded in and <strong>shredded an Insidiator with silver Needle Darts</strong> (10, a clean kill).</li>
+        <li>It was her tactical read that put the crystal in the tank's hands in the first place (<em>"if they place it and something comes out, they'll be right there"</em>).</li>
+        <li>Navigated the Foundry learning curve as a first-time player with patience and a dry wit &mdash; sorting out her witch's trained skills, her detect-magic limits, and her familiar mid-fight &mdash; ribbing the tank even as she healed him: <em>"Never too much healing, especially with you. You keep running into stuff."</em></li>
+        <li>And she warmed visibly to the team's animals: <em>"Ren's growing on me."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Generalist <span style="font-size:12px;color:var(--ember);">(debut)</span></h4>
+      <ul>
+        <li>Wrote his own introduction: a small, white-bearded gnome mage with a hammer that <em>"doesn't look like it makes much sense,"</em> <em>"a rebel without a clue, looking for some cause to fight for"</em> who's latched onto the Hellbreakers &mdash; a jack-of-everything (<em>"a generalist in my spellcasting... a little bit of fire and a little bit of everything,"</em> plus a Blessed One's <em>"little lay on hands"</em>).</li>
+        <li>His best newcomer beat was pure bewilderment, walking up on a band of armed strangers in the deep woods: <em>"Why are we in the woods?"</em></li>
+        <li>Pulled his weight fast &mdash; a <strong>Hand of the Apprentice crit</strong> on a moss-sloth (hurling that oversized hammer, after Bai Jian's Snagging Strike set the target off-guard), a guidance-buffed occultism check that helped close the Hungry Hole, and an <strong>Electric Arc</strong> into the Insidiator cluster.</li>
+        <li>Refreshingly modest about it, too: <em>"I wouldn't call myself well versed yet &mdash; still just starting out, like the rest of y'all."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-sammy">
+      <h4>Sammy Shadowfoot &middot; the Frying-Pan Bard <span style="font-size:12px;color:var(--amber);">(debut)</span></h4>
+      <ul>
+        <li>Introduced herself with the detail that stuck &mdash; a musical instrument always on hand and <em>"her trusty frying pan"</em> &mdash; and a backstory of <em>"run-ins with the Chelaxian Guard"</em> that pushed her toward the Hellbreakers.</li>
+        <li>She hailed the party first, testing them with the Hellbreaker passphrase: <em>"Are you friends of Rose?"</em> Her biggest hard contribution came in the Stagfall cave &mdash; the party was fighting blind until Sammy cast <strong>Light</strong> and let everyone see the devils.</li>
+        <li>At the <strong>Moss Pond</strong>, Sammy <strong>disabled the corrupted trap</strong> with an occultism check &mdash; though by then her Wi-Fi had cut out, so the vivid version (a trance, the lute, a spin and a dance, a sung Courageous Anthem &mdash; <em>"You can do it!"</em>) was the <strong>DM narrating her turn</strong> in her absence.</li>
+        <li>An honest note: her connection dropped repeatedly all night and the DM ran much of her combat; her player genuinely spoke only a handful of lines. But the halfling with the lute and the frying pan still made a first impression, and the table clearly wanted her in it.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Falcata (+1 potency &rarr; +1 striking)</div><div class="loot-source">Gug's Smithy &middot; Thorngrip</div><div class="loot-note">Bai Jian traded in his jian; rune transferred, then a striking rune (from Bracknap's elders) applied for 6g5s.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Rune of Striking</div><div class="loot-source">Bracknap &amp; the Thorngrip Elders</div><div class="loot-note">Gifted; applied to Bai Jian's falcata.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Crystal Pendant (charged)</div><div class="loot-source">Bracknap</div><div class="loot-note">Fully charged across 3 sites; "still has much power left."</div></div>
+    <div class="loot-item magical"><div class="loot-name">Spacious Pouch</div><div class="loot-source">The Little Tree</div><div class="loot-note">A "thank you" from the cleansed tree.</div></div>
+    <div class="loot-item"><div class="loot-name">Rare Mushrooms</div><div class="loot-source">The Little Tree</div><div class="loot-note">In party loot.</div></div>
+    <div class="loot-item"><div class="loot-name">Bear Pelt</div><div class="loot-source">Grizzly Bear</div><div class="loot-note">Skinned by Bai Jian; worth its weight in gold.</div></div>
+    <div class="loot-item"><div class="loot-name">Smuggler's Padlock + consumables</div><div class="loot-source">Moss Pond (dissolved sloths)</div><div class="loot-note">Party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">Low-grade Talisman + 20 gp</div><div class="loot-source">The Hungry Hole</div><div class="loot-note">Belched up after the corruption was cleared.</div></div>
+    <div class="loot-item"><div class="loot-name">Key to Thorngrip's Gate</div><div class="loot-source">Zagnub</div><div class="loot-note">The party can now open the thorn wall freely.</div></div>
+  </div>
+  <div class="xp-banner">
+    Bracknap's Trust +30 &middot; Moss Pond 60 (Low) &middot; Little Tree + Hungry Hole + Stagfall &rarr; <strong>Level 3</strong>
+  </div>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Vero Ahala is in Stagfall.</strong> The charged crystal located him in the caves named for Bracknap's grandmother. The party is one chamber away &mdash; past a snake-like creature and a shattered armored statue &mdash; from his ritual.</li>
+      <li><strong>The cliffhanger creature.</strong> A slithering snake-like thing on a pile of rocks in the four-tunnel cavern. Unidentified. The shattered statue of an armored figure may be Vero's, a guardian, or a clue.</li>
+      <li><strong>The crystal still has power.</strong> Bracknap said it remains <em>"very useful"</em> &mdash; an unspent tool going into the lair.</li>
+      <li><strong>Bai Jian's new blade.</strong> The +1 striking falcata is online and already proven (60-damage crit). His old jian stays with Gug at Thorngrip. A property rune is next &mdash; waiting on level 4.</li>
+      <li><strong>The two newcomers.</strong> Zanthar (generalist wizard, some healing) and Sammy (occult bard) are integrating fast; Sammy's connectivity is the table's one practical wildcard.</li>
+      <li><strong>Rama's death</strong> (still open from S7) &mdash; no word yet sent to Rhokrag at the Saringallow HQ.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "I just do a spin and just cut his head clean off."<span class="attribution">The falcata crit (base dice maxed, "Double 12," 60 after resistance) that instant-killed the last Insidiator and ended the cave fight.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Please take care of that sword. It meant a lot to me."<span class="attribution">Trading in his jian &mdash; the blade he'd carried for years &mdash; at Gug's goblin smithy.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "I mean, that's what I do. I'm like the tank."<span class="attribution">Waving off "too much healing" after eating hits at three sites in a row.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Maybe if I fall into the hole, I can just come back home."<span class="attribution">Riffing on the Hungry Hole legend &mdash; that goblins who fall through come out the other side of the world &mdash; and his own faraway origin in Tian Xia.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I will stand there menacingly."<span class="attribution">His turn at the Little Tree once there was nothing useful left to do &mdash; peak deadpan.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "They resist all physical except silver and poison, they're immune to fire, and they're weak to holy."<span class="attribution">The crit Exploit Vulnerability read on the Insidiators that shaped the entire cave fight.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "He has no weaknesses."<span class="attribution">Exploit Vulnerability on the grizzly bear coming up empty &mdash; the session's first comedic letdown.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "Ren's growing on me."<span class="attribution">Warming to Bai Jian's boarhound mid-session.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "Never too much healing, especially with you. You keep running into stuff."<span class="attribution">Ribbing the tank while topping him off again.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "Why are we in the woods?"<span class="attribution">The new wizard's first line &mdash; pure bewildered-newcomer energy, walking up on a band of armed strangers.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "He's a rebel without a clue. He's looking for some cause to fight for."<span class="attribution">Introducing his own character &mdash; the DM asked Zanthar's player to describe him, and he narrated himself in the third person.</span></blockquote>
+
+  <blockquote><strong>Sammy:</strong> "Sammy Shadowfoot, nice to meet you... carrying a musical instrument always, and her trusty frying pan."<span class="attribution">Her introduction &mdash; the frying pan made the first impression.</span></blockquote>
+
+  <blockquote><strong>Sammy:</strong> "Hello, are you friends of Rose?"<span class="attribution">Her first words to the party &mdash; a newcomer testing them with the Hellbreaker passphrase before throwing in.</span></blockquote>
+
+  <blockquote><strong>Bracknap:</strong> "The caves! The Hell-Human Vero is in the caves!"<span class="attribution">Reading the charged crystal &mdash; calm blue eyes flashing red &mdash; and naming Stagfall.</span></blockquote>
+
+</section>
+
+<section>
+  <h2>The Cliffhanger</h2>
+  <div class="cliffhanger">
+    <span class="label">Session ends &middot; Stagfall, the inner cavern</span>
+    <p>Past the rubble wall, four tunnels branch off a circular cavern. Neatly stacked rocks. A moss alcove. The shattered remains of a stone statue of an armored figure, scattered across the floor. And on a pile of rocks &mdash;</p>
+    <span class="big-line">A slithering, snake-like creature.</span>
+    <span class="speaker">&mdash; we find out what it is next week.</span>
+  </div>
+</section>
+
+<section>
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <section class="pax-notes">
+    <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Bai Jian did this session</h3>
+    <ul>
+      <li>Traded the <strong>jian</strong> for a <strong>falcata</strong> at Gug's Thorngrip smithy; transferred the +1 potency rune. One-handed, fatal &mdash; fits the free-hand build better.</li>
+      <li>Took the <strong>Crystal Pendant</strong> as the party's designated bearer; carried and placed it at all three sites.</li>
+      <li><strong>Solo-tanked and killed the grizzly bear</strong> at the Little Tree (Dueling Parry, two crits &mdash; 25 then 36 &mdash; self-Battle-Medicine for 11). <strong>Disarmed the tree's last trap component</strong> myself (stamped the ember at the roots).</li>
+      <li>Scouted/tanked the <strong>Moss Pond</strong> and the <strong>Hungry Hole</strong> (dragged to the edge; stepped back).</li>
+      <li>Received a <strong>rune of striking</strong> from Bracknap's elders; Gug applied it to the falcata.</li>
+      <li><strong>60-damage crit</strong> (base dice maxed, "Double 12"; 63 &rarr; 60 after resistance) decapitated the last Insidiator in the Stagfall caves.</li>
+      <li>Walked the two new players &mdash; <strong>Zanthar</strong> and <strong>Sammy</strong> &mdash; through their first turns.</li>
+    </ul>
+
+    <h3>Things Bai Jian knows that the party does not</h3>
+    <ul>
+      <li>The crystal <strong>still has power left</strong> &mdash; Bracknap said it'll be "very useful" inside. Don't spend it carelessly; it may be a key, a ward, or a one-shot against Vero.</li>
+      <li><strong>Stagfall</strong> is sacred ground &mdash; the grandmother's stag-sacrifice caves. Vero defiling it is personal to Bracknap; the goblins will remember how we treat the place.</li>
+      <li>We're <strong>early, not late</strong> again &mdash; the crystal pointed us to Vero <em>before</em> the ritual fired. That window is open but closing.</li>
+      <li>Giving up the jian sat heavier than I let on. A blade is just a tool. I keep telling myself that.</li>
+    </ul>
+
+    <h3>What Bai Jian is thinking about</h3>
+    <ul>
+      <li>The falcata's <strong>fatal die</strong> does exactly what I hoped on a crit &mdash; the decap proved it. With <strong>striking</strong> online now, every crit is a problem for whatever's in the next chamber.</li>
+      <li>Two new bodies change the math. <strong>Zanthar</strong> can blast (Electric Arc) and patch wounds a little; <strong>Sammy</strong> has occult tricks and the trap-skills none of us had &mdash; but her connection is a coin flip. Plan fights assuming she might blink out.</li>
+      <li>I keep being the one who walks into the trap first. It works because I have the saves and the HP &mdash; but in a devil's lair, "decent save" might not be enough. Watch the Will saves; Vero's a ritualist.</li>
+      <li>Still no <strong>light</strong> source of my own. I was swinging blind in that cave until Sammy's Light fixed it &mdash; and she's the one whose connection drops. I need a torch or a light cantrip I control before we push deeper.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>What is the <strong>snake-like creature</strong> on the rocks? Guardian, familiar, or Vero's summon?</li>
+      <li>The <strong>shattered armored statue</strong> &mdash; Vero's discarded Hell Knight shell, a destroyed guardian, or a warning?</li>
+      <li>How <strong>close is the ritual</strong> to completing? Bracknap couldn't say &mdash; only that Vero is <em>here</em>, now.</li>
+      <li>Four tunnels off that cavern. Which one is Vero down &mdash; and what's in the other three?</li>
+      <li>Does Sammy's connection hold for the boss fight? If not, who covers the occult/trap lane?</li>
+    </ul>
+  </section>
+</section>
+
+</div>
+</body>
+</html>

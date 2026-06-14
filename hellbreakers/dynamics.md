@@ -7,6 +7,8 @@
 | Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 2 | Beastmaster (Ren active) + Thaumaturge | Pax |
 | Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 2 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
 | Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 2 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
+| Zanthar Melodune III | Gnome | Wizard (generalist) — Lv 3 | Blessed One (Lay on Hands focus spell) | Scott Smith — **JOINED S8 (2026-06-13)** |
+| Sammy Shadowfoot | Halfling | Bard (Polymath muse) — Lv 3 | TBD | fallernon — **JOINED S8 (2026-06-13)**; frequent Wi-Fi drops, often DM-run in combat |
 | Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane dedication (Electric Arc), Battle Medicine. | crackrockcowboy — *JOINED S6 · **DIED S7 (2026-06-06)** — DM-controlled after the player departed; crit-failed a Hell Hound's breath, dropped to dying, never revived, body left in the Chitterwood.* |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
@@ -19,17 +21,17 @@
 ## Party Composition Notes
 
 - **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Ren (Isgeri Boarhound) — three melee bodies, two dragon-blooded. *(Rama, the 4th, died S7.)*
-- **Healing**: Panacea (Catfolk Witch — Medic dedication). **Now the party's sole healer** since Rama's death — no Battle Medicine backup. A real fragility going into the Viro hunt.
+- **Healing**: Panacea (Catfolk Witch — Medic dedication), primary healer. **Backup added S8**: Zanthar (Blessed One — Lay on Hands) and Bai Jian (Battle Medicine) chip in. Sammy carries a wand of soothe. Still thin, and Sammy's connection is unreliable, but no longer a single point of failure.
 - ~~**Healing backup**: Rama~~ — gone (died S7).
 - ~~**Non-lethal lead**: Rama~~ — gone (died S7). The party is back to taking the -2 for non-lethal, or relying on Intimidation/surrender (as with the Iskari Slayer captive, S7). **Two new members join S8** — possible non-lethal/healing replacements.
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; now also **Fleet** for reach, taken L3). *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
-- **Cantrip-range damage**: none currently — Rama's Electric Arc died with him. Panacea's Divine Lance (spirit, 30 ft) is the only reliable ranged option besides Bai Jian's thrown holy water/javelins.
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; **Fleet** for reach, L3). **Weapon swap (S8): traded his jian for a +1 striking falcata** (one-handed, fatal d12 — big crits; free-hand Dueling build retained). Old jian left with Gug the Thorngrip smith. *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
+- **Cantrip-range damage** (improved S8): **Zanthar's Electric Arc** (arcane, 30 ft, 2 targets) and **Hand of the Apprentice** (hurls his hammer, 500 ft), plus Sammy's occult cantrips. Panacea's Divine Lance / silver Needle Darts and Bai Jian's thrown holy water/javelins round it out. The flying-enemy/long-range gap is largely closed.
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
 - **Buffs**: Moob (elixirs, mutagens, numbing tonics)
 - **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Crashing Slam auto-Prone, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (Lock Jaw auto-Grab)
 - **Detection**: Boarhound (precise fiend/undead scent 40 ft, telepathic link via Beastmaster Bond at level 10)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
-- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (Religion, Occultism likely), Moob (Crafting, alchemy)
+- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (**Arcana, Religion, Crafting — NOT Occultism**, confirmed S8), **Sammy (Occultism — the party's trap-disabler / occult lane)**, Zanthar (Arcana, Occultism, generalist), Moob (Crafting, alchemy)
 
 ## Party Gaps
 
@@ -135,7 +137,7 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Thorngrip Alliance** (active, S7): Hidden deep-Chitterwood goblin town now allied. Ancestor-speaker **Bracknap** will guide the party to Viro **after** they finish driving off the Iskari Slayers. Potential recurring base; scout **Zagnub** is a reliable forest guide.
 - **The Iskari Slayers** (active, S7): Three genocidal goblin-hunters routed but still loose in the Chitterwood; two killed/captured. Bracknap's favor is mostly fulfilled — but the runners could regroup or find Thorngrip.
 - **Rama's Death** (open loose end, S7): Rama died in the Hell Hound fight and his body was left in the woods — no burial, no word sent to **Rhokrag**, who dispatched him from Saringallow. An unsettled debt with the HQ.
-- **Two New Members** (incoming, S8): The DM and Bracknap both foreshadowed two new "Longshanks." The party is holding the 250-gp / level-6 shield and a spare potency rune in the stash for them.
+- **Two New Members** (ARRIVED S8): **Zanthar Melodune III** (Gnome generalist Wizard / Blessed One — Scott Smith) and **Sammy Shadowfoot** (Halfling Polymath Bard — fallernon). Met on the goblin trails; both were sent east to Swiftrun and brought intel confirming Vero's ritual. Zanthar: Electric Arc, Hand of the Apprentice (hurls his hammer), minor healing, "rebel without a clue." Sammy: occult cantrips, Courageous Anthem, occultism trap-disabling, wand of soothe, frying pan — but her player has frequent Wi-Fi drops and is often DM-run. The 250-gp / level-6 shield is still in the stash, unclaimed.
 - **Ren's Provenance** (open mystery): Anonymous donor delivered a Chelaxian-trained boarhound to HQ. Who? Why?
 - **The Follower** (RESOLVED S6): It was **Sister Sylvie** of the Golden Erinyes, trying to find safe ground to approach the party. She presented herself outside Vordia in S6 and explained the Viro Ahala situation. Mystery closed. **Hellknight Alaya remains separately at large** — not the follower.
 - **The Lucent Mission Raid (S6)**: Golden Erinyes mission half a day south of Vordia in the foothills of the Aspodel Mountains. Party raided S6: 2 sisters dead (Panacea crit-Needle-Darts gardener; Cyrathul lethal-chomped kitchen sister; Bai Jian crit-eviscerated training-room sister), 3 captured and manacled (gardener, training-room sister, Sister Endreah), 1 summoned devil (Velavi) one-shotted by Bai Jian's Potency-Crystal Sudden Charge for 37 crit damage. The three sleeping sisters will wake — window to act before the order regroups.

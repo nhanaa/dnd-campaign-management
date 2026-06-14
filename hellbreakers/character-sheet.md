@@ -95,7 +95,8 @@
 ## Equipment
 
 ### Weapons
-- **Jian +1** (Katana base, reflavored): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons." Uncommon, Sword group. **+1 potency rune** grants +1 item bonus to attack rolls.
+- **Falcata +1 striking** (reflavored — acquired S8): 1d8 S, **fatal d12**, one-handed, Sword group. Primary blade. **+1 potency** (+1 to attack, transferred from the old jian) and **+1 striking** (gifted by the Thorngrip elders, applied by Gug) → two weapon dice; crits use the fatal d12 (e.g. the 60-damage Insidiator decapitation, S8). One-handed by design — keeps the free hand for Snagging Strike / Dueling Parry.
+- ~~**Jian +1** (Katana base, reflavored): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons."~~ — **Traded to Gug the Thorngrip smith in S8** for the falcata (*"Please take care of that sword. It meant a lot to me."*). Potency rune transferred off it.
 - **Lang Ya Chui** (Leiomano reflavor): 1d6 B, fatal d10, versatile S — "Wolf tooth mace." Uncommon, Club group. Swap-in for bludgeoning-weak enemies.
 - **Shortsword**: 1d6 P, agile, finesse, versatile S. Off-hand option / backup blade.
 - **Javelin ×2**: 1d6 P, thrown 30 ft
