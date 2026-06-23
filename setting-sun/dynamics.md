@@ -91,6 +91,26 @@
 - **Bargrum is the load-bearing wall** (DM: "Bargrum doesn't die. We've established this."): Group/Shielding Taunt + Intercept + **Energy Interceptor** (eating Cataclysm Brand fire) carried both Chosen fights. Boulder Roll/trip control on the ogres + globsters.
 - **Bael diversified into support + electricity**: two kills (fleeing Xarbaene flaming bow; Chosen G birdie), but the bigger story is the pivot — Healer's Gloves, real-time Treat Wounds, Thermal Nimbus fire-resist bubble for the backline, and switching from fire to **lightning** once the globsters' electricity weakness surfaced. His final Solar Detonation mostly whiffed saves — the alpha-strike isn't guaranteed value against high-save groups.
 
+## Character Relationships (Session 4 Observations)
+
+- **Party leveled to 9** mid-session (on Firitula's defeat). Tivael gained flight + rank-5 spells; Bael upgraded his Thermal aura junction so allies in it get a **free Step** ("I gave you ADHD"); Ferrok got Friendly Fling.
+- **Ferrok is the finisher of record**: personally killed Tokainen (Ignition Spellstrike run-through), crit-finished the Sigva statue, ran down and killed Firitula, killed Chomper, and two of the three Dero Stranglers. When his shock sword would have triggered the Charnel Creation's Electric Reflexes, he **gored it with his horns** instead — good adaptive play. Also the source of the lobby entry (Shared Invisibility). One empathy beat for the captive ("I think the lady would look happier now that we're here") cut against his usual deadpan.
+- **Raylta carried the back line and the morale**: Divine Wrath crit-fail broke the Warden open, Divine Lance killed the incorporeal Eskis, and her rank-5 Heals + potion patch + Healer's Gloves kept a dying party up through the Geff fight. She's the conscience (grief for the Ofalth bodies, mourning Aruneth) and the hype-woman ("My teammates are so fucking cool"). Note a recurring vulnerability gag — feeling left out of the post-fight heal-huddles.
+- **Bael is the AoE opener + secret support**: Solar Detonation opened three fights; Lightning Dash, flying-flame birdies (killed Zer), Battle Medicine crit-heals, Thermal Nimbus bubbles. Deadpan pyromaniac voice ("I explode better for myself").
+- **Bargrum is the wall and the heart**: group/Shielding Taunt, Intercept/Energy Interceptor, Interpose (freed Bael from a Crawling Hand). Carried the most RP texture this session (the retirement/ocean reverie, the cat story, the "200 years ago / college" bit, proposing a crematorium for the Ofalth corpses).
+- **Tivael (Pax)** is the RK anchor (every fight) + focus-fire caller ("Jump her, guys") + clutch finisher — downed by Geff's 1,000 Cuts, revived, rose to land the killing 72-damage Flurry crit. His debuffs are real but several whiffed this session (Command on Firitula saved; Phantom Pain on Tokainen saved; Synesthesia on Zer saved into 1 round) — his **weak Fortitude** also made him the Medusa's gaze magnet. Honest self-assessment after underestimating Geff out loud.
+- **Single-healer fragility recurred** in the Geff fight (Raylta one hit from death repeatedly, Tivael KO'd) — same structural risk flagged in S3. Cone-AoE bosses (1,000 Cuts) punish clustering; the party needs to spread out and/or add a second heal source.
+
+## Session 4 — New Enemy Save Profiles (learned via RK or combat)
+
+- **Giant Animated Statue (Sigva)**: Best **Fort**, worst Reflex/Will. **Construct Armor Hardness 10** (all damage −10) until below half HP or **hit by a crit** → armor breaks, AC drops to 22. Burn Alive grab = 3d8 fire + 1d8 persistent, no save. Lesson: land a crit fast to strip the armor; chip damage is near-worthless until then.
+- **Tokainen (Warden, Dampyr)**: No exposed weakness, but "takes well damage." Casts Divine Wrath (enemies-only spirit) + Divine Immolation (party fire/persistent). Folds quickly once focused + Sickened.
+- **Eskis (Mistbear)**: Incorporeal — **force/spirit only** (ignored fire). Raylta's Divine Lance is the answer.
+- **Firitula (Medusa)**: Living, best Reflex / worst **Will**. Dazzle her (Solar Detonation) to force flat checks on her gaze; everyone should **Avert Gaze** near her. Tivael's weak Fort made him the petrify target.
+- **Charnel Creation**: Mindless, weak **Reflex**, resist fire + spell damage (adamantine bypasses). **Do not shock it** (Electric Reflexes grab) — physical/horns/adamantine only.
+- **Ofalths**: Best Fort / worst **Reflex**, immune disease/poison, NOT mindless (Fear works). Reflex AoE (Bael) + Will debuffs (Tivael) both land.
+- **Geff**: Hits far above apparent weight; 1,000 Cuts (cone, no MAP) is the threat — **not a mook**. Re-baseline "just a Dero" assumptions on this floor.
+
 ## Session 3 — New Enemy Save Profiles (learned via RK or combat)
 
 - **Globsters**: Mindless oozes. **Immune to crits** (crit riders still apply), **weak to electricity**, very high HP. Nauseating Slap = Fort save or stacking sickened. Grab tendrils.
@@ -105,3 +125,37 @@
 - **Persistent fire (Cataclysm Brand) remains the party's worst unanswered threat**: a 7-Chosen wave with synchronized bursts is a near-TPK. Spreading out + Thermal Nimbus + the defensive Rallying Anthem mitigate but don't solve it — a Cleanse Affliction / persistent-damage counter would change these fights.
 - **Single-healer fragility is now load-bearing**: Raylta at Cursebound 2 nearly died while being the only healer. Tivael's Summon Fey unicorn (a second vitality-heal source) is the emerging answer; keep a rank-4 slot for it on hard fights.
 - **The ghost-bear problem ahead**: the Warden's incorporeal guardian needs **force / ghost touch / vitality / silver**. The party has only **one ghost oil** for a melee-heavy roster — Tivael's Flurry of Claws (force) and Raylta's vitality/silver will carry that fight unless they stock more oils.
+
+## Session 4 — Key Patterns
+
+- **The ghost-bear was a non-problem after all**: Raylta's **Divine Lance** (force/spirit, divine) one-shot the incorporeal Eskis. Spirit/force damage on the divine + occult lists covers incorporeal guardians without needing ghost oil — bank this for Nizca's deeper guards.
+- **Crit-to-break on construct armor**: the Sigva statue's Hardness 10 made it nearly immune to chip damage. The play is to **land a crit fast** (Tivael's Telekinetic Projectile crit + Ferrok's Ignition crit did it) — spamming one-action attacks to fish for the crit beats committing big single hits into the hardness.
+- **Tivael's weak Fortitude is a targeting magnet**: the Medusa's Fort-save gaze locked onto him specifically. Against any Fort- or save-targeting boss, he wants Rallying Anthem up or distance — and the party should pre-empt by having everyone Avert Gaze near gaze enemies.
+- **Don't shock the flesh golem**: the Charnel Creation's Electric Reflexes punishes electricity (the party's go-to construct lever). Physical, horns, fire, and adamantine are the safe answers — RK construct types before defaulting to lightning.
+- **Cone-AoE bosses punish clustering**: Geff's 1,000 Cuts (no MAP, every turn) carved a bunched-up party and near-TPK'd them. Spread out and don't stack on the healer; this is the same single-healer fragility from S3 in a new costume.
+- **Save outcomes are not guaranteed**: several of Tivael's debuffs whiffed (Command on Firitula, Phantom Pain on Tokainen, Synesthesia on Zer all saved). Even good save-targeting (Will on the Medusa, etc.) needs a backup plan; don't bank a fight on one save-or-suck landing.
+- **Two sessions of Shades of Blood left** — Nizca, Degg, and the Shadow Beacon at the top. Resource discipline matters now (don't burn rank-5 slots on mid encounters).
+
+## Character Relationships (Session 5 Observations)
+
+- **Tivael (Pax)** is the herald + debuff engine + plot-reader. RK'd the ambush vampires; **Evangelize** stupefied Vye; a for-fun **Fireball caught both Vye and the Zombie Hulk** (both failed — the Hulk destroyed); **killed Kaba** with silver Needle Darts. Shrugged Vye's Synaptic Pulse AND Agonizing Despair on his +18 Will ("that's our bard"). His one whiff lane: **Bon Mot bounced off the vampires' strong Wills** (one crit-fail bounced the penalty back onto him) — mental debuffs are the wrong tool vs these vampires. Best non-combat beat: reading the Degg-vs-Nizca mastermind question ("not sure if you're cooking or burning the kitchen").
+- **Bargrum is the load-bearing wall, literally soaking every nat 20** the dice produced in the 11-round Vye fight (Group/Shielding Taunt → Defensive Advance → Intercept → Shield Block; ate Vision of Death 30 even after a Hero Point reroll). Out of combat he carried the session's heart and humor: third-person field-medic for Sarah, the coffin **sunbath** engineering plan, delight at the manacle-arresting Sentries ("I love creatures that do weird shit"), and the Conan blood-trap line ("Nobody makes me bleed my own blood"). **Killed Xibin** with a Boulder Roll.
+- **Ferrok flips from cursed to kill-leader.** In the Vye fight his dice abandoned him completely (missed nearly every Spellstrike, gore-RP out of frustration) — but across the back half he was the **finisher of record**: both Clockwork Sentries, the Irnakurse, and **Chamadi** (Ignition Spellstrike). New toy **Echo Jump** finally solves his perennial doorway problem. Note: the vampires (and the Dero) **focus-fire Ferrok every fight** — the front line is fragile when his Spellstrikes whiff; he needs Courageous Anthem (accuracy) and Rallying Anthem (when crits land) more than anyone.
+- **Bael is the adaptive tactician.** Best read of the session: clocking the vampires' **cold/frost rapiers** and flipping **Thermal Nimbus to cold** for party-wide cold resistance. Solar Detonation crit-failed the Zombie Hulk (~68); flying-flame double-kills; **finished Lauso** with the final blast. Also the Speckle translator (Azlanti), the lockpick saga, and the bedside-manner bits. The "fire kineticist in a high-Reflex campaign" critique is fully dead — he alternates fire/cold/electricity and support fluidly.
+- **Raylta is the conscience, the heart, and a lethal backstop.** **Killed Vye** (the 11-round boss) with a needle dart; her **Cloak of Light vitality aura** is a passive execution zone (the DM: two vampires "would have died" just starting a turn beside her). She ran the whole heal economy (rank 2-5 Heals, Nudge → Cursebound/Enfeebled spiral, Lay on Hands 48) keeping a crit-battered Ferrok up. RP highlights: the Sarah rescue, adopting **Speckle** ("my dumb three-eyed rock"), and the Degg-mastermind theory.
+
+## Session 5 — New Enemy Save Profiles (learned via RK or combat)
+
+- **Vye** (vampire caster): mechanically not tough, but Synaptic Pulse (Will AoE stun), Synesthesia, Vision of Death, and a **rank-4 Translocate** make a single clever caster a long fight. Silver/force/vitality bypass his resistance.
+- **Zombie Hulk**: **weak to vitality, NOT fire.** Wide Swing hits two targets. Raylta's vitality / Bael's Solar Detonation vitality rider are the levers, not Bael's fire.
+- **Clockwork Sentry**: best save unclear, **weak to electricity**; the real threat is Sudden Seize grapple + manacle-arrest (action denial), not damage.
+- **Irnakurse** (fleshwarp): **not mindless** (Mindlash is a Will-save stun, Fear-type debuffs should work); Storm of Tentacles is a wide reach-22 multi-strike. Spread out.
+- **Vampires (Kaba/Chamadi/Xibin/Lauso)**: **best Will, worst Fort.** Resist non-silver physical (silver/force/vitality bypass). Cold/frost rapiers (Bael cold-Nimbus counters). Fast Healing, feint, Nimble Dodge.
+
+## Session 5 — Key Patterns
+
+- **Mental/Will debuffs are dead weight vs vampires** (best save Will). Tivael's Bon Mot bounced repeatedly — save Fort-targeting (Worm's Repast), force (Flurry of Claws), and silver (Needle Darts) for them.
+- **RK the damage type before committing** — the Zombie Hulk ate fire fine but folds to vitality; the constructs fold to electricity; the vampires need silver/force. The party's instinct to default to fire/lightning still costs rounds.
+- **Bael's cold Thermal Nimbus is a real answer to cold-weapon enemies** — party-wide cold resistance flipped the vampire fight. Match the Nimbus element to the incoming damage type.
+- **Ferrok is the permanent aggro magnet** — single-target bosses and packs alike focus him. Keep him buffed (Courageous/Rallying Anthem) and keep Bargrum's intercept umbrella + Raylta's heals on him; the front line cracks when his Spellstrikes whiff.
+- **Raylta's vitality aura (Cloak of Light) is a passive anti-undead execution zone** — against undead packs, position her so enemies must start their turns adjacent. Pairs with her Cursebound fragility, so it's best when the party can keep enemies off her.

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 9 — The False Hell Knight</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-sammy { border-left-color: var(--amber); }
+.char-ren { border-left-color: var(--gold); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ember); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-sammy { border-left-color: var(--amber); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The False Hell Knight</h1>
+  <div class="subtitle">Session 9 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">Jun 20, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 4m</span>
+    <span class="meta-pill">~26 Lamson 4726</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:58%"></div>
+    <div class="comp-seg comp-rp" style="width:16%"></div>
+    <div class="comp-seg comp-explore" style="width:14%"></div>
+    <div class="comp-seg comp-social" style="width:8%"></div>
+    <div class="comp-seg comp-loot" style="width:4%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 58%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 16%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 14%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 8%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 4%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Moon Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome &middot; Wizard (generalist) / Blessed One</div><div class="char-player">Scott Smith</div></div>
+    <div class="char-card char-sammy"><div class="char-name">Sammy Shadowfoot</div><div class="char-class">Halfling &middot; Bard (Polymath)</div><div class="char-player">fallernon</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound &middot; Bai Jian's Beastmaster Companion</div><div class="char-player">&mdash;</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The party finished what they started at Stagfall. The slithering shape on the rocks from last week's cliffhanger turned out to be a <strong>basilisk</strong> &mdash; and its petrifying gaze nearly ended Bai Jian's campaign in the opening minutes, freezing him toward permanent stone before he dug deep and burned a hero point to shrug it off. Cyrathul ended the monster with a freak <strong>double natural 20</strong>, biting into its neck mid-gaze and tearing its head off. But the fight wasn't over: out of the dark behind them came a squad of <strong>Hellknight Armigers</strong> with crossbows and halberds, and the party &mdash; fighting half-blind until Sammy's Light lit the cavern &mdash; cut them down, Bai Jian decapitating one with a 48-damage Sudden Charge crit and Cyrathul slinking up a wall to slit the throat of the last one as it fled. That whole running brawl scored <strong>128 XP (Extreme)</strong>.</p>
+    <p>From there it was a methodical, bloody crawl deeper into the caves, one chamber at a time. A glowworm-lit column room held a pair of <strong>Orts</strong> (hairy, eyed devil-blobs) and a Hellknight commander &mdash; Bai Jian crit-beheaded an Ort, Zanthar phase-bolted the Hellknight through her own shield, and they went down to teeth and goo. The waterfall chamber was the real meat-grinder: two more Armigers dug in behind log barricades plus a chameleon-skinned <strong>Insidiator</strong> spitting immobilizing web. Cyrathul took a Morningstar to the neck and <strong>dropped to dying</strong> &mdash; the first party member down since Rama &mdash; and Bai Jian whistled Ren onto the dragon's body to anchor a vengeance strike (<em>"Avenge Sai"</em>) while Panacea poured healing in. Sammy crit-killed the Insidiator with Needle Darts, Zanthar's Blazing Bolt cleared an Armiger, and Bai Jian swept the scared young Novice's legs out for the kill.</p>
+    <p>Then the last chamber: brimstone, candlelight, and <strong>Viro Ahala</strong> himself &mdash; the false Hell Knight &mdash; standing over an ivory bowl of flame, burning a blood-inked parchment. <em>"You're too late. I've already completed the ritual."</em> He alpha-struck Bai Jian with a round-one crit (saved only by Dueling Parry) while a <strong>Ritual Backlash</strong> hazard fed him healing and pulsed Will-save waves of hellfire at the frontline. But the party was rolling hot this time &mdash; Sammy hero-pointed <strong>Biting Words</strong> to terrify him, Bai Jian tripped him prone, Cyrathul and Panacea stacked debuffs, and Zanthar's cold cone <strong>froze Viro to death</strong> with that same grin frozen on his face. The flame in the bowl flared and snuffed out; the ritual &mdash; which would have torn open a greater gate for a powerful devil &mdash; died with him. They stuffed his body in the spacious pouch to identify later (they never did learn <em>why</em> he was a "fake" Hell Knight), looted his rubies and Hell Knight plate, and walked back to a hero's welcome at Thorngrip: goblin mead, Bracknap's undying thanks, the spent crystal reforged into a <strong>Pendant of the Occult</strong>, and the Hellbreaker reputation finally maxed at <strong>20</strong> &mdash; <em>"talk of Isgeri independence on everyone's lips."</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I &middot; Combat &middot; The Basilisk &amp; the Ambush</div>
+      <div class="act-card">
+        <h3>Stone, Crossbows, and a Double 20</h3>
+        <ul>
+          <li>Quick recap of S8 (Panacea narrated the three corrupted sites, the crystal, Bracknap's quest, into the caves). Everyone topped to one hero point; Panacea got two.</li>
+          <li>The S8 cliffhanger creature resolved: a <strong>basilisk</strong>. Its <strong>petrifying gaze</strong> hit <strong>Bai Jian</strong> on repeated Fortitude saves &mdash; first <strong>Slowed</strong>, then a failed save that would have made him <strong>permanently petrified, like a Medusa victim</strong>. Bai Jian <strong>hero-pointed</strong> it and pushed the stone off (<em>"Oh wait, can I hero point that?"</em>).</li>
+          <li><strong>Cyrathul</strong> moved behind it, Exploited (no readable weakness), and ended it on a <strong>double natural 20</strong> &mdash; <em>"that's double 20&hellip; nat 20 twice. Let's go."</em> &mdash; biting its neck mid-gaze and clawing the head clean off. Bai Jian's salute: <em>"the superior reptile."</em></li>
+          <li>The DM kept initiative running &mdash; <strong>three Hellknight Armigers</strong> opened with crossbows <strong>from the dark behind the party</strong>. Bai Jian, who'd charged into open ground, had to do the <strong>"Walk of Shame"</strong> back into the room.</li>
+          <li><strong>Sammy</strong> cast <strong>Light</strong> across the cave (and <strong>Courageous Anthem</strong> &mdash; whose over-the-top Foundry animation lagged everyone's computers so badly the DM disabled the module mid-session; <em>"a little too dramatic"</em>).</li>
+          <li><strong>Zanthar</strong> opened with <strong>Blazing Bolt at all three</strong>. <strong>Panacea</strong>'s Divine Lance + Trade Life for Death killed one (<em>"their eyes just pop right out of their head"</em>). <strong>Bai Jian</strong> crit-decapitated a Novice with a <strong>48-damage Sudden Charge</strong> (massive-damage instakill). <strong>Cyrathul</strong> chased the last one down a tunnel, slinking up the wall to <strong>slit its throat</strong>.</li>
+          <li><strong>128 XP (Extreme).</strong> Loot from the bones in the basilisk room: an <strong>angel statue</strong>, a <strong>jeweled helmet</strong>, and a <strong>healing-looking pendant</strong> Bai Jian pocketed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat / Exploration &middot; The Glowworm Column</div>
+      <div class="act-card">
+        <h3>Orts in the Glowworm Light</h3>
+        <ul>
+          <li>Through the Armigers' camp (bedrolls, a hooded lantern) into a chamber lit by a <strong>glowing column full of glowworms</strong> (Panacea ID'd them with Arcana; Zanthar coaxed them brighter by tracing arcane symbols on the stone).</li>
+          <li>A Hellknight commander and a pair of <strong>Orts</strong> (hairy, eyed devil-blobs) ambushed them &mdash; <em>"Intruders! Get them!"</em></li>
+          <li><strong>Bai Jian</strong> crit the first Ort &mdash; <em>"No mercy. 33 damage."</em> &mdash; splitting it into hair-goo, then <strong>beheaded the second</strong>. <strong>Zanthar</strong> <strong>phase-bolted</strong> the Hellknight: <em>"It goes right through her shield and hits her in the face."</em> (<em>"Did I steal the kill? Nice."</em>)</li>
+          <li><strong>Cyrathul</strong> tumbled into flank, Exploited, chomped; <strong>Panacea</strong> and <strong>Sammy</strong> chipped with Needle Darts and Guidance; <strong>Ren</strong> dodged the Ort's swings and tore it down.</li>
+          <li><strong>48 XP (Low).</strong> Materialism watch: <em>"As we always say, we need money for this operation"</em> &mdash; Pax narrating his own character's arc: <em>"Bai Jian has started to slowly become more and more materialistic."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Waterfall &mdash; the hard fight</div>
+      <div class="act-card">
+        <h3>The Dragon Goes Down</h3>
+        <ul>
+          <li>A 20-foot waterfall, a pool, <strong>log barricades</strong> as a makeshift guard post. Two <strong>Hellknight Armigers</strong> dug in behind cover (expecting someone else) plus a <strong>chameleon-skinned Insidiator</strong> lurking invisible above.</li>
+          <li>Sammy's connection dropped here (the table broke to wait); she got back in and stayed active the rest of the night.</li>
+          <li>The <strong>Insidiator</strong> spat <strong>immobilizing web</strong>, gluing <strong>Zanthar</strong> to the floor; the Armigers used <strong>Pinning Strikes</strong> and Morningstars. <strong>Cyrathul</strong> Exploited and chomped &mdash; then took a <strong>Morningstar to the neck and dropped to dying</strong>. First party member down since Rama.</li>
+          <li><strong>Bai Jian</strong> whistled <strong>Ren</strong> onto Cyrathul's body for the Support benefit and struck back &mdash; <em>"Avenge Sai."</em> Cyrathul <strong>stabilized on his own recovery check</strong>; <strong>Panacea</strong>'s ranged <strong>Heal</strong> + <strong>Life Boost</strong> revived him the next round.</li>
+          <li><strong>Zanthar</strong> <strong>Dizzying Colors'd</strong> the Insidiator (<em>"Brazzle Dazzle"</em>), then Drain-Bonded-Item &rarr; restored <strong>Blazing Bolt</strong> &rarr; killed an Armiger. <strong>Sammy</strong> <strong>crit-killed the Insidiator with Needle Darts</strong> (the DM narrated the kill: <em>"a thousand needle darts&hellip; it turns to ash"</em>) and whacked the Novice with her <strong>frying pan</strong>.</li>
+          <li>The last Novice (<em>"fights to the death,"</em> shield up) fell to <strong>Bai Jian</strong>: Ren bit the leg as a distraction, and Bai Jian <strong>swept the leg and cut him down</strong>.</li>
+          <li><strong>72 XP (Moderate).</strong> Loot: a <strong>bag of gold</strong> and a <strong>chunk of silver</strong>. The party calls it their <strong>first real boss-grade fight</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; Viro Ahala &amp; the Ritual</div>
+      <div class="act-card">
+        <h3>The False Hell Knight</h3>
+        <ul>
+          <li>The ritual chamber: brimstone, candlelight, scattered ritual materials, an <strong>ivory bowl with a flame</strong>, and <strong>Viro Ahala</strong> in full Hell Knight plate burning a blood-inked parchment, an Armiger Novice at his side.</li>
+          <li><em>"You're too late. I've already completed the ritual."</em> He refused to explain it (<em>"You think I'm a fool?"</em>), then charged Bai Jian &mdash; shield-bash to off-guard, then a <strong>longsword crit</strong> saved only by <strong>Dueling Parry</strong> (<em>"Thank god I had the parry"</em>). Bai Jian had rolled a <strong>nat 1 initiative</strong>.</li>
+          <li>The <strong>Ritual Backlash</strong> hazard (the burning bowl) activated: a tendril <strong>healed Viro</strong>, and a <strong>Will-save pulse</strong> of hellfire hit Cyrathul and Bai Jian &mdash; <strong>both shrugged it off</strong>.</li>
+          <li>The party stacked him: <strong>Cyrathul</strong> Exploited (Hell Knight plate resisted physical), chomped, and <strong>Demoralized</strong> (<em>"which I realize I should have done first"</em>). <strong>Panacea</strong> threw Divine Lance and hero-pointed Needle Darts. <strong>Bai Jian</strong> struck for <strong>16</strong> and <strong>tripped him prone</strong> (hero-pointed). <strong>Sammy</strong> landed <strong>Biting Words</strong> (hero-pointed) &mdash; Viro terrified.</li>
+          <li><strong>Zanthar</strong> finished it: a <strong>cold cone (Chilling Spray)</strong> that, on top of everyone's stacked damage, <strong>froze Viro to death</strong> &mdash; <em>"he just dies with that same grin on his face."</em> The flame flared up and snuffed out. The ritual was unmade.</li>
+          <li>The grieving Novice went berserk; <strong>Bai Jian</strong> deadpanned (<em>"What, he's your father or something?"</em>) and the party put him down &mdash; <strong>Sammy sustaining Biting Words to insult him to death</strong>: <em>"Just take him to filth for his wardrobe."</em></li>
+          <li><strong>Boss: 88 XP (Severe).</strong> A Recall Knowledge (Bai Jian &amp; Cyrathul) revealed the ritual was a <strong>greater summoning</strong> &mdash; it would have opened a <strong>greater gate</strong> for a powerful devil. They stopped it in time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V &middot; Faction / Loot &middot; Spoils &amp; the Hero's Return</div>
+      <div class="act-card">
+        <h3>Heroes of Thorngrip</h3>
+        <ul>
+          <li>They never learned <strong>why</strong> Viro was a "fake" Hell Knight &mdash; they killed him before they could ask. They stuffed his <strong>body and Hell Knight plate into the spacious pouch</strong> to identify back at HQ (and to hunt for a possible "real" one).</li>
+          <li>Looting: Viro's <strong>rubies</strong> and ritual materials; from a long-dead climber's skeleton, his <strong>climbing bolts</strong> (ironically what would've saved his fall &mdash; <em>"Safety third"</em>) and gear worth ~<strong>35 gp</strong>; and a <strong>shining ritual symbol</strong> giving a bonus to Religion (Bai Jian, an atheist: <em>"Looks like cash to me"</em>).</li>
+          <li><strong>+2 reputation</strong> for defeating Viro &rarr; the tracker hit <strong>20, the maximum tier</strong>: <em>"Talk of Isgeri independence is on everyone's lips. The Hellbreakers League are considered the best chance for the future of Isger."</em></li>
+          <li>Back to <strong>Thorngrip</strong> at sundown to a <strong>hero's welcome</strong> &mdash; goblins in rows, children cheering, Bracknap's blue glow. <em>"You are heroes here. You are welcome here forever. We are in your debt."</em></li>
+          <li>Bracknap took the spent crystal, whispered his grandmother's essence into it, and gave it back transformed into a <strong>Pendant of the Occult</strong> &mdash; <em>"This is for you now."</em> Then three kegs of goblin mead and a party. Bai Jian: <em>"I need that level four."</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <p style="color:var(--text-dim);font-size:14px;">Damage and to-hit values are from the session's roll log (<code>rolls.txt</code>) and transcript where stated. Attribution is by character capability (class / feature / weapon), not transcript speaker labels &mdash; which <strong>merged Cyrathul and Zanthar into one voice</strong> this session and <strong>split the DM across two.</strong></p>
+
+  <div class="combat-box">
+    <h3>Encounter 1 &mdash; The Basilisk &amp; the Hellknight Ambush</h3>
+    <div class="combat-meta">Extreme &middot; 128 XP &middot; Init: Basilisk &middot; Cyrathul &middot; Bai Jian &middot; Adjutant HK &middot; Novice HK &middot; Adjutant HK &middot; Sammy &middot; Zanthar &middot; Panacea</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Wave 1</div><div class="combat-stat-value">Basilisk (petrify gaze)</div></div>
+      <div><div class="combat-stat-label">Wave 2</div><div class="combat-stat-value">3 Hellknight Armigers</div></div>
+      <div><div class="combat-stat-label">Clutch</div><div class="combat-stat-value">Bai Jian hero-points petrify</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Cyrathul, Bai Jian, Panacea</div></div>
+    </div>
+    <ul>
+      <li><strong>Basilisk</strong> &mdash; gazed at <strong>Bai Jian</strong> repeatedly: Slowed, then a <strong>failed save &rarr; permanent petrification</strong>, which Bai Jian <strong>hero-pointed</strong> to negate. <strong>Cyrathul</strong> moved behind, Exploited (no weakness), Snagging-Struck/chomped, and <strong>killed it on a double nat-20 crit</strong> (bite + claw decapitation).</li>
+      <li><strong>Bai Jian</strong> &mdash; Snagging Strike crit on the basilisk (<strong>14</strong>); raised Dueling Parry; later <strong>Sudden Charge crit on a Novice Armiger for 48 &mdash; massive-damage instant kill</strong> (decapitation; the +5 confirms Courageous Anthem was up).</li>
+      <li><strong>Sammy</strong> &mdash; cast <strong>Light</strong> so the melee line could see (Bai Jian/Panacea/Sammy have no darkvision; only Cyrathul &amp; Zanthar do), <strong>Courageous Anthem</strong>, Needle Darts.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Blazing Bolt</strong> at all three Armigers.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Divine Lance</strong> + <strong>Trade Life for Death</strong> (familiar Stupefy rider) &rarr; <strong>killed an Armiger</strong> ("eyes pop out"); Needle Darts (several misses).</li>
+      <li><strong>Cyrathul</strong> &mdash; chased the last fleeing Armiger down the tunnel and <strong>slit its throat</strong> to end the encounter.</li>
+    </ul>
+    <p><strong>Outcome:</strong> basilisk + 3 Armigers dead. <strong>128 XP (Extreme).</strong> Loot: angel statue, jeweled helmet, a healing-looking pendant, Armiger breastplates.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 2 &mdash; The Glowworm Column</h3>
+    <div class="combat-meta">Low &middot; 48 XP &middot; Init (partial): Bai Jian &middot; Adjutant HK &middot; Sammy &middot; [others]</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Orts + 1 Hellknight</div></div>
+      <div><div class="combat-stat-label">Orts</div><div class="combat-stat-value">Resist physical (not silver)</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian (x2), Zanthar</div></div>
+    </div>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; crit the first Ort (boarhound-supported falcata crit, rolled <strong>33</strong>, ~30 after resistance) &mdash; <em>"No mercy. 33 damage."</em> &mdash; then a second Ren-supported strike beheaded the other Ort to end the fight.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Phase Bolt</strong> killed the Hellknight: <em>"right through her shield and hits her in the face."</em></li>
+      <li><strong>Cyrathul</strong> &mdash; tumbled into flank, Exploited, chomped. <strong>Panacea</strong> &mdash; Needle Darts (miss) + Trade Life for Death. <strong>Sammy</strong> &mdash; Needle Darts, Guidance. <strong>Ren</strong> &mdash; dodged the Ort's swings and finished it.</li>
+    </ul>
+    <p><strong>Outcome:</strong> 2 Orts + Hellknight dead. <strong>48 XP (Low).</strong> Loot: the Hellknight's gathered bag of goods (spotted by the brightened glowworms).</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 3 &mdash; The Waterfall <span style="font-size:12px;color:var(--rose-bright);">(the hard fight)</span></h3>
+    <div class="combat-meta">Moderate &middot; 72 XP &middot; Init: Cyrathul &middot; Zanthar &middot; Insidiator &middot; Sammy &middot; Panacea &middot; Adjutant HK &middot; Novice HK &middot; Bai Jian</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Armigers + Insidiator</div></div>
+      <div><div class="combat-stat-label">Hazards</div><div class="combat-stat-value">Log cover, web, Pinning Strike</div></div>
+      <div><div class="combat-stat-label">Down</div><div class="combat-stat-value">Cyrathul (dying 2)</div></div>
+      <div><div class="combat-stat-label">Insidiator Kill</div><div class="combat-stat-value">Sammy (crit darts, 22)</div></div>
+    </div>
+    <ul>
+      <li><strong>Cyrathul</strong> &mdash; Exploited and chomped an Armiger early, then took a <strong>Morningstar to the neck from the scared Novice and dropped to dying (Dying 2)</strong>. <strong>Stabilized on his own recovery check (nat 20).</strong></li>
+      <li><strong>Bai Jian</strong> &mdash; <strong>Sudden Charge</strong> + <strong>Snagging Strike</strong> (13 + hits); when Cyrathul fell, <strong>whistled Ren onto his body</strong> for Support and struck (<em>"Avenge Sai"</em>). Closed the fight by <strong>sweeping the last Novice's legs</strong> (Ren leg-bite distraction &rarr; kill).</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Hand of the Apprentice</strong> (miss), <strong>Dizzying Colors</strong> dazzled the Insidiator; got <strong>webbed/stuck</strong>; <strong>Drain Bonded Item &rarr; restore &rarr; Blazing Bolt</strong> killed an Armiger; escaped the web.</li>
+      <li><strong>Sammy</strong> &mdash; softened the Insidiator with a <strong>silver Needle Darts</strong> volley (11), then a <strong>crit Needle Darts (22) killed it</strong> ("turns to ash"); <strong>frying-pan</strong> whack on the Novice; Guidance on Panacea.</li>
+      <li><strong>Panacea</strong> &mdash; flagged the <strong>silver weakness</strong>; Divine Lance; <strong>ranged Heal + Life Boost</strong> revived Cyrathul.</li>
+    </ul>
+    <p><strong>Outcome:</strong> 2 Armigers + Insidiator dead; Cyrathul revived. <strong>72 XP (Moderate).</strong> Loot: bag of gold + chunk of silver.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 4 &mdash; Viro Ahala &amp; the Ritual Backlash <span style="font-size:12px;color:var(--rose-bright);">(boss)</span></h3>
+    <div class="combat-meta">Severe &middot; 88 XP &middot; Init: Viro Ahala &middot; Sammy &middot; Cyrathul &middot; Panacea &middot; Zanthar &middot; Ritual Backlash &middot; Novice HK &middot; Bai Jian</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Boss</div><div class="combat-stat-value">Viro Ahala (Hell Knight plate)</div></div>
+      <div><div class="combat-stat-label">Support</div><div class="combat-stat-value">Novice + Ritual Backlash</div></div>
+      <div><div class="combat-stat-label">Hazard</div><div class="combat-stat-value">Heals Viro + Will pulse</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Zanthar (cold cone)</div></div>
+    </div>
+    <h4>The Fight</h4>
+    <ul>
+      <li><strong>Round 1:</strong> Viro shield-bashed Bai Jian off-guard and <strong>crit with his longsword &mdash; negated by Dueling Parry.</strong> (Bai Jian had rolled a <strong>nat 1 initiative</strong>.)</li>
+      <li><strong>Ritual Backlash:</strong> a tendril healed Viro; a Will-save pulse hit <strong>Cyrathul + Bai Jian</strong> &mdash; <strong>both shrugged it off.</strong></li>
+      <li><strong>Cyrathul</strong> Exploited (plate resisted physical), chomped, <strong>Demoralized</strong>. <strong>Panacea</strong> Divine Lance + Needle Darts (hero-pointed). <strong>Bai Jian</strong> struck for <strong>16</strong> and <strong>tripped Viro prone</strong> (hero-pointed). <strong>Sammy</strong> <strong>Biting Words</strong> (hero-pointed) &rarr; Viro terrified.</li>
+      <li><strong>Kill:</strong> <strong>Zanthar's cold cone</strong> &mdash; on top of the whole party's stacked damage &mdash; <strong>froze Viro to death</strong> (<em>"he just dies with that same grin on his face"</em>). The ritual flame flared and snuffed out.</li>
+      <li><strong>Cleanup:</strong> the grieving Novice went berserk; <strong>Bai Jian</strong> struck him (Ren-supported) and <strong>Sammy sustained Biting Words to insult him to death</strong> (<em>"take him to filth for his wardrobe"</em>).</li>
+    </ul>
+    <p><strong>Outcome:</strong> Viro + Novice dead, ritual stopped (a <strong>greater gate</strong> for a greater devil). <strong>88 XP (Severe)</strong>; <strong>+2 reputation &rarr; 20 (max)</strong>, then <strong>+40 mission + 40 reputation-milestone XP</strong> back at Thorngrip.</p>
+  </div>
+
+  <div class="xp-banner">
+    Experience &middot; 128 Extreme &middot; 48 Low &middot; 72 Moderate &middot; 88 Severe (boss) &middot; 40 mission &middot; 40 reputation = <strong>416 XP</strong> &middot; Reputation 20 (MAX)
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Blade That Would Not Break</h4>
+      <ul>
+        <li>In the first two minutes the <strong>basilisk's gaze nearly turned him permanently to stone</strong> &mdash; a campaign-ending failed save &mdash; and he dug in and <strong>hero-pointed his way out of it</strong>, the clutchest roll of the night.</li>
+        <li>The closer at every fight: a <strong>48-damage Sudden Charge crit</strong> that decapitated a Novice Armiger, the <em>"No mercy, 33 damage"</em> crit-beheading of an Ort, and the leg-sweep kill that ended the waterfall meat-grinder.</li>
+        <li>When <strong>Cyrathul dropped to dying</strong>, he didn't panic &mdash; he <strong>whistled Ren onto the dragon's fallen body</strong> to anchor a Support strike and went for blood: <em>"Avenge Sai."</em> In the boss fight he ate Viro's round-one crit on his Dueling Parry, then <strong>tripped the false Hell Knight prone</strong> to set up the kill.</li>
+        <li>The session's comedy was his: the <strong>"Walk of Shame"</strong> back into the room after charging out to meet enemies who came from behind, and the <strong>escalating materialism</strong> he played up himself &mdash; <em>"we need money for this operation"</em> &mdash; to the point Pax narrated his own arc out loud (<em>"Bai Jian has started to slowly become more and more materialistic"</em>). His atheist's appraisal of a holy relic: <em>"Looks like cash to me."</em></li>
+        <li>Underneath it, a quieter conscience: over the Novice who'd charged them, <em>"poor this guy&hellip; not knowing what was waiting for him,"</em> and he insisted on hauling <strong>Viro's body back</strong> to identify him &mdash; admitting he <em>"actually kind of feel[s] a bit bad about the kid"</em> who watched his idol die.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Superior Reptile</h4>
+      <ul>
+        <li>Opened and nearly closed the session at both extremes. He <strong>ended the basilisk</strong> on a freak <strong>double natural 20</strong> &mdash; <em>"that's double 20&hellip; nat 20 twice. Let's go."</em> &mdash; biting the neck <em>as it was still trying to petrify Bai Jian</em>, then clawing the head off (earning Bai Jian's salute, <em>"the superior reptile"</em>).</li>
+        <li>His Exploit Vulnerability was the party's enemy-reader all night, and his signature kill &mdash; <strong>slinking into a dark tunnel, maneuvering up the wall, and slitting a fleeing Armiger's throat</strong> &mdash; ended the opening brawl in style.</li>
+        <li>The deadpan stayed dry: a Demoralize delivered as <em>"a good boo,"</em> his go-to attack announced as <em>"the good old classic chomp."</em></li>
+        <li>He took the session's hardest hit &mdash; a <strong>Morningstar that crushed his neck and dropped him to dying</strong>, the first party member down since Rama. He bounced back (a clutch recovery check stabilized him; Panacea's Heal + Life Boost revived him next round) and was right back in the boss's face.</li>
+        <li>Self-critiquing with a dragon's dry honesty &mdash; <em>"I'll Demoralize him &mdash; which I realize I should have done first"</em> &mdash; and by the end he was flying up moss-covered cave walls on his wings just because he could.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Prepared Hand</h4>
+      <ul>
+        <li>Came in <strong>loaded for bear</strong> &mdash; and said so: <em>"I prepared for a big one this time. I thought we were going into something scary."</em> Which is exactly what saved Cyrathul.</li>
+        <li>When the dragon went down, a clutch ranged <strong>Heal</strong> plus <strong>Life Boost</strong> fast-healing brought him back, with reserves to spare (<em>"I have two more heals if I need it"</em>).</li>
+        <li>The party's <strong>divine-damage and debuff engine</strong> &mdash; Divine Lance, Trade Life for Death (familiar Stupefy rider), and the <strong>eyes-pop-out kill</strong> on a basilisk-room Armiger.</li>
+        <li>Sharp reads: she <strong>called the Insidiator's silver weakness</strong> (<em>"I think it was silver"</em>) and quietly reminded the table to use the right metal.</li>
+        <li>Carried the session's wry-economist throughline opposite Bai Jian's greed (<em>"It's an expensive world we're living in here"</em>) while gamely fighting Foundry and her own dice (<em>"I'm having bad rolls again"</em>) &mdash; a first-time player running the whole healing economy through a five-fight dungeon.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Closer</h4>
+      <ul>
+        <li>Funnier and more self-effacing than his kill count lets on &mdash; and the kill count is real. The party's artillery (<strong>Blazing Bolt at all three</strong> is his happy place), but what makes him Zanthar is the sheepish grin after it works: a <strong>Phase Bolt through a Hellknight's own shield and into her face</strong>, then &mdash; <em>"Did I steal the kill? Nice."</em></li>
+        <li>Runs control, too: a <strong>Dizzying Colors</strong> ("Brazzle Dazzle") that dazzled the Insidiator &mdash; even while glued to the floor in devil-web, gamely asking <em>"Can I try and break out of the goo?"</em></li>
+        <li>Honest about still learning his kit (puzzling through Blazing Bolt's targeting mid-cast, working out his Drain Bonded Item economy out loud).</li>
+        <li>When it counted he closed the session: with Viro stacked in debuffs and bleeding from the whole party, Zanthar's <strong>cold cone (Chilling Spray) was the tick that froze the false Hell Knight to death</strong> &mdash; crystalline ice wrapping a dead man still grinning. From "rebel without a clue" to the one who put the boss in the ground.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-sammy">
+      <h4>Sammy Shadowfoot &middot; the Frying-Pan Bard</h4>
+      <ul>
+        <li><strong>Far more present this session</strong> &mdash; connection drops and all, she played her own turns and stacked real contributions.</li>
+        <li>The party's <strong>light source</strong> (casting Light so everyone could fight the dark cavern), buff engine (<strong>Courageous Anthem</strong>, whose absurd animation she cheerfully owned was <em>"a little too dramatic"</em> once it crashed everyone's Foundry), and a genuine threat: she <strong>crit-killed the Insidiator with Needle Darts</strong> and, when in doubt, <strong>brained a Hellknight Novice with her frying pan</strong>.</li>
+        <li>Her best beats were at the boss: she hero-pointed <strong>Biting Words</strong> to terrify Viro at the right moment &mdash; then, with him dead and his Novice raging in grief, she <strong>sustained Biting Words to insult the man to death</strong>. The DM handed her the kill (<em>"tell me how you sing or insult this man to death"</em>); her answer, deadpan: <em>"Just take him to filth for his wardrobe."</em></li>
+        <li>Over the corpse of a climber who died because he forgot his climbing gear, she delivered the session's driest line &mdash; <em>"Safety third."</em></li>
+        <li>Curious and still learning (asking how she'd know an enemy's weakness), but she's all the way in the fight now.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Pendant of the Occult</div><div class="loot-source">Bracknap &middot; Thorngrip</div><div class="loot-note">The spent Crystal Pendant reforged with his grandmother's essence &mdash; "This is for you now."</div></div>
+    <div class="loot-item magical"><div class="loot-name">Viro Ahala's Hell Knight Plate</div><div class="loot-source">Viro's body</div><div class="loot-note">Body + armor stuffed in the spacious pouch to identify him at HQ.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Healing-looking Pendant</div><div class="loot-source">Basilisk-room bones</div><div class="loot-note">Bai Jian pocketed it &mdash; "useful for our healing."</div></div>
+    <div class="loot-item magical"><div class="loot-name">Shining Ritual Symbol</div><div class="loot-source">Cave alcove</div><div class="loot-note">Grants a bonus to Religion. Bai Jian: "Looks like cash to me."</div></div>
+    <div class="loot-item"><div class="loot-name">Angel Statue + Jeweled Helmet</div><div class="loot-source">Basilisk-room bones</div><div class="loot-note">For sale &mdash; "money for the operation."</div></div>
+    <div class="loot-item"><div class="loot-name">Bag of Gold + Chunk of Silver</div><div class="loot-source">Waterfall room</div><div class="loot-note">Silver for silvering weapons later (needs a forge).</div></div>
+    <div class="loot-item"><div class="loot-name">Rubies + Ritual Materials</div><div class="loot-source">Viro's chamber</div><div class="loot-note">Possibly ritual components; sellable.</div></div>
+    <div class="loot-item"><div class="loot-name">Climbing Bolts + Fancy Gear</div><div class="loot-source">Dead climber's skeleton</div><div class="loot-note">~35 gp. "Safety third."</div></div>
+    <div class="loot-item"><div class="loot-name">Hellknight Armiger Breastplates</div><div class="loot-source">Encounters 1 / 3</div><div class="loot-note">Salvage for gold.</div></div>
+  </div>
+  <div class="xp-banner">
+    128 Extreme &middot; 48 Low &middot; 72 Moderate &middot; 88 Severe &middot; 40 mission &middot; 40 reputation = <strong>416 XP</strong> &middot; still Level 3, closing on 4
+  </div>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Why was Viro a "fake" Hell Knight?</strong> They killed him before they could ask. His body and plate are in the spacious pouch &mdash; they want to identify him at <strong>Hellbreaker HQ</strong> and learn whether there's a <em>real</em> one. (Distinct from <strong>Hellknight Alaya</strong>, still at large.)</li>
+      <li><strong>The ritual was nearly complete.</strong> Viro claimed <em>"I've already completed the ritual"</em>; the gate for a greater devil never opened because they killed him in time. Did anything still slip through? Bracknap's read is "stopped."</li>
+      <li><strong>The Pendant of the Occult</strong> &mdash; Bracknap's permanent gift, infused with his grandmother's essence. The party's new occult item; who attunes/uses it is open.</li>
+      <li><strong>Reputation maxed at 20.</strong> The Hellbreakers are now "the best chance for the future of Isger." With the hearts-and-minds tour and Viro both done &mdash; what's the next front? Back to <strong>Saringallow / Rhokrag</strong>, the <strong>Lich on Lake Encarthan</strong>, or <strong>Hedvind's Thrune escalation</strong>?</li>
+      <li><strong>Rama's death</strong> (still open from S7) &mdash; no word yet sent to Rhokrag.</li>
+      <li><strong>Unexplored Stagfall</strong> &mdash; a rubble-blocked tunnel would take a day to clear; a few passages left unsearched.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "Alright, time to do the Walk of Shame."<span class="attribution">Trudging back into the basilisk room after charging out to meet enemies &mdash; who promptly opened fire from behind him instead.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "We can sell this helmet for more money. As we always say, we need money for this operation."<span class="attribution">The session's running gag &mdash; Bai Jian's escalating materialism, which Pax narrated about his own character moments later.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "What, he's your father or something?"<span class="attribution">Deadpan to the Novice Armiger raging in grief over Viro Ahala's corpse.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "Oh my god, that's double 20&hellip; nat 20 twice. Let's go."<span class="attribution">The freak double-natural-20 that decapitated the basilisk mid-gaze.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I'll just slink in the dark tunnel, then maneuver on the wall and slash his throat."<span class="attribution">Ending the opening ambush by running down the last fleeing Hellknight Armiger.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I'll Demoralize him &mdash; which I realize I should have done first."<span class="attribution">Self-critiquing his own tactics mid-boss-fight, with a dragon's dry honesty.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I prepared for a big one this time. I thought we were going into something scary."<span class="attribution">The healer, loaded with extra heal slots &mdash; which is exactly what saved Cyrathul.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "It's an expensive world we're living in here."<span class="attribution">Her wry counterpoint to Bai Jian's loot-greed.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "It goes right through her shield and hits her in the face."<span class="attribution">Phase Bolt finishing the glowworm-room Hellknight &mdash; "Did I steal the kill? Nice."</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "Can I try and break out of the goo?"<span class="attribution">Glued to the floor in Insidiator web, deadpan, mid-fight.</span></blockquote>
+
+  <blockquote><strong>Sammy:</strong> "Just take him to filth for his wardrobe."<span class="attribution">Sustaining Biting Words to insult the last Novice Armiger to death &mdash; the DM handed her the kill flavor.</span></blockquote>
+
+  <blockquote><strong>Sammy:</strong> "Safety third."<span class="attribution">Over the skeleton of a climber who died because he forgot the climbing bolts still on his belt.</span></blockquote>
+
+  <blockquote><strong>Sammy:</strong> "A little too dramatic."<span class="attribution">Cheerfully owning her Courageous Anthem animation after it crashed everyone's Foundry.</span></blockquote>
+
+  <blockquote><strong>Viro Ahala:</strong> "You're too late. I've already completed the ritual."<span class="attribution">The false Hell Knight, over the flame &mdash; moments before being frozen to death with that grin still on his face.</span></blockquote>
+
+</section>
+
+<section>
+  <h2>Victory</h2>
+  <div class="cliffhanger">
+    <span class="label">Session ends &middot; Thorngrip, at sundown</span>
+    <p>Viro Ahala is dead, his ritual unmade, his body folded into a spacious pouch with the questions it still won't answer. The goblins stand in rows as the party comes through the thorn wall &mdash; children cheering, Bracknap glowing blue. The crystal becomes a Pendant of the Occult; the mead kegs come out. The reputation tracker reads twenty.</p>
+    <span class="big-line">"You are heroes here. You are welcome here forever."</span>
+    <span class="speaker">&mdash; Bracknap, ancestor-speaker of Thorngrip</span>
+  </div>
+</section>
+
+<section>
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <section class="pax-notes">
+    <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Bai Jian did this session</h3>
+    <ul>
+      <li>Survived the <strong>basilisk's petrifying gaze</strong> &mdash; failed the save, would have been <strong>permanently turned to stone</strong>, spent a <strong>hero point</strong> to push it off. Too close.</li>
+      <li><strong>Decapitated a Novice Hellknight Armiger</strong> with a 48-damage Sudden Charge crit (massive damage). Crit an Ort for 33 ("No mercy") and slew Armigers across the dungeon.</li>
+      <li>When <strong>Cyrathul dropped to dying</strong>, whistled <strong>Ren</strong> onto his body for Support and struck back &mdash; kept the line.</li>
+      <li>Tanked <strong>Viro Ahala's round-one longsword crit</strong> on Dueling Parry; <strong>tripped Viro prone</strong> to set up the kill.</li>
+      <li>Took <strong>Viro's body and Hell Knight plate</strong> in the spacious pouch to identify at HQ.</li>
+      <li>Pocketed a healing-pendant, eyed a shining religion-symbol to sell, and pushed the party to sell everything not nailed down.</li>
+    </ul>
+
+    <h3>Things Bai Jian knows that the party does not</h3>
+    <ul>
+      <li>The crystal is now a <strong>Pendant of the Occult</strong> &mdash; Bracknap's grandmother's essence is <em>in</em> it. That's not just loot; it's a piece of Thorngrip's dead. Treat it accordingly.</li>
+      <li>Viro called himself a <strong>fake Hell Knight</strong> and we never found out why. If there's a <em>real</em> one wearing that mask &mdash; and Alaya is still out there &mdash; this isn't closed. His body might tell HQ something we can't read.</li>
+      <li>The ritual was a <strong>greater gate</strong> &mdash; a hair from loosing a greater devil on the Chitterwood goblins. We were early by <em>minutes</em>, not days.</li>
+      <li>I felt the <strong>Ritual Backlash</strong> wave wash off me on a Will save. A ritualist's hellfire &mdash; next time the bowl might not miss. Disable the hazard, don't just race the boss.</li>
+    </ul>
+
+    <h3>What Bai Jian is thinking about</h3>
+    <ul>
+      <li><strong>Petrification is a hard counter to me.</strong> "Decent saves" almost cost the whole campaign in two minutes. I need a way to not be the only one staring down the gaze &mdash; or a backup save boost.</li>
+      <li>I keep being the first into the room and the first into the open. The <strong>"Walk of Shame"</strong> wasn't funny in the moment &mdash; running out blind nearly fed me to crossbows. Hold position; let Cyrathul read the room first.</li>
+      <li>I'm getting <strong>greedy</strong>. The team's noticing. It's funny, but a Hellbreaker who fights for money instead of the cause is one bad decision from being a mercenary. Watch that.</li>
+      <li>We're <strong>maxed on reputation (20)</strong> and the false Hell Knight is dead. The hearts-and-minds work is done. Time to point this at something bigger &mdash; Saringallow, Rhokrag, whatever Hedvind calls in next.</li>
+      <li>Still <strong>no light source of my own.</strong> Sammy's Light saved us again. Buy a torch. Learn a cantrip. Stop relying on the one whose connection drops.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li><strong>Who was Viro Ahala, really?</strong> Will HQ recognize the body? Why "fake"?</li>
+      <li>Is there a <strong>real</strong> Hell Knight behind the mask &mdash; and is it <strong>Alaya</strong>?</li>
+      <li>Did <strong>anything</strong> come through the gate before we snuffed the ritual?</li>
+      <li>What does a <strong>Pendant of the Occult</strong> do for us &mdash; and who carries it?</li>
+      <li>Where next? Back to <strong>Rhokrag</strong> at Saringallow (and Rama's overdue debt), or a new front entirely?</li>
+    </ul>
+  </section>
+</section>
+
+<style>
+.pax-notes { background: linear-gradient(135deg, #241a14, #2a1e16); border: 1px solid var(--gold-dim); border-radius: 6px; padding: 28px 32px; box-shadow: inset 0 0 30px var(--gold-glow); }
+.pax-notes .pax-intro { color: var(--amber); border-bottom: 1px dashed var(--gold-dim); padding-bottom: 16px; margin-bottom: 20px; font-size: 14px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; margin-bottom: 10px; font-size: 16px; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+.pax-notes strong { color: var(--text-bright); }
+</style>
+
+</div>
+</body>
+</html>

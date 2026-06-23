@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 5 — The Warren, the Beacon, and Speckle</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Warren, the Beacon, and Speckle</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 5</div>
+<div class="meta-row">
+  <span class="meta-pill">June 21, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 40m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 9</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:54%"></div>
+  <div class="comp-seg comp-explore" style="width:20%"></div>
+  <div class="comp-seg comp-rp" style="width:16%"></div>
+  <div class="comp-seg comp-social" style="width:6%"></div>
+  <div class="comp-seg comp-loot" style="width:4%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The session opened on the corpse of last week's nightmare — the surgeon Geff dead, his table cleared, and the woman he'd been cutting on (no anesthetic) finally freed. Her name was <strong>Sarah</strong>, and once the party calmed her with a blanket, a cup of whiskey-flavored water, and the world's least reassuring introduction (<em>"we're just the good guys, lady"</em>), she pointed them onward: the upper floors are a warzone, ruled by a red-robed vampire woman with long black hair — <em>not</em> Nizca — and stalked by tortured, self-mutilated "things" that fight the vampires on sight.</p>
+  <p>What they found first was a Dero warren and an <strong>eleven-round meat grinder</strong>. Three spiked-chain Stranglers screamed for help, three kukri-swinging Sentries poured in, a wall-busting <strong>Zombie Hulk</strong> lumbered through, and presiding over it all was <strong>Vye</strong>, a vampire spellcaster who spent the fight stacking Synesthesia, Vision of Death, and a party-wide Synaptic Pulse on Bargrum — and, cornered at single digits, <strong>Translocated across the room and critted on the way out</strong>. The dwarf soaked literally every natural 20 the dice rolled; Ferrok could not buy a hit. It ended only when Raylta's needle dart finally put Vye in the ground.</p>
+  <p>After a full rest the floor turned gentle and strange. The party adopted <strong>Speckle</strong>, a three-eyed winged homunculus janitor, and looted <strong>Deg's workshop</strong>, whose journals laid the whole plot bare: a retrofitted <strong>Shadow Beacon</strong> now drawing power from the Plane of Shadow to blot out the sun, so the Dero can walk the surface and Nizca can cross the sea to find a living man named <strong>Lograsi</strong>. (To stop the Beacon: smash it.) Then they climbed — past a manacle-happy pair of Clockwork Sentries, into a ruined ballroom where two vampires were losing to an <strong>Irnakurse</strong> fleshwarp, and finally into the fled vampires' ambush, which turned out to be <strong>four</strong>: Kaba, Chamadi, Xibin, Lauso. The vampires critted Ferrok into paste, but Raylta's vitality aura made standing near her lethal, and the party closed the night four-for-four. Two vampire-haunted floors and the Shadow Beacon remain — this floor ran long, so the next session is the second-to-last of Shades of Blood, with the finale after it.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I · RP · The Rescued Captive</div>
+    <div class="act-card">
+      <h3>Sarah</h3>
+      <ul>
+        <li>The party stabilized the freed captive — operated on with no anesthetic — as she sat terrified amid the carnage. <strong>Bargrum</strong> treated her for shock in careful third person; <strong>Bael</strong> flavored a cup of water to taste like whiskey (<em>"it's a mental thing — you think you're getting drunk, so you relax"</em>).</li>
+        <li><strong>Tivael</strong> delivered the grand introduction (<em>"We are the liberators. We are the vampire destroyers."</em>); <strong>Raylta</strong> cut it down to size (<em>"We're just the good guys, lady"</em>). The captive gave her name: <strong>Sarah</strong>.</li>
+        <li>Sarah's intel: she came from <strong>upstairs</strong>, where the floors are a battleground. A <strong>vampire woman in bright red with long black hair</strong> seems to run the upper levels — and is <em>not</em> Nizca. "Things that looked like they'd tortured themselves" fight the vampires up there.</li>
+        <li>The party gave Sarah directions and rations and sent her down, resolving to clear the rest of the floor first.</li>
+        <li>Loot from the previous fight was claimed: Geff's <strong>+1 Striking Bonesaw</strong> and <strong>+1 Striking Scalpel</strong>; the bomber Zer's <strong>+1 Striking Wounding Sickle</strong>, <strong>+1 leather (work coat)</strong>, and <strong>5 lesser elixirs of life</strong>; plus a room of sellable surgical instruments.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Dero Warren</div>
+    <div class="act-card">
+      <h3>Vye + 3 Stranglers + 3 Sentries + a Zombie Hulk (11 rounds)</h3>
+      <ul>
+        <li>A mold-choked fungal room held <strong>three Dero Stranglers</strong> (spiked chains, Strangle), who screamed for intruders. The fight snowballed: <strong>three Dero Sentries</strong> (kukri + bola, Focused Blow), a wall-busting <strong>Zombie Hulk</strong> (weak to vitality, <em>not</em> fire), and finally <strong>Vye</strong>, a vampire spellcaster.</li>
+        <li><strong>Bargrum</strong> group-Taunted the whole warren onto himself and absorbed an absurd crit streak — Vye's Vision of Death (30), Synesthesia (Clumsy 3 + Dazzled), repeated focus-blow nat-20s. The DM's refrain: <em>"Bargrum gets all my nat 20s this combat."</em></li>
+        <li><strong>Ferrok</strong> had the inverse luck — missing nearly every Spellstrike for ten rounds (<em>"I think I rolled above five, like, twice that fight"</em>) and, in frustration, lowering his horns to gore Vye when his sword wouldn't connect.</li>
+        <li><strong>Bael's Solar Detonation</strong> crit-failed the Zombie Hulk for ~68 and dazzled the room; a later flying-flame birdie double-killed two Dero Sentries at once.</li>
+        <li><strong>Tivael</strong> worked the debuff lane — a Demoralize crit and a Telekinetic Projectile <strong>crit (44)</strong> on Strangler A, <strong>Evangelize</strong> to stupefy Vye, and a for-fun <strong>Fireball</strong> that caught both the Zombie Hulk and Vye (both failed — the Hulk <strong>destroyed</strong>).</li>
+        <li><strong>Vye</strong> stacked control on Bargrum, hit Tivael with <strong>Agonizing Despair</strong> (which the bard shrugged off — the DM's <em>"Nope — that's our bard"</em>), Vampiric-Feasted Ferrok (who Reactive-Struck him), and at single digits <strong>Translocated (rank 4)</strong> across the room and critted on arrival. Raylta: <em>"My top five fight right here."</em></li>
+        <li>The party wore him down; <strong>Raylta's needle dart ended the 11-round fight</strong> — the DM's longest of the campaign so far.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act III · RP / Explore · Speckle &amp; Deg's Workshop</div>
+    <div class="act-card">
+      <h3>A Pet Rock and the Shadow Beacon</h3>
+      <ul>
+        <li>After a full <strong>8-hour rest</strong>, the party swept the Dero bunkrooms — finding a <strong>Crater Mage's hat</strong>, a <strong>wand of Summon Elemental</strong> (Tivael), assorted bombs, and a smoke fan.</li>
+        <li>Under a bed they found <strong>Speckle</strong>, a three-eyed winged <strong>homunculus</strong> (the floor's cleaner). <strong>Bargrum</strong> Recall-Knowledge'd it; <strong>Bael</strong> chatted with it in <strong>Azlanti</strong>; and <strong>Raylta</strong> adopted it on the spot (<em>"It's my dumb three-eyed rock"</em>). <strong>Ferrok</strong> promptly jinxed it (<em>"Speckle's definitely going to tragically die before we finish"</em>) — <em>"do not give him a death flag!"</em></li>
+        <li><strong>Deg's workshop</strong> journals cracked the campaign open: Deg discovered <strong>N'Gokal ~90 years ago</strong>; the Dero have long supplied the vampires with goods and <strong>prisoners as food</strong>; the N'Gokal vampires worship the <strong>Children of the Night</strong> pantheon (Kamazotz, Nin, Urgathoa, and others).</li>
+        <li><strong>Nizca only joined Nalushae ~3 years ago</strong> (freed from stasis late). Deg and Nizca then retrofitted the <strong>Shadow Beacon</strong> — once an Azlanti device that siphoned the <strong>Plane of Dreams</strong> to pacify rioting prisoners — to <strong>draw from the Plane of Shadow</strong>, blot out the sun, and let Nizca cross the sea to find a living man, <strong>Lograsi</strong>.</li>
+        <li><strong>How to stop it:</strong> the device has failsafes, but smashing it would functionally work — <em>"the percussive engineering I've heard about."</em></li>
+        <li>Reception-room maps showed <strong>three more floors plus the observation deck</strong> above. The party torched a room of <strong>six empty coffins</strong>, then — behind a <strong>Nin-warded blood-siphon trap</strong> (all five resisted: <em>"Nobody makes me bleed my own blood"</em>) — found a cell of <strong>prisoners drained near-dry of blood</strong>, staged for later rescue with Sarah.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · The Clockwork Sentries</div>
+    <div class="act-card">
+      <h3>"You're under arrest!"</h3>
+      <ul>
+        <li>Behind a locked door (Bael picked it after a crit-fail and a hero point) stood a pair of giant multi-armed <strong>Clockwork Sentries</strong> — hammer-wielding and <strong>weak to electricity</strong>.</li>
+        <li>Their gimmick: <strong>Sudden Seize</strong> grapples plus an <strong>arrest</strong> action that claps <em>manacles</em> on grabbed targets. They bound Tivael's legs (<em>"You're under arrest!"</em>) and tried to chain the whole party; <strong>Tivael hero-pointed a flat check</strong> to keep casting while grabbed.</li>
+        <li><strong>Ferrok</strong> (Ignition Spellstrikes, shock rune punching the electricity weakness), <strong>Bael</strong> (electric blasts), <strong>Bargrum</strong> (Titan-wrestler trip + Taunts), and <strong>Raylta</strong> (needle darts) dismantled both with no real danger.</li>
+        <li><em>Loot:</em> two <strong>+1 Striking Mauls</strong> and <strong>12 sets of manacles</strong> — the party's manacle fortune grows.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Irnakurse</div>
+    <div class="act-card">
+      <h3>The Fleshwarp in the Ballroom</h3>
+      <ul>
+        <li>Up the stairs to a grand <strong>octagonal landing</strong> — four doors: west (frantic singing/screaming), north (a glowing magical ward of sigils and equations), east (clawed and battered), and south (shattered open, sounds of fighting).</li>
+        <li>Through the south door, a wrecked moon-themed ballroom: <strong>two vampires</strong> losing a brawl to a flailing fleshwarp. <strong>Raylta</strong> RK'd it — a <strong>flesh warp</strong>, once people, broken down and re-amalgamated, with only faint scraps of human consciousness (not mindless).</li>
+        <li>The party chose to <strong>let the duel play out</strong> for milestone XP; the vampires faltered, nodded to each other, and <strong>misted away</strong> — at which point the fleshwarp, an <strong>Irnakurse</strong>, turned and charged.</li>
+        <li>Its <strong>Storm of Tentacles</strong> (reach ~22 ft) hit Ferrok, Bargrum, Tivael, and Raylta at once, and <strong>Mindlash</strong> stunned Bargrum and Raylta.</li>
+        <li><strong>Bael</strong> (Nimbus + a nat-20 blast), <strong>Ferrok</strong> (Ignition Spellstrike + swings), and <strong>Tivael</strong> (Courageous Anthem + Fortissimo +2, Telekinetic Projectile 25) hacked it silent fast. The party took the kill grimly — <em>"this poor creature."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Four Vampires</div>
+    <div class="act-card">
+      <h3>Kaba, Chamadi, Xibin, Lauso (finale)</h3>
+      <ul>
+        <li>The two fled vampires <strong>barricaded</strong> a north door. The party forced it (Bael unlocked — <em>"righty tighty, lefty Lucy"</em> — Ferrok charged it open), and the ambush sprang: not two vampires but <strong>four</strong> — Kaba, Chamadi, Xibin, Lauso — with a <strong>+2 initiative bonus</strong> (the party had been loudly threatening them through the door).</li>
+        <li>The vampires (Fast Healing, feint, Nimble Dodge, flanking; best save Will, worst Fort; resist non-silver physical, <strong>cold/frost rapiers</strong>) <strong>focus-fired Ferrok</strong> and critted him into the floor repeatedly (DM: <em>"I've done enough damage to kill you three times over"</em>).</li>
+        <li><strong>Bael</strong> read the room and flipped Thermal Nimbus to <strong>cold</strong> for party-wide cold resistance, then flying-flamed multiple vampires per pass. <strong>Raylta's</strong> Cloak of Light vitality aura was a lethal backstop (the DM noted two would have died just standing beside her), on top of rank-4/5 Heals and a 48-point Lay on Hands keeping Ferrok alive.</li>
+        <li><strong>Tivael</strong> front-loaded <strong>Flurry of Claws</strong> (force), fired Needle Dart and Frostbite combos, and ran <strong>Bon Mot</strong> at their Wills (which bounced — their best save). <strong>Ferrok</strong> finished vampires with Ignition Spellstrike and used <strong>Echo Jump</strong> to teleport past the doorways that plague him.</li>
+        <li>The party went <strong>four-for-four</strong>: <strong>Tivael</strong> dropped Kaba (silver Needle Darts), <strong>Bargrum</strong> crushed Xibin (Boulder Roll), <strong>Ferrok</strong> ran Chamadi through (Ignition Spellstrike), and <strong>Bael's</strong> final blast finished Lauso. The dice were brutal but the threats were under-level (<em>"all crits by things lower level than you"</em>).</li>
+        <li>DM's wrap: this floor ran long, so the finale slipped — <strong>next session is the second-to-last</strong> of Shades of Blood, then the finale, then Fists of the Ruby Phoenix.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Vye + 3 Dero Stranglers + 3 Dero Sentries + Zombie Hulk · 5 PCs · 11 rounds</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Vye → Dero Sentry B <em>(joins later)</em> → Ferrok → Dero Strangler A → Bargrum → Zombie Hulk → Raylta → Tivael → Bael → Dero Strangler B → Dero Sentry C <em>(joins later)</em> → Dero Strangler C → Dero Sentry A. <strong>Vye</strong> — male vampire spellcaster (Synesthesia, Vision of Death, Chromatic Ray, Agonizing Despair, Synaptic Pulse, Noise Blast, Vampiric Feast, rank-4 Translocate, Shield; +1 Striking Light Mace; resist non-silver physical, Fast Healing). <strong>Stranglers ×3</strong> — spiked chains, Strangle (grab + garrote, silences casting). <strong>Sentries ×3</strong> — kukri + bola, Focused Blow, Demoralize. <strong>Zombie Hulk</strong> — huge undead, Wide Swing (two strikes), too big for doors, weak to vitality (not fire).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The Stranglers opened; <strong>Ferrok's</strong> first Ignition Spellstrike landed, but his dice cratered for the rest of the fight. The Stranglers grappled <strong>Ferrok</strong> and repeatedly tried <strong>Bargrum</strong>; the Sentries filed in with Focused-Blow kukri swings and bolas.</li>
+    <li><strong>Bargrum</strong> group-Taunted to pull the warren onto himself and tanked a brutal crit streak: Vye's <strong>Vision of Death</strong> (30; a Hero Point reroll still failed → Frightened 2), <strong>Synesthesia</strong> (Clumsy 3 + Dazzled), and repeated focus-blow nat-20s. Raylta kept him up with stacked Heals (rank 2/3/4 + scrolls) and Nudge the Scales (sliding into Cursebound/Enfeebled).</li>
+    <li><strong>Bael's Solar Detonation</strong> crit-failed the <strong>Zombie Hulk</strong> (~68) and dazzled multiple Dero; <strong>Tivael</strong> added a Demoralize crit and a Telekinetic Projectile <strong>crit (44)</strong> on Strangler A, then Evangelize (stupefied) on Vye.</li>
+    <li><strong>Vye's Synaptic Pulse</strong> caught most of the party (Stunned 2 Bargrum, Stunned 1 Bael; <strong>Tivael's +18 Will</strong> shrugged it off), and his <strong>Agonizing Despair</strong> on Tivael bounced too — the DM's <em>"Nope, that's our bard."</em> Vye Vampiric-Feasted <strong>Ferrok</strong>, who <strong>Reactive-Struck</strong> him (Vye burned a Wooden-Double reaction to eat 25).</li>
+    <li><strong>Tivael's Fireball</strong> caught both <strong>Vye and the Zombie Hulk</strong> — both failed their saves, and the <strong>Hulk was destroyed</strong>; <strong>Bael's flying-flame birdies double-killed</strong> two Dero Sentries in one pass.</li>
+    <li>Down to Vye alone at single digits, he <strong>Translocated (rank 4)</strong> across the room and critted — buying another round. <strong>Raylta</strong> fatigued him with Interstellar Void; the party pinned him; <strong>Raylta's Needle Dart landed the kill.</strong></li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>An eleven-round grind — the DM's longest fight of the campaign so far. <em>Loot:</em> 3× +1 Striking Spiked Chain, 3× +1 Hand Crossbow (Stranglers); 3× +1 Striking Kukri, 3× +1 Striking Bola (Sentries); Vye's +1 Striking Light Mace, +1 Resilient Hooded Robe, 2 scrolls of False Vitality, Wand of Raise Skeletons.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Two Clockwork Sentries · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (no tracker — reconstructed): the party surprised them opening a locked door; order traded between Ferrok, Bael, Bargrum, Tivael, and Raylta vs. the two Sentries. <strong>Clockwork Sentries ×2</strong> — giant multi-armed hammer constructs; weak to electricity; Sudden Seize reaction grapples; an arrest action that locks manacles on grabbed targets (six pairs each).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>They grabbed and <strong>manacled Tivael's legs</strong> (<em>"You're under arrest!"</em>) and tried to chain the party; Tivael <strong>hero-pointed a flat check</strong> to land Electric Arc while grabbed.</li>
+    <li><strong>Ferrok</strong> (Ignition Spellstrikes, shock rune punching the electricity weakness), <strong>Bael</strong> (electric blasts), <strong>Bargrum</strong> (Titan-wrestler trip + Taunts; intercepted a trip onto himself), and <strong>Raylta</strong> (needle darts) brought both down.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>No party member seriously threatened. <em>Loot:</em> 2× +1 Striking Maul, 12 sets of manacles.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · The Irnakurse (fleshwarp) · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bael → Ferrok → Irnakurse → Bargrum → Irnakurse <em>(Tivael and Raylta acted lower in the order; both were Mindlash-stunned mid-fight)</em>. <strong>Irnakurse</strong> — a fleshwarp (once people; faint human consciousness, <em>not</em> mindless); Storm of Tentacles (up to four reach-~22 ft strikes) + Mindlash (Will save or Stunned).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The party watched it overwhelm <strong>two vampires</strong>, who <strong>misted away</strong>; the Irnakurse then charged. Its opening Storm of Tentacles hit <strong>Ferrok, Bargrum, Tivael, and Raylta</strong>, and Mindlash <strong>stunned Bargrum and Raylta</strong>.</li>
+    <li><strong>Bael</strong> (Thermal Nimbus + a nat-20 blast), <strong>Ferrok</strong> (Ignition Spellstrike + swings), and <strong>Tivael</strong> (Courageous Anthem + Fortissimo +2, Telekinetic Projectile 25) cut it down quickly. <strong>Bargrum</strong> Shield/Taunted through the stun.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>A short, grim fight — the party regretted not helping the tortured creature against the vampires.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Four Vampires: Kaba, Chamadi, Xibin, Lauso · 5 PCs · finale</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Kaba → Tivael → Chamadi → Bael → Xibin → Ferrok → Lauso → Bargrum → Raylta. <strong>Four Vampires</strong> — rapiers (mix of Shock and Frost runes), Fast Healing, feint, Nimble Dodge, flanking, Demoralize; best save Will, worst Fort; resist non-silver physical. They ambushed with a <strong>+2 initiative</strong> bonus (the party had been yelling threats through the barricaded door).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The vampires <strong>focus-fired Ferrok</strong> and critted him relentlessly (feints → off-guard → rapier crits); his glass shield, <strong>Emergency Targe</strong>, and Raylta's rank-4/5 Heals + 48-point Lay on Hands barely kept pace.</li>
+    <li><strong>Bael</strong> flipped Thermal Nimbus to <strong>cold</strong> to counter the frost rapiers (party-wide cold resistance), then flying-flamed multiple vampires per pass. <strong>Bargrum</strong> Taunted, intercepted, and shoved with the silver Monkey's Fist.</li>
+    <li><strong>Tivael</strong> ran Flurry of Claws (force) and Needle Dart / Frostbite combos, with Bon Mots that bounced off their strong Wills (one crit-fail bounced the penalty back onto him). <strong>Ferrok</strong> kept finishing vampires with Ignition Spellstrike and used <strong>Echo Jump</strong> to skip the doorway.</li>
+    <li><strong>Raylta's Cloak of Light vitality aura</strong> was a lethal backstop — the DM confirmed two of the downed vampires "<em>would have died as they started their turn next to Raylta</em>" — though the actual killing blows were landed by the front line.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Four-for-four: <strong>Tivael</strong> killed Kaba (silver Needle Darts), <strong>Bargrum</strong> killed Xibin (Boulder Roll), <strong>Ferrok</strong> killed Chamadi (Ignition Spellstrike), and <strong>Bael's</strong> final two-action blast killed Lauso (Tivael's Frostbite had dropped her to single digits first). <em>Loot:</em> 4× +1 Resilient Leather Armor; four rapiers (Shock and Frost runes mixed).</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Liberator with the Long Game ★</h4>
+    <ul>
+      <li><strong>Set the tone in the first five minutes</strong> — rattling off titles at the rescued Sarah (<em>"We are the liberators. We are the vampire destroyers. The liberators of the Bounty. Your saviors."</em>), then, with a beat, <em>"Hey, let me brag a bit. I had to after all that."</em></li>
+      <li><strong>Worked every lane in the Vye grinder</strong> — a Telekinetic Projectile crit and a Demoralize crit on the Stranglers, <strong>Evangelize</strong> to stupefy Vye, and a for-fun <strong>Fireball</strong> that caught both the Zombie Hulk and Vye (both failed — the Hulk destroyed).</li>
+      <li><strong>The squishy-caster self-knowledge</strong> — <em>"I'm gonna stay here and not get in the way of anything scary."</em></li>
+      <li><strong>The table's sharpest plot-reader</strong> — to Raylta's theory that Deg is the real puppet-master behind Nizca, the line of the night: <em>"I'm not sure if you're cooking or you're burning the kitchen."</em></li>
+      <li><strong>In the vampire finale</strong> — killed Kaba with silver Needle Darts, chipped Lauso to single digits with Frostbite, and front-loaded Flurry of Claws (force) while his Bon Mots bounced off the vampires' iron Wills. Composed, funny, three moves into the campaign's mystery.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum · the Wall That Soaks Every Nat 20</h4>
+    <ul>
+      <li><strong>Mechanically he was the Vye fight</strong> — Group and Shielding Taunts pulling the whole warren onto himself, Defensive Advances, Intercepts, and Shield Blocks, while the dice dropped what felt like every enemy crit on his head (the DM kept apologizing).</li>
+      <li><strong>Took it in character</strong> — when the DM teased <em>"you get quieter with every sentence, Bargrum,"</em> he answered, <em>"I'm getting older and fading away,"</em> and even while grappled kept up the smack talk, telling the Dero choking him to go right ahead and let the minotaur go.</li>
+      <li><strong>The party's heart and over-engineer</strong> — field-treated Sarah for shock, and pitched an elaborate plan to crack the vampires' coffins open and excavate a sunlight hole so any returning vampire would get a nice sun bath.</li>
+      <li><strong>Pure delight at the manacle-happy Clockwork Sentries</strong> — <em>"I love creatures that do weird shit, okay?"</em></li>
+      <li><strong>The only possible Conan response to the Nin blood-siphon trap</strong> — <em>"Nobody makes me bleed my own blood."</em> And he crushed Xibin with a Boulder Roll in the finale.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok · Cursed Dice, Steady Hands</h4>
+    <ul>
+      <li><strong>A study in heroic frustration that pays off</strong> — for most of the Vye fight he simply could not connect, until he narrated the breaking point: <em>"there is no way this man lives another round — Ferrok, extremely frustrated, lowers his horns and tries to gore him."</em></li>
+      <li><strong>Then the luck turned</strong> — across the back half of the night Ferrok was the <strong>kill leader</strong>, finishing both Clockwork Sentries, hacking the Irnakurse silent, and running Chamadi through in the finale — all while being the enemies' favorite target.</li>
+      <li><strong>The party's blunt moral compass</strong> — to Sarah: <em>"We're here to put an end to all this. That's why we're here."</em></li>
+      <li><strong>Solved his oldest problem</strong> — the doorways that plague him (<em>"I always get stuck on doorways"</em>) now simply blinked past, courtesy of a brand-new <strong>Echo Jump</strong> teleport.</li>
+      <li><strong>Comedy in the margins</strong> — <em>"Evil Geff,"</em> the Fullmetal-Alchemist homunculus aside, and the death-flag he hung on Speckle the instant the party adopted it.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · the Adaptive Pyromaniac</h4>
+    <ul>
+      <li><strong>Opened combats the way he always does</strong> — <em>"Bael will raise up his finger and send in the solar detonation"</em> — and crit-failed a Zombie Hulk for ~68.</li>
+      <li><strong>The standout was his read in the finale</strong> — clocking the vampires' cold/frost rapiers, he flipped Thermal Nimbus to <strong>cold</strong> so the whole party got cold resistance, then carved them up with flying-flame birdies (and landed the final blow on Lauso).</li>
+      <li><strong>Bedside manner is its own bit</strong> — the whiskey-water placebo for Sarah; for the drained prisoners, <em>"I'll write a small note saying: this is food for you. Please eat up."</em></li>
+      <li><strong>Sound engineering instincts</strong> — on disabling the world-ending Shadow Beacon, <em>"Is this the percussive engineering I've heard about?"</em> He also ran the lockpicking sideshow (crit-fail, hero point, <em>"righty tighty, lefty Lucy"</em>) and translated for Speckle in Azlanti.</li>
+      <li>When his blasts ran dry against Vye, he <em>"heroically ran up and conjured a small fiery knife"</em> to stab him. Chaos with a working brain.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta · the Conscience and the Quiet Deterrent</h4>
+    <ul>
+      <li><strong>A lethal backstop by standing still</strong> — her Cloak of Light vitality aura had the DM marveling that two of the felled vampires "<em>would have died</em>" just from starting a turn beside her (<em>"just by standing near me"</em>) — and she landed the killing needle dart on Vye, the session's 11-round boss.</li>
+      <li><strong>The healing economy</strong> — rank-2-through-5 Heals, Nudge the Scales, heal scrolls, and a 48-point Lay on Hands, all while sliding into Cursebound/Enfeebled to keep a crit-battered Ferrok upright.</li>
+      <li><strong>The conscience first</strong> — introduced the party as <em>"just the good guys, lady,"</em> noted with pride that <em>"we're getting better at talking to people,"</em> and grieved the drained prisoners (<em>"these poor people"</em>).</li>
+      <li><strong>The session's purest joy</strong> — adopted <strong>Speckle</strong> the three-eyed homunculus (<em>"I'd love a pet rock!… It's my dumb three-eyed rock"</em>) and fiercely defended him from Ferrok's jinx (<em>"do not give him a death flag!"</em>).</li>
+      <li><strong>The party's theorist</strong> — floated that Deg might be the true mastermind pulling Nizca's strings; and she relishes a good villain — of Vye's clutch Translocate, <em>"I love spellcasters, man."</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Bonesaw / +1 Striking Scalpel</div>
+    <div class="loot-source">Geff (prior fight)</div>
+    <div class="loot-note">Claimed this session.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Wounding Sickle, +1 Leather (work coat)</div>
+    <div class="loot-source">Zer (prior fight)</div>
+    <div class="loot-note">Plus 5 lesser elixirs of life.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Surgical instruments / jars / ingredients</div>
+    <div class="loot-source">Surgery room</div>
+    <div class="loot-note">Sellable for funds.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">3× +1 Striking Spiked Chain / 3× +1 Hand Crossbow</div>
+    <div class="loot-source">Dero Stranglers</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">3× +1 Striking Kukri / 3× +1 Striking Bola</div>
+    <div class="loot-source">Dero Sentries</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Light Mace, +1 Resilient Hooded Robe</div>
+    <div class="loot-source">Vye</div>
+    <div class="loot-note">Plus 2 scrolls of False Vitality and a Wand of Raise Skeletons.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Crater Mage's Hat / Wand of Summon Elemental</div>
+    <div class="loot-source">Dero bunkrooms</div>
+    <div class="loot-note">Tivael took the Summon Elemental wand. Plus bombs and a smoke fan.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">2× +1 Striking Maul</div>
+    <div class="loot-source">Clockwork Sentries</div>
+    <div class="loot-note">Plus 12 sets of manacles — the fortune grows.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">4× +1 Resilient Leather Armor / 4× Rapier</div>
+    <div class="loot-source">The four vampires</div>
+    <div class="loot-note">Rapiers carry a mix of Shock and Frost runes.</div>
+  </div>
+</div>
+<div class="xp-banner">Four combats — an 11-round Dero warren, the Clockwork Sentries, the Irnakurse, and the four-vampire ambush — but <strong>no level-up this session</strong>. The party remains <strong>Level 9</strong>. This floor ran long, so <strong>two sessions of Shades of Blood remain</strong> — next is the second-to-last, then the finale.</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "We are the liberators. We are the vampire destroyers. The liberators of the Bounty. Your saviors."
+  <span class="attribution">Introducing the party to the freed captive Sarah — the others piling on titles behind him.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I'm not sure if you're cooking or you're burning the kitchen."
+  <span class="attribution">To Raylta, as she spun her theory that Deg is the real mastermind behind Nizca.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I'm gonna stay here and not get in the way of anything scary."
+  <span class="attribution">Squishy-caster positioning, mid-warren.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Nobody makes me bleed my own blood."
+  <span class="attribution">Resisting the Nin blood-siphon trap that tried to draw a pint from each of them.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Imagine over-engineering a solution — 'I'll just blot out the sun,' and somebody's just holding it. She does it for the love of science."
+  <span class="attribution">Riffing on the absurd scale of Nizca's world-ending plan, reading Deg's journals.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "I love creatures that do weird shit, okay?"
+  <span class="attribution">Genuinely delighted as the Clockwork Sentries began manacle-arresting the party.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "There is no way this man lives another round. Ferrok, extremely frustrated, lowers his horns and tries to gore him."
+  <span class="attribution">Round ten of whiffing every Spellstrike against Vye.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "I'm getting in there. But the doorways don't like me."
+  <span class="attribution">The minotaur's eternal dungeon problem — a running gag he finally solved this session with an Echo Jump teleport.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "It's a mental thing — you think you're getting drunk, so you relax."
+  <span class="attribution">Flavoring a cup of water "like whiskey" to calm the traumatized Sarah.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "Is this the percussive engineering I've heard about?"
+  <span class="attribution">On the party's plan to disable the world-ending Shadow Beacon by hitting it really hard.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I'll write a small note saying: this is food for you. Please eat up."
+  <span class="attribution">His contribution to caring for the unconscious, blood-drained prisoners.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "We're just the good guys, lady. To summarize."
+  <span class="attribution">Cutting through Tivael's stack of grand titles for Sarah's benefit.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "I'd love a pet rock! It's my rock. It's my dumb three-eyed rock."
+  <span class="attribution">Adopting Speckle the homunculus.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "No! Oh my god, do not give him a death flag!"
+  <span class="attribution">Defending Speckle the instant Ferrok predicted his tragic death.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Shadow Beacon</strong> at the tower's top — retrofitted by Deg and Nizca to draw from the Plane of Shadow and blot out the sun. The disable plan, per Deg's own notes: <strong>smash it</strong>. Three floors + the observation deck still stand between the party and it.</li>
+  <li><strong>Lograsi</strong> (spelling now confirmed from Deg's journal) — Nizca's living lost love, a human across the sea. Nizca's whole plan hinges on reaching him.</li>
+  <li><strong>The red-robed, black-haired vampire woman</strong> Sarah described as running the upper floors — <em>not</em> Nizca. Who is she?</li>
+  <li><strong>The octagonal landing's other doors</strong>: west (frantic singing/screaming), north (a glowing magical ward), east (clawed and battered). All unexplored.</li>
+  <li><strong>The drained prisoners</strong> staged with Sarah — they need prolonged care and a real evacuation.</li>
+  <li><strong>Deg vs. Nizca</strong> — Raylta's theory that the Dero engineer Deg is the true mastermind manipulating Nizca. Unconfirmed.</li>
+  <li><strong>The Children of the Night</strong> pantheon (Kamazotz, Nin, Urgathoa, et al.) and <strong>Nin's</strong> blood-siphon wards — the vampire-god angle keeps recurring.</li>
+  <li><strong>Fleshwarps (Irnakurse-type)</strong> roam the upper floors, attacking the vampires on sight. Are they Deg/Nizca experiments gone loose?</li>
+  <li><strong>Speckle</strong> the homunculus has joined the party (and Ferrok has hung a death flag on him).</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Final Ascent</span>
+  <p>A Dero warren, a manacle-happy pair of clockwork giants, a tortured fleshwarp, and four ambushing vampires lie behind them — but the octagonal landing still has three doors they never opened, behind them frantic singing, a glowing ward, and the scars of claws. Somewhere above, a red-robed vampire woman holds the upper floors, and at the very top Nizca and Deg still tend the Shadow Beacon, waiting to give the world an endless night.</p>
+  <div class="big-line">"Watch us speedrun the next two floors."</div>
+  <span class="speaker">— Tivael, with two sessions of Shades of Blood left to climb</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Opened on the rescue of <strong>Sarah</strong>, the captive from Geff's table; delivered the party's introduction and gathered her intel about the upper floors.</li>
+  <li>In the 11-round Dero-warren fight: Demoralize crit + Telekinetic Projectile crit (44) on a Strangler, <strong>Evangelize</strong> stupefying Vye, a <strong>Fireball</strong> that caught both Vye and the Zombie Hulk (both failed; the Hulk destroyed), Electric Arc, Dirge, and shrugged off Vye's Synaptic Pulse and Agonizing Despair on strong Will saves.</li>
+  <li>Looted a <strong>wand of Summon Elemental</strong> (arcane — usable).</li>
+  <li>Got <strong>manacled</strong> by a Clockwork Sentry and hero-pointed a flat check to keep casting while grabbed.</li>
+  <li>In the vampire finale: Flurry of Claws (force), Courageous Anthem + Fortissimo, <strong>killed Kaba</strong> with silver Needle Darts, chipped Lauso to single digits with Frostbite (Bael's blast finished her), and ran <strong>Bon Mot</strong> attempts that bounced off the vampires' strong Wills (one crit-fail bounced the penalty back onto me).</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li>The <strong>Shadow Beacon</strong> can likely just be <strong>smashed</strong> (Deg's own notes) — but it has failsafes, so expect instability. Worth a real plan before swinging at it.</li>
+  <li>The upper floors are a <strong>three-way war</strong>: vampires vs. fleshwarps, with a red-robed black-haired vampire woman (not Nizca) apparently in charge. The fleshwarps are made from broken people and are hostile to everyone.</li>
+  <li><strong>Nizca is a relative latecomer</strong> — only joined Nalushae ~3 years ago. <strong>Deg</strong> is the long-game architect (90 years in these ruins). Raylta may be right that Deg is steering Nizca.</li>
+  <li>These vampires' <strong>best save is Will</strong> — Bon Mot / mental debuffs are the wrong tool against them. Save Fort-targeting (Worm's Repast, etc.) and force damage (Flurry) for this floor.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li>Vye proved a single clever caster can stretch a fight to eleven rounds with control spells and a clutch Translocate. The next floors will have more like him; <strong>Synesthesia / Fortissimo / Rallying Anthem</strong> earn their slots against casters and bosses.</li>
+  <li>Ferrok's dice abandoned him in the warren and the vampires keep focus-firing him — the front line is fragile when his Spellstrikes miss. Keep Courageous Anthem up for accuracy, Rallying Anthem ready when the crits start landing.</li>
+  <li>Flurry of Claws (force) remains the answer to physical-resistant vampires; pair it with Raylta's vitality aura, which punishes anything that lingers beside her.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What's behind the <strong>other three doors</strong> on the octagonal landing — the singing/screaming (west), the warded room (north), the clawed door (east)?</li>
+  <li>Who is the <strong>red-robed vampire woman</strong> running the upper floors?</li>
+  <li>Is <strong>Deg</strong> the true mastermind, with Nizca a love-blinded figurehead?</li>
+  <li>Can the <strong>drained prisoners</strong> be safely evacuated before the final push — and is Sarah still watching them?</li>
+  <li>Shades of Blood's endgame is close (two sessions left): eventually <strong>Nizca, Deg, and the Shadow Beacon</strong> at the top. What's the order of operations — and do we have a counter for Nin's blood wards?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

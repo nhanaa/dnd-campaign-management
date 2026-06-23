@@ -7,7 +7,7 @@
 - **Heritage**: Dragonblood (Sovereign Dragon)
 - **Background**: Foreign Aid
 - **Class**: Fighter
-- **Level**: 2
+- **Level**: 3
 - **Size**: Medium
 - **Speed**: 25 ft (base; Str 18 ≥ breastplate's Str 16 threshold → -5 speed penalty negated)
 - **Deity**: None (Atheists and Free Agents)
@@ -23,22 +23,24 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 18 (+4) | 12 (+1) | 14 (+2) | 10 (+0) | 14 (+2) | 10 (+0) |
+| 18 (+4) | 12 (+1) | 18 (+4) | 10 (+0) | 14 (+2) | 10 (+0) |
 
-*Rebuilt at L2 to fit the new party — WIS boosted (Nature/Medicine/Survival/Will), CHA dropped (no diplomat/face role needed). All boosts come from L1 sources (Ancestry: STR/CON, Background: STR/WIS, Class: STR, Free L1: STR/DEX/CON/WIS). Next ability boost slot is L5 — planned: WIS again, then DEX/STR/CHA fill.*
+*Synced to the live Foundry token (2026-06-21). This campaign uses the **Gradual Ability Boosts** variant — one boost at each of L2/L3/L4/L5 instead of four at L5. Starting array (L1): STR 18, CON 16, DEX 12, WIS 12 (Ancestry STR/CON, Background STR/CON, Class key STR, Free L1 STR/DEX/CON/WIS). Gradual boosts so far: **L2 → CON 18, L3 → WIS 14.** Both STR and CON are now maxed at 18 (offense + the +11 Fort + 50 HP). Next gradual boost at **L4** (DEX or WIS the likely picks).*
 
 ## Defenses
 
-- **AC**: 19 (10 + 4 proficiency + 1 DEX cap + 4 breastplate) — **21 with Dueling Parry**
-- **Max HP**: 32 (8 ancestry + 20 class [10×2] + 4 CON [2×2])
+- **AC**: 20 (10 + 5 proficiency + 1 DEX cap + 4 breastplate) — **22 with Dueling Parry**
+- **Max HP**: 50 (8 ancestry + 30 class [10×3] + 12 CON [4×3])
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert | +8 |
-| Reflex | Expert | +7 |
-| Will | Trained | +6 |
+| Fortitude | Expert | +11 |
+| Reflex | Expert | +8 |
+| Will | Expert | +9 |
 
-- **Perception**: Expert (+8)
+*Will is **Expert via Bravery** (L3) — not Trained. Bravery + Dragonblood both make a success vs a fear effect a critical success, and Bravery reduces any Frightened you gain by 1. No dumped save-stat: all three saves are Expert, Fort is the standout at +11.*
+
+- **Perception**: Expert (+9)
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
 
 ## Heritage Features
@@ -50,6 +52,7 @@
 
 - **Reactive Strike**: Reaction — Strike when a creature within reach uses a manipulate/move action, makes a ranged attack, or leaves a square
 - **Shield Block**: Free general feat (unused — no shield in this build)
+- **Bravery** (3rd): Will-save proficiency is Expert. On a success vs a fear effect you critically succeed instead, and you reduce any Frightened condition you gain by 1.
 
 ## Ancestry Feats
 
@@ -66,17 +69,17 @@
 
 | Skill | Prof | Modifier | Source |
 |-------|------|----------|--------|
-| Athletics | Trained | +8 | Fighter class L1 choice |
-| Diplomacy | Trained | +4 | Foreign Aid background |
-| Intimidation | Trained | +4 | Dragon Lore feat |
-| Medicine | Trained | +6 | Fighter additional skill |
-| Nature | Trained | +6 | Fighter additional skill (Beastmaster prereq) |
-| Survival | Trained | +6 | Fighter additional skill |
+| Athletics | Expert | +11 | Fighter L1 choice; raised to Expert at the L3 skill increase |
+| Diplomacy | Trained | +5 | Foreign Aid background |
+| Intimidation | Trained | +5 | Dragon Lore feat |
+| Medicine | Trained | +7 | Fighter additional skill |
+| Nature | Trained | +7 | Fighter additional skill (Beastmaster prereq) |
+| Survival | Trained | +7 | Fighter additional skill |
 
 ### Lore Skills
-- **Dragon Lore** (Trained, +4) — from Additional Lore (Dragon Lore feat)
-- **Lingshen Lore** (Trained, +4) — from Foreign Aid background
-- **Demon Lore** (Trained, +4) — free skill from Dragon Lore's Diplomacy overlap
+- **Dragon Lore** (Trained, +5) — from Additional Lore (Dragon Lore feat)
+- **Lingshen Lore** (Trained, +5) — from Foreign Aid background
+- **Demon Lore** (Trained, +5) — from Additional Lore
 
 ### Skill Feats
 - **No Cause for Alarm** (Background): 3 actions — Reduce Frightened on allies in 10-ft emanation via Diplomacy check
@@ -119,7 +122,7 @@
 - ~~**Harpy's Talon**~~ — consumed in S5 against the Attic Whisperer. Activated persistent bleed on strike, but undead don't bleed. Wasted.
 
 ### Wealth
-- 19 gp, 9 sp, 8 cp
+- 93 gp, 6 sp (per live Foundry sheet, 2026-06-21)
 
 ## Animal Companion — Ren the Isgeri Boarhound (Young)
 

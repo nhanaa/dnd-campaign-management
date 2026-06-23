@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 4 — The Warden, the Medusa, and the Surgeon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Warden, the Medusa, and the Surgeon</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 4</div>
+<div class="meta-row">
+  <span class="meta-pill">June 14, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~4h 20m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 8 → 9</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:64%"></div>
+  <div class="comp-seg comp-rp" style="width:13%"></div>
+  <div class="comp-seg comp-explore" style="width:12%"></div>
+  <div class="comp-seg comp-social" style="width:7%"></div>
+  <div class="comp-seg comp-loot" style="width:4%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>After the bloody climb of the previous two sessions, the party took a breath. Back at Talmandor's Bounty they sold a literal thousand gold of looted manacles, split ~1,300 gp apiece, transferred runes, and bantered their way through a shopping montage before riding the long way back down to the Ebon Tower. They expected a sea of guards. Instead, three sessions of slaughtered security had left the floor nearly empty, and waiting in the gap was the <strong>Warden Tokainen</strong> herself — a meteor-hammer Dampyr flanked by an ethereal Mistbear and a fifteen-foot animated statue of the Azlanti goddess Sigva.</p>
+  <p>Tokainen went down hard but fast; the real menace was her statue, a construct-armored juggernaut that grabbed Bargrum and tried to feed him into its own brazier. With the Warden dead, the party freed the tower's terrified kitchen staff, mourned the now-vanished engineer <strong>Aruneth</strong>, looted a secret reliquary behind the Nin shrine, and climbed — invisible — into a grand underwater lobby, where a guard-pack of clockwork soldiers and then a coiling <strong>Medusa named Firitula</strong> with three vampire servitors stood between them and the floors above. Firitula's petrifying gaze nearly turned Tivael to stone, but Ferrok ran her down the stairs. Level nine arrived on her corpse.</p>
+  <p>Above lay a rotting cellblock. A Dero strangler-pack and a lumbering flesh-golem came first; a room of shambling filth-things — <strong>Ofalths</strong> — came second, and the party gave the corpses they were made from a funeral pyre on the way out. Then, behind a padlocked door, they found a woman strapped to a table and a grinning Dero surgeon — <strong>Geff</strong> — poised over her with a scalpel. What should have been a rescue became the hardest fight of the campaign so far: Geff's "1,000 Cuts" carved the whole party round after round, his bomb-throwing partner <strong>Zer</strong> rained grenades, and Giant Crawling Hands grappled the frontline. Tivael — fully buffed, with Geff stacked in debuffs — was cut down, hauled back up by Raylta, and rose to land a <strong>72-damage Flurry of Claws crit that finished the surgeon</strong>. The party put Zer down and freed the captive. Two sessions of Shades of Blood remain.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Downtime · Talmandor's Bounty</div>
+    <div class="act-card">
+      <h3>The Shopping Montage</h3>
+      <ul>
+        <li>The party rested, restocked, and liquidated the spoils of "like 20 guards" — including ~30 sets of manacles that sold for a thousand gold. Ferrok: <em>"Crash the market for manacles locally."</em></li>
+        <li>Each PC walked away with <strong>~1,300 gp</strong>. Runes were shuffled: Ferrok took a <strong>shock rune</strong> for his bastard sword; Bargrum, Ferrok, Bael, and Tivael split three <strong>resilient runes</strong>; Raylta claimed the <strong>Charm of Cold Resistance</strong>.</li>
+        <li>The settlement sells up to 8th-level items (uncommon counts as +5 levels, rare as +10). Shopping ran long and loose, with retroactive purchases allowed up to next session.</li>
+        <li>Pure character voice all the way through — Ferrok on the Skittering Mask (<em>"Fashion is always the true endgame"</em>), Ferrok remembering his forgotten Pyrefeather cloak, a tangent about <em>The Boys</em>, and the party briefly fantasizing about retirement.</li>
+        <li>Then back to Vil-Azmar — through the cave, Underheaven, the Bleeding Palace, the clockwork elevator, and up the spiral stairs into the Ebon Tower's administration wing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Warden Tokainen</div>
+    <div class="act-card">
+      <h3>Tokainen + Eskis the Mistbear + the Statue of Sigva</h3>
+      <ul>
+        <li>Waiting in the administration wing: <strong>Tokainen</strong>, a Dampyr Warden with a meteor hammer; her ethereal <strong>Mistbear Eskis</strong>; and a fifteen-foot <strong>Giant Animated Statue of Sigva</strong> ("the Mistress of All"). <em>"I wondered when the bastards who took half my security down would be back."</em> — Bargrum: <em>"Only half. We'll have to do better."</em></li>
+        <li><strong>Bargrum</strong> opened with a Defensive Advance and a group Taunt; the statue immediately fixated on him, <strong>grabbing him and using Burn Alive</strong> to grind him into its red-hot brazier — repeatedly, with no save.</li>
+        <li>A comedy beat: Tokainen and Raylta both reached for <strong>Divine Wrath</strong> the same round. Tokainen got it off first (<em>"That was my move!"</em>); Raylta answered with her own, and <strong>the Warden crit-failed the save into Sickened 2 + Slowed</strong>.</li>
+        <li><strong>Tivael</strong> RK'd the statue (construct armor, Hardness 10, weak Reflex/Will) and cast <strong>Phantom Pain</strong> on Tokainen (she saved — initial damage only). <strong>Bael</strong> opened with Solar Detonation and crit-healed Bargrum with Battle Medicine (37).</li>
+        <li><strong>Ferrok killed Tokainen</strong>, running her through the breastplate with a flaming Ignition Spellstrike. <strong>Raylta's Divine Lance crit put the incorporeal Eskis down</strong> (spirit bypasses incorporeal) after Ferrok softened it.</li>
+        <li>The statue was the real fight: <strong>Tivael's Telekinetic Projectile crit and Bael's blasts cracked the construct armor</strong>, then <strong>Ferrok crit-finished it</strong> — it burst into flames.</li>
+        <li><em>Loot:</em> +1 Resilient Breastplate, +2 Striking Thundering Meteor Hammer.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act III · RP / Explore · The Kitchen &amp; the Reliquary</div>
+    <div class="act-card">
+      <h3>Freed Cooks, a Vanished Engineer, and a Candle of Truth</h3>
+      <ul>
+        <li>The tower's <strong>kitchen staff</strong> (a chef and two servants, non-hostile) were thrilled the party had killed Tokainen — <em>"no longer have to prepare for these bastards"</em> — and were given safe directions out, plus an all-you-can-eat invitation to the abandoned feast.</li>
+        <li>The party discovered <strong>Aruneth the engineer had absconded</strong> with his familiar — no note, no goodbye. Raylta took it personally: <em>"I loved him and now he's gone."</em></li>
+        <li>Behind the giant <strong>Nin statue</strong>, a secret reliquary: a skeleton with <strong>+1 leather armor</strong>, a <strong>candle of truth</strong>, and an <strong>emergency eye</strong> (Tivael claimed the eye against future blindness).</li>
+        <li>Bargrum lingered at the underwater dome between rooms — staring into the ocean, drifting into a fond ramble about his cat and his long-ago "college."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · The Clockwork Lobby</div>
+    <div class="act-card">
+      <h3>Three Clockwork Soldiers (30 feet underwater)</h3>
+      <ul>
+        <li>Ferrok cast <strong>Shared Invisibility</strong> and the party crept up into a vast lobby of deconstructed stained-glass sculptures — actually <strong>30 feet underwater</strong>, with a domed solarium looking out into the ocean.</li>
+        <li>A scout pass revealed hidden <strong>rune-traps on the stairs</strong> (later disabled via an Arcana check, with an Aid from Bargrum and a Guidance boost). Then <strong>three Clockwork Soldiers</strong> (weak to electricity, 10-ft reach) closed in.</li>
+        <li>Tivael's opening Electric Arc broke the invisibility. <strong>Bael phased through one soldier as a bolt of lightning</strong> (Lightning Dash) for heavy damage — but the kills landed with <strong>Bargrum</strong> and <strong>Raylta</strong> (adamantine Needle Darts).</li>
+        <li>Exploration filled in lore: a statue of <strong>High Governor Avres of Vespera</strong>, the prison's pre-Earthfall founder; a <strong>grudge stone</strong> (to Ferrok); and a psychometric read from Raylta that turned up a recent visitor — someone lounging here, reading, just days ago.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · Firitula the Medusa</div>
+    <div class="act-card">
+      <h3>Firitula + Three Vampire Servitors</h3>
+      <ul>
+        <li>Down a side door: <strong>Firitula</strong>, a snake-haired <strong>Medusa</strong>, with <strong>three Vampire Servitors</strong>. <em>"Would you like your corpses displayed where you die, or in the grand entry?"</em></li>
+        <li>Raylta RK'd her: <strong>living</strong> (not undead), best Reflex / worst Will, with a <strong>petrifying gaze</strong> (Focus Gaze), a petrification <strong>aura</strong>, a Biting Snakes reaction, and Serpent Venom.</li>
+        <li>Tivael's weak Fortitude made him the gaze's first target — Slowed and one save from stone; the gaze then turned on <strong>Raylta, who passed via Avert Gaze</strong>. Tivael <strong>tried to Command Firitula prone — she saved</strong> — and answered with Flurry of Claws.</li>
+        <li><strong>Bael's Solar Detonation</strong> dazzled Firitula (forcing flat checks on her gaze). <strong>Tivael's Flurry killed one servitor; Raylta's Needle Darts (silver, then adamantine) dropped the other two.</strong></li>
+        <li><strong>Ferrok ran Firitula down and killed her</strong> as she fled down the stairs.</li>
+        <li><em>Loot:</em> +1 Resilient Explorer's Clothing, +1 Striking Flaming Shortsword, +1 Striking Shock Composite Shortbow, <strong>Fortune's Coin</strong> (Raylta), 4 explosive arrows. <strong>The party hit level 9.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI · Explore · Level Up &amp; the Rotting Floor</div>
+    <div class="act-card">
+      <h3>New Tricks and a Room of the Dead's Laundry</h3>
+      <ul>
+        <li>A long level-up beat: Tivael can now <strong>fly</strong> and picked up rank-5 spells (<em>"You know what's coming, guys"</em>); Ferrok got <strong>Friendly Fling</strong>; <strong>Bael upgraded his Thermal aura junction</strong> so allies in his aura get a free Step (<em>"I gave you ADHD"</em>).</li>
+        <li>A long, warm digression about cats — the DM's, Bargrum's "nice but not good" cat — between rounds.</li>
+        <li>Up a long dark stair into a rotting, mold-choked level. The party explored a <strong>laundry/clothing room of the dead</strong> and found an animal-companion-only <strong>tree</strong> (Raylta nearly ate it).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII · Combat · The Dero Stranglers &amp; the Charnel Creation</div>
+    <div class="act-card">
+      <h3>Spiked Chains and a Flesh Golem</h3>
+      <ul>
+        <li>Behind a door: a pack of <strong>Dero</strong> with spiked chains (<strong>Strangle</strong>: grab + garrote) and a lumbering <strong>Charnel Creation</strong> — a mindless flesh-golem, resistant to fire and spell damage (save adamantine), weak Reflex, and rigged to <strong>grab anyone who shocks it</strong>.</li>
+        <li>The Dero strangled Ferrok and then Bargrum; Bargrum tanked the golem's haymakers and Intercepted.</li>
+        <li><strong>Ferrok</strong>, warned that his shock sword would trigger Electric Reflexes, <strong>lowered his horns and gored the golem</strong> instead — and elsewhere killed two of the three Dero (a Horizon Thunder Sphere Spellstrike crit one-shot one). <strong>Tivael's Telekinetic Projectile crit killed the third Strangler.</strong></li>
+        <li><strong>Bael finished the Charnel Creation</strong> with a flying flame as it tried to roar (it never went Berserk — it passed the check).</li>
+        <li>Afterward Bargrum proposed turning the corpse-room into a crematorium.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VIII · Combat · The Ofalths</div>
+    <div class="act-card">
+      <h3>Two Things Made of Filth</h3>
+      <ul>
+        <li>A cell filled with corpses and severed limbs; the refuse rose up as two <strong>Ofalths</strong> — aberrations born of filth, best Fort / worst Reflex, not undead, not mindless.</li>
+        <li>Tivael RK'd them and hit both with rank-3 <strong>Fear</strong>, then a Flurry of Claws (43). <strong>Bael's Solar Detonation</strong> lit the room and the component bodies screamed.</li>
+        <li>Kills: Tivael's Flurry plus Bael's Eternal Eruption bead dropped one; Raylta's Needle Darts finished the other. A fast, grim two rounds.</li>
+        <li>The party gave the bodies a <strong>funeral pyre</strong> — Bael lit it, fanned it with air, and they offered a prayer.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IX · Combat · Geff the Surgeon (Finale)</div>
+    <div class="act-card">
+      <h3>The Rescue That Became the Hardest Fight Yet</h3>
+      <ul>
+        <li>Behind a padlocked door, a woman lay strapped to a table, marked for cutting, as a grinning Dero <strong>surgeon, Geff</strong>, raised a scalpel. His pet <strong>Chomper</strong> blocked the doorway.</li>
+        <li><strong>Ferrok killed Chomper fast</strong>, but Geff fled deeper, calling for help — and the fight exploded: <strong>Zer</strong>, a Dero <strong>bomb-thrower</strong> (fire/cold/acid grenades), and two <strong>Giant Crawling Hands</strong> (not mindless — grab + claw) joined.</li>
+        <li>Geff's <strong>1,000 Cuts</strong> (a no-MAP scalpel-storm cone) tore the whole party apart round after round, repeatedly critting near-max. Zer's grenades chipped the backline; the Hands grappled Ferrok and Bael (Bargrum <strong>Interpose</strong>'d Bael free).</li>
+        <li>Tivael debuted his level-9 toolkit — <strong>Synesthesia</strong> on Zer (she saved — one round), <strong>Inner Radiance Torrent</strong>, an <strong>Interposing Earth</strong> reaction. Raylta's <em>"Put the scalpel down!"</em> (her Security Badge) caught Geff slowed.</li>
+        <li>Cut down by a 68-damage scalpel-storm and hauled back by Raylta's rank-5 Heal, Tivael rose to <strong>land the 72-damage Flurry of Claws crit that finished Geff</strong> — fully buffed, the surgeon Sickened and Off-Guard (the screenshot swing). <em>"You crit me, I'll crit you."</em></li>
+        <li>It still nearly broke them: Raylta cycled rank-5 Heals, a potion patch, and Healer's Gloves to keep a dying party up. The win came with <strong>Tivael jinxing the very last blow</strong> — Bael's flame-bird on Zer — which connected anyway.</li>
+        <li>With Geff dead, <strong>Zer fell to Bael's flying flame</strong>, and the party freed the captive. The DM called it the strongest fight yet — <em>"the dice just weren't in your favor."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Tokainen + Eskis + Statue of Sigva · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bargrum → Giant Animated Statue → Tivael → Bael → Tokainen → Eskis → Ferrok → Raylta. Tokainen — Dampyr Warden, meteor hammer, Divine Wrath / Divine Immolation caster. Eskis — ethereal Mistbear (incorporeal; ignored fire). Statue — animated object of Sigva, construct armor (Hardness 10 until bloodied or crit), Burn Alive brazier grab; best Fort, worst Reflex/Will.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Bargrum</strong> opened with Defensive Advance + group Shielding Taunt. The statue grabbed him and used <strong>Burn Alive twice</strong> (no save), sustaining the grab across rounds.</li>
+    <li><strong>Bael</strong> opened with Solar Detonation (dazzle). <strong>Raylta</strong> answered Tokainen's Divine Wrath with her own — failed saves left Tokainen Sickened 2 / Slowed.</li>
+    <li><strong>Tivael</strong> RK'd the statue, then cast <strong>Phantom Pain</strong> on Tokainen (she saved — initial damage only, no persistent). <strong>Bael</strong> Battle-Medicine crit-healed Bargrum (37).</li>
+    <li><strong>Ferrok killed Tokainen</strong> with an Ignition Spellstrike, "running her through the breastplate."</li>
+    <li><strong>Eskis the Mistbear</strong> (incorporeal — ignored fire) was softened by Ferrok's Ignition crit + Force Fang and <strong>killed by Raylta's Divine Lance crit</strong> (spirit bypasses incorporeal).</li>
+    <li>The statue was the real fight: <strong>Tivael's Telekinetic Projectile crit and Bael's one-action blasts cracked its construct armor</strong>, then <strong>Ferrok crit-finished it</strong> — it burst into flames.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>All three down; Bargrum badly singed but standing. <em>Loot:</em> +1 Resilient Breastplate, +2 Striking Thundering Meteor Hammer.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Three Clockwork Soldiers · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (reconstructed): Tivael → Soldier A → Bael → Bargrum → Raylta → Ferrok → Soldier B → Soldier C. Constructs, weak to electricity, 10-ft reach, Reactive Strike. The party started invisible (Shared Invisibility).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Tivael's</strong> opening Electric Arc broke invisibility. <strong>Bargrum</strong> tripped and tied up soldiers with Taunts; <strong>Raylta</strong> used adamantine Needle Darts and got Reactive-Struck for it but landed the hit.</li>
+    <li><strong>Bael phased through a soldier as a bolt of lightning</strong> (Lightning Dash) for heavy damage — but it survived at single digits. The kills went to <strong>Bargrum</strong> (finishing that soldier next turn, <em>"that was Bargrum's kill"</em>) and <strong>Raylta</strong> (adamantine Needle Darts on another).</li>
+    <li>A clean, mid-length fight — no party member seriously threatened.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Firitula the Medusa + 3 Vampire Servitors · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (reconstructed): Firitula → Vampire Servitors → Tivael → Ferrok → Raylta → Bael → Bargrum. Firitula — Medusa, living, best Reflex / worst Will; Focus Gaze (petrify a Slowed target), petrification aura, Biting Snakes reaction, Serpent Venom. Vampire Servitors — Fort weakest, rapier/bow, Nimble Dodge.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Raylta</strong> RK'd Firitula and led the anti-petrification play (Avert Gaze). <strong>Tivael</strong> was Slowed by the first gaze and one save from stone (his weak Fort); the gaze then turned on <strong>Raylta, who passed via Avert Gaze</strong>. Tivael answered with Flurry of Claws.</li>
+    <li><strong>Bael's Solar Detonation</strong> dazzled Firitula (forcing flat checks on her petrifying gaze). <strong>Tivael's Flurry of Claws killed one servitor; Raylta's Needle Darts (silver, then adamantine) dropped the other two</strong> — Ferrok's Force Fang/Ignition chipped but didn't land the kills.</li>
+    <li><strong>Tivael tried to Command Firitula prone — she saved.</strong> <strong>Ferrok ran her down and killed her</strong> as she fled down the stairs.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Firitula and all servitors dead. <em>Loot:</em> +1 Resilient Explorer's Clothing, +1 Striking Flaming Shortsword, +1 Striking Shock Composite Shortbow, Fortune's Coin (Raylta), 4 explosive arrows. <strong>The party leveled to 9.</strong></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Dero Stranglers (A/B/C) + Charnel Creation · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bael → Dero Strangler C → Tivael → Dero Strangler A → Charnel Creation → Bargrum → Ferrok → Raylta → Dero Strangler B. Stranglers — spiked chains, Strangle (grab + garrote). Charnel Creation — mindless flesh-golem; resist fire + spell damage (save adamantine), weak Reflex, Berserk at half HP, Electric Reflexes (grabs whoever shocks it).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Bael's Solar Detonation</strong> opened (dazzle/blind). The Dero strangled Ferrok and then Bargrum; Bargrum tanked the golem's haymakers and Intercepted.</li>
+    <li><strong>Ferrok</strong>, warned that shocking it would trigger the grab, <strong>gored the Charnel Creation with his horns</strong> instead of his sword — and elsewhere <strong>killed two of the three Dero</strong> (a Horizon Thunder Sphere Spellstrike crit one-shot one). <strong>Tivael's Telekinetic Projectile crit killed the third Strangler.</strong></li>
+    <li><strong>Bael finished the Charnel Creation</strong> with a flying flame as it tried to roar; it passed its Berserk check and never rampaged.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>All four down. <em>Loot:</em> +1 Hand Crossbows and +1 Striking Spiked Chains (three between them).</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · Two Ofalths · 5 PCs · 2 rounds</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Ofalth A → Tivael → Bael → Bargrum → Ferrok → Ofalth B → Raylta. Ofalths — aberrations of filth/detritus, best Fort / worst Reflex, immune disease/poison, not undead, not mindless.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Tivael</strong> RK'd them, hit both with rank-3 <strong>Fear</strong> (both Frightened), then added a Flurry of Claws (43). <strong>Bael's Solar Detonation</strong> lit the room and the component bodies screamed.</li>
+    <li>Kills: <strong>Tivael's Flurry plus Bael's Eternal Eruption bead dropped one Ofalth; Raylta's Needle Darts finished the other.</strong> Bargrum tanked the front.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>A fast, grim two rounds; afterward the party cremated the corpse-room as a funeral pyre.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · Geff + Chomper + Zer + 2 Giant Crawling Hands · 5 PCs · the finale</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Ferrok → Zer → Geff → Crawling Hand B → Crawling Hand A → Tivael → Raylta → Bargrum → Chomper → Bael. Geff — Dero surgeon: scalpel, Daze, and <strong>1,000 Cuts</strong> (7d6+2 piercing cone, no MAP restriction). Zer — Dero bomber (fire/cold/acid grenades + splash). Chomper — Geff's pet (died fast). Giant Crawling Hands — grab + claw, not mindless.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Ferrok killed Chomper fast</strong> at the doorway. Geff fled and called for help, bringing in Zer and the Hands.</li>
+    <li><strong>1,000 Cuts</strong> was the story of the fight — repeated near-max crits chewing through the whole party. The Hands grappled Ferrok and Bael (Bargrum <strong>Interpose</strong>'d Bael free); Zer's grenades forced Bargrum's Energy Interceptor.</li>
+    <li><strong>Tivael</strong> ran his level-9 kit — Synesthesia on Zer (she saved — one round), Inner Radiance Torrent, an Interposing Earth reaction. <strong>Cut down by a 68-damage scalpel-storm</strong>, he was hauled back by Raylta's rank-5 Heal (63).</li>
+    <li>Risen, Tivael <strong>crit Geff for 72 with Flurry of Claws — the killing blow</strong> (Geff Sickened/Off-Guard; the screenshot swing). <strong>Zer then fell to Bael's flying flame.</strong></li>
+    <li>Raylta cycled rank-5 Heals, a potion patch, and Healer's Gloves to keep a dying party upright; Tivael dropped unconscious one final time as the fight closed.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Geff and Zer dead, the captive woman freed. The hardest fight of the campaign so far. Two sessions of Shades of Blood remain.</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · Knowledge First, the Killing Blow Last ★</h4>
+    <ul>
+      <li><strong>The party's knowledge anchor</strong> — Recall Knowledge on every single fight (the statue, the Medusa, the Charnel Creation, the Ofalths), handing the party each enemy's weak save before a die hit the table.</li>
+      <li><strong>The focus-fire caller</strong> — the one barking <em>"Jump her, guys. Jump her."</em> to sic the party onto the Medusa, and again onto Zer in the finale.</li>
+      <li><strong>Debuff lane stayed busy even when the dice didn't</strong> — rank-3 Fear scattered the Ofalths and the finale's Crawling Hands; a Command on the Medusa and a Phantom Pain on the Warden both ran into saves.</li>
+      <li><strong>Level nine and the killing blow</strong> — flight and rank-5 spells (<em>"You know what's coming, guys"</em>); in the finale, cut down by Geff's scalpel-storm and revived by Raylta, he rose to <strong>crit the surgeon for 72</strong> to end him (<em>"You crit me, I'll crit you."</em>).</li>
+      <li><strong>Refreshingly honest</strong> — wrote Geff off out loud (<em>"I thought he was gonna be just a bit stronger, but not that strong"</em>) and owns his glass-jaw Fortitude and his habit of rolling last. Knowledge first; the killing blow last.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum Stonefist · the Retired Wall</h4>
+    <ul>
+      <li><strong>The load-bearing wall</strong> — group Taunts, Defensive Advances, Intercept Attacks eaten on everyone's behalf, and a long stretch grabbed and shoved into a statue's brazier without complaint.</li>
+      <li><strong>Flat dwarven defiance</strong> to open the Warden fight: <em>"Only half. We'll have to do better." … "I don't think we were asking."</em></li>
+      <li><strong>Quietly the session's most human voice</strong> — staring out the underwater dome (<em>"I didn't expect retirement to be quite like this"</em>), a fond ramble about his "nice but not good" cat, a deadpan claim to have read a magic book once <em>"back in college… over 200 years ago."</em></li>
+      <li><strong>A moral streak</strong>: it's Bargrum who proposes giving the Ofalths' corpse-room a proper crematorium.</li>
+      <li>Dryly funny, durable, and decent.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok the Unyielding · the Closing Argument</h4>
+    <ul>
+      <li><strong>The party's finisher</strong> — personally ended three of the session's marquee threats: running Tokainen through with a flaming Ignition Spellstrike, crit-shattering the Sigva statue, and chasing Firitula down the stairs to cut her dead. Plus two Dero and Chomper.</li>
+      <li><strong>Clever improvisation</strong>: when his shocking sword would have triggered the Charnel Creation's grab, he <strong>lowered his horns and gored it</strong> instead.</li>
+      <li><strong>Deadpan and constant</strong>: <em>"Fashion is always the true endgame"</em> during shopping, <em>"I like the image of Bargrum taunting them while being burned alive,"</em> and a flat <em>"You're not my supervisor"</em> at Geff mid-vivisection.</li>
+      <li>Cast the <strong>Shared Invisibility</strong> that got the party into the lobby clean — and, beneath the deadpan, let one note of warmth slip for the woman on Geff's table: <em>"I think the lady would look happier now that we're here."</em></li>
+      <li>Methodical, lethal, and quietly decent.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · the Walking Detonation</h4>
+    <ul>
+      <li><strong>The session's AoE artillery</strong> — opened three separate fights with <strong>Solar Detonation</strong> and narrated each like a ritual: <em>"The power of the sun in the palm of my hands… oh god, it's gonna smell so bad"</em> over the Ofalths.</li>
+      <li><strong>A Lightning Dash</strong> where he phased through a clockwork soldier as a bolt of electricity, and the flying-flame birdie that put down Zer to end the night.</li>
+      <li><strong>The party's secret support spine</strong>: Battle Medicine crits, Thermal Nimbus fire/cold bubbles, and a level-9 aura upgrade he gifted the whole party (<em>"I gave you ADHD"</em> — free Steps for everyone in range).</li>
+      <li>When the DM pegged his theme as a walking bomb, Bael leaned in: <em>"I explode better for myself."</em> And it was Bael who lit the Ofalths' funeral pyre and fanned it with air.</li>
+      <li>Chaos with a conscience.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta Cailleach · the Heart and the Hype</h4>
+    <ul>
+      <li><strong>Ran the whole back line</strong> — Nudge the Scales every round, rank-5 Heals, a potion patch and Healer's Gloves in the finale to keep a dying party upright.</li>
+      <li><strong>Real offense, too</strong>: the Divine Wrath that broke the Warden open (a crit-failed save into Sickened 2), Holy Light, silver/adamantine Needle Darts, and the Divine Lance crit that put down the incorporeal Mistbear.</li>
+      <li><strong>The party's loudest cheerleader and its conscience</strong> — pure delight at her teammates (<em>"My teammates are so fucking cool"</em>), genuine grief for the dead (<em>"these poor people"</em>; mourning Aruneth).</li>
+      <li>A running love of gambling and cats (she snatched the Fortune's Coin), a sweetly insecure streak about the heal-huddles (<em>"you don't have to say I'm not part of the group"</em>), and a beautifully exasperated <em>"Put the scalpel down!"</em> barked at Geff.</li>
+      <li>When the finale ground everyone down, hers was the honest line: <em>"That usually goes better in our usual fights than this. What the fuck is happening?"</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">~1,300 gp each</div>
+    <div class="loot-source">Downtime sale</div>
+    <div class="loot-note">Incl. ~1,000 gp of looted manacles. "Crash the market for manacles locally."</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Shock rune + 3× Resilient rune</div>
+    <div class="loot-source">Shop / transfer</div>
+    <div class="loot-note">Shock to Ferrok's sword; resilient split among Bargrum, Ferrok, Bael, Tivael.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Charm of Cold Resistance</div>
+    <div class="loot-source">Downtime</div>
+    <div class="loot-note">Raylta.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Resilient Breastplate</div>
+    <div class="loot-source">Tokainen</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+2 Striking Thundering Meteor Hammer</div>
+    <div class="loot-source">Tokainen</div>
+    <div class="loot-note">Stashed — unclaimed.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Candle of Truth + Emergency Eye</div>
+    <div class="loot-source">Nin reliquary</div>
+    <div class="loot-note">Plus +1 leather armor. Tivael took the eye (anti-blindness).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Grudge Stone</div>
+    <div class="loot-source">Solarium</div>
+    <div class="loot-note">Ferrok.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Resilient Explorer's Clothing</div>
+    <div class="loot-source">Firitula</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Flaming Shortsword</div>
+    <div class="loot-source">Firitula</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Shock Composite Shortbow</div>
+    <div class="loot-source">Firitula</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Fortune's Coin</div>
+    <div class="loot-source">Firitula</div>
+    <div class="loot-note">Reroll a failed check/attack (seraph side = 12). Raylta.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">4× Explosive Arrow</div>
+    <div class="loot-source">Firitula</div>
+    <div class="loot-note">Party stash (no archer).</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">+1 Hand Crossbows / +1 Striking Spiked Chains</div>
+    <div class="loot-source">Dero Stranglers</div>
+    <div class="loot-note">Three between them.</div>
+  </div>
+</div>
+<div class="xp-banner">Five combats plus the finale carried the party from level 8 to <strong>Level 9</strong> — leveled on Firitula's defeat. The +2 Thundering Meteor Hammer remains unclaimed in the stash.</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "Jump her, guys. Jump her."
+  <span class="attribution">His recurring focus-fire call — siccing the party onto the Medusa, and again onto Zer in the finale.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I say this and then it's not gonna happen… Oh, there you go."
+  <span class="attribution">Gallows-humor jinx on the very last blow — Bael's flame-bird going out to finish Zer — which connected anyway.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "You crit me, I'll crit you."
+  <span class="attribution">Right before landing the 72-damage Flurry of Claws crit that killed Geff.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Lost in thought. Just staring at the ocean. I didn't expect retirement to be quite like this."
+  <span class="attribution">Gazing out the underwater solarium dome between fights.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "I read a book on it once. It was back in college… that was over 200 years ago."
+  <span class="attribution">On how arcane runes work, while aiding Tivael's trap-disable check.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "Fashion is always the true endgame."
+  <span class="attribution">During the shopping montage, on why he'd never wear the Skittering Mask.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "You're not my supervisor."
+  <span class="attribution">Fired back at the surgeon Geff after Raylta's "Put the scalpel down!"</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "The power of the sun in the palm of my hands — and it flies into them. Oh god, it's gonna smell so bad."
+  <span class="attribution">Narrating a Solar Detonation into the Ofalths' corpse-room.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I gave you ADHD."
+  <span class="attribution">Explaining his level-9 aura upgrade — free Steps for everyone nearby — to Raylta.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I explode better for myself."
+  <span class="attribution">Keeping his own crit-buff in the finale, after the DM pegged his theme as a walking bomb.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "My teammates are so fucking cool."
+  <span class="attribution">Watching Bael phase through a clockwork soldier as a bolt of lightning.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Put the scalpel down!" / "You crazy doctor!"
+  <span class="attribution">Ordering Geff to drop his scalpel — her Security Badge's Authoritative Command — mid-vivisection.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Sorry, lady. That usually goes better in our usual fights than this. What the fuck is happening?"
+  <span class="attribution">To the rescued captive, as the finale ground the whole party down.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Firitula</strong> (DM): "Would you like your corpses displayed where you die, or in the grand entry?"
+  <span class="attribution">The Medusa's greeting from the top of the lobby stairs.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The captive woman</strong> rescued from Geff's table — unnamed and un-interviewed at session end. Who is she, and what was Geff cutting her for?</li>
+  <li><strong>Aruneth the engineer absconded</strong> with his familiar before the party could recruit him. Where did he go, and does he still have the clockwork knowledge they needed?</li>
+  <li><strong>Nizca and Degg</strong> remain at the top of the tower with the Shadow Beacon. Two sessions of Shades of Blood left.</li>
+  <li><strong>Tokainen was a Dampyr and a follower of Nin</strong>, as were her human "Chosen." Was she turning prisoners, or being turned herself? The Nin angle (perfecting vampires past their weaknesses) is still unresolved.</li>
+  <li><strong>The +2 Thundering Meteor Hammer</strong> sits unclaimed in the stash.</li>
+  <li><strong>Lagrassi</strong>, Nizca's living lover, is still confirmed alive and at large from S3's records.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Climb Continues</span>
+  <p>A Warden, a Medusa, and a surgeon lie dead behind them; a rescued woman trembles on a table they only just reached in time. The party is battered and bone-dry on slots, bloodied across the floor of a butcher's room — and somewhere far above, beneath a sky they've vowed to give back the sun, Nizca and Degg still tend the Shadow Beacon.</p>
+  <div class="big-line">"That usually goes better… What the fuck is happening?"</div>
+  <span class="speaker">— Raylta, to the woman they saved, as the hardest fight yet finally ended</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Recall Knowledge on every threat: the <strong>Sigva statue</strong> (construct armor, weak Reflex/Will), <strong>Firitula</strong> (Medusa, living, weak Will), the <strong>Charnel Creation</strong>, the <strong>Ofalths</strong> (aberrations, weak Reflex).</li>
+  <li>Cast <strong>Phantom Pain</strong> on Tokainen (she saved — initial damage only); tried to <strong>Command</strong> Firitula prone (she saved); rank-3 <strong>Fear</strong> that landed on both Ofalths and the finale's Crawling Hands; <strong>Flurry of Claws</strong> repeatedly, including the <strong>72-damage crit that killed Geff</strong>.</li>
+  <li>Hit <strong>level 9</strong>: gained flight and rank-5 spells. Debuted <strong>Synesthesia</strong> (on Zer, who saved), cast <strong>Inner Radiance Torrent</strong>, used <strong>Interposing Earth</strong> as a reaction.</li>
+  <li>Took the <strong>Emergency Eye</strong> from the Nin reliquary (anti-blindness insurance).</li>
+  <li><strong>Went down unconscious</strong> in the finale to a 1,000 Cuts crit — survived (not dying), healed back up, then dropped one final time at the end.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li>His Fortitude is the team's weak point — the Medusa's gaze locked onto him for exactly that reason. Against any Fort- or save-targeting boss, he's the one who needs Rallying Anthem or to stay out of range.</li>
+  <li><strong>Synesthesia</strong> is a real answer to single high-value casters/bosses (concentrate-fail + off-guard + speed penalty) — even Zer's <em>successful</em> save still bought a round. Worth holding a rank-5 slot for the Nizca fight.</li>
+  <li>Geff hit far above his apparent weight — <em>not</em> a mook. Tivael underestimated him out loud and paid for it. Re-baseline "just a Dero" threat assessment for this floor.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li>Flurry of Claws is still the workhorse — force damage and the crit ceiling (72 on Geff). Keep front-loading it on bosses while buffed and the target's off-guard/sickened.</li>
+  <li>The 1,000 Cuts fight proved single-healer fragility again — Raylta was one hit from death repeatedly. The party needs to spread out against cone-AoE bosses, and Tivael should consider Sanctuary/positioning over standing in the blast.</li>
+  <li>Two fights left of Shades of Blood. Resources matter now; don't burn rank-5 slots on mid encounters.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who is the <strong>woman strapped to Geff's table</strong>? Worth interviewing before moving on.</li>
+  <li>Where did <strong>Aruneth</strong> go, and can the party still get the clockwork knowledge they wanted from him?</li>
+  <li>Was <strong>Tokainen</strong> turning the human "Chosen," or being perfected herself under Nin's doctrine?</li>
+  <li>What's at the top — <strong>Nizca, Degg, the Shadow Beacon</strong> — and is <strong>Lagrassi</strong> waiting there too?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ End-to-end pipeline: transcribe a session recording, generate a styled HTML reca
 ```
 
 **Arguments:**
-- `<campaign>` — Campaign folder name: `korvosa`, `myrrindar`, `icewind-dale`, `raiders`
+- `<campaign>` — Campaign folder name (the top-level directory for that campaign in this repo)
 - `<audio-file>` — Filename in the recordings directory (`/mnt/c/Users/nhanp/Videos/`), or a full path
 - `--speakers N` — Number of speakers (players + DM). Optional, improves diarization accuracy.
 - `--session-number N` — Session number. If omitted, auto-detect from existing session folders.
@@ -24,43 +24,38 @@ End-to-end pipeline: transcribe a session recording, generate a styled HTML reca
 These are concrete errors that have happened in real sessions. Scan this list every time you generate a recap. If any of these patterns shows up in your draft, stop and fix it before continuing.
 
 **Identity / pronouns:**
-- **Mist is he/him.** Fairy Bard, Myrrindar. Don't infer pronouns from the name — read the character-sheet Backstory section and use those pronouns. Ask Pax for cameo NPC pronouns if not stated.
+- **Never infer a PC's pronouns from their name** — read the character-sheet Backstory/Personality section and use those pronouns (androgynous-sounding names mislead). Ask the player for cameo-NPC pronouns if the transcript doesn't state them.
 
 **Class-mechanic mismatches** (the diarization label is a *hint*, not authority — every quoted ability use must match the character's actual class):
-- **Guidance** = Cleric / Druid / Artificer cantrip. If quoted on a Bard/Monk/Barbarian/Rogue/Fighter speaker, that's bleed — check the actual class list before attributing.
-- **Spiritual Weapon, Cure Wounds, Channel Divinity, Mind Spike, Detect Magic ritual** = Cleric. Common bleed source onto Talya's bucket in Myrrindar (SPEAKER_05).
-- **Heat Metal, Dissonant Whispers, Silvery Barbs, Healing Word, Bardic Inspiration, Vicious Mockery** = Bard (Mist's lane).
-- **Guiding Bolt, Thorn Whip, Wild Shape, Starry Wisp** = Druid (Akasha's lane).
-- **Elemental Strikes/Attunement, Flurry of Blows, Patient Defense, Deflect Missiles** = Monk (Talya's lane).
-- **Rage, Reckless Attack, Savage Attacker, Divine Fury (Path of the Zealot)** = Barbarian (Loren).
-- **Touch-spell suggestions / Inflict Wounds advice** = Pax (Mist) frequently offers cross-class spell knowledge — check who's actually speaking.
-- **"Hadouken" coining** = Avon (a player joke, attributed to Avon in S5).
+- Before attributing any quoted spell/ability, confirm the speaker's class can actually use it. Build a per-PC ability list from the character sheets and check each quoted cast against it.
+- Diarization "bleed" most often lands a divine caster's spells onto a martial PC's bucket, or one caster's signature spell onto another. When an ability is iconic to a class no one near that label has, find the PC whose class supports it.
+- Watch for cross-class spell *knowledge*: an experienced player often suggests spells/tactics from a class they don't play — check who is actually *casting* vs. merely *advising*.
 
 **High-roll / negotiation outcomes:**
 - A high Persuasion roll plus a co-PC's "deal is a deal" refusal does NOT mean the high roll failed. Patrons frequently re-frame asks as separate parallel deals. Read the FULL exchange to the end of the scene before declaring an outcome.
 - If a PC says "remember the X you promised" later in the scene, the X was won — don't frame it as a loss.
 
 **Initiative & combat structure:**
-- **Ask Pax for the Foundry/Roll20 initiative tracker screenshot** (or roll log) before reconstructing combat. The transcript's "who spoke when" is unreliable — DMs flex tie-breaks, mis-call turns, and abandon partial rounds when players join late.
+- **Ask the player for the VTT initiative tracker** (or roll log) before reconstructing combat. The transcript's "who spoke when" is unreliable — DMs flex tie-breaks, mis-call turns, and abandon partial rounds when players join late.
 - For late-joining cameo NPCs: "back at the top of the initiative" = restart from existing order with the new PC slotted at their actual roll. NOT a full re-roll. NOT "slotted at the top."
-- Common bug: inverting two PCs at adjacent inits (Akasha 14 / Talya 10 → don't write Talya before Akasha).
+- Common bug: inverting two PCs at adjacent initiative values — verify the order against the tracker.
 
 **Damage numbers:**
-- If a damage tick number is "unstated" in the transcript (e.g. Heat Metal sustain on the cast turn), ASK PAX rather than writing "unstated." He tracks his own damage.
+- If a damage tick number is "unstated" in the transcript (e.g. a sustained-spell tick on the cast turn), ASK THE PLAYER rather than writing "unstated" — players track their own damage.
 
 **Roleplay representation (the most common failure — see Foundational Principle #2):**
-- The pipeline reliably nails combat math and under-serves roleplay. Half the table is RP; the recap must be too. Build every Character Spotlight from the **Roleplay Inventory** (Step 5), not from whatever lines were loudest.
-- **Never characterize a player by their combat one-trick, a fumble, or their self-deprecating jokes.** A sharp roleplayer must read as sharp. (Real failure: Izka — a deft diplomat/arcanist — was written as a "lame" one-trick because his RP was overlooked. It took multiple correction passes.)
-- Dig for the quiet players' RP; it hides in mechanical chatter. Cover everyone, not just Pax.
-- Don't fabricate or pad RP, and **never source a quote/beat from a VAD-merged run-on or a `[cleaned]` rewrite** (see the Fabrication Guard in Step 5). Two beats had to be retracted last session for exactly this.
+- The pipeline reliably nails combat math and under-serves roleplay. Much of the table is RP; the recap must reflect that. Build every Character Spotlight from the **Roleplay Inventory** (Step 5), not from whatever lines were loudest.
+- **Never characterize a player by their combat one-trick, a fumble, or their self-deprecating jokes.** A sharp roleplayer must read as sharp. (This has misfired before — a deft diplomat/arcanist written as a "lame" one-trick because their RP was overlooked; it took multiple correction passes.)
+- Dig for the quiet players' RP; it hides in mechanical chatter. Cover everyone, not just the player's own PC.
+- Don't fabricate or pad RP, and **never source a quote/beat from a VAD-merged run-on or a `[cleaned]` rewrite** (see the Fabrication Guard in Step 5). Beats have had to be retracted for exactly this.
 
 **Quote selection:**
-- Don't fill the Mist quote slots with tactical-only lines (Heat Metal plan, sustain narration, persuasion attempt). Mix in character voice — panic moments, covert RP, comedy, schemes. The cleanup report's per-character quotable list is a *menu*, not the answer; pick the lines that show character, not the lines that are easy to defend.
+- Don't fill a PC's quote slots with tactical-only lines (spell plans, sustain narration, attack attempts). Mix in character voice — panic moments, covert RP, comedy, schemes. The cleanup report's per-character quotable list is a *menu*, not the answer; pick the lines that show character, not the lines that are easy to defend.
 - Each PC's quotes should be their *strongest, most-characterful* lines — not their easiest or loudest. A self-deprecating combat aside is rarely a PC's best line.
 - Hard cap: 2-4 quotes per PC, 10-14 total. Count before finalizing.
 
 **Subagent reports are inputs, not authority:**
-- The cleanup, attribution-review, and combat-review subagents produce structured reports. Their outputs are advisory. The cleanup report explicitly flags caveats ("left as Talya but writer should double-check Cleric spells") — actually act on those caveats. Don't copy a quotable line from the report without verifying the speaker against transcript context.
+- The cleanup, attribution-review, combat-review, and non-combat-review subagents produce structured reports. Their outputs are advisory but their FLAGS must be resolved (Step 5.7). The cleanup report explicitly flags caveats ("left as <speaker> but writer should double-check the class spells") — actually act on those caveats. Don't copy a quotable line from the report without verifying the speaker against transcript context.
 
 ## Foundational Principle: Capability-Constrained Attribution
 
@@ -76,16 +71,16 @@ Every attribution in the recap (a spell cast, a skill check, a damage number, a 
 
 3. **Is the character physically able right now?** — Track HP and conditions across the encounter. A PC at 2 HP cannot take 5 damage and "save" — they would have dropped. A character who's currently Restrained can't reposition. *If the attributed action requires capability the character has been actively stripped of, re-check the target.*
 
-4. **Is this their lane?** — The party's dynamics.md assigns explicit roles (RK lane, healing lane, off-guard generation, infiltration, etc.). When the recap attributes an action that belongs to another PC's designated lane, treat it as suspect. *Example: if dynamics.md says "Riddle carries spirit/undead RK," then a Recall Knowledge attribution on Mo (no Lore training, INT 10) is wrong — Riddle did it.*
+4. **Is this their lane?** — The party's dynamics.md assigns explicit roles (Recall Knowledge lane, healing lane, off-guard generation, infiltration, etc.). When the recap attributes an action that belongs to another PC's designated lane, treat it as suspect. *Example: if dynamics.md says one PC carries the spirit/undead Recall Knowledge lane, then an RK attribution on a low-INT, untrained PC is wrong — the lane-owner did it.*
 
-5. **Does this match their voice?** — Players have RP fingerprints. Third-person self-reference ("Mo's gonna..."), distinctive phrasings ("not a lot of visitors here. Not a lot of visitors here."), preferred jargon, gallows humor patterns. A line that doesn't match the character's established voice in 5+ sessions is likely misattributed.
+5. **Does this match their voice?** — Players have RP fingerprints: third-person self-reference, distinctive repeated phrasings, preferred jargon, gallows-humor patterns. A line that doesn't match the character's established voice across many sessions is likely misattributed.
 
 ### Why the transcript misleads
 
-- **Whisper mishears proper nouns** as common phrases ("Kugaptee" → "cook of tea") that then get treated as "the table canonized" jokes. They didn't. The mishear is a transcription artifact, not a real beat.
+- **Whisper mishears proper nouns** (a creature/NPC/deity name) as common phrases that then get treated as "the table canonized" jokes. They didn't. The mishear is a transcription artifact, not a real beat.
 - **Whisper mis-attributes speakers** when two voices have similar register. The speaker label is a hint; the *content* of the line is the truth.
-- **Pyannote diarization** can split one speaker across SPEAKER_00 + SPEAKER_03 (especially if their cadence shifts), or merge two speakers into one SPEAKER_xx. Check segment counts against expected player count; investigate any discrepancy.
-- **The rolls log is global, not per-speaker.** Pax pastes the whole Foundry dump. Attribution-by-proximity ("Mo got the 96 gp callout, so Mo also rolled the Boneyard Lore check next to it") is wrong — back-derive from stat fingerprints.
+- **Pyannote diarization** can split one speaker across two SPEAKER_xx labels (especially if their cadence shifts), or merge two speakers into one. Check segment counts against expected player count; investigate any discrepancy.
+- **The rolls log is global, not per-speaker.** The player pastes the whole VTT dump. Attribution-by-proximity ("this PC got the gold callout, so they also rolled the Lore check logged next to it") is wrong — back-derive from stat fingerprints.
 
 ### When ambiguous: ask, don't guess
 
@@ -147,7 +142,7 @@ Use the campaign's `dynamics.md` to show the expected party roster for reference
 
 Spawn a **general-purpose subagent** to clean up the raw WhisperX transcript before generating the recap. Whisper has two persistent issues that the subagent fixes:
 
-1. **Name mis-hearings** — Whisper mis-transcribes character/NPC names consistently (e.g. "Aesgor" → "Asgore", "A-score", "Acegor"; "Marzena" → "Marzipan"; "Siddhe" → "Cindy"/"City"/"Sidae"). These can be fixed with regex substitution.
+1. **Name mis-hearings** — Whisper mis-transcribes character/NPC/place names consistently (a name reliably becomes 2-5 recurring wrong spellings across the session). These can be fixed with regex substitution once you know the canonical→variants mapping.
 2. **VAD over-segmentation** — the audio gets split into ~2-second chunks, which makes dialogue unreadable. Merging consecutive same-speaker segments into sentences dramatically improves readability.
 3. **Heavily garbled passages** — occasional run-on transcription errors on dramatic player turns that should be rewritten by hand for later quoting.
 
@@ -160,61 +155,21 @@ You are cleaning up a raw WhisperX transcript of a D&D session for readability a
 
 ## Input
 - Raw WhisperX JSON: /home/nhanp/dnd-campaign-management/dnd-transcription/transcripts/<transcript-name>.json
-- 6 speakers (including DM), diarization is usually clean
+- <N> speakers (players + DM); diarization is usually clean
 
 ## Speaker mapping (from step 2)
 <list SPEAKER_XX → character name mapping>
 
 ## Canonical name fixes
-Apply these as global substitutions. Add any variants you notice in the transcript:
+Apply these as global substitutions. **Build the canonical→variants list for THIS campaign before the run** — pull every PC, NPC, place, faction, and deity name from the campaign's `dynamics.md` and `world.md`, then collect the Whisper variants for each by scanning the raw transcript. Add any new variants you notice while cleaning.
 
-<list canonical → [mishears] for this campaign. Pull from the campaign's dynamics.md.
-For Raiders:
-- Aesgor ← Asgore, A-score, Acegor, Isco, Elrath, Everett, Ace Gore
-- Marzena ← Marzipan, Barzena, Morzana, Verzena, Marzetta, Marzina, Rosanna
-- Tree-Hammer ← Treehammer, Tree Master, Tree Hammer, Free Hammer
-- Hrolf ← Rolf, Ralph, Hralf, Haralf, Froff, Kral
-- Siddhe ← Sidae, Sidhe, Cindy, Sude, City, C-Day, Sadu
-- Gaynor ← Kynar, Ganor, Gainor, Gainer, Gaz
-- Glug ← Gluck, Glog
-- Kekel ← Keckel, Kekkel
+Format one line per name: `Canonical ← variant1, variant2, variant3, …`
 
-For Icewind Dale:
-- Avarath ← Elrath, Everett (overlap with Raiders — watch for context)
-- Rune Ánstepa ← Rune
-- Thors Ketterson ← Thors
-- Kane Whitefang ← Kane
-- Virel Talthrae ← Virel
-- Rathis Nox ← Rathis
-- Hrolf doesn't exist in Icewind Dale
-
-For Myrrindar:
-**Characters / players:**
-- Mist ← Miss, Mr., Myst, Mast, Mister
-- Avon ← Avalon, Aven, Aaron, Avah, Avons, Aabon
-- Akasha ← Acosta, Akoshu, Akashia, Akashu, Akasi, Acoshia
-- Talya ← Talia, Tahlia, Tiia, **Kelly** (real S5 mishear — T→K substitution on "Talya's" → "Kelly's"), Tilly
-- Loren ← Lauren
-- Loren Lyster ← Loren Leister, Loren Lister
-- Seerosaur ← Sirosaur, Cirosaur, Sero, Ciro
-
-**NPCs / world:**
-- Evrin ← Everin, Everett, Everin
-- Vale Tempest ← Veiled Tempest, Vail Tempest, Vale Temptest
-- Wardstone(s) ← Ward stone, War stone, Wardston
-- Whisper Prism ← Whisper Prison, Whispering Prism, Wisper Prism
-- Skybreeze ← Sky breeze, Sky-breeze, Sky brees
-- Stillwind Lab ← Still Wind, Stillwind, Still-Wind
-- Crowned Pheasant ← Crown Pheasant, Crowned Peasant
-- Elias Whitmore ← Elias Whitmer, Eli Whitmore, Elias Witmore
-- Carrie-Anne ← Carrie Ann, Cary Ann, Karianne, Carry Anne, Carry on (context-fragile — only when followed by Bahamut/priestess context)
-- Bahamut ← Bahmut, Behmut, Bahomut
-- Eldrin ← Eldren, Aldrin, Aldren
-- Rufus Dawnstrider ← Rufus Donstrider, Roofus, Ruffus
-- Neulvyn ← Newlvin, Newlivin, Newlivian, Nulvyn
-- Sylvia Plath ← Silvia Plath, Sylvia Path
-
-**Note on `Kelly` (Myrrindar-specific):** "Kelly" is *not* a character in this campaign. Whisper repeatedly mis-transcribes "Talya's" as "Kelly's" (especially possessive form). If you see "Kelly" anywhere in the transcript, it is a mishear — most often referring to Talya. Confirm context before substituting; if the line is the Talya player narrating Talya's reaction in third person, normalize to "Talya's."
+Guidance for building the list:
+- Cover **PCs and players**, **NPCs**, and **world/place/faction/deity** names separately.
+- Expect 2-5 variants per name; proper nouns with unusual phonemes get the most mangling.
+- **Watch for cross-campaign / cross-name collisions** — the same mishear can map to different names in different campaigns, and a possessive form can mutate badly (e.g. a name + "'s" mis-hearing as an unrelated word). Confirm by context before substituting a fragile one.
+- Flag any "name" that is actually a recurring mishear of a real name (not a real character) so it isn't canonized as a person.
 
 **Tactical jargon mishears (any campaign):**
 - save-or-suck ← Sable sucks, Sable suck, save or sock (5e/PF2e tactical phrasing meaning "save spell that punishes the target on a failed save"). Whisper consistently mishears "save-or-" as "Sable" because of the soft consonant blend.
@@ -270,8 +225,8 @@ Before generating the recap, read these files for context:
 Use **AskUserQuestion** (not free-form text) and bundle these into a single question with multi-select:
 
 1. **Initiative tracker screenshot** — Foundry/Roll20 init order if any combat happened. Treat as authoritative for round structure.
-2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs (especially Mist)? If so, ask him to paste/screenshot it.
-3. **Ambiguous moments** — anything from this session that was confusing in the moment, e.g. "Silas's teleport — DM intent?" or "What was Loren's full name?"
+2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs? If so, ask him to paste/screenshot it. **Default location: the Foundry roll-log dump lives at `/home/nhanp/dnd-campaign-management/rolls.txt`** (Pax updates it each session; check `git status` for the modification). Read it before reconstructing combat and pass it to the Step 5.6 combat-review subagent. It's a global dump (not per-speaker) — back-derive attribution from stat fingerprints.
+3. **Ambiguous moments** — anything from this session that was confusing in the moment (a teleport's intent, an NPC's full name, who actually got a contested item).
 4. **Cameo NPC details** — pronouns, last names, anything not in dynamics.md.
 5. **Anything Pax wants to make sure is captured** — high-impact moments he wants the recap to land correctly (his persuasion wins, his character beats, etc.). This is a deliberate carve-out — Pax has historically been under-represented in recaps; ask him directly what he wants emphasized.
 
@@ -283,14 +238,14 @@ If Pax says "skip / no extras," proceed. If he provides items, store them locall
 
 **Required reads before drafting:**
 - The cleaned transcript at `/tmp/transcript-cleaned-<campaign>-s<N>.txt` — read it **end-to-end**, not just the per-character quote list from the cleanup report. The full linear read catches: (a) who said what in long exchanges, (b) negotiation re-framings, (c) class-mechanic bleed lines, (d) damage numbers you'd otherwise mark "unstated," (e) the iconic character moments that don't make the cleanup's quote list.
-- The cleanup report's flagged caveats — these are not informational; they are **action items**. If the report says "left as Talya but writer should verify Cleric spell attributions," that's a directive to do a class-mechanic pass over Talya's quoted lines.
+- The cleanup report's flagged caveats — these are not informational; they are **action items**. If the report says "left as <speaker> but writer should verify the class-spell attributions," that's a directive to do a class-mechanic pass over that speaker's quoted lines.
 - The character sheet for every PC named in the recap — confirm pronouns, class features, and self-presentation notes from the Backstory section.
 
 > **FABRICATION GUARD (read every time).** The cleanup subagent (Step 2.5) does two things that are *fabrication risks* downstream: it **VAD-merges** short segments into run-on lines, and it **hand-rewrites** heavily-garbled passages. A merged or rewritten line can splice multiple speakers together or invent phrasing that was never said. **Never source a quote, a character beat, or an attributed action from a merged run-on blob or a `[cleaned]`-tagged rewrite.** Before you put any quote or RP claim in the recap, confirm it is a clean, single-speaker line — if a line reads as a run-on splice of several speakers (e.g. a 4-line block that swerves topic and voice), do NOT attribute it to anyone; drop it or use only the clearly-attributable fragment, and if it matters, check the raw SRT at `dnd-transcription/transcripts/<name>.srt`. Past failures: a fabricated "self-detonation" beat and a fabricated player line ("never wash this hand again") both came from rewritten/merged blobs and had to be retracted. When in doubt, leave it out.
 
 Before declaring outcomes, applying pronouns, or framing scenes:
 
-1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (e.g. "Mist" sounds androgynous; the character sheet uses he/him). When in doubt about a cameo NPC's pronouns, ask Pax.
+1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (androgynous-sounding names mislead; trust the sheet). When in doubt about a cameo NPC's pronouns, ask Pax.
 
 2. **High rolls and negotiation outcomes** — when a PC makes a high check (Persuasion, Insight, etc.) or any pivotal roll, **read the full in-fiction exchange** before framing the result. Patrons and NPCs frequently re-frame an ask as a *separate* deal (e.g. "I won't pay more for the original deal, *but* for a long-term contract a signing bonus is acceptable"). One PC's refusal to renegotiate one thread does NOT close other threads. The earliest "no" is often not the final word — keep reading until the scene actually ends.
 
@@ -357,7 +312,7 @@ This section is where roleplay representation lives or dies. Build each PC's ent
 - **No character reduced to one note.** If a PC's entry is built only from their combat one-trick, a fumble, or self-deprecating jokes, it is wrong. A player who roleplayed sharply must read as sharp. Self-deprecation and whiffs may appear *alongside* real agency, never *as* the characterization.
 - **Lead with character, not mechanics.** A spotlight that opens with damage numbers and never shows the person has buried the lede.
 - **Every PC gets real depth**, proportional to what they actually did — not to dice volume or who spoke loudest. The quiet player who ran one brilliant scene gets that scene.
-- **Epithets must flatter or fit, never diminish.** The one-line epithet (e.g. "Bai Jian · the Measured Blade") should capture something true and good about the character, not reduce them to a joke.
+- **Epithets must flatter or fit, never diminish.** The one-line epithet (e.g. "<Character> · the Measured Blade") should capture something true and good about the character, not reduce them to a joke.
 - **Pull the actual lines.** Quote or paraphrase their real words from the transcript (verified single-speaker — see fabrication guard). Do not invent representative-sounding dialogue.
 
 **Self-check:** read each PC's spotlight as if you were that player. If it would make them feel flat, one-note, or like a punchline, you have mischaracterized them — return to their Roleplay Inventory and rebuild around their best material.
@@ -377,7 +332,7 @@ This section is where roleplay representation lives or dies. Build each PC's ent
 - (e) **Plot beat / emotional weight** — a line that lands a story moment.
 
 **Anti-patterns to avoid:**
-- All-tactical Mist quotes. The cleanup report's quote list often skews tactical because tactical lines are easy to identify; the iconic-character-moment lines (panic, covert RP, schemes) require linear-reading the transcript and recognizing the *moment*, not the wording.
+- All-tactical quotes for any one PC. The cleanup report's quote list often skews tactical because tactical lines are easy to identify; the iconic-character-moment lines (panic, covert RP, schemes) require linear-reading the transcript and recognizing the *moment*, not the wording.
 - Picking the easy/safe quote when a punchier line exists 30 seconds later.
 - Picking quotes that all came from the same scene.
 
@@ -391,7 +346,7 @@ Group multi-line exchanges under a single context line.
 **Self-check before finalizing the section:**
 1. Count total quotes. Cap is 14.
 2. Count per PC. Each PC has 2-4. No PC has 0-1.
-3. For each PC, list which facets (a-e) are covered. If a PC has only one facet (e.g. all tactical for Mist), swap one quote for a different facet.
+3. For each PC, list which facets (a-e) are covered. If a PC has only one facet (e.g. all tactical), swap one quote for a different facet.
 4. Class-mechanic check: every quoted casting/ability mention matches the speaker's class.
 
 **Pax's Notes Guidelines:**
@@ -419,7 +374,7 @@ Structure (always these four H3 subsections):
 Voice rules:
 - **Factual and terse.** Short declarative sentences. No flowery prose.
 - **Bold** key names/concepts. *Italics* for in-character quotes only.
-- Match the voice from Raiders (Aesgor) and Icewind Dale (Avarath) recaps — direct, tactical, observational.
+- Match the voice of prior journals in this campaign's `sessions/` (or other campaigns') — direct, tactical, observational.
 - Do NOT invent thoughts or motivations. Only include what is evidenced in the transcript.
 
 ### Step 5.4: Pre-Review Self-Audit (main agent — DO NOT SKIP)
@@ -430,23 +385,23 @@ Voice rules:
 
 For each item below, scan the recap.md you just wrote:
 
-1. **Pronoun pass:** Search for "her" and "she" in any line referring to a male PC; "him" and "he" referring to a female PC. Mist is he/him.
+1. **Pronoun pass:** Search for "her"/"she" in any line referring to a male PC, and "him"/"he" referring to a female PC, against the pronouns confirmed from each character sheet.
 
 2. **Class-mechanic pass:** For every quoted casting / ability / feature, verify it matches the speaker's class against your capability matrix:
    - For each quoted "I cast X" or "I use Y," ask: **does this character actually have X/Y?** If no, it's bleed — find the real speaker.
-   - **Class-contradiction = misattribution, not flavor.** If you wrote "Mo deadpans an offer to cast Calm" and Mo is a no-spellcaster Rogue, the line isn't Mo's — it's the actual divine caster's. Don't hedge ("deadpans," "jokingly offers," "who has no spellcasting") to paper over the conflict. Fix the speaker.
+   - **Class-contradiction = misattribution, not flavor.** If you wrote "<a no-caster PC> deadpans an offer to cast Calm" and that PC has no spellcasting, the line isn't theirs — it's the actual caster's. Don't hedge ("deadpans," "jokingly offers," "who has no spellcasting") to paper over the conflict. Fix the speaker.
    - Common bleed: divine spells on a martial PC's bucket; class-specific actions (Channel Divinity, Flurry of Blows, Spellstrike, Rage, Hex) on the wrong class.
 
 3. **Roll-fingerprint pass:** For every skill check or roll quoted in the recap (especially Earn Income, Recall Knowledge, Lore checks), cross-check the roll modifier against the attributed PC's character sheet:
    - The Foundry/Roll20 rolls log Pax may paste records the modifier breakdown verbatim (e.g. "Intelligence +2, Expert +8, item bonus +1, 1d20 + 11"). The fingerprint identifies the actual roller.
-   - If the rolls log says "INT +2 / Expert in Boneyard Lore" but the attributed PC has INT 10 and no Boneyard Lore training, **the attribution is wrong** — find the PC whose sheet matches the fingerprint.
-   - Pax's pasted rolls log is a **global dump**, not a per-speaker log. Do not attribute rolls to a PC just because their name appeared nearby in the DM's narration (e.g. don't assume "Mo gets 96 gp" means Mo rolled every Earn Income check in that block).
+   - If the rolls log shows "INT +2 / Expert in <a Lore>" but the attributed PC has INT 10 and no training in that Lore, **the attribution is wrong** — find the PC whose sheet matches the fingerprint.
+   - Pax's pasted rolls log is a **global dump**, not a per-speaker log. Do not attribute rolls to a PC just because their name appeared nearby in the DM's narration (e.g. don't assume a gold callout next to a Lore check means the same PC rolled both).
 
-4. **Lane-discipline pass:** For each attributed action, check whether dynamics.md assigns that action's lane to a different PC. If it does, default to the lane-owner unless the transcript is unambiguous otherwise. *Example: if dynamics.md says "Riddle carries spirit/undead RK," don't credit Mo (no Lore training, INT 10) with the Recall Knowledge unless the transcript is explicit that Mo rolled it.*
+4. **Lane-discipline pass:** For each attributed action, check whether dynamics.md assigns that action's lane to a different PC. If it does, default to the lane-owner unless the transcript is unambiguous otherwise. *Example: if dynamics.md says one PC carries the spirit/undead Recall Knowledge lane, don't credit a low-INT, untrained PC with the RK unless the transcript is explicit that they rolled it.*
 
 5. **High-roll outcome pass:** For every Persuasion/Insight/Deception/Intimidation roll mentioned in the recap, search the cleaned transcript ±2 minutes around the roll. Read to the END of the scene. If the recap frames a high roll as a failure, double-check that the patron didn't carve out a separate parallel deal that succeeded.
 
-6. **Initiative pass** (if there was combat): If you have the tracker screenshot from Step 4.5, verify every round's order against it. Specifically check adjacent-init pairs (e.g. Akasha 14 vs Talya 10 — they should NOT be inverted).
+6. **Initiative pass** (if there was combat): If you have the tracker screenshot from Step 4.5, verify every round's order against it. Specifically check adjacent-init pairs (two PCs one point apart should NOT be inverted).
 
 7. **HP-state plausibility pass:** For each attributed damage event in combat, check whether the attributed target could physically survive it given their HP coming in. A PC at 2 HP who "saves" a 12-damage Phantom Pain didn't take that hit — re-check the target. A PC who took a "5 mental, no persistent" save outcome wasn't dropped to 2 HP by it. This pass catches transposed Phantom Pain / Heat Metal / similar single-target spell targets.
 
@@ -459,7 +414,7 @@ For each item below, scan the recap.md you just wrote:
     - Count per PC — each must have 2-4.
     - For each PC, list the facet (a-e) of each of their quotes. If all are the same facet (e.g. all tactical), swap one for a different facet.
 
-11. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as Talya but writer should double-check..." style caveat, confirm you actually checked the affected lines.
+11. **Cleanup-report-caveat pass:** Re-open the cleanup report. For every "left as <speaker> but writer should double-check..." style caveat, confirm you actually checked the affected lines.
 
 12. **Roleplay-coverage pass (DO NOT SKIP — this is the one that gets missed):** For EACH player character, read their Character Spotlight as if you were that player.
     - **One-note check:** Is the entry built only from combat, a fumble, or self-deprecating jokes? If yes, it's a fail — rebuild from their Roleplay Inventory around their real agency and voice.
@@ -600,40 +555,48 @@ Format:
 <For any PC with <2 quotes, provide 2-3 candidate quotes from the transcript with timestamps>
 
 ## Guardrails
-- **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns ("Kugaptee" → "cook of tea"), invents plausible-sounding content, and pyannote diarization misattributes speakers regularly (especially when voices have similar register). **The capability matrix you built in Step 0 is stronger evidence than the speaker label.** When they conflict, trust the matrix.
+- **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns (a deity/NPC name becoming an unrelated common phrase), invents plausible-sounding content, and pyannote diarization misattributes speakers regularly (especially when voices have similar register). **The capability matrix you built in Step 0 is stronger evidence than the speaker label.** When they conflict, trust the matrix.
 - **Don't canonize Whisper artifacts.** If a "running joke" in the recap is actually a Whisper mishear of an in-fiction name, flag it as a transcription artifact, not a real beat.
 - Be adversarial. Assume the recap has errors until proven otherwise.
 - Every flagged item must cite a specific transcript timestamp AND the capability test that fails.
 - Do NOT rewrite the recap — just report findings. The main agent will fix.
 - **When an attribution is ambiguous between two PCs, flag for user confirmation rather than guessing.** A wrong guess costs the user a correction cycle; a flag costs one question.
-- Do NOT hedge known errors. If a Rogue is attributed casting a spell, the answer is "the speaker is the actual caster, not the Rogue" — never "Mo deadpans an offer to cast Calm" or similar paper-over language.
+- Do NOT hedge known errors. If a non-caster is attributed casting a spell, the answer is "the speaker is the actual caster, not this PC" — never "<PC> deadpans an offer to cast it" or similar paper-over language.
 ```
 
 After the subagent returns its review:
-1. **The review is advisory, not authoritative.** Do not blindly apply fixes — verify each finding against the cleaned transcript yourself before changing the recap. The reviewer can also miss things or mis-suggest (e.g. propose attributing a Cleric line to Akasha when it's Avon).
+1. **The review is advisory, not authoritative.** Do not blindly apply fixes — verify each finding against the cleaned transcript yourself before changing the recap. The reviewer can also miss things or mis-suggest (e.g. propose attributing a divine-caster line to the wrong PC).
 2. Fix all confirmed errors in the recap.
 3. For flagged/ambiguous items, use **AskUserQuestion** to ask the user before committing.
 4. Rebalance quotes and spotlights based on the distribution check.
-5. After applying fixes, re-scan for collateral damage: when you change one attribution, check that you didn't break a related sentence elsewhere (e.g. moving a quote from Talya to Avon may also require updating a spotlight bullet that references the same moment).
+5. After applying fixes, re-scan for collateral damage: when you change one attribution, check that you didn't break a related sentence elsewhere (e.g. moving a quote from one PC to another may also require updating a spotlight bullet that references the same moment).
 
 **Do NOT proceed to HTML generation until all review items are resolved.**
 
-### Step 5.6: Combat Review (subagent)
+### Step 5.6: Combat Review — ONE SUBAGENT PER ENCOUNTER
 
-Spawn a **second general-purpose subagent** to review combat encounters specifically. The recap writer has a demonstrated pattern of collapsing multi-round combat into narrative summaries, merging actions from different rounds, inserting actions that never happened, and understating contributions. This subagent reconstructs the actual combat from the transcript and compares it against the recap.
+Spawn **one general-purpose subagent for EACH combat encounter** — N fights → N agents, run together in parallel. Do **not** use a single agent to skim all the fights; a dedicated reviewer per encounter reconstructs that one fight in far more depth and catches the kill-credit, damage, and HP-state errors a single skimming agent misses. (The most accurate recaps in this project were built "one reviewer each.")
 
-**Run this in parallel with Steps 5.5 and 5.6b** — all three review subagents are independent.
+**Determine N** from the drafted recap's Combat Encounters section + Pax's initiative orders from Step 4.5. For each encounter, give that agent its **scope**: the encounter name, its initiative order, and its approximate transcript timestamp range (so it isn't re-reading the whole session). Each agent reconstructs only its assigned fight and writes its own report.
 
-**Subagent prompt template:**
+**Run all N combat agents in parallel with Steps 5.5 and 5.6b** — every review subagent is independent. (For a 4-combat session that's 4 combat agents + the attribution agent + the non-combat agent = 6 in parallel.)
+
+**Subagent prompt template (fill in the assigned encounter):**
 
 ```
-You are reviewing the combat encounters in a D&D/PF2e session recap for accuracy. Your job is to reconstruct what ACTUALLY happened round-by-round from the cleaned transcript, then compare it against what the recap claims.
+You are reviewing ONE combat encounter in a D&D/PF2e session recap for accuracy. Reconstruct what ACTUALLY happened round-by-round in THIS encounter from the cleaned transcript + roll log, then compare it against what the recap claims. Ignore the other encounters.
+
+## Your assigned encounter
+- Encounter <K>: <name>
+- Initiative order (from Pax's tracker): <order, or "reconstruct from transcript">
+- Approx. transcript range: [<MM:SS> – <MM:SS>]  (and approx. rolls.txt line range if known)
 
 ## Inputs
 - Cleaned transcript: /tmp/transcript-cleaned-<campaign>-s<N>.txt
-- Generated recap: <campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md
+- Generated recap: <campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md (read only your encounter's block + any mentions of it in Spotlight/Key Events/Pax's Notes)
 - Party roster: <campaign>/dynamics.md (includes class features and action abilities)
 - PC character sheets in <campaign>/ (typically `character-sheet.md` for Pax's PC; others may have separate files or be summarized in dynamics.md)
+- Foundry roll-log dump: `/home/nhanp/dnd-campaign-management/rolls.txt` (global, not per-speaker — back-derive attribution from stat fingerprints; records damage numbers, save DCs, and per-action breakdowns verbatim). Focus on your encounter's portion.
 - Campaign system: <D&D 5e | D&D 5.5e | PF2e Remastered>
 
 ## Step 0 (REQUIRED before reconstructing) — Build the capability matrix
@@ -645,16 +608,16 @@ Before touching the transcript, **read all PC character sheets and the dynamics.
 - Spell tradition + spell list (if any). **A no-spellcaster PC cannot cast spells. Don't attribute spells to them no matter what Whisper says.**
 - Trained skills + proficiency tier
 - Stat fingerprint (STR/DEX/CON/INT/WIS/CHA) — these appear in rolls log entries
-- Key items currently held (especially items granting innate spells or roll bonuses — e.g. "Pendant of the Occult: +1 Occultism + innate Guidance, held by Mo")
+- Key items currently held (especially items granting innate spells or roll bonuses — e.g. "an item that grants +1 to a skill + an innate cantrip, held by <PC>")
 - HP at session start + AC
 - Hero point count entering the session (returning PCs typically 1; new PCs typically 2; recap-presenter may get +1)
 - Lane assignment per dynamics.md (RK lane, healing lane, off-guard generation, infiltration, frontline tank, etc.)
 
-**Every attribution you make in the reconstruction must be consistent with this matrix.** If a transcript line says "PC X cast Phantom Pain" but PC X has no occult spellcasting, find the actual caster. If the rolls log shows "INT +2 / Expert in Boneyard Lore" but no PC in the matrix has that fingerprint, flag it — the roll might be from an NPC, an item, or a PC sheet you don't have access to.
+**Every attribution you make in the reconstruction must be consistent with this matrix.** If a transcript line says "PC X cast <a spell>" but PC X has no spellcasting on that tradition, find the actual caster. If the rolls log shows a stat fingerprint (e.g. "INT +2 / Expert in <a Lore>") that no PC in the matrix matches, flag it — the roll might be from an NPC, an item, or a PC sheet you don't have access to.
 
-## Step 1: Reconstruct Each Combat
+## Step 1: Reconstruct YOUR assigned combat
 
-For every combat encounter in the transcript, build a round-by-round breakdown:
+Build a round-by-round breakdown of your assigned encounter:
 
 ### Per Round, Per Character:
 - **Initiative order** (who went when, including delays)
@@ -681,7 +644,7 @@ Read the recap's Combat Encounters section AND any combat mentions in Character 
 
 ### Errors to check:
 1. **Capability misattributions** — every quoted ability, spell, or feature must match the named PC's capability matrix. A divine spell quoted on a no-spellcaster PC = misattribution, find the actual caster. A class-specific feature on the wrong class = misattribution.
-2. **Roll-fingerprint mismatches** — attack rolls, damage rolls, and skill checks with stated modifiers must match the attributed PC's stat fingerprint. If "Mo's Overwhelming Combination crit for 44 damage" decomposes to weapon dice + sneak attack + Crushing rune that all fit Mo's sheet, attribution is correct. If a 44-damage Stumbling Swing crit is attributed to a Monk who doesn't have Crushing rune on their Handwraps, re-check the source.
+2. **Roll-fingerprint mismatches** — attack rolls, damage rolls, and skill checks with stated modifiers must match the attributed PC's stat fingerprint. If a big crit decomposes to weapon dice + sneak attack + a damage rune that all fit one PC's sheet, attribution is correct. If that same crit is pinned on a PC whose weapon/runes can't produce those dice, re-check the source.
 3. **HP-state impossibilities** — a PC at 2 HP who "saves" a 12-damage Phantom Pain didn't take that hit; check who the actual target was. A PC currently Grabbed cannot Stride. A PC who used a Reaction this round cannot Shield Block as another Reaction unless they have multi-reaction features.
 4. **Conflated rounds** — actions from different rounds described as one sequence. Watch especially for round-3 actions getting duplicated into a fabricated round-4.
 5. **Invented actions** — things described in the recap that never happened in the transcript (e.g., a Demoralize that was considered but not executed; a Strike that was rolled but not connected).
@@ -699,21 +662,24 @@ Read the recap's Combat Encounters section AND any combat mentions in Character 
 
 ## Output
 
-Write your review to: /tmp/combat-review-<campaign>-s<N>.md
+Write your review to: /tmp/combat-review-<campaign>-s<N>-enc<K>.md  (one file per encounter — use YOUR encounter number K)
 
 Format:
 
-### Combat Reconstruction
-<For each encounter: full round-by-round breakdown as described above>
+### Combat Reconstruction (Encounter <K>)
+<Full round-by-round breakdown for THIS encounter as described above>
 
 ### Recap vs Reality
 <Table: what the recap says | what actually happened | severity (factual error / omission / minor)>
 
 ### Missing from Recap
-<Important combat moments that the transcript shows but the recap doesn't mention>
+<Important moments from this encounter the transcript shows but the recap doesn't mention>
 
-### Suggested Combat Section Rewrite
-<Provide a corrected version of the Combat Encounters section with round-by-round accuracy. Include per-character action sequences, hit/miss results, and enemy turns.>
+### FLAGS (action items for the main agent)
+<Explicit, numbered list of every correction this encounter needs — each with the recap line, the fix, and the evidence (transcript timestamp / rolls.txt line). Mark each [FIX] (apply directly) or [CONFIRM] (ambiguous — needs the user). The main agent is required to resolve every one of these.>
+
+### Suggested Encounter Rewrite
+<A corrected version of THIS encounter's recap block with round-by-round accuracy: per-character action sequences, hit/miss/crit results, damage, conditions, enemy turns, kill credit.>
 
 ## Guardrails
 - **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns, invents plausible-sounding content, and the cleaned transcript's speaker labels are based on pyannote diarization that misattributes regularly. **Capability + roll-fingerprint + HP-state plausibility are stronger evidence than the speaker label.** When they conflict, trust the capability matrix, not Whisper.
@@ -727,23 +693,24 @@ Format:
 - **When ambiguous between two PCs, flag for user confirmation rather than guessing.** Guessing wrong costs the user a correction cycle; asking costs one question.
 ```
 
-After the subagent returns its combat review:
-1. Replace the Combat Encounters section with the corrected version.
-2. Fix any combat-related errors in Character Spotlight, Key Events, and Pax's Notes.
-3. If anything is ambiguous, use **AskUserQuestion** to confirm with the user.
+After the per-encounter subagents return (collect all N reports):
+1. Work the **FLAGS** list from every encounter report (see the mandatory flag-resolution gate in Step 5.7 below — do not skip flags).
+2. Replace each encounter's Combat Encounters block with its corrected version.
+3. Fix any combat-related errors the flags surface in Character Spotlight, Key Events, and Pax's Notes.
+4. For every `[CONFIRM]` flag, use **AskUserQuestion** before committing.
 
-Then resolve the Roleplay-Coverage Review (Step 5.6b) as well — all three reviews (5.5, 5.6, 5.6b) gate HTML generation together.
+Then resolve the non-combat review (Step 5.6b) as well — **all the per-encounter combat reviews + Step 5.5 + Step 5.6b gate HTML generation together** (Step 5.7).
 
-### Step 5.6b: Roleplay-Coverage Review (subagent)
+### Step 5.6b: Non-Combat Review (subagent)
 
-Spawn a **third general-purpose subagent** dedicated to roleplay coverage — the RP-side equivalent of the combat review. Steps 5.5 and 5.6 verify combat math and attribution; **neither one checks whether the players' roleplay was represented well**, which is the pipeline's most common quality failure. This subagent exists to catch flat, one-note, under-represented, or fabricated RP before the recap is finalized.
+Spawn **one general-purpose subagent for the non-combat side of the session** — the counterpart to the per-encounter combat agents. The per-encounter agents (5.6) verify combat math; the attribution agent (5.5) verifies who-did-what; **neither checks the non-combat half of the session.** This agent covers it: **(a) roleplay coverage** (the pipeline's most common quality failure — flat, one-note, under-represented, or fabricated RP) **and (b) non-combat mechanics and facts** — exploration beats, skill checks (and whether the right PC/skill is credited), downtime, lore/world-facts read off the transcript, and named-NPC/place accuracy. RP is the priority, but a wrong skill-check attribution or a garbled lore fact is just as much a flag as a flat spotlight.
 
-**Run this in parallel with 5.5 and 5.6** — all three reviews are independent.
+**Run this in parallel with Step 5.5 and all the per-encounter combat agents (5.6)** — every review is independent.
 
 **Subagent prompt template:**
 
 ```
-You are auditing the ROLEPLAY / out-of-combat coverage of a D&D/PF2e session recap. Combat mechanics are out of scope (other reviewers handle that). Your job: independently inventory the session's roleplay, then check whether the recap represents each player faithfully and well.
+You are auditing the NON-COMBAT side of a D&D/PF2e session recap. In-combat round-by-round math is out of scope (per-encounter reviewers handle that). Your job has two parts: (a) the priority — independently inventory the session's ROLEPLAY and check whether the recap represents each player faithfully and well; and (b) the non-combat MECHANICS & FACTS — exploration beats, skill checks (verify the right PC and skill are credited via stat fingerprint/lane), downtime/shopping, and lore/world-facts and named NPC/place accuracy read off the transcript.
 
 ## Inputs
 - Cleaned transcript: /tmp/transcript-cleaned-<campaign>-s<N>.txt
@@ -763,15 +730,19 @@ Read the recap's Character Spotlight, Key Events, Memorable Quotes, and (for the
 - **FABRICATED / UNVERIFIABLE RP** — any quote or beat in the recap you cannot trace to a clean, single-speaker transcript line. Flag anything that looks sourced from a merged run-on or a rewritten `[cleaned]` blob.
 - **EPITHET check** — does each spotlight epithet flatter/fit or diminish?
 - **Quote-quality check** — are the selected quotes each PC's strongest, most-characterful options, or just the easy/loud ones? Suggest specific swaps with timestamps.
+- **NON-COMBAT MECHANIC / FACT ERRORS** — wrong PC or wrong skill credited on an out-of-combat check (verify by stat fingerprint / lane, not transcript proximity), a garbled or invented lore/world fact, a misnamed NPC or location, or a downtime/loot error. These are flags too, equal in weight to the RP findings.
 
 ## Output
-Write to /tmp/rp-review-<campaign>-s<N>.md:
+Write to /tmp/noncombat-review-<campaign>-s<N>.md:
 ### Roleplay inventory (per character, with timestamps)
 ### One-note / flat characterizations (highest priority)
 ### Missing RP beats (per character)
 ### Thin / under-represented players
 ### Mis-attributed or fabricated RP
+### Non-combat mechanic / fact errors
 ### Quote / epithet suggestions
+### FLAGS (action items for the main agent)
+<Numbered list of every fix this review requires — RP and non-combat-mechanic alike — each with the recap text, the fix, and the evidence (timestamp / sheet / lane). Mark each [FIX] or [CONFIRM]. The main agent must resolve every one.>
 ### Ranked fixes
 
 ## Guardrails
@@ -780,13 +751,25 @@ Write to /tmp/rp-review-<campaign>-s<N>.md:
 - Never invent beats to "improve" coverage; if a player genuinely did little RP, say that rather than padding.
 ```
 
-After the subagent returns its RP review:
+After the subagent returns its non-combat review (work its FLAGS per Step 5.7):
 1. Rebuild any flat/one-note spotlight around the player's real agency and voice (per Character Spotlight Guidelines).
-2. Add missing RP beats; fix mis-attributions; **cut any fabricated/unverifiable line**.
+2. Add missing RP beats; fix mis-attributions; **cut any fabricated/unverifiable line**; fix any non-combat mechanic/fact error (wrong skill-check PC, garbled lore, misnamed NPC).
 3. Rebalance quotes toward each PC's strongest, most-characterful options.
 4. Re-read each spotlight as that player before finalizing.
 
-**Do NOT proceed to HTML generation until all THREE review subagents (5.5, 5.6, 5.6b) are resolved.**
+### Step 5.7: Resolve EVERY reviewer flag (HARD GATE — do not skip a single one)
+
+The review subagents (the per-encounter combat agents, the attribution agent, and the non-combat agent) produce **FLAGS**. Their reports are advisory, but you may **not silently ignore a flag.** For each flag, exactly one of these must happen:
+
+1. **Apply it** — after verifying the fix against the transcript / `rolls.txt` / character sheet yourself (the reviewer can mis-suggest; confirm before editing).
+2. **Override it** — only with a specific, stated, verified reason, checked against the source. Write the override reason down (in your working notes / the report to Pax). "I think the transcript label is right" is **not** a verified reason.
+3. **Ask** — if it's still ambiguous after you check, use **AskUserQuestion**. A question costs less than a wrong recap.
+
+> **Cautionary tale (real):** a combat reviewer flagged that "Interstellar Void" read as the Oracle's spell, not the Kineticist's. The main agent overrode it on the Whisper speaker label alone — and was wrong; the player had to catch it. A capability-based flag (a class can't cast that / the math doesn't fit) **beats the diarization label every time.** When a flag cites capability or roll-math, default to trusting the flag, not the transcript.
+
+Make a quick checklist of all flags across all reports and confirm each is Applied / Overridden-with-reason / Asked before moving on. **Collateral check:** when you apply one flag, re-scan for sentences elsewhere (Spotlight, Key Events, Pax's Notes, Quotes) that referenced the same beat and fix them too.
+
+**Do NOT proceed to HTML generation until every flag from every review subagent (all per-encounter combat reviews + Step 5.5 + Step 5.6b) is resolved via Step 5.7.**
 
 ### Step 6: Generate HTML Visual
 
@@ -810,7 +793,7 @@ Create `<campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.html`
 
 #### HTML Structure (match exactly)
 
-The HTML must be a single self-contained file. Copy the CSS from the reference recap.html verbatim — do not create new classes or rename existing ones. The following documents the required structure using the Hellbreakers campaign as the canonical example. Other campaigns should follow the same patterns with their own style-guide colors.
+The HTML must be a single self-contained file. Copy the CSS from the reference recap.html verbatim — do not create new classes or rename existing ones. The following documents the required structure; use the most recent existing recap.html in this campaign as the canonical example. Other campaigns follow the same patterns with their own style-guide colors.
 
 **1. Header** (`header.header`)
 - Sparkle via CSS `::before` pseudo-element (NOT an explicit `<span>`)
@@ -824,7 +807,7 @@ The HTML must be a single self-contained file. Copy the CSS from the reference r
 
 **3. Party Cards**
 - `.party-grid` (CSS grid, `repeat(auto-fill, minmax(240px, 1fr))`)
-- `.char-card` with character-specific class (`.char-baijian`, `.char-cyrathul`, etc.) for left border color
+- `.char-card` with a per-character class (`.char-<charactername>`, one per PC) for left border color
 - Inner divs: `.char-name`, `.char-class`, `.char-player`
 
 **4. Session Summary**
@@ -835,7 +818,7 @@ The HTML must be a single self-contained file. Copy the CSS from the reference r
 - `.timeline` div with `border-left: 2px solid var(--border)`
 - Each act is a `.act` div with type class (`.combat`, `.rp`, `.explore`, `.social`, `.mystery`)
 - Timeline dot via `::before` pseudo-element, colored by type
-- `.act-label` div — JetBrains Mono, uppercase, e.g. "Act I · Combat · The Warehouse"
+- `.act-label` div — JetBrains Mono, uppercase, e.g. "Act I · Combat · <Scene Name>"
 - `.act-card` div — card background with full content inside:
   - `<h3>` title for the act
   - `<ul><li>` bullet lists with **ALL key events** from that act
@@ -854,8 +837,8 @@ The HTML must be a single self-contained file. Copy the CSS from the reference r
 
 **7. Character Spotlight**
 - `.spotlight-grid` (single column)
-- `.spotlight` divs with character class (`.s-baijian`, `.s-cyrathul`, etc.)
-- `<h4>` with character name + epithet (e.g. "Bai Jian · the Measured Blade")
+- `.spotlight` divs with a per-character class (`.s-<charactername>`, one per PC, matching the party-card classes)
+- `<h4>` with character name + epithet (e.g. "<Character> · the Measured Blade")
 - `<ul><li>` with all spotlight bullets from recap.md
 
 **8. Loot**
