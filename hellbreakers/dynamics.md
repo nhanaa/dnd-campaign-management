@@ -4,18 +4,20 @@
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 2 | Beastmaster (Ren active) + Thaumaturge | Pax |
-| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 2 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
-| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 2 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
-| Zanthar Melodune III | Gnome | Wizard (generalist) — Lv 3 | Blessed One (Lay on Hands focus spell) | Scott Smith — **JOINED S8 (2026-06-13)** |
-| Sammy Shadowfoot | Halfling | Bard (Polymath muse) — Lv 3 | TBD | fallernon — **JOINED S8 (2026-06-13)**; **much more present/self-driven from S9** (one drop mid-session): Light, Courageous Anthem, crit-killed an Insidiator, Biting-Words kills, frying-pan strikes |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 4 | Beastmaster (Ren active) + Thaumaturge | Pax |
+| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 4 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
+| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 4 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
+| Zanthar Melodune III | Gnome | Wizard (generalist) — Lv 4 | Blessed One (Lay on Hands focus spell) | Scott Smith — **JOINED S8 (2026-06-13)** |
+| Sammy Shadowfoot | Halfling | Bard (Polymath muse) — Lv 4 | TBD | fallernon — **JOINED S8 (2026-06-13)**; present/self-driven from S9; **ABSENT & DM-run in S10** (halberd swaps in for the frying pan, Calm-song crowd control) |
 | Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane dedication (Electric Arc), Battle Medicine. | crackrockcowboy — *JOINED S6 · **DIED S7 (2026-06-06)** — DM-controlled after the player departed; crit-failed a Hell Hound's breath, dropped to dying, never revived, body left in the Chitterwood.* |
-| Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
-| Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. DM-controlled in fights 1-2, then stayed at HQ. |
+| Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. **Permanent HQ fixture as of S10** — refuses to field again (*"We die when we leave"*); the HQ's alchemy/body-incineration crew. |
+| Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. **Permanent HQ fixture as of S10** (with Moob). |
 
 ## Companions
 
-- **Ren** — Bai Jian's Beastmaster boarhound (acquired S4, level 2). Green boarhound trained specifically against Chelaxian forces. Delivered to the HQ door by an unnamed donor. Uses Tumble Through reliably; bites do meaningful damage. Crit-downed by the goblin-snake boss in S4; revived via Treat Wounds.
+- **Ren** — Bai Jian's Beastmaster boarhound. **Matured to a Mature companion at L4 (S10)**: now Medium, 42 HP, **Jaws 2d8**, AC 21 / Fort +11 / **Ref +12** (best save on the team) / Will +10, and **acts independently** (one action/turn uncommanded; two when Commanded). **Note: NOT yet a lockdown piece — the boarhound's *Lock Jaws* advanced maneuver (auto-Grab) only unlocks at the Nimble/Savage stage via *Incredible Companion*, a later feat.** Green boarhound trained against Chelaxian forces; delivered to HQ by an unnamed donor (open thread). Precise foe-scent (fiend/undead, 40 ft) — also the party's best wilderness tracker (scent-led them out of the Chitterwood, S10).
+- **Serrafina** — Panacea's witch familiar: a **two-headed** creature (fits Paradox of Opposites / *Familiar of Paired Perplexity*, the rider that Stupefies a nearby enemy whenever Panacea casts/sustains a hex). 20 HP, low-light. The voice her patron speaks *through* (e.g. the S10 Urgothoa rebuff: *"Don't do that again"*).
+- **Kumquat** — Sammy's bard familiar: a **raven** (low-light + echolocation). 20 HP.
 - **Wing** — Fang's wolf-motorcycle construct. Stayed at HQ when Fang did.
 
 ## Party Composition Notes
@@ -24,11 +26,12 @@
 - **Healing**: Panacea (Catfolk Witch — Medic dedication), primary healer. **Backup added S8**: Zanthar (Blessed One — Lay on Hands) and Bai Jian (Battle Medicine) chip in. Sammy carries a wand of soothe. Still thin, and Sammy's connection is unreliable, but no longer a single point of failure.
 - ~~**Healing backup**: Rama~~ — gone (died S7).
 - ~~**Non-lethal lead**: Rama~~ — gone (died S7). The party is back to taking the -2 for non-lethal, or relying on Intimidation/surrender (as with the Iskari Slayer captive, S7). **Two new members join S8** — possible non-lethal/healing replacements.
-- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; **Fleet** for reach, L3). **Weapon swap (S8): traded his jian for a +1 striking falcata** (one-handed, fatal d12 — big crits; free-hand Dueling build retained). Old jian left with Gug the Thorngrip smith. *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
+- **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; **Fleet** for reach). **Weapon swap (S8): traded his jian for a +1 striking falcata** (one-handed, fatal d12 — big crits; free-hand Dueling build retained). Old jian left with Gug the Thorngrip smith. *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
+- **S10 loadout updates (Level 4)**: Bai Jian — **Full Plate** (AC 22 / 24 Parry), **silvered falcata + crushing rune**, new **Slam Down** (1-action Strike+Trip), **Lifting Belt** (+1 Athletics → trips), and **Ren matured** (2d8, independent action, better stats — *no Lock Jaws yet*, that waits on Incredible Companion). Cyrathul — carries the **Pendant of the Occult**, the **Shining Symbol** (constant light), and **striking handwraps**. Panacea — bought a **Staff of Healing** (2 extra heals/day). Zanthar — scribed **Grease + Force Barrage**, stocked **Helpful Step / Heal** scrolls. Sammy — **halberd** (10-ft reach) replaces the frying pan.
 - **Cantrip-range damage** (improved S8): **Zanthar's Electric Arc** (arcane, 30 ft, 2 targets) and **Hand of the Apprentice** (hurls his hammer, 500 ft), plus Sammy's occult cantrips. Panacea's Divine Lance / silver Needle Darts and Bai Jian's thrown holy water/javelins round it out. The flying-enemy/long-range gap is largely closed.
 - **Face/Social**: Bai Jian (Diplomacy, Intimidation, CHA 14), Moob (deception / humble-goblin routine)
 - **Buffs**: Moob (elixirs, mutagens, numbing tonics)
-- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, Crashing Slam auto-Prone, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (Lock Jaw auto-Grab)
+- **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, **Slam Down** auto-Trip, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (*Lock Jaws auto-Grab — **future**, pending Incredible Companion; not yet online*)
 - **Detection**: Boarhound (precise fiend/undead scent 40 ft, telepathic link via Beastmaster Bond at level 10)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
 - **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (**Arcana, Religion, Crafting — NOT Occultism**, confirmed S8), **Sammy (Occultism — the party's trap-disabler / occult lane)**, Zanthar (Arcana, Occultism, generalist), Moob (Crafting, alchemy)
@@ -71,7 +74,7 @@
 - Fang's Overdrive gives Wing a massive damage spike round — deployed for finishing blows (see dread bat kill, Session 1).
 
 ### Lockdown Economy
-- Bai Jian generates Prone (Crashing Slam auto-Trip) and the Boarhound generates Grabbed (Lock Jaw auto-Grab)
+- Bai Jian generates Prone (**Slam Down** Strike+Trip, L4) — and the Boarhound *will* generate Grabbed (Lock Jaws auto-Grab) once it reaches Nimble/Savage via **Incredible Companion** (future feat; not yet online)
 - Prone: -2 circumstance to attack rolls, must spend action to Stand (provokes Bai Jian's Reactive Strike), Off-Guard to melee
 - Grabbed: Off-Guard, immobilized, must spend action to Escape
 - Prone + Grabbed simultaneously = target is completely locked down, Off-Guard, and burning 2+ actions per round just to recover
@@ -95,8 +98,8 @@ Established Session 1: Each party member was individually summoned by missive to
 - **Gertraud Middenhelm** — Junior Hellbreaker. Rescued from the Everbloom Imports warehouse in Session 2. Grateful to the party — looted the loyalists' gear for the cause.
 - **Hagrath the Hammer** — Blacksmith in Traveler's Square, Saringallow. Transferred Bai Jian's +1 rune. Taught Fang the dueling pistol formula. Warm, fatherly rapport with the goblin inventor. Not confirmed as Hellbreaker sympathizer.
 - **Captain Julenus Aedin** — (Deceased) Captain of the Night's Prize. Killed by Cyrathul in Session 2.
-- **Alceo Demetrias** — Co-founder of the Hellbreakers League, cleric of Milani. Currently in Eladir.
-- **Phoebe Demetrias** — Co-founder of the Hellbreakers League. Currently in Eladir.
+- **Alceo Demetrias** — Co-founder of the Hellbreakers League, cleric of Milani. Currently in Elidir.
+- **Phoebe Demetrias** — Co-founder of the Hellbreakers League. Currently in Elidir.
 - **Marie Phelan** — Hellbreaker at Saringallow HQ. Briefed the party on Rhokrag's disappearance and the Waterspout Inn. Provided healing potions. Visibly worried about Rhokrag.
 - **Bai Feng** — Bai Jian's older brother, missing for 5 years. Last trail led to Isger.
 - **Hellknight Alaya** — (active threat) Hellknight hunting the Hellbreakers. Captain of the Waterspout Inn ship cited her as the bounty-payer. Identity, face, location all unknown. Likely connected to the broader Chelaxian intelligence apparatus.
@@ -115,7 +118,7 @@ Established Session 1: Each party member was individually summoned by missive to
 ## Key Plot Threads
 
 - **The Warehouse Standoff** (resolved): Gertraud rescued. Three Chelaxian loyalists — two killed by Bai Jian, one released with a warning to spread the word.
-- **Hedvind's Decree** (active): Steward Stuart Hedvind VII's citizen-bounty system is driving neighbor-against-neighbor witch hunts. Alceo and Phoebe are in Eladir trying to limit the damage. Public Hellbreaker operation is now untenable.
+- **Hedvind's Decree** (active): Steward Stuart Hedvind VII's citizen-bounty system is driving neighbor-against-neighbor witch hunts. Alceo and Phoebe are in Elidir trying to limit the damage. Public Hellbreaker operation is now untenable.
 - **The Lich on Lake Encarthan**: Ferryman Otto tipped the party off that a lich is commanding the restless dead in Isger. Likely source of the dread bats — and likely a recurring threat.
 - **Ina's Attention**: Moob has caught the sun goddess's eye — she inspired his star-grenade formula mid-craft. Wants no part of her clergy ("solar radiation" priests) but is superstitiously careful around her domain. Deity attention rarely stays ignored.
 - **The +1 Rune Transfer** (completed): Transferred by blacksmith Hagrath in Saringallow for 3.5gp. Bai Jian's jian now has +1 potency.

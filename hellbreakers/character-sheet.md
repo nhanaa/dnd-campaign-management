@@ -7,9 +7,9 @@
 - **Heritage**: Dragonblood (Sovereign Dragon)
 - **Background**: Foreign Aid
 - **Class**: Fighter
-- **Level**: 3
+- **Level**: 4
 - **Size**: Medium
-- **Speed**: 25 ft (base; Str 18 ≥ breastplate's Str 16 threshold → -5 speed penalty negated)
+- **Speed**: 25 ft (base 25; Full Plate −10 speed reduced to −5 since Str 19 ≥ Str 16 req, then negated by **Fleet** +5)
 - **Deity**: None (Atheists and Free Agents)
 - **Campaign**: Hellbreakers (Rise Up Isger and Join the Hellbreakers League!)
 - **System**: Pathfinder 2e Remastered
@@ -23,22 +23,22 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 18 (+4) | 12 (+1) | 18 (+4) | 10 (+0) | 14 (+2) | 10 (+0) |
+| 19 (+4) | 12 (+1) | 18 (+4) | 10 (+0) | 14 (+2) | 10 (+0) |
 
-*Synced to the live Foundry token (2026-06-21). This campaign uses the **Gradual Ability Boosts** variant — one boost at each of L2/L3/L4/L5 instead of four at L5. Starting array (L1): STR 18, CON 16, DEX 12, WIS 12 (Ancestry STR/CON, Background STR/CON, Class key STR, Free L1 STR/DEX/CON/WIS). Gradual boosts so far: **L2 → CON 18, L3 → WIS 14.** Both STR and CON are now maxed at 18 (offense + the +11 Fort + 50 HP). Next gradual boost at **L4** (DEX or WIS the likely picks).*
+*Synced to the live Foundry token (2026-06-27, Lv 4). This campaign uses the **Gradual Ability Boosts** variant — one boost at each of L2/L3/L4/L5 instead of four at L5. Starting array (L1): STR 18, CON 16, DEX 12, WIS 12. Gradual boosts so far: **L2 → CON 18, L3 → WIS 14, L4 → STR 19** (partial boost above 18 — the modifier stays +4 until STR reaches 20, planned for L5). CON maxed at 18; STR climbing toward 20 for the eventual +5.*
 
 ## Defenses
 
-- **AC**: 20 (10 + 5 proficiency + 1 DEX cap + 4 breastplate) — **22 with Dueling Parry**
-- **Max HP**: 50 (8 ancestry + 30 class [10×3] + 12 CON [4×3])
+- **AC**: 22 (10 + 6 proficiency + 0 DEX cap + 6 full plate) — **24 with Dueling Parry**
+- **Max HP**: 68 (8 ancestry + 40 class [10×4] + 16 CON [4×4] + 4 Toughness)
 
 | Save | Prof | Modifier |
 |------|------|----------|
-| Fortitude | Expert | +11 |
-| Reflex | Expert | +8 |
-| Will | Expert | +9 |
+| Fortitude | Expert | +12 |
+| Reflex | Expert | +9 |
+| Will | Expert | +10 |
 
-*Will is **Expert via Bravery** (L3) — not Trained. Bravery + Dragonblood both make a success vs a fear effect a critical success, and Bravery reduces any Frightened you gain by 1. No dumped save-stat: all three saves are Expert, Fort is the standout at +11.*
+*Will is **Expert via Bravery** (L3) — not Trained. Bravery + Dragonblood both make a success vs a fear effect a critical success, and Bravery reduces any Frightened you gain by 1. No dumped save-stat: all three saves are Expert, Fort is the standout at +12.*
 
 - **Perception**: Expert (+9)
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
@@ -58,12 +58,14 @@
 
 - **Dragon Lore** (1st): Trained in Diplomacy and Intimidation. Additional Lore: Dragon Lore.
 - **Natural Ambition** (1st, Ancestry Paragon): Grants Sudden Charge as bonus class feat.
+- **General Training** (1st, Human) → **retrained at L4 to Toughness** (the "really tanky" pick): +4 HP at level 4 (scales with level; folded into the 68 HP above) and Dying-recovery DC reduced by your level. **Fleet** is also held (general feat, +5 ft Speed — offsets the Full Plate penalty).
 
 ## Class Feats
 
 - **Snagging Strike** (1st): 1 action — Make a Strike with one hand free. On hit, target is Off-Guard until start of your next turn.
 - **Sudden Charge** (1st, via Natural Ambition): 2 actions — Stride twice, then Strike.
 - **Dueling Parry** (2nd): 1 action — While wielding a one-handed melee weapon with no other weapons or shields in your other hand, gain +2 circumstance bonus to AC until the start of your next turn.
+- **Slam Down** (4th): 1 action, Flourish — Make a melee Strike; if it hits and deals damage, attempt an Athletics check to **Trip** the creature. Both count toward your multiple attack penalty, but the penalty doesn't increase until after both. (One-action Strike-and-Trip; pairs with the Lifting Belt's Athletics bonus.)
 
 ## Skills
 
@@ -89,6 +91,7 @@
 
 - **Beastmaster Dedication** (2nd): Gain a young animal companion. Trained in Nature.
   - **Companion**: Ren — Isgeri Boarhound (see below)
+- **Mature Beastmaster Companion** (4th): Ren becomes a **mature** animal companion — he now acts on his own (one action each turn even when uncommanded; still two actions when Commanded), grows to **Medium** (Jaws **2d8**), and gains ability boosts/better stats. **Does NOT grant the boarhound's advanced maneuver** — *Lock Jaws* (auto-Grab) waits on the Nimble/Savage stage via a future **Incredible Beastmaster Companion** feat.
 
 ## Languages
 
@@ -98,7 +101,7 @@
 ## Equipment
 
 ### Weapons
-- **Falcata +1 striking** (reflavored — acquired S8): 1d8 S, **fatal d12**, one-handed, Sword group. Primary blade. **+1 potency** (+1 to attack, transferred from the old jian) and **+1 striking** (gifted by the Thorngrip elders, applied by Gug) → two weapon dice; crits use the fatal d12 (e.g. the 60-damage Insidiator decapitation, S8). One-handed by design — keeps the free hand for Snagging Strike / Dueling Parry.
+- **Falcata +1 striking** (reflavored — acquired S8; **silvered + crushing rune added S10**): 1d8 S, **fatal d12**, one-handed, Sword group. Primary blade. **+1 potency** and **+1 striking** → two weapon dice; crits use the fatal d12 (e.g. the 54-damage zombie cleave / 42-damage Toady kill, S10). Now **low-grade silver** (anti-fiend / lycanthrope / regeneration) with a **crushing rune** (property). One-handed by design — keeps the free hand for Snagging Strike / Dueling Parry / Slam Down.
 - ~~**Jian +1** (Katana base, reflavored): 1d6 S, deadly d8, two-hand d10, versatile P — "The gentleman of weapons."~~ — **Traded to Gug the Thorngrip smith in S8** for the falcata (*"Please take care of that sword. It meant a lot to me."*). Potency rune transferred off it.
 - **Lang Ya Chui** (Leiomano reflavor): 1d6 B, fatal d10, versatile S — "Wolf tooth mace." Uncommon, Club group. Swap-in for bludgeoning-weak enemies.
 - **Shortsword**: 1d6 P, agile, finesse, versatile S. Off-hand option / backup blade.
@@ -109,10 +112,12 @@
 - **Potency Crystal**: Talisman, free-action activate before a Strike. Affixed weapon becomes a +1 striking weapon for that Strike and until end of turn (+1 attack, 2 damage dice). Use on a Lang Ya Chui crit-fish or a critical-moment jian Strike.
 
 ### Armor
-- **Breastplate**: +4 AC, DEX cap +1, check penalty -2 (negated by Str 18 ≥ Str 16 threshold), speed -5 ft (negated by Str 18 ≥ Str 16 threshold). Plate group.
+- **Full Plate** (bought from Gug, S10): +6 AC, DEX cap +0, check penalty -3 (negated by Str 19 ≥ Str 18 req), speed -10 ft (reduced to -5 by meeting the Str req, then negated by Fleet +5). Plate group. The new daily-driver armor — +2 AC over the breastplate at the cost of the DEX cap.
+- ~~**Breastplate**~~: +4 AC, DEX cap +1 — kept as backup / for when the lighter armor and DEX cap matter.
 
 ### Worn Magic Items
-- **Ring of Discretion** (invested): Magically conceals worn armor and sheathed weapons — either invisible or illusory ordinary clothes. Dropped the instant you wield an affected weapon (re-engages after sheathing for 1 minute). DC 15 Seek to disbelieve. Frees Bai Jian to walk into civilian spaces in breastplate without drawing attention — useful for the Hellbreakers' undercover operations in Isger.
+- **Ring of Discretion** (invested): Magically conceals worn armor and sheathed weapons — either invisible or illusory ordinary clothes. Dropped the instant you wield an affected weapon (re-engages after sheathing for 1 minute). DC 15 Seek to disbelieve. Frees Bai Jian to walk into civilian spaces in full plate without drawing attention — useful for the Hellbreakers' undercover operations in Isger.
+- **Lifting Belt** (invested; goblin-made gift via Rhokrag, S10): +1 item bonus to Athletics checks to Lift, Force Open, Shove, Trip, and Disarm, and doubles how much you can carry/lift. Directly boosts **Slam Down** and the trip game.
 
 ### Gear
 - Backpack (holds 4 Bulk, first 2 don't count)
@@ -128,11 +133,11 @@
 
 - **Source**: Pathfinder #222: Hellbreakers (AP-specific companion)
 - **Heritage**: Isgeri Boarhound — Nimble companion type
-- **Size**: Small (Young) → Medium at Mature (level 4)
+- **Size**: **Medium (Mature, as of L4 — S10)** — 42 HP
 - **Speed**: 40 ft
 - **Senses**: Foe scent (precise, 40 ft, vs. designated fiend or undead, refresh daily) + scent (imprecise, 40 ft)
-- **Attacks**: Jaws 1d8 piercing (finesse) → 2d8 at Mature
-- **Action economy**: Acts on Bai Jian's turn. Spend 1 action to **command Ren** → hound takes 2 actions (no roll required for a bonded animal companion). If uncommanded, Ren does nothing on his turn except Stride toward Bai Jian if more than 30 ft away and use his Reaction if applicable. Young companion can Stride, Strike, or use its **Support** benefit (foe-scent rider: +1 attack and +1d6 piercing on Bai Jian's Strikes against the designated foe). **Advanced Maneuver — Lock Jaws (auto-Grab on a successful bite) — unlocks at Mature (L4 via Mature Beastmaster feat).**
+- **Attacks**: Jaws **2d8** piercing (finesse) — matured at L4
+- **Action economy**: Acts on Bai Jian's turn. Spend 1 action to **command Ren** → hound takes 2 actions. **As a Mature companion he now acts on his own even when uncommanded** (one action per turn — Stride, Strike, or use his **Support** benefit), and still takes 2 actions when Commanded. **Support** = foe-scent rider: +1 attack and +1d6 piercing on Bai Jian's Strikes against the designated foe. **Advanced Maneuver — Lock Jaws (auto-Grab on a successful bite): NOT yet available** — unlocks at the Nimble/Savage stage via the future **Incredible Beastmaster Companion** feat.
 - **Acquisition**: Anonymous donor delivered Ren to Hellbreakers HQ in Saringallow during the week of downtime. Trained against Chelaxian forces. Donor unknown — open thread.
 
 ## Appearance

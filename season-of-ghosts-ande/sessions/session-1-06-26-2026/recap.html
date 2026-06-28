@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 1 — No One Came at Dawn</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>No One Came at Dawn</h1>
+  <div class="subtitle">Session 1 &mdash; Season of Ghosts &middot; Willowshore, Shenmen</div>
+  <div class="meta-row">
+    <span class="meta-pill">June 26, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 15m</span>
+    <span class="meta-pill">First Dawn of Summer, 7108 IC</span>
+    <span class="meta-pill">Book One Opens</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-mystery" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:25%"></div>
+    <div class="comp-seg comp-social" style="width:20%"></div>
+    <div class="comp-seg comp-combat" style="width:15%"></div>
+    <div class="comp-seg comp-explore" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery / Investigation 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 25%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social / Town 20%</span>
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 15%</span>
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-zhen"><div class="char-name">Zhen Stillness</div><div class="char-class">Samsaran (Hungerseed) &middot; Animist (Liturgist)</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-iryoku"><div class="char-name">Iryoku-Yasha</div><div class="char-class">Yaksha &middot; Kineticist (Wood/Fire)</div><div class="char-player">legendfather</div></div>
+    <div class="char-card char-kaelen"><div class="char-name">Kaelen Ashford</div><div class="char-class">Human &middot; Monk</div><div class="char-player">cajun_code</div></div>
+    <div class="char-card char-kaoru"><div class="char-name">Kaoru</div><div class="char-class">Kitsune &middot; Magus (Aloof Firmament)</div><div class="char-player">magus player</div></div>
+    <div class="char-card char-mujin"><div class="char-name">Mu-Jin</div><div class="char-class">Witch &middot; Spinner of Threads</div><div class="char-player">snotierknave69</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The five abductees of this year's Reenactment Festival wake at dawn in a forest clearing &mdash; but on the <em>east</em> side of Willowshore, not the west where they were carried, and no one has come to ransom them with breakfast. Uncle <strong>Choe Chung-hu</strong>, the miller who leads the festival, never arrived. As they free themselves from the straw mats and start home down a game trail, two giant centipedes attack &mdash; and the insects <em>speak</em>, hissing "meat, flesh, bones" before Iryoku burns one in half and Kaelen flattens the other. Recall Knowledge only deepens the wrong: these are ordinary giant centipedes, yet they have a human's intelligence and were speaking plain Tian. Something is influencing the animals.</p>
+    <p>The walk home turns the morning into a horror story. Fog rolls in unnaturally fast; an old nursery rhyme surfaces in Kaoru's memory about a lazy lamplighter, a blood moon, and the ghosts that come when the lamp goes dark. At the Spider Gate, the town's beloved stone guardian <strong>"Ugly Cute"</strong> is simply <em>gone</em> &mdash; its lantern broken on the ground, deep furrows showing the horse-sized statue walked off east on its own. At the Eastern Watchtower they find four corpses: two town guards dead of viper venom, and two <strong>jinkin</strong> (blue-grey gremlin-fey) cut down by the guards' blades. A surviving guard, frightened in her tower, recounts that the jinkin came from the south after midnight with trained serpents. Then night falls early, the moon turns blood-red, and rain of real blood coats everything before reverting to water &mdash; the party only shrugs it off thanks to a generous hand of hero points.</p>
+    <p>After gathering cold iron, ghost charges, and gear from their homes, the party reaches Dawnstep Bridge and finds the worst confirmed: the <strong>Eternal Lantern is dark</strong>, and a flesh-eating <strong>Buso</strong> lounges on a throne of stolen furniture, swilling stolen liquor while jinkin caper around it. The party opens with buffs &mdash; Mu-Jin's Forbidding Ward and familiar trick, Zhen finally drawing the wrapped nodachi he has carried unsheathed for fifty years &mdash; and the fight is over almost before it begins: the jinkin flee, and a crit from Kaelen's Inner Upheaval drops the drunken Buso in the first round. The loot includes the three ancient copper coins whose blessing kept the Lantern lit &mdash; blessing now stripped away. The party shelters the night at the lime-warded Matsuki Estate and, by the next foggy dawn, has a plan: tour three shrines, re-bless the coins, and relight the Lantern before whatever has taken downtown comes for the rest of Willowshore.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act mystery">
+      <div class="act-label">Act I &middot; Mystery &middot; The Wrong Clearing</div>
+      <div class="act-card">
+        <h3>No Ransom at Dawn</h3>
+        <ul>
+          <li>The five festival "abductees" wake blindfolded in straw mats in a clearing <strong>east</strong> of town &mdash; the wrong side; they were carried <em>west</em> the night before.</li>
+          <li>The sun is already up and <strong>Choe Chung-hu has not come with the ransom breakfast</strong> &mdash; an abnormality that worries Old Zhen, who has lived here his whole life.</li>
+          <li>They free themselves easily (no check needed). <strong>Mu-Jin casts Know the Way</strong> to find the game trail south toward Willowshore &mdash; silver thread spooling from his fingers as he stitches the spell into the air.</li>
+          <li>Zhen, unbothered: <em>"Well, let's just wait for a bit more. Unless you children are impatient and hungry."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Talking Centipedes</div>
+      <div class="act-card">
+        <h3>"Meat. Flesh. Bones."</h3>
+        <ul>
+          <li>Two <strong>giant centipedes</strong> burst from the trees and attack. As they bite, their hissing forms <em>words</em>: "Meat. Flesh. Bones. Fingers. Hair. Skin. Eyes."</li>
+          <li>Quick, decisive fight (see Combat). <strong>Iryoku crit-burned one in half; Kaelen's Flurry of Blows finished the other.</strong> Iryoku took 3 damage, Kaoru 1; no one was poisoned.</li>
+          <li><strong>Recall Knowledge (Mu-Jin, Occultism):</strong> ordinary giant centipedes &mdash; but with <strong>+0 INT (average human intelligence)</strong> and able to <strong>speak Common/Tian</strong>, both wildly abnormal for vermin that normally flee daylight.</li>
+          <li>Working theory (Mu-Jin, with Zhen and Kaoru): the animals are <strong>possessed or influenced by evil spirits</strong>. Zhen, dryly: <em>"I do have a lot of spirits around me, but none of them is evil, so I wouldn't know."</em></li>
+          <li><strong>Zhen casts Garden of Healing</strong> out of combat to top everyone off &mdash; apologizing that he forgot his healer's toolkit ("old age").</li>
+          <li>Above-table <strong>character introductions</strong> on the walk back (see Spotlights): Iryoku the ancient town spirit, Mu-Jin the lifelong local, Kaoru the bookish kitsune, Kaelen the newcomer pilgrim, Zhen the elder-healer with a blade he never draws.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Exploration &middot; The Road Home Turns Wrong</div>
+      <div class="act-card">
+        <h3>The Fog and the Rhyme</h3>
+        <ul>
+          <li>Ten minutes out of the clearing, an unnatural <strong>fog</strong> floods the trees. Mu-Jin re-casts Know the Way to keep their bearing as they cross the <strong>Douyu River</strong> onto the Riverside Road into town.</li>
+          <li>A childhood <strong>nursery rhyme surfaces in Kaoru's memory</strong>: <em>"Lazy Ado took a break and did not light the lamp that day&hellip; Hazy mist and moon of blood, all because he just gave up."</em> &mdash; implying the <strong>Eternal Lantern may have gone out.</strong></li>
+          <li><strong>Detect Magic</strong> (Mu-Jin, as an exploration activity) lights up the whole area. Iryoku: <em>"Dude, it's lit up like a Christmas tree."</em> Magic is everywhere.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act IV &middot; Mystery &middot; The Spider Gate &amp; the Watchtower</div>
+      <div class="act-card">
+        <h3>Four Bodies and a Missing Guardian</h3>
+        <ul>
+          <li>At the <strong>Spider Gate</strong>, the horse-sized stone guardian <strong>"Ugly Cute" is missing.</strong> Its lantern lies broken on the ground (no oil). No chisel marks, but <strong>large furrows</strong> show the statue <strong>animated and walked east</strong>. Kaoru greets it before realizing it's gone: <em>"Hey there, little guy!"</em></li>
+          <li>At the <strong>Eastern Watchtower</strong> (~1 mile on): the smell of blood and <strong>four corpses</strong> &mdash; two town guards (dead of poison) and <strong>two jinkin</strong> (tiny blue-grey gremlin-fey) slain by sword. Two dead <strong>vipers</strong> nearby.</li>
+          <li><strong>RK (Zhen):</strong> the humanoids are <strong>jinkin</strong> &mdash; fey/gremlin, <strong>weak to cold iron</strong>. A second RK yields nothing more. <strong>Medicine (Zhen):</strong> the guards <strong>died of viper venom</strong>; the snakes are ordinary.</li>
+          <li>Theory firms up: <strong>Iryoku</strong> seeds it &mdash; <em>"something is influencing the animals to attack"</em> &mdash; and <strong>Mu-Jin</strong> develops it: jinkin are fey known for enchantment, so they likely <strong>beguiled the animals</strong>. Possibly the front of a larger invasion.</li>
+          <li>A surviving guard (the table nicknames her <strong>"Ha-hire"</strong> &mdash; unnamed in canon) hails them, frightened. <strong>Eight Practices challenge:</strong> each PC names one of the town's anti-ghost tenets; collectively they pass.</li>
+          <li>Her account: Choe Chung-hu's crew carried the actors <em>west</em>, then returned <em>without</em> them; after midnight, jinkin came from the south with trained serpents; the other two guards killed them but died to the venom.</li>
+          <li><strong>Comedy beat:</strong> Zhen moves to comfort her with a pat on the shoulder &mdash; a direct Eight-Practices taboo. The table catches it and rolls it back (the old elder would <em>never</em>). She gives the party flares/oil, a ladder, and a utility item.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery &middot; Blood Moon</div>
+      <div class="act-card">
+        <h3>The Rain That Was Real</h3>
+        <ul>
+          <li>Night falls early (the DM runs time at 1 real-second = 1 in-game-minute). The fog clears into a <strong>blood-red moon</strong>.</li>
+          <li><strong>Rain of actual blood</strong> coats everything for about a minute before reverting to plain water.</li>
+          <li>Everyone makes the Will save &mdash; hero points plus the table's "under-10-becomes-10" heroic-reroll rule make it a clean sweep; no one is affected.</li>
+          <li>Zhen confirms by touch that the blood was <strong>real, not illusion.</strong> The DM hands out a hero point and officially welcomes the table to <em>Season of Ghosts</em> over the soundtrack. <strong>(Break.)</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; The Eternal Lantern</div>
+      <div class="act-card">
+        <h3>The Buso on the Throne</h3>
+        <ul>
+          <li>The party loots their homes for gear (cold iron, ghost charges, snares, potions) and reaches <strong>Dawnstep Bridge.</strong></li>
+          <li>The <strong>Eternal Lantern</strong> &mdash; an immobile 5-foot stone lamp &mdash; is <strong>dark.</strong> A large <strong>Buso</strong> (a flesh-eating humanoid) sits on a <strong>throne of stolen furniture</strong>, drinking from a brewing pot, while jinkin entertain and taunt it. Blood smears mark a recent fight.</li>
+          <li><strong>RK (party):</strong> Buso &mdash; humanoid, "a simmering desire to consume the flesh of others," <strong>AC 18, no weaknesses.</strong></li>
+          <li>Buffs, then the fight (see Combat). The <strong>jinkin flee</strong> the instant combat starts; only the drunk, sickened Buso fights, and it falls in round one. <strong>Kaelen's Inner Upheaval crit lands the kill.</strong></li>
+          <li><strong>Loot from the throne:</strong> a kukri + studded leather (Iryoku), a silver scepter, a jewelry case, and &mdash; crucially &mdash; <strong>three ancient copper coins.</strong> Detect Magic confirms the coins' blessing is <strong>gone</strong>; these are the very coins that kept the Eternal Lantern lit. Iryoku's Ignition can't relight the Lantern &mdash; the block is magical, not fuel.</li>
+          <li><strong>The quest:</strong> carry each copper coin to a <strong>shrine</strong> and use the <strong>Invoke Shrine Blessing</strong> activity (Religion / deity-lore check, easy DC) to re-bless it. Success heals 1d8+8 and grants Guidance 1/24h; <strong>crit-fail destroys the coin and stupefies you.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VII &middot; Social &middot; Refuge &amp; the Plan</div>
+      <div class="act-card">
+        <h3>The Walls of the Matsuki Estate</h3>
+        <ul>
+          <li>The party hustles to the <strong>Matsuki Estate</strong> (lime-warded walls, the town's safest building). <strong>Old Matsuki Shou</strong> admits them after another Eight Practices challenge. South Willowshore's townsfolk shelter here; others are at the Thrice-Blessed Inn with Mother Otis. Ha-hire's husband is confirmed safe.</li>
+          <li>They rest the night. <strong>Reward: +1 reputation with both Northridge and South Bank</strong> for clearing Dawnstep Bridge.</li>
+          <li>Next foggy dawn, they recount everything to Old Matsuki and set the day's plan: bless the three coins at three shrines (Abadar next door &rarr; a shrine at Mother's Coil &rarr; the Kofusachi shrine at the Trade Office, where Granny Hu is), then relight the Lantern.</li>
+          <li>Matsuki warns: <strong>light the Lantern before touching downtown</strong> (north of the river), which is in shambles and "particularly infested with monsters."</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Game Trail, East of Willowshore &middot; ~2 Rounds</div>
+    <h3>The Talking Centipedes</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2&times; Giant Centipede (AC 15, ~11 HP; abnormally INT +0, speaking Tian)</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">~2</div></div>
+      <div><div class="combat-stat-label">Setup</div><div class="combat-stat-value">Trail ambush &middot; party scout bonus (Iryoku's Unwavering Guide)</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Iryoku 3 &middot; Kaoru 1 &middot; no poison</div></div>
+    </div>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Zhen</strong>: casts <strong>Needle Darts</strong> at a centipede &mdash; <strong>misses</strong> (a 15 into AC 15, foiled by the target's lesser cover) &mdash; then <strong>casts Shield.</strong></li>
+      <li><strong>Iryoku</strong>: a melee <strong>Strike</strong> (hit, minimum damage), then <strong>casts Shield.</strong></li>
+      <li>The party maneuvers; a <strong>centipede</strong> moves to <strong>Iryoku</strong>, bites, and demands a <strong>Fortitude save</strong> (Iryoku saves but takes <strong>3 damage</strong>, Barely Injured). Its hisses form words.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Iryoku</strong>: <strong>Flying Flame</strong> (catching one centipede; 1d6 fire, basic Reflex), then <strong>weapon-infusion &rarr; fire Elemental Blast &rarr; crit</strong> &mdash; <em>"like a fire halberd, straight through the body, cut in half."</em> <strong>Kill #1.</strong></li>
+      <li>The <strong>surviving centipede</strong> bites again; <strong>Kaoru takes 1 damage</strong> (Barely Injured). No one is poisoned.</li>
+      <li><strong>Kaelen</strong>: strides into reach and uses <strong>Flurry of Blows</strong> (fist, +7 / MAP &minus;4); both connect thanks to <strong>off-guard</strong>. <strong>Kill #2.</strong></li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li>Clean win over ~2 rounds, modest chip damage (Iryoku 3, Kaoru 1). The real payload was the post-combat RK: these "animals" think and talk. Mystery &gt; danger.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Dawnstep Bridge / The Eternal Lantern &middot; 1 Round</div>
+    <h3>The Buso</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">1&times; Buso (AC 18, no weaknesses; entered sickened/drunk) + jinkin (fled)</div></div>
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1 (one-round rout)</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">Iryoku 1 (fire Elemental Blast)</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">None taken</div></div>
+    </div>
+
+    <h4>Pre-Combat Buffs</h4>
+    <ul>
+      <li><strong>Mu-Jin</strong>: casts <strong>Nudge Fate</strong> (on Kaelen) and uses his familiar <strong>Weaver</strong> to raise <strong>Iryoku's AC +1.</strong></li>
+      <li><strong>Zhen</strong>: casts <strong>Embodiment of Battle</strong> and <strong>draws the nodachi for the first time</strong> &mdash; the blade he's carried wrapped for fifty years.</li>
+    </ul>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Combat opens &mdash; the jinkin flee</strong> the moment initiative starts; only the Buso fights.</li>
+      <li><strong>Zhen</strong>: strides in (reach), <strong>strikes the Buso with the nodachi</strong>, then <strong>casts Shield.</strong> With Embodiment of Battle's reach + Reactive Strike online, he also gets a <strong>reach reactive strike (11 damage)</strong> as the enemy repositions (the table was unsure whether the target was the Buso or a fleeing jinkin; the DM waved it through).</li>
+      <li><strong>The Buso</strong>: sickened/drunk &mdash; spends an action <strong>retching</strong>, then tries to <strong>Demoralize Iryoku</strong> in Fey (Iryoku's Will is low, but it doesn't matter &mdash; the fight ends fast).</li>
+      <li><strong>Iryoku</strong>: strides, <strong>weapon-infusion &rarr; fire Elemental Blast</strong> (hero point), big damage; drops his whip to keep a light up.</li>
+      <li><strong>Mu-Jin</strong>: moves beside Kaoru and casts <strong>Forbidding Ward</strong> (ally <strong>Kaoru</strong> / enemy Buso) &mdash; +1 AC &amp; saves vs the Buso.</li>
+      <li><strong>Kaoru</strong>: <em>"Actually, I'm going to Spellstrike."</em> &mdash; channels a save-spell through the blade; the Buso makes the save (sparking a friendly rules debate about Spellstrike + save spells, which the DM defers).</li>
+      <li><strong>Kaelen</strong>: moves in and uses his Ki spell <strong>Inner Upheaval</strong> &mdash; <strong>crit</strong> &mdash; <em>"First crit of the first one!"</em> &mdash; for big spirit damage. <strong>Kill &mdash; the Buso drops in round 1.</strong></li>
+    </ul>
+
+    <h4>Outcome</h4>
+    <ul>
+      <li>A one-round rout, <strong>no party damage taken.</strong> The fight's significance was the loot (the three blessing-stripped copper coins) and confirmation that the Eternal Lantern is out.</li>
+    </ul>
+  </div>
+
+  <div class="xp-banner">Experience &middot; Two encounters cleared &middot; <strong>32 XP each</strong></div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-zhen">
+      <h4>Zhen Stillness &middot; the Blade Still Wrapped</h4>
+      <ul>
+        <li><strong>The session's quiet emotional weight.</strong> For most of it Zhen is exactly who the town thinks he is &mdash; the gentle, unhurried elder-healer who calls grown adventurers "you children" and frets that the festival organizers were careless.</li>
+        <li><strong>The investigation's backbone.</strong> It's Zhen who identifies the <strong>jinkin</strong> and their cold-iron weakness, reads the guards' <strong>viper-venom</strong> deaths off a Medicine check, and quietly <strong>Garden-of-Healings</strong> everyone back to full.</li>
+        <li><strong>The line that is the whole character:</strong> to the dead-eyed guard &mdash; <em>"I do have a lot of spirits around me, but none of them is evil, so I wouldn't know."</em> Kind, a little uncanny, exactly the man on the sheet.</li>
+        <li><strong>His one near-misstep</strong> (going to pat a frightened woman on the shoulder, an Eight-Practices taboo) is corrected in-fiction precisely <em>because</em> Zhen of all people would know better.</li>
+        <li><strong>The beat the whole character is built around:</strong> facing the Buso, <strong>Zhen draws the wrapped nodachi for the first time</strong> &mdash; fifty years bound in cloth and prayer paper &mdash; strides in on his reach, and lands the blade.</li>
+        <li>Closed the night, OOC, asking the DM to make combat <em>harder.</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-iryoku">
+      <h4>Iryoku-Yasha &middot; the Town That Walks</h4>
+      <ul>
+        <li><strong>The deepest root in Willowshore.</strong> An ancient <strong>Yaksha nature spirit</strong> who has <em>"been in the town since its founding,"</em> who manifested to protect the people who came to trade with the monks, and who quietly resents the town's slide toward something "larger and more civilized."</li>
+        <li><strong>The party's driest voice:</strong> opening the Buso fight with a flat <em>"Well, I say we fight them, guys,"</em> calling the detect-magic chaos <em>"lit up like a Christmas tree,"</em> and announcing <strong>looting</strong> as <em>"my favorite part of this game"</em> a half-second after the boss hits the dirt.</li>
+        <li><strong>Carried the centipede fight:</strong> <strong>Flying Flame</strong>, then a <strong>weapon-infusion fire blast crit</strong> that cut one <em>"like a fire halberd, straight through the body."</em></li>
+        <li><strong>Seeded the session's working theory</strong> &mdash; <em>"something is influencing the animals to attack"</em> &mdash; which Mu-Jin then developed into the fey-enchantment read.</li>
+        <li>The party Face by build, and the one who quietly handles the bookkeeping (reputation tracking, who can use which martial gear).</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mujin">
+      <h4>Mu-Jin &middot; the One Who Reads the Threads</h4>
+      <ul>
+        <li><strong>If anyone "ran" this session it was Mu-Jin</strong> &mdash; the lifelong Willowshorer who actually knows the town, its NPCs, its shrines, and its monsters, and who drove nearly every investigative beat.</li>
+        <li><strong>The session's most striking image</strong>, narrating his <strong>Spinner of Threads</strong> casting: <em>"silver thread comes from his fingers, making a symbol, as if he's stitching the very magic into the air."</em></li>
+        <li><strong>The knowledge engine:</strong> the <strong>Occultism RK</strong> that cracks the talking-centipede mystery (<em>"even from 50 feet away, I very clearly heard them speaking Tian"</em>), the <strong>Detect Magic</strong> that exposes the saturated battlefield, and the theory-builder who lands on <strong>possession/enchantment by fey.</strong></li>
+        <li><strong>The planner</strong> who turns a pile of clues into an actual to-do list (<em>"a tour of the village &mdash; a blessing for each coin"</em>).</li>
+        <li><strong>Rich RP:</strong> a full backstory (elven adventurer father <strong>Mubong</strong>, late herbalist mother <strong>Xion</strong>, his spider familiar <strong>Weaver</strong>, mentors <strong>You So-Jin</strong> and the doctor <strong>Dami</strong>) and small grace notes like stroking Weaver's head as he reasons aloud.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaoru">
+      <h4>Kaoru &middot; the Boy with the Note</h4>
+      <ul>
+        <li><strong>The quiet one, and the party's soft-hearted heart.</strong> His introduction is the session's saddest thread: a kitsune of about 21, grown up in Willowshore making mischief, whose <strong>mother disappeared when he was ~15 and father when he was ~17</strong>, and who now spends his days in libraries <strong>trying to decipher the note his mother left behind.</strong></li>
+        <li><strong>His town-rooted childhood pays off</strong> when the fog rolls in and it's <em>Kaoru</em> who dredges up the old local <strong>nursery rhyme</strong> &mdash; <em>"Lazy Ado took a break and did not light the lamp that day&hellip;"</em> &mdash; the clue that first tells the party the Eternal Lantern may have gone dark.</li>
+        <li><strong>His tenderness</strong> shows when he greets the (now-missing) stone guardian like an old friend &mdash; <em>"Hey there, little guy!"</em> &mdash; a half-beat before the horror of its absence lands.</li>
+        <li><strong>A genre-savvy streak:</strong> calling the blindfolded-abductee opening <em>"that one intro to Skyrim,"</em> and floating that the centipedes are <em>"genetically modified&hellip; or brought back from the dead."</em></li>
+        <li><strong>The party's cleanest mechanical signature:</strong> stepping up to the Buso and calling <em>"Actually, I'm going to Spellstrike."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaelen">
+      <h4>Kaelen Ashford &middot; the Open Door</h4>
+      <ul>
+        <li><strong>The outsider who chose to belong.</strong> A clean-shaven, bald <strong>Human Monk</strong>, he came to Willowshore on <strong>pilgrimage</strong> to honor the Sangpotshi faith at the temple up the Pilgrim's Path &mdash; and then, with no real stake in the place, volunteered for the town's festival and threw in with strangers to defend it.</li>
+        <li><strong>That open-handedness is his throughline:</strong> when the exhausted party needs somewhere to weather the night, it's Kaelen who offers up his own (tiny) shack without a second thought &mdash; <em>"No, it'll be fine."</em></li>
+        <li><strong>Sneaky-good comic timing</strong>, the dry newcomer's-eye view of a town's weird rituals: deadpanning <em>"I didn't realize we were being kidnapped"</em> mid-combat, and answering "whose house do we crash at?" with a wordless <em>"I look at the magus."</em></li>
+        <li><strong>Carried real weight in both fights</strong> despite battling the worst laptop in the room (the good-natured "this laptop is smoking some crack" saga): the <strong>Flurry of Blows that finishes the second centipede</strong>, and the <strong>Inner Upheaval Ki-spell crit that kills the Buso</strong> &mdash; <em>"First crit of the first one!"</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">3 Ancient Copper Coins</div><div class="loot-source">The Buso's throne</div><div class="loot-note">The coins that kept the Eternal Lantern lit &mdash; <strong>blessing now stripped.</strong> Must be re-blessed at three shrines (Invoke Shrine Blessing).</div></div>
+    <div class="loot-item"><div class="loot-name">Chunk of Cold Iron</div><div class="loot-source">Mu-Jin's heirloom (his father Mubong's)</div><div class="loot-note">Chilling-cold iron, for the jinkin weakness. Only one chunk &mdash; hard to share.</div></div>
+    <div class="loot-item magical"><div class="loot-name">2&times; Ghost Charge</div><div class="loot-source">Iryoku's home &rarr; Kaoru</div><div class="loot-note">Iryoku lacks the proficiency; handed to Kaoru. Good vs incorporeal (vitality damage).</div></div>
+    <div class="loot-item"><div class="loot-name">Alarm Snare + 10 sp</div><div class="loot-source">Iryoku's home</div><div class="loot-note">Iryoku keeps. An alarm for when the party rests.</div></div>
+    <div class="loot-item"><div class="loot-name">2&times; Minor Healing Potion + Silver Holy Symbol</div><div class="loot-source">Kaelen's home</div><div class="loot-note">Potions to the party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">Kukri + Studded Leather</div><div class="loot-source">The Buso</div><div class="loot-note">Iryoku &mdash; <em>"my favorite part of this game."</em></div></div>
+    <div class="loot-item"><div class="loot-name">Silver Scepter &amp; Jewelry Case</div><div class="loot-source">The Buso's throne</div><div class="loot-note">Silver scepter with stones (~15 gp) + an elegant silver jewelry case (~5 gp) + 3 copper.</div></div>
+    <div class="loot-item"><div class="loot-name">Watchtower Supplies</div><div class="loot-source">Gift from the guard "Ha-hire"</div><div class="loot-note">Flares/oil (light), a ladder, and a utility item.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Reputation</div><div class="loot-source">Clearing Dawnstep Bridge</div><div class="loot-note">Gained with <strong>both</strong> Northridge and South Bank.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; The Talking Centipedes + The Buso &middot; <strong>32 XP each</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Zhen</strong>: "I do have a lot of spirits around me, but none of them is evil, so I wouldn't know."
+    <span class="attribution">To the frightened watchtower guard, when the party raises the idea of evil spirits &mdash; the whole Animist in one sentence.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "Well, let's just wait for a bit more. Unless you children are impatient and hungry."
+    <span class="attribution">Dawn in the clearing, the ransom late &mdash; Old Zhen unbothered, calling the party "children."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "I will also draw my nodachi for the first time."
+    <span class="attribution">Facing the Buso at the Eternal Lantern &mdash; the blade he's carried wrapped for fifty years, finally unsheathed.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "[Iryoku] has been in the town since its founding&hellip; he manifested to protect the people who came to trade with the monks. His Yaksha vow, to protect the community."
+    <span class="attribution">His character introduction &mdash; the town spirit who predates the town's industry.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "Dude, it's lit up like a Christmas tree."
+    <span class="attribution">When Mu-Jin's Detect Magic reveals magic saturating the whole area.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "My favorite part of this game." &mdash; "Got a kukri and studded leather armor."
+    <span class="attribution">The instant the Buso hits the ground and the looting begins.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mu-Jin</strong>: "As he casts it, silver thread comes from his fingers, making a symbol, as if he's stitching the very magic into the air before casting it."
+    <span class="attribution">Narrating his Spinner-of-Threads spellcasting &mdash; Know the Way, on the trail home.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mu-Jin</strong>: "And yet, even from 50 feet away, I very clearly heard them speaking Tian."
+    <span class="attribution">His Occultism Recall Knowledge that breaks the centipede mystery open.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mu-Jin</strong>: "It would make sense if they were possessed &mdash; their minds taken over by malicious intelligences."
+    <span class="attribution">Building the party's working theory about the turned animals.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "Hey there, little guy! Hey!"
+    <span class="attribution">Greeting the stone guardian Ugly Cute &mdash; a beat before the party realizes it's gone.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "Actually, I'm going to Spellstrike."
+    <span class="attribution">Stepping up to the Buso &mdash; his cleanest mechanical beat of the night.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "It seems like they're genetically modified by someone. Or brought back from the dead."
+    <span class="attribution">Theorizing about the impossibly clever centipedes.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "I didn't realize we were being kidnapped."
+    <span class="attribution">Deadpan, mid-combat, re: the festival's abduction framing.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "No, I'm gonna try the Ki spell." &mdash; "First crit of the first one!"
+    <span class="attribution">His Inner Upheaval crit that kills the Buso in round one.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Why the east, and where is Choe Chung-hu?</strong> The abductees woke on the wrong side of town and were never ransomed. The miller and his crew returned to the watchtower <em>without</em> the actors. What happened to him?</li>
+      <li><strong>The Eternal Lantern is dark.</strong> Three ancient copper coins lost their blessing. Re-bless all three at shrines and relight the Lantern &mdash; before tackling downtown.</li>
+      <li><strong>Ugly Cute walked away.</strong> The horse-sized stone guardian animated and went <strong>east</strong>. To what? Why?</li>
+      <li><strong>The animals are turning.</strong> Centipedes that think and speak; vipers that ambush guards. Fey (jinkin) enchantment, evil-spirit possession, or both &mdash; and is this the front of a larger <strong>invasion</strong>?</li>
+      <li><strong>Blood moon, blood rain.</strong> Real blood fell from a crimson moon and then undid itself. What does it portend?</li>
+      <li><strong>Downtown is overrun.</strong> North of the river is "particularly infested with monsters" and in shambles. Matsuki says save it for after the Lantern.</li>
+      <li><strong>The jinkin fled the Buso.</strong> They ran the instant the fight began &mdash; afraid of <em>something.</em> (Iryoku: "they looked at your face." Kaoru: "I thought they looked at <em>Kaoru's</em> face.")</li>
+      <li><strong>Kaoru's note.</strong> The note his mother left when she vanished &mdash; still undeciphered.</li>
+      <li><strong>Zhen's nodachi is unwrapped now.</strong> After fifty years, the blade is drawn. There is no putting that back.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">The Morning After</span>
+    <p>The blood moon is gone. So is the blood. But when the party steps out of the lime-warded walls of the Matsuki Estate at sunrise, the dense fog has rolled back in, thicker than before &mdash; and somewhere across Dawnstep Bridge, the Eternal Lantern still stands dark over a town that has always, for its entire history, kept a light burning.</p>
+    <span class="big-line">"Lazy Ado took a break and did not light the lamp that day&hellip;<br>for then the ghosts came out to play."</span>
+    <span class="speaker">&mdash; A Willowshore nursery rhyme, as Kaoru remembers it</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Zhen Stillness's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Zhen did this session</h3>
+  <ul>
+    <li>Woke in the <strong>wrong clearing</strong> (east, not west) with the other actors. No ransom, no <strong>Choe Chung-hu</strong>. Helped the party decide to walk home.</li>
+    <li>In the trail ambush: cast <strong>Needle Darts</strong> (missed &mdash; foiled by the target's cover) and cast <strong>Shield</strong>. (The bites landed on Iryoku and Kaoru, not me.)</li>
+    <li>Cast <strong>Garden of Healing</strong> after the fight to top everyone off.</li>
+    <li>Identified the <strong>jinkin</strong> (fey/gremlin, <strong>weak to cold iron</strong>); read the guards' deaths as <strong>viper venom</strong> (Medicine); ran the <strong>viper</strong> lore check.</li>
+    <li>Named one of the <strong>Eight Practices</strong> twice (watchtower, and again at the Matsuki gate). Almost broke Practice #2 (patting the guard) &mdash; caught it, rolled it back.</li>
+    <li>Made the <strong>Will save</strong> vs the blood moon (hero point); confirmed by touch the blood was <strong>real</strong>.</li>
+    <li>At the Eternal Lantern: cast <strong>Embodiment of Battle</strong>, <strong>drew the nodachi for the first time</strong>, struck the Buso with the nodachi, got a <strong>reactive strike (11)</strong>, cast Shield.</li>
+    <li>Pushed back, OOC, that combat felt too easy &mdash; asked Andy to consider making it harder.</li>
+  </ul>
+
+  <h3>Things Zhen knows that the party does not</h3>
+  <ul>
+    <li>Nothing private surfaced this session &mdash; the party investigated as a unit and shared findings. (Zhen's oni hunger, past life, and the blade's true origin remain his alone, untouched in play.)</li>
+    <li>Worth holding close: <strong>drawing the nodachi was supposed to be "a thing that is asked of him," not chosen.</strong> A drunk Buso that died in one round was <em>not</em> that moment. Watch whether the blade being unwrapped changes how the hunger sits.</li>
+  </ul>
+
+  <h3>What Zhen is thinking about</h3>
+  <ul>
+    <li>The animals are <strong>possessed or enchanted</strong>, not undead &mdash; Mu-Jin's "minds taken over" theory fits best. Jinkin are fey; fey beguile. This reads as <strong>coordinated</strong>, not random.</li>
+    <li><strong>Cold iron</strong> matters now (jinkin weakness). The party has exactly <strong>one</strong> chunk. Needle Darts can carry cold-iron properties &mdash; could be worth getting more cold iron, fast.</li>
+    <li>Zhen is the <strong>Perception anchor</strong> and it showed (hero-pointing the Seeks). In a horror AP, his initiative and Seeks are the party's early-warning system. Lean into it.</li>
+    <li>Combat is trivially easy so far (two one-sided fights). If Andy won't dial up difficulty without group buy-in, Zhen should <strong>stop spending resources</strong> (Shield, hero points) on fights that end in a round and save them for whatever's downtown.</li>
+    <li>Healing economy is comfortable: Garden of Healing out of combat + unrestricted refocus + heal-to-full rests. No reason to hoard Heal spells.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Where is <strong>Choe Chung-hu</strong>? Why the <strong>east</strong>? Who moved the sleeping actors?</li>
+    <li>Where did <strong>Ugly Cute</strong> go, and why east?</li>
+    <li>Which <strong>three shrines</strong> to bless the coins at, and what's the risk if anyone <strong>crit-fails</strong> the Invoke Shrine Blessing (coin destroyed, stupefied)? Zhen has <strong>Religion +7</strong> &mdash; he should be the one rolling.</li>
+    <li>What lit the <strong>blood moon</strong>, and is it coming back?</li>
+    <li>What's holding <strong>downtown</strong>? Matsuki says don't go until the Lantern's lit &mdash; genre-wisdom or a specific known threat?</li>
+    <li>The <strong>jinkin fled</strong> the Buso. From what? Worth knowing what scares fey here.</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

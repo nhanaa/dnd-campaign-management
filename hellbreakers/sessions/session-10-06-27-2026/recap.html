@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 10 — Incognito</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-sammy { border-left-color: var(--amber); }
+.char-ren { border-left-color: var(--gold); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ember); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-sammy { border-left-color: var(--amber); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Incognito</h1>
+  <div class="subtitle">Session 10 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">Jun 27, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 22m</span>
+    <span class="meta-pill">~13&ndash;22 Kuthona 4726</span>
+    <span class="meta-pill">Level 4</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:22%"></div>
+    <div class="comp-seg comp-explore" style="width:20%"></div>
+    <div class="comp-seg comp-social" style="width:20%"></div>
+    <div class="comp-seg comp-loot" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 22%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Exploration 20%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction 20%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Downtime 8%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Moon Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome &middot; Wizard (generalist) / Blessed One</div><div class="char-player">Scott Smith</div></div>
+    <div class="char-card char-sammy"><div class="char-name">Sammy Shadowfoot</div><div class="char-class">Halfling &middot; Bard (Polymath)</div><div class="char-player">fallernon &middot; <span class="new-badge">ABSENT / DM-RUN</span></div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound &middot; Bai Jian's Companion &middot; <span class="new-badge">MATURED &rarr; LV 4</span></div><div class="char-player">&mdash;</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The hero's hangover wore off fast. The party woke at Thorngrip the morning after the Stagfall victory, re-geared with Gug (Bai Jian splurging on a brand-new suit of full plate), and set off through the Chitterwood toward Saringallow as the first snow of the year began to fall. Three days of bad survival rolls and quiet, <em>too</em>-quiet forest later, the quiet broke: undead came crunching through the snow at the third night's camp &mdash; ghouls, a life-draining "white" wight, and a pair of slow zombie shamblers. Bai Jian, the only one who'd slept in his armor, met them in the dark while Panacea threw up Light; what followed was a one-sided slaughter (the DM "only rolling crits for the players"), with Bai Jian cleaving corpses in half, Ren ripping a zombie's leg clean out of the socket, Cyrathul biting a ghoul's head off, and Zanthar &mdash; who'd logged on mid-fight, half-asleep, and immediately fumbled his own hammer &mdash; closing it out with a Hand-of-the-Apprentice decapitation. <strong>The party hit level 4</strong> (Ren matured right after).</p>
+    <p>Out of the woods (Ren finally allowed to lead the way by scent), two crit-success diplomacy stops swelled the Hellbreaker ranks, and they reached Saringallow to report in. The HQ scene paid off a season of work: Cyrathul tipped Viro Ahala's week-old corpse out of the spacious pouch at Rhokrag's feet (Marie ran for a barrel), and Rhokrag confirmed the kill &mdash; Viro was the apprentice-thief he'd been chasing when he was captured, the man gathering Isger's scattered Hell Knights, undone with a stolen suit of plate. Moob and Fang incinerated the body; the goblins flatly refused to ever leave HQ again. Then a new mission: <strong>Alceo and Phoebe Demetrias are pinned down in the capital, Elidir</strong> &mdash; too hot, too identified. Rhokrag is sending the party in undercover for Hedvind's gala in ten days. <em>Stay incognito. No spouting off about the League.</em> A long shopping spree and the brand-new <strong>Uprising / Suppression tracker</strong> later, they marched north.</p>
+    <p>Elidir's gate was a Disneyland-line of refugees and inspectors, and getting in meant splitting up to blend with the crowd: Bai Jian muscled in as a green northern recruit (after fumbling his own heavy sword and flatly refusing to leash Ren), Panacea crit-tumbled through with a troupe of acrobats who turned out to be working thieves, and Zanthar talked a nervous Andoran clockmaker &mdash; and himself &mdash; past the guard. Then to the meeting point: <strong>Isger's Circle</strong>, an ancient, shunned monument to Urgothoa, goddess of excess and the first undead. They waited hours in the snow. Their courier finally arrived &mdash; <em>"friends of the rose"</em> &mdash; and so did the trap: <em>"Halt, criminals!"</em> A devil-masked constable named <strong>Adiutor</strong> and his thugs had been watching the circle. The fight was fast and deliberately non-lethal: Bai Jian one-shot a thug, Sammy's calm-song placated another, and Cyrathul clawed the masked constable bloody before a hero-pointed <strong>non-lethal strike to the skull</strong> put him down alive. They stuffed Adiutor into the spacious pouch &mdash; <em>no body, no evidence</em> &mdash; and their courier <strong>Sarevial</strong> hustled them through the dark to a safehouse. Session ends inside, undercover, in the capital, with a captive in the bag.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act explore">
+      <div class="act-label">Act I &middot; Exploration &middot; Thorngrip Morning &amp; the Road North</div>
+      <div class="act-card">
+        <h3>Hangover, Snow, and a New Suit of Plate</h3>
+        <ul>
+          <li>The party woke at <strong>Thorngrip</strong> the morning after Stagfall, hungover on goblin mead (<em>"Wake up, hangover. It's been a while since I drank this much."</em>). Everyone banked an extra hero point and took a long rest.</li>
+          <li><strong>Bai Jian shopped Gug</strong> one more time &mdash; spending his own gold on a full suit of <strong>plate armor</strong> (the smith measuring the too-tall human with two notched sticks taped together) &mdash; and the party picked <strong>Sammy a halberd</strong> out of the stash to replace her frying pan.</li>
+          <li>They set off through the <strong>Chitterwood</strong> toward Saringallow &mdash; ~3&frac12; days, no real paths, very bad survival rolls ("you guys kind of wish you had brought a ranger along").</li>
+          <li>The <strong>first snow of the year</strong> fell on the second night; winter was arriving (the 13th of Kuthona).</li>
+          <li>The forest went <strong>unnervingly quiet</strong> &mdash; "a little off-putting." Bai Jian and Ren both clocked it on watch but chalked it up to the snow. On the <strong>third night</strong>, crunching footsteps in the now-crusted snow woke them: visitors, from the east.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Snowbound Undead</div>
+      <div class="act-card">
+        <h3>Crits in the Cold</h3>
+        <ul>
+          <li><strong>Bai Jian woke the camp</strong> and, as the only one who'd slept in his armor, ran up to meet the threat; <strong>Panacea cast Light on him</strong> so the no-darkvision members (her, Bai Jian, Sammy) could see.</li>
+          <li>The enemies were <strong>undead</strong>: ghouls with a paralytic bite, slow grabbing <strong>zombie shamblers</strong>, and a life-draining <strong>"white" wight</strong>. They came in two waves &mdash; the second revealed when <strong>Zanthar</strong> caught movement to the south (<em>"I'll scream like a little girl"</em>).</li>
+          <li><strong>Zanthar arrived mid-fight, half-asleep</strong> &mdash; logged on, whiffed his first swing (the DM narrating the hammer slipping from his sleepy grip), and loved it: <em>"Oh, I'm going to cry. I love that."</em> (Both Zanthar and <strong>Cyrathul</strong> had been <strong>DM-run</strong> until their players logged in mid-fight &mdash; Bai Jian greeting <strong>Snowgeen's</strong> arrival: <em>"You're right on time for our first combat."</em>)</li>
+          <li><strong>Bai Jian carved through them</strong>: an opening <strong>40-damage crit</strong> destroyed a wight, then a second <strong>crit (54) split a zombie shambler clean in half</strong> &mdash; <em>"I'm overkilling these guys. Holy."</em> &mdash; the DM narrating it "like an anime." He commanded <strong>Ren</strong> (still young) to finish a near-dead zombie, narrated as the hound ripping its leg out of the socket.</li>
+          <li>The undead bit back: the <strong>white wight's life-draining dagger punched through Bai Jian's brand-new plate</strong> (<em>"I need to get a refund"</em> &mdash; he made every save, hero-pointing the last). Its drain caught <strong>Zanthar</strong> twice; he shrugged both off (incapacitation, higher level).</li>
+          <li><strong>Panacea</strong> anchored the back &mdash; <strong>Vitality Lash</strong>, <strong>Divine Lance</strong>, and a clutch <strong>three-action burst Heal</strong> that topped the party while searing every undead in range (the white wight <strong>crit-failed</strong>). <strong>Cyrathul</strong> read the weaknesses and <strong>bit a ghoul's head off</strong>. <strong>Sammy</strong> (DM-run) kept up <strong>Courageous Anthem</strong> and crit-swung her halberd. <strong>Zanthar</strong> ended it with a <strong>Hand of the Apprentice crit</strong> &mdash; <em>"the head of the hammer just flies sideways&hellip; and takes his head off."</em></li>
+          <li><strong>Party levels to 4.</strong> Ren leveled to a <strong>Mature companion</strong> (now acts independently); Bai Jian retrained his level-1 ancestry feat tankier still (<em>"How tanky do you want to be?" "Really tanky."</em>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III &middot; Faction / Roleplay &middot; Hearts, Minds &amp; the Hero's Report</div>
+      <div class="act-card">
+        <h3>"He's in Here"</h3>
+        <ul>
+          <li>Next morning the forest's sounds returned &mdash; and <strong>Ren scent-tracked the party out of the woods</strong> by an elk trail (Bai Jian: <em>"You wonder why you haven't been listening to him this whole time"</em>), popping out southwest of Fernsby.</li>
+          <li>Two <strong>crit-success diplomacy</strong> stops: a farmstead already on-board offered to march to Saringallow (<strong>+2 reputation</strong>), and <strong>Sammy sang a Hellbreaker ditty</strong> at a second &mdash; <em>"you can almost swear there's magic behind her singing"</em> &mdash; winning another (<strong>+1 reputation</strong>).</li>
+          <li>At <strong>Saringallow HQ</strong>, Marie welcomed them and led them to <strong>Rhokrag</strong>. Asked where the false Hell Knight was, Cyrathul <strong>gestured to the spacious pouch "under his wing" and tapped it with a claw</strong> &mdash; <em>"He's in here."</em> Marie recoiled at the week-old smell and ran to vomit into a barrel.</li>
+          <li><strong>Rhokrag identified the body: Viro Ahala.</strong> The man he'd been chasing &mdash; an <strong>apprentice himself</strong> who'd <strong>stolen Hell Knight plate after the Battle of Breachill</strong> to gather Isger's scattered, fleeing Hell Knights. This was the trail that got Rhokrag captured. <strong>Moob and Fang torched the corpse</strong> &mdash; and flatly refused to ever go into the field again (<em>"We die when we leave"</em>), eyeing Panacea, who reassured them: <em>"I've got everybody covered."</em></li>
+          <li><strong>The new mission</strong>: Alceo and Phoebe Demetrias have stirred up too much trouble in <strong>Elidir, the capital</strong>; the authorities have made them. Get in <strong>incognito</strong>, go to <strong>Isger's Circle</strong>, and wait for a courier. <strong>Hedvind's gala is in ~10 days</strong>; the party will be on the guest list. Rhokrag handed over a goblin-made magic item &mdash; a <strong>Lifting Belt</strong> &mdash; for Bai Jian.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV &middot; Downtime &middot; Spoils &amp; the Long Shop</div>
+      <div class="act-card">
+        <h3>"Rebellion Is Profitable"</h3>
+        <ul>
+          <li><strong>Zanthar scribed two spells</strong> into his book &mdash; Scroll of Grease and Scroll of Force Barrage (Arcana checks, hero-pointed).</li>
+          <li>The party <strong>liquidated the dungeon</strong>: seven Hellknight breastplates, weapons, rare mushrooms, rubies, ritual supplies, 35 bolts. <em>"Rebellion is profitable." / "We're rich!"</em></li>
+          <li><strong>Kept for the mission</strong>: Viro's <strong>Hell Knight plate</strong> (a future infiltration disguise), the devil journal, a <strong>climbing bolt</strong>, and a <strong>silver chunk</strong> &mdash; which Bai Jian used to <strong>silver his falcata</strong>.</li>
+          <li>Gear: <strong>Cyrathul</strong> claimed the <strong>Pendant of the Occult</strong> and the <strong>Shining Symbol</strong> (<em>"I'm sparkly"</em>) and upgraded his <strong>handwraps to striking</strong>. <strong>Panacea</strong> bought a <strong>Staff of Healing</strong>. <strong>Zanthar</strong> stocked <strong>Helpful Step</strong> and second-level <strong>Heal</strong> scrolls. <strong>Bai Jian</strong> added a <strong>crushing rune</strong>.</li>
+          <li>On the road north, the DM introduced the <strong>Uprising / Suppression tracker</strong>: Uprising points build Hellbreaker support; Suppression points accrue from noise or killing (a flat check each time). Travel passed the very spot where they'd <strong>sunk the Chelaxian ship in Session 2</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V &middot; Exploration / Social &middot; The Gate of Elidir</div>
+      <div class="act-card">
+        <h3>Three Disguises and a Refusal</h3>
+        <ul>
+          <li><strong>Elidir</strong> &mdash; a walled capital of ~20,000, the Carnecia River running through it &mdash; greeted them with a refugee line <strong>"as long as the Matterhorn at Disneyland,"</strong> exhausted and gouged by water-and-ale vendors. Several groups offered cover.</li>
+          <li><strong>Bai Jian</strong> tried to pass as one of the <strong>green northern recruits</strong> (Athletics). It went badly first: showing off, he <strong>dropped his own heavy falcata</strong> in the snow, and when the guard demanded he <strong>leash Ren</strong>, he <strong>refused outright</strong> &mdash; portcullis down, denied.</li>
+          <li><strong>Panacea</strong> joined the <strong>Menagerie of Fae Fantastico</strong> acrobats &mdash; a hero-pointed <strong>crit-success triple-backflip</strong> &mdash; and realized mid-tumble the troupe were <strong>working thieves</strong> pickpocketing the line. <em>"I'll blend right in. Keep a low profile, smile and nod."</em></li>
+          <li><strong>Zanthar</strong> disguised as a plain human and worked the <strong>nervous Andoran clockmaker dwarf</strong> (Crafting, crit success) &mdash; deducing the dwarf feared rejection over the Andor&ndash;Cheliax war, then <strong>sidestepping the guard</strong> with a cover story and walking him through. The grateful dwarf gifted him a little hand-carved clock.</li>
+          <li><strong>Bai Jian hero-point-retconned</strong> his attempt and got in clean: vouching for the green recruits (<em>"They're new, but they have the spirit"</em>) and <strong>still refusing to leash Ren</strong> &mdash; the guard, eyeing his gleaming plate and huge sword, waved them through. The party drew a little suspicion (a <strong>Suppression point</strong>), but everyone made it inside.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; Isger's Circle &amp; the Trap</div>
+      <div class="act-card">
+        <h3>Halt, Criminals</h3>
+        <ul>
+          <li>Inside the capital, the party <strong>immediately forgot why they'd come</strong> &mdash; <em>"Let's go bar hopping"</em> &mdash; until the DM reminded them about the meeting (<em>"Not a single note-taker in the group"</em>).</li>
+          <li>They found <strong>Isger's Circle</strong> by asking around (a snobby half-elf: <em>"There'll be no one else there. Why would you want to go there? Disgusting."</em>), crossing Elidir's great bridge past <strong>Moyle</strong> (the former slave market, slavery only just outlawed by the Emancipation Edict &mdash; now a debtor's munitions workhouse), the docks, and a derelict menagerie.</li>
+          <li><strong>The Circle</strong> was an ancient, worn standing-stone monument to <strong>Urgothoa</strong> &mdash; goddess of excess, disease, and the undead, the first being to refuse death at the River Styx. Centuries of attempts to remove it had failed (workers fell ill). Everyone avoids it. Cyrathul, unbothered: <em>"Are we going to sacrifice someone on the altar now?"</em></li>
+          <li>They <strong>waited hours in the snow</strong>. A courier walked up &mdash; <em>"Friends of the rose? Wonderful, we've been expecting you"</em> &mdash; and then: <strong>"HALT, CRIMINALS!"</strong> A devil-masked constable, <strong>Adiutor</strong>, with two thug "Toadies," had been watching the circle.</li>
+          <li><strong>The fight</strong> (deliberately restrained, the Suppression rules looming): <strong>Zanthar</strong> opened with <strong>Blazing Bolt</strong>; <strong>Bai Jian dropped a Toady with a single 42-damage strike</strong>; <strong>Adiutor fumbled his unloaded musket</strong> (<em>"I guess he's not very good at his job"</em>), then fired and shot Bai Jian. <strong>Sammy's calm-song</strong> placated the surviving Toady; <strong>Adiutor shrugged it off.</strong> <strong>Panacea's</strong> improvised attempt to channel Urgothoa was shut down by her own patron. <strong>Cyrathul</strong> Exploited, <strong>Demoralized</strong>, and clawed Adiutor open &mdash; then <strong>hero-pointed a non-lethal claw</strong> (narrated as a spinning tail-strike to the head), dropping the constable alive.</li>
+          <li><strong>No body, no evidence</strong>: they <strong>stuffed Adiutor into the spacious pouch</strong>, the calmed Toady fled, and they made a <strong>clean getaway with zero exposure</strong>. Their courier, <strong>Sarevial</strong>, led them through the dark to a safehouse.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <p style="color:var(--text-dim);font-size:14px;">Damage and to-hit values are from the session's roll log (<code>rolls.txt</code>) and transcript where stated. Attribution is by character capability (class / feature / weapon), not transcript speaker labels &mdash; which <strong>merged Cyrathul and Zanthar into one voice</strong> this session and <strong>split the DM (who also voiced absent Sammy) across two.</strong> The first fight was a <strong>128-XP encounter</strong> (the level-up &mdash; a genuinely hard budget for a 7-enemy swarm; it only <em>played</em> one-sided because the party crit repeatedly and the undead whiffed nearly every bite). The capital capture-fight's XP wasn't announced.</p>
+
+  <div class="combat-box">
+    <h3>Encounter 1 &mdash; The Snowbound Undead</h3>
+    <div class="combat-meta">128 XP &middot; ~3 rounds &middot; level-up after &middot; Init: Ghoul (later) &middot; Panacea &middot; Bai Jian &middot; Wight &middot; Cyrathul &middot; Zanthar &middot; Sammy &middot; Ghoul (later) &middot; Zombie Shambler &middot; Wight (later) &middot; Ghoul (later) &middot; Zombie Shambler</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Wave 1 (East)</div><div class="combat-stat-value">Ghouls + Wight</div></div>
+      <div><div class="combat-stat-label">Wave 2 (South)</div><div class="combat-stat-value">Shamblers + white Wight</div></div>
+      <div><div class="combat-stat-label">Clutch</div><div class="combat-stat-value">Bai Jian hero-points the drain</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian x4, Cyrathul, Ren, Zanthar</div></div>
+    </div>
+    <h4>Round by Round</h4>
+    <ul>
+      <li><strong>Setup:</strong> Bai Jian (only one armored) woke the camp and engaged; <strong>Panacea cast Light on him</strong> so the no-darkvision half could see. His opening <strong>falcata crit (40) destroyed the first wight</strong> &mdash; whose <strong>dying-reaction claw</strong> clipped him for 10 (Fort save, success).</li>
+      <li><strong>Bai Jian &mdash; 4 kills:</strong> the 40-crit wight; a second <strong>crit (49 rolled &rarr; 54 with weakness) that split a zombie shambler in half</strong>; a <strong>Sudden Charge (14) that finished the white wight</strong>; and a <strong>MAP strike (13) that beheaded a ghoul</strong>. Commanded <strong>Ren</strong> (still Young) to <strong>bite a near-dead zombie for the kill</strong>. Made every paralysis/drain Fort save &mdash; <strong>spending a hero point</strong> to reroll the white wight's final draining dagger (<em>"I need to get a refund"</em>).</li>
+      <li><strong>Cyrathul:</strong> <strong>Exploit Vulnerability</strong> flagged the undead's weaknesses (vitality/slashing), then <strong>chomped a ghoul's head off</strong> (30 &rarr; 33). Whiffed both attacks on the last ghoul late.</li>
+      <li><strong>Panacea:</strong> <strong>Vitality Lash</strong> (target saved, weakness still bit two undead for 3/8), <strong>Divine Lance</strong>, and a <strong>three-action burst Heal</strong> &mdash; healing the party 7 each while searing all three remaining undead; the <strong>white wight crit-failed</strong> for 14.</li>
+      <li><strong>Zanthar:</strong> arrived half-asleep, <strong>whiffed his first hammer Strike</strong> (narrated as a dropped hammer), chipped a zombie with <strong>Phase Bolt (7)</strong>, <strong>Dizzying Colors dazzled two</strong>, shrugged off <strong>two life-draining wight bites</strong> (incapacitation), and <strong>ended the fight with a Hand-of-the-Apprentice crit (30) decapitation</strong>.</li>
+      <li><strong>Sammy</strong> (DM-run): <strong>Courageous Anthem</strong> + <strong>Runic Weapon</strong> on herself; <strong>crit-swung her halberd into the white wight (14)</strong>, then MAP-hit it again (9). Soaked the wave-2/3 bites (~22 dmg) and passed every paralysis save.</li>
+      <li><strong>Ren</strong> (matured to Lv 4 <em>after</em> this fight): landed the finishing zombie bite; next morning, scent-led the party out of the forest.</li>
+    </ul>
+    <p><strong>Outcome:</strong> all undead destroyed, no party drops. <strong>Party levels to 4.</strong></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 2 &mdash; The Trap at Isger's Circle <span style="font-size:12px;color:var(--rose-bright);">(capture fight)</span></h3>
+    <div class="combat-meta">Non-lethal &middot; Init: Zanthar &middot; Toady &middot; Adiutor &middot; Bai Jian (delayed) &middot; Panacea &middot; Sammy &middot; Cyrathul &middot; Sarevial (ally) &middot; Toady</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Boss</div><div class="combat-stat-value">Adiutor (devil-mask, musket)</div></div>
+      <div><div class="combat-stat-label">Minions</div><div class="combat-stat-value">2 Toady thugs</div></div>
+      <div><div class="combat-stat-label">Ally</div><div class="combat-stat-value">Sarevial (courier)</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Adiutor captured alive</div></div>
+    </div>
+    <ul>
+      <li>The courier's <em>"friends of the rose"</em> was answered by <em>"HALT, CRIMINALS!"</em> &mdash; constable <strong>Adiutor</strong> (flaming-horn devil mask; <strong>flintlock musket</strong> + bayonet-stick; a <strong>divine</strong> caster) and two billy-club <strong>Toadies</strong>. <strong>Bai Jian delayed</strong> (no darkvision, waiting for Light). The party fought to <strong>subdue.</strong></li>
+      <li><strong>Zanthar:</strong> <strong>Blazing Bolt</strong> as three rays &mdash; two missed, one landed for 12 on a Toady; later a <strong>non-lethal Hand of the Apprentice</strong> at Adiutor (miss); pegged the empty musket for the table.</li>
+      <li><strong>Bai Jian:</strong> a <strong>crit Strike for 42 &rarr; Toady killed</strong> outright (declared Slam Down, swapped to a plain Strike at the number). Round 2: commanded <strong>Ren to Support</strong>, then a <strong>non-lethal Slam Down on Adiutor</strong> (-2, miss) &mdash; after shouting to Sarevial to confirm a kill was off the table. Got a <strong>Reactive Strike</strong> on Adiutor's spellcast (a manipulate action) but missed. Tanked the musket (15) and <strong>Crisis of Faith</strong> (saved &rarr; 8 mental).</li>
+      <li><strong>Adiutor</strong> (enemy): <em>"You're all under arrest."</em> <strong>Fumbled the unloaded musket</strong>, reloaded, <strong>shot Bai Jian for 15</strong>; cast <strong>Crisis of Faith</strong> (Bai Jian saved); bayonet (miss). Took 23 / 16 / 18 / 20 from Cyrathul.</li>
+      <li><strong>Sammy</strong> (DM-run): <strong>Courageous Anthem</strong> + <strong>Calm</strong> &mdash; <strong>placated Toady #2</strong> (failed save, swaying); <strong>Adiutor made his save.</strong> Sustained the calm to cover the getaway.</li>
+      <li><strong>Panacea:</strong> a <strong>Necril plea to Urgothoa</strong> to scare the captives &mdash; <strong>shut down by her own patron</strong> via her familiar; <strong>Light on Bai Jian</strong>; <strong>Life Boost</strong>; familiar-step &rarr; <strong>auto-Stupefy on Adiutor</strong>; <strong>Trade Death for Life</strong> (saved).</li>
+      <li><strong>Cyrathul:</strong> <strong>Exploit Vulnerability</strong> + <strong>Demoralize (Intimidating Glare &rarr; Frightened 1)</strong> + claws <strong>through Adiutor's chest armor</strong>; finished with a <strong>hero-pointed, non-lethal claw that just connected</strong> (the DM narrating a spinning tail-strike to the head) &mdash; <strong>Adiutor down alive.</strong></li>
+    </ul>
+    <p><strong>Outcome:</strong> one Toady dead, one fled (Calmed), <strong>Adiutor captured</strong> and bagged in the spacious pouch. <strong>Clean getaway &mdash; no exposure/suppression point.</strong> Sarevial leads them to a safehouse.</p>
+  </div>
+
+  <div class="xp-banner">
+    Two encounters &middot; undead night-ambush (128 XP, levels party to 4) &middot; capital capture-fight (clean) &middot; <strong>Now Level 4</strong> &middot; Reputation 20 (MAX) &middot; +3 from the road
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the White Blade in Winter</h4>
+      <ul>
+        <li>The quiet competence the party leans on. He slept in his armor, woke the camp, and ran <em>toward</em> the dark to buy everyone a turn &mdash; then once Panacea lit him, was a butcher: a crit that <strong>slid an undead in half "like an anime"</strong> (<em>"I'm overkilling these guys"</em>), a ghoul beheaded, and a <strong>single 42-damage strike that one-shot a thug</strong> in the capital.</li>
+        <li>He ate a wight's life-draining dagger through his <strong>brand-new plate</strong> with the session's best deadpan &mdash; <em>"I need to get a refund"</em> &mdash; and made every save it threw at him (hero-pointing the last).</li>
+        <li>The spotlight beat was <strong>Ren</strong>. With the boarhound newly matured, Bai Jian stopped babysitting him and started <em>trusting</em> him &mdash; handing Ren the survival check to lead them out of the forest, and, twice at the Elidir gate, <strong>flatly refusing to leash him</strong> even when it cost him entry. <em>"Yes, I've got him, and he's a very good boy."</em></li>
+        <li>He plays the tank as a caretaker: led the watch rotations, talked Panacea through her positioning all fight, and in the capital deferred every kill decision to the mission (<em>"Anything wrong if I kill this guy?"</em>). The materialism gag carried over lightly (<em>"Finally, we can sell all these"</em>) but reads as a quartermaster's habit now, not greed. He's the one keeping the lights on.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Profitable Rebel</h4>
+      <ul>
+        <li>The party's <strong>mouth and its scalpel</strong>. He delivered the HQ report, summed up a season of war in a sentence, and gave the session its thesis on the way to sell loot: <em>"Rebellion is profitable."</em></li>
+        <li>His presentation of <strong>Viro's corpse</strong> was peak Cyrathul &mdash; <strong>gesturing to the pouch "under my wing" and tapping it with a claw, "He's in here"</strong> &mdash; theatrical, dry, and faintly monstrous, right down to asking the goblin arsonists to <strong>teach him the body-incineration trick</strong>.</li>
+        <li>In combat the enemy-reader and the closer: <strong>Exploit Vulnerability</strong> every fight, a <strong>ghoul's head bitten off</strong>, and in the capital he methodically took the masked constable apart &mdash; Exploit, <strong>Demoralize</strong>, claws <strong>through the chest armor</strong> &mdash; before threading the needle that mattered: a <strong>hero-pointed, MAP-penalized, non-lethal claw</strong> that <em>just</em> connected, capped with a spinning <strong>tail-strike</strong> that crumpled Adiutor "like a rag doll" without killing him.</li>
+        <li>He owns the party's self-awareness, too &mdash; eyeing the infiltration plan and admitting <em>"I can keep myself not a dragon for an hour&hellip; but I'm not really good at being inconspicuous. I don't think our party in general is"</em> &mdash; and surveying Urgothoa's creepy altar with a glowing Shining Symbol pinned to him: <em>"I'm sparkly. Are we going to sacrifice someone now?"</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Hand That Has Everybody Covered</h4>
+      <ul>
+        <li>Ran the whole back line under pressure: <strong>Light</strong> so the no-darkvision half could even fight, <strong>Vitality Lash</strong> and <strong>Divine Lance</strong> into the undead, and a perfectly-placed <strong>three-action burst Heal</strong> that mended the party and torched every walking corpse in range.</li>
+        <li>Her positioning instincts are sharp and stated aloud (<em>"First I'm going to move out of the way, because if it dies and flats on me, I don't want that"</em>), and she came <strong>loaded</strong> &mdash; buying a <strong>Staff of Healing</strong> specifically for the dark mission ahead.</li>
+        <li>Facing Moob and Fang &mdash; the goblins her crit-failed Battle Medicine killed two sessions back &mdash; she didn't flinch: <em>"Don't worry, I've learned a lot more since then. I've got everybody covered."</em></li>
+        <li>At Isger's Circle she got curious and reckless, trying to <strong>channel Urgothoa herself</strong> (she speaks Necril) to scare the captives into talking &mdash; only for her own patron to recoil through her familiar and warn <em>"Don't do that again."</em> Her reply was the line of the night: <em>"Well, I thought it might be fun."</em> And she's a genuine infiltrator &mdash; a hero-pointed <strong>crit-success acrobatics tumble</strong> slid her into the city with a troupe of thieves.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Apprentice Who Logged On Mid-Fight</h4>
+      <ul>
+        <li>The funniest entrance of the campaign so far: he <strong>joined the session in the middle of the undead ambush, half-asleep</strong>, immediately <strong>whiffed his first attack</strong> (the DM narrating the hammer slipping from his grip) &mdash; and loved it. <em>"Oh, I'm going to cry. I love that."</em></li>
+        <li>From there, exactly what the party needed: he <strong>screamed the warning</strong> that revealed the second wave (<em>"I'll scream like a little girl"</em>), shrugged off <strong>two life-draining wight bites</strong>, dazzled a cluster, and <strong>closed the fight with a Hand-of-the-Apprentice crit</strong> &mdash; <em>"the head of the hammer just flies sideways&hellip; and takes his head off."</em></li>
+        <li>The party's problem-solver out of combat: he <strong>scribed Grease and Force Barrage</strong> into his book, stocked <strong>Helpful Step</strong> and <strong>Heal</strong> scrolls with the next mission in mind, and at the Elidir gate ran the cleverest con &mdash; reading the <strong>Andoran clockmaker's</strong> real fear, then <strong>talking both of them past the guard</strong>.</li>
+        <li>Even his combat read of the enemy is comedy with a point &mdash; clocking Adiutor's empty musket and calling it: <em>"I guess he's not very good at his job. He just waves the gun around &mdash; he doesn't actually use it."</em> From "rebel without a clue" to the guy quietly carrying the utility belt.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-sammy">
+      <h4>Sammy Shadowfoot &middot; the Song From the Wings</h4>
+      <ul>
+        <li>fallernon was absent and <strong>DM-run all session</strong>, but Sammy still earned her keep. She traded her frying pan for a <strong>10-foot-reach halberd</strong> and immediately put it to work &mdash; crit-swinging into the white wight while keeping <strong>Courageous Anthem</strong> up over the party.</li>
+        <li>On the road, a hearts-and-minds weapon: <strong>a Hellbreaker ditty at a farmstead</strong> that landed like real enchantment (<em>"you can almost swear there's magic behind her singing"</em>) and won a reputation point.</li>
+        <li>Her best beat was the capital ambush. With the party trying to keep the fight <strong>non-lethal</strong>, her <strong>calm-song lullaby</strong> placated one of Adiutor's thugs into swaying on the spot, taking him out of the fight without a scratch. (The masked constable shook it off entirely, which is its own kind of ominous.)</li>
+        <li>Reliable, present, and quietly load-bearing even when her player can't be.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Gear</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Pendant of the Occult</div><div class="loot-source">Claimed by Cyrathul</div><div class="loot-note">The reforged crystal &mdash; Cyrathul carries it (best Religion).</div></div>
+    <div class="loot-item magical"><div class="loot-name">Shining Symbol</div><div class="loot-source">Claimed by Cyrathul</div><div class="loot-note">Constant light + Religion bonus &mdash; "I'm sparkly."</div></div>
+    <div class="loot-item magical"><div class="loot-name">Silvered Falcata</div><div class="loot-source">Bai Jian (silver chunk)</div><div class="loot-note">Low-grade silver applied &mdash; anti-fiend / lycanthrope / regeneration.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Staff of Healing</div><div class="loot-source">Panacea (90 gp)</div><div class="loot-note">Two extra Heals per day for the dark mission ahead.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Viro's Hell Knight Plate</div><div class="loot-source">Kept from S9</div><div class="loot-note">Saved for a future infiltration disguise.</div></div>
+    <div class="loot-item"><div class="loot-name">Full Plate Armor</div><div class="loot-source">Bought from Gug</div><div class="loot-note">Bai Jian's own gold &mdash; stabbed through round one. "I need a refund."</div></div>
+    <div class="loot-item"><div class="loot-name">Halberd (10-ft reach)</div><div class="loot-source">Stash &rarr; Sammy</div><div class="loot-note">Replaces the frying pan; immediately crit-swinging.</div></div>
+    <div class="loot-item"><div class="loot-name">Scrolls: Grease &amp; Force Barrage</div><div class="loot-source">Zanthar (scribed)</div><div class="loot-note">Added to spellbook. Plus Helpful Step x4 + Heal (2nd) x2.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Lifting Belt</div><div class="loot-source">Rhokrag / goblins &rarr; Bai Jian</div><div class="loot-note">Goblin-made gift &mdash; +1 item to Athletics (Trip/Shove). Plus a crushing rune (30 gp).</div></div>
+    <div class="loot-item"><div class="loot-name">Sold: 7 breastplates, weapons, rubies, supplies, 35 bolts</div><div class="loot-source">Stagfall haul</div><div class="loot-note">"We're rich!" / "Rebellion is profitable."</div></div>
+  </div>
+  <div class="xp-banner">
+    Reputation &middot; +2 farmstead crit-diplomacy &middot; +1 Sammy's song = <strong>still 20 (MAX tier)</strong> &middot; New: Uprising / Suppression tracker live
+  </div>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Elidir mission</strong> &mdash; reach <strong>Alceo &amp; Phoebe Demetrias</strong>' safehouse (Sarevial is taking them), survive ten days incognito in a locked-down Chelaxian capital, and turn up on the guest list for <strong>Hedvind's gala</strong>. What's the actual play at the gala?</li>
+      <li><strong>Adiutor in the pouch</strong> &mdash; a captured devil-masked <strong>constable</strong> who'd been <em>watching Isger's Circle specifically</em> for League contacts. How did the authorities know to watch the meeting spot? Who is he, and what does he know? (And the <strong>second Toady fled</strong> &mdash; a witness is loose.)</li>
+      <li><strong>The Uprising / Suppression tracker</strong> is now live. Suppression builds from noise and killing; the party is already learning to fight non-lethally and hide bodies. How tight will the capital's leash be?</li>
+      <li><strong>Isger's Circle / Urgothoa</strong> &mdash; an ancient monument to the goddess of undeath that <em>can't be removed</em> and makes people ill. Set dressing, or a thread &mdash; given a season fighting undead and a lich rumored on Lake Encarthan?</li>
+      <li><strong>Viro Ahala &mdash; closed, mostly.</strong> Confirmed as an apprentice-thief who stole Hell Knight plate after Breachill to gather fleeing Hell Knights. Rhokrag's capture is explained. Still open: was anyone <em>above</em> Viro pulling strings, and is <strong>Hellknight Alaya</strong> connected?</li>
+      <li><strong>Moob &amp; Fang</strong> are now permanent HQ fixtures (<em>"We die when we leave"</em>). <strong>Rama's death</strong> remains an unsettled debt with Rhokrag &mdash; still not raised.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "I need to get a refund. Oh my God."<span class="attribution">His brand-new full plate, bought that morning, getting punched through by a wight's draining dagger round one.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Yes, I've got him, and he's a very good boy."<span class="attribution">Refusing &mdash; twice &mdash; to leash Ren at the Elidir gate, even when it cost him entry. He signals the hound to roll over and play harmless.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Oh my god, I'm overkilling these guys. Holy."<span class="attribution">A falcata crit cleaving a snowbound corpse in half "like an anime."</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "Rebellion is profitable."<span class="attribution">Deadpan, on the way to liquidate a dungeon's worth of loot.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I gesture to the pouch &mdash; which we'll say is under my wing &mdash; and tap it with the claw. He's in here."<span class="attribution">Presenting Viro Ahala's week-old corpse to Rhokrag at HQ. Marie ran for a barrel.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I'm sparkly. Are we going to sacrifice someone on the altar now?"<span class="attribution">Surveying the shunned altar of Urgothoa, a glowing Shining Symbol pinned to him.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "Well, I thought it might be fun."<span class="attribution">After trying to channel Urgothoa to terrify the captives &mdash; and getting recoiled at by her own patron, who warned her through her familiar: "Don't do that again."</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "Don't worry, I've learned a lot more since then. I've got everybody covered."<span class="attribution">To Moob and Fang &mdash; the goblins her crit-failed Battle Medicine killed two sessions ago.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I'll blend right in. I'll just keep a low profile, smile and nod, and keep going."<span class="attribution">Crit-tumbling through the Elidir gate with a troupe of acrobats who turn out to be working thieves.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "Oh, I'm going to cry. I love that."<span class="attribution">Logging on mid-combat, half-asleep, and immediately fumbling his own hammer on a missed swing.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "I guess he's not very good at his job. He just waves the gun around &mdash; he doesn't actually use it."<span class="attribution">On the constable Adiutor's unloaded flintlock musket.</span></blockquote>
+
+  <blockquote><strong>Sammy</strong> <em>(DM-voiced):</em> "Sammy comes up with a song about the Hellbreakers&hellip; you can almost swear there's magic behind her singing."<span class="attribution">The DM running absent Sammy's road-side performance &mdash; a crit-success that won over a whole farmstead.</span></blockquote>
+
+  <blockquote><strong>Sammy</strong> <em>(DM-voiced):</em> "He just starts swaying back and forth&hellip; he can't help himself, his head weaving to her song."<span class="attribution">Her calm-song placating one of the constable's thugs, keeping the capital ambush non-lethal (the masked constable shrugged it off).</span></blockquote>
+
+  <blockquote><strong>Rhokrag:</strong> "This is the one I was trying to chase after&hellip; he stole some armor after the battle. He'd been recruiting all over."<span class="attribution">Identifying Viro Ahala's corpse &mdash; the apprentice-thief whose trail got Rhokrag captured.</span></blockquote>
+
+</section>
+
+<section>
+  <h2>The Capital</h2>
+  <div class="cliffhanger">
+    <span class="label">Session ends &middot; A safehouse in Elidir, by night</span>
+    <p>The snow keeps falling on Isger's Circle. The trap is sprung and survived &mdash; one thug dead, one fled into the dark, and the devil-masked constable Adiutor folded unconscious into a spacious pouch with whatever he knows about how the authorities found the meeting spot. Sarevial doubles the party back through the lanes &mdash; <em>"That was so intense. Let's keep going"</em> &mdash; and ushers them through a small mansion's door. Incognito, in the capital, with a captive in the bag and a gala ten days out.</p>
+    <span class="big-line">"No body, no evidence. That's how we clean up now."</span>
+    <span class="speaker">&mdash; the party, bagging the constable</span>
+  </div>
+</section>
+
+<section>
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <section class="pax-notes">
+    <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Bai Jian did this session</h3>
+    <ul>
+      <li>Bought a full suit of <strong>plate</strong> from Gug &mdash; then took a wight's draining dagger straight through it round one. Quality control, Gug.</li>
+      <li>Woke the camp and <strong>front-lined the undead ambush</strong> solo until Panacea got Light up. Falcata crits split two of them in half; beheaded a ghoul; <strong>Sudden Charge</strong> finished the white wight. Made every paralysis and drain save &mdash; one on a hero point.</li>
+      <li><strong>Leveled to 4.</strong> <strong>Ren matured</strong> &mdash; independent now, free action a turn, hits harder, no more babysitting. Retrained my level-1 ancestry feat tankier. Also have <strong>Slam Down</strong> now (Strike + Trip in one).</li>
+      <li>Reported the Viro kill at HQ; <strong>Rhokrag confirmed it was his man.</strong> Silvered my falcata, added a crushing rune.</li>
+      <li>Got us into <strong>Elidir</strong> &mdash; fumbled the warrior bluff first (and would not leash Ren), then hero-pointed it and talked us through.</li>
+      <li>In the capital trap: <strong>one-shot a thug</strong> (42), then deliberately went <strong>non-lethal</strong> on the rest. We bagged the constable alive.</li>
+    </ul>
+
+    <h3>Things Bai Jian knows that the party does not</h3>
+    <ul>
+      <li><strong>The forest told us it was coming.</strong> Two nights of "too quiet," no animal noise, before the undead hit. That's not random wandering dead &mdash; something cleared the woods first. Remember that next time the birds go silent.</li>
+      <li><strong>Ren is the best tracker we have</strong>, full stop. I've been overriding him out of habit. Stop. He found the way out in seconds; he'd have saved us a day and a half.</li>
+      <li><strong>Adiutor was waiting at the meeting spot.</strong> Our courier walked into it too. Either Isger's Circle is a known League contact point that's been burned, or someone fed the authorities the meet. We are not as incognito as Rhokrag thinks.</li>
+      <li><strong>We bagged a live constable.</strong> No body, no evidence &mdash; but a living prisoner can also talk, scream, or be traced. He's a lead and a liability both.</li>
+    </ul>
+
+    <h3>What Bai Jian is thinking about</h3>
+    <ul>
+      <li><strong>This whole city is a Suppression check.</strong> Every kill, every loud fight, is a flat check away from heat. Lead with non-lethal and trips now &mdash; the new feat helps. The plate and the giant sword make me <em>memorable</em>, the opposite of what this mission wants.</li>
+      <li><strong>Our party cannot stealth.</strong> A dragon, a heavy-armor swordsman with a hound, a catfolk, a gnome. Cyrathul said it: we're bad at inconspicuous. We got in by <em>bluffing loudly</em>, not by hiding. Be a plausible somebody, not a nobody.</li>
+      <li><strong>Keep Viro's Hell Knight plate ready.</strong> If we need to walk into a Chelaxian space, that armor is our way in. The gala in ten days might be exactly that.</li>
+      <li><strong>Moob and Fang are done leaving HQ.</strong> Field healing is Panacea, my Battle Medicine, Zanthar's Lay on Hands, and now a Staff and some Heal scrolls. Thin but real. Don't let Panacea get isolated.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>Who is <strong>Adiutor</strong>, and how did he know to watch <strong>Isger's Circle</strong>? Who burned the meeting spot?</li>
+      <li>Where's the <strong>second Toady</strong> &mdash; and what's he reporting right now?</li>
+      <li>What's the <strong>actual gala play</strong>? Are we protecting Alceo and Phoebe, or doing something <em>at</em> Hedvind's party?</li>
+      <li>What do the <strong>Uprising bonuses</strong> unlock &mdash; and how hard does Suppression bite?</li>
+      <li>Is <strong>Urgothoa's circle</strong> just a meeting spot, or does undeath in the capital tie back to the Lake Encarthan lich?</li>
+    </ul>
+  </section>
+</section>
+
+</div>
+</body>
+</html>
