@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 6 — The Hooked Choir and the Brave Little Guard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Hooked Choir and the Brave Little Guard</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 6</div>
+<div class="meta-row">
+  <span class="meta-pill">June 28, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 45m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 9 → 10</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:50%"></div>
+  <div class="comp-seg comp-rp" style="width:22%"></div>
+  <div class="comp-seg comp-explore" style="width:14%"></div>
+  <div class="comp-seg comp-social" style="width:8%"></div>
+  <div class="comp-seg comp-loot" style="width:6%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The floor the party had bloodied last session turned out to belong to something far worse than vampires. Pressing past an electrified gate, they walked into a halberd-line of <strong>Living Guards</strong> — bite-marked human thralls in ancient Azlanti armor — and the red-clad vampire <strong>Freileth</strong>, who drifted in through the gate as mist and very nearly drained Raylta to death with a void beam. It was a grinding, reach-choked brawl in a tiny room, but the guards were weak to fire (Bael's whole thesis) and Freileth folded to silver: <strong>Tivael's silver Needle Dart</strong> put her down. Battered, over-encumbered, and absurdly rich, the party took a full day-trip back to Talmandor's Bounty to offload loot and shop (<em>"we're suffering from successes"</em>), then climbed back up.</p>
+  <p>What waited above was a Zon-Kuthon torture-house. The hacked-up corpses of the vampires they'd killed last session now hung from the ceiling on hooks — claimed by a pack of <strong>Evangelists</strong>, chain-and-hook velstracs who were genuinely offended the party had "stolen their kill" (<em>"I hear you called dibs" / "No dibs was called!"</em>). The velstracs grappled half the party with impaling chains — Bargrum crit-grabbed first, Raylta hooked through both palms mid-cast, Tivael through the wings — but silver and fire ground them down. Only a retroactive Recall Knowledge named them: velstracs, fanatics of the god of pain. <em>"Basically the aliens from Hellraiser."</em></p>
+  <p>Then the session's heart: behind a reinforced door, a <strong>brave little poppet</strong> — a toy guard named <strong>Anvaca</strong>, animated by the spirits of long-dead N'Gokal guardsmen and built in the likeness of the moon-goddess Asavna — squared up alone against the whole party in defense of a kingdom a thousand years dead. Raylta refused to kill it; the party closed the doors on its bolt-emitter, beat it unconscious with the flats of their weapons, left it a note (<em>"sorry we knocked you out, we're not bad guys"</em>), and locked it safely back in its room. A hallway of mirror-strapped torture victims followed (freed and staged for evacuation), and then the floor's master: <strong>Jubilant</strong>, a Conductor velstrac — a maestro with a conductor's baton, a throne of flesh, and a hunger to find a dragon's pain receptors. She and her two Ostiarius and a Sacristan nearly screamed the party apart, but Tivael's control engine (Evangelize, a spreading Infectious Ennui, Fortissimo Anthems) locked the choir down while Ferrok focus-fired the conductor. Bael's blast burned Jubilant to a crisp; Ferrok's blade swept the rest. The party hit <strong>level 10</strong> — one session from the top of the tower.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act explore">
+    <div class="act-label">Act I · Explore · The Electrified Gate</div>
+    <div class="act-card">
+      <h3>Shutting Off the Fence</h3>
+      <ul>
+        <li>After refocusing and healing off the previous fight (<strong>Bael</strong>: <em>"Getting better at exploding myself"</em>), the party found a bare room with three exits — two doors barricaded with furniture, the north one behind a <strong>very clearly electrified gate</strong> (purely mechanical, no magic to dispel).</li>
+        <li><strong>Bael</strong> volunteered (shock-resistant), borrowed a charm of resistance from <strong>Bargrum</strong> as a hedge, and disabled the power source with a <strong>thievery check — a nat-20 critical success</strong> after a hero point.</li>
+        <li>Beyond lay an alchemy workroom, and through the doorways, the rush of <strong>multiple humanoids</strong> — living, breathing humans in ancient Azlanti arms and armor. <strong>Bargrum</strong> tried to head it off (<em>"Can't we talk this out?"</em>); they only shook their heads and attacked.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Living Guards &amp; Freileth</div>
+    <div class="act-card">
+      <h3>Seven Halberds and a Vampire in Red</h3>
+      <ul>
+        <li><strong>Seven Living Guards</strong> (halberds, 10-ft reach, reactive strikes) swarmed the cramped room. <strong>Raylta's</strong> Recall Knowledge read them as martially-trained humans with <strong>bite marks on their necks</strong> — vampire thralls, <em>not</em> undead — and <strong>weak to fire</strong>.</li>
+        <li>For most of three rounds the reach-and-reactive-strike wall meant <em>nobody landed a hit</em>. <strong>Bargrum</strong> anchored it (Group/Shielding Taunts, Intercepts, trips); <strong>Bael's fire</strong> and <strong>Ferrok's Ignition Spellstrikes</strong> chewed guards down one a round.</li>
+        <li><strong>Tivael</strong> worked control — Phantom Pain, a rank-3 <strong>Fear</strong> frightening most of the pack (sparing Raylta), Courageous Anthem, Electric Arc — and summoned a <strong>unicorn (Summon Fey)</strong> that ate a reactive strike and then healed Raylta.</li>
+        <li>At the top of a round, <strong>mist</strong> poured through the gate and became <strong>Freileth</strong> — a vampire in a well-tailored red outfit, hair in old Azlanti fashion, glowing green eyes — who snarled <em>"You wretches!"</em></li>
+        <li>Freileth's <strong>Enervation</strong> (void line) drained Bael, then a rank-4 line <strong>caught Raylta for 48 persistent void + Drained</strong> (doomed-adjacent — <em>"I would die"</em>). She also missed a Chromatic Ray and Shielded.</li>
+        <li>The party answered with a combo: <strong>Ferrok placed Incendiary Fog</strong> and <strong>Bael's incendiary aura instantly ignited it</strong> into "a gigantic flaming sphere"; <strong>Raylta's Divine Wrath</strong> left Freileth <strong>Sickened 2 / Slowed</strong>; Moonbeam and a 46-point Lay on Hands held the line.</li>
+        <li>Near death, <strong>Tivael</strong> failed an Evangelize on Freileth, then finished her with a <strong>silver Needle Dart</strong> — <em>"that was actually a lot of damage."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act III · Social · Suffering from Successes</div>
+    <div class="act-card">
+      <h3>The Manacle Monopoly</h3>
+      <ul>
+        <li>Badly drained and over-bulk, the party took the <strong>full day-trip back to Talmandor's Bounty</strong> to sell and shop. <strong>Bargrum</strong> ran the auction-house bit — quartermaster, appraiser, and <em>"the number one manacle dealer in the region — real monopoly,"</em> closing each lot with <em>"going once, going twice, sold."</em></li>
+        <li>They were drowning in money. <strong>Raylta</strong>: <em>"Scrooge McDuck swims in his coinage — there's just too much."</em> <strong>Bael</strong> upgraded to <strong>greater healer's gloves</strong> (<em>"Damn, we're so rich"</em>); <strong>Ferrok</strong> put a <strong>+2 potency rune</strong> and a flaming rune on his bastard sword; <strong>Tivael</strong> bought a new instrument and scrolls.</li>
+        <li>Hard cap: level-10 items are still out of reach (<em>"nine is your cap"</em>). Then the long climb back up the Ebon Tower to where they'd left off.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · Dibs</div>
+    <div class="act-card">
+      <h3>The Evangelists</h3>
+      <ul>
+        <li>Back in the southern ballroom, the <strong>hacked-up corpses of the vampires</strong> the party had killed now hung from the ceiling on spiked hooks. Among them stood chain-impaled figures, grinning: <em>"Are you the ones that finally beat those wretches?"</em></li>
+        <li>The mood curdled when the party answered wrong: <em>"What matters is that they were ours, not yours… I hear you called dibs."</em> — <strong>Raylta</strong>: "Right? You didn't call dibs!" / <strong>Bael</strong>: "Yeah, it's very important. No dibs was called."</li>
+        <li><strong>Bael opened with Solar Detonation</strong>, dazzling two of the <strong>five Evangelists</strong> (A, C) and blinding a third (D). The velstracs closed with <strong>Impaling Chain</strong> (a crit auto-grabs and impales for persistent bleed): <strong>Bargrum</strong> was crit-grabbed first, then <strong>Raylta</strong> got hooked through both palms mid-cast (<em>"No! You motherfucker… you're on my shit list"</em>) and <strong>Tivael</strong> through the wings.</li>
+        <li><strong>Bargrum</strong> held the grapple-line, his crit-taunt landing the session's hardest line (<em>"Yeah, we killed him. So what? What are you gonna do about it?"</em>). <strong>Bael</strong> cracked back at a hook-threat (<em>"Are you a dentist?"</em>); <strong>Tivael</strong> carved with Flurry of Claws, Electric Arc, and a Telekinetic Projectile crit.</li>
+        <li><strong>Ferrok</strong> was the kill engine — his stretching reach <strong>killed two at once and freed a grabbed Raylta</strong>, with Force Fang and Ignition finishes, and a Demoralize on a frightened survivor (<em>"You're next!"</em>).</li>
+        <li>The party identified them only afterward, by retroactive Recall Knowledge: <strong>velstracs</strong>, fanatics of <strong>Zon-Kuthon</strong>, god of pain. <strong>Ferrok</strong>: "So they're basically the aliens from Hellraiser."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act V · RP / Combat · The Brave Little Guard</div>
+    <div class="act-card">
+      <h3>Anvaca, and the Mercy of the Murdery</h3>
+      <ul>
+        <li>The party examined a defaced <strong>statue of Asavna</strong> (Azlanti goddess of companionship, defense, and the moon — destroyed at Starfall), decapitated atop a pile of viscera, and cleared a coffin room and a coat room, picking up a <strong>Fireball</strong> scroll, <strong>Shape Stone</strong>, and a <strong>Silver Slough</strong> (Ferrok, to silver his blade).</li>
+        <li>Bargrum face-checked a reinforced door and a <strong>little toy guard</strong> stabbed at him — <strong>Anvaca</strong>, a <strong>poppet</strong> animated by the spirits of old <strong>N'Gokal guardsmen</strong> and built in the likeness of Asavna: <em>"Back! Back, fiends! In defense of N'Gokal, I shall slay thee!"</em> It worked a remote <strong>Bolt Emitter</strong> (32 electricity) and twice unleashed <strong>Dead, But Not Forgotten</strong> (a spirit-guardian AoE).</li>
+        <li>Recall Knowledge confirmed it: a construct, but a <em>humanoid</em> one, <strong>not mindless</strong>. <strong>Bael's RK on the bolt-emitter</strong> reframed the whole fight — take the controller, and the machine dies. The party closed the door on its firing line and decided to take it <strong>alive</strong>.</li>
+        <li><strong>Raylta refused to kill it</strong> (<em>"It's just a little guard"</em>), tried her <strong>Security Badge</strong> (it shrugged off the command) and outright pleading (<em>"we don't want to hurt you, just drop the remote!"</em>). The party switched to <strong>non-lethal</strong> — <strong>Bael</strong> dunked his fist (with Raylta's Guidance) to soften it, and <strong>Ferrok's flat-of-the-sword blow knocked it unconscious</strong>, not dead.</li>
+        <li>They took the remote, <strong>left it a note</strong> (<em>"sorry we knocked you out, we're not bad guys"</em>), dragged it back into its room, and locked it in. <strong>Ferrok</strong>: <em>"I don't know. We're pretty murdery. One good deed of the day."</em> (The spared list: the poppet and Speckle.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI · Explore · The Mirror Hall</div>
+    <div class="act-card">
+      <h3>What the Velstracs Left</h3>
+      <ul>
+        <li>A long hall of countless mirrors (odd, given vampires cast no reflection) gave way to a rotten stench and a string of torture cells: men with their <strong>eyelids cut off</strong>, heads strapped, <strong>forced to stare at their own reflections</strong>, hooks shoved beneath their flesh, fingers and nails removed. "The velstracs have been to work on this man."</li>
+        <li>The victims were in <strong>deep shock</strong> (no quick recovery). It was <strong>Bargrum's plan</strong> to unstrap each prisoner and stage them by the stairs with blankets and food for evacuation — and his idea to improvise saline/eye-drops for the lidless eyes.</li>
+        <li>Grim, methodical care between fights — the cost of clearing a torture-house one room at a time.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII · Combat · The Conductor's Kingdom</div>
+    <div class="act-card">
+      <h3>Jubilant, and the Choir of Screams (finale)</h3>
+      <ul>
+        <li>The north door opened on a <strong>grisly shrine</strong>: bone pillars, a statue of organs and limbs, and <strong>four velstracs</strong> — two <strong>Ostiarius</strong> with bleeding palms, a blindfolded <strong>Sacristan</strong>, and on a throne of flesh, a sewn-together woman with pitch-black eyes and a <strong>conductor's baton</strong>: <strong>Jubilant</strong>, a Conductor velstrac.</li>
+        <li>Jubilant mused about a new canvas: <em>"I've never worked on a dragon before. I wonder where the pain receptors in your wings are found."</em> <strong>Tivael</strong> answered cold: <em>"Too bad you won't ever find out in this life… maybe you'll be condemned so deep in hell that you won't ever be reincarnated."</em> Jubilant: <em>"Oh, sweet summer child. I come from a far worse place."</em></li>
+        <li><strong>Raylta</strong> led on <strong>Oracular Warning</strong> (+2 initiative party-wide, at the cost of self-Cursebound — "Yes, Bargrum's cursed!"). <strong>Bargrum</strong> opened with a Defensive Advance and called the room's tech: <strong>the velstracs are weak to silver, and silver stops their fast healing.</strong></li>
+        <li><strong>Jubilant was the engine</strong> — huge, so her <strong>Scream for Me</strong> and <strong>Unholy Exaltation</strong> reached the whole clustered party every round; the <strong>Sacristan</strong> added Chilling Darkness and Fear; the <strong>Ostiarius</strong> chained the front line and buffed the choir with Compel Courage.</li>
+        <li><strong>Tivael ran control all fight</strong>: <strong>Evangelize</strong> stupefied the Sacristan, a sustained <strong>Infectious Ennui</strong> spread Slowed + Frightened velstrac to velstrac round by round, and <strong>Fortissimo +2 Anthems</strong> propped the party up. <strong>Raylta's Divine Wrath</strong> caught both Ostiarius.</li>
+        <li><strong>Ferrok focus-fired the conductor</strong>: self-Haste + Arcane Cascade, an <strong>Echo Jump</strong> onto her, Sure Strike + Ignition Spellstrike runs dropping her to <strong>2 HP</strong>; <strong>Bael's one-action blast finished Jubilant</strong> (<em>"she burns to a crisp"</em>).</li>
+        <li>The party swept the choir — Ferrok's Ignition Spellstrikes (a 50 on an Ostiarius) and <strong>the final blade on the last velstrac</strong> (Raylta: <em>"That'll do it. Bye, you freak."</em>). The DM closed the night with <strong>level 10</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Seven Living Guards + Freileth · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Living Guard C → Freileth <em>(joins later, via mist)</em> → Living Guard E → LG F → Raylta → Ferrok → LG B → Bargrum → Bael → Tivael → LG D → LG A → LG G. <strong>Living Guards ×7</strong> — halberd thralls in Azlanti armor, 10-ft reach + reactive strike, bite-marked (vampire servants, <em>not</em> undead), <strong>weak to fire</strong>, Demoralize. <strong>Freileth</strong> — vampire arcane caster (Enervation, Chromatic Ray, Shield; resist non-silver physical, Fast Healing), red Azlanti outfit, green eyes.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>A cramped room of reach attackers made the opening rounds a whiff-fest in the party's favor — <strong>Bargrum</strong> Taunted the line onto himself while <strong>Bael's fire</strong> (their weakness) and <strong>Ferrok's Ignition Spellstrikes</strong> picked guards off one a round.</li>
+    <li><strong>Tivael</strong> controlled: Phantom Pain, a rank-3 <strong>Fear</strong> (sparing Raylta), Courageous Anthem, Electric Arc, and a <strong>Summon Fey unicorn</strong> that healed Raylta after eating a reactive strike.</li>
+    <li><strong>Freileth</strong> misted in and hit hard with <strong>Enervation</strong> — Bael drained on the first line, then a rank-4 line <strong>caught Raylta for 48 persistent void + Drained</strong> (near-death). She also missed a Chromatic Ray on Raylta and Shielded.</li>
+    <li>The combo answered: <strong>Ferrok placed Incendiary Fog</strong>, <strong>Bael's aura ignited it</strong> into a flaming sphere on Freileth + a guard; <strong>Raylta's Divine Wrath</strong> left Freileth <strong>Sickened 2 / Slowed</strong>; Moonbeam and Lay on Hands stabilized the line.</li>
+    <li><strong>Tivael</strong> failed an Evangelize on Freileth, then <strong>killed her with a silver Needle Dart</strong>. The guard kills split between <strong>Ferrok</strong> (Ignition Spellstrikes — including a 56-damage crit that "took a guard's head off") and <strong>Bael</strong> (Flying Flame finishes + blasts); Tivael's Enc-1 work was pure control.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>The party cleared the room but was badly drained — Raylta doomed-adjacent, the whole party over-bulk and low — and decided to rest and resupply in town. <em>Loot:</em> 7× +1 Striking Halberd; from Freileth, a +1 Striking Wounding Silver Corset Knife, a Wand of Shardstorm, and a Wand of Paralytic Shock.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Five Evangelists (velstracs) · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Tivael → Bael → Evangelist B → Evangelist D → Ferrok → Evangelist C → Evangelist A → Bargrum → Evangelist E → Raylta. <strong>Evangelists ×5</strong> — chain-and-hook velstracs; <strong>Impaling Chain</strong> (a crit auto-grabs/impales for persistent bleed and immobilizes), Demoralize, <strong>Fast Healing</strong> (only stopped by silver). Best save Reflex.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Bael opened with Solar Detonation</strong> — A and C <strong>Dazzled</strong>, D <strong>Blinded</strong> (B and E were just outside the burst) — producing a string of flat-check misses all fight.</li>
+    <li>The velstracs chained the party: <strong>Bargrum</strong> took the first crit-grab, then <strong>Raylta</strong> (hooked through both palms, interrupting her Needle Darts → persistent bleed) and <strong>Tivael</strong> (through the wings) were impaled; Ferrok was chained later. Casting while grabbed forced flat checks; Raylta lost a turn to it.</li>
+    <li><strong>Bargrum</strong> held the grapple line (Shielding Taunts, the "we killed him, so what?" crit-taunt). <strong>Tivael</strong> carved with Flurry of Claws (a hero-pointed second-prong crit), Electric Arc, and a <strong>Telekinetic Projectile crit</strong>, then chipped a survivor with a silver Needle Dart + Bon Mot (<em>"Oh, you stupid bitch"</em>).</li>
+    <li><strong>Bael</strong> ran Flying Flame birdies + blasts. <strong>Ferrok</strong> was the kill engine — <strong>stretching reach to kill two Evangelists at once and free a grabbed Raylta</strong>, plus Force Fang / Ignition finishes — and Demoralized a frightened survivor (<em>"You're next!"</em>).</li>
+    <li>Silver wasn't found as the Fast-Healing lever until round 4 (Bargrum's fist); the last Evangelist survived to the break and was finished after.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>The party only identified the foe by a retroactive Recall Knowledge: velstracs, fanatics of Zon-Kuthon. <em>Loot:</em> none (velstracs carry no gear).</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Anvaca, the Poppet Guard · 5 PCs · spared</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Anvaca → Bael → Tivael → Raylta → Ferrok → Bargrum. <strong>Anvaca</strong> — a <strong>poppet</strong> (construct, humanoid, <em>not</em> mindless) animated by the spirits of old N'Gokal guardsmen, built in the likeness of the goddess Asavna. Weakness silver. Wielded a remote-controlled <strong>Bolt Emitter</strong> (32 electricity/strike, ignores MAP) and <strong>Dead, But Not Forgotten</strong> (a recharging spirit-guardian AoE) twice.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The poppet fought alone in defense of a dead kingdom (<em>"I am the shield that never breaks"</em>). The party <strong>closed the doors</strong> between it and the emitter's firing slits to neutralize the AoE, then chose to take it <strong>alive</strong>.</li>
+    <li><strong>Raylta</strong> tried a Security Badge command (it resisted — incapacitation) and pleaded with it. The party switched to <strong>non-lethal (−2)</strong> attacks: <strong>Bael's</strong> fist-dunk (with Raylta's Guidance) softened it, and <strong>Ferrok's flat-of-the-sword blow knocked it unconscious</strong>.</li>
+    <li>They took the remote, left a note, dragged the poppet back to its room, and locked it in alive.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>No PC was seriously threatened. The poppet was <strong>spared</strong>, not killed — one of only two things (with Speckle) the party has chosen to leave alive. No loot beyond the bolt-emitter remote.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Jubilant (Conductor) + Sacristan + Ostiarius A/B · 5 PCs · finale</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bargrum → Jubilant → Sacristan → Tivael → Ferrok → Ostiarius B → Raylta → Bael → Ostiarius A. <strong>Jubilant</strong> — a Conductor velstrac; auditory powerhouse (<strong>Scream for Me</strong> single + secondary-AoE scream once/round, <strong>Unholy Exaltation</strong> sonic cone, conductor's-baton Strike, <strong>Sonic Redirection</strong> reaction); best save Reflex, worst Fort/Will, unholy, <strong>weak to silver + holy</strong>, Fast Healing — and <em>not</em> a spellcaster (her screams are actions). <strong>Sacristan</strong> — blindfolded velstrac caster (Chilling Darkness, rank-3 Fear). <strong>Ostiarius ×2</strong> — bleeding-palm velstracs (Compel Courage buff, barbed-chain Strikes + bleed). All silver-weak, Fast Healing.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Raylta opened with Oracular Warning</strong> (+2 initiative, self-Cursebound). <strong>Bargrum</strong> Defensive-Advanced in and called the <strong>silver weakness</strong> (which also shuts off the choir's Fast Healing).</li>
+    <li><strong>Jubilant's screams</strong> reached the whole clustered party every round (she's Large): Scream for Me and Unholy Exaltation hammered Bargrum, Ferrok, and Bael; the <strong>Sacristan</strong> added Chilling Darkness and Fear; the <strong>Ostiarius</strong> chained the front line and buffed with Compel Courage. <strong>Raylta's Divine Wrath</strong> caught both Ostiarius.</li>
+    <li><strong>Tivael ran control all fight</strong>: <strong>Evangelize</strong> (Sacristan Stupefied 2), a <strong>sustained Infectious Ennui</strong> spreading Slowed + Frightened velstrac to velstrac, <strong>Fortissimo +2 Anthems</strong>, Demoralize, Biting Words, Electric Arc — and once let <strong>Raylta use him as a body-shield</strong> against a chain.</li>
+    <li><strong>Ferrok focus-fired Jubilant</strong>: self-Haste + Arcane Cascade, <strong>Echo Jump</strong> onto her, Sure Strike + Ignition Spellstrike runs dropping her to <strong>2 HP</strong>; <strong>Bael's one-action blast killed Jubilant</strong> (<em>"she burns to a crisp"</em>).</li>
+    <li>The party finished the choir: Ferrok's Ignition Spellstrikes (a 50 on an Ostiarius) and <strong>the final blade on the last velstrac</strong>, Bael's Flying Flame, Raylta's Holy Light + heals, Bargrum's taunts and intercepts.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>A near-thing — Tivael bled to death's door, the screams reached everyone — but the choir fell, and the party <strong>leveled to 10</strong>. Tivael's read on Jubilant: <em>"She was like a bard, basically."</em> <em>Loot:</em> none (velstracs carry no gear).</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Conductor's Better Half ★</h4>
+    <ul>
+      <li><strong>His control session, by design</strong> — against Jubilant's choir he ran the whole board at once: <strong>Evangelize</strong> to stupefy the Sacristan, a <strong>sustained Infectious Ennui</strong> nursed every single round so it kept hopping Slowed-and-Frightened from velstrac to velstrac, and <strong>Fortissimo +2 Anthems</strong> holding the party's numbers up as the screams came in.</li>
+      <li><strong>Still closed threads with violence when it counted</strong> — the <strong>silver Needle Dart that killed Freileth</strong> (<em>"that was actually a lot of damage"</em>), a hero-pointed Flurry of Claws crit and a Telekinetic Projectile crit among the Evangelists — but the fingerprints this week are on <em>control</em>, not the kill log.</li>
+      <li><strong>Voice stayed sharp</strong> — the deadpan <em>"oh, you stupid bitch"</em> as he Bon-Mot'd a survivor, and the post-fight read that named Jubilant for what she was (<em>"She was like a bard, basically"</em> — the maestro clocking his own dark reflection).</li>
+      <li><strong>The chilling sentence he handed Jubilant</strong> before initiative — a bard condemning a bard to a hell past reincarnation.</li>
+      <li><strong>Honest about the cost</strong> afterward — <em>"I think I need to play more defensively"</em> — after a fight that nearly bled him out.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum · the Wall and the Auctioneer</h4>
+    <ul>
+      <li><strong>The same immovable object</strong> — Group/Shielding Taunts pulling reach-guards, velstrac chains, and an entire screaming choir onto himself; Intercepts, Defensive Advances, trips, and the silver Monkey's Fist.</li>
+      <li><strong>The party's reader of mechanics</strong> — called the Living Guards' positioning problem and announced the velstracs' silver weakness (<em>"they will not heal because they've been damaged by silver"</em>).</li>
+      <li><strong>The quartermaster-in-chief</strong> — ran a full auction house out of the loot pile back in town: <em>"the number one manacle dealer in the region, real monopoly," "going once, going twice, sold."</em></li>
+      <li><strong>The session's hardest line</strong> — his crit-taunt against the Evangelists: <em>"Yeah, we killed him. So what? What are you gonna do about it?"</em></li>
+      <li><strong>The dry philosopher</strong> in the poppet debate — <em>"Well, let's get philosophical — is it a good thing that you have a soul?"</em> and, to Raylta, <em>"You're the one who didn't want to kill it. So this is your child now, right?"</em> Also drove the mirror-hall prisoner evacuation.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok · the Murdery Conscience</h4>
+    <ul>
+      <li><strong>The kill leader and priority-target eliminator</strong> — Ignition Spellstrikes all night, a stretching-reach swing that <strong>killed two Evangelists and freed a grabbed Raylta</strong>, the <strong>Echo Jump teleport</strong> onto Jubilant, a 50-damage Ignition on an Ostiarius, and the <strong>final blade</strong> on the last velstrac.</li>
+      <li><strong>Gallows deadpan</strong> — "We don't negotiate," "basically the aliens from Hellraiser," "still traumatized by evil Greg."</li>
+      <li><strong>The poppet cracked something honest open</strong> — he flagged the party's own hypocrisy (<em>"murder a defenseless little poppet?"</em>) and supplied the merciful logistics (the flat-of-the-sword KO, "write a note and say sorry we knocked you out, we're not bad guys").</li>
+      <li><strong>The self-aware thesis of the night</strong> — <em>"I don't know. We're pretty murdery. One good deed of the day."</em></li>
+      <li><strong>Echo Jump finally fixed his oldest problem</strong> — teleporting straight onto a priority target instead of fighting a doorway.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · the Adaptive Pyromaniac (and Reluctant Diplomat)</h4>
+    <ul>
+      <li><strong>The opener and the closer</strong> — <strong>disabled the electrified gate</strong> (clutch nat-20 thievery), <strong>opened the Evangelist fight with Solar Detonation</strong>, ran the Incendiary-Fog ignition combo with Ferrok, and <strong>landed the killing blast on Jubilant</strong> (<em>"as she burns to a crisp"</em>).</li>
+      <li><strong>His RK reframed the poppet fight</strong> — clocking that the bolt-emitter was a remote-controlled construct that died if you took the controller, which turned a slugfest into a capture.</li>
+      <li><strong>The self-immolation gag stayed strong</strong> — <em>"Getting better at exploding myself,"</em> the doomed Brace-for-Impact recovery rolls, Treat-Wounds whiffs (<em>"cross your fingers I don't fuck it up again"</em>) — and his greater healer's gloves made him a real second healer.</li>
+      <li><strong>The reluctant diplomat</strong> — he kept trying to <em>defuse</em> the poppet (a web scroll — "Just stop fighting!" — then the non-lethal fist-dunk).</li>
+      <li><strong>The kindest possible aftercare</strong> — leaving the freed poppet "a brief recap of the thousand years of history he missed."</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta · the Heart That Wouldn't Let Go</h4>
+    <ul>
+      <li><strong>The heal economy under brutal pressure</strong> — Benediction, rank-2-through-5 Heals, Nudge the Scales (sliding into Cursebound/Enfeebled), Divine Wrath, Moonbeam, Holy Light, a 46-point Lay on Hands.</li>
+      <li><strong>Nearly died twice</strong> — Freileth's 48-point void beam left her doomed-adjacent; the Evangelists hooked her through both palms mid-cast. She took it with gallows humor (<em>"this ain't my fight," "you're on my shit list"</em>) and a flash of healer frustration when the chains ate two of her turns (<em>"Don't pity me!"</em>).</li>
+      <li><strong>She IS the poppet arc</strong> — saw a brave little guard instead of a boss (<em>"It's just a little guard"</em>), refused to kill it, tried to talk it down (<em>"we don't want to hurt you, just drop the remote!"</em>), and pulled the whole table into sparing it.</li>
+      <li><strong>Called out the party's bloodlust</strong> — <em>"That's what you guys are doing! I was trying to defuse!"</em> The note in that locked room is hers as much as anyone's.</li>
+      <li><strong>Opened the finale by Cursing herself</strong> (Oracular Warning) to give everyone a head start against the choir — heart and sacrifice in one action.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">7× +1 Striking Halberd</div>
+    <div class="loot-source">Living Guards</div>
+    <div class="loot-note">Mostly sold off in town.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Wounding Silver Corset Knife</div>
+    <div class="loot-source">Freileth</div>
+    <div class="loot-note">Silver — anti-vampire / anti-velstrac.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Wand of Shardstorm / Wand of Paralytic Shock</div>
+    <div class="loot-source">Freileth</div>
+    <div class="loot-note">Two more wands for the growing collection.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Fireball scroll / Shape Stone scroll</div>
+    <div class="loot-source">Exploration (gear room)</div>
+    <div class="loot-note">Scattered among the cleared rooms.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Silver Slough</div>
+    <div class="loot-source">Exploration</div>
+    <div class="loot-note">Taken by Ferrok — silvers his blade.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Bolt-emitter remote</div>
+    <div class="loot-source">Anvaca's room</div>
+    <div class="loot-note">Disables the wall-mounted bolt emitter.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Downtime upgrades</div>
+    <div class="loot-source">Talmandor's Bounty</div>
+    <div class="loot-note">Ferrok: +2 potency + flaming rune. Bael: greater healer's gloves. Tivael: new instrument + scrolls. Raylta: scrolls.</div>
+  </div>
+</div>
+<div class="xp-banner">Four combats — the Living Guards + Freileth, the Evangelists, the spared poppet Anvaca, and the velstrac choir — capped by the conductor Jubilant. The party <strong>leveled to 10</strong> at session end, and surplus loot (halberds, crossbows, manacles, +1 resilient armors) was sold off in town. <strong>Next session: the conclusion of Shades of Blood, and the ascent to Nizca.</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "Too bad you won't ever find out in this life. Maybe in your next life. Or maybe you'll be condemned so deep in hell that you won't ever be reincarnated."
+  <span class="attribution">To Jubilant the Conductor, before initiative — answering her musings about a dragon's pain receptors.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "She was like a bard, basically."
+  <span class="attribution">Tivael's post-fight read on Jubilant the Conductor — one maestro clocking his own dark reflection.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I think I need to play more defensively."
+  <span class="attribution">Post-finale, honest self-assessment after a fight that nearly bled him out.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Yeah, we killed him. So what? What are you gonna do about it?"
+  <span class="attribution">His crit-taunt landing on the Evangelists who'd "called dibs" on the vampire corpses.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "A bunch of manacles, which we were just selling, right? The number one manacle dealer in the region. Real monopoly."
+  <span class="attribution">Running the party's loot auction back in town.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Well, let's get philosophical. Is it a good thing that you have a soul?"
+  <span class="attribution">To the captured poppet, mid-mercy-debate.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "I don't know. We're pretty murdery. One good deed of the day."
+  <span class="attribution">After the party spared the poppet and left it a note.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "So they're basically the aliens from Hellraiser."
+  <span class="attribution">On the velstracs, after the retroactive Recall Knowledge.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "Getting better at exploding myself."
+  <span class="attribution">Opening the session on his own self-inflicted fire damage.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "And then a brief recap of the thousand years of history he missed. Things you may have missed."
+  <span class="attribution">On what to leave the spared poppet, who guards a kingdom long destroyed.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I take out a scroll of web. Just stop fighting! …Oh, I'm gonna get webbed too."
+  <span class="attribution">His earnest (and self-defeating) attempt to de-escalate the poppet fight.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Come on, come on. We don't want to hurt you, just drop the remote!"
+  <span class="attribution">Pleading with the brave little poppet instead of killing it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "No! You motherfucker. Who was that? See? You're on my shit list."
+  <span class="attribution">Getting hooked through both palms mid-cast by an Evangelist — her Needle Darts interrupted.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Scrooge McDuck swims in his coinage. There's just too much."
+  <span class="attribution">On the party's absurd post-loot wealth.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Nizca and the Shadow Beacon</strong> — next session is the <strong>conclusion of Shades of Blood</strong>: the ascent to the peak of the Ebon Tower, Nizca (and presumably Degg), and the sun-blotting beacon. Disable plan still stands: smash it.</li>
+  <li><strong>Freileth</strong> — a red-clad, Azlanti-fashioned vampire; possibly the "red-robed woman" Sarah warned ran the upper floors, or simply the seventh coffin's tenant. Dead now either way.</li>
+  <li><strong>The velstracs / Zon-Kuthon</strong> — the upper floors are a <strong>Zon-Kuthon torture-house</strong>, not (only) a vampire nest. They were torturing the <em>vampires'</em> corpses — a third faction, hostile to the vampires too. Why are they here, and how do they relate to Nizca's plan?</li>
+  <li><strong>Anvaca the poppet</strong> — left alive and locked in its room, a guard-spirit of a kingdom a thousand years dead. Will it stay put? Could it be an ally if approached differently?</li>
+  <li><strong>The mirror-hall prisoners</strong> — velstrac torture victims, unstrapped and staged by the stairs in deep shock. They need a real evacuation (and ongoing care for the eye-injuries).</li>
+  <li><strong>The defaced Asavna shrine</strong> — the Azlanti moon-goddess of defense and companionship, decapitated and desecrated by the velstracs. A thematic counterpoint to everything on this floor.</li>
+  <li><strong>Speckle</strong> — still the party mascot; the "things we're willing to spare" list is now Speckle and the poppet.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Conclusion of Shades of Blood</span>
+  <p>The torture-house is cleared — seven thralls and a vampire in red, a choir of chain-and-hook velstracs, a brave little guard spared, and a screaming conductor burned to a crisp. The party is level 10 and one floor from the top, where Nizca and Degg still tend the Shadow Beacon, waiting to give the world an endless night. Next week, the climb ends.</p>
+  <div class="big-line">"Make sure we all make it out alive — and we gotta make it to the tournament."</div>
+  <span class="speaker">— the table, on the eve of the finale</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Played the <strong>control/buff lane</strong> deliberately this week rather than chasing kills: Phantom Pain, rank-3 <strong>Fear</strong>, Courageous/Rallying Anthems, <strong>Fortissimo +2</strong>, Electric Arc, Telekinetic Projectile, <strong>Summon Fey unicorn</strong> (emergency heal).</li>
+  <li><strong>Killed Freileth</strong> the vampire with a <strong>silver Needle Dart</strong> after an Evangelize attempt failed.</li>
+  <li>Among the Evangelists: Flurry of Claws (hero-pointed prong crit), a Telekinetic Projectile crit, and a silver Needle Dart + Bon Mot on a survivor (Ferrok and Bael landed the actual Evangelist kills).</li>
+  <li>In the Jubilant fight, ran the whole control board: <strong>Evangelize</strong> stupefied the Sacristan, a <strong>sustained Infectious Ennui</strong> spread Slowed + Frightened across the velstracs every round, <strong>Fortissimo Anthems</strong> held the party's numbers, plus Biting Words and Electric Arc. Let Raylta use me as a literal shield against a chain.</li>
+  <li>Bought a new instrument and scrolls in town; party hit <strong>level 10</strong> at session end.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li>This floor is a <strong>Zon-Kuthon torture-house</strong>, not a vampire nest — the velstracs are a <em>third</em> faction, and they were carving up the <em>vampires'</em> corpses. Whatever Nizca is doing at the top, these things are not obviously his allies (his jailers? his pets?).</li>
+  <li><strong>Velstracs heal fast unless hit with silver</strong> — silver is mandatory against this whole floor. My silver Needle Darts and Bargrum's silver fist are the levers; everyone else's physical damage just gets regenerated.</li>
+  <li>Jubilant "wasn't even magical" — her screams were <em>actions</em>, not spells, which is why Counter Performance didn't catch them and why she reached everyone every round. A Conductor velstrac is a martial-action AoE machine; spread out next time.</li>
+  <li>The poppet <strong>Anvaca</strong> is alive and locked in its room. It's an N'Gokal loyalist built in the image of Asavna (defense/companionship/moon) — a guard with a soul, on the wrong side by a thousand years.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li><strong>Infectious Ennui is the MVP control spell against a cluster</strong> — sustained, it kept hopping Slowed-and-Frightened from velstrac to velstrac all fight. Keep a slot for it against any pack with a weak save.</li>
+  <li>I got hit too much in the finale (bled to death's door) — a tiny room + a Large screamer punishes clustering. <strong>Sanctuary, distance, and Rallying Anthem</strong> matter more than another debuff when the boss is an unavoidable AoE.</li>
+  <li>The Anthems + Fortissimo are doing real work; against Nizca, front-load <strong>Courageous Anthem</strong> for the front line's accuracy and keep <strong>Rallying Anthem</strong> ready for his AoEs.</li>
+  <li>Silver, force (Flurry of Claws), and Fort-targeting remain the anti-undead / anti-velstrac kit. Bank silver consumables before the top floor.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who is <strong>Nizca</strong> at the peak, and is <strong>Degg</strong> with him? What does the <strong>Shadow Beacon</strong> actually require to disable safely (failsafes), and do we just smash it?</li>
+  <li><strong>Why velstracs?</strong> Are they Nizca's allies, his torturers-for-hire, or an infestation he can't control? Does Zon-Kuthon have a stake in the sun going out?</li>
+  <li>Was <strong>Freileth</strong> the red-robed woman Sarah described — and if so, is the <em>real</em> upper-floor mistress already dead, or is there another?</li>
+  <li>Can the <strong>mirror-hall prisoners</strong> (and the poppet) be evacuated/secured before the final push?</li>
+  <li>We're level 10 and one session from the finale. What's the <strong>order of operations</strong> at the top — beacon first, or Nizca first?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 — New Blood, Paper Trails</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.no-combat-note {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-argon { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-argon { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>New Blood, Paper Trails</h1>
+<div class="subtitle">Abomination Vault — Session 1</div>
+<div class="meta-row">
+  <span class="meta-pill">July 1, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~4 hours</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">Argon joins · Level 4</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-rp" style="width:35%"></div>
+  <div class="comp-seg comp-social" style="width:30%"></div>
+  <div class="comp-seg comp-explore" style="width:25%"></div>
+  <div class="comp-seg comp-loot" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+<div class="no-combat-note">No combat this session — all intros, RP, social investigation &amp; travel</div>
+
+<div class="party-grid">
+  <div class="char-card char-argon">
+    <div class="char-name">Argon Rath ★</div>
+    <div class="char-class">Orc (Hold-Scarred) · Barbarian (Dragon / Barrage-Force)</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human · Thaumaturge (returning chakram)</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf · Divine Sorcerer (Pharasma)</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling · Monk (wrestler)</div>
+    <div class="char-player">Ben</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>Argon Rath came to the party the hard way — face-down in the dark. A displaced orc warrior taking patrol work on the Isle of Kortos, he'd heard of Otari from a fellow orc on the trail and set out to find new work there. Two days short of town he was ambushed at night by things with cold claws and a dead smell, beaten unconscious, and dragged into the basement of the <strong>Gauntlight</strong>. He came to in a black room, struck blind into his captors, and ran — feeling his way door to door until he lost them. He also lost something to their bite: the first fatigue of <strong>ghoul fever</strong> settling into his blood. Half-starved and sick, he passed out again, and woke to torchlight and voices — the very party hired to purge this place, doubling back down the stairs. They nearly braced for a fight (<em>"You don't look particularly rotting"</em>), then took him in instead.</p>
+  <p>With Argon confirmed bitten, the group scrapped the night's expedition and hauled their new stray back toward town — first to their base (an abandoned tavern they share, uneasily, with a warren of kobolds), then in the morning to the <strong>Dawnflower Library</strong>, where the priestess <strong>Vandy</strong> burned the fever out of Argon as a goodwill gesture to the town's new problem-solvers. Between the diagnosis and the cure, Argon signed on: he'd repay the healing by lending his guisarme to their contract. The job, they explained, is the Gauntlight itself — a dead lighthouse whose light woke undead in the Otari graveyard two weeks ago, tied to the long-dead tyrant <strong>Belcorra Haruvex</strong>, slain five centuries past and maybe stirring again.</p>
+  <p>But the Gauntlight is sealed until nightfall, and a day is a long time to a party with idle hands. Xurl and Argon spotted a <strong>paper note flying eighty feet over the ocean</strong> — the second such note in two days, launched from the cliffs above town, written in a language none of them read. That thread swallowed the rest of the session: a translation from the fortune-teller <strong>Wrin</strong> (a time, a place, in the gnoll tongue <strong>Kholo</strong>), a day's march west to the port town of <strong>Chester</strong>, Alder reading old malice off the paper with a psychometry scroll, Xurl dead-reckoning a pirate lane onto a bartender's scrap-paper map, and a long walk back to lay it all before <strong>Mayor Osif Mahimis</strong> — whose lumber convoys the notes have been selling to raiders. By session's end the party had talked their way into the pirate problem on purpose: fight pirates by day, the Gauntlight by night. Not one blade was drawn all night. The DM admitted, cheerfully, that he'd invented the entire side-quest on the spot when the players wandered off the map.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I · Roleplay · The Man in the Dark</div>
+    <div class="act-card">
+      <h3>Argon's Arrival</h3>
+      <ul>
+        <li>Character and player introductions all around; <strong>Argon</strong> is the new face at an established table, and the DM ran his cold open solo before the others found him.</li>
+        <li>Argon's backstory: orc warrior of a destroyed borderland clan, ex-captive turned wanderer, taking short patrol contracts on Kortos. A fellow orc patrolman's tale of Otari (and a slain baby dragon) pointed him here.</li>
+        <li>Ambushed on the road by ghouls, dragged into the Gauntlight's basement, he woke, struck blind, and <strong>escaped by feel through the dark</strong> — losing the ghouls but catching <strong>ghoul fever</strong>.</li>
+        <li>The party (returning from deeper in the dungeon) found him; a tense first contact (<em>"Are you guys not my captors?"</em>) resolved into a rescue once they smelled the rot on his story.</li>
+        <li><strong>Ruben's</strong> medicine check confirmed the ghoul fever; <strong>Alder</strong> then read its progression (esoteric lore) — stage 2–3 of 6; stage 6 means death and rising as a ghoul. They aborted the expedition to save him.</li>
+        <li>Full character descriptions traded in the hallway — Ruben's Pharasma amulet, Alder's bandolier of oddities and star-weapon, Argon's one-shouldered breastplate and tusks, and Xurl's <strong>inexplicable bioluminescence</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act II · Social · Base, Cure &amp; the Lay of Otari</div>
+    <div class="act-card">
+      <h3>A Room, a Cure, and a Dead Tyrant</h3>
+      <ul>
+        <li>The party led Argon out of the swamp to their base — a half-cleaned abandoned tavern shared with kobolds — and gave him a room. <strong>Ruben swore on Pharasma</strong> that Argon would not perish.</li>
+        <li>Next morning: to the <strong>Dawnflower Library</strong> (the Rose Blade of Vol Rajadi on display at the door), where the priestess <strong>Vandy</strong> cured the ghoul fever <strong>free of charge</strong>.</li>
+        <li>Lore dump: the Gauntlight woke and threw undead into the Otari graveyard two weeks ago; the prior party cleared them; the light dimmed but may be reactivating.</li>
+        <li><strong>Belcorra Haruvex</strong> — slain 500 years ago by the Roseguard — is the suspected cause. Four tapestries of her life have been recovered so far.</li>
+        <li><strong>Wrin Sivinxi</strong> introduced — white-eyed tiefling fortune-teller running Wrin's Wonders. Alder introduced himself and angled for future business and lore.</li>
+        <li><strong>Ruben</strong> identified a salvaged wand — a <strong>wand of quench</strong> (primal; useless to a divine caster) — and sold it plus a sturdy shield for 130 gp, split to the party.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III · Mystery · The Flying Note</div>
+    <div class="act-card">
+      <h3>Eighty Feet Over the Ocean</h3>
+      <ul>
+        <li>Xurl and Argon watched a <strong>note fly ~80 ft over the ocean</strong>, launched from the cliffs — the second in two days (the first, caught last session by <strong>Xurl swimming out for it</strong>).</li>
+        <li>Written in an unreadable script; the party has lost the multilingual members (Victor and the other departed prior PCs) who could have read it.</li>
+        <li><strong>Wrin</strong> identified the paper as a magical "homing" object and translated it for 7 gp: a <strong>date, a time, and a place</strong> (a small town west of Otari), in <strong>Kholo</strong> (the gnoll tongue).</li>
+        <li>The whole party rolled catastrophically low on Intelligence checks (a nat 1, several 0-modifier rolls) — the running <em>"we are a group of zero intelligence"</em> gag was born here.</li>
+        <li><strong>Argon</strong> made the key leap: the note's time is <em>past</em>, so it can't be a meeting time — <em>"Maybe something happened, like a report."</em> The group voted to chase the note over returning to the Gauntlight.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act IV · Explore · Chester (the improvised pirate hunt)</div>
+    <div class="act-card">
+      <h3>A Port Town and a Paper Trail</h3>
+      <ul>
+        <li>A day-and-a-half march west to the port town of <strong>Chester</strong> (camp overnight; safe patrolled road; hero points topped to max).</li>
+        <li>At the town inn, <strong>Alder</strong> ran the investigation: cast <strong>object reading</strong> (psychometry) off a scroll and sensed the note's author as <strong>"evil, greedy, and determined"</strong> → deduced a pirate.</li>
+        <li>Talking to the bartender, Alder learned <strong>Otari Lumber</strong> (the mayor's company) ships to Chester; a shipment arrived two days ago. He pieced together that the notes <strong>broadcast shipment routes to raiders</strong>.</li>
+        <li><strong>Xurl</strong> — a former sailor — tried to <strong>triangulate the pirate lane</strong> by dead reckoning on a bartender's rough map (<em>"liberal sailing navigation on a coastline; this is what I do"</em>). Sloppy, wrong-direction, and hilarious, but it produced a rough coastal area.</li>
+        <li><strong>Ruben</strong> owned the misfire gracefully (<em>"I saw the problem, used the completely wrong formula, and got the wrong answer"</em>) and the party turned back for Otari.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act V · Social · The Mayor's Office</div>
+    <div class="act-card">
+      <h3>Selling the Scheme to the Man Who's Being Robbed</h3>
+      <ul>
+        <li>Back in Otari, a multi-hour stakeout of the cliff and pier turned up nothing (excellent perception all around — <em>"some freaking Hawkeyes"</em>), but reconstructing the two note-sightings cracked it: <strong>note time = when a ship leaves; note place = its destination</strong>, so pirates can intercept the convoy.</li>
+        <li>To the West Wing of the lumber works, greeted by the mayor's elderly elf aide <strong>Iqbal</strong>, then <strong>Mayor Osif Mahimis</strong> himself (owner of Otari Lumber, shipments raided twice last week).</li>
+        <li>The party laid out the whole scheme. <strong>Xurl</strong> poked the one hole in the mayor's tidy fix — <em>"unless the cliff is only a convenience and not a requirement"</em> — which gave even the mayor pause.</li>
+        <li>The mayor — who'd normally hand it to the Arsenal Navy — offered to let them take the pirates themselves (harder, no navy escort, maybe a couple of guards and an under-equipped ship). They took it.</li>
+        <li>Reward: 40 gp now; next shipment in two days. Plan set: <strong>pirates by day, the Gauntlight by night.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+  <div class="combat-meta">Encounter Log · Session 1</div>
+  <h4>No combat this session</h4>
+  <p>No initiative was rolled all night — the session was entirely introduction, roleplay, social investigation, and travel. The one brush with danger (Argon's <strong>ghoul fever</strong>) was resolved by <strong>Vandy's cure</strong>, not a fight. The party has lined up their first real fights for future sessions: the <strong>pirate convoy raid</strong> (by day) and the return to the <strong>Gauntlight dungeon</strong> (by night).</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-argon">
+    <h4>Argon Rath · the Newcomer with a Code ★</h4>
+    <p>Argon spent the session being onboarded — literally waking into the campaign as a prisoner — but he was never passive. His whole arc is a man deciding, fast, what kind of ally he's going to be. The moment the party pledged to cure him, he flipped the ledger and offered his arm to their contract before he even had a weapon back: <em>"Since you guys are planning to help me, maybe I can repay the favor."</em> His bravado is dry and soldierly rather than boastful (<em>"I have survived many battles. What is one more?"</em> → <em>"What is many more? Bring it on."</em>), and it sits on top of a real code.</p>
+    <p>His character comes through in a quieter register than the party's talkers. His first words on breaking free of the ghouls set the tone — <em>"I stand now free. At least I hope so, until I can get out of this place"</em> — wary, unbroken, already scanning for the exit. Playing the deliberately clueless new guy, he still made the deduction that reframed the note mystery (that the timestamp was a report, not a meeting time). And the truest note he struck was trust: pulled from a cell into a stranger's oath, he answered Ruben's vow with a simple <em>"I trust you"</em> — a displaced man deciding, on the spot, that these three were worth following. If there's a knock on his debut, it's that the party's one real fork — chase the note or do the job they were hired for — went by with Argon on the sidelines, the new arrival letting the veterans steer.</p>
+  </div>
+
+  <div class="spotlight s-alder">
+    <h4>Alder Ungram · the Man with the Answers</h4>
+    <p>Alder is the party's occult investigator, and this was his session to prove it. Every time the plot needed a fact, Alder produced it: he read Argon's fever stage off diverse lore, he chatted up Wrin and the Chester bartender for the town-and-shipment intel, and — the single most important play of the night — he cracked the entire pirate mystery by casting <strong>object reading</strong> on the note and sensing its author as <em>"evil, greedy, and determined,"</em> then connecting the harbor, the greed, and the lumber routes into <em>"this might be a pirate."</em></p>
+    <p>He's the deductive engine, and he plays it with an unbothered curiosity — introducing himself around town, asking Wrin to read his fortune sometime, methodically working the barkeep two ales deep. His one persistent bit is that his answer to every obstacle is a purchasable scroll (Translate, helpful steps, water breathing), which the party started ribbing him for — but even that is the thaumaturge's toolbox at work.</p>
+  </div>
+
+  <div class="spotlight s-ruben">
+    <h4>Ruben Falmoor · the Oathbound Diplomat</h4>
+    <p>Ruben is the party's voice and its conscience. He carries the courtly register — <em>"gentlemen," "I suppose," "it would behoove you"</em> — and he does the load-bearing social work: consoling a frightened, diseased stranger, brokering with the priestess, and laying the full pirate case before the mayor. His defining moment is a vow: to a man he'd known for an hour, still sick and scared, he swore <em>"on the grace of Pharasma that you will not perish this day."</em> That's who Ruben is — a healer who treats a promise as a sacred instrument.</p>
+    <p>He's also the session's most gracious loser: he drove the "follow the note" plan, watched his deductions turn out mostly wrong, and owned it without flinching (<em>"I saw the problem and used the completely wrong formula"</em> / <em>"my apologies for the wild duck chase"</em>). And he mines real comedy from his own build — a divine sorcerer who dumped Intelligence for faith and charisma, cheerfully conceding he has <em>"a zero in Intelligence"</em> while Xurl notes he <em>"has the power of God and anime on his side."</em></p>
+  </div>
+
+  <div class="spotlight s-xurl">
+    <h4>Xurl · the Sailor Who Knows Things</h4>
+    <p>Xurl is a three-foot, forty-pound, faintly glowing halfling wrestler-monk who talks like a deckhand and thinks like a navigator. His comedic timing anchored the table — the deadpan role summary (<em>"He drinks and he knows things… I'm here to punch things"</em>), the honest job description (<em>"I'm not so good at hitting. Pretty good at grabbing, though"</em>), and the session mantra <em>"Plan is no plan. Fuck it, we ball."</em></p>
+    <p>But it would be a mistake to file him as comic relief, because Xurl did the most actual <em>reasoning</em> of anyone. He's the one who worked out the full pirate mechanism — that the note goes to the raiders, not the meeting, so you either stow away on the convoy or find the hideout — and who poked the hole in the mayor's plan (<em>"unless the cliff is only a convenience and not a requirement"</em>). He threw his old sailor's trade at the problem, dead-reckoning a search cone onto a scrap-paper map (<em>"this is a new level of fuckery… liberal sailing navigation on a coastline"</em>). Sloppy and wrong-way, but it was real navigation, and it was his idea. He carries the party's institutional memory too (he caught the first note last session, swimming out and nearly drowning), and quietly ran point on most of the tactical planning while cracking jokes the whole way.</p>
+  </div>
+
+</div>
+
+<h2>Loot &amp; Gold</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Wand of Quench (sold)</div>
+    <div class="loot-source">Salvaged from the Gauntlight</div>
+    <div class="loot-note">Primal — useless to Ruben (divine). Sold for 80 gp.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Sturdy Shield (sold)</div>
+    <div class="loot-source">Party stash</div>
+    <div class="loot-note">No one was using it. Sold for 50 gp.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Ghoul Fever Cure — FREE</div>
+    <div class="loot-source">Vandy · Dawnflower Library</div>
+    <div class="loot-note">Goodwill to the town's new problem-solvers.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Note Translation</div>
+    <div class="loot-source">Wrin Sivinxi · 7 gp</div>
+    <div class="loot-note">Revealed date/time/place in Kholo.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">40 gp advance</div>
+    <div class="loot-source">Mayor Osif Mahimis</div>
+    <div class="loot-note">Toward the pirate job — 10 gp each.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Full re-equip</div>
+    <div class="loot-source">Otari blacksmith</div>
+    <div class="loot-note">Argon replaced gear lost to the ghouls (narrative, no cost).</div>
+  </div>
+</div>
+<div class="xp-banner">No XP awarded — a zero-combat session of intros, RP, and investigation. <strong>Argon still has unassigned magic-item slots</strong> (one level-3, two level-2, one level-1) to pick before the next outing, and wants a <strong>Striking rune</strong> on his guisarme.</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Argon</strong>: "I stand now free. At least I hope so, until I can get out of this place."
+  <span class="attribution">His first coherent words after breaking loose of the ghouls in the dark.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Argon</strong>: "Yes, I have survived many battles. What is one more?" — "What is many more? Bring it on."
+  <span class="attribution">Signing on to the party's contract, still weaponless and half-sick.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Argon</strong>: "Give me some beer. I need that after this whole kidnapping."
+  <span class="attribution">Discovering the party's unclaimed stash beer the morning after his rescue.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ruben</strong>: "I swear on the grace of Pharasma that you will not perish this day."
+  <span class="attribution">His oath to a diseased stranger he'd known for an hour.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ruben</strong>: "If by a small chance that someone is doing this in order to receive help, then I cannot ignore it. But I understand that my whims do not supersede the group."
+  <span class="attribution">At the fork over chasing the note — his conscience and his deference to the group in one breath.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ruben</strong>: "I saw the problem and used the completely wrong formula and got the wrong answer."
+  <span class="attribution">Owning the Chester misfire after his plan led the party astray.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Alder</strong>: "Evil, greedy, and determined… Something tells me this might be a pirate — where the pirates come."
+  <span class="attribution">The psychometry read on the note that cracked the whole side-quest.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Alder</strong>: "Perhaps you could read our fortune sometime."
+  <span class="attribution">Introducing himself to Wrin the fortune-teller.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Xurl</strong>: "He drinks and he knows things." — "I'm here to punch things."
+  <span class="attribution">Summarizing Alder, and then himself, for the new guy.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Xurl</strong>: "This is liberal sailing navigation on a coastline. This is what I do."
+  <span class="attribution">Defending his MS-Paint dead-reckoning of the pirate lane.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Xurl</strong>: "Unless the cliff is only a convenience and not a requirement. If they can launch it from anywhere, then it will be substantially harder."
+  <span class="attribution">Poking a hole in the mayor's tidy "just watch the cliff" plan.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Xurl</strong>: "Fighting pirates by day, fighting zombies by night. Oh yeah — easy life."
+  <span class="attribution">On the party's newly doubled workload.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Vandy</strong> (the priestess): "Big boy, you got to be careful out there. Those things can kill you."
+  <span class="attribution">A two-and-a-half-foot halfling patting a seven-foot orc on the shoulder after curing his fever.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The flying notes / pirate ring</strong> — Someone on the Otari cliffs launches magical Kholo-language notes broadcasting <strong>Otari Lumber</strong> convoy routes (departure time + destination) to pirates who raid them. The party has agreed to take the pirates on themselves; <strong>next shipment is in two days.</strong></li>
+  <li><strong>Who writes the notes?</strong> Not confirmed as an inside job — likely someone <em>watching</em> the port and sending word at cast-off. The launch point is the cliff (or beyond it). The Kholo language is a lead: who in the area speaks the gnoll tongue?</li>
+  <li><strong>The Gauntlight proper</strong> — Still the actual contract. Sealed by day, open after sunset. Belcorra may be reactivating it; the graveyard undead were a symptom. Untouched this session.</li>
+  <li><strong>Belcorra's tapestries</strong> — Four recovered; more in the dungeon. Each teaches the library more about the dead tyrant.</li>
+  <li><strong>Name confirmations still open</strong> — mayor <strong>Osif Mahimis</strong> and aide <strong>Iqbal</strong> are working spellings (DM homebrew). The party lost more prior members than just Victor and Tlanik — a third had "a bunch of languages" (why no one can read Kholo now).</li>
+  <li><strong>Xurl's "Sindus"</strong> — a power source/patron Xurl used last session to reach the first note. Unexplained.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">What's Next</span>
+  <p>Argon is cured, re-armed, and signed on. The party has a lumber-pirate ambush to plan in two days — and a sealed megadungeon that only opens after dark, with a five-hundred-year-dead tyrant maybe waking at the bottom of it. Two jobs, one clock.</p>
+  <div class="big-line">"Fighting pirates by day, fighting zombies by night."</div>
+  <span class="speaker">— Xurl, on the life of a hired professional</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Argon Rath's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Argon did this session</h3>
+<ul>
+  <li>Woke a captive in the dark under the <strong>Gauntlight</strong>. Struck first, escaped blind through the dungeon, lost the ghouls. Caught <strong>ghoul fever</strong> from a bite.</li>
+  <li>Was found and rescued by the party (<strong>Ruben</strong>, <strong>Alder</strong>, <strong>Xurl</strong>). Taken to their base, then to the <strong>Dawnflower Library</strong> the next morning.</li>
+  <li><strong>Cured</strong> of ghoul fever by the priestess <strong>Vandy</strong> — no charge.</li>
+  <li>Pledged to join the party's contract in return. Re-equipped at the Otari blacksmith (lost my gear to the ghouls).</li>
+  <li>Deduced the flying note's timestamp was a <em>record of an event</em>, not a meeting time — reframed the mystery.</li>
+  <li>Marched with the party to <strong>Chester</strong> and back; stood watch on the cliff for more notes (saw none).</li>
+  <li>Sat in on the meeting with <strong>Mayor Osif Mahimis</strong>; agreed to hunt the pirates.</li>
+</ul>
+
+<h3>Things Argon knows that the party does not</h3>
+<ul>
+  <li>Nothing hidden yet. I'm the one who's behind — the party knows this place and I don't. I came in blind.</li>
+  <li>I keep my coin in a hidden pocket sewn into a shirt; that's why the ghouls didn't take it. Keep doing that.</li>
+</ul>
+
+<h3>What Argon is thinking about</h3>
+<ul>
+  <li>I owe these three. A cure and a place to sleep. I pay debts.</li>
+  <li>I am useless without a weapon. Get the <strong>Striking rune</strong> on the guisarme first — biggest damage. Then Ghost Touch for the ghosts they keep warning me about. Pick my open magic items (level 3, two level 2s, level 1) before the next fight.</li>
+  <li>The party has no real muscle until me — Xurl grabs, I hit. That's the plan. Learn to flank with him.</li>
+  <li>Everyone here is sharp of tongue and dull of book. Fine. I don't need to be clever. I need to be the wall.</li>
+  <li>I don't care whether we fight pirates or the dead first. I care that I'm ready when we do.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who on the cliffs is selling out the lumber convoys, and do they speak <strong>Kholo</strong>?</li>
+  <li>What is in the <strong>Gauntlight</strong> below where the others have been? What woke <strong>Belcorra</strong>?</li>
+  <li>Who were the party's old companions — <strong>Victor</strong>, <strong>Tlanik</strong>, the others — and why did they leave? "Cost a couple of lives."</li>
+  <li>What are the <strong>kobolds</strong> we share a base with, and can they be trusted at my back?</li>
+  <li>What is Xurl, and why does he glow?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

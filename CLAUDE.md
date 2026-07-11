@@ -34,6 +34,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
 | `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | Tivael — House Drake Dragonet — Maestro Bard / Sorcerer (Draconic) |
+| `kingmaker/` | Pathfinder 2e Remastered | Kingmaker (Stolen Lands, River Kingdoms) — Tuesday group | Avor — Hobgoblin (Elfbane) Thief Rogue — dual-wield Aldori duelist | **JOINED 2026-07-07 @ S4** |
 
 ## How to Help
 

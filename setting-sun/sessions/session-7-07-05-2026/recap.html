@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 7 — The Long Climb, One Floor from the Sun</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b0304010 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #7040b018;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-tivael { border-left-color: var(--shadow-bright); }
+.char-bargrum { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-bael { border-left-color: var(--blood); }
+.char-raylta { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-tivael { border-left-color: var(--shadow-bright); }
+.s-bargrum { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-bael { border-left-color: var(--blood); }
+.s-raylta { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1528 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Long Climb, One Floor from the Sun</h1>
+<div class="subtitle">Setting Sun, Rising Phoenix — Session 7</div>
+<div class="meta-row">
+  <span class="meta-pill">July 5, 2026</span>
+  <span class="meta-pill">PF2e Remastered</span>
+  <span class="meta-pill">~3h 50m</span>
+  <span class="meta-pill">Shades of Blood · Book 3</span>
+  <span class="meta-pill">Level 10</span>
+  <span class="meta-pill">6 Encounters</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:60%"></div>
+  <div class="comp-seg comp-explore" style="width:15%"></div>
+  <div class="comp-seg comp-rp" style="width:14%"></div>
+  <div class="comp-seg comp-social" style="width:6%"></div>
+  <div class="comp-seg comp-loot" style="width:5%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-tivael">
+    <div class="char-name">Tivael ★</div>
+    <div class="char-class">House Drake Dragonet · Bard (Maestro) / Sorcerer</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-bargrum">
+    <div class="char-name">Bargrum Stonefist</div>
+    <div class="char-class">Dwarf · Guardian / Eagle Knight</div>
+    <div class="char-player">Guardian Player</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Talos Minotaur · Magus (Sparkling Targe)</div>
+    <div class="char-player">LordOfArrakis</div>
+  </div>
+  <div class="char-card char-bael">
+    <div class="char-name">Bael</div>
+    <div class="char-class">Human (Aiuvarin) · Kineticist / Rogue</div>
+    <div class="char-player">Dado76</div>
+  </div>
+  <div class="char-card char-raylta">
+    <div class="char-name">Raylta Cailleach</div>
+    <div class="char-class">Human · Cosmos Oracle / Oatia Skysage</div>
+    <div class="char-player">Heath</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>This was the long climb — six fights up the last habitable floors of the Ebon Tower, the architecture itself curdling into the Netherworld as they rose (the honest Azlanti stone giving way to black-mist glass, every cast shadow deepening, every lamp dimming). It opened quietly: cleanup from the velstrac massacre below, one more room of half-broken captives staged for rescue, a reading nook where they could look <em>out</em> through the tower wall and see the world beneath them swallowed in supernatural dark. Then the fights started and mostly didn't stop.</p>
+  <p>The floor's guardians were a rogue's gallery of "not again" enemies. First, two winged <strong>vampire-Strix</strong> — Okoa and Rukh — dropped screeching into a sea-battered reception hall; Ferrok cracked Okoa in half and Bael's fire ran down the fleeing Rukh. Then a hall of paintings breathed out <strong>five Greater Shadows</strong> that spent the fight literally <em>stealing the party's shadows</em> (Ferrok's, Raylta's, Bael's, and Bargrum's all went — only Tivael's "evasive dragon" kept his), until Tivael answered with a spell he'd been itching to cast — a three-action <strong>Spiritual Torrent</strong> cone, "Kaboom" — that vaporized one shadow and softened two more, and Raylta punched the one that stole <em>her</em> shadow to death with Holy Light. A statue of the vampire god <strong>Nin</strong> split in two and lunged as a pair of <strong>Stone Bulwarks</strong>; a wall-mural of gems tore itself down as <strong>three Aeon Stone Swarms</strong> and became the worst grind of the night — every swarm exploded when it died, so the party "kept losing when they won."</p>
+  <p>Between the gem swarm and the finish, the session's one real conversation: the party found <strong>Anareth Zorlan</strong>, the engineer who'd seemingly <em>absconded</em> from the Warden's floor — revealed here to have been <strong>captured by Degg</strong> and forced to build spare parts. He handed them <strong>blueprints for safely dismantling the Shadow Beacon</strong> (and a key past a paralysis trap), plus the reveal that landed: the beacon is a <em>rushed prototype</em>. Degg and Nizca skipped the tests, so only the surrounding seas are shrouded so far — but given time it will tie all of Golarion to the Netherworld, permanently. Two more fights closed the floor: a pair of masochist velstrac <strong>Sacristans</strong> who <em>begged</em> to be hurt (and whom Bargrum met with the session's best bars), and finally a <strong>river of blood</strong> that congealed into four self-healing <strong>Bulbous Blood Oozes</strong>. The party ended battered, rich, and one short floor from the top of the world.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act explore">
+    <div class="act-label">Act I · Explore · Cleanup and the Climb</div>
+    <div class="act-card">
+      <h3>Freeing Captives, Reading the Dark</h3>
+      <ul>
+        <li>The session picked up right after the velstrac boss floor (Jubilant, last session). A rough start on hero-point-fueled healing rolls (<strong>Bael</strong>: <em>"failed again — good start"</em>) gave way to methodical cleanup: one more room of captives — <em>not</em> as broken as the mirror-hall victims — staged with food, water, and directions for later evacuation.</li>
+        <li>Exploring the last rooms of the floor: a small <strong>torture chamber</strong> (<strong>Tivael</strong>, deadpan: <em>"This is a torture chamber."</em>), coffin rooms already emptied (the vampires the party killed), and a <strong>Nin shrine/office</strong> full of pre-Earthfall prison records. Loot: a <strong>Spiritual Warhorn</strong> (Bael took it), and a legend-boosting relic that needed a <em>sanctified</em> wielder — nobody qualified.</li>
+        <li>A <strong>reading nook</strong> with windows let them look out the tower wall: below, the world was twisted and obscured by supernatural darkness; above, everything vanished into shadow. The higher they climbed, the more the Netherworld bled through — the Azlanti stone literally replaced by clear glass full of dense inky mist.</li>
+        <li>Bargrum, ever the quartermaster, appraised a rug (<em>"It really does tie the room together, you know?"</em>) and floated the post-campaign dream: <em>"If we build an adventuring team house after all this, we're going to be set."</em> Ferrok: <em>"Manacles hanging from everything."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Okoa &amp; Rukh, the Vampire-Strix</div>
+    <div class="act-card">
+      <h3>Two Winged Shadows in a Sea-Battered Hall</h3>
+      <ul>
+        <li>In a <strong>salt-encrusted reception hall</strong> slick with sea spray near the ocean surface, a screech echoed and two shadow-clad figures dropped in on enormous wings — shortbows, claws, burning red glares, no words. Bargrum tried anyway (<em>"Let's talk about this."</em>); they answered with weapons.</li>
+        <li><strong>Tivael's Recall Knowledge</strong> named them: <strong>Strix</strong> — winged humanoids native to Golarion — but infused with Netherworld energy and turned into <strong>undead vampires</strong>. High physical resistance; even Raylta's adamantine barely bit. Both self-healed ~10 HP a turn.</li>
+        <li><strong>Okoa</strong> was the melee flyer — claws, a Vicious Flurry, and a <strong>Strafing Strike</strong> that turned her into a winged shade and carved the party line. <strong>Rukh</strong> was the caster — Synesthesia on Bargrum (Clumsy 3 / Dazzled) and a rank-4 <strong>Grim Tendrils</strong> void-line that bled most of the party.</li>
+        <li><strong>Bargrum</strong> anchored: a Juggernaut Charge that wrapped the silver monkey's fist around a Strix's neck to <em>drag</em> it, Group/Shielding Taunts, and <strong>two Intercepts in one round</strong> (<em>"you learn to block things with your face as well as your chest"</em>). His clutch play was a <strong>Commitment to Protection</strong> call-out — <em>"Watch out for her claws, Ferrok"</em> — reading the danger and handing Ferrok a +1 AC edge (Raylta: <em>"That call-out was clutch."</em>).</li>
+        <li><strong>Ferrok killed Okoa</strong> with an Ignition Spellstrike run — <em>"that guy's dead. Dead, dead."</em> / Raylta: <em>"Why are you so strong?"</em> <strong>Bael's Flying Flame finished Rukh</strong> — <em>"that is enough to break her down."</em></li>
+        <li>Tivael controlled with a rank-3 Fear (both frightened), Befuddle, and Frostbite; Raylta chipped with Vitality Lash (vitality vs. undead) and kept Bael topped with Nudge; Bael used Flinging Updraft and blasts. Afterward, a callback to last session's spared poppet (<em>"We did a good thing, you guys."</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · The Painting Shadows</div>
+    <div class="act-card">
+      <h3>Five Greater Shadows, and the Theft of Shadows</h3>
+      <ul>
+        <li>A U-shaped hall lined with paintings; a staircase ascended at the center. As the party entered, <strong>five Greater Shadows</strong> peeled out of the paintings. Ferrok: <em>"Painting monsters. I pull out my eraser."</em> (DM: <em>"I think that would just make the eraser very dirty."</em>)</li>
+        <li>Incorporeal — resistant to everything but force, ghost touch, and vitality — and armed with <strong>Steal Shadow</strong>: every solid hit enfeebled a PC by ripping their shadow off. They stole <strong>Ferrok's</strong> (<em>"I look so weird walking around with no shadows"</em>), <strong>Raylta's</strong> (<em>"How dare you? It's mine!"</em>), <strong>Bael's</strong>, and <strong>Bargrum's</strong> — only Tivael, the self-styled <em>"evasive dragon,"</em> kept his.</li>
+        <li><strong>Tivael ran the fight.</strong> First a spell he'd wanted to cast for ages — <strong>Wall of Mirrors</strong> — which both punished anything that struck it and became difficult terrain that bogged the incorporeal shadows down. Then, once the party clocked that <strong>vitality</strong> was the lever (<strong>Bael</strong> called it first — <em>"I think vitality might hurt them"</em>), Tivael dropped a <strong>three-action Spiritual Torrent</strong> vitality cone. <em>"Kaboom."</em> It <strong>destroyed Greater Shadow B</strong> (84 damage) and gutted two others.</li>
+        <li><strong>Bael</strong> opened with his <strong>Crescent Aeon Stone's Moonbeam</strong> — a 100-foot silver line (<em>"Big Beam Attack! His Crescent Stone"</em> / Raylta, dry: <em>"It's so lame."</em>) — then cleared A, C, and D with Flying Flame and blasts, plus a literal fire-fist punch from his new handwraps.</li>
+        <li><strong>Raylta</strong> took her revenge personally: <strong>Holy Light killed the shadow that stole her shadow</strong> — <em>"I just punch him with a holy light. Where's your holy light?"</em> Ferrok's Force Fang and Ignition Spellstrikes chipped through the incorporeal resistance; Bargrum reactive-struck and taunted.</li>
+        <li>Out of combat, Bargrum found the perfect reference: <em>"Has anybody seen the old, old Peter Pan? Bargrum's gonna take his shadow and nail it back on."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act IV · Explore · The Scrying Circle &amp; the Golden Goose</div>
+    <div class="act-card">
+      <h3>Two Temptations, Both Declined</h3>
+      <ul>
+        <li>A room held a <strong>heavily-warded scrying circle</strong>. Ferrok RK'd it — a scrying tool, but trapped; a botched attempt to use it deals <em>"pretty intense mental damage."</em> Tempting to spy on the floors above, but nobody was skilled enough to risk it. Left alone.</li>
+        <li>A lounge cabinet held a <strong>cursed golden goose</strong> — feed it the bloody heart of a <em>non-evil</em> creature and wait, and it lays a gold egg. The catch spooked them. Raylta, gleefully: <em>"I kind of want to see if it's the 12th egg or not. I love gambling."</em> Ferrok: <em>"It's freaking cursed."</em> They left it.</li>
+        <li>A <strong>magically locked door</strong> (detect magic flagged it) got noted for later — it would turn out to be the Warden's old chambers, and Anareth would hand over the key.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Stone Bulwarks</div>
+    <div class="act-card">
+      <h3>The Statue of Nin, Split in Two</h3>
+      <ul>
+        <li>A bare lounge held a single statue of the vampiric god <strong>Nin</strong> (Bael: <em>"He just looks like a dude."</em> / Ferrok: <em>"We are all set to start a vampire cult after this."</em> / Raylta: <em>"We're <strong>trying to destroy</strong> the cult."</em>). As they stepped in, <strong>the statue split in two</strong> and both halves lunged — a pair of <strong>Stone Bulwarks</strong>.</li>
+        <li>Mindless, with heavy physical resistance bypassed only by <strong>adamantine</strong>. Ferrok ran the party's signature combo — <strong>Incendiary Fog</strong> placed over the enemies, then <strong>Bael's Thermal Nimbus ignited it</strong> into a fireball — though one Bulwark <strong>crit-saved</strong> the blast (a soul-crushing nat-20 that shrugged off the fire; only its twin took the brunt).</li>
+        <li><strong>Bargrum</strong> anchored: double Shielding Taunts pinning both statues (forcing a string of taunt-misses) and a 38-damage Intercept eaten for Raylta.</li>
+        <li><strong>Raylta's adamantine Needle Darts crit shattered one Bulwark</strong> (<em>"Off the board!"</em>); <strong>Tivael's Electric Arc finished the other</strong>, with Ferrok crowing <em>"No mercy — all crits!"</em> over the lucky streak.</li>
+        <li>The statue left behind a copy of <strong>The Immaculate Solution</strong> (Nin's scripture — the party had sold their first copy). Raylta: <em>"Are we spreading the religion accidentally?"</em></li>
+        <li>The northern <strong>library</strong> held a dozen glowing hovering notes; <strong>Raylta's Occultism</strong> cracked them: schematics for the <strong>Shadow Beacon</strong>. Confirmed — the device is still a <strong>prototype</strong>, which is why only this region is shadowed rather than all of Golarion. Bael, unbothered: <em>"If there isn't a flaw, we'll make one."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Aeon Stone Swarms</div>
+    <div class="act-card">
+      <h3>"We're Not Rocks, We're Gems"</h3>
+      <ul>
+        <li>An office's east wall was a mural of tiny polished stones. As they searched, the mural <strong>tore itself off the wall</strong> and became <strong>three Aeon Stone Swarms</strong> — <em>"we're not rocks, we're gems"</em> (Ferrok, theorizing: <em>"they crave our blood. That's all I can think."</em>).</li>
+        <li>The ugliest grind of the session. The swarms flew into the party's squares and hammered them with <strong>Battering Orbit</strong> AoE and launched-stone strikes — and each swarm, when killed, detonated with <strong>Stone Shatter</strong> (a 30-foot burst that caught allies too). Raylta ate a 56 (DM: <em>"a headshot and a nutshot simultaneously"</em>): <em>"Why are we still losing when we win?"</em></li>
+        <li>The three swarms split one kill apiece: <strong>Bargrum</strong> (Silver Monkey's Fist) → A, <strong>Bael</strong> (crit blast) → B, and <strong>Tivael</strong> — after switching to hit their weaker Fortitude save (<em>"these guys keep saving my spells, so I'll do a 40 instead"</em>) — closed the last with a <strong>Frostbite</strong>.</li>
+        <li>Bael's <strong>Four Winds</strong> scattered the party out of the swarms, then his signature <strong>Brace</strong> turn: <em>"Instead of dodging, I just Brace, and everything that flies into my face I catch in my hand and burn."</em> <strong>Ferrok</strong> ground away through a genuinely cursed streak — <strong>Enfeebled 2</strong> the whole fight from the Greater Shadows — while <strong>Bargrum</strong> interposed his body over Raylta to eat AoE (<em>"he just dives and rolls and blocks both hits"</em>) until his Intercepts ran dry.</li>
+        <li>The room's Aeon Stones became loot — a <strong>black pearl</strong> (+4 vs. mental / reflects, to Bargrum), a <strong>delaying stone</strong> (Ferrok), and a stasis stone — and the party's absurd wealth became a running bit (Bael: <em>"I only have moderates. Look at all the money I'm carrying around."</em> / Raylta: <em>"I didn't know we were made out of money."</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act VII · RP · Anareth Zorlan &amp; the Beacon Blueprints</div>
+    <div class="act-card">
+      <h3>The Captured Engineer, and the Way to Break the Sun-Killer</h3>
+      <ul>
+        <li>In a converted <strong>workshop</strong>, the party found <strong>Anareth Zorlan</strong> — the same engineer they'd tried to free two floors down (the one who seemingly <em>absconded</em> back in S4). The reframe: he hadn't run off — Degg's people <strong>captured</strong> him after the party left and put him to work on spare parts for the beacon. Ferrok, deadpan: <em>"There — you listen to us this time and actually run."</em></li>
+        <li>Asked to help, he refused to fight (<em>"I'm no warrior. Or mage. I'm an inventor."</em>) — but offered the campaign's most important handoff. The engine is <strong>unstable</strong>: Degg and Nizca <strong>rushed the activation and skipped tests</strong>, which is the only reason the shadow stopped at the surrounding seas. Given time, <em>"Galarian will become tied to the Netherworld. Permanently."</em></li>
+        <li>He gave them <strong>blueprints to safely dismantle the beacon</strong> (ten minutes of study → mechanical circumstance bonuses to next session's disable checks) with a blunt warning: fail the disable and <em>"big boom"</em> — a mass release of Netherworld energy. He also slid them the <strong>enchanted key to the Warden's old chambers</strong> (it disables a paralysis trap), then took the cleared stairs out. Raylta: <em>"See? I knew you weren't such a bad guy."</em></li>
+        <li>The <strong>Strix journal</strong> (Okoa and Rukh's room) filled in the rest: the two were <strong>exiled Strix</strong> who joined Nizca hoping their own Netherworld ties would buy them belonging. It also confirmed the upper tower's backstory — when the beacon first darkened the sky, it drew the <strong>velstracs</strong> in; Nizca struck an <em>uneasy alliance</em> with them, but once he and Degg got consumed with repairs up top, the velstracs turned on everyone below — captives <em>and</em> vampires alike.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VIII · Combat · The Sacristans</div>
+    <div class="act-card">
+      <h3>The Choir That Wanted to Be Hurt</h3>
+      <ul>
+        <li>Behind the Warden's key: a chamber preserved since Earthfall, full of luxury and red embroidery — occupied by <strong>two velstrac Sacristans</strong> still grieving Jubilant. <em>"You brought an end to her. Please show us how."</em> They were <strong>masochists</strong> — they <em>wanted</em> to be hit — which flipped the fight's whole emotional register.</li>
+        <li><strong>Tivael controlled hard</strong>: a four-round Dirge of Doom, a <strong>Laughing Fit</strong> that stuck a Sacristan unable to use reactions (<em>"No reaction strike for you, bitch."</em>), a second Laughing Fit sustained, Evangelize (Stupefied), Demoralize, Telekinetic Projectile, and Electric Arc. He paid for standing too close — a 56-damage hit and stacked persistent bleed he never once saved against (<em>"I'm just going to bleed to death"</em>).</li>
+        <li><strong>Bargrum</strong> got the session's sharpest exchange. As he deliberately Intercepted hit after hit — and <strong>Shield-Blocked a Sacristan's nat-20 crit</strong> — a Sacristan admired him: <em>"I was unfamiliar with your game. You've my respect."</em> Bargrum, spitting blood: <strong>"We're nothing alike"</strong> — and, on the same theme: <strong>"You're taking hits for the love of the pain. I'm shielding crits for the love of the game."</strong> Raylta nailed it: <em>"He's right — he's not one of you! … I'm a fucking freak."</em></li>
+        <li><strong>Tivael's Electric Arc killed Sacristan B</strong> (the DM: <em>"B had exactly nine hit points — that is enough"</em>). The last Sacristan came down to <strong>Raylta</strong>, who <strong>did not want the kill</strong> — <em>"I hope I miss. I hope I miss."</em> — because giving a masochist his death felt like giving him what he wanted. Her Needle Darts connected anyway, and with cruel irony <strong>crit</strong>: <em>"the darts just shatter the glass behind him as he tumbles out the window into the ocean."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IX · Combat · The Bulbous Blood Oozes (finale)</div>
+    <div class="act-card">
+      <h3>A River of Blood, and the Wall That Wouldn't Fall</h3>
+      <ul>
+        <li>Clearing the last rooms (an extravagant bath, a fine bedroom — <em>"this is where the rich people who own the prison operate"</em>), the party turned back toward the stairs and a <strong>massive river of blood</strong> poured down and congealed into <strong>four Bulbous Blood Oozes</strong>.</li>
+        <li>Mindless, <strong>immune to crits</strong>, high HP, and armed with <strong>Siphon Vitality</strong> — a 15-foot pulse that damaged everyone nearby <em>and healed the ooze</em> (Raylta, exasperated: <em>"Man, they get healed."</em>). Another grind, and another where the party defaulted to damage before <strong>Recall Knowledge</strong> (their reflex saves turned out to be the weak point — learned late).</li>
+        <li><strong>Bargrum</strong> was the immovable object — Group/Shielding Taunts holding three oozes at once, Shield Blocks, and Intercepts soaking Siphon Vitality until the party begged him to stop (<em>"Bargrum, no, you can't!"</em> / Bargrum: <em>"I can take it."</em>). The DM's verdict: <em>"If you ever GM with a Guardian in the party, the best way to damage the Guardian is to attack literally everybody else."</em></li>
+        <li><strong>Tivael's Electric Arc</strong> did the quiet closing work — finishing two of the four oozes on their weak reflex — while <strong>Ferrok</strong> re-ran the <strong>Incendiary Fog / Nimbus</strong> combo with Bael and put the <strong>final blade on the last ooze</strong>. <strong>Bael</strong> flung Raylta clear on a gust and crit a <strong>Battle Medicine</strong> (40) on Bargrum. <strong>Raylta's</strong> rank-5 <strong>Divine Immolation</strong> (<em>"That's a divine fireball"</em>) aimed at their weak reflex — but both targets shrugged it off on a <strong>nat-19 and nat-20</strong> (<em>"very unfortunate"</em>), the exact luck that defined the grind.</li>
+        <li>The last ooze fell around the 3h50m mark, and the DM called it there. Next week: the top of the tower, and the end of Shades of Blood.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Okoa &amp; Rukh (vampire-Strix) · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bargrum → Bael → Raylta → Ferrok → Tivael → Rukh → Okoa. Two winged <strong>Strix</strong> infused with Netherworld energy and turned to <strong>undead vampires</strong> — high physical resistance (adamantine only partly bypassed; silver/force/vitality are the levers), both self-heal ~10 HP/turn. <strong>Okoa</strong> — melee flyer: claws, Vicious Flurry, Strafing Strike (semi-incorporeal line dash). <strong>Rukh</strong> — caster: Synesthesia (Clumsy 3 / Dazzled on Bargrum), rank-4 Grim Tendrils (void line + persistent bleed).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The party won initiative decisively (the Strix rolled a 1 and a 3). <strong>Bargrum</strong> opened Defensive Advance, discovered the deep physical resistance, and set up Group/Shielding Taunts, a Juggernaut Charge drag, and <strong>two Intercepts in one round</strong>.</li>
+    <li><strong>Tivael</strong> RK'd them (Strix / undead vampires), stuck a Stupefied on one, then a rank-3 <strong>Fear</strong> (both frightened), Befuddle, and Frostbite. <strong>Bael</strong> used Flinging Updraft (wind-jump on Ferrok), blasts, and Flying Flame. <strong>Raylta</strong> worked Vitality Lash, Divine Lance, and a Nudge for Bael.</li>
+    <li><strong>Ferrok killed Okoa</strong> — an Ignition Spellstrike run that near-maxed (<em>"Dead, dead."</em>). <strong>Bael's Flying Flame finished Rukh</strong> (<em>"that is enough to break her down"</em>). Bargrum's Commitment-to-Protection call-out fed Ferrok a +1 AC bonus vs. the Strix (Raylta: <em>"clutch"</em>).</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Both Strix down; the party callbacked the spared poppet (<em>"we did a good thing"</em>). <em>Loot:</em> +2 handwraps of mighty blows, +1 striking astral shortbow, +1 resilient leather armor, +1 resilient scroll robes, scroll of Grim Tendrils.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Five Greater Shadows · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bargrum → Ferrok → Tivael → Raylta → Greater Shadow B → Greater Shadow A → Bael → Greater Shadow D → Greater Shadow C → Greater Shadow E. <strong>Greater Shadows ×5</strong> (A–E), incorporeal (resist all but force / ghost touch / <strong>vitality</strong>), manifesting from the paintings. <strong>Steal Shadow</strong> — solid hits enfeeble by tearing off the target's shadow (Ferrok, Raylta, Bael, <em>and</em> Bargrum all lost theirs; only Tivael kept his).</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Tivael</strong> opened with <strong>Wall of Mirrors</strong> (damages attackers + difficult terrain vs. the incorporeal shadows), then a three-action <strong>Spiritual Torrent</strong> vitality cone that <strong>destroyed Greater Shadow B</strong> (84) and softened C and E.</li>
+    <li><strong>Bael</strong> led with the <strong>Crescent Aeon Stone Moonbeam</strong> (silver line) and cleared shadows with Flying Flame and blasts (finishing <strong>A, C, and D</strong>) plus a fire-fist punch from his new handwraps. <strong>Raylta</strong> — after Bael flagged vitality as the lever — <strong>killed Greater Shadow E</strong> with Holy Light (the one that had stolen her shadow).</li>
+    <li><strong>Ferrok</strong> chipped with Force Fang and Ignition Spellstrikes against heavy incorporeal resistance; <strong>Bargrum</strong> reactive-struck and taunted.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>All five destroyed; kill split Tivael (B), Bael (A/C/D), Raylta (E). <em>Loot:</em> none carried; the paintings themselves were worth some coin.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Two Stone Bulwarks · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Tivael → Stone Bulwark A → Stone Bulwark B → Ferrok → Bael → Raylta → Bargrum. <strong>Stone Bulwarks ×2</strong> — the split statue of the vampire god <strong>Nin</strong>. Mindless, heavy physical resistance bypassed by <strong>adamantine</strong>; fists + spikes, reach.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Ferrok</strong> placed <strong>Incendiary Fog</strong> over both and delayed; <strong>Bael</strong> ignited it with his Thermal Nimbus for a two-target fireball — though one Bulwark <strong>crit-saved</strong> (a nat-20 that shrugged off the fire, so only its twin took the brunt).</li>
+    <li><strong>Bargrum</strong> double-Shielding-Taunted both statues (forcing a string of taunt-misses) and ate a 38-damage Intercept for Raylta.</li>
+    <li><strong>Raylta's adamantine Needle Darts crit shattered one Bulwark</strong> (<em>"Off the board!"</em>); <strong>Tivael's Electric Arc finished the other</strong>.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Both statues shattered. <em>Loot:</em> <strong>The Immaculate Solution</strong> (Nin scripture — sellable); the adjoining library's glowing notes were the <strong>Shadow Beacon blueprints</strong> (Raylta's Occultism read: prototype-stage, region-only shadow so far).</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Three Aeon Stone Swarms · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Aeon Stone Swarm A → Bael → Aeon Stone Swarm B → Tivael → Ferrok → Aeon Stone Swarm C → Raylta → Bargrum. <strong>Aeon Stone Swarms ×3</strong> — the office's gem mural come alive. <strong>Battering Orbit</strong> (in-space AoE), launched-stone strikes, and <strong>Stone Shatter</strong> — a 30-foot gem-burst when each swarm dies (catches allies too). The party's worst grind of the night.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li>The three swarms split one kill apiece: <strong>Bargrum</strong> (Silver Monkey's Fist) → Swarm A, <strong>Bael</strong> (crit blast) → Swarm B, <strong>Tivael</strong> (Frostbite, after switching to their weaker Fort save) → Swarm C.</li>
+    <li>Bael's <strong>Four Winds</strong> scattered the party out of the swarms and he took his <strong>Brace</strong> turn (<em>"everything that flies into my face I catch in my hand and burn"</em>). <strong>Tivael</strong> ran Flurry of Claws (two swarms) and Electric Arc every round.</li>
+    <li><strong>Ferrok</strong> ground away with Ignition Spellstrikes through a miss streak — <strong>Enfeebled 2</strong> all fight from the shadows. <strong>Bargrum</strong> interposed his body over Raylta to eat AoE and burned every Intercept he had. <strong>Raylta</strong> healed under fire (Lay on Hands, Vital Beacon), eating a 56-damage hit at one point.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>All three swarms burst; the party was badly chipped by the Stone Shatter chain. <em>Loot:</em> multiple <strong>Aeon Stones</strong> — a <strong>black pearl</strong> (+4 vs. mental / reflects; to Bargrum), a <strong>delaying stone</strong> (Ferrok), a stasis stone; incense and finery.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · Two Sacristans (velstracs) · 5 PCs</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Tivael → Bael → Bargrum → Sacristan B → Sacristan A → Ferrok → Raylta. <strong>Sacristans ×2</strong> — blindfolded velstrac casters (Chilling Darkness cold rays, barbed-chain strikes + persistent bleed, rank-3 Fear). <strong>Masochists</strong> — they <em>invite</em> being hit; <strong>silver</strong> stops their Fast Healing.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Tivael</strong> ran the control lane: a four-round Dirge of Doom, <strong>Laughing Fit</strong> (locked a Sacristan out of reactions — <em>"No reaction strike for you, bitch"</em>) sustained on both, Evangelize (Stupefied), Demoralize, Telekinetic Projectile, and the <strong>Electric Arc that killed Sacristan B</strong> (exactly 9 HP). He soaked a 56 + persistent bleed for clustering too close (<em>"I literally bled to death every time"</em>).</li>
+    <li><strong>Bargrum</strong> tanked chains and Chilling Darkness (Energy Interceptor caught a 34-damage cold ray; a Shield Block ate a Sacristan nat-20) and delivered the fight's defining bars (<em>"We're nothing alike" / "I'm shielding crits for the love of the game"</em>). <strong>Ferrok</strong> Ignition-Spellstruck the pair down to the wire; <strong>Bael</strong> dropped Solar Detonation (<em>"Kaboosh"</em>) and Flying Flame.</li>
+    <li>The two kills went to <strong>Tivael</strong> (Electric Arc → Sacristan B) and <strong>Raylta</strong>, who — reluctantly (<em>"I hope I miss"</em>) — <strong>crit Sacristan A</strong> with a Needle Dart that pitched it out the window into the sea.</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>Both Sacristans dead; the masochists never got the satisfaction they wanted. <em>Loot:</em> none carried (velstracs).</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · Four Bulbous Blood Oozes · 5 PCs · finale</div>
+  <h4>Setup</h4>
+  <p><strong>Initiative</strong> (Pax's tracker): Bulbous Blood Ooze D → Bargrum → Ferrok → Bael → BBO A → BBO C → Raylta → Tivael → BBO B. <strong>Bulbous Blood Oozes ×4</strong> — a river of blood congealed. Mindless, <strong>immune to crits</strong>, high HP, <strong>weak reflex</strong> (found late), with <strong>Siphon Vitality</strong> (15-foot pulse that damages the party and <em>heals the ooze</em>) and Pseudopod strikes.</p>
+  <h4>The fight</h4>
+  <ul>
+    <li><strong>Bargrum</strong> held three oozes at a time on Group/Shielding Taunts and soaked Siphon Vitality until the party protested (<em>"Bargrum, no, you can't!"</em> / Bargrum: <em>"I can take it."</em>).</li>
+    <li><strong>Tivael's Electric Arc</strong> finished two of the four oozes on their weak reflex (plus Flurry of Claws). <strong>Ferrok</strong> re-ran the <strong>Incendiary Fog / Nimbus</strong> combo with Bael, added Force Fang and Ignition Spellstrikes, and put the <strong>final blade on the last ooze</strong>.</li>
+    <li><strong>Bael</strong> flung Raylta clear on a conjured gust, crit a <strong>Battle Medicine</strong> (40) on Bargrum, and sent phoenixes through the pack. <strong>Raylta's</strong> rank-5 <strong>Divine Immolation</strong> (<em>"divine fireball"</em>) aimed at their weak reflex — but both targets saved on a <strong>nat-19 and nat-20</strong> (<em>"very unfortunate"</em>).</li>
+  </ul>
+  <h4>Outcome</h4>
+  <p>The last ooze fell and the session ended out of combat. No level-up — the party stayed at level 10, one short floor from Nizca. <em>Loot:</em> none noted.</p>
+</div>
+
+<h2>Character Spotlights</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-tivael">
+    <h4>Tivael · the Spell He'd Been Saving ★</h4>
+    <ul>
+      <li><strong>The single most satisfying moment of the night</strong> — against the incorporeal Greater Shadows he finally uncorked <strong>Wall of Mirrors</strong> (a spell he flagged out loud as one he'd <em>"been itching to do"</em>), then a three-action <strong>Spiritual Torrent</strong> cone (<em>"Kaboom"</em>) that erased one shadow and cracked two more open.</li>
+      <li><strong>The party's most reliable engine</strong> across the grinds — the <strong>Recall Knowledge</strong> anchor (he ID'd the Strix as Netherworld-infused vampires) and the dependable AoE (Flurry of Claws + Electric Arc, every single fight).</li>
+      <li><strong>The finisher more often than a glance suggests</strong> — dropped the last <strong>Aeon Stone Swarm</strong> with a Frostbite (after switching to its weaker save), closed two of the four <strong>Blood Oozes</strong> with Electric Arc, and killed <strong>Sacristan B</strong> on the nose (exactly 9 HP left).</li>
+      <li><strong>A full control board vs. the Sacristans</strong> — a four-round Dirge, a <strong>Laughing Fit</strong> that locked a velstrac out of its reactions (<em>"No reaction strike for you, bitch"</em>), Evangelize, and Demoralize.</li>
+      <li><strong>His one running cost</strong> was self-inflicted geometry — clustered too close to the Sacristans, ate a 56 and a stack of persistent bleed, and never once saved, which he turned into the session's best self-deprecating bit (<em>"I literally bled to death every time"</em>). Also the loot pragmatist: <em>"Money is money."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bargrum">
+    <h4>Bargrum · "I Can Do This All Day"</h4>
+    <ul>
+      <li><strong>Everywhere at once</strong> — the double-Intercept discovery in the Strix fight (<em>"you learn to block things with your face as well as your chest"</em>), the monkey's-fist-around-the-neck drag, the body-block <strong>Interpose</strong> that ate Aeon-swarm AoE meant for Raylta, and enough taunt-and-soak that the DM conceded <em>"the best way to damage the Guardian is to attack literally everybody else."</em></li>
+      <li><strong>The session's sharpest exchange</strong> — against the masochist Sacristan who offered him <em>"my respect"</em> for taking hits on purpose, Bargrum drew the exact line between a tank and a fanatic: <strong>"We're nothing alike"</strong> and, better, <strong>"You're taking hits for the love of the pain. I'm shielding crits for the love of the game."</strong></li>
+      <li><strong>The dry heart out of combat</strong> — the rug that <em>"really ties the room together,"</em> the dream of a fully-decorated adventuring-team house, and the Peter Pan fix for everyone's stolen shadows (<em>"take his shadow and nail it back on"</em>).</li>
+      <li><strong>Clutch reads</strong> — his <strong>Commitment to Protection</strong> call-out in the Strix fight was, by Raylta's own word, <em>"clutch,"</em> and he ended the Aeon-swarm grind having cracked a swarm himself with the silver fist.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ferrok">
+    <h4>Ferrok · the Hammer</h4>
+    <ul>
+      <li><strong>The kill leader</strong> — combat thesis stated outright (<em>"when you have a hammer, everything is a nail. So Ignition Spellstrike"</em>), and backed it: <strong>cracked Okoa the vampire-Strix in half</strong> (<em>"Dead, dead."</em>), ran the <strong>Incendiary Fog</strong> setups Bael detonated in the Bulwark and ooze fights, and put the <strong>final blade on the last Blood Ooze</strong> while bleeding profusely.</li>
+      <li><strong>Held through a cursed streak</strong> — Enfeebled 2 the whole Aeon-swarm fight (<em>"you're killing me"</em>), he stayed the finisher of record anyway.</li>
+      <li><strong>Carried the dungeon-crawl humor</strong> — theorizing that denied gems <em>"crave our blood,"</em> proposing the party <em>"start a vampire cult after this"</em> in front of a Nin idol, and mocking the beacon apocalypse (<em>"won't be able to tan anymore"</em>).</li>
+      <li><strong>Best line of the night</strong> — reacting to a Greater Shadow stealing his shadow with pure minotaur exasperation: <em>"I'm already weak, you fool. I look so weird walking around with no shadows."</em></li>
+      <li><strong>Threw the velstracs' ethos back at them</strong> — <em>"It hurts so good."</em> — and cut the oozes to the bone: <em>"If it bleeds, we can kill it."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-bael">
+    <h4>Bael · Big Beam, Bigger Wallet</h4>
+    <ul>
+      <li><strong>The AoE opener and closer</strong> — announced his Crescent Aeon Stone like a JRPG super (<em>"Big Beam Attack! His Crescent Stone"</em>), <strong>finished Rukh</strong> with a Flying Flame, cleared most of the Greater Shadows, and ran the Nimbus-ignition combo with Ferrok twice.</li>
+      <li><strong>His defining image</strong> — planted himself in the Aeon-swarm storm and stopped dodging: <em>"Instead of dodging, I just Brace and everything that flies into my face I catch in my hand and burn."</em></li>
+      <li><strong>A real second healer</strong> — Four-Winds-flung allies out of danger and crit a <strong>Battle Medicine</strong> for 40 on Bargrum mid-ooze-fight, plus greater healer's gloves topping off whoever Raylta couldn't reach.</li>
+      <li><strong>The wealth gag</strong> — the guy who <em>only</em> carries expensive potions (<em>"I only have moderates. Look at all the money I'm carrying around"</em>), reframed by the DM as <em>"the guy who only buys expensive wine."</em></li>
+      <li><strong>The engineer's philosophy in one line</strong> — on the maybe-flawed beacon: <em>"If there isn't a flaw, we'll make one."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-raylta">
+    <h4>Raylta · The Heart That Kept Score</h4>
+    <ul>
+      <li><strong>The one keeping everyone standing</strong> — ran the heal economy through six fights (rank-2-through-5 Heals, Nudge into the Cursebound spiral, Lay on Hands, Vital Beacon) and read the <strong>beacon blueprints</strong> (Occultism) that reframed the whole endgame.</li>
+      <li><strong>Divine offense that finally clicked</strong> — the <strong>Holy Light that killed the Greater Shadow that stole her shadow</strong> (<em>"How dare you? It's mine!"</em> → <em>"I just punch him with a holy light"</em>), an adamantine <strong>Needle Darts crit that shattered a Stone Bulwark</strong>, and a rank-5 <strong>Divine Immolation</strong> she was delighted to finally have a target for (even if the oozes shrugged it off on a nat-19/20).</li>
+      <li><strong>Reluctant to enjoy the violence</strong> — balked at soaking Bargrum's hits (<em>"I'm actually starting to feel bad"</em>) and, against the last masochist Sacristan, openly hoped to whiff the killing blow (<em>"I hope I miss. I hope I miss."</em>).</li>
+      <li><strong>Snapped the line shut on the velstrac's kinship bid</strong> — <em>"He's right — he's not one of you! … I'm a fucking freak."</em></li>
+      <li><strong>Exasperated-heroine comedy</strong> — the muted-turn disaster (<em>"I did a whole speech and I was muted. What the fuck?"</em>), the potion-snob standoff with rich Bael, the golden-goose gambling itch (<em>"I love gambling"</em>), and the despairing thesis of every grind: <em>"Why are we still losing when we win?"</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Spiritual Warhorn</div>
+    <div class="loot-source">Nin office (exploration)</div>
+    <div class="loot-note">Taken by Bael — needs a free hand to use.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+2 Handwraps of Mighty Blows</div>
+    <div class="loot-source">Okoa / Rukh (Strix)</div>
+    <div class="loot-note">Bael — the fire-fist punches.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Astral Shortbow</div>
+    <div class="loot-source">Okoa / Rukh</div>
+    <div class="loot-note">Plus +1 resilient leather armor + scroll robes.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Scroll of Grim Tendrils</div>
+    <div class="loot-source">Rukh</div>
+    <div class="loot-note">The caster-Strix's spell, banked.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Black Pearl Aeon Stone</div>
+    <div class="loot-source">Aeon Stone Swarms</div>
+    <div class="loot-note">+4 vs. mental effects / reflects them. Invested by Bargrum (lowest Will).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Delaying / Stasis Aeon Stones</div>
+    <div class="loot-source">Aeon Stone Swarms</div>
+    <div class="loot-note">Delaying stone → Ferrok; a stasis/enfeebled-reducer stone in the haul.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">The Immaculate Solution</div>
+    <div class="loot-source">Nin statue / Stone Bulwarks</div>
+    <div class="loot-note">Nin scripture — a second copy, sellable.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Shadow Beacon Blueprints</div>
+    <div class="loot-source">Anareth Zorlan (engineer)</div>
+    <div class="loot-note">Safe-disable plans → circumstance bonuses to next session's beacon checks.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Enchanted Warden's Key</div>
+    <div class="loot-source">Anareth Zorlan</div>
+    <div class="loot-note">Disables the Warden's-chamber paralysis trap.</div>
+  </div>
+</div>
+<div class="xp-banner">Six encounters — the vampire-Strix, five Greater Shadows, two Stone Bulwarks, three Aeon Stone Swarms, two Sacristans, and four Blood Oozes — all fought at <strong>level 10</strong> (no level-up this session). The party floated another day-trip to Talmandor's Bounty before the final push. <strong>Next session: the conclusion of Shades of Blood — Nizca, Degg, and the Shadow Beacon.</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Tivael</strong>: "And then, I will cast a spell that I've been itching to do. Wall of Mirrors." → "Kaboom."
+  <span class="attribution">Uncorking Wall of Mirrors and then a three-action Spiritual Torrent on the Greater Shadows — the highlight of his night.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "No reaction strike for you, bitch."
+  <span class="attribution">Landing Laughing Fit on a Sacristan and locking it out of its reactions.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Tivael</strong>: "I never succeeded a save for the persistent bleed. I literally bled to death every time."
+  <span class="attribution">His running gag after standing too close to the Sacristans all fight.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "We're nothing alike." → "You're taking hits for the love of the pain. I'm shielding crits for the love of the game."
+  <span class="attribution">To the masochist Sacristan who offered him "my respect" for Intercepting on purpose.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "I can do this all day."
+  <span class="attribution">Trading blows with the masochist Sacristan who'd just praised him for taking hits — the tank who won't quit.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bargrum</strong>: "Has anybody seen the old, old Peter Pan? Bargrum's gonna take his shadow and nail it back on."
+  <span class="attribution">On the party's stolen shadows after the Greater Shadow fight.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "When you have a hammer, everything is a nail. So Ignition Spellstrike."
+  <span class="attribution">His entire combat philosophy, stated to open the shadow fight.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "I'm already weak, you fool. I look so weird walking around with no shadows."
+  <span class="attribution">After a Greater Shadow stole his shadow and enfeebled him.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "We are all set to start a vampire cult after this." → Raylta: "We're <strong>trying to destroy</strong> the cult."
+  <span class="attribution">Standing in front of the statue of the vampire god Nin.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "Instead of dodging, I just Brace, and everything that flies into my face I catch in my hand and burn."
+  <span class="attribution">Planting himself in the Aeon Stone Swarm storm.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Bael</strong>: "I only have moderates. Look at all the money I'm carrying around." → Raylta: "I didn't know we were made out of money."
+  <span class="attribution">The party's absurd post-loot wealth, in one exchange.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "How dare you? Shadow wants it. It's mine!" → "I just punch him with a holy light. Where's your holy light?"
+  <span class="attribution">Getting her shadow stolen, then killing the Greater Shadow that did it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "Why are we still losing when we win? Why are we still losing?"
+  <span class="attribution">On the Aeon Stone Swarms exploding every time one died.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Raylta</strong>: "I hope I miss. I hope I miss."
+  <span class="attribution">Not wanting to give the last masochist Sacristan the death it was begging for.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Nizca, Degg, and the Shadow Beacon</strong> — next session <strong>concludes Shades of Blood</strong>: less than one floor remains to the tower's pinnacle. The party now has <strong>Anareth's safe-disable blueprints</strong> (circumstance bonuses to the checks) — but failing the disable means a Netherworld "big boom," and Degg and Nizca <em>"will die before they let you get close."</em></li>
+  <li><strong>The beacon is a rushed prototype</strong> — its incompleteness is the only reason the shadow stopped at the seas. A ticking clock: given time, they finish it and tie Golarion to the Netherworld permanently.</li>
+  <li><strong>Anareth Zorlan</strong> — the engineer who seemingly <em>absconded</em> from the Warden's floor in S4 turns out to have been <strong>captured by Degg</strong>, not gone. Freed again and headed down the now-cleared stairs. Will he make it out this time?</li>
+  <li><strong>The Warden's chambers</strong> — opened with Anareth's key (past a paralysis trap); the Sacristan fight happened inside. Anything else left in there for the final rest/shop?</li>
+  <li><strong>The trapped scrying circle &amp; the cursed golden goose</strong> — both left untouched. The circle could reveal the top floor if someone risked the wards; the goose is a gamble nobody wanted to take.</li>
+  <li><strong>The velstrac aftermath</strong> — the journal confirmed the velstracs came in when the beacon first darkened the sky and turned on the vampires too. With Jubilant dead last session and these two Sacristans gone, are there more velstracs above, or was this the last of them?</li>
+  <li><strong>The staged captives</strong> — multiple rooms of freed-but-fragile prisoners still need a real evacuation once the tower is clear.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">One Floor from the Sun</span>
+  <p>Six fights up, the tower turning to Netherworld glass beneath their feet, the party stands one short floor below the peak — where Nizca and Degg still tend the Shadow Beacon, rushing to give the world an endless night. In their hands now: the captured engineer's blueprints to break it safely, and his warning about what happens if they don't.</p>
+  <div class="big-line">"Given enough time, they will succeed. And Galarian will become tied to the Netherworld. Permanently."</div>
+  <span class="speaker">— Anareth Zorlan, on the Shadow Beacon</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Tivael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Tivael did this session</h3>
+<ul>
+  <li>Played <strong>control + artillery</strong> through a six-fight grind: <strong>Wall of Mirrors</strong> and a three-action <strong>Spiritual Torrent</strong> cone (killed a Greater Shadow, softened two more), <strong>Flurry of Claws</strong> and <strong>Electric Arc</strong> as the reliable AoE in every swarm/ooze fight, <strong>Dirge of Doom / Laughing Fit / Evangelize / Demoralize</strong> to lock down the Sacristans.</li>
+  <li><strong>Recall Knowledge anchor</strong> every fight — ID'd Okoa and Rukh as Netherworld-infused <strong>vampire-Strix</strong>; RK'd the Stone Bulwarks (mindless, adamantine-vulnerable).</li>
+  <li>Closed out kills across the grinds: the last <strong>Aeon Stone Swarm</strong> (Frostbite, after switching to its weak Fort save), two of the four <strong>Blood Oozes</strong> (Electric Arc), and <strong>Sacristan B</strong> with a finishing <strong>Electric Arc</strong> (exactly 9 HP).</li>
+  <li>Got hit too much again in the Sacristan fight — a 56 plus persistent bleed I never once saved against. Same clustering problem as the Jubilant floor.</li>
+</ul>
+
+<h3>Things Tivael knows that the party does not</h3>
+<ul>
+  <li>The <strong>beacon is a rushed prototype</strong> — that's the <em>only</em> reason the shadow stopped at the seas instead of the whole sky. It is incomplete and unstable, which cuts both ways: easier to break now, but a botched disable dumps a mass of Netherworld energy ("big boom").</li>
+  <li>We have <strong>Anareth's blueprints</strong> — the safe-disable path gives us real mechanical bonuses on the checks up top. Guard those. Failing the disable is worse than not trying.</li>
+  <li><strong>Okoa and Rukh were exiled Strix</strong> who threw in with Nizca hoping their Netherworld ties would buy them belonging. The velstracs came in when the beacon first darkened the sky; Nizca's alliance with them frayed once he and Degg buried themselves in repairs — which is why the velstracs were carving up the vampires too. Nizca's coalition is <em>fractured</em>, not unified.</li>
+  <li>The <strong>scrying circle</strong> below could show us the top floor if anyone could safely beat its wards. Nobody could. The <strong>golden goose</strong> is a cursed gamble we passed on.</li>
+</ul>
+
+<h3>What Tivael is thinking about</h3>
+<ul>
+  <li><strong>Vitality is the answer to incorporeal.</strong> Spiritual Torrent (vitality cone) and Raylta's Holy Light did what our physical damage couldn't against the Greater Shadows. Keep a rank-5 vitality slot ready — there may be more shadow-stuff up top.</li>
+  <li><strong>Silver and adamantine are the physical-bypass kit</strong> on this floor — silver for the velstracs (stops Fast Healing), adamantine for the stone constructs. Bank silver consumables before the pinnacle.</li>
+  <li>I keep clustering into single-target and AoE punishment (the Sacristan bleed, the Jubilant screams last floor). Against Nizca I want <strong>distance, Sanctuary, and Rallying Anthem</strong> up front, not another debuff.</li>
+  <li>The <strong>order of operations at the top</strong> matters: Degg and Nizca will die before they let us near the beacon, so it's the fight <em>first</em>, then a careful disable with Anareth's blueprints — not a smash-and-hope.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What is <strong>Nizca</strong> actually capable of, and is <strong>Degg</strong> fighting beside him or hanging back to protect the beacon?</li>
+  <li>Does the safe-disable need specific skills we should pre-buff (Occultism, Arcana, Crafting)? Should we day-trip to town to shop <strong>silver</strong> and <strong>void resistance</strong> first?</li>
+  <li>Are there <strong>more velstracs or shadow-things</strong> on the final stretch, or did we clear the last of them?</li>
+  <li>Can we evacuate the staged captives — and secure Anareth — before or after the beacon, without the "big boom" catching them?</li>
+  <li>We're level 10 and one floor from the end. What do we spend the last day-trip on?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

@@ -5,10 +5,10 @@
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
 | Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — Lv 4 | Beastmaster (Ren active) + Thaumaturge | Pax |
-| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 4 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
+| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — Lv 4 | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen — *absent & DM-run in S11 (2026-07-04); expected back next session* |
 | Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — Lv 4 | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
 | Zanthar Melodune III | Gnome | Wizard (generalist) — Lv 4 | Blessed One (Lay on Hands focus spell) | Scott Smith — **JOINED S8 (2026-06-13)** |
-| Sammy Shadowfoot | Halfling | Bard (Polymath muse) — Lv 4 | TBD | fallernon — **JOINED S8 (2026-06-13)**; present/self-driven from S9; **ABSENT & DM-run in S10** (halberd swaps in for the frying pan, Calm-song crowd control) |
+| ~~Sammy Shadowfoot~~ | Halfling | Bard (Polymath muse) — Lv 4 | TBD | fallernon — **DEPARTED THE CAMPAIGN S11 (2026-07-04)**. Joined S8; absent/DM-run S10–S11; player stepped away rather than keep missing sessions. Written out on-screen (reassigned to "a different mission"). Halberd + wand of soothe revert to the stash. |
 | Rama | Human (Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2 | Arcane dedication (Electric Arc), Battle Medicine. | crackrockcowboy — *JOINED S6 · **DIED S7 (2026-06-06)** — DM-controlled after the player departed; crit-failed a Hell Hound's breath, dropped to dying, never revived, body left in the Chitterwood.* |
 | Moob | Goblin | Alchemist (Quick Bomber, Wallop Stick) | TBD | Harrgoth — *DEPARTED S4*. **Permanent HQ fixture as of S10** — refuses to field again (*"We die when we leave"*); the HQ's alchemy/body-incineration crew. |
 | Fang | Goblin (dragonblooded — draconic teeth) | Inventor (Construct innovation — *Wing*, wolf-motorcycle) | TBD | Cherry — *DEPARTED S4*. **Permanent HQ fixture as of S10** (with Moob). |
@@ -17,13 +17,13 @@
 
 - **Ren** — Bai Jian's Beastmaster boarhound. **Matured to a Mature companion at L4 (S10)**: now Medium, 42 HP, **Jaws 2d8**, AC 21 / Fort +11 / **Ref +12** (best save on the team) / Will +10, and **acts independently** (one action/turn uncommanded; two when Commanded). **Note: NOT yet a lockdown piece — the boarhound's *Lock Jaws* advanced maneuver (auto-Grab) only unlocks at the Nimble/Savage stage via *Incredible Companion*, a later feat.** Green boarhound trained against Chelaxian forces; delivered to HQ by an unnamed donor (open thread). Precise foe-scent (fiend/undead, 40 ft) — also the party's best wilderness tracker (scent-led them out of the Chitterwood, S10).
 - **Serrafina** — Panacea's witch familiar: a **two-headed** creature (fits Paradox of Opposites / *Familiar of Paired Perplexity*, the rider that Stupefies a nearby enemy whenever Panacea casts/sustains a hex). 20 HP, low-light. The voice her patron speaks *through* (e.g. the S10 Urgothoa rebuff: *"Don't do that again"*).
-- **Kumquat** — Sammy's bard familiar: a **raven** (low-light + echolocation). 20 HP.
+- ~~**Kumquat**~~ — Sammy's bard familiar (a **raven**). *Left with Sammy on her S11 departure.*
 - **Wing** — Fang's wolf-motorcycle construct. Stayed at HQ when Fang did.
 
 ## Party Composition Notes
 
 - **Frontline**: Bai Jian (Fighter) + Cyrathul (Thaumaturge) + Ren (Isgeri Boarhound) — three melee bodies, two dragon-blooded. *(Rama, the 4th, died S7.)*
-- **Healing**: Panacea (Catfolk Witch — Medic dedication), primary healer. **Backup added S8**: Zanthar (Blessed One — Lay on Hands) and Bai Jian (Battle Medicine) chip in. Sammy carries a wand of soothe. Still thin, and Sammy's connection is unreliable, but no longer a single point of failure.
+- **Healing**: Panacea (Catfolk Witch — Medic dedication, **now with a Staff of Healing**), primary healer. **Backup**: Zanthar (Blessed One — Lay on Hands) and Bai Jian (Battle Medicine) chip in. *(Sammy's wand of soothe reverted to the stash on her S11 departure.)* Thin but real; Panacea remains the linchpin — protect her.
 - ~~**Healing backup**: Rama~~ — gone (died S7).
 - ~~**Non-lethal lead**: Rama~~ — gone (died S7). The party is back to taking the -2 for non-lethal, or relying on Intimidation/surrender (as with the Iskari Slayer captive, S7). **Two new members join S8** — possible non-lethal/healing replacements.
 - **Damage**: Cyrathul (Exploit Vulnerability + Strikes + Mirror Cloak), Bai Jian (Sudden Charge + Ren Support rider + Advantageous Assault + Glimpse Vulnerability weakness; **Fleet** for reach). **Weapon swap (S8): traded his jian for a +1 striking falcata** (one-handed, fatal d12 — big crits; free-hand Dueling build retained). Old jian left with Gug the Thorngrip smith. *(Moob/Fang's Wing remain at HQ; Rama's Electric Arc lost with his death.)*
@@ -34,7 +34,7 @@
 - **Debuffs**: Bai Jian (Demoralize, Snagging Strike Off-Guard, **Slam Down** auto-Trip, Breath of the Dragon AoE Will save), Cyrathul (Exploit Vulnerability, Demoralize), Boarhound (*Lock Jaws auto-Grab — **future**, pending Incredible Companion; not yet online*)
 - **Detection**: Boarhound (precise fiend/undead scent 40 ft, telepathic link via Beastmaster Bond at level 10)
 - **Divine**: Panacea (Witch — Paradox of Opposites patron, divine tradition). Heal, spirit damage, anti-fiend spells, condition removal.
-- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (**Arcana, Religion, Crafting — NOT Occultism**, confirmed S8), **Sammy (Occultism — the party's trap-disabler / occult lane)**, Zanthar (Arcana, Occultism, generalist), Moob (Crafting, alchemy)
+- **Knowledge**: Bai Jian (Dragon Lore, Religion, Survival), Cyrathul (Esoteric Lore — covers everything), Panacea (**Arcana, Religion, Crafting — NOT Occultism**, confirmed S8), Zanthar (Arcana, Occultism, generalist — **now the party's sole occult lane** after Sammy's departure; also carries Elidir/Underworld Lore, IDed the S11 thieves' guild), Moob (Crafting, alchemy). **GAP (post-S11)**: with **Sammy gone**, the party has **no dedicated trap-disabler / thieves'-tools specialist** — exposed at the S11 orphanage (a spring-loaded net trap, and no one able to pick the front lock or sneak in).
 
 ## Party Gaps
 
