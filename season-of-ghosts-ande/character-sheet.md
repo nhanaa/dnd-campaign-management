@@ -73,6 +73,7 @@ Then came the summer of the festival. When the time came to choose the year's ab
 - **Apparitions** (pick 2/day, 1 primary; swap primary on Refocus):
   - **Witness to Ancient Battles** (war) → vessel spell **Embodiment of Battle**; grants Battlegrounds + Heraldry Lore, and Shield / Sure Strike / Enlarge / Ghostly Weapon.
   - **Custodian of Groves and Gardens** (life) → vessel spell **Garden of Healing**; the out-of-combat party heal.
+  - **(S2, lava/magma — earth+fire)** → vessel spell **Earth's Bile** (rank-1 animist, 30-ft range, 10-ft burst, 1d4 fire + 1d4 bludgeoning + persistent fire, Reflex, **sustained** 1 min); Zhen's ranged AoE / area-denial option. Swapped in for the downtown push in S2.
 - **Weapon**: **Nodachi** (advanced weapon, treated as **simple** via Oni Weapon Familiarity → trained, +full proficiency). Two-handed, d8 slashing, **reach**, **deadly d12**. Wrapped, narratively never drawn until the AP begins.
 - **Unarmed**: horns (1d6 P, brawling) from Hungerseed.
 - **Heirloom**: Oil of Potency (one-shot, makes the Nodachi +1 striking for 1 min — the "this fight matters" button) + Predictable Silver Piece.

@@ -83,4 +83,42 @@ The Reenactment opening played out: the five abductees woke in a clearing **east
 
 ---
 
+### Session 2 (2026-07-10) — The Relief Sweep (First days of summer, 7108 IC)
+*Mu-Jin absent (parked in-fiction at the Matsuki Estate). Four PCs: Zhen, Iryoku, Kaoru, Kaelen.*
+
+A methodical cleanup sweep of Willowshore. Goal: re-bless the three copper coins and relight the **Eternal Lantern**, then start clearing the monster-held downtown.
+
+**Relighting the Lantern:**
+- The party toured three shrines and used **Invoke Shrine Blessing** (all on **Zhen's** Religion) to re-bless the coins: **Abadar** (Society bonus), **Catephis** (Survival bonus — an unfamiliar deity, spelling/identity unverified), and **Pharasma / Lady of Souls** (Medicine bonus; a crit success). The Lantern relit "as if magic"; the fog thinned (didn't fully lift).
+- **Blessing rewards** (party-wide, item bonuses): **+2 to saves vs the blood-moonlight**, +1 Medicine (Pharasma), +1 Society (Abadar), +1 Survival (Catephis).
+- **The wrong gods (thread):** per legend (Master Zhi Hui), the *original* coins were blessed by **Calistria, Kofusachi, and Shelyn** — none of which the party used. Granny Hu flagged it and was pointedly disappointed in Zhen. Zhen is hiding that the coins were re-blessed by the wrong deities. Whether this weakens the ward is open.
+
+**Combat & encounters (all one-sided — the "combat is too easy" note persists):**
+- **The Abacus Sisters** — 2 jinkin + a trained bird + a weasel at a fog-bound farm, harassing farmers and their livestock. Talked into a bickering retreat, then killed when **Iryoku** (Yaksha edict to *confront cruel fae*) fired on them as they left. Kaoru questioned the kill.
+- **Dr. Dami's clinic** — centipedes (some flying) + a frog. Iryoku's Flying Flame hit all three centipedes for 56. A resident **incorporeal guardian-gecko spirit** (been protecting the clinic) was *not* hostile; the party spared it non-lethally and it dissipated back to its plane (will reform).
+- **The public stage** — 3 jinkin in stolen costumes jeering from a roof (greater cover). The party burned them off; they fled. (A deleted Foundry spell-region crashed the scene for ~30 min.)
+- **The Mushroom House** — a lethal trap-web (trip lines, stakes, tension dowels) around Granny Hu's four grandchildren. Disarmed by **Kaoru** (Thievery) with **Iryoku's** wood-Kinesis as an auto-success aid. Kids rescued.
+
+**The villain lead — Modoku:**
+- Granny Hu named the invasion's "brain" as **Modoku** (rumor: a human occultist or human-shaped yokai).
+- The **downtown barracks** captain (Granny Hu's son-in-law) — found caged, fatigued, enfeebled, at 1 HP with his guards — described the attacker: **a bald, sharp-toothed, hooded man whose neck rotates further than it should**, leading a jinkin warband. The party freed and healed them and looted **cold iron + silver** from the armory.
+- Following a blood trail (Zhen, Survival) led to the **Happy Kappa bathhouse**, where a group of **bribed (not enthralled) jinkin** confessed Modoku *paid* them, said they regret it, and pointed to the **tea house** as where he went. The party left them in peace. Session ended on this lead.
+
+**Other developments:**
+- **The governor's manor is missing** — vanished from its downtown cliffside lot without a trace (no active governor; possibly someone was sheltering there). Major mystery.
+- **"Blood will rise"** — the DM's ominous timeskip line; the S1 blood-moon isn't finished.
+- Reputation: **+1 Northridge** (Mushroom House + barracks; +1 more from Iryoku's Northridge Scholar background).
+
+**New NPCs (in play):**
+- **Granny Hu Ban-niang** — Northridge leader, running relief from the trade office. Gruff, credit-seeking, distrusted by Kaoru (the committed South-Banker). Her son-in-law is the barracks captain; her grandchildren were at the Mushroom House.
+- **Dr. Dami** — the town doctor, refused to abandon his clinic. Gave the party antidotes + darkvision elixirs; kept his one healer's kit. Escorted to Granny Hu's.
+- **The Hunter** — unnamed female farmer/hunter (the one Old Matsuki sent them to find, to track Ugly Cute). Gave a Spirit Trap snare; escorted to the Matsuki Estate. Ugly-Cute tracking still not started.
+- **The Happy Kappa owner** — a halfling; hid in a locker from Modoku's rampage.
+- **Modoku** — the antagonist (spelling unverified). Bald, sharp-toothed, hooded, neck rotates too far. Broke the barracks; went to the tea house.
+- **The guardian-gecko** — a benign incorporeal spirit warding Dr. Dami's clinic.
+
+**New locations (in play):** Dr. Dami's clinic, the Mushroom House / northern lumber-drying yard, the public stage, the downtown barracks (armory), the **Happy Kappa** bathhouse, the shrines to Abadar / Catephis / Pharasma (Lady of Souls). The **governor's manor** — now an empty lot.
+
+---
+
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

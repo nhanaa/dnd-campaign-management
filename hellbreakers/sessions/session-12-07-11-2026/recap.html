@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 12 — Thick as Thieves</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-sammy { border-left-color: var(--amber); }
+.char-ren { border-left-color: var(--gold); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-sammy { border-left-color: var(--amber); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Thick as Thieves</h1>
+  <div class="subtitle">Session 12 &mdash; Hellbreakers &middot; Rise Up Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">Jul 11, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 25m</span>
+    <span class="meta-pill">26&ndash;30 Kuthona 4726 &middot; New Year's Eve</span>
+    <span class="meta-pill">Level 4</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-social" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:28%"></div>
+    <div class="comp-seg comp-explore" style="width:17%"></div>
+    <div class="comp-seg comp-combat" style="width:15%"></div>
+    <div class="comp-seg comp-loot" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Faction / Gala 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 28%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Downtime 17%</span>
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 15%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human Tian Dragonblood &middot; Dueling Fighter / Beastmaster / Thaumaturge</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Moon Dragon &middot; Thaumaturge (Mirror Cloak / Draconic Ravager)</div><div class="char-player">Snowgeen &middot; <span class="new-badge">BACK THIS SESSION</span></div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk &middot; Witch (Paradox of Opposites / Medic)</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome &middot; Wizard (generalist) / Blessed One</div><div class="char-player">Scott</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Isgeri Boarhound &middot; Bai Jian's Mature Companion</div><div class="char-player">&mdash;</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-size:13px;margin-top:14px;"><strong>Snowgeen returned</strong> to play Cyrathul (DM-run in S11); the dragon dropped in a round into the opening fight and was live for the rest of the night. The party is a tight four again.</p>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The crossbows at the top of the orphanage stairs turned out to be the easy part. The Children's Charity &mdash; the thieves' guild fronting as the Old House of the Found Family &mdash; got its surprise round and put two arrows into <strong>Zanthar</strong> the instant he peeked around the corner, but the fight was over almost before it started: <strong>Bai Jian</strong> opened with a <strong>63-damage non-lethal crit</strong> that folded one rogue in a single flat-of-the-blade Slam Down, <strong>Zanthar</strong> climbed a bunk bed and dropped a <strong>Dizzying Colors</strong> cone that stunned and blinded the room, and when <strong>"the father" himself</strong> &mdash; <strong>Father Kindness</strong> &mdash; stepped out shouting <em>"My children!"</em>, Bai Jian answered with a <strong>second non-lethal crit (59)</strong> and put him down too. Every blow was pulled. Nobody died.</p>
+    <p>And then the session turned, because this party doesn't win fights so much as it wins <em>people</em>. With Father Kindness manacled and his adopted son crit-Intimidated into dropping his sword, the party healed the old thief awake and &mdash; instead of interrogating him &mdash; <strong>recruited him</strong>. He steals only from Chelaxians; the Hellbreakers <em>are</em> the uprising; the math did itself. Father Kindness disarmed his own bedroom trap, opened his chest, and handed over not just the stolen <strong>Lazy Bones pendant</strong> but a pile of <strong>artwork</strong> "as a contribution to the cause," and a standing offer of intel on which noble estates are easy pickings. Two uprising points, a thieves' guild turned asset, and not a single body.</p>
+    <p>The back half was preparation and payoff. A day of shopping and downtime in Elidir (scrolls, sleeves of storage, a banned book fenced with a straight face), a <strong>goblin pickpocket</strong> Bai Jian covered for and quietly paid off under a guard's nose, and a costume-shop confrontation where a preening noble named <strong>Frederick Consum</strong> tried to strong-arm the party out of their gala outfits &mdash; until his own bodyguard eyeballed Bai Jian's sword and refused to fight. Then the main event: the <strong>New Year's Eve ball</strong> at the Regent's manor, a Chelaxian celebration of the conquest of Isger, where the party &mdash; in devil costumes, Lazy Bones pendant around Cyrathul's neck &mdash; went to close the deal the founders couldn't. The gala is a slow social duel (PF2e's influence subsystem), and the party opened strong: <strong>Cyrathul</strong> worked the merchant <strong>Quoster</strong> with a razor-sharp bit of social sabotage, <strong>Panacea</strong> gossiped her way into a magic-loving noble's good graces, <strong>Zanthar</strong> bullied a lower-class hanger-on into liking him, and <strong>Bai Jian</strong> shot his way to second place in a darts contest while a humiliated colonel stormed off. Session pauses mid-gala &mdash; the deal not yet closed.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I &middot; Combat &middot; The Guild on the Stairs</div>
+      <div class="act-card">
+        <h3>Intruders, Answered (non-lethal)</h3>
+        <ul>
+          <li><strong>The surprise round.</strong> Resolving the S11 cliffhanger, the party crept up the orphanage stairs and <strong>Zanthar peeked around the corner</strong> &mdash; into a purpose-built defensive nook (a bunk bed with an arrow slit). The Housebreakers got a <strong>surprise round</strong> (a rogue ability leaving the party off-guard the whole first round) and put <strong>two arrows into Zanthar (16 + 9 = 25).</strong></li>
+          <li><strong>Bai Jian's opener.</strong> He moved <strong>Ren</strong> up (the hound tumbled through toward the rogues, a dagger flashing over his head), then tumbled through behind them and led with <strong>Slam Down.</strong> It crit; asked to make it non-lethal, he rerolled straight damage: <strong>63.</strong> Flat of the blade, <em>tink</em> &mdash; a <em>"thin little waif of a girl"</em> crumpled instantly.</li>
+          <li><strong>"My children!"</strong> <strong>Father Kindness</strong> &mdash; the guild's leader &mdash; stepped out from behind the next bunk, <strong>Feinted</strong> Bai Jian off-guard, and stabbed &mdash; his dagger sliding along the backside of the armor, <strong>a miss.</strong></li>
+          <li><strong>Panacea</strong> moved in, <strong>Battle-Medicined</strong> Bai Jian, then cast <strong>Trade Death for Life</strong> &mdash; void damage into Father Kindness (a failed Fort save, 16 vs DC 20; 1d4 barely fazed him) routing <strong>fast healing to the arrow-riddled Zanthar</strong>, and her <strong>Familiar of Paired Perplexity Stupefied him</strong> on the cast.</li>
+          <li><strong>Zanthar's control play.</strong> <em>"I am small &mdash; maybe I can stand on top of the bed."</em> He scurried onto the bunk (Athletics) and, from the high ground, dropped a <strong>Dizzying Colors</strong> cone: the remaining Housebreaker was <strong>Stunned, Blinded, and Dazzled.</strong> Bai Jian: <em>"Stunned and blind. And dazzled afterward."</em></li>
+          <li><strong>Cyrathul drops in.</strong> Snowgeen loaded in mid-round (<em>"What happened?" "We're in combat."</em>), crossed the room, <strong>Exploited Vulnerability on Father Kindness</strong> (<em>"nothing to speak of of note"</em> &mdash; no weakness), and <strong>non-lethally chomped</strong> him.</li>
+          <li><strong>The finisher.</strong> Round 2, Bai Jian <strong>Commanded Ren</strong> for the <strong>Support</strong> rider and swung &mdash; <strong>another non-lethal crit: 59.</strong> <em>"Oh my lord."</em> Father Kindness went down, alive.</li>
+          <li><strong>The son surrenders.</strong> Blinded, the last Housebreaker flailed by guesswork (all missed), panicking &mdash; <em>"father, are you there?"</em> Watching the party beat a house of orphans unconscious over a necklace, <strong>Bai Jian</strong> muttered the quiet part aloud: <em>"I'm feeling very guilty right now."</em> <strong>Cyrathul crit-Intimidated the son</strong> (Intimidating Glare, critical success): he <strong>dropped his sword immediately</strong> &mdash; <em>"Did you kill my dad?"</em> &mdash; and was manacled. <strong>Three enemies subdued, zero dead.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act II &middot; Faction / Roleplay &middot; A Contribution to the Cause</div>
+      <div class="act-card">
+        <h3>Recruiting the Thieves' Guild</h3>
+        <ul>
+          <li><strong>Panacea opened honestly:</strong> they came for the stolen <strong>Lazy Bones pendant</strong> (a blue ribbon left in its place), were attacked on sight, and answered non-lethally throughout. Father Kindness, unimpressed &mdash; <em>"Would you not attack someone that broke into your home?"</em> &mdash; then, on the pendant: <em>"We steal from all Chelaxians."</em></li>
+          <li><strong>The pivot.</strong> Bai Jian: <em>"You heard of the Hellbreakers?"</em> Father Kindness lit up (<em>"Uprisers, yes&hellip; at some point there'll be a chapter here"</em>). <strong>Cyrathul</strong> closed it: <em>"We happen to be the perpetrators of such activities. And we are looking to expand the scope."</em> A <strong>Diplomacy check</strong> (Panacea's <strong>Guidance</strong> stacked on) won him fully over.</li>
+          <li><strong>The donation.</strong> <em>"Untie me, and I will undo the trap in my room, and you are more than welcome to it."</em> Father Kindness disarmed his own bedroom trap and handed over <strong>the Lazy Bones pendant</strong> <em>and</em> <strong>valuable artwork</strong> &mdash; <em>"as a contribution to the cause"</em> &mdash; plus a standing offer: keep him in mind for <em>"easy pickings in any of the Chelaxian nobles' estates."</em></li>
+          <li>His parting grace: <em>"had you found it yourselves, I would congratulate my own children on such a successful theft."</em> Recruiting the guild banked <strong>+2 uprising points</strong>, pushing the party to <strong>5</strong> &mdash; unlocking a second one-time capital bonus (<strong>+1 to an attack roll or saving throw after the roll</strong>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Downtime &middot; A Day in Elidir</div>
+      <div class="act-card">
+        <h3>Shopping, Earn Income, and a Small Mercy</h3>
+        <ul>
+          <li><strong>Briefing.</strong> Back at the safehouse, the party caught <strong>Cyrathul</strong> up: <strong>Quoster Thistleweight</strong>, the wealthy halfling merchant who <em>"believes in charity and hates Cheliax"</em> and wants a free Isger, was on the cusp of funding the League &mdash; the deal now has to close at the <strong>New Year's Eve ball</strong>, and the <strong>Lazy Bones pendant</strong> is the recognition token.</li>
+          <li><strong>Shopping.</strong> The party sold the artwork and fenced a <strong>banned book</strong> &mdash; the <em>Abergale the First</em> script, contraband &mdash; which <strong>Cyrathul deception-sold</strong> for <strong>150 gold</strong> on a cover story Bai Jian floated (the shopkeep: <em>"I don't believe you, but I want this book"</em>). <strong>Zanthar</strong> bought <strong>four Sure Strike scrolls</strong> and <strong>sleeves of storage</strong>; <strong>Cyrathul</strong> grabbed Sure Strike scrolls for his implement. The DM redistributed <strong>Sammy's leftover gold.</strong></li>
+          <li><strong>The goblin pickpocket.</strong> A <strong>hungry goblin girl</strong> lifted the gold from Bai Jian's pocket &mdash; and the <strong>town guard</strong> saw it. Bai Jian covered instantly (<em>"I was just about to give her this,"</em> palming her a <strong>gold coin</strong>) and waved off the captain &mdash; <em>"do you think I would leave someone alone who tried to steal from me?"</em>, hand drifting to his sword. She tried to <strong>bite the coin in half to give some back</strong>, then vanished into the crowd. <strong>+1 uprising point.</strong></li>
+          <li><strong>Earn Income &amp; Gather Info.</strong> <strong>Panacea</strong> worked shifts at the <strong>hospital helping sick kids</strong>; Bai Jian earned income and learned about the ball (a celebrity bard, <strong>Lazenia</strong>; <strong>Reeves Rest Manor</strong>, the Regent's two-story state house). <strong>Zanthar</strong> tried to help at a scroll station and <strong>spilled ink over the day's work</strong> &mdash; no pay.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IV &middot; Roleplay / Social &middot; Dress to Impress</div>
+      <div class="act-card">
+        <h3>The Costume Thief</h3>
+        <ul>
+          <li><strong>Costume pickup, interrupted.</strong> At <strong>Brightgate's</strong> shop the party walked into a shouting match: <strong>Frederick Consum</strong>, a self-important noble with two bodyguards, was trying to <strong>seize the party's finished costumes</strong> &mdash; <em>"or I will have my two gentlemen beat you to a bloody pulp."</em></li>
+          <li><strong>Cyrathul, dry as ever:</strong> <em>"I mean, if you're that heavy, maybe you should cut off the carbs."</em> The party refused to budge (<em>"Those are ours. We paid for those."</em>) &mdash; Panacea leading the pushback.</li>
+          <li><strong>The bluff breaks.</strong> Bai Jian and Cyrathul overheard a <strong>bodyguard whisper</strong>: <em>"Boss, did you see that guy's sword? I don't want to tangle with him."</em> Frederick folded &mdash; <strong>shoulder-checked Bai Jian</strong> (<em>"like shoulder-checking a brick wall"</em>), got nowhere, and stormed out berating his men.</li>
+          <li><strong>Reward.</strong> The grateful tailor pressed a <strong>potency rune</strong> and a <strong>quick-change (raiment) rune</strong> on the party for free &mdash; Bai Jian took both. Costumes finalized: Bai Jian as an <strong>Armengur Hell Knight</strong>, Cyrathul as a <strong>chain devil</strong>, Panacea in a <strong>fur-matched blue devil dress</strong>, Zanthar as a <strong>tiny Angeval devil</strong>, and <strong>Ren as a hellhound</strong>. But Frederick will be at the ball tonight.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V &middot; Faction / Social &middot; The New Year's Eve Ball</div>
+      <div class="act-card">
+        <h3>The Influence Duel (in progress)</h3>
+        <ul>
+          <li><strong>The send-off.</strong> The Demetriases prepped the party and left town loudly on the opposite end &mdash; a decoy exit (their departed <strong>bard friend</strong> already started a diversionary <em>"kerfuffle"</em>) to make it look like the League fled. <strong>Objective:</strong> find <strong>Quoster</strong>, close the funding deal, seed a Hellbreakers chapter in Elidir. <strong>Cyrathul wore the Lazy Bones pendant</strong> as the recognition token.</li>
+          <li><strong>The room.</strong> Reeves Rest Manor &mdash; floating red-and-white lights, a string quartet, guests in Hell-themed finery, guarded stairs to a forbidden upper landing. A <strong>six-round influence duel</strong> over six hours; five NPCs can be influenced (<strong>Quoster, Iso Data, Colonel Rithert, Cato Volnax, Sasatoli Bronc</strong>).</li>
+          <li><strong>Round zero.</strong> Cyrathul was steered to <strong>Quoster</strong> (a giggling fop with a levitating ruby cane); Panacea met <strong>Iso Data</strong> (iron-throne cape, an order from <strong>Tilaax</strong>); Zanthar got cornered by the casually-cruel <strong>Mirapila Carafo</strong> and clocked a <strong>silent woman radiating immense magic</strong>; Bai Jian flattered the celebrity bard <strong>Lazenia</strong> and traded real monster-hunting expertise in drake-hunting shop talk.</li>
+          <li><strong>Cyrathul influenced Quoster</strong> with a scalpel &mdash; praising Cheliax's <em>"great institutions&hellip; like slavery &mdash; sorry, I mean debt,"</em> then <strong>glaring at Quoster</strong> to isolate the halfling from the pro-slavery nobles (hero point &rarr; success, +1 influence). A second round (hero point) landed another point and <strong>earned the League a reputation point</strong>.</li>
+          <li><strong>Panacea</strong> crit-<strong>Discovered</strong> Iso Data (Society), then <strong>influenced</strong> him with <strong>gossip</strong> (<em>"a gossipy look like she's enjoying the tea,"</em> +2, hero point). <strong>Zanthar</strong> befriended lower-class <strong>Sasatoli Bronc</strong> and <strong>intimidated</strong> him into liking it (<em>"you're a chip off the old block"</em>). <strong>Bai Jian</strong> Discovered <strong>Colonel Rithert's</strong> resistance (jealous of combat vets, &minus;2).</li>
+          <li><strong>Manticore (the darts contest).</strong> Three targets, AC 18, crits &amp; double-throws double points. <strong>Colonel Rithert whiffed all six darts</strong> and stormed off (Bai Jian: <em>"Your money's gone"</em>); ringer <strong>Renacilos Aziri</strong> won; <strong>Bai Jian took second (16 pts)</strong> and earned <strong>Ambassador Frigg's lucky silver dart</strong>; <strong>Zanthar</strong> then tied him for second.</li>
+          <li><strong>Bonus round.</strong> Because Bai Jian competed, the party got an extra Rithert round: Bai Jian <strong>Discovered his weakness</strong> (flattery, +2), and <strong>Zanthar influenced him</strong> on it (Diplomacy &rarr; success). <strong>Cyrathul lost 20 gold</strong> on Bai Jian (and Zanthar lost 3 on Rithert); a last-ditch Deception to weasel out of paying flopped. <strong>Session pauses mid-gala.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <p style="color:var(--text-dim);font-size:14px;">Attribution is by character capability (class / feature / weapon) and the Foundry roll log (<code>rolls.txt</code>), <strong>not</strong> transcript speaker labels &mdash; diarization merged Cyrathul's and Zanthar's audio this session, and Cyrathul dropped in mid-fight. <strong>The 63-damage opening crit is not in <code>rolls.txt</code></strong> (the line was deleted) &mdash; it is confirmed by Pax and the transcript (<em>"the damage is 63&hellip; that's going to zero them"</em>). The fight was fought entirely <strong>non-lethal</strong> (the capital's Suppression clock looming).</p>
+
+  <div class="combat-box">
+    <h3>The Old House of the Found Family &mdash; Upstairs <span style="font-size:12px;color:var(--rose-bright);">(resolves the S11 cliffhanger)</span></h3>
+    <div class="combat-meta">Non-lethal &middot; surprise round + 2 rounds &middot; Init: Bai Jian &middot; Father Kindness &middot; Housebreaker A &middot; Panacea &middot; Zanthar &middot; Housebreaker B &middot; Cyrathul (dropped in)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Father Kindness + 2 Housebreakers (no weaknesses)</div></div>
+      <div><div class="combat-stat-label">Two big crits</div><div class="combat-stat-value">Bai Jian 63 &amp; 59 &mdash; both non-lethal</div></div>
+      <div><div class="combat-stat-label">Control</div><div class="combat-stat-value">Dizzying Colors: stun / blind / dazzle</div></div>
+      <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">All 3 subdued alive &middot; +2 Uprising</div></div>
+    </div>
+    <h4>Surprise Round</h4>
+    <ul>
+      <li>The Housebreakers, set behind a bunk-bed arrow slit, loosed on <strong>Zanthar</strong> as he peeked around the corner: <strong>16 then 9 damage (25 total).</strong> The party was off-guard the whole first round (rogue surprise ability).</li>
+    </ul>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; moved <strong>Ren</strong> up (the hound tumbled through; a dagger flashed over his head, missing), tumbled through behind the rogues (Acrobatics), and led with <strong>Slam Down.</strong> Crit, made non-lethal: <strong>63 damage</strong> &rarr; Housebreaker A (the <em>"waif of a girl"</em>) instantly KO'd, flat of the blade.</li>
+      <li><strong>Father Kindness</strong> &mdash; stepped out (<em>"My children!"</em>), <strong>Feinted</strong> Bai Jian off-guard, and <strong>missed</strong> his dagger strike.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Battle Medicine</strong> on Bai Jian; <strong>Trade Death for Life</strong> (void damage &rarr; Father Kindness, who <strong>failed</strong> the basic Fort save, 16 vs DC 20 &mdash; trivial 1d4, but enough to route <strong>fast healing &rarr; Zanthar</strong>); <strong>Familiar of Paired Perplexity</strong> &rarr; <strong>Stupefied</strong> Father Kindness on the cast.</li>
+      <li><strong>Zanthar</strong> &mdash; climbed the bunk (Athletics), cast <strong>Dizzying Colors</strong> (15-ft cone) &rarr; Housebreaker B <strong>Stunned / Blinded / Dazzled.</strong></li>
+      <li><strong>Cyrathul</strong> (dropped in) &mdash; <strong>Exploit Vulnerability</strong> on Father Kindness (no weakness) &rarr; <strong>non-lethal bite</strong> (&minus;2).</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; <strong>Commanded Ren</strong> for <strong>Support</strong> (+1 hit, foe-scent rider), then a <strong>non-lethal falcata crit: 59</strong> (<code>2*(2d12+4)+1d12</code>) &rarr; <strong>Father Kindness KO'd</strong>, alive.</li>
+      <li><strong>Panacea</strong> &mdash; a follow-up <strong>Heal</strong> on Zanthar; Diplomacy steadying the surrendering son.</li>
+      <li><strong>Housebreaker B</strong> &mdash; blinded, flailed at the hidden party (attacks vs a flat DC &mdash; <strong>all missed</strong>).</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Intimidating Glare, critical success</strong> (<code>rolls.txt</code>) &rarr; the last rogue <strong>dropped his sword and surrendered</strong>; talked to his knees and <strong>manacled.</strong></li>
+    </ul>
+    <p><strong>Outcome:</strong> all three enemies subdued alive, non-lethal. Father Kindness healed conscious &rarr; recruited to the cause. <strong>+2 uprising points</strong> (crossing the 5-point threshold).</p>
+  </div>
+
+  <div class="xp-banner">
+    Experience &middot; guild fight &middot; goblin scene &middot; costume standoff &middot; gala progress (values unstated) &middot; <strong>Still Level 4</strong> &middot; +3 Uprising &rarr; 6 total &middot; +1 League reputation &middot; Suppression clean
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Blade That Never Draws Blood</h4>
+      <ul>
+        <li>Pax's fighter is now defined by the hits he <em>doesn't</em> let land. He opened by rolling a <strong>63-damage crit</strong> and immediately asking to make it non-lethal &mdash; folding a rogue with the flat of the blade &mdash; and closed the fight with a <strong>59-damage non-lethal crit</strong> on Father Kindness. Two of the biggest swings in the campaign, both pulled on purpose, in a city where one loud death means lockdown.</li>
+        <li>The through-line was <strong>mercy that reads as strength.</strong> When the guild leader woke in manacles, Bai Jian didn't interrogate &mdash; he asked <em>"You heard of the Hellbreakers?"</em> and turned a burglary into a recruitment. Ribbed by the DM about having <em>"just broke into your house and murdered your dad,"</em> he owned it flat: <em>"Yeah, kind of."</em></li>
+        <li>When a starving <strong>goblin girl</strong> picked his pocket in full view of the town guard, he covered for her without a beat &mdash; <em>"I was just about to give her this"</em> &mdash; palmed her a gold coin, and stared the captain down with a hand near his sword. He gave a thief his own gold and made the guard thank him for it.</li>
+        <li>At the gala he played the everyman-in-costume beautifully &mdash; trading <strong>real monster-hunting expertise</strong> in drake-hunting shop talk, flattering a celebrity bard, taking <strong>second place in a darts contest</strong> on a stat he doesn't even build for, and roasting a self-important colonel off the field (<em>"Your money's gone"</em>). He still hands the big conversations to Cyrathul, but the <em>plans</em> and the quiet decency are his.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Dragon Who Reads the Room</h4>
+      <ul>
+        <li>Snowgeen was back, and Cyrathul reminded the table why the party can't run a social scene without him. He dropped into the fight a round late and still did real work &mdash; <strong>Exploit Vulnerability</strong>, a non-lethal chomp, and the <strong>crit Intimidating Glare</strong> that ended the combat outright (the last rogue dropped his sword on the spot).</li>
+        <li>His real weapon is his tongue. The <strong>Quoster influence</strong> was the most sophisticated play of the night: rather than flatter the merchant, Cyrathul praised Cheliax's <em>"great institutions &mdash; like slavery, sorry, I mean debt"</em> and then <strong>glared at Quoster</strong> to socially isolate the halfling (whose people <em>are</em> Cheliax's slaves) from the pro-slavery nobles crowding him. Twice over, +2 influence and a League reputation point banked.</li>
+        <li>He's also the party's dry wit &mdash; he deflated <strong>Frederick Consum</strong> with <em>"if you're that heavy, maybe you should cut off the carbs,"</em> fenced a banned book with a straight face (<em>"I found it in my hoard"</em>), and made undead-silk gala chatter sound effortless.</li>
+        <li>Even his losses were in character: he bet 20 gold on Bai Jian at the darts, lost, and tried to <em>deception</em> his way out of paying up. He is the mouth, the mirror, and the closer.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Cat Who Keeps Everyone Standing</h4>
+      <ul>
+        <li>In the fight she was the reason the party could afford to peek around corners into arrow slits &mdash; <strong>Battle Medicine</strong> on Bai Jian, <strong>Trade Death for Life</strong> routing fast healing to the arrow-riddled Zanthar while chipping and Stupefying Father Kindness, and a follow-up <strong>Heal</strong> to patch the wizard back up. She never stops doing her job, and she keeps the party's fights survivable and its captives alive.</li>
+        <li>She isn't all softness, either: she <strong>led the verbal pushback</strong> when Frederick tried to strong-arm the party out of their costumes (<em>"Those are ours. We paid for those."</em>), and she's genre-savvy enough to call <em>"we're in a rogue's house &mdash; watch for traps"</em> before anyone stepped wrong.</li>
+        <li>Her social game is a delight because it's disarming. Her whole gala approach is <strong>"I'm just a cat"</strong> &mdash; she opened on the iron-throne noble <strong>Iso Data</strong> with <em>"I'm just a cat, but I'm drawn to your cape,"</em> introduced herself as <em>"just a cat, my name is Panacea"</em> (DM: <em>"what a very inclusive name"</em>), then <strong>gossiped</strong> her way into his confidence. A crit Discover and a hero-pointed influence later, Iso was hers.</li>
+        <li>Off the clock she's the party's conscience made literal &mdash; she spent her downtime <strong>at the hospital helping sick children</strong> &mdash; and she feeds her two-headed familiar <strong>Serrafina</strong> scrolls to learn new spells (<em>"she has two heads, so she was pretty hungry"</em>). The healer who solves the fight and then goes to volunteer.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Gnome Who Takes the High Ground</h4>
+      <ul>
+        <li>Scott's wizard once more rounded the corner first and paid for it &mdash; <strong>two arrows, 25 damage</strong>, the instant he peeked into the guild's ambush nook. And once more he answered with the single best mechanical play of the fight: <em>"I am small &mdash; maybe I can stand on top of the bed,"</em> scrambling onto a bunk to line up a <strong>Dizzying Colors</strong> cone that <strong>stunned, blinded, and dazzled the room.</strong> One spell, perfectly placed.</li>
+        <li>His downtime fleshed him out past the artillery role. He's a compulsive <strong>shopper and planner</strong> (four Sure Strike scrolls, sleeves of storage, <em>"I need to get to level five"</em>) and a <strong>comic fail waiting to happen</strong> (he spilled ink across a full day's Earn Income).</li>
+        <li>When it mattered, he was the party's surprising <strong>influence utility.</strong> His two social wins both came sideways: he <strong>bonded with a lower-class hanger-on</strong> by drinking and eating beside him, then <em>intimidated</em> him into liking it (<em>"careful how much food you're eating&hellip; these rich people, they come after you"</em> &mdash; <em>"you're a chip off the old block"</em>).</li>
+        <li>He also <strong>influenced Colonel Rithert</strong> on the flattery angle Bai Jian dug up &mdash; and on a lark stepped up to the darts and <strong>tied Bai Jian for second</strong>, pocketing a silver dart. <em>"I have been known to talk,"</em> he'd said, volunteering for the pendant. Turns out he can do more than that.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Gear</h2>
+  <div class="loot-grid">
+    <div class="loot-item" style="border-color:var(--gold);"><div class="loot-name" style="color:var(--amber);">The Lazy Bones Pendant</div><div class="loot-source">Father Kindness</div><div class="loot-note"><strong>Recovered at last</strong> &mdash; the recognition token for Quoster. Worn by Cyrathul at the ball.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Potency Rune</div><div class="loot-source">Rasumili Brightgate (free)</div><div class="loot-note">For scaring off Frederick &mdash; Bai Jian affixed it to his armor.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Quick-Change (Raiment) Rune</div><div class="loot-source">Rasumili Brightgate (free)</div><div class="loot-note">Bai Jian took it to disguise his armor at will.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Sleeves of Storage</div><div class="loot-source">Elidir magic shop</div><div class="loot-note">Bought by Zanthar.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Sure Strike Scrolls &times;4 (+ more)</div><div class="loot-source">Elidir magic shop</div><div class="loot-note">Zanthar's four; Cyrathul grabbed some to flick from his implement.</div></div>
+    <div class="loot-item"><div class="loot-name">Valuable Artwork</div><div class="loot-source">Father Kindness</div><div class="loot-note">Donated "as a contribution to the cause" &mdash; sold in Elidir.</div></div>
+    <div class="loot-item"><div class="loot-name">150 Gold</div><div class="loot-source">Fencing the Abergale script</div><div class="loot-note">The banned book from S11; Cyrathul deception-sold it.</div></div>
+    <div class="loot-item"><div class="loot-name">2&times; Silver "Lucky" Darts</div><div class="loot-source">The Manticore contest</div><div class="loot-note">One each to Bai Jian and Zanthar for tying second; Bai Jian plans to sell his.</div></div>
+    <div class="loot-item"><div class="loot-name">Sammy's Leftover Gold</div><div class="loot-source">Redistributed by the DM</div><div class="loot-note">Split among the party.</div></div>
+  </div>
+  <div class="xp-banner">
+    Uprising &middot; +2 recruit the guild (&rarr; crosses 5) &middot; +1 goblin mercy = <strong>+3 &rarr; 6 Uprising Points</strong> &middot; +1 League reputation &middot; Suppression: clean &mdash; every encounter non-lethal
+  </div>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Quoster deal isn't closed.</strong> Cyrathul has <strong>2 influence</strong> on the halfling merchant; more gala influence rounds run next session. Land it and the Hellbreakers get funding <em>and</em> a chartered chapter in the capital.</li>
+      <li><strong>A thieves' guild is now an asset.</strong> <strong>Father Kindness</strong> and the Children's Charity steal only from Chelaxians and offered intel on <em>"easy pickings"</em> in noble estates. A recurring resource &mdash; and a source of inside jobs.</li>
+      <li><strong>Frederick Consum is at the ball.</strong> The humiliated noble the party crossed at the costume shop is a guest tonight. Will he recognize them under the costumes?</li>
+      <li><strong>The woman radiating magic.</strong> Zanthar spotted a silent, imperial woman in fine undead silk giving off <em>"an immense amount of magical essence"</em> &mdash; unidentified. A plot seed hanging over the ball.</li>
+      <li><strong>Iso Data's cape came from Tilaax.</strong> The iron-throne cape traces to <strong>Tilaax</strong> &mdash; Cheliax's infernal-contracts faction, already tied to the Waterspout Inn torture devil. What is a devil-contract noble doing at this party?</li>
+      <li><strong>Colonel Rithert, humiliated and influenced.</strong> A military man in town, down a point of pride (whiffed the darts) and one influence point (Zanthar's flattery angle). Useful lever or future enemy?</li>
+      <li><strong>The founders are gone; the party <em>is</em> the League here.</strong> Alceo and Phoebe left Elidir under a decoy exit. Whatever happens at the ball, there's no cavalry &mdash; just four costumed rebels and a pendant.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> "Can I do that non-lethal?"<span class="attribution">Rolling a 63-damage crit on the fight's first swing &mdash; and immediately pulling it.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "You heard of the Hellbreakers?"<span class="attribution">The pivot that turned a burglary into a recruitment, with the guild leader in manacles.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "I was just about to give her this." &hellip; "Do you think I would leave someone alone who tried to steal from me?"<span class="attribution">Covering for the starving goblin pickpocket &mdash; palming her a gold coin, then staring the town guard down with a hand near his sword.</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> "Your money's gone."<span class="attribution">Deadpan, watching Colonel Rithert whiff all six darts at the Manticore contest.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "We happen to be the perpetrators of such activities. And we are looking to expand the scope."<span class="attribution">Revealing the party as Hellbreakers to Father Kindness &mdash; and closing the recruitment.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "&hellip;Cheliax's great institutions &mdash; like slavery. Sorry, I mean debt." <em>(then glares at Quoster)</em><span class="attribution">The influence play of the night &mdash; isolating the halfling merchant from the pro-slavery nobles around him.</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> "I mean, if you're that heavy, maybe you should cut off the carbs."<span class="attribution">To Frederick Consum, mid-threat, in the costume shop.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "I'm just a cat. My name is Panacea."<span class="attribution">Introducing herself to the iron-throne noble at the gala. The DM: "What a very inclusive name."</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "She has two heads, so she was pretty hungry."<span class="attribution">On feeding scrolls to Serrafina, her two-headed familiar, to learn new spells overnight.</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> "We're in a rogue's house &mdash; watch for traps."<span class="attribution">Genre-savvy, the moment the recruited Father Kindness pointed them toward the pendant in his trapped bedroom.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "I am small. Maybe I can stand on top of the bed."<span class="attribution">Climbing a bunk bed to line up the Dizzying Colors cone that stunned and blinded the room.</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "Better be careful how much food you're eating &mdash; these rich people, they come after you."<span class="attribution">Intimidating a lower-class gala guest into liking him. "You're a chip off the old block."</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> "I have been known to talk."<span class="attribution">Volunteering to wear the Lazy Bones pendant and be the party's mouthpiece at the ball.</span></blockquote>
+
+  <blockquote><strong>Father Kindness:</strong> "Had you found it yourselves, I would congratulate my own children on such a successful theft."<span class="attribution">The recruited guild leader, on the party's non-lethal break-in &mdash; and the start of a very useful friendship.</span></blockquote>
+
+</section>
+
+<section>
+  <h2>The Ball</h2>
+  <div class="cliffhanger">
+    <span class="label">Session pauses &middot; The New Year's Eve gala, mid-influence</span>
+    <p>Two rounds down, a merchant halfway won, a colonel humiliated off the darts field, and a room full of Chelaxian elites who have no idea there are four Hellbreakers in devil costumes working them one conversation at a time. The founders are gone. The deal is not closed. Somewhere in the crowd, a noble who hates the party is watching &mdash; and a silent woman is radiating more magic than anyone in the room.</p>
+    <span class="big-line">"We'll pick up with a couple more influence rounds next week."</span>
+    <span class="speaker">&mdash; the DM, pausing the gala. Cyrathul: "Thank you for running the game."</span>
+  </div>
+</section>
+
+<section>
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <section class="pax-notes">
+    <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+    <h3>What Bai Jian did this session</h3>
+    <ul>
+      <li>Finished the guild fight the way we started it: <strong>non-lethal, no bodies.</strong> Opened on a Housebreaker with a <strong>63 crit</strong> (flat of the blade) and dropped <strong>Father Kindness</strong> with a <strong>59 crit</strong> off Ren's Support. Two of my biggest hits ever, both pulled.</li>
+      <li>Turned the win into a recruitment. Asked the old thief if he'd heard of the Hellbreakers &mdash; he had. <strong>The Children's Charity is ours now.</strong> He gave us the <strong>Lazy Bones pendant</strong> and artwork for free and offered to point us at Chelaxian estates worth robbing.</li>
+      <li>Covered for a <strong>goblin pickpocket</strong> in front of the guard &mdash; gave her my gold and made the captain thank me for it. Another uprising point. This city pays you back for being decent.</li>
+      <li>Faced down <strong>Frederick Consum</strong> at the tailor's &mdash; his own bodyguard wouldn't fight me once he saw the sword. Got a <strong>potency rune and a quick-change rune</strong> out of it, free.</li>
+      <li>At the ball: bluffed through the nobles, took <strong>second in the darts</strong> (Aziri's a ringer), and dug up <strong>Colonel Rithert's weakness</strong> so Zanthar could work him. We're two influence up on Quoster and climbing.</li>
+    </ul>
+
+    <h3>Things Bai Jian knows that the party does not</h3>
+    <ul>
+      <li><strong>We keep winning by not killing.</strong> The guild, the goblin, the costume ass &mdash; none of it needed a body. Non-lethal isn't a handicap in this city; it's the whole strategy, and it's stacking uprising points faster than any fight would.</li>
+      <li><strong>Father Kindness is a weapon we haven't fired yet.</strong> A whole guild that robs only Chelaxians and owes us a favor. When we need something stolen from a noble's estate, we don't have to do it ourselves.</li>
+      <li><strong>That woman at the ball is wrong.</strong> Zanthar felt it too &mdash; an imperial-looking woman in undead silk, radiating more magic than anyone in the room, saying nothing. Nobles don't glow like that. Watch her.</li>
+      <li><strong>Iso's cape came from Tilaax.</strong> That's the infernal-contracts faction &mdash; the same one behind the torture devil at the Waterspout. There's a devil-contract noble in this ballroom. He might be a mark, or he might be the reason this whole party exists.</li>
+      <li><strong>Rithert can't stand being reminded he's not in the field.</strong> Combat vets make him jealous (&minus;2 if you talk battle), but flattery about "getting back out there" opens him right up. Careful which lever I pull.</li>
+    </ul>
+
+    <h3>What Bai Jian is thinking about</h3>
+    <ul>
+      <li><strong>Darts are Dex, and I'm not a Dex fighter.</strong> Second place off raw luck. Fine for a party game &mdash; but a reminder that my whole kit is melee and reach. Don't get talked into a ranged contest that matters.</li>
+      <li><strong>I'm the muscle and the moral center, not the mouth.</strong> I keep handing the talking to Cyrathul and it keeps working. My job is the plan, the sword on display, and knowing when <em>not</em> to swing. Own it.</li>
+      <li><strong>Ren earns his slot every fight.</strong> The Support rider turned my finisher into a crit on Father Kindness. Command, block, scent &mdash; keep leaning on him.</li>
+      <li><strong>The founders are gone. It's just us now.</strong> No cavalry at that ball. If Frederick makes us, or that magic woman turns on us, we handle it quiet &mdash; one loud fight and the whole city locks down.</li>
+    </ul>
+
+    <h3>Open questions for next session</h3>
+    <ul>
+      <li>Can we <strong>close Quoster</strong> in the rounds left? Does the darts colonel or Iso matter to the deal, or are they side quests?</li>
+      <li><strong>Does Frederick recognize us</strong> under the costumes? He's here and he hates us.</li>
+      <li><strong>Who is the woman radiating magic?</strong> And why is a <strong>Tilaax</strong>-caped noble at this party?</li>
+      <li>Do we ever call on <strong>Father Kindness's guild</strong> &mdash; and for what?</li>
+      <li>When do we finally hit <strong>level 5</strong>? The armor rune and STR 20 are right there.</li>
+    </ul>
+  </section>
+</section>
+
+</div>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+
+</body>
+</html>

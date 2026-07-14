@@ -1,6 +1,6 @@
 # Party Dynamics — Season of Ghosts (AndeGM)
 
-**Table**: AndeGM's paid Foundry game · Standard difficulty · Variant rules: Free Archetype, Gradual Attribute Boosts, Ancestry Paragon. **Session 1 played 2026-06-26.**
+**Table**: AndeGM's paid Foundry game · Standard difficulty · Variant rules: Free Archetype, Gradual Attribute Boosts, Ancestry Paragon. **S1 played 2026-06-26; S2 played 2026-07-10 (Mu-Jin/snotierknave69 absent).**
 **Pax is the new 5th player joining an established crew** (several are AndeGM regulars from his Abomination Vaults / Stolen Fate games; two players are housemates).
 
 ---
@@ -68,15 +68,19 @@ Full house rules + hero-point economy + crit-fail-RK ruling: `sessions/session-0
 - **His late father** — Lung Wa veteran, taught him blade + healing + restraint. Died → Animist awakening. Zhen channels every spirit *except* his father (private grief, light flavor only — not RP'd heavily).
 - **His mother** — an oni, gone before memory. The wrapped nodachi was hers (Zhen doesn't know this).
 
-## Lanes confirmed in play (S1)
-- **Zhen** — RK (jinkin, vipers) + **Medicine** (cause-of-death reads) + **Perception anchor** + out-of-combat healer (Garden of Healing). Worked exactly as designed.
-- **Mu-Jin** — **Occultism RK** (the DM let him roll it even on the animal centipedes) + **Detect Magic** exploration + buffs (Forbidding Ward, Nudge Fate, familiar AC) + de-facto **investigation/plot driver**.
-- **Iryoku** — primary striker (Flying Flame, fire Elemental Blast crit) + Face + party bookkeeping; **seeds** the party's theories.
-- **Kaelen** — striker; landed **both kills** the party cared about (Flurry on the 2nd centipede, Inner Upheaval crit on the Buso).
-- **Kaoru** — Spellstrike striker; quiet at the table but mechanically present.
+## Lanes confirmed in play (S1–S2)
+- **Zhen** — RK (jinkin, vipers) + **Medicine** + **Perception/Survival anchor** (S2: **tracked the blood trail** to the Happy Kappa) + out-of-combat healer (Garden of Healing, incl. the whole caged cellblock) + the party's **Religion/ritual hand** (S2: all three shrine blessings ran on him). Worked exactly as designed.
+- **Mu-Jin** — **Occultism RK** + **Detect Magic** exploration + buffs + de-facto **investigation/plot driver**. *(Absent S2 — parked at the Matsuki Estate; his RK/control was missed a bit but the fights were trivial anyway.)*
+- **Iryoku** — primary striker (Flying Flame; S2 hit all 3 clinic centipedes for 56) + **Face** (all the S2 NPC scenes) + party bookkeeping (recap, rep math, loot) + **seeds** theories. S2: acts on the **Yaksha edict to confront cruel fae** — killed the retreating abacus-sisters jinkin, which Kaoru openly questioned. A zealotry note to watch.
+- **Kaelen** — striker; S1 landed both kills the party cared about; S2 landed **two Flurry-of-Blows kills** (a jinkin at the farm, a centipede in the clinic) *despite* heavy laptop lag that kept him near-silent and AFK across the break. Diarization repeatedly mislabels his turns; verify by kit (Bo staff + Flurry = his).
+- **Kaoru** — Spellstrike/Foxfire striker + **highest Thievery** (S2: disarmed the Mushroom House trap-web) + the party's **deadpan skeptic** and committed **South-Banker**; openly distrusts Granny Hu (Northridge). Quiet at the table but every line lands.
 
 ## Open threads
-- ➤ Confirm whether Kaoru has **Deception** (the one possible social gap) — **still unconfirmed after S1** (never came up).
-- ➤ Zhen is the **Perception anchor** — his initiative/Seeks carry the horror-genre awareness the party lacks.
-- ➤ Zhen is the new outsider in a tight group — integrate socially; be a helpful (not preachy) rules resource; buff their less-optimized builds rather than critique them. *(S1: integrated smoothly; the party already treats Zhen and Mu-Jin as old acquaintances via You So-Jin.)*
-- ➤ **Combat is running very easy** (two one-sided S1 fights). Pax asked the DM for harder combat; the DM acknowledged the AP is easy but said any difficulty bump needs whole-group buy-in. Watch whether this gets addressed.
+- ➤ Confirm whether Kaoru has **Deception** (the one possible social gap) — **still unconfirmed after S2** (never came up).
+- ➤ Zhen is the **Perception/Survival anchor** — his initiative/Seeks + tracking carry the horror-genre awareness the party lacks.
+- ➤ Zhen is the new outsider in a tight group — integrate socially; be a helpful (not preachy) rules resource; buff their less-optimized builds rather than critique them. *(S1–S2: integrated smoothly; Zhen is now the de-facto rules-helper AND ritual/Religion hand.)*
+- ➤ **Combat is STILL running very easy** — three more one-sided S2 fights (abacus jinkin, clinic centipedes, rooftop jinkin that just fled). Pax raised this in S1; the DM said any difficulty bump needs whole-group buy-in. Still unaddressed. Zhen should consider not burning Shield/hero points on one-round fights and saving them for whatever's downtown (Modoku).
+- ➤ **Modoku (S2)** — the invasion's "brain": bald, sharp-toothed, hooded, neck rotates too far (human-shaped yokai). Bribes jinkin rather than enthralling them (coin, not curse). Broke the barracks; went to the **tea house** — the party's next target.
+- ➤ **The wrong gods (S2)** — the Lantern was relit with Abadar/Catephis/Pharasma, not the legendary Calistria/Kofusachi/Shelyn. It lit anyway. Zhen is hiding it from Granny Hu. Watch whether the ward is weaker for it.
+- ➤ **The governor's manor vanished (S2)** — gone from downtown without a trace. Open mystery.
+- ➤ **Zhen's apparition swap (S2, resolved)** — for the downtown day Zhen swapped in a **lava/magma (earth+fire) apparition** whose vessel spell is **Earth's Bile** (rank-1 animist, 30-ft range, 10-ft burst, fire + bludgeoning + persistent fire, **sustained** up to 1 min). That's the rooftop-stage spell ("Earthvile" was the Whisper mishear); its sustained template is the Foundry region whose deletion crashed the scene. Confirms Zhen runs a **third apparition** beyond war (Embodiment of Battle) and life (Garden of Healing).

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 2 — The Lantern, the Wrong Gods, and the Long Neck</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Lantern, the Wrong Gods, and the Long Neck</h1>
+  <div class="subtitle">Session 2 &mdash; Season of Ghosts &middot; Willowshore, Shenmen</div>
+  <div class="meta-row">
+    <span class="meta-pill">July 10, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h (&plusmn;30m Foundry outage)</span>
+    <span class="meta-pill">First Days of Summer, 7108 IC</span>
+    <span class="meta-pill">The Relief Sweep</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-explore" style="width:28%"></div>
+    <div class="comp-seg comp-social" style="width:24%"></div>
+    <div class="comp-seg comp-combat" style="width:20%"></div>
+    <div class="comp-seg comp-mystery" style="width:18%"></div>
+    <div class="comp-seg comp-rp" style="width:10%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 28%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social / Town 24%</span>
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 20%</span>
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery / Lore 18%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 10%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-zhen"><div class="char-name">Zhen Stillness</div><div class="char-class">Samsaran (Hungerseed) &middot; Animist (Liturgist)</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-iryoku"><div class="char-name">Iryoku-Yasha</div><div class="char-class">Yaksha &middot; Kineticist (Wood/Fire)</div><div class="char-player">legendfather</div></div>
+    <div class="char-card char-kaoru"><div class="char-name">Kaoru</div><div class="char-class">Kitsune &middot; Magus (Aloof Firmament)</div><div class="char-player">magus player</div></div>
+    <div class="char-card char-kaelen"><div class="char-name">Kaelen Ashford</div><div class="char-class">Human &middot; Monk (Mountain Stance)</div><div class="char-player">cajun_code</div></div>
+    <div class="char-card char-mujin absent"><div class="char-name">Mu-Jin</div><div class="char-class">Witch &middot; Spinner of Threads</div><div class="char-absent-tag">Absent &middot; parked at the Matsuki Estate</div><div class="char-player">snotierknave69</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Session 2 is the cleanup shift after the invasion &mdash; a long, methodical relief sweep of Willowshore that trades Session 1's chaos for a to-do list, three shrines, and a slow-tightening dread. Picking up where they'd stopped (lantern dark, its three blessed copper coins gone dull, Old Matsuki asking them to hunt down the vanished stone guardian Ugly Cute), the four able-bodied heroes push out into fog thick enough to blunt Perception and swallow the road. The plan is simple: re-bless the three coins at whatever shrines are closest and relight the <strong>Eternal Lantern</strong> before crossing the river into the monster-held downtown.</p>
+    <p>They knock out the first blessing at the Abadar shrine (Zhen's Religion, aided into a success), then run into the night's first fight on the way to find Old Matsuki's hunter: a pair of jinkin and their two animals at a fog-bound farm, cackling a nonsense rhyme and calling themselves <em>the abacus sisters.</em> The party talks them into a bickering retreat &mdash; but when the fae start slinking off, <strong>Iryoku</strong>, bound by a Yaksha's edict to confront cruel fae, opens fire, and the abacus sisters die in the mud. Kaoru asks, pointedly, whether that was necessary. The barricaded hunter turns out fine, hands over a Spirit Trap snare, and points them at a second shrine. A third blessing at the Lady of Souls (Pharasma) &mdash; a clean crit &mdash; completes the set, and the lantern flares to life "as if magic." The fog thins. The town exhales.</p>
+    <p>Across the river, the bill comes due. <strong>Granny Hu</strong>, holding the north together from the trade office, is unimpressed that they relit the lantern with the <em>wrong</em> gods &mdash; legend says Master Zhi Hui blessed the original coins with Calistria, Kofusachi, and Shelyn, none of which the party used &mdash; and she's especially disappointed in Zhen, a north-sider who should have known better. (Zhen elects to keep that quiet.) She trades information for labor: retake the downtown barracks, check on the stubborn Dr. Dami, and find her missing grandchildren. She also drops the night's real lead &mdash; the "brain" behind the invasion is rumored to be someone called <strong>Modoku</strong>, maybe a human occultist, maybe a human-shaped yokai.</p>
+    <p>Downtown is where it goes cold. The governor's manor is simply <em>gone</em> from its cliffside lot. Jinkin in stolen costumes jeer from a rooftop stage and demand a play; the party burns them off the roof instead (and accidentally sets the stage on fire, then very nearly sets Foundry on fire &mdash; a deleted spell-region crashes the whole scene for the better part of half an hour). In the barracks they find Granny Hu's son-in-law and his guards caged, fatigued, and at 1 HP each, and get the first real description of the enemy: a bald, sharp-toothed, hooded man whose <strong>neck rotates further than a neck should.</strong> They loot cold iron and silver from the armory, pick up the blood trail, and follow it to the Happy Kappa bathhouse &mdash; where a knot of repentant, <em>bribed</em> jinkin give up Modoku's name and point to the <strong>tea house</strong> as where he went. The party, wisely, does not pick that fight. They call it a night on the doorstep of the lead.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act explore">
+      <div class="act-label">Act I &middot; Exploration &middot; Fog and the First Coin</div>
+      <div class="act-card">
+        <h3>South Willowshore, in the Fog</h3>
+        <ul>
+          <li><strong>Cold open / S1 recap</strong> (Iryoku): woke east of town, killed talking centipedes, found Ugly Cute's pedestal empty, cleared a guard tower (2 dead guards, 2 dead jinkin), met the lone survivor <strong>Ha Haier</strong>, killed a <strong>Buso</strong> at Dawnstep Bridge, found the Eternal Lantern dark with its three copper coins no longer blessed, and learned the <strong>Invoke Shrine Blessing</strong> activity from Old Matsuki.</li>
+          <li><strong>Two standing asks</strong>: Old Matsuki wants a <strong>hunter found to track Ugly Cute</strong>; Ha Haier asked them to check on her daughter (at Granny Hu's) and husband (at the Matsuki Estate).</li>
+          <li><strong>The fog is a mechanic now</strong> &mdash; thick enough to hinder Perception <em>and</em> Survival to sense direction. Every cross-town leg eats an hour-plus and demands a check.</li>
+          <li><strong>Abadar shrine (first blessing)</strong>: Zhen invokes on Religion; Iryoku aids. A joke about drafting the absent Mu-Jin to aid gets shut down &mdash; <em>"he's actually currently staying with Matsuki."</em> Success (a hero point in the mix). <strong>Coin #1 blessed.</strong></li>
+          <li>Zhen: <em>"So, light it up. Let's go, younglings."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Abacus Sisters</div>
+      <div class="act-card">
+        <h3>Cruel Fae, Walking Away</h3>
+        <ul>
+          <li><strong>The commotion</strong>: through the fog, a small farm &mdash; two jinkin plus a pecking bird and a small weasel-ish critter (four "sisters" by their own count) harassing farmers barricaded inside. One coos <em>"here, kitty kitty, come out and get a treat"</em> at the door.</li>
+          <li><strong>The rhyme</strong>: the fae announce themselves &mdash; <em>"swift like a fawn&hellip; together we are the abacus sisters"</em> &mdash; then dissolve into cackling. Kaoru, dry: <em>"Apparently they can't count."</em></li>
+          <li><strong>The talk-down</strong>: Iryoku says they're here to protect the farmers; Kaoru offers the alternative read &mdash; <em>"I just thought we were teaching them math, since they call themselves an abacus."</em> Learning that the real cattle-thief word is <em>abacter</em>, Zhen tells the jinkin they've had their own name wrong &mdash; and the four fall into a genuine argument and start wandering off.</li>
+          <li><strong>The turn</strong>: Iryoku won't let cruel fae simply leave. <em>"My heritage gives me an edict to confront cruel fae."</em> Opens fire on the retreating jinkin &rarr; initiative.</li>
+          <li><strong>The fight</strong> (one-sided): Iryoku's fire, Zhen in <strong>Embodiment of Battle</strong> cutting down the bird then the weasel, Kaoru's Slashing Gust + Shield, and <strong>Kaelen's Bo-staff Flurry of Blows</strong> finishing the last jinkin. They <em>"all fall dead."</em></li>
+          <li><strong>The aftermath beat</strong>: Kaoru &mdash; <em>"I have to ask, was that necessary?"</em> Iryoku &mdash; <em>"Yes. They are evil."</em> Zhen splits the difference &mdash; <em>"they were terrorizing this place&hellip; but in their own silly way."</em></li>
+          <li><strong>The hunter</strong>: the barricaded farmer (the very hunter Old Matsuki sent them to find) is unharmed, gives them a <strong>Spirit Trap</strong> snare, and points them south to a shrine to <strong>Catephis.</strong> The party escorts her toward the Matsuki Estate.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Exploration &middot; Two More Coins, the Lantern Relit</div>
+      <div class="act-card">
+        <h3>Teamwork is Dreamwork</h3>
+        <ul>
+          <li><strong>Catephis shrine (second blessing)</strong>: Zhen on Religion; Kaoru burns a hero point on an aid. Success. <strong>Coin #2 blessed.</strong> Zhen: <em>"Teamwork is dreamwork."</em></li>
+          <li><strong>Lady of Souls / Pharasma (third blessing)</strong>: at the cathedral above the graveyard, Zhen rolls a <strong>critical success</strong> &mdash; full HP restore plus Guidance once in the next 24h. <em>"Good thing I don't have Guidance."</em> <strong>Coin #3 blessed.</strong></li>
+          <li>Zhen: <em>"I feel very blessed today. Not by my deity, but blessed nonetheless."</em></li>
+          <li><strong>Relight</strong>: at the bridge, the Eternal Lantern catches <em>"as if magic."</em> The fog doesn't fully lift but thins hard, and <em>"some sort of weight has been lifted."</em></li>
+          <li><strong>Blessings gained</strong>: <strong>+2</strong> item bonus to saves vs the blood-moonlight, and <strong>+1</strong> item bonus each to Medicine (Pharasma), Society (Abadar), and Survival (Catephis).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV &middot; Social &middot; Granny Hu and the Wrong Gods</div>
+      <div class="act-card">
+        <h3>Crossing to Northridge</h3>
+        <ul>
+          <li><strong>Zhen's house</strong>: the only PC who hadn't stopped home. He collects his heirlooms &mdash; an <strong>Oil of Potency</strong> (turns the nodachi +1 striking for a minute) and the <strong>Predictable Silver Piece.</strong></li>
+          <li><strong>Granny Hu, at the trade office</strong>: gruff, suspicious. <em>"You didn't bargain with them, did you?"</em> &mdash; Kaoru: <em>"Define bargain."</em> Iryoku: <em>"No deals with ghosts."</em></li>
+          <li><strong>The wrong gods</strong>: the <em>original</em> three blessings came from <strong>Calistria, Kofusachi, and Shelyn</strong> &mdash; none of which the party used. Granny Hu is specifically let down in Zhen: <em>"I'm mostly surprised by you, Zhen. You should know better."</em> Zhen chooses to <strong>hide</strong> it.</li>
+          <li><strong>The Santa Claus problem</strong>: Granny Hu wants credit for the doctor's rescue as much as the rescue. Kaoru, unmoved: <em>"I trust Granny Hu as far as I can throw her&hellip; I believe that like I believe in Santa Claus."</em></li>
+          <li><strong>Three downtown tasks</strong>: retake the <strong>barracks</strong> (her son-in-law is the captain); check on <strong>Dr. Dami</strong>; find her <strong>missing grandchildren.</strong></li>
+          <li><strong>The lead</strong>: rumor names the invasion's "brain" as <strong>Modoku</strong> &mdash; possibly a human occultist, possibly a human-shaped yokai.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V &middot; Exploration &middot; The Mushroom House</div>
+      <div class="act-card">
+        <h3>A Killing Trap Around the Kids</h3>
+        <ul>
+          <li><strong>The trap-web</strong>: four grandchildren huddled at the center of a lumber-drying yard inside a lattice of trip lines, tension dowels, heavy timbers, and sharpened stakes &mdash; a genuine hazard.</li>
+          <li><strong>The disarm</strong>: three legal approaches (Thievery / Crafting / Engineering Lore). <strong>Kaoru</strong> (highest Thievery) takes the roll; <strong>Iryoku</strong> uses base wood-Kinesis, which the DM allows as an <strong>auto-success aid.</strong></li>
+          <li>Clean disarm &rarr; <strong>1 XP + Northridge reputation</strong> (Iryoku's Northridge Scholar background adds a bonus point).</li>
+          <li>The kids come home safe.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; Dr. Dami's Clinic</div>
+      <div class="act-card">
+        <h3>Centipedes, and a Guardian Ghost</h3>
+        <ul>
+          <li><strong>The room</strong>: several centipedes (some <em>flying</em>), a frog, and a strange darting lizard the party can't place &mdash; Kaelen: <em>"Centipedes are flying."</em></li>
+          <li><strong>The fight</strong> (one-sided again): <strong>Iryoku's Flying Flame hits all three centipedes for 56 damage, no crit fails.</strong> Zhen enters Embodiment of Battle and drops another with the nodachi. <strong>Kaelen's Flurry of Blows obliterates a centipede outright</strong> ("massive damage"). Kaoru comes in with <strong>Foxfire</strong> for max damage.</li>
+          <li><strong>The gecko is not an enemy</strong>: the lizard is a manifestation of a <strong>guardian spirit</strong> long protecting the clinic &mdash; it was fighting the <em>centipedes.</em> The party pivots to mercy. Zhen: <em>"Maybe we'll just knock it out."</em> Kaoru wants it: <em>"&hellip;it might be giving us the death glare, I'm still going to take it home."</em> Kaelen argues to leave it be.</li>
+          <li>It turns out <strong>incorporeal</strong> (all-damage-resistant, doubled vs non-magical), takes Zhen's non-lethal swing and Iryoku's non-lethal blast, then simply <strong>dissipates back to its plane</strong> (it will reform).</li>
+          <li><strong>Dr. Dami</strong>: grateful, gives the party <strong>antidotes and darkvision elixirs</strong>, but flatly refuses to part with his one healer's kit. He and a few unaffiliated villagers agree to be escorted to <strong>Granny Hu's</strong> (shortest, promised, avoids downtown).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act VII &middot; Roleplay &middot; The Break</div>
+      <div class="act-card">
+        <h3>Prepared vs. Spontaneous</h3>
+        <ul>
+          <li>Kaelen steps away for a drink; the table falls into a long, warm build-and-rules argument &mdash; the Animist archetype, going Oracle for fire, and the eternal <strong>prepared-vs-spontaneous caster</strong> debate.</li>
+          <li>Capped by Iryoku's war story about a Sandpoint boss who crit-failed a Slow and got walked down. Kaelen, back and engaged: <em>"Andy just loves people casting slow."</em> Zhen, gleefully: <em>"Slow! Slow!"</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VIII &middot; Mystery &middot; Downtown Willowshore</div>
+      <div class="act-card">
+        <h3>The Missing Manor, the Stage, the Barracks</h3>
+        <ul>
+          <li><strong>The manor is gone</strong>: crossing into downtown, the party looks over the cliffside and finds the <strong>governor's manor simply missing</strong> from its lot. No governor's been active in a while &mdash; but Kaoru notes someone could have been sheltering there. A large, cold mystery.</li>
+          <li><strong>The public stage</strong>: jinkin in stolen costumes roughhouse on the roof and demand <em>"a play&hellip; we want to see the cowardness and foolishness of the people here."</em> Kaoru flips it: <em>"No. You do a play for us. I think you have the wrong people."</em> The roof blocks Iryoku's Performance sightline; the jinkin lob a shingle, Kaoru throws it back, and Iryoku is done: <em>"I'm getting got."</em></li>
+          <li><strong>The rooftop fight</strong>: the jinkin have greater cover up top. Zhen answers with <strong>Earth's Bile</strong> &mdash; the vessel spell of a lava/magma apparition swapped in for the downtown day &mdash; a molten-stone burst that catches all three jinkin and sets the stage alight. The DM, dryly: <em>"Setting buildings on fire. Why not?"</em> Iryoku Flying-Flames in support and later Suppresses the blaze. The jinkin break and flee.</li>
+          <li><strong>The Foundry crash</strong>: Earth's Bile is sustained, so it leaves a persistent template; cleaning up that spell-region (the DM deletes it) crashes the entire scene for ~25&ndash;30 minutes &mdash; later logged as "don't use region unless you want to break the game."</li>
+          <li><strong>The barracks</strong>: the office is ransacked. The cells hold Granny Hu's son-in-law (the captain) and his guards &mdash; all <strong>fatigued, enfeebled 3, unarmed, at 1 HP.</strong> His description of the enemy: <em>"a bald man with sharp teeth&hellip; his neck seemed capable of rotating more than it should"</em> &mdash; <strong>Modoku</strong> &mdash; leading a jinkin warband. Keys under a loose brick free them; <strong>Zhen Garden-of-Healings the whole cellblock.</strong></li>
+          <li><strong>The armory</strong>: the party stocks <strong>cold iron and silver.</strong> Kaelen takes a <strong>+1 spear</strong>; Zhen takes a silver short sword, a cold iron dagger (to feed his Needle Darts), and an oni tetsubo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act IX &middot; Mystery &middot; The Happy Kappa</div>
+      <div class="act-card">
+        <h3>Modoku's Trail Goes to the Tea House</h3>
+        <ul>
+          <li><strong>Blood trail</strong>: bloody prints run from the stables through the northern gate. <strong>Zhen tracks it</strong> (Survival) &mdash; Mu-Jin the only other trained tracker, and he's absent &mdash; north to the <strong>Happy Kappa bathhouse.</strong></li>
+          <li><strong>The locker</strong>: a sound leads to a <strong>halfling</strong> wedged inside a locker &mdash; the bathhouse's owner, who tracked a bloody trail here, panicked, and hid. He glimpsed only a <strong>long-necked</strong> creature.</li>
+          <li><strong>The repentant jinkin</strong>: in the bath area, a group of jinkin &mdash; the <em>bribed</em>, not-enthralled kind &mdash; admit Modoku paid them and regret ever taking the coin. They give up his name freely and point the party to the <strong>tea house.</strong> They mean to stay put; the party lets them.</li>
+          <li><strong>End of night</strong>: with the lead pointing at the tea house and the scene (literally) in pieces, the party regroups. Zhen: <em>"I'd rather not, to be honest."</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+  <p><em>No Foundry roll log was available this session; reconstructions below are from the transcript. All three fights ran heavily in the party's favor &mdash; a continuation of the group's standing note that the AP's combats have been very one-sided.</em></p>
+
+  <div class="combat-box">
+    <div class="combat-meta">A Fog-Bound Farm, South Willowshore &middot; One-Sided</div>
+    <h3>The Abacus Sisters</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2&times; Jinkin (AC 15, short swords) + a pecking bird + a weasel-like critter</div></div>
+      <div><div class="combat-stat-label">Trigger</div><div class="combat-stat-value">Iryoku fires on the retreating fae ("confront cruel fae" edict)</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Iryoku ~5 &middot; bird's hidden peck the only enemy hit of note</div></div>
+    </div>
+    <ul>
+      <li><strong>Iryoku</strong>: fire attacks / Elemental Blasts with Weapon Infusion (reach), one-action blasts with Sweep for the MAP bonus. Primary damage.</li>
+      <li><strong>Zhen</strong>: <strong>Embodiment of Battle</strong> (war-apparition vessel), then nodachi Strikes &mdash; dropped the bird, then the weasel/critter. Reactive Strike online in the war stance.</li>
+      <li><strong>Kaelen</strong>: <strong>Flurry of Blows with the Bo staff</strong> &mdash; finished the last standing jinkin. <em>(The transcript briefly labels this turn "Kaoru," but Bo staff + Flurry is the Monk's kit.)</em></li>
+      <li><strong>Kaoru</strong>: <strong>Slashing Gust</strong> cantrip, then <strong>Shield</strong> &mdash; support / cleanup.</li>
+      <li><strong>Outcome</strong>: both jinkin and their animals dead; the party barely scratched, healed out of combat by Zhen. The one lingering cost is a moral one &mdash; the fae were mid-retreat when the fight started.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Dr. Dami's Clinic &middot; ~2 Rounds</div>
+    <h3>Vermin, and a Guardian Spirit</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Centipedes (some flying, poison mandibles) + a frog</div></div>
+      <div><div class="combat-stat-label">Not an Enemy</div><div class="combat-stat-value">Guardian-gecko (incorporeal clinic spirit; was fighting the centipedes)</div></div>
+      <div><div class="combat-stat-label">Big Hit</div><div class="combat-stat-value">Iryoku's Flying Flame &mdash; 56 to all three centipedes, no crit fails</div></div>
+    </div>
+    <ul>
+      <li><strong>Iryoku</strong>: <strong>Flying Flame across all three centipedes &mdash; 56 damage, no crit fails</strong> (the night's biggest hit), then a two-action blast to finish the last one.</li>
+      <li><strong>Zhen</strong>: Embodiment of Battle + nodachi to drop a centipede (~8 HP or less to finish).</li>
+      <li><strong>Kaelen</strong>: <strong>Flurry of Blows with a hero-point reroll obliterated a centipede</strong> &mdash; "massive damage," roughly four times its max HP. <em>(His DM-declared turn; the lines scatter onto Zhen/Kaoru labels because Zhen was proxy-driving his lagged tokens &mdash; but Flurry + Parry is the Monk's kit.)</em></li>
+      <li><strong>Kaoru</strong>: <strong>Foxfire</strong> (kitsune ancestry) for max damage, then <strong>Shield</strong>; an unarmed strike on the gecko bounced off (incorporeal).</li>
+      <li><strong>The gecko</strong>: revealed as an <strong>incorporeal guardian spirit</strong> (all-damage resistance, doubled vs non-magical). The party deliberately goes non-lethal &mdash; Zhen's knock-out swing, Iryoku's non-lethal blast &mdash; and it <strong>dissipates back to its plane</strong> (will reform). No one wanted it dead; Kaoru wanted it as a pet.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">The Public Stage, Downtown Willowshore &middot; Rout</div>
+    <h3>The Rooftop Jinkin</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3&times; Jinkin in stolen costumes (greater cover on the roof = high AC)</div></div>
+      <div><div class="combat-stat-label">Trigger</div><div class="combat-stat-value">The jinkin demand a mocking "play," lob a shingle; Iryoku &mdash; "I'm getting got"</div></div>
+      <div><div class="combat-stat-label">Outcome</div><div class="combat-stat-value">The jinkin break and flee rather than trade blows</div></div>
+    </div>
+    <ul>
+      <li><strong>Zhen</strong>: opened by missing a <strong>Needle Darts</strong> cast (hero-point reroll still missed on a 17), then landed <strong>Earth's Bile</strong> &mdash; the vessel spell of a lava/magma apparition swapped in for the downtown day (rank-1 animist, 10-ft burst, fire + bludgeoning + persistent fire, sustained) &mdash; catching all three rooftop jinkin and setting the stage ablaze.</li>
+      <li><strong>Iryoku</strong>: Flying Flame in support; later <strong>Suppress Element</strong> to put the stage fire out.</li>
+      <li><strong>Kaoru</strong>: targeted a jinkin through the fire's visual effect (still a hit).</li>
+      <li><strong>Outcome</strong>: the jinkin <strong>broke and fled.</strong> The encounter ended in the party's favor &mdash; and immediately preceded the ~30-minute Foundry crash when the DM deleted the fire spell-region.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-zhen">
+      <h4>Zhen Stillness &middot; the Town's Quiet Keystone</h4>
+      <ul>
+        <li><strong>The session's connective tissue and its conscience.</strong> Zhen is the one who actually <em>does</em> the ritual work &mdash; all three shrine blessings run on his Religion, and he closes the set with a crit at the Lady of Souls.</li>
+        <li><strong>The party's memory and manners</strong>: he corrects the table's Tian Xia geography without breaking stride (<em>"This is technically not Japan"</em>), and knows the town well enough that Granny Hu singles <em>him</em> out for using the wrong gods &mdash; then quietly decides to let her keep believing it went by the book.</li>
+        <li><strong>Exactly what his sheet promises in a fight</strong>: drop into <strong>Embodiment of Battle</strong>, swing the nodachi, put things down. Out of it, he's the healer who tops everyone off and <strong>Garden-heals the whole caged cellblock.</strong></li>
+        <li><strong>The party's eyes</strong>: reads the <strong>blood trail</strong> off a Survival check straight to the bathhouse.</li>
+        <li><strong>His mercy instinct is real</strong>: first to argue the guardian-gecko doesn't need to die. A grounded, faintly weary elder who holds the center without raising his voice.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-iryoku">
+      <h4>Iryoku-Yasha &middot; the Zealous Face</h4>
+      <ul>
+        <li><strong>The party's mouth and its moral engine.</strong> Iryoku carries every conversation (Granny Hu, the hunter, Dr. Dami) and every bit of bookkeeping (the recap, the reputation math, the loot ledger) on a nature-spirit's easy authority.</li>
+        <li><strong>The Yaksha's edict isn't a decoration</strong>: when the abacus sisters are literally walking away mid-argument, Iryoku opens fire anyway &mdash; <em>"My heritage gives me an edict to confront cruel fae"</em> &mdash; and doubles down (<em>"Yes. They are evil"</em>) when Kaoru questions it.</li>
+        <li><strong>That conviction reads as principle</strong> elsewhere (<em>"No deals with ghosts"</em> to Granny Hu) and as comedy at the rooftop stage (<em>"I'm getting got"</em>).</li>
+        <li><strong>Mechanically dominant when the fights are on</strong>: the <strong>56-damage Flying Flame</strong> in the clinic is the single biggest number of the night.</li>
+        <li><strong>Quietly clever use of the kit</strong>: the wood-Kinesis that auto-solves the grandkids' death-trap.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaoru">
+      <h4>Kaoru &middot; the Deadpan South-Banker</h4>
+      <ul>
+        <li><strong>Quiet at the table, but every line lands.</strong> Kaoru is the party's skeptic and its dry wit &mdash; calling the abacus sisters' math (<em>"Apparently they can't count"</em>) and refusing to launder Granny Hu's politics (<em>"I trust Granny Hu as far as I can throw her&hellip; I believe that like I believe in Santa Claus"</em>).</li>
+        <li><strong>He flips the rooftop jinkin's demand</strong> straight back at them: <em>"No. You do a play for us. I think you have the wrong people."</em></li>
+        <li><strong>The party's hands</strong>: highest Thievery, so <em>he's</em> the one threading the disarm on the Mushroom House trap-web.</li>
+        <li><strong>The committed South-Banker</strong> whose distrust of the Northridge matriarch is a running thread he caps at session's end: <em>"I still can't stand Granny Hu."</em></li>
+        <li><strong>Softest under the deadpan</strong>: he decides the death-glaring guardian ghost should come home with him. Kaoru wants a pet, and won't be talked out of it.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaelen">
+      <h4>Kaelen Ashford &middot; the Quiet Wall</h4>
+      <ul>
+        <li><strong>Fought a laptop the whole night and still showed up where it mattered.</strong> Tech lag kept Kaelen sparse and pulled him AFK across the break, but the monk was present in the moments that count.</li>
+        <li><strong>His Bo-staff Flurry of Blows cleaned up the last of the abacus sisters</strong> &mdash; and in the clinic his Flurry obliterated a centipede outright.</li>
+        <li><strong>He's the one who first clocks</strong> the clinic centipedes are <em>flying</em>, and he plants a firm flag for mercy on the guardian-gecko (<em>"Because honestly, the lizard ain't attacking anyone"</em>) &mdash; the same instinct Zhen voices, from the party's quietest seat.</li>
+        <li><strong>When he <em>is</em> mic'd in, the enthusiasm is unmistakable</strong>, both in the build-debate stretch and in the simplest line of the night: <em>"I thoroughly enjoy this."</em></li>
+        <li>Closes the session a little better-armed, having claimed the armory's <strong>+1 spear.</strong></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mujin">
+      <h4>Mu-Jin &middot; Absent This Session</h4>
+      <ul>
+        <li>Player <strong>snotierknave69</strong> was out; Mu-Jin was written in as sheltering at the <strong>Matsuki Estate.</strong> Referenced a few times as the party's other trained hand for aid checks (and their only other trained tracker), but off-screen the whole night. Rejoins next session.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">Spirit Trap (snare)</div><div class="loot-source">The rescued hunter</div><div class="loot-note">~10 gp; traps only creatures with the spirit trait. To the party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Oil of Potency</div><div class="loot-source">Zhen's house (heirloom)</div><div class="loot-note">One-shot: nodachi becomes +1 striking for 1 min &mdash; the "this fight matters" button.</div></div>
+    <div class="loot-item"><div class="loot-name">Predictable Silver Piece</div><div class="loot-source">Zhen's house (heirloom)</div><div class="loot-note">Heirloom trinket.</div></div>
+    <div class="loot-item"><div class="loot-name">Antidotes + Lesser Darkvision Elixirs</div><div class="loot-source">Dr. Dami (thanks)</div><div class="loot-note">The doctor refused to sell or give up his one healer's kit.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Spear</div><div class="loot-source">Barracks armory</div><div class="loot-note">A monk weapon &rarr; Kaelen.</div></div>
+    <div class="loot-item"><div class="loot-name">Silver Short Sword + Cold Iron Dagger</div><div class="loot-source">Barracks armory</div><div class="loot-note">Zhen &mdash; silvered / cold-iron material to feed his Needle Darts against the jinkin.</div></div>
+    <div class="loot-item"><div class="loot-name">Oni Tetsubo</div><div class="loot-source">Barracks armory</div><div class="loot-note">A shove weapon; oni-familiarity fit &rarr; Zhen.</div></div>
+    <div class="loot-item"><div class="loot-name">Cold Iron &amp; Silver Sundries</div><div class="loot-source">Barracks armory</div><div class="loot-note">Climbing dagger, lamellar armor, assorted anti-fey metal. Distributed / stashed.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Lantern Blessings</div><div class="loot-source">Relighting the Eternal Lantern</div><div class="loot-note">+2 to saves vs the blood-moonlight; +1 each to Medicine (Pharasma), Society (Abadar), Survival (Catephis).</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Northridge Reputation</div><div class="loot-source">Mushroom House + barracks</div><div class="loot-note">+1 more from Iryoku's Northridge Scholar background.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; Three encounters + the Mushroom House hazard (1 XP) &middot; <strong>coins re-blessed, Lantern relit</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Zhen</strong>: "I feel very blessed today. Not by my deity, but blessed nonetheless."
+    <span class="attribution">After the crit-success blessing at the Lady of Souls &mdash; Zhen keeps the old rites but privately reveres Tsukiyo.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "Teamwork is dreamwork."
+    <span class="attribution">An aid roll lands the second shrine blessing.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Granny Hu</strong>: "I swear you must have been born in South Bank and then came up here just to spite me sometimes."<br>
+    <strong>Zhen</strong>: "Probably."
+    <span class="attribution">The Northridge elder and her least-favorite north-side elder. Zhen doesn't even blink.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "My heritage gives me an edict to confront cruel fae."
+    <span class="attribution">Opening fire on the retreating abacus sisters &mdash; the night's one hard moral turn.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "At that point, I'm no longer willing to entertain this course. I'm getting got."
+    <span class="attribution">Done with the rooftop jinkin's demand for a play.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "No deals with ghosts."
+    <span class="attribution">To Granny Hu, on whether they cut a bargain with the monsters.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "Define bargain."
+    <span class="attribution">When Granny Hu asks if they bargained with the monsters.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "I trust Granny Hu as far as I can throw her&hellip; I believe that like I believe in Santa Claus."
+    <span class="attribution">On the Northridge matriarch's supposed altruism.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "Even though it might be giving us the death glare, I'm still going to take it home."
+    <span class="attribution">Deciding the guardian ghost is coming home with him.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "No. You do a play for us. I think you have the wrong people."
+    <span class="attribution">Flipping the rooftop jinkin's demand back at them.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "Because honestly, the lizard ain't attacking anyone."
+    <span class="attribution">Arguing to spare the guardian-gecko.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "I thoroughly enjoy this."
+    <span class="attribution">Mid-session, unprompted &mdash; from the party's quietest, most tech-cursed seat.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>DM (Granny Hu)</strong>, on the party relighting the lantern with the wrong deities: "Does he know nothing about tradition?"
+    <span class="attribution">Old Matsuki catches a stray; the "wrong gods" thread gets its hook.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Modoku.</strong> The invasion's "brain." Bald, sharp-toothed, hooded, with a <strong>neck that rotates too far</strong> (a human-shaped yokai, likely). Commanded the jinkin that broke the barracks. Last seen headed to the <strong>tea house</strong> &mdash; the party's next destination.</li>
+      <li><strong>The governor's manor is gone.</strong> Vanished from its downtown cliffside lot without a trace. No active governor, but possibly someone was sheltering inside.</li>
+      <li><strong>The wrong gods.</strong> The lantern was relit with Abadar, Catephis, and Pharasma, not the legendary Calistria, Kofusachi, and Shelyn that Master Zhi Hui originally used. Granny Hu flagged it; Zhen is hiding it. Whether the "wrong" blessings matter is unknown.</li>
+      <li><strong>Ugly Cute.</strong> The stone spider-guardian walked east and is still unaccounted for. Old Matsuki wants it tracked; the hunter was found but hasn't started.</li>
+      <li><strong>"Blood will rise."</strong> The DM's ominous timeskip line; the blood-red moon of Session 1 is not done.</li>
+      <li><strong>Catephis.</strong> The third shrine's deity, unfamiliar to the party and not in their lore. Uncertain identity.</li>
+      <li><strong>The repentant jinkin.</strong> A bribed (not enthralled) faction now sheltering at the Happy Kappa &mdash; potential future allies or informants.</li>
+      <li><strong>The guardian-gecko.</strong> A benign incorporeal clinic-spirit; will reform. Possibly relevant to how spirits manifest around town.</li>
+      <li><strong>Mu-Jin</strong> rejoins when snotierknave69 is back.</li>
+      <li><strong>The difficulty question</strong> (table-level): three more one-sided fights. Pax has already raised wanting harder combat; still unaddressed.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">On the Doorstep of the Lead</span>
+    <p>The lantern is lit again, the fog thinner than it's been in days. But the manor is gone from its cliff, the town's captain and his guards were left at one breath from death, and the thing that did it &mdash; bald, hooded, its neck turning further than a neck should &mdash; walked away toward the tea house while the jinkin it bribed shrugged and stayed to soak. The party knows his name now. Tomorrow, they go find him.</p>
+    <span class="big-line">"You mean Modoku? &hellip; I believe he went to the tea house."</span>
+    <span class="speaker">&mdash; A repentant jinkin, at the Happy Kappa</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Zhen Stillness's Journal</h2>
+  <p class="pax-intro"><em>Private notes. Old Zhen keeps his own counsel.</em></p>
+
+  <h3>What Zhen did this session</h3>
+  <ul>
+    <li>Carried all three <strong>shrine blessings</strong> on Religion &mdash; Abadar (aided), Catephis (aided, Kaoru hero-pointed the aid), Pharasma (crit success, full HP + a Guidance charge). Relit the <strong>Eternal Lantern.</strong></li>
+    <li>Fought in <strong>Embodiment of Battle</strong> in two of the three fights; nodachi work. Dropped the bird and the weasel at the farm; a centipede at the clinic.</li>
+    <li><strong>Knocked out, not killed, the guardian-gecko</strong> at the clinic &mdash; turned out incorporeal, dissipated on its own.</li>
+    <li>Healed the party out of combat and <strong>Garden-healed the whole caged cellblock</strong> at the barracks.</li>
+    <li><strong>Tracked the blood trail</strong> (Survival) from the barracks stables to the Happy Kappa.</li>
+    <li>Stopped home; picked up the <strong>Oil of Potency</strong> and the silver piece.</li>
+    <li>Took from the armory: <strong>silver short sword</strong>, <strong>cold iron dagger</strong> (both to feed Needle Darts the right materials against the jinkin), and an <strong>oni tetsubo.</strong></li>
+    <li><strong>Hid from Granny Hu</strong> that the lantern was relit with the wrong three gods.</li>
+  </ul>
+
+  <h3>Things Zhen knows that the party does not</h3>
+  <ul>
+    <li>Nothing secret the others don't share &mdash; but Zhen is the one who <em>felt</em> how off it is that the lantern took the wrong gods and lit anyway. Master Zhi Hui used Calistria, Kofusachi, Shelyn. We used Abadar, Catephis, Pharasma. It lit <em>"as if magic"</em> regardless. Either the lantern doesn't care which gods, or it lit for a reason that isn't the blessing at all. Watch this.</li>
+    <li>The guardian-gecko was a <strong>spirit that reforms</strong> &mdash; the clinic has a resident protector on another plane. If spirits are manifesting like this around town, that's worth knowing before the tea house.</li>
+  </ul>
+
+  <h3>What Zhen is thinking about</h3>
+  <ul>
+    <li><strong>The neck that turns too far.</strong> Bald, sharp teeth, hooded, and a neck that rotates past what a neck should &mdash; Modoku isn't human. Human-shaped yokai. He broke the barracks captain's men down to 1 HP each and left. He is at the <strong>tea house.</strong> That is a hunt, not an errand.</li>
+    <li><strong>The jinkin aren't a monolith.</strong> The abacus sisters were cruel and died for it. The Happy Kappa jinkin were <em>bribed</em>, regret it, and gave up Modoku freely. Bribed, not enthralled &mdash; Modoku is <em>buying</em> this invasion, not compelling it. Coin, not curse. Different problem.</li>
+    <li><strong>Iryoku's edict.</strong> The Yaksha killed fae who were leaving. Not wrong by its own law &mdash; but it made a choice the rest of us had already talked past. If that edict fires again on something that <em>isn't</em> clearly evil, that will be a problem. Note it. Don't preach it.</li>
+    <li><strong>Materials.</strong> Silver short sword and cold iron dagger are in hand now &mdash; Needle Darts can bite the jinkin's weakness properly. The lantern blessings also give +1 Medicine / Society / Survival while they last.</li>
+    <li><strong>The blade stays wrapped.</strong> Nothing this session asked for it. Embodiment of Battle and the nodachi did the work without it becoming a thing I chose. Good.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>Who &mdash; or what &mdash; is Modoku, and what does he want at the tea house?</strong> A human-shaped yokai buying an invasion. Why here, why now.</li>
+    <li><strong>Where did the governor's manor go?</strong> Gone from the cliffside, no rubble, no trace. Was anyone inside?</li>
+    <li><strong>Do the wrong gods matter?</strong> The lantern lit. Does the ward hold as well with Abadar / Catephis / Pharasma as it would have with the original three? Ask carefully &mdash; Granny Hu already smells it.</li>
+    <li><strong>Who is Catephis?</strong> A deity of Survival at a Willowshore shrine none of us recognized. Find out.</li>
+    <li><strong>Ugly Cute</strong> &mdash; still walking east, still untracked. When does that become urgent?</li>
+    <li><strong>The bribed jinkin at the Happy Kappa</strong> &mdash; are they worth going back to? They talked freely once. They might again.</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>
