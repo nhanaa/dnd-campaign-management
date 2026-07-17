@@ -30,8 +30,16 @@ Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderla
 - **Chester** — small port town ~1.5 days west of Otari; receives regular Otari Lumber shipments. Has a harbor able to dock a large ship.
 
 ## Lore
-- **Belcorra Haruvex** — would-be tyrant slain **500 years ago by the Roseguard**; suspected of reactivating the Gauntlight (its light woke undead in the Otari graveyard two weeks ago). **Four tapestries** of her life recovered so far; the library learns more from each.
+- **Belcorra Haruvex** — would-be tyrant slain **500 years ago by the Roseguard**; suspected of reactivating the Gauntlight (its light woke undead in the Otari graveyard two weeks ago). **Four tapestries** of her life recovered so far; the library learns more from each. Her **tomb / boss room** was found on the 3rd floor in S2 — a carved double stone door (a ghost-lady rising from a grave); the party stopped at the threshold.
+- **Otari (the hero)** — the Roseguard member the town is named for **did not die** in the battle. He survived, went **deeper into the dungeon**, and left **messages** the party keeps finding hidden in corners (two so far).
+- **The Gauntlight's light** — a pillar of **negative energy** rising from a lake on the 3rd floor (near a huge **purple-worm corpse**) up to the top of the lighthouse. Undead that touch the energy are **healed**; it will kill the living.
+- **The teleport array** — dormant teleport circles on the lower floors (found on negative-1 and negative-2; none on the surface). Alder believes he can **reactivate** them with the right **ritual instructions** (a book or scroll), as long as the circle isn't defaced — a potential shortcut through the megadungeon.
+- **The flesh-eating cult** — ghoul cultists operating from the 3rd-floor "restricted collection" library. They **eat their victims** (bickering over raw vs. fungus-poisoned flesh) and can **heal by consuming corpses**. Includes a robed intelligent ghoul and a **spellcasting ghoul** (Grim Tendrils, Harm, Command, Phantom Pain). They **recruit** — the caster offered the party immortality to "drop your weapon and join us."
+- **The captured red-haired dwarf** — held by the cult, to be **sacrificed at midnight in two days, on the floor below** the party's current position (the same day as the planned pirate raid).
 - **The lumber-pirate ring** — magical **Kholo-language notes** are launched from the Otari cliffs, flying to pirates at sea; each note carries a shipment's **departure time + destination** so raiders can intercept Otari Lumber convoys. The party intercepted two. Not confirmed an inside job. The party has agreed to hunt the pirates directly (over the Arsenal Navy handling it).
+
+## The DM
+- **"Ab"** — runs deliberately **over-level, lethal combat**; standard/trivial encounters bore him, so most fights are 1–2 levels above the party. "Only one character died so far… and one was permanently crippled." Warns players not to get attached; expects harder combat than a typical table.
 
 ## Session log
 
@@ -40,3 +48,11 @@ Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderla
 - **Cured** of ghoul fever by the priestess **Vandy** at the Dawnflower Library (free). Lore established: the Gauntlight, Belcorra, the Roseguard, the tapestries.
 - **The flying-note side-quest** (entirely improvised by the DM): a magical Kholo note translated by **Wrin** revealed a pirate scheme against Otari Lumber. The party traveled to **Chester** and back investigating, then brought it to **Mayor Osif Mahimis**.
 - **No combat.** Ended with the party agreeing to hunt the lumber pirates themselves — next shipment in two days. Plan: **pirates by day, the Gauntlight by night.**
+
+### Session 2 — Into the Dark (2026-07-15)
+- **First dive with Argon.** After a night's rest and installing Argon's **striking rune**, the party descended to the Gauntlight's **3rd floor** (where the veterans had stopped) — Argon's first real combats. Crossed a collapsed bridge on a rope; got the newcomer's tour (dead giant frog, stained-glass chapel, teleport circles, the lore above).
+- **Three over-level undead fights, no deaths** (the whole table rolled cursed all night):
+  - **Gibbering Mouther** (level 6, modded 2 levels over party) in a cavern pond — a 40-minute grind. Opened by critting Argon for 34 and engulfing Alder; won by **Xurl's** finishing Flurry of Blows.
+  - **Two ghouls** behind a secret door — **Argon** crit-decapitated one before it acted (44) and finished the other.
+  - A **library** guarded by a **ghast + spellcasting ghoul + packmates** — cleared over another 40 min (Twan's internet died; DM rolled Ruben's saves by proxy). The caster offered immortality (refused), Harmed the room to heal its undead, and Argon smashed the last head off.
+- **Overheard the cult's plan** to sacrifice the captured **red-haired dwarf** and **found Belcorra's boss-room door.** Floor 3's undead largely cleared; party stopped at the threshold. **No XP announced on-mic; still level 4.**

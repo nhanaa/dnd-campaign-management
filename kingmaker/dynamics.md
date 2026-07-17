@@ -1,6 +1,6 @@
 # Party Dynamics — Kingmaker (Tuesday Group)
 
-> Avor joins at ~Session 4 (2026-07-07), party at level 1, just off the Aldori manor dinner. **GM: Luke Santos.** Relationship/plot notes to be filled as sessions run.
+> Avor joined at **Session 4 (2026-07-07)**, party at level 1. **GM: Luke Santos.** The **manor arc concluded at S5 (2026-07-14)** — the party cleared the West Wing, saved Lady Aldori, and won the **Greenbelt charter**. Now heading **southwest into the Greenbelt** to break the Rostland-Hinterlands bandits, with a growing NPC roster in tow.
 
 ## The Party
 
@@ -17,7 +17,7 @@
 ### Drek — *(player TBD)*
 - **Dragonet Exemplar** (they/them) — ranged with an **arbalest** (1d10), plus Dragonet bite/tail. Foundry token name **"Volk."**
 - Striker from the back line. RP is a paranoid tiny dragon ("they're here to steal my heart!") with real depth underneath.
-- **Grief thread (S4):** lost **Buggy** — a departed player's PC (now NPC) who was Drek's "one true friend." Found dead in the ogre's pile; Drek carries the remains.
+- **Grief thread (S4→S5):** lost **Buggy** — a departed player's PC (now NPC bard) who was Drek's "one true friend." **(S5)** The manor's dead were cremated/buried; **Zouse** kept Buggy's **hand** as a keepsake, which turned into a shared burial-rite beat — **Soft Willow** revealed Kholo **bone-keeper** culture and offered to clean the bones, and **Drek** offered to salt-cure the hand so it wouldn't rot. Closure (a "proper lake" burial) still owed.
 - **Bond formed (S4):** **Soft Willow** offered friendship after the interrogation; Drek accepted ("I suppose you're better than the kobold"). Willow now plays big-sibling/handler to Drek.
 
 ### Zouse Von Kusby — *(player TBD)*
@@ -39,12 +39,23 @@
 - Story-oriented, voice-acting, "immersive/funny"; rated for Creativity + Teaching + Inclusivity. Uses safety tools (Lines & Veils, consent checklist, X/N/O cards).
 - **Pacing question flagged early** (was the slow start his metronome, or setup?) — resolved as a session-count artifact.
 - **+S4 observations:** Runs the **Owlcat CRPG's opening** (the Aldori-mansion assault), adapted with homebrew (Black Tears, Gromog/Jurgrindor, Buggy) — *not* the tabletop book's opening. Voices every NPC himself and leans into villain menace. **Generous** — let the party rescue *everyone* and handed out a reward. Combat cadence is brisk (five encounters in ~3.5 hrs). Notable **Foundry technical friction** — token-name mixups (Gnasher/Volk), a "ranged dagger" misconfig, and a **lighting bug that ended the session early** in the smoke-filled West Wing.
+- **+S5 observations:** Still **generous** (the Milani shrine handed the party a free full-rest boon for a bit of piety). Willing to build **sophisticated set-pieces** — the Extreme Dueling Hall stacked a greataxe boss + 5 mooks alongside an NPC (Lady Aldori) soloing two giants as living scenery, and let a **PC death-and-revival** land as the dramatic peak without fudging. Heavy **Discord/voice + Foundry technical friction** again (mic/voice dropouts, a lingering token/smoke-lighting issue) that repeatedly broke immersion mid-scene. **Actionable feedback Willow gave him (accepted):** when combat gets chaotic and he drops to initiative, **explicitly call "you're up"** per player — the table stalls waiting for permission to act otherwise. Worth watching whether he tightens turn-calling next session.
+
+## Companions & recruits (NPC roster, S5+)
+
+The party is assembling a bench as it leaves the manor. Confirm final slots at the table:
+- **Valerie** — noble knight; signed on as **Zouse's protective knight** (his squire died in the attack).
+- **Amiri** — loud barbarian ("greatest barbarian you'll ever see"); attached to **Soft Willow** (she'd bonded with the departed kobold "Soup," whom Willow revealed was a **12-year-old child** sent home). Beer-chug rivalry with Willow.
+- **Jaethal** — the freed captive; a **Cleric of Swords / ex-Inquisitor** (Warpriest-flavored). Welcomed by **Avor**, who'd met her at the banquet and whose Demoralize game she praised. *(spelling per Owlcat companion — confirm.)*
+- **Linzi** (halfling bard) — a lead; **Drek** wants her along so **Caleb** isn't spending actions on Bless every round. A second caster/support.
+- **Harrim** — end-times dwarf cultist; floated as a possible recruit (Caleb is wary — "a grotesque worshiper"). *(spelling per Owlcat companion — confirm.)*
 
 ## Plot Threads
 
-- **Why the Black Tears?** A full assassin company + giants deployed to wipe out a manor of charter-holders — not a robbery. Target was the Aldori charter, a specific guest, or all of them? Prisoners died without saying.
-- **Maegar Varn, "traitor"** — the young noble Zouse befriended at the feast; the DM flagged him. A betrayal seeded early.
-- **The padlocked trunk** — hidden chamber in the ruined library; only **Avor** knows the wall-catch. Left unlooted ("don't rob our hostess").
-- **The West Wing (immediate)** — Lady Amandi Aldori is holding the **Dueling Hall** as the wing burns; the party is pushing in to reach her. Next session's opener.
-- **Buggy's death** — Drek's grief thread; a burial/closure beat owed.
-- **New allies in tow** — Linzi, Amiri, Valerie, Olgrim (rescued survivors).
+- **Why the Black Tears?** **(Updated S5)** They left a full armory of loot untouched — **sabotage, not robbery**, aimed at stopping the charter-holders from reaching the Stolen Lands. Both named leaders (Nishkiv the Knife, Volodmyra) died without talking; **no prisoner was taken this time**, so the paymaster and full objective are still unknown. Lady Aldori hinted she overheard chatter pointing to **an unspoken motive** she's still working out.
+- **The Iron Wraiths** — a rival band of arrogant adventurers, charter in hand, openly betting the party won't "last a fortnight." A competitive-rivalry thread seeded (they specifically needled Zouse).
+- **Maegar Varn, "traitor"** — the young noble Zouse befriended; got the **Nomen Heights** charter and rode off happy. DM still flagging him. Betrayal seeded early.
+- **The Greenbelt charter (immediate)** — the party's actual mission: southwest into the **Narlmarches/Kamelands**, break the bandits raiding the **Rostland Hinterlands**, start at a hard-hit trading post. The sandbox opener.
+- **The padlocked trunk** — hidden chamber in the ruined library; only **Avor** knows the wall-catch. Left unlooted, back at the (now-secured) manor.
+- **Buggy's burial** — Drek's grief thread; Zouse carries the **hand** toward a "proper lake" burial, Willow to clean the bones. Closure owed.
+- **Milani's shrine** — a genuine safe spot / full-rest boon inside the manor; Avor clocked the location.

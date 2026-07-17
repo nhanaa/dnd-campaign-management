@@ -27,7 +27,7 @@
 
 ## Defenses (from sheet)
 
-- **AC**: 20 (Leather armor)
+- **AC**: **18** (Leather armor; = 10 + 3 trained + 4 DEX + 1 leather). **20 with Nimble Dodge** (+2 circumstance vs a seen attacker). *(An earlier "AC 20" here was an error — corrected S5 2026-07-14 after a boss's 29-to-hit crit landed vs the true AC 18. Banking Nimble Dodge would have downgraded that crit to a hit.)*
 - **Max HP**: 17
 - **Perception**: +6
 
