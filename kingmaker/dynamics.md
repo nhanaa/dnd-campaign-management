@@ -12,7 +12,7 @@
 ### Soft Willow — *(player TBD)*
 - **Kholo Swashbuckler** (they/them; DM sometimes "she"). Foundry token name **"Gnasher."**
 - Melee precision striker (kukri / tekko-kagi / throwing knife, tumble, Parry). **Avor's key flank partner** — the reliable second body on a target for off-guard.
-- **The party's de-facto field leader (S4):** organizes triage, doors, and back-line safety, and runs the interrogations with genuine menace (the drowning-threat). Player is the **ex-"Soup" (kobold) player** — replaced that PC with Soft Willow.
+- **The party's de-facto field leader (S4):** organizes triage, doors, and back-line safety, and runs the interrogations with genuine menace (the drowning-threat). Player is the **former druid** — retrained off that character (and its **Dromaeosaur** animal companion, now gone from the party) into Soft Willow.
 
 ### Drek — *(player TBD)*
 - **Dragonet Exemplar** (they/them) — ranged with an **arbalest** (1d10), plus Dragonet bite/tail. Foundry token name **"Volk."**

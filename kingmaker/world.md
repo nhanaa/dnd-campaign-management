@@ -33,10 +33,10 @@ The party holds a **charter** to head south into the wilderness of the **Stolen 
 | — | **Zouse Von Kusby** | Tripkee | **Commander** | Tactical support / buffs; INT knowledge; mid-line |
 | — | **Caleb** | Human | **Cleric** (Erastil) | Healer / divine caster — the party's only caster |
 
-- Plus a **Dromaeosaur animal companion** (someone's pet — not tracked here).
+> **No animal companion.** An earlier **Dromaeosaur** belonged to a **druid** PC whose player has since **retrained into a Swashbuckler** — the companion left with that character. The party is a clean five PCs, no extra body on the field.
 
 ### Party shape
-Martial-heavy: four martials + one **divine** caster. No arcane/occult/primal control or AoE (the standing gap — not Avor's to fill). With Drek moving to ranged, the melee front is Avor + Soft Willow (+ the Commander mid-line), which keeps flanking reliable while adding ranged reach.
+Martial-heavy: four martials + one **divine** caster. No arcane/occult/primal control or AoE (the standing gap — not Avor's to fill). With Drek moving to ranged, the melee front is **just Avor + Soft Willow** (the Commander drifts mid-line). No animal companion to block or complete a flank — the front is thin, and there's no durable/heavy-armor body on it.
 
 ## Session Log
 

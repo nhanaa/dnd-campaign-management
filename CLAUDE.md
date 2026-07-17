@@ -51,6 +51,16 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 
 When discussing any campaign that uses **D&D 5.5e / 2024 PHB** (`myrrindar/`, `icewind-dale/`, and any future 2024 tables), **always double-check mechanics against the 2024 rules before stating them as fact.** Your training prior leans heavily toward 2014 5e, and you will silently default to 2014 mechanics — encounter budgets (no x1.5 monster multiplier in 2024; per-character XP budgets with Low/Moderate/High tiers), concentration rules (Spiritual Weapon, Hunter's Mark, etc. changed), spell scaling (Cure Wounds 2d8 base, Healing Word 2d4 base), class-feature levels (Monk Stunning Strike at Lv5 not Lv3), and subclass features have all shifted. Verify before critiquing tactics, planning levels, or estimating encounter difficulty. If you can't verify, hedge explicitly ("in 2014 this was X; I'm not sure if 2024 changed it") rather than asserting confidently.
 
+## PF2e Remaster rules discipline
+
+Your training prior leans heavily toward **legacy (pre-remaster) PF2e** and will silently default to it. Verify every mechanic — spells, feats, class chassis numbers, focus spell text — in the local `pf2e-lookup` pack (`node pf2e-lookup/pf2e-search.js "<name>" -d`) before asserting it. Known traps that have already caused wrong analysis:
+
+- **Spell attack modifier and spell DC are ONE unified statistic.** Class features like Expert/Master Spellcaster raise it for ALL spells the character casts, including archetype spells of other traditions. There is no per-tradition DC gap for multiclass casters — archetype casting lags in slots and spell ranks only, never DC.
+- **Remaster oracle (PC2) gets 4 spell slots / 4 spells known per rank** (3 at the newest rank), plus mystery-granted spells and a free mystery feat. Not the legacy 3-per-rank chassis.
+- **Focus spells auto-heighten to half level (round up)** and many were completely redesigned in the remaster (e.g., Ancestral Memories is now a ±1/±2 spell-accuracy swing, not skill training). Read the current text before judging one.
+- **Foundry actor JSON**: a spontaneous caster's heightened-known copies appear as duplicate spell items — the real rank is `system.location.heightenedLevel`, not `system.level.value`. Before flagging a feat as slotless or illegal, check granting feats' full text (e.g., dragonet Covet Hoard grants Hefty Hauler at 1 and Incredible Investiture at 11).
+- **Archetype spontaneous casters get signature spells**: one from Basic Spellcasting benefits (6th), a second from Expert Spellcasting (12th).
+
 ## Interpretation discipline
 
 When reviewing Pax's tactical or RP decisions in a session:

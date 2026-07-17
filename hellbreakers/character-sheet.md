@@ -7,9 +7,15 @@
 - **Heritage**: Dragonblood (Sovereign Dragon)
 - **Background**: Foreign Aid
 - **Class**: Fighter
+<<<<<<< Updated upstream
 - **Level**: 4
 - **Size**: Medium
 - **Speed**: 25 ft (base 25; Full Plate −10 speed reduced to −5 since Str 19 ≥ Str 16 req, then negated by **Fleet** +5)
+=======
+- **Level**: 3 (XP 274/1000)
+- **Size**: Medium
+- **Speed**: 30 ft (25 base + 5 Fleet; Str 18 ≥ breastplate's Str 16 threshold → -5 speed penalty negated)
+>>>>>>> Stashed changes
 - **Deity**: None (Atheists and Free Agents)
 - **Campaign**: Hellbreakers (Rise Up Isger and Join the Hellbreakers League!)
 - **System**: Pathfinder 2e Remastered
@@ -23,6 +29,7 @@
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
+<<<<<<< Updated upstream
 | 19 (+4) | 12 (+1) | 18 (+4) | 10 (+0) | 14 (+2) | 10 (+0) |
 
 *Synced to the live Foundry token (2026-06-27, Lv 4). This campaign uses the **Gradual Ability Boosts** variant — one boost at each of L2/L3/L4/L5 instead of four at L5. Starting array (L1): STR 18, CON 16, DEX 12, WIS 12. Gradual boosts so far: **L2 → CON 18, L3 → WIS 14, L4 → STR 19** (partial boost above 18 — the modifier stays +4 until STR reaches 20, planned for L5). CON maxed at 18; STR climbing toward 20 for the eventual +5.*
@@ -41,6 +48,24 @@
 *Will is **Expert via Bravery** (L3) — not Trained. Bravery + Dragonblood both make a success vs a fear effect a critical success, and Bravery reduces any Frightened you gain by 1. No dumped save-stat: all three saves are Expert, Fort is the standout at +12.*
 
 - **Perception**: Expert (+9)
+=======
+| 18 (+4) | 12 (+1) | 16 (+3) | 10 (+0) | 16 (+3) | 10 (+0) |
+
+*Rebuilt at L2 to fit the new party — WIS boosted (Nature/Medicine/Survival/Will), CHA dropped (no diplomat/face role needed). L1 sources: Ancestry STR/CON, Background STR/WIS, Class STR, Free L1 STR/DEX/CON/WIS. The L5 boost set applies via **Gradual Ability Boosts**: WIS→16 at L2, CON→16 at L3; the remaining two boosts of the set land at L4 and L5.*
+
+## Defenses
+
+- **AC**: 20 (10 + 5 proficiency [3 level + 2 trained] + 1 DEX cap + 4 breastplate) — **22 with Dueling Parry**
+- **Max HP**: 50 (8 ancestry + 30 class [10×3] + 9 CON [3×3] + 3 Toughness)
+
+| Save | Prof | Modifier |
+|------|------|----------|
+| Fortitude | Expert | +10 |
+| Reflex | Expert | +8 |
+| Will | Expert (Bravery) | +10 |
+
+- **Perception**: Expert (+10)
+>>>>>>> Stashed changes
 - **Vision**: Normal (no low-light — consider Draconic Sight later)
 
 ## Heritage Features
@@ -52,13 +77,21 @@
 
 - **Reactive Strike**: Reaction — Strike when a creature within reach uses a manipulate/move action, makes a ranged attack, or leaves a square
 - **Shield Block**: Free general feat (unused — no shield in this build)
+<<<<<<< Updated upstream
 - **Bravery** (3rd): Will-save proficiency is Expert. On a success vs a fear effect you critically succeed instead, and you reduce any Frightened condition you gain by 1.
+=======
+- **Bravery** (L3): Will saves → Expert. Success on a Will save vs a fear effect becomes a critical success, and any Frightened condition you gain is reduced by 1. (Overlaps with the Dragonblood heritage's success→crit on fear saves — Bravery adds the Frightened −1 and covers the Will proficiency bump.)
+>>>>>>> Stashed changes
 
 ## Ancestry Feats
 
 - **Dragon Lore** (1st): Trained in Diplomacy and Intimidation. Additional Lore: Dragon Lore.
 - **Natural Ambition** (1st, Ancestry Paragon): Grants Sudden Charge as bonus class feat.
+<<<<<<< Updated upstream
 - **General Training** (1st, Human) → **retrained at L4 to Toughness** (the "really tanky" pick): +4 HP at level 4 (scales with level; folded into the 68 HP above) and Dying-recovery DC reduced by your level. **Fleet** is also held (general feat, +5 ft Speed — offsets the Full Plate penalty).
+=======
+- **General Training** (3rd, Ancestry Paragon): Grants Toughness as bonus general feat. *(Part of the GM-approved respec after the goblin and hobgoblin players left — durability over Draconic Resistance, which moves to a later slot.)*
+>>>>>>> Stashed changes
 
 ## Class Feats
 
@@ -67,10 +100,16 @@
 - **Dueling Parry** (2nd): 1 action — While wielding a one-handed melee weapon with no other weapons or shields in your other hand, gain +2 circumstance bonus to AC until the start of your next turn.
 - **Slam Down** (4th): 1 action, Flourish — Make a melee Strike; if it hits and deals damage, attempt an Athletics check to **Trip** the creature. Both count toward your multiple attack penalty, but the penalty doesn't increase until after both. (One-action Strike-and-Trip; pairs with the Lifting Belt's Athletics bonus.)
 
+## General Feats
+
+- **Fleet** (3rd): +5 ft Speed → 30 ft total. Better Sudden Charge reach and positioning.
+- **Toughness** (3rd, via General Training): Max HP increases by your level (+3 now, scales each level). Recovery check DC reduced by 1.
+
 ## Skills
 
 | Skill | Prof | Modifier | Source |
 |-------|------|----------|--------|
+<<<<<<< Updated upstream
 | Athletics | Expert | +11 | Fighter L1 choice; raised to Expert at the L3 skill increase |
 | Diplomacy | Trained | +5 | Foreign Aid background |
 | Intimidation | Trained | +5 | Dragon Lore feat |
@@ -82,10 +121,23 @@
 - **Dragon Lore** (Trained, +5) — from Additional Lore (Dragon Lore feat)
 - **Lingshen Lore** (Trained, +5) — from Foreign Aid background
 - **Demon Lore** (Trained, +5) — from Additional Lore
+=======
+| Athletics | **Expert** | +11 | Fighter class L1 choice; L3 skill increase |
+| Diplomacy | Trained | +5 | Foreign Aid background |
+| Intimidation | Trained | +5 | Dragon Lore feat |
+| Medicine | Trained | +8 | Fighter additional skill |
+| Nature | Trained | +8 | Fighter additional skill (Beastmaster prereq) |
+| Survival | Trained | +8 | Fighter additional skill |
+
+### Lore Skills
+- **Dragon Lore** (Trained, +5) — from Additional Lore (Dragon Lore feat)
+- **Lingshen Lore** (Trained, +5) — from Foreign Aid background *(not entered on the VTT sheet)*
+- **Demon Lore** (Trained, +5) — free skill from Dragon Lore's Diplomacy overlap
+>>>>>>> Stashed changes
 
 ### Skill Feats
 - **No Cause for Alarm** (Background): 3 actions — Reduce Frightened on allies in 10-ft emanation via Diplomacy check
-- **Quick Jump** (2nd): High Jump and Long Jump become 1 action instead of 2, and skip the initial Stride / 10-ft requirement. Mobility shim that pairs with Sudden Charge and Reactive Strike positioning.
+- **Battle Medicine** (2nd): 1 action — Medicine check (Treat Wounds DCs) to heal in combat; doesn't remove Wounded, target then immune to your Battle Medicine for 1 day. Requires the Healer's Toolkit. *(Swapped in from Quick Jump as part of the GM-approved respec — party needed in-combat healing after the roster change.)*
 
 ## Free Archetype
 
@@ -109,15 +161,22 @@
 
 ### Consumables
 - **Silverscrap Bomb (Lesser)** ×1: Martial bomb, 2d4 piercing + 2 splash (silver for weakness/resistance purposes), 20-ft range, +1 item bonus to attack. Anti-fiend/anti-lycanthrope panic button.
-- **Potency Crystal**: Talisman, free-action activate before a Strike. Affixed weapon becomes a +1 striking weapon for that Strike and until end of turn (+1 attack, 2 damage dice). Use on a Lang Ya Chui crit-fish or a critical-moment jian Strike.
+- **Healing Potion (Minor)** ×1: 1 action (manipulate) — drink to regain 1d8 HP.
+- **Holy Water** ×2: Thrown Strike, 20-ft range — 1d6 spirit + 1 spirit splash. Only damages creatures with the unholy trait. On-theme for Isger's diabolists. *(One vial is flagged as dropped on the VTT — may need recovering.)*
+- ~~**Potency Crystal**~~ — no longer in inventory per the VTT export (presumably used).
 
 ### Armor
 - **Full Plate** (bought from Gug, S10): +6 AC, DEX cap +0, check penalty -3 (negated by Str 19 ≥ Str 18 req), speed -10 ft (reduced to -5 by meeting the Str req, then negated by Fleet +5). Plate group. The new daily-driver armor — +2 AC over the breastplate at the cost of the DEX cap.
 - ~~**Breastplate**~~: +4 AC, DEX cap +1 — kept as backup / for when the lighter armor and DEX cap matter.
 
 ### Worn Magic Items
+<<<<<<< Updated upstream
 - **Ring of Discretion** (invested): Magically conceals worn armor and sheathed weapons — either invisible or illusory ordinary clothes. Dropped the instant you wield an affected weapon (re-engages after sheathing for 1 minute). DC 15 Seek to disbelieve. Frees Bai Jian to walk into civilian spaces in full plate without drawing attention — useful for the Hellbreakers' undercover operations in Isger.
 - **Lifting Belt** (invested; goblin-made gift via Rhokrag, S10): +1 item bonus to Athletics checks to Lift, Force Open, Shove, Trip, and Disarm, and doubles how much you can carry/lift. Directly boosts **Slam Down** and the trip game.
+=======
+- **Bracers of Missile Deflection** (invested): Once per day, Reaction (manipulate) when a ranged weapon attack hits you (not a crit) — +2 circumstance bonus to AC against that attack; if that makes the attack a failure, it misses. Requires being aware of the attack and not Off-Guard.
+- **Ring of Discretion** (invested): Magically conceals worn armor and sheathed weapons — either invisible or illusory ordinary clothes. Dropped the instant you wield an affected weapon (re-engages after sheathing for 1 minute). DC 15 Seek to disbelieve. Frees Bai Jian to walk into civilian spaces in breastplate without drawing attention — useful for the Hellbreakers' undercover operations in Isger.
+>>>>>>> Stashed changes
 
 ### Gear
 - Backpack (holds 4 Bulk, first 2 don't count)
@@ -127,7 +186,11 @@
 - ~~**Harpy's Talon**~~ — consumed in S5 against the Attic Whisperer. Activated persistent bleed on strike, but undead don't bleed. Wasted.
 
 ### Wealth
+<<<<<<< Updated upstream
 - 93 gp, 6 sp (per live Foundry sheet, 2026-06-21)
+=======
+- 109 gp, 11 sp, 8 cp
+>>>>>>> Stashed changes
 
 ## Animal Companion — Ren the Isgeri Boarhound (Young)
 

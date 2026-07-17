@@ -149,7 +149,7 @@ Fighter's Combat Flexibility class feature lets you "rent" a 1st-8th level Fight
 |-------|------|------|--------|
 | 1 | Normal | **Dragon Lore** | Trained in Diplomacy + Intimidation + Dragon Lore |
 | 1 | Paragon | **Natural Ambition → Sudden Charge** | Bonus 1st-level Fighter feat (Sudden Charge) |
-| 3 | Paragon | **Draconic Resistance** | Mental damage resistance = half level. Always-on passive defense. |
+| 3 | Paragon | **General Training → Toughness** ✅ *(respec pick — durability prioritized after party roster change)* | +HP equal to level, recovery DC −1. Draconic Resistance deferred to a later slot. |
 | 5 | Normal | **Traditional Resistances** | +1 status to AC/saves vs occult spells, +2 vs sleep/paralysis |
 | 7 | Paragon | **Breath of the Dragon** | 15-ft cone (or 30-ft line), mental damage, Will save. Starts at 4d4 damage, scales with level. Recharges 1d4 rounds. |
 | 9 | Normal | **Multitalented → Thaumaturge Dedication** | Weapon implement (jian), Glimpse Vulnerability (weakness 2 on Strikes). |
@@ -163,16 +163,16 @@ Fighter's Combat Flexibility class feature lets you "rent" a 1st-8th level Fight
 | Level | Skill Feat | Effect |
 |-------|-----------|--------|
 | 1 (bg) | **No Cause for Alarm** | 3 actions — reduce Frightened on allies in 10-ft emanation via Diplomacy check. From Foreign Aid background. |
-| 2 | **Intimidating Prowess** | Use Str mod for Intimidation checks instead of Cha mod if higher. Net +2 to Demoralize at level 2 (Str +4 vs Cha +2). |
+| 2 | **Battle Medicine** ✅ *(respec pick — party lost members, needed in-combat healing)* | 1 action in-combat heal via Medicine. Pulled forward from the L10 slot, which is now open. |
 | 4 | **Titan Wrestler** | Trip/Grapple creatures up to 2 sizes larger than you. Critical for Crashing Slam vs Large+ bosses. |
 | 6 | **Assurance (Athletics)** | Flat result on Athletics checks. Makes Slam Down's Trip reliable before Crashing Slam's auto-Trip at level 10. |
 | 8 | **Terrified Retreat** | Crit-success on Demoralize → target Flees for 1 round + Frightened 2. Prereq: master Intimidation. |
-| 10 | **Battle Medicine** | Self-heal 1 action via Medicine. Emergency button. |
+| 10 | *Open slot* (Battle Medicine already taken at 2) | Candidates: Intimidating Prowess, Kip Up earlier, or other. |
 | 12 | **Kip Up** | Stand from prone as a free action. Counters enemies who Trip you. |
 | 14 | *Flex — Scare to Death or other* | Flex |
 
 ### Key Skill Increases
-- Level 3: Athletics → expert (enables reliable Slam Down Trip)
+- Level 3: Athletics → expert ✅ (enables reliable Slam Down Trip)
 - Level 5: Intimidation → master (unlocks Terrified Retreat at 8)
 - Level 7: Diplomacy or another → expert
 - Level 9: Athletics → master (scales Trip reliability even further)
@@ -181,12 +181,14 @@ Fighter's Combat Flexibility class feature lets you "rent" a 1st-8th level Fight
 
 | Level | General Feat | Effect |
 |-------|-------------|--------|
-| 3 | **Fleet** | +5 ft speed. 25 ft → 30 ft. Better Sudden Charge reach, better positioning. |
-| 7 | **Toughness** | +1 HP per level retroactively. Durable frontliner. |
+| 3 | **Fleet** ✅ | +5 ft speed. 25 ft → 30 ft. Better Sudden Charge reach, better positioning. |
+| 7 | *Open slot* (Toughness already taken at 3 via General Training) | Candidates: Diehard, Robust Health, Incredible Initiative. |
 | 11 | **Diehard or Robust Health** (TBD) | Diehard: die at dying 5 instead of 4. Robust Health: +level HP per Treat Wounds/Battle Medicine, Battle Medicine cooldown reduced to 1 hour. |
-| 15 | *Flex — Incredible Initiative or other* | Flex |
+| 15 | *Flex — open* | Flex. (Incredible Initiative removed — its +2 circumstance to initiative doesn't stack with Battlefield Surveyor's at L7.) |
 
 ## Stat Progression (Gradual Ability Boost)
+
+> **⚠️ Stale — predates the GM-approved respec** (done after the goblin and hobgoblin players left, to refit Bai Jian for the new party). Actual L1 array after the respec: Str 18, Dex 12, Con 14, Int 10, **Wis 14, Cha 10**. Actual gradual boosts taken so far (per VTT): **L2 Wis → 16, L3 Con → 16** (current array: 18/12/16/10/16/10). The remaining two boosts of the L5 set land at L4 and L5. The table below reflects the old pre-respec plan and needs a replan.
 
 Starting: **Str 18 (+4), Dex 12 (+1), Con 14 (+2), Int 10 (+0), Wis 10 (+0), Cha 14 (+2)**
 
