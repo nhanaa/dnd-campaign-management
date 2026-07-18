@@ -34,7 +34,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
 | `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | Tivael — House Drake Dragonet — Maestro Bard / Sorcerer (Draconic) | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11** |
-| `kingmaker/` | Pathfinder 2e Remastered | Kingmaker (Stolen Lands, River Kingdoms) — Tuesday group | Avor — Hobgoblin (Elfbane) Thief Rogue — dual-wield Aldori duelist | **JOINED 2026-07-07 @ S4** |
+| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINING 2026-07-18 @ Lv12** |
 
 ## How to Help
 
@@ -58,7 +58,7 @@ Your training prior leans heavily toward **legacy (pre-remaster) PF2e** and will
 - **Spell attack modifier and spell DC are ONE unified statistic.** Class features like Expert/Master Spellcaster raise it for ALL spells the character casts, including archetype spells of other traditions. There is no per-tradition DC gap for multiclass casters — archetype casting lags in slots and spell ranks only, never DC.
 - **Remaster oracle (PC2) gets 4 spell slots / 4 spells known per rank** (3 at the newest rank), plus mystery-granted spells and a free mystery feat. Not the legacy 3-per-rank chassis.
 - **Focus spells auto-heighten to half level (round up)** and many were completely redesigned in the remaster (e.g., Ancestral Memories is now a ±1/±2 spell-accuracy swing, not skill training). Read the current text before judging one.
-- **Foundry actor JSON**: a spontaneous caster's heightened-known copies appear as duplicate spell items — the real rank is `system.location.heightenedLevel`, not `system.level.value`. Before flagging a feat as slotless or illegal, check granting feats' full text (e.g., dragonet Covet Hoard grants Hefty Hauler at 1 and Incredible Investiture at 11).
+- **Foundry actor JSON**: a spontaneous caster's heightened-known copies appear as duplicate spell items — the real rank is `system.location.heightenedLevel`, not `system.level.value`. Cantrips also store `system.level.value: 1` — check for the `cantrip` trait before counting a spell as a rank-1 repertoire pick (Needle Darts is a cantrip, not a slotted spell). Before flagging a feat as slotless or illegal, check granting feats' full text (e.g., dragonet Covet Hoard grants Hefty Hauler at 1 and Incredible Investiture at 11).
 - **Archetype spontaneous casters get signature spells**: one from Basic Spellcasting benefits (6th), a second from Expert Spellcasting (12th).
 
 ## Interpretation discipline
