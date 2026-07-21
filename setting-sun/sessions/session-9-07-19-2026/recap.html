@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 9 — Danger Island</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-savatt { border-left-color: var(--blood); }
+.char-alastor { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-savatt { border-left-color: var(--blood); }
+.s-alastor { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Danger Island</h1>
+  <div class="subtitle">Session 9 · Fists of the Ruby Phoenix, Book 1 — a new island, a new team, and six fights before sundown</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-07-19</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 51m</span>
+    <span class="meta-pill">Day 0 — Isle of Bonmou</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:52"></div>
+  <div class="comp-seg comp-rp" style="flex:20"></div>
+  <div class="comp-seg comp-explore" style="flex:15"></div>
+  <div class="comp-seg comp-social" style="flex:9"></div>
+  <div class="comp-seg comp-loot" style="flex:4"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat 52%</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay 20%</span>
+  <span><span class="legend-dot comp-explore"></span>Exploration 15%</span>
+  <span><span class="legend-dot comp-social"></span>Social 9%</span>
+  <span><span class="legend-dot comp-loot"></span>Loot 4%</span>
+</div>
+
+<h2>The Team</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael — "Mingzhu"</div>
+    <div class="char-class">Oracle (Flames) / Bard (Maestro) / Sorcerer (Imperial)</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion</div>
+    <div class="char-player">Continuing</div>
+  </div>
+  <div class="char-card char-savatt">
+    <div class="char-name">Savatt</div>
+    <div class="char-class">Ranger (Precision) — Irorian pilgrim</div>
+    <div class="char-player">Bael's player</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch</div>
+    <div class="char-class">Guardian (Wrestler) — Kholo</div>
+    <div class="char-player">Bargrum's player</div>
+  </div>
+  <div class="char-card char-alastor">
+    <div class="char-name">Alastor</div>
+    <div class="char-class">Monk — departed mid-session</div>
+    <div class="char-player">New player</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-size:14px;margin-top:12px;"><strong>Absent:</strong> Seva (Magus, Laughing Shadow) — joins next session.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>A new adventure path, a new party, and a new island. Six months after the Ebon Tower, phoenix-sealed invitations gathered five strangers onto a magically propelled ship bound for the Isle of Bonmou — the once-a-decade Ruby Phoenix tournament, hosted this year by <strong>Hao Jin</strong> herself, returned from a death everyone had assumed was permanent. Thirty-two hand-picked teams. Only eight advance. And this particular team is the wildcard: not a veteran adventuring company but a set of individual fighters Hao Jin assembled because they were each worthy and each teamless.</p>
+<p>The day began with a handshake and ended with a temple full of dead things. A rival team — <strong>Tino's Toughest</strong> — flagged the party down on the beach and asked for a friendly spar, and it turned into a genuine brawl: three rounds, both sides trading knockdowns, Alastor and Clutch on the sand for the visitors and <strong>Takatorra flattened by Ferrok</strong> at the bell. Partway through, Alastor's player took a bad run of dice, went down, and left the call, Foundry, and the DM's Discord permanently. The remaining four shrugged, agreed the crabs got him, and carried on as a party of four.</p>
+<p>Their assigned base turned out to be a derelict <strong>Temple of Irori</strong> — which meant something particular to Savatt, an Irorian pilgrim who spent the session treating the dungeon as a desecrated holy site rather than a loot pile. "Make it safe for habitation" meant clearing it room by room: two Goliath Spiders whose venom put Ferrok on the floor, four incorporeal ghost monks, a catoblepas rotting in the atrium pond, six sand-elemental monks that sheathed themselves in electricity-resistant glass, a one-shot sutra trap, and finally <strong>Kannitri</strong> — the grief-stricken ghost of an Irorian nun who mistook the party for the raiders who massacred her temple centuries ago.</p>
+<p>Six encounters in one session, three silver feathers recovered, the Phoenix Necklace still missing, and a level promised for next week.</p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act rp">
+  <div class="act-label">Act I · Roleplay · Session Zero and the Voyage</div>
+  <div class="act-card">
+    <h3>Five strangers on a boat</h3>
+    <ul>
+      <li><strong>Cody framed the campaign</strong>: ~20 sessions through the end of 2026, Book 1 extended and Book 2 shortened, and a one-line pitch — <em>"This is the Shonen Anime Tournament campaign."</em> Expect combat to dominate every session.</li>
+      <li><strong>The premise</strong>: Hao Jin returned to Goka, resumed control of her own tournament, cut the field to 32 hand-selected teams, and replaced the opening bracket with a <strong>three-day free-for-all</strong> on the Isle of Bonmou — nicknamed <em>Danger Island</em>. Top eight advance.</li>
+      <li><strong>Alastor</strong> introduced himself as a finalist from last decade's tournament — middle-aged now, estranged from his old team, given one more shot with strangers. <em>"He's reached that ripe old middle age."</em></li>
+      <li><strong>Ferrok</strong> is from Absalom and fights in the <strong>Irorium</strong>; he was travelling to Tian Xia to train early for this very tournament when the Ebon Tower sidetracked him.</li>
+      <li><strong>Savatt</strong> is a pilgrim and wanderer from Janja — unfamous, long-lived, a <strong>follower of Irori</strong>, reading his invitation as a sign pointing toward enlightenment.</li>
+      <li><strong>Sovael</strong> is <strong>Tivael's cousin</strong>, a devotee of Hao Jin who came to meet her and to find the cousin who promised to be here. His verdict on Tivael: <em>"Not as skilled as me, of course."</em> Ferrok's counter: <em>"He did run from a dragon this one time."</em></li>
+      <li><strong>Clutch</strong>'s cousin <strong>Clinch</strong> competed ten years ago on a <em>separate</em> team. Both lost. Clutch has spent the decade since tearing through legal and underground fight circuits — and he is here to compete <em>and</em> to find him.</li>
+      <li><strong>The first dark note</strong>: Ferrok recognised Clutch's face, couldn't place it, then landed on it — <em>"the only Kholo I've seen was a dead one in Ebon Tower."</em> Clutch let it pass without comment.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act social">
+  <div class="act-label">Act II · Social · Landfall and the Ceremony</div>
+  <div class="act-card">
+    <h3>Welcome to Danger Island</h3>
+    <ul>
+      <li><strong>Shifu Shou Noh</strong>, emissary of the tournament and guardian of Hao Jin's legacy, welcomed the 32 teams from the docks as the waves themselves seemed to pause.</li>
+      <li><strong>The task</strong>: each team is assigned a site somewhere on the island, occupied by something dangerous. Clear it, claim the <strong>Phoenix Necklace</strong> and <strong>three silver feathers</strong> hidden there, then acquire <strong>seven more</strong> over three days.</li>
+      <li><strong>Ingdani</strong>, a Tian human woman in her mid-thirties, introduced herself as the team's handler — and was very clear about her limits: <em>"Should you get yourselves in over your heads, my orders are to stand back and, if necessary, watch you all perish."</em></li>
+      <li><strong>Tino's Toughest approached on the beach</strong>: Tino Tong (Tian monk, Irori's symbol tattooed on his chest), Takatorra (a near-seven-foot Tengu, they/them), Ji-yook (a Kitsune fighting bare-clawed), and Yabin the Just (a Nagaji caster).</li>
+      <li><strong>Savatt made the first real connection</strong> — bowing to Tino as a fellow Irorian: <em>"I see you're a follower as well."</em></li>
+      <li><strong>Yabin singled out Ferrok</strong> as an Ebon Tower survivor and asked to discuss the Netherworld later — a scholar's interest in the last campaign.</li>
+      <li><strong>Clutch opened negotiations</strong> by tilting his muzzle to the sky and growling <em>"I must break you"</em> at a man who had just offered a friendly warm-up. Sovael, immediately: <em>"Maybe not that."</em> Takatorra, delighted: <em>"That a threat or a promise, big guy?"</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act III · Combat · The Temple of Irori</div>
+  <div class="act-card">
+    <h3>Make it safe for habitation</h3>
+    <ul>
+      <li>Ingdani led the party inland to a temple wrapped in enormous webs, a <strong>fully grown triceratops</strong> cocooned and writhing against the northern wall. Clutch, dryly: <em>"Anything that keeps a triceratops as a snack is probably going to be pretty big."</em></li>
+      <li>She smiled, leapt several dozen feet backward into the treeline, and called: <em>"Welcome to your base. Your first task is to make it safe for habitation."</em> Two <strong>Goliath Spiders</strong> descended.</li>
+      <li>Inside, <strong>paintings of a faceless man</strong> undergoing trials — wading a river, balancing atop a tree, meditating in a storm. The figure was <strong>Irori</strong>. The tournament had quartered Savatt in a ruined temple to his own god.</li>
+      <li>The training courtyard held a <strong>30-foot pagoda covered in hundreds of carved names</strong> — a memorial for all who served the temple, not only its battle dead — and <strong>four Irorian ghost monks</strong> rose from the sand.</li>
+      <li><strong>Savatt asked to clean the temple rather than strip it</strong>, and pressed the DM on why an Irori site would be haunted — establishing that there had been violence here, and that the scattered weapons marked a battle rather than a ritual.</li>
+      <li>The <strong>dormitory</strong> gave up a holy rune, a Ring of Climbing, a Wand of Cleanse Affliction, and ~400 gp in opals — and the session's best running joke, Clutch turning the ring down on behalf of his dead cousin.</li>
+      <li>The <strong>mess hall</strong> was searched because Clutch insisted people always drop things while eating. He was right: a <strong>+2 Striking Astral Hook Sword</strong>, <strong>Greater Holy Prayer Beads</strong>, a fire-resistance potion, and a vial of endless water.</li>
+      <li>The <strong>atrium pond</strong> — dark, fouled water around a stone platform — opened its eyes. Sovael: <em>"It's the weirdest temple I've ever been to."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act mystery">
+  <div class="act-label">Act IV · Mystery · Feathers and the Broken Rebus</div>
+  <div class="act-card">
+    <h3>"I am sorry. We could not stop them."</h3>
+    <ul>
+      <li><strong>First silver feather</strong> recovered from the sand chamber, after six sand-elemental monks rose out of the coloured dunes to defend it.</li>
+      <li>A <strong>prayer chamber</strong> of candles, bells, and singing bowls held the second — and a <strong>one-shot sutra hazard</strong>: a spectral monk appeared, recited a sutra, filled the room with kinetic energy, and vanished.</li>
+      <li><strong>Savatt recited the sutra back at it</strong>: <em>"One must know the teachings of Irori."</em> The DM confirmed a complex hazard with a single trigger — <em>"Nothing happens. That was the threat."</em></li>
+      <li>A chamber with a <strong>eucalyptus tree</strong> growing up through a ceiling window, an old skeleton slumped at its base, and the third feather among the bark scraps.</li>
+      <li>Beside the skeleton sat <strong>Kannitri</strong>, the ghost of an Irorian monk woman, dazed and staring past them. She stood and said: <em>"I am sorry. We could not stop them."</em></li>
+      <li>Asked what happened, she named them: <strong>"The broken Rebus. They came, they showed no mercy."</strong> Then her eyes cleared into rage — <em>"They've come back!"</em> — and she attacked.</li>
+      <li><strong>Savatt tried to spare her</strong>, delaying his turn to check whether she would respond to his Irorian holy symbol — <em>"maybe we can resolve this without destroying her."</em> The game gave him nothing.</li>
+      <li>She was destroyed, fading <em>"with this horribly sad expression on her face, this guilt-ridden look of anguish"</em> — and the DM noted <strong>her presence is still there. She's gone, but not completely.</strong></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<p style="color:var(--text-dim);font-size:14px;font-style:italic;margin-bottom:20px;">The Foundry export this session lost its roll breakdowns but kept named damage lines. Every figure below is from that log or spoken aloud by the DM — where neither exists, it says so.</p>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 · The Spar vs. Tino's Toughest · 3 rounds · no victor</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sovael → Yabin → Ji-yook → Tino → Savatt → Takatorra → Alastor → Ferrok → Clutch</span></div>
+  <div><span class="stat-label">Terms</span><span class="stat-value">To end of Round 3 · no holding back</span></div>
+  <div><span class="stat-label">Down</span><span class="stat-value">Alastor, Clutch · and Takatorra</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">1 (Alastor)</span></div>
+</div>
+
+<p style="font-size:14px;color:var(--text-dim);">As rolled, Ji-yook was ahead of Yabin; she <strong>Delayed</strong> on her first turn to act after him, and that order held for the rest of the fight.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li><strong>Alastor</strong> triggered <strong>Battle Cry</strong> on his initiative roll, Demoralizing Tino with <em>"a very accurate wolf howl."</em> It landed — Tino was <em>"scared back a little bit"</em> before grinning and taking it head on.</li>
+  <li><strong>Sovael</strong> led with <strong>Courageous Anthem</strong> and <strong>Lingering Composition</strong>, extending it three rounds — the entire spar. Then <strong>Divine Wrath</strong>: Tino succeeded (13); <strong>Takatorra critically failed for 54</strong> into sickened 2 and slowed 1, the biggest hit of the fight.</li>
+  <li><strong>Yabin</strong> retreated and answered with a <strong>rank-6 Arrow Salvo</strong> — Sovael 27, Clutch 21, Ferrok 27. Clutch shield-blocked.</li>
+  <li><strong>Ji-yook</strong> used <strong>Skirmish Strike</strong> to step-and-strike, clawing Clutch and then Ferrok. <strong>Clutch Intercepted</strong> the blow meant for Ferrok and offered him a free 10-ft reposition; Ferrok declined to stay on the offensive.</li>
+  <li><strong>Tino</strong> charged Alastor with a <strong>Flurry of Blows</strong> using <strong>Inner Upheaval</strong>, choosing force — both strikes hit and combined for <strong>34 and 38</strong>.</li>
+  <li><strong>Savatt</strong> ran to Alastor, laid a hand on his back to <em>"align your chi"</em> and <strong>healed him 36</strong>, then Hunt Preyed Takatorra.</li>
+  <li><strong>Alastor</strong> entered <strong>Clinging Shadows Stance</strong> and spent the encounter's <strong>only hero point</strong> on a <strong>Combat Grab</strong> that landed and held Tino, dealing Shadow Grasp damage (19).</li>
+  <li><strong>Ferrok</strong> opened with <strong>Sure Strike</strong> into an <strong>Ignition Spellstrike</strong> on Ji-yook — she <strong>Nimble Dodged</strong> and it missed by a hair. <em>"Now Ferrok's sad."</em></li>
+  <li><strong>Clutch</strong> ran <strong>Defensive Advance</strong> for 28 into Ji-yook — and <strong>Tino answered with Retributive Strike</strong>, the Irori tattoo flaring on <em>his own</em> chest, granting Ji-yook <strong>resistance 11</strong> and cutting the hit to <strong>16</strong>. Clutch followed with a MAP claw strike and <strong>grabbed Ji-yook</strong>, 6 shock splashing onto Takatorra.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li><strong>Sovael</strong> cast a <strong>three-action rank-6 Blazing Bolt</strong> — <strong>Tino 36</strong>, <strong>Takatorra 40</strong>, third ray at Ji-yook wide — and triggered <strong>Foretell Harm</strong> as a free action, accepting <strong>Cursebound</strong> and 1 persistent fire per round from here on. Tino took <strong>12</strong> more at the top of his turn.</li>
+  <li><strong>Yabin</strong> dropped a <strong>Fireball</strong> on four of the party. <strong>Clutch Intercepted for Ferrok</strong>; Ferrok used his <strong>cloak reaction</strong> for +1 to the save and fire resistance 5, taking <strong>23</strong>.</li>
+  <li><strong>Ji-yook</strong>, still grabbed, <strong>feinted Ferrok successfully</strong> and hit him with a <strong>Foxfire Blast</strong> that would have critted him off-guard for <strong>43</strong> — <strong>Emergency Targe</strong> downgraded it to a normal hit.</li>
+  <li><strong>Tino hit Alastor with a second Inner Upheaval for 105</strong> and dropped him. The DM apologised on the spot: <em>"I didn't mean to pick on you that hard, I'm sorry."</em></li>
+  <li><strong>Alastor's player left the call here.</strong> Savatt covered the gap — a <strong>Hunted Shot</strong> at Takatorra for 27 and 13, then hands on Ferrok for <strong>45</strong>.</li>
+  <li><strong>Ferrok</strong> answered with a <strong>Force Fang</strong> and an <strong>Ignition Spellstrike on Takatorra for 76</strong> — the biggest single hit of the fight, plus persistent fire. <em>"Takatorra gets rocked by that one."</em></li>
+  <li><strong>Clutch</strong> used <strong>Group Taunt</strong> via Shielding Taunt on Ji-yook, Tino, and Takatorra, then a MAP Combat Grab to maintain his hold.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+  <li><strong>Sovael</strong> used <strong>Elf Step</strong> to disengage — prompting Ferrok's <em>"You don't look like an elf"</em> — weighed a rank-6 breath weapon, and stood down when the DM warned this was only the first fight of the day, settling for <strong>Electric Arc</strong>.</li>
+  <li><strong>Yabin cast Phantasmal Killer on Clutch.</strong> Clutch <strong>failed</strong> — damage and frightened 2 — but his <strong>Black Pearl Aeon Stone</strong> reflected a copy back on a <strong>+30 counteract</strong>, and <strong>Yabin failed his own spell</strong>, taking 27 and frightened 2. The stone survived its flat check. A 2,000 gp consumable, spent to make an enemy caster share his condition.</li>
+  <li><strong>Tino flanked and dropped Clutch with 64</strong> — <em>"a liver punch that sends you to your knees."</em></li>
+  <li><strong>Savatt</strong> put his bow away and punched Takatorra <em>"right in the beak"</em> for <strong>42</strong>, then kept punching once he learned Clutch would be revived at the bell.</li>
+  <li><strong>Takatorra</strong> used <strong>Blade Barrage</strong> on Savatt — three strikes, two landing, inflicting persistent bleed and off-guard.</li>
+  <li><strong>Ferrok closed the spar by putting Takatorra on the sand</strong>, then landed a second swing on Ji-yook.</li>
+  <li><strong>Ingdani raised her hands</strong>: <em>"That is quite enough. Well fought, everyone."</em></li>
+</ul>
+
+<p style="color:var(--gold);"><strong>Aftermath</strong> — handshakes all round; Ferrok helped Takatorra up, Savatt helped Clutch. Ingdani noted this had been suggested as a <em>sparring</em> match <em>"and yet, it seems martial artists just can't help themselves."</em> Unprompted, the DM told Ferrok that each of Tino's Toughest struck him as <strong>as powerful as Nizca</strong>.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 · Goliath Spiders ×2 · 6 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Savatt → Spider B → Spider A → Sovael → Clutch → Ferrok</span></div>
+  <div><span class="stat-label">Threat</span><span class="stat-value">Goliath Spider Venom — paralysis at the top</span></div>
+  <div><span class="stat-label">Down</span><span class="stat-value">Ferrok (dying 3)</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">1 (Ferrok)</span></div>
+</div>
+<ul>
+  <li>Two gargantuan spiders — big enough that a fully grown triceratops <em>and</em> a pegasus were cocooned in their webs. The venom drove everything: a Fortitude save on every bite <em>and</em> at the end of each spider's turn. <strong>Ferrok made five of these across the fight</strong>, yo-yoing between stages.</li>
+  <li><strong>Savatt</strong> opened by Hunt Preying Spider A and casting <strong>Gravity Weapon</strong> — the campaign's first focus spell — then landing both arrows of a <strong>Hunted Shot</strong> (31, 27). Sovael, baffled: <em>"Wait, how do you do two hits?"</em> Savatt: <em>"It's Legolas. Just Ranger things."</em></li>
+  <li><strong>Ferrok became the venom sponge immediately</strong> — bites for 15, 20, 24, 22, 34, stacking <strong>slowed 1 → slowed 2</strong>. He burned the fight's only hero point on a save, and at one point simply drank a potion while prone: <em>"That's all I can do."</em></li>
+  <li><strong>Sovael ran the whole support engine solo</strong>: Benediction, then <strong>Whispers of Weakness</strong> on Goliath A revealing <strong>no weaknesses and Will as its worst save</strong> — then <strong>Fire Ray</strong>, setting the spider's square alight. <strong>The Shadow Signet was no help here</strong>: it converts spell attacks to Fort or Reflex, and the weak save was Will. What paid was <strong>Whispers' own +2 status bonus</strong>.</li>
+  <li><strong>Ferrok went down</strong> after a <strong>76-damage</strong> bite — unconscious, dying 3, still saving against venom. He raised the idea of his <strong>delaying Aeon Stone</strong> and the DM talked him out of it; <strong>he never used it</strong>. What saved him was <strong>Sovael's rank-3 Heal</strong>. <em>"I'm alive."</em></li>
+  <li><strong>Clutch took a 72-damage nat-20 bite</strong> and chose to eat it rather than break his shield, then waved off Savatt's offer to block for him: <em>"Cody never goes for me. He goes for you all to hit."</em> The DM agreed — <em>"that is the best way to hit a guardian."</em></li>
+  <li><strong>Savatt doubled as second healer</strong> — healer's gloves on Ferrok (27, 30, 45), Guidance on Sovael, and Elf Step to pull out of reach. He and Clutch also caught that <strong>Shielding Taunt and Doctor's Visitation are both flourishes</strong> and can't be combined.</li>
+  <li><strong>Goliath Spider A died</strong> between Clutch's <strong>Snagging Strike crit</strong> (<em>"Single digits"</em>) and Savatt's follow-up — the DM never announced the kill, so <strong>credit is unresolved</strong>.</li>
+  <li><strong>Ferrok killed Goliath Spider B from the floor</strong> — a Battle Medicine on Clutch, then a swing from prone that <strong>critted</strong>: <em>"you just spear this thing from underneath, with this spray of flames and ichor, it dies."</em></li>
+</ul>
+<p style="color:var(--gold);"><strong>Aftermath</strong> — Ferrok stood up and vomited poison, then asked Savatt whether he could be healed by exploding, <em>"I knew a guy that did this once, and it really worked well."</em> Savatt, deadpan: <em>"I could try blocking your meridian so your chi explodes, but I don't think that's healthy."</em></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 3 · Irorian Ghost Monks ×4 · 3 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sovael → Savatt → GM B → Ferrok → GM C → Clutch → GM A → GM D</span></div>
+  <div><span class="stat-label">Profile</span><span class="stat-value">Incorporeal undead · best Will, worst Fortitude</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sovael (C) · Ferrok (B, A) · Clutch (D, unconfirmed)</span></div>
+</div>
+<ul>
+  <li><strong>Sovael opened with a plain Recall Knowledge</strong> — not Whispers of Weakness, so no Cursebound cost — establishing incorporeal undead, best save Will, worst Fortitude.</li>
+  <li><strong>Then the sharp question</strong>: could RK tell him whether they had <em>reactions</em>? The DM ruled they'd had chances and used none, so he could assume not — and <strong>Sovael repositioned freely on that information</strong>.</li>
+  <li><strong>The chain is the tidiest play of the session</strong>: worst save Fortitude → <strong>Divine Wrath</strong> is a Fortitude-save, spirit-damage, <em>enemies-only</em> burst. A triple match against incorporeal undead, needing no ally saves. It <strong>destroyed Ghost Monk C</strong> outright. (<em>"Can undead be sickened?"</em> — <em>"Amazingly, yes."</em>)</li>
+  <li><strong>Savatt</strong> switched his conjured bow to <strong>spirit damage</strong> to bypass incorporeality — <em>"it will glow and shimmer and be a white coloration this time"</em> — then Hunt Preyed Monk C and later crit Monk D.</li>
+  <li><strong>Ferrok</strong> applied <strong>Ghost Oil</strong>, a consumable he'd been carrying unused, and went to work.</li>
+  <li><strong>Clutch's Black Pearl couldn't reflect Frightful Moan</strong> — he read the wording carefully (<em>"It says you're <strong>targeted</strong> by its mental effect"</em>) and the DM confirmed <em>"It's everything."</em> An emanation, not a targeted effect. Correct read, no trigger.</li>
+  <li><strong>Clutch landed a jaw strike crit</strong> — noting his jaws have the bigger die but his claws have deadly — and <strong>Monk D vanishes from the initiative immediately afterward</strong>.</li>
+  <li><strong>Ferrok killed Monk B outright</strong> (<em>"B is down"</em>), then finished <strong>Monk A</strong> with a Guidance-boosted <strong>Ignition Spellstrike</strong>: <em>"This thing evaporates into red mist and is gone."</em></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 4 · Catoblepas · 3 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Ferrok → Catoblepas → Clutch → Savatt → Sovael</span></div>
+  <div><span class="stat-label">Profile</span><span class="stat-value">No weaknesses · lowest save Reflex · Ferocity</span></div>
+  <div><span class="stat-label">Kill</span><span class="stat-value">Ferrok (Force Fang)</span></div>
+  <div><span class="stat-label">Party damage</span><span class="stat-value">Sovael 42 · Savatt 42 · Clutch 64+21 · Ferrok 40+21</span></div>
+</div>
+<ul>
+  <li>A large skeletal-headed beast festering in the atrium pond, its corruption fouling the water. The DM ruled the pond <strong>difficult terrain</strong>, deep enough to require Swimming past one square — which is why <strong>Clutch had to Leap</strong> to engage.</li>
+  <li><strong>Ferrok</strong> strode in and opened with a flaming Spellstrike for <strong>45</strong>. The catoblepas answered with an antler strike (40 into Ferrok), then a <strong>60-ft poison breath cone</strong> that caught the party — <strong>Sovael 42, Savatt 42, Ferrok 21</strong>, at least two of them sickened.</li>
+  <li><strong>Clutch</strong> ran Shielding Taunt, leapt down, and hit it with a <strong>Snagging Strike</strong> to make it off-guard. A later agile <strong>Combat Grab</strong> at full MAP was never adjudicated on tape.</li>
+  <li><strong>Savatt</strong> Hunt Preyed, <strong>missed both Hunted Shot arrows</strong>, and used Battle Medicine.</li>
+  <li><strong>Sovael</strong> ran <strong>Whispers of Weakness</strong> — his second Cursebound stack of the session — revealing <strong>no weaknesses, lowest save Reflex</strong>, then kept <strong>Courageous Anthem</strong> up and threw a <strong>Fire Ray</strong> that missed — he dealt no damage in this fight.</li>
+  <li><strong>Ferrok's Round 2</strong> was a Force Fang into a <strong>Horizon Thunder Sphere Spellstrike</strong>; the DM's only quantitative remark all fight was <em>"not great damage."</em> The catoblepas then <strong>failed its poison-breath recharge</strong>.</li>
+  <li><strong>It critted Ferrok</strong> with an antler and kept hammering. <strong>Clutch Intercepted the jaws strike</strong>; Ferrok <strong>Emergency Targe'd</strong> the follow-up antler.</li>
+  <li><strong>Ferrok's sword strike would have killed it</strong> — but <strong>Ferocity</strong> dropped it to 1 HP and wounded. He finished it with a <strong>Force Fang</strong>, which automatically deals its damage: <em>"Down into the water."</em></li>
+</ul>
+<p style="color:var(--gold);"><strong>Aftermath</strong> — the water began to self-purify, though the DM noted it will take days. Savatt patched everyone up: <em>"How many times can you tangle up your meridians in one day, people?"</em></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 5 · Sand Monks ×6</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Savatt → SM D → SM F → SM E → Sovael → SM C → SM A → Clutch → Ferrok → SM B</span></div>
+  <div><span class="stat-label">Profile</span><span class="stat-value">Elementals · best Fortitude, worst Reflex</span></div>
+  <div><span class="stat-label">Twist</span><span class="stat-value">Glass Armor — triggered by electricity</span></div>
+  <div><span class="stat-label">Big hit</span><span class="stat-value">121 on Monk D (Sovael)</span></div>
+</div>
+<ul>
+  <li>Six monk-shaped elementals rising from piles of coloured sand, guarding the first silver feather. Their tricks: <strong>burrowing</strong> to surface behind you, <strong>blinding sand</strong> on a crit, and <strong>Glass Armor</strong> — AC +2 and resistance to acid, cold, electricity, fire, force, piercing, and slashing.</li>
+  <li><strong>Savatt</strong> opened with a <strong>crit on Monk A for 64</strong>, self-correcting his damage type from spirit to piercing mid-roll.</li>
+  <li><strong>Sand Monk D burrowed twice</strong> to surface behind <strong>Sovael</strong> and crit him for <strong>38</strong> — <strong>blinding him for a round</strong>.</li>
+  <li><strong>Clutch</strong> anchored with Shielding Taunt on three monks at once and Snagging Strikes, at one point stacking so many sources the table lost the thread: <em>"This one's so off-guard."</em> His <strong>shock rune chained electricity into Monk C — which turned to glass on the spot</strong>, a full turn before anything else did.</li>
+  <li><strong>Ferrok then cast Chain Lightning into the room</strong>, knowing the risk and saying so first: <em>"Well, this seems like a bad idea now, but I really want to use this spell. We can take him, right, guys?"</em> It arced through all six for <strong>247 total</strong> (56 each on A, D and E; 28 on B and F; 23 on the already-glassed C) — a genuinely big hit that <strong>also triggered Glass Armor on the remaining five</strong>, since Chain Lightning is <strong>electricity</strong>. Both true at once, and he was cheerful about it: <em>"I was just happy to use it."</em></li>
+  <li><strong>Sovael answered with his own Chain Lightning — the biggest play of the session.</strong> It arced F → E → D → C → B for <strong>321 total</strong>, including a <strong>critical failure on Monk D for 121 damage</strong>, the largest single number of the night.</li>
+  <li><strong>Ferrok fought blind</strong> after a crit at the top of the next round, taking flat checks on every swing and connecting anyway — <em>"So I felt it connect. I'm going to keep swinging"</em> — <strong>killing at least one monk blind</strong>, then casting Glass Shield because <em>"I have no idea what's going on around me."</em></li>
+  <li><strong>Sovael burned Cursebound again for Whispers of Weakness — explicitly for the +2 attack bonus, not the information</strong> (<em>"I just need that bonus"</em>) — then <strong>crit and killed Monk B</strong>: <em>"Double that. Shatters in your glass."</em> A self-inflicted burn converted straight into a kill.</li>
+  <li><strong>Savatt</strong> finished the last one with an arrow that overcame its resistance.</li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 6 · Kannitri, the Irorian Ghost</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Savatt → Sovael → Ferrok → Clutch → Kannitri</span></div>
+  <div><span class="stat-label">Profile</span><span class="stat-value">No weaknesses · weakest save Fortitude</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">One Inch Punch (4d6 void) · Corrupting Gaze · Flurry</span></div>
+  <div><span class="stat-label">Kill</span><span class="stat-value">Ferrok — final 20</span></div>
+</div>
+<ul>
+  <li>She spoke before she fought — apologising for a failure centuries old, naming <strong>"the broken Rebus"</strong> as the ones who came and showed no mercy — then mistook the party for those raiders.</li>
+  <li><strong>Savatt attempted a peaceful resolution first.</strong> He <strong>delayed his turn</strong> so Sovael could act, then spent a Recall Knowledge checking whether she'd respond to his <strong>Irorian holy symbol</strong> — <em>"maybe we can resolve this without destroying her."</em> The DM ruled it changed nothing. He was trying to spare one of his own faith's dead, and the game did not offer him the option.</li>
+  <li><strong>Sovael led with Lingering Composition</strong>, then pulled a <strong>rank-5 Scroll of Synesthesia</strong> from his Retrieval Belt and cast it. <strong>She succeeded</strong> — which grants the <em>same three effects</em> as a failure and differs only in <strong>duration: one round instead of one minute</strong>. The log confirms all of it fired: <strong>Dazzled</strong>, <strong>Clumsy 3</strong>, and <strong>every party member Concealed to her at flat-check DC 5</strong>.</li>
+</ul>
+
+<div style="background:#160f12;border-left:3px solid var(--gold);padding:16px 20px;margin:20px 0;border-radius:4px;">
+<p style="color:var(--gold);font-weight:600;margin-bottom:10px;">The Synesthesia window, turn by turn</p>
+<p style="margin-bottom:8px;">Four turns fell inside it. <strong>Ferrok spent his entire turn on Haste and Arcane Cascade</strong> — <em>"that's all my actions"</em> — and made no attack at all. <strong>Clutch</strong> taunted, ran Defensive Advance, swung and missed. <strong>Kannitri's own three-action One Inch Punch missed</strong> — the DM said outright it was <em>because she was clumsy</em>. <strong>Savatt</strong> wasted one action on a redundant Recall Knowledge the DM shut down, but then <strong>landed both Hunted Shot arrows for 13 and 17</strong>.</p>
+<p>Three of the four turns used the window. Ferrok's was the one that didn't.</p>
+</div>
+
+<ul>
+  <li><strong>Sovael's Whispers of Weakness</strong> identified <strong>Fortitude</strong> as her weakest save, and he immediately followed with <strong>Spirit Blast</strong> — 16d6 spirit, basic Fortitude, DC 31. The sequencing was his sharpest play of the fight; the dice were not. <strong>She succeeded on the save <em>and</em> he rolled 34 on 16d6</strong> (average 56), so it landed for only <strong>17</strong>.</li>
+  <li><strong>Ferrok</strong> opened his real offense with a <strong>Blink Charge</strong> teleport-strike (22), then cycled Spellstrikes including a <strong>Disintegrate Spellstrike</strong> that missed. He finished the night <strong>five attacks missed</strong> and out of hero points: <em>"I'm not having luck. Unfortunate rolls today."</em></li>
+  <li><strong>Clutch</strong> tried repeatedly to <strong>trip</strong> her and failed, then went back for more on principle: <em>"Must go for Redemption."</em> His <strong>Astral rune</strong> let him <strong>Combat Grab a ghost</strong>. He correctly declined one Intercept after working out that moving would break the grab — <strong>but made another, eating 32 for Savatt</strong>, and took 60 more before the end.</li>
+  <li><strong>Corrupting Gaze stupefied Savatt for a full minute</strong>, breaking his spellcasting for the rest of the fight — flat check after flat check failing to cast Shield. He stayed on his bow and kept hitting, including a <strong>nat 20 for 28</strong>. <em>"I keep trying to pray, but I fumble my words every time."</em></li>
+  <li><strong>Sovael kept the party standing</strong> — <strong>Ferrok took 101 through a 7-point shield block</strong>, and Sovael answered with a <strong>rank-5 Heal for 67</strong>. His <strong>Demoralize failed</strong>. Late on he burned Cursebound once more, then landed a <strong>Telekinetic Projectile for 16</strong>: <em>"Hey, finally."</em></li>
+  <li><strong>Ferrok stepped forward to flank and swung</strong> for the last <strong>20</strong>. She faded with <em>"this horribly sad expression on her face, this guilt-ridden look of anguish."</em></li>
+</ul>
+<p style="color:var(--gold);"><strong>Aftermath</strong> — the DM noted <strong>her presence is still in the room. "She's gone, but not completely."</strong> The skeleton at the tree's base remains unexamined.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Burning Pearl</h4>
+<p style="color:var(--text-dim);font-size:14px;margin-bottom:12px;">The team's only healer, only buffer, only debuffer, only counteract, and its Recall Knowledge lane — running all of it at once, all session, while on fire.</p>
+<ul>
+  <li><strong>He took the burn five times.</strong> Every Whispers of Weakness costs a Cursebound stack and a point of persistent fire per round; he paid it in five of six fights, plus a sixth stack from Foretell Harm in the spar. A Tiny dragonet hovering over the scrum, setting himself alight to tell everyone else where to hit.</li>
+  <li><strong>He is the reason the ghost monk fight was clean</strong> — RK established worst-save Fortitude, he got a ruling that the monks had no reactions, repositioned freely on it, and dropped a <strong>Divine Wrath</strong> (Fortitude, spirit, enemies-only) that destroyed Monk C outright. Identify, match the save, pick the ally-safe burst.</li>
+  <li><strong>His best mechanical read was recognising a dead end</strong> — Whispers revealed <em>Will</em> on the spider, which meant his Shadow Signet (Fort/Reflex only) was useless. He took the <strong>+2 status bonus</strong> instead and landed Fire Ray anyway.</li>
+  <li><strong>He converted a self-inflicted burn straight into a kill</strong> on the sand monks — Cursebound purely for the attack bonus, then a crit: <em>"Double that. Shatters in your glass."</em></li>
+  <li><strong>He kept Ferrok alive twice</strong> — a rank-3 Heal off the floor mid-spider-fight, and a rank-5 Heal for <strong>67</strong> after Ferrok ate 101 through a shield block.</li>
+  <li><strong>In character he is a delight and slightly a menace</strong> — a devotee who came to meet Hao Jin, a cousin who introduced Tivael to the table purely to rank himself above him, a tiny dragon explaining Elf Step with <em>"I had a lot of elf best friends growing up,"</em> and the designated straight man to Clutch: <em>"Maybe not that."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok the Unyielding · the Load-Bearing Minotaur</h4>
+<p style="color:var(--text-dim);font-size:14px;margin-bottom:12px;">The only survivor of the old campaign, and the party's lightning rod exactly as he always was — and the session's kill leader.</p>
+<ul>
+  <li><strong>Everything in the temple went for him</strong>: the spiders put him unconscious and dying, the catoblepas critted him, the sand monks blinded him, Kannitri hit him for 101 through a shield block.</li>
+  <li><strong>Kills</strong>: Takatorra in the spar, Goliath Spider B, Ghost Monks A and B, the catoblepas, at least one sand monk while blind, and Kannitri.</li>
+  <li><strong>He kept fighting from the floor</strong> — unconscious and dying 3 from venom, he came back up and killed Spider B with a <strong>crit from prone</strong>.</li>
+  <li><strong>He fought an entire stretch blind</strong>, eating flat checks on every swing, connecting anyway, then casting Glass Shield because <em>"I have no idea what's going on around me."</em></li>
+  <li><strong>His most knowingly reckless call paid off anyway</strong> — Chain Lightning into a room of monks whose armour triggers on electricity. He flagged the risk first, hit all six for <strong>247 total</strong>, and handed the survivors resistance in the same breath. <em>"I was just happy to use it."</em></li>
+  <li><strong>He carries the campaign's memory</strong> — the only one who can speak to the Ebon Tower, the one Yabin wanted to interrogate about it, and the one who told Clutch, without quite realising, that the only Kholo he'd ever seen was a dead one in that tower.</li>
+  <li><strong>He was the most gracious person at the table</strong> about Alastor's exit — <em>"low rolls are part of the game, it happens"</em> — and then wrote the eulogy anyway.</li>
+</ul>
+</div>
+
+<div class="spotlight s-savatt">
+<h4>Savatt · the Pilgrim Come Home</h4>
+<p style="color:var(--text-dim);font-size:14px;margin-bottom:12px;">A wanderer who is not famous and has never competed — and then the tournament quartered him in a ruined temple to his own god.</p>
+<ul>
+  <li><strong>He greeted Tino as a fellow Irorian</strong> before a punch was thrown — a bow and <em>"I see you're a follower as well"</em> — the first real connection anyone on either team made.</li>
+  <li><strong>He wanted to clean the temple, not loot it.</strong> He asked why an Irori site would be haunted, read the hundreds of names on the memorial pagoda looking for ones he knew, and asked whether monks had been massacred here.</li>
+  <li><strong>He recited the sutra back at the trap</strong>: <em>"One must know the teachings of Irori."</em></li>
+  <li><strong>He tried to spare Kannitri</strong> — delaying his turn and spending an action checking whether she'd respond to his holy symbol, <em>"maybe we can resolve this without destroying her."</em> The game gave him nothing, and he had to help kill one of his own faith's dead.</li>
+  <li><strong>Mechanically the party's second healer and its most reliable gun</strong> — Gravity Weapon, Hunted Shot doubles, healer's gloves, Battle Medicine, Guidance, and a bow he re-tuned to spirit damage on the spot to hurt incorporeal monks. Stupefied for a full minute, he shrugged and kept shooting — nat 20 for 28.</li>
+  <li><strong>His register is entirely his own</strong> — chi, meridians, and acupuncture as combat medicine: <em>"Do not worry, I will align your chi."</em> · <em>"How many times can you tangle up your meridians in one day, people?"</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · Ten Years Later</h4>
+<p style="color:var(--text-dim);font-size:14px;margin-bottom:12px;">Came to this island for two reasons: to win, and to find Clinch. Everything funny about him this session sits directly on top of that.</p>
+<ul>
+  <li><strong>He is the reason the party had a front line</strong> — Group and Shielding Taunt on three enemies at a time, Snagging Strikes feeding everyone else off-guard, Combat Grabs on a spider, a ghost, and a Kitsune, and Intercept after Intercept including a 72-damage nat-20 bite he chose to eat rather than break his shield.</li>
+  <li><strong>His best moment was rules mastery, not damage</strong> — reading Black Pearl's wording closely enough to know it wouldn't reflect an emanation, and catching that Shielding Taunt and Doctor's Visitation are both flourishes.</li>
+  <li><strong>He reflected Phantasmal Killer back at Yabin the Just.</strong> He failed the save himself — damage and frightened 2 — but the +30 counteract sent a copy back and <em>Yabin failed his own spell</em>. A 2,000 gp consumable spent to make an enemy caster share his condition.</li>
+  <li><strong>The Ring of Climbing bit is the session's best sustained joke and its saddest.</strong> He turned the ring down on behalf of a dead man — <em>"Clinch can't use it just yet, but maybe someday in the future"</em> — and when the table pushed back, doubled down: <em>"Not with that attitude. He's pretty determined, you never know."</em></li>
+  <li><strong>And after losing the spar, the mask came off</strong>: <em>"I thought after 10 years I'd gotten stronger, but it seems I still need to keep growing."</em> That's the whole character in one sentence.</li>
+</ul>
+</div>
+
+<div class="spotlight s-alastor">
+<h4>Alastor · One More Shot</h4>
+<p style="color:var(--text-dim);font-size:14px;margin-bottom:12px;">Present for a little over an hour. A finalist from last decade's tournament, past his peak, given a place with strangers on the strength of an old result.</p>
+<ul>
+  <li><strong>He got the session's first good beat</strong> — Battle Cry on the initiative roll, a Demoralize on Tino delivered as <em>"a very accurate wolf howl,"</em> and the DM narrating Tino as genuinely rattled before he shook it off.</li>
+  <li><strong>He spent the encounter's only hero point</strong>, on a Combat Grab into Clinging Shadows Stance that landed and held Tino.</li>
+  <li><strong>Tino's second Inner Upheaval hit him for 105</strong> and dropped him. He left the call, Foundry, and the DM's Discord shortly after; the DM confirmed after the break that he will not be returning.</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Silver Feather ×3</div>
+    <div class="loot-source">Sand chamber · prayer chamber · eucalyptus chamber</div>
+    <div class="loot-note">Tournament requirement — 3 of 10</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Holy Prayer Beads</div>
+    <div class="loot-source">Mess hall</div>
+    <div class="loot-note">→ Sovael. <em>"I am holy."</em></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+2 Striking Astral Hook Sword</div>
+    <div class="loot-source">Mess hall</div>
+    <div class="loot-note">Astral rune — affects incorporeal targets. Claimant never stated aloud, though Clutch uses "the astral rune" against Kannitri</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Wand of Cleanse Affliction (5th)</div>
+    <div class="loot-source">Dormitory</div>
+    <div class="loot-note">→ Sovael. Arrived one fight after the spider venom that nearly killed Ferrok</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Ring of Climbing</div>
+    <div class="loot-source">Dormitory</div>
+    <div class="loot-note">Unclaimed — offered to a dead man</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Holy Rune</div>
+    <div class="loot-source">Dormitory</div>
+    <div class="loot-note">Unassigned</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Moderate Potion of Fire Resistance</div>
+    <div class="loot-source">Mess hall</div>
+    <div class="loot-note">—</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Vial of Endless Water</div>
+    <div class="loot-source">Mess hall</div>
+    <div class="loot-note">—</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Pouch of Opals</div>
+    <div class="loot-source">Dormitory</div>
+    <div class="loot-note">~400 gp</div>
+  </div>
+</div>
+<div class="xp-banner">Consumed · Scroll of Synesthesia (rank 5, 1 of 2) · Ghost Oil · 1 healing potion · 2 hero points all session · <strong>Phoenix Necklace still missing</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Clutch</strong>: "Clutch will step forward, tilt his muzzle towards the sky, but look down towards them, whoever's in front, and say: <em>I must break you.</em>"<br>
+  <strong>Sovael</strong>: "Maybe not that."
+  <span class="attribution">The party's first-ever diplomatic contact with a rival team, conducted entirely by a Kholo quoting Ivan Drago at a man who asked for a friendly warm-up — and immediately walked back by the team's face.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Clutch</strong>: "He's got to climb out of his grave, you know, so he needs the climb speed."
+  <span class="attribution">Turning down the Ring of Climbing on behalf of his dead cousin Clinch, whom he came to this island to find.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Clutch</strong>: "I thought after 10 years I'd gotten stronger, but it seems I still need to keep growing."
+  <span class="attribution">After losing the spar. Ten years of underground fight circuits, and the mask comes off in one sentence.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Savatt</strong>: "I keep trying to pray, but I fumble my words every time."
+  <span class="attribution">Stupefied for a full minute by Kannitri's Corrupting Gaze, failing flat check after flat check trying to cast Shield.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Savatt</strong>: "I could try blocking your meridian so your chi explodes, but I don't think that's healthy."
+  <span class="attribution">To Ferrok, who had just asked whether he could be healed by exploding, because he knew a guy who had good results with it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Savatt</strong>: "Savatt bows. I see you're a follower as well."
+  <span class="attribution">Greeting Tino before a punch was thrown — the first real connection anyone on either team made, and the opening note of a session that put him in his own god's ruined temple.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Sovael</strong>: "I had a lot of elf best friends growing up, you see. I learned a lot from them."
+  <span class="attribution">Ferrok, watching a tiny dragonet use Elf Step: "You don't look like an elf."</span>
+</blockquote>
+
+<blockquote>
+  <strong>Sovael</strong>: "Well, I haven't been cursed yet, so it's time to be cursed."
+  <span class="attribution">Reaching into Cursebound for another Whispers of Weakness — the fifth of the session — cheerfully setting himself on fire to do it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "We can assume the crabs ate him on the beach then, right?"
+  <span class="attribution">The morning after Alastor's exit — the party's entire eulogy, delivered and accepted.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ferrok</strong>: "Well, this seems like a bad idea now, but I really want to use this spell. We can take him, right, guys?"
+  <span class="attribution">Immediately before casting an electricity spell into a room of monks whose armour triggers on electricity. Verdict afterward: "I was just happy to use it."</span>
+</blockquote>
+
+<blockquote>
+  <strong>Alastor</strong>: "I just let out a very accurate wolf howl at Tino as we're starting."
+  <span class="attribution">His Battle Cry Demoralize — and it worked; the DM narrated Tino as visibly rattled before he grinned and took it head on.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Alastor</strong>: "He's reached that ripe old middle age."
+  <span class="attribution">Introducing himself: a finalist from last decade's tournament, ten years past his peak, given one more shot with a team of strangers.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Ingdani (DM)</strong>: "Should you get yourselves in over your heads, my orders are to stand back and, if necessary, watch you all perish."
+  <span class="attribution">The handler explaining, pleasantly, exactly how much help she will be.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Phoenix Necklace is still unfound.</strong> Ingdani said it's somewhere in the temple, and the party <em>must</em> have it to compete. Several rooms remain unexplored.</li>
+  <li><strong>Seven more silver feathers.</strong> Three secured, ten required — and the other 31 teams are hunting the same feathers, with taking them by force explicitly allowed.</li>
+  <li><strong>"The broken Rebus."</strong> Kannitri named them as the ones who massacred her temple and showed no mercy. Unexplained — and a single-occurrence proper noun worth confirming the spelling of with Cody before it becomes canon.</li>
+  <li><strong>She's gone, but not completely.</strong> Kannitri's presence lingers in the eucalyptus chamber, and the skeleton at the tree's base was never examined.</li>
+  <li><strong>Tino's Toughest are a friendly rivalry now</strong> — handshakes, a helping hand, and an explicit hope for a rematch as an official bout.</li>
+  <li><strong>Yabin the Just wants to talk to Ferrok</strong> about the Netherworld and how its energies bled into Golarion.</li>
+  <li><strong>Clutch is still looking for Clinch.</strong> Ferrok has already seen a dead Kholo in the Ebon Tower and can't rule out the connection.</li>
+  <li><strong>Sovael is still looking for Tivael</strong>, who said he'd be at the tournament and hasn't appeared — and still wants to meet Hao Jin.</li>
+  <li><strong>Seva joins next session</strong>; the DM may or may not replace the sixth slot.</li>
+  <li><strong>Level-up next session</strong>, partway through — and the preliminary round proper begins.</li>
+</ul>
+</div>
+
+</div>
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li>Introduced himself as <strong>Tivael's cousin</strong> and a devotee of <strong>Hao Jin</strong>. Came to meet her; came to find Tivael. Neither has happened.</li>
+  <li><strong>Spar vs. Tino's Toughest</strong>: Courageous Anthem + <strong>Lingering Composition</strong> (3 rounds — the whole fight). <strong>Divine Wrath</strong> — Takatorra <strong>critically failed</strong> for <strong>54</strong> into sickened 2 / slowed 1; Tino succeeded. <strong>Three-action rank-6 Blazing Bolt</strong> — Tino 36, Takatorra 40, third ray at Ji-yook missed — with <strong>Foretell Harm</strong> free-actioned on top (12 more to Tino). Went Cursebound for it. <strong>Elf Step</strong> to disengage; <strong>Electric Arc</strong> in the last round after standing down from a rank-6 breath weapon on the DM's warning.</li>
+  <li><strong>Goliath Spiders</strong>: Benediction, <strong>Whispers of Weakness</strong> on Goliath A (no weaknesses, worst save <strong>Will</strong>), <strong>Fire Ray</strong>, <strong>rank-3 Heal</strong> to bring Ferrok up off the floor, Courageous Anthem, <strong>Ancestral Memories</strong> (+2), Fear.</li>
+  <li><strong>Ghost Monks</strong>: plain <strong>Recall Knowledge</strong> (incorporeal undead, best Will / worst Fort) — no Cursebound cost. Got the DM to rule they had no reactions, then <strong>Divine Wrath destroyed Ghost Monk C</strong>.</li>
+  <li><strong>Catoblepas</strong>: Whispers of Weakness — no weaknesses, lowest save <strong>Reflex</strong>. Kept Courageous Anthem up; <strong>Fire Ray missed</strong>. Dealt no damage this fight. Took <strong>42</strong> from the poison breath cone.</li>
+  <li><strong>Sand Monks</strong>: crit and <strong>blinded</strong> for a round by a burrowing monk (38). <strong>Chain Lightning</strong> arcing F → E → D → C → B for <strong>321 total</strong>, including a <strong>crit-failed 121 on Monk D</strong>. Another Whispers of Weakness — taken purely for the <strong>+2 attack bonus</strong> — into a <strong>crit that killed Monk B</strong>.</li>
+  <li><strong>Kannitri</strong>: Lingering Composition, then <strong>burned a rank-5 Scroll of Synesthesia</strong>. She succeeded → one round instead of one minute. <strong>Whispers of Weakness</strong> (weakest save Fortitude) immediately into <strong>Spirit Blast</strong> (16d6, DC 31) — she succeeded <em>and</em> the dice gave 34 of a possible 96, so only <strong>17</strong> landed. <strong>Rank-5 Heal on Ferrok for 67.</strong> Demoralize <strong>failed</strong>. A final Whispers, then <strong>Telekinetic Projectile for 16</strong>.</li>
+  <li>Took the <strong>Greater Holy Prayer Beads</strong> and the <strong>Wand of Cleanse Affliction</strong>.</li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>Tivael said he would be here and is not.</strong> Ferrok's last information is that the old party disbanded and Tivael went off alone. Nobody has seen him since.</li>
+  <li><strong>The Wand of Cleanse Affliction arrived one fight too late.</strong> It would have ended the Goliath Spider venom that nearly killed Ferrok. It is in hand now — remember it exists before the next poison enemy.</li>
+  <li><strong>One Scroll of Synesthesia remains.</strong></li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Synesthesia's success/failure split is about duration, not effects.</strong> This is the correction worth internalising: a <em>success</em> still applies <strong>Dazzled, Clumsy 3, and the concealment rider</strong> (everything Concealed to her, flat check DC 5) — it just lasts <strong>one round instead of one minute</strong>. The scroll wasn't wasted on a weak outcome; it bought a full-strength round. The lesson is about the <em>clock</em>, not the effect.</li>
+  <li><strong>The window was mostly used, and the one miss was Ferrok's.</strong> Three of the four turns inside it did something: Clutch swung (missed), Kannitri's One Inch Punch <strong>missed because of the Clumsy</strong>, and Savatt landed both arrows for 13 and 17. <strong>Ferrok spent the entire round on Haste and Arcane Cascade and never attacked.</strong> That's the actual complaint — and it's a communication problem, not a Ferrok problem. <strong>When a consumable buys a window, say out loud what it bought and how long it lasts before the next person acts.</strong> This party has never fought together before and cannot yet read each other's setups.</li>
+  <li><strong>Whispers of Weakness cost six Cursebound stacks this session</strong> (five Whispers + one Foretell Harm), each a point of persistent fire per round. It does <strong>not</strong> compete for the focus pool — it's a Cursebound action, not a focus spell — so the real constraint is HP and the fire-resistance suppression, not actions. At 151 HP that's affordable, but six is a lot more than it felt like in the moment. Refocusing between rooms is for Lingering Composition and Fire Ray; <strong>the Cursebound bill is separate and paid in blood.</strong></li>
+  <li><strong>Whispers is worth taking for the +2 alone.</strong> The sand monk kill proves it: no useful information, just the attack bonus, straight into a crit. That reframes it from an RK action to an attack buff that happens to also scout.</li>
+  <li><strong>Divine Wrath is the best spell in the book for this party.</strong> Enemies-only means no friendly-fire discipline with four melee bodies in the room. It killed a ghost monk outright and needed no ally saves. Lead with it over Fireball once the party has closed.</li>
+  <li><strong>Match the spell to the revealed save — and check the item actually helps.</strong> The spider taught this the hard way: Whispers said <em>Will</em>, and the Shadow Signet only converts to Fort or Reflex, so the Signet did nothing and the <strong>+2 status bonus</strong> was the real payload. Against Kannitri it went right: Fortitude revealed → Spirit Blast (Fortitude) one action later.</li>
+  <li><strong>The sole-healer problem is real but survivable.</strong> Savatt is a genuine second healer (healer's gloves, Battle Medicine, Guidance) and Ferrok has Battle Medicine too — better coverage than the dynamics predicted. <strong>Ask whether Seva brings any.</strong></li>
+  <li><strong>Ferrok is the aggro magnet exactly as before</strong> — down once, 101 through a shield block, blinded, critted, poisoned. Beseech the Sphinx and Vital Beacon should default to him.</li>
+  <li><strong>Being blinded by a sand monk crit was a warning.</strong> A Tiny caster hovering near the scrum still eats crits. Permanent flight and Elf Step exist; use them earlier.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Where is the Phoenix Necklace?</strong> The team cannot compete without it and several rooms are unexplored.</li>
+  <li><strong>What is "the broken Rebus"?</strong> Kannitri named them as the ones who massacred the temple. Nobody asked a follow-up.</li>
+  <li><strong>What is left of her?</strong> The DM said she's "gone, but not completely," and the skeleton under the eucalyptus was never examined.</li>
+  <li><strong>Is Tivael on this island at all?</strong></li>
+  <li><strong>Does the party get a sixth member</strong>, and does Seva bring any healing?</li>
+  <li><strong>What does the preliminary round actually look like</strong> once feathers can be taken from other teams by force?</li>
+</ul>
+
+</section>
+</body>
+</html>

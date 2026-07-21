@@ -1,217 +1,221 @@
-# Character Sheet — Tivael
+# Character Sheet — Sovael
+
+> **Replaces Tivael** as of the Fists of the Ruby Phoenix transition (level 11, 2026-07). Tivael's retirement and Sovael's arrival are covered in `world.md`.
 
 ## Identity
 
-- **Name**: Tivael
+- **Name**: Sovael (stage name **"Mingzhu" — The Flaming Pearl**)
 - **Ancestry**: Dragonet
-- **Heritage**: House Drake
-- **Background**: Student of the Ancients
-- **Class**: Bard (Maestro + Enigma via Multifarious Muse)
-- **Archetype**: Sorcerer (Draconic — Rune Dragon, Arcane tradition). Arcane chosen for: force damage on Flurry of Claws, Eldritch Researcher path to Expert Sorcerer Spellcasting, and full access to Grease/Enlarge/Hidebound (all arcane/primal).
-- **Level**: 8
+- **Heritage**: Aiuvarin (versatile) → **Pearl Dragonet** regained via Ascended Dragonet Heritage (L7)
+- **Background**: Ruby Phoenix Fanatic
+- **Class**: **Oracle (Flames mystery)**
+- **Archetypes**: Bard (Maestro) + Sorcerer (Imperial bloodline) — both via Free Archetype
+- **Level**: 11
 - **Size**: Tiny
-- **Speed**: 20 ft base (+10 ft from Wand of Tailwind daily = 30 ft effective)
-- **Deity**: Desna (Song of the Spheres)
-- **Campaign**: Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix)
-- **System**: Pathfinder 2e Remastered
-- **Age**: 32
-- **Gender**: He/him
-- **Languages**: Common, Draconic, Azlanti, Necril, Aklo, Shadowtongue, Diabolic
+- **Speed**: 20 ft; **fly 25 ft at all times** (Into the Sky)
+- **Deity**: **Anras** (Mother Sky — astronomy, prediction, weather)
+- **Relation**: Tivael's cousin. Took Tivael's phoenix-sealed tournament invitation.
+- **Age**: 32 · **Gender**: He/him
+- **Languages**: Tien (self-taught, from imported tournament fight-bills) — ⚠️ *Foundry lists only Tien; confirm Common/Draconic from ancestry*
 
 ## Ability Scores
 
 | STR | DEX | CON | INT | WIS | CHA |
 |-----|-----|-----|-----|-----|-----|
-| 10 (+0) | 16 (+3) | 16 (+3) | 14 (+2) | 14 (+2) | 18 (+4) |
+| 10 (+0) | 16 (+3) | 18 (+4) | 12 (+1) | 16 (+3) | 20 (+5) |
 
 ## Defenses
 
-- **AC**: 26 (10 + 10 trained unarmored + 3 DEX cap + 2 Scales of Steel + 1 EC potency)
-- **Max HP**: 88
+- **AC 30** — 10 + 11 level + 2 trained unarmored + 3 DEX (capped by Scales of Steel) + 2 Scales of Steel + 2 potency rune *(the feat explicitly stacks with armor potency runes)*
+- **HP 151** — 8 ancestry + 88 class + 44 CON + 11 Toughness
 
-| Save | Prof | Modifier |
-|------|------|----------|
-| Fortitude | Expert (Canny Acumen) | +15 |
-| Reflex | Expert | +15 |
-| Will | Expert | +14 |
+| Save | Proficiency | Modifier |
+|------|-------------|----------|
+| Fortitude | Expert (Magical Fortitude, L5) | **+20** |
+| Reflex | Expert (Canny Acumen, L11) | **+19** |
+| Will | **Master** (Mysterious Resolve, L7) | **+21** |
 
-- **Perception**: Expert (+14, +16 with Incredible Initiative for initiative)
-- **Vision**: Darkvision
+- **Perception**: Expert (Oracular Senses, L11) — **+18**, **+20 initiative** (Incredible Initiative)
+- **Vision**: Low-light (Aiuvarin)
 
 ### Defensive Layers
-- Airborne via Take Wing (1A, 25 ft fly, must land)
-- Cloak of Illusions (1/day Invisibility, 2A)
-- Wooden Double (reaction on crit, Hardness 5 + 20 HP block)
-- Hidebound (Sorcerer reaction, resistance 5 physical to ally or self)
-- Shield cantrip (1A, +1 AC, Hardness 10 block at rank 4)
-- Bounce Away (reaction, bludgeoning resistance = level + reposition)
-- Deathless rune (1/day, reduce Wounded or Doomed by 1)
-- Warp Step (2A escape cantrip, double Stride)
-- Sanctuary (2A, enemies must save to target you)
+- **Bounce Away** (Pearl Dragonet reaction — bludgeoning resistance + reposition)
+- **Elf Step** (1 action, Step 5 ft twice — disengage from reactive strike)
+- Permanent flight (Into the Sky) — vertical disengage
+- Shield cantrip (rank 6 block)
+- **Mind of Menace** precast → Fight with Fear reaction (enemy mental effect → Will vs DC 30 or Frightened 2; you get +2 vs the triggering effect, immune on their crit fail)
+- Martyr's Intervention (reaction — redirect a lethal hit off an ally onto yourself; unusable while Wounded)
+- +1 Resilient rune (already counted in saves)
 
-## Heritage Features
+## Spellcasting Statistics
 
-- **House Drake**: Jaws count as silver. +1 circumstance bonus to damage vs fiends. Diabolic language.
-- **Dragonet Breath (House Drake)**: 15-ft cone (20-ft with Inhale), mental damage counting as silver, Will save. Recharge 1d4 rounds.
+| Tradition | Spell DC | Spell Attack | Source |
+|-----------|----------|--------------|--------|
+| **Divine** (Oracle) | **31** | **+21** | Expert Spellcaster (L7), CHA 20, +1 Ring of Divine Might |
+| **Occult** (Bard archetype) | **31** | **+21** | +1 Ring of Occult Might |
+| **Arcane** (Sorcerer archetype) | **31** | **+21** | +1 Ring of Arcane Might |
 
-## Class Features
+> Spellcasting proficiency is **one character-wide statistic** — the archetypes do **not** have a lagging DC. **All three traditions carry a Ring of Magic Might (+1 item, table homebrew), so DC 31 / attack +21 across the board.**
+>
+> Under Courageous Anthem, add **+1 status** to spell attack rolls.
 
-- **Maestro Muse**: Lingering Composition (focus spell), Courageous Anthem (composition cantrip), Soothe (bonus repertoire spell)
-- **Enigma Muse** (via Multifarious Muse): Bardic Lore (RK on any topic)
-- **Composition Cantrips**: Courageous Anthem, Rallying Anthem, Dirge of Doom
-- **Focus Spells**: Lingering Composition, Counter Performance
-- **Signature Spells**: Phantom Pain (R1), Worm's Repast (R2), Wooden Double (R3), Biting Words (R4)
-- **Expert Spellcaster** (gained level 7): Expert in occult spell attack/DC
+## Class Features (Oracle — Flames)
 
-## Archetype — Sorcerer (Draconic, Rune Dragon)
+- **Flames Mystery** — grants **Ignition** (cantrip), **Breathe Fire** (R1), **Blazing Bolt** (R2), **Fireball** (R3) as bonus repertoire spells; mystery skill Acrobatics; bonus feat Foretell Harm
+- **Curse of Engulfing Flames** — while Cursebound, take persistent fire = cursebound value, and **your own fire immunity/resistance is suppressed**. Subsides when you begin Refocusing or fall unconscious.
+- **Major Curse** (L11), **Divine Access** (L11), **Oracular Senses** (L11), **Weapon Expertise** (L5), **Magical Fortitude** (L5), **Expert Spellcaster** (L7), **Mysterious Resolve** (L7 — Will master)
+- **Signature Spells** — one per rank, freely heightened
+- **Divine Access (Anras)**: adds **Chain Lightning** to the divine list/repertoire at no cost to normal picks. ⚠️ **Anras grants exactly three cleric spells — Thunderstrike (R1), Wall of Wind (R3), Chain Lightning (R6) — and Divine Access can only pick from those three.** It is NOT a free pick of any divine spell. Each is added at **its own rank**, so Chain Lightning (R6) was the only high-value one and is already claimed. **Thunderstrike and Wall of Wind remain claimable for free, but only as R1/R3 entries** — the **R5 Thunderstrike in the repertoire was correctly bought with a spell-known slot and must stay** (a Divine Access R1 copy cannot be cast at R5).
 
-- **Tradition**: Arcane
-- **Bloodline**: Draconic (Rune Dragon) — force damage, Arcana skill
-- **Basic Sorcerer Spellcasting**: 1 rank 1 + 1 rank 2 + 1 rank 3 slot (arcane spontaneous; rank-3 slot unlocked at level 8). +1 rank-1 slot from Bloodline Breadth.
-- **Basic Bloodline Spell**: Flurry of Claws (focus spell, 2 targets, slashing + force)
-- **Blood Magic**: +1 status bonus to AC for 1 round on bloodline spell cast
-- **Focus Points**: 3 (Lingering Composition + Counter Performance + Flurry of Claws)
+## Feats
 
-## Ancestry Feats
-
+### Ancestry (Ancestry Paragon — 1, 1, 3, 5, 7, 9, 11)
 | Level | Feat |
 |-------|------|
-| 1 | Scales of Steel (+2 item AC unarmored, DEX cap +3, stacks with EC potency/Mystic Armor/Bands of Force) |
-| Paragon 1 | Dragonet Breath (House Drake — 15-ft cone mental/silver, Will save) |
-| Paragon 3 | Take Wing (1A, fly 15 ft, must land) |
-| 5 | Zip! Zoom! (Take Wing fly speed → 25 ft) |
-| Paragon 7 | Inhale, Exhale! (1A setup: +5 ft cone/line, +1 damage die on breath) |
+| 1 | **Scales of Steel** (+2 item AC unarmored, DEX cap +3, stacks with potency runes) |
+| 1 | **Covet Hoard** (grants Hefty Hauler; Incredible Investiture at 11) |
+| 3 | Take Wing |
+| 5 | Zip! Zoom! |
+| 7 | **Ascended Dragonet Heritage** (regains all Pearl Dragonet benefits) |
+| 9 | **Into the Sky** (permanent 25-ft fly speed) |
+| 11 | **Elf Step** (elf feat via Aiuvarin — Step 5 ft twice) |
 
-## Class Feats
-
+### Class (Oracle — 2, 4, 6, 8, 10)
 | Level | Feat |
 |-------|------|
-| 2 | Multifarious Muse (Enigma) → Bardic Lore |
-| 4 | Rallying Anthem |
-| 6 | Dirge of Doom |
-| 8 | Fortissimo Composition (Focus, upgrade composition cantrip status bonus to +2/+3) |
+| 2 | **Whispers of Weakness** (learn a target's weaknesses + lowest save; +2 status to your next attack vs it) |
+| 4 | Basic Muse's Whispers → **Lingering Composition** |
+| 6 | **Domain Acumen** (fire) → **Fire Ray** revelation spell |
+| 8 | **Gifted Power** (extra top-rank slot, mystery/Divine-Access spells only) |
+| 10 | **Quickened Casting** (free action, 1/day — cast a lower-rank spell with one fewer action) |
 
-## Free Archetype Feats
-
+### Free Archetype
 | Level | Feat |
 |-------|------|
-| 2 | Sorcerer Dedication (Draconic Rune Dragon, arcane) |
-| 4 | Basic Sorcerer Spellcasting |
-| 6 | Basic Bloodline Spell (Flurry of Claws) |
-| 8 | Bloodline Breadth (extra arcane spell slots from the Sorcerer archetype) |
+| 2 | Bard Dedication (Maestro) |
+| 4 | Basic Bard Spellcasting |
+| 6 | Sorcerer Dedication (Imperial bloodline) |
+| 8 | **Anthemic Performance** → Courageous Anthem |
+| 10 | Basic Bloodline Spell → **Ancestral Memories** |
 
-## Skill Feats
+### Skill (2, 4, 6, 8, 10)
+Bon Mot · Virtuosic Performer (Singing) · Pilgrim's Token · **Evangelize** · Intimidating Glare
+*(plus Dubious Knowledge from background, Hefty Hauler from Covet Hoard)*
 
-| Level | Feat |
-|-------|------|
-| 1 (background) | Multilingual |
-| 2 | Bon Mot |
-| 4 | Virtuosic Performer (Winds) |
-| 6 | Assurance (Medicine) |
-| 8 | Evangelize (Master Diplomacy vs Will DC → Stupefied; stacks with Bon Mot) |
-
-## General Feats
-
-| Level | Feat |
-|-------|------|
-| 3 | Canny Acumen (Fortitude) |
-| 7 | Incredible Initiative |
+### General (3, 7, 11)
+Toughness · Incredible Initiative · **Canny Acumen (Reflex)**
+*(plus Incredible Investiture from Covet Hoard)*
 
 ## Skills
 
 | Skill | Proficiency | Modifier |
 |-------|-------------|----------|
-| Performance | Expert | +15 (+16 with Pipes, +17 with Pipes + Virtuosic Winds) |
-| Diplomacy | Master | +17 (+18 with Pipes) |
-| Intimidation | Trained | +11 |
-| Occultism | Trained | +9 |
-| Religion | Trained | +9 |
-| Society | Trained | +9 |
-| Nature | Trained | +9 |
-| Medicine | Trained | +9 (Assurance = 20, auto-success Expert DC Treat Wounds at level 8) |
-| Crafting | Trained | +9 |
-| Deception | Trained | +11 |
-| Survival | Trained | +9 |
+| **Diplomacy** | Master | **+22** (+24 w/ Messenger's Ring) |
+| **Performance** | Master | **+22** (+24 w/ Persona Mask when acting/orating/comedy/singing) |
+| **Occultism** | Expert | +16 (+18 w/ Pendant of the Occult) |
+| Intimidation | Trained | +18 |
+| Acrobatics | Trained | +16 |
+| Religion | Trained | +16 (+18 w/ Prognostic Veil) |
+| Medicine | Trained | +16 |
+| Crafting | Trained | +14 |
+| Lore: Axis / Gladiatorial / **Goka** | Trained | +14 |
 
-## Lore Skills
+## Spell Repertoire — Divine (Oracle, Spontaneous)
 
-- Azlanti Lore (Trained, +9)
-- Bardic Lore (Trained, +9 — Recall Knowledge on any topic)
+**Slots**: 4 / 4 / 4 / 4 / 4 / 3 (ranks 1–6) + **1 Gifted Power slot** at rank 6
 
-## Spellcasting
+**Cantrips (rank 6)**: Ignition · Needle Darts · Divine Lance · Vitality Lash · Guidance · Shield
 
-### Occult Spontaneous (Bard) — Expert DC 26 (27 with Ring of Magic Might; spell attack +17, +18 under Courageous Anthem)
+| Rank | Spells |
+|------|--------|
+| 1 | **Heal [SIG]** · Breathe Fire · Fear · Benediction · Beseech the Sphinx ⚠️*rare — needs DM approval* |
+| 2 | **Dispel Magic [SIG]** · Blazing Bolt · **Benediction (h2)** · Restoration · Manifestation of Spirits |
+| 3 | **Fireball [SIG]** · Fear (h3) · Roaring Applause · Martyr's Intervention · Mind of Menace |
+| 4 | **Divine Wrath [SIG]** · Dirge of Remembrance · Spiritual Anamnesis · Vital Beacon |
+| 5 | **Blazing Bolt [SIG]** · **Thunderstrike** · Rip the Spirit · Wall of Flesh |
+| 6 | **Chain Lightning [SIG]** · Roaring Applause (h6 — **10 creatures**) · Spirit Blast |
 
-**Cantrips (5):** Needle Darts, Telekinetic Projectile, Shield, Warp Step, Detect Magic
+> **Signature spells (Foundry-verified 2026-07-19):** Divine — **Heal (R1), Dispel Magic (R2), Fireball (R3), Divine Wrath (R4), Blazing Bolt (R2), Chain Lightning (R6)**. Occult — **Sure Strike (R1), Overselling Flourish (R1), Slow (R3)**.
+> Signature Blazing Bolt is castable at **ranks 2–6**. Signature Heal and Dispel Magic scale to any rank — Dispel counteracts up to **rank 6**.
 
-**Rank 1 (3 slots, 4 known):** Soothe, Befuddle, Phantom Pain [SIG], Sanctuary
+## Spell Repertoire — Occult (Bard Archetype)
 
-**Rank 2 (3 slots, 2 known):** Dispel Magic, Worm's Repast [SIG]
+**Slots**: 1 / 1 / 1 (ranks 1–3)
+**Cantrips**: Detect Magic · Telekinetic Projectile
+**R1** Overselling Flourish · **R2 Sure Strike [SIG]** · **R3** Slow
 
-**Rank 3 (3 slots, 3 known):** Wooden Double [SIG], Infectious Ennui, Fear (heightened from R1 to R3 for 5 targets)
+## Spell Repertoire — Arcane (Sorcerer Archetype)
 
-**Rank 4 (3 slots, 2 known):** Biting Words [SIG] (heightened from R1), Summon Fey
+**Cantrips**: Electric Arc · Frostbite *(no slots — Basic Bloodline Spell only)*
 
-### Arcane Spontaneous (Sorcerer Archetype) — Trained
+## Focus Spells (3 Focus Points — all auto-heighten to rank 6)
 
-**Cantrips (2):** Electric Arc, Frostbite
-
-**Rank 1 (2 slots, 2 known):** Sure Strike, Overselling Flourish *(2nd slot + Overselling Flourish from Bloodline Breadth, L8)*
-
-**Rank 2 (1 slot, 1 known):** Hidebound
-
-**Rank 3 (1 slot, 1 known):** Fireball *(rank-3 slot unlocked at L8 via Basic Sorcerer Spellcasting)*
-
-### Focus Spells (3 FP)
-
-**Occult (Bard):** Lingering Composition (free action spellshape), Counter Performance (reaction), Fortissimo Composition (upgrade composition status bonus), Courageous Anthem (cantrip), Rallying Anthem (cantrip), Dirge of Doom (cantrip)
-
-**Arcane (Sorcerer):** Flurry of Claws (2A, 2 targets, slashing + force)
-
-### Staff Spells (Pipes of Compulsion)
-
-Charges from invested spell slots. Contains: Daze (cantrip), Charm (R1), Command (R1), Fear (R1)
+| Spell | Tradition | Effect at rank 6 |
+|-------|-----------|------------------|
+| **Fire Ray** | Divine (Domain Acumen) | 2A, 60 ft, spell attack, **12d6 fire (~42)**, doubles on crit + burning ground |
+| **Incendiary Aura** | Divine (initial revelation) | 2A, 10-ft emanation — anything taking fire damage inside catches fire |
+| **Courageous Anthem** | Occult (cantrip) | 1A, +1 status attack/damage |
+| **Lingering Composition** | Occult | Free action — extend a composition to 3–4 rounds |
+| **Ancestral Memories** | Arcane | ±1/±2 swing to spell accuracy |
 
 ## Equipment
 
-| Item | Level | Notes |
-|------|-------|-------|
-| +1 Deathless Explorer's Clothing | 7 | AC 25 with Scales of Steel. Deathless: 1/day reduce Wounded or Doomed by 1. |
-| Pipes of Compulsion | 4 | +1 item bonus to Diplomacy and Performance. Staff spells: Daze, Charm, Command, Fear. |
-| Cloak of Illusions | 7 | +1 Stealth. Free Figment cantrip. 1/day Invisibility (2A, draw hood). |
-| Wand of Tailwind (Rank 2) | 5 | 1/day: +10 ft speed for 8 hours. |
-| Wand of Pocket Library (Rank 1) | 3 | 1/day: +1 status to Recall Knowledge, crit fail → fail, extra creature info on success. 24 hours. |
-| Healer's Toolkit | 0 | Required for Treat Wounds. |
-| Silver material | — | For Needle Darts (silver piercing damage, bypasses vampire physical resistance). |
-| Bottled Sunlight (Moderate) | 4 | Consumable bomb. Bright light 20 ft for 1 hour. Throw: 2d4 vitality + 2 splash + 2d4 fire. Max vitality vs vampires. |
+**Invested (8 of 12 — Incredible Investiture)**
+
+| Item | Lvl | Effect |
+|------|-----|--------|
+| **+2 Resilient Explorer's Clothing** | — | AC + save bonuses above |
+| **Ring of Occult Might** | 5 | +1 item to occult spell DC and attack *(table homebrew)* |
+| **Ring of Divine Might** | 5 | +1 item to divine spell DC and attack *(table homebrew)* |
+| **Ring of Arcane Might** | 5 | +1 item to arcane spell DC and attack *(table homebrew)* |
+| **Shadow Signet** | 10 | Spell attacks may target **Fort or Reflex DC** instead of AC |
+| **Prognostic Veil** | 10 | +2 Religion; 1/day free Focus Point (revelation spells only) |
+| **Pendant of the Occult (Greater)** | 9 | +2 Occultism; Guidance at will; 1/day Dream Message |
+| **Persona Mask (Greater)** | 9 | +2 Performance (acting/orating/comedy/singing); 1/day reroll |
+| **Messenger's Ring** | 9 | +2 Diplomacy; Message at will; 1/day Animal Messenger |
+| **Retrieval Belt** | 7 | Stow/retrieve items |
+
+**Carried**: **Staff of Healing (Greater)** — contains *Heal* (R1/R2/R3), **Clear Mind (R2)**, **Sound Body (R2)**, **Cleanse Affliction (R3)**, *Stabilize*. ⚠️ These counteract at their listed rank (2–3), so they handle mook-tier conditions but **not** boss effects (a level-14 creature's effects are counteract rank 7) · Spacious Pouch I · Healer's Toolkit · Silver Chunk (Needle Darts material) · Predictable Silver Piece (the coin trick) · Wand of Tailwind · Formula Book · Silver Coffer
+
+**Consumables**: Scroll of Heal (R4) ×4 · Scroll of False Vitality (R4) ×4 · Scroll of Wall of Stone (R5) ×2 · Scroll of Synesthesia (R5) ×2 · Elixir of Life (Moderate) ×2 · Potion of Quickness · Retrieval Prism ×10
+
+**Coin**: 222 gp, 837 sp, 10,004 cp ≈ **406 gp**
 
 ## Combat Priorities
 
-### Round 1 (Setup)
-1. **Free action**: Lingering Composition (Performance check, extend composition 3-4 rounds)
-2. **1 action**: Courageous Anthem OR Dirge of Doom (depending on enemy type)
-3. **1 action**: Recall Knowledge (Bardic Lore or relevant skill — identify weakness, lowest save, special abilities)
-4. **1 action**: Bon Mot (soften Will for follow-up debuffs)
+### Opening (before the bell — tournament bouts are scheduled)
+1. **Mind of Menace** (10 min, 24 hr) — banks the Fight with Fear reaction
+2. **Beseech the Sphinx** on the most save-targeted ally (10 min)
+3. **Vital Beacon** — converts healing into allies' spare Interact actions
+4. Wand of Tailwind for the day
 
-### Rounds 2+ (Lingering active, 3 free actions)
-- **Debuff priority**: Infectious Ennui (Will, 60 ft, sustained — Slowed + Frightened) or Worm's Repast (Fort, 30 ft — Off-Guard + persistent + undead bonus)
-- **Damage**: Electric Arc (2A, 2 targets, Reflex), Silver Needle Darts (2A, spell attack), Biting Words at R4 (8d6 sonic, 3 hits over 3 rounds)
-- **Support**: Summon Fey/Unicorn (3A cast, then 1A Sustain for rank 3 Heal every round), Hidebound (reaction, resistance 5 physical on ally)
-- **Emergency**: Wooden Double (reaction on crit), Cloak of Illusions (2A invisibility), Sanctuary (2A, enemies save to target you)
+### Round 1
+1. **Free**: Lingering Composition (Performance +22 vs standard DC → ~85% for 3 rounds)
+2. **1A**: Courageous Anthem
+3. **1A**: **Whispers of Weakness** — reveals weaknesses **and lowest save**, +2 status to your next attack vs that target
 
-### Composition Selection
-- **Courageous Anthem**: Default. +1 attack/damage/fear saves for entire party.
-- **Rallying Anthem**: When party is taking heavy AoE damage. +1 AC/saves + physical resistance.
-- **Dirge of Doom**: When within 30 ft of intelligent enemies. Frightened 1, no save. Switch to this after Lingering Courageous.
+### Rounds 2+ (composition lingering — three free actions)
+- **Boss**: **Fire Ray** via Shadow Signet at their revealed weak save (~34 EV, crits for ~84) → **Foretell Harm** free action (+12)
+- **Crowd**: **Roaring Applause** at rank 6 — **10 creatures lose reactions**; failures also Slowed 1
+- **Ally-safe AoE**: Divine Wrath (enemies-only burst) or Chain Lightning (you pick the arc)
+- **Pre-contact AoE**: Fireball before the martials close
+- **Caster shutdown**: Manifestation of Spirits (Stupefied 3, one minute on a failure) · Dispel Magic at rank 6
+- **Healing**: signature Heal at whatever rank fits; Staff of Healing to save slots; scrolls between rounds
+- **Emergency**: Martyr's Intervention · Elf Step out of reach · fly straight up
 
-### Anti-Undead Toolkit
-- Silver Needle Darts (bypasses vampire physical resistance 5)
-- Dragonet Breath (mental damage counting as silver, AoE cone)
-- Worm's Repast (Fort save, extra damage vs corporeal undead, Off-Guard)
-- Summon Unicorn (Ghost Touch Strikes, rank 3 Heal = vitality damage to undead)
-- Bottled Sunlight (consumable, vitality + fire, max vitality damage vs vampires)
+### Save-Targeting Map
+| Enemy weak save | Your play |
+|---|---|
+| **Reflex** | Fireball [SIG] · Radiant Beam · Chain Lightning |
+| **Fortitude** | Divine Wrath [SIG] · Fire Ray + Shadow Signet |
+| **Will** | Roaring Applause (R3/R6) · Manifestation of Spirits · Fear · Spirit Blast · Slow |
+| **Weak AC** | Blazing Bolt [SIG] (2–3 rays, all rolled before MAP) · Needle Darts |
 
-### Decision Tree: Mental vs Non-Mental
-- **Intelligent undead (vampires, liches)**: Full toolkit — Dirge, Fear, Phantom Pain, Bon Mot, Infectious Ennui
-- **Mindless undead (zombies, skeletons, spawn)**: Worm's Repast (Fort), Electric Arc (Reflex), Frostbite (Fort), silver Needle Darts
-- **Mixed groups**: Dirge for intelligent ones, targeted Fort/Reflex spells for mindless ones
+### Curse Management
+Cursebound stacks deal persistent fire equal to their value **and suppress your own fire resistance**. On 151 HP that's affordable chip damage — but Refocusing between bouts competes with Lingering Composition and Fire Ray for the same focus pool. The Prognostic Veil's daily Focus Point partly covers this. Tournament pacing (discrete bouts with resets) is the format this build wants.
+
+### Known Weak Points
+- **Fortitude AoE lane is thin** — Divine Wrath carries it alone
+- Nearly all control is **mental/emotion** — mindless or construct opponents blank the debuff wing entirely; fall back to Fireball/Radiant Beam/Chain Lightning and healing
+- **Incendiary Aura requires you within 10 ft** of enemies — that's what Elf Step and permanent flight are for
+- Tivael's recurring clustering problem is inherited: a Tiny caster hovering near the scrum eats AoE. Distance first, debuff second.

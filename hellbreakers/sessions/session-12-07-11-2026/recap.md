@@ -49,7 +49,7 @@ The back half was preparation and payoff. A day of shopping and downtime in Elid
 
 ### Act III — Downtime in Elidir (48:00–83:00) — *Shopping, Earn Income, a small mercy*
 
-- **Briefing.** Back at the safehouse, the party caught **Cyrathul** up and got the full picture from the DM: **Quoster Thistleweight**, the wealthy halfling merchant the founders had been courting — *"believes in charity and hates Cheliax,"* wants a free Isger — was on the cusp of funding the League for post-liberation trade rights when Hedvind outed the founders. He got cold feet; the deal now has to close at the **New Year's Eve ball** at the Regent's palace, five days out — the Lazy Bones pendant is the recognition token so Quoster knows who to trust.
+- **Briefing.** Back at the safehouse, the party caught **Cyrathul** up and got the full picture from the DM: **Quoster Thistlewait**, the wealthy halfling merchant the founders had been courting — *"believes in charity and hates Cheliax,"* wants a free Isger — was on the cusp of funding the League for post-liberation trade rights when Hedvind outed the founders. He got cold feet; the deal now has to close at the **New Year's Eve ball** at the Regent's palace, five days out — the Lazy Bones pendant is the recognition token so Quoster knows who to trust.
 - **Shopping.** Elidir is a level-8 city. The party sold the artwork and fenced a **banned book** — the *Abergale the First* script, contraband — which **Cyrathul deception-sold** for **150 gold** on a cover story Bai Jian floated (*"I just found it in my hoard"*; the shopkeep: *"I don't believe you, but I want this book"*). **Zanthar** bought **four Sure Strike scrolls** and **sleeves of storage** (*"I need to get to level five — that's a lot of things to buy"*); **Cyrathul** grabbed Sure Strike scrolls to flick out with his implement. The DM redistributed **Sammy's leftover gold** to the party.
 - **The goblin pickpocket.** Earning income and gathering info in the streets, a **hungry goblin girl** lifted the gold from Bai Jian's pocket — and the **town guard** saw it. Bai Jian covered for her instantly: *"I was just about to give her this,"* palming her a **gold coin**, and waved the captain off — *"do you think I would leave someone alone who tried to steal from me?"*, a hand drifting to his sword. The guard bought it and moved on. The goblin, near tears, tried to **bite the coin in half to give some back** (*"I only need a little bit"*), then vanished into the crowd — *"I would do anything for you."* **+1 uprising point.**
 - **Earn Income & Gather Info.** **Panacea** worked shifts at the **hospital helping sick kids**; Bai Jian earned income and gathered intel (a celebrity bard, **Lazenia**, is the talk of the town; the ball is at **Reeves Rest Manor**, the Regent's state house, two stories, multiple entrances). **Zanthar** tried to help at a scroll station and **spilled ink over the day's work** — no pay.
@@ -64,22 +64,22 @@ The back half was preparation and payoff. A day of shopping and downtime in Elid
 ### Act V — The New Year's Eve Ball (115:00–end) — *Influence encounter (in progress)*
 
 - **The send-off.** The Demetriases prepped the party and left town loudly on the opposite end — a decoy exit (their departed **bard friend** already started a diversionary *"kerfuffle"*) to make it look like the League fled, buying the party cover to *become* the League's presence in the capital. **Objective:** find **Quoster**, close the funding deal, and seed a Hellbreakers chapter in Elidir. **Cyrathul wore the Lazy Bones pendant** as the recognition token (Zanthar volunteered too — *"I have been known to talk"*).
-- **The room.** Reeves Rest Manor, floating red-and-white lights, a string quartet, guests in Hell-themed finery, guarded stairs to a forbidden upper landing. The ball is a **six-round influence duel** over six hours; five NPCs can be influenced (**Quoster, Iso Data, Colonel Rithert, Cato Volnax, Sasatoli Bronc**), plus un-influenceable minor guests.
+- **The room.** Reeves Rest Manor, floating red-and-white lights, a string quartet, guests in Hell-themed finery, guarded stairs to a forbidden upper landing. The ball is a **six-round influence duel** over six hours; five NPCs can be influenced (**Quoster, Ezio Daeta, Colonel Rithert, Caeto Vulaunex, Sasatoli Bronc**), plus un-influenceable minor guests.
 - **Round zero — meeting the room.**
   - **Cyrathul** was steered straight to **Quoster** — a giggling halfling fop with a **levitating ruby cane** ("worth a small country") — and traded undead-silk small talk.
-  - **Panacea** met **Iso Data**, a big ruddy noble whose **magical cape conjures an iron throne** behind him wherever he goes (an order from **Tilaax**).
+  - **Panacea** met **Ezio Daeta**, a big ruddy noble whose **magical cape conjures an iron throne** behind him wherever he goes (an order from **Tilaax**).
   - **Zanthar** got cornered by **Mirapila Carafo**, a bored, casually-cruel noble (*"they should just know their lot in life"*), and clocked a **silent, imperial woman radiating immense magic** he couldn't identify.
   - **Bai Jian** flattered his way through drake-hunting shop talk and an audience with **Lazenia**, the self-worshipping celebrity bard.
 - **Round 1 — first moves.**
   - **Cyrathul influenced Quoster** with a scalpel: praising Cheliax's *"great institutions… like slavery — sorry, I mean debt,"* then **glaring at Quoster** to isolate the halfling from the pro-slavery nobles around him. Hero point spent → **success, +1 influence.** The DM: *"the glare does have an effect… he hates it here, but he's smiling and pretending he doesn't."*
-  - **Panacea** landed a **crit Discover** on Iso Data (Society) — his two lowest influence skills (Diplomacy, Society).
+  - **Panacea** landed a **crit Discover** on Ezio Daeta (Society) — his two lowest influence skills (Diplomacy, Society).
   - **Zanthar** befriended **Sasatoli Bronc**, a lower-class dock-worker dragooned in as "representation," by eating and drinking alongside him — and **Discovered** his lowest influence skill (Intimidation, of all things).
   - **Bai Jian Discovered Colonel Rithert** — and hit a wall: the colonel is *"jealous of those who have seen combat,"* so any warrior who talks battle takes **–2**. (Bai Jian, a career warrior: *"good thing, I think I can still spin it around."*)
 - **Round 2 — pressing.**
   - **Cyrathul influenced Quoster again** (hero point) → **success**, and the win **earned the Hellbreakers League a reputation point**. *"I got it from a mutual friend,"* he said of the pendant.
-  - **Panacea influenced Iso Data** with **gossip** — a *"gossipy look like she's enjoying the tea,"* +2 circumstance, hero point — trading dirt about Cato just returning from Cheliax. **Success → influence point on Iso.**
+  - **Panacea influenced Ezio Daeta** with **gossip** — a *"gossipy look like she's enjoying the tea,"* +2 circumstance, hero point — trading dirt about Caeto just returning from Cheliax. **Success → influence point on Ezio.**
   - **Zanthar intimidated Sasatoli Bronc** into liking him (*"better be careful how much food you're eating — these rich people, they come after you"*). *"You're a chip off the old block,"* Bronc laughed.
-  - **Bai Jian** tried to butter up the Hell Knight **Cato Volnax** — bored him, no dice.
+  - **Bai Jian** tried to butter up the Hell Knight **Caeto Vulaunex** — bored him, no dice.
 - **Manticore (the darts contest).** A garden game: three straw targets (halfling 20 ft, goblin 40 ft, human 60 ft; AC 18; crits and double-throws double points). Contestants: **Ambassador Frigg**, **Colonel Rithert**, **Renacilos Aziri**, and **Bai Jian** (invited in).
   - **Colonel Rithert** whiffed **all six darts**, storming off humiliated. Bai Jian, flat: *"Your money's gone."*
   - **Renacilos Aziri** — a legionnaire ringer — hit everything for the win (Cyrathul's suspicious Perception check found no cheating, just skill).
@@ -106,7 +106,7 @@ He's also the party's dry wit. He deflated **Frederick Consum** with *"if you're
 
 Bog Witch's healer had a quietly essential session, and a genuinely charming social one. In the fight she was the reason the party could afford to peek around corners into arrow slits — **Battle Medicine** on Bai Jian, **Trade Death for Life** routing fast healing to the arrow-riddled Zanthar while chipping and Stupefying Father Kindness, and a follow-up **Heal** to patch the wizard back up. She's still learning the VTT (a running thread of good-natured *"operator error"*), but she never stops doing her job, and she's the one who keeps insisting the party's fights stay survivable and its captives stay alive. She isn't all softness, either: she led the verbal pushback when a noble tried to strong-arm the party out of their costumes (*"Those are ours. We paid for those."*), and she's genre-savvy enough to call *"we're in a rogue's house — watch for traps"* before anyone stepped wrong.
 
-Her social game is a delight precisely because it's disarming. Her whole gala approach is **"I'm just a cat"** — she opened on the iron-throne noble **Iso Data** with *"I'm just a cat, but I'm drawn to your cape,"* introduced herself as *"just a cat, my name is Panacea"* (earning the DM's *"what a very inclusive name"*), and then **gossiped** her way into his confidence with *"a gossipy look like she's enjoying the tea."* A crit Discover and a hero-pointed influence later, Iso was hers. Off the clock she's the party's conscience made literal — she spent her downtime **at the hospital helping sick children** — and she feeds her two-headed familiar **Serrafina** scrolls to learn new spells (*"she has two heads, so she was pretty hungry"*). The healer who solves the fight and then goes to volunteer.
+Her social game is a delight precisely because it's disarming. Her whole gala approach is **"I'm just a cat"** — she opened on the iron-throne noble **Ezio Daeta** with *"I'm just a cat, but I'm drawn to your cape,"* introduced herself as *"just a cat, my name is Panacea"* (earning the DM's *"what a very inclusive name"*), and then **gossiped** her way into his confidence with *"a gossipy look like she's enjoying the tea."* A crit Discover and a hero-pointed influence later, Ezio was hers. Off the clock she's the party's conscience made literal — she spent her downtime **at the hospital helping sick children** — and she feeds her two-headed familiar **Serrafina** scrolls to learn new spells (*"she has two heads, so she was pretty hungry"*). The healer who solves the fight and then goes to volunteer.
 
 ### Zanthar Melodune III · the Gnome Who Takes the High Ground
 
@@ -160,7 +160,7 @@ His downtime and gala work fleshed him out past the artillery role. He's a compu
 - **A thieves' guild is now an asset.** **Father Kindness** and the Children's Charity steal only from Chelaxians and offered intel on *"easy pickings"* in noble estates. A recurring resource — and a source of inside jobs — for the Elidir uprising.
 - **Frederick Consum is at the ball.** The humiliated noble the party crossed at the costume shop is a guest tonight. Will he recognize them under the costumes, and make trouble?
 - **The woman radiating magic.** At the gala, Zanthar spotted a silent, imperial woman in fine undead silk giving off *"an immense amount of magical essence"* — unidentified. A plot seed hanging over the ball.
-- **Iso Data's cape came from Tilaax.** The iron-throne cape traces to **Tilaax** — Cheliax's infernal-contracts faction, already tied to the Waterspout Inn torture devil. What is an infernal-contracts noble doing at this party, and is Iso a mark or a threat?
+- **Ezio Daeta's cape came from Tilaax.** The iron-throne cape traces to **Tilaax** — Cheliax's infernal-contracts faction, already tied to the Waterspout Inn torture devil. What is an infernal-contracts noble doing at this party, and is Ezio a mark or a threat?
 - **Colonel Rithert, humiliated and influenced.** A military man in town, now down a point of pride (whiffed the darts) and one influence point (Zanthar's flattery angle). Useful lever or future enemy?
 - **The founders are gone; the party *is* the League here.** Alceo and Phoebe left Elidir under a decoy exit. Whatever happens at the ball, there's no cavalry — just four costumed rebels and a pendant.
 
@@ -225,7 +225,7 @@ His downtime and gala work fleshed him out past the artillery role. He's a compu
 - **We keep winning by not killing.** The guild, the goblin, the costume ass — none of it needed a body. Non-lethal isn't a handicap in this city; it's the whole strategy, and it's stacking uprising points faster than any fight would.
 - **Father Kindness is a weapon we haven't fired yet.** A whole guild that robs only Chelaxians and owes us a favor. When we need something stolen from a noble's estate, we don't have to do it ourselves.
 - **That woman at the ball is wrong.** Zanthar felt it too — an imperial-looking woman in undead silk, radiating more magic than anyone in the room, saying nothing. Nobles don't glow like that. Watch her.
-- **Iso's cape came from Tilaax.** That's the infernal-contracts faction — the same one behind the torture devil at the Waterspout. There's a devil-contract noble in this ballroom. He might be a mark, or he might be the reason this whole party exists.
+- **Ezio's cape came from Tilaax.** That's the infernal-contracts faction — the same one behind the torture devil at the Waterspout. There's a devil-contract noble in this ballroom. He might be a mark, or he might be the reason this whole party exists.
 - **Rithert can't stand being reminded he's not in the field.** Combat vets make him jealous (–2 if you talk battle), but flattery about "getting back out there" opens him right up. Careful which lever I pull.
 
 ### What Bai Jian is thinking about
@@ -237,7 +237,7 @@ His downtime and gala work fleshed him out past the artillery role. He's a compu
 
 ### Open questions for next session
 
-- Can we **close Quoster** in the three rounds left? What does he actually want to hear — and does the darts colonel or Iso matter to the deal, or are they side quests?
+- Can we **close Quoster** in the three rounds left? What does he actually want to hear — and does the darts colonel or Ezio matter to the deal, or are they side quests?
 - **Does Frederick recognize us** under the costumes? He's here and he hates us.
 - **Who is the woman radiating magic?** And why is a **Tilaax**-caped noble at this party?
 - Do we ever call on **Father Kindness's guild** — and for what?

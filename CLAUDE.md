@@ -33,7 +33,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
 | `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
-| `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | Tivael — House Drake Dragonet — Maestro Bard / Sorcerer (Draconic) | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11** |
+| `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
 | `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINING 2026-07-18 @ Lv12** |
 
 ## How to Help
@@ -46,6 +46,41 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 - **Style guides**: Each campaign can have a `style-guide.md` defining the HTML recap theme. Copy `style-guide-template.md` from the project root to create one.
 - **Tactics**: Focus on action economy, spell slot efficiency, and positioning.
 - **Ask Question Tool**: Use it regularly to help aid with thinking and asking questions about what Pax thinks.
+
+## Roll logs — the Foundry export (applies to every Foundry campaign)
+
+**Pax exports the Foundry chat log at session end using `foundry-export.js` in the repo root.** He pastes it into the campaign's roll log (`rolls.txt` for setting-sun). Read that script's header comment before working with any roll log — it documents the format and the failure modes.
+
+**The exported format is speaker-attributed.** Each line is:
+
+```
+[HH:MM:SS] Speaker :: flavor :: formula = total :: rendered content
+```
+
+split into `=== ENCOUNTER N ===` blocks auto-detected from initiative clusters.
+
+**This supersedes the old "the rolls log is a global dump, back-derive attribution from stat fingerprints" guidance** — that applied to the copy-pasted format used through 2026-07-19 and earlier. With the export script, attribution is *direct*: the speaker is on the line. Only fall back to stat-fingerprint back-derivation when working with a pre-2026-07-19 log.
+
+### What the export gives you, without opening a bestiary
+
+- **Speaker on every line** → damage contribution and kill credit per PC, directly
+- **`Target: X (AC 35 31)`** → the target's real AC *and* its reduced AC when off-guard/frightened. First number is base.
+- **`Result: Hit by +7`** → exact accuracy and crit rates
+- **Full modifier fingerprint** → disambiguates rollers when names collide
+- **`They are destroyed`** → kill confirmation, no inference needed
+- **Enemy attack bonus + Perception (initiative cards) + AC** → reverse-engineer creature level against the PF2e benchmark tables. This is more reliable than the bestiary, because GMs scale creatures (S9's catoblepas was book level 12 / AC 33, run at AC 35 / attack +29 ≈ level 14).
+- **Timestamps** → align the roll log to a session recording's transcript
+- **`SAVE ::` lines** → every target's saving throw against a PC spell: **natural die, total, degree of success, and the modifier breakdown** (including debuffs like `Frightened 2 -2`). This is how you measure what the party's debuffs actually bought. Sourced from the **pf2e-toolbelt** module's message flags — not present at tables without it.
+
+### Pitfalls that have actually bitten
+
+- **CHECK FOR DOUBLE-PASTE FIRST.** The 2026-07-19 log contained encounters 1–3 twice, which silently doubled every HP estimate. Exports now begin with two `#` header lines giving the message count and date range — **two headers means a double paste.** For older logs, verify by looking for a repeated damage sequence per creature before computing anything.
+- **The export auto-detects sessions by time gap** (`GAP_HOURS`, default 8) and skips stray clusters under `MIN_MESSAGES`, so a token healed the next day can't anchor the window. The header lists every session found; `SESSION = 0` is the latest, `1` the one before.
+- **Adjacent duplicate applications.** The same target taking the same value on consecutive lines is usually one event applied twice, not two hits.
+- **Stale ability headers.** Plain weapon Strikes generate no ability block, so in the *old* format they inherit whatever spell header came before. This caused a real error: Ferrok's Force Fang damage was credited to Sovael's Fire Ray. The new format's speaker field eliminates this.
+- **Damage rolls ≠ damage dealt.** An AoE rolls once and applies to many targets. Summing roll totals undercounts AoE casters badly; pair rolls to their applications.
+- **GM blind rolls are absent** — the script only sees what Pax's client received.
+- **Enemy saves live in message *flags*, not visible chat text.** The rendered chat card shows them, but a copy-paste of the pane loses them — which is why older logs have no save data. The export reads them out of `flags['pf2e-toolbelt'].targetHelper.saveVariants`. If a log has no `SAVE ::` lines, either the table lacks the module or the log predates 2026-07-21.
 
 ## 5.5e (2024) rules discipline
 

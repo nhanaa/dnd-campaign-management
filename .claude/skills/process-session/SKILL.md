@@ -59,7 +59,9 @@ These are concrete errors that have happened in real sessions. Scan this list ev
 
 ## Foundational Principle: Capability-Constrained Attribution
 
-**The transcript is not gospel. Whisper hallucinates, misattributes, and conflates. Pyannote diarization splits one speaker into multiple labels and merges multiple speakers into one. The rolls log Pax pastes is a global dump, not a per-speaker log — attribution must be back-derived.**
+**The transcript is not gospel. Whisper hallucinates, misattributes, and conflates. Pyannote diarization splits one speaker into multiple labels and merges multiple speakers into one. The rolls log's format depends on how it was exported (see below) — verify which you have before trusting attribution.**
+
+> **ROLL-LOG FORMAT — check this first.** Since 2026-07-19 Pax exports the Foundry chat log with `foundry-export.js` (repo root), which puts the **speaker on every line** plus target AC, hit margins, timestamps, and `=== ENCOUNTER N ===` splits. **With that format, attribution is direct — do not back-derive.** Older logs are un-attributed global dumps where the back-derivation guidance below applies. Look at the top of the file: if lines start with `[HH:MM:SS] Name ::`, it's the new format.
 
 Every attribution in the recap (a spell cast, a skill check, a damage number, a quote, a kill credit) must satisfy **all five capability tests** below. If even one fails, the attribution is wrong — find the actual character. Do **not** paper over with hedge phrases ("X deadpans an offer to cast Y" when X can't cast Y).
 
@@ -225,7 +227,7 @@ Before generating the recap, read these files for context:
 Use **AskUserQuestion** (not free-form text) and bundle these into a single question with multi-select:
 
 1. **Initiative tracker screenshot** — Foundry/Roll20 init order if any combat happened. Treat as authoritative for round structure.
-2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs? If so, ask him to paste/screenshot it. **Default location: the Foundry roll-log dump lives at `/home/nhanp/dnd-campaign-management/rolls.txt`** (Pax updates it each session; check `git status` for the modification). Read it before reconstructing combat and pass it to the Step 5.6 combat-review subagent. It's a global dump (not per-speaker) — back-derive attribution from stat fingerprints.
+2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs? If so, ask him to paste/screenshot it. **Default location: `/home/nhanp/dnd-campaign-management/rolls.txt`** (Pax updates it each session; check `git status`). Read it before reconstructing combat and pass it to the Step 5.6 combat-review subagents. **If it's in the `foundry-export.js` format (lines beginning `[HH:MM:SS] Name ::`), it is speaker-attributed** — use the speaker directly, and it also carries target AC, hit/miss margins, and encounter splits. Older un-attributed dumps require stat-fingerprint back-derivation. **Always check for double-paste before computing anything** — a duplicated log silently doubles every HP figure.
 3. **Ambiguous moments** — anything from this session that was confusing in the moment (a teleport's intent, an NPC's full name, who actually got a contested item).
 4. **Cameo NPC details** — pronouns, last names, anything not in dynamics.md.
 5. **Anything Pax wants to make sure is captured** — high-impact moments he wants the recap to land correctly (his persuasion wins, his character beats, etc.). This is a deliberate carve-out — Pax has historically been under-represented in recaps; ask him directly what he wants emphasized.
@@ -395,7 +397,7 @@ For each item below, scan the recap.md you just wrote:
 3. **Roll-fingerprint pass:** For every skill check or roll quoted in the recap (especially Earn Income, Recall Knowledge, Lore checks), cross-check the roll modifier against the attributed PC's character sheet:
    - The Foundry/Roll20 rolls log Pax may paste records the modifier breakdown verbatim (e.g. "Intelligence +2, Expert +8, item bonus +1, 1d20 + 11"). The fingerprint identifies the actual roller.
    - If the rolls log shows "INT +2 / Expert in <a Lore>" but the attributed PC has INT 10 and no training in that Lore, **the attribution is wrong** — find the PC whose sheet matches the fingerprint.
-   - Pax's pasted rolls log is a **global dump**, not a per-speaker log. Do not attribute rolls to a PC just because their name appeared nearby in the DM's narration (e.g. don't assume a gold callout next to a Lore check means the same PC rolled both).
+   - **Check the roll-log format first.** In the `foundry-export.js` format (`[HH:MM:SS] Name ::`) the speaker is authoritative — use it. In an older un-attributed dump, never attribute a roll to a PC just because their name appeared nearby in the DM's narration (e.g. don't assume a gold callout next to a Lore check means the same PC rolled both).
 
 4. **Lane-discipline pass:** For each attributed action, check whether dynamics.md assigns that action's lane to a different PC. If it does, default to the lane-owner unless the transcript is unambiguous otherwise. *Example: if dynamics.md says one PC carries the spirit/undead Recall Knowledge lane, don't credit a low-INT, untrained PC with the RK unless the transcript is explicit that they rolled it.*
 
@@ -471,7 +473,7 @@ For any skill check, attack roll, or save with a stated modifier in the recap or
 - Decompose the modifier (e.g. "1d20 + 11" with breakdown "Intelligence +2, Expert +8, Pendant +1").
 - Match the components to the PC whose sheet fits: INT 14 + Expert in this skill + holds the relevant item.
 - **If the fingerprint doesn't match the attributed PC, the attribution is wrong.** Find the PC whose sheet matches.
-- **The rolls log Pax pastes is a global dump, not a per-speaker log.** Do not attribute a roll to a PC just because their name appears nearby in narration.
+- **Check the roll-log format.** Speaker-attributed (`[HH:MM:SS] Name ::`) means use the speaker directly. Un-attributed older dumps: never attribute a roll to a PC just because their name appears nearby in narration.
 
 ### 3. Class Feature / Mechanic Sanity Check
 Does the action make system sense?
@@ -596,7 +598,7 @@ You are reviewing ONE combat encounter in a D&D/PF2e session recap for accuracy.
 - Generated recap: <campaign>/sessions/session-<N>-<MM>-<DD>-<YYYY>/recap.md (read only your encounter's block + any mentions of it in Spotlight/Key Events/Pax's Notes)
 - Party roster: <campaign>/dynamics.md (includes class features and action abilities)
 - PC character sheets in <campaign>/ (typically `character-sheet.md` for Pax's PC; others may have separate files or be summarized in dynamics.md)
-- Foundry roll-log dump: `/home/nhanp/dnd-campaign-management/rolls.txt` (global, not per-speaker — back-derive attribution from stat fingerprints; records damage numbers, save DCs, and per-action breakdowns verbatim). Focus on your encounter's portion.
+- Foundry roll log: `/home/nhanp/dnd-campaign-management/rolls.txt`. **Check the format first**: lines beginning `[HH:MM:SS] Name ::` are the `foundry-export.js` format and are **speaker-attributed** — use the speaker directly, and it also gives target AC (`Target: X (AC 35 31)` = base/reduced), hit margins (`Result: Hit by +7`), and `=== ENCOUNTER N ===` splits. Older dumps are un-attributed; back-derive from stat fingerprints there. **Check for double-paste before computing.** Focus on your encounter's portion.
 - Campaign system: <D&D 5e | D&D 5.5e | PF2e Remastered>
 
 ## Step 0 (REQUIRED before reconstructing) — Build the capability matrix
@@ -684,7 +686,7 @@ Format:
 ## Guardrails
 - **The transcript is not gospel. Whisper is not accurate.** Whisper mishears proper nouns, invents plausible-sounding content, and the cleaned transcript's speaker labels are based on pyannote diarization that misattributes regularly. **Capability + roll-fingerprint + HP-state plausibility are stronger evidence than the speaker label.** When they conflict, trust the capability matrix, not Whisper.
 - **Build the capability matrix (Step 0) before doing anything else.** If you skip it, your reconstruction will have the same misattributions the recap has.
-- **Cross-check every roll modifier against PC sheets.** The rolls log Pax pastes is global, not per-speaker — back-derive attribution from stat fingerprints, not from text proximity.
+- **Cross-check every roll modifier against PC sheets.** If the log is the speaker-attributed `foundry-export.js` format, trust the speaker field; otherwise back-derive from stat fingerprints, never from text proximity. Watch for adjacent duplicate applications (same target, same value) — that's one event logged twice, not two hits.
 - Reconstruct from the transcript FIRST, then compare. Do not read the recap first — that biases you toward confirming it.
 - Every claim must cite a transcript timestamp.
 - If the transcript is ambiguous about round boundaries, note it and give your best reconstruction.

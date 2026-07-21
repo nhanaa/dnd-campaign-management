@@ -1,6 +1,36 @@
 # Dynamics — Setting Sun, Rising Phoenix
 
-## Party Roles
+## Party Roles — Fists of the Ruby Phoenix (current)
+
+**Party size: 5** — Sovael, Clutch, Savatt, Seva (joins S10), Ferrok. *(The new Monk, **Alastor**, rage-quit mid-spar in S9 and will not return. S9 itself ran with **four** PCs after he left.)*
+
+| Role | Primary | Secondary |
+|------|---------|-----------|
+| **Tank** | Clutch (Guardian / Wrestler dedication) | Ferrok (Bastion) |
+| **Striker** | Ferrok (Magus, Sparkling Targe) · Seva (Magus, Laughing Shadow) | Savatt (Precision Ranger) |
+| **Ranged damage** | Savatt (Precision Ranger) | Sovael |
+| **Healer** | **Sovael** (signature Heal, Staff of Healing, Vital Beacon, scrolls) | **Savatt — CONFIRMED S9** (healer's gloves, Battle Medicine, Treat Wounds, Guidance) · Ferrok (Battle Medicine) |
+| **Buffer** | Sovael (Courageous Anthem, Lingering, Beseech the Sphinx) | — |
+| **Debuffer** | Sovael (Roaring Applause, Fear, Manifestation of Spirits, Bon Mot, Evangelize) | — |
+| **AoE Damage** | Sovael (Fireball, Divine Wrath, Chain Lightning, Radiant Beam) | — |
+| **Counteract / dispel** | Sovael (signature Dispel Magic — rank 6) | — |
+| **Recall Knowledge** | Sovael (Whispers of Weakness — weaknesses + lowest save) | — |
+
+### Structural notes for the new comp
+
+> **S9 UPDATE — the sole-healer question below is partly answered.** The file asked whether anyone else was taking Battle Medicine. **They were.** Savatt is a genuine second healer (healer's gloves, Battle Medicine, Treat Wounds, Guidance) and **Ferrok also has Battle Medicine**. Across six S9 encounters Savatt healed Alastor 36, Ferrok 45/27/30/45, and Clutch 28 — comparable volume to Sovael's. Coverage is materially better than this section predicted. **Still ask what Seva brings.**
+
+- **Sole-healer risk is back, and materially worse than S3–S8.** Raylta had a second healer in Bael's gloves and only four other PCs to cover. Sovael has no backup and **five** allies to keep upright — every 2A Heal is a round the party loses its debuffer. Mitigations already built in: signature Heal (any rank, and a rank-5 AoE Heal now catches more bodies with six PCs), greater Staff of Healing, **Vital Beacon** (moves healing onto allies' spare Interact actions), 4 Heal scrolls, elixirs. **Ask whether anyone else is taking Battle Medicine — with a six-person party this is close to mandatory.**
+- **Four melee + one ranged means friendly-fire discipline matters a lot.** Sovael's ally-safe options are **Divine Wrath** (enemies-only burst) and **Chain Lightning** (you choose the arc). Fireball is the pre-contact opener only — with Clutch, Ferrok, Seva, and the Monk all closing, the window for a clean burst is one round.
+- **Six PCs raises the XP budget substantially.** A fight that reads "severe" at four PCs is close to moderate at six. Compute against the actual party size before calling anything under- or over-tuned.
+- **Ferrok is the established aggro magnet** (S3–S8: enemies focus-fired him nearly every fight). He is the default target for Beseech the Sphinx, Vital Beacon proximity, and Martyr's Intervention.
+- **Savatt's precision damage is front-loaded into one hit per round**, so accuracy support pays him more than it pays a Flurry Monk or a multi-Strike martial. Courageous Anthem, off-guard from Clutch's grapples, and Overselling Flourish all convert directly into his damage.
+- **Clutch's Wrestler lean does double duty** — grapples make targets off-guard, which feeds both the Magus and Savatt, and clumps enemies for Sovael's ally-safe AoE.
+- **Reaction denial is the highest-leverage debuff in this comp.** Roaring Applause at rank 6 strips reactions from **10 creatures**, letting three melee characters move freely through threatened squares. This is the single best thing Sovael brings to this roster.
+- **Mindless/construct opponents blank Sovael's whole control wing** (nearly all of it is mental/emotion). Fall back to Fireball / Radiant Beam / Chain Lightning + healing.
+- **Inherited weakness**: Tivael's recurring clustering problem (S6 Jubilant, S7 Sacristan, S8 Viseldron) applies unchanged — a Tiny caster hovering near the scrum eats AoE. Elf Step and permanent flight exist to fix this; use them.
+
+## Party Roles — Shades of Blood (historical, levels 1–10)
 
 | Role | Primary | Secondary |
 |------|---------|-----------|
@@ -229,3 +259,27 @@
 - **When the win condition is an OBJECT (a disable check), pivot the whole party early** — don't tunnel-vision the boss (the DM literally warned about "boss tunnel vision"). Spread the disable checks across every PC's best skill + Aid + Guidance; the clock, not the boss, is the threat.
 - **Nizca's Spiteful Escape** is the model for "kill isn't the win condition" bosses — dropping them to 0 wasn't enough; the beacon had to be destroyed. Expect more objective-based finales.
 - **Clustering punished the party again** (Viseldron's Fireball caught the bunched party for two 40s turn one) — the recurring lesson from Jubilant's screams (S6) and the Sacristan bleed (S7). Spread out vs. AoE bosses.
+
+---
+
+## Character Relationships (Session 9 Observations — Ruby Phoenix begins)
+
+- **The party are strangers and it shows mechanically.** Hao Jin assembled them as a wildcard team of teamless individuals; they had never fought together before S9. The clearest cost: Sovael burned a **rank-5 Scroll of Synesthesia** on Kannitri and **Ferrok spent the entire one-round window on Haste + Arcane Cascade without attacking**. Clutch and Savatt did use it (Savatt landed both arrows; her One Inch Punch missed on the Clumsy), so it wasn't wholly wasted — but nobody announced what the debuff bought or how long it lasted. **Callout discipline is the party's biggest gap right now.**
+- **Sovael ↔ Ferrok** — the connective tissue. Ferrok adventured with **Tivael**, Sovael's cousin, and they bonded over him immediately (Ferrok: the old party "quit adventuring to open a manacle store"; Sovael: "Not as skilled as me, of course"). Ferrok is also Sovael's primary heal target, exactly as the dynamics predicted.
+- **Ferrok ↔ Clutch** — an unresolved landmine. Ferrok recognised Clutch's face, couldn't place it, then said **"the only Kholo I've seen was a dead one in Ebon Tower."** Clutch is on Bonmou hunting his missing cousin **Clinch**. Neither has connected the dots aloud.
+- **Savatt is the party's conscience and its Irorian.** The temple is dedicated to **his own god**, and he played it throughout: greeting Tino as a fellow follower before the spar, asking to *clean* the temple rather than loot it, reciting the sutra back at the hazard, and spending an action trying to spare Kannitri via his holy symbol. He is the one who reaches for a non-violent read first.
+- **Clutch's comedy is load-bearing grief.** The "I must break you" opener, and the Ring of Climbing bit — turning it down on behalf of a dead man, *"he's got to climb out of his grave, so he needs the climb speed."* Then, after losing the spar: *"I thought after 10 years I'd gotten stronger, but it seems I still need to keep growing."*
+- **Tino's Toughest are a friendly rivalry, not a nemesis.** Handshakes after the spar, Ferrok helping Takatorra up, Tino hoping for a rematch as an official bout, and Yabin wanting a scholarly conversation with Ferrok about the Ebon Tower.
+- **Alastor's departure is closed.** He rage-quit mid-spar; the GM confirmed he will not return. Ferrok was gracious about it (*"low rolls are part of the game"*) and the table moved on within two minutes.
+
+## Session 9 — Key Patterns / Lessons
+
+- **Sovael's whole kit is load-bearing and self-damaging.** He ran RK, healing, buffs, debuffs and AoE simultaneously all session. **Whispers of Weakness cost six Cursebound stacks** (five Whispers + one Foretell Harm), each a point of persistent fire per round that also suppresses his own fire resistance. It is a **Cursebound action, not a focus spell** — it does not compete for the focus pool, so the real constraint is HP, not actions.
+- **Whispers of Weakness is worth taking for the +2 alone.** Against the sand monks he took it purely for the attack bonus with no useful information, and crit-killed Monk B with it.
+- **Check that the item actually helps before routing through it.** Against the Goliath Spider, Whispers revealed **Will** as the weak save — but the **Shadow Signet only converts to Fort or Reflex**, so it did nothing. Against Kannitri the same sequence went right: Fortitude revealed → Spirit Blast (Fortitude) one action later.
+- **Divine Wrath is the standout spell for this comp.** Enemies-only means zero friendly-fire discipline with four melee bodies in the room. It destroyed a ghost monk outright and needed no ally saves.
+- **Electricity is now a liability to check for.** Sand Monk Glass Armor triggers on electricity and then resists most of the party's damage types. Both Chain Lightnings still hit for 247 and 321, but the resistance persisted afterward.
+- **Ferrok remains the aggro magnet, unchanged from S3–S8** — downed by spider venom, critted by the catoblepas, blinded by sand monks, and hit for 101 through a shield block by Kannitri. Beseech the Sphinx / Vital Beacon / Martyr's Intervention default to him.
+- **Clutch's Black Pearl Aeon Stone is a real asset with a real limit** — it reflected Phantasmal Killer back at Yabin (+30 counteract; Yabin failed his own spell) but **cannot** reflect emanations like Frightful Moan, only targeted effects. He reads the wording correctly under pressure.
+- **A Tiny caster near the scrum still eats crits** — a burrowing sand monk surfaced behind Sovael and blinded him. Permanent flight and Elf Step exist; use them earlier.
+- **The GM's homebrew hero-point economy matters**: 3 per session, rationed, no hourly refresh. Only **two** were spent in all of S9 (Alastor's grab, Ferrok's venom save), and Ferrok was out by the final fight. The party is under-spending them.
