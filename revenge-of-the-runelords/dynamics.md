@@ -12,7 +12,7 @@
 | **Tinzen** | Dragonblood **Animist** + **Guardian** dedication | Caster-tank, shield wall, grappler | AC 36 (raised) / 34 base, 151 HP, shield 104 HP / hardness 13 |
 | **Kudu** | Kholo **Barbarian** (Dragon instinct) + Mauler + Fighter dedications | Primary melee damage, trip control | AC 31, **202 HP**, master Fort |
 | **Galan Magani** (DeeJay) | Nephilim (Angelkin) **Cleric**, cloistered + Medic/Time Mage/Rose Warden | Dedicated healer, control | AC 29, 150 HP, master Will |
-| **Psychic** (Looney) | **Oscillating Wave** | Ranged fire/cold blaster, AoE | *incoming* |
+| **Guar** (Levi "Looney") | **Psychic** (Oscillating Wave) + **Drake Rider** | Ranged fire/cold blaster, AoE, mounted skirmisher | AC 30, ~106 HP · **Gaston** (Riding Dragonet): AC 29, 128 HP |
 
 **Mythic callings** (no overlap): Liu = Sage's · Tinzen = Guardian's · Kudu = Hunter's · Galan = Caretaker's
 **Destinies** (no overlap): Liu = Mortal Herald · Tinzen = Wildspell · Kudu = Warshard Warrior · Galan = Broken Chain
@@ -27,7 +27,11 @@
 
 **Galan** — a healing engine: Battle Medicine, Continual Recovery, Ward Medic, Treat Condition, Assurance (Medicine), Restorative Channel, Healing Hands, Magic Hands, Fast Recovery. Plus **Wall of Roses** for control. Also runs Fiery Rebirth (same as Liu).
 
-**Psychic** — Oscillating Wave granted spells alternate elements at nearly every rank: fire (Breathe Fire, Blazing Bolt, Fireball, Volcanic Eruption) and cold (Ice Storm, Howling Blizzard, Frozen Fog, Arctic Rift). Covers the party's AoE and ranged needs.
+**Guar** — Oscillating Wave granted spells alternate elements at nearly every rank: fire (Breathe Fire, Blazing Bolt, Fireball, Volcanic Eruption) and cold (Ice Storm, Howling Blizzard, Frozen Fog, Arctic Rift). Covers the party's AoE and ranged needs. **He chooses which element starts** each encounter, then must alternate (Conservation of Energy); refocusing resets it.
+
+Also: **Psi Burst**, **Thermal Stasis** (party fire/cold resistance), **Frostbite**, **Lose the Path** (reaction — difficult terrain on a failed Will save), **Dispel Magic** and **Detect Magic** as mythic/known spells, **Thoughtsense** (30 ft, detects thinking creatures through walls), **Sixth Sense** (secret check to find haunts while exploring), **Hydra's Bond** (chance to notice an ally under domination).
+
+**Gaston** — the Riding Dragonet gets his own action each round even uncommanded, which Guar uses as free movement: *"I'm essentially quickened."* Commanding him grants a second action. INT 0 (not −4, via Drake Rider), so he can take exploration activities. Riding checks are Nature, but Guar doesn't roll them for his own companion.
 
 ---
 
@@ -62,11 +66,12 @@ Three melee bodies means Liu and Kudu flank without spending anything — on top
 
 **Liu is not the party's debuffer.** Tinzen owns that lane more completely — he has Bon Mot *and* Terrified Retreat, which Liu doesn't. Liu's unique lanes are **intel, weakness amplification, arcane scrolls, and reaction punishment**.
 
-**Correct the Story duplicated** (Liu + Tinzen). Fine — two crit-negations per fight is real insurance. **Unrivaled Retort** is the alternative if Liu wants uniqueness.
+**Correct the Story duplicated ×3** (Liu + Tinzen + **Guar**). Confirmed in play S1 — Guar used it twice, Liu once. Three crit-negations is deep insurance, but it's the most-duplicated resource in the party. **Unrivaled Retort** is the alternative if Liu wants uniqueness.
+→ **Worth noting:** it can be spent on *anyone's* incoming crit. Guar used both of his on other people (Kudu, then Liu). Call the target out loud before spending, so two people don't burn Mythic Points on the same hit.
 
 **Grapple lane is crowded** — Kudu and Tinzen both have Titan Wrestler + Binds That Tie. This is why Liu dropped Sword of Sealing.
 
-**Fire overlap** — Liu's runes should avoid fire; the psychic already owns that element, and fire is the most-resisted damage type (11.7% at level 10+). Astral + thundering keeps Liu's damage in rare types.
+**Fire overlap** — Liu's runes should avoid fire; the psychic already owns that element, and fire is the most-resisted damage type (11.7% at level 10+). Astral + shock keeps Liu's damage in rare types.
 
 ---
 
@@ -82,6 +87,30 @@ Three melee bodies means Liu and Kudu flank without spending anything — on top
 | Tanking | Tinzen (shield wall) + Liu (aura, AC 34) |
 
 **Net:** the party is a fortress with strong control and healing. Liu's contribution is **not** more tanking or more debuffs — it's the intel that aims everyone else, the weakness multiplier on Kudu, arcane utility nobody else has, and reaction punishment on a dense melee line.
+
+---
+
+## Observed in play — Session 1 (2026-07-21)
+
+**Liu is a crit magnet.** The greedspawn ignored the rest of the party for five rounds and put three natural 20s into him (63, 40, 54). AC 34 + Parry + Champion's Resistance + Galan means he can hold that attention — but it consumed Galan's biggest heal, a reaction spell, and one of *Guar's* Mythic Points. Budget for it rather than being surprised by it.
+
+**Reaction punishment is the real engine, and it over-delivered.** Retributive Strike ended the snow oni fight (71 damage on the counter, 81 → 10 HP), saved Guar 16, saved Galan, and halved Kudu's haunt damage. It fired in **every encounter it could**. Keeping a dense melee line adjacent is worth more than another Strike.
+
+**⚠️ The party has no battlefield control.** Galan has a wall spell and never cast it; nobody has reliable AoE control beyond Guar's blasts. Against entrenched casters behind greater cover this is the visible gap. Galan spotted the better line himself: **bait enemies through a hazard** instead of walking into their prepared room.
+
+**Skill-check hazards are a real failure mode.** The Haunted Forge could only be disabled by **Master Religion or Intimidation** — Guar had neither, Kudu never rolled Intimidation, and the party dealt **zero damage** to it across three rounds. Two PCs carried the whole encounter. Worth knowing who can and can't contribute before the next complex hazard.
+
+**Exploit Vulnerability aims Guar, as designed.** Synergy #3 works — but Guar burned both his sixth-rank slots and all three Mythic Points in one session. Getting him the element *before* he commits a top slot is the highest-leverage thing Liu does for someone else's sheet.
+
+---
+
+## Table agreement — metagaming (session 1, out of character)
+
+The DM raised this explicitly at session end. **He takes no position himself and will enforce the group majority.** All four players landed in roughly the same place:
+
+- **Tactical table talk is fine within limits.** Characters in the same room can obviously talk; six-second rounds don't allow ten-minute strategy sessions.
+- **Nobody should be omniscient.** Reading a creature's stat block, resistances, or spells **without a Recall Knowledge** is over the line. (Pax's framing: strategy discussion fine, quoting a monster's sheet is not. Kudu's: fine "as long as it doesn't become a blocker… someone's trying to quarterback." Galan's: no one should have "read the bestiary and know everything.")
+- The DM's stake: if table talk replaces everything, **Message, Mind Link and similar spells never get used**.
 
 ---
 

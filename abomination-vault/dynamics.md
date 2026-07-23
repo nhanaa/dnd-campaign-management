@@ -4,7 +4,7 @@
 
 | Character | Player | Class | Lane |
 |-----------|--------|-------|------|
-| **Argon Rath** | Pax | Orc (Hold-Scarred) Barbarian — Dragon/Barrage-Force | **Frontline · damage · fear** (Demoralize/Intimidating Glare). The party's only real muscle. |
+| **Argon Rath** | Pax | Orc (Hold-Scarred) Barbarian — Dragon/Barrage-Force | **Frontline · damage · Athletics control** (Slam Down shove/trip, grapple via Titan Wrestler; Intimidating Strike fear rider). The party's only real muscle. |
 | **Alder Ungram** | Ricardo | Human Thaumaturge (returning chakram) | **Recall Knowledge / occult investigation · versatile striker.** Esoteric + Diverse Lore, Dubious/Unmistakable Lore; uses scrolls (e.g. object reading). The party's "answers guy." |
 | **Ruben Falmoor** | Twan | Half-Elf Divine Sorcerer of Pharasma | **Healer · party face · undead lore.** Battle Medicine + Heal/Lay on Hands. Zero INT (dumped for CHA/WIS) — does the talking, not the deducing. |
 | **Xurl** | Ben | Halfling Monk (wrestler) | **Control (Grapple) · scout · mobility.** Athletics expert, former sailor (navigation/dead reckoning). Bioluminescent. Also the party's sharpest tactical reasoner. |
@@ -44,11 +44,12 @@
 
 ## Combat notes (validated in S2)
 - **The DM ("Ab") runs deliberately over-level, lethal combat** — most fights are 1–2 levels above the party. Expect grinding attrition fights, not curbstomps. Debuffs and positioning matter a lot at level 4.
-- **Argon = the wall + primary damage.** Debuted his S2 build: **Slam Down** (Strike+Trip, via Mauler), **Intimidating Strike**, **Demoralize/Intimidating Glare**. Holds doorways with 10-ft reach so nothing reaches the squishies; execution engine once the dice cooperate (multiple decapitation crits). Reactive Strike at L6 will make the wall much stronger.
+- **Argon = the wall + primary damage.** Current build (rebuilt as of S3): **Slam Down** (Shove/Trip + Strike, via Mauler), **Raging Athlete**, **Titan Wrestler**, **Intimidating Strike** (on-hit Frightened rider). The old fear package (Raging Intimidation / Intimidating Glare) is **gone** — secondary niche pivoted from *fear* to *Athletics maneuvers*. Holds doorways with 10-ft reach so nothing reaches the squishies; execution engine once the dice cooperate (multiple decapitation crits). **No Ghost Touch yet (broke)** — his slashing dice bounce off incorporeal undead; only the force rage bonus bites. Reactive Strike at L6 will make the wall much stronger.
 - **Xurl** — the grapple lane **whiffed all session** (running joke), but his **jumps / Stunning Blows / Stand Still / Assurance Demoralize** carried; also the party's rules-brain and conscience.
 - **Alder** — RK/Exploit Vulnerability lane confirmed (reads weaknesses every fight); squishy chakram thrower; keeps forgetting cover.
 - **Ruben** — healer/face confirmed (Lay on Hands, Heal, Enfeeble, Vitality Lash vs undead); first-time sorcerer; **psychopomp bloodline auto-refocuses** (can Treat Wounds + refocus together).
 
 ## Notes / cadence
-- **S1 was 100% RP** (improvised pirate side-quest); **S2 was ~65% combat** — the first real dungeon dive (3 fights). The 50/50 balance holds across sessions, not within them.
+- **S1 was 100% RP** (improvised pirate side-quest); **S2 was ~65% combat** — the first real dungeon dive (3 fights); **S3 was ~75% exploration/RP** — only two combats, both *fled* (the Furnace haunt, the unwinnable Chandriu ghost). The 50/50 balance holds across sessions, not within them.
+- **Xurl/Ben missed S3** (DM ran the token). When a player's out, the DM runs their PC minimally; don't build recap RP for the absent player.
 - Ruben's player (Twan) **was present** for S2 (the earlier "may miss 2026-07-15" prediction didn't pan out), though his internet died in the final fight and the DM rolled his saves by proxy.

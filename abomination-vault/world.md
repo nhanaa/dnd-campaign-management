@@ -4,7 +4,7 @@
 **Abomination Vault** (PF2e Remaster AP), levels 1–11, three volumes: *Ruins of Gauntlight → Hands of the Devil → Eyes of Empty Death*. Set in the frontier town of **Otari** on the Isle of Kortos, beside the **Gauntlight** — a dead lighthouse atop a vast megadungeon. The vault is the lair of the long-dead would-be tyrant **Belcorra Haruvex** (final boss, L12, incorporeal undead), whose undead and aberrations are seeping toward the surface.
 
 ## Party
-- **Argon Rath** (Pax) — Orc (Hold-Scarred) Barbarian, Barrage Dragon instinct — frontline, damage, fear. *(you)*
+- **Argon Rath** (Pax) — Orc (Hold-Scarred) Barbarian, Barrage Dragon instinct — frontline, damage, Athletics/maneuver control. *(you)*
 - **Alder Ungram** (Ricardo) — Human Thaumaturge, returning chakram — versatile striker, Recall Knowledge / occult investigation (Esoteric + Diverse Lore, Dubious/Unmistakable Lore).
 - **Ruben Falmoor** (Twan) — Half-Elf Divine Sorcerer of Pharasma, Battle Medicine — healer, party face, undead lore. Dumped INT for CHA/WIS.
 - **Xurl** (Ben) — Halfling Monk (wrestler) — Grapple control, mobility, athletics; former sailor. **Bioluminescent** (glowing arms/neck, unexplained). The X is silent ("Earl").
@@ -14,7 +14,7 @@
 ## Argon Rath's backstory
 Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderlands, the kind of clan that tattoos its survival into its skin. Somewhere far back, a dragon's blood crept into his line — and when his fury takes him, it surfaces as raw crackling **force**, sparking off his hide like a storm with nowhere to go. He earned every scar the honest way, defending a hold that never stopped bleeding, until there was nothing left to defend and no war worth staying for. So he shouldered his guisarme and went looking for a better one. Otari promised coin and quiet work — but the dead things clawing up out of the Gauntlight offered something Argon respects far more: an enemy that *deserves* killing. He signed on to go down into the dark, and hasn't looked back.
 
-**Ties to the mechanics:** Hold-Scarred scars = a hardened veteran (Warrior background); dragon-blood = the Barrage/force Draconic Rage; the roar that unsettles the dead = his fear kit (Demoralize/Intimidating Glare).
+**Ties to the mechanics:** Hold-Scarred scars = a hardened veteran (Veteran background); dragon-blood = the Barrage/force Draconic Rage; the hold-fighter's brawl = Athletics maneuvers (Slam Down shove/trip, grappling via Titan Wrestler, Raging Athlete), with a fear rider on his hits (Intimidating Strike).
 
 ## Otari NPCs
 - **Vandy** — halfling priestess at the Dawnflower Library (Sarenrae/Dawnflower faith). Cured Argon's ghoul fever gratis as goodwill to the new group; will charge next time.
@@ -56,3 +56,16 @@ Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderla
   - **Two ghouls** behind a secret door — **Argon** crit-decapitated one before it acted (44) and finished the other.
   - A **library** guarded by a **ghast + spellcasting ghoul + packmates** — cleared over another 40 min (Twan's internet died; DM rolled Ruben's saves by proxy). The caster offered immortality (refused), Harmed the room to heal its undead, and Argon smashed the last head off.
 - **Overheard the cult's plan** to sacrifice the captured **red-haired dwarf** and **found Belcorra's boss-room door.** Floor 3's undead largely cleared; party stopped at the threshold. **No XP announced on-mic; still level 4.**
+
+### Session 3 — The Weeping Scribe (2026-07-22)
+- **3 players + DM** — **Xurl/Ben absent** (Xurl run as a DM token; whiffed grapples continued as a bit).
+- **Explored Floor 3's scriptorium rooms.** Catalogued book-choked shelves (necromancy / sacrifice-ritual / regional-history texts), a cracked-mirror study, a suspiciously clean washroom with a mossy-skull fountain, and an **unfinished library expansion** (source of the mossy pick).
+- **The carved north double-stone door = Belcorra's tomb.** Alder identified it as a shrine to **Nhimbaloth, goddess of nothing/emptiness**, taking the souls of her followers. Later confirmed as the **point-of-no-return boss door**; the party wisely did **not** open it. *(Nhimbaloth spelling tentative — confirm with the DM.)*
+- **New tapestry** recovered (woman over a slain-but-breathing bear; serpentfolk raising a shrine around a mossy stone skull; a woman before a half-built lighthouse). Delivered to Wrin.
+- **A model of Absalom** that Alder — who has Absalom Lore — insists looks *nothing* like the real city. Unexplained.
+- **The Vengeful Furnace (Complex Haunt, Hazard 4).** Argon opened a floor hatch and released two burning ghosts; **Burn Knowledge** wiped his memory (**Stupefied 1 for 24 hours** — forgot why he came, then the party's faces). Crit him for 24; he landed 23 into the furnace but the party never realized it was a *haunt* (disable = Intimidation to cow / Religion to exorcise / destroy it) and simply left.
+- **Chandriu Invisar — the weeping scribe-ghost** (never named in-fiction). Run with the **Elite template** = level 7, PL+3 solo vs a level-4 party of three; with **Rejuvenation** she can't be killed by damage. She won init (31), opened with **Despairing Cry** (sorrow AoE), shrugged off everything (party dealt **6** of ~84 HP), and **crit Argon for 50.** Argon found the pendant in the dead scribe's hand — inscribed **Volluk** (Belcorra's assistant, her lost love) — and tried to reach her with it ("is this your love?"); it fell through her incorporeal hand and she kept grieving. **Party fled and sealed the door.**
+- **The lesson, late:** Alder's RK revealed ghosts are laid to rest by **talking them down** (over her grief for the assistant) or a **Religion exorcism** — not melee. Alder can also use his **scrying mirror** to view the past.
+- **In town:** sold the mossy **+1 pick** (~17 gp split); gave Wrin the tapestry; met **Mayor Osif**, who borrowed **two cannons.** Argon pitched a **decoy-shipment ambush** for the pirates (hide aboard, spring the trap) — launch **noon, two days out** (same day as the midnight dwarf-sacrifice; conflict unresolved).
+- **Downtime:** Alder made an impression on **Vandy** at the Dawnflower Library, angling for the library's **restricted collection on ghosts.** **Still level 4.**
+- DM's closing thesis: *"This is a dungeon, but not everything should be resolved with combat."*

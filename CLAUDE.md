@@ -34,7 +34,8 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
 | `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
-| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINING 2026-07-18 @ Lv12** |
+| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINED 2026-07-21 @ Lv12** (Pax's S1 = campaign's S2) |
+| `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | Argon Rath — Orc (Hold-Scarred) Barbarian (Barrage Dragon / Force) | **JOINED @ Lv4; DM ("Ab") runs deliberately over-level** |
 
 ## How to Help
 

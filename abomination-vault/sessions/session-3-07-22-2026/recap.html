@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3 — The Weeping Scribe</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-argon { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-argon { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Weeping Scribe</h1>
+<div class="subtitle">Abomination Vault — Session 3</div>
+<div class="meta-row">
+  <span class="meta-pill">July 22, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~2h 35m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">Gauntlight · 3rd Floor</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-explore" style="width:45%"></div>
+  <div class="comp-seg comp-rp" style="width:25%"></div>
+  <div class="comp-seg comp-combat" style="width:20%"></div>
+  <div class="comp-seg comp-social" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat (fled)</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-argon">
+    <div class="char-name">Argon Rath ★</div>
+    <div class="char-class">Orc (Hold-Scarred) · Barbarian (Dragon / Barrage-Force)</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human · Thaumaturge (returning chakram)</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf · Divine Sorcerer (Pharasma; Psychopomp)</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling · Monk (wrestler)</div>
+    <div class="char-player">Ben — absent (DM-run)</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>A quiet, careful floor turned loud twice — and both times the smart move was to leave. Picking over Floor 3's book-choked scriptorium rooms, the party catalogued tapestries, a carved door to <strong>Nhimbaloth</strong> (goddess of emptiness), and a model of an Absalom that doesn't match the city Alder knows. Then Argon, hunting for a secret door, pried open a hatch in a too-hot little chamber and woke the <strong>Vengeful Furnace</strong> — a haunt whose burning ghosts <em>ate a piece of his memory.</em> He spent the rest of the night not remembering why he'd come to the Gauntlight at all, leaning on companions he only half-recognized.</p>
+  <p>Deeper in, a scribe's ghost rose from a chain-shirted skeleton and ordered the party back to their desks. Bluffs failed, she screamed, and the fight that followed had no version the party could win: she went first, wailed them into sorrow, shrugged off everything they threw (six damage, total), and dropped Argon with a single fifty-point strike. But Argon had noticed the pendant in the dead scribe's hand — and instead of swinging, he held it up: <em>"Is this your love?"</em> She stopped. She reached for it. It fell through her incorporeal hand, and she went back to weeping for a man who betrayed her. The party ran, closed the door, and only <em>afterward</em> learned the truth: ghosts like her aren't meant to be beaten. You talk them down, or you lay them to rest — and they'd been holding the key the whole time.</p>
+  <p>They regrouped in Otari: delivered a pristine tapestry to Wrin, planned a decoy-shipment ambush for the lumber pirates with Mayor Osif, and — broke to the bone — bought a few scrolls. Alder spent his downtime befriending the priestess Vandy, angling for the library's restricted collection on ghosts. The DM closed on the thesis the whole night had been building toward: <em>"Not everything should be resolved with combat."</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act explore">
+    <div class="act-label">Act I · Explore · The Scriptorium Rooms</div>
+    <div class="act-card">
+      <h3>Book-choked rooms, five doors</h3>
+      <ul>
+        <li>Picked up where S2 ended — the bookshelf chamber with five doors. Searched bodies (nothing) and shelves: necromancy, sacrifice-ritual, and regional-history texts, all too vague to pin the cult's ritual without knowing <em>which</em> ritual.</li>
+        <li><strong>Alder floated an infiltration plan</strong> — use his <strong>Masquerade Scarf</strong> to disguise as a ghoul and scout the ritual. Shelved when the rooms turned out empty of ghouls.</li>
+        <li>Recovered a <strong>well-preserved tapestry</strong>: a woman over a slain-but-breathing bear in a snowy forest; in the blood's reflection, serpentfolk raising a shrine around a <strong>mossy stone skull</strong>; a second pool showing a woman before a half-built lighthouse.</li>
+        <li><strong>Alder identified the carved north double-stone door</strong> as <strong>Nhimbaloth, goddess of nothing/emptiness</strong>, taking the souls of her followers — later confirmed to be <strong>Belcorra's tomb: the boss door.</strong></li>
+        <li>Explored a cracked-mirror study, a suspiciously <strong>clean washroom</strong> with a mossy-skull fountain, and a <strong>model of Absalom</strong> that Alder — who has Absalom Lore — swears looks <em>nothing</em> like the real city (though he couldn't say why; he rolled a 2).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · The Vengeful Furnace (Haunt)</div>
+    <div class="act-card">
+      <h3>A hatch better left shut</h3>
+      <ul>
+        <li>In a small, unnaturally <strong>hot</strong> chamber, Argon searched for a secret door, lifted a barrel, and opened a <strong>metal hatch in the floor</strong> — releasing <strong>two burning ghosts.</strong></li>
+        <li><strong>Burn Knowledge</strong> ate his memories in stages: the first failed save took <em>why he was in the Gauntlight</em>; a second burning lash took his companions' faces too (they flickered back as he fled). Left <strong>Stupefied 1 for 24 hours.</strong></li>
+        <li>The ghosts lashed him for <strong>24</strong> on a crit. Confused, Argon swung his guisarme twice and connected (23 damage into the furnace — not enough to destroy it), then made the only sane call and <strong>ran</strong> as Ruben and Alder pulled him out.</li>
+        <li><strong>The party never learned it was a haunt.</strong> No one was told there were disable options — Intimidation to cow the spirits, Religion to exorcise, or destroying the furnace — so it read as "a wall spat fire and stole Argon's memory."</li>
+        <li>Ruben, playing medic, talked the panicking amnesiac down — <em>"Easy there. Breathe, breathe"</em> — and diagnosed the loss as magical and temporary.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · The Weeping Scribe</div>
+    <div class="act-card">
+      <h3>The ghost that couldn't be beaten</h3>
+      <ul>
+        <li>A scriptorium with writing desks, dried inkwells, and a <strong>skeleton in a shiny chain shirt.</strong> Stepping in, a <strong>ghost</strong> appeared: <em>"Sit down, start working! You're late!"</em></li>
+        <li>Bluffs to placate her failed — Alder's <em>"the day's ended, shift change,"</em> then <strong>Argon's deadpan "I'm here to hand in my resignation letter."</strong> She screamed, and combat began.</li>
+        <li>She was a wall the party couldn't climb: won initiative (31), opened with <strong>Despairing Cry</strong> (a sorrow AoE — Ruben and Xurl slowed), and the party's entire offensive output was <strong>six damage.</strong> Only Ruben's <strong>Vitality Lash</strong> chipped her; Alder's chakram critically missed and Argon's Intimidating Strike missed.</li>
+        <li><strong>She crit Argon for 50</strong> with a ghostly hand; Ruben poured in a Heal to keep him standing.</li>
+        <li><strong>The real turn:</strong> Alder pulled a <strong>pendant</strong> — inscribed with the name <strong>Volluk</strong>, Belcorra's assistant — from the dead scribe's hand. <strong>Argon held it up: "Is this your love?"</strong> She calmed and fixed on it, but when he tried to pass it over, <strong>it fell through her incorporeal hand</strong> and she resumed weeping: <em>"Why did you betray me, my love?"</em></li>
+        <li>Recognizing there was no win here, the <strong>party fled and sealed the door.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act IV · Mystery · The Lesson, Late</div>
+    <div class="act-card">
+      <h3>The answer they were holding</h3>
+      <ul>
+        <li>Safely out, Alder's Recall Knowledge finally paid off: <strong>ghosts are put to rest, not beaten down</strong> — talk them into letting go, or force it via a <strong>Religion exorcism</strong> (or, brutally, grind them to 0). The pendant/lost-love story is exactly the lever to talk <em>this</em> one down.</li>
+        <li>The DM noted Alder could use his <strong>scrying mirror</strong> to look into the past and reconstruct what happened between the scribe and the assistant.</li>
+        <li>Confirmed the <strong>Nhimbaloth-carved north door is the point of no return</strong> — <em>"once you open it, there's no turning back."</em> This is <strong>Belcorra's tomb.</strong> Left unopened; the party isn't ready.</li>
+        <li>Belatedly identified the S2 <strong>Gibbering Mouther</strong> as an import from the <strong>underworld</strong> — a thinking blob that doesn't belong on the surface.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act V · Social · Otari</div>
+    <div class="act-card">
+      <h3>Town, planning, downtime</h3>
+      <ul>
+        <li>Back to town, low on everything. Appraised the <strong>mossy magic pick</strong> (a +1 pick, similar make to Argon's weapon) and sold it off; split ~17 gp.</li>
+        <li>Delivered the pristine tapestry to <strong>Wrin Sivinxi</strong>, who was delighted; Alder made a warm impression thanking her — <em>"it's a collaborative effort — between us all, we'll solve this mystery."</em></li>
+        <li><strong>Mayor Osif</strong> reported he'd borrowed <strong>two cannons.</strong> <strong>Argon pitched a decoy-shipment ambush</strong> — hide aboard, let the pirates board, spring the trap (Alder refined it: hide in the barrels). Launch: <strong>noon, two days out.</strong></li>
+        <li>The timing conflict looms: the <strong>midnight dwarf-sacrifice</strong> falls the same day as the pirate raid.</li>
+        <li><strong>Downtime:</strong> Alder courted <strong>Vandy</strong> at the Dawnflower Library as a contact, angling for the restricted collection on ghosts — <em>"knowledge is power."</em> She'll see what she can dig up.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Complex Haunt · Hazard 4</div>
+  <h3>The Vengeful Furnace</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Type</div><div class="value">Haunt (Hz 4)</div></div>
+    <div class="combat-stat"><div class="label">Trigger</div><div class="value">Opened hatch</div></div>
+    <div class="combat-stat"><div class="label">Save</div><div class="value">DC 23 Will</div></div>
+    <div class="combat-stat"><div class="label">Lash</div><div class="value">+15 · crit 24</div></div>
+    <div class="combat-stat"><div class="label">Outcome</div><div class="value">Fled · active</div></div>
+  </div>
+  <p>Not a fight so much as an ambush the party couldn't identify. Argon triggered it opening the floor hatch.</p>
+  <ul>
+    <li><strong>Burn Knowledge</strong> (DC 23 Will) — Argon failed twice (‑4, then ‑9 while stupefied) → <strong>Stupefied 1 for 24 hours</strong>, memory wiped in two stages.</li>
+    <li><strong>Burning Lash</strong> crit (rolled 34 vs AC 21) → <strong>24 damage</strong> (2d8 fire + 2d8 mental, doubled).</li>
+    <li><strong>Argon</strong> landed two guisarme hits (23 & 24 vs AC 21) → <strong>23 damage</strong> into the furnace (HP 60) — <em>not destroyed.</em></li>
+  </ul>
+  <p class="combat-note">A fair, on-level Hazard 4 — but run without the "this is a haunt" read, which removed all counterplay. The party left the room (a haunt resets when empty).</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Elite Ghost · Solo PL+3 (unwinnable as fought)</div>
+  <h3>The Weeping Scribe — Chandriu Invisar</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Enemy</div><div class="value">Elite ghost</div></div>
+    <div class="combat-stat"><div class="label">Init</div><div class="value">She 31</div></div>
+    <div class="combat-stat"><div class="label">AC</div><div class="value">25</div></div>
+    <div class="combat-stat"><div class="label">HP</div><div class="value">~84 · Rejuv</div></div>
+    <div class="combat-stat"><div class="label">Party dmg</div><div class="value">6</div></div>
+    <div class="combat-stat"><div class="label">Outcome</div><div class="value">Fled</div></div>
+  </div>
+  <p class="combat-note">The party never learned her name in-fiction. She is <strong>Chandriu Invisar</strong>, run with the <strong>Elite template</strong> — a book level-6 ghost pushed to level 7 (PL+3) against a level-4 party of three. With <strong>Rejuvenation</strong>, she can't be permanently killed by damage; the intended resolution is a Diplomacy talk-down (over her grief for Volluk, the pendant's owner) or a Religion exorcism.</p>
+  <p><strong>Initiative:</strong> Chandriu 31 · Ruben 22 · Alder 16 · Xurl 12 · Argon 12.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Despairing Cry</strong> (DC 26 Will): Alder crit-success (nat 20); <strong>Argon crit-failed, then hero-pointed the reroll into a nat 20 → crit success</strong>; Ruben hero-pointed his own crit-fail down to a plain fail → Slowed 1; Xurl failed → Slowed 1. <em>Two hero points on one wail.</em></li>
+    <li><strong>Alder:</strong> Exploit Vulnerability vs DC 23 → failed (personal antithesis only); Instructive Strike chakram vs AC 25 → <strong>critical miss.</strong></li>
+    <li><strong>Ruben:</strong> Vitality Lash — she made the basic Fort save → <strong>6 damage</strong> (the party's only damage all fight).</li>
+    <li><strong>Argon:</strong> Intimidating Strike guisarme vs AC 25 → <strong>miss.</strong></li>
+    <li><strong>Xurl</strong> (DM-run): Slowed — managed only Crane Stance and a move.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Ghostly Hand</strong> vs Argon (AC 21) → <strong>crit for 50 void.</strong> It nearly folded him; Ruben answered with a 24-point Heal.</li>
+    <li><strong>Xurl</strong> (DM-run): two Crane Wing strikes vs AC 25 → miss/miss; a grapple → critical failure.</li>
+    <li><strong>The pendant beat:</strong> Alder retrieved the pendant; <strong>Argon showed it to her — "Is this your love?"</strong> She calmed and fixed on it, but the hand-off fell through her incorporeal grasp and she resumed grieving.</li>
+    <li><strong>Party fled</strong> and sealed the door.</li>
+  </ul>
+  <p class="combat-xp">Total party damage to Chandriu: <strong>6 of ~84 HP.</strong> No win condition was available in the room — fleeing was correct.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-argon">
+    <h4>Argon Rath · the Amnesiac Who Kept His Head</h4>
+    <p>Pax's orc got the worst of the night mechanically and turned it into the session's emotional spine. The Furnace wiped his memory in stages — first <em>why he'd come to the Gauntlight</em>, then his companions' faces — and he <strong>played it straight the whole way through</strong>, half-recognizing his own party and choosing to trust them anyway: <em>"Well, I guess I'll just have to follow you guys. I'll just trust you guys."</em> He carried it clean into the next day — <em>"I got a good rest, I still don't really remember why we went there, but I'll just follow you guys."</em> Loyalty written without a memory to justify it, and the best RP at the table this session.</p>
+    <p>He was also the party's <strong>comic pressure valve and its conscience.</strong> The deadpan "I'm here to hand in my resignation letter" to a screaming ghost is an all-timer — but under the jokes he was the one steering risk all night ("I don't want to fight at this HP," "we need to be better prepared"), and in town it was Argon who <strong>pitched the decoy-shipment ambush.</strong></p>
+    <p>And crucially, <strong>Argon found the answer nobody else reached for.</strong> While the others traded attacks, he clocked the pendant, connected it to the ghost's grief, and tried <em>empathy</em> — "Is this your love?" — the exact non-combat solution the DM later confirmed. He was the first to see a person to be reached, not a monster to be killed.</p>
+    <p class="combat-note">The frustration is real and separate: in the actual combat rounds he had almost no agency — memory-wiped, one missed swing, then a 50-damage crit. His lone mechanical bright spot was hero-pointing a crit-failed save into a nat-20. The RP was rich; the fight gave him little to do. Both things are true.</p>
+  </div>
+
+  <div class="spotlight s-alder">
+    <h4>Alder Ungram · the Answers Guy</h4>
+    <p>The party's investigator ran the knowledge lane all night and did it with warmth. He <strong>IDed the Nhimbaloth door</strong>, recognized the mismatched Absalom model, pitched the <strong>ghoul-disguise infiltration</strong> plan, and — after the ghost fight — pieced the whole tragedy together: <em>"This might be Belcorra's assistant… I guess she loved him? I don't know if he loved her back, though."</em> That deduction, plus the RK on how to lay ghosts to rest, is what converted a bad fight into a plan.</p>
+    <p>He was also the party's <strong>face and its glue</strong> — bluffing the ghost ("the day's ended, shift change"), thanking Wrin sincerely, gently offering to catch amnesiac Argon up "over a beer," and spending his downtime cultivating Vandy for the library's restricted ghost collection. His thesis: <em>"Knowledge is power — knowing anything about these creatures is the best way to deal with them."</em></p>
+  </div>
+
+  <div class="spotlight s-ruben">
+    <h4>Ruben Falmoor · the Pharasman Anchor</h4>
+    <p>Running on almost no sleep, Ruben still held the party together as <strong>healer and moral center.</strong> His clearest faith beat landed early, surveying the necromantic rooms: <em>"There's a lot of blasphemy here. Raising the dead? It spits on the concept of life."</em> Pure Pharasma.</p>
+    <p>In the fights he kept people upright — the <strong>only clean damage</strong> on the ghost (Vitality Lash), a big Heal to keep a battered Argon on his feet, and the discipline to <strong>hero-point a crit-failing save</strong> down to a mere fail ("I can't risk it — as a spellcaster, I can't risk it"), one of two hero points burned on that wail. His bedside manner with the panicking, memory-wiped Argon — <em>"Easy there. Breathe, breathe"</em> — was the quiet heart of the Furnace aftermath. And he named the mood honestly: <em>"A second time we got our shit rocked since we've been down here."</em></p>
+  </div>
+
+  <div class="spotlight s-xurl">
+    <h4>Xurl · in absentia</h4>
+    <p>Ben was out, so Xurl was a DM-moved token — and the running gag survived even under DM control: his Crane Wing strikes and a grapple all whiffed (the grapple a crit-fail). Argon dragged his token along by hand — <em>"I'll bring him in — let's just pretend he's following us."</em></p>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Well-preserved tapestry</div>
+    <div class="loot-source">Scriptorium wall</div>
+    <div class="loot-note">Delivered to Wrin; feeds Belcorra research (bear / serpentfolk / lighthouse imagery).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Mossy +1 pick</div>
+    <div class="loot-source">Unfinished expansion room</div>
+    <div class="loot-note">Magic (same make as Argon's weapon); appraised and sold (~17 gp split).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Volluk's pendant</div>
+    <div class="loot-source">The scribe's skeleton</div>
+    <div class="loot-note">The key to laying Chandriu to rest — kept.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">A few scrolls (heal + combat)</div>
+    <div class="loot-source">Town shopping</div>
+    <div class="loot-note">Bought cheap; Alder already carried a fear scroll for the next fight.</div>
+  </div>
+</div>
+<div class="xp-banner">Experience · <strong>none announced on-mic</strong> — the party remains <strong>level 4.</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Argon:</strong> "Actually, I'm here to hand in my resignation letter."<span class="attribution">Deadpanning a bluff at a screaming ghost demanding the party get back to their scribe-desks.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "You know what? I should show the pendant to the ghost. Like — is this your love?"<span class="attribution">The first person to reach for empathy instead of steel — the exact non-combat solution, glimpsed mid-fight.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "I got a good rest. I still feel like I don't really remember why we went there, but I'll just follow you guys."<span class="attribution">The Furnace's memory-wipe, roleplayed straight through into the next day — loyalty with no memory to justify it.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "The chance to run, that is. Yeah — run, run, run, run. Fuck this shit."<span class="attribution">Calling the retreat from Chandriu.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I don't know if you guys are familiar with Nhimbaloth, the goddess of emptiness… that door seems to be her taking the souls of her followers."<span class="attribution">The Recall Knowledge lane, in his voice — reading the carved door.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "No, no, no. The day's ended. Shift change."<span class="attribution">His own deadpan bluff at the scribe-ghost, one beat before Argon's resignation line.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I guess she loved him? I don't know if he loved her back, though."<span class="attribution">Piecing the scribe's tragedy together from the pendant and the name.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "In my opinion, there's a lot of blasphemy here. Raising the dead? It spits on the concept of life."<span class="attribution">Pharasman conviction, surveying the necromantic library.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Easy there. Easy there. Breathe, breathe."<span class="attribution">Talking a panicking, memory-wiped Argon down after the Furnace — before diagnosing the memory loss as magical and temporary.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "God, this feels so bad. A second time we got our shit rocked since we've been down here."<span class="attribution">Honest morale check after fleeing the ghost.</span></blockquote>
+
+<blockquote><strong>The scribe-ghost:</strong> "Why, my love? Why did you have to leave me?"<span class="attribution">Chandriu's grief — the whole encounter's real shape, weeping over a betrayal five centuries old.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Chandriu, unfinished.</strong> Return to <strong>talk her down</strong> (her grief over Volluk, named on the pendant) or <strong>exorcise</strong> her via Religion. The pendant and Alder's scrying mirror (to view the past) are the tools.</li>
+  <li><strong>Belcorra's tomb — the Nhimbaloth-carved north door.</strong> The point-of-no-return boss door, found and deliberately left unopened.</li>
+  <li><strong>The pirate ambush</strong> — decoy shipment, two cannons, noon in two days.</li>
+  <li><strong>The dwarf sacrifice</strong> — midnight, the same day as the pirate raid. The timing conflict is unresolved.</li>
+  <li><strong>Vandy's restricted collection</strong> — Alder's downtime seed; holy/ghost knowledge pending her goodwill.</li>
+  <li><strong>The mismatched Absalom model</strong> — why does a model of Absalom look <em>wrong</em> to someone with Absalom Lore?</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Thesis</span>
+  <p>The DM called the night on the lesson the whole session had been teaching:</p>
+  <div class="big-line">"Not everything should be resolved with combat."</div>
+  <span class="speaker">— Ab, after the party wisely walked away from a fight it could never win</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Argon Rath's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Argon did this session</h3>
+<ul>
+  <li>Searched the scriptorium rooms; opened a floor hatch that released the <strong>burning ghosts</strong> (the Furnace). Lost 24 hours of memory to it — <strong>can't remember why I came to the Gauntlight.</strong></li>
+  <li>Hero-pointed a crit-failed save to a nat 20 to shrug off her sorrow-wail; then took a <strong>50-damage crit</strong> from her ghostly hand — survived on Ruben's Heal.</li>
+  <li>Pulled the one real thread in the ghost fight: showed her the <strong>pendant</strong> — "is this your love?" She calmed but couldn't take it (my hand, her hand — it fell through).</li>
+  <li><strong>Called the retreat.</strong> Twice today I was the one saying stop, heal, prepare, don't fight at this HP.</li>
+  <li>In town: <strong>pitched the decoy-shipment ambush</strong> for the pirates. Broke — bought almost nothing.</li>
+</ul>
+
+<h3>Things Argon knows that the party does not</h3>
+<ul>
+  <li>Not much this session — the memory loss cut the other way. <strong>I know less than the party right now</strong>, including my own reason for being here.</li>
+  <li>I was <strong>first to the pendant idea.</strong> The others were still swinging when I saw she was grieving, not just attacking.</li>
+</ul>
+
+<h3>What Argon is thinking about</h3>
+<ul>
+  <li><strong>The ghost is beatable — just not with the guisarme.</strong> Talk her down about the assistant, or exorcise her (Religion). The pendant is hers. Next time we come back with a plan, not blades.</li>
+  <li><strong>My kit does almost nothing to ghosts right now.</strong> Slashing eats their resistance; only the force in my rage bites, and it's not enough. I need <strong>Ghost Touch</strong> — and I can't afford it (75 gp; I have ~1 gp). Money is the wall.</li>
+  <li><strong>Two over-level threats in one room, back to back</strong> (the Furnace, then her). Ab runs it lethal. Don't walk into rooms half-healed. Don't open hatches I don't have to.</li>
+  <li><strong>The boss door is right there</strong> — Belcorra's tomb. We're not ready. Level 4, broke, no ghost gear. Not yet.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Will the memory come back tomorrow when the Stupefied ends, or is something still missing?</li>
+  <li>What actually happened between the scribe and <strong>Volluk</strong> (Belcorra's assistant) — can Alder's mirror show us?</li>
+  <li>The <strong>pirate raid</strong> and the <strong>dwarf sacrifice</strong> land the same day. Which do we save? Can we do both?</li>
+  <li>What is <strong>Nhimbaloth's</strong> door for — and why is that model of Absalom <em>wrong</em>?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

@@ -105,4 +105,35 @@ Deities of world-ending or mass destruction (Rovagug, Groetus) are poor fits.
 
 | # | Date | Summary |
 |---|---|---|
-| — | — | *Campaign not yet started* |
+| — | 2026-07-14 | *Session zero + arrival in Xin-Eurythnia (before Liu joined).* Missives from Queen Sorshen, VIP treatment, and the shared dream-vision: **Lirilaru** awakens the party's mythic power, **the Ashen Man** hijacks the dream and shows them Golarion destroyed. **Aurora's** priesthood, having had the same nightmares, uncovers the **Risen of the Triad**. |
+| 1 | 2026-07-21 | **The Dawnsilver Workshop.** Liu joins the party mid-fight against an elite snow oni doorman; the party accepts his surrender, heals him, and trades his life for intel on the cult. Four **greedspawn** cleared, a **haunted forge** exorcised, and eight **Trinity Initiates** engaged — *fight unfinished, resumes next session.* |
+
+*(Session 1 is Liu's first; the campaign's own first session was 2026-07-14.)*
+
+---
+
+## Campaign-specific developments
+
+### The Risen of the Triad
+A cult operating out of a ruined **Dawnsilver workshop** in Xin-Eurythnia, three days before the Circle of Open Hands ceremony. Per the hired doorman: **a dozen or more, all spellcasters**, and they believe they are **bringing back runelords**. Their leader is a burly, haughty man with a mustache and goatee who handles payments personally — not yet seen by the party.
+
+Their rank and file are **Trinity Initiates** (150 HP, Mystic Armor, self-cast concealment, *Vision of Death*). One survivor of the party's first strike is measurably sharper than the rest — a probable lieutenant.
+
+### ⚠️ "Gimel" — unresolved
+Liu's **successful** Recall Knowledge, chasing the doorman's half-remembered version of the leader's name (*"Limmel, Gimmel, Gabby, something"*), returned: **a Runelord of Envy named Gimel, who lived 7,000 years ago** — *"but it couldn't possibly be him."*
+
+**This is recorded as heard and is NOT canon.** It conflicts with this campaign's established Runelord of Envy, **Belimarius**, who is alive and ruling western New Thassilon. Gimel may be an alias, a namesake, a devotee, a DM-specific NPC, or a misdirection. **Confirm with the DM before treating it as fact.**
+
+### Locations
+- **The Dawnsilver workshop** — a ruined smithing hall, partially buried by an ancient lava flow. Rooms cleared so far: the entry hall (freezing cloud), the greedspawn room (a **+1 greater striking dawnsilver greatpick** recovered from the lava), and the **forge chamber**, which housed a complex haunt of burning spirits hurling molten dawnsilver. Doors remain unopened to the north (silent) and east (voices).
+
+### NPCs
+| NPC | Status |
+|---|---|
+| **Aurora** | Priestess; gave Liu his writ. Wants **hard evidence** the cult threatens the ceremony, to bring to Queen Sorshen. |
+| **Lirilaru** | "A runelord that never was," existing solely in the Dreamlands. Awakened the party's mythic power because she foresees futures where they must avert an apocalypse. |
+| **The Ashen Man** | Hijacked Lirilaru's dream and showed the party Golarion's destruction. Nature unknown. |
+| **Haruto** | Elite snow oni (level 14), hired as a doorman by the cult. **Surrendered, was healed by Galan, and released alive.** Claims 70 dependents. Refused to help against the cult — bad for his reputation — but left on good terms. |
+
+### The table
+**DM: Tom Brister** — professional GM, runs eight Pathfinder campaigns a week, and has run *Revenge of the Runelords* **three times through**. Runs rules-as-written with minimal house rules, high player agency, and a couple of house-adjusted mythic rules. He gives out generous Recall Knowledge results (full trait and save profiles, often the whole stat block on a success).
