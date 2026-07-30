@@ -121,4 +121,31 @@ A methodical cleanup sweep of Willowshore. Goal: re-bless the three copper coins
 
 ---
 
+### Session 3 (2026-07-24) — The Cerulean Teahouse (First morning of summer, 7108 IC)
+*All five PCs present (Mu-Jin back). Party **leveled 1→2** mid-session (fiat "mixed-XP" catch-up, not earned XP).*
+
+The party finished clearing monster-held downtown Willowshore and ran the "long-necked man" to ground in the **Cerulean Teahouse.**
+
+**Modoku identified, and killed:**
+- The S2 invasion lead — the bald, sharp-toothed, **long-necked man** — is a variant **rokurokubi** named **Mo Douqiu the Hedonist.** He ran the teahouse as a slaughterhouse (a back room of villagers **flayed or partially digested**, hung from the beams) because he found Willowshore "the most boring place ever" and wanted to author a horror story: *"Admit it — haven't you been having fun?"* The party refused; **Zhen killed him** (nodachi), and **Iryoku killed his pet weasel.**
+- With the yokai dead and the last caged villagers freed, the GM declared **Willowshore reclaimed from the monsters.** The downtown occupation is broken.
+
+**The teahouse deed & Fumeiyoshi (new quest):**
+- A **Last Will & Testament of Qing Mai-Lai** (the teahouse's late aristocrat owner, no surviving heirs) deeds the teahouse to whoever recovers **two pearls she threw into "Fumeiyoshi's eyes"** — two ponds north of town locally called the **Eyes of Fumeiyoshi.** Standing quest.
+- **Fumeiyoshi** — a Tian deity (envy / laziness / undeath) — surfaces here for the first time, on the will and the ponds.
+
+**Combat (six fights; five trivial, one with teeth):** a house of *drunk* jinkin holding captives (a GM nat-20 tear dropped Kaoru to 3 HP), a cockroach swarm in a stable of slaughtered horses (Kaelen one-shot), three **animated cookware** objects demanding the party "join the parade" for Willowshore's "new rulers," a **giant frog** (disarmed + tongue-grabbed Zhen), a hidden **variant forest scorpion**, and the boss. Only Mo Douqiu's **persistent bleed** genuinely threatened the party.
+
+**New NPCs (in play):**
+- **Mo Douqiu the Hedonist** — variant rokurokubi, the S2 "Modoku"; ran the teahouse; **dead.** Left a Legerdemain Handkerchief and his keys.
+- **Qing Mai-Lai** — the teahouse's late founder/aristocrat; set the two-pearls inheritance riddle. Deceased (backstory only).
+- **Yuli Sanmi** and **Hu Lelong** — captive villagers freed from the jinkin house; escorted to safety.
+- **The stranger at the outskirts** — the session-closing cutscene: a **mysterious figure watching Willowshore from afar** (the party could not reach them). Unresolved — possibly a sign Mo Douqiu was a chapter, not the whole book.
+
+**New locations (in play):** the **Cerulean Teahouse** (downtown; now cleared and party-claimable pending the pearls); the outdoor prison cell / stables (slaughtered horses); the **Eyes of Fumeiyoshi** (two ponds north of town — named, not yet visited).
+
+**Carried-forward threads:** the **wrong-gods lantern** (S2) is still unresolved and still hidden from Granny Hu; **Ugly Cute**, the **governor's manor**, and **"blood will rise"** remain open.
+
+---
+
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

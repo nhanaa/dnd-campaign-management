@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 2 — The Rune of Greed</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7a4bc014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d8632c14 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d8632c12 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-liu { border-left-color: var(--shadow-bright); }
+.char-kudu { border-left-color: var(--ember); }
+.char-galan { border-left-color: var(--rose); }
+.char-guar { border-left-color: var(--teal); }
+.char-tinzen { border-left-color: var(--silver); opacity: 0.72; }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-box.unfinished { border-left-color: var(--gold); }
+.combat-box.hazard { border-left-color: var(--shadow); }
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-liu { border-left-color: var(--shadow-bright); }
+.s-kudu { border-left-color: var(--ember); }
+.s-galan { border-left-color: var(--rose); }
+.s-guar { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Rune of Greed</h1>
+  <div class="subtitle">Session 2 — the Dawnsilver workshop falls, and a dead runelord gets a name</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-07-28</span>
+    <span class="meta-pill">PF2e Remastered · Mythic</span>
+    <span class="meta-pill">Level 12</span>
+    <span class="meta-pill">~3h 00m</span>
+    <span class="meta-pill">Two days to the ceremony</span>
+  </div>
+</header>
+
+<div class="note-banner">
+  <strong>Tinzen's player (Aaron) was absent again.</strong> Tinzen did not appear in either fight and was not run as an NPC this week; he drew a full share of the loot off-screen. Four players and the DM at the table. The session opens <strong>mid-round</strong>, picking up the Trinity Initiate fight exactly where Session 1 stopped.
+</div>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:54%"></div>
+  <div class="comp-seg comp-explore" style="width:13%"></div>
+  <div class="comp-seg comp-rp" style="width:12%"></div>
+  <div class="comp-seg comp-social" style="width:11%"></div>
+  <div class="comp-seg comp-loot" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat 54%</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration 13%</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Mystery 12%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social 11%</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 10%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-liu">
+    <div class="char-name">Liu Heifeng</div>
+    <div class="char-class">Tengu (Sylph) Thaumaturge — Weapon + Tome / Champion (justice) / Spirit Warrior</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kudu">
+    <div class="char-name">Kudu</div>
+    <div class="char-class">Kholo Barbarian (Dragon instinct) — Mauler / Fighter</div>
+    <div class="char-player">Bob</div>
+  </div>
+  <div class="char-card char-galan">
+    <div class="char-name">Galan Magani</div>
+    <div class="char-class">Nephilim Cleric (cloistered) — Medic / Time Mage / Rose Warden</div>
+    <div class="char-player">DeeJay</div>
+  </div>
+  <div class="char-card char-guar">
+    <div class="char-name">Guar</div>
+    <div class="char-class">Psychic (Oscillating Wave) — Drake Rider, riding <strong>Gaston</strong></div>
+    <div class="char-player">Levi "Looney"</div>
+  </div>
+  <div class="char-card char-tinzen">
+    <div class="char-name">Tinzen</div>
+    <div class="char-class">Dragonblood Animist — Guardian <em>(absent, off-screen)</em></div>
+    <div class="char-player">Aaron — absent</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+  <p>The cliffhanger resolved fast and ugly. Seven Trinity Initiates were still standing behind their overturned tables when the session picked up, and <strong>Galan</strong> opened the round with a <strong>Divine Wrath</strong> that caught all seven and produced four critical failures at once — sickened, slowed, and suddenly unable to spend three actions on anything. He then walked the DM through his own spell's degrees of success to make sure the riders actually stuck. That one burst decided the encounter; everything afterwards was collection. <strong>Guar</strong> spent a Mythic Point to push a 4th-rank Fireball, recast as cold, to <strong>DC 37</strong> and dropped it on the pile, and from there it was cleanup: forty minutes and four Foundry rounds turned seven entrenched casters into seven bodies, with <strong>Liu killing three, Kudu two, and Guar two</strong>. The initiates' entire answer was to chip Liu for 8, 11 and 7. He described it accurately at the time: <em>"I'm just getting chipped down."</em></p>
+
+  <p>The last one didn't die on the floor. She flew fifteen feet up onto a balcony where nobody could reach her — and she was, by some distance, the luckiest thing in the room. She cast the Vision of Death that opened the session, she was the only initiate to save against Divine Wrath, she rolled a natural 20 against the Fireball, and she went the entire fight without ever carrying a single condition. <strong>Galan reached for the right idea</strong> — <em>"I want to try to dispel her flying effect"</em> — but the Dispel Magic he had prepared was too low-rank to counteract a 4th-rank Fly, which he didn't yet know, and she was already on the balcony by then anyway. He threw a Divine Lance instead and missed. So it fell to the two people who could physically get up there. <strong>Kudu</strong> Sudden Charged straight up a lava flow on Raging Athlete's climb speed and rolled a critical hit that came to nothing at all; she was still sitting on a full 70 HP seven minutes later. <strong>Liu</strong> — who had never climbed anything in this system — had the DM walk him through the rules line by line, worked out that climbing needs <em>both hands</em>, and then made the call the whole session turns on: he <strong>dropped his tome and his falcata on the floor</strong> and spent his entire turn — Climb, Climb, punch — hauling himself up the lava flow weaponless to buy one attack. The Mythic Strike <strong>fist</strong> critically hit for 60. She Stepped clear and reached for the door, and opening it drew Kudu's Reactive Strike for 124.</p>
+
+  <p>The hallway beyond was coated in a rank-7 illusion. Galan identified it on a Religion 38 and named exactly what it was — <em>"extremely powerful illusion magic"</em> — and then, to his credit, immediately said the useful thing rather than the flattering one: <em>"I don't think I'm powerful enough to dispel it."</em> His best prepared Dispel was rank 4, and he committed on the spot to fixing it. It was an <strong>Endless Reality</strong>, a mythic hazard whose only listed answers were legendary Thievery, legendary Arcana, or a 7th-rank Dispel against DC 39 — nothing a level-12 party has without spending mythic power. Guar priced the cost out loud and pre-committed to it — <em>"if I have to, I absolutely will"</em> — then paid, and cleared a rank-7 hazard with a <strong>rank-6</strong> Dispel carried over the DC by his mythic proficiency. Galan closed the scene with the deduction of the night: <em>"someone who was mythic placed the trap there in the first place, right?"</em> The DM confirmed it. Clearing it refilled the whole party's mythic pool.</p>
+
+  <p>Behind the last door was an office full of star charts and incense, and behind the desk was a man in green with a polearm. Liu and Galan both read him before initiative, and the answer came back off his gear and his polearm: <strong>a runelord of greed</strong>. Kudu critically failed the same check by 21, and reported what his character actually got: <em>"It's a guy in a green shirt."</em> He had a <strong>Lamia Matriarch</strong> and three greedspawn soldiers with him, and he opened with <em>"It's unfortunate you came snooping around. Now you gotta die."</em> The fight ran five rounds and was the hardest of the campaign so far. Liu took 24, 26, 24 and 26 in the first round alone and finished it at <strong>65 of 165</strong>. Kudu ate a 62-point critical Reactive Strike for swapping weapons mid-melee, then a 66-point falchion crit later. Gimmel put a <strong>Disintegrate</strong> into Galan for 75 — and Galan, whose first instinct was to check whether anyone else needed the Mythic Point more and to hold it, was talked into spending it by Kudu's <em>"mythic that motherfucker."</em> He critically succeeded the Fortitude save and took <strong>nothing</strong>.</p>
+
+  <p>It ended with the two reactions Liu has now used to close three of the campaign's five fights. Vesinra's Falchion Swipe crit Kudu for 66; Liu's <strong>Retributive Strike</strong> cut it to 46 and answered with a <strong>90-damage crit that killed her outright</strong>. Then, with Gimmel walled off behind his own Wall of Stone and the party grinding at one inch of masonry, Kudu simply walked around the end of it and crit him for 116, and Liu spent his last turn doing the thing he was built to do — and it was the <strong>free</strong> roll that paid. His Exploit Vulnerability succeeded by exactly zero and bought almost nothing; the tome's no-action Recall Knowledge, made at the top of the same turn against a <em>rare</em> DC of 33, came back with a name: <strong>Risen Runelord Gimmel</strong>, dream trait, mythic trait. He asked his follow-up question about lore and got the whole entry. Then he Mythic Struck for 106 and the runelord came apart.</p>
+
+  <p>What fell out of the corpse was the mission. A <strong>comprehensive intelligence briefing on Xin-Eurythnia</strong> — written throughout under the city's ancient name, <strong>Xin-Shalast</strong> — proving the cult intends to strike the portal ceremony, and a <strong>paired sending slate</strong> carrying a message from someone who is still out there: <em>"As feared, our city is crawling with heroes… If you don't hear back soon, assume the worst."</em> Signed with one word: <strong>the Rune of Greed</strong>.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act combat">
+    <div class="act-label">Act I · Combat · The Common Room, Concluded</div>
+    <div class="act-card">
+      <h3>Seven Trinity Initiates, four Foundry rounds</h3>
+      <ul>
+        <li><strong>The session resumed mid-round</strong> with seven initiates alive behind cover. Foundry's counter continued from Session 1 — the observed rounds were <strong>4 (partial), 5, 6 and 7</strong>.</li>
+        <li><strong>Galan's Divine Wrath opened the session</strong>: a 20-foot burst, 26 spirit damage, <strong>all seven caught</strong>. Four <strong>critical failures</strong> (natural 1, 2, 2 and 4) → <strong>sickened 2, slowed 1</strong>, which cost the cult its three-action turns for the rest of the fight. Galan then ran the degrees of success for the DM himself so the riders landed correctly.</li>
+        <li><strong>The slowed rider bit within seconds.</strong> A Force Barrage rolled 12 into Liu and the DM took it straight back off: <em>"No, no, wait. Don't take that… They're slowed. I forgot."</em></li>
+        <li><strong>The initiates' entire answer was Liu.</strong> Three Force Barrages landed — <strong>8, 11 and 7, for 26 total</strong>. Nothing else on the party took a single point. He floored at <strong>104 / 165</strong>.</li>
+        <li><strong>Guar spent a Mythic Point</strong> to raise a 4th-rank Fireball, recast as cold, from DC 31 to <strong>DC 37</strong>: two critical failures at 54, five failures at 27, and the <strong>first kill</strong>. <strong>Kudu's flail hit for 55</strong> and killed a second.</li>
+        <li><strong>Liu killed two in one turn.</strong> The DM retracted an incorrectly applied table cover; the Strike hit by <strong>exactly +1</strong> and then cleared the DC 5 concealment flat check by a single point — <em>"Oh, oof. It just made it."</em></li>
+        <li><strong>Guar's second burst — a plain rank-3 Fireball, no Mythic Point</strong> — finished a fourth. <strong>That one was the initiate Session 1 flagged as the probable leader.</strong> He died mid-fight to a rank-3 spell, which closes the thread.</li>
+        <li><strong>Liu caught a rider he was owed and wasn't getting.</strong> <strong>Sympathetic Vulnerabilities</strong> should have been spreading his personal antithesis to every other cultist in the room, and it hadn't been applied to any of them — <em>"I think it didn't apply to the previous one, which is weird."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act I (cont.) · Combat · The Balcony</div>
+    <div class="act-card">
+      <h3>Fifteen feet of air, and a man with no weapon</h3>
+      <ul>
+        <li><strong>Fly went up three times</strong> across the fight — the cult's answer to a melee party was simply to leave the floor. The last survivor took it <strong>15 feet up onto a balcony</strong>, out of everyone's reach. Liu: <em>"That is a 15 foot tall balcony. Oh — 15 foot tall balcony. Oh, shit."</em></li>
+        <li><strong>The DM had already established this was a real problem</strong> — a round earlier, Kudu needed <strong>Lunge</strong> just to reach something ten feet up.</li>
+        <li><strong>Galan reached for the right idea</strong>: <em>"I want to try to dispel her flying effect."</em> It wouldn't have worked — his prepared Dispel was too low-rank to counteract a 4th-rank Fly, a counteract gap he'd diagnose and fix himself at the hazard — and she was already up on the balcony regardless. He threw a Divine Lance instead and missed.</li>
+        <li><strong>Kudu went up the wall — and it produced nothing.</strong> Raging Athlete's climb speed into a Sudden Charge, 70 feet of movement, landing a <strong>critical hit that never dealt damage</strong>. She sat on a full <strong>70 HP</strong> until Liu reached her seven minutes later. <em>(Most likely a failed DC 5 concealment flat check — flat checks don't appear in the export.)</em></li>
+        <li><strong>So Liu dropped everything and climbed.</strong> He learned the Climb rules from scratch, worked out it needs <strong>both hands</strong>, and talked himself into it: <em>"But I don't want to just drop my sword here. I have no sword to use."</em></li>
+        <li><strong>His whole turn was Climb, Climb, punch.</strong> Two regular successes (26 and 21), ten feet each on speed 45, ending level with the balcony lip. <strong>Mythic Strike with his fist: critical hit for 60</strong>, plus 8 personal antithesis → <strong>70 → 2 HP</strong>.</li>
+        <li><strong>Liu checked whether Implement's Interruption could fire and it couldn't</strong> — that reaction only triggers off the target of his Exploit Vulnerability. Kudu took the reaction instead: she <strong>Stepped</strong> clear and reached for the door, and <strong>opening it</strong> drew <strong>Kudu's Reactive Strike, a critical hit for 124</strong>. Seven initiates down.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act II · Exploration · Cleanup and the Storage Rooms</div>
+    <div class="act-card">
+      <h3>Twenty minutes on the clock, and salvage turned into ammunition</h3>
+      <ul>
+        <li><strong>Detect Magic on the bodies turned up nothing</strong> beyond <em>+1 striking</em> <strong>bec de corbins</strong> on every initiate — worth four gold apiece under Automatic Rune Progression.</li>
+        <li><strong>Galan critically succeeded both Treat Wounds</strong> (Assurance, no dice at all), and <strong>Ward Medic let each cover two people</strong>: the first healed Liu and Guar 28 apiece, the second rolled 43 and topped up Liu (33, capped) and Kudu.</li>
+        <li><strong>Two storage rooms</strong>, stripped to dust and fragments, gave up a <strong>Greater Skeleton Key</strong> and assorted Dawnsilver oddments — a pen nib, a button, a monocle frame.</li>
+        <li><strong>Galan turned salvage into ammunition</strong>: <em>"Can I take some of this Dawnsilver to use it as, what's it called, Needle Darts?"</em> The DM smashed the monocle frame into a Dawnsilver chunk for him.</li>
+        <li><strong>Liu asked about Dawnsilver full plate</strong>; it needs a full ingot, and the party had one. He ultimately voted to sell it so everyone could shop: <em>"if the money will help everyone else then I'm fine with just selling it."</em></li>
+        <li><strong>Kudu raised the same thing twice, unprompted</strong>: <em>"Next time we get back to town, remind me to buy some magical storage."</em> He also personally logged every find into the party stash, and dug out the ingot that made Galan's request possible.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III · Mystery · The Endless Reality</div>
+    <div class="act-card">
+      <h3>A hazard built so only mythic characters could pass it</h3>
+      <ul>
+        <li><strong>Guar's Detect Magic found a rank-7 aura coating the entire hallway.</strong> <em>"I'm going to let everyone know that there's a big-boy spell coating that entire hallway."</em></li>
+        <li><strong>Galan identified it</strong> with a Religion check of <strong>38</strong> — a complex magical illusion <strong>mythic trap</strong> — and relayed it in character: <em>"I always tell everyone that this is extremely powerful illusion magic."</em> Then, immediately: <em>"I don't think I'm powerful enough to dispel it, unfortunately."</em></li>
+        <li><strong>The disable options, in full</strong>: legendary <strong>Thievery</strong>, legendary <strong>Arcana</strong>, or a <strong>7th-rank Dispel Magic against DC 39</strong>. Nobody at level 12 has a legendary skill. Guar's read: <em>"So it's literally designed to only be passable by mythic characters."</em></li>
+        <li><strong>Guar pre-committed, then paid.</strong> <em>"I don't want to have to use a second Mythic Point, but if I have to, I absolutely will."</em> He beat DC 39 — with a <strong>rank-6</strong> Dispel, not the rank 7 the hazard nominally called for. His mythic proficiency carried it over.</li>
+        <li><strong>Galan drew the conclusion that matters</strong>: <em>"someone who was mythic placed the trap there in the first place, right?"</em> The DM: <em>"That's a pretty good guess."</em></li>
+        <li><strong>House rule confirmed: clearing a mythic hazard refills everyone's mythic pool.</strong> The DM remembered a round into the next fight.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · The Office</div>
+    <div class="act-card">
+      <h3>Risen Runelord Gimmel, Vesinra, and three greedspawn soldiers</h3>
+      <ul>
+        <li><strong>The room</strong>: four tables of scrolls, star charts and maps, an incense burner spewing spicy smoke, glowing stones in the ceiling. Behind the desk, a man in green with a polearm.</li>
+        <li><strong>Liu and Galan both read him before initiative</strong> — identical Arcana successes: <strong>he is a runelord of greed</strong>. <strong>Kudu critically failed the same check by 21</strong>, hence <em>"It's a guy in a green shirt."</em></li>
+        <li><strong>Liu's Battle Cry critically succeeded on initiative</strong> (+10), frightening a greedspawn to <strong>2</strong> before anyone had acted.</li>
+        <li><strong>One Recall Knowledge rewrote his whole turn.</strong> Vesinra identified as a mythic <strong>Lamia Matriarch</strong>; her <strong>Caress</strong> is a curse that leaves you feeble. Liu abandoned his plan and pulled a <strong>scroll of Invisibility</strong> from his retrieval belt instead.</li>
+        <li><strong>Round one was as bad as it gets for Liu, and the invisibility is what makes it hurt.</strong> He'd spent an action and a scroll to go undetected and it bought him <strong>nothing</strong> — the greedspawn made every DC 11 flat check and put <strong>24, 26 and 24</strong> through an <strong>AC 34</strong>, and Vesinra spent <strong>Sure Strike</strong> to waive the check entirely for another <strong>26</strong>. Four attacks, four flat checks passed, four hits. He ended the round on <strong>65 of 165</strong> — and the next round, the one flat check that would have gone his way, on <strong>Galan's 93-point Heal</strong>, was the one that failed.</li>
+        <li><strong>Galan's biggest heal of the fight was eaten by his own ally's invisibility</strong> — a rank-6 <strong>Heal for 93</strong> lost to a DC 11 flat check. Liu took it on himself: <em>"I could have healed myself. I should have said that."</em></li>
+        <li><strong>Kudu used Dragon's Rage Breath for the first time in twelve levels.</strong> <em>"I've never done an AoE. How do I fucking select them all?"</em> Guar talked him through the template; the cone hit four for a critical failure of <strong>80</strong> and a kill.</li>
+        <li><strong>Gimmel answered with a Wall of Stone to the ceiling</strong>, cutting off Galan's Guardian, Guar's Floating Flame and every melee line at once. The party spent two rounds on one inch of masonry with hardness 14.</li>
+        <li><strong>Liu killed Vesinra with a reaction</strong> — Retributive Strike cut Kudu's 66-point crit to 46 and countered for <strong>98 applied</strong>. Then he <strong>named Gimmel</strong> off the tome's free Recall Knowledge and Mythic Struck for <strong>106</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act V · Social · The Evidence and the Slate</div>
+    <div class="act-card">
+      <h3>The mission accomplished, and a message from someone still out there</h3>
+      <ul>
+        <li><strong>The room proved the mission.</strong> A comprehensive <strong>intelligence briefing on Xin-Eurythnia</strong> — <em>"though the notes stubbornly refer to it by its ancient name, Xin-Shalast"</em> — granting a <strong>+2 item bonus to Recall Knowledge about the city</strong>, worth ~650 gp, and <strong>the hard evidence Aurora asked for in Session 1</strong>.</li>
+        <li><strong>A paired sending slate fell out of Gimmel when he died.</strong> <em>"As feared, our city is crawling with heroes. One group is getting close to us. If you don't hear back soon, assume the worst."</em> Signed <strong>the Rune of Greed</strong>.</li>
+        <li><strong>Guar was the only one who tried to run it down</strong> — proposed Scrying, looked up his own spell and ruled himself out, then tried a second angle. Neither worked.</li>
+        <li><strong>Liu chose the client over the market</strong>: <em>"We can go talk to the client first. I think it's more important."</em> Then, a beat later: <em>"I mean, also, she might just give us more things for us to use in the market."</em></li>
+        <li><strong>The priestess took the audience immediately</strong>: <em>"This is exactly what I was afraid of… I will schedule a meeting with her first thing tomorrow morning."</em> → <strong>an audience with Queen Sorshen tomorrow, and two days to the ceremony</strong>.</li>
+        <li><strong>Two distributions — 111 platinum, then 120</strong> — roughly <strong>2,300 gp each</strong>. Xin-Eurythnia is an 18th-level city: any common item up to level 18, uncommon and rare negotiable.</li>
+        <li><strong>Liu spent the last of the session working out the pre-buffing rules with the DM</strong>, restating the case concretely and taking the misunderstanding on himself. The ruling: an encounter begins when both sides are aware of each other, and <em>"you're casting in a long, loud, strong voice."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Trinity Initiates (concluded) · Foundry rounds 4–7</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">7 × Trinity Initiate · AC 27 · Mystic Armor +1 · self-cast concealment · Cover +2 / Greater Cover +4</span></div>
+    <div><span class="stat-label">HP entering S2</span><span class="stat-value">130 · 110 · 90 · 90 · 90 · 70 · 50 <em>(S1 puts them at 150 each)</em></span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Liu → initiates ×2 → Galan → initiates ×4 → Guar → Kudu → initiates ×2</span></div>
+    <div><span class="stat-label">Party damage taken</span><span class="stat-value">26 total — all of it on Liu. Floor 104 / 165</span></div>
+    <div><span class="stat-label">Length</span><span class="stat-value">~40 minutes of table time</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">All seven killed</span></div>
+  </div>
+
+  <h4>Round 4 (resumed)</h4>
+  <ul>
+    <li>An initiate opens with <strong>Vision of Death</strong> on Liu — <strong>critical success</strong>, no effect. A second cast later in the round is also critically saved.</li>
+    <li><strong>Galan's Divine Wrath</strong> catches all seven for 26: four <strong>critical failures</strong> (nat 1, 2, 2, 4) → sickened 2, slowed 1.</li>
+    <li>A 12-point <strong>Force Barrage is rolled and retracted</strong> — the caster is slowed — then three land for <strong>8, 11 and 7</strong>.</li>
+    <li><strong>Guar spends a Mythic Point</strong> → 4th-rank Fireball recast as cold at <strong>DC 37</strong>: two crit-fails at 54, five failures at 27 — <strong>first kill</strong>.</li>
+    <li><strong>Kudu</strong> hits for <strong>55</strong> — <em>second kill</em>. The cult starts casting <strong>Fly</strong>.</li>
+  </ul>
+
+  <h4>Round 5</h4>
+  <ul>
+    <li><strong>Liu kills two in one turn.</strong> The DM retracts an incorrectly applied +4 table cover; the Strike hits by <strong>exactly +1</strong> (his tome's free Recall Knowledge is in that modifier list) for 29, and clears the concealment flat check by one.</li>
+    <li>His second Strike takes another initiate off exactly 10 HP.</li>
+    <li><strong>Kudu's Reactive Strike</strong> catches an initiate Striding away for <strong>57</strong> (77 → 20).</li>
+    <li><strong>Galan's Divine Lance</strong> for 14 leaves one on 3. <strong>Guar's rank-3 Fireball</strong> (no Mythic Point spent) finishes it — <em>fourth kill</em>, and it was <strong>Session 1's suspected leader</strong>.</li>
+    <li>Kudu closes the round missing twice, once critically. More <strong>Fly</strong> goes up.</li>
+  </ul>
+
+  <h4>Round 6</h4>
+  <ul>
+    <li><strong>Liu's Overwhelming Combination</strong> hits for 41 and kills the fifth. <strong>Galan's Divine Lance misses.</strong></li>
+    <li><strong>Guar's whole turn produces nothing</strong> — a Blazing Bolt that hits but never applies damage, and a Psi Burst he retracts himself as out of range.</li>
+    <li><strong>Kudu Sudden Charges up a lava flow</strong> — 70 feet of movement — and rolls a <strong>critical hit that deals no damage</strong>. The last survivor stays on a full 70 HP.</li>
+  </ul>
+
+  <h4>Round 7 — the balcony</h4>
+  <ul>
+    <li><strong>Liu releases his tome and his falcata</strong> and spends his whole turn <strong>Climb (26), Climb (21), punch</strong> — ten feet each on speed 45, ending level with the balcony lip and still prone.</li>
+    <li><strong>Mythic Strike with his fist: critical hit for 60</strong>, plus 8 personal antithesis → <strong>70 → 2 HP</strong>.</li>
+    <li><strong>Liu passes on his own reaction</strong>; she <strong>Steps</strong> clear, and <strong>opening the door</strong> draws <strong>Kudu's Reactive Strike — critical hit for 124</strong>. Encounter over.</li>
+  </ul>
+
+  <h4>Kill ledger — Liu 3 · Kudu 2 · Guar 2</h4>
+  <ul>
+    <li><strong>50 HP</strong> → <strong>Guar</strong>, 4th-rank Fireball (cold, mythic DC), 27 into 24 remaining</li>
+    <li><strong>90 HP</strong> → <strong>Kudu</strong>, flail, 55 into 37 remaining</li>
+    <li><strong>90 HP</strong> → <strong>Liu</strong>, falcata, 29 into 10 remaining — <em>hit by exactly +1</em></li>
+    <li><strong>90 HP</strong> → <strong>Liu</strong>, falcata, 28 into 10 remaining</li>
+    <li><strong>70 HP</strong> → <strong>Guar</strong>, rank-3 Fireball, 14 into 3 remaining — <strong>S1's suspected leader</strong></li>
+    <li><strong>130 HP</strong> → <strong>Liu</strong>, Overwhelming Combination, 41 into 20 remaining</li>
+    <li><strong>110 HP</strong> → <strong>Kudu</strong>, <strong>Reactive Strike critical, 124</strong> into 2 remaining — the balcony caster</li>
+  </ul>
+  <p><strong>Mythic ledger</strong>: Guar 1 (Mythic Casting) · Liu 1 (Mythic Strike). <em>Foundry also logged a phantom Mythic Casting under Galan — that was Guar clicking the feat while stranded on Galan's actor during a Forge disconnect — and ran two of Guar's later spells at mythic DCs off a stale checkbox. Neither is a spend.</em></p>
+  <p><strong>Pattern worth noting:</strong> two of Kudu's three scoring blows this encounter were <strong>reactions</strong> (57 and 124, on fleeing casters).</p>
+</div>
+
+<div class="combat-box hazard">
+  <div class="combat-meta">Hazard · The Endless Reality (mythic)</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Type</span><span class="stat-value">Complex magical illusion, mythic hazard · rank 7 · DC 39 · covered the entire hallway</span></div>
+    <div><span class="stat-label">Disable</span><span class="stat-value">Legendary Thievery, legendary Arcana, or 7th-rank Dispel Magic vs DC 39 — no level-12 character has a legendary skill</span></div>
+    <div><span class="stat-label">Detected by</span><span class="stat-value">Guar (Detect Magic, rank-7 aura)</span></div>
+    <div><span class="stat-label">Identified by</span><span class="stat-value">Galan (Religion 38)</span></div>
+    <div><span class="stat-label">Disabled by</span><span class="stat-value">Guar — Mythic Point → rank-6 Dispel Magic at mythic proficiency, counteract 42 vs DC 39</span></div>
+    <div><span class="stat-label">Reward</span><span class="stat-value">Clearing a mythic hazard refilled every PC's mythic pool (house rule)</span></div>
+  </div>
+  <p>A rank-6 counteract clears a rank-7 effect on a plain success — the mythic proficiency is what got Guar over the DC. <em>(The log shows the raw roll at 36; the DM applied the +6 mythic bonus by hand.)</em></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Office — Risen Runelord Gimmel · 5 rounds</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Risen Runelord Gimmel</span><span class="stat-value">195 HP · AC 30 · Perception +22 · spell attack +22, DC 30 · <strong>rare</strong>, <strong>dream</strong> and <strong>mythic</strong> · Enlarge, Telekinetic Projectile, Disintegrate, Wall of Stone · <strong>Vanishing Death</strong> on death</span></div>
+    <div><span class="stat-label">Vesinra</span><span class="stat-value">Elite <strong>Lamia Matriarch</strong>, mythic · 195 HP + 20 temp · AC 31 · falchion +24 · Falchion Swipe (two targets, no MAP), Vesinra's Caress, Synaptic Pulse · <strong>level 11</strong></span></div>
+    <div><span class="stat-label">Greedspawn soldiers</span><span class="stat-value">3 × 180 HP · AC 30 (28 off-guard) · glaive +23 reach 10 ft · jaws +22 with Sinful Bite · Reactive Strike · +1 status to saves vs magic</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Liu 41 → greedspawn 39 → Galan 38 → Kudu 36 → greedspawn 33 → Gimmel 28 → greedspawn 26 → Guar 26 → Vesinra 23</span></div>
+    <div><span class="stat-label">HP floors</span><span class="stat-value">Liu <strong>65 / 165</strong> · Kudu 106 / 202 · Guar 73 · <strong>Galan untouched at 135</strong></span></div>
+    <div><span class="stat-label">Damage share</span><span class="stat-value">Kudu 518 (55%) · Liu 271 (29%) · Guar 146 (16%) — but 122 of Kudu's was one Dragon's Rage Breath (once per 10 min). Without it: 396 / 271 / 146</span></div>
+  </div>
+
+  <h4>Round 1 — the greedspawn's round</h4>
+  <ul>
+    <li><strong>Liu's Battle Cry critically Demoralizes on initiative</strong> (+10) → <strong>frightened 2</strong> on the greedspawn Gimmel will shortly Enlarge.</li>
+    <li>He <strong>Recalls Knowledge on Vesinra</strong> — Lamia Matriarch, beast/humanoid/<strong>mythic</strong>, and her action list — learns the <strong>Caress</strong> is a feeble-inflicting curse, and <strong>abandons his plan</strong> to pull a <strong>scroll of Invisibility</strong> from his retrieval belt. <strong>Exploit Vulnerability fails by 1</strong> (29 vs DC 30) → personal antithesis only, an 8-point rider.</li>
+    <li>A greedspawn glaives <strong>Kudu for 28</strong> — <strong>Liu's Retributive Strike</strong> cuts it to <strong>9</strong> (resistance 14 applied to each damage type separately wipes the fire component entirely); his counter-Strike misses.</li>
+    <li><strong>Galan casts Bless</strong> (+1 status to attacks, live for most of the fight). <strong>Kudu's Slam Down crits for 74</strong>, target <strong>fails the Reflex save → prone</strong>, plus 12 from Crashing Slam.</li>
+    <li><strong>Gimmel casts Enlarge</strong> on a greedspawn (<strong>reach 15</strong>) — the only reason it can reach Liu. It hits for <strong>26</strong> and <strong>24</strong>.</li>
+    <li><strong>Guar's Ice Storm</strong> (rank 5) blankets the room in difficult terrain and 2 damage per turn ended inside it. <strong>Vesinra Sure-Strikes</strong> — waiving the flat check against Liu's invisibility — and hits for <strong>26</strong>. <strong>Liu ends the round on 65 / 165</strong>, having watched all four attacks beat both his AC 34 and the concealment his scroll was supposed to buy.</li>
+  </ul>
+
+  <h4>Round 2 — the weapon swap</h4>
+  <ul>
+    <li><strong>Liu's Overwhelming Combination kills the first greedspawn</strong> — falcata critical into fist, <strong>122 combined</strong>, shock rune arcing 12 into Vesinra and 12 into a second greedspawn.</li>
+    <li><strong>Galan's rank-6 Heal for 93 is lost to Liu's own invisibility</strong> — DC 11 flat check, failed, spell gone.</li>
+    <li><strong>A greedspawn's Reactive Strike crits Kudu for 62</strong> and interrupts his weapon swap. <strong>Guar's Correct the Story</strong> forces a reroll that <strong>crits again for nothing gained</strong>. <strong>Liu declares Retributive Strike but can't reach</strong> — resistance only, no counter — bringing it to <strong>42</strong>.</li>
+    <li><strong>Kudu's Lunge crits back for 84.</strong> Gimmel's Telekinetic Projectile misses.</li>
+    <li><strong>Guar Unleashes Psyche</strong> and — after the DM warns him about the manipulate trait and offers a rewind — <strong>Steps out of one threat</strong> and casts <strong>Floating Flame</strong> anyway, taking a 29-point glaive for it.</li>
+    <li><strong>Vesinra's Synaptic Pulse</strong> (rank 5, incapacitation) catches Galan, Kudu, Guar and Gaston — <strong>all four critically succeed</strong>.</li>
+  </ul>
+
+  <h4>Round 3 — the cone and the Disintegrate</h4>
+  <ul>
+    <li><strong>Liu heals himself for 64</strong> off a consumable and lands a 31 (fist critically misses).</li>
+    <li><strong>Galan's Spiritual Guardian</strong> appears and attacks on placement for 13, leaving a greedspawn on <strong>2</strong>.</li>
+    <li><strong>Kudu uses Dragon's Rage Breath for the first time in twelve levels</strong> — 30-foot cone, 40 force: a <strong>critical failure for 80</strong>, a failure that <strong>kills the greedspawn on 2</strong>, and 20 each to Gimmel and Vesinra. Then <strong>Instinct Crown (Dragon)</strong>.</li>
+    <li><strong>Gimmel's Disintegrate hits Galan for 75.</strong> Galan had decided to <strong>hold</strong> his Mythic Point; Kudu's <em>"mythic that motherfucker"</em> changed his mind. <strong>Critical success — zero damage.</strong></li>
+    <li><strong>Guar's amped Ignition hits for 62</strong> (+12 Unleash Psyche, +6 Oscillating Wave), splash clipping Galan's own Guardian.</li>
+    <li><strong>Vesinra's Vision of Death</strong> at Kudu, who <strong>spends a Mythic Point</strong> to succeed: 15 damage and frightened 1, which <strong>Liu's Aura of Courage</strong> strips at the end of Liu's turn.</li>
+  </ul>
+
+  <h4>Round 4 — the wall, and Vesinra's death</h4>
+  <ul>
+    <li><strong>Liu Delays</strong> — nothing in reach, no line to Gimmel.</li>
+    <li><strong>Galan sustains the Guardian</strong> and misses; his follow-up Divine Lance reads as a hit until <strong>Liu reads him the text confirming the Guardian contributes to his multiple attack penalty</strong> — recalculated, it's a miss.</li>
+    <li><strong>Kudu kills the second greedspawn</strong> (41), then <strong>Mythic Strikes Vesinra for 43</strong>.</li>
+    <li><strong>Liu Returns</strong> → <strong>Intensify Vulnerability → Overwhelming Combination</strong>: falcata for 40, <strong>48 applied</strong> with the antithesis rider → Vesinra to <strong>33</strong>.</li>
+    <li><strong>Gimmel casts Wall of Stone</strong>, floor to ceiling, five feet inside the doorway — severing line of sight <em>and</em> line of effect for the entire party at once. <strong>Guar slams his Floating Flame into it</strong> for 12 past hardness 14, then <strong>loses Ignition to a natural 1 on the stupefied DC 6 flat check</strong>.</li>
+    <li><strong>Vesinra's Falchion Swipe</strong> hits Liu for 25 and <strong>critically hits Kudu for 66</strong> — <strong>Liu's Retributive Strike</strong> cuts it to <strong>46</strong> and answers with a <strong>critical hit, 90 rolled and 98 applied — killing her</strong>.</li>
+  </ul>
+
+  <h4>Round 5 — the name and the kill</h4>
+  <ul>
+    <li><strong>Galan sustains a Guardian that can't reach anything</strong> and throws <strong>Needle Darts at a one-inch stone wall</strong> — 16 rolled, <strong>2</strong> past hardness 14.</li>
+    <li><strong>Kudu Absorbs Strength</strong> from Vesinra's corpse (<strong>+11 temp HP → she was level 11</strong>), walks around the end of the wall, and <strong>crits Gimmel for 116</strong> at mythic proficiency (165 → 49) — the <strong>thundering rune finally lands</strong>, deafening him for a minute.</li>
+    <li><strong>Liu's Exploit Vulnerability succeeds by exactly 0</strong> (28 vs DC 28). Gimmel has <strong>no printed weakness</strong>, so it's the 8-point antithesis rider again. <em>Foundry printed the Diverse Lore comparison DC on the same card at 28 — that result would also have bought a free Recall Knowledge, but the comparison was never called for.</em></li>
+    <li><strong>The tome's free Recall Knowledge lands the name — a 34.</strong> <strong>Risen Runelord Gimmel</strong>, <strong>dream</strong> and <strong>mythic</strong> traits, plus the full lore entry off his Know-It-All follow-up.</li>
+    <li><strong>Mythic Strike, critical hit, 98 rolled and 106 applied — Gimmel dies.</strong> <strong>Vanishing Death</strong>: Liu and Kudu both <strong>critically succeed</strong> the DC 27 Will save.</li>
+  </ul>
+
+  <h4>Kill ledger — Liu 3 · Kudu 2</h4>
+  <ul>
+    <li><strong>Greedspawn A</strong> → <strong>Liu</strong>, Overwhelming Combination, 122</li>
+    <li><strong>Greedspawn B</strong> → <strong>Kudu</strong>, Dragon's Rage Breath</li>
+    <li><strong>Greedspawn C</strong> → <strong>Kudu</strong>, Thresher Strike, 41</li>
+    <li><strong>Vesinra</strong> → <strong>Liu</strong>, Retributive Strike critical, 98 applied</li>
+    <li><strong>Gimmel</strong> → <strong>Liu</strong>, Mythic Strike critical, 106 applied</li>
+  </ul>
+  <p><strong>Mythic ledger</strong>: Liu 1 · Kudu 2 · Guar 1 (Correct the Story, which rerolled a crit into another crit) · Galan 1 (the Disintegrate save). <em>The pool had been fully refilled by clearing the mythic hazard, plus one each returning from the break.</em></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-liu">
+    <h4>Liu Heifeng · the Empty Hands</h4>
+    <ul>
+      <li><strong>He solved the balcony by giving up everything that makes him dangerous.</strong> A caster flew fifteen feet out of reach and Liu — who had never climbed anything in this system — made the DM walk him through the rules line by line, established that climbing needs both hands, and then talked himself into it out loud: <em>"But I don't want to just drop my sword here. I have no sword to use."</em> He released his tome and his falcata onto the floor and spent his <strong>entire turn — Climb, Climb, punch</strong> — hauling himself up a lava flow weaponless to buy exactly one attack. <strong>Mythic Strike on a Spirit Warrior fist: critical hit, 60 damage.</strong></li>
+      <li><strong>He is the table's rules conscience, and it runs in both directions.</strong> He caught a rider he was <em>owed</em> — <strong>Sympathetic Vulnerabilities</strong> should have been spreading his personal antithesis to every cultist in the room and hadn't been applied to any of them. On the very Strike that killed Vesinra he told the DM the total should be <strong>42, not 45</strong> — handing back a mythic proficiency bonus that shouldn't have been applied. He told Guar he should be <strong>stupefied 1</strong>. He read Galan the Spiritual Guardian text proving it <strong>does</strong> eat into his multiple attack penalty. In Session 1 he argued a −2 onto his own roll on his first night at a strange table. It isn't a one-off; it's the way he plays.</li>
+      <li><strong>One Recall Knowledge rewrote his whole turn.</strong> He identified Vesinra as a mythic Lamia Matriarch, spent his follow-up on her <em>actions</em>, learned that <strong>Vesinra's Caress</strong> is a curse — and immediately abandoned his plan: <em>"either way, I will actually do this instead, since this looks dangerous."</em> The invisibility ran the whole fight and forced her to spend Sure Strike to touch him.</li>
+      <li><strong>He killed both bosses, and one of them on someone else's turn.</strong> Vesinra died to a <strong>Retributive Strike critical</strong> — a reaction he spent to cut a 66-point crit off Kudu. Gimmel died to a <strong>Mythic Strike critical, 106 applied</strong>. He called that one before rolling: <em>"the only way I can miss is literally a nat 1."</em> Three of the five kills in that room were his on roughly 29% of the damage — <strong>Liu is the closer, not the engine</strong>.</li>
+      <li><strong>He named the thing the campaign has been circling since Session 1 — on the roll that cost him nothing.</strong> It was the <strong>tome's free Recall Knowledge</strong>, taken automatically at the top of the turn, that came back with <em>"He is Risen Runelord Gimmel."</em> He spent his follow-up question on <strong>lore</strong> rather than a tactical advantage, which is the only reason the party now knows what a risen runelord actually is.</li>
+      <li><strong>He picked the client over the payday, then priced it anyway.</strong> <em>"We can go talk to the client first. I think it's more important."</em> Beat. <em>"I mean, also, she might just give us more things for us to use in the market."</em> The justice-cause instinct and the merchant's instinct in the same breath.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kudu">
+    <h4>Kudu · the First Time for Everything</h4>
+    <ul>
+      <li><strong>He did two things this session he had never done in twelve levels, and both worked.</strong> <strong>Dragon's Rage Breath</strong> — <em>"I've never done an AoE. How do I fucking select them all?"</em> — caught four enemies in a 30-foot cone, rolled a critical failure for <strong>80</strong> and killed a greedspawn outright. Then <strong>Absorb Strength</strong>, on the lamia's corpse.</li>
+      <li><strong>And he made the second one a culture, not a gross-out.</strong> The DM's reaction was <em>"Gross, but okay."</em> Kudu's was flat and immediate: <strong>"That's how we honor our dead, my civilization."</strong> Then, to the four people staring: <em>"Don't look at me!"</em></li>
+      <li><strong>He went up a lava flow at a dead run, and the dice took it away from him.</strong> Raging Athlete's climb speed plus Sudden Charge, 70 feet of movement, landing beside a flying caster with a <strong>critical hit that dealt nothing</strong>. Guar said it looked like a backflip. Kudu: <em>"I'm a Raging Athlete, dude."</em> Then, watching it evaporate: <em>"Oh, you bastard."</em></li>
+      <li><strong>His biggest failure of the night was an ambitious one, and he owned it instantly.</strong> He tried to swap to a reach spear mid-melee, ate a <strong>62-damage critical Reactive Strike</strong> that interrupted the swap, and explained himself without excuses: <em>"I got a really cool spear, guys — that's why I did it. But I had to swap to it, so now I can't do that."</em></li>
+      <li><strong>He made the call that saved Galan 75 damage.</strong> When Gimmel's <strong>Disintegrate</strong> landed, it was Kudu who shouted <em>"Mythic that motherfucker."</em> It wasn't his turn, his point, or his character sheet.</li>
+      <li><strong>He has quietly made himself the party's quartermaster, and it is a real job he does for free.</strong> He raised it twice, unprompted. He personally logged every single find into the party stash. He's the one who dug out the Dawnsilver ingot that made Galan's Needle Darts request possible. He bought two spacious pouches out of his own share, <strong>put one straight into the stash</strong>, and refused Galan's offer to split it — <em>"300 gold. I got it."</em></li>
+      <li><strong>He does other people's rules labour.</strong> He read the whole <strong>deafened</strong> condition aloud for the DM after his own rune procced it, and remembered his Instinct Crown when the DM had forgotten it.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-galan">
+    <h4>Galan Magani · the One Who Knew What It Was</h4>
+    <div class="lede">The lowest-volume player at the table this session, and the one whose decisions did the most structural work.</div>
+    <ul>
+      <li><strong>He broke the first fight with his opening action.</strong> A single 20-foot <strong>Divine Wrath</strong> caught all seven surviving initiates and produced <strong>four critical failures</strong> — sickened 2 and slowed 1 across the cult's entire front rank. That stripped their three-action turns for the rest of the encounter. Everything the party did for the following forty minutes was collecting on that one spell. <strong>And he adjudicated it himself</strong> — it was Galan who supplied the degrees of success that made the riders stick.</li>
+      <li><strong>He is the reason the party got past the hallway at all.</strong> Galan's <strong>Religion 38</strong> turned a rank-7 aura from "something bad" into a solved problem. He relayed it in character, then said the useful thing instead of the flattering one — <em>"I don't think I'm powerful enough to dispel it, unfortunately"</em> — and handed the job to the one person who could take it.</li>
+      <li><strong>Then he made the deduction of the night.</strong> <em>"I think we would know that that means that, like, someone who was mythic placed the trap there in the first place, right?"</em> The DM: <em>"That's a pretty good guess."</em> Nobody else in the room asked what the trap <strong>meant</strong> — only how to get through it. That single line is the strongest lead the party owns going into the Sorshen audience.</li>
+      <li><strong>He reached for the right idea on the balcony before anyone climbed anything.</strong> When the last initiate flew out of reach, Galan was the only person who went for the obvious answer: <em>"I want to try to dispel her flying effect."</em> It wouldn't have landed — his prepared Dispel was too low-rank to counteract a 4th-rank Fly, and she'd already reached the balcony — but he was the only one thinking about <em>removing</em> the problem rather than climbing to it, and the counteract gap it exposed is the one he diagnosed and committed to fixing at the hazard.</li>
+      <li><strong>He beat a Disintegrate, and he thought about the party before himself.</strong> Seventy-five points came at him and his first instinct was to check whether anyone else needed the resource more — <em>"I'm just asking. Okay, well, I'll save it."</em> He'd decided to <strong>hold</strong> the Mythic Point. Kudu's shout changed his mind. He spent it, <strong>critically succeeded, and took nothing.</strong></li>
+      <li><strong>He polices the table quietly, including the DM.</strong> <em>"Can I say something? My guardian is right there. You can't end your turn in his space."</em> The DM: <em>"Yeah, thank you for that."</em> He tracked the boss's HP for the whole table. And twice in one session he offered to <strong>pay the party</strong> for things he took. Both times he was waved off. He never takes a shared resource for free.</li>
+      <li><strong>The Wall of Stone took his whole kit away, and his comedy got better for it.</strong> <em>"Oh, great. Great, great, great, great, great."</em> Earlier: <em>"Like everything else I've done."</em> And on first sight of the lamia: <em>"Oh, she big."</em> <strong>That stretch was the room beating him, not him failing</strong> — the wall was the single most effective thing any enemy did all night.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-guar">
+    <h4>Guar · the Only Key in the Room</h4>
+    <ul>
+      <li><strong>He was the single point of failure on the mythic hazard, and he pre-committed before he knew he'd have to.</strong> He detected it in the first place, diagnosed the design out loud (<em>"it's literally designed to only be passable by mythic characters"</em>), and priced the cost without flinching: <em>"I don't want to have to use a second Mythic Point, but if I have to, I absolutely will."</em> Then he paid it — and cleared a <strong>rank-7</strong> hazard with a <strong>rank-6</strong> Dispel. Nobody else at the table could have opened that hallway.</li>
+      <li><strong>He spends his mythic power on other people's problems, again.</strong> <strong>Correct the Story</strong> came out for the third time in two sessions, this time to rewrite a 62-damage crit on Kudu. It rerolled into another crit. <em>"Darn."</em> Across two sessions he has now spent every one of these on someone else's dice.</li>
+      <li><strong>He rules against himself, repeatedly, without being asked.</strong> He retracted an out-of-range Psi Burst the moment the DM raised it — <em>"You're absolutely right. So I couldn't do that"</em> — and salvaged the turn with <em>"I'm going to wave at her and end my turn."</em> And in one stretch he read both Floating Flame's and Unleash Psyche's text aloud and ruled <em>against himself</em> on each: <em>"It literally says, this applies only to initial damage… So, no. So, no."</em></li>
+      <li><strong>He ran the slate down properly.</strong> He proposed <strong>Scrying</strong>, looked up his own spell, ruled himself out, and then immediately tried a second angle — could the slate count as one of Gimmel's possessions? It couldn't. That's an investigation, not a whiff, and he was the only person who tried.</li>
+      <li><strong>He describes his mechanics as things that are happening.</strong> <em>"My first action is going to be Unleash Psyche. You're gonna see geometric patterns of fire and ice burst from my head and start to surround me."</em> Thoughtsense: <em>"I can smell that they're there."</em> A rank-7 aura becomes <em>"a big-boy spell coating that entire hallway."</em> He is doing the work of making a spell list feel like a person.</li>
+      <li><strong>He coached another player through his own best moment.</strong> When Kudu — twelve levels in — didn't know how to place an area template, Guar talked him through it and then gave it a soundtrack: <em>"The cone is great. There is no shame in the cone."</em> And when it landed for 80: <em>"That's like just the image of Godzilla shooting the beam directly down the monster's throat."</em> He narrated someone else's crit for them.</li>
+      <li><strong>His amped Ignition for 62 was the biggest single spell hit of the night</strong>, built out of Unleash Psyche's +12 and Oscillating Wave's +6.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Intelligence briefing on Xin-Eurythnia</div>
+    <div class="loot-source">Gimmel's office</div>
+    <div class="loot-note"><strong>The mission objective.</strong> +2 item bonus to Recall Knowledge about the city and its history. ~650 gp — kept, and shown to the priestess.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Paired sending slate</div>
+    <div class="loot-source">Fell from Gimmel's body</div>
+    <div class="loot-note">Half of a matched pair. Its counterpart is <strong>still in someone's hands</strong>. Carries the Rune of Greed message.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Skeleton Key</div>
+    <div class="loot-source">Storage room</div>
+    <div class="loot-note">Party stash</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">6 × Everlight Crystal</div>
+    <div class="loot-source">Ceiling of the office</div>
+    <div class="loot-note">Torch replacements. Only Kudu lacks darkvision.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Flaming Falchion</div>
+    <div class="loot-source">Vesinra</div>
+    <div class="loot-note">To the party stash → sold</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Striking Glaives &amp; Bec de Corbins</div>
+    <div class="loot-source">Greedspawn soldiers · Trinity Initiates</div>
+    <div class="loot-note">Eight glaives and six bec de corbins. Four gold each under Automatic Rune Progression. All sold; nobody wanted the flaming runes.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Dawnsilver oddments</div>
+    <div class="loot-source">Storage rooms</div>
+    <div class="loot-note">Pen nib, button, monocle frame. The <strong>monocle frame was destroyed</strong> and converted into a Dawnsilver chunk for Galan's Needle Darts.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Obsidian Goggles</div>
+    <div class="loot-source">Purchased — 1,250 gp</div>
+    <div class="loot-note">Kudu</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">2 × Spacious Pouch</div>
+    <div class="loot-source">Purchased — 300 gp each</div>
+    <div class="loot-note">Kudu — <strong>one donated to the party stash</strong>, and he refused Galan's offer to split the cost.</div>
+  </div>
+</div>
+<div class="xp-banner">
+  Gold · two distributions — 111 pp 1 gp 1 sp 1 cp, then 120 pp = <strong>roughly 2,300 gp each</strong> · Treasure sells at 100%, equipment at 50% · Xin-Eurythnia is an <strong>18th-level city</strong> · <strong>No XP announced</strong>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Liu Heifeng:</strong> "But I don't want to just drop my sword here. I have no sword to use."
+  <span class="attribution">Talking himself into putting his tome and his falcata on the floor so he could climb with both hands. He did it anyway, spent his whole turn on the wall, and punched her off the balcony.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Vesinra:</strong> "Just us now, boys."<br>
+  <strong>Liu Heifeng:</strong> "Let's dance."
+  <span class="attribution">Alone with the lamia matriarch behind her own boss's Wall of Stone.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Liu Heifeng:</strong> "The knowledge just kind of comes back to me and I'm like — ah, I have heard of this guy, or read of this character, in many books."
+  <span class="attribution">Naming Risen Runelord Gimmel off a rare-DC Recall Knowledge, in character.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Kudu:</strong> "I'm a Raging Athlete, dude."
+  <span class="attribution">After Guar suggested he'd backflipped up a lava flow. Seventy feet of climb-speed charge — into a critical hit that turned out to deal nothing at all.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Kudu:</strong> "That's how we honor our dead, my civilization." / "Don't look at me!"
+  <span class="attribution">Straight-faced, after biting a chunk out of the lamia matriarch for eleven temporary hit points — and then to the four people staring at him.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Kudu:</strong> "Mythic that motherfucker."
+  <span class="attribution">Not his turn, not his point, not his character sheet. It turned 75 points of Disintegrate into zero.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Galan Magani:</strong> "I always tell everyone that this is extremely powerful illusion magic." / "I don't think I'm powerful enough to dispel it, unfortunately."
+  <span class="attribution">Identifying the mythic hazard and, in the same breath, handing the job to the person who could actually do it.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Galan Magani:</strong> "I think we would know that that means that, like, someone who was mythic placed the trap there in the first place, right?"
+  <span class="attribution">The deduction of the night. The DM: "That's a pretty good guess."</span>
+</blockquote>
+
+<blockquote>
+  <strong>Galan Magani:</strong> "And then I'm going to stride here so I can see into the room. Oh, she big."
+  <span class="attribution">First sight of Vesinra.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Galan Magani:</strong> "Oh, great. Great, great, great, great, great."
+  <span class="attribution">Throwing Needle Darts at one inch of masonry with hardness 14, on a turn where the Wall of Stone had taken everything he owned out of reach.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Guar:</strong> "I don't want to have to use a second Mythic Point, but if I have to, I absolutely will, and I will frickin' hit it with a mythic level Dispel Magic."
+  <span class="attribution">He did. He was the only thing in the party that could have cleared the Endless Reality.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Guar:</strong> "My first action is going to be Unleash Psyche. You're gonna see geometric patterns of fire and ice burst from my head and start to surround me."
+  <span class="attribution">Nobody asked him to describe it. He does this constantly.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Guar:</strong> "I was going to say — we've been trying to reach you, but your car's extended warranty."
+  <span class="attribution">The instant the DM described a magical device that lets a distant stranger send you messages.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Risen Runelord Gimmel:</strong> "It's unfortunate you came snooping around. Now you gotta die."
+  <span class="attribution">His only line before initiative.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Who holds the other slate?</strong> <em>"As feared, our city is crawling with heroes. One group is getting close to us. If you don't hear back soon, assume the worst."</em> — the Rune of Greed. Gimmel was reporting to somebody, that somebody is now overdue an answer, and the party is holding the receiver.</li>
+  <li><strong>Gimmel is dead — and he was never the man the doorman described.</strong> Session 1's snow oni described the leader as burly, mustached, goateed, and personally handling payments. <strong>That man has still not appeared.</strong></li>
+  <li><strong>Who cast <em>raise runelord</em> here?</strong> A risen runelord is <strong>bound to whoever created them, for as long as that creator lives</strong> — and the ritual is <strong>Xanderghul's</strong> invention. Someone performed it in Xin-Eurythnia.</li>
+  <li><strong>The Envy/Greed contradiction is resolved — as Greed.</strong> Session 1's Recall Knowledge returned "a Runelord of Envy named Gimel." Everything this session says <strong>Greed</strong>: the read off his gear, the greedspawn, the Rune of Greed signature.</li>
+  <li><strong>The initiates carried bec de corbins.</strong> That is <strong>Xanderghul's</strong> polearm — the Runelord of <strong>Pride</strong>, and the inventor of <em>raise runelord</em>. The greedspawn carried glaives (Karzoug, <strong>Greed</strong>). Nobody at the table remarked on it. <em>(Inference, not established in play.)</em></li>
+  <li><strong>Session 1's "probable leader" among the initiates is resolved — and it was nothing.</strong> He died mid-fight to a rank-3 Fireball. He was not a lieutenant; he was just a better dice roller.</li>
+  <li><strong>The audience with Queen Sorshen is tomorrow morning</strong>, with <strong>two days to the Circle of Open Hands ceremony</strong>. The party has hard evidence; what Sorshen does with it is the next question.</li>
+  <li><strong>Aurora or Ava?</strong> The DM said <em>"you can go talk to Aurora,"</em> then corrected on air to <em>"Ava, sorry, her name is Ava,"</em> and used <strong>Ava</strong> for the rest of the scene. <strong>Recorded here as Aurora, matching Session 1 — but flagged as suspect.</strong></li>
+  <li><strong>The workshop is cleared, but nothing says the cult was only here.</strong> The doorman said <em>"a dozen, maybe more."</em></li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The message on the slate</span>
+  <p>A dark rectangular slate fell out of Risen Runelord Gimmel when he came apart — one of a matched pair. Writing on one appears on the other. Someone, somewhere, is still waiting for a reply.</p>
+  <p class="big-line">"If you don't hear back soon, assume the worst."</p>
+  <span class="speaker">— signed with one final word: <strong>the Rune of Greed</strong></span>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Liu Heifeng's Journal</h2>
+<p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</em></p>
+
+<h3>What Liu did this session</h3>
+<ul>
+  <li><strong>Was the only party member the cultists attacked.</strong> Three Force Barrages landed — 8, 11, 7, for <strong>26 total</strong>. A fourth for 12 was retracted when the DM remembered the caster was slowed. Floor: <strong>104 / 165</strong>.</li>
+  <li><strong>Killed three initiates.</strong> Two in a single turn on round 5 — the first after the DM retracted an incorrectly applied cover bonus, hitting by exactly +1 and then clearing a DC 5 concealment check by one.</li>
+  <li><strong>Solved the balcony by giving up his whole kit.</strong> Learned the Climb rules on the spot, established it needs both hands, <strong>released tome and falcata as free actions</strong>, and spent the <strong>entire turn — Climb (26), Climb (21), punch</strong>. <strong>Mythic Strike on the Spirit Warrior fist — critical hit, 60, plus 8 antithesis.</strong></li>
+  <li><strong>Changed his entire turn on one Recall Knowledge.</strong> Identified <strong>Vesinra</strong> as a mythic Lamia Matriarch, learned <strong>Vesinra's Caress</strong> is a feeble-inflicting curse, and abandoned the plan to pull a <strong>scroll of Invisibility</strong> from the retrieval belt instead.</li>
+  <li><strong>Opened Encounter 2 with a critically successful Battle Cry</strong> (+10) — frightened 2 before initiative resolved.</li>
+  <li><strong>Neither Exploit bought a weakness.</strong> Vesinra: failed by 1 → antithesis. Gimmel: succeeded by 0, but he has <strong>no printed weakness</strong> → antithesis anyway. Both fights ran on the flat <strong>8-point rider</strong>.</li>
+  <li><strong>The name came off the tome's free Recall Knowledge</strong>: a <strong>34</strong>, taken automatically at the top of the turn, no action spent.</li>
+  <li><strong>Killed the two bosses.</strong> Vesinra to a <strong>Retributive Strike critical, 98 applied</strong>; Gimmel to a <strong>Mythic Strike critical, 106 applied</strong>.</li>
+  <li><strong>Removed 271 HP in the office and took three of the five kills.</strong> Kudu removed 518 — but <strong>122 of that was one Dragon's Rage Breath</strong>; without it the gap is 396 to 271. Liu rolled <strong>429</strong> and landed 271: <strong>158 went to overkill</strong>, because he was finishing what others opened.</li>
+  <li><strong>Policed the rules in both directions, four times.</strong> Caught that <strong>Sympathetic Vulnerabilities</strong> wasn't spreading his personal antithesis to the other cultists — a rider he was owed and wasn't getting. Then three that cost his own side: his own attack total (<strong>42, not 45</strong>, handing back a mythic proficiency bonus); Guar's stupefied; and the Spiritual Guardian's contribution to Galan's MAP.</li>
+</ul>
+
+<h3>Things Liu knows that the party does not</h3>
+<ul>
+  <li><strong>Nothing material is being withheld</strong> — the Gimmel lore entry was revealed to everybody. What follows is reading, not secrets.</li>
+  <li><strong>The lore entry says a risen runelord is a leash, not a person.</strong> <em>(All of this comes from the journal the DM revealed in Foundry; only the name, the dream and mythic traits, the "runelord of greed" read and the Rune of Greed signature were established out loud.)</em> It is a manifestation of a runelord's legacy at a fixed moment, incapable of ever getting stronger, and <strong>bound to its creator's desires for as long as that creator lives</strong>. Gimmel dying tells the party almost nothing about who is running this.</li>
+  <li><strong>The ritual is Xanderghul's.</strong> The Runelord of Pride invented it — and <strong>the Trinity Initiates were all carrying bec de corbins</strong>, which is Pride's polearm. The greedspawn carried glaives, which is Greed's. That is a mismatch nobody at the table said out loud.</li>
+  <li><strong>Xanderghul can use any risen runelord as a spare body</strong> — including ones he did not create — jumping his soul to the nearest one if he is slain.</li>
+  <li><strong>The Envy read from Session 1 was wrong.</strong> <strong>Belimarius is not implicated by anything seen so far.</strong> Liu should say so before the party builds a theory on it.</li>
+  <li><strong>Gimmel was not the man the doorman described.</strong> That is still an unmet person, and the party has just told him — by silence — that his outpost is gone.</li>
+</ul>
+
+<h3>What Liu is thinking about</h3>
+<ul>
+  <li><strong>The tome's free Recall Knowledge is the single best action he doesn't spend.</strong> It landed the rare-DC identification on Gimmel for nothing. Take it every round regardless of the escalating DC — the failure costs nothing and the success is sometimes the kill.</li>
+  <li><strong>⚠️ Diverse Lore was live on Gimmel and went unclaimed — ask for the comparison.</strong> Foundry printed the comparison DC directly on the Exploit card: <strong>Recall Knowledge DC 28</strong>, against a result of <strong>28</strong>. That is a success, and it would have bought a free Recall Knowledge on a rare creature for no action. <strong>The fix is a sentence, not a build change</strong>: whenever Exploit Vulnerability succeeds, say <em>"compare that to the Recall Knowledge DC"</em> out loud.</li>
+  <li><strong>Diverse Lore's first clause matters more out of combat than in it.</strong> <em>"Take a −2 penalty to Recall Knowledge with Esoteric Lore to Recall Knowledge about <strong>any topic</strong>."</em> Esoteric Lore is <strong>Master +25</strong>, so that's <strong>+23 on literally any subject</strong> — well ahead of Arcana or Occultism at +14, and Society at +0. On any research or downtime question, the correct move is almost always Esoteric Lore at −2 rather than the "right" skill.</li>
+  <li><strong>Retributive Strike mitigated 59 damage off Kudu in the office alone</strong> (28 → 9, 62 → 42, 66 → 46) — and the third trigger's counter-Strike <strong>crit for 98 and killed Vesinra</strong>. It has now closed three of five fights. <strong>Standing adjacent to Kudu is worth more than an extra Strike.</strong></li>
+  <li><strong>The Invisibility scroll was the right call. The dice ate it.</strong> Hidden means a <strong>DC 11 flat check — a flat 50% miss chance on every attack</strong>. Four attacks connected that were subject to it, for <strong>99 damage</strong>. Expected prevention: <strong>~50 points</strong>. Actual: <strong>zero</strong> — a <strong>6.25%</strong> outcome. Add <strong>Galan's 93-point Heal</strong> failing the same DC 11 and it is <strong>five coin flips in a row going the wrong way (3.1%)</strong>, roughly <strong>142 HP of expected value</strong>. It also forced <strong>Vesinra to spend Sure Strike</strong> purely to bypass it.</li>
+<li><strong>That variance is what wrecked the round-one plan</strong> — halving three glaives and a falchion was supposed to buy the position to stand and tank. <strong>The play was correct and would be correct again.</strong></li>
+<li><strong>The lost Heal isn't something Liu needs to fix.</strong> Galan watched him pull the scroll and vanish — that is in-fiction knowledge his character has, and well inside the table's own agreement that characters in the same room can talk. Liu was deliberately staying quiet about mechanical state to avoid quarterbacking, which is <em>stricter</em> than the table asks for. <strong>The flat check belongs to the DM to prompt, or to Galan to ask about, before a sixth-rank slot goes into an invisible target.</strong></li>
+  <li><strong>The Wall of Stone was the most effective thing any enemy did all night.</strong> One action-and-a-half cut off Galan's Guardian, Guar's Floating Flame, and every melee line at once. <strong>The party still has no answer to terrain.</strong></li>
+  <li><strong>Kudu opens, Liu closes, and the gap is smaller than the raw share suggests.</strong> 518 to 271 in the office — but <strong>122 of Kudu's was one Dragon's Rage Breath</strong>, a once-per-10-minutes ability. Strip it and it's <strong>396 to 271</strong>. Getting <strong>Share Weakness</strong> onto Kudu is still the highest-leverage thing available, and it did not happen once this session because both Exploit rolls went to bosses.</li>
+  <li><strong>Buy scrolls.</strong> The invisibility scroll changed a fight. The Heal saved a turn. <strong>Something that answers a wall</strong> is the current gap.</li>
+</ul>
+
+<h3>Two things to check on the sheet</h3>
+<ul>
+  <li><strong>⚠️ Liu is taking less damage than the enemies are rolling, and the gap is exactly the fire die every time.</strong> Five hits: 29/24, 30/26, 27/24, 30/26, 27/25. The deltas are 5, 4, 3, 4, 2 — each precisely the <code>1d6 fire</code> rider. Something is zeroing all incoming fire, and <strong>nothing on the character sheet accounts for it</strong>. It was worth <strong>18 points</strong> this session.</li>
+  <li><strong>⚠️ Round one of Encounter 2 may have run four actions.</strong> Retrieval belt Interact (1) + Invisibility from the scroll (2) + Exploit Vulnerability (1) = 4. Worth clarifying the intended reading with Tom so the sequence is repeatable.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who holds the other slate, and what happens if the party writes on it?</strong> It is a two-way device and it is now in the party's hands.</li>
+  <li><strong>Who cast <em>raise runelord</em>, and are they still alive?</strong> The binding lasts only as long as the creator does. If Gimmel's creator lives, there are more risen runelords.</li>
+  <li><strong>Why Pride's polearm on Greed's cultists?</strong> Coincidence, or the actual chain of command?</li>
+  <li><strong>What does Queen Sorshen do with the evidence tomorrow morning?</strong> And does she offer Liu the trade audience Aurora hinted at in Session 1?</li>
+  <li><strong>Is the mustached paymaster the creator, or another middleman?</strong></li>
+  <li><strong>Two days to the ceremony.</strong> Is that the cult's deadline as well as the party's?</li>
+  <li><strong>Is the priestess Aurora or Ava?</strong> The DM used both in the same scene.</li>
+</ul>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 14 — A Puddle Under Every Window</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-ren { border-left-color: var(--gold); }
+.char-serrafina { border-left-color: var(--jade); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>A Puddle Under Every Window</h1>
+  <div class="subtitle">Session 14 &mdash; four bodies, a staged vampire, and a defense system that only kills the living</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-07-25</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 05m</span>
+    <span class="meta-pill">Reeves Rest Manor &middot; Elidir</span>
+    <span class="meta-pill">3 AM &middot; Blizzard &middot; Sealed</span>
+    <span class="meta-pill">Level 5</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-explore" style="width:46%"></div>
+    <div class="comp-seg comp-rp" style="width:22%"></div>
+    <div class="comp-seg comp-combat" style="width:20%"></div>
+    <div class="comp-seg comp-social" style="width:7%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Investigation 46%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 22%</span>
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 20%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Interrogation 7%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Clues 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster &mdash; <span class="new-badge">LV 5</span></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Dragon Thaumaturge (Mirror Cloak) &middot; Draconic Ravager &mdash; <span class="new-badge">LV 5</span></div>
+      <div class="char-player">Snowgeen</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic &mdash; <span class="new-badge">LV 5</span></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &mdash; <span class="new-badge">LV 5</span></div>
+      <div class="char-player">Scott Smith</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Isgeri Boarhound &mdash; mature animal companion</div>
+      <div class="char-player">Bai Jian's</div>
+    </div>
+    <div class="char-card char-serrafina">
+      <div class="char-name">Serrafina</div>
+      <div class="char-class">Two-headed witch familiar</div>
+      <div class="char-player">Panacea's</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>A detective session, and the party was good at it. They began the night with one murder and a missing corpse. They ended it with four bodies, a suspect under surveillance, and a working theory that explains the whole building.</p>
+    <p>The first break came off a cipher &mdash; twelve pieces of vertebra strung together, pulled from the costume of the woman they'd captured, decoded by <strong>Panacea</strong> into a sentence that named a god's servant and a name nobody recognized: <em>Illcayna will reward you when Isger is hers.</em> From there the manor started producing corpses faster than the party could sweep it. <strong>Merpelia Carafo</strong> in the art gallery, drained white with two neat punctures in her neck. A <strong>manor guard</strong> on the guest landing, throat opened by claws with the fang marks added afterward, as an afterthought. <strong>Ambassador Frigg</strong> in the conservatory, the same way. <strong>Zanthar</strong> called it barely twenty minutes in and never wavered: <em>"That is someone trying to make it look like a vampire."</em> <strong>Bai Jian</strong> tested it the direct way and ran a corpse through the heart with a silver blade &mdash; and nothing came out. No blood at all. Someone had taken it.</p>
+    <p>What the party built instead of a confession was a pattern. Zanthar noticed the water and kept checking: a small puddle under an unlocked window at every scene, in a manor where every latch is on the inside. <strong>Cyrathul</strong> identified the black-sand hourglass under the game-room table as a talisman that hurries or halts decomposition &mdash; which is why the bodies went cold too fast. Panacea reached back into a conversation from a <em>previous session</em> and remembered that <strong>Ezio Daeta</strong> had refused a plate because of the garlic in it, then caught him contradicting himself about where Merpelia had gone and started keeping a tally out loud: <em>"Lie number one."</em> By three in the morning they had a tail on Ezio, a garlic trap being assembled from a magic platter, and a Hellknight Paralictor telling them that circumstantial wasn't going to be enough.</p>
+    <p>Twice the manor fought back. A room filled floor to ceiling with rats, spiders and centipedes pouring through every crack &mdash; a hazard Panacea's own Recall Knowledge identified as something a vampire can summon and command telepathically, <strong>but only within a hundred yards</strong>, which told them the killer was still in the building. And when the party finally followed bootprints out into the blizzard toward the stewards' mausoleum, the ornamental hedges stood up. Bai Jian ended the tiger in a single turn with two consecutive falcata crits. Then Cyrathul recalled what those things actually were &mdash; the manor's own defense system, keyed to attack anything <em>living</em> that comes near without clearance &mdash; and Zanthar took it the last step: which means the thing that has been walking in and out of this house all night isn't.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The Night, Hour by Hour</h2>
+  <div class="timeline">
+
+    <div class="act mystery">
+      <div class="act-label">Act I &middot; Mystery &middot; The Cipher</div>
+      <div class="act-card">
+        <h3>Twelve Pieces of Vertebra</h3>
+        <p><em>The first ~15 minutes of play happened before the recording started; those beats are reconstructed from the Foundry log alone and carry no quotes.</em></p>
+        <ul>
+          <li>The party worked the aftermath of the gala attack with <strong>Fessy Finwinkle</strong> on hand offering healing. <strong>Panacea's</strong> Medicine check on a patient came up just short (14 vs DC 15).</li>
+          <li>Attention turned to <strong>Lefranek Meyal's</strong> discarded devil costume. The party went to Identify Magic on its contents &mdash; <strong>Cyrathul crit-failed</strong> the Nature attempt (9), <strong>Panacea</strong> missed the Arcana by 3, <strong>Zanthar</strong> matched her exactly.</li>
+          <li><strong>Panacea</strong> carried the decode: a <strong>Society check against DC 25, made by 4 (29)</strong>, on a wheel cipher assembled from <strong>twelve pieces of vertebra</strong> &mdash; an instrument used by the agents of <strong>Urgathoa</strong>. Cyrathul rolled a <strong>natural 19</strong> on the same check and still failed it by 6, because he is untrained in Society and Panacea is not.</li>
+          <li>The message: <strong>"Bring the guards to a servant cloaked in our most sacred color. Illcayna will reward you when Isger is hers."</strong></li>
+          <li>Also in the costume: a <strong>Platter of Putrid Dreams</strong> and a <strong>Skeleton Key</strong>, both moved to the party stash by <strong>Zanthar</strong>. <strong>110 XP.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act II &middot; Investigation &middot; Two Inferences and a Scream</div>
+      <div class="act-card">
+        <h3>The Art Gallery</h3>
+        <ul>
+          <li><strong>Cyrathul</strong> took two inferences off one sentence inside a minute: the sacred color is <strong>red</strong> &mdash; which points straight back to the man in the red cloak &mdash; and <em>"Illcayna"</em> reads as an alias. <em>"Would that be a name that's recognizable? Or maybe a pseudonym? Something related to, like, the one goddess?"</em></li>
+          <li>He also read the <strong>Platter of Putrid Dreams</strong> correctly &mdash; it conjures a dish only its intended target can stomach &mdash; and asked the question that makes it evidence rather than loot: <em>"Who is this compelled to?"</em></li>
+          <li>Upstairs in the steward's bedroom: maroon velvet, a folded-silver glaive over the fireplace, a canopy bed with nothing on it but an indent in the quilt. <strong>A drift of snow and a melting puddle under the open window.</strong></li>
+          <li>A woman screamed directly below them. <strong>Cyrathul</strong> floated leaving <strong>Ren</strong> behind as an alarm; <strong>Bai Jian</strong> took the bait &mdash; <em>"He knows, like, 101. Never split the party"</em> &mdash; then argued the whole thing down, since a Hellknight was already posted on that landing.</li>
+          <li><strong>Merpelia Carafo</strong> lay dead in the art gallery, already cold to the touch. <strong>Panacea's</strong> medical exam returned <strong>exsanguination</strong> and two puncture marks. <em>"Fantastic, we have vampires in the house."</em></li>
+          <li><strong>Zanthar's</strong> Society check placed the loss: Merpelia helped run the Isgeri government. <em>"It would be like the Secretary of State being murdered."</em> <strong>30 XP.</strong></li>
+          <li><strong>Cyrathul's Recall Knowledge crit success</strong> ruled out the obvious suspect: Hellknights are lawful evil and entirely by the book, they would march in the front door, and <strong>Cheliax already owns Isger</strong> &mdash; there is nothing here worth assassinating for.</li>
+          <li><strong>Zanthar</strong> made the call the whole session runs on: <em>"That is someone trying to make it look like a vampire."</em></li>
+          <li>The party tested it. <strong>Bai Jian</strong> put his silver falcata through Merpelia's heart and out the back of her chest cavity &mdash; <em>"there's almost zero fluid that comes out."</em> The corpse did not react. <strong>Cyrathul</strong>: <em>"Red cloak. Fake vampire."</em> <strong>Panacea</strong>, totting it up: <em>"Fake Hellknights, fake vampires. Okay. And a cipher."</em></li>
+          <li><strong>Cyrathul</strong> swept the room and found the first puddle: water under a <strong>closed but unlocked</strong> window.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act III &middot; Roleplay &middot; Working the Room</div>
+      <div class="act-card">
+        <h3>Lie Number One</h3>
+        <ul>
+          <li><strong>Cyrathul interviewed the guards over the body</strong>, and this is where the entire Ezio thread starts. <em>"How'd y'all find the body?"</em> &mdash; and on a <strong>Diplomacy 22</strong> the guard gave it up: Merpelia had not been in the gallery alone. <em>"I believe she was arguing with the fat man&hellip; Mr. Daeta, before she came in here."</em></li>
+          <li><strong>Panacea</strong> then ran <strong>Ezio Daeta</strong> &mdash; the gossip she'd cultivated at the gala &mdash; and turned him into an unwitting asset: <em>"Why don't you go work the room on people and see what you can find out from them and let me know."</em> He scurried off and immediately told a cluster of nobles <em>"I thought she was down in the art gallery"</em> &mdash; after telling Panacea to her face that he had no idea where Merpelia had gone.</li>
+          <li><strong>Panacea</strong>, dry: <em>"So now we've caught him in a lie. <strong>Lie number one.</strong>"</em></li>
+          <li><strong>Panacea</strong> also flagged the conflict of interest nobody else raised: <strong>Caeto</strong> was upstairs, turned up covered in blood, and is the man directing the investigation.</li>
+          <li><strong>Bai Jian</strong> pushed the tempo: <em>"Let's go just check everywhere to make sure. Because the more we just laying around, the more time we lose in finding."</em> The party swept the ground floor room by room.</li>
+          <li><strong>Cyrathul</strong> had the guards herd the surviving guests into one room so the killer would run out of isolated targets &mdash; gesturing a claw at the corpse in the corner by way of argument.</li>
+          <li>The <strong>kitchen</strong>: <strong>Sasatoli Bronc</strong> with a turkey leg in one hand and a tankard in the other. <strong>Zanthar</strong> tried to intimidate him and got a mug of mead for his trouble &mdash; <em>"You are one funny little guy. I really like you."</em> <strong>Cyrathul</strong> stepped in behind him and got a straight answer: <em>"I'll play ball."</em> The exhausted kitchen servant alibi'd Sasatoli completely.</li>
+          <li>The <strong>conservatory</strong>, the <strong>servants' quarters</strong> (where <strong>Zanthar</strong> stole a card game's hands to give an absent servant a better draw), the <strong>dining room</strong>, and the <strong>library</strong> &mdash; where <strong>Zanthar</strong> asked the one useful question of a room full of drunk nobles: <em>are any of you new faces?</em> That surfaced <strong>Ambassador Frigg</strong>, in Isger for the first time, all the way from <strong>Oprak</strong>.</li>
+          <li><strong>Bai Jian</strong>, on discovering the privy has two doors: <em>"Hmm, a toilet with two doors. Intriguing. The people over here is quite eccentric, I see."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act IV &middot; Investigation &middot; The Second Victim</div>
+      <div class="act-card">
+        <h3>Claws First, Fangs After</h3>
+        <ul>
+          <li>On the guest landing: a manor guard in chainmail, throat torn out, a frozen expression of shock. This was the second victim <strong>Caeto</strong> had mentioned in S13 &mdash; the one killed by <em>"someone or something."</em></li>
+          <li><strong>Panacea's Medicine check crit-succeeded</strong> (hero point, 28) and produced the session's most important forensic detail: the throat was opened by <strong>claws</strong>, there were <strong>no defensive wounds</strong>, there was far less blood than there should have been &mdash; and the <strong>fang marks were added moments <em>after</em> he was already dead.</strong></li>
+          <li><strong>Zanthar's</strong> perception found the coin purse still on the belt, the longsword still sheathed, and &mdash; under the window &mdash; <strong>more water on the floor.</strong> Cyrathul: <em>"Seems to be a common factor between them."</em></li>
+          <li><strong>150 XP</strong>, and a break.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act V &middot; Combat &middot; Creatures of the Night</div>
+      <div class="act-card">
+        <h3>The Room Fills</h3>
+        <ul>
+          <li>Rats, spiders, centipedes and bats poured in through every crack, vent and chimney flue. The door slammed shut. A <strong>complex hazard</strong>, not a creature &mdash; nothing to kill, only a disable to work. <em>(Full round-by-round below.)</em></li>
+          <li><strong>Panacea's</strong> Recall Knowledge produced the constraint that reframed the whole night: some vampires summon and telepathically command vermin like this, <strong>but only within about a hundred yards.</strong></li>
+          <li><strong>Cyrathul</strong> ended it with a hero-pointed <strong>Religion</strong> roar and put a Seek out the window afterward &mdash; nothing but snow and a magical construct sentry patrolling below. <em>"So it's still here. It's nearby. And we know it's a vampire now for sure."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Mystery &middot; The Game Room</div>
+      <div class="act-card">
+        <h3>Where the Steward Died</h3>
+        <ul>
+          <li>Hedvind's actual murder site. A door off its hinges, taxidermied monster heads, a smoldering fire, an overturned chair speckled with blood.</li>
+          <li><strong>Two hands of cards on the table</strong> &mdash; one face up with three aces, one face down with nothing. <strong>Cyrathul</strong> raised the question and offered Games Lore; the payoff came off <strong>Panacea's Society check (26)</strong>: Hedvind was mid-hand when he died, which means <strong>he knew his killer and wasn't alarmed by them.</strong></li>
+          <li><strong>A key on the table</strong>, with the door broken down from outside: the room was <strong>locked from the inside.</strong> No signs of struggle at all.</li>
+          <li>Under the table, knocked over: an <strong>hourglass filled with black sand.</strong> <strong>Cyrathul</strong> identified it as a talisman that <strong>preserves or accelerates decomposition on a body</strong> &mdash; and that it had <strong>been used</strong>. Also under the table: an <strong>onyx idol of Urgathoa</strong>, recovered by <strong>Zanthar</strong>.</li>
+          <li><strong>Zanthar</strong> checked the <strong>Staff of the Dead</strong> from last session and confirmed it had <strong>not</strong> been used today.</li>
+          <li><strong>Zanthar</strong>, again: <em>"Are any of the windows open or have water near them?"</em> There was.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VII &middot; Investigation &middot; The Conservatory</div>
+      <div class="act-card">
+        <h3>The Third Body, and the Garlic</h3>
+        <ul>
+          <li>A man screamed. <strong>Ambassador Frigg</strong>, dead among the tomato vines. Two punctures in the neck. A puddle under a closed window whose latch was on the inside.</li>
+          <li><strong>Zanthar's</strong> Society check: an alliance with <strong>Oprak</strong> would have benefited Isger enormously, and now it is impossible.</li>
+          <li><strong>Cyrathul</strong> built a testimony chain rather than trusting one witness &mdash; Frigg had to pass two guards outside the library &mdash; and the guards delivered: <strong>Frigg and Ezio Daeta had been arguing</strong>, specifically about whether Oprak would benefit Isger, and Ezio <em>"was staring pretty intently at him."</em></li>
+          <li><strong>Panacea</strong> landed the session's sharpest line: <em>"We <strong>did</strong> tell him to talk to everybody &mdash; but it just happens to be that he's talking to everybody that's been dead."</em></li>
+          <li>Then the leap of the night, reaching back into a <strong>previous session's</strong> influence scene: Ezio had refused a dish in a tantrum, and she thought she knew why. <em>"I think he threw the plate that had garlic in it, honestly&hellip; if I remember right."</em> She went to check her own notes and came back with <em>"Yes, it was bad cheese and garlic sauce"</em> &mdash; then flagged its limits herself: <em>"Or that was his claim when I asked him about it."</em> <strong>The DM never confirmed the detail.</strong></li>
+          <li><strong>Zanthar</strong> went straight to the kitchen for garlic; the party began assembling a sting using the <strong>Platter of Putrid Dreams</strong>. <strong>Panacea</strong> covered the whole operation to Ezio's face while it was being planned &mdash; <em>"we're just trying to figure out how to keep everybody well fed so that they don't get too cranky with us"</em> &mdash; with a small Cheshire grin.</li>
+          <li><strong>Zanthar</strong> put a <strong>tail on Ezio</strong>: <em>"Not formally guard him. Just kind of make sure where he is and what he's doing."</em></li>
+          <li>A servant reported that <strong>Fessy Finwinkle</strong> had become badly frightened and <strong>locked herself in the private dining room upstairs.</strong> Bai Jian: <em>"That's definitely a recipe for success right there."</em> Nobody followed up.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VIII &middot; Interrogation &middot; Reporting to Caeto</div>
+      <div class="act-card">
+        <h3>"We're Going to Need Hard Proof"</h3>
+        <ul>
+          <li><strong>Panacea</strong> led: they have a suspect, not proof. Caeto's bar: <em>"We're going to need hard proof."</em></li>
+          <li><strong>Cyrathul</strong> pressed him on where that bar actually sits &mdash; <em>"How much circumstantial evidence would you consider undoubtable?"</em> &mdash; then spelled the cipher name aloud: <em>"It's I-L-L-C-A-Y-N-A."</em> Caeto had never heard it.</li>
+          <li><strong>Panacea</strong> asked the operational question: the grounds are ringed with magical construct sentries, so how is anyone getting in and out? Caeto admitted he is <strong>untrained in the arcane arts</strong> and has no idea how the wards identify anything &mdash; then opened a desk drawer and showed them the <strong>control box of glowing crystals</strong> that arms and disarms the manor's entire defense system.</li>
+          <li><strong>Cyrathul</strong> briefed him on the false flag and the magically edited memories. <strong>Bai Jian</strong> supplied the framing: <em>"I mean, if you want to just cause some havoc like this, what's better than using the name Hellbreakers?"</em></li>
+          <li>Caeto, satisfied: <em>"Seems like you're on the right path. I'm glad I entrusted this to you."</em></li>
+          <li><strong>Panacea</strong> got an Arcana read on a second crystal he pulled out &mdash; a <strong>speaking crystal</strong>, paired to another across great distances, and expensive.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act IX &middot; Investigation &middot; The Bedroom, and Outside</div>
+      <div class="act-card">
+        <h3>Dirt on the Bed</h3>
+        <ul>
+          <li><strong>Bai Jian</strong>: <em>"Should we check outside?"</em> The party finished the interior first.</li>
+          <li>Back in the steward's bedroom, <strong>Cyrathul crit-succeeded</strong> his Perception (nat 20): <strong>handfuls of dirt scattered across the bed</strong>, more dirt tracked onto the bearskin rug, scratches on the floorboards by the western wall &mdash; and a <strong>secret door</strong>. <em>"Guys, I found something."</em></li>
+          <li>Inside the hidden compartment: <strong>ledgers tracking bribes and corruption in and outside the city</strong> (400 gp of leverage), recovered by <strong>Cyrathul</strong>.</li>
+          <li>Outside the secret door, <strong>tracks</strong>. <strong>Panacea</strong> and <strong>Bai Jian</strong> both made the Survival check and followed them out into the blizzard &mdash; where they led, exactly as Bai Jian had said they would. <em>"I feel like we should have checked outside."</em></li>
+          <li>Through heavy snow with thirty feet of visibility: a <strong>stone mausoleum lit by everlight crystals</strong>, the historic resting place of Isger's stewards, ringed by trimmed hedges and topiaries.</li>
+          <li><strong>Bai Jian</strong> stopped the party before they closed: <em>"Hold on, before we come closer. We have two of our members still pretty low. You guys want to drink potions?"</em> They healed up. Then the hedges moved.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act X &middot; Combat &middot; The Topiaries</div>
+      <div class="act-card">
+        <h3>The Hedges Stand Up</h3>
+        <ul>
+          <li>A Tiger Topiary and two Hound Topiaries, all with <strong>weakness 5 to fire</strong>. <em>(Full round-by-round below.)</em></li>
+          <li><strong>Cyrathul's</strong> Esoteric Lore (31) closed the session's loop: the topiaries are <strong>part of the manor's own defense system</strong>, activated to attack <strong>anything living</strong> that approaches without proper clearance.</li>
+          <li><strong>Zanthar</strong> took it the rest of the way: <em>"It only goes after living things. So undead things might not be able to go."</em> <strong>Panacea</strong>: <em>"A dead, but can go right by it. That's probably how he's getting in and out."</em></li>
+          <li><strong>Bai Jian</strong>: <em>"There must be someone that planted these, right?"</em> Someone armed the grounds.</li>
+          <li>Final sweep: <strong>Zanthar</strong> found the mausoleum doors <strong>locked</strong>, snow and dust undisturbed &mdash; nobody has been inside recently. And <strong>Panacea</strong> found, right beside it, a <strong>small freshly dug hole in the soil</strong> and <strong>a torn-off imp tail from one of the manor servants' costumes.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Encounter 1 &mdash; Creatures of the Night</h3>
+    <div class="combat-meta">Complex Hazard &middot; 2 Rounds &middot; No XP Award &middot; 108 Damage to the Party</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Hazard 36 &rarr; Panacea 29 &rarr; Cyrathul 23 &rarr; Zanthar 21 &rarr; Bai Jian 12</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">4 &mdash; Cyrathul &times;2, Panacea, Bai Jian</div></div>
+      <div><div class="combat-stat-label">Damage Taken</div><div class="combat-stat-value">Bai Jian 39 &middot; Panacea 34 &middot; Cyrathul 22 &middot; Zanthar 13</div></div>
+      <div><div class="combat-stat-label">Disable</div><div class="combat-stat-value">2 successes &mdash; Bai Jian (Nature), Cyrathul (Religion)</div></div>
+    </div>
+
+    <p>Rats, spiders, centipedes and bats poured in through every crack, vent and chimney flue in the room as the party examined the guard's body. The door slammed shut. This was a <strong>complex hazard, not a creature</strong> &mdash; there was nothing to kill, only a disable to work. The DM: <em>"You guys are used to complex hazards now. How would you like to try to disable this?"</em></p>
+
+    <h4>On Entry &mdash; Infest, DC 24 Fortitude</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> critical success (33) &mdash; unaffected</li>
+      <li><strong>Cyrathul</strong> success (25)</li>
+      <li><strong>Panacea</strong> failure (22) &mdash; <strong>Sickened 1</strong></li>
+      <li><strong>Zanthar</strong> failure (15) &mdash; <strong>Sickened 1</strong></li>
+    </ul>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>The hazard</strong> went first and hit the whole room: <strong>basic Reflex DC 24</strong>, 2d8+3 = <strong>11 damage</strong>. Bai Jian saved (26) for 5; Zanthar saved (24) for 5; <strong>Cyrathul spent a hero point</strong> to turn an 18 into a 27 and took 5 instead of 11; <strong>Panacea failed</strong> (16), took the full <strong>11</strong>, and came out of it with <strong>persistent bleed 3</strong> on top.</li>
+      <li><strong>Panacea</strong> opened with <strong>Recall Knowledge</strong>, then went for the disable and &mdash; <strong>hero point</strong> &mdash; still came up <strong>2 short</strong> (22 vs DC 24). Her bleed ticked for 3, and she <strong>critically failed the recovery check on a natural 1.</strong></li>
+      <li><strong>Cyrathul</strong> templated a <strong>dragon's roar</strong> at the swarm as an Intimidation attempt and failed &mdash; <em>"you roar and a bunch of them just flood into your mouth instead, which isn't probably the worst thing you've had in your mouth"</em> &mdash; and his follow-up <strong>Pest Lore</strong> (Diverse Lore, &minus;2) also missed: <em>"it's on the tip of your tongue, but it's just evading you."</em></li>
+      <li><strong>Zanthar</strong> rolled a <strong>natural 20</strong> on Recall Knowledge (Arcana 32) &mdash; which returned the same hint Panacea had surfaced a turn earlier. <strong>The DM had specified Nature or Religion for the disable, and Zanthar is untrained in both</strong>, so the party's knowledge specialist had no legal way to contribute to the actual objective. He considered <strong>Dizzying Colors</strong>, discarded it, and burned a rank-2 slot on <strong>Chilling Spray</strong> instead &mdash; a 15-foot cone for <strong>8 cold</strong> into a hazard with no hit points. <em>"You see quite a few of the spiders and stuff curl up and die. And as soon as they do, just more keep flooding in down the chimney."</em></li>
+      <li><strong>Bai Jian</strong> went to his <strong>Expert Nature</strong> &mdash; the party's best skill in the room &mdash; <strong>spent a hero point</strong>, and made it by 5 (<strong>29</strong>). <em>"You take your sword out, and you start banging it around, and you see that they kind of spread out a little bit &mdash; that will be a success towards disabling this."</em> <strong>First success.</strong> With his last action he offered to Aid anyone else's attempt, then took <strong>Dueling Parry</strong>.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>The hazard</strong> hit again: <strong>basic Reflex DC 24</strong>, 2d8+3 = <strong>17 damage</strong>. Zanthar saved (27) for 8. Panacea (16) and Cyrathul (15) failed for <strong>17</strong> each. <strong>Bai Jian critically failed</strong> (13) and took <strong>34</strong> &mdash; the single biggest hit anyone took all session.</li>
+      <li><strong>Panacea</strong> missed the disable again, this time <strong>by 1</strong> (23 vs 24), then converted her turn into the intelligence that mattered: a <strong>Recall Knowledge success (26)</strong> establishing that <strong>some vampires can summon creatures like this and command them telepathically &mdash; but only within about a hundred yards.</strong> Her bleed ticked for another 3 and she failed the recovery a second time.</li>
+      <li><strong>Cyrathul</strong> went back to the roar &mdash; but with a different skill. <strong>Religion</strong>, <strong>hero point</strong>, <strong>29</strong>. <em>"This time you dig deep into that roar, and you bellow it out, and all of the pests start racing back outside, up through the chimney, out through the vent holes, out through the crack in the window. They uncover the door. And they all disappear."</em> <strong>Encounter over.</strong></li>
+      <li><strong>Bai Jian and Zanthar never got a Round 2 turn.</strong> And <strong>nobody healed anyone for the entire encounter</strong> &mdash; Panacea asked, and the disable cost two actions, so it never happened until the fight was over.</li>
+    </ul>
+
+    <p><strong>Aftermath:</strong> with initiative dropped, Panacea ran the whole party back up &mdash; Treat Wounds on Bai Jian (13), Zanthar (5) and Cyrathul (5), plus Life Boost &mdash; while <strong>Zanthar healed himself for 18 with Lay on Hands</strong> and Bai Jian drank a Soothing Tonic.</p>
+
+    <p><strong>What it bought the party:</strong> the hazard dealt 108 points of damage across the party and gave up no XP award of its own, but Panacea's Recall Knowledge turned it into the session's tightest constraint &mdash; <strong>the killer was within a hundred yards of that room, and had been the whole time.</strong></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 2 &mdash; The Topiaries</h3>
+    <div class="combat-meta">Moderate &middot; 80 XP &middot; 2 Rounds &middot; 219 Damage Dealt</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Hound 28 &rarr; Hound 26 &rarr; Panacea 21 &rarr; Cyrathul 19 &rarr; Tiger 18 &rarr; Bai Jian 18 &rarr; Zanthar 17</div></div>
+      <div><div class="combat-stat-label">Damage Dealt</div><div class="combat-stat-value">Bai Jian 90 &middot; Cyrathul 80 &middot; Zanthar 39 &middot; Panacea 10</div></div>
+      <div><div class="combat-stat-label">Damage Taken</div><div class="combat-stat-value">Cyrathul 61 &middot; Ren 18 &middot; everyone else 0</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">3 &mdash; Bai Jian, Zanthar, Cyrathul</div></div>
+      <div><div class="combat-stat-label">Kill Credit</div><div class="combat-stat-value">Tiger &mdash; Bai Jian &middot; Hound &mdash; Zanthar &middot; Hound &mdash; Cyrathul</div></div>
+      <div><div class="combat-stat-label">Enemy Weakness</div><div class="combat-stat-value">Fire 5 (all three)</div></div>
+    </div>
+
+    <p><em>Panacea's initiative went in late &mdash; Foundry logged a 29, but the DM couldn't get it to register and manually re-slotted her at <strong>21</strong>, behind both hounds. Ren acts on Bai Jian's turn.</em></p>
+
+    <p>Three ornamental hedges &mdash; a <strong>Tiger Topiary</strong> (AC 21, attack +13) and two <strong>Hound Topiaries</strong> (AC 18, attack +10, Pack Attack +1d6, Warning Howl DC 17 Will) &mdash; came alive around the party as they approached the stewards' mausoleum through the blizzard.</p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Hound A</strong> opened on <strong>Cyrathul</strong>: claw <strong>hit for 7</strong>, then a <strong>Warning Howl</strong> (DC 17 Will) that the entire party shrugged off &mdash; <strong>Cyrathul</strong> critically succeeded (29), <strong>Bai Jian</strong> hero-pointed a 15 into a 23 and <strong>critically succeeded</strong> via Bravery/Dragonblood, Zanthar (20) and Panacea (17) both held &mdash; then jaws at MAP for <strong>8</strong>.</li>
+      <li><strong>Hound B</strong> flanked in on Cyrathul, making him <strong>off-guard</strong>: jaws with <strong>Pack Attack for 11</strong>, then a claw for <strong>13</strong>. <strong>Cyrathul had taken 39 in the first round and was the only PC either hound would look at all fight.</strong></li>
+      <li><strong>Panacea</strong> dropped a two-action <strong>Heal for 15</strong> into Cyrathul, then cast <strong>Trade Death for Life</strong> on a hound &mdash; it <strong>failed its Fortitude save</strong> and took <strong>10 void damage</strong>, handing Cyrathul <strong>fast healing 3</strong> on top.</li>
+      <li><strong>Cyrathul</strong> spent an action on <strong>Exploit Vulnerability</strong>, took the <strong>mortal weakness</strong>, and found fire &mdash; <em>"which is not good, because I now do fire damage"</em> &mdash; which added <strong>+5 to his own Strikes</strong>: <strong>chomp for 17</strong>, <strong>claw for 20</strong>, <strong>37 into one hound.</strong> <em>"Your claws just burn a big arc right to the center of this thing."</em></li>
+      <li><strong>The Tiger Topiary</strong> went for <strong>Ren</strong>: a claw <strong>hit the boarhound for 18</strong>, then missed twice, both <strong>critical misses</strong>.</li>
+      <li><strong>Ren</strong> used his action for the <strong>Support benefit</strong>, feeding <strong>+1</strong> into Bai Jian's next Strike.</li>
+      <li><strong>Bai Jian</strong> strode in and <strong>critically hit the Tiger for 46</strong>. He made the second swing a <strong>Snagging Strike</strong> &mdash; and <strong>critically hit again for 44.</strong> <em>"You just tear through the center of this thing. Slice once across half of it. It kind of tumbles to the ground. Slice again, and the whole tiger just kind of seems to fall in half, and then it's just a lifeless bush on the ground."</em> <strong>90 damage in one turn. Tiger dead.</strong></li>
+      <li><strong>Zanthar</strong> <strong>Drained his Bonded Item</strong> to recover <strong>Blazing Bolt</strong> and fired two rays &mdash; which must strike <em>different</em> targets, so one went to each hound. Both rode the hounds' own <strong>fire weakness 5</strong> (nothing to do with Cyrathul's Exploit Vulnerability, which only buffs his own Strikes). <strong>Hero point on the first ray</strong> turned a 16 into a 27 &mdash; <strong>22 damage</strong>, <em>"a scorching hole right through the center of this thing,"</em> and it survived. The second <strong>hit the hound Cyrathul had already opened up for 37</strong> and <strong>finished it at 17</strong>: <em>"the bolt just sears through, and it's such a big gaping hole the head of this thing just falls off."</em></li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li>The <strong>last hound</strong> kept working Cyrathul: jaws missed, then a <strong>natural 20 on the claw critically hit for 22</strong>, and the second jaws missed.</li>
+      <li><strong>Panacea</strong> sustained <strong>Trade Death for Life</strong>, cast <strong>Life Boost</strong>, and used <strong>Doctor's Visitation + Battle Medicine for 7</strong> &mdash; Cyrathul recovering <strong>16 in that round alone</strong> between the heal and two sources of fast healing.</li>
+      <li><strong>Cyrathul critically succeeded a Demoralize</strong> (28 vs DC 16) for <strong>Frightened 2</strong> &mdash; and that is precisely what killed the hound. Frightened 2 dropped its AC from 18 to <strong>16</strong>; he <strong>spent a hero point</strong> on the follow-up and rerolled into a <strong>26</strong>, beating 16 by exactly ten. The DM: <em>"Barely crit."</em> <strong>43 damage.</strong> Without his own Demoralize the swing is an ordinary hit and the fight goes another round.</li>
+      <li><em>"I'll just open my mouth and there'll be a flame coming out of my teeth, and as I'm biting I'll move through him as it's burning the rest of him. And I'll just chop him in half."</em> <strong>Encounter over in 2 rounds</strong>; Bai Jian and Zanthar never took a Round 2 turn.</li>
+    </ul>
+
+    <p><strong>Kill credit:</strong> Tiger Topiary &mdash; <strong>Bai Jian</strong> (90 in one turn, unassisted). Hound #1 &mdash; <strong>Zanthar's</strong> Blazing Bolt decapitation, finishing a hound <strong>Cyrathul had already put 37 into</strong>. Hound #2 &mdash; <strong>Cyrathul's</strong> crit jaws, off his own Demoralize. <em>(The two hounds land at roughly 64&ndash;65 HP each on the arithmetic, which is the only split consistent with one dying to a 17-point ray while the other survived 22 and needed a 43 to drop.)</em></p>
+
+    <p><strong>Healing:</strong> Panacea put <strong>34 into Cyrathul during the fight</strong> (Heal 15, Battle Medicine 7, fast healing 12) and another 26&ndash;36 afterward, plus 8 on Ren.</p>
+
+    <p><strong>The tuning.</strong> A textbook Moderate that funnelled entirely onto one PC. The two hounds ignored everyone else for two rounds, and Cyrathul absorbed <strong>61 of the 79 damage the party took</strong>. The counterweight was that Bai Jian removed the only genuinely dangerous creature &mdash; the Tiger, hitting at +13 for 2d6+7 &mdash; from the board before it took a second turn.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the One Who Wanted to Go Outside</h4>
+      <ul>
+        <li><strong>He was right about the exits, and he said so before it mattered.</strong> With the ground floor swept and the party circling, Bai Jian asked <em>"Should we check outside?"</em> The party finished the interior instead. Five minutes later a secret door in the steward's bedroom opened onto bootprints leading into the snow, and he said it twice, without heat: <em>"Should have checked outside, huh?"</em> &hellip; <em>"I feel like we should have checked outside."</em> The tracks led to the mausoleum, and the mausoleum was the session.</li>
+        <li><strong>He set the party's investigative tempo early.</strong> <em>"Let's go just check everywhere to make sure. Because the more we just laying around, the more time we lose in finding."</em> That's the sentence the entire room-by-room sweep runs on. He also split the labour at the third crime scene without being asked &mdash; <em>"You guys can check the body. I'll go check around the room"</em> &mdash; so the autopsy and the room search happened at once.</li>
+        <li><strong>He ran the vampire test himself, with the only silver in the party.</strong> The theory was that Merpelia might rise. Bai Jian put the falcata through her heart and out the back of her chest cavity. Nothing came out. It was a genuinely decisive experiment, and it belonged to him because he's the one carrying silver.</li>
+        <li><strong>He reframed the false flag in one line.</strong> Cyrathul was briefing Caeto on the impostors and the edited memories; Bai Jian supplied the reason it works: <em>"I mean, if you want to just cause some havoc like this, what's better than using the name Hellbreakers?"</em> The League's reputation is now a weapon anyone can pick up, and he's the one who said it out loud to a Hellknight.</li>
+        <li><strong>He is out of the knowledge lane, and he has made peace with exactly which lane is his.</strong> He tried untrained Religion on the vampire question and abandoned it mid-sentence. But in the vermin swarm his <strong>Expert Nature was the party's best answer in the room</strong>, and he spent a hero point to make sure of it &mdash; a success toward the disable, narrated as him drawing his sword and hammering it around until the swarm broke apart. Later, sorting loot: <em>"I'll be the nature guy. You guys can deal with religion as well as magic."</em></li>
+        <li><strong>He taught the table a rule mid-hazard rather than take the spotlight.</strong> With one action left he asked <em>"Does anyone else want to use any skill that I might be able to aid?"</em> Then, when Cyrathul tried to Aid on Panacea's turn, he corrected it: <em>"No, no &mdash; you have to prepare to aid. So on your turn, you have to prepare by rolling the DC 15&hellip;"</em> (Zanthar finished the sentence for him: <em>"Use it as a reaction."</em>) He also redirected Panacea to Recall Knowledge instead &mdash; which is the check that produced the hundred-yard leash.</li>
+        <li><strong>He stopped the party from walking into the ambush at low HP.</strong> Before closing on the mausoleum: <em>"Hold on, before we come closer. We have two of our members still pretty low. You guys want to drink potions?"</em> They topped up, and then three topiaries stood up out of the hedges.</li>
+        <li><strong>Combat:</strong> he ended the Tiger Topiary in a single turn. Ren's Support benefit fed <strong>+1</strong> into the opening swing, which <strong>crit for 46</strong>; he made the follow-up a <strong>Snagging Strike</strong>, and the fatal-d12 falcata <strong>crit again for 44</strong>. <strong>90 damage in one turn</strong>, the whole of it against the fight's only real threat. He also hero-pointed his Will save against the hound's Warning Howl into a <strong>critical success</strong> &mdash; Bravery and Dragonblood turning a bare success into an auto-crit, as designed.</li>
+        <li><strong>Deadpan of the session</strong>, on Zanthar asking what people were doing in the bedrooms during a party: <em>"Don't ask questions you don't want answers to."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Dragon Who Reads the Room</h4>
+      <ul>
+        <li><strong>He got two inferences out of one decoded sentence inside a minute.</strong> The sacred color is red &mdash; which puts the man in the red cloak back at the center of everything &mdash; and <em>"Illcayna"</em> is probably an alias for a goddess. The next half hour of red-cloak questioning comes entirely from that read.</li>
+        <li><strong>He treats magic items as forensic evidence, not loot.</strong> Handed a Platter of Putrid Dreams, his first question was <em>"Who is this compelled to?"</em> &mdash; because the item names its intended victim. Later he asked whether it had been used in the past week, and whether the Staff of the Dead had been used today. Both are the questions of someone building a timeline.</li>
+        <li><strong>His Recall Knowledge crit eliminated the obvious suspect.</strong> Hellknights are lawful evil and by the book; they'd march in the front door; and Cheliax already owns Isger outright, so there's nothing to assassinate for. That crit is what turned the investigation away from the occupying power and toward something hiding inside the house.</li>
+        <li><strong>He started the Ezio thread, and nobody has credited him for it since.</strong> Standing over Merpelia's body he turned to the guards &mdash; <em>"How'd y'all find the body?"</em> &mdash; and a <strong>Diplomacy 22</strong> produced the thing the entire back half of the session runs on: she had not been in that gallery alone. <em>"I believe she was arguing with the fat man&hellip; Mr. Daeta, before she came in here."</em> Every lie Panacea catches Ezio in afterward is downstream of that question.</li>
+        <li><strong>He identified the mechanism.</strong> The black-sand hourglass under the game table is a talisman that preserves or accelerates decomposition &mdash; which is precisely why Merpelia was stone cold minutes after dying. He also found the <strong>secret door on a natural 20</strong>: dirt scattered across the steward's bed, more of it tracked onto the rug, scratches along the western wall, and a hidden compartment holding ledgers of every bribe in the city. <em>"Guys, I found something."</em></li>
+        <li><strong>He is the party's closer in a room, and he knows when to walk in behind someone.</strong> Zanthar's intimidation of Sasatoli Bronc landed as comedy and got him a beer. Cyrathul stepped in behind the man mid-laugh: <em>"It is in your best interest to cooperate with us. This isn't really a laughing matter."</em> Sasatoli sat down his turkey leg and said <em>"I'll play ball."</em> He pressed Caeto the same way, on the only question that mattered: <em>"How much circumstantial evidence would you consider undoubtable?"</em></li>
+        <li><strong>The comedy is his too.</strong> On the vampire problem: <em>"If we had daylight, we could just exposure-therapy everyone in this place. We'd find them eventually."</em> On Zanthar floating <em>"we can make up clues,"</em> his answer was pure pragmatism rather than principle: <em>"I mean, if we want to frame someone &mdash; but I feel like leaving the murderer alive is not beneficial to us."</em> On the whole night's work: <em>"Yes, you unfortunately have to protect dead people from necromancers."</em> And the physical bit of the session &mdash; templating a dragon's roar at a room full of vermin and getting a mouthful of spiders for it.</li>
+        <li><strong>Combat:</strong> he took the entire topiary fight on his own body. <strong>Both hounds targeted him and nothing else</strong> &mdash; 61 damage across two rounds including a natural-20 crit, and he stayed standing on Panacea's heals. He found the <strong>weakness 5 to fire</strong> with Exploit Vulnerability and turned it into <strong>+5 on every Strike he landed</strong>, putting 37 into one hound before Zanthar's bolt finished it. Then he killed the last one with a two-step of his own making: <strong>Demoralize crit &rarr; Frightened 2 &rarr; its AC drops to 16 &rarr; hero-pointed jaws crit for 43.</strong> He built the opening and then walked through it.</li>
+        <li><strong>He also ended the vermin swarm</strong> &mdash; and got there by <em>changing skills</em>, not repeating himself. His Intimidation roar failed a round earlier, so he came back with <strong>Religion (29)</strong> on a hero point and the DM re-narrated it as the same roar, finally landing.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the One Keeping the Ledger</h4>
+      <ul>
+        <li><strong>She broke the case open before the recording even started.</strong> The wheel cipher &mdash; twelve pieces of vertebra, an instrument of Urgathoa's agents &mdash; went to a DC 25 Society check, and Panacea was the only one who could read it. Every thread in this session descends from that sentence.</li>
+        <li><strong>She produced the leap of the night, out of a scene from a previous session.</strong> Trying to work out whether Ezio Daeta could be a vampire, she remembered that he'd refused a dish in a tantrum at the gala &mdash; and thought she knew <em>why</em>: <em>"I think he threw the plate that had garlic in it, honestly."</em> She went and checked her own notes mid-scene rather than assert it, came back with <em>"it was bad cheese and garlic sauce,"</em> and then marked the caveat herself &mdash; <em>"or that was his claim when I asked him about it."</em> Hedged four separate times on-mic and still the most creative thing anyone did all session.</li>
+        <li><strong>She caught the suspect lying and started keeping score out loud.</strong> Ezio told her he had no idea where Merpelia had gone, then immediately told a group of nobles he'd thought she was in the art gallery. Panacea, without raising her voice: <em>"So now we've caught him in a lie. Lie number one."</em></li>
+        <li><strong>She recruited her own suspect as an intelligence asset while suspecting him.</strong> <em>"I would love to know more from you, too. So why don't you go work the room on people and see what you can find out from them and let me know."</em> Then she kept running him all night, covering the garlic sting to his face &mdash; <em>"we're just trying to figure out how to keep everybody well fed so that they don't get too cranky with us now"</em> &mdash; with a small Cheshire grin she narrated herself.</li>
+        <li><strong>She was the only one to question the man who deputized them.</strong> <em>"Why was he disappeared and covered in blood at the beginning? And he's the one who's directing the investigation too, right?"</em> Nobody else raised it. She also asked the operational question Caeto couldn't answer: if the grounds are ringed with wards, how is anybody getting in and out?</li>
+        <li><strong>Her forensics carried three of the four bodies.</strong> Exsanguination on Merpelia. A <strong>hero-pointed critical success</strong> on the guard that established the murder weapon was <strong>claws</strong> and the <strong>fang marks were added after death</strong> &mdash; the finding the entire staged-vampire theory rests on. The neck punctures on Frigg. She is the reason the party knows what killed anyone. The card-table payoff came off her Society check too: Hedvind was mid-hand when he died.</li>
+        <li><strong>She ran the healing economy for a party that has no other real healer</strong>, across two fights: Treat Wounds on all four of them after the swarm (and a second pass on herself and Cyrathul), Battle Medicine mid-combat, Heal, Life Boost, Trade Death for Life sustained for rounds, and bandages for Ren afterward. <em>"I want to make sure our fighters are nice and healed up here."</em> In the topiary fight she poured <strong>34 points into Cyrathul alone</strong> while both hounds chewed on him, which is the only reason he was alive to land the killing blow.</li>
+        <li><strong>She also found the cliffhanger.</strong> Last sweep of the night, beside the mausoleum: a freshly dug hole, and a torn-off imp tail from a manor servant's costume.</li>
+        <li>Her verdict on the whole evening, thirteen minutes in: <em>"Fantastic, we have vampires in the house."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the One Who Was Right First</h4>
+      <ul>
+        <li><strong>He called the central twist twenty minutes into the session and never moved off it.</strong> Everyone else was working out how to find a vampire. Zanthar looked at the same body and said <em>"That is someone trying to make it look like a vampire."</em> Panacea's autopsy on the guard &mdash; claws first, fangs afterward &mdash; confirmed him forty minutes later.</li>
+        <li><strong>He assembled the pattern that connects every crime scene.</strong> The puddles themselves came from all over &mdash; Cyrathul's Seek turned up the first in the gallery, Zanthar asked for the second in the game room, Panacea asked for the third in the conservatory. Zanthar is the one who put them together into a method. The DM confirmed the latches were all on the inside; Zanthar took it from there: <em>"That means someone's coming around and then jumping out the window to escape."</em> Three unrelated details became one signature on his turn.</li>
+        <li><strong>And he's the one who solved how.</strong> The session's last real deduction is his: the topiaries are keyed to attack the living, <em>"so undead things might not be able to go"</em> past them. The manor's own defenses have been letting the killer through all night because the killer doesn't register as alive.</li>
+        <li><strong>He drove the investigation by asking better questions than anyone else.</strong> To a library full of drunk nobles: <em>are any of you new faces?</em> &mdash; which is how Ambassador Frigg surfaced as the outsider from Oprak, hours before Frigg turned up dead. To the party at large: <em>"Is there anyone in particular that would benefit from the death of all these people?"</em> &mdash; motive-first suspect narrowing. And he established the blizzard as the evidence clock early: <em>"If it happened recently, they'd show up in the snow."</em></li>
+        <li><strong>The garlic plan is his, end to end.</strong> Panacea remembered the plate; Zanthar went to the kitchen, got the garlic, and came back with it. He also put the tail on Ezio in exactly the right register &mdash; <em>"Not formally guard him. Just kind of make sure where he is and what he's doing."</em></li>
+        <li><strong>His comedy is a running bit about tampering with evidence.</strong> He rearranged a card game in the servants' quarters to give an absent servant a better hand &mdash; <em>"I'm going to give someone a really good hand"</em> &mdash; and then, at the actual murder scene, went to do it again: <em>"I'm going to switch the cards up again so that the other one's got four twos."</em> He also floated <em>"We can make up clues"</em> and a plan to stab everyone at the party with a stake and see who bursts into flame.</li>
+        <li><strong>His intimidation of Sasatoli Bronc was a total failure and a great scene.</strong> He rolled it, and the man laughed, poured him a mug of mead and told him <em>"You are one funny little guy. I really like you."</em> Zanthar's gnome, threatening a dockworker twice his size, ends the exchange holding a beer.</li>
+        <li><strong>Combat:</strong> the vermin swarm was the one problem all night his kit couldn't touch. The DM offered <strong>Nature or Religion</strong> for the disable and Zanthar is <strong>untrained in both</strong> &mdash; so the party's best knowledge character was locked out of a knowledge puzzle for the entire encounter. He rolled a <strong>natural 20</strong> anyway and it returned the hint Panacea had already produced, then spent a rank-2 slot on Chilling Spray against a thing with no hit points. He did the only things available to him and none of them counted. In the topiary fight he <strong>Drained his Bonded Item</strong> to get Blazing Bolt back, hero-pointed the first ray into a hit for 22, and put the second into the hound Cyrathul had already opened up &mdash; <strong>taking its head off</strong>. He also closed the night's search, finding the mausoleum doors locked with the snow and dust on them undisturbed.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Clues</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Platter of Putrid Dreams</div>
+      <div class="loot-source">Lefranek's devil costume &middot; Lv 4</div>
+      <div class="loot-note">Conjures a dish only its intended target can stomach; anyone else vomits. Confirmed unused in the past week. Being repurposed as the delivery vehicle for the garlic sting on Ezio Daeta.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Skeleton Key</div>
+      <div class="loot-source">The same costume &middot; Lv 5</div>
+      <div class="loot-note">A lockpick granting an item bonus. Implies Lefranek's crew intended to pick something.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Hourglass Talisman</div>
+      <div class="loot-source">Under the game-room table</div>
+      <div class="loot-note">Filled with black sand. Preserves or accelerates decomposition on a body &mdash; and it had been used. Explains the unnaturally cold, bloodless corpses.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Onyx Idol of Urgathoa</div>
+      <div class="loot-source">Under the game-room table &middot; Zanthar</div>
+      <div class="loot-note">A second Urgathoa artifact, at the steward's murder scene.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Ledgers</div>
+      <div class="loot-source">Hidden compartment &middot; Cyrathul, nat 20 &middot; 400 gp</div>
+      <div class="loot-note">"Ledgers tracking bribes and corruption in and outside of the city." Political leverage over most of Elidir.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Primeval Mistletoe</div>
+      <div class="loot-source">Living Topiary Remains &middot; Bai Jian &middot; Lv 6</div>
+      <div class="loot-note">Invested magical, 230 gp. Claimed by Bai Jian, who also took the Nature lane outright.</div>
+    </div>
+  </div>
+  <div class="xp-banner">
+    Experience &middot; 110 cipher &middot; 30 Merpelia &middot; 150 the guard's body &middot; 80 topiaries = <strong>370 XP each</strong> &mdash; Bai Jian 850/1000
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "That is someone trying to make it look like a vampire."
+    <span class="attribution">Twenty minutes in, while everyone else was working out how to hunt a vampire. Panacea's autopsy proved him right.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "He did, yes. So now we've caught him in a lie. Lie number one."
+    <span class="attribution">Ezio told her he had no idea where Merpelia had gone, then told a group of nobles he'd thought she was in the art gallery.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Don't ask questions you don't want answers to."
+    <span class="attribution">Zanthar, on the way into the guest wing: "What are people doing in the bedrooms during a party?"</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Alas. Because if we had daylight, we could just exposure-therapy everyone in this place. We'd find them eventually."
+    <span class="attribution">Checking whether his Shining Symbol produces sunlight. It does not.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "We did tell him to talk to everybody &mdash; but it just happens to be that he's talking to everybody that's been dead."
+    <span class="attribution">On their own informant, after the third body.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Let's go just check everywhere to make sure. Because the more we just laying around, the more time we lose in finding."
+    <span class="attribution">Setting the sweep that ran the rest of the session.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>DM</strong>: "You roar, and a bunch of them just flood into your mouth instead &mdash; which isn't probably the worst thing you've had in your mouth. But it's just disgusting."
+    <span class="attribution">Cyrathul, templating a dragon's roar as an Intimidation attempt into a room packed floor to ceiling with spiders.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "I'm going to switch the cards up again so that the other one's got four twos."
+    <span class="attribution">Tampering with the hand of cards on the table where the Steward of all Isger was murdered &mdash; the second card game he'd rearranged that night.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "I think he threw the plate that had garlic in it, honestly. If I remember right."
+    <span class="attribution">Reaching back into a gala scene from a previous session &mdash; then going to check her notes before committing to it.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I mean, if you want to just cause some havoc like this, what's better than using the name Hellbreakers?"
+    <span class="attribution">To a Hellknight Paralictor, explaining why the League's own reputation is now the most useful weapon in Elidir &mdash; for someone else.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "It's I-L-L-C-A-Y-N-A."
+    <span class="attribution">Spelling the cipher's name out to Caeto Vulaunex, who had never heard it.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I feel like we should have checked outside."
+    <span class="attribution">He'd suggested it five minutes earlier. The tracks in the snow led to the mausoleum.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "It only goes after living things. So undead things might not be able to go."<br>
+    <strong>Panacea</strong>: "A dead, but can go right by it. That's probably how he's getting in and out."
+    <span class="attribution">The last deduction of the night: the manor's own defenses have been waving the killer through all along.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Yes, you unfortunately have to protect dead people from necromancers."
+    <span class="attribution">On the job description.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Who is Illcayna?</strong> Spelled out at the table as I-L-L-C-A-Y-N-A. The cipher says Isger will be <em>hers</em>. Caeto has never heard the name. Cyrathul reads it as an alias &mdash; possibly for Urgathoa herself, possibly for a person.</li>
+      <li><strong>Was somebody digging beside the mausoleum, in a stolen servant's costume?</strong> A freshly dug hole and a torn-off imp tail from the manor's own servant costumes. The mausoleum doors themselves are locked and undisturbed. <em>The session ends on this.</em></li>
+      <li><strong>Ezio Daeta.</strong> Last seen with two of the three fresh victims, caught in one direct lie, argued with Frigg about Oprak minutes before Frigg died, and refused a plate at the gala over its garlic. He is now under informal surveillance, and a garlic sting is being prepared. The party has no hard proof and Caeto has said hard proof is the bar.</li>
+      <li><strong>The garlic premise is unverified.</strong> Panacea's recollection is the entire basis of the sting &mdash; and she hedged it four times on-mic, checked her own notes, and flagged that it was <em>his</em> claim, not an observed fact. The DM never confirmed it. If Ezio simply disliked the cheese, the trap proves nothing.</li>
+      <li><strong>The staged vampire.</strong> Claws first, fangs afterward, blood removed and never found. Somebody wants this read as a vampire killing. Zanthar called it, and nobody has established what's actually doing it.</li>
+      <li><strong>Where is all the blood going?</strong> Four bodies drained. None of it is anywhere in the manor.</li>
+      <li><strong>The hundred-yard leash.</strong> Whatever summoned the vermin was within a hundred yards of the guest landing at that moment &mdash; which is most of the building. It has not left.</li>
+      <li><strong>The manor's defenses only attack the living.</strong> Wards, construct sentries, and topiaries all ignore the undead. Caeto keeps the control box of crystals in his desk drawer and is untrained in the arcane &mdash; he cannot tell the party how any of it identifies a target, or who could have tuned it.</li>
+      <li><strong>Hedvind knew his killer.</strong> Two hands of cards, no signs of struggle, the door locked from the inside with the key still on the table. He was mid-game and unafraid.</li>
+      <li><strong>The ledgers.</strong> Every bribe in and outside the city, in the murdered steward's hidden compartment. Motive for half of Elidir.</li>
+      <li><strong>Fessy Finwinkle locked herself in the private dining room upstairs</strong>, badly frightened, and the party never went to check on her.</li>
+      <li><strong>Ambassador Frigg gave Bai Jian his "lucky" silver dart</strong> at the S12 darts contest, for beating him &mdash; and stood frowning beside Colonel Rithert while Bai Jian flattered the man in S13. Frigg is now the third body. Bai Jian still carries the dart.</li>
+      <li><strong>The man in the red cloak</strong> (S13) &mdash; now with a cipher instruction pointing straight at him: <em>a servant cloaked in our most sacred color.</em></li>
+      <li><strong>Hedvind VI's body is still missing</strong>, with an Urgathoa idol, a decomposition talisman, and an unused Staff of the Dead all in play.</li>
+      <li><strong>Rooms still unswept</strong>, including the upstairs the party kept getting pulled away from, and whatever is outside beyond the mausoleum.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Cliffhanger</h2>
+  <div class="cliffhanger">
+    <span class="label">The session ends here</span>
+    <p>The mausoleum doors are locked. The snow and dust on them are undisturbed &mdash; nobody has been inside. But right beside them, in the middle of a blizzard, at three o'clock in the morning, Panacea finds a small hole freshly dug into the soil.</p>
+    <p>And next to it, torn off and dropped in the snow:</p>
+    <span class="big-line">an imp's tail, from one of the manor servants' costumes.</span>
+    <span class="speaker">&mdash; "You guys can figure out what manor servant was out here next week."</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Swept the manor room by room with the others. Pushed to keep moving early &mdash; every minute spent standing over a body is a minute the killer is elsewhere.</li>
+    <li>Ran the vampire test on <strong>Merpelia Carafo</strong> myself. Silver falcata through the heart and out the back. <strong>No blood came out of her at all.</strong> Nobody has explained where it went.</li>
+    <li>Argued the party out of splitting at the first scream. Cyrathul wanted to leave <strong>Ren</strong> behind as an alarm; I talked it down &mdash; there was already a Hellknight posted on that landing. We all went together.</li>
+    <li>Checked the privy, the hallways, the side doors. Found nothing except that this house has a toilet with two doors.</li>
+    <li><strong>Untrained Religion is useless.</strong> Tried it on the vampire question and stopped. My lane is <strong>Nature</strong>, and I said so out loud when we split the loot.</li>
+    <li>In the vermin room: used <strong>Nature</strong> to break the swarm apart. Spent a hero point on it. <strong>First success toward the disable.</strong> Then offered to Aid and had to explain how preparing to Aid works.</li>
+    <li>Took <strong>34 damage in one round</strong> to a critical failure on that reflex save. Worst hit I've taken in a while, and there was nothing to swing at.</li>
+    <li>Told the party to check <strong>outside</strong>. They wanted to finish the interior. Five minutes later Cyrathul found a secret door and the tracks led straight out into the snow.</li>
+    <li>Tracked the bootprints through the blizzard with Panacea.</li>
+    <li>Stopped the party from closing on the mausoleum with two members still low. We drank potions first. Then three hedges stood up.</li>
+    <li>Killed the <strong>Tiger Topiary</strong> in one turn. Ren fed me the Support bonus, first swing <strong>crit for 46</strong>, made the second a <strong>Snagging Strike</strong> and <strong>crit again for 44</strong>. Ninety damage, and the only real threat in that fight never took a second turn.</li>
+    <li>Hero-pointed the Will save against the hound's howl into a critical success. Fear does not work on me.</li>
+    <li>Took the <strong>Primeval Mistletoe</strong> and the <strong>Nature lane</strong> in the loot split &mdash; I am the party's expert in it now, and I said so.</li>
+    <li>Cyrathul made the Recall Knowledge on the topiary remains: <strong>they are this manor's defense system</strong>, keyed to attack anything living without clearance. Zanthar drew the conclusion off it.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>I said to check outside and I was right. I am not going to keep saying it, but next time the exits get checked first. Every scene had an unlocked window and a puddle under it &mdash; the answer was never going to be inside a room.</li>
+    <li><strong>Ren is worth more than I use him for.</strong> He fed me the Support bonus that turned the tiger fight and he is the only member of this party with <strong>fiend and undead scent out to forty feet</strong>. We spent three hours hunting something we believe is undead, in a building we could not leave, and I never once put him on the scent. That is my mistake, and it is fixable immediately.</li>
+    <li>I carry the only <strong>silver</strong> in the party and I am the only one who can test a body without a spell. That made me useful in a session where I could not roll a single knowledge check.</li>
+    <li><strong>Fessy Finwinkle is locked in a room upstairs, terrified.</strong> She healed us for nothing at the gala and asked for nothing back. A servant came to tell us and we did not go. If something happens to her, that is on us &mdash; and she may also have seen something worth having.</li>
+    <li><strong>Caeto keeps the box that controls this building's entire defense system in his desk drawer</strong>, and he told us straight out that he does not understand how it works. He showed it to four people he arrested six hours ago.</li>
+    <li>Panacea has been keeping notes on these nobles since the gala. She pulled a detail about a thrown plate out of a conversation from days ago and it became our best lead. Whatever she is writing down, it is working.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The fangs went in after he was already dead.</strong> Claws killed that guard; the bite was staged on top. Whoever is doing this wants a vampire blamed for it. That is the same move as the flag at the gala &mdash; do the thing, then dress it as somebody else's crime. <strong>Twice in one night is a method, not a coincidence.</strong></li>
+    <li>Related: <strong>fake Hellknight, fake Hellbreakers, fake vampire.</strong> This whole campaign has been people wearing other people's faces. Somebody in Isger has worked out that the cheapest way to win is to make the enemy's reputation do the killing.</li>
+    <li>The manor's defenses <strong>only attack the living</strong>. That is not a flaw in the wards, that is a specification. Someone had to build them that way, or tune them that way &mdash; and Caeto cannot tell us who.</li>
+    <li>The blood is the part nobody is chasing. Four bodies drained, and none of it is in this house. It was <strong>taken</strong>, deliberately, in quantity. That is not feeding. That is a component for something.</li>
+    <li><strong>Hedvind was playing cards when he died.</strong> No struggle, door locked from the inside, key on the table. He let the person in and sat back down. Whoever killed the Steward of all Isger was someone he was comfortable losing a hand to.</li>
+    <li>An hourglass that speeds or stops decay, an idol of the goddess of undeath, a staff that raises the dead, and a corpse that walked out of a sealed room. They are not hiding what they intend to do with Hedvind.</li>
+    <li><strong>Ezio Daeta is the obvious suspect and that bothers me.</strong> He is loud, he is everywhere, he is the last person seen with two of the dead, and he tells us so himself. Everything about this night has been misdirection. A suspect this convenient at three in the morning deserves suspicion of a different kind.</li>
+    <li>I could not make a single knowledge check that mattered tonight &mdash; not religion, not the vampire, not the hourglass. That is the cost of the respec and I accept it. <strong>But I have an Expert Nature and a boarhound with foe-scent, and both of those are detection.</strong> Use them.</li>
+    <li>We have not slept, it is three in the morning, and the killer has hit roughly once an hour. <strong>If that holds, there is another body coming.</strong></li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>Who was digging beside the mausoleum</strong>, and which manor servant is missing an imp tail from their costume?</li>
+    <li>Who or what is <strong>Illcayna</strong>?</li>
+    <li>Where is <strong>all the blood</strong> going?</li>
+    <li>Is <strong>Ezio Daeta</strong> the killer, or the thing we are meant to be looking at while the real one works?</li>
+    <li><strong>Who tuned the manor's wards to ignore the dead</strong>, and when?</li>
+    <li>Is <strong>Fessy Finwinkle</strong> still alive behind that door?</li>
+    <li>What is in the <strong>mausoleum</strong>, given nobody has opened it and something was digging right outside it?</li>
+    <li>Whose name is in those <strong>ledgers</strong> &mdash; and does it overlap with anyone still in this building?</li>
+    <li>Can <strong>Ren</strong> scent this thing? Why have I not tried?</li>
+    <li>Where is <strong>Hedvind VI's body</strong>, and how much time do we have before somebody stands it back up?</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

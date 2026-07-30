@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 3 — The Cerulean Teahouse</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Cerulean Teahouse</h1>
+  <div class="subtitle">Session 3 &mdash; Season of Ghosts &middot; Willowshore, Shenmen</div>
+  <div class="meta-row">
+    <span class="meta-pill">July 24, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 35m</span>
+    <span class="meta-pill">First Morning of Summer, 7108 IC</span>
+    <span class="meta-pill">Willowshore Reclaimed</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:34%"></div>
+    <div class="comp-seg comp-rp" style="width:22%"></div>
+    <div class="comp-seg comp-mystery" style="width:16%"></div>
+    <div class="comp-seg comp-explore" style="width:16%"></div>
+    <div class="comp-seg comp-social" style="width:12%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 34%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 22%</span>
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery / Lore 16%</span>
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Level-Up / Downtime 16%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social / Town 12%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-zhen"><div class="char-name">Zhen Stillness</div><div class="char-class">Samsaran (Hungerseed) &middot; Animist (Liturgist)</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-iryoku"><div class="char-name">Iryoku-Yasha</div><div class="char-class">Yaksha &middot; Kineticist (Wood/Fire)</div><div class="char-player">legendfather</div></div>
+    <div class="char-card char-kaoru"><div class="char-name">Kaoru</div><div class="char-class">Kitsune &middot; Magus (Aloof Firmament)</div><div class="char-player">magus player</div></div>
+    <div class="char-card char-kaelen"><div class="char-name">Kaelen Ashford</div><div class="char-class">Human &middot; Monk (monastic weaponry)</div><div class="char-player">cajun_code</div></div>
+    <div class="char-card char-mujin"><div class="char-name">Mu-Jin</div><div class="char-class">Witch &middot; Spinner of Threads &middot; familiar Weaver</div><div class="char-player">snotierknave69</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The party finished what Session 2 started: clearing monster-held downtown Willowshore and running down the "long-necked man" &mdash; <strong>Modoku</strong>, the invasion's rumored brain &mdash; all the way to his den in the <strong>Cerulean Teahouse</strong>. The morning ran long and comic before it turned grim. A house full of <em>drunk</em> jinkin (the GM went on a nat-20 tear and narrated the fey petting and cursing at their own clubs) nearly cost Kaoru his life at the very first fight, then the party rolled through a slaughterhouse-stable cockroach swarm and a chorus of <strong>animated cookware</strong> that demanded they join a parade for Willowshore's "new rulers."</p>
+    <p>A fiat level-up to <strong>2</strong> landed mid-session, and with it a round of build shopping. The teahouse itself was a horror set-piece: a giant frog that disarmed and tongue-grabbed Zhen, a hidden variant scorpion, a will-and-testament promising the deed to whoever recovers two pearls from <strong>Fumeiyoshi's eyes</strong>, and finally the rokurokubi himself &mdash; <strong>Mo Douqiu the Hedonist</strong> &mdash; lounging in a room of flayed and half-digested bodies with a pet weasel.</p>
+    <p>He pitched the party on how much <em>fun</em> his horror story had been. They declined, at length and with profanity. The bleed he handed out was the only thing all session that actually threatened them, and even that was cleaned up. <strong>Zhen cut Mo Douqiu down</strong> with the wrapped nodachi; <strong>Iryoku vaporized the weasel.</strong> With the yokai dead and the caged villagers freed, <strong>Willowshore is reclaimed from the monsters</strong> &mdash; and the session closed on a cutscene: a mysterious figure watching from the outskirts of town.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I &middot; Combat &middot; The Drunken House</div>
+      <div class="act-card">
+        <h3>Six Nat-20s and a Near-Death</h3>
+        <ul>
+          <li><strong>Following the S2 blood-trail</strong>, the party opened a mud-walled house to find <strong>two captive villagers (Yuli Sanmi, Hu Lelong)</strong> guarded by a mob of <strong>jinkin.</strong></li>
+          <li><strong>The GM went on an absurd nat-20 tear</strong> and leaned into it in fiction: the jinkin were <em>drunk</em> &mdash; praising their clubs, petting them, and yelling at them in Common for missing.</li>
+          <li>The jinkin were at effectively +0 to hit, so the only strikes that could land were auto-crits &mdash; and <strong>three nat-20 club crits all landed on Kaoru</strong>, dropping him to <strong>3 HP (Near Death).</strong> The scariest moment of the night, at the weakest fight of the night, entirely on crit luck.</li>
+          <li>Kills came fast once the party found its feet: <strong>Kaelen's bo-staff dropped one for 29</strong> (a crit plus a second hit &mdash; massive-damage instakill), <strong>Zhen's Needle Darts</strong> (his divine cantrip) dropped another, and Earth's Bile chipped the cluster.</li>
+          <li><strong>Mu-Jin's Soothe pulled Kaoru back</strong> from the brink; the villagers were freed and escorted out.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Slaughtered Stables</div>
+      <div class="act-card">
+        <h3>Have Bonk, Will Travel</h3>
+        <ul>
+          <li>The stable behind the guardhouse held a dozen <strong>slaughtered horses</strong> &mdash; the party's first hard look at the invaders' cruelty. <em>"What barbaric actions."</em></li>
+          <li>A <strong>cockroach swarm</strong> boiled out of the carnage. <strong>Kaelen one-shot it</strong> &mdash; Flurry of Blows, first strike missed (a GM hero point made it hit), second strike crit, 21 after resistance. The entire encounter was one turn.</li>
+          <li>Cleanup and escorts: the party freed <strong>caged villagers</strong> ("thrown in to repent, or sent to the teahouse") and walked rescued Southbankers back across <strong>Dawnstep Bridge</strong>, banking reputation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Cookware Parade</div>
+      <div class="act-card">
+        <h3>Willowshore's "New Rulers"</h3>
+        <ul>
+          <li>A racket "like hundreds of pieces of cookware clattering, combined with off-key humming" resolved into <strong>three animated objects</strong> &mdash; cleavers, kettles, chopsticks, and a <strong>bloody butcher's apron.</strong></li>
+          <li>One declared itself among Willowshore's <strong>new rulers</strong> and ordered the party to <strong>join the parade.</strong> <strong>Iryoku's</strong> Make an Impression actually landed (hero-pointed to a success) &mdash; but the party had no interest, and <strong>Kaelen</strong> torpedoed it: <em>"No, you ain't. You're too small and short."</em></li>
+          <li>The engulfing cauldron-thing <strong>swallowed Kaelen</strong> (failed Reflex + two Fortitude saves, losing air) before the party cracked it open &mdash; <em>"I landed on my face&hellip; thumbs up, I'm okay."</em></li>
+          <li>Kills: <strong>Iryoku</strong> solo-killed one with a crit blast; <strong>Kaoru's Phase Bolt</strong> dropped the engulfer (freeing Kaelen); <strong>Kaelen</strong> finished the third after <strong>Zhen</strong> cracked its construct armor.</li>
+          <li>Loot: a miscatalogued <strong>+1 silver dagger</strong>, oil of potency, potency crystals, and a <strong>Mesmerizing Opal</strong> talisman.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IV &middot; Roleplay &middot; Level 2 &amp; the Build Table</div>
+      <div class="act-card">
+        <h3>Mixed XP, Live Retooling</h3>
+        <ul>
+          <li>The GM applied the mixed-XP catch-up he'd forgotten: everyone hit <strong>level 2.</strong> <em>"Level two is important for class feats."</em></li>
+          <li><strong>Kaelen</strong> dropped the long-planned Spirit Warrior (Zhen argued it's redundant with Monk/Flurry) for <strong>Staff Acrobat</strong> + Elemental Fist + Slippery Prey &mdash; <em>"I like bonking people to death."</em></li>
+          <li><strong>Mu-Jin</strong> leaned into <strong>Familiar Master</strong> (Enhanced Familiar &rarr; Cantrip Connection, Light, Willowshore Lore) to make Weaver tougher and more survivable.</li>
+          <li><strong>Kaoru</strong> kept <strong>Shocking Grasp</strong> for the spellstrike; <strong>Zhen</strong> continues on Druid Dedication (Storm).</li>
+          <li>Heavy table-advice throughout, most of it Zhen and Iryoku walking the others through the 2024 Magus update and the finer points of PF2e archetypes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery &middot; Into the Cerulean Teahouse</div>
+      <div class="act-card">
+        <h3>A Frog, a Will, and a Hidden Sting</h3>
+        <ul>
+          <li><strong>The frog.</strong> A giant frog slept in the wreck of the teahouse floor; waking it, the party ate a <strong>tongue disarm</strong> (Zhen's nodachi knocked from his hand) and a <strong>tongue-grab</strong> on Zhen, who failed both Escapes and only came loose when the frog died. <strong>Mu-Jin's Needle Darts crit for 22</strong> killed it.</li>
+          <li><strong>The will.</strong> Teahouse paperwork yielded the <strong>Last Will &amp; Testament of Qing Mai-Lai</strong>: with no heirs left, the deed passes to whoever recovers <strong>the two pearls she threw into Fumeiyoshi's eyes</strong> &mdash; two ponds north of town locally called the <strong>Eyes of Fumeiyoshi</strong> (a Tian deity). A standing quest.</li>
+          <li><strong>The scorpion.</strong> A hidden <strong>variant forest giant scorpion</strong> clambered down; <strong>Zhen's Seek (25)</strong> caught it before it could drop on the party. <strong>Zhen's "burst combo"</strong> softened it and <strong>Kaoru finished it with a Shocking Grasp Spellstrike.</strong></li>
+          <li><strong>The body room.</strong> Flayed and partially-digested corpses hung from the beams &mdash; the yokai's larder. Mu-Jin recoiled: <em>did something eat and digest them, then spit them back out?</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; Mo Douqiu the Hedonist</div>
+      <div class="act-card">
+        <h3>The Rokurokubi's Bad Pitch</h3>
+        <ul>
+          <li>The <strong>long-necked man</strong> &mdash; Modoku, now named <strong>Mo Douqiu the Hedonist</strong> &mdash; lounged among the bodies with a <strong>weasel.</strong> He argued the town had been "the most boring place ever" and that he'd done everyone a favor by dropping them into a horror story: <em>"Admit it &mdash; haven't you been having fun?"</em></li>
+          <li>The party refused across the board &mdash; <strong>Mu-Jin</strong> ("an unwanted guest&hellip; we ask you to leave"), <strong>Iryoku</strong> ("Violence."), <strong>Zhen</strong> ("Get the fuck out"), <strong>Kaoru</strong> ("you need a new definition of fun"), <strong>Kaelen</strong> ("you bring chaos&hellip; get the hell out") &mdash; and rolled initiative.</li>
+          <li>Mo Douqiu fought dirty: a <strong>20-ft elongating neck</strong>, Jaws with <strong>1d6 persistent bleed</strong>, Demoralize, and <strong>"Drop Corpse"</strong> &mdash; biting the ropes to drop hanging bodies onto the party. The <strong>bleed</strong> stuck on Iryoku, Zhen, and Kaoru and refused to clear.</li>
+          <li><strong>Mu-Jin's signature play:</strong> dismount Weaver, send it in, land <strong>Elemental Betrayal</strong> (fire weakness) on the rokurokubi and drop its AC via Familiar of Balanced Luck.</li>
+          <li><strong>Zhen cut the boss down</strong> &mdash; stepping to an off-guard angle and running him through with the wrapped nodachi. <strong>Iryoku vaporized the weasel</strong> after Kaoru's Foxfire crit softened it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VII &middot; Social &middot; Willowshore Reclaimed</div>
+      <div class="act-card">
+        <h3>The Dead, and the Living</h3>
+        <ul>
+          <li><strong>The bodies.</strong> Rather than presume to burn them, the party (led by <strong>Mu-Jin</strong>) chose to cut the corpses down, cover them, and <strong>notify the families</strong> and Granny Hu / Old Matsuki &mdash; "I don't know the customs of this village."</li>
+          <li><strong>The prisoners.</strong> A locked back room held more <strong>bound, fatigued villagers</strong> &mdash; freed with Mo Douqiu's keys.</li>
+          <li>With the yokai dead and downtown cleared, the GM called it: <strong>"You have successfully reclaimed Willowshore from the monsters."</strong></li>
+          <li>Everyone was healed to full by <strong>Zhen's Garden of Healing</strong> before the party moved on.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+  <p><em>This session had a full Foundry roll log; the reconstructions below were verified against it (speaker-attributed, with target ACs and hit margins). Six fights in all &mdash; five of them trivial, one that finally had teeth.</em></p>
+
+  <div class="combat-box">
+    <div class="combat-meta">The Mud-Walled House, Downtown &middot; 2 Rounds</div>
+    <h3>E1 &middot; The Drunken Jinkin</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">~6&times; Jinkin (AC 12, clubs 1d6&minus;2, Quickened but drunk)</div></div>
+      <div><div class="combat-stat-label">Danger</div><div class="combat-stat-value">Three nat-20 club crits &rarr; Kaoru to 3 HP (Near Death)</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">96 each</div></div>
+    </div>
+    <ul>
+      <li><strong>Round 1</strong>: Mu-Jin opened with <strong>Nudge Fate + AC support</strong> on Kaoru; Kaoru struck (ninjato); <strong>Zhen dropped Earth's Bile</strong> on a cluster (fail/crit/fail; 6/6 + persistent fire). The GM's nat-20 barrage began &mdash; three club crits (4, 8, 1) all on <strong>Kaoru</strong>, taking him to <strong>3 HP.</strong> Iryoku's thrown fire blast tagged one.</li>
+      <li><strong>Kaelen's bo-staff (crit + a second hit &rarr; 29) &rarr; massive-damage instant kill.</strong></li>
+      <li><strong>Round 2</strong>: <strong>Mu-Jin's Soothe (7)</strong> healed Kaoru; Kaoru flew in (Sky Laughs at Waves) and struck; <strong>Zhen's Needle Darts (9, his divine cantrip) killed a second jinkin</strong>; Earth's Bile mopped up the survivors (all half-damage saves).</li>
+      <li><strong>Threat</strong>: all incoming damage landed on Kaoru (~14, to 3 HP), all of it from nat-20 auto-crits. The L1 HP pool is tiny &mdash; this "trivial" fight was the second-most dangerous of the night.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">The Slaughtered Stables &middot; 1 Round</div>
+    <h3>E2 &middot; Cockroach Swarm</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">1&times; Cockroach Swarm (physical resistance)</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Kaelen Flurry crit &mdash; 21 after resistance, one-shot</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">48 each</div></div>
+    </div>
+    <ul>
+      <li><strong>Kaelen Flurry</strong>: first strike missed (GM spent a hero point &rarr; hit), second strike <strong>crit &rarr; 23 rolled, 21 after resistance &rarr; dead.</strong> One round, zero damage taken. <em>"Have Bonk will travel."</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Downtown Alley &middot; ~2 Rounds</div>
+    <h3>E3 &middot; Animated Cookware</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3&times; animated objects (Slice-and-Pound; Engulf/Constrict; Construct Armor)</div></div>
+      <div><div class="combat-stat-label">Scare</div><div class="combat-stat-value">The engulfer swallowed Kaelen (~10 dmg, losing air)</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">112 each</div></div>
+    </div>
+    <ul>
+      <li>Iryoku's <strong>Make an Impression succeeded</strong> (hero-pointed 9&rarr;18 vs DC 15) &mdash; but the party refused the "parade" demand and rolled initiative anyway. Combat opened with a <strong>Slice and Pound</strong> AoE (everyone saved, ~1 each).</li>
+      <li><strong>Engulf object swallowed Kaelen</strong> &mdash; failed Reflex, then two Fortitude saves (Awful Engulf + Constrict), to <strong>Badly Injured</strong> (~10 damage, losing air) &mdash; until it died and dumped him out.</li>
+      <li>Kills: <strong>Iryoku</strong> solo-killed one with a <strong>crit Elemental Blast (10)</strong>; <strong>Kaoru's Phase Bolt (9)</strong> dropped the engulfer (freeing Kaelen); <strong>Kaelen</strong> finished the third after <strong>Zhen</strong> cracked its construct armor with a nodachi hit.</li>
+      <li>~12 total damage taken (~10 of it on the engulfed Kaelen).</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Cerulean Teahouse, Ground Floor &middot; ~2 Rounds</div>
+    <h3>E4 &middot; The Giant Frog</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemy</div><div class="combat-stat-value">1&times; Giant Frog (AC 19; tongue disarm + grab)</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Mu-Jin's Needle Darts crit for 22</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">48 each</div></div>
+    </div>
+    <ul>
+      <li>The frog <strong>tongue-disarmed Zhen</strong> (crit; nodachi knocked away) and <strong>tongue-grabbed</strong> him; Zhen <strong>failed both Escapes</strong> and only came free when the frog died.</li>
+      <li>Chip from the whole party (Needle Darts, Ray of Frost, Elemental Blast, bo-staff, Earth's Bile) softened it; <strong>Mu-Jin's Needle Darts crit for 22 &rarr; dead.</strong></li>
+      <li><strong>The frog dealt no HP damage</strong> &mdash; its whole turn was disarm + grab.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Teahouse Upstairs &middot; 1 Round</div>
+    <h3>E5 &middot; Variant Forest Scorpion</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemy</div><div class="combat-stat-value">1&times; variant forest giant scorpion (AC 18, hidden)</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Kaoru's Shocking Grasp Spellstrike (23)</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">32 each</div></div>
+    </div>
+    <ul>
+      <li>Hidden; <strong>Zhen's Seek (25)</strong> beat its Stealth and denied the ambush. <strong>Zhen's burst combo</strong> (Nodachi 10 + Harm + Earth's Bile) and <strong>Kaoru's Shocking Grasp Spellstrike (1d6 + 2d12 = 23) &rarr; dead.</strong></li>
+      <li>All Recall Knowledge rolls whiffed in the moment (<em>"none of you know&hellip; a coward"</em>), but the GM revealed it anyway: a variant, lower-level than a standard scorpion, with forest scorpion venom. No damage taken.</li>
+      <li><em>(This encounter was missing from the shared initiative list.)</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">The Body Room &middot; 2 Rounds &middot; The Real Fight</div>
+    <h3>E6 &middot; Mo Douqiu the Hedonist + the Weasel</h3>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Rokurokubi (AC 19, Jaws +12 reach 20ft, 1d6 bleed, Demoralize) + Weasel (AC 17, Grab)</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zhen &rarr; Mo Douqiu (nodachi) &middot; Iryoku &rarr; weasel (blast)</div></div>
+      <div><div class="combat-stat-label">Damage Taken</div><div class="combat-stat-value">~64 (Iryoku 25 &middot; Zhen 18 &middot; Kaoru 15 &middot; Weaver 6)</div></div>
+    </div>
+    <ul>
+      <li><strong>Round 1</strong>: Mo Douqiu <strong>Demoralized Iryoku</strong> and bit him (10 + bleed), then his Reactive Strike bit Zhen (10 + bleed); <strong>Drop Corpse</strong> rained a hanging body on Iryoku. The weasel bit <strong>Weaver</strong> (6) and whiffed its grab. The party answered: Kaoru ninjato + Breathe Fire, <strong>Iryoku's big blast (15)</strong>, Kaelen bo-staff (9), Mu-Jin's <strong>Elemental Betrayal</strong> + AC drop via Weaver.</li>
+      <li><strong>Round 2</strong>: the <strong>persistent bleed</strong> ground on &mdash; <strong>Zhen, Iryoku, and Kaoru all failed recovery</strong> (four failed DC-15 flat checks across the fight), the one threat the party couldn't shrug off. Mo demoralized and bit Kaoru; the weasel bit <strong>Iryoku (8 &rarr; Near Death)</strong> and crit-failed its grab.</li>
+      <li><strong>Zhen killed Mo Douqiu</strong> &mdash; stepping to an off-guard angle and landing the nodachi (9 &rarr; dead). <strong>Iryoku killed the weasel</strong> with a two-action melee blast (14); Kaoru's Foxfire crit (4) had set it up.</li>
+      <li><strong>Threat</strong>: ~64 damage &mdash; nearly half the L2 HP pool, plus stacked bleed. <strong>Iryoku hit Near Death; Zhen and Kaoru were driven to Badly Injured.</strong> The only fight all session that behaved like a fight. Cleaned up afterward by Zhen's Garden of Healing.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-zhen">
+      <h4>Zhen Stillness &middot; the Steady Hand</h4>
+      <ul>
+        <li><strong>Glue and closer both.</strong> In fiction he was the party's conscience &mdash; the one who told Mo Douqiu flatly, <em>"We don't want any of this here. Get the fuck out. You have caused enough havoc"</em> &mdash; and who insisted on <strong>letting the dead villagers' families know</strong> rather than presuming to burn the bodies.</li>
+        <li><strong>The table's peacemaker</strong>: when Kaoru wanted Granny Hu "bitch-slapped," Zhen just shrugged the youngest off.</li>
+        <li><strong>The Liturgist in one line</strong>: after the boss dropped, he begged off healing for a beat &mdash; <em>"I do need to refocus&hellip; Talk to my spirits a bit &mdash; they're asking me how I'm doing."</em></li>
+        <li><strong>Everywhere mechanically</strong>: Earth's Bile persistent-fire chip in every fight, the Garden of Healing that undid the boss's bleed, the Seek that spotted the scorpion, and the <strong>killing blow on Mo Douqiu himself.</strong></li>
+        <li>Took a rough one physically &mdash; tongue-disarmed and grabbed by the frog, bled by the rokurokubi &mdash; and closed the session standing. Also spent the level-up steering Kaelen off a redundant archetype.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-iryoku">
+      <h4>Iryoku-Yasha &middot; the Oathbound</h4>
+      <ul>
+        <li><strong>The party's Face, bookkeeper, and edge.</strong> Iryoku kicked off the whole session with a clean recap of S2, then spent the night tracking the party stash (the mystery <strong>+1 silver dagger</strong>, Kaelen's <strong>+1 spear</strong>), the reputation math, and everyone's scout bonus.</li>
+        <li><strong>The oath keeps surfacing</strong>: he framed even the S2 jinkin as something <em>"my oath demanded we confront."</em></li>
+        <li>When Mo Douqiu asked what entertainment the party had brought him, Iryoku answered for all of them in one word &mdash; <em>"Violence."</em></li>
+        <li>When he unlocked <strong>Timber Sentinel</strong>, the delight was pure: <em>"I make trees now. Probably the best class feat in the game &mdash; just cast a spell at will."</em></li>
+        <li>He put the boss fight to bed by <strong>overkilling the weasel</strong> and solo-killing a cookware object with a crit blast. <em>"Goodbye."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaelen">
+      <h4>Kaelen Ashford &middot; Have Bonk, Will Travel</h4>
+      <ul>
+        <li><strong>Played half the night around job applications and laptop lag</strong>, near-silent through stretches &mdash; and still posted <strong>two one-shot kills</strong>: the 29-damage jinkin drop and the swarm-ending Flurry crit.</li>
+        <li>His comedy is the load-bearing kind &mdash; and he frames it as deliberate, not distraction (<em>"monks are supposed to have some sense of humor"</em>). He told the cookware claiming to rule the town, <em>"No, you ain't. You're too small and short,"</em> and stuck to the bit an hour later.</li>
+        <li>He met the weasel with <em>"So we're fighting a damn weasel? &hellip; Let the weasel talk. Fuck it &mdash; what's its health?"</em></li>
+        <li><strong>Not only the punchline</strong>: when Mo Douqiu tried the "aren't we the same" gambit, Kaelen drew the line cleanly &mdash; <em>"We bring what we bring to the table. And you bring chaos with you. Get the hell out."</em></li>
+        <li>Settled his build this session, committing to <strong>Staff Acrobat</strong> because bonking is the plan.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaoru">
+      <h4>Kaoru &middot; the Deadpan Blade</h4>
+      <ul>
+        <li><strong>Quiet at the table, sharp every time he speaks.</strong> Kaoru carries the party's dry wit and its <strong>South-Bank grudge</strong>: on Granny Hu, <em>"She still needs to be bitch-slapped&hellip; watch out &mdash; bitch-slapper, with my tail."</em></li>
+        <li>He reads every room a half-beat ahead of the horror &mdash; <em>"It's gonna be hopping mad"</em> at the frog, <em>"It looks like we're late to the party,"</em> and <em>"we just jump to the Death Star"</em> at the cliffhanger.</li>
+        <li>The party's quiet lore hand, walking Mu-Jin through <strong>external digestion</strong> to explain the corpses.</li>
+        <li>Mechanically the <strong>Spellstrike specialist</strong> &mdash; he channels <strong>Shocking Grasp (2d12) through the ninjato</strong> and used exactly that to <strong>end the scorpion</strong> in one burst.</li>
+        <li>To Mo Douqiu's "haven't you been having fun?" he had the cleanest reply in the room: <em>"No. I think you need a new definition of fun."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mujin">
+      <h4>Mu-Jin &middot; the Support Mage Who Came Back</h4>
+      <ul>
+        <li><strong>Back after missing S2, and glad to run his own game plan.</strong> Mu-Jin is unapologetically the support mage &mdash; Nudge Fate on Kaoru nearly every round, Familiar of Balanced Luck shaving enemy AC, Soothe when Kaoru cratered.</li>
+        <li>His proudest moment was tactical and he said so: dismount <strong>Weaver</strong>, send it in, land a Hex, drop the boss's AC &mdash; <em>"That's why I have familiars to do this sort of shit. Pet fight."</em> He picked <strong>Familiar Master</strong> precisely so Weaver can survive being sent out.</li>
+        <li>His best beat was human: faced with the flayed bodies he recoiled in genuine horror, and then insisted on doing it right &mdash; cover them, don't presume to burn them, <strong>notify the families</strong> &mdash; since he didn't know the village's customs for the dead and wouldn't presume.</li>
+        <li>He opened the boss scene with diplomacy first: <em>"No entertainment, Yokai. You're an unwanted guest in our village, and we ask you to leave."</em></li>
+        <li>Killed the giant frog with a <strong>Needle Darts crit for 22.</strong></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Rewards</h2>
+  <div class="loot-grid">
+    <div class="loot-item"><div class="loot-name">Recognizable Necklace + Stolen Jewelry</div><div class="loot-source">Jinkin House</div><div class="loot-note">Willowshore families' property &mdash; returned via the guard captain.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Silver Dagger</div><div class="loot-source">Animated Cookware</div><div class="loot-note">Went to the party stash (miscatalogued as a plain dagger first).</div></div>
+    <div class="loot-item"><div class="loot-name">Oil of Potency &times;2 &middot; Potency Crystal &times;2</div><div class="loot-source">Animated Cookware</div><div class="loot-note">Consumables for later runes.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Mesmerizing Opal</div><div class="loot-source">Animated Cookware</div><div class="loot-note">Talisman &mdash; auto-crit a Feint on activation.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Crying Angel Pendant</div><div class="loot-source">Jinkin House area</div><div class="loot-note">Talisman &mdash; Administer First Aid +1; stabilize / stop bleed.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 Spear</div><div class="loot-source">Party Stash</div><div class="loot-note">Handed to Kaelen (rune to move to his bo-staff later).</div></div>
+    <div class="loot-item magical"><div class="loot-name">Legerdemain Handkerchief</div><div class="loot-source">Mo Douqiu</div><div class="loot-note">Extradimensional &mdash; vanishes a tiny item.</div></div>
+    <div class="loot-item"><div class="loot-name">Mo Douqiu's Keys</div><div class="loot-source">Mo Douqiu</div><div class="loot-note">Unlocked the teahouse prison room.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Cerulean Teahouse &mdash; Deed (pending)</div><div class="loot-source">Qing Mai-Lai's Will</div><div class="loot-note">Transfers to whoever recovers the two pearls from Fumeiyoshi's eyes.</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; Six fights + escort / rescue awards &middot; <strong>Leveled 1 &rarr; 2</strong> (fiat mixed-XP catch-up)</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "She still needs to be bitch-slapped&hellip; watch out &mdash; bitch-slapper, with my tail."
+    <span class="attribution">On Granny Hu &mdash; the South-Bank grudge, still going strong.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "No, you ain't. You're too small and short."
+    <span class="attribution">To the animated cookware announcing it was one of Willowshore's new rulers.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "Have Bonk will travel."
+    <span class="attribution">After critting a cockroach swarm to death in a single Flurry.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong> (asked by Mo Douqiu what entertainment they'd brought): "Violence."
+    <span class="attribution">The whole party's answer, in one word.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Iryoku</strong>: "I make trees now. Probably the best class feat in the game &mdash; just cast a spell at will."
+    <span class="attribution">Discovering Timber Sentinel at level 2.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mo Douqiu the Hedonist</strong>: "When I got here, this town was the most boring place ever&hellip; Nothing changes you more than being thrown into the middle of a horror story. Admit it &mdash; haven't you been having fun?"
+    <span class="attribution">The rokurokubi's pitch, moments before the party killed him.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "No. I think you need a new definition of fun."
+    <span class="attribution">Answering the rokurokubi.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "She's just old. She's stuck in her ways."
+    <span class="attribution">When Kaoru wants Granny Hu "bitch-slapped," Zhen just shrugs the youngest off &mdash; the calm elder.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "We don't want any of this here. Get the fuck out. You have caused enough havoc."
+    <span class="attribution">The party's conscience, drawing the line.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaelen</strong>: "We bring what we bring to the table. And you bring chaos with you. Get the hell out."
+    <span class="attribution">Refusing Mo Douqiu's "aren't we the same" gambit.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mu-Jin</strong>: "That's why I have familiars to do this sort of shit. Pet fight."
+    <span class="attribution">On his Weaver-dismount / Hex / AC-drop combo &mdash; the play he built toward.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Mu-Jin</strong>: "No entertainment, Yokai. You're an unwanted guest in our village, and we ask you to leave."
+    <span class="attribution">Opening the boss confrontation with diplomacy before the swords came out.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zhen</strong>: "I do need to refocus before I can heal us&hellip; Talk to my spirits a bit. They're asking me how I'm doing."
+    <span class="attribution">The Liturgist, after the boss dropped.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Kaoru</strong>: "Yeah, so we just jump to the Death Star."
+    <span class="attribution">On the session-ending cutaway to the stranger at the town's edge.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The two pearls in Fumeiyoshi's eyes.</strong> Qing Mai-Lai's will deeds the Cerulean Teahouse to whoever recovers two pearls thrown into the two ponds ("the Eyes of Fumeiyoshi") north of town. Open quest &mdash; and a possible tie to <strong>Fumeiyoshi</strong>, the Tian deity of envy / undeath, whose name is now surfacing.</li>
+      <li><strong>The stranger at the outskirts.</strong> The session-closing cutscene: a mysterious figure watching Willowshore from afar. Was Mo Douqiu the <em>brain</em>, or a lieutenant?</li>
+      <li><strong>Modoku resolved.</strong> The S2 invasion lead &mdash; the bald, sharp-toothed, long-necked man &mdash; is confirmed as <strong>Mo Douqiu the Hedonist</strong>, a variant rokurokubi, and he's dead. The downtown occupation is broken.</li>
+      <li><strong>The wrong-gods lantern</strong> (S2, still open). The Eternal Lantern relit with Abadar / Catephis / Pharasma instead of the legendary Calistria / Kofusachi / Shelyn. Zhen is still hiding it from Granny Hu; whether the ward is weaker is unresolved.</li>
+      <li><strong>Builds locked at L2.</strong> Kaelen &rarr; Staff Acrobat; Mu-Jin &rarr; Familiar Master; Zhen &rarr; Druid Dedication (Storm). The party is stronger and, per Zhen's read, still out-scaling the fights.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Willowshore Reclaimed &mdash; and Watched</span>
+    <p>The long-necked man is dead, the caged villagers are free, and for the first time since the first dawn of summer the town belongs to its people again. But the teahouse deed hangs on two pearls in a death-god's ponds, a will written by a woman with no heirs, and &mdash; as the party catches its breath &mdash; a figure none of them can reach yet stands at the edge of Willowshore, watching. Mo Douqiu called this a horror story he authored. If he was only a chapter, someone else is holding the pen.</p>
+    <span class="big-line">"A mysterious person comes into view at the outskirts of Willowshore&hellip;"</span>
+    <span class="speaker">&mdash; The GM, on the final cut of the night</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Zhen Stillness's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Zhen did this session</h3>
+  <ul>
+    <li>Ran <strong>Earth's Bile</strong> as the workhorse in every fight (persistent-fire chip, sustained), swapping to <strong>Garden of Healing</strong> to clean up between and after.</li>
+    <li>Took a beating in the teahouse: <strong>tongue-disarmed and grabbed</strong> by the frog (failed both Escapes), <strong>bitten and bled</strong> by Mo Douqiu. Ended the session standing.</li>
+    <li><strong>Killed Mo Douqiu the Hedonist</strong> &mdash; stepped to an off-guard angle to shave his AC, then cut him down with the wrapped nodachi. First boss kill of the campaign.</li>
+    <li>Caught the hidden scorpion with a <strong>Seek</strong> before it could drop on the party; steered <strong>Kaelen</strong> off Spirit Warrior toward Staff Acrobat.</li>
+    <li>Handled the dead with respect &mdash; pushed to <strong>notify the families</strong> and Granny Hu / Old Matsuki rather than burn the bodies.</li>
+  </ul>
+
+  <h3>Things Zhen knows that the party does not</h3>
+  <ul>
+    <li>Still carrying the <strong>wrong-gods secret</strong> from S2: the Eternal Lantern was relit with Abadar / Catephis / Pharasma, not the legendary Calistria / Kofusachi / Shelyn. Granny Hu suspects; Zhen has not confirmed it. Whether the ward holds is unknown.</li>
+    <li>His <strong>nodachi was his mother's</strong> &mdash; an oni's blade, still wrapped, drawn now to kill a yokai in a room full of the yokai's victims. He does not know its history. He does know it cut the boss down cleanly.</li>
+    <li>The <strong>persistent bleed</strong> was the only thing that hurt the party. Note it: our answer to ongoing damage is thin &mdash; flat DC-15 recovery, and we kept failing it. Hero points don't fix a flat check.</li>
+  </ul>
+
+  <h3>What Zhen is thinking about</h3>
+  <ul>
+    <li>The fights are still easy &mdash; even the boss only bit because of bleed, not because we were outmatched. Consider <strong>not burning Shield / hero points</strong> on one-round fights and holding them for whatever the stranger at the edge of town turns out to be.</li>
+    <li><strong>Fumeiyoshi.</strong> A deity of envy and undeath, and now his name is on a dead aristocrat's will and on two ponds outside town. The teahouse deed is a lure; the deity is the thread. Watch it.</li>
+    <li><strong>The stranger at the outskirts.</strong> Mo Douqiu called this a horror story he authored. If he was only a chapter, someone else is holding the pen.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Where are the <strong>two pearls in Fumeiyoshi's eyes</strong>, and what happens &mdash; to us and to the ward &mdash; when we pull them out of a death-god's ponds?</li>
+    <li>Who is the <strong>figure watching Willowshore</strong>, and how far away is "far away"?</li>
+    <li>With downtown reclaimed, does the town start to recover &mdash; or does clearing the last yokai just move the story to its next act?</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

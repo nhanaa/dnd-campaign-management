@@ -45,9 +45,39 @@ node pf2e-lookup/pf2e-search.js -c equipment --eq-type weapon --trait martial
 # Spells by save type
 node pf2e-lookup/pf2e-search.js -c spells -t primal -s reflex
 
+# Archetype: full entry INCLUDING its "Additional Feats" list
+node pf2e-lookup/pf2e-search.js --archetype archer
+
+# List all 256 archetypes
+node pf2e-lookup/pf2e-search.js --archetype
+
 # Run with --help for all options
 node pf2e-lookup/pf2e-search.js --help
 ```
+
+## Archetypes — always use `--archetype`
+
+⚠️ **The search index does not contain archetype "Additional Feats."** Many archetypes
+grant feats from *other* classes at *adjusted levels* — and those grants exist only in
+`pf2e/journals/archetypes.json`, never in the index or in `pf2e/feats/archetype/<name>/`.
+
+Filtering by subcategory or trait returns a tree that **looks complete and isn't**:
+
+```bash
+# WRONG — returns only the archetype's own feats, silently missing the rest
+node pf2e-lookup/pf2e-search.js -c feats --subcat archer
+
+# RIGHT
+node pf2e-lookup/pf2e-search.js --archetype archer
+```
+
+Worked example: Archer's Additional Feats grant **Double Shot at 6th** (normally a
+4th-level Fighter feat), **Triple Shot at 8th**, **Multishot Stance at 18th**, and
+**Impossible Volley at 20th**. None appear under `--subcat archer`. A feat taken this
+way **loses the granting class's trait** (an Archer's Double Shot is not a fighter feat).
+
+Consequence: never conclude "that archetype can't take X" or "X is <class>-exclusive"
+from an index query alone. Check `--archetype` first.
 
 **Filters (combinable):**
 | Flag | Description | Examples |
@@ -62,6 +92,7 @@ node pf2e-lookup/pf2e-search.js --help
 | `-a, --act` | Action cost | `1`, `2`, `3`, `free`, `reaction`, `passive` |
 | `--eq-type` | Equipment type | `weapon`, `armor`, `shield`, `consumable` |
 | `--subcat` | Subcategory (folder) | `cantrip`, `focus`, `general` |
+| `--archetype` | Full archetype entry **+ Additional Feats** | `archer`, `eldritch archer`; omit value to list all |
 | `--remaster` | Remaster only | |
 
 **Output:**
@@ -111,7 +142,10 @@ Strip HTML tags from descriptions. Always include:
 ## Guidelines
 
 - Cantrips are at level 0 in the index, stored in `pf2e/spells/spells/cantrip/`
-- Archetype feats are in `pf2e/feats/archetype/{archetype-name}/`
+- Archetype feats: use `--archetype <name>`. `pf2e/feats/archetype/{name}/` holds only the
+  archetype's *own* feats — the Additional Feats list lives in `pf2e/journals/archetypes.json`
+- `pf2e/journals/` also holds other rules text the index omits (e.g. archetype spellcasting
+  benefit tables). Grep it before going to the web for a rules question
 - Use `--class` (not `--subcat`) to find all feats a class can take — `--subcat` only checks the folder
 - Clean `@UUID[...]{Text}` references — show only the display text
 - Try `pathfinder-monster-core/` before `pathfinder-bestiary/` for creatures

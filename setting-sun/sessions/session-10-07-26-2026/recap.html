@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 10 — The Old Man and the Rules of the Game</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-alastor { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-alastor { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+/* --- S10 additions --- */
+.char-seva { border-left-color: var(--teal); }
+.s-seva { border-left-color: var(--teal); }
+
+.rules-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  padding: 26px 28px;
+  margin-bottom: 22px;
+}
+.rules-box h3 { margin-top: 26px; }
+.rules-box h3:first-child { margin-top: 0; }
+
+table.rules {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 20px;
+  font-size: 15px;
+}
+table.rules td, table.rules th {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+table.rules th {
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+table.rules td:first-child { color: var(--text-dim); width: 38%; }
+table.rules tr:last-child td { border-bottom: none; }
+
+.caveat {
+  background: #1a1622;
+  border-left: 2px solid var(--blood);
+  border-radius: 3px;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+.caveat strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Old Man and the Rules of the Game</h1>
+  <div class="subtitle">Session 10 · The temple falls, the Phoenix Necklace is claimed, and the qualifying round begins</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-07-26</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 39m</span>
+    <span class="meta-pill">Fists of the Ruby Phoenix · Book 1</span>
+    <span class="meta-pill">Day 1 of 3 · 6:00–7:00 AM</span>
+    <span class="meta-pill">Level 11 → 12</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:45"></div>
+  <div class="comp-seg comp-social" style="flex:20"></div>
+  <div class="comp-seg comp-rp" style="flex:18"></div>
+  <div class="comp-seg comp-explore" style="flex:10"></div>
+  <div class="comp-seg comp-loot" style="flex:7"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · 5 encounters</span>
+  <span><span class="legend-dot comp-social"></span>The rules briefing &amp; challenges</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · Seva joins</span>
+  <span><span class="legend-dot comp-explore"></span>Exploration</span>
+  <span><span class="legend-dot comp-loot"></span>Loot &amp; shopping</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard (Maestro) / Sorcerer (Imperial)</div>
+    <div class="char-player">Pax · "Mingzhu"</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva</div>
+    <div class="char-class">Ranger (Precision) · field medic</div>
+    <div class="char-player">Irorian pilgrim</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch</div>
+    <div class="char-class">Guardian / Wrestler</div>
+    <div class="char-player">Kholo</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva</div>
+    <div class="char-class">Magus (Laughing Shadow)</div>
+    <div class="char-player">Wayang · joins this session</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+  <p>The team finished the temple and then found out what they had actually signed up for.</p>
+  <p>Two rooms remained. The garden was a nest of enormous tick swarms — a fight nobody enjoyed, in which Sovael learned the swarms' one weakness was <em>area and splash damage</em> and then had to sit on it, because his own party was standing inside the area. The shrine held a smiling old man carved in stone, a heap of treasure, and the <strong>Phoenix Necklace</strong>. Ferrok called it before anyone moved: <em>"Statues are always trying to murder us."</em> Sattva respectfully approached anyway, and the statue stood up and drew its staff.</p>
+  <p>The <strong>Old Man Statue</strong> was the hardest thing the party has fought since Kannitri — AC 37, a fifteen-foot reach, a +31 to hit, and a staff that critted for 86 and then 70. Sattva's bow went ice-cold for the entire encounter (<em>"they just kind of plink off"</em>), Sovael's two rank-5 Thunderstrikes were both saved against, and Clutch spent the fight alternately grabbed and putting a fifteen-foot statue on the ground with critical Trips. <strong>Seva landed the killing blow</strong> — on her first session, on the hardest thing in the temple. Behind it: a spacious pouch, a jade serpent, a ring of swimming, fifteen hundred gold in gems, and the necklace the tournament required. <strong>Level 12.</strong></p>
+  <p>Then Ingdani sat them down and explained the qualifying round — the whole thing, in one go, and it is a genuinely different game from a dungeon crawl. Ten silver feathers by the end of day three. Three days on a hex map with a clock that advances ten minutes at a time. Challenges you cannot refuse. Wagers of one to three feathers. Zero feathers means you go home. There are things on this island that will kill you and you are expected to run from them. And the Phoenix Necklace means nobody dies in a tournament bout — but if someone dies to the <em>wildlife</em>, bringing them back costs a feather, and the price goes up every time.</p>
+  <p>Day one began at six in the morning with a knock at the door. The <strong>Ahmoza sisters</strong> — twin monks, polite to the point of ceremony — challenged for a single feather at the party's own base and were humbled in two rounds. They forfeited with grace. One hex east, the very first flat check of the day came up hot and produced the <strong>Lightning Callers</strong>, three archers who spent the entire fight kiting backwards and raining volleys on the whole party at once. They forfeited too. Feather five.</p>
+  <p>Reconnoitering the same hex turned up the reason it's called Danger Island: <strong>three gargantuan praying mantises</strong>, twenty-foot reach, speed 50, and a habit of grabbing people and throwing them thirty feet into the air. Round one went badly enough that the party openly discussed running. Then Clutch rolled two natural 20s back to back — <em>"that was a tide turner"</em> — and the fight turned into a grind the party won. One hundred platinum, 320 XP, and exactly one hex of a very large island explored.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act rp">
+  <div class="act-label">Act I · Roleplay · The Fifth</div>
+  <div class="act-card">
+    <h3>Seva joins the party</h3>
+    <ul>
+      <li><strong>Clutch asked for it directly</strong>: <em>"And then, did we get a character introduction for Seva?"</em> Nobody else raised it. The quietest player at the table made sure the newest one got a scene. Sovael's contribution to the problem was to look at the woman standing in the party and ask, reasonably: <em>"Where did you come from?"</em></li>
+      <li>The DM's retcon put her in the temple "a little bit earlier." Seva asked whether she could steal the departed player's invite. The ruling was blunt: <em>"We're kind of ruling he was not going to officially be a part of things just because of behavior. <strong>He got eaten by crabs.</strong>"</em> — the S9 joke promoted to canon. The party never says his name again.</li>
+      <li><strong>Her entrance</strong>: <em>"Seva's definitely been eyeing the party. And once she sees that they're four, she just rises up into the shadows and like, okay, I think I've seen enough."</em> — <em>"I'm not sure if you are all superstitious, but four is definitely an ominous number here in Tian Xia. Shall I round you off to a good five?"</em></li>
+      <li>The description: <strong>a very lanky, shadowy wayang, entirely monochrome, the only colour on her the flute strapped to her side.</strong> Then, immediately deflating it: <em>"Oh, but I am a small creature, I think. I say I'm tall, but I'm a small creature."</em></li>
+      <li><strong>Ingdani</strong> bowed to her: <em>"Welcome, Seva. Glad you could join us."</em></li>
+      <li><strong>She bought in with medicine, not violence.</strong> <em>"How about a show of good faith? I tried to heal Clutch. I have Medic Dedication."</em> — a Risky Surgery critical success for <strong>60 HP</strong> on Clutch, immediately. Sattva, stupefied and running the heal economy alone until that moment: <em>"Another pair of hands helping me. I'll take it. This helps a lot."</em> Seva's verdict on herself: <strong>"Yes, I'm useful to the team."</strong></li>
+      <li>Sattva: <em>"Well, nice meeting you, sir."</em> Ferrok: <strong>"Good to have you on our side."</strong> Clutch, patched up and moving on: <em>"All right, well, thank you for looking after me. Let's move."</em></li>
+      <li>In Foundry chat, mid-scene, someone typed: <strong>"Flashback to Seva's character intro. Seva, who was <em>always</em> with us :D"</strong> — and later, on the party's habit of replacing dead PCs with relatives: <em>"I already have Clasp rolled up, it'll be fine. There is a whole clan of cousins :D"</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act II · Combat · The Garden of Ticks</div>
+  <div class="act-card">
+    <h3>Three swarms in a dead garden</h3>
+    <ul>
+      <li>A roofless garden plot, soil dry, plants dead — and <strong>three enormous swarms of ticks</strong> already moving to greet them. <strong>Swarming Bites</strong>: 8d6 piercing to everyone in the swarm's space, DC 31 basic Reflex, plus Cling.</li>
+      <li>The swarms played the space, not the targets — hovering just outside until they could overlap three PCs at once. The DM: <em>"they don't have to move to swarm each of you three times."</em></li>
+      <li><strong>Clutch Intercepted five times</strong> in this fight, repeatedly eating a full 8d6 so someone else didn't. Ferrok narrated one for him: <em>"He just grabs him and chucks him into the air and the ticks swarm him instead."</em> Sovael's version: <em>"Just kind of hug me and bring me up like, woo woo woo."</em></li>
+      <li><strong>Sovael's Whispers of Weakness found the one thing he couldn't use</strong>: lowest save Will, and a weakness to <strong>area or splash damage</strong> — because it's a swarm. His response, with the whole party standing in it: <em>"Too bad we're kind of in an area where I can't really do that."</em></li>
+      <li><strong>Seva's mechanical debut</strong> was staged as deliberate mimicry: <em>"You see her copy what Sovael did with a melee Ignition, but my flame isn't going to be red — it's going to be like a dark, shadowy flame."</em> She took the first swarm down off the fight's only hero point.</li>
+      <li>Clutch on the taste: <em>"Trying not to imagine what ticks taste like. <strong>They pop in your mouth.</strong>"</em> DM: <em>"More protein."</em> / <em>"Imagine crunchy grapes."</em></li>
+      <li><strong>Sattva's dice began their session-long collapse here</strong> — two critical misses on his opening Hunted Shot, then more. He pivoted: <em>"Seeing that arrows are not working, Sattva will stay calm and start stomping."</em> It worked.</li>
+      <li>Ferrok discovered mid-fight that <strong>Stretching Reach is a stance</strong> and he'd been paying an action for it every single round. <em>"I've had to use it every time."</em></li>
+      <li>Loot in the grass: a <strong>greater cognitive mutagen</strong> and a <strong>greater serene mutagen</strong>. No necklace.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act III · Combat · The Old Man Statue</div>
+  <div class="act-card">
+    <h3>Ferrok calls it, and is immediately correct</h3>
+    <ul>
+      <li><strong>Ferrok called it before anything happened.</strong> <em>"Probably going to murder us. Statues are always trying to murder us."</em> Sattva: <em>"Is that what happened on your last expedition, Ferrok?"</em> Ferrok: <em>"You wouldn't believe the number of statues that just came to life."</em> Sovael: <em>"Yeah, that's what Tivael told me as well."</em></li>
+      <li>The shrine: tarnished bells, frayed ribbons, a smiling cross-legged old man in stone holding a staff, braziers, scattered prayer instruments — and on a platform in front of him, <strong>an enchanted pouch, jade statuettes, and a bright gleaming necklace with a ruby inlaid upon it.</strong></li>
+      <li><strong>Sattva</strong>: <em>"Sattva will respectfully approach."</em> <strong>Sovael</strong>, one second later: <em>"Sovael will keep his distance."</em></li>
+      <li>The statue stood and drew its staff. Seva: <em>"Okay, Ferrok totally called it."</em> Sattva, unbothered: <strong>"A test of martial prowess it is."</strong></li>
+      <li>Sovael's read going in was wrong in an instructive way — <em>"Statues, right? It's mindless, guys… Good thing I'm not a bard anymore."</em> The evidence is genuinely ambiguous: Clutch's Demoralize <em>succeeded</em> on the roll (41 against a Will DC of 34), but <strong>Frightened never actually appeared on the statue</strong> — no condition card, and its AC only ever dropped 37→35 from the Trips' off-guard, never the −1 a Frightened 1 would have added. Whether it was immune to emotion effects was never adjudicated out loud.</li>
+      <li><strong>Whispers of Weakness</strong>: lowest save <strong>Reflex</strong>, <strong>no weaknesses</strong> — but a flat <strong>physical resistance 10</strong>, which is why the martials' damage kept getting shaved. Ferrok, mid-fight: <em>"Did I have construct armor that we just broke?"</em> DM: <em>"Not construct armor — just physical resistance."</em></li>
+      <li><strong>Seva killed it</strong>, and its death trigger fired — <strong>Divine Destruction</strong>, 14d6 <strong>vitality</strong> damage in a 30-foot emanation. DM: <em>"The thing explodes in a burst of divine light."</em> Then, checking the room: <em>"Nobody's undead, right?"</em> Nobody was — <strong>vitality damage doesn't harm the living</strong>, so the burst did nothing to the party and the fight simply ended there.</li>
+      <li><strong>The treasure</strong>: a <strong>Type III Spacious Pouch</strong>, a <strong>Wondrous Figurine (Jade Serpent)</strong>, a <strong>Ring of Swimming</strong>, ~<strong>1,500 gp</strong> in gems and coin — and the <strong>Phoenix Necklace</strong>.</li>
+      <li><strong>Ingdani</strong>: <em>"Well fought, everyone. With this, you have made the interior of your lodgings safe. And so, with the collection of the three Silver Feathers and the Phoenix Necklace, you now are able to compete in the qualifying round."</em> <strong>Level 12.</strong></li>
+      <li>The post-fight beat: <strong>Ferrok</strong> — <em>"I'll just gotta watch out for statues."</em> <strong>Seva</strong> — <em>"I'll take that advice to my grave. Honestly."</em> <strong>Sovael</strong> — <em>"Don't go to grave just yet, okay?"</em> <strong>Seva</strong> — <em>"We've got a tournament to win."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act social">
+  <div class="act-label">Act IV · Social · The Rules, and the Market</div>
+  <div class="act-card">
+    <h3>Ingdani explains the qualifying round</h3>
+    <ul>
+      <li><strong>Level-12 picks surfaced at the table</strong>: Ferrok took <strong>Gladiator Dedication</strong> (roll Performance for initiative in front of spectators; temp HP equal to his level for a minute when he does) and <strong>Wall of Metal</strong>. Sovael took the rare skill feat <strong>Talent Envy</strong> and another rank-6 spell — <em>"I'm just gonna become a turret."</em> Sattva took a feat letting him <strong>Hunt Prey two targets at once</strong>. Clutch took <strong>Armored Counterattack</strong>.</li>
+      <li><strong>Ingdani laid out the entire qualifying round</strong> — reproduced in full in the reference section below.</li>
+      <li><strong>The stone market</strong>: a mile from base, same hex, stalls with no merchants, connected directly to the Endless Market in Goka. Mechanically a <strong>level 20 settlement</strong>. Other teams shop there too, and you may challenge them — but only after both teams have finished their business.</li>
+      <li><strong>The stash was liquidated</strong>: the +2 Striking Astral Hook Sword, the Decanter of Endless Water, the Ring of Swimming, the Jade Serpent Figurine, and a Holy rune all went to Loot. <strong>906 gp distributed to each of the five.</strong></li>
+      <li><strong>Clutch took the Ring of Climbing</strong> — briefly taking the Ring of Swimming first, then swapping. This is the same ring he turned down in Session 9 on behalf of his dead cousin Clinch, because <em>"he's got to climb out of his grave, so he needs the climb speed."</em> Nobody remarked on it.</li>
+      <li><strong>Sattva was broke.</strong> <em>"Yeah, nothing for me either. I'm too poor."</em> He needed a <strong>greater striking rune</strong> and was 1,080 gp short. Ferrok offered 250 and admitted he was broke too. <strong>Seva simply paid for the whole thing</strong>: <em>"I got 2k still, so I can just give Sattva his own."</em> Ferrok: <em>"Yeah, Seva's got rich parents."</em> Seva: <em>"I wouldn't say we're rich. We're just comfortable."</em></li>
+      <li>Ferrok on the whole briefing: <strong>"Ferrok doesn't have the intelligence to keep track of rules, so…"</strong> — and then, typed into chat seconds after Seva asked whether the rules came with a handout: <strong>"1st Rule: Don't talk about fight club."</strong> Seva, meanwhile, had been <strong>writing all of it down</strong>. There is no handout.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act V · Combat · Day 1, 6:00 AM · The Ahmoza Sisters</div>
+  <div class="act-card">
+    <h3>The first challenge arrives before they leave the house</h3>
+    <ul>
+      <li><em>"The sun sets, and morning comes. It is 6am, day one of three of the qualifying rounds."</em></li>
+      <li><strong>Two women, human, late twenties, twins</strong>, with their own guide in tow. Steely determination, and a polite bow in perfect unison. <em>"Well met. I am <strong>Manyala Ahmoza</strong>." / "And I am <strong>Rijana Ahmoza</strong>." / "We would challenge you for one Silver Feather. Do you accept?"</em></li>
+      <li>The DM confirmed the wager is negotiable — <em>"you can say no, two, if you want, or three"</em> — and <strong>Sattva accepted on behalf of the party</strong>: <em>"Yes. How many do you want to wager?"</em> Sovael settled it: <em>"Let's start with one. Let's test the water."</em></li>
+      <li><strong>Ferrok's first use of Gladiator Dedication</strong>: <em>"Is this considered — are our minders considered spectators? Because now with gladiator dedication, I can roll performance for initiative."</em> DM: <em>"You know what? I suppose they would be. I can't deny it."</em></li>
+      <li><strong>Sattva pre-cast Hunt Prey on both sisters</strong> — allowed as an exploration action. The DM used it to set the boundary: <em>"In general, pre-buffing will usually not be allowed… you can't haste yourself before the battle."</em></li>
+      <li>The bout ran <strong>two rounds</strong> and the sisters <strong>forfeited at the top of the third</strong>.</li>
+      <li><strong>The aftermath was the best RP of the fight.</strong> Rijana collected her unconscious sister: <em>"I admit, I thought my sister and I could take on anything together. I suppose it's best we were humbled from an early point."</em> <strong>Sattva</strong>: <strong>"Better here than out in the jungle."</strong> — <em>"I suppose we'll be off, but best of luck to you all."</em> — <strong>Sattva</strong>: <em>"Likewise here as well."</em> And in chat, <strong>Ferrok bows to the sisters.</strong></li>
+      <li><strong>Feather four. Six to go.</strong> Ten minutes advance on the clock. Ferrok patched Seva up: <em>"Let me patch you up. Ferrok's face is just a mass of bruises."</em> Sovael, for once: <em>"I didn't burn myself this time."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act VI · Exploration &amp; Combat · East into the Jungle</div>
+  <div class="act-card">
+    <h3>The Lightning Callers, and a team with no name</h3>
+    <ul>
+      <li><strong>Jungle or coast?</strong> Seva settled it: <em>"We didn't take that ring of swimming, so I guess to the jungle."</em> Sattva: <em>"We're better at climbing. Just go east."</em> Ferrok deferred to him: <em>"Sattva going to lead the way. He looks like a ranger type."</em></li>
+      <li><strong>The very first DC 17 flat check of the qualifier hit.</strong> Clutch rolled it. DM: <em>"Right away, encounter a team."</em></li>
+      <li><strong>A trio of archers with impressive longbows.</strong> <em>"Well met. Good morning to you, and if you'll mind if we skip the preamble. <strong>We are the Lightning Callers.</strong> We would challenge you for one of your feathers."</em></li>
+      <li><strong>The party still did not have a team name</strong>, and this became the running bit of the session. Sattva: <em>"They already have a name. How do we introduce ourselves?"</em> Proposals flew across each other — <strong>The Lone Rangers</strong>, <strong>the Five Guys</strong>, and Sattva's <strong>Triple S FC</strong>. Seva vetoed the second on the spot: <em>"Guys, we're not the guys though."</em> / <em>"I veto this name."</em> What actually got said out loud was Ferrok's: <strong>"Name pending — accept your challenge."</strong></li>
+      <li><strong>The "Archery Specialist" leak.</strong> Seva spotted the Foundry actor's base name showing through: <em>"Wait, one isn't the Lightning Caller. He's not yet the Lightning Caller."</em> The table adopted it instantly — Seva: <em>"You'll earn the name."</em> Sattva: <strong>"He's still learning. He's on probation."</strong></li>
+      <li>The fight was a kiting nightmare. <strong>Rain of Arrows</strong> makes one attack roll and compares it to <em>everyone's</em> AC in a 10-foot burst; the openers hit almost the whole party for 26 each. Then they ran backwards. Seva, immediately: <strong>"Fucking archers."</strong> DM: <em>"They're gonna kite us around. Just be glad you don't have Pegasus Knights."</em></li>
+      <li><strong>Sovael took 90 damage in a single enemy turn</strong> — a critical hit for 56 and a follow-up for 34 out of one Double Shot.</li>
+      <li><strong>They forfeited at the top of a round.</strong> DM: <em>"You saw so many of your Sure Strikes. They will acknowledge your victory on this one."</em> Sovael: <strong>"You guys were formidable."</strong> <strong>Feather five.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VII · Combat · Reconnoiter · Three Deadly Mantises</div>
+  <div class="act-card">
+    <h3>Why they call it Danger Island</h3>
+    <ul>
+      <li>The party hadn't explored the hex they were standing in. Sattva: <em>"So we want to do that, right, guys? I think we have time."</em> Sovael: <em>"So we don't run into a dragon or something."</em></li>
+      <li><em>"Time to learn why they call it Danger Island… as you watch as not one, not two, but three of the biggest praying mantises you've ever seen come stealthily out of the underbrush."</em> <strong>Gargantuan.</strong></li>
+      <li><strong>Sattva rolled a natural 20 on Recall Knowledge</strong> (Nature), critically succeeding on three of the four tiers of DC: <strong>best save Fortitude, worst save Will</strong>, 20-foot reach with the legs and 10 with the mandibles, and a 40-foot vertical leap. His summary: <strong>"So anything within 20 feet is danger zone."</strong></li>
+      <li><strong>Round one was a disaster.</strong> Mantis B opened on Seva with Sudden Strike, critted for 84, and Clutch ate <strong>77</strong> intercepting — then Intercepted the follow-up too. Mantis A ran 50 feet to the back line to bite Sattva.</li>
+      <li><strong>The party seriously discussed running</strong>, and the escape rule was checked live. Ferrok: <em>"I'm wondering if this is not one we should retreat from."</em> Sovael: <em>"The plus 28, I think, is a sign there."</em> Sattva: <em>"I think take one more round to determine it."</em> Seva: <strong>"Do we actually trust the guy that's been rolling crit misses the majority of the session?"</strong></li>
+      <li><strong>Clutch turned the fight with two natural 20s back to back</strong> — critical Claws for 61 and 71, with Shock arcing onto a second mantis both times. DM: <strong>"That was a tide turner."</strong> Clutch: <em>"Okay, just two nat 20s in a row, no problem."</em> … <em>"I was gonna scream if it was another nat 20."</em></li>
+      <li><strong>Clutch's whole Wrestler kit was switched off by size.</strong> <em>"These are gargantuan, right? They're four by four? So none of my athletics skills will work."</em> He spent the fight on Taunt, Defensive Advance, Intercept and raw claws — and out-damaged everyone.</li>
+      <li><strong>Both Ferrok and Clutch got Flung thirty feet into the air.</strong> Ferrok made the save. Clutch <strong>critically failed</strong> it — 30 bludgeoning and prone — and erased every point of the damage with <strong>Cat Fall</strong>. Sattva narrated the landing: <em>"You parry at the last second."</em></li>
+      <li><strong>Ferrok's escape</strong> from a critical Restrain: <em>"Ferrok is going to flex his muscles and try to escape."</em> — <strong>"Whoa, what a flex!"</strong> And after a mantis whiffed all three strikes: <strong>"I Matrix Dodged the whole thing."</strong> DM: <em>"Bulls are natural predators for mantises."</em></li>
+      <li>Aftermath, over three dead gargantuan insects: <strong>Sattva: "Anybody up for breakfast?"</strong> Seva: <em>"It's cooked fried mantis leg?"</em> … <em>"Yes, actually."</em> This became a five-minute tangent on whether crabs are technically insects.</li>
+      <li><strong>Ingdani paid out</strong>: <em>"There are no feathers awarded for surviving such creatures, but defeating them will yield coins… this will be the smallest payment you'll receive for such a feat."</em> — <strong>100 platinum</strong>. And <strong>320 XP</strong>, awarded only because Sattva stopped the DM to ask about it.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 · Tick Swarms ×3 · Temple garden · 4 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Tick C → Tick A → Seva → Tick B → Sattva → Ferrok → Clutch → Sovael</span></div>
+  <div><span class="stat-label">Threat</span><span class="stat-value">Swarming Bites — 8d6, DC 31 basic Reflex, in-space</span></div>
+  <div><span class="stat-label">Defences</span><span class="stat-value">AC 31 · physical resistance 10 · ~190–205 HP each</span></div>
+  <div><span class="stat-label">Weakness</span><span class="stat-value">Area / splash damage · lowest save Will</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">1 (Seva)</span></div>
+</div>
+
+<h4>Round 1</h4>
+<ul>
+  <li>Tick C strode 50 feet and bit three PCs at once for <strong>25</strong>; Seva, Sovael and Ferrok all failed, and <strong>Clutch Intercepted for Sovael</strong>, taking 19 — <strong>Guardian's Armor</strong> shaves a flat 6 off every hit he takes at level 11, which is most of why he can do this all day.</li>
+  <li><strong>Tick B held its turn</strong>, hovering outside the scrum. Seva opened her account with a Deathseeker strike into <strong>Ray of Frost</strong> (18). <strong>Sattva critically missed twice.</strong></li>
+  <li><strong>Ferrok's Spellstrike crit put 98 into Tick C in one turn</strong> — 44 from the Shock Flaming bastard sword (6 electricity arcing to Tick A) and <strong>54</strong> from the Ignition, doubled by the crit.</li>
+  <li>Clutch's whole turn whiffed — Snagging Strike and Claw both missed, so it generated no off-guard either.</li>
+  <li><strong>Sovael</strong> ran the standard opener — Courageous Anthem + <strong>Lingering Composition on a 45 (critical success, four rounds)</strong> — then a melee <strong>Ignition through the Shadow Signet at Tick C's Fortitude DC for 28</strong>. Cursebound 1.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li>Tick C bit twice more; <strong>Clutch Intercepted for Ferrok</strong> and used <strong>Get Behind Me!</strong> to walk him out of the space. Tick A did the same to Sovael — a third Intercept.</li>
+  <li><strong>Seva took the first swarm down</strong>: her Spellstrike missed on a natural 2, she <strong>spent the fight's only hero point</strong>, rerolled a 16, and the Ignition's 23 finished <strong>Tick C</strong>.</li>
+  <li><strong>Clutch critted Jaws on Tick A for 44</strong>, then blew a Battle Medicine by 6 and locked himself out of his own for an hour.</li>
+  <li>Sovael's <strong>Whispers of Weakness</strong> found the one thing he couldn't use, and he spent the +2 status bonus on a Telekinetic Projectile for 20 instead. Cursebound 2.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+  <li>Tick A bit for <strong>34</strong> and <strong>29</strong> back to back. <strong>Clutch Intercepted the 34 for Sovael</strong>, and Sovael made the second save on a nat 12 — 14 through.</li>
+  <li>Seva <strong>Battle Medicined Clutch for 57</strong> (68 after Robust Health) mid-turn and still got a strike off.</li>
+  <li><strong>Tick B put 56 into Sattva in one turn</strong> — his only two failed saves of the fight, back to back, and the largest single-turn hit anyone took.</li>
+  <li><strong>Ferrok broke Tick A</strong> with a Force Fang (13 force, straight through the resistance) into a Spellstrike crit — <strong>48 + 50</strong>. DM: <em>"Another swarm goes flying."</em></li>
+  <li>Sovael cracked Tick B with <strong>Sure Strike → Telekinetic Projectile crit for 36</strong>, spending an occult slot on a cantrip and knowing it: <em>"Spending Sure Strike on a cantrip is a choice."</em></li>
+</ul>
+
+<h4>Round 4 — Sattva gives up on the bow</h4>
+<ul>
+  <li>Eight attack rolls into a slump with nothing to show: <em>"Seeing that arrows are not working, Sattva will stay calm and start stomping."</em> It worked — 9 damage, his only hit of the encounter.</li>
+  <li><strong>Sovael ended it</strong> with a ranged <strong>Ignition critting Tick B's Reflex DC for 46</strong> through the Shadow Signet. DM: <em>"The ticks are no more as they go scattering."</em></li>
+</ul>
+
+<p style="font-size:14px;color:var(--text-dim);"><strong>Kills</strong> — Tick C: Seva (her debut, off the fight's only hero point) · Tick A: Ferrok · Tick B: Sovael.<br>
+<strong>Damage dealt</strong> — Ferrok 260 · Sovael 130 · Clutch 104 · Seva ~65 · <strong>Sattva 9</strong> (eight attack rolls, four critical misses).<br>
+<strong>Damage absorbed</strong> — <strong>Clutch 147</strong>, more than the next two PCs combined, across five Intercepts. Seva 77 · Ferrok 68 · Sattva 56 · Sovael 19.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 · The Old Man Statue · A "divine warden" · 4 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Ferrok → Old Man Statue → Sattva → Sovael → Clutch → Seva</span></div>
+  <div><span class="stat-label">Defences</span><span class="stat-value">AC 37 · physical resistance 10 · ~265 HP · lowest save Reflex · no weaknesses</span></div>
+  <div><span class="stat-label">Offence</span><span class="stat-value">+31 · staff 3d12+18 reach 15 (Trip) · fist 3d10+18 reach 10 (Grab) · Athletics +31</span></div>
+  <div><span class="stat-label">Death trigger</span><span class="stat-value">Divine Destruction — 14d6 vitality, 30-ft emanation</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">0</span></div>
+</div>
+
+<h4>Round 1 — nobody connects</h4>
+<ul>
+  <li><strong>Ferrok</strong> opened with a Spellstrike and <strong>missed by 9</strong>. The macro fired with the wrong spell selected, which he flagged live: <em>"I need to figure out how to set the spell, I guess. But I missed anyway, so it doesn't matter."</em></li>
+  <li>The statue answered by <strong>critting Ferrok for 86</strong> — <strong>Clutch Intercepted and took 80.</strong> A fist strike followed for 32; Clutch ate that too, taking 26.</li>
+  <li><strong>Sattva</strong> missed and critically missed. <strong>Sovael</strong>: Courageous Anthem + Lingering (a 45), <strong>Whispers of Weakness</strong>, Shield. <strong>Clutch</strong> missed both strikes. <strong>Seva</strong> missed. Nobody had connected.</li>
+</ul>
+
+<h4>Round 2 — first blood, and the statue plays positioning</h4>
+<ul>
+  <li><strong>Ferrok's Force Fang</strong> landed the first damage of the fight — <strong>15</strong>, on a creature everyone else had whiffed.</li>
+  <li><strong>The statue Stepped out of Clutch's Intercept range first</strong> — the DM said so out loud — and only then <strong>critted Seva for 68</strong>, with nobody able to eat it for her. It grappled Clutch successfully.</li>
+  <li><strong>Sattva</strong> critically succeeded a Battle Medicine on Clutch (51 + 11), then critically missed twice more.</li>
+  <li><strong>Sovael's rank-5 Thunderstrike</strong> (51 rolled) — <strong>the statue succeeded its save</strong>, halving it to 25.</li>
+</ul>
+
+<h4>Round 3 — Clutch puts a statue on the floor</h4>
+<ul>
+  <li>The statue <strong>critted Ferrok for 70</strong>. <strong>Clutch was still grabbed and the DM ruled he could not Intercept</strong> — so Ferrok burned <strong>Emergency Targe</strong> to get the rank-6 Shield cantrip up and blocked: 15 absorbed, 55 through.</li>
+  <li><strong>Sattva</strong> critically missed twice more, failed a stupefied flat check on Benediction, <strong>turned down an offered hero point</strong> — <em>"I'll just cast it again"</em> — and failed the second one too.</li>
+  <li><strong>Sovael's second rank-5 Thunderstrike</strong> (56) — <strong>saved again</strong>, 28 through. Two top-rank slots for 53 total.</li>
+  <li><strong>Clutch critically succeeded a Trip</strong> on a fifteen-foot statue, putting it prone and off-guard.</li>
+  <li><strong>Seva critted a Deathseeker Spellstrike</strong> off the prone target — 18 through the resistance from the blade and <strong>44</strong> from the Ignition, doubled by the crit. <strong>62 in one action.</strong></li>
+</ul>
+
+<h4>Round 4 — the Shadow Signet earns its keep, and Seva finishes it</h4>
+<ul>
+  <li><strong>Ferrok</strong> took a hand off his sword to drink a healing potion (28) and spent the rest of the round re-gripping: <em>"All I can really do is put my hand back on my sword and wait for next round."</em></li>
+  <li>The statue hit Seva for 34, then swung at Ferrok for 36 — <strong>Clutch Intercepted that one too, taking 30.</strong></li>
+  <li><strong>Sattva</strong> critically missed twice more, at <strong>−18</strong> and <strong>−20</strong> — his sixth and seventh of the fight. He finished <strong>0-for-9 on bow attacks</strong>.</li>
+  <li><strong>Sovael</strong> spent the <strong>Prognostic Veil's daily free Focus Point</strong>, cast <strong>Sure Strike</strong>, and put a <strong>Fire Ray</strong> through the <strong>Shadow Signet</strong> — retargeting the statue's <strong>Reflex DC 31</strong> instead of its AC 37. The better of two rolls came up <strong>31</strong>: a hit by exactly zero, and a clean miss if he'd gone at AC. <strong>48 damage</strong>, the largest single application of the fight.</li>
+  <li><strong>Clutch critically Tripped it a second time.</strong> <strong>Seva finished it</strong> — Deathseeker for 5 through the resistance, then melee Ignition for 20, and the statue hit 0.</li>
+</ul>
+
+<p style="font-size:14px;color:var(--text-dim);"><strong>Kill credit</strong> — <strong>Seva</strong>, on her first session, on the hardest thing in the temple.<br>
+<strong>Damage dealt</strong> — Sovael 101 · Seva 89 (+22 persistent) · Ferrok 53 · <strong>Clutch 0 · Sattva 0</strong>. Neither Clutch nor Sattva landed a single point on it; Clutch's contribution was two critical Trips and 136 damage absorbed off Ferrok.<br>
+<strong>The death burst</strong> — Divine Destruction fired: 14d6 <strong>vitality</strong> in a 30-foot emanation. The DM checked the room (<em>"Nobody's undead, right?"</em>), nobody was, and vitality damage doesn't harm the living — so nothing landed.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 3 · Manyala &amp; Rijana Ahmoza · Tournament bout · 2 rounds + forfeit</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sovael 44 → Manyala 36 → Seva 29 → Sattva 26 → Rijana 26 → Ferrok 26 → Clutch 20</span></div>
+  <div><span class="stat-label">The sisters</span><span class="stat-value">Level-13-tier monks · AC 33 · +27 · Athletics +26 · Will DC 33</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Qi Rush · Inner Upheaval (force) · Punch Down (+2d10 vs prone) · Trip</span></div>
+  <div><span class="stat-label">Stakes</span><span class="stat-value">1 Silver Feather · fists are Nonlethal — a sanctioned bout</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">0</span></div>
+</div>
+
+<p style="font-size:14px;color:var(--text-dim);">Ferrok, Sattva and Rijana all rolled exactly <strong>26</strong>; the tie ran Sattva → Rijana → Ferrok, and the DM held that order in both rounds. Ferrok rolled <strong>Performance</strong> for initiative — the first payoff of his new Gladiator Dedication.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li><strong>Clutch Demoralized Rijana on the initiative roll</strong> (Battle Cry) — success, <strong>Frightened 1</strong>. She spent the rest of the bout coming for him.</li>
+  <li><strong>Sovael</strong>: Courageous Anthem + Lingering Composition, then <strong>Benediction</strong>. <em>"That's why I immediately Benediction — because two people means two strong people."</em></li>
+  <li><strong>Manyala opened with the best sequence of the fight</strong>: Qi Rush to close, a <strong>critical Trip on Ferrok</strong>, then Inner Upheaval into a Flurry with <strong>Punch Down</strong> on top. Both fists were on track to land — until <strong>Ferrok's Emergency Targe</strong> put the rank-6 Shield cantrip up mid-sequence, turning the second into a whiff. The first still hit for <strong>37</strong>; Shield Block ate 15.</li>
+  <li><strong>Seva</strong> vaulted off the prone Ferrok to land behind Manyala for flanking, then Spellstruck and missed. <em>"All that preparation."</em></li>
+  <li><strong>Sattva's Hunted Shot</strong>: one arrow in for <strong>26</strong> with precision dice online, one miss. He then prepared an action to Trip anyone entering his reach — which never came up all fight.</li>
+  <li><strong>Rijana</strong> went straight at Clutch, tripped him, and Inner Upheaval'd for <strong>52</strong>. <strong>Clutch Shield Blocked</strong> — 13 absorbed, 32 through, and his Sturdy Shield <strong>broke</strong>.</li>
+  <li><strong>Ferrok stood up and critically Spellstruck</strong> — <strong>84</strong> from the bastard sword plus <strong>46</strong> from the doubled Ignition: <strong>130 damage in one turn</strong>, with 6d6 persistent fire on top.</li>
+  <li><strong>Clutch</strong> stood, <strong>Shielding Taunted both sisters</strong>, and Snagging Struck Rijana with Jaws for <strong>31</strong>.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li><strong>Sovael sustained Benediction</strong> to widen it over the whole party, then cast <strong>Fear on both sisters</strong> — both saved, <strong>Frightened 1 each</strong>. That −1 mattered immediately.</li>
+  <li><strong>Manyala turned on Seva</strong>, tried to Trip her, and rolled a <strong>natural 1</strong> — critical failure, and she went prone herself.</li>
+  <li><strong>Standing back up cost her the bout.</strong> Her Stand drew reactive Strikes from <strong>both magi</strong> — Ferrok for <strong>39</strong> and Seva for <strong>15</strong> (<em>"I want to hit her." / "Oh, and I hit her too."</em>). She got her Inner Upheaval off on Ferrok for 33, then ended her turn taking 18 persistent fire and failing the flat check.</li>
+  <li><strong>Seva</strong> tried her Wayang ancestry feat <strong>Dance of the Tiger</strong> on Manyala's shadow — <strong>failed</strong> against Will DC 33. <em>"Oh, they're really so high. That's fine. I will just strike normally."</em> The normal strike landed.</li>
+  <li><strong>Sattva finished her</strong>: one arrow for <strong>37</strong>, one critical miss. <strong>"Okay, I knocked her out. Right in the temple."</strong></li>
+  <li><strong>Rijana Qi Rushed the length of the field to Sovael</strong> and Inner Upheaval'd — <strong>both</strong> fists landed, 69 rolled. Sovael answered with <strong>Bounce Away</strong>: resistance 12 to the triggering blow, dropping it to <strong>57 taken</strong>, and a free half-speed flight out of reach. <em>"Peace! Peace!"</em></li>
+  <li><strong>Ferrok</strong> hit Rijana for <strong>46</strong>. <strong>Clutch</strong> closed with Defensive Advance — <strong>Jaws for 29</strong> off Sattva's Guidance — then <strong>Combat Grab</strong> for a <strong>Claw for 33</strong>, leaving Rijana grabbed, at 139 damage, with her sister unconscious.</li>
+</ul>
+
+<p style="font-size:14px;color:var(--text-dim);"><strong>The forfeit</strong> — at the top of round three, Rijana looked around and nodded: <em>"All right. We forfeit. Well fought."</em> Seva: <em>"Yeah, we honor that."</em><br>
+Manyala absorbed <strong>278</strong> before going down; Rijana took <strong>139</strong> before forfeiting. <strong>Seva finished the bout untouched.</strong> <strong>Feather 4.</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 4 · The Lightning Callers ×3 · Tournament bout · 4 rounds + forfeit</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">LC C → Sovael → LC A → LC B → Sattva → Ferrok → Seva → Clutch</span></div>
+  <div><span class="stat-label">The archers</span><span class="stat-value">AC 33–35 · +28 · 3d8+11 piercing + 1d6 electricity · Deadly d10</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Rain of Arrows · Double Shot · Incredible Aim · Pinning Shot · Point-Blank Shot</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">8 — the most of any fight this session</span></div>
+</div>
+
+<p style="font-size:14px;color:var(--text-dim);">Sovael and Lightning Caller A both rolled 44; <strong>Sovael's Pilgrim's Token won the tie</strong>. Note that <strong>"Archery Specialist C" is not a separate enemy</strong> — it's the Foundry actor's un-renamed base name leaking through, and the table caught it live.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li><strong>Clutch critically Demoralized Lightning Caller C</strong> on the initiative roll — <strong>Frightened 2</strong>, costing it 2 on every roll for the whole opening.</li>
+  <li><strong>C opened with Rain of Arrows anyway</strong>, catching all five: Sovael, Seva and Sattva for <strong>26</strong> each, Ferrok 23, and Clutch 19 — <strong>shield-blocked down to 6</strong>.</li>
+  <li><strong>A followed with its own volley</strong> — 23 / 23 / 22 — and <strong>B's missed the entire party</strong>. Both withdrew. Seva: <strong>"Fucking archers."</strong></li>
+  <li><strong>Sattva</strong> landed a Hunted Shot on B for <strong>43</strong>. <strong>Ferrok</strong> closed with <strong>Blink Charge</strong> and hit C for 31 + 8. <strong>Seva copied it</strong> — <em>"just thinking of us both blinking to the same spot where he is"</em> — and landed <strong>27</strong>.</li>
+  <li><strong>Clutch critically grappled Lightning Caller B</strong> — <strong>Restrained</strong>.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li><strong>A Double Shot Sovael and critically hit — 56, then 34 more.</strong> <strong>90 damage in one enemy turn</strong> on a 151-HP caster.</li>
+  <li><strong>B escaped Clutch's grapple</strong>, then used <strong>Pinning Shot</strong> to immobilize him — no damage, pure action denial.</li>
+  <li><strong>Sovael's two-action Blazing Bolt</strong> routed through the <strong>Shadow Signet</strong> to target Fortitude DC 32 instead of AC: one ray missed B, one hit C for <strong>39</strong>. He then free-actioned <strong>Foretell Harm</strong> — Cursebound 1 — tagging C for 10 more.</li>
+  <li><strong>Clutch spent an action pulling the arrow out</strong> and <strong>re-grabbed B immediately</strong>. <strong>Sattva healed Sovael 28</strong> off the healer's gloves.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+  <li><strong>C's Rain of Arrows</strong> caught Seva for 34 and Ferrok for 29.</li>
+  <li><strong>Ferrok</strong> ran <strong>Shielding Strike</strong> and hit C twice for <strong>30</strong> each — and <strong>that dropped it</strong>. Lightning Caller C never acted again.</li>
+  <li><strong>Seva</strong> ran the medic line — Battle Medicine on herself, then <strong>Doctor's Visitation</strong> to close on Ferrok and Battle Medicine him too.</li>
+  <li><strong>Clutch</strong> landed claws for <strong>31</strong> and <strong>23</strong>. <strong>Sovael</strong> cast a rank-3 Heal off the Staff of Healing for <strong>40</strong> on himself.</li>
+</ul>
+
+<h4>Round 4 — closing it</h4>
+<ul>
+  <li><strong>A's Rain of Arrows at Sattva and Sovael missed both.</strong> The DM, watching his own dice: <em>"Honestly, they've rolled pretty poorly overall."</em></li>
+  <li><strong>Sattva put both arrows into B</strong>, then, in character: <strong>"Stand down, Lightning Caller A. You've lost."</strong></li>
+  <li><strong>Ferrok</strong> planted himself behind an archer: <em>"Ferrok will use his movement to just move and be <strong>imposingly</strong> behind that guy. Three moves — 'cause I can't move that fast."</em> Sovael: <em>"You're not going anywhere."</em></li>
+  <li><strong>Seva</strong> entered Arcane Cascade, discovered her speed bonus mid-turn (<em>"Then fuck it, we ball"</em>), and used <strong>Dimensional Assault</strong> — <em>"she uses the shadow of the trees, kind of swims into it, and then shows up right next to him and strikes."</em> She missed the first roll, <strong>spent her last hero point</strong>, rerolled a 17, and connected for <strong>14</strong> — the only damage Lightning Caller A took in the entire bout.</li>
+  <li><strong>Sovael was mid-Sure Strike when they folded.</strong> DM: <em>"They will acknowledge your victory on this one."</em></li>
+</ul>
+
+<p style="font-size:14px;color:var(--text-dim);">The damage was wildly lopsided: <strong>C took 196 and went down</strong>; <strong>B took 192</strong> and was still standing; <strong>A took 14 all fight</strong> — which is why Seva was still saying <em>"Damn, he's still barely injured"</em> moments before the forfeit. <strong>Clutch took 13 damage across four rounds.</strong> <strong>Feather 5.</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 5 · Deadly Mantises ×3 · Wildlife — no death protection · 6 rounds</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sattva → Mantis B → Clutch (delayed) → Seva → Ferrok → Mantis A → Sovael → Mantis C</span></div>
+  <div><span class="stat-label">Defences</span><span class="stat-value">Gargantuan (4×4) · AC 34 · ~280 HP each · Reflex +22 · Will +20</span></div>
+  <div><span class="stat-label">Offence</span><span class="stat-value">+27 · legs 3d10+14 reach 20 (Grab) · mandibles 3d12+14 reach 10 · speed 50</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Sudden Strike · Leaping Grab (40 ft up) · Fling (30 ft up and away)</span></div>
+  <div><span class="stat-label">Difficulty</span><span class="stat-value">Severe — retreat was openly discussed</span></div>
+</div>
+
+<h4>Round 1 — the party nearly ran</h4>
+<ul>
+  <li><strong>Sattva</strong> Hunt Preyed A and B, spent an action on the <strong>natural 20 Recall Knowledge</strong>, and put an arrow into A for <strong>41</strong>.</li>
+  <li><strong>Mantis B critically hit Seva</strong> through Sudden Strike's off-guard — <strong>84 raw</strong>. <strong>Clutch Intercepted and took 77.</strong> Its last action was a second leg strike at Seva for 31 — <strong>Clutch Intercepted that one too</strong>, taking 24. Two Intercepts in one enemy turn, before he'd had a turn of his own. <strong>Seva took nothing.</strong></li>
+  <li><strong>Clutch discovered his kit was offline</strong> and ran <strong>Defensive Advance</strong> into B for 36 instead.</li>
+  <li><strong>Mantis A crossed 50 feet</strong> to the back line and bit Sattva for 33. <strong>Mantis C hit Clutch and grabbed him.</strong></li>
+  <li><strong>Sovael's opener carried the whole fight</strong>: Lingering Composition → Courageous Anthem, and the Composition <strong>critically succeeded — four rounds of +1 to every attack and damage roll the party made</strong>. Riding free on that same Performance check, his brand-new <strong>Talent Envy</strong> fired: a Demoralize on Mantis A, upgraded to a <strong>critical success. Frightened 2.</strong> <em>"It's like a mouse frightening an elephant."</em> … <strong>"I'm a dragon, all right?"</strong></li>
+</ul>
+
+<h4>Round 2 — the turn</h4>
+<ul>
+  <li><strong>Mantis B critically hit Ferrok for 66</strong>, grabbed him, and <strong>Flung him 30 feet</strong> — Ferrok made the save and took 7.</li>
+  <li><strong>Clutch turned the fight.</strong> A Claw he <strong>rerolled on a hero point</strong> from a 3 into a natural 20 — critical hit for <strong>61</strong>, Shock arcing 2 onto Mantis C. Then a clean <strong>natural 20</strong>: <strong>71</strong>, Shock arcing 6. DM: <strong>"That was a tide turner."</strong></li>
+  <li><strong>Ferrok</strong> burned a hero point to land the sword for <strong>38</strong> through A's Frightened 2, plus <strong>35</strong> of Ignition. <strong>Mantis A then missed all three strikes at him</strong>: <em>"I Matrix Dodged the whole thing."</em></li>
+  <li><strong>Sovael's Chain Lightning</strong> arced A → B → C: A and B succeeded (22 each), <strong>C failed for 45</strong>.</li>
+  <li><strong>Mantis C Flung Clutch.</strong> He <strong>critically failed</strong> — 30 bludgeoning and prone — and <strong>Cat Fall (Master) erased every point of the damage.</strong> He still landed prone.</li>
+</ul>
+
+<h4>Rounds 3–6 — grinding it out</h4>
+<ul>
+  <li><strong>Sattva killed Mantis B</strong> — <em>"Two shots in both of the eyes"</em> — and triggered his kill-reposition rune: <em>"you see my clothing kind of ruffle a bit and it pulls me sideways."</em></li>
+  <li><strong>Mantis C critically restrained Ferrok</strong>, who broke out: <em>"Ferrok is going to flex his muscles and try to escape."</em> — <strong>"Whoa, what a flex!"</strong></li>
+  <li><strong>Clutch Intercepted a mandible strike meant for Ferrok and Armored Counterattacked</strong> — and the Jaws strike that followed <strong>killed Mantis A</strong>. Seva: <strong>"Clutch for the kill."</strong></li>
+  <li><strong>Mantis C then missed all three attacks — every one a critical miss.</strong> DM: <em>"I feel like they got all their crits out on round one."</em> Sattva: <em>"Perfectly balanced. I thought we were going to have to run."</em></li>
+  <li><strong>Sovael</strong> debuted <strong>Dirge of Doom</strong> (<em>"I got this trick from my cousin, Tivael"</em>), landed a <strong>Fear</strong> (<em>"It says: get out of my head!"</em>), then burned <strong>Whispers of Weakness</strong> for the +2 and hit with a <strong>Fire Ray for 29</strong>, setting the ground alight.</li>
+  <li><strong>Clutch Intercepted for Seva one last time and Armored Counterattacked</strong> — Ferrok: <strong>"Why they call him Clutch?"</strong> — and the burning ground ticked another <strong>11</strong>.</li>
+  <li><strong>Sattva put the last arrow in.</strong> DM: <em>"And with a well-placed shot to this thing's eye, the last mantis collapsed."</em></li>
+</ul>
+
+<p style="font-size:14px;color:var(--text-dim);"><strong>Kills</strong> — Mantis B: Sattva · Mantis A: Clutch · Mantis C: Sattva.<br>
+<strong>Damage dealt</strong> — Clutch 234 · Ferrok 228 · Sattva 197 · Sovael 137 · Seva 41. <strong>Clutch also absorbed 148 on four Intercepts</strong> so nobody else had to.</p>
+</div>
+<h2>⭐ The Rules of the Qualifying Round</h2>
+<p style="color:var(--text-dim);font-size:15px;margin-bottom:20px;">Delivered by Ingdani at the party's base immediately after the level-up break. Reproduced here as a reference.</p>
+
+<div class="rules-box">
+<h3>At a glance</h3>
+<table class="rules">
+  <tr><td><strong>Goal</strong></td><td>Hold <strong>10 Silver Feathers</strong> at the end of Day 3</td></tr>
+  <tr><td><strong>Starting feathers</strong></td><td>3 (from the temple) — currently <strong>5</strong></td></tr>
+  <tr><td><strong>Duration</strong></td><td>3 days</td></tr>
+  <tr><td><strong>Active hours</strong></td><td>6:00 AM – 10:00 PM (travel and challenges allowed)</td></tr>
+  <tr><td><strong>Inactive hours</strong></td><td>10:00 PM – 6:00 AM (no travel, no challenges; shopping only)</td></tr>
+  <tr><td><strong>Wager per match</strong></td><td>1 to 3 feathers, negotiable</td></tr>
+  <tr><td><strong>Losing all feathers</strong></td><td><strong>Immediate disqualification.</strong> No recovery</td></tr>
+  <tr><td><strong>Excess feathers</strong></td><td>Anything past 10 is confiscated for a cash prize</td></tr>
+  <tr><td><strong>Clock</strong></td><td>Advances <strong>10 minutes</strong> per Traverse, Reconnoiter, fight, Treat Wounds cycle, <strong>or Refocus</strong></td></tr>
+  <tr><td><strong>Encounter check</strong></td><td><strong>DC 17 flat check</strong> on every Traverse → you meet another team</td></tr>
+  <tr><td><strong>XP</strong></td><td>Experience, not milestone. Everyone starts Level 12 at 0 XP</td></tr>
+</table>
+
+<h3>The feather economy</h3>
+<blockquote>"In order to qualify for the Ruby Phoenix Tournament proper, you must collect 10 Silver Feathers. You have been given three to start. Over the course of the next three days, each of the qualifying teams is free to travel Bonmou. Teams may challenge each other, wagering their Silver Feathers. You may wager from one to three Silver Feathers per match.<br><br>
+Should you reach ten Silver Feathers and hold on to ten Silver Feathers by the end of day three of the qualifying round, you will qualify for the tournament. <strong>If at any point you fall to zero feathers, you will be disqualified and escorted off the island.</strong><br><br>
+…should you reach 10 Silver Feathers from an early point, it does not guarantee your qualification — for having ten feathers does not exempt you from being challenged by other teams. Any feathers you collect past your tenth will be confiscated, but you will be given a cash prize for doing so."</blockquote>
+<p>Asked whether hitting zero is instant: <strong>"If you reach zero feathers at any point, you have lost your place in the tournament."</strong> Ferrok: <em>"Don't bet all our feathers at once."</em> — DM: <em>"I would advise against it."</em></p>
+
+<h3>Challenges — you cannot refuse</h3>
+<blockquote>"The challenged team must reciprocate the challenge, or automatically forfeit their feathers."</blockquote>
+<p><strong>Sovael</strong>: <em>"Wait, so we can't refuse a challenge?"</em> — <strong>"You cannot."</strong></p>
+<ul>
+  <li><strong>You may only fight the same team once per day.</strong> Different teams, as many as you can survive. <em>"Functionally, it is to prevent a team from being defeated and then being challenged again by the same team."</em></li>
+  <li>A team facing back-to-back challenges gets <strong>time to recuperate</strong> between them.</li>
+  <li><strong>A team down to its last single feather may refuse</strong> any challenge.</li>
+</ul>
+<div class="caveat">⚠️ The DM's <strong>first</strong> pass on this rule was <em>"a team may only engage in combat once per day"</em> — which would have capped the party at <strong>one fight a day</strong>. <strong>Sovael's follow-up question is what produced the correct rule.</strong> Worth remembering which version is live.</div>
+<blockquote>"Basically assume a fight's gonna happen if you encounter a team. Because everybody wants your feathers."</blockquote>
+
+<h3>Active and inactive hours</h3>
+<blockquote>"Active hours will be from 6am to 10pm each day. During this time, you are free to wander Bonmou, seeking out and challenging other teams or exploring the island at your leisure.<br><br>
+During inactive hours, wandering the island is forbidden, and teams may not challenge one another. In the event you are outside of your home base during inactive hours, we will escort you promptly back."</blockquote>
+<p>Functionally: if 10 PM lands while you're out, your day ends where you stand and you're walked home.</p>
+
+<h3>The stone markets</h3>
+<blockquote>"This is the stone market. There are several like it on Goka, though outside of this one, you'll need to discover them for yourselves. The stone markets on Bonmou connect directly to the endless market in Goka, and you can use the stone markets to purchase equipment as you see fit.<br><br>
+Should you run into another team at the stone market, you may challenge them, or they may challenge you. But you must allow each team to perform what business they seek to do at the markets before the challenge is initiated."</blockquote>
+<p><strong>Mechanically the market counts as a level 20 settlement:</strong></p>
+<table class="rules">
+  <tr><th>Rarity</th><th>Max item level</th></tr>
+  <tr><td>Common</td><td><strong>20</strong></td></tr>
+  <tr><td>Uncommon</td><td><strong>15</strong></td></tr>
+  <tr><td>Rare</td><td><strong>10</strong></td></tr>
+</table>
+<p>Shopping is available <strong>during inactive hours</strong>, and teams met at the market during inactive hours <strong>cannot be challenged</strong>.</p>
+
+<h3>Dangers and wonders</h3>
+<blockquote>"Along Bonmou, there will be plenty of dangers, per the moniker of the island. You will find other teams, of course, but you will also find terrifying and powerful beasts. <strong>You will also find wonders on Bonmou, but I will not spoil the dangers or wonders.</strong><br><br>
+I will say that where the dangers are concerned, vanquishing certain creatures on Bonmou will also net you gold and platinum, which of course can be spent at the stone market. <strong>Use the island as a chance to grow stronger.</strong>"</blockquote>
+<p style="font-size:14px;color:var(--text-dim);">The "wonders" are an unelaborated hook — the party has not found one yet.</p>
+
+<h3>Exploration — the modified Hexploration rules</h3>
+<blockquote>"Two actions can be taken in each hex. <strong>Traverse</strong>, which moves you from one hex to another. And <strong>Reconnoiter</strong>, in which you explore a hex. Both activities take 10 minutes, as each hex is only half a mile across.<br><br>
+When traversing from one hex to another, you will roll a <strong>DC 17 flat check</strong>. If you meet the DC, you will encounter another team, and a challenge might be ensued.<br><br>
+In reconnoitering, you might find secrets hidden in that hex — dangerous creatures, treasure, or other items. You won't know until you Reconnoiter."</blockquote>
+<ul>
+  <li><strong>Traversal is adjacency-only</strong> — one hex at a time, no skipping across the map.</li>
+  <li><strong>Reconnoitering is not a roll.</strong> <em>"You just say you're doing so, and then I'll let you find it."</em></li>
+  <li><strong>This is not a dungeon crawl</strong> — rest back to back as often as you like, but every Treat Wounds cycle costs 10 minutes.</li>
+  <li><strong>You will not cover the island.</strong> <em>"Depending on how well you do… you might only see two-thirds or even a half of it."</em></li>
+</ul>
+
+<h3>Fights you are meant to lose</h3>
+<blockquote>"Especially at level 12, there are things on the island you cannot beat. There are going to be fights you have no hope of winning and that you have to run from. But, of course, this is by design, and you are accumulating experience… some fights that are impossible now might be very possible on future days.<br><br>
+…It's best that you judge carefully whether you want to surrender. Because, yes, surrendering means you do forfeit some feathers if you're outmatched, but it also means you've got stamina for future fights. If you're guaranteed to lose and fight to the bitter end, well, that is valorous, but it also means you've blown through the majority of your resources for the day."</blockquote>
+<p><strong>The escape mechanic.</strong> Sovael asked whether Recall Knowledge could tell them in advance that something was too dangerous. The ruling was not that RK fails, but that <strong>you don't get the choice</strong> — <em>"Everything that could fight you, you're going to have some combat against."</em> What you get instead is a way out:</p>
+<blockquote>"If <strong>everybody</strong> on their turn declares that they are contributing to running away, the party can <strong>automatically escape</strong> from a non-tournament fight."</blockquote>
+<p style="font-size:14px;color:var(--text-dim);">Confirmed later in play: <strong>this still works while a party member is grabbed.</strong></p>
+
+<h3>The Phoenix Necklace — nobody dies in a bout</h3>
+<blockquote>"Fights to the death are prohibited in the Ruby Phoenix Tournament, as is helping yourselves to other combatants' equipment. The Ruby Phoenix Necklace that you have helps prevent this.<br><br>
+<strong>While doing a tournament fight, you cannot die.</strong> Anything that would kill you just reduces you to unconscious. This includes things with death effects. So say you get crit by a disintegrate and reduced to zero HP, you're just rendered unconscious.<br><br>
+<strong>This only applies to tournament fights though, not wildlife encounters.</strong>"</blockquote>
+<blockquote>"On Danger Island your Phoenix Necklace has a further use. You can permanently eliminate one phoenix feather, burning it away. Doing so will <strong>resurrect an ally who has died on Bonmou</strong>… It's also not infinite, and draws more energy each time. Each subsequent resurrection you do while on Bonmou takes an additional feather. <strong>So the first resurrection costs one feather, the second costs two, and so forth.</strong>"</blockquote>
+
+<h3>Guides and enforcers</h3>
+<blockquote>"I will be with you every step of the way. However, I have been instructed <strong>not to interfere in matters where wildlife is concerned</strong>, unless you forfeit the tournament. Should you find yourselves in mortal peril, I have been instructed to <strong>stand by and watch you die</strong>, should you not relinquish your place in the tournament.<br><br>
+<strong>However, there are enforcers on the island and more guides like myself. If you find it necessary and offer your forfeit, then we will rush to your aid — but only in that instance.</strong><br><br>
+There are guides like me, one for each team, and there are <strong>enforcers</strong> across the island, those meant to both enforce the tournament rules and offer a further layer of challenge. <strong>They may challenge you as well</strong>, requiring that you ante up feathers. Defeating tournament enforcers, or succeeding at whatever challenge they put before you, <strong>does not win you feathers, but it does win you gold and platinum</strong>.<br><br>
+All of this is meant to ensure that only the best of the best reach the tournament proper."</blockquote>
+
+<h3>Wildlife payouts</h3>
+<blockquote>"There are no feathers awarded for surviving such creatures, but defeating them will yield coins… The amount of coinage you receive is dependent <strong>not on how dangerous the creature itself is but how many you have brought down</strong>."</blockquote>
+<p>Three Deadly Mantises → <strong>100 platinum</strong>, described as "the smallest payment you'll receive for such a feat."</p>
+
+<h3>Rules confirmed in play</h3>
+<ul>
+  <li><strong>Pre-buffing is banned.</strong> Exploration actions (Hunt Prey) are fine; Haste is not.</li>
+  <li><strong>A bout ends the moment a team forfeits</strong>, typically declared at the top of a round. Both bouts this session ended that way.</li>
+  <li><strong>Wagers are negotiable</strong> before the bout begins.</li>
+  <li><strong>There is no handout.</strong> Seva asked. <em>"There is not a solid list, no. But if anyone has any questions at any time, you can ask me."</em></li>
+</ul>
+</div>
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-seva">
+<h4>Seva · the Fifth, Who Was Always With Us</h4>
+<p>She arrived in the middle of a heal, introduced herself by pointing out that a party of four is an unlucky number, and offered to fix it. Within ninety seconds of her first line she had critically succeeded a Risky Surgery and put 60 HP into a man she'd never met. <strong>Her whole integration was built on usefulness rather than spectacle</strong>, and she said so out loud: <em>"Yes, I'm useful to the team."</em></p>
+<ul>
+  <li><strong>She solved the party's biggest structural problem on arrival.</strong> Sattva had been running the heal economy alone and stupefied; Seva walked in with <strong>Medic Dedication, Ward Medic, Risky Surgery and healer's gloves.</strong> His reaction is the honest measure of it: <em>"Another pair of hands helping me. I'll take it. This helps a lot."</em></li>
+  <li><strong>She killed the Old Man Statue</strong> — the hardest thing in the temple, a four-round slog with AC 37 that had shrugged off two rank-5 Thunderstrikes and Sattva's entire quiver.</li>
+  <li><strong>Her mechanical identity is deliberate mimicry, and she narrates it.</strong> Her first Spellstrike was staged as copying Sovael — <em>"my flame isn't going to be red, it's going to be like a dark, shadowy flame."</em> She copied Ferrok's Blink Charge the moment she saw it, and Clutch's claw strike late in the mantis fight. Her Dimensional Assault: <em>"she uses the shadow of the trees, kind of swims into it, and then shows up right next to him and strikes."</em></li>
+  <li><strong>She taught the party's veteran a tool he'd been doing by hand all campaign.</strong> Ferrok had been running Spellstrike manually for ten sessions. Seva: <em>"Get the Spellstrike macro."</em> … <em>"Wait, I'll take a screenshot for you."</em></li>
+  <li><strong>She quietly paid for Sattva's greater striking rune.</strong> He was 1,080 gp short; Ferrok offered 250 and admitted he was broke. Seva just covered it — <em>"I got 2k still"</em> — and then declined the framing: <em>"I wouldn't say we're rich. We're just comfortable."</em></li>
+  <li><strong>She is the only person at the table who wrote the rules down</strong> and asked for a handout. She also swears at archers.</li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok the Unyielding · the Man Who Called It</h4>
+<p>Eleven sessions in, the campaign's only survivor of Shades of Blood has settled into a specific register: he is the one who has <em>seen this before</em>, and he keeps being right about it. He called the statue thirty seconds before it stood up. He is also, increasingly, the party's most reliably funny person.</p>
+<ul>
+  <li><strong>The statue prophecy is the session's best sustained bit.</strong> <em>"Probably going to murder us. Statues are always trying to murder us."</em> → <em>"You wouldn't believe the number of statues that just came to life."</em> → the statue comes to life → Seva: <em>"Okay, Ferrok totally called it."</em> → an hour later, unprompted: <em>"I'll just gotta watch out for statues."</em></li>
+  <li><strong>He was the first person to welcome Seva</strong>, with no ceremony at all: <strong>"Good to have you on our side."</strong></li>
+  <li><strong>He had the largest single Spellstrike turn of the session</strong> — a critical hit on Manyala Ahmoza for <strong>84</strong> plus <strong>46</strong> from the doubled Ignition, with persistent fire on top. <strong>130 damage from a standing start</strong>, after she had tripped and Punch-Downed him earlier that same round. <em>(Only Clutch's two-crit turn against Mantis B beat it, at 132.)</em></li>
+  <li><strong>He bowed to the Ahmoza sisters.</strong> Typed into Foundry chat as the bout ended — <em>"Ferrok bows to the sisters"</em> — the one unmixed note of sportsmanship in a session he otherwise spent making jokes and hitting things. He also typed <strong>"1st Rule: Don't talk about fight club"</strong> seconds after Seva asked whether the rules came with a handout.</li>
+  <li><strong>Gladiator Dedication changed his opening</strong>, and he found the loophole himself: <em>"Are our minders considered spectators? Because now with gladiator dedication, I can roll performance for initiative."</em> The DM allowed it.</li>
+  <li><strong>He is the party's aggro magnet as always</strong> — critted for 86 and 70 by the statue, tripped and force-flurried by Manyala, Double Shot by archers, and grabbed, restrained and thrown thirty feet into the air by mantises. He escaped the restraint by flexing (<em>"Whoa, what a flex!"</em>) and shrugged off a triple whiff with <strong>"I Matrix Dodged the whole thing."</strong></li>
+  <li><strong>He narrates other people's mechanics for them.</strong> Clutch's Intercept, in Ferrok's words: <em>"He just grabs him and chucks him into the air and the ticks swarm him instead."</em> And when Clutch Intercepted and counterattacked in one turn: <em>"Why they call him Clutch?"</em></li>
+  <li>His plan for party finances: <em>"We'll just defeat the elder dragon on the island and take his hoard."</em> His relationship with the rulebook: <em>"Ferrok doesn't have the intelligence to keep track of rules, so…"</em> His priority: <strong>"Ferrok wants to live."</strong></li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the Pilgrim Who Kept Bowing</h4>
+<p>He is the party's second medic, its diplomat with beaten opponents, its scout, and the only person at the table tracking whether the DM had remembered to hand out XP. He also had the worst dice night anyone here has had in months — and that is the least interesting thing about his session.</p>
+<ul>
+  <li><strong>"Sattva will respectfully approach."</strong> Said to a fifteen-foot statue everyone else had just agreed was going to murder them. When it stood up and drew its staff, his answer was <strong>"A test of martial prowess it is."</strong> That is the entire character in two lines.</li>
+  <li><strong>He onboarded the new player inside thirty minutes.</strong> Seva arrived offering to heal; Sattva — stupefied, and until that moment the only medic — took her up on it immediately, discovered she also had Ward Medic, and by the end of the first fight they had a <strong>shared heal rotation</strong> running: <em>"Shall we, Seva?"</em> / <em>"I got this one."</em> / <em>"Seva, if you need to refocus or something, you can do that."</em></li>
+  <li><strong>He accepted the Ahmoza challenge on behalf of the party.</strong> Sovael hedged; Sattva answered for the team: <strong>"Yes. How many do you want to wager?"</strong></li>
+  <li><strong>He knocked out Manyala Ahmoza</strong> — <em>"Right in the temple"</em> — and then, when Rijana said she was glad to have been humbled early, gave her the session's kindest line: <strong>"Better here than out in the jungle."</strong> He'd put her sister on the ground a few minutes earlier.</li>
+  <li><strong>He rolled a natural 20 on Recall Knowledge</strong> against the Deadly Mantises and immediately converted it into something the party could act on: <em>"So anything within 20 feet is danger zone."</em> <strong>He killed two of the three</strong>, including the last one, with the arrows that had failed him all night.</li>
+  <li><strong>He did the only strategic thinking anyone did about the qualifier itself.</strong> Post-bout, unprompted: <em>"Where's the nearest shop, we said? Just so we know to orient ourselves. Because a lot of people are probably near."</em></li>
+  <li><strong>He adapted instead of complaining, every single time</strong> — and after the statue fight, the one that humiliated his dice worst, his first words to the party were <strong>"But good work with that statue."</strong> When Seva apologised (<em>"Nice, Sattva. Sorry for doubting you"</em>), he waved it off: <em>"My arrows have not been effective today."</em></li>
+  <li><strong>He talks to defeated enemies like a sportsman and to his own party like a medic.</strong> <em>"Stand down, Lightning Caller A. You've lost."</em> / <em>"Close his hands in prayer and try to cast this."</em> / <em>"I'm moral support. It's fine."</em> And, standing over three dead gargantuan insects: <strong>"Anybody up for breakfast?"</strong></li>
+  <li><strong>And the party has 320 XP because of him.</strong> The DM had moved on to scheduling; Sattva stopped him: <em>"Cody, you said we would be using XP for this exploration part, right?"</em> DM: <em>"Yes. You make a fair point."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Reason Anyone Is Still Standing</h4>
+<p>He spoke less than anyone at the table — 214 raw segments to Seva's 701 — and he was, mechanically, the most load-bearing person in the room for the second session running. He also asked the question that started the session.</p>
+<ul>
+  <li><strong>He is the reason Seva got an introduction at all.</strong> <em>"Did we get a character introduction for Seva?"</em> Nobody else raised it. The quietest player made sure the newest one got a scene.</li>
+  <li><strong>He Intercepted constantly and at real cost</strong> — 80 damage off a statue crit meant for Ferrok, 77 off a mantis crit meant for Seva, and five separate 8d6 tick bites. <strong>147 absorbed in the tick fight alone</strong>, more than the next two PCs combined, and another 148 in the mantis fight. He also used <strong>Get Behind Me!</strong> to reposition allies out of swarm space while doing it.</li>
+  <li><strong>His entire Wrestler kit was switched off in the last fight and he didn't blink.</strong> <em>"These are gargantuan, right? They're four by four? So none of my athletics skills will work."</em> He pivoted to Taunt, Defensive Advance, Intercept and raw claws — and then <strong>rolled two natural 20s back to back</strong> for 61 and 71, which the DM called a tide turner. <strong>He finished the fight as its top damage dealer.</strong></li>
+  <li><strong>He put a fifteen-foot statue on the ground twice</strong> with critical Trips, and grappled a Lightning Caller into Restrained on a critical success — then, when it pinned him with an arrow, spent an action pulling it out and immediately re-grabbed it.</li>
+  <li><strong>He got thrown thirty feet in the air, critically failed the save, and took zero damage</strong> because he's a Master in Acrobatics with Cat Fall.</li>
+  <li><strong>His best RP is unprompted mechanical flavour.</strong> Asked nothing, mid-combat, he gave Taunt two distinct in-fiction versions: an aura of bloodlust, or <em>"Clutch does this really enticing dance."</em> Sattva, instantly: <em>"Just an annoying dance."</em> Seva: <em>"Did you actually dance?"</em></li>
+  <li><strong>He took the Ring of Climbing</strong> — the same ring he turned down in Session 9 on behalf of his cousin Clinch, because <em>"he's got to climb out of his grave, so he needs the climb speed."</em> He briefly took the Ring of Swimming instead, then swapped back. Nobody remarked on it.</li>
+  <li>And, discovered muted near the end of the mantis fight: <em>"I was. I was just narrating my actions here. It's fine."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Burning Pearl</h4>
+<p>The party's healer stopped needing to be the party's healer this session — Seva and Sattva have the medicine covered — and what he did with the freed actions was become a control turret. He also carried most of the rules briefing and debuted two new tools in one fight.</p>
+<ul>
+  <li><strong>He asked more of the briefing's questions than anyone</strong> — four of the eight. <em>"Wait, so we can't refuse a challenge?"</em> — <em>"If we do DC 17 and we decide not to challenge the other team, the other team can still challenge us, right?"</em> — <em>"Does Recall Knowledge help with that?"</em> Each produced a ruling the party now operates on, and the last produced the group-escape mechanic. <em>(Credit where due: <strong>Ferrok</strong> asked the question that produced the inactive-hours shopping ruling, and <strong>Seva</strong> asked the one that got the zero-feathers rule stated flatly.)</em></li>
+  <li><strong>Talent Envy debuted and immediately crit.</strong> It rides free on the Performance check he was already making for Lingering Composition — a no-cost Demoralize every combat — and its first use critically frightened a Gargantuan mantis. He knew exactly how funny that was: <em>"It's like a mouse frightening an elephant."</em> … <strong>"I'm a dragon, all right?"</strong></li>
+  <li><strong>Dirge of Doom debuted as an act of inheritance.</strong> <em>"You know what? It's time to debut. Like, I got this trick from my cousin, Tivael."</em> He is still looking for Tivael, and he has started casting his spells.</li>
+  <li><strong>The Shadow Signet was his best item all session</strong> — it turned an Ignition into a crit against a tick swarm's Reflex DC, routed a Blazing Bolt at a Fortitude DC, and landed a Fire Ray on the Old Man Statue at Reflex DC 31 that would have missed AC 37 outright.</li>
+  <li><strong>He is the most consistent voice on party positioning.</strong> <em>"Next time, if you will move, you can move first, so you're in range of my Courageous Anthem."</em> — the exact callout discipline the S9 notes flagged as this party's weakest link.</li>
+  <li><strong>His worst round and his best call were the same fight.</strong> Whispers of Weakness told him the tick swarms were weak to area and splash damage; his entire party was standing inside the area. <em>"Too bad we're kind of in an area where I can't really do that."</em> He spent that fight parked in the swarm's space and needed Clutch's reaction three separate times — then flew clear of a Rain of Arrows two fights later, the lesson landing one encounter late.</li>
+  <li><strong>He is on fire more or less permanently</strong> and treats it as an inconvenience to apologise for. <em>"I'm still burning, guys."</em> / <em>"Yeah, I'm trying to control my fire. Sorry, guys."</em> Seva, doing the math on 1 persistent fire per round: <em>"We did the math, you're about to die tonight."</em> And, one bout later, with real satisfaction: <strong>"I didn't burn myself this time."</strong></li>
+  <li><strong>He is the party's diplomat and its straight man.</strong> He called the wager (<em>"Let's test the water"</em>), complimented the beaten archers (<em>"You guys were formidable"</em>), and kept Seva alive in conversation as well as combat — <em>"Don't go to grave just yet, okay?"</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Phoenix Necklace</div>
+    <div class="loot-source">Old Man Statue's shrine</div>
+    <div class="loot-note">Rare artifact — the tournament requirement, finally claimed</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Type III Spacious Pouch</div>
+    <div class="loot-source">Shrine</div>
+    <div class="loot-note">Kept — party</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Ring of Climbing</div>
+    <div class="loot-source">S9 dormitory — unclaimed until now</div>
+    <div class="loot-note">→ Clutch. The ring he refused on his dead cousin's behalf</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">~1,500 gp in gems and coin</div>
+    <div class="loot-source">Shrine</div>
+    <div class="loot-note">Party stash</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Cognitive Mutagen</div>
+    <div class="loot-source">Tick garden</div>
+    <div class="loot-note">+3 to Recall Knowledge and mental skills</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Serene Mutagen</div>
+    <div class="loot-source">Tick garden</div>
+    <div class="loot-note">+3 Will and Perception; +4 vs mental</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Ring of Swimming</div>
+    <div class="loot-source">Shrine</div>
+    <div class="loot-note">Sold</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Wondrous Figurine (Jade Serpent)</div>
+    <div class="loot-source">Shrine</div>
+    <div class="loot-note">Sold — "our action economy is already so tight as a magus"</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+2 Striking Astral Hook Sword</div>
+    <div class="loot-source">S9 mess hall</div>
+    <div class="loot-note">Sold</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Decanter of Endless Water · Holy rune</div>
+    <div class="loot-source">S9</div>
+    <div class="loot-note">Sold</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">100 platinum (≈1,000 gp)</div>
+    <div class="loot-source">Three Deadly Mantises</div>
+    <div class="loot-note">Party stash — the first wildlife payout</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Greater Striking rune</div>
+    <div class="loot-source">Stone market — bought</div>
+    <div class="loot-note">→ Sattva. Seva paid the full 1,080 gp shortfall</div>
+  </div>
+</div>
+<div class="xp-banner">Experience · 320 XP · Silver Feathers <strong>3 → 4 → 5</strong> · <strong>906 gp each</strong> distributed · <strong>Level 12</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Seva:</strong> "I'm not sure if you are all superstitious, but four is definitely an ominous number here in Tian Xia. Shall I round you off to a good five?"
+<span class="attribution">Her first line in the campaign — introducing herself by pointing out that the party was an unlucky number, and volunteering to fix it.</span></blockquote>
+
+<blockquote><strong>Seva:</strong> "Yes, I'm useful to the team."
+<span class="attribution">After critically succeeding a Risky Surgery for 60 HP on Clutch within a minute of arriving. She bought into a party of strangers with medicine, not violence.</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "Probably going to murder us. Statues are always trying to murder us."<br>
+<strong>Sattva:</strong> "Is that what happened on your last expedition, Ferrok?"<br>
+<strong>Ferrok:</strong> "Yeah, you wouldn't believe the number of statues that just came to life."
+<span class="attribution">Thirty seconds before the statue came to life. Seva, afterward: "Okay, Ferrok totally called it."</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "I Matrix Dodged the whole thing."
+<span class="attribution">A gargantuan mantis missed all three strikes on him. The DM: "Bulls are natural predators for mantises."</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "Let me patch you up. Ferrok's face is just a mass of bruises."
+<span class="attribution">To Seva, immediately after the Ahmoza bout — the aggro magnet doing the patching anyway.</span></blockquote>
+
+<blockquote><strong>Sattva:</strong> "Sattva will respectfully approach."<br>
+<strong>Sovael:</strong> "Sovael will keep his distance."
+<span class="attribution">Two characters, two philosophies, one obviously cursed statue. Sattva's follow-up once it stood up and drew its staff: "A test of martial prowess it is."</span></blockquote>
+
+<blockquote><strong>Sattva:</strong> "Seeing that arrows are not working, Sattva will stay calm and start stomping."
+<span class="attribution">Round four of the tick fight, after opening the session with back-to-back critical misses. It worked.</span></blockquote>
+
+<blockquote><strong>Sattva:</strong> "Better here than out in the jungle."
+<span class="attribution">To Rijana Ahmoza, who had just said she was glad to be humbled early. The kindest thing anyone said all session, offered to someone whose sister he'd knocked unconscious minutes before.</span></blockquote>
+
+<blockquote><strong>Clutch:</strong> "So Taunt can either be one of two things for Clutch. It's either this big, vicious aura of bloodlust where everybody's like, <em>oh, that's a big target, I need to take that out first.</em> Or Clutch does this really enticing dance, right? And you're just like, <em>I need to hit that guy in the face.</em>"<br>
+<strong>Sattva:</strong> "Just an annoying dance."
+<span class="attribution">Clutch, unprompted, giving his signature mechanic two distinct in-fiction flavours mid-combat.</span></blockquote>
+
+<blockquote><strong>Clutch:</strong> "Okay, just two nat 20s in a row, no problem." … "I was gonna scream if it was another nat 20."
+<span class="attribution">The turn that saved the mantis fight — critical claw strikes for 61 and 71, from a Wrestler whose entire grappling kit had been switched off by the enemies being Gargantuan.</span></blockquote>
+
+<blockquote><strong>Clutch:</strong> "And then, did we get a character introduction for Seva?"
+<span class="attribution">The first substantive line of the session. The quietest player at the table is the one who made sure the newest player got a scene.</span></blockquote>
+
+<blockquote><strong>Sovael:</strong> "I was going to say, it's like a mouse frightening an elephant." … "I'm a dragon, all right?"
+<span class="attribution">A Tiny dragonet critically Demoralizing a Gargantuan praying mantis with a free action.</span></blockquote>
+
+<blockquote><strong>Sovael:</strong> "You know what? It's time to debut. Like, I got this trick from my cousin, Tivael." … "Dirge of Doom."
+<span class="attribution">Sovael's first Dirge of Doom in the campaign, explicitly framed as inheriting the repertoire of the cousin he still hasn't found.</span></blockquote>
+
+<blockquote><strong>DM:</strong> "Nobody's <em>undead</em>, right?" — <strong>Sovael:</strong> "I know." — <strong>DM:</strong> "Not yet." — <strong>Sovael:</strong> "Not ever."
+<span class="attribution">The statue's death burst deals <em>vitality</em> damage — harmless to the living. The DM checking who it would actually hurt, and Sovael declining, on principle, to ever become undead.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Five feathers, five to go, ~15 hours of Day 1 remaining.</strong> The party has used roughly one hour of a 48-hour clock and explored <strong>one hex</strong>.</li>
+  <li><strong>The team still has no name.</strong> "Name pending" is currently the official answer given to rivals.</li>
+  <li><strong>The Ahmoza sisters are alive, humbled, and still in the running</strong> — they left on good terms and can be challenged again, just not the same day.</li>
+  <li><strong>The Lightning Callers likewise.</strong> They forfeited cleanly and were complimented for it.</li>
+  <li><strong>There are things on this island the party cannot beat.</strong> The DM said so explicitly. The escape rule is now a live tactical option that has been checked but never used.</li>
+  <li><strong>"Wonders" exist on Bonmou</strong> and Ingdani refused to elaborate. None found yet.</li>
+  <li><strong>Tournament enforcers</strong> can challenge the party for feathers, paying out only gold and platinum.</li>
+  <li><strong>Sovael is still looking for Tivael</strong>, who said he'd be at this tournament. He is now casting Tivael's spells — Dirge of Doom debuted as an explicit homage.</li>
+  <li><strong>Clutch is still looking for Clinch</strong>, and now carries the Ring of Climbing he refused on his cousin's behalf in S9.</li>
+  <li><strong>Tino's Toughest</strong> haven't been seen since the beach. Tino wanted a rematch as an official bout.</li>
+  <li><strong>Kannitri's lingering presence</strong> in the eucalyptus chamber and the unexamined skeleton were never revisited. <strong>"The broken Rebus"</strong> remains unexplained.</li>
+  <li><strong>Next session is 16 August</strong> — two weeks off (Ferrok at Gen Con; two other players away). The DM will run level-20 "gauntlet" one-shots in the gap.</li>
+</ul>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Tick swarms</strong>: Courageous Anthem + <strong>Lingering Composition on a 45 — a critical success, four rounds</strong>. <strong>Whispers of Weakness</strong> — lowest save <strong>Will</strong>, weakness to <strong>area/splash damage</strong>, which the party's own positioning made unusable. Melee <strong>Ignition</strong> through the <strong>Shadow Signet</strong> at its Fortitude DC (28). A ranged <strong>Ignition crit</strong> at its Reflex DC (46) that ended the fight. <strong>Sure Strike → Telekinetic Projectile crit</strong> (36). Cursebound 1 → 2. Took only <strong>19</strong> all fight — Clutch Intercepted for him three times.</li>
+  <li><strong>Old Man Statue</strong>: Courageous Anthem + Lingering (45). <strong>Whispers of Weakness</strong> — lowest save <strong>Reflex</strong>, <strong>no weakness</strong>, flat physical resistance 10. <strong>Ancestral Memories</strong> for −2 to its save, then <strong>two rank-5 Thunderstrikes</strong> — <strong>it succeeded on both</strong> (51 → 25, 56 → 28). Spent the <strong>Prognostic Veil's daily free Focus Point</strong>, then <strong>Sure Strike → Fire Ray through the Shadow Signet at Reflex DC 31 for 48</strong> — the largest single application of the fight, and a clean miss if he'd gone at AC 37. <strong>101 damage dealt, the most of anyone.</strong></li>
+  <li><strong>Ahmoza bout</strong>: Courageous Anthem + Lingering. <strong>Benediction</strong>, then sustained it to extend the emanation over the whole party. <strong>Fear on both sisters</strong> — both saved, Frightened 1 each, and Manyala's −1 fed straight into the Trip she then rolled a natural 1 on. Took <strong>57</strong> from Rijana's Inner Upheaval (69 rolled) and answered with <strong>Bounce Away</strong>, used for the first time. <strong>Dealt zero damage — pure buff and control.</strong></li>
+  <li><strong>Lightning Callers</strong>: Courageous Anthem + Lingering; flew clear of the Rain of Arrows burst. <strong>Two-action Blazing Bolt</strong> routed through the <strong>Shadow Signet</strong> at Fortitude DC 32 — one ray missed B, one hit C for <strong>39</strong> — plus <strong>Foretell Harm</strong> free-actioned for 10 more (Cursebound 1). Two hero points went into those rays. <strong>Took 90 in one enemy turn</strong> (a 56 crit and a 34) and answered with a rank-3 Heal off the Staff for 40. Won an initiative tie with the <strong>Pilgrim's Token</strong>.</li>
+  <li><strong>Deadly Mantises</strong>: <strong>Lingering Composition critically succeeded — four rounds of Courageous Anthem</strong>, +1 to every attack and damage roll the party made; that, not the spell damage, was his largest contribution. <strong>Talent Envy debuted</strong> and <strong>critically succeeded on Mantis A (Frightened 2)</strong>. <strong>Chain Lightning</strong> A → B → C (22 / 22 / 45 on C's failure). <strong>Dirge of Doom</strong> debuted. <strong>Fear</strong> (Frightened 1). <strong>Whispers of Weakness</strong> (Will, no weakness). <strong>Fire Ray</strong> for 29, and the burning ground it left ticked another 11.</li>
+  <li><strong>Level 12</strong>: took <strong>Talent Envy</strong> (rare skill feat) and another rank-6 spell.</li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>The one thing that would have shredded the tick swarms was the one thing he couldn't cast.</strong> Whispers said <em>area or splash damage</em>; his whole party was standing inside the area. That is a recurring shape — his best AoE and his allies occupy the same square. <strong>Divine Wrath (enemies-only) and Chain Lightning (pick the arc) are the answer, and he used neither.</strong></li>
+  <li><strong>He burned two rank-5 Thunderstrikes into a successful save each.</strong> 107 damage rolled, 53 delivered, against a creature whose lowest save was Reflex and whose Reflex was <em>still</em> good for its level. The wrong spell, twice.</li>
+  <li><strong>He is now casting Tivael's spells.</strong> Dirge of Doom was framed out loud as inherited. Nobody at the table asked about it.</li>
+  <li><strong>Ingdani will watch them die.</strong> She has said it twice now, in more detail the second time. The only exit is forfeiting the whole run.</li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Talent Envy is the best thing he took at 12, and it's free.</strong> It rides on the Lingering Composition Performance check he was already making on round one of every fight — so it is a <strong>free-action Demoralize every single combat, no action cost, no Cursebound cost</strong>. It crit on its debut. This should be the new round-one default, aimed at whatever the martials are about to swing at.</li>
+  <li><strong>The Shadow Signet is the single best item he owns in this AP.</strong> Three of his four biggest hits this session came from converting a spell attack away from AC — Ignition into a Reflex DC for a crit, Blazing Bolt into a Fortitude DC, and the Fire Ray that hit the statue's Reflex DC 31 by exactly zero and would have missed AC 37 outright. Against high-AC, mediocre-save enemies, that item <em>is</em> his accuracy.</li>
+  <li><strong>Whispers of Weakness went 0-for-3 on actionable information this session</strong> — "area/splash" he couldn't use, "no weakness / Reflex" on the statue, "no weakness / Will" on the mantis. Three Cursebound stacks for three dead ends. Ruby Phoenix simply has fewer exploitable weaknesses than Shades of Blood did. <strong>Take it for the +2 status bonus to the next attack and treat the information as a bonus, not the point</strong> — and don't take it at all unless a Fire Ray is queued behind it.</li>
+  <li><strong>Bounce Away works and he forgot he had it for two sessions.</strong> It cut Rijana's flurry from 69 to <strong>57</strong> — resistance equal to his level — and gave him a free half-speed flight out of melee on top. Against anything bludgeoning, that reaction is worth more than the Shield cantrip. <em>(Resistance and movement only; there is no counter-strike.)</em></li>
+  <li><strong>He is still the party's clustering problem — Clutch just hides it.</strong> He parked in the tick swarm's space and needed Clutch to Intercept for him <strong>three times in one fight</strong>; he personally took only 19 because of it. Then an archer with a clean line put <strong>90 into him in one turn</strong>. <strong>Permanent flight and Elf Step exist. He used flight exactly once, in the archer fight, and it worked perfectly.</strong> Lead with it.</li>
+  <li><strong>The healing burden has genuinely lifted.</strong> Seva is a second Medic-Dedication healer with Ward Medic and Risky Surgery; Sattva is a third. Sovael cast exactly two Heals all session and one was on himself. <strong>That frees his action economy for control and artillery — which is what the qualifier's back-to-back fight structure actually rewards.</strong></li>
+  <li><strong>The clock is the real resource now, not spell slots.</strong> Every fight, every Treat Wounds, every Refocus and every hex costs ten minutes out of a sixteen-hour day. <strong>Refocusing to clear Cursebound is no longer free between fights.</strong> That changes the Whispers math again.</li>
+  <li><strong>Five feathers held means they are now a target.</strong> Teams challenge for feathers, and the party cannot refuse. Sitting on a good count protects nothing.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>What does the party name themselves?</strong> "Name pending" will not hold for three days.</li>
+  <li><strong>How much of the island is worth exploring versus hunting teams?</strong> Reconnoitering produced a Severe wildlife fight and 100 platinum in one go; traversing produced a feather. Which is the better rate?</li>
+  <li><strong>What is on this island that a level-12 party genuinely cannot beat</strong>, and will they recognise it before round one rather than after?</li>
+  <li><strong>Can the party actually execute the group-retreat rule under pressure?</strong> It requires <em>everyone</em> to declare it on their own turn, and this party has never fought together long enough to coordinate that.</li>
+  <li><strong>Are the Ahmoza sisters and the Lightning Callers worth re-challenging</strong> on a later day, now that both are known quantities?</li>
+  <li><strong>Is Tivael on Bonmou at all?</strong></li>
+</ul>
+</section>
+</body>
+</html>

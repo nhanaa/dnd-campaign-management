@@ -10,14 +10,25 @@ End-to-end pipeline: transcribe a session recording, generate a styled HTML reca
 ## Usage
 
 ```
-/process-session <campaign> <audio-file> [--speakers N] [--session-number N]
+/process-session <campaign> [audio-file] [--speakers N] [--session-number N]
 ```
 
 **Arguments:**
 - `<campaign>` — Campaign folder name (the top-level directory for that campaign in this repo)
-- `<audio-file>` — Filename in the recordings directory (`/mnt/c/Users/nhanp/Videos/`), or a full path
+- `[audio-file]` — **Optional.** Filename in the recordings directory (`/mnt/c/Users/nhanp/Videos/`), or a full path. **If omitted, auto-resolve it — do NOT stop and ask for a filename, and do NOT try to build the recap from the roll log alone.** See "Resolving the recording" below.
 - `--speakers N` — Number of speakers (players + DM). Optional, improves diarization accuracy.
 - `--session-number N` — Session number. If omitted, auto-detect from existing session folders.
+
+### Resolving the recording (do this BEFORE anything else if no audio path was given)
+
+Pax very often invokes this with **no filename** — he'll say things like "process session … today" or just point you at `rolls.txt`. **A missing audio file is never a signal to skip transcription.** The recording almost always exists in `/mnt/c/Users/nhanp/Videos/`; go find it:
+
+1. **List the recordings dir newest-first:** `ls -lat "/mnt/c/Users/nhanp/Videos/"`. Files are named `YYYY-MM-DD HH-MM-SS.wav` (OBS default) — the name IS the recording's start date/time.
+2. **Match to the session.** If Pax said "today," pick the file whose date is today. Cross-check against the roll log if one was provided — the `rolls.txt` export header (`# <DD>/<MM>/<YYYY>, HH:MM:SS -> …`) and the recording's filename timestamp should line up (the `.wav` start time is usually a few minutes *before* the first roll). That match is your confirmation you grabbed the right file.
+3. **If exactly one recording matches the target day and it lines up with the rolls, use it** — mention which file you picked, then proceed. Don't ask.
+4. **Only ask (AskUserQuestion)** if: no recording matches the day, or several plausibly do and the roll log can't disambiguate. Show the candidate filenames.
+
+**The roll log is a supplement to the recording, not a replacement for it.** Transcribe first; use `rolls.txt` for combat attribution/math per the roll-log guidance. If Pax genuinely wants a rolls-only recap he'll say so explicitly ("no recording", "rolls only").
 
 ## Past-Session Pitfalls — read before every run
 
@@ -132,6 +143,7 @@ python dnd-transcription/transcribe.py <audio-path> --min-speakers <N> --max-spe
 
 - Audio files are in `/mnt/c/Users/nhanp/Videos/` by default
 - If the file is just a filename (no path), prepend the default directory
+- **If no file was given at all, resolve it first** per "Resolving the recording" in the Usage section — don't ask for a filename you can find yourself
 - Output goes to `dnd-transcription/transcripts/`
 
 ### Step 2: Speaker Identification

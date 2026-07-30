@@ -180,7 +180,7 @@ Xurl was, quietly, the session's MVP — and its funniest player. He finished th
 > **Xurl**: "God, I love barbarians when they get to hit."
 *Over Argon's final smashing kill in the library.*
 
-> **DM (Ab)**: "To my credit, only one character died so far."
+> **DM (Lap)**: "To my credit, only one character died so far."
 *Reassuring the new player about his combat style, one sentence before "and one was permanently crippled."*
 
 ## Pax's Notes — Argon Rath's Journal

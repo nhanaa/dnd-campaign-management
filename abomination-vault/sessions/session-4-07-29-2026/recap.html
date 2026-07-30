@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 — The Last Stand of Argon Rath</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-argon { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-argon { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Last Stand of Argon Rath</h1>
+<div class="subtitle">Abomination Vault — Session 4 · Argon's Final Session</div>
+<div class="meta-row">
+  <span class="meta-pill">July 29, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~3h 50m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">Gauntlight · 3rd Floor</span>
+  <span class="meta-pill">DM · Lap</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:55%"></div>
+  <div class="comp-seg comp-explore" style="width:28%"></div>
+  <div class="comp-seg comp-rp" style="width:17%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat (3 fights)</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-argon">
+    <div class="char-name">Argon Rath ★ †</div>
+    <div class="char-class">Orc (Hold-Scarred) · Barbarian (Barrage Dragon / Force)</div>
+    <div class="char-player">Pax — final session</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human · Thaumaturge (returning chakram) / Cleric</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf · Divine Sorcerer (Pharasma; Psychopomp) / Champion</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling · Monk (Crane Stance)</div>
+    <div class="char-player">Ben</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The party returned to the Gauntlight's third floor to finish clearing it before tomorrow's twin deadlines — the pirate shipment and the midnight sacrifice of the captured dwarf. Behind the heavy stone doors of the floor's central chamber they found a reliquary desecrated into a shrine: smashed display cases, and a 15-foot statue of a woman stitched together from squares of preserved flesh. Kneeling before it was the cult's spellcasting <strong>ghoul priestess</strong>, who turned, smiled, and made the same offer as before — <em>"Drop your weapon and join us."</em> Ruben answered for the party: <em>"Pitiful creatures. You will receive your judgment from Pharasma."</em> The fight that followed was an 80-minute war of attrition against a caster who healed herself by eating pieces of the flesh statue, dropped Alder outright with an upcast three-action Harm (a hero-point reroll that came up nat 1 twice — "one in 400," said the DM), and finally died to Argon's guisarme: a called vertical cut past Alder's shoulder, straight down through her skull, for a 50-damage critical.</p>
+  <p>The middle of the night belonged to exploration — and to two mysteries walking the halls. An <strong>armored knight, visibly not human</strong>, twice crossed the party's path and ignored them; it left carrying a huge book taken from a hidden wall-library the party then found for themselves. Inside were the <strong>Gauntlight Blueprints</strong> and a <strong>Folio of Teleportation Research</strong> — Ruben's nat-20 find — which by night's end had the third floor's teleportation circle reactivated (one of nine in the dungeon). The <strong>Cracked Magic Mirror</strong> showed the room's past: twenty or thirty robed librarians kneeling before empty cases, and then, when the image cleared, devouring one another — the birth of the flesh-eating cult, centuries ago. A second fight against two Canker Cultists mid-ritual went the party's way (Ruben's Vitality Lash zapped one dead; Argon's 38-damage crit sent the other flying into the flesh mound), though it cost Argon a round paralyzed and Xurl a faceful of Phantom Pain.</p>
+  <p>Then, with the session winding down and the party healing up to leave, one last unopened door. Xurl said what everyone was thinking — <em>"Surely that won't go wrong."</em> Argon stepped forward: <em>"Let me do it."</em> Behind the door: a small corpse on a table, three ghouls feeding on it, and the <strong>ghast leader</strong> the veterans had once fled from, who looked up in annoyance — <em>"You guys again? Why don't you leave me alone?"</em> The party ran. Argon held the doorway so they could — took a 34-damage crit that dropped him, until Xurl called across the map, <em>"You have Ferocity, right?"</em>, and the One Hundred Victories tattoo stood him back up at 10 HP — then failed the paralysis save. Pax made the call above the table: <em>"No, just leave. Leave him. He's dead. Don't even try."</em> The last the party heard, Argon was still fighting. The DM's ruling on ghoul custom: they won't eat him — they'll turn him. <strong>Argon Rath is gone.</strong> The party leveled to 5 on the walk out. Everyone at the table is now on their second character.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I · RP · The Reliquary of Flesh</div>
+    <div class="act-card">
+      <h3>"Either way, you will be mine."</h3>
+      <ul>
+        <li>The corpses the party left behind yesterday were gone — <em>"They are aware of our presence, probably"</em> (<strong>Argon</strong>).</li>
+        <li>Session-opening banter: <strong>Argon</strong> clocked that <strong>Xurl's</strong> bioluminescent stripes trace the <strong>One Hundred Victories</strong> pattern — the same tattoo Argon wears in scar. Both carry it.</li>
+        <li>The door-duty exchange that would bookend the night: Xurl asked who goes first through doors. Argon: <em>"You have more AC than me. You should be first, actually."</em></li>
+        <li>Behind the double stone doors: smashed, empty display cases under spotlights, and a <strong>15-ft statue of a woman made of stitched flesh squares</strong> — the source of the room's stench.</li>
+        <li>The <strong>ghoul priestess</strong> and two ghoul attendants knelt before it. She repeated the cult's offer: <em>"Drop your weapon and join us."</em> <strong>Ruben</strong> spat back Pharasma's judgment; she smiled — <em>"Either way, you will be mine"</em> — and initiative was rolled.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Killing the Priestess</div>
+    <div class="act-card">
+      <h3>An 80-minute war of attrition</h3>
+      <ul>
+        <li><strong>Alder dropped at 46 damage</strong> on a double-nat-1 hero-point reroll against her upcast three-action Harm — revived by Ruben's 30-point Heal.</li>
+        <li>The priestess healed herself by <strong>eating a piece of the flesh statue</strong>, went Quickened for a 4-action turn, and made Ruben her favorite target all night (79 damage taken).</li>
+        <li><strong>Argon ended her</strong> with a called shot — blade curved past Alder, straight down through the skull — <strong>nat 20, 50 damage.</strong></li>
+        <li>Ruben spat on the corpse; <strong>Xurl took her head off</strong> with Argon's axe afterward — <em>"I'm not leaving her mostly intact in one room."</em></li>
+        <li>Mid-fight, a <strong>figure appeared in the doorway, laughed, and vanished</strong> — Ruben later identified it as the "jokester" that pranked the <em>previous</em> party during their fights. First contact for this group.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III · Mystery · The Knight</div>
+    <div class="act-card">
+      <h3>A creature best left ignored</h3>
+      <ul>
+        <li>On the way to the safe room, footsteps: a <strong>knight in full plate — visibly not human</strong> — walked past the battered party, ignoring them entirely, and went into the reliquary. They shut the secret door and holed up — <em>"encountering an enemy we don't know anything about, while we're injured, would be suicide"</em> (<strong>Ruben</strong>).</li>
+        <li><strong>Argon</strong>, uneasy: <em>"I wonder if we're doing something that we would regret later, though."</em></li>
+        <li>After the healing round it appeared a second time, now <strong>carrying a huge book</strong>. Xurl called out — <em>"Where'd you find that book?"</em> — no answer. The party debated jumping it and stood down: <em>"The last time we picked a fight with a creature who was ignoring us, it went poorly"</em> (<strong>Xurl</strong>). It descended the stairs toward the floor below and disappeared.</li>
+        <li>Perception checks connected it: <strong>both the knight and the book appear in the recovered tapestries.</strong> Argon, who joined after the tapestries were found, couldn't place it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act IV · Explore · The Hidden Library &amp; the Mirror</div>
+    <div class="act-card">
+      <h3>What the knight left behind</h3>
+      <ul>
+        <li><strong>Ruben found a hidden wall-niche library</strong> (nat-20 Perception) — the room the knight took its book from; a conspicuous gap remained in the shelf. <em>"It seems Pharasma has smiled upon me very well today."</em></li>
+        <li>Recovered: the <strong>Folio of Teleportation Research</strong> and the <strong>Gauntlight Blueprints</strong> (a full-day downtime project — about the lighthouse itself, not the dungeon). Ruben's plan: bring them to <strong>Lady Wrin</strong>.</li>
+        <li>The <strong>Cracked Magic Mirror</strong> (cracking further with use) showed the room's past: 20–30 robed librarians kneeling before intact-but-empty cases — then <strong>devouring each other</strong>. The cult's origin. The DM awarded everyone a hero point.</li>
+        <li>End of night: <strong>Alder performed the activation ritual — a nat-20 Arcana</strong> (<em>"That's funny. You activate this."</em>) — and brought the <strong>third-floor teleportation circle online</strong>. The nat 20 bought extra insight: <strong>nine circles total</strong>, roughly one per floor, each needing on-site reactivation — and the ground-floor circle's connection is severed.</li>
+        <li><strong>Ruben</strong>, shelving the loot: <em>"Come. We have a sacrifice to find."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Ritual Chamber</div>
+    <div class="act-card">
+      <h3>Bone figurines around a dead flesh-mound</h3>
+      <ul>
+        <li>A room with a <strong>dead flesh-mound</strong> (like the gibbering mouther, but dark red and dead) ringed by <strong>dozens of tiny bone figurines wrapped in hair</strong> — two <strong>Canker Cultists</strong> mid-ritual.</li>
+        <li>Corpse-stench at the door: DC 20 Fort — fail is sickened 1, success is immune for 24 hours. Ruben failed, then <strong>retched it off with a nat 20</strong> (<em>"Nat 20, baby"</em>).</li>
+        <li><strong>Ruben's Vitality Lash killed one cultist</strong> (<em>"No, not slash. Zap."</em>); <strong>Argon crit the other for 38</strong> and sent it flying over Xurl into the flesh pile.</li>
+        <li>Cost: Argon a full round <strong>paralyzed</strong>, and Xurl a faceful of <strong>Phantom Pain</strong> (persistent mental + a fight-long Sickened 1).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI · Explore · The Mushroom Door</div>
+    <div class="act-card">
+      <h3>Not a fun mushroom</h3>
+      <ul>
+        <li>One more door: a soil-floored room with <strong>two Violet Fungi</strong>. One tentacle-slashed <strong>Xurl</strong> for 16 + 5 poison (Violet Rot, Enfeebled 1).</li>
+        <li>Nobody identified them — the whole table failed the Recall Knowledge; the DM narrated what they'd met on pre-campaign travels (<em>"this is not a fun mushroom"</em>).</li>
+        <li>The party slammed the door and did not go back. <strong>Xurl</strong>: <em>"Who puts hostile mushrooms in their basement? I ain't paid enough to deal with this bullshit."</em></li>
+        <li>Precautionary healing all around; the plan was: activate the circle, check one last door, and leave.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII · Combat · The Last Door — Argon's Death</div>
+    <div class="act-card">
+      <h3>"Let me do it."</h3>
+      <ul>
+        <li>Heading out, one unexplored door. Xurl: <em>"Surely that won't go wrong."</em> <strong>Argon stepped forward: "Let me do it"</strong> — deliberately taking point because, as he said after, <em>"at least I can tank if needed."</em></li>
+        <li>Inside: a small corpse on a table, <strong>three ghouls feeding</strong>, and the <strong>ghast leader</strong> — a creature the veterans had once fled from. It recognized them: <em>"You guys again? Why don't you leave me alone?"</em> Argon, who'd never met it: <em>"I don't know what you're talking about. I don't know you."</em></li>
+        <li>The party fled; Argon held the doorway. A ghoul's jaws and claw, then the ghast leader's claw — <strong>critical, 34 damage.</strong> Argon dropped — until <strong>Xurl</strong> called across the map: <em>"Is he done? You have Ferocity, right?"</em> Argon had forgotten his own feat. <strong>One Hundred Victories + Orc Ferocity</strong> stood him back up at 10 HP.</li>
+        <li>But the crit had torn the <strong>guisarme from his hands</strong>, and the <strong>Paralysis save (DC 24) failed by 8.</strong> <em>"I don't think it matters that much to me."</em></li>
+        <li>Xurl: <em>"Pax, are we trying?"</em> Pax: <em>"No, just leave. Leave him. He's dead. Don't even try."</em> Boots of Elvenkind — <em>"and we're fuckin' runnin'!"</em> — as Argon shouted <strong><em>"I'll hold him back!"</em></strong></li>
+        <li>The DM, as the three escaped: <em>"You hear that Argon keeps fighting, holding the ghouls as best as he can."</em></li>
+        <li>Recall Knowledge on the run: the cult will <strong>turn him into a ghoul</strong>, not eat him — <em>"a couple days to save him."</em> Xurl said the quiet part: <em>"We're going to have to put him down next time we come down here."</em></li>
+        <li>Above table: Pax retired Argon on the spot. Every player has now lost a character in this campaign. <strong>The party leveled to 5.</strong> Next week: the pirate raid.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Flesh Reliquary · ~80 min</div>
+  <h3>Ghoul Priestess + 2 Ghouls</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Boss AC</div><div class="value">23 base</div></div>
+    <div class="combat-stat"><div class="label">Spell DC</div><div class="value">23–24</div></div>
+    <div class="combat-stat"><div class="label">Rounds</div><div class="value">~7</div></div>
+    <div class="combat-stat"><div class="label">Kills</div><div class="value">Argon ×2 · Xurl ×1</div></div>
+    <div class="combat-stat"><div class="label">Downed</div><div class="value">Alder (46)</div></div>
+  </div>
+  <p class="combat-note">Initiative: Ghoul B 26 · Xurl 24 · Ruben 24 · Priestess 19 · Ghoul A 15 · Argon 15 · Alder 14 — Xurl delayed to after the priestess; Argon delayed to after Alder.</p>
+  <h4>Round 1 — Lights Out</h4>
+  <ul>
+    <li><strong>Ruben</strong> opened with Benediction + Healing Plaster; the priestess's Demoralize was retconned (out of 30-ft range), and her <strong>Chilling Darkness</strong> hit Ruben for <strong>21 cold</strong> — its counteract (19 vs DC 18) <strong>snuffed every magical light in the party</strong>, Ruben's level-3 lamp included. Xurl burned an action re-lighting his stripes.</li>
+    <li>Both ghouls converged on <strong>Xurl</strong> — four attacks, one claw for 7; the paralysis save squeaked through <em>(the die was 16 vs DC 17 — quietly adjusted to a success, and the table moved on)</em>.</li>
+    <li><strong>Alder</strong> read a Bless scroll and tagged Ghoul A with Exploit Vulnerability.</li>
+    <li><strong>Argon</strong> (still Stupefied 1 from the Furnace): Intimidating Strike missed — <strong>hero point, bumped to a hit</strong> (13, Frightened 1) — realized Rage never auto-fired, switched it on (7 temp HP, +4 force retroactive), and his second swing <strong>crit Ghoul A for 42 — dead on the spot.</strong></li>
+  </ul>
+  <h4>Round 2 — "Quick work of these two"</h4>
+  <ul>
+    <li><strong>Ruben's</strong> Spiritual Armament hit Ghoul B for a max-roll 16; Guidance on Xurl. The priestess <strong>Dazed</strong> Ruben (9, failed by 1).</li>
+    <li><strong>Xurl's Flurry of Blows finished Ghoul B</strong> (8+15) — <em>"quick work of these two,"</em> Argon noted — and Xurl slid behind her.</li>
+    <li><strong>Alder's</strong> Exploit Vulnerability on the priestess succeeded but learned only that she's <em>not a regular ghoul</em> — no weaknesses to find.</li>
+  </ul>
+  <h4>Rounds 3–7 — The Long War</h4>
+  <ul>
+    <li>Her <strong>three-action Harm (upcast rank 3)</strong>: <strong>Alder hero-pointed the Fort save and rolled nat 1 twice</strong> ("one in 400"), took <strong>46</strong>, dropped dying, and lost chakram <em>and</em> buckler; Argon failed (23); she healed herself 23 off the same pulse. <strong>Ruben's two-action Heal (30) brought Alder back.</strong></li>
+    <li>She <strong>ate a piece of the flesh statue</strong> to heal 16 — which also scrubbed off the Clumsy 2 / −5 speed that <strong>Xurl's nat-20 crit card</strong> had pinned on her ("until healed," taken literally).</li>
+    <li>Her Grim Tendrils got argued down to a single target by <strong>Argon's line-geometry catch</strong> (Ruben saved, took 3); her <strong>Vampiric Touch</strong> forced Ruben to <strong>hero-point the save to a success</strong> (<em>"that would have put me out"</em>) on a Quickened 4-action turn that also put a staff into his head (12).</li>
+    <li>Her second 3-action Harm went out at rank 2 — a DM misclick the table held to <em>no take-backs</em> — and still crit-caught Argon (22).</li>
+    <li><strong>Xurl</strong> went 0-for-3 on grapples (two hero-pointed rerolls, both still crit fails, prone twice — he blamed Ruben for one) but <strong>Demoralized her twice</strong> (one success by exactly the tattoo's +1) and crit for 20. <strong>Alder's</strong> Implement's Interruption punished her casting once (18) and backfired once — a fumble card left <em>him</em> Clumsy 2; his <strong>nat-20 chakram crit</strong> offered bleed-or-double and he took <strong>double (27)</strong>.</li>
+    <li>A rules summit established she's a <strong>unique creature, RK DC 32</strong> — even Alder's Scholarly Recollection double-roll (28) couldn't crack her.</li>
+  </ul>
+  <h4>The Kill</h4>
+  <ul>
+    <li>After a full whiff cycle (Xurl's readied flank-Flurry missed twice — one nat 1 saved by Halfling Luck, still a miss by 1 — and Argon's nat-1 fumble card shoved him 10 feet), <strong>Argon stepped back into Xurl's flank and called the shot</strong>: blade curved past Alder, straight down through the top of her skull — <strong>nat 20, 50 damage, dead.</strong></li>
+    <li>Ruben spat on her; Argon stabbed the chest <em>"to make sure she's dead for good"</em>; Xurl took the head.</li>
+  </ul>
+  <p class="combat-xp">Damage dealt: Argon 123 · Alder 58 · Xurl 53 · Ruben 26 — the priestess self-healed exactly 50 and put 79 into Ruben. Six hero points spent; only the two degree bumps changed an outcome.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Ritual Chamber · ~37 min · 4 rounds</div>
+  <h3>2 Canker Cultists</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Enemy AC</div><div class="value">20–21</div></div>
+    <div class="combat-stat"><div class="label">Attacks</div><div class="value">+14</div></div>
+    <div class="combat-stat"><div class="label">Spell DC</div><div class="value">21–22</div></div>
+    <div class="combat-stat"><div class="label">Level</div><div class="value">4 (= party)</div></div>
+    <div class="combat-stat"><div class="label">Kills</div><div class="value">Ruben · Argon</div></div>
+  </div>
+  <p class="combat-note">Initiative: Cultist A 31 · Argon 23 · Ruben 17 · Cultist B 16 · Alder 12 · Xurl 11.</p>
+  <h4>Round 1 — Grim Tendrils &amp; a Stun</h4>
+  <ul>
+    <li><strong>Cultist A</strong> opened with Grim Tendrils: Xurl failed (10 + 5 bleed), Argon and Alder saved (5 each).</li>
+    <li><strong>Argon's</strong> Intimidating Strike came up <strong>nat 1 — hero point, rerolled to a 22, hit</strong> (17, Frightened 1) — then a crit-fumble left him bleeding (<em>"how do you even clip your hand with a reach weapon?"</em>).</li>
+    <li><strong>Cultist B</strong> put <strong>Phantom Pain</strong> on Xurl (15 + persistent mental + a fight-long Sickened 1).</li>
+    <li><strong>Alder's</strong> chakram hit for 18; his RK verdicts: <em>"Don't use will save on them"</em> — strong minds, weak bodies. <strong>Xurl's</strong> Crane Wing hit for 15 and <strong>Stunning Blows stuck</strong>: Cultist A Stunned 1 + Frightened 1.</li>
+  </ul>
+  <h4>Round 2 — "Zap." and a Paralysis</h4>
+  <ul>
+    <li>Cultist A's 3-action Harm (15) healed itself 15; <strong>Ruben hero-pointed a nat-1 Fort into a success.</strong> The DM collected the forgotten stench saves — <strong>Ruben Sickened 1</strong>, later retched off with a nat 20.</li>
+    <li><strong>Ruben's Vitality Lash killed Cultist A</strong> (8 — <em>"No, not slash. Zap."</em>).</li>
+    <li><strong>Cultist B bit Argon</strong> (14): the first Fort save (22 vs DC 22) beat the Ghoul Fever — <em>"you're not catching it again"</em> — but the second (21) <strong>failed the paralysis</strong>, and a claw (10) hit him while he stood frozen. Pax litigated the incapacitation trait; the DM: <em>"Trust the system, please. They're level 4, same as you."</em></li>
+    <li><strong>Xurl</strong>, denied a jump over the cultist by the high-jump rules, <strong>Tumbled Through</strong> instead and flurried 13+14.</li>
+  </ul>
+  <h4>Rounds 3–4 — The Avenging Crit</h4>
+  <ul>
+    <li><strong>Argon lost his entire turn paralyzed</strong>, then broke free with a <strong>30 Fort</strong> at its end.</li>
+    <li><strong>Ruben</strong> poured a 24-point Heal into Xurl — then wasted his last action on Bleed Out against a bleed-immune ghoul (<em>"I think they're immune to bleed." "I didn't hear him."</em>).</li>
+    <li>Cultist B's second Harm caught the room (healed itself 13) — but casting it triggered <strong>Alder's Implement's Interruption</strong>: a reaction chakram for 17. Alder's own turn was three straight misses (<em>"he don't like you either"</em>); Xurl flurried 10 more off the flank.</li>
+    <li><strong>Argon's Intimidating Strike came up nat 20: crit, 38</strong> — the cultist flew over Xurl into the dead flesh-mound. Dead.</li>
+  </ul>
+  <p class="combat-xp">Damage dealt: Argon 71 · Xurl 52 · Alder 35 · Ruben 14 (cultists self-healed 28). Taken: Xurl 51 (+21 fungus after) · Argon 43 · Alder 25 · Ruben 20.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · The Last Door · one round · unresolved — Argon lost</div>
+  <h3>Ghast Leader + Ghouls + Ghast</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Leader Claw</div><div class="value">+17 · 2d6+9</div></div>
+    <div class="combat-stat"><div class="label">Paralysis</div><div class="value">DC 24</div></div>
+    <div class="combat-stat"><div class="label">The Crit</div><div class="value">34 dmg</div></div>
+    <div class="combat-stat"><div class="label">Argon entered at</div><div class="value">29 / 72 HP</div></div>
+    <div class="combat-stat"><div class="label">Outcome</div><div class="value">Argon left behind</div></div>
+  </div>
+  <p class="combat-note">Initiative: Alder 30 · Ruben 30 (Ruben first — "Ruben, you go first") · Ghoul 29 · Ghoul 27 · Ghast Leader 24 · Argon 17 (auto-Rage, 7 temp HP; paralyzed before his turn ever came) · Ghast 16 · Xurl 13. Three ghouls narrated feeding; two rolled initiative.</p>
+  <h4>One Round — The Whole Fight</h4>
+  <ul>
+    <li><strong>Ruben</strong> readied a Guidance and ran, coaching Alder's escape as he went. <strong>Alder</strong> failed the Stench save (14 vs DC 16 — Sickened 1), then ran the called play: step, close the door, run.</li>
+    <li><strong>The lead ghoul</strong> reached Argon in the doorway: jaws (5 — Ghoul Fever save passed, 19 vs 17), then claw (4). Rage's temp HP ate most of it — Argon met what came next at 27 real HP.</li>
+    <li><strong>The ghast leader's claw: critical, 34.</strong> Argon dropped — and <strong>Xurl caught it from across the map</strong>: <em>"Is he done? You have Ferocity, right?"</em> Argon had forgotten his own feat. <strong>One Hundred Victories + Orc Ferocity stood him back up at 10 HP</strong> — but the crit had torn the guisarme from his grip, and with the DC 24 Paralysis save coming — <em>"I don't think it matters that much to me"</em> — he <strong>failed it by 8.</strong></li>
+    <li><strong>Xurl</strong> activated Boots of Elvenkind and ran with the others. The encounter ended with Argon paralyzed, weaponless, at 10 HP, surrounded by four undead — still fighting, the DM narrated, as long as the party could hear.</li>
+    <li><strong>Aftermath</strong> — RK on the run: the cult will <strong>turn him, not eat him</strong>; a couple of days before it's done. The DM, above table: <em>"I don't want you to feel bad because I killed your character... you guys didn't heal it up back to full"</em> — and the log agrees.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Hazard · out of initiative</div>
+  <h3>Violet Fungi</h3>
+  <ul>
+    <li>Opening the soil-room door, <strong>Xurl</strong> took a tentacle slash for <strong>16</strong> plus <strong>5 poison</strong> (Violet Rot, Enfeebled 1). Nobody identified the fungi — the whole table failed the RK; the DM narrated from the party's pre-campaign travels. Door slammed; never reopened.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Hero Points · house rule: reroll OR bump one degree</div>
+  <h3>The Ledger</h3>
+  <ul>
+    <li><strong>Argon ×3</strong> — F1 miss→hit bump (the 13-damage Intimidating Strike); F1 Trip reroll (still failed); F2 nat-1 Strike rerolled to a 22 — hit for 17.</li>
+    <li><strong>Xurl ×2</strong> — two grapple rerolls, both still (crit-)failed. The curse holds.</li>
+    <li><strong>Ruben ×2</strong> — bump to success vs Vampiric Touch (<em>"that would have put me out"</em>); reroll nat 1 → success vs Harm.</li>
+    <li><strong>Alder ×1</strong> — the infamous <strong>nat 1 → nat 1</strong> vs Harm. 46 damage, down.</li>
+    <li><strong>Award</strong>: +1 each from the DM after the mirror vision. <em>(Xurl's fight-1 strike reroll was Halfling Luck, not a hero point.)</em></li>
+  </ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-argon">
+    <h4>Argon Rath · the Wall That Held — final session</h4>
+    <ul>
+      <li>The session bookended itself on him. At the door-duty question in the first five minutes he deferred — <em>"You have more AC than me. You should be first, actually"</em> (to Xurl). By the last door he'd stopped deferring: <strong>taking point so the squishier three didn't have to.</strong> He volunteered for the fatal door in plain words — <em>"If you're going to open that door, let me open it. At least I can tank if needed"</em> — and when it went wrong, his first and only instinct was <em>"I'll hold him back! Run!"</em></li>
+      <li>Before the end, he was the session's <strong>executioner</strong>: a 42-damage crit that dropped a ghoul in fight 1, the <strong>50-damage called-shot crit</strong> that killed the priestess (<em>"curve my blade, just slightly past Alder, and slash straight down on the top of her head"</em>), and the <strong>38-damage crit</strong> that ended fight 2 by launching a cultist into the flesh mound. Every boss-tier enemy that died to a weapon died to his.</li>
+      <li>Sharp above the table too: talked the table through the counteract rules, argued the priestess's Grim Tendrils line down to a single target with a geometry catch, and litigated the incapacitation trait on his own paralysis before accepting the DM's <em>"trust the system, please."</em> Read the room at the last door before anyone rolled: <em>"It's not too late to run away. Or maybe it is too late."</em></li>
+      <li>Fought the whole first fight <strong>Stupefied 1</strong> — the Furnace's memory-burn from last session only lifted mid-session, giving him two clear-headed hours before the end.</li>
+      <li>His body — weaponless, paralyzed, at 10 HP — was left among four undead. <strong>The cult will raise him as one of their own.</strong></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-xurl">
+    <h4>Xurl · the Doctrine of Closed Doors</h4>
+    <ul>
+      <li>The party's conscience and its Cassandra. He spent the whole session warning about doors — <em>"Don't open that door. Just keep walking. There's some bullshit behind all these doors, man"</em> — and delivered the night's standing wisdom to talk the party out of jumping the knight: <em>"The last time we picked a fight with a creature who was ignoring us, it went poorly."</em></li>
+      <li><strong>Corpse-disposal doctrine</strong>: borrowed Argon's axe to behead the dead priestess and chucked the head into a far corner — <em>"I'm not leaving her mostly intact in one room."</em> In a dungeon where a pillar of void energy heals the undead, this is not paranoia, it's protocol.</li>
+      <li>In combat, the grapple curse continued (two hero-pointed grapples, both still failed — he blamed Ruben for one) but the fists never stopped: killed a ghoul with Flurry of Blows, landed a 20-damage crit on the priestess, stunned a Canker Cultist, and delivered <em>"shockingly, we're going to punch him a bunch"</em> as an actual mission statement.</li>
+      <li>At the end he was the one still watching Argon's sheet: when the 34 crit landed, it was Xurl who called <em>"Is he done? You have Ferocity, right?"</em> — Argon had forgotten the feat that stood him back up. Then, when Pax released them, he made the exit cleanly: Boots of Elvenkind, <em>"and we're fuckin' runnin'!"</em> — and, first of anyone, named what comes next: putting ghoul-Argon down.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ruben">
+    <h4>Ruben Falmoor · Pharasma's Weary Instrument</h4>
+    <ul>
+      <li>Opened the session in full Pharasmin voice — <em>"Pitiful creatures. You will receive your judgment from Pharasma"</em> — and spent the boss fight as her favorite target: Chilling Darkness (21), Daze (9), a staff to the head (12), Vampiric Touch (hero-pointed down to survivable), and two Harms. He healed through all of it and still brought Alder back from dying with a 30-point Heal.</li>
+      <li>The night's best luck ran through him: the <strong>nat-20 Perception</strong> that found the hidden library and the blueprints — <em>"It seems Pharasma has smiled upon me very well today"</em> — and the mission-defining line as he shelved the loot: <em>"Come. We have a sacrifice to find."</em></li>
+      <li>Kill credit with style: his Vitality Lash dropped a Canker Cultist, and he corrected the DM's narration in real time — <em>"No, not slash. Zap."</em></li>
+      <li>Parented his kid Skylar off-mic through the entire boss fight — <em>"Okay, Skylar, I'm sorry. It just tickles me, okay?"</em> — without dropping a single heal.</li>
+      <li>Carried the retreat's grief: <em>"Dammit, I hate this"</em> — then, bitterly, the session's epitaph: <em>"Every door we open is a freaking encounter. Why do we keep opening doors?"</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-alder">
+    <h4>Alder Ungram · the Scholar Who Already Knows How This Goes</h4>
+    <ul>
+      <li>The quiet one had the night's darkest arc. Dropped to dying by a double-nat-1 hero-point reroll against the priestess's Harm (46 damage) — his whole reaction: <em>"Yeah, yeah. What the fuck?"</em> When she wound up the second Harm, he deadpanned: <em>"Yeah, I guess I'll die. That's what happened to me"</em> — this is the player already on his second character.</li>
+      <li>The RK engine ran all night: Exploit Vulnerability on every enemy, and the party's standing orders delivered in his broken deadpan — <em>"Don't use will save on them... They have much mind power."</em> His Implement's Interruption punished the priestess's casting; his nat-20 chakram crit helped bring her down (offered bleed-or-double, he took double — 27).</li>
+      <li><strong>He's the one holding the clock</strong>: <em>"Tomorrow we need to save the person from the ritual."</em> And he performed the nat-20 ritual that brought the third-floor teleportation circle online — the party's first real infrastructure in the megadungeon.</li>
+      <li>One of the two minds (with Xurl) that placed the armored knight and its stolen book <strong>in the recovered tapestries</strong> — the night's biggest lore connection, made on a post-fight Perception check.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot &amp; Advancement</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Gauntlight Blueprints</div>
+    <div class="loot-source">Hidden wall-library · Ruben, nat-20 Perception</div>
+    <div class="loot-note">Full-day downtime project; about the lighthouse itself. Plan: show Lady Wrin.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Folio of Teleportation Research</div>
+    <div class="loot-source">Hidden wall-library</div>
+    <div class="loot-note">Used — 3rd-floor circle online; 9 circles sensed, one per floor; the ground-floor one is severed.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">The Priestess's Staff</div>
+    <div class="loot-source">Combat 1</div>
+    <div class="loot-note">"Probably magical" — unidentified, in the party stash.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">The Priestess's Severed Head</div>
+    <div class="loot-source">Xurl</div>
+    <div class="loot-note">Carried out and chucked into a rocky corner far from the body — anti-rejuvenation protocol.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">2 Tapestries (examined)</div>
+    <div class="loot-source">Earlier recoveries</div>
+    <div class="loot-note">Both the knight and its book appear in them.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Cracked Magic Mirror (used)</div>
+    <div class="loot-source">Party inventory</div>
+    <div class="loot-note">Cracked further; showed the cult's origin. Limited uses left.</div>
+  </div>
+</div>
+<div class="xp-banner">Advancement · Milestone — <strong>the party reached level 5</strong> at session end. <em>(Table joke: "the milestone is character death.")</em></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Ruben:</strong> "Pitiful creatures. You will receive your judgment from Pharasma."<span class="attribution">Answering the priestess's "drop your weapon and join us" — the session's opening lines of battle.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Yeah, I guess I'll die. That's what happened to me."<span class="attribution">Deadpan, watching the priestess wind up the second Harm — minutes after the first one dropped him on a double nat 1.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "The last time we picked a fight with a creature who was ignoring us, it went poorly."<span class="attribution">Talking the party out of jumping the knight.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "No, not slash. Zap."<span class="attribution">Correcting the DM's kill narration — Vitality Lash does not slash.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Don't use will save on them... They have much mind power."<span class="attribution">The thaumaturge RK lane, delivered in signature deadpan.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "It's not too late to run away. Or maybe it is too late. It might be."<span class="attribution">The instant the last door opened on three feeding ghouls. He was right both times.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "I'll hold him back!"<span class="attribution">The line of the campaign — shouted twice, once as the ghouls charged and once as the party fled.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "We're gonna go ahead and use Boots of Elvenkind. And we're fuckin' runnin'!"<span class="attribution">The exit, once Pax released the party from the rescue.</span></blockquote>
+
+<blockquote><strong>Argon:</strong> "If you're going to open that door, let me open it. Because at least I can tank if needed."<span class="attribution">After the fact, explaining why he was in front. He died doing the tank's job.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "You mean the fact that he's going to come back as an undead ghoul? That we're going to have to put him down next time we come down here?"<span class="attribution">Answering the DM's call for Recall Knowledge with the answer nobody wanted.</span></blockquote>
+
+<blockquote><strong>Pax, above table:</strong> "Yep. And it's done. He's done."<span class="attribution">Argon's own player pronouncing it the instant the crit landed — premature by one Ferocity, and then not.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Every door we open is a freaking encounter. Why do we keep opening doors?"<span class="attribution">The healer's epitaph for the night.</span></blockquote>
+
+<blockquote><strong>DM (Lap):</strong> "That is the module. I'm sorry to say that."<span class="attribution">In answer.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Argon's body</strong> — the cult will <strong>turn him into a ghoul</strong> within "a couple of days." The party can try to save him in that window — but Pax has retired the character, so the likelier outcome is putting ghoul-Argon down. His +1 striking guisarme lies where he fell.</li>
+  <li><strong>The armored knight</strong> — not human, ignores the party, took a huge book from the hidden library, descended toward the floor below. Knight and book both appear in the tapestries. Who is it, and what is the book?</li>
+  <li><strong>The laughing figure</strong> — appears, laughs, vanishes; pranked the previous party mid-fight. Its laugh can deal psychic damage. First contact with this group.</li>
+  <li><strong>Twin deadlines, one day left</strong> — the dwarf sacrifice (midnight, one floor down) and the pirate shipment both land tomorrow. The party floated <strong>calling off the pirate job and "sending the navy"</strong> to buy time.</li>
+  <li><strong>The teleportation network</strong> — one circle live, eight to go, each requiring an on-site ritual. The ground-floor circle's connection is severed — why would the <em>surface</em> circle be the cut one?</li>
+  <li><strong>The Gauntlight Blueprints</strong> — a full downtime day to decipher what the lighthouse actually does. Ruben's plan: bring them to <strong>Lady Wrin</strong> — <em>"perhaps she could even make a map for us."</em></li>
+  <li><strong>The flesh statue</strong> — a woman, 15 feet, made of stitched flesh, fed on by the cult. Who is it a statue <em>of</em>? (The party suspects it needs destroying and left it intact.)</li>
+  <li><strong>Pax's next character</strong> — level 5, joining at the pirate raid. The party's frontline/damage slot is open.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Last Stand</span>
+  <p>Weaponless, paralyzed, at 10 HP, surrounded by four undead — as the party's footsteps faded up the stairs:</p>
+  <div class="big-line">"I'll hold him back!"</div>
+  <span class="speaker">— Argon Rath, holding the doorway. The DM: "You hear that Argon keeps fighting, holding the ghouls as best as he can."</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Argon Rath's Journal <em>(final entry)</em></h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party. This is the last entry.</p>
+
+<h3>What Argon did this session</h3>
+<ul>
+  <li>Killed the ghoul priestess. Curved the blade past Alder's shoulder, straight down through the skull — <strong>50 and done.</strong> Dropped one of her ghouls with a 42-crit earlier. Killed the second cultist in the ritual room — sent him into that pile of flesh. Every kill by steel tonight was mine (Ruben zapped the other cultist).</li>
+  <li>Fought the first fight still <strong>Stupefied</strong> from the Furnace. It finally lifted mid-session. Two clear hours.</li>
+  <li>Got paralyzed by a cultist's bite. Beat the ghoul fever — <em>"not catching it again."</em> Broke the paralysis and killed the thing that did it.</li>
+  <li>Opened the last door <strong>on purpose</strong>. Alder was standing in front of it. Better me than him. Took the crit that should have dropped me — the scars held, <strong>the tattoo set me back on my feet at 10</strong> (Xurl remembered the Ferocity before I did). Then the claw-venom took my legs, and the guisarme was gone from my hands.</li>
+  <li>Told them to run. Held the doorway. That was the whole job. That was always the job.</li>
+</ul>
+
+<h3>Things Argon knows that the party does not</h3>
+<ul>
+  <li>Nothing anymore. What Argon knows now, he'll know as one of <em>them</em>.</li>
+  <li>He never learned why the knight felt familiar to the others — he wasn't there for the tapestries. He died only days into knowing this place.</li>
+</ul>
+
+<h3>What Argon is thinking about</h3>
+<ul>
+  <li>Nothing. But if the scars could think: <strong>the debt is paid.</strong> They pulled him out of the Gauntlight with ghoul fever in his blood; he bought their way out of it with everything he had. Even.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Does the party come back down in time — and if not, who puts the ghoul with the diamond scars down?</li>
+  <li>The guisarme (+1 striking) is still in that room.</li>
+  <li>Who fills the wall? Pax builds the answer at level 5 before the pirate raid.</li>
+</ul>
+
+</section>
+
+</body>
+</html>

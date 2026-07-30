@@ -188,7 +188,7 @@ Not a fight so much as an ambush the party couldn't identify. Argon triggered it
 ### What Argon is thinking about
 - **The ghost is beatable — just not with the guisarme.** We now know: talk her down about the assistant, or exorcise her (Religion). The pendant is hers. Next time we come back with a plan, not blades.
 - **My kit does almost nothing to ghosts right now.** Slashing eats their resistance; only the force in my rage bites, and it's not enough. I need **Ghost Touch** — and I can't afford it (75 gp; I have ~1 gp). Money is the wall.
-- **Two over-level threats in one room, back to back** (the Furnace, then her). Ab runs it lethal. Don't walk into rooms half-healed. Don't open hatches I don't have to.
+- **Two over-level threats in one room, back to back** (the Furnace, then her). Lap runs it lethal. Don't walk into rooms half-healed. Don't open hatches I don't have to.
 - **The boss door is right there.** We're not ready. Level 4, broke, no ghost gear. Not yet.
 
 ### Open questions for next session

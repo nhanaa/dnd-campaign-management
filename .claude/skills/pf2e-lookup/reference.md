@@ -11,7 +11,8 @@ All paths relative to project root `pf2e/`.
 | Rituals | `spells/rituals/` | `{name}.json` |
 | Equipment | `equipment/` | Flat `{name}.json` |
 | Feats — Class | `feats/class/{class}/level-{N}/` | `{name}.json` by class & level |
-| Feats — Archetype | `feats/archetype/{archetype}/` | `{name}.json` by archetype |
+| Feats — Archetype | `feats/archetype/{archetype}/` | `{name}.json` — archetype's OWN feats only; see Journals |
+| Journals | `journals/` | `archetypes.json` (256 archetype pages incl. **Additional Feats**), plus other rules text absent from the index |
 | Feats — Ancestry | `feats/ancestry/{ancestry}/` | `{name}.json` by ancestry |
 | Feats — General | `feats/general/` | `{name}.json` |
 | Feats — Skill | `feats/skill/` | `{name}.json` |

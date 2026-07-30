@@ -32,17 +32,18 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) | **LEFT 2026-05-16** |
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
-| `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) | Mo — Wayang Rogue (Thief) / Spirit Warrior |
+| `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **Orion's group** | Mo — Wayang Rogue (Thief) / Spirit Warrior |
+| `season-of-ghosts-ande/` | Pathfinder 2e Remastered (Free Archetype, Gradual Boosts, Ancestry Paragon) | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **AndeGM's paid group** | **Zhen Stillness** — Samsaran (Hungerseed) Animist (Liturgist) — healer/buffer/secondary striker | **JOINED 2026-06-26 @ S1** (new 5th player) |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
 | `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINED 2026-07-21 @ Lv12** (Pax's S1 = campaign's S2) |
-| `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | Argon Rath — Orc (Hold-Scarred) Barbarian (Barrage Dragon / Force) | **JOINED @ Lv4; DM ("Ab") runs deliberately over-level** |
+| `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | ~~Argon Rath — Orc Barbarian~~ **DIED S4 (2026-07-29)**; new Lv5 PC TBD | **DM ("Lap") runs deliberately over-level; party Lv5** |
 
 ## How to Help
 
 - **Build discussions**: When discussing builds, reference specific feats, spells, and class features by name. Consider action economy and party synergy.
 - **System accuracy**: Be precise about which system (5e vs PF2e Remastered) rules apply. Do not mix rules between systems.
 - **Progression planning**: When planning levels, lay out feat/spell choices level by level.
-- **Session processing**: Use `/process-session <campaign> <audio-file>` to transcribe recordings and generate session recaps (MD + HTML). The skill handles transcription, speaker mapping, recap generation, and proposes updates to world.md and dynamics.md.
+- **Session processing**: Use `/process-session <campaign> [audio-file]` to transcribe recordings and generate session recaps (MD + HTML). The skill handles transcription, speaker mapping, recap generation, and proposes updates to world.md and dynamics.md. **The audio file is optional — if Pax doesn't give one, auto-find today's recording in `/mnt/c/Users/nhanp/Videos/` (filenames are `YYYY-MM-DD HH-MM-SS.wav`); never build a recap from the roll log alone unless Pax explicitly says "no recording."**
 - **World file**: `world.md` tracks the campaign storyline, world-building, NPCs, and locations. Updated after each session.
 - **Style guides**: Each campaign can have a `style-guide.md` defining the HTML recap theme. Copy `style-guide-template.md` from the project root to create one.
 - **Tactics**: Focus on action economy, spell slot efficiency, and positioning.
@@ -72,6 +73,25 @@ split into `=== ENCOUNTER N ===` blocks auto-detected from initiative clusters.
 - **Enemy attack bonus + Perception (initiative cards) + AC** → reverse-engineer creature level against the PF2e benchmark tables. This is more reliable than the bestiary, because GMs scale creatures (S9's catoblepas was book level 12 / AC 33, run at AC 35 / attack +29 ≈ level 14).
 - **Timestamps** → align the roll log to a session recording's transcript
 - **`SAVE ::` lines** → every target's saving throw against a PC spell: **natural die, total, degree of success, and the modifier breakdown** (including debuffs like `Frightened 2 -2`). This is how you measure what the party's debuffs actually bought. Sourced from the **pf2e-toolbelt** module's message flags — not present at tables without it.
+
+### Hero points — house rule (reroll + 10 on a low die)
+
+**At SOME of Pax's tables, hero point rerolls are NOT RAW.** The house rule: spend a hero point, reroll the d20, and **if the new die is 10 or lower, add +10 to the result.** A high reroll takes no bonus.
+
+> ⚠️ **This rule is table-specific — confirm before assuming it.** **`setting-sun/` (Cody McGraw / "Ryu") does NOT use it** (confirmed by Pax 2026-07-26, after S10 produced four rerolls of ≤10 that never got the bonus). Cody's hero-point homebrew is instead **3 per session, rationed, no hourly refresh** (see `setting-sun/world.md`). Do not apply the +10 to setting-sun logs.
+
+**How it appears in the export.** A hero-point reroll renders as *two* d20 blocks on one line. Compare the formula header to the dice:
+
+```
+Panacea :: Medicine Check ... :: 1d20 + 12 + 10 = 28 :: 1d20 + 12  1d20 3  3 15   1d20 + 12  1d20 6  6 28
+                                          ^^^^ house-rule bonus       first roll (3)      reroll (6, ≤10) → +10
+Zanthar :: Arcane Spell Attack ... ::     1d20 + 11 = 27 :: 1d20 + 11  1d20 5  5 16   1d20 + 11  1d20 16  16 27
+                                          no +10                       first roll (5)      reroll (16, >10) → no bonus
+```
+
+So: **`+ 10` in the formula header ⇒ hero point spent AND the reroll came up low.** But its *absence* does not mean "no hero point" — a two-d20 line with a high reroll is still a hero point. **Count every two-d20 line as a hero-point spend**; use the `+ 10` only to tell whether the reroll was low.
+
+⚠️ Do not confuse this with the Foundry **low-reroll automation** warned about elsewhere in this file. Both render as two d20s. Confirm against the transcript where it matters — players say "I'll hero point that" out loud.
 
 ### Pitfalls that have actually bitten
 

@@ -4,7 +4,7 @@
 **Abomination Vault** (PF2e Remaster AP), levels 1–11, three volumes: *Ruins of Gauntlight → Hands of the Devil → Eyes of Empty Death*. Set in the frontier town of **Otari** on the Isle of Kortos, beside the **Gauntlight** — a dead lighthouse atop a vast megadungeon. The vault is the lair of the long-dead would-be tyrant **Belcorra Haruvex** (final boss, L12, incorporeal undead), whose undead and aberrations are seeping toward the surface.
 
 ## Party
-- **Argon Rath** (Pax) — Orc (Hold-Scarred) Barbarian, Barrage Dragon instinct — frontline, damage, Athletics/maneuver control. *(you)*
+- **Argon Rath** (Pax) — Orc (Hold-Scarred) Barbarian, Barrage Dragon instinct. *(you)* — **DIED S4 (2026-07-29)**: left paralyzed among the ghouls covering the party's retreat; the cult will turn him into a ghoul. Pax's new **level-5 PC** joins at the pirate raid.
 - **Alder Ungram** (Ricardo) — Human Thaumaturge, returning chakram — versatile striker, Recall Knowledge / occult investigation (Esoteric + Diverse Lore, Dubious/Unmistakable Lore).
 - **Ruben Falmoor** (Twan) — Half-Elf Divine Sorcerer of Pharasma, Battle Medicine — healer, party face, undead lore. Dumped INT for CHA/WIS.
 - **Xurl** (Ben) — Halfling Monk (wrestler) — Grapple control, mobility, athletics; former sailor. **Bioluminescent** (glowing arms/neck, unexplained). The X is silent ("Earl").
@@ -15,6 +15,8 @@
 Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderlands, the kind of clan that tattoos its survival into its skin. Somewhere far back, a dragon's blood crept into his line — and when his fury takes him, it surfaces as raw crackling **force**, sparking off his hide like a storm with nowhere to go. He earned every scar the honest way, defending a hold that never stopped bleeding, until there was nothing left to defend and no war worth staying for. So he shouldered his guisarme and went looking for a better one. Otari promised coin and quiet work — but the dead things clawing up out of the Gauntlight offered something Argon respects far more: an enemy that *deserves* killing. He signed on to go down into the dark, and hasn't looked back.
 
 **Ties to the mechanics:** Hold-Scarred scars = a hardened veteran (Veteran background); dragon-blood = the Barrage/force Draconic Rage; the hold-fighter's brawl = Athletics maneuvers (Slam Down shove/trip, grappling via Titan Wrestler, Raging Athlete), with a fear rider on his hits (Intimidating Strike).
+
+**The end (S4, 2026-07-29):** Died as he lived — holding a doorway on the Gauntlight's third floor so the others could run. A ghast leader's 34-damage crit dropped him; Orc Ferocity and the One Hundred Victories tattoo stood him back up at 10 HP; the paralysis took his legs and the crit took his guisarme, and the party fled at his word: *"I'll hold him back!"* The cult is turning him; the party expects to have to put the ghoul with the diamond scars down. His +1 striking guisarme lies where he fell.
 
 ## Otari NPCs
 - **Vandy** — halfling priestess at the Dawnflower Library (Sarenrae/Dawnflower faith). Cured Argon's ghoul fever gratis as goodwill to the new group; will charge next time.
@@ -38,8 +40,16 @@ Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderla
 - **The captured red-haired dwarf** — held by the cult, to be **sacrificed at midnight in two days, on the floor below** the party's current position (the same day as the planned pirate raid).
 - **The lumber-pirate ring** — magical **Kholo-language notes** are launched from the Otari cliffs, flying to pirates at sea; each note carries a shipment's **departure time + destination** so raiders can intercept Otari Lumber convoys. The party intercepted two. Not confirmed an inside job. The party has agreed to hunt the pirates directly (over the Arsenal Navy handling it).
 
+- **The flesh statue** — a 15-ft statue of a woman made of stitched squares of preserved flesh, in the floor-3 reliquary (smashed display cases, spotlights). The cult feeds from it — the priestess ate a piece mid-fight to heal. Left intact; the party suspects it should be destroyed.
+- **The cult's origin (mirror vision, S4)** — the Cracked Magic Mirror showed the reliquary in the deep past: intact-but-empty cases, no statue, and 20–30 robed librarians kneeling with heads bowed — then devouring one another. The library's own keepers became the flesh-eating cult.
+- **The armored knight** — full plate, visibly not human; twice walked past the party ignoring them; took a **huge book** from a hidden wall-library and descended toward the floor below. **Both the knight and the book appear in the recovered tapestries** (Xurl + Alder made the connection). Identity unknown.
+- **The laughing figure ("the jokester")** — appears in doorways, laughs, vanishes; pranked the *previous* party mid-fight (per Ruben); its laugh can deal psychic damage. First contact with this group in S4.
+- **The teleportation network** — **nine circles**, roughly one per floor. Alder reactivated the floor-3 circle with a nat-20 ritual (S4) using the Folio of Teleportation Research; each circle must be reactivated on-site, and destroying its inlaid silver disables it. **The ground-floor circle's connection is severed** — reason unknown.
+- **Aller Rosk** *(Foundry name — never spoken at the table)* — the **ghast leader** on floor 3; claw +17 (2d6+9), Paralysis DC 24, far above the floor's other undead. Recognizes the three veterans from a fight they fled. **Killed Argon (S4).**
+- **Nhakazarin** *(Foundry name — never spoken)* — the cult's spellcasting **ghoul priestess** (Chilling Darkness, Harm, Grim Tendrils, Vampiric Touch, Daze; AC 23, DC 23–24). Offered the party membership twice. Slain and beheaded in S4; her staff (unidentified, "probably magical") is in the party stash.
+
 ## The DM
-- **"Ab"** — runs deliberately **over-level, lethal combat**; standard/trivial encounters bore him, so most fights are 1–2 levels above the party. "Only one character died so far… and one was permanently crippled." Warns players not to get attached; expects harder combat than a typical table.
+- **"Lap"** — runs deliberately **over-level, lethal combat**; standard/trivial encounters bore him, so most fights are 1–2 levels above the party. Warned players not to get attached — and as of S4 **every player at the table has lost a character** (Argon is the second death). Handled Argon's death graciously: "I don't want you to feel bad because I killed your character… you guys didn't heal it up back to full."
 
 ## Session log
 
@@ -69,3 +79,12 @@ Argon Rath was born to a scar-marked orc hold on the ragged edge of the borderla
 - **In town:** sold the mossy **+1 pick** (~17 gp split); gave Wrin the tapestry; met **Mayor Osif**, who borrowed **two cannons.** Argon pitched a **decoy-shipment ambush** for the pirates (hide aboard, spring the trap) — launch **noon, two days out** (same day as the midnight dwarf-sacrifice; conflict unresolved).
 - **Downtime:** Alder made an impression on **Vandy** at the Dawnflower Library, angling for the library's **restricted collection on ghosts.** **Still level 4.**
 - DM's closing thesis: *"This is a dungeon, but not everything should be resolved with combat."*
+
+### Session 4 — The Last Stand of Argon Rath (2026-07-29)
+- **Argon Rath's final session — he died covering the party's retreat.** Party leveled to **5**; Pax builds a new level-5 PC for next week (pirate day).
+- **Killed the cult's ghoul priestess** in the floor-3 reliquary (the flesh-statue shrine) after an 80-minute attrition fight: she dropped Alder with an upcast 3-action Harm (double nat 1 on the hero-point reroll, 46 damage), healed off the statue, and died to Argon's called-shot **nat-20, 50-damage crit**. Xurl beheaded the corpse as anti-rejuvenation protocol.
+- **The armored knight** crossed the party's path twice, took a huge book from a hidden wall-library, and left; knight + book matched to the tapestries.
+- **Looted the hidden library** (Ruben, nat-20): **Gauntlight Blueprints** (downtime project; for Wrin) + **Folio of Teleportation Research** → Alder's nat-20 ritual **reactivated the floor-3 teleport circle** (9 total; ground-floor circle severed). **Mirror vision**: the librarians becoming the cult.
+- **Killed two Canker Cultists** mid-ritual around a dead flesh-mound ringed with bone figurines (Ruben's Vitality Lash + Argon's 38 crit). Argon was briefly paralyzed; beat the ghoul fever. A Violet Fungus mauled Xurl through one more door (16+5, Enfeebled 1).
+- **The last door**: three ghouls feeding on a small corpse + the ghast leader (Aller Rosk). The party fled; Argon held the doorway — 34-damage crit, Ferocity + One Hundred Victories to 10 HP (Xurl reminded him of the feat), failed Paralysis DC 24 by 8, weapon torn away. Pax called it: *"Leave him. He's dead. Don't even try."* The DM: the cult will **turn him into a ghoul** — "a couple days to save him," but Pax has retired the character.
+- Twin deadlines still loom (dwarf sacrifice + pirate shipment tomorrow); the party floated **handing the pirates to the navy**.

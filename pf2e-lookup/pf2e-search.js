@@ -27,6 +27,7 @@ function parseArgs(argv) {
     else if (a === '--wpn-cat') { args.filters.wpnCat = argv[++i]?.toLowerCase(); }
     else if (a === '--wpn-grp') { args.filters.wpnGrp = argv[++i]?.toLowerCase(); }
     else if (a === '--remaster') { args.filters.remaster = true; }
+    else if (a === '--archetype') { args.flags.archetype = argv[++i] ?? ''; }
     else if (a === '--detail' || a === '-d') { args.flags.detail = true; }
     else if (a === '--limit' || a === '-n') { args.flags.limit = parseInt(argv[++i], 10); }
     else if (a === '--json') { args.flags.json = true; }
@@ -72,6 +73,14 @@ FILTERS:
                         to find ALL feats a class can take.
   --remaster           Only show remaster content
 
+ARCHETYPES:
+  --archetype [name]   Full archetype entry from the journal, INCLUDING its
+                        "Additional Feats" list (feats granted from other classes
+                        at adjusted levels). The search index does NOT carry these
+                        — always use this flag for archetype questions rather than
+                        --subcat/--trait, which return an incomplete feat tree.
+                        Omit the name to list all 256 archetypes.
+
 OUTPUT:
   -d, --detail         Show full description (loads detail files)
   --no-desc            With --detail, skip description text (show stats only)
@@ -90,6 +99,8 @@ EXAMPLES:
   node pf2e-search.js -c feats --trait kitsune
   node pf2e-search.js -c conditions
   node pf2e-search.js heal -c spells -d
+  node pf2e-search.js --archetype archer          # full entry + Additional Feats
+  node pf2e-search.js --archetype                 # list every archetype
 `.trim();
 
 // ── Filtering ───────────────────────────────────────────────────────────────
@@ -259,6 +270,52 @@ function formatCompact(entry) {
   return `  ${entry.n}${level}${rarity}${traits}${extraStr}`;
 }
 
+// ── Archetypes (journal-backed) ─────────────────────────────────────────────
+// The search index does NOT carry archetype "Additional Feats" lists — those
+// feats are granted from other classes at adjusted levels and exist only in the
+// journal. Filtering feats by subcategory returns a deceptively incomplete tree.
+
+const ARCHETYPES_PATH = path.join(__dirname, '..', 'pf2e', 'journals', 'archetypes.json');
+
+function cleanJournalText(t) {
+  return t
+    .replace(/@UUID\[[^\]]*\]\{([^}]*)\}/g, '$1')
+    .replace(/@UUID\[[^\]]*\.([^.\]]+)\]/g, '$1')
+    .replace(/@Embed\[[^\]]*\]/g, '(see feat entry)')
+    .replace(/<(br|\/p|\/h\d|\/li|\/tr)[^>]*>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&\w+;/g, ' ')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function showArchetypes(name) {
+  if (!fs.existsSync(ARCHETYPES_PATH)) {
+    console.log(`Archetype journal not found at ${ARCHETYPES_PATH}`);
+    return;
+  }
+  const pages = JSON.parse(fs.readFileSync(ARCHETYPES_PATH, 'utf8')).pages || [];
+  const q = (name || '').toLowerCase();
+
+  if (!q) {
+    console.log(`${pages.length} archetypes:\n`);
+    console.log(pages.map(p => p.name).filter(Boolean).sort().join(', '));
+    return;
+  }
+
+  const hits = pages.filter(p => p.name?.toLowerCase().includes(q));
+  if (!hits.length) {
+    console.log(`No archetype matching "${name}". Run --archetype with no value to list all.`);
+    return;
+  }
+  for (const p of hits) {
+    console.log(`\n${'='.repeat(70)}\n### ${p.name}\n${'='.repeat(70)}`);
+    console.log(cleanJournalText(p.text?.content || '(no text)'));
+  }
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -266,6 +323,11 @@ function main() {
 
   if (args.flags.help) {
     console.log(HELP);
+    return;
+  }
+
+  if (args.flags.archetype !== undefined) {
+    showArchetypes(args.flags.archetype || args.query.join(' '));
     return;
   }
 
