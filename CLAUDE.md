@@ -117,6 +117,14 @@ Your training prior leans heavily toward **legacy (pre-remaster) PF2e** and will
 - **Foundry actor JSON**: a spontaneous caster's heightened-known copies appear as duplicate spell items — the real rank is `system.location.heightenedLevel`, not `system.level.value`. Cantrips also store `system.level.value: 1` — check for the `cantrip` trait before counting a spell as a rank-1 repertoire pick (Needle Darts is a cantrip, not a slotted spell). Before flagging a feat as slotless or illegal, check granting feats' full text (e.g., dragonet Covet Hoard grants Hefty Hauler at 1 and Incredible Investiture at 11).
 - **Archetype spontaneous casters get signature spells**: one from Basic Spellcasting benefits (6th), a second from Expert Spellcasting (12th).
 
+## Build sheets — assume incomplete, don't audit for blanks
+
+When Pax shares a Pathbuilder export or a build sheet, **treat missing fields as not-yet-filled-in, not as errors.** Equipment, runes, deity, languages, alignment, some feat slots, and attribute-boost routing are routinely blank because he's sketching the concept fast — not because he overlooked them or doesn't know they're required.
+
+Do **not** list blanks as findings, flags, or "fixes before this is playable." It's noise, and he's said so directly. Analyze the build on what's actually there.
+
+The one exception: if a blank genuinely changes the mechanical analysis (e.g. a class feature keys off the deity, or a damage number depends on a rune), state the assumption in a single clause — *"assuming +1 striking handwraps"* — and continue. Never make it a section, and never make it a to-do list.
+
 ## Interpretation discipline
 
 When reviewing Pax's tactical or RP decisions in a session:

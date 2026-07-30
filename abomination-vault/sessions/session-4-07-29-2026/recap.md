@@ -12,9 +12,9 @@
 | Character | Class | Player |
 |-----------|-------|--------|
 | Argon Rath | Orc (Hold-Scarred) Barbarian — Barrage Dragon (Force) | Pax |
-| Alder Ungram | Human Thaumaturge (weapon implement) / Cleric | Ricardo |
-| Ruben Falmoor | Half-Elf Divine Sorcerer of Pharasma / Champion | Twan |
-| Xurl | Halfling Monk (Crane Stance) | Ben |
+| Alder Ungram | Human Thaumaturge (returning chakram — weapon implement) | Ricardo |
+| Ruben Falmoor | Half-Elf Divine Sorcerer of Pharasma | Twan |
+| Xurl | Halfling Monk (wrestler; Crane Stance this session) | Ben |
 
 ## Session Summary
 
