@@ -1,6 +1,8 @@
 # Progression — Levels 14 → 20
 
-Campaign runs **12 → 20**. Three feats land on every even level from here: a **mythic** feat, a **free-archetype** feat, and a **Monk class feat**. Skill feats on even levels, general feats on odd.
+Campaign runs **12 → 20**. Three feats land on every even level: a **mythic** feat, a **free-archetype** feat, and a **Monk class feat**. Skill feats on even levels, general feats on odd.
+
+**Status: the 14 board is LOCKED — final v3 build** (Foundry 2026-08-02, pending Cody's nod on the retrains — no session played at 14 yet). Attribute reroute: level-10 boost Int→Dex (Reflex +1 now; **Dex and Wis both +5 at 20, Con +4**). **Level 15: Third Path to Perfection → FORTITUDE LEGENDARY** (crit fail→fail, failed save vs damage→half) **+ general feat: Canny Acumen (Reflex)** — inert until it flips **Reflex to MASTER at 17** (two levels earlier than using the 19 slot).
 
 ---
 
@@ -8,76 +10,79 @@ Campaign runs **12 → 20**. Three feats land on every even level from here: a *
 
 | Level | Mythic (Ascended Celestial) | Free Archetype | Monk class feat |
 |---|---|---|---|
-| **14** | **Channel Divine Spark** | **Mortal Ascension** *(Mortal Herald)* | *open* |
-| **16** | **Abjure Harm** | **Flash of Omnipresence** *(Mortal Herald)* | **Fuse Stance** |
+| **14** | **Ascend** ✅ | **Herald's Weapon** *(Mortal Herald)* ✅ | **Advanced Defender → Long-Distance Taunt** ✅ |
+| **16** | **Celestial Armaments** | **Flash of Omnipresence** *(Mortal Herald)* | **Fuse Stance** (Ripple + Whirlwind) |
 | **18** | **Shining Glory** | **Stand for the Fallen** *(Mortal Herald)* | **Grandmaster Qi Spells** |
-| **20** | **Celestial Rebirth** | **Flash of Omnipotence** *(Mortal Herald)* | *open* |
+| **20** | **Celestial Rebirth** *vs* **Abjure Harm** — the last fork | **Flash of Omnipotence** *(Mortal Herald)* | *open* |
 
 ### Why these
 
-**Channel Divine Spark (14)** — the anchor. **1 action, once per hour, no Mythic Point**, and for a full minute you get **Quickened** (Strike/Stride), **resistance to physical equal to half your level**, **temp HP equal to your level**, and a **free Shove or Trip on every damaging melee Strike**. At Cody's ~5-encounters-per-rest pacing that's effectively once per fight, for free. Nobody in the party can cast Haste; this is better than Haste and costs no resource.
+**Ascend (14)** — the anchor. Permanent **fly Speed = land Speed (60)**, **Flyby Attack**, and **1/day fly 120 for 5 rounds**. Replaced the old plan's pair (Channel Divine Spark + Mortal Ascension) with one feat: CDS was evaluated and cut — its quickened action is **Stride/Strike, not Fly**, and its free-Trip rider duplicates Flurry of Maneuvers at deeper MAP — and Ascend supersedes Mortal Ascension while adding Flyby and the burst. At 20 with Greater Boots of Bounding the burst hits **150: exact adult-mirage-dragon parity.**
 
-**Mortal Ascension (14)** — *"Your power uplifts you, breaking the bonds between you and the ground. **You gain a fly Speed equal to your Speed.**"* No activation, no duration, no focus point — **permanent fly 60**. This is what retires the Wyrm's Wingspan tattoo's once-per-day flight and makes Trip live against anything airborne, permanently. Highest-value feat on the 14 board.
+**Getting knocked down is a solved problem — recovery, not prevention:** Cat Fall (free landing) → Kip Up (free stand) → fly 60 back up. ~1 action lost. This is why Immovable Object wasn't worth a destiny swap (see post-mortem below).
 
-**Flash of Omnipresence (16)** — pushed back a level by Mortal Ascension, since both are Mortal Herald 14+ feats and only one fits at 14. 1 action, once/hour: teleport adjacent to an ally within 100 feet; with a Mythic Point, anywhere within a mile plus adjacent enemies save vs Stunned 1. The **Bodyguard delivery system**.
+**Herald's Weapon (14, FA)** — 1/hr, no MP: the staff goes **all-spirit + sanctified + 2d4** for a minute. Bypasses physical resistances; points holy at unholy Risen.
 
-**Group Taunt** — displaced. Advanced Defender → Group Taunt has no slot left before 18 now. Options: take it at 18 in place of Stand for the Fallen, or drop it. Worth deciding once you've played a few sessions and know whether one Taunt is enough.
+**Long-Distance Taunt (14, via Advanced Defender)** — Taunt at **120 feet**. The flying tank no longer has to stand in the blast template to do his job; spread the party and Telekinetic Bombardment hits one person.
 
-**Fuse Stance (16)** — merge **Reflective Ripple** and **Whirlwind**. Requirements are compatible (unarmored while wielding a staff), so you get +2 AC *and* the trip-trait attacks and +1 Athletics-to-Trip simultaneously.
+**Celestial Armaments (16)** — daily blessing, no MP: staff sheds light, **+1d8 spirit on every hit**, crit → Blinded (Fort). Bigger than the flaming rune and it can't be immune'd by fire.
 
-**Shining Glory (18)** — Mythic Point: every ally in your nimbus gains **+3 status to attack rolls and skill checks** for a minute. Largest party buff available anywhere in the destiny list.
+**Fuse Stance (16)** — merge **Reflective Ripple + Whirlwind**: +2 AC *and* the trip engine simultaneously — and with **Reflexive Stance** (took at 12, replacing Wave Spiral) the fused stance comes online **at initiative, as a free action, every fight**. Zero actions ever spent on stances from 16 on. Confirmed pair — Immovable Object was considered for the fusion and rejected (restriction rides along).
 
-**Stand for the Fallen (18)** — reaction when an ally would drop to 0: Stride twice (or Fly) to them and **take the damage instead, with resistance equal to your level**. Direct answer to the party's documented bleeding.
+**Flash of Omnipresence (16, FA)** — 1/hr teleport adjacent to an ally within 100 ft. The Bodyguard delivery system.
 
-**Celestial Rebirth (20)** — **Heal twice per day at 7th rank**, Breath of Life, and Raise Dead for a Mythic Point.
+**Shining Glory (18)** — 1 MP, and it's the whole package: allies in the nimbus get **+3 status to attack rolls** (Paya and Aureys' crit thresholds drop 3 — S4 measured them at 30%/20% crit rates *without* it), **and** every enemy in the light saves vs Will: Frightened 1/2/3, **frightened floor of 1 for the minute**, and on a failure **Sevek is Concealed to them (Hidden on crit fail)** — a flat check to even target the tank. Party nova + fear engine fuel + defense in one action.
 
-**Flash of Omnipotence (20)** — free action, Mythic Point: for the turn, your damage **ignores all resistance and immunities**. The answer to regenerating bosses (Eron healed 255 HP in one fight).
+**Stand for the Fallen (18, FA)** — reaction when an ally would drop: Stride/Fly twice and **take the damage instead with resistance = level**. The one intercept that comes back, at the level it matters.
 
----
+**Celestial Rebirth vs Abjure Harm (20)** — the deliberate open fork. Rebirth: Breath of Life, 2×/day rank-7 Heal, Raise Dead for 1 MP, apotheosis. **Abjure Harm is the uncovered square**: 1 MP reaction that turns an enemy crit into a hit — and melee crits are the only thing that has actually floored Sevek (the S4 mukradi 78). Decide at 19 based on how often crits are still landing.
 
-## Open class-feat slots (14 and 20)
+### Eternal Legend post-mortem (evaluated 2026-08-02, rejected)
 
-Best candidates, all reachable by spending a **Monk class feat on an archetype feat**:
+The full-list comparison ran: EL front-loads selfish excellence (**Faultless Defense**, **Earth to Heavens Strike**, **Legend of Combat**'s double reactions at 18) and its pitch-feat **Immovable Object** died on inspection — ground-only (dormant exactly when flying, and airborne prone = falling, which it can't prevent), no coverage of immobilized/Grabbed (that's Become Destiny's job), and 2 of its 16th-level feats are dead on this sheet (ranged-only; master-Intimidation-gated). AC won on: **Shining Glory's party math** (feeding two measured crit engines beats buffing the party's third-place striker), Truesight access (Eyes Unclouded, if wanted later), the nimbus being load-bearing fiction for an Ashavan, and **MP economy** — EL's best feats all eat a point per use; the AC plan's only recurring cost is Shining Glory.
 
-- **Divine Presence** *(Mortal Herald 18)* — stance, 5-ft emanation Sustained to 15: act **from any space in the emanation**, so you'd **Trip from up to 25 feet**, plus enemies ending their turn inside are off-guard. ⚠️ It's a **third stance** and Fuse Stance merges only two.
-- **Eyes of God** *(Mortal Herald 18)* — permanent 8th-rank **See the Unseen and Truesight**. Strong in an illusion-heavy runelord AP.
-- **Flash of Omniscience** *(Mortal Herald 18)* — free action, Mythic Point: learn a creature's resistances, weaknesses, immunities, and amounts. Nobody else at the table covers this.
-- **Marked for Rebuke** *(Mortal Herald 18)* — spellshape; your next damaging spell marks a target for **weakness 10 to all damage** for a round. Trigger it with **Electric Arc** or **Frostbite** (basic saves still mark on a regular success; only a crit success whiffs). **Value depends entirely on the weakness ruling below.**
+**MP budget rule going forward:** recurring spends are Become Destiny + rerolls + (at 18) Shining Glory ≈ 2 discretionary points per fight, against 3/day + Summon Mythic Power + kill refunds + **the Echoes of the Swords daily refill (one-action Long Jump, crits on a nat 2 — effectively guaranteed)**. Do not add per-use MP feats.
 
 ---
+
+## Speed milestones
+
+| Level | Land | Fly | 1/day burst |
+|---|---|---|---|
+| 14 (now) | **60** (25 + 20 IM + 5 Nimble Elf + 5 Fleet + 5 boots) | 60 | **120** |
+| 15 | 65 (IM +25) | 65 | 130 |
+| 19 | 70 (IM +30) | 70 | 140 |
+| 19+ w/ **Greater Boots of Bounding** | **75** (+10 item replaces +5) | 75 | **150 — adult dragon parity** |
 
 ## Gear roadmap
 
-| Level | Buy |
-|---|---|
-| 14 | **Greater Resilient** (3,440 gp) — Reflex is the soft save |
-| 18 | **+3 weapon and armor potency** → **3 property runes** |
-| 20 | **Mythic Weapon Potency** (70,000 gp) — **+4 to attack** and **four property runes** |
+| Priority | Buy | Why |
+|---|---|---|
+| Next (3,440 gp) | **Greater Resilient rune** | +1 more Reflex (with the Dex-boost reroute, the two permanent Reflex levers are now both pulled) |
+| ~19 (4,250 gp) | **Greater Boots of Bounding** | The 150-fly capstone |
+| 18+ | **+3 weapon/armor potency** → 3 property runes | Rune diversity if the weakness ruling goes our way |
+| 20 (70,000 gp) | **Mythic Weapon Potency** | +4 attack, four property runes |
 
-**Rune selection is an optimization problem you don't normally have.** If the weakness ruling goes your way, you want four runes each adding a **different damage type** — not four with the biggest dice. Flaming (fire) and Astral (spirit) are in; Frost, Corrosive, Shock, and Thundering each add a distinct type.
-
-**Inner Upheaval adds one more**: 1d6 of **force, spirit, vitality, or void, chosen each Strike**, and it applies to Flurry of Blows. Don't pick spirit — Astral covers it.
-
-At level 20 that's **bludgeoning + four rune types + Inner Upheaval = six damage types per Strike.**
+**Rune selection stays an optimization problem**: if "weakness to all damage" triggers per damage type, four runes want four *different* types (Flaming + Astral in; Frost/Corrosive/Shock/Thundering candidates), plus Inner Upheaval's chosen type = six per Strike.
 
 ---
 
 ## Unresolved
 
-1. **Weakness to all damage — once per Strike or once per damage type?** No community consensus. The strongest argument is the **resistance** rules, which explicitly apply "resistance to all damage" **separately to each damage type** with a worked example; weakness has no parallel example. Decides whether Marked for Rebuke is +10 or +60 per Strike. Raise it early, framed as the resistance parallel — not as a damage number.
-2. **Stance count.** Ripple, Whirlwind, and potentially Divine Presence and Immovable Object. Fuse Stance merges exactly two — decide the pair before 16. **Wave Spiral at 14 argues hard for Ripple + Whirlwind**, since Wave Spiral is dead without Reflective Ripple.
-4. **Foundry support** for Battlecry! (Guardian) and Impossible Magic content on Cody's Forge instance.
+1. **Weakness to all damage — once per Strike or once per damage type?** Argue from the resistance rules' worked example. Decides Marked for Rebuke's value if it ever gets a slot.
+2. **The 14 retrain package needs Cody's blessing** (framed: never played at 14) — now including the **calling swap to Echoes of the Swords** (AP calling set — confirm player-legality and check its edicts/anathema in the book). Also ask **how much aerial combat is coming** — it prices the flight investment and every ground-only rider.
+3. **The 20 fork** (Rebirth vs Abjure Harm) stays open on purpose.
 
 ---
 
-## Party context (as of the last logged session)
+## Party context (updated from measured S4 data)
 
-| PC | Role | Notes |
+| PC | Role | S4 numbers |
 |---|---|---|
-| **Paya** — Leshy Fighter + Medic | 748 damage/session, AC 36 | Reach halberd, **can't use any Athletics maneuver** (two-handed, no trip trait) |
-| **Aureys** — Dragonet Scoundrel Rogue (Fan Dancer / Spirit Warrior) | 33 attacks, 48% hit, AC 34 | **Tiny** (shares squares), has **Gang Up**, Feint **can't crit** vs boss Perception DCs |
-| **Mithtirith** — Cleric of Nethys + Druid dedication | ~19 Heals in one session; AC 30 at Lv12 → **33 now** (Divine Defense) | Took **524 damage from 12 attacks, all melee** — 9 of them Eron's. Master Arcana +22. Wounded 2 by session end. |
+| **Paya** — Leshy Fighter + Kineticist/Medic | Legendary halberd, the crit engine | **872 damage, 30% crit rate**, killing blows on the mukradi + Krune; can't use any Athletics maneuver (two-hander, no trip trait) |
+| **Aureys** — Tiny Dragonet Scoundrel Rogue | Debuff→crit loop (Feint/Fearsome/Majestic Presence) | **1,033 damage, 20% crit rate, zero nat 20s** — all margin crits off debuffs. Prone is her favorite gift |
+| **Mithtirith** — Cleric of Nethys | Heal battery + enemy magnet | **559 healing output, 381 damage absorbed** at the table's lowest AC — every fight's AI finds him. Bodyguard stays on him |
 
-**Departed:** Jericho (Investigator — took Occultism +27 and Society +25), Gutso (Gunslinger — all ranged damage), Durgin (Kineticist — **Unbreaking Castle gave the party +2 AC** and Thermal Nimbus gave resistance 13; both now gone).
+**Party save architecture:** all four run success→crit upgrade features on their covered saves (Path to Perfection, Evasion, Bravery/Juggernaut, Resolve) — 6 of 13 saves in the S4 finale were crit successes. Enemy basic-save spells are a coin flip between working and doing nothing; everyone bleeds only through their *uncovered* save. Sevek's is Reflex.
 
-The party's own stated need: *"We could use a tank or spellcasting."* Space is often cramped, so ranged is a lesser priority.
+**Departed before Sevek joined:** Jericho (Investigator — Occultism +27), Gutso (Gunslinger — all ranged), Durgin (Kineticist — party +2 AC and resistance auras, both gone). The party's stated need was "a tank or spellcasting" — the tank seat is now filled; **no arcane caster in a Runelords AP** remains the standing gap.

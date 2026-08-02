@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 15 — I Thought We Were Friends, Darling</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-zarok { border-left-color: var(--jade); }
+.char-ren { border-left-color: var(--gold); }
+.char-serrafina { border-left-color: var(--teal); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-zarok { border-left-color: var(--jade); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>I Thought We Were Friends, Darling</h1>
+  <div class="subtitle">Session 15 &mdash; a mass-heal sting, two vampires, and a Hellknight on the throne of Isger</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-01</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 21m</span>
+    <span class="meta-pill">Reeves Rest Manor &middot; Elidir</span>
+    <span class="meta-pill">Small hours &middot; 1 Abadius 4727</span>
+    <span class="meta-pill">Level 5 &rarr; 6</span>
+    <span class="meta-pill">New Player: Zarok</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:38%"></div>
+    <div class="comp-seg comp-explore" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:18%"></div>
+    <div class="comp-seg comp-social" style="width:9%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 38%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Investigation 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 18%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Interrogation 9%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Clues 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster &mdash; <span class="new-badge">LV 5 &rarr; 6</span></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Dragon Thaumaturge (Mirror Cloak) &middot; Draconic Ravager &mdash; <span class="new-badge">LV 5 &rarr; 6</span></div>
+      <div class="char-player">Snowgeen</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic &mdash; <span class="new-badge">LV 5 &rarr; 6</span></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &mdash; <span class="new-badge">LV 5 &rarr; 6</span></div>
+      <div class="char-player">Scott Smith</div>
+    </div>
+    <div class="char-card char-zarok">
+      <div class="char-name">Zarok Brewhide</div>
+      <div class="char-class">Lizardfolk Cleric (Warpriest) &middot; "The Aleigator" &mdash; <span class="new-badge">NEW PLAYER &middot; LV 5 &rarr; 6</span></div>
+      <div class="char-player">New Player</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Isgeri Boarhound &mdash; mature animal companion</div>
+      <div class="char-player">Bai Jian's</div>
+    </div>
+    <div class="char-card char-serrafina">
+      <div class="char-name">Serrafina</div>
+      <div class="char-class">Two-headed witch familiar</div>
+      <div class="char-player">Panacea's</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The murder night ended tonight, and the party solved it the way good detectives do &mdash; they stopped chasing testimony and built a test. <strong>Cyrathul</strong> had the insight early, staring at fingertip marks in windowsill snow: <em>undead take damage from healing magic.</em> Gather every living soul in the manor into one room, cast a three-action Heal over the crowd, and whoever flinches is the killer. It took an hour of shepherding terrified nobles, a berserk steam-bull, and a false confession to pull off &mdash; and when <strong>Panacea's</strong> Heal washed over the assembled guests and every last one of them just felt better, the elimination was complete. Every guest in the room was clean, and the one guest who'd slipped away before the test was the big man. <strong>Ezio Gaeta.</strong> The gossip, the influence target, the "prime suspect too convenient to trust" &mdash; he was exactly what he looked like. The garlic was real all along.</p>
+    <p>The misdirection ran deep before it broke. A tailless servant, cracked by <strong>Zanthar's</strong> blunt "why'd you lose your tail?", confessed that a tall figure in a red cloak with burning eyes made her dig mausoleum dirt and scatter it on Hedvend's bed &mdash; and then her memory wiped itself mid-interrogation, just like Lefranek's. <strong>Lezinia</strong> the bard diva suddenly screamed a confession to the whole ballroom &mdash; <em>he promised to make me queen of Isger</em> &mdash; and bolted out the front door, straight into the manor's own construct sentry, which chased her back inside and trampled half the party. Zanthar's Lay on Hands proved she was living; a red cloak planted in her travel bag proved someone was framing her; and Cyrathul called the whole shape of it: <em>"I think that the red cloak is a red herring."</em> Even <strong>Fessy Finwinkle's</strong> locked door turned out to be a booby trap of sorts &mdash; Lezinia had handed her a summoning scroll "for protection," and the terrified priestess had accidentally summoned a light-ray-spitting guardian of holy books that the party had to put down before it put Cyrathul down.</p>
+    <p>Then Cyrathul opened the storage closet, and <strong>Hedvend VI</strong> &mdash; the murdered steward whose body had been missing all night &mdash; was standing inside it with fangs. The fight that followed was the real thing: Hedvend paralyzed Cyrathul and drank from his neck while Ezio stalked in from the far end of the hall &mdash; <em>"You just couldn't help yourselves"</em> &mdash; and clamped <strong>Bai Jian</strong> in a vice-grip claw. Bai Jian, locked in Ezio's grip, declined to escape &mdash; <em>"I don't even gonna bother to escape, so I'm just gonna swing"</em> &mdash; and put his silver falcata through Hedvend twice, ending the steward for good. Ezio made him pay for it a round later, fangs in his neck, draining him to Drained 2. The party ground Ezio down through fast healing and physical resistance until Panacea, the healer he'd gossiped with all gala, raised her hand: <em>"As I throw this &mdash; I thought we were friends. I thought we were friends, darling."</em> The Moonlight Ray took him apart in silver-cold holy light. He burst into blood, goo, and flies &mdash; and per the roll log, that death-burst was a <strong>Cloud of Plague</strong>, and <strong>Ren failed the save</strong>. That detail matters enormously (see The Unfinished Kill, below).</p>
+    <p>Paralictor <strong>Caeto Vulaunex</strong> poked the remains with a letter opener &mdash; <em>"The dandy? The disgusting fat blob was a vampire?"</em> &mdash; lifted the lockdown, declared himself <strong>acting steward of Isger</strong>, and armed the party with a sword and shield off his office wall. The manor emptied like a concert letting out. The party walked back to the safehouse through the blizzard at <strong>Level 6</strong> &mdash; having killed two vampires, cleared the Hellbreakers of a regicide, and put a Hellknight in charge of the country.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The Night, Hour by Hour</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; The Aleigator in the Bushes</div>
+      <div class="act-card">
+        <h3>A Very Tall Lizardfolk, Drinking, Hiding</h3>
+        <ul>
+          <li><strong>Panacea</strong> delivered the last-session recap (bonus hero point); the GM ran lines-and-veils for the table's <strong>new player</strong>.</li>
+          <li>Outside by the mausoleum, <strong>Panacea</strong> and <strong>Bai Jian</strong> spotted someone hiding behind a bush in the blizzard: <strong>a very tall lizardfolk in priestly gear, drinking, no weapons</strong> &mdash; the new PC introducing himself. Bai Jian, deadpan: <em>"Look, we found the murderer."</em></li>
+          <li><strong>Zarok Brewhide</strong> explained himself: he was delivering ale to "the breakers" for a sender whose <em>"unique name"</em> he couldn't remember &mdash; <em>"I don't know which ones they are, but they broke something"</em> &mdash; and it was <strong>Alceo and Phoebe</strong> who put him in a devil costume and pointed him at the manor.</li>
+          <li>His read on the org chart: <em>"They broke hell and now we gotta fix it."</em> &mdash; <em>"My name is Zarok Brewhide, but everybody just calls me the Aleigator."</em></li>
+          <li><strong>Bai Jian</strong> welcomed him to the team; the party walked their new cleric back through the whiteout toward the manor, lit up "like a Christmas tree."</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act II &middot; Interrogation &middot; The Tailless Servant</div>
+      <div class="act-card">
+        <h3>"Why'd You Lose Your Tail?"</h3>
+        <ul>
+          <li><strong>Cyrathul</strong> set the objective &mdash; find the servant whose imp-costume tail matched the torn-off tail by the mausoleum: <em>"that's likely our vampire."</em> <strong>Zarok</strong>, immediately invested in tail matters: <em>"How'd he lose his tail? Did it just fall off?"</em></li>
+          <li>Cyrathul's Gather Information (success, 21) turned her up fast &mdash; a servant came down from upstairs <strong>missing her costume tail</strong>. His opening move was pure genre-awareness: <em>"They look like they've been hurt. You should heal them"</em> &mdash; a covert heal-test, gesturing at Panacea.</li>
+          <li><strong>Zanthar</strong> skipped the subtlety: <em>"Why'd you lose your tail?"</em> The servant checked her own costume, blurted that she was glad Hedvend was dead &mdash; <em>"Can we pretend I didn't say that?"</em> &mdash; and under <strong>Cyrathul's critical Gather Information (31)</strong> she broke: <strong>a tall figure in a red cloak with burning eyes</strong> told her to <strong>dig dirt from the mausoleum and scatter it on Hedvend's body</strong> where it lay in state. She wept that it felt like desecrating the dead.</li>
+          <li>Cyrathul asked the question that mattered &mdash; <em>"How did you get past the defenses?"</em> &mdash; and got the mechanism: a <strong>locket with the house stamp</strong>. <em>"These let us go anywhere. The mechanicals just ignore us."</em> The servants can walk past the manor's kill-anything-living wards.</li>
+          <li>When Zanthar pressed for the red-cloak's description, her face went quizzical &mdash; reaching for memories no longer there. <strong>Panacea</strong>: <em>"Oh no, it's wiping its memory. Just like the other guy we interrogated."</em></li>
+          <li><strong>Zanthar's</strong> crit Recall Knowledge: this is <strong>Rewrite Memory</strong>-grade magic &mdash; and, on his own follow-up question, <strong>vampires have domination abilities that can do exactly this</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Investigation &middot; The Fifth Victim</div>
+      <div class="act-card">
+        <h3>Fingertips in the Snow, and the Plan</h3>
+        <ul>
+          <li>A scream from the solarium: <strong>another manor guard dead</strong> &mdash; punctures, exsanguinated, sword still sheathed. <strong>Zarok's</strong> Medicine (33) ran his first forensics for the table; <strong>Zanthar</strong> found the window <strong>unlocked from the inside</strong> again; the perception sweep found <strong>wet boot prints walking in from the window, over the body, and back out</strong>.</li>
+          <li><strong>Bai Jian</strong> pushed the examination outward &mdash; check the sill, check below the window &mdash; and found <strong>two fingertip indentations in the snow on the windowsill</strong>, still filling in with fresh snowfall. The killer had braced a hand there minutes ago.</li>
+          <li>Then <strong>Cyrathul</strong> assembled the session's central idea from first principles: <em>"We could, in theory, heal people, because if they take positive healing, they'll take it as damage&hellip; We can AoE heal. If people use three-action heal, that could hit the entire ballroom at once."</em></li>
+          <li><strong>Bai Jian</strong> added the operational discipline: <em>"We also have to make sure that no one knows our intention. We need a valid excuse."</em></li>
+          <li>The party had the guards herd every guest into the ballroom &mdash; <strong>Cyrathul's Diplomacy, boosted by Bai Jian's critical-success Aid (+2)</strong>, carried it, with the guard relaying the stakes to the room: people are dying.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; The False Confession</div>
+      <div class="act-card">
+        <h3>"You Caught Me. I Did It."</h3>
+        <ul>
+          <li>As the guards announced the round-up, <strong>Lezinia</strong> &mdash; the celebrity bard &mdash; cracked in front of the whole room: <em>"Fine. You caught me. I did it. I killed that miserable old man. He promised he would try to marry me and make me queen of Isger&hellip; I killed him, and I don't know what happened afterward."</em> She charged out the front door &mdash; and charged straight back in with a <strong>berserk steam-powered automaton bull</strong> on her heels. The manor's own outdoor sentry, doing exactly what the wards do to living things outside.</li>
+          <li><strong>Cyrathul</strong>, before initiative was even done: <em>"I have a theory that the memory that she killed him is planted, or she was dominated to do it."</em></li>
+          <li>The bull fight <em>(full breakdown below)</em> ended with the thing detonating in a 30-foot fireball that dropped Panacea dying &mdash; <strong>Zarok's first three-action Heal got her back up</strong>, with Zanthar's Lay on Hands topping her off &mdash; and the same Heal washed over the wounded bystanders. <strong>60 XP.</strong></li>
+          <li>Mid-triage, <strong>Cyrathul</strong> kept one eye on the room and caught it thinning: <em>"Hold on. Wait a second. Someone did slip out&hellip; the big boy."</em> <strong>Ezio had left during the chaos</strong> &mdash; noted a full hour before the sting confirmed what it meant.</li>
+          <li>Upstairs in the boudoir, Lezinia repeated her confession word for word &mdash; then couldn't say <em>how</em> she'd killed him. Her eyes crossed grasping for the memory (Cyrathul's and Zanthar's Sense Motive both flagged that she wasn't acting normally). She improvised, badly: <em>"I had to drain the blood out of the bodies. I must be a vampire."</em></li>
+          <li><strong>Zanthar</strong> tested her with <strong>Lay on Hands &mdash; the healing healed her.</strong> Living. <strong>Zarok's</strong> Detect Magic found <strong>enchantment magic wafting off her</strong>.</li>
+          <li>Zanthar spotted red fabric in her travel bag: <strong>a red cloak</strong>, wrapped around a wire, a jar of oil, and her own bracelet &mdash; planted evidence she'd unknowingly bundled with her valuables. She let the party keep all of it.</li>
+          <li><strong>Cyrathul's</strong> Recall Knowledge (Diverse Lore) landed the thesis: Urgathoa's sacred colors are <strong>red <em>and green</em></strong> &mdash; and this cloak had never been seen on anyone at the party. <em>"I think that the red cloak is a red herring&hellip; trying to frame someone very poorly. So more a distraction than a framing."</em> Calming her down and proving her innocent earned <strong>30 XP</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Mystery &middot; The Sting</div>
+      <div class="act-card">
+        <h3>Nobody Flinched</h3>
+        <ul>
+          <li>After the break, the guards packed the ballroom. <strong>Zanthar</strong> told the grumbling nobles exactly why: <em>"You're picking off guests one at a time, so I want you all together."</em></li>
+          <li><strong>Cyrathul</strong> clocked the gap before the test even ran: <em>"I think we're missing the big men."</em> <strong>Bai Jian's</strong> call: run it anyway &mdash; <em>"if everyone here is good, then maybe it's that guy, the guy that's not here."</em></li>
+          <li>Bai Jian staged the cover story &mdash; <em>"We have something to announce"</em> &mdash; and winked at Panacea and Zarok. <strong>Panacea cast the three-action Heal over the entire crowd.</strong> Scrapes sealed. Bruises faded. <strong>Nobody flinched.</strong></li>
+          <li>Everyone in that room was alive &mdash; so the elimination closed around the guest who wasn't in it. Cyrathul: <em>"So it's likely the big man is once again suspect number one."</em> <strong>Ezio Gaeta.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; Fessy's Guardian</div>
+      <div class="act-card">
+        <h3>The Locked Door Nobody Had Opened</h3>
+        <ul>
+          <li>Sweeping for Ezio, <strong>Cyrathul hero-pointed a Seek</strong> and spotted a window <strong>cracked open again</strong> &mdash; the killer was still moving through the house. Then the party remembered the door nobody had opened: <strong>Fessy Finwinkle</strong>, locked in the private dining room since mid-panic last session.</li>
+          <li>Cyrathul peeked through the keyhole (Perception 20) &mdash; Fessy lying on the floor behind a table &mdash; and <strong>Mirror Cloak'd through the locked door</strong>. Frightened spellcasting answered him.</li>
+          <li>The fight <em>(full breakdown below)</em> was against a <strong>summoned guardian of holy books</strong> &mdash; two spiraling rings of tomes with angel wings, spitting light rays &mdash; not against Fessy, who spent the whole fight curled in a ball apologizing. <strong>Zarok</strong> announced himself to the party in the most direct way possible: he <strong>roundhouse-kicked the locked door off its hinges</strong>.</li>
+          <li>The source: <strong>Lezinia had given Fessy a summoning scroll</strong> and told her to hide upstairs and lock the door. The terrified priestess had read it when the door opened. She healed Cyrathul to full on the spot, apologized roughly thirty times, and gave the party her savings &mdash; a lesser Elixir of Life and a <strong>Marvelous Miniature horse</strong> (<em>"I've been saving this pony for a while, but you guys can have it"</em>).</li>
+          <li><strong>Zanthar</strong> lay-on-hands-tested Fessy too &mdash; living. The scroll: a summoning scroll. Another planted thread through Lezinia, the night's designated patsy.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII &middot; Combat &middot; The Steward in the Closet</div>
+      <div class="act-card">
+        <h3>Two Vampires, One Hallway</h3>
+        <ul>
+          <li>One room left unswept: the back storage closet. <strong>Cyrathul</strong> opened it &mdash; and <strong>Hedvend VI, the murdered steward of all Isger, was standing inside</strong>, fangs bared, an open window behind him. <strong>Panacea</strong>: <em>"There's the missing body!"</em> Cyrathul: <em>"I might have been a bit overzealous."</em></li>
+          <li>At the end of round one, <strong>Ezio Gaeta appeared at the far end of the hall</strong>: <em>"You just couldn't stay to yourselves. You just had to butt your noses right in, didn't you?"</em> Two vampires, one hallway <em>(full breakdown below)</em>.</li>
+          <li><strong>Bai Jian destroyed Hedvend</strong> &mdash; locked in Ezio's grip, he skipped escaping and swung: a 39-damage silver falcata crit and a follow-up ended the steward permanently.</li>
+          <li><strong>Panacea destroyed Ezio</strong> &mdash; Moonlight Ray, holy and silver-cold, delivered with <em>"I thought we were friends, darling."</em> He exploded in blood, goo, and flies. <strong>96 XP (Severe)</strong> &mdash; plus a <strong>120 XP bonus</strong> for identifying the killer early and saving lives by gathering the guests.</li>
+          <li>The table's post-mortem was half triumph, half indignation. <strong>Zanthar</strong>: <em>"And we influenced him. That's a waste. What was I wasting all my time on him for?"</em> <strong>Panacea</strong>: <em>"But that's how we knew, though, with the garlic."</em> The S12 influence work &mdash; Ezio refusing the garlic dish &mdash; was the clue that cracked the case; her hedged recollection from two sessions ago was right.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VIII &middot; Faction &middot; The Hellknight Regent</div>
+      <div class="act-card">
+        <h3>"I Will Begrudgingly Step Up"</h3>
+        <ul>
+          <li>The party shook both vampires' remains out of the spacious pouch in front of <strong>Caeto Vulaunex</strong> &mdash; who objected, <em>"Oh, disgusting. Not on the desk"</em> &mdash; and poked the goo with a letter opener: <em>"The dandy? The&hellip; disgusting fat blob was a vampire?"</em></li>
+          <li>On Ezio's remains: an <strong>encryption ring</strong> whose runes match the vertebra wheel-cipher. Ezio wasn't a lone monster &mdash; he was a <em>correspondent</em> of whoever "Illcayna" is.</li>
+          <li>Caeto flagged the piece that doesn't fit: vampires take <strong>days</strong> to rise, and Hedvend rose in hours. <em>"Some weird magic must have been at work here&hellip; it was no ordinary vampire."</em> The mausoleum dirt, the used decomposition talisman, and four bodies' worth of missing blood are presumably that magic &mdash; the ritual was never explained.</li>
+          <li>Then the political earthquake, delivered casually: <em>"I will begrudgingly step up and be the temporary steward"</em> &mdash; pending word from <em>"Mother Cheliax"</em> on a permanent replacement. <strong>The Hellknight Paralictor who deputized the party is now acting ruler of Isger</strong>, promising <em>"a much better country&hellip; I look forward to a better Isger after tonight."</em></li>
+          <li>Rewards: a <strong>sword and shield</strong> off his office wall (unidentified). Bai Jian asked about coin; the coffers are "a bit light." <strong>Zanthar</strong>, genre-savvy to the end, made Caeto promise to <strong>burn the drained victims</strong> so nothing else rises. Caeto keyed the ward control box from red to green &mdash; <strong>lockdown lifted</strong>.</li>
+          <li>The manor emptied "like a concert letting out." The party walked back to the safehouse through the blizzard. <strong>Level 6.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Encounter 1 &mdash; The Steam Bull (Aurocan)</h3>
+    <div class="combat-meta">60 XP &middot; 2 Rounds &middot; Bull Absorbed 132 Damage &middot; Explosive End</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Aurocan 33 &rarr; Zarok 29 &rarr; Panacea 23 &rarr; Bai Jian 15 &rarr; Zanthar 15 &rarr; Cyrathul 14 &rarr; Lezinia 3</div></div>
+      <div><div class="combat-stat-label">Weaknesses</div><div class="combat-stat-value">Orichalcum 10 &middot; Electricity 10 &middot; Immune Mental</div></div>
+      <div><div class="combat-stat-label">Kill Credit</div><div class="combat-stat-value">Cyrathul &mdash; Sure Strike crit bite, 46</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">1 &mdash; Bai Jian (trip reroll, +10 rule)</div></div>
+      <div><div class="combat-stat-label">Casualty</div><div class="combat-stat-value">Panacea &mdash; dropped dying by the death-explosion</div></div>
+    </div>
+    <p><em>The manor's outdoor construct sentry, drawn inside when Lezinia bolted out the front door &mdash; "There's nobody driving it. It's a berserk robot." Immune to mental; weakness 10 to orichalcum &mdash; which Cyrathul's dragon jaws happen to be &mdash; and, as Zanthar's cantrips revealed, weakness 10 to electricity.</em></p>
+
+    <h4>Round 1 &mdash; Trampled</h4>
+    <ul>
+      <li><strong>Aurocan</strong> charged through the front door and <strong>Trampled four of the five PCs</strong> (DC 24 Reflex &mdash; Zanthar was out of its line, "the only one that's safe"): Panacea, Cyrathul, and Zarok failed (17 damage each); Bai Jian saved via Bulwark (8). <strong>Lezinia</strong> spent the fight cowering behind Zarok: <em>"Please don't let that thing get me."</em></li>
+      <li><strong>Zarok</strong> (first action of his career): <strong>Warrior's Regret</strong> &mdash; the bull saved; a 5-damage tick was applied and then retracted once the timing was read (the bull damaged nobody on its next turn, so the curse dealt 0).</li>
+      <li><strong>Panacea</strong>: Battle Medicine on Cyrathul (Assurance, 4 HP), then <strong>Trade Death for Life</strong> &mdash; the bull's Fortitude failed but its construct chassis shrugged the void damage; the GM let the hex's riders through anyway (fast healing 3 to Cyrathul, Serrafina's Stupefied 1 on the bull).</li>
+      <li><strong>Bai Jian</strong>: <strong>Slam Down</strong> hit (19 rolled, 14 taken through resistance) and the <strong>Trip landed &mdash; huge bull, prone</strong> (Titan Wrestler). Dueling Parry up. (The attempted Ren flank turned out to be geometrically invalid &mdash; discovered a round later, after it had quietly cost him two would-be crits.)</li>
+      <li><strong>Zanthar</strong>: Electric Arc (14 rolled; the construct took 17 &mdash; electricity weakness) &mdash; <em>"like Johnny Five getting zapped"</em> &mdash; then bounced a Demoralize off it and discovered the hard way that it's <strong>immune to mental</strong>: <em>"I learned something."</em></li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability (success) &mdash; <strong>weakness 10, orichalcum</strong> &mdash; then bit it for 13, which its frame took as <strong>23</strong>.</li>
+    </ul>
+
+    <h4>Round 2 &mdash; Detonation</h4>
+    <ul>
+      <li><strong>Aurocan</strong> stood (eating Bai Jian's Reactive Strike &mdash; 12 rolled, 7 taken), activated <strong>Blistering Touch</strong> (heating its frame, +1d6 fire on melee), and missed Bai Jian's horn-swipe by 4.</li>
+      <li><strong>Zarok</strong>: cast <strong>Bless</strong>, first declaring targets 5e-style &mdash; <em>"Are you thinking of 5E Blast?" "Yes. Yes, I am. Sorry."</em></li>
+      <li><strong>Panacea</strong>: Needle Darts missed; Battle Medicine on herself (7).</li>
+      <li><strong>Bai Jian</strong>: second <strong>Slam Down</strong> (14 rolled/9 taken) and a <strong>hero-pointed Trip reroll</strong> (nat 1 &rarr; reroll 5, +10 house rule &rarr; 29, success) &mdash; <strong>prone again</strong>. From the trample onward, the bull never took a turn on its feet.</li>
+      <li><strong>Zanthar</strong>: Electric Arc again (12 rolled/16 taken).</li>
+      <li><strong>Cyrathul</strong>: <strong>Scroll of Sure Strike &rarr; critical bite</strong> (36 rolled, <strong>46 taken</strong> with weakness) &mdash; the bull died mid-chomp and <strong>detonated</strong>: <strong>Explosive End</strong>, 30-foot emanation, 36 damage, DC 21 basic Reflex. Bai Jian, Cyrathul, and Zarok saved (17 taken each); <strong>Zanthar and Ren failed (36 each)</strong> &mdash; and <strong>Panacea dropped dying in the blast</strong>. (Bookkeeping note from the log: her save was actually a <strong>success by +4</strong>, but the full 36 was applied instead of 17 &mdash; a correct 17 would have left her standing. Nobody caught it at the table.)</li>
+    </ul>
+
+    <p><strong>Aftermath:</strong> <strong>Zarok's first three-action Heal (8) got Panacea up from dying</strong> and washed over party and wounded bystanders alike; Zanthar's Lay on Hands (18) topped her off; treat-wounds triage followed. Kill credit: <strong>Cyrathul</strong> (who also ate the point-blank explosion for his trouble). The bull absorbed 132 damage across its two rounds.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 2 &mdash; The Tome Guardian (Gnokesh)</h3>
+    <div class="combat-meta">Low &middot; 40 XP &middot; 2 Rounds &middot; Fessy's Accidental Summon</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Bai Jian 24 (delayed) &rarr; Gnokesh 20 &rarr; Zarok 19 &rarr; Zanthar 18 &rarr; Cyrathul 18 &rarr; Panacea 11</div></div>
+      <div><div class="combat-stat-label">Weakness</div><div class="combat-stat-value">Unholy 5 &mdash; found by Cyrathul's Exploit Vulnerability</div></div>
+      <div><div class="combat-stat-label">Kill Credit</div><div class="combat-stat-value">Bai Jian &mdash; nat 20 Snagging Strike, 40</div></div>
+      <div><div class="combat-stat-label">Comedy Casualty</div><div class="combat-stat-value">Ren &mdash; nat 1 vs Calm; sat like a good boy</div></div>
+    </div>
+    <p><em>A summoned guardian &mdash; two spiraling rings of holy books on angel wings &mdash; accidentally called by the terrified Fessy Finwinkle from a scroll Lezinia gave her. Holy, divine; weak to unholy (5), which Cyrathul's Exploit Vulnerability turned his Strikes into.</em></p>
+
+    <h4>Round 1 &mdash; Light Rays Through a Keyhole</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> delayed (couldn't see through the door).</li>
+      <li><strong>Gnokesh</strong> fired three <strong>Light Rays</strong> at Cyrathul: one hit (9 fire/spirit), two grazed his wings.</li>
+      <li><strong>Zarok</strong> <strong>roundhouse-kicked the locked door open</strong> (Athletics 23, two actions) and walked in.</li>
+      <li><strong>Zanthar</strong> cast <strong>Fear</strong> &mdash; crit success, unmoved.</li>
+      <li><strong>Cyrathul</strong> talked Fessy down (<em>"We're not here to hurt you"</em> &mdash; <em>"I swear I'm not sustaining it!"</em>), Exploited Vulnerability (weak to <strong>unholy</strong>), and bit it for 17 (<strong>22 taken</strong>).</li>
+      <li><strong>Bai Jian</strong> returned: Snagging Strike missed, second connected (13).</li>
+      <li><strong>Panacea</strong>: Divine Lance hit (11).</li>
+    </ul>
+
+    <h4>Round 2 &mdash; Cut All the Books Into Pieces</h4>
+    <ul>
+      <li><strong>Gnokesh</strong> cast <strong>Calm</strong> (DC 24) over the room: every PC in it saved (&minus;1 to attacks) &mdash; Panacea actually rolled a failure but was outside the room and exempted (<em>"Oh, thank God, because I failed"</em>) &mdash; <strong>except Ren, who critically failed on a natural 1</strong> and sat down like a good boy, wagging, waiting for a treat, out of the fight. Its book-slap at Cyrathul missed.</li>
+      <li><strong>Zarok</strong>: Divine Lance (10). <strong>Zanthar</strong>: Electric Arc (11) + Shield. <strong>Cyrathul</strong>: Demoralize failed; two bites missed under the Calm penalty.</li>
+      <li><strong>Bai Jian</strong>: Snagging Strike &mdash; <strong>natural 20, fatal-d12 crit for 40</strong> &mdash; <em>"multiple quick slash, just cut all the books into pieces."</em> <strong>Destroyed.</strong> Kill credit: <strong>Bai Jian</strong>.</li>
+    </ul>
+
+    <p><strong>Aftermath:</strong> Fessy healed Cyrathul to full while apologizing continuously, handed over her savings (lesser Elixir of Life + the Marvelous Miniature "pony"), and passed Zanthar's Lay on Hands test &mdash; living. The scroll was a summoning scroll, given to her by <strong>Lezinia</strong>.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 3 &mdash; The Steward and the Dandy (Hedvend VI &amp; Ezio Gaeta)</h3>
+    <div class="combat-meta">Severe &middot; 96 XP + 120 Story Bonus &middot; 4 Rounds &middot; Round 1 Reconstructed (GM Chat Clear)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Cyrathul &rarr; Panacea &rarr; Ezio (joined R2) &rarr; Hedvend VI &rarr; Bai Jian &rarr; Zarok &rarr; Zanthar</div></div>
+      <div><div class="combat-stat-label">Damage (logged)</div><div class="combat-stat-value">Bai Jian 61 &middot; Cyrathul 58 &middot; Panacea 37 &middot; Zarok 28 &middot; Zanthar 5</div></div>
+      <div><div class="combat-stat-label">Kill Credits</div><div class="combat-stat-value">Hedvend &mdash; Bai Jian &middot; Ezio &mdash; Panacea</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">5 &mdash; Cyrathul, Panacea &times;2, Zanthar, Zarok</div></div>
+      <div><div class="combat-stat-label">Conditions Eaten</div><div class="combat-stat-value">Cyrathul Paralyzed + Drained 1 &middot; Bai Jian Drained 2 &middot; Zarok Stupefied 1</div></div>
+      <div><div class="combat-stat-label">The Loose End</div><div class="combat-stat-value">Ren &mdash; failed Cloud of Plague (14 vs DC 22)</div></div>
+    </div>
+    <p><em>The payoff fight. Hedvend VI risen as a vampire spawn (fast healing 5, paralyzing gaze, Grab + Drink Blood); Ezio Gaeta a true vampire (fast healing 7, Claw +18, Drink Blood, Hypnotic Gaze DC 22 stupefying aura, physical resistance &mdash; bypassed by silver). The GM cleared the Foundry chat mid-round-1, so the log picks up partway through; round 1 is reconstructed from the recording.</em></p>
+
+    <h4>Round 1 &mdash; The Closet Opens <em>(reconstructed)</em></h4>
+    <ul>
+      <li><strong>Cyrathul</strong> opened the closet and paid for it: Exploit Vulnerability on Hedvend (hero-pointed reroll after a failure; the "custom weakness 4" the macro reported was his own Personal Antithesis &mdash; Hedvend has only standard vampire vulnerabilities), confirmed the creature type, and yelled the warning down the hall: <em>"We got Vampire Hedvend!"</em> He then two-actioned a rank-2 <strong>heal scroll</strong> at him &mdash; crit-success save, nothing.</li>
+      <li><strong>Panacea</strong> spent her turn closing the distance from the ballroom.</li>
+      <li><strong>Hedvend</strong> hissed &mdash; fangs out &mdash; and his gaze <strong>Paralyzed Cyrathul</strong>.</li>
+      <li><strong>Bai Jian</strong> (delaying to after Hedvend) moved in and <strong>Slam Down</strong> &mdash; silver falcata hit plus <strong>Trip: the steward of Isger, prone</strong>.</li>
+      <li><strong>Zarok</strong>: <strong>Vitality Lash</strong> &mdash; save succeeded, but 20 vitality rolled still burned him for 10.</li>
+      <li><strong>Zanthar</strong> sprinted 40 feet from the far end of the manor: <em>"I just ran."</em></li>
+      <li>End of the round: <strong>Ezio Gaeta stepped out at the end of the hall</strong> &mdash; <em>"You just couldn't stay to yourselves&hellip; You just had to do it, huh?"</em></li>
+    </ul>
+
+    <h4>Round 2 &mdash; The Steward Falls</h4>
+    <ul>
+      <li><strong>Cyrathul</strong> (paralyzed, off-guard): could only Recall Knowledge &mdash; his Esoteric Lore <strong>on the newly-arrived Ezio</strong> failed with Dubious Knowledge, delivering the session's best useless intel: <em>"He doesn't have any immunities, and he is a vampire."</em> (One of those is false. Neither mattered.) &mdash; <em>"I'm paralyzed. I'm just looking at him intensely."</em></li>
+      <li><strong>Panacea</strong>: silver Needle Darts at Hedvend &mdash; miss, <strong>hero point</strong> (reroll 2, +10 &rarr; hit) for 6.</li>
+      <li><strong>Ezio</strong> closed on Bai Jian &mdash; head going hazy in his stupefying aura &mdash; <strong>Claw hit (13) and Grab</strong>: <em>"his hand is like a vice."</em></li>
+      <li><strong>Hedvend</strong> (prone, fast healing 5): clawed the paralyzed Cyrathul (13), <strong>grabbed him, and sank his fangs in &mdash; Drink Blood, Cyrathul drained 1</strong> (5 HP lost).</li>
+      <li><strong>Zarok</strong> turned on Hedvend: <em>"I'm going to try to bite him back"</em> &mdash; fangs hit (12 rolled/7 taken), tail smack hit (12/7). At the end of his turn, <strong>Ezio's Hypnotic Gaze</strong> washed over the melee (DC 22 Will): Cyrathul saved; <strong>Zarok failed &mdash; Stupefied 1</strong>.</li>
+      <li><strong>Bai Jian</strong> (delayed to after Zarok, grabbed, off-guard, immobilized &mdash; and out of patience): <em>"I don't even gonna bother to escape, so I'm just gonna swing."</em> Ren's support benefit, then a <strong>critical 39-damage silver falcata blow</strong> and a 9-damage follow-up: <strong>Hedvend VI destroyed.</strong> Dueling Parry up with the last action.</li>
+      <li><strong>Zanthar</strong>: <strong>Slow</strong> on Ezio &mdash; success, Slowed 1 &mdash; then <strong>Hand of the Apprentice</strong>, hurling his maul down the hall with a <strong>hero-pointed reroll</strong> (nat 1 &rarr; 6, +10 &rarr; 27, hit) for 12 rolled, 5 taken through resistance. His only damage of the fight, and worth the point.</li>
+    </ul>
+
+    <h4>Round 3 &mdash; The Dandy Digs In</h4>
+    <ul>
+      <li><strong>Cyrathul</strong> (free of the dead steward's grip): Exploit Vulnerability on Ezio &mdash; <em>"He has no known weaknesses. Until now"</em> &mdash; learned he's <em>"more than a mid-grade vampire,"</em> and bit him with a GM-granted retroactive flank (20 rolled/17 taken through resistance).</li>
+      <li><strong>Ezio</strong> (Slowed): fast healing 7, <strong>Drink Blood on the grabbed Bai Jian</strong> &mdash; 10 damage, drained (reaching <strong>Drained 2</strong>), vitality flowing back into the vampire &mdash; then a Claw that hit for 17 but <strong>failed to crit because of Dueling Parry</strong>.</li>
+      <li><strong>Zarok</strong>: <strong>Claw Stance + Dashing Pounce</strong> &mdash; the leap failed, then his <strong>first hero point</strong> (reroll 8, +10 &rarr; crit success) vaulted him in; one frenzied claw connected (11 rolled/4 taken &mdash; the strike briefly carried a stale Calm &minus;1 from the book fight until the table caught it: <em>"Why do you still have calm on?"</em>), one missed at MAP.</li>
+      <li><strong>Bai Jian</strong>: <strong>Slam Down</strong> hit (13 &mdash; silver cutting straight through the resistance) and <strong>Trip: Ezio prone.</strong> Dueling Parry.</li>
+      <li><strong>Zanthar</strong>: <strong>Drain Bonded Item &rarr; second Slow</strong> &mdash; Ezio crit-succeeded and <em>smiled at him</em>, needle teeth and Bai Jian's blood down his chin.</li>
+    </ul>
+
+    <h4>Round 4 &mdash; Moonlight</h4>
+    <ul>
+      <li><strong>Cyrathul</strong>: Demoralize failed (26 vs 28), but the Jaws <strong>crit</strong> (28 rolled/25 taken) and a claw at MAP (19/16) tore Ezio open.</li>
+      <li><strong>Panacea</strong>: <strong>Moonlight Ray</strong> &mdash; miss, <strong>hero point reroll &rarr; hit</strong> against his off-guard AC. <em>"I thought we were friends. I thought we were friends, darling."</em> <strong>31 damage, cold-silver and holy spirit: Ezio Gaeta destroyed.</strong></li>
+      <li>His body <strong>exploded in blood, goo, and flies</strong> &mdash; a <strong>Cloud of Plague</strong> (DC 22 Fortitude): Bai Jian (28, through his Drained 2 penalty), Cyrathul (27), and Zarok (29) all saved. <strong>Ren rolled 14 and failed</strong> &mdash; see The Unfinished Kill.</li>
+    </ul>
+
+    <p><strong>Damage contribution (both vampires, logged rounds):</strong> Bai Jian 61 (both trips + the Hedvend kill) &middot; Cyrathul 58 &middot; Panacea 37 (the Ezio kill) &middot; Zarok 28 &middot; Zanthar 5 (Hand of the Apprentice; his real contribution was landing Slow &mdash; control, not DPR). Bai Jian's round-1 Slam Down damage on Hedvend predates the chat clear and is uncounted. <strong>Five hero points spent</strong> (Cyrathul's EV, Panacea's needles, Zanthar's hammer, Zarok's leap, Panacea's Moonlight Ray). Kill credits: <strong>Bai Jian on Hedvend VI, Panacea on Ezio Gaeta.</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Blade That Doesn't Flinch</h4>
+      <ul>
+        <li>Met the new player's lurking lizardfolk with a straight face &mdash; <em>"Look, we found the murderer"</em> &mdash; then vouched him in five minutes later: <em>"Welcome to the team. We're in the middle of something right now that we can definitely use your help."</em></li>
+        <li>Ran the investigation's physical layer: pushed to check outside and under every window, and found the <strong>two fingertip indentations in the windowsill snow</strong> &mdash; proof the killer had braced there minutes earlier, the closest anyone came to touching him before the fight.</li>
+        <li>Did more of the interrogation work than the table noticed: vetted the stranger's build on sight (<em>"Are you wearing armor?&hellip; are you cloister or a war priest?"</em>), played bait in Cyrathul's covert heal-test on the tailless servant (<em>"I can help you&hellip; why don't you slowly kind of go over here?"</em>), prompted the Detect Magic that confirmed Lezinia's enchantment, and interviewed Fessy about the scroll (<em>"Did she seem strange to you?"</em>). He also stress-tested the heal plan's economics before backing it &mdash; <em>"it is wasteful, though, because it is a spell&hellip; we do have our cleric"</em> &mdash; which is why the sting ran on free divine-font heals.</li>
+        <li>The deadpan ran all night: <em>"Please calm down"</em> to the diva cowering behind Zarok mid-bull-fight; <em>"Voice actor got to pay rent that day"</em> at the death scream; and <em>"Yeah, we knew it was you"</em> answering Ezio's villain entrance.</li>
+        <li>Added the tradecraft to Cyrathul's heal-test: <em>"We have to make sure that no one knows our intention. We need a valid excuse"</em> &mdash; backed the guard round-up with a <strong>critical-success Aid</strong> on Cyrathul's Diplomacy, then staged the announcement himself, wink and all.</li>
+        <li>Was the fight's anchor in all three combats: double Slam Down trips kept the steam bull prone through both its rounds; his crit <strong>cut the tome-guardian into pieces</strong> (<em>"multiple quick slash &mdash; just cut all the books into pieces"</em>); and in the vampire hallway, <strong>locked in Ezio's vice-grip claw, he declined to escape</strong> &mdash; <em>"I don't even gonna bother to escape, so I'm just gonna swing"</em> &mdash; and killed Hedvend VI with a 39-damage silver crit. Ezio drank him to Drained 2 the next round; he stayed in and tripped the vampire anyway. <em>"Thank god I'm a fighter. Good thing I have silver."</em></li>
+        <li>Table-captain as ever on rules &mdash; walked Cyrathul through Diverse Lore's Recall Knowledge rider mid-fight, tracked the paralysis duration, and clocked the XP ledger to the point (<em>"we have 940 &mdash; come on guys, we're so close"</em>).</li>
+        <li>Ended the night pragmatic in-character: asked the new acting steward straight-up about payment, and shrugged off the empty coffers &mdash; <em>"Well, it's always good to get rid of such a wretched person."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Dragon Who Built the Test</h4>
+      <ul>
+        <li>Authored the session's decisive idea from a fingertip in the snow &mdash; <em>"We could, in theory, heal people, because if they take positive healing, they'll take it as damage&hellip; If people use three-action heal, that could hit the entire ballroom at once"</em> &mdash; and, when the hunt stalled an hour later, made it the plan: <em>"I think our best bet is heal everyone. That would immediately tell us who's undead."</em> The entire endgame &mdash; the round-up, the sting, the identification-by-absence &mdash; grew from those lines.</li>
+        <li>Ran the interrogations: covertly tried to heal-test the tailless servant on first contact (<em>"They look like they've been hurt. You should heal them"</em>), and asked her the question that unlocked the manor &mdash; <em>"How did you get past the defenses?"</em> &mdash; producing the house-stamp lockets the wards ignore.</li>
+        <li>Called both frame-jobs in real time: Lezinia's confession (<em>"I have a theory that the memory that she killed him is planted"</em>) and the planted cloak (<em>"I think that the red cloak is a red herring"</em>), backing the latter with a Diverse Lore pull &mdash; Urgathoa's colors are red <strong>and green</strong>.</li>
+        <li><strong>Mirror Cloak'd through Fessy's locked door</strong>, then led with kindness instead of claws: <em>"We're not here to hurt you. We were just worried."</em></li>
+        <li>Paid the price for opening the closet &mdash; Paralyzed by Hedvend's gaze, then grabbed with fangs in his neck &mdash; and played it to the hilt: <em>"I can't speak, so I wouldn't be able to say anything. I'm paralyzed. I'm just looking at him intensely."</em> Freed, he went straight back in: Exploit Vulnerability (<em>"He has no known weaknesses. Until now."</em>), a crit bite, and a claw at MAP in the final round.</li>
+        <li>Delivered the party's report by upending the body bag onto Caeto's floor, and the campaign's running theme in four words: <em>"This happens too much. The betrayal."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Healer Who Pulled the Trigger</h4>
+      <ul>
+        <li>Opened the session with the full recap from her own notes (bonus hero point) and closed it with the kill &mdash; the record-keeper's session, start to finish.</li>
+        <li>Vindicated across two sessions: her hedged S14 memory of <strong>Ezio refusing the garlic dish</strong> was real, and she owned both halves of it in the post-mortem &mdash; <em>"That's how we knew, with the garlic"</em> and, honestly, <em>"we fumbled the ball on that by talking about it in front of him."</em></li>
+        <li>Made the sharp inferences look casual: recognized the servant's memory-wipe mid-sentence (<em>"Oh no, it's wiping its memory &mdash; just like the other guy we interrogated"</em>), pattern-matched the killer's movement (<em>"That's the same MO. He's coming in and out through windows &mdash; we should order a lockdown of all the windows"</em>), and used the height evidence to clear every halfling in the building.</li>
+        <li><strong>Cast the sting itself</strong> &mdash; the three-action Heal over the packed ballroom that proved every guest was living and convicted Ezio by elimination.</li>
+        <li>Went down dying in the steam bull's death-explosion, got back up, and finished the night by executing a vampire with his own social weapon turned back on him: <em>"As I throw this &mdash; I thought we were friends. I thought we were friends, darling."</em> Moonlight Ray, holy silver moonlight, kill confirmed. Then, ever practical: <em>"Put it in our bag. Our body bag."</em></li>
+        <li>Her line about Serrafina's whereabouts was peak witch-and-familiar domesticity: <em>"I don't know where she is either. She's in my cape somewhere."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Rebel Who Asks the Rude Question</h4>
+      <ul>
+        <li>His interrogation style is a can opener: <em>"Why'd you lose your tail?"</em> cracked the servant confession that gave the party the red-cloak figure, the mausoleum dirt, and the ward-bypassing lockets. His follow-up Recall Knowledge crit identified the memory-editing as Rewrite Memory-grade magic &mdash; and his own question, <em>"Do vampires do that?"</em>, connected the campaign's two-session memory-wipe mystery to vampire domination.</li>
+        <li>Ran the healing tests that cleared the innocent: Lay on Hands on Lezinia (living, framed) and on Fessy (living, terrified). Also the one who spotted the <strong>planted red cloak</strong> in Lezinia's bag.</li>
+        <li>Herded the entire noble guest list with zero diplomatic varnish: <em>"You're picking off guests one at a time, so I want you all together."</em></li>
+        <li>Managed his spellbook like a wartime quartermaster &mdash; <em>"I'm running low on spells, and I think we're gonna fight a vampire later, so I'm just gonna Electric Arc him"</em> &mdash; then spent the real fight double-casting <strong>Slow</strong> on Ezio (Drain Bonded Item for the second), eating a crit-success save and a needle-toothed smile for his trouble.</li>
+        <li>Suffered the night's dice curse with grace: <em>"I haven't rolled above a 10 for initiative yet."</em></li>
+        <li>The genre-savvy conscience at the end: made sure the drained victims get <strong>burned</strong> &mdash; <em>"the people that went down, they'll need to be burned as well"</em> &mdash; and signed off on the new regime with <em>"It's good to make friends in high places, too."</em> His verdict on Ezio was the table's best epitaph: <em>"And we influenced him. That's a waste."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zarok">
+      <h4>Zarok Brewhide &middot; the Aleigator <em>(new player, first session)</em></h4>
+      <ul>
+        <li>Entered the campaign hiding behind a bush in a blizzard, drinking: a very tall lizardfolk in priestly gear whose mission briefing had clearly been light on detail &mdash; <em>"I was supposed to bring some beer to the breakers. I don't know which ones they are, but they broke something."</em> His theology of the org: <em>"They broke hell and now we gotta fix it."</em> And the introduction that will outlive us all: <em>"My name is Zarok Brewhide, but everybody just calls me the Aleigator."</em></li>
+        <li>Immediately claimed the party's forensics lane &mdash; his Medicine 33 examined the solarium victim &mdash; and its second-healer lane: his first three-action divine font Heal <strong>got a dying Panacea back on her feet</strong> and washed over the wounded bystanders besides, with Bless and Vitality Lash rounding out the kit.</li>
+        <li>Announced his combat style by <strong>roundhouse-kicking Fessy's locked door off its hinges</strong> in one Athletics check, and fought the vampires like a crocodile: <em>"I'm going to try to bite him back"</em> and <em>"I'm gonna smack him with my tail."</em></li>
+        <li>Spent his first-ever hero point on a Dashing Pounce leap and got the table's house rule demonstrated live &mdash; low reroll, +10, crit success &mdash; before raking Ezio with frenzied claws.</li>
+        <li>First-session growing pains handled with good humor: declared targets for his opening spell &mdash; <em>"Target&hellip; Bai Jian. Cy."</em> &mdash; before realizing PF2e Bless is an aura (<em>"Are you thinking of 5E Blast?" "Yes. Yes, I am. Sorry."</em>), and shrugged off a failed Hypnotic Gaze that left him Stupefied. The table's verdict was instant adoption.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Clues</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Whispering Wire (Greater)</div>
+      <div class="loot-source">Lezinia's travel bag</div>
+      <div class="loot-note">Bundled with the planted red cloak; she gave it up freely.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Oil of Revelation</div>
+      <div class="loot-source">Lezinia's travel bag</div>
+      <div class="loot-note">Same bundle &mdash; wrapped in the cloak with her valuables.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Jewelry</div>
+      <div class="loot-source">Lezinia's travel bag</div>
+      <div class="loot-note">Her own valuables, gifted &mdash; "I don't need it anymore."</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Elixir of Life (Lesser)</div>
+      <div class="loot-source">Fessy Finwinkle</div>
+      <div class="loot-note">Her personal savings, given in apology.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Marvelous Miniature (Horse)</div>
+      <div class="loot-source">Fessy Finwinkle</div>
+      <div class="loot-note">"I've been saving this pony for a while, but you guys can have it."</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Encryption Ring</div>
+      <div class="loot-source">Ezio Gaeta's remains</div>
+      <div class="loot-note">Runes match the vertebra wheel-cipher &mdash; Ezio was in correspondence with "Illcayna."</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Sword and Shield</div>
+      <div class="loot-source">Caeto Vulaunex's office wall</div>
+      <div class="loot-note">Reward from the acting steward; unidentified. "Warriors like you should not go unarmed."</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">The Planted Red Cloak</div>
+      <div class="loot-source">Lezinia's bag &middot; evidence</div>
+      <div class="loot-note">Never seen worn by anyone at the gala. Urgathoa's colors are red and green.</div>
+    </div>
+  </div>
+  <div class="xp-banner">
+    Experience &middot; 60 steam bull &middot; 30 clearing Lezinia &middot; 40 tome guardian &middot; 96 vampires (Severe) &middot; 120 story bonus = <strong>346 XP &rarr; LEVEL 6</strong> &mdash; 1,196 total, 196 into the level
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Zarok</strong>: "I was supposed to bring some beer to the breakers. I don't know which ones they are, but they broke something, and now I'm here to give ale to them."
+    <span class="attribution">The new PC's mission briefing, as understood by the new PC.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zarok</strong>: "My name is Zarok Brewhide, but everybody just calls me the Aleigator."
+    <span class="attribution">The introduction. The table adopted him on the spot.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "Look, we found the murderer."
+    <span class="attribution">Discovering a seven-foot lizardfolk hiding behind a bush at a murder scene.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "Why'd you lose your tail?"
+    <span class="attribution">The interrogation opener that cracked the servant, the red-cloak lead, and the ward-locket secret in one blunt stroke.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "Oh no, it's wiping its memory. Just like the other guy we interrogated."
+    <span class="attribution">Watching the servant's face go blank mid-answer &mdash; the S13 memory-edit signature, live.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "I think our best bet is heal everyone. That would immediately tell us who's undead."
+    <span class="attribution">The plan the whole session pivoted on &mdash; first sketched an hour earlier from a fingertip mark in windowsill snow.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "You're picking off guests one at a time, so I want you all together."
+    <span class="attribution">Crowd control, wizard-style.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "I can't speak, so I wouldn't be able to say anything. I'm paralyzed. I'm just looking at him intensely."
+    <span class="attribution">Roleplaying through Hedvend's paralysis, fangs inbound.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zarok</strong>: "I'm going to try to bite him back."
+    <span class="attribution">The Aleigator's response to vampire fangs. Followed shortly by "I'm gonna smack him with my tail."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I don't even gonna bother to escape, so I'm just gonna swing."
+    <span class="attribution">Grabbed by one vampire &mdash; and killing the other one anyway.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "As I throw this &mdash; I thought we were friends. I thought we were friends, darling."
+    <span class="attribution">Moonlight Ray. Kill confirmed. The healer he'd gossiped with all gala ended him with holy moonlight.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "And we influenced him. That's a waste. What was I wasting all my time on him for?"
+    <span class="attribution">The table's epitaph for Ezio Gaeta.</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "You don't want to flank with me?"
+    <span class="attribution">To Cyrathul, who had just attacked the vampire without setting up the flank. &mdash; "Oh, you're right. Well, too late now."</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "That was a betrayal, right?"<br>
+    <strong>Cyrathul</strong>: "This happens too much. The betrayal."
+    <span class="attribution">The post-mortem on Ezio &mdash; and the campaign in four words.</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>REN HAS CHOKING DEATH &mdash; AND EZIO ISN'T PERMANENTLY DEAD UNTIL IT'S CURED.</strong> From the roll log: Ezio's death-burst was <strong>Cloud of Plague</strong> &mdash; each living creature in 15 feet saves DC 22 Fortitude or contracts choking death at stage 1, and <em>Ezio bursts forth from the corpse of the first creature to die of this affliction, fully healed</em> &mdash; permanent destruction only if all affected creatures are cured. <strong>Ren failed the save (14 vs DC 22).</strong> Never discussed at the table. Curing Ren is the difference between a dead vampire and a returning one. Zarok's Medicine +14 with Ward Medic is the tool.</li>
+      <li><strong>Illcayna is still out there.</strong> Ezio carried an <strong>encryption ring matching the bone cipher</strong> &mdash; he was a servant, not the principal. <em>"Illcayna will reward you when Isger is hers"</em> remains unclaimed, and Caeto has never heard the name.</li>
+      <li><strong>Who edited the memories?</strong> The tailless servant and Lezinia both had surgical memory work &mdash; same signature as Lefranek in S13. Vampire domination is <em>a</em> candidate, and Ezio is dead &mdash; but the red-cloak-with-burning-eyes figure was never confirmed to <em>be</em> Ezio. If the memory editor survives him, the operation does too.</li>
+      <li><strong>"No ordinary vampire."</strong> Caeto: vampires need ~3 days to rise; Hedvend rose in hours. The mausoleum-dirt ritual, the used decomposition talisman, and <strong>four bodies of missing blood</strong> were the machinery of something &mdash; and nobody at the table has connected those pieces yet.</li>
+      <li><strong>A Hellknight Paralictor now rules Isger.</strong> Caeto Vulaunex is acting steward "until Mother Cheliax decides." He is warm to the party, was <strong>born near Saringallow</strong> &mdash; and Cyrathul once claimed to be a Saringallow local to his face while undercover. The best-positioned ally the League has ever had, or the most dangerous audit waiting to happen.</li>
+      <li><strong>Lezinia the loose thread.</strong> The night's designated patsy &mdash; implanted confession, planted cloak, weaponized scroll gift to Fessy. Someone chose her. She's alive, cleared, and traumatized; she may remember something someday.</li>
+      <li><strong>The Widow Queen, the man in the red cloak, Frederick Consum</strong> &mdash; all still unresolved from S12&ndash;S14, all still out there.</li>
+      <li><strong>The party's real mission is still open</strong>: the Quoster supply deal is closed, but the Elidir chapter's work &mdash; and the frame-job's authors ("fake Hellknights, fake vampires," as Panacea tallied it) &mdash; remain.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>The Unfinished Kill</h2>
+  <div class="cliffhanger">
+    <span class="label">From the roll log &mdash; never discussed at the table</span>
+    <p>Ezio Gaeta exploded into blood, goo, and flies, and the party celebrated. But his death trigger was a <em>Cloud of Plague</em>: every living creature within fifteen feet had to beat a DC 22 Fortitude save or contract choking death. Bai Jian saved. Cyrathul saved. Zarok saved.</p>
+    <p><strong>Ren rolled a 14.</strong></p>
+    <span class="big-line">"Ezio bursts forth from the corpse of the first creature to die of this affliction, fully healed."</span>
+    <span class="speaker">&mdash; permanently destroyed only if every infected creature is cured. Cure the dog.</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</em></p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Spotted the new arrival hiding in the blizzard; vouched him in once his story checked. <strong>Zarok Brewhide</strong> &mdash; lizardfolk war priest, healer, natural weapons. The party has a real cleric now.</li>
+    <li>Found the <strong>fingertip marks in the windowsill snow</strong> at the solarium &mdash; the killer left them minutes before we arrived. Closest we came to him before the hallway.</li>
+    <li>Backed Cy's mass-heal plan and built the cover for it: gather everyone "for an announcement," heal the crowd, watch for a flinch. Nobody flinched. That told us everything &mdash; the killer was the one who wasn't in the room. Crit-Aided Cy's Diplomacy to get the guards moving.</li>
+    <li>Kept the steam bull on the ground both rounds &mdash; Slam Down, trip, parry, repeat. From the trample onward it never took a turn on its feet.</li>
+    <li>Cut the book-creature apart in Fessy's room. One nat-20 crit.</li>
+    <li><strong>Killed Hedvend VI.</strong> Grabbed by Ezio &mdash; escaping would have cost the turn. Swung instead. Silver crit, 39, then finished it. The silver falcata went through vampire resistance like it wasn't there. Ezio drank from me the next round; I ended the fight <strong>Drained 2</strong>.</li>
+    <li>Asked Caeto about payment. Coffers empty. Took the sword and shield anyway.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>Nothing held back this session &mdash; everything went to the table in the moment.</li>
+    <li><em>(Table knowledge from the export, needs saying out loud next session: <strong>Ren failed the save against the burst from Ezio's corpse &mdash; DC 22, rolled 14. Choking death, stage 1.</strong> The ability text says Ezio comes back <strong>fully healed from the corpse of the first creature that dies of this disease</strong> &mdash; and is only permanently destroyed if everyone infected is cured. <strong>Cure Ren first thing.</strong> Zarok's Medicine is +14.)</em></li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>Ezio was the convenient suspect, and he was guilty anyway.</strong> My caution about misdirection was wrong in the best way &mdash; but only half wrong: the red cloak WAS planted, Lezinia WAS framed, the confession WAS implanted. Somebody built misdirection <em>around</em> a real vampire. Who dressed the scene?</li>
+    <li>The <strong>encryption ring</strong> means Ezio answered to Illcayna. Killing him didn't close the network &mdash; it decapitated one node of it.</li>
+    <li><strong>Hedvend rose in hours, not days.</strong> The dirt ritual, the black-sand talisman, the missing blood &mdash; that was engineered. Whoever engineered it can do it again to any body we leave unburned. Zanthar is right about burning the victims. Verify it happened.</li>
+    <li><strong>Caeto runs Isger now.</strong> A Hellknight who likes us, owes us, and was born next to our HQ. That is either the League's biggest asset or a blade at our throat, and it will not stay ambiguous forever.</li>
+    <li>Drained 2 heading into level 6 &mdash; get that restored before the next fight.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Is Ren cured? <strong>Do not leave the manor district without settling this.</strong></li>
+    <li>Who or what is <strong>Illcayna</strong> &mdash; and did the memory-editing die with Ezio, or does the red-cloak figure with burning eyes still exist?</li>
+    <li>Where did four bodies' worth of blood <em>go</em>?</li>
+    <li>Did the guards actually burn the drained victims?</li>
+    <li>What are the sword and shield from Caeto's wall? (Identify before someone bonds with a cursed regent's blade.)</li>
+    <li>Does Caeto's promotion change the Quoster deal, the founders' safehouse confinement, or the League's exposure in Elidir?</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

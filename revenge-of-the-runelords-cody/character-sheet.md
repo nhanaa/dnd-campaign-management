@@ -1,8 +1,8 @@
 # Character Sheet — Revenge of the Runelords (Cody's table)
 
 **Name:** **Sevek**
-**Human (Dragonblood — Sky Dragon) · Monk 13 · Local Savior (Roderic's Cove) · Worshipper of Ashava**
-**Role:** frontline controller / tank — mass Trip, Taunt, highest AC in the party
+**Human (Dragonblood — Sky Dragon) · Monk 14 · Local Savior (Roderic's Cove) · Worshipper of Ashava**
+**Role:** frontline controller / tank — mass Trip, Taunt at 120 ft, highest AC in the party, and as of 14: **permanent flight**
 
 > Backstory, voice, and party notes: **[character.md](character.md)**
 > Hired muscle out of **Roderic's Cove** — a small port on the Varisian Gulf that exists because merchants won't dock at Riddleport. He collected debts for the people squeezing his own town, then stopped, and kept stopping. Took his devotions at **Ashava's side shrine** in the Temple of the Stars and Roads. *Lead the lost; cast light in places of darkness; dance even when there is no music.*
@@ -18,152 +18,141 @@
 
 | Str | Dex | Con | Int | Wis | Cha |
 |---|---|---|---|---|---|
-| **20** (+5) | 16 (+3) | 16 (+3) | 12 (+1) | **18** (+4) | 10 (+0) |
+| **20** (+5) | **18** (+4) | 16 (+3) | 10 (+0) | **18** (+4) | 10 (+0) |
 
-Boosts: **1** Str/Con/Dex/Wis · **5** Str/Con/Wis/Dex · **10** Str/Wis/Con/Int
+Boosts: **1** Str/Con/Dex/Wis · **5** Str/Con/Wis/Dex · **10** Str/Wis/Con/**Dex** — Int deliberately dropped for Dex. Endgame (15/20 boosts): **Dex and Wis both +5 at 20, Con +4**.
 
-**Dex 16 is exactly optimal** — Scaly Hide caps Dex at +3 while unarmored, so anything higher is wasted.
+**Dex 18 exceeds Scaly Hide's +3 AC cap on purpose** — the fourth boost buys nothing for AC but a real +1 to **Reflex** (the permanent soft save) and Acrobatics. Reflex is worth more than Int at this table.
 
 ## Defenses
 
 | | Value | Source |
 |---|---|---|
-| **AC** | **36** → **38 in Whirlwind Stance** | 10 + 13 + 6 (master unarmored, *Graceful Mastery*) + 3 Dex + 2 potency + **2 Scaly Hide** |
-| HP | **190** | 8 human + 13×(10 monk + 3 Con) + 13 Toughness — exact |
-| **Fort** | **+23** | master |
-| Reflex | +21 | expert — **softest save** |
-| **Will** | **+24** | master |
-| Perception | +21 → **+23 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | expert |
+| **AC** | **37** → **39 in Whirlwind Stance** | 10 + 14 + 6 (master unarmored, *Graceful Mastery*) + 3 Dex + 2 potency + **2 Scaly Hide** |
+| HP | **204** | 8 human + 14×(10 monk + 3 Con) + 14 Toughness — exact |
+| **Fort** | **+24** | master — **Path to Perfection: success → crit**. **Plan: Third Path at 15 → LEGENDARY** (crit fail → fail; failed save vs damage → half) |
+| Reflex | **+23** | expert — the chassis never upgrades it (Third Path only touches Fort/Will), hence the Dex boosts. **Plan: Canny Acumen (Reflex) at 15 → MASTER at 17** (~+29 with rune + Dex). Until then: mythic rerolls, positioning, don't clump |
+| **Will** | **+25** | master — **Second Path: success → crit**, plus the Ascended Celestial 1/hr Will reroll |
+| Perception | +22 → **+24 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | expert |
 
 Scaly Hide's +2 is **explicitly cumulative** with explorer's clothing potency runes. Whirlwind Stance's +2 is a **circumstance** bonus and stacks with everything.
+
+⚠️ **No Fortification rune** — Cody ruled it illegal on explorer's clothing (medium/heavy armor only) mid-S4, after a flat check had already succeeded. It's off the sheet; the crit that dropped Sevek that day stood.
+
+## Speed & flight — the altitude stack
+
+**Land 60** = 25 base + 20 Incredible Movement + 5 Nimble Elf + 5 Fleet + 5 Propulsive Boots
+**Fly 60, permanent** (*Ascend*, no activation) + **Flyby Attack** · **1/day: fly 120 for 5 rounds** (*Ascend* burst — adult mirage dragons fly 150; at 20 with Greater Boots of Bounding this hits **150: dead parity**)
+
+Knocked out of the sky costs ~1 action total, five layers deep:
+1. **Cat Fall** (master Acrobatics): falls land 50 ft shorter — a 30–50 ft swat is free
+2. **Kip Up**: stand as a free action, no reactions triggered
+3. **Fly 60**: re-ascend on the same turn
+4. **Wyrm's Wingspan tattoo**: 1/day backup minute of flight + soft landing (now strictly redundancy; its real payload is the **permanent resistance 10** — leaning occult/mental, which S4's mental-heavy damage profile vindicated)
+5. **Become Destiny** (free action, 1 MP): strip any one condition — the answer to **Grabbed/Restrained/immobilized**, which nothing else in the kit touches
 
 ## Offense
 
 **+2 Greater Striking Flaming Astral Bo Staff** — 1d8 B, traits **monk, parry, reach, trip**
 
-- **Attack +26** · **3d8 + 8, plus 1d6 fire and 1d6 spirit** ≈ 28.5 per hit
+- **Attack +27** · **3d8 + 8, plus 1d6 fire and 1d6 spirit** ≈ 28.5 per hit
 - The **trip trait** means no free hand needed *and* the weapon's potency adds to Trip checks
 - **parry** is what Whirlwind Stance requires; **monk** is what Monastic Weaponry needs for Flurry
+- **Herald's Weapon** (1/hr, 1 action): the staff goes **all-spirit + sanctified + 2d4 spirit** for a minute — bypasses physical resistance and points holy damage at an AP full of unholy Risen
 
-**Trip: +27** — 13 + 6 (master Athletics) + 5 Str + 2 item + 1 circumstance (Reflective Ripple)
+**Trip: +28** — 14 + 6 (master Athletics) + 5 Str + 2 item + 1 circumstance (Reflective Ripple)
 *Item bonuses don't stack: Sash of Prowess +2 and the staff's potency +2 are both item, take one.*
 
 ## Skills
 
-**Master:** Acrobatics **+24** · Athletics **+26** · **Religion +23**
+**Master:** Acrobatics **+26** · Athletics **+27** · **Religion +24** (+2 more from Shining Symbol on checks)
 **Trained:** Arcana, Crafting, Intimidation, Medicine, Nature, Occultism, Society, Stealth, Survival
 **Lores:** **Warfare +20** (master, *Additional Lore*) · **Art** *(Local Savior)*
 
-⚠️ **Architecture Lore is gone** — it came from Escaped from Time. **Mercantile** was on the old sheet and I don't know what granted it; if it was never sourced from anything but the background shuffle, it drops too. Check Pathbuilder.
-
 **Languages:** Common · **Thassilonian** · Azlanti · Aklo · Wildsong *(Druid Dedication)*
 
-Thassilonian is the one ancient language the guide says actually **gates communication** in this AP rather than adding flavor; Aklo and Azlanti are both on its secondary value list. Between the three he covers most of the campaign's ancient-language surface, and Azlanti is his own ethnic tongue besides.
+Thassilonian is the one ancient language the guide says actually **gates communication** in this AP. Aklo already paid off — S4's siktemporas Demoralized in it ("Punished for speaking languages").
 
-**Religion is the party's real source** — Mithtirith is only *trained* in it despite being the Cleric. Master Religion also satisfies the **Mortal Herald** prerequisite outright, so that archetype no longer depends on any deity's divine skill.
+**Occultism is trained, not master, and that's deliberate.** Int 10 means he was never going to be the Recall Knowledge PC. **Always roll Perception for initiative** (+24, wins ties).
 
-**Occultism is trained, not master, and that's deliberate.** Int 12 means he was never going to be the Recall Knowledge PC; the party's gap there is real but it isn't his to fill. **Always roll Perception for initiative** (+23, wins ties) — the background's Occultism-initiative option is never the better roll and isn't part of how he plays. Escaped from Time is on the sheet for flavor.
+**Religion is the party's real source** — Mithtirith is only *trained* in it despite being the Cleric. Master Religion satisfies the **Mortal Herald** prerequisite outright and carried six days of Oppose the Risen in S4 (3,600 gp of consumables).
 
 ## Class features & feats
 
-**Monk:** Flurry of Blows · Powerful Fist · Mystic/Metal Strikes · Incredible Movement · Path to Perfection (**Fortitude**) · Second Path (**Will**) · **Graceful Mastery** (master unarmored, 13) · Master Strikes · Weapon Specialization
+**Monk:** Flurry of Blows · Powerful Fist · Mystic/Metal Strikes · Incredible Movement (+20) · Path to Perfection (**Fortitude**) · Second Path (**Will**) · **Graceful Mastery** (master unarmored) · Master Strikes · Weapon Specialization
 
-**Class feats:** Monastic Weaponry · **Reflective Ripple Stance** · **Qi Spells** · **Flurry of Maneuvers** (4) · **Stand Still** (4) · **Rippling Spin** (8) · **Wave Spiral** (12)
+**Class feats:** Monastic Weaponry · **Reflective Ripple Stance** · **Qi Spells** · **Flurry of Maneuvers** (4) · **Stand Still** (4) · **Rippling Spin** (8) · **Reflexive Stance** (12) · **Advanced Defender** (14) → **Long-Distance Taunt**
 
-**Wave Spiral** — 1 action, once per minute, requires Reflective Ripple Stance: **one Athletics Trip against every creature standing on the ground in a 10-foot emanation.** All count toward MAP, but **the penalty doesn't rise until after you've made them all**, so every Trip in the burst rolls at your current MAP. At Trip +27 that's a floor-clearing button.
+**Reflexive Stance** (replaced Wave Spiral, 2026-08-02) — **free action on rolling initiative: enter a stance.** Enemies that win initiative meet AC 39 (or the Ripple trip engine) before anyone acts, and turn 1 never spends an action on stances — that action goes to the Ascend burst, Herald's Weapon, or (at 18) Shining Glory. **After Fuse Stance at 16 this enters BOTH stances at initiative, permanently, for zero actions.** Wave Spiral was cut honestly: 10-ft emanation trips *every* creature including allies, and this party fights clumped.
 
-⚠️ **It costs you AC until 16.** Wave Spiral needs **Reflective Ripple**, and you can only hold one stance until **Fuse Stance**. Running Ripple means **AC 36, not 38** — you trade 2 AC for the mass Trip until level 16 merges them.
-
-**Ancestry (Paragon):** General Training · Natural Ambition · **Nimble Elf** · **Otherworldly Magic** · **Scaly Hide** · **Otherworldly Acumen** (9) · **Elf Step** (9) · **Multitalented** (9)
+**Ancestry (Paragon):** General Training · Natural Ambition · **Nimble Elf** · Otherworldly Magic · **Scaly Hide** · **Otherworldly Acumen** (9) · **Elf Step** (9) · **Multitalented** (9)
 
 **General:** Adopted Ancestry (Elf) · Fleet · Toughness · **Incredible Initiative**
-**Skill:** Quick Jump · **Additional Lore (Warfare)** · **Cat Fall** · **Pilgrim's Token** · Aerobatics Mastery · Kip Up
+**Skill:** Quick Jump · **Additional Lore (Warfare)** · **Cat Fall** · **Pilgrim's Token** · Aerobatics Mastery · Kip Up · **Quick Climb** (14 — pairs with the Echoes of the Swords spend/refill vectors)
 
-**Additional Lore grants skill increases at 3rd, 7th, and 15th**, so taken now it lands at **master immediately — Warfare Lore +20**. The player's guide names Warfare the single most-used Lore in this AP, and notes Lore checks *"often represent the easiest DCs to hit."* Beats your Occultism (+16) and claws back part of the Recall Knowledge lane the party lost with Jericho.
-
-**Bullying Staff replaces Titan Wrestler and is an upgrade.** Titan Wrestler capped you at **two** sizes larger. Bullying Staff gives **two sizes, or three with master proficiency in your staff** — which you have via Master Strikes + Monastic Weaponry. Medium → you can Trip or Shove anything up to **Gargantuan**. The tradeoff: Bullying Staff covers only **Shove and Trip**, so Grapple, Disarm, and Reposition lose the size extension. Rippling Spin's Disarm option is the only place that's felt.
-
-**Cat Fall is the Wind Jump insurance.** At **master Acrobatics** you treat falls as **50 feet shorter** — and falling damage is half the distance fallen. Wind Jump drops you if you miss the DC 30 Acrobatics check at end of turn (25% at your +24), so anything under a 50-foot drop now costs **nothing but the landing**. It also lets you trip a flier and follow it down.
-
-**Cat Fall is the Wind Jump insurance.** At **master Acrobatics** you treat falls as **50 feet shorter** — and falling damage is half the distance fallen. Wind Jump makes you fall if you miss the DC 30 Acrobatics check at end of turn (25% at your +24), so anything under a 50-foot drop now costs you **nothing but the landing**. It also covers tripping a flier and following it down.
-
-**The initiative rebuild nets out ahead.** Elven Instincts gave +2 circumstance *to Perception initiative only*, plus tie-breaking. **Incredible Initiative** gives the same +2 to **any** initiative roll, and **Pilgrim's Token** restores the tie-break. Same +23, broader coverage, and it freed the ancestry slot for Otherworldly Acumen. Pilgrim's Token requires trained Religion and a specific deity — both satisfied — and in fiction it's a wooden token from the Ashavan house he still belongs to.
+**Bullying Staff replaces Titan Wrestler and is an upgrade** — Trip or Shove anything up to **Gargantuan** (three sizes via master staff proficiency). Proven on the S4 mukradi. The tradeoff: Grapple, Disarm, and Reposition lose the size extension.
 
 ### Archetypes
 
 | Archetype | Feats |
 |---|---|
-| **Guardian** | Dedication → **Taunt** · Basic Defender → **Bodyguard** · **Guardian's Intercept** |
+| **Guardian** | Dedication → **Taunt** · Basic Defender → **Bodyguard** · **Advanced Defender → Long-Distance Taunt (Taunt at 120 ft)** |
 | **Staff Acrobat** | Dedication · **Bullying Staff** · **Whirlwind Stance** (+2 circ AC) |
 | **Druid** *(via Multitalented)* | Dedication (**Wave order**) → **Electric Arc**, **Frostbite** |
-| **Mortal Herald** | Dedication → 1/day self-only **Heal** at half level; **free action when reduced to 0 HP** |
+| **Mortal Herald** | Dedication (1/day self Heal; free action at 0 HP — **remember it exists**, it went unused when he dropped in S4) · **Herald's Weapon** (14) |
 
-**Bodyguard:** designate **Mithtirith** (the Cleric) as your charge — your Taunt penalty against him becomes **−2**. Chosen at daily preparations, 10 minutes to change: free, permanent, no action.
-
-He was **AC 30** in the last logged session at level 12; **Divine Defense** at Cleric 13 raises unarmored defense to expert, so he should be **AC 33** now (he uses Mystic Armor, which runs off unarmored proficiency). Still 5 below Paya and 8 below you, still the only healer, still eating ~**44 damage per attack aimed at him** versus your ~24. The call doesn't change.
-
-**Mortal Herald** binds you to **Ashava's anathema** — *never intentionally mislead someone, never desecrate a grave, never abandon a creature in darkness* — and grants the **holy** trait. Worth checking how holy interacts with the Astral rune's spirit damage against unholy enemies before it comes up at the table.
-
-**You carry three anathema sets, not one.** Druid Dedication also binds you to the **druid anathema** and to **Wave order's** — *"polluting water, or allowing those who pollute water sources to go unpunished."* Wave was the right order thematically (Reflective Ripple Stance and Wave Spiral are both **water**-traited), but know that it's a live obligation, and that the order grants **nothing else** — no order spell, no Rising Surf. Its one concrete benefit is training in **Medicine**.
+**The level-14 rebuild retired every intercept** — Guardian's Intercept, Unbelievable Interception, and Mythic Strike are retrained out. Deliberate identity shift: the tank works by **Taunt at 120 ft + flight + kill pressure**, not by taking hits for people. Bodyguard stays on **Mithtirith** (the enemy magnet: 381 damage absorbed in S4 at the table's lowest AC).
 
 ## Focus & spells
 
-**Focus pool 2** — **Inner Upheaval** (qi) only, now that Wind Jump is gone. ⚠️ **Two points, one spell** — the second point does nothing. Worth spending a feat on another focus spell, or accepting the waste.
-**Innate:** **Guidance** (divine, at-will — *Local Savior / Roderic's Cove*) · Light (arcane, at-will) · **Enlarge** (arcane, 1/day — *Otherworldly Acumen*) · Electric Arc, Frostbite (primal cantrips) · Heal (divine, 1/day, self only)
+**Focus pool 2** — **Inner Upheaval** (qi): +1 status to flurry attacks, +2d6 of **force/spirit/vitality/void chosen per Strike**. Vitality is the regeneration off-switch (killed Siktempora A with it).
+**Innate:** **Guidance** (divine, at-will) · Light (arcane, at-will) · **Enlarge** + **Vision of Death** (arcane — Otherworldly Acumen/Magic) · Electric Arc, Frostbite, **Spout** (primal) · **Warp Step** · Heal (divine, 1/day, self — Mortal Herald) · Figment (Cloak of Illusions)
 
-**At-will Guidance is a real action sink for your spare action.** 1 action, 30 feet: an ally gets **+1 status** to one attack roll, Perception check, save, or skill check before the start of your next turn. Different target each round (1-hour immunity per creature). On a party where Paya swings at +25 and Mithtirith rolls saves at AC 30, that's a free +1 every round for nothing but an action you often have spare.
-**Item:** Figment, Phantasmal Treasure (divine, *Phantasmal Doorknob*)
-
-Otherworldly Acumen's 2nd-rank spell is **swappable with one day of downtime**, so Enlarge isn't a locked pick — worth revisiting once you see what the campaign actually asks for.
+**At-will Guidance remains the best spare action in the kit** — it fed the killing flurry on Krenlith.
 
 ## Mythic
 
-**Calling: Acrobat's Calling** — spend a Mythic Point to Balance / Maneuver in Flight / Tumble Through / Long Jump at mythic proficiency. Regain a point the first time each day you crit an Acrobatics check while Balancing, Tumbling, or Maneuvering in Flight. *Staff Acrobat turns Balance successes into crits, making that refill near-automatic.*
+**Calling: Echoes of the Swords** *(swapped from Acrobat's Calling in v3 — from the AP's Saga Lands calling set; confirm with Cody alongside the retrain package)* — spend a Mythic Point to Climb / Force Open / High Jump / Long Jump / Swim at mythic proficiency. **Refill: first Athletics crit each day while doing any of those — no "during combat" clause.** The engine: **Quick Jump makes Long Jump one action**, DC = declared distance, and at +27 (+2 Staff Acrobat, +5 ft) a 15-foot jump **crits on a natural 2**. Long Jumping at the enemy instead of Striding = a normal approach action with the Mythic Point refunded as a side effect. Verify the exact action list and any edicts/anathema in the book before the retrain — the local data strips them.
 
-**Destiny: Ascended Celestial** — once/hour reroll a Will save; 30-ft nimbus granting allies +1 status vs fear; Bless Ally.
+**Destiny: Ascended Celestial** — **kept, after a full Eternal Legend evaluation** (see progression.md). 1/hr Will reroll; 30-ft moonlight nimbus, +1 status vs fear for allies inside; Bless Ally.
 
-**Mythic feats:** Ears That Hear the Truth (2) · Godspeed (4) · Correct the Story (6) · **Unbelievable Interception** (8) · Mythic Strike (10) · **Ascended Celestial Dedication** (12)
+**Mythic feats:** Ears That Hear the Truth (2) · **Fiery Rebirth** (4) · Correct the Story (6) · **Summon Mythic Power** (8) · **Become Destiny** (10) · Ascended Celestial Dedication (12) · **Ascend** (14)
 
-> **Unbelievable Interception is the best feat on this sheet.** Reaction, when an enemy Strikes an ally you can see: spend a Mythic Point, **Stride twice toward the enemy**, and if you end in range you **become the target of that Strike** — original roll, compared to *your* AC 38. If it fails and they're in your reach, you immediately Strike back **at mythic proficiency (+10)**. It's Stand for the Fallen five levels early, it crosses the map to get there, and it punishes the miss.
+> **Ascend is the level-14 anchor**: permanent fly = Speed, **Flyby Attack**, and the 1/day 120-ft burst. Channel Divine Spark was evaluated and rejected — its quickened action is Stride/Strike (not Fly), and its free-Trip rider duplicates Flurry of Maneuvers at worse MAP.
+> **MP economy note:** recurring costs are only Become Destiny, rerolls, and (at 18) Shining Glory — roughly 2 discretionary points per fight against 3/day + Summon + this AP's kill refunds. Don't add more MP mouths.
 
 ## Gear
 
-+2 Greater Striking Flaming Astral Bo Staff · **+2 Resilient Explorer's Clothing** · **Sash of Prowess** (+2 item to Acrobatics *and* Athletics) · Boots of Bounding · Phantasmal Doorknob · **Wyrm's Wingspan (Greater)** — 2,800 gp
++2 Greater Striking Flaming Astral Bo Staff · **+2 Resilient Explorer's Clothing** (no Fortification — see Defenses) · **Sash of Prowess** · **Propulsive Boots** (+5 Speed; 1/day quickened Stride minute) · **Obsidian Goggles (Greater)** (+2 initiative) · **Cloak of Illusions (Greater)** (+2 Stealth; 1/day Invisibility) · **Phantasmal Doorknob (Greater)** (crit rider: blind — Cody rules a class-DC save applies) · **Shining Symbol (Greater)** (+2 Religion) · **Retrieval Belt (Greater)** · **Ring of Primal Might** · **Wyrm's Wingspan** (resistance 10 + 1/day backup flight) · Pilgrim's Token · 3× Cat's Eye Elixir · Potion of Quickness · Scroll of Wall of Stone (r5) · **1,639 gp**
 
-**Wyrm's Wingspan (Greater)** is an invested magical tattoo, not a feat — it costs gold, not a slot. **Permanent resistance 10** to one damage type, plus **once per day, 2 actions: Dragon Wings** — fly **60 feet for 1 minute**, and *"if you're still flying when the duration ends, you float to the ground"*. Strictly better than Wind Jump in a fight: one activation covers a whole encounter with no per-turn DC 30 check and no fall risk.
-
-**Pick the resistance deliberately** — the type follows the tradition of the dragon the tattoo depicts, and nothing ties it to your own heritage:
-**Arcane → force · Divine → spirit · Occult → mental · Primal → fire**
-The log says **~95% of incoming damage was physical**, which resistance doesn't touch. The *only* non-physical damage all session was **mental** (Phantasmal Calamity, 41). Mental bypasses AC entirely and usually rides along with conditions, so **occult/mental** is the pick unless Cody signals otherwise.
+Next purchases, in order: **Greater Resilient rune** (3,440 gp — the only thing that permanently moves Reflex), then **Greater Boots of Bounding** (4,250 gp, ~19th — the 150-fly-speed capstone).
 
 ---
 
 ## How it plays
 
-**The engine is Trip.** Paya's two-handed halberd locks him out of every Athletics maneuver, Aureys can't crit-Feint against boss Perception DCs, and prone is a **physical** condition — so it works on the mental-immune enemies that shut down the party's entire Charisma suite.
+**The engine is Trip, and S4 priced it: ~100 damage swung per landed Trip** (converted party hits, the 75-crit window on Siktempora D, stand-provoked double reactions, and prone-attack taxes). Paya's two-hander can't maneuver, Aureys converts everyone's debuffs into crits — prone is the debuff that feeds *all* melee, and it works on the mental-immune.
 
-- **Flurry of Maneuvers** — replace one or both Flurry attacks with Trips: **two Trips for one action** at MAP 0 / −5
-- **Bullying Staff** — Trip or Shove creatures up to **three sizes larger** (master staff proficiency). Medium → Gargantuan.
+- **Flurry of Maneuvers** — two Trips for one action at MAP 0 / −5
+- **Bullying Staff** — Trip or Shove up to Gargantuan
 - **Rippling Spin** — reaction: hit in melee → Step + free Trip or Disarm
-- **Stand Still** — reaction: a creature that uses a move action in reach eats a Strike; **on a crit you disrupt the action**
+- **Stand Still** — reaction: movement in reach eats a Strike; **crit disrupts** (disrupted the mukradi's Stand and a mirage dragon's escape in S4)
 
-> **The lock:** Trip on your turn → they must **Stand** (a move action) on theirs → **Stand Still** fires → and if you're running Channel Divine Spark, the damage triggers a **free Trip** at fresh MAP, putting them back down.
+> **The lock:** Trip → they must Stand (or fight prone at −2) → Stand Still fires → crit puts them back down. Tripping a flier knocks it out of the sky.
 
-**Taunt converts AC 38 into party-wide mitigation.** Nothing else makes enemies attack you instead of the Cleric, and Taunt is **auditory/visual, not mental**, so it works on enemies immune to fear.
+**Taunt converts AC 39 into party-wide mitigation, now from 120 feet.** S4 receipts: three siktempora claws whiffed into Whirlwind AC, zero damage taken that fight, a crit prevented on Paya, and enemies hit Sevek at a 28% rate vs 55–62% on everyone else. Auditory/visual, not mental — works on the fear-immune.
 
-**Reach 10** on the staff plus **Elf Step** (two Steps as one action) covers the positioning.
+**Reach 10 + Elf Step + fly 60 + Flyby** covers positioning that used to cost whole turns.
 
 ---
 
 ## Open rulings to confirm with Cody
 
-1. **Weakness to all damage — once per Strike, or once per damage type?** The resistance rules state that "resistance to all damage" applies **separately to each damage type**, with a worked example; weakness lacks the parallel example. This decides whether Marked for Rebuke (level 18) is worth +10 or +60 per Strike. Ask as a rules question, framed on the resistance parallel.
-2. **Fuse Stance at 16** — Reflective Ripple + Whirlwind have compatible requirements (unarmored while wielding a staff). Confirm he agrees before building around it.
-3. **Impossible Magic / Battlecry! content** — confirm the Foundry module has Guardian and Staff Acrobat implemented.
-4. **How Sevek gets his mythic destiny** — the party received theirs in the chapter-1 shared dream with Liralarue, before he joined. Did he have that dream separately, or does his land during the chapter-2 catastrophe?
-
-*(The Mortal Herald prerequisite ruling that used to sit here is resolved — master Religion satisfies it directly. The Mythic Magic spell-selection item is gone; the level-8 mythic feat is Unbelievable Interception.)*
+1. **The level-14 retrain package** — Ascend + Herald's Weapon in, Channel Divine Spark / Mortal Ascension / the intercept feats out. (Framed as: haven't played a session at 14 yet.)
+2. **Weakness to all damage — once per Strike, or once per damage type?** The resistance rules apply "resistance to all damage" separately per type with a worked example; weakness lacks the parallel. Decides whether Marked for Rebuke (18) is +10 or +60 per Strike. Ask as a rules question on the resistance parallel.
+3. **Fuse Stance at 16** — Reflective Ripple + Whirlwind (compatible requirements: unarmored, staff). Immovable Object was evaluated for the fusion and rejected — ground-only restriction rides along into the fused stance.
+4. **How much aerial combat is coming?** Asked plainly — it prices the whole flight investment and the ground-only riders. Cody trims the AP himself; he knows.
 
 ## Foundry sheet
 
-✅ **Matches this record.** Deity set to **Ashava** (Mortal Herald reads its anathema from that field). Nothing outstanding.
+✅ **Matches this record** (export v3 — final level-14 build, 2026-08-02). Deity set to **Ashava**.
