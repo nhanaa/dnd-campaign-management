@@ -47,7 +47,7 @@ The third great empire of the Tian-Shu, founded **6642 IC** by emperor Wuo Wu Zh
 - **"Old" Matsuki Shou** — retired carpenter, the town's living history, Southbank spokesman (NG).
 - **Heh Shan-Bao** — appointed governor (LN).
 - **You So-Jin** — elf herbalist, keeper of **Graveside Manners** (the cemetery); former Tan Sugi pilgrim. *(Zhen's NPC tie.)*
-- **Choe Chung-hu** — millers' leader (Milling Houses), beloved; this year's festival ransomer. *(Zhen's friend.)* *(Player's Guide gazetteer spelling; the intro text also renders it "Chun-hu".)*
+- **Choe Chung-hu** — millers' leader (Milling Houses), beloved; this year's festival ransomer. *(Zhen's friend.)* *(Player's Guide gazetteer spelling; the intro text also renders it "Chun-hu".)* **Survived the occupation trapped in his own house (S4) — he never abandoned the abductees.**
 - **Ba-Ming Ouh** — priest of Daikitsu, Nine Ear Shrine.
 - **Elizeth Candora** — cleric of Pharasma, the Lady of Souls cathedral.
 - **Yong Wu-Xiu** — kitsune blacksmith, Eternal Blaze Ironworks.
@@ -131,7 +131,7 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 - With the yokai dead and the last caged villagers freed, the GM declared **Willowshore reclaimed from the monsters.** The downtown occupation is broken.
 
 **The teahouse deed & Fumeiyoshi (new quest):**
-- A **Last Will & Testament of Qing Mai-Lai** (the teahouse's late aristocrat owner, no surviving heirs) deeds the teahouse to whoever recovers **two pearls she threw into "Fumeiyoshi's eyes"** — two ponds north of town locally called the **Eyes of Fumeiyoshi.** Standing quest.
+- A **Last Will & Testament of Qing Mai-Lai** (the teahouse's late aristocrat owner, no surviving heirs) deeds the teahouse to whoever recovers **two pearls she threw into "Fumeiyoshi's eyes"** — two ponds locally called the **Eyes of Fumeiyoshi** (*corrected S4: they lie **northwest** of town*). Standing quest.
 - **Fumeiyoshi** — a Tian deity (envy / laziness / undeath) — surfaces here for the first time, on the will and the ponds.
 
 **Combat (six fights; five trivial, one with teeth):** a house of *drunk* jinkin holding captives (a GM nat-20 tear dropped Kaoru to 3 HP), a cockroach swarm in a stable of slaughtered horses (Kaelen one-shot), three **animated cookware** objects demanding the party "join the parade" for Willowshore's "new rulers," a **giant frog** (disarmed + tongue-grabbed Zhen), a hidden **variant forest scorpion**, and the boss. Only Mo Douqiu's **persistent bleed** genuinely threatened the party.
@@ -145,6 +145,36 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 **New locations (in play):** the **Cerulean Teahouse** (downtown; now cleared and party-claimable pending the pearls); the outdoor prison cell / stables (slaughtered horses); the **Eyes of Fumeiyoshi** (two ponds north of town — named, not yet visited).
 
 **Carried-forward threads:** the **wrong-gods lantern** (S2) is still unresolved and still hidden from Granny Hu; **Ugly Cute**, the **governor's manor**, and **"blood will rise"** remain open.
+
+---
+
+### Session 4 (2026-07-31) — The Fog Wall (first week of summer, 7108 IC)
+*All five PCs present. Days 2–5 after the reclamation. New proper-noun spellings (Karahai, Commander Wen, Duyu, Gord Lake, Shinzo, Yix, Xi Yang) are best-effort from audio — the GM posted several in Foundry chat; verify against the scrollback.*
+
+**The cost of the occupation:** nearly **three dozen citizens dead** — population now **225**. Funerals underway; **Granny Hu and Old Matsuki** have fallen into de-facto leadership roles. The Governor's Manor "looks like it was never there to begin with."
+
+**The fog wall — Willowshore is cut off:**
+- Matsuki asked the party to carry news of the invasion to **Karahai**, a fortified settlement several dozen miles southeast on the coast of the **Sea of Ghosts** — Willowshore's closest neighbor and most important trade partner, commanded by **Commander Wen**. Route: southeast along the **Duyu River**, past **Peachwood Grove** and **Gord Lake** (~1 day by horse).
+- With Karahai's fortress **visible on its coastline bluffs**, an unnaturally thick fog descended; moments after entering, the party was returned to where it started. Every direction, every attempt — same result. **And the fog steals time**: moments inside cost ~a day outside (entered morning, exited at sunset). Two attempts across two days, both bounced; **the message is undelivered.**
+- RK (multiple PCs, hero points burned): beyond current knowledge — some **curse settled on the land**, tied to the invasion and the governor's vanishing.
+- The **long-abandoned village north of town** (no name anyone remembers) sits at the fog's *edge* — reachable, but the wall hangs just past it. It's Matsuki's plan for **emergency winter crops**: if the curse holds, **Willowshore's food will not last the winter**. Kaelen's standing theory: the fog's source is near the village.
+
+**New NPC — Sahina Shinzo**: a traveling merchant with a raven, **Yix**, arrived to set up shop *despite the fog*. Sense Motive (hero-pointed): genuinely here only to sell. Dodges questions about his origin ("I came from out there somewhere"). Takes orders for future visits — stock **level-locked to party level**; ordered so far: a walking cauldron (Mu-Jin), journey bread + iron wine (Zhen). Stays nowhere longer than 24 hours. Party consensus: "sus." Open question: did he cross the wall, or was he already inside? (Kaoru: "we can't say he was able to walk through the fog at all.")
+
+**The help list (Matsuki's, worked as a quest board):**
+- **Willowshore Stables rebuilt** (10-Victory-Point project, Survival/Crafting, two days; Zhen's blessed-coin crit led day one) — open for business again. **+1 South Bank rep, 10 XP.**
+- **Kappa boat theft resolved without combat**: kappa stole two boats from the docks (reported by a Nagaji dockworker — name garbled on the recording, rendered "Samudra"/"Rajul"). Tracked to Gord Lake; Mu-Jin's folklore-correct courtesy + a basket of cucumbers; an **elder kappa** apologized for "the youngsters' pranks" and returned the boats, towed home one horse per bank (Kaoru's rig). **+1 Northridge rep, 40 XP.**
+- **The Desna shrine**: Choe Chung-hu's ask — relocate the shrine languishing in the abandoned estates to the Milling Houses. Its guardian **kami** (small glowing stone spirits; kami bond with a specific object/place) must first be persuaded: Diplomacy, then Athletics/Religion checks (4 hours each) to 5 VP. **Two failed persuasion days so far** (party Diplomacy ceiling +6); retry daily. Forcing the move is possible at a penalty — the party refused.
+- **Xi Yang** — the town's independent, pointedly **unaffiliated** lawyer; offered help parsing Qing Mai-Lai's will. Confirmed: the **Eyes of Fumeiyoshi are northwest** of town.
+
+**The elite slime mold** (the abandoned village): the session's one fight and the campaign's first genuinely threatening one — an **elite-template slime mold** (the GM's bestiary view hid the template; he read out AC 12/Reflex +3 when it was actually 14/+5). It crit Zhen for 20, and **both Zhen and Kaelen contracted Slime Rot (Stage 1)** — DC 20 Fortitude; stage 6 is death, and the body erupts into a new slime mold. Zhen self-healed and landed the kill. **48 XP.**
+
+**Character thread:** **Mu-Jin may adopt Desna** — realized in play he's never had a deity and asked the GM about taking her. The kami guard *her* shrine.
+
+**New NPCs (in play):** Sahina Shinzo + Yix (merchant + raven) · Commander Wen (Karahai — named, not met) · the elder kappa · Xi Yang (lawyer) · the Nagaji dockworker (name unverified).
+**New locations (in play):** Karahai · the Duyu River · Gord Lake · Peachwood Grove · the Sea of Ghosts · the long-abandoned village north of town (at the fog's edge).
+
+**Carried-forward threads:** the **wrong-gods lantern** (S2 — the re-blessed coins' blessing carried Zhen's stables crit; the wrong gods are answering anyway); **Ugly Cute** (still untracked, went east); the **governor's manor**; **"blood will rise"**; the **two pearls** (Eyes of Fumeiyoshi, northwest, unvisited); **both Slime Rot infections**.
 
 ---
 

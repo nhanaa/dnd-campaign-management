@@ -35,8 +35,21 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **Orion's group** | Mo — Wayang Rogue (Thief) / Spirit Warrior |
 | `season-of-ghosts-ande/` | Pathfinder 2e Remastered (Free Archetype, Gradual Boosts, Ancestry Paragon) | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **AndeGM's paid group** | **Zhen Stillness** — Samsaran (Hungerseed) Animist (Liturgist) — healer/buffer/secondary striker | **JOINED 2026-06-26 @ S1** (new 5th player) |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
-| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords (Xin-Eurythnia, Saga Lands/Varisia) | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **JOINED 2026-07-21 @ Lv12** (Pax's S1 = campaign's S2) |
+| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords — **Tom Brister's Tuesday group** | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **LEAVING** — scheduling conflict; switching to Cody's Saturday RotR |
+| `revenge-of-the-runelords-cody/` | Pathfinder 2e Remastered (**Mythic**, Free Archetype, Ancestry Paragon, **no ARP, no GAB**) | Revenge of the Runelords — **Cody McGraw's Saturday group** (same DM as `setting-sun/`) | **Sevek** — Human (Sky Dragonblood) **Monk 13**, worshipper of Ashava — bo staff trip/tank, Guardian + Staff Acrobat + Druid + Mortal Herald, Ascended Celestial destiny | **JOINING 2026-08-01 @ Lv13** |
 | `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | ~~Argon Rath — Orc Barbarian~~ **DIED S4 (2026-07-29)**; new Lv5 PC TBD | **DM ("Lap") runs deliberately over-level; party Lv5** |
+
+## Discuss it — don't go build it
+
+**A question from Pax is a question, not a work order.** When he asks what something should be, what would work, or how to approach it, the deliverable is a *conversation*. Talk it through, offer options, ask what he thinks, and let him decide. Do not go produce the finished thing.
+
+This is a creative collaboration, and the characters, stories, and builds are **his**. Handing him a polished artifact in response to a question takes the decision away from him even when the work is good — it settles choices he hasn't made and leaves him editing something instead of choosing something.
+
+- **Write a file only when he asks for a file** — never because the discussion generated enough material to justify one.
+- **Never write a decision he hasn't made into a file**, and never propagate one across multiple files.
+- **Do the one thing asked.** Don't chain follow-on edits onto an approved action.
+- **Ask when there's a real fork** instead of picking a branch and presenting it as done.
+- **Software-engineering defaults do not apply in this repo.** The reflex to carry a task to completion and report it finished is wrong here. Stopping to talk *is* the work.
 
 ## How to Help
 
@@ -124,6 +137,22 @@ When Pax shares a Pathbuilder export or a build sheet, **treat missing fields as
 Do **not** list blanks as findings, flags, or "fixes before this is playable." It's noise, and he's said so directly. Analyze the build on what's actually there.
 
 The one exception: if a blank genuinely changes the mechanical analysis (e.g. a class feature keys off the deity, or a damage number depends on a rune), state the assumption in a single clause — *"assuming +1 striking handwraps"* — and continue. Never make it a section, and never make it a to-do list.
+
+## Archetype analysis — read the whole feat list, never just the Dedication
+
+**When evaluating ANY archetype — multiclass, class archetype, mythic calling, or mythic destiny — pull its full feat list and read the payload feats before forming an opinion.** The Dedication is the entry fee, not the product, and it is routinely the weakest part of the archetype. Judging an archetype by its Dedication is the single most common way to give Pax a wrong answer.
+
+Worked examples of the failure:
+- **Mortal Herald**: the Dedication is a self-only 1/day Heal. The archetype's actual value is *Stand for the Fallen*, *Divine Presence*, *Flash of Omnipresence*, *Flash of Omnipotence*, and *Marked for Rebuke* — none visible from the Dedication.
+- **Mythic destinies**: each is a full archetype with feats at 14/16/18/20. Ranking them off Dedication text alone is meaningless.
+- **Staff Acrobat**: Dedication is a jump bonus; the reason to take it is *Whirlwind Stance* and *Staff Sweep*.
+
+Also check, every time:
+- **Dedications that grant things the character already has** are near-dead feats — e.g. Wrestler grants expert Athletics + Titan Wrestler, both worthless to a master-Athletics character who already took Titan Wrestler.
+- **Prerequisites on the payload feats**, not just the Dedication. Whole branches die on a skill rank Pax doesn't have (expert Intimidation, master Stealth, master Diplomacy).
+- **Whether the archetype's feats are reachable.** `Advanced [X]` feats set your effective class level to *half your character level*, so a level-8 class feat needs character level 16.
+
+Enumerate before recommending. `node pf2e-lookup/pf2e-search.js --archetype` with no argument lists all 256; `--archetype "<name>"` prints one archetype's full feat list. Do not shortlist from memory — Pax has called this out explicitly ("you find like 3 archetypes that you have in your memory and then just go... for nothing").
 
 ## Interpretation discipline
 
