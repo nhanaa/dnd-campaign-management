@@ -27,15 +27,15 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | Folder | System | Setting | Character |
 |--------|--------|---------|-----------|
 | `korvosa (abandoned)/` | Pathfinder 2e Remastered | Korvosa | Frozen Wind Kitsune — Draconic Sorcerer (Rime) | **ABANDONED** |
-| `korvosa-monday/` | Pathfinder 2e Remastered | Curse of the Crimson Throne (Korvosa) — Monday group | Izka — Kashrishi (Sylph) Magus (Inexorable Iron) / Cavalier | **JOINED 2026-06-01 @ S7** |
+| `korvosa-monday/` | Pathfinder 2e Remastered | Curse of the Crimson Throne (Korvosa) — Monday group | Izka — Kashrishi (Sylph) Magus (Inexorable Iron) / Cavalier | **ABANDONED** — DM had issues and never returned |
 | `myrrindar/` | D&D 5e (2024 PHB) | Myrrindar — Winds of Warding | Fairy Bard (Mist) |
 | `icewind-dale/` | D&D 5.5e (2024 PHB) | Rime of the Frostmaiden | Eladrin Paladin (Avarath Solvane) | **LEFT 2026-05-16** |
 | `raiders/` | D&D 5e (2014 PHB) | Raiders of the Serpent Sea (Grimnir) | Tuss — Discovery Domain Cleric (Aesgor) |
 | `hellbreakers/` | Pathfinder 2e Remastered | Hellbreakers — Rise Up Isger | Tian Human Dragonblood — Dueling Fighter (Bai Jian) |
-| `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **Orion's group** | Mo — Wayang Rogue (Thief) / Spirit Warrior |
+| `season-of-ghosts/` | Pathfinder 2e Remastered | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **Orion's group** | Mo — Wayang Rogue (Thief) / Spirit Warrior | **ABANDONED** — Orion left |
 | `season-of-ghosts-ande/` | Pathfinder 2e Remastered (Free Archetype, Gradual Boosts, Ancestry Paragon) | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **AndeGM's paid group** | **Zhen Stillness** — Samsaran (Hungerseed) Animist (Liturgist) — healer/buffer/secondary striker | **JOINED 2026-06-26 @ S1** (new 5th player) |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
-| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords — **Tom Brister's Tuesday group** | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **LEAVING** — scheduling conflict; switching to Cody's Saturday RotR |
+| `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords — **Tom Brister's Tuesday group** | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **LEFT** — scheduling conflict; switched to Cody's Saturday RotR |
 | `revenge-of-the-runelords-cody/` | Pathfinder 2e Remastered (**Mythic**, Free Archetype, Ancestry Paragon, **no ARP, no GAB**) | Revenge of the Runelords — **Cody McGraw's Saturday group** (same DM as `setting-sun/`) | **Sevek** — Human (Sky Dragonblood) **Monk 13**, worshipper of Ashava — bo staff trip/tank, Guardian + Staff Acrobat + Druid + Mortal Herald, Ascended Celestial destiny | **JOINING 2026-08-01 @ Lv13** |
 | `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | ~~Argon Rath — Orc Barbarian~~ **DIED S4 (2026-07-29)**; new Lv5 PC TBD | **DM ("Lap") runs deliberately over-level; party Lv5** |
 
