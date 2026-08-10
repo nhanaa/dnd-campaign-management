@@ -13,8 +13,8 @@
 | Character | Class | Player |
 |-----------|-------|--------|
 | **Sevek** | Human (Sky Dragonblood) Monk 13 — Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial | **Pax** (first session!) |
-| **Paya** | Leshy (pineapple) Fighter — halberd, Kineticist archetype, Medic | (player name not caught on recording) |
-| **Aureys Hollow** | Fey Dragonet Rogue (Scoundrel) — fighting fan + claws, legendary Perception | Jesse's wife (name not confirmed) |
+| **Paya** | Leshy (pineapple) Fighter — halberd, Kineticist archetype, Medic | **Kelsie** |
+| **Aureys Hollow** | Fey Dragonet Rogue (Scoundrel) — fighting fan + claws, legendary Perception | **Anna** (Jesse's wife) |
 | **Mithtirith** | Elf Cleric of Nethys — Heal battery, Sandpoint veteran | Jesse |
 | **DM** | — | Cody ("Ryu" in Foundry) |
 
@@ -24,7 +24,7 @@ Sevek's first session opens in the immediate aftermath of catastrophe: the unvei
 
 What follows is a session built almost entirely around that exodus. Seven days of preparation (Fortify Shelters, Comfort and Protect, Oppose the Risen, Scavenge Supplies — a daily-activity minigame with Supply Points on the line) are interrupted on day four by a **pyroclastic mukradi**, a mythic-empowered, three-headed Gargantuan horror that puts Sevek on the floor dying before Paya impales it. Then the Flight of the Eurythnians proper: a ten-day infiltration-style trek through the High Kodars — hundred-foot-tall watchers clinging to the mountaintops, an avalanche Sevek clears with a nat-20, a parley bought with a critical success from Paya that turns the naiad **Svevenka** from a hazard into a gift-giver, Risen saboteurs sniffed out by Aureys, a night ambush by four **misery siktemporas**, stone giant bandits flattened by Paya alone, and finally two **Risen Runelords of Sloth — Krune and Krenlith — on mirage dragon mounts**, come to finish what Gimmel could not.
 
-The runelord fight is the session's crescendo: mounted enemies bombing the party from 50 feet up, Sevek unfurling actual dragon wings from his tattoo, Aureys dealing the most damage she's ever done in this game and then getting dropped by a teleporting runelord, and the sky-shaking arrival of **Kandirvek**, a blue dragon who evaporates the third runelord's mount off-screen, snaps the rider out of the air, and lands with "Let's even the odds a bit, shall we?" Both runelords burn Mythic Ferocity to survive their first deaths; both die anyway — Krune run through by Paya, Krenlith beaten down by Sevek's bo staff. Ten thousand people, minus one hundred souls lost in the mountains, arrive within sight of Vekr's Crossing, and the party hits **level 14**.
+The runelord fight is the session's crescendo: mounted enemies bombing the party from 50 feet up, Sevek unfurling actual dragon wings from his tattoo, Aureys dealing the most damage she's ever done in this game and then getting dropped by a teleporting runelord, and the sky-shaking arrival of **Kandirvek**, a omen dragon who evaporates the third runelord's mount off-screen, snaps the rider out of the air, and lands with "Let's even the odds a bit, shall we?" Both runelords burn Mythic Ferocity to survive their first deaths; both die anyway — Krune run through by Paya, Krenlith beaten down by Sevek's bo staff. Ten thousand people, minus one hundred souls lost in the mountains, arrive within sight of Vekr's Crossing, and the party hits **level 14**.
 
 ## Key Events
 
@@ -61,11 +61,11 @@ The runelord fight is the session's crescendo: mounted enemies bombing the party
 - **Day 7 — The Missing Eurythnians**: dozens wander off. Aureys and Sevek take to the air (Sevek's Aerobatics Mastery approved by Cody); **Paya's Nature check fails — 1 Survival Point, a hundred people lost to the snow** — and Mithtirith's follow-up fails too, his heart no longer in it after the table wrote the wanderers off ("You guys were talking about it was their fault and… my heart wasn't in it"). Then **Aureys' crit recovers a hundred more**, found freezing in a cave. Aureys: "Can't solve for stupid" → after the crit → "I guess I *can* solve for stupid."
 - **Day 8 — The Kodar Kings**: organized stone giant bandits eye 10,000 walking treasure troves. Sevek's strike whiffs on a 2 ("I have given you false confidence. I apologize," offers Paya) — **and the failure bites: another hundred lives and a Supply Point gone**. Then **Paya walks up alone and clears the entire obstacle with one crit strike** — "just a blank stare and then just a bloodbath." Mithtirith: "Paya just looks at him with that stare he has."
 - **Day 9 — Frayed Nerves**: Mithtirith leads the faithful in prayer ("Nethys cares more about magic than dogma. I get you."); Aureys' chicken dance crit-fails, gets mythic-rerolled, and works anyway.
-- **Day 10 — Dragon sightings**: Paya's Arcana failure tips the party to the 6-Awareness threshold → the sightings are real. **Three adult mirage dragons with riders** inbound — until a blue dragon slams one out of the sky mid-approach.
+- **Day 10 — Dragon sightings**: Paya's Arcana failure tips the party to the 6-Awareness threshold → the sightings are real. **Three adult mirage dragons with riders** inbound — until a omen dragon slams one out of the sky mid-approach.
 
 ### Act VII — The Runelords of Sloth (combat, day 10)
 - **Krune and Krenlith**, former Runelords of Sloth, on mirage dragon mounts, here to finish what Gimmel started. Krune, eyeing the party's silver mythic auras: "I expect you're the reason that waste of skin Gimmel hasn't reported back in… I hope you've all made your peace." Paya: "Long made my peace with your deaths. Let any runelords come." See Combat Encounters.
-- Mid-fight, the blue dragon — **Kandirvek** — finishes the third runelord off-screen (evaporates the mount, snaps the rider out of the air) and joins the party's side: "Let's even the odds a bit, shall we?"
+- Mid-fight, the omen dragon — **Kandirvek** — finishes the third runelord off-screen (evaporates the mount, snaps the rider out of the air) and joins the party's side: "Let's even the odds a bit, shall we?"
 
 ### Act VIII — Kinsmen (RP)
 - Kandirvek, Cody's self-declared favorite NPC, introduces himself — "though I wish it were under different circumstances, it's a pleasure to meet you all. I think we've much to talk about."
@@ -125,7 +125,7 @@ The runelord fight is the session's crescendo: mounted enemies bombing the party
 - **Aftermath**: Sevek took **literally zero damage** — Taunt tanking at its finest ("Interesting. I didn't take any damage"). No loot ("Stuff of dreams, but not my dreams, because I dream of stuff" — Aureys).
 
 ### Encounter 3 — Risen Runelords Krune & Krenlith + Mirage Dragons (trek day 10)
-**Enemies**: Risen Runelord Krune, Risen Runelord Krenlith (Runelords of Sloth, mythic, Telekinetic Bombardment / Arrow Salvo / Blink Charge / Cast into Time, Mythic Ferocity), 2× Mirage Dragon mounts (fly 150 ft, Hallucinatory Breath, Draconic Frenzy). **Ally**: Kandirvek (adult blue dragon, joins round 3).
+**Enemies**: Risen Runelord Krune, Risen Runelord Krenlith (Runelords of Sloth, mythic, Telekinetic Bombardment / Arrow Salvo / Blink Charge / Cast into Time, Mythic Ferocity), 2× Mirage Dragon mounts (fly 150 ft, Hallucinatory Breath, Draconic Frenzy). **Ally**: Kandirvek (adult omen dragon, joins round 3).
 
 - **Setup**: runelords open mounted at 50 feet — Krune on Dragon B, Krenlith on Dragon A. Mounted-combat ruling: rider and mount share one effective space; riders spend an action each turn to ride. Aureys starts airborne; her opening Demoralize is first out of range, then fails by 1.
 - **Round 1**: Sevek activates **Dragon Wings from the Wyrm's Wingspan tattoo** and climbs. Krune sneers "Back on the ground where you belong" — Telekinetic Bombardment at the two fliers (Sevek mythic-rerolls to a save and takes 21 — his only damage of the fight; Aureys: "Not this dragon, buddy"). Mithtirith identifies the dragons (Will is the weak save; fascination-immune) and casts Divine Immolation into Krenlith's pair — 20 fire plus persistent into Dragon A, 10 into Krenlith. Aureys breathes void on the same pair, then sneak-hides in Sevek's square on a crit Stealth. Krenlith's Telekinetic Bombardment knocks Mithtirith prone (35); his fumbling for the never-before-used **Runelord's Response** reaction ends when it turns out to cost a mythic point he doesn't have. Dragon B's Hallucinatory Breath is double-crit-saved by Paya and Mithtirith; Paya takes to the air on winged sandals; Dragon A dives 20 feet and breathes on the hidden pair — Sevek and Aureys both crit-save (Aureys on a mythic-reroll nat 20).
@@ -154,7 +154,7 @@ The runelord fight is the session's crescendo: mounted enemies bombing the party
 
 - ➤ **Queen Sorshen** is still down the sinkhole — "I don't know if she's coming out of it any time soon" (Ayavah). Finding her is deferred, not forgotten.
 - ➤ **The watchers in the Kodars**: hundred-foot spider-limbed figures with red eyes clinging to the mountaintops, watching the exodus. They didn't move. Nobody knows what they are.
-- ➤ **Kandirvek**: a blue dragon who hunts risen runelords, calls the party's arrival "much to talk about," and is Cody's favorite NPC. Why did he intervene? What does he know?
+- ➤ **Kandirvek**: a omen dragon who hunts risen runelords, calls the party's arrival "much to talk about," and is Cody's favorite NPC. Why did he intervene? What does he know?
 - ➤ **The Risen of the Trinity Star**: Gimmel, Krune, and Krenlith are destroyed (plus one unnamed runelord eaten mid-air), but the **Warshard of Gorum** in the Kodars remains unfound, and the cult's purpose is unfinished.
 - ➤ **Svevenka's warning**: "Something is wrong out in the Kodars. It's like the entire mountaintop has been disrupted."
 - ➤ **Vekr's Crossing**: a town built for hundreds is about to host a tent city of ~9,900 refugees. Ayavah has been running bureaucracy; someone must run the camp.
@@ -203,7 +203,7 @@ The runelord fight is the session's crescendo: mounted enemies bombing the party
 *Topping off Aureys for the nth time.*
 
 > **Aureys**: "Hello, kinsmen."
-*Landing on the enormous blue dragon's shoulder.*
+*Landing on the enormous omen dragon's shoulder.*
 
 ## Pax's Notes — Sevek's Journal
 

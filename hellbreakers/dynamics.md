@@ -1,21 +1,23 @@
 # Party & Campaign Dynamics
 
-> Current through **Session 14 (2026-07-25)**. Party level **5**. Full NPC dossiers, locations, and the session log live in `world.md` — this file tracks the party itself: roster, roles, synergy, relationships, and thread status.
+> Current through **Session 16 (2026-08-08)**. Party level **6**. Full NPC dossiers, locations, and the session log live in `world.md` — this file tracks the party itself: roster, roles, synergy, relationships, and thread status. *(S15–S16 in brief: murder night solved — Ezio & Hedvend destroyed, Caeto acting steward; League publicly framed for the regicide; party now runs the nascent Elidir chapter from Quoster's safehouse with fixer Jenverick; Uprising at the final REVOLUTION stage.)*
 > *Name spellings normalized to the Foundry actors as of S15 prep: **Hedvend VI** (earlier notes: "Hedvind"), **Ezio Gaeta** (earlier: "Daeta"), **Lezinia** (earlier: "Lazenia").*
 
 ## Party Members
 
 | Name | Ancestry | Class | Archetype | Player |
 |------|----------|-------|-----------|--------|
-| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — **Lv 5** | Beastmaster (Ren active) — *Thaumaturge dropped in the S13 respec* | Pax |
-| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — **Lv 5** | Draconic Ravager (committed S4 — dropped longsword, full natural-weapon pivot) | Snowgeen |
-| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — **Lv 5** | Medic Dedication + Assurance (taken S4 — explicit reaction to crit-failing Moob) | Bog Witch |
-| Zanthar Melodune III | Gnome | Wizard (generalist) — **Lv 5** | Blessed One (Lay on Hands focus spell) | Scott Smith — joined S8 (2026-06-13) |
+| Bai Jian | Human (Tian, Dragonblood) | Fighter (Dueling) — **Lv 6** | Beastmaster (Ren active) + **Hedge Mage (occult) — NEW S16** (Guidance cantrips; Occultism retrained in from Arcana) | Pax |
+| Cyrathul | Medium Dragon (winged, "observer from the moon") | Thaumaturge (Mirror Cloak implement) — **Lv 6** | Draconic Ravager (committed S4; Twisting Tail reaction in play) — *bane rune commissioned for the handwraps S16, pending application* | Snowgeen |
+| Panacea | Catfolk | Witch (Paradox of Opposites — Divine) — **Lv 6** | Medic + **Living Nexus — NEW S16** (Absorb Magic reaction; +1 striking dancer's spear bought for the martial-weapon kit) | Bog Witch |
+| Zanthar Melodune III | Gnome | Wizard (generalist) — **Lv 6** | Blessed One (Lay on Hands; **Mercy — NEW S16**); spellbook grew S16: Blindness, Invisibility, Water Breathing | Scott Smith — joined S8 (2026-06-13) |
+| **Hexroot** | Leshy ("a little leshy") | **Witch (occult) — Lv 6** — fights with a **club**; hissing familiar (Familiar of Ongoing Misery); Enfeeble, Underworld Lore, Expert Crafting, Intimidation | **NEW PC S16** — Tim (same player as Zarok) |
 
 ### Departed / HQ-bound
 
 | Name | Class | Status |
 |------|-------|--------|
+| Zarok Brewhide "The Aleigator" (Lizardfolk) | Cleric (Warpriest) — Lv 6 | **Retired after one session (S15)** — Tim swapped to Hexroot for S16. No in-fiction exit scene; folded out off-screen. |
 | Sammy Shadowfoot (Halfling) | Bard (Polymath) — Lv 4 | **Player left the campaign S11** (2026-07-04). Joined S8; often DM-run (Wi-Fi); written out on-screen (reassigned to "a different mission"). Halberd + wand of soothe reverted to the stash. |
 | Rama (Human, Jaunmari-coded — older, blue skin, white hair) | Monk — Lv 2, Arcane dedication (Electric Arc), Battle Medicine | Joined S6 · **DIED S7** (2026-06-06) — DM-controlled after the player departed; crit-failed a Hell Hound's breath and was never revived; body left in the Chitterwood. |
 | Moob (Goblin) | Alchemist (Quick Bomber, Wallop Stick) | Player departed S4. **Permanent HQ fixture as of S10** — refuses to field (*"We die when we leave"*); the HQ's alchemy/body-incineration crew. |
@@ -37,8 +39,8 @@
 - **Cantrip-range damage**: Zanthar's **Electric Arc** (arcane, 30 ft, 2 targets) and **Hand of the Apprentice** (hurls his hammer, 500 ft); Panacea's Divine Lance / silver Needle Darts. The flying-enemy gap is largely closed since S8.
 - **Party stash highlights**: a **scroll of Talking Corpse** (Rank 4, deliberately unspent), the unidentified **Staff of the Dead** + **carved onyx skull** (moved there by Cyrathul, S13), Sammy's halberd + wand of soothe, the unclaimed 250-gp level-6 shield.
 
-### Healing — ⚠️ THIN
-- **Panacea is the linchpin** (Medic dedication, Battle Medicine + Assurance, **Staff of Healing** bought S10) — protect her. **Backup**: Zanthar (Blessed One — Lay on Hands). **Bai Jian dropped Battle Medicine in the S13 respec**, so the party is down to two sources with no martial self-heal.
+### Healing — ⚠️ STILL THIN
+- **Panacea is the linchpin** (Medic dedication, Battle Medicine + Assurance, **Staff of Healing** bought S10, Life Boost fast healing) — protect her. **Backup**: Zanthar (Blessed One — Lay on Hands, now with **Mercy**). Zarok's second divine font left with him (S16); **Hexroot is an occult witch, not a healer** — the lane is back to two sources. ⚠️ Panacea's Cleanse Affliction is prepared at **rank 2 — too low to counteract choking death**; the party burned a bought rank-3 scroll on Ren (S16) and owns no spare.
 
 ### Debuffs & Lockdown
 - **Bai Jian**: Snagging Strike off-guard (his signature party-wide enabler), Slam Down auto-Trip, Breath of the Dragon (AoE Will save). ⚠️ **His Demoralize is effectively offline since S13** — Intimidation training was respec'd away (~+1 instead of +8).
@@ -50,7 +52,8 @@
 - ⚠️ **Bai Jian has NO Lore skills since the S13 respec** (Dragon, Lingshen, Demon Lore all gone; he is Nature/Medicine/Survival only) — **out of the RK lane entirely**, and said so in play (*"Bai Jian doesn't know shit about magic"*). **He formally claimed the Nature lane in S14** (*"I'll be the nature guy. You guys can deal with religion as well as magic"*) — Expert +11, the party's best.
 - **Cyrathul**: Esoteric Lore (+ Diverse Lore) — covers everything; carried three of S14's four biggest reveals (the Hellknight elimination, the hourglass talisman, the topiary defense system).
 - **Panacea**: Arcana, Religion, Crafting, Society, Medicine — **NOT Occultism** (confirmed S8). Decoded the S14 cipher on Society; carried the forensics on three of four bodies.
-- **Zanthar**: Arcana, Occultism (the party's **sole occult lane** since Sammy left), Society, Elidir/Underworld Lore (IDed the S11 thieves' guild).
+- **Zanthar**: Arcana, Occultism, Society, Elidir/Underworld Lore (IDed the S11 thieves' guild).
+- **Hexroot (NEW S16)**: **Underworld Lore** (surfaced the Queen of Kanersha and Father Kindness for the Gyve-riot bluff), **Expert Crafting** (fake talismans; the improvised sleep potion), Arcana/Occultism, Intimidation. The occult lane is no longer Zanthar's alone — and Bai Jian's Hedge Mage retrain adds a third Occultism dabbler.
 - ⚠️ **The WIS-skill lesson (S14)**: the Creatures of the Night hazard could only be disabled with **Nature or Religion**, and Zanthar is untrained in both — the party's knowledge specialist was mechanically locked out of a knowledge puzzle for an entire encounter (his nat-20 Arcana returned a hint Panacea had already surfaced). **INT-caster coverage does not protect against WIS-skill challenges.**
 
 ### Detection
@@ -127,7 +130,19 @@ Established Session 1: each member was individually summoned by missive to the C
 
 ## Plot Threads — ACTIVE
 
-### The Murder Night (S13–S14, inside sealed Reeves Rest Manor)
+### The Elidir Chapter (S15–S16 — current front)
+- **⚠️ EZIO'S RETURN CLAUSE IS LIVE.** His death-burst Cloud of Plague: he rises fully healed from the first creature to die of choking death, and is only permanently destroyed *if every affected creature is cured*. **Ren failed S15, manifested S16, and was cured** (rank-3 Cleanse Affliction scroll; clawed embryo-phlegm stomped). **Cyrathul failed a follow-up save on the S16 morning and was never treated.** Watch the dragon for a cough; buy a spare rank-3 scroll *before* it's needed.
+- **THE STAGED DOCK ROBBERY** — next session's cold open. Empty crates (never full), a single guard, Sasatoli stage-managing, the goal to be *seen* but not *identified*, so Quoster gains leverage to move his goods — and smuggle the party — out of Elidir. Quoster's condition: *"Please don't kill anyone."*
+- **JENVERICK** — fixer, fencer, chapter co-founder, author of every S16 scheme. Total access in four days; every plan has worked, for the party. Bai Jian's standing caution: *"I have bad feelings about that. No matter. We can try."* What does she actually want?
+- **THE AZIRIS IN THE GYVE** — framed exactly as the League was framed; innocent of this crime; Caeto may acquit. If the frame unravels, it unravels toward its builders — and the army's supply pipeline is cut mid-crackdown either way.
+- **WANTED: THE HELLBREAKERS LEAGUE** — the S13 false flag is now state truth; leaflets name the party regicides; Caeto's sweeps fill the Gyve. The party solved his murder for him, and he is still hunting them.
+- **REVOLUTION STAGE** — Uprising maxed; a prison crowd chanted the League's name in the open. The city will rise if asked. Can the fire be aimed?
+- **The onyx skull** — fenced S16 without ever being examined. If it mattered, someone in Elidir's market owns it now.
+- **Colonel Rithert, unwitting asset** — forged orders passed, false investigation launched, on friendship alone.
+- **The Queen of Kanersha** — Elidir's second underworld power, name only.
+- **The Lifebloom Glaive** — a relic with locked gifts and no wielder, kept "just for fun."
+
+### The Murder Night (S13–S14 — **RESOLVED S15**; loose ends folded into the threads above and world.md)
 - **THE MURDER OF HEDVEND VI** — the Steward of all Isger, killed mid-card-game by someone he knew (Panacea's Society read); **his body is missing**. The party is deputized by Caeto to solve it, sealed in until they do. His bar: *"hard proof."*
 - **THE STAGED VAMPIRE** — Zanthar called it twenty minutes into S14: claws first, **fang marks punched in after death** (Panacea's hero-pointed crit forensics), no blood from Bai Jian's silver blade through Merpelia's heart. Someone dresses kills as a vampire's work — the same play as the false Hellbreaker flag. *Twice in one night is a method.*
 - **THE MISSING BLOOD** — four drained bodies, none of the blood anywhere in the manor. Removed deliberately, in quantity. With the Urgathoa idol, the used decomposition talisman, and the Staff of the Dead, it reads as a **component**, not a feeding. Nobody has chased this.

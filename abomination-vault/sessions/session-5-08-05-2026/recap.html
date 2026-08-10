@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 — The Debut of Snagg</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-snagg { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+.char-crew  { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-snagg { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Debut of Snagg</h1>
+<div class="subtitle">Abomination Vault — Session 5 · Pirate Day on the Decoy Run</div>
+<div class="meta-row">
+  <span class="meta-pill">August 5, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~4h 05m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">The Inner Sea · Otari</span>
+  <span class="meta-pill">DM · Lap</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:32%"></div>
+  <div class="comp-seg comp-social" style="width:25%"></div>
+  <div class="comp-seg comp-rp" style="width:28%"></div>
+  <div class="comp-seg comp-explore" style="width:15%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat (1 fight)</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Interrogation</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Travel &amp; Explore</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-snagg">
+    <div class="char-name">Snagg ★</div>
+    <div class="char-class">Goblin (Razortooth) · Fighter (jaws + sturdy shield) / Medic</div>
+    <div class="char-player">Pax — debut session</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human · Thaumaturge (returning chakram)</div>
+    <div class="char-player">Ricardo — piloted Rodman</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf · Divine Sorcerer (Pharasma; Psychopomp)</div>
+    <div class="char-player">Twan — piloted Danilo</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling · Monk (Crane Stance)</div>
+    <div class="char-player">Ben — piloted Clive</div>
+  </div>
+  <div class="char-card char-crew">
+    <div class="char-name">Klorte Hengis &amp; the security team</div>
+    <div class="char-class">Half-orc lumber manager (feather boa, twin hatchets) · Rodman · Parry · Clive · Danilo</div>
+    <div class="char-player">Klorte GM-run · crew player-piloted · Parry — Pax</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>Pirate day. The morning after Argon's death, the party reported to the port at noon, told Iqbal what the Gauntlight had claimed, and met the decoy shipment's escort: <strong>Klorte Hengis</strong>, the lumber company's shirtless, feather-boa'd half-orc manager — and behind him, the mayor's hired security team and its leader, a short, well-armored goblin who smiled to show every one of his very sharp teeth. <em>"Snagg? Yeah, because I'll snack your head off. Well — not you specifically. As long as you stay on my good side."</em> Pax's new character is an Otari local, born and raised, security lead for the lumber company — and by the end of the night the party's unanimous review was Ruben's: <em>"I love this guy. Can we keep him?"</em></p>
+  <p>The trap half-worked. Two open d-rolls before departure came up maximally cursed — the worst weather on the table and the latest possible attack — so the party spent four seasick hours in a building storm (everyone but the ocean-raised Snagg fought at Sickened 1 all day) before the pirate ship rammed them at sunset. What followed was a chaotic deck brawl: eight pirate boarders — all women, commanded by a human "captain" with a slide pistol — against four PCs, Klorte, and the player-piloted deck crew. <strong>Snagg's first combat turn set the tone</strong>: a jaws critical that ripped a pirate's leg artery out (<em>"Who is the fucking villain here?"</em> — the DM), then a hero-pointed Combat Grab crit on a second. Xurl and Clive muscled the enemy captain over the rail; Ruben angled a 60-foot Inner Radiance Torrent at him while he dangled; Klorte long-jumped onto the pirate ship like Superman and hurled boarders into the sea; and when the captain shoved his last pirate at the party and Snagg's Reactive Strike bit her down in one hit, the man's nerve broke entirely — <em>"I'm surrender! I'm surrender!"</em> Two captives taken, at least two swimmers gone into the storm, and one real cost: <strong>Rodman</strong>, one of Snagg's own men, cut down by a parting blade as he tried to run.</p>
+  <p>The back half of the night belonged to Ruben. With Snagg kneeling at eye level beside the prisoners — blood still dripping from his jaws — Ruben ran the interrogation in full Pharasmin magistrate voice (<em>"Your hands are stained with blood, even if you didn't hold the knife"</em>), turned a public nat 1 into a hero-pointed 30, and walked away with everything: the pirates answer to a Kholo captain called <strong>Black Eel</strong>, operating from a small island two hours south, and they call themselves the <strong>Sons of Montriarch</strong> — a name that should be "Sons of Lamashtu," if Ruben's theology is right, and isn't. The Navigator flipped outright, trading her piloting for a lighter sentence. The new signal note carried a third line the old ones didn't: <strong>"has defense."</strong> Someone in Otari watched the guards board.</p>
+  <p>Then the bill came due. Sailing the captured pirate ship home past midnight, the party watched the <strong>Gauntlight double in brightness</strong> — the same omen that preceded the graveyard dead rising two weeks ago, and almost certainly the cult's midnight sacrifice, completed while the party was four hours away at sea. Ruben handed Wrin the Gauntlight Blueprints, and by morning she had the shape of the nightmare: the Gauntlight is an <strong>artifact Belcorra built</strong> — eight dungeon levels under a 115-foot tower, four lenses only Belcorra could handle — and fully restored it can watch anywhere its light reaches, <strong>reanimate every undead within a mile</strong>, and <strong>teleport creatures across its beam</strong>... with light that would reach Absalom and its millions of siege-war dead. <em>"We definitely need to stop it before it goes up to stage four."</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I · RP · The Port at Noon</div>
+    <div class="act-card">
+      <h3>"I'll snack your head off"</h3>
+      <ul>
+        <li>The party told <strong>Iqbal</strong> of Argon's fate — <em>"The Gauntlight claimed another"</em> (<strong>Xurl</strong>) — and confirmed they'll see the contract through: <em>"I was summoned here to do a job. We will get it done"</em> (<strong>Alder</strong>).</li>
+        <li>Met <strong>Klorte Hengis</strong> <em>(spelling tentative)</em>: half-orc, mid-40s, braided beard, no shirt, white feather boa, the lumber company's mark tattooed across his back. Bear hugs for everyone, and for Alder: "My boy, you need to train up. You're too weak." Alder: <em>"I like this guy already."</em></li>
+        <li><strong>Snagg's introduction</strong>: an Otari local, ex-adventurer, now security lead for the lumber company — his four-man team (Rodman, Parry, Clive, Danilo) shipped out with him. The name pun landed immediately; the height double-act with Xurl began (<em>"I finally see someone that's shorter than me"</em> / <em>"Bumbling fool"</em> — Snagg is actually a foot and a half taller).</li>
+        <li>Xurl's theory of goblin temperament brought the house down: <em>"People are closer to hell, and that makes them more violent."</em></li>
+        <li>Quick shopping — Xurl a level-2 talisman, Snagg smelling salts. Then two open doom-rolls: the weather d6 came up <strong>1</strong> (worst possible), Xurl's attack-timing d4 came up <strong>4</strong> (latest possible). The DM later confirmed: a 1 on that d4 would have had them home in time for the sacrifice.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act II · Travel · The Storm Crossing</div>
+    <div class="act-card">
+      <h3>Four hours of weather and cannon smoke</h3>
+      <ul>
+        <li>Departed ~1 PM into a rising storm. The seasickness Fort save (at −2) caught everyone except the ocean-raised local: <strong>Xurl, Ruben, and Alder fought the entire day Sickened 1.</strong></li>
+        <li>Ambush positions: Alder eyed a barrel, Ruben hid below with the cargo, Xurl loitered in plain sight ("no one's going to look twice at a random fucking halfling") — and Snagg stood in the open, his boss on deck: <em>"I'm a real fighter. I don't need to hide."</em></li>
+        <li><strong>Snagg spotted the pirate ship first</strong> (Perception 27), one sail out of the storm-blurred Inner Sea traffic: <em>"This probably is the one... Just my gut feeling."</em></li>
+        <li><strong>The cannon duel</strong>: Xurl's first shot nearly blew up the gun (Halfling Luck — <em>"I'm happy with not exploding, actually"</em>); Klorte lucked one hit and declared himself a professional; Snagg's rally speech — <em>"This is for Otari! For the wood company!"</em> (DM: <em>"For our corporate overlords"</em>) — cratered on the morale check and he dropped mid-sentence, later wiping the puke off the cannon while aiming it.</li>
+        <li>The one earned artillery hit was a <strong>three-man production</strong>: Xurl firing on <strong>Warfare Lore</strong> (ex-sailor), Alder Aiding with a <strong>nat-20 Esoteric Lore</strong> (Diverse Lore stretched to naval gunnery), 23 — hit. Two hits total on the pirate ship.</li>
+        <li>The pirates <strong>rammed the ship at sunset</strong>. Brace-and-Reflex: Xurl (hero point, still 19) and Ruben went prone with most of the deck crew; Snagg and Alder kept their feet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · The Deck Fight</div>
+    <div class="act-card">
+      <h3>Boarding actions, both ways</h3>
+      <ul>
+        <li>Eight boarders, a pistol-armed captain, and a navigator vs. the party, Klorte, and the crew — with each player handed one of Snagg's guards via a number lottery: <strong>Rodman → Ricardo, Parry → Pax, Clive → Ben, Danilo → Twan</strong>.</li>
+        <li><strong>Snagg's three jaws kills</strong> and the DM-improvised morale checks they caused — culminating in the captain's broken surrender.</li>
+        <li><strong>Xurl and Clive</strong> put the enemy captain over the rail; <strong>Klorte</strong> long-jumped the gap and hurled two pirates into the sea; <strong>Ruben</strong> ate part of a crit meant for Snagg and nuked the rail with a 60-ft torrent.</li>
+        <li><strong>Rodman died</strong> running from two cutlasses — the fight's only allied loss.</li>
+        <li>End state: <strong>captain and navigator captured</strong>, at least two swimmers gone into the storm, seven boarders dead. <em>(Full round-by-round below.)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · The Interrogation</div>
+    <div class="act-card">
+      <h3>"Perhaps you'd rather talk to my little friend here"</h3>
+      <ul>
+        <li>Post-fight, <strong>Snagg</strong> counseled caution before mercy: the letter was in Kholo but no Kholo was aboard — <em>"are these actually the real people that we need to defeat? Or there's more?"</em> — and proposed binding and questioning the survivors. <strong>Xurl</strong> stripped the prisoners: <em>"Anything which isn't made out of pants is coming off. They can keep their pants, begrudgingly."</em></li>
+        <li><strong>Ruben led</strong>, staging Snagg — blood still dripping — at eye level with the kneeling captain (+2 from the DM). His public nat 1 sparked the secret-roll debate; reroll-take-lower offered, <strong>hero point → 30</strong>. <em>"I would have done the same thing if I rolled a nat 20. Just to let you know."</em></li>
+        <li>The take: the raiders answer to <strong>Black Eel</strong>, a Kholo pirate captain no one has heard of (four RK rolls of 4–8 — <em>"Who the fuck is anyone?"</em>); hideout on a <strong>small island ~2 hours south</strong>; the crew are the <strong>Sons of Montriarch</strong>.</li>
+        <li><strong>Ruben's Religion 25</strong> flagged the anomaly: Kholo worship Lamashtu and style themselves <em>sons of Lamashtu</em>. "Sons of Montriarch" is a rebel, a different god — or something worse. <em>"Perplexing... More to research on."</em></li>
+        <li><strong>The Navigator flipped</strong> over the captain's protest (<em>"the captain will skin you alive"</em>): she'll pilot the party to the hideout — <em>"I'm going to die anyway. I'd rather risk it."</em></li>
+        <li>The new signal note had <strong>three lines</strong> — time, destination, and <em>"has defense."</em> Someone in Otari watched the mayor's guards board the decoy.</li>
+        <li>Strategy: <strong>Snagg argued to hit the hideout now</strong> (<em>"We have time to prepare... They'll be prepared next time"</em>) but yielded to the dwarf-rescue clock; Ruben — <em>"I do not like my odds of challenging an entire stronghold"</em>; Xurl — hand the prisoners to the mayor and <em>"actually get a proper force."</em> Klorte sent the lumber on to Chester and sailed the <strong>captured pirate ship</strong> home.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act V · Mystery · The Beacon</div>
+    <div class="act-card">
+      <h3>The light doubled while they were away</h3>
+      <ul>
+        <li>Past midnight, nearing Otari: <strong>the Gauntlight abruptly doubled in brightness</strong> and stayed there — the omen that preceded the graveyard dead rising. Snagg failed the "were you even in town" flat check: <em>"I was away, guys. I had a different job"</em> — and heard about the graveyard incident for the first time.</li>
+        <li>The graveyard: quiet, empty. <strong>Alder ran the deduction</strong> — Vandy wasn't on the shortcut, so she wasn't headed there: <em>"the only two places I can think of is Wrin or the mayor"</em> — and led the party straight to Wrin's Wonders.</li>
+        <li>The <strong>disused cliff path</strong> down to the Dawnflower Library (DC 22 Reflex): Ruben and Alder slipped and caught themselves; <em>"the goblin with heavy plate armor doesn't fucking care."</em> Snagg, beforehand: <em>"There's no such thing as too dangerous for Snagg."</em></li>
+        <li>Vandy already gone from the library. Xurl to the acolyte: <em>"It is bright like the night the dead rose. You should wake Vandy."</em> Found <strong>Vandy and Wrin conferring</strong> outside the star-painted tent — Wrin's read: about <strong>half as bright as the graveyard night</strong>, and the first sudden jump in her nightly observations.</li>
+        <li><strong>Ruben connected the flare to the cult's sacrifice</strong> (Wrin: <em>"Ruben, what are you talking about? What kind of ritual?"</em>); <strong>Xurl</strong> sharpened it: they didn't sacrifice to brighten the light — <em>"they're sacrificing because they knew it would become brighter."</em> The midnight ritual is presumed complete; the red-haired dwarf presumed dead. <em>"We went for pirates instead of this ritual sacrifice... It is what it is."</em></li>
+        <li><strong>Ruben handed Wrin the Gauntlight Blueprints</strong> overnight (<em>"Oh gods... my Pharasma"</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VI · Mystery · Wrin's Report</div>
+    <div class="act-card">
+      <h3>What the blueprints say</h3>
+      <ul>
+        <li>Next morning at the mayor's: the Gauntlight is an <strong>artifact built by Belcorra</strong> — the 115-ft lighthouse above <strong>eight dungeon levels</strong>, with <strong>four magical lenses</strong> so potent Belcorra handled them personally, activated from the very bottom level.</li>
+        <li>Active, it can <strong>observe anything its light touches</strong>, <strong>reanimate all undead within a mile</strong>, and <strong>teleport creatures along its beam</strong> — currently one creature of level 4 or lower (the "spider-thing" that appeared in the graveyard).</li>
+        <li>Fully restored: <strong>any number of creatures of level 15 or lower</strong>, with light reaching <strong>Absalom</strong>.</li>
+        <li><strong>Snagg's local knowledge (Society 21) supplied the stakes</strong>: five or six major sieges across Absalom's history — millions of dead outside its walls, every one in reach of a restored beam.</li>
+        <li>The closing frame on the clock: stop it <strong>before it reaches "stage four"</strong> — with the light sitting at roughly stage two now.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounter</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Decoy Run · ~78 min · 2 rounds · ended by surrender</div>
+  <h3>Pirate Boarding Action — 8 boarders + captain + navigator</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Pirate AC</div><div class="value">17</div></div>
+    <div class="combat-stat"><div class="label">Captain pistol</div><div class="value">+15 · fatal d10</div></div>
+    <div class="combat-stat"><div class="label">Kills</div><div class="value">Snagg ×3 · Klorte ×2 · Xurl · Alder</div></div>
+    <div class="combat-stat"><div class="label">One-shots</div><div class="value">4</div></div>
+    <div class="combat-stat"><div class="label">Captured</div><div class="value">2</div></div>
+    <div class="combat-stat"><div class="label">Allied loss</div><div class="value">Rodman</div></div>
+  </div>
+  <p class="combat-note">Initiative: Xurl 27 = Rodman 27 · Snagg 25 (delayed) · pirates 22–24 · Ruben 21 = Navigator 21 · Alder 20 · Captain 19 · Klorte 18 = Clive 18 · Parry 11 · Danilo 10. Prone from the ram: Xurl, Ruben, Rodman, Parry, Danilo. Field: two rain-lashed decks 15 ft above the water — nat 1s near the rail risk a swim. Two "Diver" tokens rolled initiative and never surfaced. The fight ran exactly two ~40-minute rounds; Clive, Parry, and Danilo never got a second turn.</p>
+
+  <h4>Round 1 — The Boarding Wave</h4>
+  <ul>
+    <li><strong>Rodman's</strong> crossbow opened into the ocean; sap drawn. <strong>Xurl</strong> stood into <strong>Crane Stance</strong>; <strong>Snagg</strong> raised his shield and <strong>delayed</strong>.</li>
+    <li><strong>Two pirates swung across on Boarding Actions</strong> — one opened <strong>Clive</strong> for 10; the other <strong>crit Xurl for 12</strong>, her follow-up missing <strong>by exactly 1 — the Crane Stance AC bought it</strong>.</li>
+    <li><strong>Snagg's debut turn</strong>, off delay: jaws <strong>crit — 32, pirate dead outright</strong>, artery torn out (<em>"this small little goblin in heavy armor just jump up and bite — and he just kills this guy right off"</em>). Then <strong>Combat Grab</strong>: nat 1 → <strong>hero point</strong> → 19 → <strong>second crit, 26</strong> — target <strong>Grabbed + Slowed 1</strong>. Two actions, 58 damage. Chat log: <em>"Nom!"</em></li>
+    <li><strong>Second wave</strong>: one boarder <strong>crit Alder 18</strong>; another swung past Rodman — his Reactive-Strike sap <strong>crit</strong> rolled a 1 on the die (8 total; so sad Foundry mis-targeted it at Rodman himself) — then she carved him for <strong>7 + 10</strong>. A fifth pirate crossed and ran out of actions.</li>
+    <li><strong>Ruben's rank-2 Heal put 28 back into Alder</strong> (<em>"Holy shit. That's a bit of health"</em>). <strong>Alder</strong> stood and read a <strong>scroll of Command</strong> at the advancing Navigator — saved (28 vs DC 20).</li>
+    <li>Mid-round Wisdom checks: the letter was Kholo, but the man commanding the all-women crew is <strong>human</strong> (<strong>Alder</strong>: <em>"He created his own harem. A pirate harem"</em>).</li>
+    <li><strong>The captain</strong> strode out — pike in one hand, slide pistol in the other — and fired at Alder through cover; the rocking deck took it wide (miss by 2).</li>
+    <li>One pirate whiffed twice on Xurl (Crane Stance by 1 again); his <strong>Stand Still</strong> came up a <strong>crit-miss fumble</strong> — the card rolled him aside, prone.</li>
+    <li><strong>Klorte's</strong> crit-success running <strong>long jump onto the pirate ship</strong>, twin hatchets mid-air — <strong>crit, 38, pirate swatted into the ocean</strong> (<em>"He is fucking Superman over here"</em>).</li>
+    <li><strong>The play of the fight</strong>: <strong>Xurl and Clive muscled the captain over the rail</strong> — Clive's nat-20 flat check (<em>"this man is the king"</em>) resolved as a Reposition off Xurl's Athletics (success by 4). The captain <strong>Grabbed an Edge</strong> (31), hanging — <strong>his slide pistol dropped into the sea</strong> (<strong>Alder</strong>: <em>"Shame, because that's a damn good pistol"</em>).</li>
+    <li>A pirate <strong>passed the DM's improvised morale check</strong> after watching a teammate get instant-killed — and piled onto the big half-orc anyway (hit Klorte for 8). <strong>Parry</strong> and <strong>Danilo</strong> stood and whiffed crossbows (<em>"Parry is useless"</em> — Pax, piloting).</li>
+    <li>The last pirate's Boarding Action <strong>crit Snagg for 28</strong> — <strong>Ruben's heightened Protector's Sacrifice</strong> ate 9 (Snagg 19, Ruben 9 — and it was <strong>Snagg</strong> who reminded him it was heightened).</li>
+  </ul>
+
+  <h4>Round 2 — Collapse and the Surrender Cascade</h4>
+  <ul>
+    <li><strong>Rodman again</strong>: the DM's warning came seconds before the end — <em>"don't sacrifice your people... if you can keep him alive, maybe something good's going to happen"</em> — then a second sap crit (crit deck: double damage, 8), and <strong>the run</strong>: two Reactive Strikes threatened, one rolled — <strong>7 damage dropped him. Rodman died on the deck.</strong></li>
+    <li><strong>Xurl</strong>: an <strong>Assurance-Intimidation Demoralize</strong> sold as a shoulder-check fake-out (Frightened 1), then a split <strong>Flurry of Blows</strong> — <strong>Crane Wing crit, 24, killed the grabbed pirate</strong>; the follow-up came up <strong>nat 1</strong> and the rail rule fired: the DM narrated her dying counter-kick, and Xurl caught the railing on a <strong>crit-success Grab an Edge</strong>.</li>
+    <li><strong>Snagg</strong>: jaws <strong>crit (18</strong>, Slowed 1 again<strong>)</strong> + <strong>Snagging Strike (16)</strong> — <em>"with two bites, the whole head went off."</em></li>
+    <li>A pirate landed one of three swings on Alder (8); another <strong>failed her morale check</strong> — <em>"'Fuck this!' And she jumped off"</em> — the first swimmer. The <strong>Navigator's</strong> pistol clipped Alder for 7.</li>
+    <li><strong>Ruben's Inner Radiance Torrent</strong>, angled along the rail, caught the <strong>still-dangling captain</strong> and the Navigator — both saved for 7, the captain at the improvised <strong>−2 "on the edge"</strong> (argued by Snagg: <em>"School of cool for the win"</em>). <em>"They just have swords and guns and shit, and we're bringing magic nukes."</em></li>
+    <li><strong>Alder's chakram crit (29) + backswing (15) killed another boarder</strong> (<em>"Big boy damage"</em>); his <strong>Exploit Vulnerability</strong> read the captain — strong Reflex from a life at sea, <strong>weak Fort</strong>.</li>
+    <li>Only then the captain <strong>nat-20'd his climb</strong> back aboard — the DM waived <strong>Alder's Implement's Interruption</strong> for the natural 20 (Alder had spotted the trigger) — now armed with nothing but the pike. <strong>Snagg</strong>: <em>"Just fist fight, man. Come. Fist fight."</em></li>
+    <li>The captain <strong>shoved his last pirate at the party</strong> and ordered her in. Her path crossed Snagg's reach — <strong>Reactive Strike: jaws crit, 32, one bite, dead.</strong></li>
+    <li>The captain watched his order get someone one-shotted and <strong>broke</strong>: <em>"I'm surrender! I'm surrender!"</em> <strong>Klorte</strong>, mid-rampage, <strong>crit the last fighting pirate for 36 and hurled her into the sea</strong> (<em>"I feel like this was supposed to be a hard fight"</em> — the DM, deflated). The <strong>Navigator surrendered</strong>; the DM's final morale roll was for <strong>Klorte himself</strong> — does he stop killing? He stopped.</li>
+    <li><strong>End state</strong>: captain + Navigator captured; Snagg's Perception 30 spotted the fled pirate riding the waves <strong>plus at least one more figure</strong> (likely a never-surfaced Diver). Offered the DM's deadpan <em>"you're in the middle of the ocean, no one knows what happened"</em> — <strong>Snagg declined</strong>: <em>"I'm just not going to go for kills here."</em> Seven of eight boarders dead. <em>"Good job, everyone. No one died. I mean, poor Rodman."</em></li>
+  </ul>
+  <p class="combat-xp">Damage dealt: Snagg 124 (five jaws connections, four crits, 3 kills) · Klorte 74 (2 kills) · Alder 44 (1 kill) · Xurl 24 (1 kill) · Ruben 14 + 28 healed + 9 redirected. Taken: Alder 33 · Snagg 19 (+3 surgery) · Xurl 12 (+8 friendly surgery) · Ruben 9 (voluntary) · Clive 10 · Klorte 8 · Rodman — all of it. Four of the seven kills were one-shots — <em>"four of them just got one shot."</em></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Hero Points · house rule: reroll OR bump one degree</div>
+  <h3>The Ledger</h3>
+  <ul>
+    <li><strong>Snagg ×1</strong> — Combat Grab nat 1 → 19 → <strong>crit for 26</strong>. The best-spent point of the night.</li>
+    <li><strong>Xurl ×1</strong> — ram Reflex reroll (still 19, still prone). His cannon reroll was <strong>Halfling Luck</strong>, not a hero point.</li>
+    <li><strong>Ruben ×1</strong> — interrogation Intimidation nat 1 → 18 → <strong>30</strong>, after the DM's reroll-take-lower offer.</li>
+    <li><strong>Alder — unlabeled reroll</strong> on the seasickness Fort save (nat 1 → 11, still failed; most likely a hero point, never stated on tape).</li>
+    <li><strong>Award</strong>: +1 each at session start (post-Argon full rest).</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">After-Action · out of initiative</div>
+  <h3>The Medic Kit &amp; the Cliff</h3>
+  <ul>
+    <li><strong>Snagg's Medic debut, full spectrum</strong>: nat-20 Risky Surgery on himself (+21 HP); a <strong>failed surgery on Xurl</strong> that dealt 8 slashing and healed nothing (<em>"It's a procedure, okay?"</em>); and a nat-2-into-crit-success surgery on Alder (+25) — Risky Surgery's upgrade meant he only had to avoid the 1: <em>"I rolled — not a one."</em></li>
+    <li><strong>The cliff path</strong>: DC 22 Reflex — Ruben (17) and Alder (16) slipped and caught themselves; Snagg (29) and Xurl (26) descended clean. One of them glowing, one in full plate.</li>
+  </ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-snagg">
+    <h4>Snagg · the Company Man with the Company Teeth — debut</h4>
+    <ul>
+      <li>The debut worked on every axis at once. In fiction he's an Otari local made good — a goblin from a town that "treats you not very bad, but definitely not good," who came home from adventuring to lead the lumber company's security team, and who repaid the first employer to respect him with <em>"This is for Otari! For the wood company!"</em> (then dropped mid-speech as the rally roll cratered — and later calmly wiped the puke off the cannon he was aiming).</li>
+      <li>The name pun — <em>"I'll snack your head off... as long as you stay on my good side"</em> — turned out to be a promise, not a joke. First combat turn: a jaws crit that <strong>ripped a pirate's artery out</strong>, then a hero-pointed Combat Grab crit. By fight's end: <strong>three pirates bitten dead</strong>, including the two-bite beheading and the <strong>Reactive Strike one-shot that broke the enemy captain's morale</strong> and ended the battle. The DM's review: <em>"Who is the fucking villain here?"</em></li>
+      <li>And then the same jaws declined the easy ending: offered the DM's deadpan out, he refused — <em>"I'm just not going to go for kills here"</em> — and later argued to strike the hideout <strong>now</strong>, while it was unwarned, before conceding to the dwarf-rescue clock. The ferocity has a spine and a code attached.</li>
+      <li>Sharp above the table from minute one: reminded Ruben that Protector's Sacrifice was <strong>heightened</strong> (tripling its value on the crit aimed at Snagg himself), called the <em>Grab an Edge</em> reaction for the falling captain, argued the rail-hanger's penalty (<em>"School of cool for the win"</em> — the DM improvised a −2), and litigated Reactive Strike triggers all night — even when the ruling went against him.</li>
+      <li>The <strong>Medic kit</strong> debuted both ways: a nat-20 self-surgery, a "just need a 2" crit-heal on Alder — and one botched procedure that stabbed Xurl for 8: <em>"It was an accident, okay? Trust me. I'll get you next time."</em></li>
+      <li>And the cost column is his too: the security team is <em>his</em> team, and <strong>Rodman died</strong> on the deck he was hired to hold. <em>"Poor Rodman. He found out the bad way."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-xurl">
+    <h4>Xurl · the Sailor on a Cursed Sea</h4>
+    <ul>
+      <li>The ex-sailor finally got a naval session and spent it half-competent, half-cursed: seasick all day, a cannon that nearly blew up in his hands (<em>"Brother, I don't know where the fuck I'm aiming"</em> — Halfling Luck: <em>"I'm happy with not exploding, actually"</em>), then the party's one earned artillery hit once the DM let him fire on <strong>Warfare Lore</strong>. He called the ram — <em>"Incoming ram! Brace!"</em> — braced, and went prone anyway on a hero-pointed 19.</li>
+      <li><strong>The Clive arc</strong>: handed one goblin crossbowman to pilot, Ben made him a legend — the nat-20 bodycheck that put the enemy captain over the rail (<em>"because this man is the king"</em>), <em>"Clive, you've done God's work, son,"</em> and finally: <em>"If I die, I'm taking Clive as my next character."</em></li>
+      <li>His own fists: an Assurance Demoralize sold as pure body language, a <strong>Crane Wing crit that "exploded" the pirate Snagg had grabbed</strong> — then a <strong>nat 1</strong> on the follow-up fired the deck's rail rule: the DM narrated the dying pirate's counter-kick, and Xurl caught the railing on a crit-success Grab an Edge.</li>
+      <li>A session-long wary side-eye at the new hire — from <em>"People are closer to hell, and that makes them more violent"</em> through <em>"Are you sure you want to recruit this guy?"</em> — curdling into the night's best line after the botched surgery: <em>"I don't know if I like you. I've only seen you cause damage."</em></li>
+      <li>Sharpest read of the finale: the cult didn't sacrifice to brighten the light — <em>"they're sacrificing because they knew it would become brighter."</em> And the sailor's ledger, unsentimental as ever: <em>"We went for pirates instead of this ritual sacrifice. It is what it is."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ruben">
+    <h4>Ruben Falmoor · Pharasma's Magistrate</h4>
+    <ul>
+      <li>His combat was judgment calls made for other people: a rank-2 Heal putting <strong>28 HP</strong> back into a crit-shredded Alder, and <strong>Protector's Sacrifice</strong> thrown in front of the crit on Snagg — 9 damage eaten for a goblin he'd met that morning (the DM: <em>"It's magic. Don't question it"</em>). His one attack: a 60-ft <strong>Inner Radiance Torrent</strong> angled at the captain <em>while he dangled from the rail</em> — both targets saved, and Ruben shrugged: <em>"They just have swords and guns and shit, and we're bringing magic nukes."</em></li>
+      <li><strong>The interrogation was a set piece</strong> and he ran every beat: the opener (<em>"Now that you have been thoroughly trounced..."</em>), the staging (<em>"my little friend here"</em> — +2 from the DM), the honesty flex on the public nat 1 (<em>"I would have done the same thing if I rolled a nat 20"</em>), and the hero point that made it a 30.</li>
+      <li>Then the magistrate voice: sentencing (<em>"Your hands are stained with blood, even if you didn't hold the knife"</em>), clemency (<em>"You are not going to meet Lady Pharasma this night. Congratulations to you both"</em>), and recruitment — flipping the Navigator into the party's pilot, with a rider for the captain: <em>"And for you to not do anything stupid."</em></li>
+      <li>The night's two biggest lore beats were his: the <strong>Religion 25</strong> exposing "Sons of Montriarch" as theological nonsense for Lamashtu-worshipping Kholo, and connecting the Gauntlight flare to the cult's sacrifice in front of Wrin before handing her the blueprints.</li>
+      <li>Verdict on the new guy, delivered mid-carnage: <em>"I love this guy. Can we keep him?"</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-alder">
+    <h4>Alder Ungram · the Scholar Who Aids in All Things</h4>
+    <ul>
+      <li>Opened the session carrying the party's resolve to Iqbal — <em>"I was summoned here to do a job. We will get it done"</em> — and closed it with the night's cleanest deduction: Vandy wasn't on the shortcut, so she wasn't at the graveyard — <em>"the only two places I can think of is Wrin or the mayor"</em> — putting the party at Wrin's tent without a wasted step.</li>
+      <li>The most improbable clutch roll of the session: a <strong>nat-20 Esoteric Lore Aid on naval artillery</strong> — Diverse Lore stretched to "how to aim a cannon, from a book" — the only reason Xurl's shot hit. In the fight, the thaumaturge lane ran clean: <strong>Exploit Vulnerability</strong> read the captain (strong Reflex, <strong>weak Fort</strong>), and the chakram crit — <em>"Big boy damage"</em> — plus backswing killed a boarder.</li>
+      <li>Character comedy in his signature register: the accent-restart bit (<em>"proverbial pants down — oh wait, I'm using the completely wrong accent"</em>), instant fondness for the man who called him weak (<em>"I like this guy already"</em>), and the anthropology of the all-female crew: <em>"He created his own harem. A pirate harem."</em></li>
+      <li>Piloting <strong>Rodman</strong> went worse: a Reactive-Strike sap crit that rolled a 1 on its damage die (<em>"He's so sad he hates himself"</em>), a crit-deck double-damage follow-up — and then the fatal retreat into a waiting Reactive Strike, seconds after the DM's <em>"don't sacrifice your people."</em> The DM's ruling on cowardice stood: <em>"It's called tactical retreat, okay?"</em></li>
+      <li>Quietly useful everywhere: the Command scroll on the Navigator (saved — a scroll spent for nothing), the empty-ship deduction (pirates run light to haul more and sail faster), and the argument that beat the storm math: deliver first — <em>"by the time they get word that their assault failed, we would have already made the delivery."</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot &amp; Advancement</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">The Pirate Ship</div>
+    <div class="loot-source">Captured intact · cannon-damaged</div>
+    <div class="loot-note">Sailed home as the party's ride. "Ships are valuable — we might get some kind of reward" (Ruben).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Navigator's Slide Pistol</div>
+    <div class="loot-source">Stripped from the prisoners</div>
+    <div class="loot-note">The captain's went into the ocean when he grabbed the rail.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Captain's Pike</div>
+    <div class="loot-source">Stripped from the prisoners</div>
+    <div class="loot-note">Stashed out of reach.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">2 Daggers</div>
+    <div class="loot-source">The prisoners</div>
+    <div class="loot-note">~2 sp each; vendor fodder.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">New Kholo Signal Note</div>
+    <div class="loot-source">The captain's person</div>
+    <div class="loot-note">Three lines: time, destination, "has defense" — someone watched the guards board.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Two Prisoners</div>
+    <div class="loot-source">The surrender</div>
+    <div class="loot-note">The captain (name unknown) and the Navigator — who's agreed to pilot the party to the hideout.</div>
+  </div>
+</div>
+<div class="xp-banner">Advancement · Milestone — none announced; party remains <strong>level 5</strong> (the post-death level-up was applied at session start).</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Snagg:</strong> "Snagg? Yeah, because I'll snack your head off. ... Well, not you specifically, but, you know. As long as you stay on my good side."<span class="attribution">The introduction, doubling as the session's thesis statement.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "I love this guy. Can we keep him?"<span class="attribution">Watching the new hire bite a second pirate mid-fight.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Bitch, I eat people."<span class="attribution">Answering Xurl's horrified "He's just eating people."</span></blockquote>
+
+<blockquote><strong>DM (Lap):</strong> "Who is the fucking villain here?"<span class="attribution">Narrating Snagg's first kill — artery and all.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "I'm just not going to go for kills here."<span class="attribution">Declining the DM's deadpan "you're in the middle of the ocean, no one knows what happened" — from the goblin who had just bitten three people to death.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "It is bright like the night the dead rose. You should wake Vandy."<span class="attribution">To the library acolyte, past midnight, with the Gauntlight burning double.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "If I die, I'm taking Clive as my next character."<span class="attribution">After Clive's nat-20 bodycheck sent the pirate captain over the rail.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "I don't know if I like you. I've only seen you cause damage."<span class="attribution">To the party's new medic, immediately after the medic stabbed him for 8.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "It was an accident, okay? Trust me. I'll get you next time." / "It's a procedure, okay?"<span class="attribution">The medic's defense.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Perhaps you'd rather talk to my little friend here. ... I'm pretty sure he has some very interesting things to say to you."<span class="attribution">Pointing the interrogation at a goblin with blood still dripping from his jaws. The DM awarded +2.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Your hands are stained with blood, even if you didn't hold the knife."<span class="attribution">Sentencing the Navigator, in full Pharasmin magistrate voice.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Once we catch them with their proverbial pants down — oh wait, I'm using the completely wrong accent."<span class="attribution">Restarting his own line in-character.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "He created his own harem. A pirate harem."<span class="attribution">On discovering the all-female crew's lone male commander.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Well, my talents are less physical, more of the magical nature."<span class="attribution">To Klorte's "My boy, you need to train up. You're too weak." (Klorte: "That's bullshit. You can still train.")</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Black Eel</strong> — the Kholo pirate captain on a small island ~2 hours south. Nobody in the party (or Klorte) has heard the name. The Navigator will pilot them there covertly; she won't be seen helping.</li>
+  <li><strong>The Sons of Montriarch</strong> — Kholo should be "sons of Lamashtu." Who or what is Montriarch? Ruben's working theories: a rebel, or another god. <em>"More to research on."</em></li>
+  <li><strong>"Has defense"</strong> — someone in Otari watched the mayor's guards board the decoy and reported it. The pirate ring has eyes on the docks — and the notes' author is still unidentified.</li>
+  <li><strong>The sacrifice is presumed complete</strong> — the party chose pirates over the dwarf, the d4 made them four hours late, and the Gauntlight flared at midnight. The red-haired dwarf is presumed dead. What did the ritual buy the cult?</li>
+  <li><strong>The Gauntlight's stage clock</strong> — artifact, eight levels, four lenses, observe/reanimate/teleport, Absalom-range at full power. The wrap-up framing: stop it "before stage four" — roughly stage two now.</li>
+  <li><strong>The swimmers</strong> — the pirate who broke and fled, plus at least one more figure in the water (possibly a diver who never joined the fight). If one survives, Black Eel learns exactly what happened.</li>
+  <li><strong>Snagg's employment</strong> — the party said "prove yourself"; he bit three pirates to death. Does he formally sign on?</li>
+  <li><strong>Ghoul-Argon</strong> — unaddressed this session; the S4 clock ("a couple of days") is still running, and the flare suggests the cult got its ritual off.</li>
+  <li><strong>The mayor's council</strong> — next session opens on the morning meeting with Osif and Wrin: hideout assault with a proper force, the Gauntlight, or both?</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Beacon</span>
+  <p>Eight levels under the tower. Four lenses only Belcorra could handle. Light that could one day reach Absalom — and the millions of siege-dead buried outside its walls.</p>
+  <div class="big-line">"Stop it before it goes up to stage four."</div>
+  <span class="speaker">— the session's closing frame. The light sits at roughly stage two. It doubled while the party was away at sea.</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Snagg's Journal <em>(first entry)</em></h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Snagg did this session</h3>
+<ul>
+  <li>First day escorting the decoy shipment. Met the client's crew: the little loud one (<strong>Xurl</strong>), the fancy talker (<strong>Ruben</strong>), the scholar with the throwing ring (<strong>Alder</strong>). They asked about the one they lost. Gauntlight took him.</li>
+  <li>Threw up exactly once, mid-speech. Wiped the cannon down after. Nobody needs to bring it up again.</li>
+  <li>When they boarded: killed three of them with my teeth. One bite for the first, one for the last; the middle one took two — the head came off anyway. The one their captain shoved at me didn't even land a step. After that he quit — dropped his weapon and begged. That's how you end a fight: make the man giving orders afraid to give another one.</li>
+  <li>Didn't finish the swimmers. Middle of the ocean, nobody watching — didn't matter. Not going for kills on people who've quit.</li>
+  <li>Patched myself up (clean work, best I've done), patched <strong>Alder</strong> (needed a 2, rolled not-a-1), stabbed <strong>Xurl</strong> by accident. It was a <em>procedure</em>. I'll get him next time.</li>
+  <li>Stood next to the prisoners while Ruben talked. Didn't have to say anything. The blood did the talking.</li>
+  <li><strong>Rodman died.</strong> My team. Ran when he shouldn't have, and they cut him down for it. Three left: Parry, Clive, Danilo.</li>
+</ul>
+
+<h3>Things Snagg knows that the party does not</h3>
+<ul>
+  <li>This town. Born here. The shops, the shortcuts, the people worth knowing — the cliff path behind the Dawnflower Library that nobody uses anymore. Went down it in full plate, no hands, while the fancy ones slipped.</li>
+  <li>What it's like working for people who "don't treat you very bad, but definitely not good." Klorte and the mayor's company gave me a real job. That's worth something. That's worth a lot.</li>
+  <li>Nothing about this Gauntlight business — and they know that. I was away for the graveyard night; had a different job. Everyone in the party has history with that light. I have none. Yet.</li>
+</ul>
+
+<h3>What Snagg is thinking about</h3>
+<ul>
+  <li>These four are good at what they do. The healer took a hit meant for me — redirected it to himself, first day, no hesitation. Remember that.</li>
+  <li>They said "prove yourself" if I want in. Three dead pirates and a broken captain feels like a start. If the money's good.</li>
+  <li>I said hit the island now, while they're blind. Got outvoted by a hostage I've never met. Fine — but every hour we wait, that hideout gets harder.</li>
+  <li>The letter said <strong>"has defense."</strong> Somebody on the docks watched the guards board. When we're back in town, I know who to ask about who was watching the loading. Locals talk to locals.</li>
+  <li>Rodman's family, if he has one. Klorte will handle the company side. I should be there anyway. He was mine.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who is <strong>Black Eel</strong>? Nobody knows the name — not even Klorte, and Klorte knows everyone. And why "Sons of <strong>Montriarch</strong>" from a Kholo who should be praying to Lamashtu?</li>
+  <li>Does the mayor give us a real force for the island, or is it four of us and a flipped navigator?</li>
+  <li>The light doubled and everyone went quiet. Eight levels under that tower, and the thing can raise the dead for a mile around. What's living in a town next to that worth?</li>
+  <li>The one they lost — Argon. They say the ghouls are turning him. Do we go down for him, or for the light?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

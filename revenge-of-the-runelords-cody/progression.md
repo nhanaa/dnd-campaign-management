@@ -25,7 +25,7 @@ Campaign runs **12 → 20**. Three feats land on every even level: a **mythic** 
 
 **Long-Distance Taunt (14, via Advanced Defender)** — Taunt at **120 feet**. The flying tank no longer has to stand in the blast template to do his job; spread the party and Telekinetic Bombardment hits one person.
 
-**Celestial Armaments (16)** — daily blessing, no MP: staff sheds light, **+1d8 spirit on every hit**, crit → Blinded (Fort). Bigger than the flaming rune and it can't be immune'd by fire.
+**Celestial Armaments (16)** — daily blessing, no MP: staff sheds light, **+1d8 spirit on every hit** (~+14%/hit, resist-proof — no fire-immunity blanking) and **crit → Fort save vs class DC or Blinded 1d4 rounds**. Strictly better than the Greater Phantasmal Doorknob rider (printed save = matches Cody's existing house ruling; 2.5× the duration), and Blinded = DC 11 flat check on every enemy attack. Aimed straight at low-Fort enemies — the Risen runelords' worst save. Demotes the Doorknob to backup (both riders still stack on the same crit).
 
 **Fuse Stance (16)** — merge **Reflective Ripple + Whirlwind**: +2 AC *and* the trip engine simultaneously — and with **Reflexive Stance** (took at 12, replacing Wave Spiral) the fused stance comes online **at initiative, as a free action, every fight**. Zero actions ever spent on stances from 16 on. Confirmed pair — Immovable Object was considered for the fusion and rejected (restriction rides along).
 

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 16 — I Have So Many Ideas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-hexroot { border-left-color: var(--jade); }
+.char-ren { border-left-color: var(--gold); }
+.char-serrafina { border-left-color: var(--teal); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-hexroot { border-left-color: var(--jade); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>I Have So Many Ideas</h1>
+  <div class="subtitle">Session 16 &mdash; a prison-gate rescue, a hellspawn fixer, and a frame-job turned back on the framers</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-08</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 10m</span>
+    <span class="meta-pill">Elidir &middot; Locked Down</span>
+    <span class="meta-pill">2 &rarr; ~mid-Abadius 4727</span>
+    <span class="meta-pill">Level 6</span>
+    <span class="meta-pill">New PC: Hexroot</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:26%"></div>
+    <div class="comp-seg comp-social" style="width:24%"></div>
+    <div class="comp-seg comp-explore" style="width:12%"></div>
+    <div class="comp-seg comp-loot" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 26%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Schemes &amp; Faction 24%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Heist &amp; Infiltration 12%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Shopping 8%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster &mdash; <span class="new-badge">NEW: HEDGE MAGE (OCCULT)</span></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Dragon Thaumaturge (Mirror Cloak) &middot; Draconic Ravager &mdash; Lv 6</div>
+      <div class="char-player">Snowgeen</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic &mdash; <span class="new-badge">NEW: LIVING NEXUS</span></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &mdash; <span class="new-badge">NEW: MERCY</span></div>
+      <div class="char-player">Scott Smith</div>
+    </div>
+    <div class="char-card char-hexroot">
+      <div class="char-name">Hexroot</div>
+      <div class="char-class">Leshy Witch (occult) &middot; club &amp; hissing familiar &mdash; <span class="new-badge">NEW PC &middot; REPLACES ZAROK</span></div>
+      <div class="char-player">Tim</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Isgeri Boarhound &mdash; mature animal companion &middot; survived choking death</div>
+      <div class="char-player">Bai Jian's</div>
+    </div>
+  </div>
+  <p style="margin-top:14px;"><em>Tim swapped characters after his debut: Zarok the Aleigator is out, Hexroot the leshy witch is in &mdash; folded into the party off-screen. No exit scene for the Aleigator.</em></p>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The morning after the vampire hunt, the party woke up level 6 in Sarevial's safehouse &mdash; and found out the frame-up stuck anyway. <strong>Quoster Thistlewait</strong> walked in with a WANTED leaflet: <em>the Hellbreakers League are murderers of Hedvend VI</em>. Bai Jian's reaction was the whole campaign in five words: <em>"Damn it, those bastards succeeded."</em> Quoster's offer: he'll smuggle the party out of Elidir in his trade wares &mdash; weeks of arranging under the lockdown &mdash; and he pays in advance: a case of Masquerade Scarves, a Staff of Phantasms, a ring off his own finger. The price is personal. His friend <strong>Siadrius</strong> has been arrested on a rival's false accusation, and the army sweep is dumping people into <strong>the Gyve</strong>, the black prison tower over the Moyle. <em>"He won't survive long in there."</em></p>
+    <p>The rescue became the session's one real fight &mdash; and one of the campaign's most Hellbreakers fights ever. A riot crowd already at the gates chanted <em>"Free Siadrius!"</em> while guards held the man strapped Ewok-style to a pole. The GM debuted a <strong>Control the Crowd</strong> action, and the fight turned into an argument between violence and reputation: Bai Jian nearly killed the Captain of the Guard with a falcata crit, failed the lethality flat check &mdash; +1 Suppression &mdash; and spent a hero point to undo it: <em>"I'm going to keep our reputation clean."</em> From there the party fought like a rebellion instead of a wrecking crew: Cyrathul crit-commanded the crowd into stoning the guards, Zanthar's Fear crit-broke a weeping guard who <em>"didn't sign up for this,"</em> Hexroot &mdash; Tim's brand-new leshy &mdash; soaked three Reactive Strikes untying Siadrius mid-melee, and every takedown landed non-lethal. Then, with the crowd chanting <em>"Hellbreakers! Isger for Isger!"</em> and the army coming, they talked their own riot into going home before it became a massacre. <strong>+2 Uprising, +1 reputation, nobody dead.</strong></p>
+    <p>The back half belonged to a new NPC who may be the most consequential recruit the Elidir chapter ever makes. Siadrius led the party to Quoster's own safehouse &mdash; the reveal landing when he sprinted into Quoster's arms, kissing his cheeks; <em>"Siadrius means more to me than you'll ever know"</em> &mdash; and put them in touch with his fixer: <strong>Jenverick</strong>, a tall, blue-skinned, horned hellspawn woman in high heels, terminal enthusiasm made flesh. She fenced the party's entire hoard (bribe ledgers at full price), delivered a shopping list of runes and scrolls, realized who her clients were, and demanded to found the Elidir chapter on the spot: <em>"The time is now&hellip; Let me join. Let me help. I have so many ideas. Please, please, please."</em> Her ideas, executed across twelve in-game days: <strong>loot the abandoned Reeves Rest Manor</strong> (Caeto fired the staff and moved out &mdash; Otton Nettlebrush confirmed it, got recruited, and the party robbed the steward's house for the city's needy, walking out with an ancient relic glaive nobody can wield), and <strong>frame the Aziri family</strong> &mdash; gala contest winners and the army's chief suppliers &mdash; exactly the way the League was framed. Fake talismans, forged army orders slipped to Colonel Rithert on Bai Jian's gala friendship, and a staged sting that ended with the Aziris marched into the Gyve while the party watched from the rooftops. <strong>Zero suppression. The Uprising tracker hit its final stage: Revolution.</strong></p>
+    <p>Two quieter beats carried weight. Ren started coughing &mdash; Panacea diagnosed <strong>choking death</strong>, the vampire plague from Ezio's death-burst, and a rank-3 Cleanse Affliction scroll made the hound cough up a clawed embryo-thing that got stomped flat. But the roll log holds a detail nobody chased: <strong>Cyrathul failed the same Cloud of Plague save that morning</strong>, and only Ren was ever treated. The session closed with a haggard Quoster needing leverage to get his goods &mdash; and the party &mdash; out of the city, and Jenverick supplying the answer: stage a robbery at the docks. <strong>Sasatoli Bronc</strong> agreed to leave empty crates and a single guard out tomorrow night &mdash; <em>"anything to get under Caeto's skin."</em> The fake heist is next week's cold open.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; Wanted: The Hellbreakers League</div>
+      <div class="act-card">
+        <ul>
+          <li>Long rest and level-6 bookkeeping at Sarevial's safehouse. <strong>Zanthar</strong> discovered Blessed One <em>does</em> have a level-6 feat and took <strong>Mercy</strong>; <strong>Bai Jian</strong> debuted <strong>Hedge Mage (occult)</strong>; <strong>Panacea</strong> debuted <strong>Living Nexus</strong>. Bai Jian still <strong>Drained 1</strong> from Ezio's fangs.</li>
+          <li>Morning <strong>Cloud of Plague saves</strong> &mdash; the choking-death follow-up from Ezio's death-burst: Bai Jian succeeded; <strong>Cyrathul and Ren both failed</strong> (roll log, 18:12). Only Ren's case would surface later.</li>
+          <li>Tim's new PC introduced: <strong>Hexroot, "a little leshy"</strong> &mdash; occult witch, club, hissing familiar. Zarok Brewhide retired off-screen.</li>
+          <li><strong>Quoster Thistlewait</strong> arrived with the WANTED leaflet &mdash; the League officially blamed for Hedvend VI's murder. <strong>Bai Jian</strong>: <em>"Damn it, those bastards succeeded. We tried."</em></li>
+          <li>Quoster's deal: he smuggles the party out of Elidir in his wares (weeks of arranging), pays up front &mdash; <strong>Masquerade Scarves for everyone, the Staff of Phantasms, the Ring of Fair Assessment</strong> &mdash; and asks one thing: rescue <strong>Siadrius</strong> from the Gyve <em>"before they put the nails to him."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; Free Siadrius! (Encounter 1)</div>
+      <div class="act-card">
+        <ul>
+          <li>The Gyve: a black-stone prison tower over the Moyle labor camp. An angry crowd had poured through the outer gates chanting <strong>"Free Siadrius!"</strong> &mdash; the prisoner strapped wrist-and-ankle to a 10-foot pole, <em>"Luke Skywalker in Return of the Jedi with the Ewoks."</em></li>
+          <li>New mechanic debuted: <strong>Control the Crowd</strong> (Diplomacy/Intimidation) &mdash; success parts the mob; a crit sends it <em>at the enemy</em> for 2d8.</li>
+          <li>Four rounds, all four guards left alive: the Captain hero-pointed back from a lethal crit, one guard KO'd against the gate mid-flight, one dropped by non-lethal Electric Arc, one knocked cold with the flat of Bai Jian's falcata.</li>
+          <li><strong>Hexroot's debut play</strong>: walked into the middle of the melee and untied Siadrius &mdash; a manipulate action that triggered <strong>all three guards' Reactive Strikes for 36 damage</strong>, the first attempt disrupted by a crit, so he simply did it again. Every enemy reaction burned on the new guy, <em>"so that you could get in there."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III &middot; Faction &middot; Send the Riot Home (victory-point challenge)</div>
+      <div class="act-card">
+        <ul>
+          <li>The freed crowd erupted &mdash; <em>"Hellbreakers! Hellbreakers! Send the devils back to Cheliax!"</em> &mdash; and the GM laid out the stakes: leave now, and the army slaughters these people.</li>
+          <li><strong>Cyrathul</strong> led &mdash; <em>"You guys need to scatter before the army gets here. No use in dying"</em> &mdash; closing on a <strong>critical-success Diplomacy 32</strong>.</li>
+          <li><strong>Panacea</strong> worked Society (25); <strong>Zanthar</strong> cast <strong>Fear on the crowd itself</strong> via Drain Bonded Item (<em>"Let's have some fun"</em> &mdash; counted a success); <strong>Bai Jian</strong> took the Aid lane (<em>"I'm not confident I can make it"</em>).</li>
+          <li><strong>Hexroot</strong>, after a crit-fail Intimidation riled them worse, pulled <strong>Underworld Lore 30</strong> &mdash; learning of Father Kindness and the <strong>Queen of Kanersha</strong>, the Mysterious River Pirate &mdash; and bluffed: <em>"The queen and the father of all kindnesses has decided to run &mdash; you should run away."</em> It worked.</li>
+          <li><strong>+2 Uprising, +1 Hellbreakers reputation.</strong> Nobody died in front of the Gyve.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IV &middot; Roleplay &middot; Quoster's Heart, Quoster's House</div>
+      <div class="act-card">
+        <ul>
+          <li>Siadrius led the party through alleys to a nondescript house in a nice neighborhood &mdash; <strong>Quoster's own safehouse</strong>, hidden key and all.</li>
+          <li>The reveal: Siadrius sprinted into Quoster's arms, kissing his cheeks &mdash; <em>"It was so awful. I thought I was going to die."</em> Quoster, softly: <em>"Siadrius means more to me than you'll ever know. This only proves I'm making the right choice by supporting the Hellbreakers League."</em></li>
+          <li>The house is the party's new HQ &mdash; Sarevial already relocated to its kitchen (<em>"your other safe house will no longer be safe"</em>).</li>
+          <li>Siadrius, calmed by whatever Sarevial put in his tea, donned a Masquerade Scarf of his own &mdash; a foot taller, human-shaped, <em>"Joe Common Man"</em> &mdash; and offered his contact: <em>"Jenverick. She's&hellip; well, you'll see. She's very excitable."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V &middot; Faction &middot; Jenverick, Fixer of Elidir</div>
+      <div class="act-card">
+        <ul>
+          <li>Enter <strong>Jenverick</strong>: tall, blue-skinned, horned hellspawn, high heels announcing her down every hallway. <strong>Panacea</strong>, deadpan: <em>"I was expecting you to be a little bit more excitable."</em></li>
+          <li>The great fencing operation: sold the Staff of the Dead, the carved onyx skull, Viro's Hellknight plate, the imposing shield, the Dream Crusher, the miniature horse, the platter, the whispering wire, the jewelry, the padlock, the Ring of Fair Assessment &mdash; and the <strong>bribe ledgers at the full 400 gp</strong> (<em>"They won't even try to talk me down"</em> &mdash; wink). Kept: skeleton key, face paint, climbing bolt.</li>
+          <li>Purchases: Panacea a <strong>+1 striking dancer's spear</strong> and ceremonial dagger; Zanthar <strong>scrolls of Blindness, Invisibility, and Water Breathing</strong> &mdash; all learned into the spellbook (Blindness at half cost on a crit); Cyrathul a <strong>bane rune for his handwraps</strong> &mdash; Jenverick, taking the order: <em>"You're not going to use that on me, are you?"</em> (<em>"Hopefully not."</em>); Hexroot a <strong>+1 armor potency rune</strong>; Bai Jian scrolls and a wand for the new occult kit. Everyone +1 hero point.</li>
+          <li>Then she put the pieces together and detonated: <em>"Are you guys really the Hellbreakers?&hellip; The time is now. Elidir is ready for its own chapter. We need leaders. Let me join. Let me help. I have so many ideas. Please, please, please."</em> <strong>Bai Jian</strong>: <em>"Your boy Bai Jian's getting dizzy."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Mystery &middot; Ren's Cough</div>
+      <div class="act-card">
+        <ul>
+          <li>Mid-shopping, another Fortitude save. Ren was coughing. <strong>Panacea's Medicine</strong> named it: <strong>choking death</strong> &mdash; the disease from Ezio's death-burst.</li>
+          <li>Her Cleanse Affliction was only rank 2 &mdash; too low to counteract &mdash; so <strong>Bai Jian</strong> bought a <strong>rank-3 scroll</strong> (justified by an earlier Nature check that spotted the sickness pre-shopping) and Panacea cast it.</li>
+          <li>Ren coughed up <em>"a nasty blood-phlegm ball&hellip; almost like an embryo&hellip; growing claws out of it."</em> <strong>Panacea</strong>: <em>"I think we're going to have to fight this thing."</em> They got it in time. Stomped.</li>
+          <li>&#9888; <strong>Cyrathul failed the same save that morning</strong> and it was never addressed on-screen &mdash; the DM's half-finished aside (<em>"I think two of them actually&mdash;"</em>) was the only brush with it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VII &middot; Heist &middot; The Reeves Rest Job</div>
+      <div class="act-card">
+        <ul>
+          <li>Jenverick returned with <strong>Otton Nettlebrush</strong> &mdash; Bai Jian's servant contact from the gala. The intel: Caeto fired most of the staff and moved to the Chelaxian quarter; Reeves Rest sits nearly empty with art, rare books, and an <strong>ancient glaive kept "since they defeated the original Iskari."</strong> The pitch: rob it for the city's needy.</li>
+          <li>Fast theater-of-the-mind heist: <strong>Panacea</strong> cat-flipped the gate; <strong>Zanthar</strong> tumbled over; <strong>Bai Jian failed his climb in full plate</strong> &mdash; saved because <strong>Hexroot had already crafted "the sleepiest potion in the world"</strong> and the guards were unconscious before he crashed down.</li>
+          <li><strong>Hexroot's Arcana</strong> (after a familiar-modifier mixup) mapped the magical window-traps; <strong>Cyrathul</strong> picked the one clean window; <strong>Zanthar's Thievery</strong> worked the locks. <em>"You guys get in like professional thieves&hellip; nobody even knows you were there."</em></li>
+          <li>Take: fenced for the needy &mdash; plus the <strong>Lifebloom Glaive</strong> (a relic: +1 vitalizing striking with locked minor/major/grand gifts) and the Token of Salt and Earth (sold). Bai Jian flirted with a full rebuild for it and declined; kept <em>"just for fun."</em></li>
+          <li><strong>Uprising hit its FINAL stage: Revolution</strong> &mdash; banked +1s, a one-time full reroll, and roll-twice-take-better once per check while in Elidir. <strong>Otton Nettlebrush recruited as a Hellbreaker.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act VIII &middot; Infiltration &middot; The Aziri Frame-Job</div>
+      <div class="act-card">
+        <ul>
+          <li>Jenverick's masterstroke: <em>"They're accusing us of killing Hedvend&hellip; What if we turned the tables and framed some of them?"</em> Target: the <strong>Aziri family</strong> &mdash; gala darts winners, <em>"fewer scruples than a devil from the hells,"</em> and the army's primary suppliers. The AP's <strong>Infiltration Points</strong> system debuted.</li>
+          <li><strong>The rumor</strong>: a missing Druman talisman shipment &mdash; Hexroot seeded it through Father Kindness's guild (Underworld Lore 29), Zanthar spread it in the streets (Deception 28); Cyrathul's version didn't land (22).</li>
+          <li><strong>The props</strong>: a day and a half crafting <em>"really, really good"</em> fake talismans &mdash; Hexroot (Crafting 31), Zanthar (23), Panacea (Arcana 31). Zanthar's brief: <em>"We don't want ones that actually work. We want fake ones."</em></li>
+          <li><strong>The paperwork</strong>: forged army orders with a stamped seal &mdash; Panacea (Society 31), Zanthar (25) &mdash; delivered to <strong>Colonel Rithert</strong> on Bai Jian's friendship, Cyrathul's hero-pointed <strong>Deception crit 32</strong> carrying the handoff. Rithert passed them to his lieutenant without a glance.</li>
+          <li><strong>The hunt</strong>: Bai Jian alerted Rithert personally &mdash; <em>"Do you still have that silver dart I gave you?" "Yes, I do."</em> &mdash; Diplomacy 25, then rerolled a second Diplomacy into <strong>27, the DC exactly</strong>; Panacea picked locks (28) and ran rooftops (30 &mdash; <em>"your resident cat did that"</em>); Zanthar hero-pointed Thievery (26); Hexroot muscled a wall (25). Every failed die was covered by a teammate.</li>
+          <li>The trap closed perfectly: Aziris buying "stolen" talismans, investigators arriving opposite, the party gone. <strong>The Aziris were handcuffed and marched into the Gyve. Zero suppression points.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act gold social">
+      <div class="act-label">Act IX &middot; Setup &middot; The Dock Robbery (to be continued)</div>
+      <div class="act-card">
+        <ul>
+          <li><strong>Quoster returned after 12 days</strong>, haggard and sleepless: the authorities refuse to let him leave. <em>"I need some leverage."</em></li>
+          <li>High heels in the hallway: <em>"Did somebody say you need leverage? I've got another idea."</em> Stage a robbery at the docks, deliberately get spotted, so Quoster can argue his goods aren't safe in Elidir. <strong>Panacea</strong>: <em>"You're just a plan person, aren't you?"</em></li>
+          <li>Quoster's one condition: <em>"Please don't kill anyone."</em></li>
+          <li>Contact: <strong>Sasatoli Bronc</strong> &mdash; Zanthar made the pitch (<em>"little buddy"</em> banter and all), <strong>Cyrathul's Diplomacy 29</strong> sealed it: <em>"Anything to get under Caeto's skin."</em> Tomorrow night: empty crates (Hexroot's touch: crates that <em>"didn't really have anything in them in the first place"</em>), a single dock guard. <em>"The next mead's on you guys."</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Encounter 1 — Free Siadrius! (the Gyve Gates)</h3>
+    <div class="combat-meta">3 Gate Guards (AC 21, halberds +14, reach 10 ft) &middot; Captain of the Guard (AC 24, longsword +18) &middot; riot crowd hazard &middot; 4 rounds &middot; all enemies survived</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Bai Jian 30 &middot; Guards 25/23/16 &middot; Cy 22 &middot; Captain 20 &middot; Hexroot 13 &middot; Panacea 12 &middot; Zanthar 11</div></div>
+      <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">Bai Jian 143 &middot; Cy 83 &middot; Zanthar 39 &middot; Ren 28 &middot; Crowd 9/guard</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">2 &mdash; the lethality flat check &middot; Twisting Tail</div></div>
+      <div><div class="combat-stat-label">Suppression</div><div class="combat-stat-value">0 &mdash; bought back with a hero point</div></div>
+    </div>
+
+    <h4>Round 1 — The Charge and the Crowd</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: Stride + Sudden Charge through the riot &mdash; <strong>crit 35</strong> on the Captain (fatal d12): off-guard (sword crit spec) plus Clumsy 1/Enfeebled 1 (crushing rune). A guard re-gripped his halberd (manipulate) &mdash; <strong>Reactive Strike, 15</strong>. The answer: a <strong>nat-20 crit for 20</strong> &mdash; <em>"the consequence of my own actions."</em></li>
+      <li>Guards dropped Siadrius' pole to fight &mdash; the prisoner hit the ground, wind knocked out of him.</li>
+      <li><strong>Cyrathul</strong>: <strong>Control the Crowd — CRIT (Diplomacy 35)</strong>: the mob stoned every guard for <strong>9 each</strong>; Draconic Advance into a <strong>crit jaws (30)</strong> on the Captain.</li>
+      <li><strong>Captain</strong> (Enfeebled 1): two longsword hits on Bai Jian (12 + 11), one miss. Guards on Bai Jian: two misses, then a <strong>nat-20 that only upgraded to a normal hit</strong> (17) &mdash; <em>"the edge case."</em></li>
+      <li><strong>Hexroot</strong> (speed 20 in difficult terrain): three actions just to close. <strong>Panacea</strong>: crowd-control Diplomacy failed (17). <strong>Zanthar</strong>: lightning bolt through the crowd vetoed (<em>"the optics"</em>) &mdash; 2-action <strong>Blazing Bolt</strong> instead: two guards hit, <strong>16 and 13 fire</strong>, Siadrius carefully spared. <strong>Panacea's Absorb Magic</strong> debuted off the cast.</li>
+    </ul>
+
+    <h4>Round 2 — "I'm Going to Keep Our Reputation Clean"</h4>
+    <ul>
+      <li><strong>Bai Jian</strong>: second <strong>crit on the Captain — 39</strong>&hellip; with non-lethal never declared. <strong>DC 10 lethality flat check: rolled 3 — the Captain dying, +1 Suppression.</strong> Hero point &mdash; automatic success under the +10 rule &mdash; <em>"I'm going to keep our reputation clean."</em> The Captain lives. Dueling Parry up.</li>
+      <li>Guards: fist and halberd missed Bai Jian; three swings missed Cyrathul.</li>
+      <li><strong>Cyrathul</strong>: Demoralize crit-failed, <strong>Draconic Frenzy</strong> &mdash; jaws hit (16), claws missed. Took a 17-damage halberd in reply.</li>
+      <li><strong>Hexroot untied Siadrius in the open</strong>: the manipulate triggered all three guards' <strong>Reactive Strikes</strong> &mdash; hit (10), miss, <strong>crit (26)</strong> &mdash; and Zanthar caught that the crit disrupts the attempt. At 36 damage taken, Hexroot spent his next action doing it again. <strong>Siadrius freed.</strong></li>
+      <li><strong>Panacea</strong>: 2-action Heal on Bai Jian (<strong>17</strong>), Assurance Battle Medicine on Hexroot (8). <strong>Zanthar</strong>: <strong>Fear, rank 3, three targets</strong> &mdash; two saves and one <strong>critical failure</strong>: a guard at Frightened 3 and Fleeing, knees shaking, tears down his face &mdash; <em>"He didn't sign up for this when he was a guard."</em></li>
+    </ul>
+
+    <h4>Round 3 — "Larry, Open the Gate!"</h4>
+    <ul>
+      <li><strong>Ren</strong> (commanded): bite, 13 (Foundry briefly bit his own owner &mdash; <em>"don't bite your owner"</em>).</li>
+      <li><strong>Bai Jian</strong>: cast <strong>Guidance on himself</strong> &mdash; the Hedge Mage debut &mdash; then a non-lethal strike (10) and Dueling Parry. The frightened guard's halberds landed at <strong>exactly 26 vs Parry-boosted AC 27</strong>, twice &mdash; <em>"Parry that ching. Parry ching again. Double Parry."</em></li>
+      <li>The <strong>Frightened-3 guard fled</strong> &mdash; Bai Jian's Reactive Strike missed by 1; <strong>Cyrathul hero-pointed Twisting Tail</strong> (reroll 12 &rarr; 27) for <strong>20</strong>, leaving him <em>"near death"</em> hammering the gate: <em>"Larry, open! Open the gate!"</em></li>
+      <li><strong>Cyrathul</strong> chased &mdash; eating a Reactive Strike upgraded to a <strong>crit</strong> on corrected math &mdash; then non-lethally clawed the runner (17) into the gate: unconscious. <strong>Guard 1 down.</strong></li>
+      <li><strong>Hexroot</strong>: yanked his familiar close, <strong>Enfeeble</strong> &mdash; failed save, <strong>Enfeebled 2</strong>. <strong>Panacea</strong>: <strong>Life Boost</strong> on Bai Jian (fast healing 6), then controlled the crowd &mdash; success &mdash; <em>"But I can see you, Cy. I'm thinking about you."</em></li>
+      <li><strong>Zanthar</strong>: <em>"non-lethally lethal spell them"</em> &mdash; <strong>Nonlethal Electric Arc</strong>: one guard failed (10) and crumpled unconscious; the other crit-saved. <strong>Guard 2 down.</strong></li>
+    </ul>
+
+    <h4>Round 4 — The Flat of the Blade</h4>
+    <ul>
+      <li>Life Boost ticked +6. The last guard (Enfeebled 2) missed Ren; <strong>Ren</strong> bit back for 15 (Nature's Precision).</li>
+      <li><strong>Bai Jian</strong>: <strong>non-lethal crit — 44</strong> (<em>"a non-lethal crit, but it's a crit nonetheless"</em>): flat of the falcata, face-down, concussed. <strong>Guard 3 down — all four enemies alive.</strong></li>
+      <li>The crowd erupted &mdash; <em>"Hellbreakers! Hellbreakers! Send the devils back to Cheliax! Isger for Isger!"</em> &mdash; rolling straight into the dispersal challenge.</li>
+    </ul>
+
+    <p style="color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px;">XP awarded in Foundry (amount not stated on-mic) &middot; +2 Uprising &middot; +1 reputation for the dispersal</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Blade That Stays Sheathed Enough</h4>
+      <ul>
+        <li>His hero point was the session's defining choice: a forgotten non-lethal call, a failed flat check, a dying Captain of the Guard, +1 Suppression &mdash; bought back on the spot. <em>"I'm going to keep our reputation clean."</em> The whole fight fought non-lethal after that.</li>
+        <li>Opened the rescue at full commitment &mdash; Sudden Charge into a <strong>35-damage crit</strong>, ate the nat-20 riposte (<em>"Well, isn't that the consequence of my own actions?"</em>), and stared down authority itself: <em>"This is the city guard! You can't do this!"</em> &mdash; <em>"Right. Like I care about that."</em></li>
+        <li>Ran the Parry Master clinic: two separate turns where <strong>Dueling Parry's +2 was the exact margin</strong> on incoming halberds &mdash; <em>"Parry that ching. Parry ching again&hellip; That's why you play smart."</em> Finished the fight with a <strong>non-lethal 44 crit</strong> and narrated the mercy.</li>
+        <li>Debuted Hedge Mage with maximum comedy: <em>"You see, out of nowhere, Bai Jian, for some reason, casts Guidance on himself."</em></li>
+        <li>His S12 social investment paid the scheme's biggest dividend: the forged-orders delivery rode his friendship with Colonel Rithert, and he made the follow-up visit himself &mdash; <em>"Do you still have that silver dart I gave you?"</em> He did; he'd kept it since the gala. His summary of why the Colonel trusts him: <em>"I even licked his boot."</em></li>
+        <li>Dog dad and rules captain: spotted Ren's sickness first, solved the cure (rank-3 scroll, correct counteract math), caught the missing XP award, and talked the DM out of a phantom Reactive Strike on the reach rules &mdash; then stress-tested a Lifebloom rebuild and kept the falcata system: <em>"I guess we'll just keep it. Just for fun."</em></li>
+        <li>Kept his instincts about convenient plans, even ones he joins: <em>"Sounds like a plan, but I have bad feelings about that. No matter. We can try."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Dragon Who Commands Crowds</h4>
+      <ul>
+        <li>First PC to touch the new mechanic and he <strong>crit it</strong>: Diplomacy 35 turned the riot into a weapon &mdash; 9 crowd damage to every guard &mdash; then Draconic Advance into a <strong>crit bite (30)</strong> on the Captain. In disguise the whole time: <em>"What are you talking about? We're upstanding citizens."</em></li>
+        <li>The conscience of the optics war &mdash; vetoed Zanthar's lightning bolt through the crowd in four words: <em>"I don't know about the optics on that."</em></li>
+        <li>Paid for aggression like a frontliner: chased the fleeing guard through an upgraded Reactive Strike crit (<em>"Maybe I should not have stride." "Then I can't do my fun new ability."</em>), hero-pointed <strong>Twisting Tail</strong> into a 20-damage interception, and non-lethally ended the runner against the gate he was begging Larry to open.</li>
+        <li>Led the dispersal that saved the crowd from the army &mdash; <em>"You guys need to scatter before the army gets here. No use in dying"</em> &mdash; grinding through treacherous d20s before the closing <strong>crit Diplomacy 32</strong>.</li>
+        <li>Commissioned a bane rune from a hellspawn fixer and answered her <em>"you're not going to use that on me, are you?"</em> with a perfectly dragon <em>"Hopefully not."</em></li>
+        <li>Gave Jenverick the campaign recap in six words: <em>"No, no, that was a vampire."</em></li>
+        <li>Quietly closed two schemes' final doors: spotted the one un-trapped window that let the manor heist finish clean, and rolled the Diplomacy (29) that turned Sasatoli's amusement into a signed-on co-conspirator.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Cat Who Runs the Rooftops</h4>
+      <ul>
+        <li>Quietly had the widest session sheet at the table: crowd control in the fight, Society in the dispersal, <strong>Arcana 31</strong> on the fake talismans, <strong>Society 31</strong> on the forged orders, <strong>Thievery 28</strong> on the sting's locks, <strong>Acrobatics 30</strong> on the getaway (<em>"your resident cat did that"</em>), plus a gate-vault in the manor heist. The frame-job ran on her skill list.</li>
+        <li>Healer to the bone even when the geometry said no: out of position, out of actions, Cyrathul bleeding across the field &mdash; <em>"But I can see you, Cy. I'm thinking about you."</em> Kept Bai Jian standing with a 17-point Heal, Battle Medicine, and Life Boost.</li>
+        <li>Debuted <strong>Living Nexus</strong> mid-fight, inhaling Zanthar's spell with Absorb Magic (<em>"I got pretty excited about it"</em>) &mdash; and built the kit for it: a +1 striking dancer's spear and a ceremonial dagger.</li>
+        <li>Diagnosed <strong>choking death</strong> on Ren and cast the scroll that made him cough up the clawed embryo &mdash; then hit the table's horror button: <em>"I think we're going to have to fight this thing."</em></li>
+        <li>Owned the deadpan lane on Jenverick &mdash; <em>"I was expecting you to be a little bit more excitable"</em> on arrival, <em>"You're just a plan person, aren't you?"</em> by the end &mdash; and the gala self-own: <em>"You did? I made friends with the vampire."</em></li>
+        <li>And Jenverick exists in the party's orbit <em>because of her</em>: she asked Quoster about trustworthy merchants, then gently worked the still-shaking Siadrius over his tea until he offered his contact. The session's defining NPC arrived through Panacea's patience.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Wizard Who Weaponizes Everything (Including Fear, Twice)</h4>
+      <ul>
+        <li>Proposed the session's most-vetoed tactic &mdash; <em>"I can just do a lightning bolt and go right through the crowd"</em> &mdash; took the judgment gracefully, and pivoted to precision: Blazing Bolt around Siadrius, then <em>"I'm going to non-lethally lethal spell them with Electric Arc"</em> &mdash; his Nonlethal Spell metamagic dropping a guard clean.</li>
+        <li>His Fear crit-broke the fight's most human moment: a gate guard in tears who <em>"didn't sign up for this&hellip; thought it was all going to be peaches."</em> Then he cast <strong>Fear on the crowd itself</strong> via Drain Bonded Item &mdash; <em>"Why not? Let's have some fun"</em> &mdash; and it counted as a dispersal success.</li>
+        <li>Quartermaster brain all night: sold the Hellknight plate the moment the scarves made it obsolete, learned <strong>Blindness</strong> (crit &mdash; half cost), <strong>Invisibility</strong> (hero-pointed), and <strong>Water Breathing</strong>, and set the frame-job's design constraint: <em>"We don't want ones that actually work. We want fake ones."</em></li>
+        <li>Caught the rules moment that mattered for Hexroot's debut &mdash; the crit <strong>disrupts</strong> the untying &mdash; playing fair against his own side.</li>
+        <li>Ran the Sasatoli relationship like an old friendship: <em>"little buddy,"</em> tart banter, and the straight pitch &mdash; Cyrathul's Diplomacy sealing the ask &mdash; that got the dock boss to stage the robbery himself.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-hexroot">
+      <h4>Hexroot &middot; the Leshy Who Took the Brunt <em>(new PC, debut session)</em></h4>
+      <ul>
+        <li>Introduced himself the hard way: waded into the center of the melee and spent his turn <strong>untying Siadrius while all three guards' Reactive Strikes tore into him for 36 damage</strong> &mdash; the first attempt disrupted by a crit, so he tried again and finished the job. Every enemy reaction burned on the new guy, <em>"so that you could get in there."</em></li>
+        <li>A witch with a mean streak and a club &mdash; <em>"No, I don't use a staff. I use a club"</em> &mdash; yanking his hissing familiar to his side and landing <strong>Enfeeble 2</strong> on a guard already drowning in conditions.</li>
+        <li>Asked the question only he would ask, mid-riot: <em>"When I meant in charge of the town, I meant like the underside of the town. Like what gang runs the streets?"</em> &mdash; then turned Underworld Lore 30 into the bluff that dispersed the crowd: <em>"The queen and the father of all kindnesses has decided to run &mdash; you should run away."</em> (His first try was a crit-fail that riled them worse; he owned it: <em>"Intimidation is the only thing I got."</em>)</li>
+        <li>The manor heist's MVP without leaving the workbench: <em>"Is it possible to create a potion of sleep by using crafting to help knock out the guards?"</em> &mdash; the GM loved it, and <em>"the sleepiest potion in the world"</em> is why Bai Jian's failed climb didn't matter.</li>
+        <li>Rounded out the frame-job as its craftsman (Crafting 31 fake talismans, rumor-seeding through the guild) and pitched the dock scheme's cleanest detail: crates that <em>"didn't really have anything in them in the first place."</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Acquisitions</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Masquerade Scarves (party-wide)</div>
+      <div class="loot-source">Quoster's gift</div>
+      <div class="loot-note">1st-rank Illusory Disguise 1/day each — the party's new incognito baseline</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Staff of Phantasms</div>
+      <div class="loot-source">Quoster's gift</div>
+      <div class="loot-note">Taken by Zanthar; prepared as his daily staff</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Lifebloom Glaive</div>
+      <div class="loot-source">Reeves Rest heist</div>
+      <div class="loot-note">RELIC: +1 vitalizing striking glaive, locked minor/major/grand gifts — nobody can wield it; kept "just for fun"</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Bribe ledgers — SOLD 400 gp</div>
+      <div class="loot-source">Jenverick's fencing</div>
+      <div class="loot-note">Full price, no haggling — "they won't even try to talk me down"</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">+1 Striking Dancer's Spear + dagger</div>
+      <div class="loot-source">Purchased — Panacea</div>
+      <div class="loot-note">The Living Nexus martial kit</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Scrolls: Blindness, Invisibility, Water Breathing</div>
+      <div class="loot-source">Purchased — Zanthar</div>
+      <div class="loot-note">All three learned into the spellbook; Blindness at half cost on a crit</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Bane rune (handwraps)</div>
+      <div class="loot-source">Commissioned — Cyrathul</div>
+      <div class="loot-note">Jenverick took the handwraps to apply it — "you're not going to use that on me, are you?"</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">+1 Armor Potency rune</div>
+      <div class="loot-source">Purchased — Hexroot</div>
+      <div class="loot-note">160 gp</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Scroll of Cleanse Affliction (rank 3) + scrolls/wand</div>
+      <div class="loot-source">Purchased — Bai Jian</div>
+      <div class="loot-note">The scroll cured Ren's choking death</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">The Great Sell-Off</div>
+      <div class="loot-source">Jenverick's fencing</div>
+      <div class="loot-note">Staff of the Dead, onyx skull, Hellknight plate, imposing shield, Dream Crusher, miniature horse, platter, whispering wire, padlock, jewelry, Ring of Fair Assessment</div>
+    </div>
+  </div>
+  <div class="xp-banner">Experience &middot; encounter + dispersal + sting awarded in Foundry &middot; 2 &times; 10 XP infiltration logged &middot; <strong>Uprising: REVOLUTION STAGE &middot; Reputation +1</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "I'm going to keep our reputation clean."
+    <span class="attribution">Spending his hero point not on a hit or a save — but to un-kill the Captain of the Guard</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Captain of the Guard</strong>: "This is the city guard! You can't do this!"<br>
+    <strong>Bai Jian</strong>: "Right. Like I care about that."
+    <span class="attribution">Mid-melee, in disguise, at the gates of the state prison</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Bai Jian</strong>: "You see, out of nowhere, Bai Jian, for some reason, casts Guidance on himself."
+    <span class="attribution">The Hedge Mage archetype's glorious combat debut</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "What are you talking about? We're upstanding citizens."
+    <span class="attribution">Biting a guard captain while magically disguised</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Let me give you some advice. Start running."
+    <span class="attribution">Riffing on Bai Jian's self-Guidance at a terrified guard</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Cyrathul</strong>: "Hopefully not."
+    <span class="attribution">Answering Jenverick — a hellspawn — after commissioning a bane rune: "you're not going to use that on me, are you?"</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "But I can see you, Cy. I'm thinking about you."
+    <span class="attribution">Out of actions and out of range — offering the only support left: moral</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "I was expecting you to be a little bit more excitable."
+    <span class="attribution">Deadpan, to Jenverick — the most excitable NPC this campaign has ever produced</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Panacea</strong>: "You did? I made friends with the vampire."
+    <span class="attribution">On hearing Bai Jian befriended Colonel Rithert at the gala</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "I can just do a lightning bolt and go right through the crowd."<br>
+    <strong>Cyrathul</strong>: "I don't know about the optics on that."<br>
+    <strong>Bai Jian</strong>: "Maybe if you want to kill me, then yeah."
+    <span class="attribution">The rebellion debates collateral damage</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Zanthar</strong>: "We don't want ones that actually work. We want fake ones."
+    <span class="attribution">Design requirements for counterfeit talismans, to the man who makes real ones for free</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Hexroot</strong>: "When I meant in charge of the town, I meant like the underside of the town. Like what gang runs the streets?"
+    <span class="attribution">The new leshy establishing his lane in his first hour at the table</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Hexroot</strong>: "No, I don't use a staff. I use a club."
+    <span class="attribution">A witch, declining the Staff of the Dead on brand</span>
+  </blockquote>
+
+  <blockquote>
+    <strong>Jenverick</strong>: "The time is now. Elidir is ready for its own chapter… We need leaders. And you showed us you can lead. Let me join. Let me help. I have so many ideas. Please, please, please."
+    <span class="attribution">The founding speech of the Elidir chapter, delivered at maximum volume in high heels</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>&#9888; Cyrathul failed a Cloud of Plague save (roll log, 18:12) — and only Ren was cured.</strong> Ezio bursts back, fully healed, from the first victim to die of choking death — and he is only permanently destroyed <em>if every affected creature is cured</em>. Ren's case was cleansed on-screen; Cyrathul's failed save was never discussed. If the dragon is incubating choking death, Ezio's return is still on the table.</li>
+      <li><strong>The staged dock robbery is next week's cold open.</strong> Empty crates, a single dock guard, Sasatoli's cooperation — and Quoster's plea: <em>"Please don't kill anyone."</em> Getting spotted is the mission; getting identified is the catastrophe.</li>
+      <li><strong>The Aziris are innocent — of this.</strong> Caeto is forced to arrest his army's main suppliers, and may acquit them later. If the frame unravels, it unravels toward whoever built it. And the army just lost its weapons pipeline mid-crackdown.</li>
+      <li><strong>Jenverick got total access in about four days.</strong> She fences their loot, knows their faces, their safehouse, their plans, and now co-founds their chapter. Everything she's done has worked — <em>for</em> them. Bai Jian's instinct anyway: <em>"I have bad feelings about that. No matter. We can try."</em></li>
+      <li><strong>The League is officially wanted for regicide.</strong> The leaflets name the Hellbreakers as Hedvend's murderers — the S13 false flag is now state truth, and Caeto's sweeps filled the Gyve enforcing it.</li>
+      <li><strong>The Revolution stage is loaded.</strong> Uprising maxed: rerolls, banked bonuses, and a city where a prison crowd chants "Hellbreakers" in the open. The tinder is dry — and the party keeps striking sparks on purpose.</li>
+      <li><strong>Quoster can't get out.</strong> The authorities refuse his Druman rights; the smuggling plan — and the party's exit from Elidir — hinges on the dock leverage working.</li>
+      <li><strong>The Queen of Kanersha</strong> — a halfling bandit, "the Mysterious River Pirate," invoked in Hexroot's bluff. A second underworld power beside Father Kindness, unmet.</li>
+      <li><strong>The Lifebloom Glaive's gifts are locked.</strong> A relic that grows with its wielder, and no wielder. Relics have a way of choosing their moment.</li>
+      <li><strong>The carved onyx skull was fenced without ever being examined.</strong> Found in the murder-night supply closet beside the Staff of the Dead, never identified — now sold into Elidir's market. If it mattered, someone else owns it now.</li>
+      <li><strong>Colonel Rithert is now an unwitting Hellbreaker asset.</strong> He's passed forged orders and launched a false investigation on the party's word. If that surfaces, the friendliest officer in Elidir becomes the most betrayed.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Next Session</span>
+    <p>Tomorrow night, the docks of Kanersha Landing. Empty crates that were never full. One dock guard who was told to look the other way. A robbery designed to be witnessed — by a crew the whole city is hunting.</p>
+    <span class="big-line">"Please don't kill anyone."</span>
+    <span class="speaker">— Quoster Thistlewait, handing the Hellbreakers a heist where getting caught is the point</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes — Bai Jian's Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Led the Gyve rescue. Sudden Charge through the riot, two crits on the Captain of the Guard. Nearly killed him — forgot to pull the blade. Spent the hero point to keep him breathing. <strong>Reputation stays clean. That was the right spend.</strong></li>
+    <li>Fought the rest non-lethal. Finished the last guard with the flat of the falcata. Double-Parried two halberd swings that would have landed without <strong>Dueling Parry</strong>. The parry is worth more than a third attack. Remember that.</li>
+    <li>First use of the new occult training — <strong>Guidance</strong>, on myself, mid-fight. It worked. The table laughed. Both outcomes acceptable.</li>
+    <li>Got the forged orders to <strong>Colonel Rithert</strong> on the strength of my friendship — the dragon's tongue carried the delivery. Went back myself to point his investigators at the "thieves." He asked after the silver dart he gave me at the gala; I still carry it. He didn't check the seal either time. The flattery bought this — every hour of it.</li>
+    <li>Aided Panacea instead of rolling my own check in the crowd dispersal. Know your own modifiers. Diplomacy +9 doesn't lead crowds; it supports the ones who can.</li>
+    <li>Caught Ren's cough early. Bought the rank-3 <strong>Cleanse Affliction</strong> scroll; Panacea cast it. The thing he coughed up had claws.</li>
+    <li>Looked hard at rebuilding for the <strong>Lifebloom Glaive</strong>. Decided against. The falcata kit works — Slam Down, Parry, Snagging Strike are a system, not a pile of feats.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li><strong>Cyrathul failed the same plague save Ren failed.</strong> I made mine; I heard the dice. Nobody treated Cyrathul. If the vampire's curse needs every victim cured before Ezio stays dead, we are not done. Watch the dragon for a cough.</li>
+    <li>Rithert now believes an investigation I invented. If it ever comes back to him, he'll know exactly whose hand delivered it. I've made him a traitor without his consent.</li>
+    <li>Jenverick's plans arrive faster than anyone can check them. Every one has worked. That is exactly what it would look like either way.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li>We fought city guards in the street, in front of a crowd, and left all four alive. The Suppression tracker reads zero. <strong>This is how the League has to fight in Elidir — every blade pulled, every time.</strong> One flat check is all that separates a rebellion from a murder story.</li>
+    <li>The crowd chanted our name at a prison gate. Uprising is at its final stage. The city will rise if we ask. The question is no longer <em>can we start the fire</em> — it's whether we can control where it burns.</li>
+    <li>The Aziris are in the Gyve for a crime I helped invent. They're monsters — army suppliers, devils in silk. And still: we did to them exactly what was done to us. If this is what winning costs, keep count of it.</li>
+    <li>The gods of small purchases: the sleep potion (Hexroot's) saved my climb; the scarves make my armor invisible; the wand rounds out the morning routine. The new party fits together fast.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>The dock robbery: how do we get <em>spotted</em> without getting <em>caught</em>? Being seen is the mission — being identified is the catastrophe. The scarves cut one way; the crowd's chants cut the other.</li>
+    <li>Does Cyrathul start coughing? Buy a second rank-3 Cleanse Affliction scroll <strong>before</strong> we need it.</li>
+    <li>When Caeto acquits the Aziris — and he will, he's thorough — where does his investigation point next?</li>
+    <li>What does Jenverick want? Not "what does she say she wants." What does she <em>want</em>?</li>
+    <li>Quoster's smuggling route: when he finally moves us out of Elidir in his wares — where are we going, and what happens to the chapter Jenverick is building here?</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

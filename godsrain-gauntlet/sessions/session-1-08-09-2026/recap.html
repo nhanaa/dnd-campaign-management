@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Godsrain Gauntlet — Level 20 One-Shot</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg-deep:#0b0a09; --bg-card:#16130f; --bg-card-hover:#1e1a15;
+  --border:#2f2820; --border-bright:#4a3f31;
+  --text:#ddd5cb; --text-dim:#a2978a; --text-bright:#f6f1ea;
+  --rust:#c4442a; --rust-glow:rgba(196,68,42,.28);
+  --ember:#e8703a; --ember-glow:rgba(232,112,58,.26);
+  --iron:#8fa3b0; --iron-glow:rgba(143,163,176,.22);
+  --violet:#8b6fc4; --violet-glow:rgba(139,111,196,.24);
+  --jade:#5fa87a; --jade-glow:rgba(95,168,122,.22);
+  --rose:#d4526e; --rose-glow:rgba(212,82,110,.24);
+  --gold:#d9a441; --gold-dim:#9c7730; --gold-glow:rgba(217,164,65,.26);
+  --c-graz:#4fae7b; --c-tam:#d9a441; --c-chthon:#c4442a;
+  --c-jassik:#3fa3a3; --c-keegru:#8bbf5a; --c-shuyinlo:#8b6fc4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(196,68,42,.13) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 12%, rgba(139,111,196,.09) 0%, transparent 50%);
+  background-attachment:fixed;
+  color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.7;
+  padding:40px 20px 80px;
+}
+.wrap{max-width:860px;margin:0 auto}
+section{margin-bottom:60px}
+h2{font-size:23px;font-weight:600;color:var(--text-bright);letter-spacing:.02em;
+   padding-bottom:10px;margin-bottom:22px;border-bottom:1px solid var(--border)}
+h3{font-size:19px;font-weight:600;color:var(--text-bright);margin-bottom:10px}
+h4{font-size:17px;font-weight:600;color:var(--text-bright);margin:22px 0 10px}
+p{margin-bottom:12px}
+strong{color:var(--text-bright);font-weight:600}
+em{color:var(--text-dim);font-style:italic}
+ul{list-style:none}
+li{padding:8px 0 8px 20px;position:relative}
+li::before{content:'·';position:absolute;left:4px;color:var(--gold-dim);font-weight:700}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--gold-dim);margin-bottom:6px}
+
+/* HEADER */
+.header{text-align:center;padding:44px 20px 34px;position:relative;margin-bottom:44px}
+.header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:70%;height:150px;background:radial-gradient(ellipse,var(--ember-glow) 0%,transparent 70%);
+  animation:emberbreathe 9s ease-in-out infinite;pointer-events:none}
+@keyframes emberbreathe{0%,100%{opacity:.5}50%{opacity:1}}
+.header h1{font-family:'Cinzel Decorative',serif;font-weight:700;
+  font-size:clamp(32px,6vw,54px);line-height:1.15;color:var(--text-bright);
+  position:relative;text-shadow:0 0 30px var(--ember-glow)}
+.subtitle{color:var(--gold);font-style:italic;font-size:17px;font-weight:500;margin-top:12px;position:relative}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px;position:relative}
+.meta-pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:20px;
+  padding:5px 13px;color:var(--text-dim)}
+
+/* COMPOSITION */
+.composition-bar{display:flex;height:12px;border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.comp-seg{height:100%}
+.comp-combat{background:var(--rust);flex:78}
+.comp-explore{background:var(--iron);flex:9}
+.comp-rp{background:var(--violet);flex:6}
+.comp-loot{background:var(--gold);flex:7}
+.composition-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* PARTY */
+.party-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.char-card{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--gold);
+  border-radius:8px;padding:16px 18px;transition:background .2s}
+.char-card:hover{background:var(--bg-card-hover)}
+.char-graz{border-left-color:var(--c-graz)} .char-tam{border-left-color:var(--c-tam)}
+.char-chthon{border-left-color:var(--c-chthon)} .char-jassik{border-left-color:var(--c-jassik)}
+.char-keegru{border-left-color:var(--c-keegru)} .char-shuyinlo{border-left-color:var(--c-shuyinlo)}
+.char-name{font-weight:600;color:var(--text-bright);font-size:17px}
+.char-class{font-size:13px;color:var(--text-dim);margin-top:3px}
+.char-player{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold-dim);margin-top:7px}
+
+/* SUMMARY */
+.summary{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:26px 28px}
+.summary p:last-child{margin-bottom:0}
+
+/* TIMELINE */
+.timeline{border-left:2px solid var(--border);padding-left:26px;margin-left:8px}
+.act{position:relative;margin-bottom:34px}
+.act::before{content:'';position:absolute;left:-33px;top:5px;width:11px;height:11px;border-radius:50%;
+  background:var(--iron);box-shadow:0 0 0 4px var(--bg-deep),0 0 12px var(--iron-glow)}
+.act.combat::before{background:var(--rust);box-shadow:0 0 0 4px var(--bg-deep),0 0 12px var(--rust-glow)}
+.act.prelude::before{background:var(--gold);box-shadow:0 0 0 4px var(--bg-deep),0 0 12px var(--gold-glow)}
+.act-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--text-dim);margin-bottom:8px}
+.act-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px 24px}
+
+/* COMBAT */
+.combat-box{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--rust);
+  border-radius:8px;padding:22px 26px;margin-bottom:26px}
+.combat-meta{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--rust);margin-bottom:6px}
+.combat-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;
+  background:#100d0b;border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin:16px 0}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--text-dim)}
+.stat-value{font-weight:600;color:var(--text-bright);font-size:15px}
+.crit-box{background:linear-gradient(135deg,#1d1410,#16130f);border:1px solid var(--ember);
+  border-radius:6px;padding:14px 18px;margin:14px 0;box-shadow:inset 0 0 24px var(--ember-glow)}
+.down{border-left:3px solid var(--rose);padding-left:14px;margin-left:-20px}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.tscroll{overflow-x:auto}
+th{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text-dim);text-align:left;padding:9px 12px;border-bottom:1px solid var(--border-bright)}
+td{padding:9px 12px;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:none}
+
+/* SPOTLIGHT */
+.spotlight-grid{display:grid;gap:18px}
+.spotlight{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--gold);
+  border-radius:8px;padding:20px 24px}
+.s-graz{border-left-color:var(--c-graz)} .s-tam{border-left-color:var(--c-tam)}
+.s-chthon{border-left-color:var(--c-chthon)} .s-jassik{border-left-color:var(--c-jassik)}
+.s-keegru{border-left-color:var(--c-keegru)} .s-shuyinlo{border-left-color:var(--c-shuyinlo)}
+.spotlight h4{margin-top:0}
+
+/* QUOTES */
+blockquote{border-left:3px solid var(--gold-dim);padding:4px 0 4px 20px;margin:20px 0;
+  font-style:italic;color:var(--text)}
+blockquote strong{font-style:normal;color:var(--text-bright)}
+.attribution{display:block;font-style:normal;font-size:13px;color:var(--text-dim);margin-top:8px}
+
+/* THREADS */
+.threads{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px 24px}
+.threads li::before{content:'➤';color:var(--rust);font-size:12px}
+
+/* NOTE */
+.note{background:#12100d;border:1px solid var(--border);border-left:3px solid var(--iron);
+  border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px;color:var(--text-dim)}
+.note strong{color:var(--text)}
+
+/* CLOSER */
+.cliffhanger{background:linear-gradient(135deg,#1a1210,#16130f);border:1px solid var(--rust);
+  border-radius:8px;padding:28px;text-align:center;box-shadow:inset 0 0 40px var(--rust-glow)}
+.cliffhanger .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--rust)}
+.cliffhanger .big-line{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3.4vw,26px);
+  color:var(--text-bright);margin:16px 0 10px;line-height:1.4}
+.cliffhanger .speaker{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="header">
+  <h1>The Godsrain Gauntlet</h1>
+  <div class="subtitle">Five fights on the palm of a dead god — and six warriors who were already dead</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-09</span>
+    <span class="meta-pill">PF2e Remastered · Level 20</span>
+    <span class="meta-pill">Free Archetype + Ancestry Paragon</span>
+    <span class="meta-pill">GM: Cody McGraw</span>
+    <span class="meta-pill">4h16m · ~3h15m combat</span>
+  </div>
+</header>
+
+<section>
+  <div class="kicker">Session composition</div>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat"></div>
+    <div class="comp-seg comp-explore"></div>
+    <div class="comp-seg comp-loot"></div>
+    <div class="comp-seg comp-rp"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rust)"></span>Combat</span>
+    <span><span class="legend-dot" style="background:var(--iron)"></span>Setup &amp; breaks</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Buffs &amp; logistics</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Table banter</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-graz"><div class="char-name">Graz</div><div class="char-class">Lizardfolk Braggart Swashbuckler 20</div><div class="char-player">Pax · Rogue / Champion / Psychic</div></div>
+    <div class="char-card char-tam"><div class="char-name">Tam al'Thor</div><div class="char-class">Halfling Gunslinger 20</div><div class="char-player">Nightmare Arbalest · aids everything</div></div>
+    <div class="char-card char-chthon"><div class="char-name">Chthon'ar'ax</div><div class="char-class">Orc Dragon-Instinct Barbarian 20</div><div class="char-player">Unarmed only · grappler · the wall</div></div>
+    <div class="char-card char-jassik"><div class="char-name">Jassik</div><div class="char-class">Nagaji Titan Fighter / Barbarian 20</div><div class="char-player">Temple sword · Indestructible Shield</div></div>
+    <div class="char-card char-keegru"><div class="char-name">Keegru</div><div class="char-class">Tripkee Animist (Liturgist) 20</div><div class="char-player">Cayden Cailean · Medic · legendary Medicine</div></div>
+    <div class="char-card char-shuyinlo"><div class="char-name">Shuyinlo Gallalva</div><div class="char-class">Elf Runesmith 20</div><div class="char-player">Runes · portals · eats other people's damage</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The Lord in Iron is dead. Gorum, god of war and battle, was slain by the mantis god Achaekek during the Godsrain — and when a god dies, the afterlife he kept dies with him. The Clashing Shore, the endless proving ground where the faithful of Gorum were promised they would test their mettle forever, vanished <em>"like smoke and ash, scattered to the cosmic winds."</em></p>
+    <p>Six dead warriors were left standing on the palm of Gorum's severed gauntlet. Every one of them had already died once — Keegru bled out in a bar fight, Jassik was murdered in his sleep for being a greedy pillaging warlord, Graz was a gladiator who challenged his way from the bottom to the top until he could no longer bear the consequences of his own arrogance. What they were offered on that iron palm was not resurrection. It was five fights, ten minutes apart, escalating from trivial to extreme, with Cody's framing hanging over it: <em>"The chances that your characters will not survive to the end of the gauntlet is possible."</em></p>
+    <p>They survived all five. Not one PC died. The party killed <strong>eighteen enemies across eleven stat blocks</strong>, dealt roughly <strong>9,500 points of damage</strong>, and burned three party-wide safety nets and most of a healer's spell list. The Sword Master of Gorum had to be reduced to zero <strong>four separate times</strong> before he stayed down — but it was the High Cleric who actually put people on the floor.</p>
+    <p>The shape of the day was set in the first ninety seconds of the first fight and never really changed: <strong>Graz's Battle Cry Demoralize at initiative, Tam's Dread Striker converting that fear into off-guard, and Perfect Finisher rolling two dice for every swing that mattered.</strong> By the end Graz was saying it out loud about his own build — <em>"I think the Perfect Finisher is just — I don't know. It's crazy"</em> — while Cody measured it from the other side of the screen: <em>"There was a point where you took down like all 600 of the champion's HP in two rounds."</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>The Gauntlet</h2>
+  <div class="timeline">
+
+    <div class="act prelude">
+      <div class="act-label">Prelude · 13:06 – 13:29 · The Iron Palm</div>
+      <div class="act-card">
+        <h3>Six dead warriors, one dead god</h3>
+        <ul>
+          <li>Cody lays out the format: <strong>five encounters, ten minutes between each</strong>, increasing difficulty, no guarantee of survival.</li>
+          <li>The ruling that shapes the whole day: <strong>"Hero points don't come back between fights. You've got three for the whole five fights."</strong></li>
+          <li><strong>Graz pre-casts Foresight</strong> (1 hour), Fly, Heroism and See the Unseen, and drinks <strong>three Greater Resistance potions — fire, cold and electricity.</strong></li>
+          <li><strong>Keegru pre-casts Sacred Covenant</strong> on all six PCs — the first time each of them hits 0, they return at 1 HP with 50 temporary. It is the single most load-bearing decision of the session.</li>
+          <li>Character introductions establish the theme without anyone planning it: every backstory ends in a death.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act I · Combat · The Magma Worms · 13:33 – 14:04</div>
+      <div class="act-card">
+        <h3>Budgeted trivial. Ate two party members.</h3>
+        <ul>
+          <li>Three level-18 Magma Worms erupt from drops of blood on the sand. Budgeted at <strong>exactly Trivial</strong> for a six-player party — 60 XP on the nose.</li>
+          <li><strong>Graz opens with a critical hit before any enemy acts.</strong> Battle Cry Demoralize crits at initiative, Rogue's Surprise Attack lands off-guard, and AC 40 becomes an effective 36 before the first die hits the table.</li>
+          <li><strong>Worm B dies without ever taking a turn</strong>, despite rolling 48 initiative.</li>
+          <li><strong>Shuyinlo is swallowed whole in round 1</strong> and fights from inside a stomach for four PC turns.</li>
+          <li><strong>Keegru's Roaring Applause hits a natural 20 on the save.</strong> The worm keeps its reactions — and four minutes later uses Fast Swallow to eat Chthon'ar'ax too.</li>
+          <li>Chthon'ar'ax bites his way out through Rupture 36. Cody: <em>"As this enormous dragon just bursts its way out."</em></li>
+          <li>Cody apologises for his own dice <strong>three separate times</strong>. He rolled 16+ on seven of eleven enemy d20s.</li>
+          <li><strong>Graz takes all three kills and zero damage.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II · Combat · Two Dragons and a Rider · 14:08 – 14:38</div>
+      <div class="act-card">
+        <h3>The Reveler was a mirror of Graz. It got one attack.</h3>
+        <ul>
+          <li>A Wyrmwraith, a Delight Dragon, and a <strong>Reveler mounted on the dragon</strong> — a Braggart Swashbuckler built as Graz's opposite number, with Perform for Panache, Confident Finisher and a starknife.</li>
+          <li><strong>Chthon'ar'ax grapples the Wyrmwraith and it critically fails its Escape</strong> — 33 against DC 48. Grabbed, immobilized, off-guard and frightened until Tam deletes it.</li>
+          <li><strong>Graz deals 238 damage in two actions</strong> to the Reveler, including a natural-20 finisher for 174.</li>
+          <li>The Reveler gets <strong>one attack all encounter and rolls a natural 1.</strong></li>
+          <li>Both dragon breath weapons target Graz. <strong>He critically succeeds both, on nat 12s.</strong></li>
+          <li>Jassik fails both Will saves on nat 7s, spends a round Confused swinging at his own healer, and finishes having dealt <strong>zero damage</strong>.</li>
+          <li>Cody, on the enemy dice: <em>"Ooh, double nat 1s. Makes sense. I had to pay for the worms."</em></li>
+          <li>Graz takes <strong>11 damage all fight</strong> — from Shuyinlo's own cold rune.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III · Combat · The Battlemage and the Lich Legion · 14:42 – 15:09</div>
+      <div class="act-card">
+        <h3>The fight that inverted the party</h3>
+        <ul>
+          <li>A Battlemage backed by the <strong>Lich Legion</strong> — three troops, AC 41, ~350 HP each across four segments.</li>
+          <li><strong>The troops broke the party's damage hierarchy in half.</strong> Weakness 15 to area damage <em>per instance, per troop</em>; resistance 15 against single-target physical Strikes; immune to bleed; and, by Cody's ruling, <strong>impossible to Demoralize.</strong></li>
+          <li>That single ruling switched off Battle Cry, Threatening Approach, Antagonize, Dazzling Display <em>and</em> Aura of Despair simultaneously. Graz: <em>"Well, here comes the shit part for me."</em></li>
+          <li><strong>Keegru, the healer, was the top damage dealer at 528</strong> — ahead of both dedicated strikers. His 7th-rank Fireball collected the area weakness on two troops from one roll: <strong>66 + 117 = 183 damage</strong>, killing Lich Legion B outright.</li>
+          <li><strong>Shuyinlo etches Germantria, Rune of Partnership onto Graz</strong> — a damage-share that splits everything Graz takes onto himself. <em>"I look forward to getting the shit kicked out of me."</em></li>
+          <li>He also builds a portal engine — Tear Rift, Define the Canvas — and <strong>never gets to use it.</strong> The fight ends one initiative slot before his round-3 turn.</li>
+          <li><strong>Graz deletes the Battlemage in a single turn</strong>: Tumble Through (critical success by +16, granting panache <em>and</em> off-guard) into two critical hits for 162 and 149.</li>
+          <li>Chthon'ar'ax chases the teleporting Battlemage with a Long Jump that crits by +32 — and leaves the party standing in four Falling Stars bursts. Cody: <em>"who left you all to get nuked. What a jerk."</em></li>
+          <li><strong>Tam's Aid ends the encounter</strong>, converting Chthon'ar'ax's Miss-by-1 into the kill on the last troop.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV · Combat · The Adamant Sentinels and the Norn · 15:27 – 16:17</div>
+      <div class="act-card">
+        <h3>Fifty minutes. The longest fight of the day.</h3>
+        <ul>
+          <li>Four <strong>Adamant Sentinels</strong> at <strong>AC 45 / ~345 HP</strong> (book: 42 / 255) — resistant to physical, <strong>immune to mental</strong>, and pointedly <em>not</em> immune to fire. Cody, the moment Graz opens: <em>"Unfortunately, they are mindless."</em></li>
+          <li>The <strong>Norn</strong> at <strong>AC 47 / ~650 HP</strong> (book: 46 / 375), with cold-iron-gated regeneration nobody could turn off.</li>
+          <li>She opens with rank-10 <strong>Tear the Veil</strong>, DC 47 Fortitude. Jassik, Chthon'ar'ax and Tam fail; Graz and Keegru succeed; <strong>Shuyinlo critically succeeds.</strong> Then she spends <strong>Shift Fate</strong> to reverse Keegru's success into a failure for 48 damage.</li>
+          <li><strong>Three Vent Flames cones back to back</strong> — ~323 fire damage in one round. Cody, narrating the party's afternoon in two words: <em>"Getting crispy."</em></li>
+          <li><strong>Phantasmagoria confuses Chthon'ar'ax and Shuyinlo into friendly fire.</strong> Round 2 is the low point of the session.</li>
+          <li><strong>Jassik's Reactive Strike disrupts the Norn's Snip Thread.</strong> Cody flags the manipulate trait himself; Jassik crits for 102; her 125-point void death effect — which she had three of — never resolves once all fight.</li>
+          <li><strong>Jassik kills the Norn</strong> on a swing Foundry had scored as a miss, after Cody worked out the software wasn't applying her prone off-guard.</li>
+          <li><strong>Graz takes three of the five knockdowns</strong>, all three set up by a Tumble Through, including a natural-20 finisher for 136.</li>
+          <li><strong>Sentinel A silently fell out of the Foundry initiative tracker for rounds 2 and 3.</strong> Graz spotted it and told Cody at 16:07:18. A quarter of the enemy melee skipped two rounds — part of why nobody dropped in the hardest fight so far.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act V · Combat · The Champions of Gorum · 16:20 – 17:19</div>
+      <div class="act-card">
+        <h3>617 damage before an enemy acted — and it still took fifty-six minutes</h3>
+        <ul>
+          <li>Three champions: <strong>Sword Master</strong> (AC 47→48, ~600 HP), <strong>High Cleric</strong> (AC 47), <strong>Monk</strong> (AC 46, Perception DC ~51).</li>
+          <li><strong>Graz's Battle Cry Demoralize crits at initiative</strong> → Frightened 2 → the Sword Master is off-guard to <strong>Tam's Dread Striker</strong> before anyone has taken a turn.</li>
+          <li><strong>Tam deals 316</strong> (a 148 crit plus a 168 amped Imaginary Weapon). <strong>Graz follows with 301</strong> across two Perfect Finisher crits. <strong>617 damage in two consecutive PC turns.</strong></li>
+          <li><strong>Gorum's Major Boon</strong> — heal to half, become Doomed 1 — was <strong>three charges shared between all three champions.</strong> The party believed it belonged to the Sword Master alone and focused him. He ate all three. The other two got none and died on their first drop. <em>The wrong premise produced the right play.</em></li>
+          <li><strong>Graz's Hide fails against the Monk</strong> — a 49 beat the Sword Master's DC 46 and lost to the Monk's ~51. The Monk walks over and opens a two-round beating.</li>
+          <li><strong>Graz's Dazzled rider erases a critical Crashing Slam</strong> on a failed DC 5 flat check. Cody: <em>"All right, because Dazzled."</em></li>
+          <li><strong>Dazzling Display: three Demoralizes, three critical successes</strong> — one via Graz's only hero point of the day, one on a natural 20, with Exemplary Finisher stripping the immunity to make the third legal.</li>
+          <li><strong>Shuyinlo moves Germantria off Graz.</strong> Graz eats 151 and 111 unsplit over the next two turns.</li>
+          <li><strong>Graz kills the Sword Master</strong> with a 181-damage Perfect Finisher crit. <strong>Jassik kills the High Cleric.</strong> <strong>Graz kills the Monk</strong> on a nat 20 chained into a second crit.</li>
+          <li><strong>Tam takes zero damage the entire encounter</strong> — the observation that drove Cody's own postmortem.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 · Trivial · 3 rounds · 31 minutes</div>
+    <h3>3× Magma Worm</h3>
+    <div class="combat-stats">
+      <div><div class="stat-label">Enemy AC</div><div class="stat-value">40</div></div>
+      <div><div class="stat-label">Effective HP</div><div class="stat-value">~476–515 ea.</div></div>
+      <div><div class="stat-label">Damage dealt</div><div class="stat-value">1,615</div></div>
+      <div><div class="stat-label">PCs downed</div><div class="stat-value">0</div></div>
+    </div>
+    <p><em>Fire-immune, cold-weak ~12 — which made Graz's greater-frost spear the best weapon on the field. Fire Breath 18d6 DC 41, Swallow Whole, Rupture 36.</em></p>
+
+    <h4>Round 0 — the free actions</h4>
+    <ul>
+      <li><strong>Graz's Battle Cry Demoralize crits by +12</strong> on Worm B → Frightened 2, floored at 1 by Antagonize.</li>
+      <li>Chthon'ar'ax crit-Demoralizes <em>the same worm</em> a beat later. Graz: <em>"Oh, yeah, it's already Demoralized, so... Shit."</em></li>
+    </ul>
+
+    <h4>Round 1</h4>
+    <div class="crit-box"><strong>The thesis statement.</strong> Graz's Illimitable Finisher into Worm B: AC 40 → 38 (frightened) → <strong>36</strong> (Surprise Attack off-guard). <code>2d20kh + 38 = 50</code> — <strong>critical hit by +14, 157 applied.</strong> Free second finisher for 70. Hides on a critical success. <strong>227 damage, round one.</strong></div>
+    <ul>
+      <li><strong>Tam discovers he has no bolts</strong> at level 20; Cody hand-adds ammunition. Then Eldritch Shot crits for 104 plus a heightened Gouging Claw for 70.</li>
+      <li><strong>Graz spends Opportune Backstab</strong> knowing it reveals his hiding spot — Cody warned him first. Critical hit by +12, <strong>114 applied. Worm B falls without ever taking a turn.</strong></li>
+      <li><strong>Worm C critically succeeds its grab on Shuyinlo, then Fast Swallows him.</strong></li>
+      <li>Two Fire Breaths land on Graz across the round. <strong>Two critical successes. Zero damage.</strong></li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Graz: 319 damage in one turn</strong> — Threatening Approach → finisher crit for 171 → Illimitable second finisher crit for 148.</li>
+      <li><strong>Tam's Fake Out upgrades Jassik's hit into a crit</strong> worth 84. It is his first Aid of the session, and he had to be reminded.</li>
+      <li><strong>Graz's Opportune Backstab kills Worm A.</strong></li>
+      <li><strong>Keegru's Roaring Applause — the worm rolls a natural 20.</strong> A plain success would have denied it reactions.</li>
+      <li><strong>Worm C crits Chthon'ar'ax for 93</strong> after his Greater Fortification flat check comes up a <strong>natural 1</strong> — then swallows him with the reaction Roaring Applause would have taken away.</li>
+    </ul>
+    <div class="note"><strong>Cody, 13:59:15:</strong> <em>"I did not expect these guys to hit the way they're hitting. Math-wise, they should just not be, but I am rolling hot."</em> He rolled 16+ on seven of eleven enemy d20s — the third time he'd said it out loud.</div>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li>Chthon'ar'ax bites out through Rupture 36 for 82.</li>
+      <li>Graz finishes Worm C with a crit for 122 and a follow-up for 66. <em>"And with that, the worm is down, Shuyinlo is free, and the first victory of the gauntlet goes to you all."</em></li>
+    </ul>
+
+    <div class="tscroll"><table>
+      <tr><th>PC</th><th>Damage dealt</th><th>Damage taken</th></tr>
+      <tr><td><strong>Graz</strong></td><td><strong>907 (56%)</strong></td><td><strong>0</strong></td></tr>
+      <tr><td>Tam</td><td>380</td><td>0</td></tr>
+      <tr><td>Jassik</td><td>181</td><td>81</td></tr>
+      <tr><td>Chthon'ar'ax</td><td>84</td><td>145</td></tr>
+      <tr><td>Shuyinlo</td><td>63</td><td>93</td></tr>
+      <tr><td>Keegru</td><td>0</td><td>64</td></tr>
+    </table></div>
+    <p><strong>Kill credit: Graz ×3.</strong> He out-damaged the other five combined.</p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 2 · 3 rounds · 30 minutes</div>
+    <h3>Wyrmwraith · Delight Dragon · Reveler</h3>
+    <div class="combat-stats">
+      <div><div class="stat-label">Highest AC</div><div class="stat-value">43 (Reveler)</div></div>
+      <div><div class="stat-label">Damage dealt</div><div class="stat-value">~1,197</div></div>
+      <div><div class="stat-label">Graz damage taken</div><div class="stat-value">11 (friendly fire)</div></div>
+      <div><div class="stat-label">PCs downed</div><div class="stat-value">0</div></div>
+    </div>
+    <ul>
+      <li><strong>The Reveler was mounted on the Delight Dragon</strong> but rolled separate initiative (54 vs 36) — which is exactly why it got stranded once its mount had moved.</li>
+      <li><strong>Chthon'ar'ax grapples the Wyrmwraith; it critically fails its Escape at 33 vs DC 48.</strong> Grabbed, immobilized, off-guard and frightened 2 from round 1 until it dies. One hit landed all fight; two critical misses.</li>
+      <li><strong>Graz: 64 + 174 in two actions</strong> on the Reveler — the 174 on a natural 20 that also applied Clumsy 1, Dazzled and persistent fire. ~58% of its HP in one turn.</li>
+      <li><strong>Both dragon breath weapons hit Graz and both critically succeed on nat 12s</strong> — Breath of Fresh Air (77 spirit, Slowed on a fail) and Let's Play (62 mental, Confused on a fail). A failure on either would have cost the party his biggest turn.</li>
+      <li>Jassik fails both on nat 7s and spends round 2 <strong>swinging at Keegru three times, missing by 1, 1 and 4.</strong></li>
+      <li>Chthon'ar'ax burns Perfect Clarity to reroll — <strong>which ends his Rage</strong> — and is Confused anyway, then fails his fortification check against a 108-damage crit.</li>
+      <li><strong>Shuyinlo kills the Reveler</strong> with an En-diacritic cold emanation that also catches three of his own party.</li>
+      <li><strong>Tam's "Always" pays off</strong>: the +4 turns Graz's finisher on the Delight Dragon from a normal hit into a <strong>143-damage crit</strong>. Four Aids landed this fight; one changed an outcome, and it was worth ~79 damage.</li>
+      <li><strong>Graz kills the Delight Dragon with an Opportune Backstab reaction.</strong></li>
+      <li>Keegru closes with Garden of Healing — <strong>100d4 = 253 to each</strong> of three PCs.</li>
+    </ul>
+    <p><strong>Kill credit:</strong> Tam → Wyrmwraith · Shuyinlo → Reveler · <strong>Graz → Delight Dragon.</strong></p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 3 · 3 rounds · 26 minutes</div>
+    <h3>Battlemage + Lich Legion ×3</h3>
+    <div class="combat-stats">
+      <div><div class="stat-label">Troop HP</div><div class="stat-value">~350 ea. (4 segments)</div></div>
+      <div><div class="stat-label">Top damage</div><div class="stat-value">Keegru — 528</div></div>
+      <div><div class="stat-label">Graz damage taken</div><div class="stat-value">0</div></div>
+      <div><div class="stat-label">Graz saves</div><div class="stat-value">6 / 6 critical</div></div>
+    </div>
+
+    <div class="note"><strong>The troop stat block is the whole story.</strong> Weakness 15 to area damage <em>per instance, per troop</em> · resistance 15 against single-target physical Strikes · immune to bleed · <strong>cannot be Demoralized</strong> · four HP segments whose footprint shrinks as they die.</div>
+
+    <ul>
+      <li><strong>Half of Graz's kit became illegal.</strong> Battle Cry, Threatening Approach, Antagonize, Dazzling Display and Aura of Despair all key on fear. <em>"Well, here comes the shit part for me."</em></li>
+      <li>He found the floor of the kit instead: <em>"I still gain my panache, even if it's immune"</em> — using Demoralize purely as a battery for finishers.</li>
+      <li><strong>Shuyinlo etches Germantria, Rune of Partnership onto Graz</strong> — the damage-share that carries into the next two fights.</li>
+      <li><strong>Chthon'ar'ax's Long Jump crits by +32</strong> to chase the teleporting Battlemage, pins it with a critical Grapple, and leaves the party standing in four Falling Stars bursts.</li>
+      <li><strong>Tam forgets to Aid in round 1.</strong> Graz's second Strike rolls 51 against an effective AC 42 — <strong>one short of the crit line at 52.</strong></li>
+    </ul>
+
+    <div class="crit-box"><strong>Round 2 — Graz deletes the Battlemage.</strong> Stride → <strong>Tumble Through, critical success by +16</strong>, doing double duty: generating panache <em>and</em> applying off-guard through Tumble Behind. That −2 is exactly what turns a roll of 53 into a critical hit against AC 44 rather than an ordinary one. Two Perfect Finisher crits: <strong>162, then 149. 311 damage, boss dead.</strong></div>
+
+    <ul>
+      <li><strong>Keegru's 7th-rank Fireball</strong>: one roll, two troops, a failure and a critical failure, area weakness on both — <strong>66 + 117 = 183 damage</strong>, killing Lich Legion B. Cody: <em>"He is gone. Wow."</em></li>
+      <li>Graz spends a <strong>Bleeding Finisher on a bleed-immune target</strong>, then his next finisher <strong>destroys the segment he was standing next to.</strong> Cody: <em>"You cannot, because you've eliminated their section. You're no longer adjacent."</em></li>
+      <li><strong>Tam's Aid ends the fight</strong> — Chthon'ar'ax's jaws roll a Miss by −1, the +4 converts it, and the last troop is destroyed.</li>
+      <li><strong>Shuyinlo never gets a round-3 turn.</strong> Tear Rift was never used once.</li>
+    </ul>
+
+    <div class="tscroll"><table>
+      <tr><th>Graz's six saves</th><th>Result</th><th>Cost of failure</th></tr>
+      <tr><td>Arrow Salvo — Ref DC 41</td><td><strong>nat 20 = 60</strong>, crit success</td><td>55 / 110 + Prone</td></tr>
+      <tr><td>Falling Stars (Plasma) — Ref DC 40</td><td>59, crit success</td><td>83 / 166</td></tr>
+      <tr><td>Phantasmagoria — Will DC 40</td><td><strong>nat 19 = 55</strong>, crit success</td><td>51 + Confused</td></tr>
+      <tr><td>Falling Stars (Asteroids) — Ref DC 39</td><td><strong>nat 20 = 60</strong>, crit success</td><td>72 / 144</td></tr>
+      <tr><td>Phantasmagoria — Will DC 39</td><td>41, crit success</td><td>53 + Confused</td></tr>
+      <tr><td>Phantasmagoria — Will DC 40</td><td>48, <strong>Foresight spent</strong></td><td>58 + Confused</td></tr>
+    </table></div>
+
+    <div class="tscroll"><table>
+      <tr><th>PC</th><th>Damage dealt</th></tr>
+      <tr><td><strong>Keegru</strong></td><td><strong>528</strong></td></tr>
+      <tr><td>Tam</td><td>487</td></tr>
+      <tr><td>Graz</td><td>454</td></tr>
+      <tr><td>Chthon'ar'ax</td><td>135</td></tr>
+      <tr><td>Jassik</td><td>52</td></tr>
+      <tr><td>Shuyinlo</td><td>43</td></tr>
+    </table></div>
+    <p><strong>The healer out-damaged both dedicated strikers.</strong> The only fight all session where Graz wasn't top damage — and the reason is a defensive stat block, not a bad turn.</p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 4 · 4 rounds · 50 minutes · the longest fight</div>
+    <h3>4× Adamant Sentinel + the Norn</h3>
+    <div class="combat-stats">
+      <div><div class="stat-label">Sentinels</div><div class="stat-value">AC 45 / ~345 HP</div></div>
+      <div><div class="stat-label">The Norn</div><div class="stat-value">AC 47 / ~650 HP</div></div>
+      <div><div class="stat-label">Damage dealt</div><div class="stat-value">~2,203</div></div>
+      <div><div class="stat-label">Damage taken</div><div class="stat-value">~1,504</div></div>
+    </div>
+    <p><em>Book values were AC 42 / 255 and AC 46 / 375. Cody scaled both well above the page.</em></p>
+
+    <h4>Round 1 — eighteen minutes</h4>
+    <ul>
+      <li>Graz opens with Battle Cry into a wall. Cody: <em>"Unfortunately, they are mindless."</em> His entire fear engine is offline for this fight.</li>
+      <li><strong>Tear the Veil</strong>, DC 47 Fortitude, party-wide. Three fail, Graz and Keegru succeed, <strong>Shuyinlo critically succeeds</strong> — and then the Norn spends <strong>Shift Fate</strong> to flip Keegru's success into a failure for 48.</li>
+      <li><strong>Three Vent Flames cones back to back</strong> — ~323 fire damage. Cody: <em>"Getting crispy."</em> And, helpfully: <em>"Funnily enough, they're not immune to fire."</em></li>
+      <li><strong>Chthon'ar'ax's entire round produces zero damage</strong> — Grapple, Crushing Grab resisted to 0, a <em>critically successful</em> Whirling Throw resisted to 0. A grappler against four physically-resistant constructs is a hard counter.</li>
+    </ul>
+
+    <h4>Round 2 — the low point</h4>
+    <ul>
+      <li><strong>Phantasmagoria confuses Chthon'ar'ax and Shuyinlo.</strong> Shuyinlo crits Chthon'ar'ax for 10; the barbarian's jaws swing back repeatedly. Cody's read: <em>"One round instead of a whole fight. I'd say that's a worthy one."</em></li>
+      <li>Shuyinlo's <strong>Annihilating Compound Invocation</strong> — four runes, four traditions, a full two-action setup — nets <strong>45 damage into a 345 HP construct</strong>, and consumes the traced resistance-debuff rune that was the actual right answer.</li>
+      <li><strong>Sentinel A silently drops out of the initiative tracker</strong> and takes no turns in rounds 2 or 3.</li>
+    </ul>
+
+    <h4>Rounds 3–4</h4>
+    <div class="crit-box"><strong>Graz's double-finisher.</strong> Tumble Through (critical success) → finisher <strong>crit for 108, killing Sentinel B</strong> → panache refreshes → <strong>natural-20 finisher for 136.</strong> <em>"Wow, that's a shitload of damage."</em></div>
+    <ul>
+      <li><strong>Jassik's Reactive Strike disrupts Snip Thread.</strong> Crit for 102. Cody: <em>"There we go. She does not get to do that. That is her turn."</em> The Norn's 125-point void death effect — three uses — never resolves once.</li>
+      <li><strong>Jassik kills the Norn</strong> on a swing Foundry read as a miss, once Cody worked out the prone off-guard wasn't applying.</li>
+      <li>Chthon'ar'ax: <em>"Save me, Protector Tree."</em> Cody: <em>"Well, first see if you can save yourself."</em> Then: <em>"Protector Tree did not save me."</em> It still absorbed 70 of a 131-point crit.</li>
+      <li><strong>Graz kills Sentinel A</strong> with a nat-20 finisher for 127, and <strong>Sentinel C</strong> falls to his persistent fire. <strong>Keegru kills Sentinel D</strong> with a critical Warshard Shot.</li>
+    </ul>
+    <p><strong>Kill credit: Graz ×3 · Jassik → the Norn · Keegru → Sentinel D.</strong> Graz dealt ~988 and took ~139 — hidden for three straight rounds. Chthon'ar'ax absorbed ~675, 45% of everything the enemy dealt. Keegru healed 491. <strong>Nobody dropped.</strong></p>
+  </div>
+
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 5 · The finale · 5 rounds · 56 minutes</div>
+    <h3>The Champions of Gorum</h3>
+    <div class="combat-stats">
+      <div><div class="stat-label">Sword Master</div><div class="stat-value">AC 47→48 / ~600 HP</div></div>
+      <div><div class="stat-label">Effective HP pushed</div><div class="stat-value">~1,500</div></div>
+      <div><div class="stat-label">Damage dealt</div><div class="stat-value">~2,823</div></div>
+      <div><div class="stat-label">Zero-HP events</div><div class="stat-value">4</div></div>
+    </div>
+
+    <div class="note"><strong>Gorum's Major Boon</strong> — <em>"Whenever you would be reduced to 0 Hit Points, you are instead healed to half your maximum Hit Points and become Doomed 1."</em> <strong>Three charges, shared between all three champions.</strong> The party thought it belonged to the Sword Master alone and focused him accordingly — so he drained the entire pool, and the other two died on their first drop. Killing one enemy three times was cheaper than killing three enemies twice.</div>
+
+    <h4>Round 1 — 617 damage before an enemy acted</h4>
+    <div class="crit-box"><strong>Graz's Battle Cry Demoralize crits at initiative</strong> → Frightened 2 → the Sword Master is <strong>off-guard to Tam's Dread Striker</strong>. <strong>Tam: 316</strong> (148 crit + 168 amped Imaginary Weapon). <strong>Graz: 301</strong> (two Perfect Finisher crits). <strong>617 total — his whole HP bar — before a single enemy turn.</strong> This is Cody's debrief line about "600 HP in two rounds." He meant turns.</div>
+    <ul>
+      <li>Graz, watching Tam's volley land: <em>"Oh my god, what the hell? It's over 300 damage."</em></li>
+      <li><strong>Graz's Hide fails against the Monk</strong> — 49 beat the Sword Master's DC 46 and lost to the Monk's ~51. <em>"Yeah, I can't expect this kind of hard against these guys."</em> The Monk closes and flurries him.</li>
+      <li><strong>The Sword Master's Crashing Slam crits Graz — and is erased</strong> by the Dazzled rider from Graz's own finisher, on the second DC 5 flat check. Cody: <em>"All right, because Dazzled."</em></li>
+      <li><strong>Divine Armageddon</strong>, DC 44 Fort. Graz succeeds on a nat 13, spends <strong>Foresight</strong> to reroll, gets the same, takes 42 — halved to 21 by Germantria.</li>
+    </ul>
+
+    <h4>Round 2 — the beating</h4>
+    <ul>
+      <li><strong>Dazzling Display: three Demoralizes, three critical successes.</strong> The High Cleric via Graz's only hero point (nat 4 → nat 17); the Sword Master on a <strong>natural 20</strong>, legal only because <strong>Exemplary Finisher</strong> had just stripped his immunity.</li>
+      <li><strong>Shuyinlo moves Germantria off Graz.</strong> The Monk immediately crits him for 183 — Shield Block absorbs 25, <strong>151 through, unsplit.</strong></li>
+    </ul>
+    <div class="down">
+      <p><strong>The Overwhelming Blow.</strong> Cody: <em>"If this hits, it's a critical hit; if it would crit, it's a crit for max damage."</em> Graz: <em>"Oh boy. Wow. Yeah, I think I'm going down."</em> It crits — but <strong>Shuyinlo's Warping Pull</strong> grants resistance and teleports him, and the damage rolls <strong>118 out of a possible 184.</strong> Cody: <em>"They didn't roll too hot, so you're still up."</em> Graz is at roughly 14 hit points.</p>
+      <p><strong>Then Pierce the Sky.</strong> Rank 9, three targets — misses Tam, hits Shuyinlo for 47, and a <strong>39-damage ray drops Graz to 0.</strong> <strong>Sacred Covenant</strong> catches him at 1 HP + 50 temp; he never goes unconscious. The spell's sonic component also leaves him <strong>Deafened for a round</strong> — the condition sat on his sheet far longer only because nobody cleared it.</p>
+    </div>
+
+    <h4>Round 3 — Chthon'ar'ax collapses, twice</h4>
+    <div class="down">
+      <ul>
+        <li><strong>Two consecutive natural 20s</strong> from the Sword Master's greatsword. Greater Fortification rolls <strong>4, then 4 again.</strong> Cody: <em>"That is another nat 20. Alright, roll the rune again."</em> <strong>194 damage → Sacred Covenant #2.</strong></li>
+        <li><strong>16:59:45 — the drop nobody noticed.</strong> The High Cleric's Morningstar crit, downgraded to a 41-damage hit, still takes him to 0. <strong>Orc Ferocity catches it silently.</strong> Not one word is said at the table — the only trace is the reaction card and a Wounded tick.</li>
+        <li><strong>17:01:16 — genuinely unconscious.</strong> He attempts <strong>Battle Medicine on himself</strong> inside the Sword Master's reach; the <strong>Reactive Strike</strong> drops him mid-manipulate. Sacred Covenant and Orc Ferocity are both spent.</li>
+        <li><strong>Keegru revives him</strong> with a 10th-rank Heal through Echoing Channel — after the Monk's Stand Still first denied his Doctor's Visitation and then critted him for 126.</li>
+      </ul>
+    </div>
+
+    <h4>Rounds 4–5 — the kills</h4>
+    <ul>
+      <li><strong>Graz kills the Sword Master</strong> — <code>2d20kh + 43 = 57</code>, crit by +11, <strong>181 damage.</strong> <em>"Oh my god, it's a crit. Well, they stay down."</em></li>
+      <li><strong>Jassik kills the High Cleric</strong> with a 96-damage crit, knowingly eating 3d6 from <em>Inviolable</em> to do it.</li>
+      <li><strong>Graz kills the Monk</strong> — Tumble Through, then a <strong>nat-20 finisher for 151</strong> and a second crit for 143. Cody: <em>"They're down as well."</em></li>
+    </ul>
+
+    <div class="tscroll"><table>
+      <tr><th>PC</th><th>Damage dealt</th><th>Damage taken</th></tr>
+      <tr><td><strong>Graz</strong></td><td><strong>~1,237</strong></td><td>~453</td></tr>
+      <tr><td><strong>Tam</strong></td><td><strong>~907</strong></td><td><strong>0</strong></td></tr>
+      <tr><td>Jassik</td><td>~304</td><td>125</td></tr>
+      <tr><td>Chthon'ar'ax</td><td>~272</td><td><strong>577</strong></td></tr>
+      <tr><td>Keegru</td><td>~74</td><td>307</td></tr>
+      <tr><td>Shuyinlo</td><td>~29</td><td>112</td></tr>
+    </table></div>
+    <p><strong>Graz and Tam together produced ~74% of the party's damage.</strong> Tam took zero, which is precisely what drove Cody's postmortem: <em>"I need more range, I'm learning — that's a big one."</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Session Statistics</h2>
+
+  <h4>Graz — the headline</h4>
+  <div class="tscroll"><table>
+    <tr><td>Attack rolls</td><td><strong>40</strong></td></tr>
+    <tr><td>Critical hits</td><td><strong>23</strong></td></tr>
+    <tr><td>Hits</td><td>16</td></tr>
+    <tr><td><strong>Misses</strong></td><td><strong>1</strong></td></tr>
+    <tr><td>Critical misses</td><td><strong>0</strong></td></tr>
+    <tr><td><strong>Hit rate</strong></td><td><strong>98%</strong></td></tr>
+    <tr><td><strong>Crit rate</strong></td><td><strong>58%</strong></td></tr>
+    <tr><td>Saving throws</td><td><strong>13 — all passed, 10 critical successes</strong></td></tr>
+    <tr><td>Tumble Through</td><td><strong>6 attempts, 6 critical successes</strong></td></tr>
+    <tr><td>Kills</td><td><strong>10</strong> <em>(two soft)</em></td></tr>
+    <tr><td>Total damage</td><td><strong>~4,100</strong></td></tr>
+  </table></div>
+
+  <div class="note"><strong>On the kill count:</strong> eight of the ten are unambiguous. <strong>Magma Worm A</strong> had already absorbed more than its book HP before Graz's reaction landed, so Cody's "That is a kill" may have trailed Jassik's swing. <strong>Adamant Sentinel C</strong> fell to a persistent-fire tick tagged only <code>Magical</code>, without the marker identifying whose flaming crit set it — and Chthon'ar'ax had also crit it.</div>
+
+  <h4>Saves by axis — the pre-session build analysis, confirmed live</h4>
+  <div class="tscroll"><table>
+    <tr><th>Axis</th><th>Saves</th><th>Crit successes</th><th>Plain successes</th></tr>
+    <tr><td>Reflex (legendary)</td><td>5</td><td><strong>5</strong></td><td>0</td></tr>
+    <tr><td>Will (master, upgrade clause)</td><td>5</td><td><strong>5</strong></td><td>0</td></tr>
+    <tr><td><strong>Fortitude (master, no clause)</strong></td><td>3</td><td><strong>0</strong></td><td><strong>3</strong></td></tr>
+  </table></div>
+  <p><strong>Four of the five Will crits were successes by margin that something upgraded</strong> — 41 vs DC 39, 47 vs 42, 48 vs 40, 49 vs 42. Only the nat 19 crit on the die. The Fortitude saves cleared by +6, +4 and +2 and got nothing, because that axis has no clause. He never failed one; he never got a free upgrade either.</p>
+
+  <h4>Party saves</h4>
+  <div class="tscroll"><table>
+    <tr><th>PC</th><th>Saves</th><th>Pass rate</th></tr>
+    <tr><td><strong>Graz</strong></td><td>13</td><td><strong>100%</strong></td></tr>
+    <tr><td>Tam</td><td>11</td><td>82%</td></tr>
+    <tr><td>Keegru</td><td>15</td><td>80%</td></tr>
+    <tr><td>Shuyinlo</td><td>14</td><td>79%</td></tr>
+    <tr><td>Jassik</td><td>14</td><td>50%</td></tr>
+    <tr><td>Chthon'ar'ax</td><td>15</td><td><strong>47%</strong></td></tr>
+  </table></div>
+  <p><strong>82 PC saving throws, zero critical failures.</strong> The two worst records belong to the two PCs who spent time on the floor.</p>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-graz">
+      <h4>Graz · the Gladiator Who Never Stopped Climbing</h4>
+      <ul>
+        <li><strong>Dealt roughly 4,100 damage and took ten of the enemy kills</strong> — all three Magma Worms, the Delight Dragon, the Battlemage, three Adamant Sentinels, the Sword Master and the Monk of Gorum.</li>
+        <li><strong>Missed one attack in four hours.</strong> Forty strikes, twenty-three critical hits, zero critical misses, against ACs climbing from 40 to 48.</li>
+        <li>The loop: Battle Cry Demoralize at initiative → Threatening Approach or Dazzling Display to hold Frightened 2 → Exemplary Finisher wiping the immunity so it can happen again → Perfect Finisher rolling two dice on every swing → Illimitable Finisher chaining a second finisher off the regained panache.</li>
+        <li><strong>His debuffs were the party's damage.</strong> The Sword Master's 617-point collapse runs entirely through one free action: his Battle Cry crit made the target off-guard to Tam before anyone had taken a turn.</li>
+        <li><strong>Six Tumble Throughs, six critical successes</strong>, against Reflex DCs up to 47 — his answer whenever fear stopped working, and the setup for four of his kills.</li>
+        <li><strong>He got shut out twice and adapted both times.</strong> The Sentinels were immune to mental; the Lich Legion couldn't be Demoralized at all. <em>"Well, here comes the shit part for me."</em> Then he found the floor of the kit — <em>"I still gain my panache, even if it's immune"</em> — and used Demoralize as a battery instead of a debuff.</li>
+        <li>Went to 0 exactly once, on a 39-point ray, after his damage-share rune had been moved to someone else. Never went unconscious, and never stopped swinging.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-tam">
+      <h4>Tam al'Thor · Always Aiding</h4>
+      <ul>
+        <li><strong>17 attacks, 17 hits, 10 crits — he did not miss once all session.</strong></li>
+        <li><strong>Took zero damage in encounters 1, 2 and 5</strong>, and ~174 across the entire gauntlet. A 120-foot sniper the champions never found an answer to — the observation that drove Cody's own postmortem.</li>
+        <li><strong>"Always."</strong> When Cody asked whether he was aiding, that was the answer, and the table adopted it as a standing ruling. One Aid in encounter 2 turned Graz's finisher into a 143-damage crit; another ended encounter 3 outright.</li>
+        <li>His round-one volley in the finale — a 148 crit plus a 168 amped Imaginary Weapon — is <strong>half of the 617 damage that broke the Sword Master before he ever acted.</strong></li>
+        <li><strong>Killed the Wyrmwraith outright</strong> with an Eldritch Shot crit, and set up the Norn's death by knocking her prone with Transform Ammunition.</li>
+        <li>Opened the session unable to shoot — a level-20 gunslinger with <strong>no bolts in his inventory.</strong> Cody had to hand him ammunition.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-chthon">
+      <h4>Chthon'ar'ax · Dragon All the Way Down</h4>
+      <ul>
+        <li><strong>The wall.</strong> Absorbed ~675 in encounter 4 — 45% of everything the enemy dealt that fight — and 577 more in the finale. <strong>Roughly 1,700 across the gauntlet, about 39% of everything the party took.</strong></li>
+        <li><strong>Hit 0 HP three times in the finale</strong> and came back every time: Sacred Covenant, a silent Orc Ferocity nobody noticed, and a genuine unconsciousness that took a 10th-rank Heal to reverse. Finished at <strong>Wounded 3.</strong></li>
+        <li><strong>Two grapples decided two fights.</strong> The Wyrmwraith critically failed its Escape at 33 vs DC 48 and never got going; the Reveler was pinned with its mount already gone and never acted again.</li>
+        <li><strong>Ate his way out of a Magma Worm.</strong> <em>"All I've got are unarmed strikes, so — you know what, let's eat from the inside out."</em> 82 damage against Rupture 36. Then, considering it: <em>"This feels like one of those videos of frogs that try to eat each other."</em></li>
+        <li>His build's one real counter arrived in encounter 4: a grappler against four physically-resistant constructs. Grapple, Crushing Grab resisted to zero, a <em>critically successful</em> Whirling Throw resisted to zero. He shrugged and kept tanking.</li>
+        <li>Dropped by a Reactive Strike while trying to <strong>Battle Medicine himself</strong> inside the Sword Master's reach — the most human mistake of the night, made at Wounded 2.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-jassik">
+      <h4>Jassik · The Man Who Cancelled the Death Effect</h4>
+      <ul>
+        <li><strong>Killed the Norn and the High Cleric</strong> — two of the gauntlet's three hardest targets — on a night when his dice were genuinely awful: three critical misses and six misses in the finale alone.</li>
+        <li><strong>The single highest-leverage action of the session was his.</strong> A Reactive Strike on the Norn's <strong>Snip Thread</strong>, crit for 102, and her 125-point void death effect — which she had three of — <strong>never resolved once in the entire fight.</strong></li>
+        <li>Killed the Norn on a swing Foundry had scored as a miss, after Cody worked out the software wasn't applying her prone off-guard.</li>
+        <li>Killed the High Cleric knowing exactly what it would cost — he confirmed the retaliation damage before swinging, took the shot anyway, and <em>Inviolable</em> duly hit him for 9.</li>
+        <li><strong>Encounter 2 was a disaster for him</strong> — nat 7 on both dragon saves, slowed out of round 1, confused through round 2 swinging at his own healer, zero damage dealt. He said the honest thing: <em>"I feel bad for just swinging away, but I don't really have a whole lot else to do here."</em> Two fights later he cancelled a death spell and killed a Norn.</li>
+        <li>Bought <strong>five potions for five combats</strong> and drank one in every single fight, exactly as planned.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-keegru">
+      <h4>Keegru · The Reason Everyone Walked Out</h4>
+      <ul>
+        <li><strong>Healed roughly 900 HP mid-combat</strong> — 491 in encounter 4 alone — on top of four between-fight Garden of Healing pulses that reset the entire party each break.</li>
+        <li><strong>In encounter 3 he was the party's top damage dealer at 528</strong>, ahead of both dedicated strikers. His 7th-rank Fireball collected the troops' area weakness twice on one roll — <strong>183 damage</strong>, killing Lich Legion B outright.</li>
+        <li><strong>Sacred Covenant is the reason this was a no-death session.</strong> Pre-cast on all six PCs. It fired twice in the finale and both times prevented an unconsciousness outright.</li>
+        <li><strong>Brought Chthon'ar'ax back from actually unconscious</strong> with a 10th-rank Heal through Echoing Channel, then topped him up with a second Battle Medicine that only exists because of the Medic archetype.</li>
+        <li>Did all of it while being <strong>the most-targeted PC in encounter 4</strong>, and taking a 126-point Stand Still crit plus a 163-point flurry in the finale — the Monk hunting him <em>"for healing reasons."</em></li>
+        <li><strong>His one bad roll changed a fight.</strong> Roaring Applause at DC 47 Will; the worm rolled a natural 20. A plain success would have denied it reactions, and four minutes later it used Fast Swallow to eat Chthon'ar'ax.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-shuyinlo">
+      <h4>Shuyinlo Gallalva · The Man Who Volunteered to Be Hit</h4>
+      <ul>
+        <li><strong>Etched Germantria, Rune of Partnership onto Graz and then spent the session eating half his damage</strong> — announced cheerfully, in advance: <em>"I look forward to getting the shit kicked out of me."</em></li>
+        <li><strong>Swallowed whole by a Magma Worm in round one of the session</strong> and simply kept working — four PC turns inside a stomach, throwing Engraving Strikes and invoking two runes at once from within.</li>
+        <li>His build and his backstory are the same object: an elf of ancient Thassilon whose signature rune is <strong>Aiuen, The Elf-Gate Key</strong> — the <em>Aiudara</em> gates he was born among, turned into one Stride per turn that ignores distance. <em>"Distance be damned."</em></li>
+        <li><strong>Saved Graz's life with Warping Pull</strong> on the called-shot Overwhelming Blow — teleporting him and granting resistance on the one attack Cody had announced would be a maximum-damage critical.</li>
+        <li><strong>His four-tradition Annihilating Compound Invocation was the most elaborate thing anyone attempted all night</strong> — and netted 45 damage into a 345 HP construct while consuming the rune that was actually the right answer. The healing invocation a round later, 137 HP plus a group reposition, is what the feat is for.</li>
+        <li>Also <strong>killed the Reveler</strong> with an En-diacritic cold emanation that caught three of his own party. He knew: <em>"It makes it a 15-foot emanation, so it does catch some of us, but it should be fine."</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Cody</strong>: "The Lord in Iron has fallen. Gorum, god of war and battle, has been slain by the mantis god Achaekek... But your paradise was robbed from you. The Clashing Shore, a place where you might test your mettle for evermore — it's gone. Vanished like smoke and ash, scattered to the cosmic winds."
+  <span class="attribution">The opening frame — six dead warriors on the palm of a dead god's gauntlet.</span></blockquote>
+
+  <blockquote><strong>Shuyinlo</strong>: "Minor inconvenience for someone who's built around teleporting."
+  <span class="attribution">Cody had just called being swallowed whole by a Magma Worm "a minor inconvenience for level 20." Shuyinlo was inside the worm at the time, and stayed there for four turns.</span></blockquote>
+
+  <blockquote><strong>Graz</strong>: "It's kind of hard to hug a huge creature."
+  <span class="attribution">Watching Chthon'ar'ax attempt to Bear Hug a Magma Worm.</span></blockquote>
+
+  <blockquote><strong>Chthon'ar'ax</strong>: "Oh yeah, all I've got are unarmed strikes, so — you know what, let's eat from the inside out."<br>
+  <strong>Cody</strong>: "Its rupture value is 36, which means you eat your way out... as this enormous dragon just bursts its way out."
+  <span class="attribution">He cleared Rupture 36 twice over on one bite. Then: "This feels like one of those videos of frogs that try to eat each other."</span></blockquote>
+
+  <blockquote><strong>Keegru</strong>: "See if we can make him clap."
+  <span class="attribution">Roaring Applause, DC 47 Will. The worm rolled a natural 20 — and used the reaction it kept to swallow Chthon'ar'ax four minutes later.</span></blockquote>
+
+  <blockquote><strong>Shuyinlo</strong>: "I look forward to getting the shit kicked out of me."
+  <span class="attribution">Said while etching the damage-sharing rune onto Graz. He meant it literally.</span></blockquote>
+
+  <blockquote><strong>Cody</strong>: "Are you aiding?"<br>
+  <strong>Tam</strong>: "Always."
+  <span class="attribution">It became a standing table ruling. The very next roll crit because of the +4.</span></blockquote>
+
+  <blockquote><strong>Cody</strong>: "Getting crispy."
+  <span class="attribution">The GM's own summary of the third 30-foot fire cone in a row — ~323 damage into the party.</span></blockquote>
+
+  <blockquote><strong>Chthon'ar'ax</strong>: "Save me, Protector Tree."<br>
+  <strong>Cody</strong>: "Well, first see if you can save yourself."<br>
+  <strong>Chthon'ar'ax</strong>: "Protector Tree did not save me."
+  <span class="attribution">It did absorb 70 of a 131-point critical hit.</span></blockquote>
+
+  <blockquote><strong>Tam</strong>: "I'm trusting this will be the last battle. There won't be a... sixth battle shenanigan."
+  <span class="attribution">Halfway through the finale, checking whether Cody had one more in him.</span></blockquote>
+
+  <blockquote><strong>Cody</strong>: "And to double up on you, Graz — they're going to make an Overwhelming Blow. If this hits, it's a critical hit; if it would crit, it's a crit for max damage."<br>
+  <strong>Graz</strong>: "Oh boy. Wow. Yeah, I think I'm going down."<br>
+  <strong>Cody</strong>: "You know what? They didn't roll too hot, so you're still up."
+  <span class="attribution">118 damage out of a possible 184. He survived at roughly 14 hit points.</span></blockquote>
+
+  <blockquote><strong>Graz</strong>: "Never. I think the resistance might do it. Never mind. I'm still down."<br>
+  <strong>Keegru</strong>: "The Sacred Covenant — you'll have 50 temp HP."<br>
+  <strong>Cody</strong>: "You're at one hit point, you're at 50 temp HP. And let me take that prone off you, because you would not be prone. You don't go down."
+  <span class="attribution">The only time Graz hit zero all session.</span></blockquote>
+
+  <blockquote><strong>Jassik</strong>: "We did the right strategy, focusing on one to bring it all down."
+  <span class="attribution">Said the moment Cody revealed the boons were a shared pool — the party's wrong premise had produced the right play.</span></blockquote>
+
+  <blockquote><strong>Cody</strong>: "Some of you guys had stupid luck this session."<br>
+  <strong>Graz</strong>: "Oh my god, yeah, I think I had so many. That's crazy."<br>
+  <strong>Cody</strong>: "Good and bad stupid luck. There was a point where you took down like all 600 of the champion's HP in two rounds, and I'm like, okay."<br>
+  <strong>Graz</strong>: "Yeah, it's crazy. I think the Perfect Finisher is just — I don't know. It's crazy."<br>
+  <strong>Jassik</strong>: "We should make us the end bosses for the next gauntlet."
+  <span class="attribution">The debrief. Cody also conceded: "You guys have shown I need to up it, challenge-wise, for sure"</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The door is open.</strong> Cody's closer: <em>"This is not the last, nor the first, that a battle of this kind shall be fought atop the gauntlet of Gorum. For as long as those who yearn to test their mettle against deadly foes, the winds of the gauntlet will blow again."</em></li>
+      <li><strong>He wants to run it harder</strong> — <em>"You guys have shown I need to up it, challenge-wise, for sure"</em> — and specifically wants an answer to ranged characters. Tam took zero damage in three of five fights.</li>
+      <li><strong>Jassik's proposal</strong>, only half joking: <em>"We should make us the end bosses for the next gauntlet."</em></li>
+      <li><strong>Graz is untested on his actual weak axis.</strong> Three Fortitude saves all session, all cleared by single digits, none against something that would have mattered. The Norn's DC 47 Tear the Veil was the closest anyone came to punishing it.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes — Graz's Journal</h2>
+  <p class="pax-intro"><em>Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</em></p>
+
+  <h3>What Graz did this session</h3>
+  <ul>
+    <li>Opened every fight the same way and it worked every time: <strong>Battle Cry Demoralize at initiative</strong>, free action, before anyone moved. Critically succeeded on it in the finale and that one roll produced 617 damage in two turns.</li>
+    <li>Killed <strong>ten enemies</strong> across five fights.</li>
+    <li><strong>Missed one attack all day.</strong> Forty swings, twenty-three crits.</li>
+    <li><strong>Tumble Through six times, six critical successes.</strong> The fallback whenever fear was illegal — against the mindless Sentinels it was the entire off-guard engine.</li>
+    <li><strong>Passed all thirteen saving throws</strong>, ten of them critically.</li>
+    <li>Spent <strong>one hero point</strong>, on a Dazzling Display reroll against the High Cleric. Turned a failure into a critical success.</li>
+    <li>Hit <strong>0 hit points once</strong>, and was caught by Sacred Covenant before going down.</li>
+  </ul>
+
+  <h3>Things Graz knows that the party does not</h3>
+  <ul>
+    <li><strong>The Foresight reaction can be pointed at the enemy, not just at himself.</strong> He spent the whole gauntlet using it to reroll his own saves. Its other half makes an attacker roll twice and take the <em>lower</em> — against a called-shot Overwhelming Blow that would have been the better use, and nobody at the table knew it was on the menu.</li>
+    <li><strong>Moving Germantria off him is what got him killed.</strong> He then ate 151 and 111 unsplit and went to zero on a 39-point ray. The rune was worth more than it looked.</li>
+    <li><strong>His Hide is not universal.</strong> A 49 beat the Sword Master's DC 46 and lost to the Monk's ~51. Legendary Sneak didn't fail — the Monk was simply out of its reach, and walked over and opened a two-round beating because of it.</li>
+    <li><strong>The Dazzled rider on his finisher erased a critical Crashing Slam.</strong> Not the frightened, not the AC — a DC 5 flat check. The best defensive moment of his night came from a condition he applies as an afterthought.</li>
+    <li><strong>Exemplary Finisher is doing more work than the damage feats.</strong> Without it, Demoralize is once per enemy per ten minutes and the whole loop dies after one turn.</li>
+  </ul>
+
+  <h3>What Graz is thinking about</h3>
+  <ul>
+    <li><strong>Fortitude is still the hole, and it never got properly tested.</strong> Three saves, cleared by +6, +4 and +2 — all successes, none upgraded, because that axis has no clause. Reflex and Will each converted five saves into critical successes on the same nights.</li>
+    <li><strong>Tam is the multiplier.</strong> Frightened 2 from Battle Cry turns straight into Dread Striker off-guard, and Tam's standing Aid turns normal hits into crits. Two of Graz's biggest turns exist because Tam was doing something on someone else's initiative.</li>
+    <li><strong>Fear got switched off twice, by two different mechanisms, and the fallback held both times.</strong> He still dealt 454 and 988 in those two fights.</li>
+    <li><strong>Against troops the whole striker chassis is the wrong tool.</strong> Resistance 15 to single-target physical, immune to bleed, four HP segments, and a footprint that moves when a segment dies — a finisher literally removed the square he was standing next to. Keegru's Fireballs out-damaged him.</li>
+    <li><strong>Opportune Backstab earned its slot.</strong> It killed three enemies outright, including one where giving up the hidden position was the explicit cost and it was still correct.</li>
+    <li><strong>Three actions is rarely three attacks.</strong> The finisher trait shuts off attacks afterwards; the third action was always setup, Hide, or Shield.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Cody is tuning it up and specifically wants an answer to ranged characters. What does that do to a melee reach build that relies on being adjacent to apply fear?</li>
+    <li>Is there a way to raise Fortitude that isn't blocked by Greater Resilient's item bonus and Heroism's status bonus? Nothing found before this session; nothing tested during it.</li>
+    <li>Is it worth asking Shuyinlo not to move Germantria off? It's the only thing that actually dropped Graz.</li>
+    <li>The Monk of Gorum's Perception was roughly 51. What tier of enemy makes Legendary Sneak stop working entirely, and how common is that at this level?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">The gauntlet closes</span>
+    <p>Six dead warriors walked onto the palm of a dead god — and walked back off it.</p>
+    <div class="big-line">"Once again, the solar winds blow across the empty palm of Gorum, and you bask in your victory."</div>
+    <span class="speaker">— Cody McGraw, 17:19:04</span>
+  </div>
+</section>
+
+</div>
+
+<style>
+.pax-notes .pax-intro{border-bottom:1px dashed var(--border-bright);padding-bottom:14px;margin-bottom:20px;color:var(--text-dim)}
+.pax-notes h3{color:var(--gold);font-size:17px;margin:26px 0 8px}
+.pax-notes li::before{color:var(--gold-dim)}
+</style>
+</body>
+</html>
