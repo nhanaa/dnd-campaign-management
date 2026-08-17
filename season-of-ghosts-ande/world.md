@@ -112,7 +112,7 @@ A methodical cleanup sweep of Willowshore. Goal: re-bless the three copper coins
 **New NPCs (in play):**
 - **Granny Hu Ban-niang** — Northridge leader, running relief from the trade office. Gruff, credit-seeking, distrusted by Kaoru (the committed South-Banker). Her son-in-law is the barracks captain; her grandchildren were at the Mushroom House.
 - **Dr. Dami** — the town doctor, refused to abandon his clinic. Gave the party antidotes + darkvision elixirs; kept his one healer's kit. Escorted to Granny Hu's.
-- **The Hunter** — unnamed female farmer/hunter (the one Old Matsuki sent them to find, to track Ugly Cute). Gave a Spirit Trap snare; escorted to the Matsuki Estate. Ugly-Cute tracking still not started.
+- **The Hunter** — unnamed female farmer/hunter (the one Old Matsuki sent them to find, to track Ugly Cute). Gave a Spirit Trap snare; escorted to the Matsuki Estate. Ugly-Cute tracking still not started. *(S5: evidently the same person as **Sumika**, the one-eyed elf ranger at the Silvermist Lodges — "You have met her earlier," per the GM.)*
 - **The Happy Kappa owner** — a halfling; hid in a locker from Modoku's rampage.
 - **Modoku** — the antagonist (spelling unverified). Bald, sharp-toothed, hooded, neck rotates too far. Broke the barracks; went to the tea house.
 - **The guardian-gecko** — a benign incorporeal spirit warding Dr. Dami's clinic.
@@ -175,6 +175,35 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 **New locations (in play):** Karahai · the Duyu River · Gord Lake · Peachwood Grove · the Sea of Ghosts · the long-abandoned village north of town (at the fog's edge).
 
 **Carried-forward threads:** the **wrong-gods lantern** (S2 — the re-blessed coins' blessing carried Zhen's stables crit; the wrong gods are answering anyway); **Ugly Cute** (still untracked, went east); the **governor's manor**; **"blood will rise"**; the **two pearls** (Eyes of Fumeiyoshi, northwest, unvisited); **both Slime Rot infections**.
+
+---
+
+### Session 5 (2026-08-14) — Hongrui's Gratitude (days ~6–9 of summer, 7108 IC)
+*All five PCs present. XP: 356 this session; party at **666/1000 toward level 3**.*
+
+**The chore list cleared, and the campaign's three mysteries took center stage.**
+
+**Downtime resolved:**
+- **The abandoned village is certified farmland** (8 VP; Zhen's blessed-coin crit led, Kaoru sealed it). Willowshore has its emergency winter crops. **+1 South Bank rep.** GM ruling: **the blessed lantern coins are permanent**, not seasonal.
+- **The pearls are recovered.** The party cleared **hunting spiders** out of the right eye of the **Eyes of Fumeiyoshi**, swam the pool (DC 10), and found **both pearls** (10 gp each) — satisfying **Qing Mai-Lai's will**. The party is now **eligible to claim the Cerulean Tea House as their business** (claiming needs future downtime). Fumeiyoshi lore expanded in play: god of **envy, graves, infamy, and undead**; **patron deity of evil oni**; sanctification must be unholy; symbol a **red demonic face**. The pools are where he "looked out at the world" — nothing grows in their gray soil.
+- **Zhen's Slime Rot is cured** — hero-pointed Fortitude, exactly 20 vs DC 20. *(Kaelen's S4 off-mic infection was never mentioned this session — status unknown.)*
+- **The Desna shrine moved to the Milling Houses.** Mu-Jin — the would-be Desna convert — finally won the kami over (Diplomacy 20 with Weaver's Bolstering Aid) after Iryoku's floored-to-10 18 barely failed; Zhen, Iryoku, and Kaelen's Athletics/Religion checks (5 VP) finished the physical move. Choe Chung-hu's ask, delivered.
+- **The Leshy's Salon blight is scoured** (10 VP over ~1.5 days). Its keeper — the agender leshy **Mountain Summit Grass** — will **supply tea to the Cerulean Tea House** when it opens.
+
+**The elders' briefing (Lady of Souls):** Granny Hu and Old Matsuki, *cooperating*, charged the party with the town's **three standing mysteries**: (1) the **vanished governor + estate** (most pressing), (2) the **mists** (map their extent; consult the Great Willow), (3) **Ugly Cute**. New backstory: late last year the governor cornered **a dangerous fugitive and her allies** at the **Canary Inn** (roadside shelter NE); the standoff ended in a **fire** — officially the fugitive's doing, though some claim **the governor's guards started it**. The fugitive's dying song: *"All those who serve Lung Wa will soon know how it feels to lose it all."*
+
+**Leads worked:**
+- **Silvermist Lodges — Sumika** (the S2 Hunter, now named): no trace of Ugly Cute; RK reframed the Spider Gate as a **posting, not a home**, and placed Ugly Cute's quarried stone at the **Gorge of Fangs and Teeth**, south of town.
+- **The Great Willow** (guardian kami on the trail-less hill north of town; childlike voice, careful words): found with **gray fungus infesting its roots** — *"an infection I brought back from a visit to check on a friend to the south."* Its Foundry-posted testimony: **the curse is a cage**; on the first day of summer it could no longer hear its friends, jumped to its closest friend's grove and found **"a foul-tempered mushroom"** in her place, and fled home on foot, tracking spores. It will help map the curse's edges **only after the party saves its friend** from the **infested grove** — which sits right beside the Gorge. (Offering: sake, placed by Mu-Jin; Iryoku's hero-pointed impression calmed it.)
+- **The Canary Inn (night):** a "young girl" in a red hood singing to three seated gray-hooded figures. Only Mu-Jin's Perception (exactly 22) pierced the **magical disguise**: **thatchlings** — undead, unholy effigies of dried grass and ghostly ectoplasm, known otherwise only from folktales (the party had destroyed **four regular thatchlings** in a road ambush hours earlier; weak to fire 5, resistant to bludgeoning). The **red-hooded thatchling** demanded entertainment; **Iryoku's expert Performance (22)** bought the party **one question**. Asked about the governor: *"He was a lapdog of Lung Wa and an enemy… Be grateful your governor **chose to leave you** rather than inflict upon your town something worse. Now leave."* The party stood its ground and destroyed all four (Kaelen ×2, Zhen — his first nodachi crit, Mu-Jin — Force Barrage on the red-hood).
+- **The burial:** shallow graves + three unburied skeletons; **Zhen insisted on proper rites** — answered by a wave of gratitude and a gift: **Hongrui's Gratitude** (item 3, red-hooded cloak; 1/day lantern = +1 Diplomacy or umbrella = +1 Survival, 1h; taken by Iryoku). Its inscription names **Fan Hongrui** — an elaborately dressed performer whose companions held her lantern and umbrella, one of *"four unfortunate travelers who met a tragic end in the Willowshore Hinterlands."* The GM's verdict: the governor line here is **a dead end**, but the Canary Inn is "a little less haunted." Working theory (Mu-Jin): the thatchlings *were* the fugitive's band — ghosts riding straw effigies. Origin RK failed twice; unconfirmed.
+
+**New house rule revealed in play:** **nat-20 initiative = 4 actions in round 1; nat-1 initiative = start slowed 1.**
+
+**New NPCs (in play):** Sumika (= the S2 Hunter, named) · Mountain Summit Grass (agender leshy, Leshy's Salon) · the Great Willow (guardian kami, infested) · Fan Hongrui (ghost performer; her thatchling destroyed, her bones laid to rest).
+**New locations (in play):** the Canary Inn (burned, NE) · the Leshy's Salon · the **Gorge of Fangs and Teeth** (S) · the **infested grove** (S, beside the Gorge) · the Great Willow's hill.
+
+**Carried-forward threads:** the wrong-gods lantern secret (S2 — coins now *permanent*); "blood will rise"; the governor ("chose to leave"?) and his estate; Ugly Cute (→ the Gorge); the mists (→ the Willow, post-rescue); the tea house claim; Kaelen's Slime Rot status; Mu-Jin's Desna adoption.
 
 ---
 

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 6 — The Garden of Pride</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7a4bc014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d8632c14 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d8632c12 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style></head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Garden of Pride</h1>
+  <div class="subtitle">Session 6 — four dragons owed an honest answer, a dead woman's journals, and the end of Book One</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-15</span>
+    <span class="meta-pill">PF2e Remastered · Mythic</span>
+    <span class="meta-pill">Level 14 → 15</span>
+    <span class="meta-pill">~4h 05m</span>
+    <span class="meta-pill">~1 in-game day</span>
+  </div>
+</header>
+
+<div class="note-banner">
+  <strong>Book One of Revenge of the Runelords is complete.</strong> Both Risen Runelords of Wrath destroyed, the Shattered Runewell of Pride shut down, and the party standing in Xanderghul's private garden with a gemstone throne nobody has looted yet. <em>"Congratulations. You all reach level 15."</em> Mithtirith is out next week.
+</div>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:52%"></div>
+  <div class="comp-seg comp-rp" style="width:14%"></div>
+  <div class="comp-seg comp-explore" style="width:12%"></div>
+  <div class="comp-seg comp-social" style="width:16%"></div>
+  <div class="comp-seg comp-loot" style="width:6%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat &amp; hazards</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Lore &amp; visions</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; downtime</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-sevek">
+    <div class="char-name">Sevek</div>
+    <div class="char-class">Human (Sky Dragonblood) Monk 14 — Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-paya">
+    <div class="char-name">Paya</div>
+    <div class="char-class">Leshy (pineapple) Fighter — halberd, Kineticist archetype, Medic</div>
+    <div class="char-player">Kelsie</div>
+  </div>
+  <div class="char-card char-aureys">
+    <div class="char-name">Aureys Hollow</div>
+    <div class="char-class">Fey Dragonet Rogue (Scoundrel) — fighting fan + claws, Living Nexus + Draconic Acolyte</div>
+    <div class="char-player">Anna</div>
+  </div>
+  <div class="char-card char-mith">
+    <div class="char-name">Mithtirith</div>
+    <div class="char-class">Elf Cleric of Nethys — Heal battery, Hedge Mage, the party's only arcane caster</div>
+    <div class="char-player">Jesse</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Book One ends the way it started: with a question about who was really behind the fall of Xin-Eurythnia, and an answer nobody wanted. The party follows the glowing footprints east through the buried city and immediately runs into the people who live there — <strong>four omen dragons</strong>, kin to the mirage dragons the party shot out of the sky over the Kodars last book. Aureys handles it exactly as Aureys handles everything, by announcing herself as "the greatest of the dragons of this world" and then telling the absolute truth about killing their relatives. It very nearly goes badly. It doesn't, because she refuses to lie about it and Sevek says the plain thing — <em>"It was self-defense"</em> — and Shephodian, the dragons' spokesman, looks at her and says <em>"I see in your eyes you don't deceive."</em> The dragons let them pass, and hand over the two facts that structure the rest of the session: <strong>the Warshard of Gorum is no longer in this city</strong>, and <strong>a tall blonde woman in black traveling robes came here weeks ago, walked east, and never came back out.</strong></p>
+
+<p>The road east costs them. A <strong>cave worm</strong> erupts out of the stonework beside the woman's abandoned campsite and opens by critting Paya for 82; three enormous adamantine-toothed <strong>shulns</strong> burrow up mid-fight and attack the worm, briefly becoming Aureys' beloved allies ("I do consider them my allies at this point") right up until the worm dies and they turn on the party ("No longer my friends"). The camp itself is the real prize: journals belonging to <strong>Aethusa</strong>, a modern wizard who took the name of the Runelord of Gluttony, full of dreams sent by a cloaked, smoke-like figure — <em>the same one from the apocalypse dream that gave the party their mythic power</em> — promising her the power in Xanderghul's hidden Runewell of Pride. She tracked the Trinity Star here exactly as the party did. Her final entry is about a dream of meeting Xanderghul, being promised secret knowledge, and waking too early. Then the entries stop.</p>
+
+<p>Past a wall of five <strong>pridespawn sentinels</strong> in peacock robes stands a silver quicksilver portal, and in its reflection <strong>Runelord Xanderghul</strong> himself steps forward and sneers — the <strong>Mirror of Glory</strong>, a mythic hazard that spends the next twenty-five minutes showing each of them a different face of Xanderghul's contempt (Cruelty, Jealousy, Worship, Disappointment) while they claw six successes out of it. Aureys lands four of them; Paya, made Jealous, swings his halberd at his own cleric and gets what the DM calls "the worst turn in the history of Paya."</p>
+
+<p>The walk through the portal is the payoff. Four mythic future-selves step out of the quicksilver and narrate what happened here: Xanderghul's ghost flowed into the sleeping Aethusa through her own wards; he looted the tomb of <strong>Emperor Jinn</strong> for Runelord bones and had her raise <strong>Gimmel</strong> and the rest of the Risen from them; he then abandoned her body for fresh flesh in a chamber of <strong>four immense steel vats</strong>; and he intends to open a <strong>doomsday door</strong>, ride the <strong>Oliphaunt of Jandelay</strong> out of it, and ascend. In the last image, <strong>Xanderghul and Queen Sorshen are locked in battle</strong>, whisked through the doors an instant before they slam shut and are buried — the first sign in two sessions that Sorshen was not simply swallowed by the sinkhole.</p>
+
+<p>Beyond the portal: a garden of peacocks and roses under a false noon sky, ten thirty-foot statues of Xanderghul looking down in imperious disdain, a throne backed in gemstone tail feathers — and the <strong>Shattered Runewell of Pride</strong>, its fragments frozen in midair around a churning magenta beam pouring out of a hole in reality. Two <strong>Risen Runelords of Wrath</strong>, Angothane and Thybidos, are waiting. Thybidos gives away the whole book in one sentence — <em>"when our Lord Xanderghul cast his judgment on Sorshen and her pathetic stolen city"</em> — Angothane monologues for twelve seconds, and Sevek answers with two words. Seventy minutes later both Runelords have exploded into light, the last runes on the Runewell have gone dark, and the party is level 15.</p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act social">
+  <div class="act-label">Act I · Social · The Omen Dragons</div>
+  <div class="act-card">
+    <h3>Four dragons, owed an honest answer</h3>
+    <ul>
+      <li>The party heals at the crater and follows the glowing footprints east. Half an hour in, <strong>four omen dragons</strong> — green and violet — circle down and land around them in the street.</li>
+      <li>Their spokesman is <strong>Shephodian</strong>, with <strong>Ithariel</strong>, <strong>Nobukis</strong>, and <strong>Yvinsbrel</strong>. They have studied these ruins for months. His question is polite and pointed: had the party met any <em>mirage dragons</em> out in the Kodars?</li>
+      <li>Aureys answers honestly — they were ridden by the Risen, they attacked the refugee column, the party defended itself. Pressed on what became of them: <em>"Well, as you see that we still stand, I can tell you that they no longer fly."</em> Snarls go up all around the party.</li>
+      <li><strong>Shephodian: "I see in your eyes you don't deceive."</strong> Aureys doubles down rather than softening — <em>"I could tell you a lie, but you would know that it was a lie"</em> — and offers friendship instead. <strong>Sevek</strong> adds the flat version: <em>"It was self-defense. We didn't intend to cause any harm."</em></li>
+      <li><strong>Mithtirith</strong> argues for telling them everything about the Risen riding the mirage dragons, and does. The dragons stand down: <em>"Though I hold no love of you and your friends for what has happened to our kin, we also understand that is the nature of the business."</em> Aureys' secret sense-motive check confirms they mean it.</li>
+      <li><strong>Two revelations.</strong> This city is the Trinity Star's landing site — but <strong>the Warshard of Gorum has vanished from it</strong>, and they cannot say where. And <strong>a woman came weeks before</strong>: human, tall, black traveling robes, staff, blonde hair, "Thassilonian, we assumed." She descended eastward and never re-emerged; when they tried to hail her she seemed to <em>vanish into thin air.</em></li>
+      <li>Their parting warning: powerful creatures haunt these upper Darklands, and <strong>more Agents of the Risen</strong>, who "will not take so kindly to intruders as we." Aureys closes in the one register she rarely uses: <em>"We are prepared to defend ourselves. We of course seek no harm, but we feel we must proceed."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act II · Combat · The Cave Worm and the Shulns</div>
+  <div class="act-card">
+    <h3>An apex predator, and three more that showed up uninvited</h3>
+    <ul>
+      <li>Approaching a scattered campsite, the ground shakes far too suddenly for an earthquake and an enormous worm breaks through the stonework.</li>
+      <li>Mid-fight, <strong>three shulns</strong> — mole-like Darklands predators with adamantine teeth and claws — burrow up out of fresh pits and start savagely swarming <em>the worm</em> as practiced pack hunters. Cody, drily: <em>"That is fair, but they are also flanking with one another."</em></li>
+      <li>For one glorious stretch they are, in Aureys' words, allies. They contribute <strong>175 of the 522 damage</strong> the worm takes. Then it dies and they look around for the next thing.</li>
+      <li>Full round-by-round in <strong>Combat Encounters</strong> below.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act III · Exploration · Aethusa's Camp</div>
+  <div class="act-card">
+    <h3>The journals of a woman who got here first</h3>
+    <ul>
+      <li><strong>Aureys</strong> searches the camp (Perception 43 with Thorough Search), Sevek and Mithtirith Seeking alongside. It was abandoned in a hurry weeks ago, mid-work: workstations set up, journals on the tables, satchels unpacked.</li>
+      <li><strong>The journals are signed Aethusa</strong> — the name of a Runelord of Gluttony, but the writing makes clear this is a modern woman who <em>took</em> the name, as magical pedigrees in the Saga Lands sometimes do.</li>
+      <li>They record <strong>dreams of a cloaked figure</strong> telling her about power to be claimed from Xanderghul's hidden <strong>Runewell of Pride</strong> — and the party recognizes the description. It is the same <strong>smoke-like being</strong> from the dream at the very beginning of the adventure, the one that showed them the apocalypse. Aethusa believed the dreams came from her own past life as the Runelord of Gluttony.</li>
+      <li>She worked out that the Trinity Star struck the Throne of the Troll King. She found the illusion over the shaft — and in her own words, <strong>the guardians expected her arrival and the trolls did not stand in her way.</strong> The party had to kill Gavergash and four warleaders to reach the same shaft.</li>
+      <li><strong>The final entry</strong>: a dream of meeting Runelord Xanderghul and being promised some secret knowledge, only to wake too early to hear it. She wanted the dream again. She made camp for the first time. There are no further entries.</li>
+      <li>Loot: ~300 gp of incense, a <strong>Scroll of Teleport</strong>, and a <strong>Wand of Widening (Phantasmal Calamity)</strong> — claimed by Mithtirith, the party's only arcane caster.</li>
+      <li><strong>The party takes a long rest in the dead woman's camp.</strong> Sevek argues for it (<em>"I say we risk it… because we don't know what will await us"</em>). Mithtirith admits he's "low on healing," stores a <strong>contingency Heal for dropping below zero</strong>, and has two <strong>Energy Aegis</strong> — Sevek breaks the tie in Aureys' favor ("she's a bit more frail").</li>
+      <li>Aureys spends the evening <strong>deliberately frightening her own party</strong> with Majestic Presence and Frightening Power so they're immune to it for the rest of the day: <em>"Feel my power. You might be shaking a little bit at first, but it'll wear off."</em></li>
+      <li>Sevek tries to farm a mythic point with a pre-bedtime Long Jump. Cody rules it has to be a jump that would actually be useful; <strong>Paya</strong> supplies the reasoning — <em>"it's fulfilling your mythic calling, not just jumping up a wall."</em> (He collects it properly two hours later, mid-finale.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act IV · Combat · The Sentinels at the Gate</div>
+  <div class="act-card">
+    <h3>Five pridespawn in peacock robes</h3>
+    <ul>
+      <li>Half an hour deeper, the trail ends at a palace buried to its outer wall. In the gate hangs a <strong>rippling silver portal like a vertical sheet of quicksilver</strong>, its reflections distorted and shuddering — and what's reflected inside looks glorious.</li>
+      <li>Guarding it: five <strong>sinspawn in resplendent green peacock robes</strong> with enchanted bec de corbins. Mithtirith identifies them as <strong>pridespawn</strong> — resistant to mental damage, with high bonuses on saves against mental effects, which raises the bar on Aureys' entire fear suite.</li>
+      <li>Aureys scouts ahead and rolls Stealth for initiative; Sentinel A spots her anyway. Full breakdown in <strong>Combat Encounters</strong>.</li>
+      <li>Afterward: <strong>five +2 greater striking shock bec de corbins</strong> and <strong>five +2 resilient raiment leather armors</strong>. Cody explains the haul unprompted — he upgrades enemy gear to match creature level as a matter of course, because <em>"they're a level 19 creature and they've got a level 12 weapon. It's like, what the hell?"</em></li>
+      <li>Mithtirith's new <strong>Peer Past the Hedge</strong> lets him Detect Magic and Search at once. The archway is carved with peacocks whose tail feathers curve up to meet a <strong>glowing keystone set with a colorful cubic gemstone</strong>. A stray sound cue makes the portal <em>sound</em> like water, so Sevek starts casting <strong>Water Breathing</strong> on the whole party — and finishes it even after the table works out that it isn't water at all. Eight hours, no cost, why not.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act mystery">
+  <div class="act-label">Act V · Hazard · The Mirror of Glory</div>
+  <div class="act-card">
+    <h3>Xanderghul steps into the reflection</h3>
+    <ul>
+      <li>As Mithtirith moves to identify the portal, a <strong>resplendent figure steps into the reflection</strong>. <em>"For who has spent any amount of time in the Saga Lands could fail to recognize Runelord Xanderghul? First and last Runelord of Pride, and greatest among the Runelords."</em> He sneers, and everyone feels awe and dread.</li>
+      <li>The opening Will save drops <strong>Paya, Mithtirith, and Aureys prone and Stupefied 1 for 24 hours</strong>. Mithtirith and Aureys buy their way out with mythic rerolls; Paya keeps the condition and stands up the hard way.</li>
+      <li>Disabling it takes <strong>six successes</strong> at Arcana (disrupt the enchantments), Thievery (disable the runes), or Intimidation (stand up to the sheer arrogance in the reflection) — and you have to stand where the mirror can reflect you to try. Each success darkens one face of the glowing cube <em>and permanently strips one of the mirror's actions.</em></li>
+      <li>The reward: the <strong>Paradigm Cube</strong>, a rare mythic illusion item — one color per day, with a flat check you can skip by spending a mythic point.</li>
+      <li>Aureys, who landed the disable, takes <strong>+2 mythic points</strong>; everyone else +1. Paya then runs <strong>Unusual Treatment</strong> across the party — <em>"okay, this is when I reveal to you my fun feat"</em> — clearing the Clumsy, Enfeebled, and Stupefied the mirror stapled on for 24 hours.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act mystery">
+  <div class="act-label">Act VI · Lore · Four Visions in the Quicksilver</div>
+  <div class="act-card">
+    <h3>The party's own mythic future-selves explain the whole book</h3>
+    <ul>
+      <li>Walking the path inside the portal, images race by like the prophecies on Kandirvek's wings — then four solidify into the party's <strong>mythic future selves</strong>, each stepping out to narrate one piece of what happened here.</li>
+      <li><strong>Paya's vision — the possession.</strong> <em>"Runelord Xanderghul returns to the universe and takes the graciously offered body of a minor wizard named Aethusa."</em> She flies down into the ruined city, examines the crater, takes copious notes, makes camp, erects magical defenses, and sleeps. A ghostly Xanderghul descends, <strong>passes through her wards as if they weren't there</strong>, and flows into her. Her body wakes up laughing, eyes shimmering.</li>
+      <li><strong>Sevek's vision — where the Risen come from.</strong> <em>"Runelord Xanderghul lays claim to the tomb of his beloved friend, the late Emperor Jinn."</em> Aethusa walks a crypt collecting <strong>the bones and burial raiments of long-dead Runelords</strong>, then performs a ritual with the Risen over a pile of dusty bones — and <strong>Runelord Gimmel rises out of them.</strong> The Risen are manufactured, from real Runelord remains.</li>
+      <li><strong>Aureys' vision — the second body.</strong> The Risen carry a human figure wrapped in vibrant cloth into a room where Aethusa lies unconscious amid magical apparatuses and <strong>four immense steel vats</strong>. Xanderghul's ghost rises out of her and flows into the wrapped body; it tears free of the shroud; the Risen clothe and adorn him in his traditional robes and armaments. <strong>Aethusa, still unconscious, is carried away.</strong> He blesses each attendant with a touch to the brow and leads them out.</li>
+      <li><strong>Mithtirith's vision — the doomsday door.</strong> <em>"Runelord Xanderghul opens a doomsday door to start the process of attaining his well-deserved godhood and lay waste to the undeserving wretches of the Saga Lands."</em> He raises his arms before an enormous door; the earth shakes; the <strong>Oliphaunt of Jandelay</strong> surges out and slays the Risen in attendance. Xanderghul climbs onto its back. The cavern opens above and a cascade of sunlight and rubble buries the door — and in the last instant the party glimpses <strong>Xanderghul and Queen Sorshen locked in battle</strong>, whisked away through the doors alongside the elephant, the moment before they slam shut.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VII · Combat · The Garden and the Shattered Runewell</div>
+  <div class="act-card">
+    <h3>Book One's finale</h3>
+    <ul>
+      <li>The portal opens on an opulent garden: lush plants, hundreds of brilliant flowers, <strong>iridescent peacocks strutting about and softly squawking</strong>, a night sky overhead but noonday light on the lawn. <strong>Twin rows of five thirty-foot statues of Xanderghul</strong> look down in imperious disdain over rose bushes in full bloom. On a raised stone platform, four more statues surround a <strong>throne whose back is gemstones arranged as peacock tail feathers</strong>.</li>
+      <li>At the far end: <strong>the Shattered Runewell of Pride</strong> — a stone well whose fragments hang suspended in midair as though frozen a split second after its explosion, with a churning beam of magenta and violet light shining up <strong>out of a hole in reality</strong>, blooming vapors that make the garden flicker where they touch it. This is Kandirvek's fourth vision, arrived at last.</li>
+      <li>Waiting: two pridespawn and <strong>two Risen Runelords of Wrath — Angothane and Thybidos.</strong></li>
+      <li><strong>Thybidos</strong>: <em>"Foolish pawns. You should have just laid down and accepted your fates when our Lord Xanderghul cast his judgment on Sorshen and her pathetic stolen city."</em> — the confession that Xanderghul destroyed Xin-Eurythnia.</li>
+      <li><strong>Angothane</strong>: <em>"You, who have dared to thwart his plans and to have stolen his valor and place in history, will perish in agony as he ascends to walk among the gods and takes his vengeance upon your pitiful doomed world."</em></li>
+      <li><strong>Paya</strong>: "And we will stop him by any means at our disposal. So let's get going." — <strong>Sevek</strong>: "You talk too much." — <strong>Mithtirith</strong>: "I mean, honestly, I come from a long line of people thwarting Runelord plans, so welcome."</li>
+      <li>Eight rounds and seventy minutes later, both Runelords have exploded into light and the Runewell's final runes have gone dark. <em>"That brings us to the end of Book One of Revenge of the Runelords, everyone. Congratulations. You all reach level 15."</em></li>
+      <li>The throne's gemstones — and whatever else is in the garden — wait until next week.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Cave Worm and the Shulns · 5 rounds</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">Cave Worm (AC 37) · 3× Shuln (AC 34)</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Worm 45 · Paya 41 · Shuln B 41 · Shuln C 37 · Shuln A 35 · Mithtirith 33 · Aureys 31 · Sevek 28</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Sevek 418 · Aureys 319 · Paya 278 · Mithtirith 90</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 277 · Sevek 145 · Aureys 111 · Mithtirith 0</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">2, both Sevek</span></div>
+    <div><span class="stat-label">Kills</span><span class="stat-value">Worm → Aureys · Shuln B → Paya · Shuln C → Aureys · Shuln A → Sevek</span></div>
+  </div>
+
+  <p>The worm's <strong>Thrash</strong> makes one Jaws strike, one Stinger, and a body strike against <em>every</em> creature in reach — all before the multiple attack penalty rises. Jaws is 3d10+25 with Deadly 2d10; Cave Worm Venom is Fortitude DC 39 for 5d6→6d6 poison and Enfeebled 2. The shulns have adamantine fangs and claws, resist all physical except adamantine and bludgeoning, and resist poison heavily.</p>
+
+  <h4>Round 1 — the opening broadside</h4>
+  <ul>
+    <li><strong>Aureys'</strong> Battle Cry Demoralize misses by 8 on a rolled 2.</li>
+    <li>The worm strides in and Thrashes: a <strong>Jaws crit on Paya for 82</strong>, a Stinger into <strong>Sevek</strong> for 42, a body strike into <strong>Aureys</strong> for 35 — <em>"Oh, it hits everything."</em> Only one body strike lands, because <strong>Mithtirith</strong> is standing 25 feet back outside its reach, a position he does not leave all fight.</li>
+    <li><strong>Sevek</strong> fails the venom save even after a <strong>mythic-point reroll</strong> that comes up nat 4 — 13 poison and <strong>Enfeebled 2</strong>.</li>
+    <li><strong>Mithtirith</strong> opens with a two-action <strong>Fast Channel</strong> Heal (23 to the front rank) and <strong>critically succeeds a Nature Recall Knowledge</strong>: best save Fortitude by far, Reflex and Will tied for worst, no weaknesses, <em>and it can swallow you whole.</em></li>
+    <li><strong>Aureys'</strong> Majestic Presence is saved — which still means <strong>Frightened 1</strong> — her Feint sticks, and she banks Mithtirith's Heal with an <strong>Absorb Magic</strong> reaction to go Overflowing. Both strikes miss.</li>
+    <li><strong>Sevek</strong> enters Reflective Ripple Stance, casts Guidance, and closes with a <strong>Flurry-of-Maneuvers critical Trip</strong> (45 vs Reflex DC 35) plus 6 stance damage. The worm ends the round <strong>Frightened 1, Prone, Off-Guard</strong> — and its attack bonuses and venom DC drop a point for all of round 2.</li>
+  </ul>
+
+  <h4>Round 2 — the Trip lock starts paying</h4>
+  <ul>
+    <li>The ground shakes again, <em>not</em> from the worm: <strong>three shulns</strong> surge out of fresh pits and attack it, formation-perfect. Aureys, delighted: <em>"I do consider them my allies at this point."</em></li>
+    <li>The worm spends its first action standing and eats <strong>three reactions on the way up</strong> — Paya's Reactive Strike for 30, <strong>Sevek's Stand Still for 31</strong>, and an Opportune Backstab from Aureys that crit-misses.</li>
+    <li>Then it Thrashes: <strong>Jaws crit on Aureys for 76</strong>, Stinger into Paya for 39, a body strike that finally misses Sevek. Paya crit-saves the venom; Sevek fails again for 14.</li>
+    <li><strong>Aureys</strong> lands a 31 with the fan (stapling <strong>Enfeebled 1</strong> on with her Debilitation) and threads an <strong>Aether Beam</strong> past the moles into the worm for 19.</li>
+    <li><strong>Sevek</strong> burns <strong>Become Destiny</strong> (free action, second mythic point) to shed the poison and the Enfeebled with it, Trips the worm again on the second attempt, switches into <strong>Whirlwind Stance</strong> for AC 39, and hands Guidance to Paya. The shulns pile on for 86.</li>
+  </ul>
+
+  <h4>Round 3 — the worm dies standing up</h4>
+  <ul>
+    <li>It stands <em>again</em> — Cody, drily: <em>"not to be a one-trick pony, but this is working for it"</em> — and eats <strong>another 69 in reactions</strong> (Sevek's Stand Still 25, Paya's unarmed "pineapple punch" 10, Aureys' Opportune Backstab 34) before it can act.</li>
+    <li>Then it Thrashes everything in reach: 44 into Sevek — a <strong>hit rather than a crit only because of Whirlwind Stance</strong> (<em>"Ooh, not a crit because I switched stands"</em>) — a <strong>crit into Paya for 76</strong> reduced to 62 by <strong>Deflecting Wave</strong>, 34 into Shuln A, and a <strong>60-point crit into Shuln B</strong>.</li>
+    <li><strong>Mithtirith</strong> lands a 66-point Heal on Paya from outside the worm's reach.</li>
+    <li><strong>Aureys critically Feints</strong> (46 vs DC 35), making the worm off-guard to <em>everyone's</em> melee — and the finish is immediate: <strong>Sevek</strong> opens Inner Upheaval and crits for <strong>84</strong> plus persistent fire, and <strong>Aureys' Opportune Backstab crits for 88.</strong> The worm <em>"crashes into the side of a building before slumping down."</em></li>
+    <li><strong>Kill: Aureys</strong>, on Sevek's crit and her own Feint. Total logged damage into the worm: <strong>522 — of which the shulns contributed 175.</strong></li>
+  </ul>
+
+  <h4>Round 4 — the shulns turn</h4>
+  <ul>
+    <li>Aureys, betrayed: <em>"No longer my friends."</em></li>
+    <li>Shuln B strides in and gets shredded on the approach: <strong>Paya's Reactive Strike crits for 74</strong> and blinds it with the Brilliant rune, and <strong>Sevek's Stand Still crits for 62</strong>. Blinded, it has to flat-check to find Paya at all.</li>
+    <li><strong>Paya opens his account at last</strong>: a <strong>Spear Dancer crit for 70 kills Shuln B</strong> — <em>"Told you it'd be glorious"</em> — seven minutes after calling the shot.</li>
+    <li><strong>Mithtirith's</strong> Lightning Storm catches A and C; <strong>Aureys'</strong> Majestic Presence frightens both survivors; <strong>Sevek's</strong> Electric Arc <strong>double-fails</strong> them for 18 apiece before a flurry crit puts 83 into Shuln A.</li>
+  </ul>
+
+  <h4>Round 5 — the finish</h4>
+  <ul>
+    <li><strong>Paya's</strong> Vicious Swing <strong>crits Shuln C for 94 applied</strong> (104 rolled, through resistance), with an Opportune Backstab from Aureys on top.</li>
+    <li><strong>Mithtirith</strong> sustains Lightning Storm into a <strong>nat-1 critical failure on Shuln C for 34</strong>, then <strong>Battle-Medicines Sevek for 27 on a critical success</strong>.</li>
+    <li><strong>Aureys'</strong> Frightening Power fails both survivors into Frightened 2, and her Overwhelming Combination <strong>kills Shuln C for 117</strong>.</li>
+    <li><strong>Sevek</strong> closes with an Electric Arc for 25, then a <strong>flurry that rolled five consecutive 1s</strong> for a minimum-damage 42 — exactly enough. <em>"Between those two hits, the shulns will be brought down."</em> <strong>Kill: Sevek</strong>, on the worst damage roll of the session.</li>
+    <li>Paya's verdict on the untouched cleric: <em>"Smart cleric kept his distance. Can't fault him for that."</em></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Pridespawn Sentinels · 5 rounds</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">5× Pridespawn Sentinel (AC 31)</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Sentinel A 43 · Paya 41 · Sentinel B 41 · Aureys 41 · Sentinel E 39 · Sentinel C 35 · Mithtirith 32 · Sevek 31 · Sentinel D 27</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys 544 · Sevek 428 · Paya 348 · Mithtirith 41</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 158 · Sevek 109 · Aureys 88 · Mithtirith 86</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">Zero, by anyone</span></div>
+    <div><span class="stat-label">Kills</span><span class="stat-value">A → Aureys (persistent) · B → Paya · D → Aureys · E → Sevek · C → Sevek</span></div>
+  </div>
+
+  <p>Each sentinel wields a <strong>+2 greater striking shock bec de corbin</strong> at +27 for 3d8+13 piercing plus 1d6 electricity, Feints, and carries a <strong>Hallucinatory Backlash</strong> reaction — 4d10 mental against anyone who hits them, basic Will. All five resist mental damage and have large bonuses on saves against mental effects. None has a reactive strike, which the party confirms out loud and then exploits.</p>
+
+  <h4>Round 1 — the healer gets found immediately</h4>
+  <ul>
+    <li><strong>Aureys</strong> scouts ahead; her Stealth 41 doesn't quite beat Sentinel A's 43. She still acts first among the party, and her <strong>Battle Cry Demoralize</strong> puts Frightened 1 on A before anyone moves.</li>
+    <li>Sentinel A Feints Aureys and hits her for 38. <strong>Sentinel B ignores the front rank entirely, takes two Strides around Paya's reach, and crits Mithtirith for 61.</strong> Sentinel C hits Sevek for 35; Sentinel D hits Mithtirith for 25.</li>
+    <li><strong>Aureys</strong> answers with the biggest number of the session: Feint, Feint again for the Distracting rider, then a fan-and-claw <strong>Overwhelming Combination that double-crits Sentinel A for 149</strong>, bleed and persistent fire attached. B's Hallucinatory Backlash bounces off her Will save for 11.</li>
+    <li><strong>Paya's</strong> Vicious Swing crits Sentinel B for 84.</li>
+    <li><strong>Sentinel E crits Mithtirith for 69 through a flank — and Sevek burns his reaction on Life Connection to take the 74 himself instead.</strong></li>
+  </ul>
+
+  <h4>Round 2 — the cleric leaves the ground</h4>
+  <ul>
+    <li><strong>Mithtirith</strong> drops a Vampiric Feast, confirms the sentinels have no reactive strikes, then <strong>flies twenty feet straight up out of reach and waves down at them</strong> — <em>"Is my free action to give him the middle finger salute?"</em></li>
+    <li><strong>Sevek</strong> enters Whirlwind Stance (AC 39) and flurries A; <strong>Aureys'</strong> second crit brings A to 71, and <strong>A dies to its own persistent bleed and fire at the end of its turn</strong> — her riders finishing what her crit started.</li>
+    <li><strong>Aureys'</strong> Majestic Presence frightens B and E to 2 and D to 1; every crit over the next two rounds is priced off those penalties.</li>
+    <li>Sentinel D Demoralizes Paya, crit-misses, then lands one for 30.</li>
+  </ul>
+
+  <h4>Round 3 — the fear lands where it counts</h4>
+  <ul>
+    <li><strong>Aureys' Frightening Power crit-fails Sentinel D to Frightened 4</strong> on a nat 1 — which will buy four critical misses out of it.</li>
+    <li><strong>Paya</strong> crits B for 66, <strong>Aureys</strong> crits B for 75, <strong>Paya</strong> crits B again for 66 — <strong>Sentinel B down.</strong></li>
+    <li><strong>Sevek</strong> opens Inner Upheaval and <strong>double-crits Sentinel E for 128</strong>, blinding it with the Phantasmal Doorknob.</li>
+  </ul>
+
+  <h4>Round 4 — Frightened 4 does the work</h4>
+  <ul>
+    <li>Sentinel D swings at Paya twice and critically misses both.</li>
+    <li><strong>Aureys</strong> crits D for 94, <strong>Paya</strong> crits it for 74 on a critical-failed Fortitude save, and <strong>Aureys' Opportune Backstab for 40 brings D down.</strong></li>
+    <li><strong>Sevek's</strong> Electric Arc catches D and E — D fails for 20, E saves for 10 — and the <strong>first strike of his Flurry finishes E for 20</strong>. He converts the second strike into a <strong>Flurry-of-Maneuvers Trip</strong> on Sentinel C. <strong>Kill: Sevek.</strong></li>
+  </ul>
+
+  <h4>Round 5 — Sentinel C alone</h4>
+  <ul>
+    <li>C stands into <strong>Sevek's Stand Still crit for 68</strong>, spends a second action standing anyway, and swings into AC 39 for nothing — Whirlwind Stance eating the attack on its own.</li>
+    <li><strong>Mithtirith</strong> Electric-Arcs it for 21 and heals Paya for 78 — the fight's only healing.</li>
+    <li><strong>Sevek</strong> adds 63 across two hits, then a <strong>Frostbite for 24</strong>; <strong>Aureys'</strong> Aether Beam lands 39; and finally <strong>Sevek's crit for 68 puts it down.</strong> <strong>Kill: Sevek.</strong></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · The Mirror of Glory · complex mythic hazard · 4 rounds</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Paya 44 · Aureys 41 · Mithtirith 38 · Mirror 35 · Sevek 35</span></div>
+    <div><span class="stat-label">Disable</span><span class="stat-value">6 successes — Arcana, Thievery, or Intimidation, DC 37</span></div>
+    <div><span class="stat-label">Success ledger</span><span class="stat-value">Aureys 4 · Mithtirith 2</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">9 spent by the party</span></div>
+    <div><span class="stat-label">Reward</span><span class="stat-value">Paradigm Cube · +2 MP Aureys, +1 all</span></div>
+  </div>
+
+  <p><strong>Opening effect:</strong> Will DC 37 or drop prone and Stupefied 1 for 24 hours. <strong>Routine:</strong> one 10d6 mental attack (basic Will DC 37) <em>per remaining action</em>, each aimed at a DM-chosen target — usually whoever is actively disabling it — followed by a d6 for which face of Xanderghul's contempt the victim sees: <strong>Cruelty</strong> (Enfeebled 1 / 24h), <strong>Disappointment</strong> (Clumsy 1 / 24h), <strong>Jealousy</strong> (Confused 1 round), <strong>Worship</strong> (Stunned 3). Each success permanently strips an action, so the mirror attacked four PCs in round 1, two in round 2, and one in round 3.</p>
+
+  <h4>Round 1 — six successes needed, and the mirror hits everyone</h4>
+  <ul>
+    <li><strong>Opening save</strong>: Sevek crit-saves. Paya, Mithtirith, and Aureys all fail. Mithtirith and Aureys mythic-reroll out; <strong>Paya keeps Stupefied 1</strong> rather than spend, and starts prone.</li>
+    <li><strong>Paya</strong> stands, Recall-Knowledges the mirror (Arcana disrupts the enchantments, Thievery disables the runes), strides into reflection range, and relays it.</li>
+    <li><strong>Aureys</strong> channels Draconic Essence, fails her Thievery, <strong>rewrites fate with a mythic point — success 1 of 6.</strong> <strong>Mithtirith</strong> takes success 2.</li>
+    <li><strong>Sevek</strong> Recall-Knowledges and turns up the third option — <strong>Intimidation</strong> — then spends the rest of his turn on <strong>Guidance and Bless Ally</strong> for Mithtirith.</li>
+    <li>The mirror closes the round by spending all four remaining actions, one per PC: Sevek and Mithtirith critically succeed and take nothing — <strong>Mithtirith's crit-save has Sevek's Guidance on the die</strong> — Paya takes 17, and <strong>Aureys critically fails</strong>, spending <strong>Draconic Salvation</strong> to upgrade it to a plain failure for 35 and rolling <strong>Cruelty — Enfeebled 1 for 24 hours.</strong></li>
+  </ul>
+
+  <h4>Round 2 — Paya pays twice for nothing</h4>
+  <ul>
+    <li><strong>Paya</strong>, having eaten the opening Stupefied rather than spend, now burns <strong>two mythic points for nothing</strong> — one on the round-1 Will save, one on a Thievery that still comes up 34 — then takes a spite swing at the mirror and misses: <em>"Wow, not a great turn, guys."</em></li>
+    <li><strong>Aureys</strong> lands success 3 on another mythic reroll; <strong>Mithtirith</strong> takes success 4 on his.</li>
+    <li><strong>Sevek</strong>, holding his last point, uses only one of his three actions — <strong>Prepare to Aid</strong> Aureys with Intimidation, crit-succeeding for +2.</li>
+  </ul>
+
+  <h4>Round 3 — the worst turn in the history of Paya</h4>
+  <ul>
+    <li>The mirror's two remaining actions hit both of the party members who had been disabling it.</li>
+    <li><strong>Mithtirith rolls Worship</strong> — <em>Xanderghul is the one true god, and you must pray for absolution</em> — <strong>Stunned 3</strong>, his entire turn gone.</li>
+    <li><strong>Paya rolls Jealousy</strong> — <strong>Confused</strong> for a round, attacking randomly between Mithtirith and Sevek. He crit-misses the cleric, hits Sevek for 32, and misses again. <em>"Guys, I want you to know I don't mean this at all, but I might enjoy it a little."</em></li>
+    <li><strong>Aureys</strong> spends <strong>Summon Mythic Power</strong> to refill a point, Intimidates the mirror on Sevek's Aid, fails, and <strong>rerolls with the point she just made — success 5 of 6.</strong></li>
+    <li><strong>Sevek</strong> burns his last mythic point on a Thievery and comes up <strong>34 against a DC of 37</strong> — short by three.</li>
+  </ul>
+
+  <h4>Round 4 — the last face</h4>
+  <ul>
+    <li>The mirror's last action goes at <strong>Sevek</strong>, the only one who hasn't failed a save. He spends his <strong>Ascended Celestial once-per-hour Will reroll</strong> — and fails anyway, rolling <strong>Disappointment: Clumsy 1 for 24 hours.</strong></li>
+    <li><strong>Paya</strong> Aids with Arcana, and <strong>Aureys' Thievery — a nat 20 — dims the last face of the cube.</strong> <em>"The illusion will vanish as the cube goes dim."</em></li>
+    <li>Cody turns down her ask for a Thief's Calling refund on the 20, leaving her <strong>net one point down</strong> on the encounter.</li>
+    <li><strong>Paya's Unusual Treatment</strong> — a Medicine 31 against DC 30, upgraded to a critical success by <strong>Risky Surgery</strong> at the price of cutting each patient for 6 first — scrubs the Clumsy, Enfeebled, and Stupefied off everyone and heals 53 apiece.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Book One Finale · Angothane, Thybidos, and the Shattered Runewell · 8 rounds, 70 minutes</div>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">2× Risen Runelord of Wrath (AC 35, Mythic Ferocity) · 2× Pridespawn Sentinel · Shattered Runewell of Pride (complex hazard)</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Angothane 48 · Sentinel B 43 · Thybidos 42 · Sevek 41 · Runewell 41 · Aureys 39 · Paya 37 · Mithtirith 33 · Sentinel A 31</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Paya 617 · Aureys 383 · Sevek 375 · Mithtirith 12</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Mithtirith 389 · Paya 236 · Sevek 225 · Aureys 156</span></div>
+    <div><span class="stat-label">Kills</span><span class="stat-value">Sentinel A → Aureys · Sentinel B → Sevek (persistent fire) · Thybidos → Aureys · Angothane → Paya</span></div>
+    <div><span class="stat-label">Runewell disable</span><span class="stat-value">3 successes — Arcana DC 37 / Occultism DC 40 / Crafting</span></div>
+  </div>
+
+  <p>The Runewell's routine fires three waves a round: <strong>Iridescent Fire</strong> (3d10+6 mental plus Will DC 37 or slowed), <strong>Black Fire</strong> (3d10+6 void plus 2d6 persistent acid), and <strong>Crimson Fire</strong> (3d10+6 slashing plus 2d6 bleed). By the last round the disable had cost it an action and only two waves came out.</p>
+
+  <h4>Round 1 — both Runelords open with the same spell</h4>
+  <ul>
+    <li><strong>Aureys'</strong> opening Demoralize <strong>critically fails</strong> on a rolled 1.</li>
+    <li><strong>Both Runelords cast Explosive Barrage</strong> — 39 and 52 fire-and-sonic across the whole party.</li>
+    <li><strong>Sevek</strong> Trips at Thybidos twice and misses both, going prone on the critical failure and <strong>Kipping Up</strong> for free.</li>
+    <li>The Runewell opens its account: Iridescent Fire into Sevek for 29 and a failed save (slowed), Black Fire into Paya for 24 plus persistent acid.</li>
+  </ul>
+
+  <h4>Rounds 2–3 — the Wall of Force gambit</h4>
+  <ul>
+    <li>Cody warns the table unprompted: <em>"They've got Mythic Ferocity. They have way more HP than anything else… I try to warn folks about boss tunnel vision. I've had a lot of PCs nearly die because the minions are liquidating them while they're attacking the boss with full health."</em> The party takes the note and switches to the sentinels.</li>
+    <li><strong>Mithtirith</strong> asks whether the Runewell's fires <em>travel</em> or simply appear, is told they travel, and spends three actions on the <strong>Wand of Wall of Force</strong> across the garden.</li>
+    <li><strong>Angothane Recognizes the Spell and Disintegrates it</strong> — destroying it automatically, and burning his whole turn to do it: one action standing out of Sevek's Trip (eating a 21-point Stand Still on the way up), the other two on the Disintegrate. Mithtirith: <em>"I just had to see if they actually bothered to get that skill feat in."</em></li>
+    <li><strong>Thybidos</strong> drops a 7th-rank <strong>Frigid Flurry</strong> (67) — Aureys crit-saves off legendary Reflex, <strong>Sevek pays a mythic point for his</strong>, Mithtirith eats 62 — then eats <strong>Sevek's Stand Still</strong> on the way out.</li>
+    <li><strong>Paya's reactive-strike crit staples Stupefied onto Thybidos</strong> via the Nightmare rune. It decides the fight three rounds before anyone notices.</li>
+  </ul>
+
+  <h4>Rounds 2–4 — clearing the minions</h4>
+  <ul>
+    <li><strong>Sevek</strong> Taunts a sentinel, then flurries <strong>Sentinel B</strong> and blinds it with the Phantasmal Doorknob.</li>
+    <li><strong>Paya</strong> Vicious-Swings Sentinel A; <strong>Aureys' Opportune Backstab kills Sentinel A.</strong></li>
+    <li><strong>Sentinel B</strong>, blind and burning, throws three attacks at Sevek — <strong>one of them a critical hit that the blindness erases on the flat check</strong> — and then <strong>dies to the persistent fire from Sevek's staff.</strong></li>
+    <li>Both Runelords settle into a Howling Blizzard rotation from range. Paya, on the template: <em>"It looks like Godzilla, but it's legally distinct."</em></li>
+  </ul>
+
+  <h4>Rounds 5–7 — running down the casters</h4>
+  <ul>
+    <li>The Runelords spend the fight teleporting away — Blink Charge, Translocate, Quickened Casting into Translocate — and the party spends it closing the gap.</li>
+    <li><strong>Sevek</strong> burns Ascend's 130-foot daily burst to cross the garden after Thybidos, discovers he <em>still</em> can't reach him, and salvages the turn with a <strong>120-foot Taunt</strong>.</li>
+    <li><strong>Paya</strong> activates <strong>Godspeed</strong> and starts chaining Sprinter Stance, quickened Strides, and Sudden Charge — <em>"like a pineapple with my head cut off."</em> <strong>Aureys</strong> Translocates through a <strong>Puff of Smoke</strong>.</li>
+    <li>At the end of round 6, <strong>Angothane's own persistent bleed and fire — Aureys' riders — tick him to zero</strong>, and he <strong>burns every mythic point he has on Mythic Ferocity</strong>, recovers half his HP, sheds prone, and comes back <strong>Wounded 1</strong>.</li>
+    <li><strong>Thybidos got no such option.</strong> Paya's Stupefied disrupted his casting three separate times, and every one of them cost a mythic point to fix — the third failed anyway and left him stranded in the open. When he hit zero he had nothing left to spend.</li>
+    <li><strong>Sevek</strong> drops <strong>Herald's Weapon</strong> and the <strong>Inner Upheaval</strong> he'd held all fight into Thybidos — a Flurry that crits and then hits again for <strong>133 combined</strong>, blinding him on the way. Two turns later <strong>Aureys' Opportune Backstab crits for 86 and Thybidos "explodes into light and is no more"</strong> (+2 MP to Aureys).</li>
+    <li>Angothane holds out a round longer before <strong>Paya's MAP−10 strike puts the halberd through his chest</strong> — <em>"he too explodes into light"</em> (+2 MP to Paya).</li>
+  </ul>
+
+  <h4>Rounds 7–8 — the Runewell alone</h4>
+  <ul>
+    <li><strong>Mithtirith</strong> Scholarly-Recollects the well and turns up three skills — Arcana, Occultism, or Crafting — needing three successes. He opens with a <strong>mythic-rerolled success (1 of 3).</strong></li>
+    <li><strong>Sevek</strong>, untrained in Arcana and Crafting, goes for <strong>Occultism</strong> — and reaches for Guidance first, only for the table to work out he's <em>still immune to it</em> from before they walked through the portal. So he rolls raw: 35, mythic point, <strong>39 against a DC of 40.</strong> He loses Book One's last check by exactly the +1 he tried to cast.</li>
+    <li>Two turns later <strong>Aureys rolls the same 39 in Arcana and succeeds</strong> — because Arcana was DC 37 and Occultism was DC 40 (2 of 3). She then Aids Mithtirith.</li>
+    <li><strong>Paya</strong> burns a mythic point on Arcana too and still comes up short at 33, then spends his last action putting 53 HP back into Sevek.</li>
+    <li>The Runewell keeps firing throughout — a <strong>Black Fire crit for 48</strong> plus doubled persistent acid, on a natural 20 that Sevek's Prevailing Position could not undo.</li>
+    <li>Then <strong>Mithtirith lands the third</strong>: <em>"the final runes on the Runewell of Pride vanish."</em> (+2 MP to Mithtirith, +1 to everyone else.)</li>
+    <li><strong>Aureys</strong> turns to him: <em>"I think that made sense to me, given your god."</em></li>
+  </ul>
+  <p style="color:var(--gold)"><strong>Aureys went four-for-four on Opportune Backstab this fight, all four critical hits — 340 of her 383 damage came off a reaction.</strong></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+  <h4>Sevek · the Plain Answer</h4>
+  <ul>
+    <li><strong>Two words closed Book One's villain monologue.</strong> Angothane spent twelve seconds promising the party would "perish in agony as he ascends to walk among the gods," and Sevek said <strong>"You talk too much."</strong> It is the entire character in one line — a man who does not perform, does not bluff, and is not impressed.</li>
+    <li>His register carried the session's tensest scene. Facing four omen dragons who had just learned the party killed their kin, with Aureys mid-boast, he supplied the flat truth instead of the flourish: <strong>"It was self-defense. We didn't intend to cause any harm."</strong> Ashava's anathema against misleading anyone isn't a note on his sheet — it is <em>why</em> the negotiation worked, because Shephodian could see he wasn't being lied to.</li>
+    <li><strong>The Trip lock ground down a Darklands apex predator.</strong> He opened the cave worm fight with a Flurry-of-Maneuvers <strong>critical Trip</strong> and then never stopped: the worm burned its actions standing up over and over while the party unloaded, until Cody said it out loud — <em>"not to be a one-trick pony, but this is working."</em> Same engine on the sentinels, same engine on Angothane.</li>
+    <li><strong>He is the reason the healer lived.</strong> When a sentinel got past the front rank and crit Mithtirith for 69, Sevek spent his reaction on <strong>Life Connection</strong> and took the whole 74 himself. In the finale he spent <strong>Prevailing Position</strong> three times with honest, mixed results — one Iridescent Fire that hit by exactly 0 turned into a clean miss at AC 41, one Reflex save the base roll would have passed anyway, and one thrown at a natural 20 that no amount of AC undoes. That last one is the 48 he ate.</li>
+    <li>The big numbers were saved and spent well: a <strong>128 double-crit</strong> on Sentinel E, an <strong>84 crit</strong> that set up the cave worm's death, an <strong>83-point flurry crit</strong> into Shuln A, and in the finale <strong>Herald's Weapon plus the Inner Upheaval he'd held all fight</strong> — a Flurry that crit and then hit again for <strong>133 combined</strong> into Thybidos, blinding him. That was the softening that let Aureys take the kill. He also killed <strong>Shuln A off five consecutive 1s</strong> for 42 damage, and burned <strong>Sentinel B to death</strong> with his staff's persistent fire.</li>
+    <li><strong>The mythic-point joke paid off two hours later.</strong> Before bed he tried to farm a point with a pointless Long Jump and got shut down. In the middle of the Book One finale, needing to cross the garden anyway, he <strong>Long Jumped, critically succeeded, and collected the point</strong> — <em>"that's also keeping me at the point into my calling."</em> Told the rule once, applied it correctly under pressure.</li>
+    <li>The support lane never went quiet: Guidance handed out all session for nothing, <strong>Guidance and Bless Ally on Mithtirith</strong> in the mirror — which is exactly why Mithtirith critically saved the first routine and took <strong>0 of 35</strong> — plus crit-succeeded Aids and <strong>Water Breathing</strong> on the whole party because the portal <em>sounded</em> like water.</li>
+    <li><strong>The quiet register is the whole character.</strong> He broke the Energy Aegis tie for Aureys without being asked twice (<em>"she's a bit more frail"</em>), made the call to rest in a dead woman's camp, handed the Paradigm Cube straight to someone else the moment he saw it, and was first to act on the boss-tunnel-vision warning. He also closed the book on a pun: <strong>"Papaya resembles that."</strong></li>
+  </ul>
+</div>
+
+<div class="spotlight s-paya">
+  <h4>Paya · the Setup and the Punchline</h4>
+  <ul>
+    <li>He called his shot and then made it. Seven minutes into whiffing everything the cave worm fight had to offer: <strong>"One of these days I'll hit on my turn, and it'll be glorious."</strong> Seven minutes later, a Spear Dancer step-and-strike put down the first shuln, and: <strong>"Told you it'd be glorious."</strong></li>
+    <li><strong>The party's plainest sincere voice, again.</strong> Two Risen Runelords finished monologuing about godhood and a doomed world, and Paya answered for the party without any bit attached: <strong>"And we will stop him by any means at our disposal. So let's get going."</strong> He also framed the book's stakes back at the camp — <em>"especially if we're following some of Xanderghul's secrets, I'd like a fully equipped cleric."</em></li>
+    <li><strong>He killed a Risen Runelord</strong> — and set up the other one. Angothane burned every remaining mythic point on Mythic Ferocity to come back with half his HP, and Paya ran him down anyway on Godspeed and a Sudden Charge. Meanwhile his round-2 reactive crit stapled <strong>Stupefied</strong> onto Thybidos via the Nightmare rune, which drained all three of that Runelord's mythic points on disrupted castings — <strong>which is why Thybidos had nothing left to resurrect with.</strong></li>
+    <li>Then the mirror got him. Jealousy left him <strong>Confused</strong>, rolling randomly between Mithtirith and Sevek, and he took it with grace: <strong>"Guys, I want you to know I don't mean this at all, but I might enjoy it a little."</strong> He crit-missed the cleric, hit Sevek, missed again — Cody: <em>"I think that's still the worst turn in the history of Paya."</em></li>
+    <li><strong>The healing lane is now most of what he does, and he's excellent at it</strong>: Fresh Produce, Dash of Herbs, Ocean's Balm, Torrent in the Blood, Deflecting Wave as mitigation, Doctor's Visitation to reach Mithtirith mid-fight for 66, and the reveal of <strong>Unusual Treatment</strong> to scrub the mirror's 24-hour conditions off the entire party at once. He also ran Foundry support all night — the Battle Medicine macro, Translocate's unoccupied-space rule, why deafened doesn't stop a non-auditory spell.</li>
+    <li>The bits stayed load-bearing: seasoning the party so the monsters find them delicious, <strong>"my lobster remains perfectly buttery,"</strong> <em>"it looks like Godzilla, but it's legally distinct,"</em> <strong>"a pineapple can dream,"</strong> <strong>"like a pineapple with my head cut off,"</strong> <strong>"Love from Sandpoint, friend"</strong> called after a Runelord who burned his last mythic point on an escape and went nowhere, and the best read of the night on Anna's pronunciation: <strong>"Angothane is going to be devastated when he hears you pronounce his name."</strong></li>
+  </ul>
+</div>
+
+<div class="spotlight s-aureys">
+  <h4>Aureys Hollow · the Honest Braggart</h4>
+  <ul>
+    <li><strong>She talked the party past four hostile dragons by refusing to lie to them.</strong> Confronted by omen dragons asking what became of their mirage-dragon kin, she announced herself "greatest of the dragons of this world," admitted the killings outright, and when Shephodian said <em>"I see in your eyes you don't deceive,"</em> answered <strong>"I do not. I could tell you a lie, but you would know that it was a lie because you see my greatness. But we do not have to be enemies. We could be friends."</strong> She ran the entire negotiation from there — the sense-motive read, the ask about safe passage, and the questions that got the party both the missing Warshard and Aethusa's description.</li>
+    <li><strong>In Xanderghul's city of Pride, she out-prided him on the record</strong>: <em>"No one could be more prideful than me."</em> The funniest line of the session, and also why the Mirror of Glory was always going to be her fight.</li>
+    <li><strong>She won that fight.</strong> Six successes, and Aureys landed <strong>four</strong> — two Thievery, one Intimidation staring down Xanderghul's own arrogance, and the final one, a nat 20, that dimmed the cube. She paid for it: four mythic points spent, one clawed back mid-fight with Summon Mythic Power, and even with the +2 for the disable she came out <strong>a point down</strong> — Cody turned down her cheeky ask for a Thief's Calling refund on the 20.</li>
+    <li><strong>Four kills, all on the same reaction.</strong> Her <strong>Opportune Backstab</strong> finished the <strong>cave worm</strong>, <strong>two pridespawn sentinels</strong>, and — after Sevek's 133-point flurry blinded him — <strong>Risen Runelord Thybidos</strong>. A fifth sentinel died to the persistent bleed and fire her fan had left on it, and Angothane's first death came the same way. Her ceiling was the highest number anyone rolled all session: a double-crit Overwhelming Combination for <strong>149</strong>.</li>
+    <li><strong>The best piece of tactical housekeeping at the table was hers</strong>: before the long rest she deliberately hit her own party with Majestic Presence and Frightening Power so they'd be immune to it all day. <em>"Feel my power. You might be shaking a little bit at first, but it'll wear off."</em></li>
+    <li>She also adopted three enormous mole-rats mid-combat purely on the strength of them attacking someone else — <em>"I do consider them my allies at this point"</em> — and took the betrayal personally: <em>"I thought we were friends."</em> And she closed Book One exactly where the character lives: <strong>"Aureys is going to be, like, hitting a candy store. Grabbing at stuff. The gems on the throne. Everything."</strong></li>
+  </ul>
+</div>
+
+<div class="spotlight s-mith">
+  <h4>Mithtirith · the Long Line</h4>
+  <ul>
+    <li><strong>He got the last word on the Book One villain speech and it was the best line of the night.</strong> One second after Sevek's "You talk too much," to two Risen Runelords promising the end of the world: <strong>"I mean, honestly, I come from a long line of people thwarting Runelord plans, so welcome."</strong></li>
+    <li><strong>He landed the hit that ended Book One.</strong> With both Runelords dead and only the Shattered Runewell left, he opened the disable with a mythic-rerolled success and then closed it — <em>"the final runes on the Runewell of Pride vanish"</em> — for +2 mythic points. He'd also landed two of the six Mirror of Glory successes earlier.</li>
+    <li><strong>The knowledge lane ran the whole session</strong>: the cave worm (best save Fortitude, Reflex and Will tied worst, <em>can swallow you whole</em>), the shulns (adamantine, resistant to everything physical except adamantine and bludgeoning), the pridespawn (resistant to mental with big bonuses on mental saves — which raised the bar on Aureys' fear suite without closing the lane), and Scholarly Recollection on the Runewell to find the three skills that could shut it down.</li>
+    <li><strong>The Hedge Mage experiment got its first real test and passed on points.</strong> He claimed Aethusa's Wand of Widening, then in the finale asked exactly the right question — do the Runewell's fires <em>travel</em>, or just appear on us? — and on being told they travel, dropped a <strong>Wall of Force</strong> across the garden. Angothane immediately Disintegrated it, costing the Runelord his entire turn, and Mithtirith's response was pure deadpan: <strong>"I just had to see if they actually bothered to get that skill feat in."</strong></li>
+    <li><strong>The enemy pattern held: everything still hunts him.</strong> He ate a 66 crit and a 74 crit from the sentinels (the second intercepted by Sevek), and took more damage than anyone in the finale. His answer was to stop being reachable — flying twenty feet straight up out of a sentinel's reach, waving down at it, and asking <strong>"Is my free action to give him the middle finger salute?"</strong> When Sevek looked up — <em>"Hello there. Why are you up there?"</em> — the reply was pure Mithtirith: <strong>"Because you're the next most wounded on the field."</strong></li>
+    <li>The dry commentary never let up. On being Stunned 3 in the same round Paya swung at him twice and missed: <strong>"Was Mithtirith stunned three by the mirror, or by the fact that Paya missed twice?"</strong> On his own status: <em>"as your sole magic user, I have to tell you, I am low on healing."</em> On being able to make the Runewell checks from the back line: <em>"That's the best news I've heard all day."</em> And after the Runewell went dark, Aureys turned to him and said the kindest thing anyone said all session — <strong>"I think that made sense to me, given your god."</strong></li>
+  </ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">~300 gp of incense</div>
+    <div class="loot-source">Aethusa's campsite</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Scroll of Teleport (rank 7)</div>
+    <div class="loot-source">Aethusa's campsite</div>
+    <div class="loot-note">Party stash — an escape hatch from the bottom of the Darklands</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Wand of Widening (Phantasmal Calamity)</div>
+    <div class="loot-source">Aethusa's campsite</div>
+    <div class="loot-note">Mithtirith — the only PC with arcane spellcasting</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Aethusa's journals</div>
+    <div class="loot-source">Aethusa's campsite</div>
+    <div class="loot-note">The dreams, the cloaked figure, the Runewell, the final entry</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">5× +2 greater striking shock bec de corbin</div>
+    <div class="loot-source">The pridespawn sentinels</div>
+    <div class="loot-note">Party stash; same weapon Gavergash carried in S5, one rune tier below his</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">5× +2 resilient raiment leather armor</div>
+    <div class="loot-source">The pridespawn sentinels</div>
+    <div class="loot-note">Party stash</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Paradigm Cube</div>
+    <div class="loot-source">The Mirror of Glory's keystone</div>
+    <div class="loot-note">Rare, mythic, invested. One color per day; a flat check decides random vs. chosen, skippable with a mythic point. Yellow (demoralize + slow) noted as the strong one. Unassigned</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">The throne's gemstones, and the rest of the garden</div>
+    <div class="loot-source">The Garden of Pride</div>
+    <div class="loot-note">Not yet looted — next session opens here</div>
+  </div>
+</div>
+<div class="xp-banner">
+  Mythic refunds · Aureys +2 (Mirror of Glory) · Aureys +2 (Thybidos) · Paya +2 (Angothane) · Mithtirith +2 (Runewell) — with <strong>+1 to everyone else on each</strong>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Angothane (DM):</strong> "You, who have dared to thwart his plans and to have stolen his valor and place in history, will perish in agony as he ascends to walk among the gods and takes his vengeance upon your pitiful doomed world."<br>
+<strong>Sevek:</strong> "You talk too much."<br>
+<strong>Mithtirith:</strong> "I mean, honestly, I come from a long line of people thwarting Runelord plans, so welcome."
+<span class="attribution">The opening of the Book One finale, in its entirety.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "I am Aureys Hollow, greatest of the dragons of this world."
+<span class="attribution">Announced to four full-grown omen dragons, none of whom had asked.</span>
+</blockquote>
+
+<blockquote>
+<strong>Shephodian (DM):</strong> "I see in your eyes you don't deceive."<br>
+<strong>Aureys:</strong> "I do not. I could tell you a lie, but you would know that it was a lie because you see my greatness. But we do not have to be enemies. We could be friends."
+<span class="attribution">Immediately after admitting the party had killed their kin.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek:</strong> "It was self-defense. We didn't intend to cause any harm."
+<span class="attribution">The plain version, offered while four dragons were deciding whether to attack.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "No one could be more prideful than me."
+<span class="attribution">Standing in Xanderghul's city of Pride, on his doorstep.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "Feel my power. You might be shaking a little bit at first, but it'll wear off."
+<span class="attribution">Deliberately frightening her own party before the long rest, so they'd be immune to fear for the rest of the day.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "One of these days I'll hit on my turn, and it'll be glorious."<br>
+<strong>Paya</strong> <em>(seven minutes later, killing the first shuln)</em><strong>:</strong> "Told you it'd be glorious."
+<span class="attribution">The best two-beat setup of the session.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "Guys, I want you to know I don't mean this at all, but I might enjoy it a little."
+<span class="attribution">Confused by the Mirror of Glory, rolling randomly for which ally to attack.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith:</strong> "Was Mithtirith stunned three by the mirror, or by the fact that Paya missed twice?"
+<span class="attribution">Stunned 3 by Worship, in the same round Paya swung at him and whiffed.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith:</strong> "Is my free action to give him the middle finger salute?"
+<span class="attribution">After flying twenty feet straight up out of a sentinel's reach and waving down at it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek:</strong> "Hello there. Why are you up there?"<br>
+<strong>Mithtirith:</strong> "Because you're the next most wounded on the field."
+<span class="attribution">The tank checking on the cleric who had solved the problem himself.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "And we will stop him by any means at our disposal. So let's get going."
+<span class="attribution">The party's answer to two Risen Runelords, without a bit attached.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "Angothane is going to be devastated when he hears you pronounce his name."
+<span class="attribution">On Aureys' pronunciation of the Runelord's name, mid-fight.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Warshard of Gorum is gone.</strong> It came down inside the Trinity Star, it is no longer in Xin-Cyrusian, and four dragons who have studied these ruins for months cannot say where it went.</li>
+  <li><strong>Sorshen was alive</strong> as of the vision's last frame — locked in battle with Xanderghul and swept through the doomsday doors alongside the Oliphaunt of Jandelay the instant before they were buried. The visions show what has already come to pass, not her state now.</li>
+  <li><strong>Xanderghul destroyed Xin-Eurythnia.</strong> Thybidos said it out loud: <em>"when our Lord Xanderghul cast his judgment on Sorshen and her pathetic stolen city."</em> The catastrophe at the portal unveiling was an act of war, not an accident.</li>
+  <li><strong>Where is Aethusa?</strong> Xanderghul wore her, then discarded her for a fresh body, and she was carried unconscious out of a room containing <strong>four immense steel vats</strong>. Nobody has said she's dead.</li>
+  <li><strong>The trolls let Aethusa through.</strong> Her journals say the guardians expected her and the Kodar trolls did not stand in her way. The party had to kill a mythic troll king and four warleaders to reach the same shaft. Somebody told the trolls she was coming.</li>
+  <li><strong>The doomsday door and the Oliphaunt of Jandelay.</strong> Xanderghul opened a door, something enormous came out and killed his own Risen, he rode it, and the cavern collapsed on top of the whole thing. That door is presumably still down there.</li>
+  <li><strong>The Risen are manufactured.</strong> They are raised by ritual from the bones and burial raiments of real Runelords, looted out of <strong>Emperor Jinn's tomb</strong> — Xanderghul's "beloved friend." Every Risen the party has killed came from a grave someone robbed.</li>
+  <li><strong>The cloaked, smoke-like figure</strong> that sent Aethusa her dreams is the same being from the party's own apocalypse dream at the start of the campaign — the one that handed them their mythic power. It has been recruiting on both sides.</li>
+  <li><strong>Kandirvek is still topside</strong>, holding off the Kodar troll nation, with no idea the party went through a portal into a garden.</li>
+  <li><strong>The garden itself is unlooted.</strong> Where it actually <em>is</em> remains unstated: the DM would say only that the mirror became "a shimmering portal to somewhere," and that "the realm before you is new."</li>
+  <li><strong>Level 15.</strong> Sevek's picks are already declared: <strong>Third Path to Perfection (Fortitude → legendary)</strong> and <strong>Canny Acumen (Reflex)</strong>. Mithtirith is out next week.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+  <li>Backed <strong>Aureys' honesty</strong> with four omen dragons who had every reason to kill us. Said the plain thing — self-defense, no harm intended. Shephodian read us and let us pass. <strong>Telling the truth was the tactic.</strong> It bought us the Warshard's disappearance and Aethusa's description.</li>
+  <li><strong>Tripped a cave worm into the ground over and over</strong> while it burned its turns standing back up. Opened with a critical Trip; the DM said out loud it was working. Same lock later on the sentinels and on Angothane.</li>
+  <li>Failed the venom save <strong>even after a mythic reroll</strong> — nat 4. Should have saved the point; <strong>Become Destiny</strong> cleared the poison and the Enfeebled a round later for the same cost and a guaranteed result.</li>
+  <li><strong>Took 74 damage off Mithtirith with Life Connection.</strong> He had just eaten a 69-point crit. That's the whole reason the reaction is prepped every morning.</li>
+  <li>Killed <strong>Shuln A</strong> with a flurry that rolled <strong>five consecutive 1s</strong> for 42 damage, and <strong>Sentinel E</strong>, and <strong>Sentinel C</strong> (68 crit). Burned <strong>Sentinel B</strong> to death in the finale with the staff's persistent fire after blinding it with the doorknob.</li>
+  <li><strong>128 double-crit</strong> on Sentinel E with Inner Upheaval. <strong>133 combined</strong> on Thybidos in the finale with <strong>Herald's Weapon + Inner Upheaval</strong>, which also blinded him — Aureys took the kill two turns later off that setup.</li>
+  <li>Burned <strong>Ascend's daily burst</strong> to cross the garden after Thybidos and <em>still</em> couldn't reach him. Salvaged it with the <strong>120-foot Taunt</strong> — which is what the 120-foot Taunt is for. Lead with the Taunt next time; the burst is for getting somewhere, not for chasing a caster who teleports.</li>
+  <li><strong>Long Jumped in the finale, crit-succeeded, took the Mythic Point back.</strong> Cody's ruling the night before was right: it has to be a jump I was going to make anyway.</li>
+  <li><strong>Prevailing Position three times, one of them worth it.</strong> One Iridescent Fire that hit by exactly 0 became a miss at AC 41 — that's the reaction doing its job. One went on a Reflex save I was passing anyway. One was thrown at a <strong>natural 20</strong> and did nothing; that's the 48. <strong>The +4 only matters on a hit that lands inside the margin — don't spend it on a crit or on a save I've already made.</strong></li>
+  <li>In the Mirror of Glory: failed every Thievery I tried, <strong>including with my last mythic point</strong> (34 against a DC of 37). The thing that actually paid was <strong>Guidance and Bless Ally on Mithtirith</strong> — he crit-saved the first routine with my Guidance on the die and took nothing out of 35. On the Runewell: Occultism <strong>39 against DC 40.</strong> One short.</li>
+  <li>Cast <strong>Water Breathing</strong> on everyone before the portal because it <em>sounded</em> like water. It wasn't. Eight hours, no cost, still the right call.</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+  <li>Standing contingencies from the morning prep: <strong>See the Unseen</strong> (8 hr), <strong>Lucky Number</strong>, <strong>Life Connection</strong>, <strong>Mind of Menace</strong>, <strong>Water Breathing</strong>. Life Connection is the one that paid this session.</li>
+  <li>The <strong>Ascended Celestial Will reroll failed again</strong> — that's three sessions running. It is insurance, not immunity, and I keep spending it on saves I then fail anyway.</li>
+  <li><strong>The Foundry sheet still has a Fortification rune on the explorer's clothing.</strong> Cody ruled it illegal back in S4 and it surfaced again mid-fight this session. Strip it before next session so it stops offering flat checks I'm not entitled to.</li>
+  <li><strong>A mythic point buys the attempt, not the result.</strong> Mythic proficiency is +24 against a master's +20 — with the point spent and Guidance up, my Thievery in the mirror was +29 needing an 8 or better. I lost a coin flip, not a door. The Runewell's <strong>DC 40 against my Occultism</strong> is the real wall, and Arcana, Crafting, and Medicine are all untrained on this sheet by choice.</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+  <li><strong>Aureys did not lie to those dragons and it worked.</strong> Same instinct, opposite temperament. Worth remembering that her version and mine landed together.</li>
+  <li><strong>Everything still goes for Mithtirith.</strong> He took 389 in the finale alone and more than anyone all session. His answer — flying twenty feet up out of reach — is better than mine. Bodyguard and Taunt only work if I'm inside the cone; positioning is the real fix.</li>
+  <li><strong>The boss-tunnel-vision warning was right.</strong> The minions were the ones killing us; the Runelords just teleported and threw spells. Killing the sentinels first was correct and I should default to it.</li>
+  <li>Both Runelords <strong>spent their entire fight running away</strong> — Blink Charge, Translocate, Quickened Casting into Translocate. Flight plus 65-foot speed plus the burst is the only reason we caught them. The mobility stack keeps earning.</li>
+  <li><strong>Herald's Weapon should open a Runelord fight, not close it.</strong> Second session in a row I remembered it at the end. It is once per hour, not once per fight.</li>
+  <li><strong>Xanderghul killed Xin-Eurythnia.</strong> Sorshen invited me by name to help inspire that city. Whatever this becomes, that part is personal now.</li>
+  <li>Level 15: <strong>Third Path to Perfection (Fortitude → legendary)</strong> and <strong>Canny Acumen (Reflex)</strong>. Confirm with Cody before next session.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Where did the Warshard of Gorum go?</strong> It is not in this city, and the dragons who live here don't know.</li>
+  <li><strong>Is Sorshen alive?</strong> She was fighting Xanderghul when the doors closed. Where do those doors go, and can they be opened from this side?</li>
+  <li><strong>Where is Aethusa?</strong> Carried off unconscious past four steel vats. What are the vats for?</li>
+  <li><strong>What is the Oliphaunt of Jandelay</strong>, and why did it kill Xanderghul's own Risen the moment it came through?</li>
+  <li>The <strong>cloaked smoke figure</strong> gave Aethusa her dreams and gave us our mythic power. What does it actually want?</li>
+  <li>We walked through a portal into a place Cody would only call "new," with Kandirvek expecting us topside. How do we get out — and is that what the <strong>Scroll of Teleport</strong> is for?</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">End of Book One</span>
+  <p>Two Risen Runelords scattered into light. The Shattered Runewell of Pride gone dark. A garden of peacocks and roses, ten statues looking down in imperious disdain, and a throne backed in gemstone tail feathers that nobody has touched yet.</p>
+  <div class="big-line">"Congratulations. You all reach level 15."</div>
+  <span class="speaker">— Cody, closing Book One of Revenge of the Runelords</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+</div>
+</body>
+</html>

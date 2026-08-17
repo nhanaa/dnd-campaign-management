@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 11 — The Lord of the Island</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Lord of the Island</h1>
+  <div class="subtitle">Session 11 · Danger Island collects its dues — two forfeits, one kaiju, and a comeback to break even</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-16</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">4h 05m</span>
+    <span class="meta-pill">Fists of the Ruby Phoenix · Book 1</span>
+    <span class="meta-pill">Day 1 of 3 · morning → early afternoon</span>
+    <span class="meta-pill">Level 12 · 640 XP</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:62"></div>
+  <div class="comp-seg comp-social" style="flex:12"></div>
+  <div class="comp-seg comp-rp" style="flex:12"></div>
+  <div class="comp-seg comp-explore" style="flex:10"></div>
+  <div class="comp-seg comp-loot" style="flex:4"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · 7 encounters</span>
+  <span><span class="legend-dot comp-social"></span>Challenges &amp; forfeits</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · the name saga</span>
+  <span><span class="legend-dot comp-explore"></span>Hexploration</span>
+  <span><span class="legend-dot comp-loot"></span>Loot &amp; market</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard (Maestro) / Living Nexus</div>
+    <div class="char-player">Pax · "Mingzhu"</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva</div>
+    <div class="char-class">Ranger (Precision) · field medic</div>
+    <div class="char-player">Irorian pilgrim</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch</div>
+    <div class="char-class">Guardian / Wrestler / Medic</div>
+    <div class="char-player">Kholo</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva</div>
+    <div class="char-class">Magus (Laughing Shadow)</div>
+    <div class="char-player">Wayang</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+  <p>This was the session Danger Island collected its dues. Seven fights in four hours, and for the first time in the campaign the party lost — twice, to rival teams that were simply better, and a third time to something no team on the island is meant to beat at all.</p>
+  <p>The morning started deceptively well: a sweep of quiet hexes (an abandoned saurian ranch, a druid-circle base, the eerily vacated <strong>Temoutan toy village</strong>, the first <strong>transport tower</strong>), then a clean, bloody win over a den of five carnivorous <strong>Dromornis</strong> terror-birds — 200 platinum from Ingdani, and the debut of Sovael's new Living Nexus toy, a 60-foot force beam that also introduced the concept of friendly fire to Seva. Then the day turned. <strong>Under the Pale Sun</strong> — two katana masters and two archers whose Rain of Arrows crit the whole backline at once — ground the party down until the DM's gentle off-ramp ("weigh your options") became unavoidable, and the party forfeited its first feather. Reconnoitering the very next cliff face produced <strong>Jaiban, the Lord of the Island</strong> — a titanic croc-saurian with an AC in the 40s whose one-action stomp is a literal Earthquake. The party used the group-escape rule for the first time and ran for their lives, Sovael shouting <em>"I'll take revenge!"</em> as he flew away.</p>
+  <p>It got worse before it got better. The next team encounter was <strong>the Lightkeepers</strong> — Syu Tak-nwa, Shino Hakusa, Blue Viper, and Ran-to, a squad so far above the party's weight that the DM apologized for "punching down." Ferrok took a dose of Cerulean Scourge, and when Blue Viper held up the antidote and suggested trading it for the feather before Ferrok's organs melted, Sattva spoke for everyone: <em>"I like my organs. I'll take that deal."</em> Down to three feathers, the comeback finally started: a convincing kill on a <strong>Caustic Monitor</strong> (300 platinum), a genuine first team win over <strong>the Nightmares</strong> behind back-to-back Divine Wraths, and a grinding, ugly victory over <strong>the Last Breath</strong>, whose monk knocked Sovael out twice — critting his unconscious body in between — before ending the day surrounded and forfeiting. Back to five feathers — exactly where the day started, but with two dens cleared, half the island mapped, a mountain of platinum, and one very personal grudge against a kaiju.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act explore">
+  <div class="act-label">Act I · Exploration · Rules Refresher &amp; the Quiet Hexes (0:00 – 0:21)</div>
+  <div class="act-card">
+    <h3>Re-briefing, and a very empty stretch of island</h3>
+    <ul>
+      <li>Three real-world weeks since S10, so the DM re-briefed the qualifier: 10 feathers by end of Day 3, active hours 6 AM–10 PM, 10-minute clock ticks, and the <strong>group-escape rule</strong> — if the whole party agrees and spends a round, you can flee any non-tournament fight.</li>
+      <li>The team-encounter flat check is now <strong>DC 18</strong> — <strong>Sovael</strong>, checking his notes, caught the discrepancy and got the rule: <strong>it rises by 1 with every tournament fight and partially resets each day.</strong></li>
+      <li>The hex sweep found: another arena, an abandoned <strong>saurian ranch</strong> (<em>"something massive must have been here"</em>), a druid-circle team base, an old <strong>oryx ranch</strong>, and an observatory team base.</li>
+      <li><strong>The Temoutan Village</strong> — a toy-scale town, fully inhabited-looking and completely empty, with a polite note: the villagers arranged with the Ruby Phoenix to leave, and request their village be left undisturbed.</li>
+      <li><strong>The first transport tower</strong> — a rune-engraved teleportation platform. Every discovered tower links to every other; the party found a <strong>second</strong> one later in the session, activating the network.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act II · Combat · The Dromornis Den (0:21 – 0:49)</div>
+  <div class="act-card">
+    <h3>Five terror-birds and a new toy</h3>
+    <ul>
+      <li>First creature den of the day: a cave nest of <strong>five Dromornis</strong> — carnivorous terror-birds <em>"a bit bigger than dodos... a cross between dodos and ostriches"</em> that hit like trucks and left persistent bleed on nearly every strike.</li>
+      <li>Clean win — full round-by-round below. <strong>Ingdani paid 200 platinum</strong>: den rewards scale with how many dens you've cleared, not how dangerous the occupant was.</li>
+      <li><strong>Sovael's rebuild debuted</strong>: Absorb Magic (inhaling a nearby spell to become "overflowing"), then <strong>Aether Beam</strong> — <em>"I just want to use my new toy. Sorry."</em> The 60-foot force line clipped <strong>Seva</strong> for 32 on a failed save. She was gracious about it. Mostly.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act III · Combat · Under the Pale Sun (0:49 – 1:18) · First loss · Feathers 5 → 4</div>
+  <div class="act-card">
+    <h3>The archers the party never touched</h3>
+    <ul>
+      <li>At a lighthouse base, a team of four challenged for one feather: <strong>Under the Pale Sun</strong> — two katana swordsmen (Swift Blow quick-draws; <strong>Dueling Expertise</strong> +2d10 against isolated targets) and two archers whose <strong>Rain of Arrows</strong> applies one attack roll against every AC in a burst.</li>
+      <li>The archers' volleys crit repeatedly — 65 damage to three PCs at once, then 63/63/57 — while the swordsmen quick-drew into the melee. <strong>Clutch</strong> ate an 89-damage katana crit. <strong>Sovael</strong> was cut down to single digits — <em>"Oh my god, nine to ten. Are you dead dead?"</em></li>
+      <li>The DM offered the resource-management off-ramp twice; <strong>Ferrok</strong> called it — <em>"It definitely seems like we're going to lose"</em> — and the party waved the proverbial white flag. <strong>First feather lost.</strong></li>
+      <li>The aftermath was pure character: <strong>Sattva</strong> asked the victors how they came up with their name (an overcast battlefield — "the Battle of the Pale Sun"), <strong>Seva</strong> seethed — <em>"So they beat us, and they have a cool name, and a backstory. Be off with you!"</em> — and <strong>Ferrok</strong> noted that naming yourselves after your first battle would make the party <strong>"Sandy Ragequit."</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act mystery">
+  <div class="act-label">Act IV · The Kaiju · Jaiban, the Lord of the Island (1:22 – 1:34) · Escaped</div>
+  <div class="act-card">
+    <h3>Heat-seeking missiles toward the most dangerous place</h3>
+    <ul>
+      <li>The very next hex's "creature den" was a waterfall grotto littered with giant reptile bones — and <strong>Jaiban, legendary beast of Bonmou</strong>, a titanic quickened croc-beast. <strong>Sattva's</strong> Recall Knowledge crit-failed against a DC in the high 40s: <em>"I don't know what this is."</em> His arrows crit-missed against an AC over 40. <strong>Seva</strong>: <em>"Is that a fucking kaiju?"</em></li>
+      <li>Jaiban's <strong>Quaking Stomp</strong> — a one-action miniature Earthquake — hit the entire party (Ferrok and Sovael crit-failed the DC 41 save; the others' failures cost ~48). Its jaws caught Clutch on a <strong>natural 3</strong>; its tail crit Ferrok for 90 through a shield block and sent the Minotaur flying — <strong>171 damage into Ferrok in a single enemy turn</strong>.</li>
+      <li><strong>The party used the group-escape rule for the first time</strong> — everyone declared, Sovael threw a heal onto the battered Ferrok as they scrambled, and they ran. Sovael, flying away: <strong>"I'll take revenge!"</strong></li>
+      <li>Ingdani afterward: they won't be the first nor the last to face his wrath — <em>"the Lord of the Island... mayhap the most dangerous thing on this island."</em> The DM, out of character, on the party's pathing: <em>"You literally just made a fucking beeline right for Jaiban. You're like heat-seeking missiles toward the most dangerous place."</em></li>
+      <li>Post-fight, <strong>Sattva's</strong> Risky Surgery streak nearly finished what Jaiban started — two failed surgeries in a row that only cut the badly wounded <strong>Ferrok</strong> deeper (down to roughly 1 HP on the operating table) until <strong>Sovael</strong> gave up waiting, pulled a Scroll of Heal, and did it himself.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act V · Combat · The Lightkeepers (1:56 – 2:26) · Second loss · Feathers 4 → 3</div>
+  <div class="act-card">
+    <h3>Punching up at legends</h3>
+    <ul>
+      <li>A team of four legends: <strong>Syu Tak-nwa</strong> (white-haired leader in violet robes, a giant cicada on her shoulder), <strong>Shino Hakusa</strong> (featureless beige gi, pressure-point striker), <strong>Blue Viper</strong> (Ysoki alchemist draped in grenades), and <strong>Ran-to</strong> — "the most jacked goblin any of you have ever seen," who opened with: <em>"Ah, fucking finally. All right, don't know who the fuck you are, don't care. Lightkeepers challenge you for two feathers."</em></li>
+      <li>The party talked the wager down from two feathers to one. Syu: <em>"If you would prefer one, we will yield to one."</em> Ran-to: <em>"Makes no difference to me. More fights in the end. All right, fuckers, let's do this."</em></li>
+      <li>The fight was one-way traffic — DCs in the high 30s, nat-20 saves against Divine Wrath, a reactive-strike <em>grapple</em> that caught Clutch by the neck mid-Defensive-Advance, and <strong>Cerulean Scourge</strong> poison ticking in Ferrok's veins.</li>
+      <li><strong>Blue Viper ended it holding up a bright-red vial</strong>: <em>"Got this for your buddy. I'd suggest giving us that feather before his organs start melting."</em> <strong>Sattva</strong>: <em>"I like my organs. That was like a good deal. I'll take that deal."</em> The party forfeited — and Blue Viper tossed Ferrok the antidote anyway. Ferrok drank it without a second thought.</li>
+      <li><strong>"That makes nine"</strong> — the Lightkeepers left one feather short of locking in their tournament seat. The sore-loser exit interview (<strong>Seva</strong>: <em>"We are the Lightkeepers. Your name is uncool."</em> Blue Viper: <em>"Now you're just being sore losers."</em>) is already a classic.</li>
+      <li><strong>Ferrok</strong>, refusing the doom spiral: <em>"That's alright. This is setting our comeback arc on."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act social">
+  <div class="act-label">Act VI · Market &amp; Mystery · The Mountain and the Strange Village (2:26 – 2:33)</div>
+  <div class="act-card">
+    <h3>Shopping, and a village that stares back</h3>
+    <ul>
+      <li>A second <strong>stone market</strong> hex — the haul was liquidated and <strong>60 platinum + 140 gold distributed to each PC</strong>. <strong>Ferrok</strong> had a rules epiphany about <strong>rune-grade materials</strong> (low-grade silver caps at level-8 runes) and is now saving for an upgrade.</li>
+      <li><strong>Mount Haminabu</strong> revealed — the tallest peak on Bonmou. On Day 3, teams holding 10 feathers ascend it to lock in their tournament seat.</li>
+      <li>A <strong>Strange Village</strong> of aggressively plain humans with sub-tournament gear stared the party down — "almost like giving you that mad dog look, daring you to approach." The party detoured around it. Unresolved.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VII · Combat · The Caustic Monitor (2:33 – 2:46) · Win · 300 platinum</div>
+  <div class="act-card">
+    <h3>The comeback starts with a lizard</h3>
+    <ul>
+      <li>Third creature den: an enormous acid-drooling monitor lizard. It opened with a <strong>nat-20 bite on Clutch (93 damage)</strong> and an acid cone — and then the party took it apart.</li>
+      <li>The fear stack (Clutch's Battle Cry, Sovael's Talent Envy Demoralize to Frightened 2) and Roaring Applause's reaction-stripping set up <strong>Ferrok's 124-damage Spellstrike crit</strong>, and <strong>Clutch landed the kill</strong> after dumping the monitor prone off its own nat-1 grapple.</li>
+      <li><strong>Seva</strong>, watching it die efficiently: <em>"I wish our team fights worked that well."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VIII · Combat · The Nightmares (2:47 – 3:20) · First team win · Feathers 3 → 4</div>
+  <div class="act-card">
+    <h3>The light-name curse is broken</h3>
+    <ul>
+      <li>A team of four dark-armored skirmishers, paired wakizashis, moving like ninjas: <strong>the Nightmares</strong> challenged for one feather.</li>
+      <li><strong>Sovael spent his first hero point of the day rerolling initiative</strong> — <em>"I'm going to risk it... Well worth the investment"</em> — and used the won tempo to fire <strong>back-to-back Divine Wraths</strong>: the first crit-failed two Nightmares (sickened AND slowed), the second landed failures across everything in the burst. <em>"You know what they say, if it works, try to do it again."</em></li>
+      <li>The sickened/slowed debuffs visibly broke the Nightmares' Tumbling Attack game; the DM admitted the slows "saved your bacon." One Nightmare <strong>bled out mid-turn</strong> on Seva's wounding rune — a real death in a tournament of knockouts — and the last one standing, burning on her 81-damage Ignition crit, <strong>forfeited</strong>. First feather won back.</li>
+      <li>The cost: the party's hero-point pool cratered — <strong>Ferrok</strong> burned his last on a Spellstrike reroll (it turned a 26 into a <strong>43 crit</strong>), and <strong>Sattva's</strong> went out with the line of the night: <em>"Last hero point gone. All of them spent on medicine checks."</em></li>
+      <li>Mid-fight bonus: after ten-plus sessions of fighting the automation, <strong>Ferrok finally got Arcane Cascade working.</strong> <em>"I figured it out!"</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act IX · Treasure · The Mountain's Base (3:23 – 3:26)</div>
+  <div class="act-card">
+    <h3>An old shrine with real loot</h3>
+    <ul>
+      <li>The hex at Mount Haminabu's base held an old shrine: a <strong>Candle of Truth</strong>, a <strong>golden spyglass</strong> (~1,000 gp), and <strong>three Greater Healing Potions</strong>.</li>
+      <li><strong>Ferrok</strong>, inventorying the swan-boat tokens and the spyglass: <em>"We have a boat and a spyglass. We can be pirates."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act X · Combat · The Last Breath (3:26 – 4:02) · Win · Feathers 4 → 5</div>
+  <div class="act-card">
+    <h3>The roughest fight of the day</h3>
+    <ul>
+      <li>A team of three: a katana <strong>swordsman</strong> (the same murderous Swift Blow/Dueling Expertise kit as the Pale Sun), an unarmed <strong>monk</strong> with a force Qi Blast cone, and a longsword <strong>"mage"</strong> who turned out to be a magus. The party debated wagering two feathers and settled on one — <em>"Slow and steady wins the race."</em></li>
+      <li>The short version: <strong>Ferrok walled the enemy magus off with Wall of Metal and killed him</strong>; the enemy monk <strong>knocked Sovael out twice</strong> with prone-punishing flurries (and crit his unconscious body for good measure); the swordsman crit Sattva for 97 before <strong>Clutch's hero-pointed crit dropped him</strong>; and at the top of the final round, the monk — last one standing, surrounded, with the party actively healing — <strong>forfeited.</strong></li>
+      <li><strong>Back to five feathers.</strong> <strong>Seva</strong>: <em>"Did we make any progress?"</em> The DM: <em>"And we met Jaiban."</em> <strong>Sovael</strong>: <em>"That's the highlight of the day."</em></li>
+      <li>640 XP. No level-up — but the DM closed with a promise: <em>"Provided you survive whatever your next encounter might be, you will level up next session."</em> <strong>Level 13 incoming.</strong></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Creature Den #2 · Win · 200 pp</div>
+  <h3>Five Dromornis</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">Dromornis A–E · AC 27–28 · ~175 HP · +24</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Beak 2d12+12 + bleed · Talon 2d8+12 + bleed · Rushing Attack</span></div>
+    <div><span class="stat-label">Kill ledger</span><span class="stat-value">Seva 2 · Ferrok 2 · Sattva 1</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">Clean win · heavy bleed economy</span></div>
+  </div>
+  <h4>Round 1 — First blood, both directions</h4>
+  <ul>
+    <li><strong>Clutch</strong> opened with Battle Cry Demoralize + Group Taunt; <strong>Ferrok's</strong> Ignition Spellstrike hit for 54. The birds rushed in — misses on Seva, a 27-damage beak into Sovael, a 27 into Sattva, and a nat-20 talon crit into Clutch (<em>"That's the only way I could have crit you on that"</em>).</li>
+    <li><strong>Sovael's</strong> standard opener: Courageous Anthem + Lingering Composition (3 rounds) + Talent Envy Demoralize (nat 1 — the bird was unimpressed).</li>
+    <li><strong>Seva's</strong> crit Ignition Spellstrike left one bird at 2 HP and cooking on 6d6 persistent fire — <em>"You fucking bird brain die!"</em> — and it obliged, burning to death before its next turn.</li>
+  </ul>
+  <h4>Round 2 — The bleed economy, and friendly fire</h4>
+  <ul>
+    <li>At one point Sovael, Sattva, Clutch, and Ferrok were all bleeding simultaneously. <strong>Clutch's</strong> Defensive Advance crit a second bird for <strong>70</strong>, Shock arcing 12 into its neighbor.</li>
+    <li><strong>Sovael</strong> debuted <strong>Aether Beam</strong> — 32 force into one bird (shoved 10 feet), 16 into another, and 32 into <strong>Seva's back</strong>, the only damage she took all fight.</li>
+    <li>When that bird went for Seva anyway, <strong>Clutch intercepted both strikes</strong>, his new <strong>Armored Counterattack</strong> answering with a hit and a 50-damage crit — and <strong>Seva's dagger finished it</strong>: her second kill.</li>
+  </ul>
+  <h4>Rounds 3–4 — Crit-cleanup</h4>
+  <ul>
+    <li>A beak crit came for Sovael — Clutch intercepted that too (33) and counterpunched, prompting the DM's Guardian PSA. <strong>Sattva's</strong> 87-damage and 55-damage crits back-to-back deleted his hunted prey; <strong>Ferrok's</strong> sword crits (72, then 84) killed the last two birds outright.</li>
+    <li><strong>Aftermath</strong>: Clutch dealt 216 with zero kills, a third of it on reaction counterattacks. Sattva's Ward Medic mass-Treat Wounds (crit, 56 HP to four PCs at once) reset the party. Ingdani delivered <strong>200 platinum</strong>.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Tournament Bout · Forfeit · Feathers 5 → 4</div>
+  <h3>Under the Pale Sun</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">2 Swordsmen (AC 33, katana +29) · 2 Archers (+28)</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Swift Blow · Dueling Expertise +2d10 · Rain of Arrows</span></div>
+    <div><span class="stat-label">Damage ledger</span><span class="stat-value">~227 dealt (archers: 0) vs ~850 taken</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">Forfeit at the top of Round 3</span></div>
+  </div>
+  <h4>Round 1 — Both swordsmen crit their quick-draws</h4>
+  <ul>
+    <li>Swordsman B into <strong>Seva</strong> for 68 with stacked bleed; Swordsman A into <strong>Ferrok</strong> for 67. <strong>Sattva</strong> hero-pointed a Battle Medicine to stitch Seva back up (61).</li>
+    <li>Archer A's first Rain of Arrows nat-1'd harmlessly — the last good news: Archer B's volley crit the whole backline, <strong>65 each</strong> into Sattva, Sovael, and Seva (Ferrok's emergency shield blocked his to 46).</li>
+    <li><strong>Sovael</strong> layered Dirge of Doom and burned a <strong>Scroll of Synesthesia (rank 5)</strong> on Swordsman B — saved, one round of Clumsy 3/Dazzled — while <strong>Ferrok</strong> went Haste + Glass Shield and popped a potion patch.</li>
+  </ul>
+  <h4>Round 2 — "For the healers"</h4>
+  <ul>
+    <li>Clumsy 3 didn't slow the katana — Swordsman B demoralized <strong>Clutch</strong> and crit him anyway for <strong>89 (Dueling Expertise)</strong> — but the AC drop bought Sattva a 60-damage crit and a follow-up hit that would otherwise have missed (<em>"Clumsy came in clutch"</em> — the DM).</li>
+    <li>Archer A's second volley crit for 63/63/57; <strong>Sovael's</strong> entire turn was triage (rank-5 self-Heal, Prayer Beads on Ferrok) as the DM slid in both resource off-ramps mid-turn. Then Swordsman A went "for the healers" and crit <strong>Sovael for 90 — 9 HP left</strong>. <em>"Are you dead dead?"</em></li>
+  </ul>
+  <h4>The forfeit</h4>
+  <ul>
+    <li><strong>Ferrok</strong> called it — the party had put 160 into Swordsman B (Sattva's bow doing 106 of it) and <strong>never touched either archer</strong>. Ingdani called victory for the Pale Sun. The archer's exit: <em>"May we meet again."</em> Full XP for the loss.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Wildlife · Group Escape · No feathers at stake</div>
+  <h3>Jaiban, the Lord of the Island</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemy</span><span class="stat-value">"CrocaMantis" kaiju · AC low-40s · Perception +34</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Jaws +37 (reach 20) · Tail +35 (reach 25) · Quaking Stomp (Earthquake, DC 41) · permanently quickened</span></div>
+    <div><span class="stat-label">RK DC</span><span class="stat-value">~48 — Sattva crit-failed</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">First-ever use of the group-escape rule</span></div>
+  </div>
+  <h4>The only round</h4>
+  <ul>
+    <li><strong>Sattva's</strong> arrows crit-missed by 11 and 17 against its AC; his RK crit-failed. Jaiban — four actions, permanently quickened — <strong>stomped</strong>: Ferrok and Sovael crit-failed the DC 41 save (96 into Ferrok, 84 into Sovael after his False Vitality temp HP; Seva and Sattva failed for 48, Clutch's resistance shaved his to 41).</li>
+    <li>Then it strode, hit <strong>Clutch</strong> with its jaws <strong>on a natural 3</strong> (63 rolled, 56 through resistance), and tail-crit <strong>Ferrok</strong> for 90 — 75 through the shield block. <strong>171 damage into Ferrok in one enemy turn.</strong></li>
+  </ul>
+  <h4>The escape</h4>
+  <ul>
+    <li>Before the round even finished, the party unanimously declared the <strong>group escape</strong> — its first use ever. <strong>Sovael</strong> declared a parting heal on Ferrok as they scrambled (resolved moments later as the Scroll of Heal). <strong>Clutch's</strong> in-chat commentary on first seeing the thing: <strong>"NANI!?"</strong></li>
+    <li>No feathers at stake — wildlife. No shame either. <em>"Come back at a higher level."</em></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Tournament Bout · Forfeit · Feathers 4 → 3</div>
+  <h3>The Lightkeepers</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">Syu Tak-nwa · Shino Hakusa · Blue Viper · Ran-to</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Synesthesia DC 39 · bombs +31 · gauntlets +32 · Escape DC 42</span></div>
+    <div><span class="stat-label">Damage ledger</span><span class="stat-value">~111 dealt (Syu &amp; Shino: 0) vs ~316 taken</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">Forfeit on the antidote ultimatum · they hit 9 feathers</span></div>
+  </div>
+  <h4>Round 1 — Outclassed immediately</h4>
+  <ul>
+    <li><strong>Blue Viper</strong> feinted a sword charge on Ferrok, then point-blank crit him with bottled lightning (47) and put an acid flask into Sattva (15 + persistent; splash caught Sovael). <strong>Ferrok's</strong> Spellstrike answer connected only on a hero-point reroll — to hit by exactly 0 — for 47, the mirror of what he'd just taken. Blue Viper, to his allies: <em>"Why can't I hit the fucking Minotaur?"</em></li>
+    <li><strong>Sovael</strong> stacked the defenses (Anthem, Benediction, a Demoralize that left Ran-to Frightened 1 — both his gauntlet swings at Seva whiffed). <strong>Shino</strong> tumbled clean over Sovael's head; Clutch Intercepted her follow-up (35).</li>
+    <li><strong>Syu</strong> landed <strong>Synesthesia on Clutch</strong> (36 vs DC 39) — Clumsy 3, Dazzled, one minute — and when Clutch tried to Defensive-Advance, <strong>Ran-to's reactive-strike grapple caught him by the neck</strong> (against Escape DC 42, there was no getting out).</li>
+  </ul>
+  <h4>Round 2 — The poison, and the biggest hit</h4>
+  <ul>
+    <li>Blue Viper's shortsword put <strong>Cerulean Scourge stage 1</strong> into Ferrok — 31 poison on a failed save. <strong>Ferrok</strong> weighed it out loud — <em>"Do I want to burn stuff on an unwinnable fight?"</em> — and fired Chain Lightning anyway; the first link crit-saved and the chain died.</li>
+    <li><strong>Sovael's</strong> Divine Wrath met a nat 20 and a nat 18 (<em>"I have good dice too"</em> — Seva, dryly) — 12 damage through, total. Shino's pressure point stacked Enfeebled 2 onto Clutch's Synesthesia through a rerolled save. <strong>Syu crit Seva with a Telekinetic Projectile for 52</strong> — the biggest hit of the fight.</li>
+    <li>Ran-to's <strong>Whirlwind Toss</strong> used Clutch as the weapon (Seva clipped, Clutch thrown five feet); Clutch Intercepted the follow-up gauntlet too — and <strong>Seva's</strong> Spellstrike finally tagged Ran-to for 30: <em>"How do you like that?"</em></li>
+  </ul>
+  <h4>The ultimatum</h4>
+  <ul>
+    <li>Round 3 opened with Blue Viper producing the antidote and pricing it at one feather. The party took the deal, Blue Viper tossed the vial over anyway, and Ferrok drank it on the spot. The Lightkeepers walked off at <strong>nine feathers</strong> — one from qualification.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · Creature Den #3 · Win · 300 pp</div>
+  <h3>The Caustic Monitor</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemy</span><span class="stat-value">Huge acid monitor lizard · quickened stride</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Jaws + Improved Grab + venom · Caustic Spray (DC 36)</span></div>
+    <div><span class="stat-label">Biggest hit</span><span class="stat-value">Ferrok's 124 Spellstrike crit</span></div>
+    <div><span class="stat-label">Kill</span><span class="stat-value">Clutch — Snagging Strike claw</span></div>
+  </div>
+  <h4>Round 1 — A nat 20 and a fear stack</h4>
+  <ul>
+    <li><strong>Clutch's</strong> Battle Cry Demoralize landed at initiative (Frightened 1), but the monitor opened anyway with a <strong>nat-20 bite on Clutch for 93</strong> and an acid cone that caught Ferrok for 68 (Sattva crit-saved for nothing).</li>
+    <li><strong>Sattva's</strong> Recall Knowledge actually <em>failed</em> — the DM volunteered the profile anyway: best save Fortitude, worst Will, no weaknesses. <strong>Seva</strong> ran Doctor's Visitation triage on Clutch mid-fight.</li>
+    <li><strong>Sovael's</strong> opener stacked the fear: Anthem, a Talent Envy Demoralize upgraded to <strong>Frightened 2</strong>, then rank-3 <strong>Roaring Applause</strong> stripping its reactions (it saved — Roaring Applause denies reactions anyway).</li>
+  </ul>
+  <h4>Round 2 — The 124</h4>
+  <ul>
+    <li>With the fear stack and a flank discounting its AC, <strong>Ferrok</strong> — <em>"Ferrok is tired of getting beat up"</em> — landed a Sure Strike + Horizon Thunder Sphere Spellstrike <strong>crit for 124</strong>, the biggest single hit of the session.</li>
+    <li><strong>Clutch's</strong> Combat Grab locked it down; its Improved Grab grapple-back <strong>crit-failed on a nat 1</strong>, Clutch forced it prone, and all three of its desperate talon rakes missed.</li>
+  </ul>
+  <h4>Round 3 — The kill</h4>
+  <ul>
+    <li><strong>Sovael's</strong> Fire Ray hit for 51; <strong>Seva</strong> mimicked the monitor's own slashing with a Gouging Claw Spellstrike; <strong>Sattva's</strong> arrows chipped it down — and <strong>Clutch's Snagging Strike claw landed the killing blow</strong>. 300 platinum from Ingdani.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · Tournament Bout · Win via forfeit · Feathers 3 → 4</div>
+  <h3>The Nightmares</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">Nightmares A–D · wakizashi skirmishers · ~205 HP</span></div>
+    <div><span class="stat-label">Kit</span><span class="stat-value">Tumbling Attack · Kip Up · feint · sneak attack · weak Fortitude</span></div>
+    <div><span class="stat-label">Turning point</span><span class="stat-value">Double Divine Wrath — 2 nat-2 crit-fails</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">C, D, A killed · B forfeited burning</span></div>
+  </div>
+  <h4>Round 1 — Winning initiative, then the tempo</h4>
+  <ul>
+    <li><strong>Sovael's</strong> hero-pointed initiative (32 rerolled into 44) put him ahead of the pack — Anthem + Lingering (a failed Performance rerolled into 3 rounds, the Persona Mask earning its keep), then <strong>Divine Wrath #1</strong>: C and D both rolled nat 2s — <strong>crit fails, 64 damage each, sickened 2 AND slowed</strong>. Both slowed Nightmares missed their round-1 strikes by exactly the sickened −2.</li>
+    <li><strong>Ferrok</strong> drank his pre-held Potion of Quickness; <strong>Clutch's</strong> Battle Cry frightened C at initiative, then he tripped and grabbed it. B answered with a 70-damage sneak-attack crit into <strong>Sattva</strong> — the start of a fight-long fixation.</li>
+  </ul>
+  <h4>Round 2 — Wrath again, and the wall holds</h4>
+  <ul>
+    <li><strong>Divine Wrath #2</strong> — free, off the Holy Prayer Beads — and all three Nightmares in the burst failed (<em>"the getting them slowed... definitely saved your bacon"</em> — the DM).</li>
+    <li>D's nat-20 Tumbling crit hit Ferrok for 71 (shield-blocked to 52), but <strong>Clutch's Snagging Strike crit (56) dropped Nightmare C</strong>, and when A crit Sattva for 97, <strong>Clutch intercepted it for 90</strong> — then intercepted A's follow-up meant for Sovael too, Armored-Counterattacking after each.</li>
+  </ul>
+  <h4>Round 3 — "Shoot D in the face"</h4>
+  <ul>
+    <li><strong>Ferrok's</strong> last-hero-point reroll turned a 26 into a <strong>43 crit</strong> — 122 damage in one turn — and <strong>Sattva's point-blank arrow finished Nightmare D</strong>.</li>
+    <li>A tumbled through Sovael and landed a nat-20 crit for 69 — and after the session's most sincere apology (<em>"Sorry, Sovael, I thought you were 20 feet away"</em>), <strong>Clutch realized his Taunt let him intercept from 15 feet and ate that one as well</strong> (62 — his third intercept of the fight, all from Nightmare A). <strong>Seva</strong> "avenged Sovael" with a 40-damage crit that left A bleeding on her wounding rune.</li>
+  </ul>
+  <h4>Round 4 — Bleeding out</h4>
+  <ul>
+    <li><strong>Sovael's</strong> Sure-Struck Fire Ray (46) set the ground burning under A; <strong>Sattva's</strong> last hero point saved a failed Battle Medicine; <strong>Clutch's</strong> claw left A at <strong>exactly 1 HP</strong>. A tumbled through Sattva for a last spite hit — and <strong>bled out mid-turn on Seva's wounding rune</strong>: <em>"And then we'll pass out. Oh, he died."</em></li>
+    <li><strong>Seva</strong> then crit B with an Ignition Spellstrike — 81 damage and heavy persistent fire (<em>"You might burn to death after that"</em>) — and <strong>B forfeited</strong>. Sovael took zero damage; Clutch absorbed 169; Sattva quietly tanked 205 of Nightmare B's undivided attention.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 7 · Tournament Bout · Win via forfeit · Feathers 4 → 5</div>
+  <h3>The Last Breath</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value">Swordsman (katana +29) · Monk (Qi Blast, Punch Down) · Magus (Disintegrate)</span></div>
+    <div><span class="stat-label">Sovael's day</span><span class="stat-value">103 crit taken · KO'd twice · healed everyone anyway</span></div>
+    <div><span class="stat-label">Kills / drops</span><span class="stat-value">Ferrok → magus · Clutch → swordsman</span></div>
+    <div><span class="stat-label">Outcome</span><span class="stat-value">Monk forfeited, surrounded, nearly untouched</span></div>
+  </div>
+  <h4>Round 1 — The wall and the spite-beam</h4>
+  <ul>
+    <li>The monk's 2-action Qi Blast cone — Sovael and Seva shrugged off half (21 each), but <strong>Sattva</strong> failed and was blasted into the rocks for 42. The swordsman's quick-draw whiffed off Seva's parry.</li>
+    <li><strong>Sovael</strong>, delaying behind the swordsman, ran the full control suite: <strong>Dirge of Doom crit-lingered to 4 rounds</strong>, Talent Envy crit-upgraded Demoralize (<strong>Frightened 2</strong> on the swordsman), and rank-6 <strong>Roaring Applause</strong> — both frontliners saved and lost their reactions anyway.</li>
+    <li><strong>Ferrok walled the magus off with a 60-foot Wall of Metal</strong> — so the magus Quickened a 1-action Translocate through it, wound up for a Flowing Strike, got ruled back (it's 3 actions), and spitefully fired <strong>Disintegrate</strong> instead: 66, halved to 33 on Ferrok's save. (<em>"He said, fuck you."</em> — Seva.)</li>
+  </ul>
+  <h4>Round 2 — The 103, and the boulder</h4>
+  <ul>
+    <li>The monk tripped Seva but whiffed both Inner Upheaval fists. The swordsman ran the long way to the isolated Sovael — Dueling Expertise online — and <strong>crit him for 103</strong>; Sovael sustained the Applause, walked away untouched through reaction-less enemies, and self-Healed 69.</li>
+    <li><strong>Ferrok's</strong> Ignition Spellstrike landed on the magus, who <strong>Zephyr Slipped</strong> away — and the slip provoked <strong>Ferrok's reactive-strike crit (68 + burning)</strong> on top of the full Spellstrike.</li>
+    <li>Then the magus lobbed a <strong>rank-7 telekinetic boulder</strong> into the clumped party: <strong>Sovael nat-2'd the save</strong> (42, <strong>knocked prone</strong> — the prone that fueled everything after), Clutch went prone with 34 through a damaged shield, Seva saved.</li>
+  </ul>
+  <h4>Round 3 — Punch Down, and one down</h4>
+  <ul>
+    <li>The monk found the prone Sovael: <strong>Punch Down flurry, 72 damage — down</strong>, then crit the unconscious body to push him toward elimination. With the Applause sustain dead, the enemies got their reactions back.</li>
+    <li>The swordsman <strong>crit Sattva for 97</strong>; Clutch intercepted the follow-up and Armored-Counterattacked. <strong>Ferrok finished the magus</strong> with a 47-damage swing (<em>"one down"</em>). <strong>Sattva's</strong> Battle Medicine (36) pulled Sovael back up; Clutch <strong>Combat-Grabbed the swordsman</strong>; Seva's Dimensional Assault + Gossamer Blade left persistent force gnawing on him.</li>
+  </ul>
+  <h4>Round 4 — "At least I heal"</h4>
+  <ul>
+    <li><strong>Sovael</strong> — still prone — spent his whole turn on others anyway: Healing Nexus (40, self) and a <strong>rank-6 Heal for 80 on Sattva</strong>: <em>"I might be knocked out after this, but at least I heal."</em> The monk's four strikes ended in a <strong>nat-20 — down again</strong> (tournament nonlethality doing heavy lifting).</li>
+    <li>The swordsman unloaded on Seva and rolled his own nat 20 — an <strong>88 crit that Clutch intercepted for 81</strong>, countering with a 44 crit as the grab slipped. Then <strong>Clutch hero-pointed his claw from a nat 2 into a 42-crit, 54 damage — and the swordsman dropped</strong> (~300 damage across the fight).</li>
+  </ul>
+  <h4>Final round — The forfeit</h4>
+  <ul>
+    <li>Having saved his Flourish for exactly this, <strong>Clutch's Doctor's Visitation</strong> strode through the fallen swordsman's square and crit the Battle Medicine that brought Sovael back — Wounded 3, still prone, still alive — while Seva shadow-stepped along behind him and patched herself. The monk — last of the Last Breath standing, nearly untouched but alone, surrounded, with the party actively healing — <strong>forfeited</strong>.</li>
+    <li><strong>Feather won — back to five.</strong> Hero-point ledger at fight's end: Seva out, Sattva out, Ferrok out, and Clutch's last one spent.</li>
+  </ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+  <h4>Sovael · The Flaming Pearl, Repeatedly Extinguished</h4>
+  <ul>
+    <li><strong>The control engine won both team fights.</strong> The Nightmares broke on his hero-pointed initiative into double Divine Wrath (two crit-fails, everything sickened/slowed — the DM: "the slows saved your bacon"); the Last Breath fight ran on his four-round Dirge of Doom, crit-upgraded Talent Envy Demoralizes, and reaction-stripping Roaring Applause. <em>"You know what they say, if it works, try to do it again. It's working."</em></li>
+    <li><strong>The rebuild debuted</strong> — Living Nexus. Absorb Magic to inhale allies' spellcasting, Aether Beam as the payoff (<em>"I just want to use my new toy. Sorry."</em>) — which promptly friendly-fired Seva for 32 — and Healing Nexus for self-repair, once Sattva talked him out of trying to aim it at other people (<em>"I think you can only heal yourself with that"</em> — with Seva piling on: <em>"On the rest of your body, yeah"</em>).</li>
+    <li><strong>He was the day's designated victim.</strong> Cut to 9 HP by the Pale Sun ("Are you dead dead?"), 84 from Jaiban's crit-failed Earthquake, and knocked out <strong>twice</strong> by the Last Breath monk's Punch Down loop — who crit his unconscious body in between — surfacing between knockdowns to heal everyone else. His stated grievance is now on record: <em>"You need more pressure on the back line, guys. Why am I the only one always pressured?"</em></li>
+    <li><strong>Best RP beat</strong>: the Jaiban arc, in four lines — "Never. Never run." (minutes before meeting it) / "Well met." / "Let's not meet again." / and, flying away from a kaiju at full speed: <strong>"I'll take revenge!"</strong> He's already budgeting a top-rank spell for the rematch.</li>
+    <li>Also the party's rules-keeper: caught the DC 17→18 drift in his notes, which surfaced the flat-check escalation rule.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-seva">
+  <h4>Seva · The Sore Loser (Affectionate)</h4>
+  <ul>
+    <li><strong>The session's comic spine was her wounded pride.</strong> She complimented the Pale Sun's name and backstory through gritted teeth ("Be off with you!"), declared the Lightkeepers' name "uncool" to their faces (Blue Viper: "Now you're just being sore losers"), banned Ferrok from rolling encounter dice ("You rolled for two teams"), and — jointly with Sattva ("this proves our hypothesis") — formulated the day's operating theory: <strong>the party cannot beat light-themed teams</strong>, proven when the Nightmares became their first team win. Money for a cleared den got the definitive response: <em>"Who cares about money when my pride is hurt? Where to?"</em></li>
+    <li><strong>Mechanically she was everywhere</strong>: two Dromornis kills (one burned to death on her Ignition, one finished with the dagger), Dimensional Assault repositioning all day, the <strong>Gossamer Blade debut</strong> (persistent force echo on off-guard targets), Shadow Tempo "taxiing" alongside Clutch's stride, and Battle Medicine triage on herself and the monk-battered frontline.</li>
+    <li><strong>She also took the worst openers of the day</strong> — a 68-damage quick-draw crit from the Pale Sun and the Last Breath swordsman's 88 crit (Clutch ate it for her) — and kept walking back into melee anyway.</li>
+    <li>The softer line came first — watching Sovael get carried out of the last fight: <em>"We need to protect you better, to be honest."</em> Then she closed the session with the whole day in one sentence: <em>"We got our asses kicked our first week. That's some experience."</em></li>
+  </ul>
+</div>
+
+<div class="spotlight s-ferrok">
+  <h4>Ferrok · The Comeback Arc</h4>
+  <ul>
+    <li><strong>The optimist of a losing day.</strong> He named the party's hypothetical first-battle title ("Sandy Ragequit"), pitched ocean-themed names until Seva staged an intervention, coined the Nightmares victory condition ("If we beat the nightmares, we can become the sweet dreams"), noted the name they <em>could</em> have had — <em>"We could have been the Talmandor 5, but we all, like everybody else, retired"</em> — and reframed both losses in real time: <em>"That's alright. This is setting our comeback arc on."</em></li>
+    <li><strong>He killed the Last Breath magus with tactics, not luck</strong>: Wall of Metal to cut the backline off, then a reactive-strike crit when the magus tried to slip away, then the finishing swing. He also drank an enemy team's antidote without hesitation and took a Disintegrate on the chin (saved, 33).</li>
+    <li><strong>Cerulean Scourge, bottled lightning, katana crits, a 90-damage kaiju tail</strong> — he remains the table's aggro magnet (171 damage from Jaiban in a single turn), and remains philosophical about it: <em>"He's the one that decided to throw bombs at me, so that's on him."</em> And, weighing spell slots against the Lightkeepers: <em>"Do I want to burn stuff on an unwinnable fight?"</em> — then casting Chain Lightning anyway.</li>
+    <li><strong>Ten sessions of automation warfare ended in triumph</strong>: <em>"I figured it out!"</em> — Arcane Cascade, at last, applied on purpose. Also had a market epiphany about rune-grade materials that will be eating his gold for weeks.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-sattva">
+  <h4>Sattva · The Medic Who Pays in Hero Points</h4>
+  <ul>
+    <li><strong>He spent every hero point he had on Medicine checks</strong> — his own accounting — including the mid-crisis stitch-up of Seva in the Pale Sun fight. <em>"Last hero point gone. All of them spent on medicine checks."</em> After Jaiban, his Risky Surgery failed twice in a row on the badly wounded Ferrok, cutting instead of curing — a running bit that somehow coexists with him being the party's most reliable healer.</li>
+    <li><strong>He made the forfeit call that mattered.</strong> When Blue Viper priced Ferrok's antidote at one feather, Sattva answered for the table without hesitation: <em>"I like my organs. That was like a good deal. I'll take that deal."</em> He's also the one who asked the Pale Sun about their name, and who, after fleeing the kaiju, announced: <em>"I'll turn to our handler and ask her what the hell that was."</em></li>
+    <li><strong>His bow ran hot and cold on brand</strong>: crit-misses by 17 against Jaiban, but an 87/55 double-crit that deleted a Dromornis, a point-blank shot "in the face" of a Nightmare, and steady precision fire that softened the Last Breath swordsman for everyone else.</li>
+    <li><strong>Identity reveal of the session</strong>: Seva — "What are you?" Sattva — "Sattva." Seva — "No, I mean, what <em>caster</em> are you?" The answer, as ever, was Sattva.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-clutch">
+  <h4>Clutch · The Wall That Apologizes</h4>
+  <ul>
+    <li><strong>He intercepted everything, all day</strong> — Dromornis crits, Shino's fists, the Last Breath swordsman's 88-damage crit on Seva (81 through his resistance) — and offered it like table service: <em>"Would you like that to be intercepted?"</em> His new Armored Counterattack turned those intercepts into free return strikes, including a 50-damage crit, on top of a 70-damage Defensive Advance crit of his own.</li>
+    <li><strong>The Lightkeepers used him as a demonstration dummy</strong> — Synesthesia (Clumsy 3, Dazzled), a reactive-strike grapple by the neck, Enfeebled 2 from pressure points, and a Whirlwind Toss that used him as the weapon — and he still ended the fight upright and taunting.</li>
+    <li><strong>He landed the Caustic Monitor kill</strong> after grab-locking it and forcing its nat-1 grapple-back prone, and <strong>dropped the Last Breath swordsman</strong> by hero-pointing his final claw from a nat 2 into a 42 crit. His actual last act of the session was the revive: Doctor's Visitation through the fallen swordsman's square, crit Battle Medicine on Sovael — <em>"We've saved our flourish trait for this."</em></li>
+    <li><strong>The quiet conscience beats</strong>: the immediate "Sattva, are you OK? I was going to intercept," and the apology mid-realization — <em>"Sorry, Sovael, I thought you were 20 feet away"</em> — right before discovering his Taunt let him intercept the 69 anyway. Plus the firm line on team names: <em>"We're not a football club. Come on."</em> His chat-window review of Jaiban: <strong>"NANI!?"</strong></li>
+  </ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Rewards</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">200 platinum</div>
+    <div class="loot-source">Dromornis den · den #2</div>
+    <div class="loot-note">Ingdani's scaling den bounty</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">300 platinum</div>
+    <div class="loot-source">Caustic Monitor · den #3</div>
+    <div class="loot-note">Next den pays more</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Fade Band</div>
+    <div class="loot-source">Animal-stash hex</div>
+    <div class="loot-note">Talisman — rank-2 Invisibility when an attack misses you (requires trained Stealth)</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Feather Token (Swan Boat) ×2</div>
+    <div class="loot-source">Animal-stash hex</div>
+    <div class="loot-note">"We have boats now"</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">700 gp in gemstones</div>
+    <div class="loot-source">Animal-stash hex</div>
+    <div class="loot-note">Sold at the stone market — 60 pp + 140 gp distributed to each PC</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Candle of Truth</div>
+    <div class="loot-source">Shrine hex · Mt. Haminabu's base</div>
+    <div class="loot-note">Second one this campaign</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Golden spyglass</div>
+    <div class="loot-source">Shrine hex</div>
+    <div class="loot-note">~1,000 gp — "We can be pirates"</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Healing Potion (Greater) ×3</div>
+    <div class="loot-source">Shrine hex</div>
+    <div class="loot-note">The "raider-killing potions" of the audio</div>
+  </div>
+</div>
+<div class="xp-banner">Experience · <strong>640 XP</strong> · Silver Feathers <strong>5 → 4 → 3 → 4 → 5</strong> · 500 pp in den bounties · <strong>Level 13 promised next session</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Sovael:</strong> "I just want to use my new toy. Sorry."
+<span class="attribution">Aether Beam's combat debut — moments before the 60-foot force line clipped Seva for 32.</span></blockquote>
+
+<blockquote><strong>Seva:</strong> "Well met." — <strong>Sovael:</strong> "Well met." — <strong>Seva:</strong> "Well met." — <strong>Sovael:</strong> "Let's not meet again."
+<span class="attribution">The party, in unison, giving tournament-greeting etiquette to Jaiban, the kaiju that was about to Earthquake them.</span></blockquote>
+
+<blockquote><strong>Sovael:</strong> "I might be knocked out after this, but at least I heal."
+<span class="attribution">Prone, freshly revived, casting a rank-6 Heal on Sattva instead of saving himself. The monk's nat 20 arrived on schedule.</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "If we were going to name ourselves after our first battle, it would be Sandy Ragequit."
+<span class="attribution">Post-loss naming workshop, honoring the S9 beach spar and its most famous casualty.</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "Do I want to burn stuff on an unwinnable fight?"
+<span class="attribution">Mid-Lightkeepers resource math — asked out loud, answered by casting Chain Lightning anyway.</span></blockquote>
+
+<blockquote><strong>Ferrok:</strong> "If we beat the nightmares, we can become the sweet dreams."
+<span class="attribution">The proposed victory-condition team name. Vetoed as "sounding like a girl group."</span></blockquote>
+
+<blockquote><strong>Sattva:</strong> "I like my organs. That was like a good deal. I'll take that deal."
+<span class="attribution">Answering Blue Viper's antidote-for-feather ultimatum on behalf of Ferrok's internal anatomy.</span></blockquote>
+
+<blockquote><strong>Sattva:</strong> "Last hero point gone. All of them spent on medicine checks."
+<span class="attribution">The healer's ledger, closing out the Nightmares fight.</span></blockquote>
+
+<blockquote><strong>Seva:</strong> "Damn, that's really cool. So they beat us, and they have a cool name, and a backstory. Be off with you!"
+<span class="attribution">Learning the Battle of the Pale Sun origin story seconds after losing to it.</span></blockquote>
+
+<blockquote><strong>Seva:</strong> "We are the Lightkeepers. Your name is uncool."
+<span class="attribution">Blue Viper's verdict: "Now you're just being sore losers."</span></blockquote>
+
+<blockquote><strong>Clutch:</strong> "Would you like that to be intercepted?"
+<span class="attribution">Offering damage absorption with the cadence of a waiter offering fresh pepper.</span></blockquote>
+
+<blockquote><strong>Clutch:</strong> "Sorry, Sovael, I thought you were 20 feet away."
+<span class="attribution">Mid-apology for missing an intercept, he realized his Taunt extended the range to 15 feet — and ate the Nightmare's 69-damage crit after all. Sovael took zero damage that fight.</span></blockquote>
+
+<blockquote><strong>DM:</strong> "You want some GM advice, folks? You ever want to hit the Guardian? Attack literally everybody else."
+<span class="attribution">Cody, watching Clutch's Intercept engine punish the Dromornis for targeting anyone at all.</span></blockquote>
+
+<blockquote><strong>Seva:</strong> "We got our asses kicked our first week. That's some experience."
+<span class="attribution">The session's closing line, and its thesis.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Jaiban's grudge</strong> — the Lord of the Island is alive, unbothered, and now the object of Sovael's sworn revenge. The DM joked about a mate and a "Jaiban's dad" stat block; nobody laughed with their whole chest.</li>
+  <li><strong>The Lightkeepers are at nine feathers</strong> — one from locking in their seat. If the party wants that feather back, the window is nearly closed. ("We'll be back for that feather later." — "Anytime.")</li>
+  <li><strong>The Strange Village</strong> — plain humans, mad-dog stares, deliberately left alone. What are they?</li>
+  <li><strong>Mount Haminabu</strong> — the Day-3 ascent point for any team holding 10 feathers. The party has 5 and two days left.</li>
+  <li><strong>The Temoutan Village</strong> — an inhabited-looking toy town, politely vacated. The note asks that it be left undisturbed.</li>
+  <li><strong>Transport-tower network</strong> — two towers found and linked; more exist. Fast travel is now live.</li>
+  <li><strong>Team name</strong> — still unsettled. <strong>"The Wanderers"</strong> (Ferrok) is the closest to consensus; Triple S FC lives on as a bit; "no light-themed names" is now doctrine.</li>
+  <li><strong>Pale Sun rematch</strong> — "May we meet again." They were called one of the stronger teams <em>available today</em>; the roster rotates daily.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next Session</span>
+  <p>640 XP banked. The comeback is one fight old, and the DM's farewell carried a rider:</p>
+  <div class="big-line">"Provided you survive whatever your next encounter might be, you will level up next session."</div>
+  <span class="speaker">— Cody, choosing those words very deliberately. Level 13 incoming.</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li>Debuted the <strong>Living Nexus</strong> kit in live fights: Absorb Magic → <strong>Aether Beam</strong> (force line; hit two Dromornis <strong>and Seva</strong> — check firing lanes before releasing), Healing Nexus 40-point heals (tried to hand one to Clutch in the bird fight — <strong>it's self-only</strong>; the table caught it in the Nightmares fight), <strong>False Vitality</strong> each fight for topping temp HP.</li>
+  <li>Ran the standard opener every fight: Courageous Anthem + Lingering Composition + <strong>Talent Envy</strong> free Demoralize. It pushed Demoralize to <strong>Frightened 2</strong> twice (Monitor, Last Breath swordsman). Free value every single round one.</li>
+  <li><strong>Double Divine Wrath broke the Nightmares</strong> — two nat-2 crit-fails on the first (64 dmg each, sickened 2 + slowed), failures across the burst on the second (cast free off the Holy Prayer Beads). Their Fortitude was the soft spot; committing the same spell twice was correct.</li>
+  <li>Spent hero point #1 on the Nightmares initiative reroll (32 → 44) — going first is what made the double-Wrath line possible. Worth it.</li>
+  <li>Burned a <strong>Scroll of Synesthesia (R5)</strong> on a Pale Sun swordsman (saved — one round of value) and a <strong>Scroll of Heal (R4)</strong> after Jaiban. Used the Prayer Beads' rank-4 Heal on Ferrok mid-fight.</li>
+  <li>Forfeited twice with the team; voted to take Blue Viper's antidote deal. Correct calls all three times.</li>
+  <li>Kept healing from prone through two knockouts in the Last Breath fight — rank-5 self-Heal (69), rank-6 Heal on Sattva (80) after his 97 crit. <strong>Bounce Away quietly shaved 12 off every bludgeoning hit</strong> (54→42, 84→72, 42→30, 78→66) — the katana's slashing was what actually hurt.</li>
+  <li>Caught the flat-check DC drift (17 → 18) — the DC climbs by 1 per tournament fight and partially resets daily. Keep tracking it in notes.</li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li>Nothing withheld this session — but note privately: the DM's level-up phrasing ("provided you survive whatever your next encounter might be") sounded like a telegraph, not a joke.</li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>The backline pressure problem is now structural.</strong> Two knockouts in one fight, and a crit taken while unconscious. Every enemy team sends its skirmisher or monk straight at me. Options to actually use: permanent flight <em>before</em> melee arrives (used it exactly once today, at Jaiban — it worked), Elf Step out of reach, Wall of Wind vs archers (forgot it against Pale Sun — "I have something for archers, but I just forgot to use it"), and standing 30+ ft from Clutch means his Intercept can't reach — stay inside 15 ft of the Guardian.</li>
+  <li><strong>Roaring Applause + Dirge of Doom is the right team-fight frame</strong> — reaction denial let Ferrok's wall-and-kill play work, and the no-save Frightened 1 fed every martial's accuracy.</li>
+  <li><strong>The Lightkeepers were a stat check, not a puzzle</strong> — DC 39 Synesthesia, nat-20 saves. Losing 1 feather instead of 2 was the win available. Blue Viper honored the antidote anyway; they're rivals, not villains.</li>
+  <li>Den bounties scale: 200 → 300 → presumably 400+. Wildlife dens are the safest income on the island — when in doubt, hunt dens, not teams.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What does the DM's "provided you survive" foreshadow — Jaiban again, the Strange Village, or a top-tier team hunting feathers?</li>
+  <li>Do the Lightkeepers hit 10 and lock in — and does that remove them from the Day-2 encounter pool?</li>
+  <li>What is the Strange Village actually guarding?</li>
+  <li>Level 13 picks — decide before next session. (Rank-7 slots: Sovael's first. What's the spell pick — and does the Living Nexus line have a feat due?)</li>
+</ul>
+</section>
+</body>
+</html>
