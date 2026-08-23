@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 18 — We're the Bad Guys</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>We're the Bad Guys</h1>
+  <div class="subtitle">Session 18 &middot; The Gyve breaks open, and the Hellbreakers stop counting bodies</div>
+  <div class="meta-row">
+    <span class="meta-pill">22 Aug 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">3h 18m</span>
+    <span class="meta-pill">~19&ndash;20 Abadius 4727 AR</span>
+    <span class="meta-pill">Level 6</span>
+  </div>
+</header>
+
+<h2>Session Composition</h2>
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:35%"></div>
+  <div class="comp-seg comp-rp" style="width:25%"></div>
+  <div class="comp-seg comp-explore" style="width:22%"></div>
+  <div class="comp-seg comp-social" style="width:10%"></div>
+  <div class="comp-seg comp-loot" style="width:8%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 35%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 25%</span>
+  <span><span class="legend-dot" style="background:var(--teal)"></span>Infiltration 22%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Planning 10%</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 8%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-baijian">
+    <div class="char-name">Bai Jian</div>
+    <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster + Hedge Mage &middot; Lv 6</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-cyrathul">
+    <div class="char-name">Cyrathul</div>
+    <div class="char-class">Lunar Dragon Thaumaturge (Mirror Cloak + <strong>Regalia</strong>) &middot; Draconic Ravager &middot; Lv 6</div>
+    <div class="char-player">Snowgeen &middot; absent for the first half (GM-run)</div>
+  </div>
+  <div class="char-card char-panacea">
+    <div class="char-name">Panacea</div>
+    <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic + Living Nexus &middot; Lv 6</div>
+    <div class="char-player">Bog Witch</div>
+  </div>
+  <div class="char-card char-zanthar">
+    <div class="char-name">Zanthar Melodune III</div>
+    <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &middot; Lv 6</div>
+    <div class="char-player">Scott Smith</div>
+  </div>
+  <div class="char-card char-leoz">
+    <div class="char-name">Judge Leoz Balake <span class="new-badge">&#9670; NEW</span></div>
+    <div class="char-class">Fetchling Gunslinger (Way of the Pistolero) &middot; Scout / Firebrands &middot; Lv 6</div>
+    <div class="char-player">Obie &middot; debut</div>
+  </div>
+  <div class="char-card char-ren">
+    <div class="char-name">Ren</div>
+    <div class="char-class">Isgeri Boarhound &middot; mature animal companion</div>
+    <div class="char-player">Bai Jian's</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The party came into this session having spent all of Session 17 refusing to kill anybody. They end it standing in a corridor full of dead prison guards, agreeing out loud that they are the bad guys now.</p>
+
+<p>The night opened quietly. Bai Jian, standing watch outside the Soldier's Aegis, heard a single set of boots in the snow &mdash; Jenverick, who had been told to stay put and hadn't &mdash; and then a second man who made no sound at all. <strong>Judge Leoz Balake</strong> stepped out of the shadows: once a genuinely well-loved magistrate, high integrity, tough on crime, never took a bribe, until somebody threw acid in his face. He has been a vigilante ever since, and that is how the Hellbreakers heard of him. The party looted fifteen feet of jagged pit for eternal eruptions and frozen lava, argued cheerfully about who got to carry the bomb (Zanthar won, and put it up his sleeve <em>"so it's kind of protected from going boom on accident"</em>), and asked the new man whether he could tell them where to plant charges. Leoz answered by drawing his pistol: <em>"I've got a detonator."</em> Panacea rolled a natural 20 on Society and picked the placements herself. They took a room at the White Stag, slept through the sound of boots marching past the window all night, and in the morning Jenverick pulled a spare Masquerade Scarf out of her back pocket for the one man at the table who wasn't wanted yet.</p>
+
+<p>Then they blew a ten-foot hole in the wall of the Gyve, and the tone of the campaign changed inside of one round. A sniper on the guard tower opened with an arquebus crit for <strong>36</strong> into Bai Jian's chest before anyone had taken a turn. Zanthar &mdash; the gnome who introduced himself an hour earlier as "a do-gooder" &mdash; looked at the tower and said, <em>"I think this is a we-don't-care-if-they-die situation."</em> Leoz put a bullet clean through the sniper for <strong>42</strong>, twirled the pistol, told him <em>"you're guilty,"</em> and reloaded John Wick-style. Zanthar hero-pointed a Blazing Bolt down the same hole the bullet had made. Panacea killed both artillerists &mdash; one with a Moonlight Ray that went <em>"right over the dead guy,"</em> one with a hex she narrated as Serrafina's ray bouncing off his skull and taking his head off. Nobody on the tower survived, and nobody at the table hesitated.</p>
+
+<p>Inside, it got worse before it got better. The basement was a torture chamber, and the two things working in it were an interrogator with a long slender razor and a bruiser with a greatclub. The interrogator hit Bai Jian with a <strong>27-damage crit</strong>, filled the room with an aura of blood and fear, and then hit him again for <strong>25</strong>. Cyrathul's Draconic Frenzy finally put it down (<em>"boss, no!"</em> from the back of the room), and Bai Jian vaulted off a desk to open the bodyguard's chest while Ren tore at his leg. Chained to the wall were <strong>Sarevial</strong>, the League's own courier, sobbing that he had told them everything &mdash; and <strong>Osney</strong>, who looked up and said <em>"me say nothing. They can get nothing from me."</em> Upstairs, the first door Zanthar picked released a stampede. The party did not just take their own people. <strong>They decided to free everyone in the building.</strong></p>
+
+<p>The last fight was a corridor lined with arrow slits and nothing to hit. Ren pointed a paw at a blank wall &mdash; a gesture his handler couldn't actually see &mdash; Bai Jian burned a hero point on the dog's Perception and then found the scratch marks himself anyway (<em>"I shouldn't have used the hero point"</em>), and a hidden door swung open onto three elite archer sentries and a hired mage. And in the middle of it the argument the whole session had been building to finally happened out loud. The last guard standing dropped his sword, fell to his knees, and said he only makes two gold a week. <strong>Judge Leoz flipped a coin for his life.</strong> It came up in the guard's favour, and the man handed over his keyring and offered to lead them to the third floor. Bai Jian, watching him go: <em>"I guess we're the bad guys now."</em> Cyrathul: <em>"We're the bad guys."</em></p>
+</div>
+
+<h2>The Night</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I &middot; Roleplay &middot; The Night Judge</div>
+    <div class="act-card">
+      <h3>Session zero, and a man who makes no sound</h3>
+      <ul>
+        <li>The GM ran a short <strong>session zero</strong> for the new player: lines and veils, fade-to-black on romance, and an explicit warning that this is a grim AP &mdash; Cheliax as Isger's mother country, slavery abolished in name and running as indentured servitude in fact.</li>
+        <li><strong>Panacea</strong>: a catfolk witch-medic from a cult of catfolk who keep <em>human</em> familiars; she and Serrafina fell <em>into</em> a portal while playing in the jungle as adolescents and came out near Breachill. And, still: <em>"this is my first time ever playing a role-playing game."</em></li>
+        <li><strong>Bai Jian</strong>: from Tian Xia, five years on the trail of a missing family member, joined the League voluntarily &mdash; <em>"hasn't paid out so far, but it has been a journey."</em> <strong>Zanthar</strong>: <em>"a gnome that's particularly small,"</em> a wizard with healing, <em>"a do-gooder."</em> <strong>Cyrathul</strong>, absent, described by the GM: a <strong>Lunar Dragon</strong> Thaumaturge who underwent the <strong>Lux Aeterna</strong> ritual to help throw off Cheliax's chains.</li>
+        <li><strong>Panacea took the recap hero point</strong> unprompted (<em>"I'll do it if nobody else wants to"</em>). House economy: one at start, one at the break, one for the recap.</li>
+        <li>Outside the Aegis, Bai Jian's Perception (<strong>21</strong>) caught <strong>one</strong> set of boots in the snow &mdash; Jenverick, disobeying orders to stay put. The <strong>second</strong> arrival made no sound at all.</li>
+        <li><strong>Judge Leoz Balake</strong> introduced himself: <em>"some in certain circles refer to him as the Night Judge."</em> A well-loved, high-integrity, tough-on-crime magistrate who never took a bribe &mdash; until he was hit in the face with <strong>acid</strong>, and turned to vigilantism. He was supposed to be at the meeting; <strong>arriving late is the only reason he isn't in the Gyve with everyone else.</strong></li>
+        <li>Bai Jian tried to bench Jenverick (<em>"I think you should stay back"</em>). She pulled the thinnest needle of a dagger anyone had ever seen out of her belt loop, looked scared and determined, and took a lookout post &mdash; blending into the corner of the building so well she nearly vanished.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act II &middot; Planning &middot; The Pit, the Plan, and the White Stag</div>
+    <div class="act-card">
+      <h3>Enough explosives to open a prison</h3>
+      <ul>
+        <li>The munitions pit was ~15 feet deep and jagged. Contents: enough unused <strong>frozen lava</strong> and <strong>eternal eruptions</strong> to blow the prison wall, stage several diversionary explosions across town, <em>and</em> leave the party spares. Everything went into Cyrathul's <strong>spacious pouch</strong>.</li>
+        <li>Zanthar claimed the eternal eruption because <em>"that looks like a fun toy to me,"</em> then stowed it in his sleeve <em>"so it's kind of protected from going boom on accident."</em> Bai Jian: <em>"Don't have too much fun, though."</em></li>
+        <li><strong>Leoz tied his first mechanical contribution to his backstory</strong> &mdash; asking whether his knowledge of prisons, "from being who he is," could place the charges. He had Underworld Lore, not Warfare Lore. When Zanthar worried they had bombs but no way to set them off remotely, Leoz produced the answer: <em>"I've got a detonator," he says as he pulls out his pistol.</em></li>
+        <li><strong>Panacea rolled a natural 20 on Society (32)</strong> and personally chose where the diversionary charges went; Zanthar's Crafting (13) and Leoz's untrained Society (8) added nothing. The GM gave her the credit outright &mdash; <em>"Panacea really seems like she knows what she's doing&hellip; almost like she's done this before."</em></li>
+        <li>Panacea kept dragging the planning back to the part nobody wanted to answer: <em>"are we also planning on what we're going to do with the people that we free?"</em> &rarr; <em>"this is why we should be discussing it. We need a good plan."</em></li>
+        <li><strong>The boat is gone as an escape route.</strong> Quoster sails as soon as he's loaded. The replacement: the <strong>military stables next to the Gyve</strong>. Jenverick took the horses, clearing the stables <em>after</em> the wall goes up, since the blast pulls the stable guards toward the breach.</li>
+        <li><strong>GM warning</strong>: <em>"Once we move to the next map, there'll probably be no long rest until you guys are done."</em> They took a room at the <strong>White Stag</strong> under Zanthar's last <strong>Shared Invisibility</strong>. One bed, everyone on the floor. Bai Jian took first watch and Zanthar second; both heard boots marching in formation up and down the street all night.</li>
+        <li>In the morning <strong>Jenverick handed Leoz a Masquerade Scarf</strong> &mdash; <em>"I know that you aren't actually wanted yet, but maybe you could use this as well."</em></li>
+        <li>Recon over breakfast: <strong>Panacea's Society (24)</strong> turned up a <strong>torture chamber in the basement</strong>; <strong>Bai Jian's Gather Information Diplomacy (26)</strong> put the prisoners on the <strong>second and third floors</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III &middot; Combat &middot; The Wall Breach</div>
+    <div class="act-card">
+      <h3>Ten feet of wall, and the doctrine dies</h3>
+      <ul>
+        <li>Charges against an outer wall blew a <strong>10-foot section</strong> open. Shouting from the ramparts: <em>"Wall breach! To arms!"</em> Then a loud crack of a firearm from the top of a tower.</li>
+        <li><strong>The courtyard was empty.</strong> Normally it would be full of prisoners forced to make arms for the army; there was no labour detail running. Panacea shouted Milani's recognition phrase into it anyway &mdash; <em>"if you are friends of the rose, come over here to the prisoners"</em> &mdash; and nobody heard her.</li>
+        <li><strong>Doctrine flipped in one line.</strong> Zanthar, looking up at the tower: <em>"I think this is a we-don't-care-if-they-die situation."</em> Nobody argued. Panacea, a round later: <em>"apparently we're going all the way with these guys, huh?&hellip; We are going to kill them."</em> Leoz: <em>"That's the only way that Leoz starts, unfortunately."</em></li>
+        <li>Post-fight the party stripped the tower: two dueling pistols, an arquebus, <strong>four silencers</strong>, two siege-weaponry toolkits, repair toolkits, forty-odd rounds. <strong>Leoz claimed the silencers and a spare pistol.</strong> Cyrathul, reading the item text: <em>"Four completely silenced shots."</em></li>
+        <li><strong>Snowgeen arrived at the break</strong> and took Cyrathul back from the GM. His first line: <em>"seems to be working pretty well."</em> Leoz's welcome to the campaign's ethics: <em>"Yeah, that whole non-lethal thing you guys apparently tried last time. I figured as much."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV &middot; Combat &middot; The Torture Chamber</div>
+    <div class="act-card">
+      <h3>"No, no more."</h3>
+      <ul>
+        <li>Down into a round subterranean chamber: black stone, dripping water amplified into echoes, rusty shackles on the ceiling and walls, an iron smell of blood under a grave-scent of earth, a rack under a pulley system, cruel pokers and blades on the back wall.</li>
+        <li><strong>Leoz, under his breath, before anyone rolled anything: <em>"This is injustice."</em></strong></li>
+        <li>Bai Jian's boots gave the party away. Two figures turned: one sharpening a long slender razor, one with a nasty gauntlet and a huge club. And from the wall, a voice &mdash; <em>"no, no more."</em></li>
+        <li>Bai Jian's answer to <em>"coming to join the party?"</em>: <strong><em>"Yeah, no, we're here to disrupt the party. You gotta stop this madness."</em></strong></li>
+        <li>Leoz crit-failed initiative and made a joke of it in character: <em>"He's slow. He's new. He's got to get with the rhythm."</em></li>
+        <li>The prisoners on the wall were <strong>Sarevial</strong>, the Hellbreaker courier who has hosted the party at two safehouses, and <strong>Osney</strong>, the goblin burglar who taught them how to stage a robbery. Sarevial fell to his knees sobbing when Cyrathul unlocked his second hand &mdash; <em>"I couldn't help myself&hellip; I was telling them everything. He was so wicked."</em> Osney gave up nothing: <em>"me say nothing. They can get nothing from me."</em></li>
+        <li><strong>Bai Jian: <em>"Yeah, we won't abandon our comrades."</em></strong> Sarevial confirmed the S17 raid hit within a minute of the party leaving, that everyone was there, and that Jenverick went out a window with a Hellknight after her. The rest are <strong>upstairs</strong>, brought down one at a time.</li>
+        <li><strong>Leoz</strong>, as the party turned for the stairs: <strong><em>"No time to waste. Justice waits for no one."</em></strong> <strong>Bai Jian</strong>, approving it out loud: <em>"I like the sound of that."</em> The Night Judge set the tone and the fighter signed off on it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act V &middot; Hazard &middot; The Prison Break</div>
+    <div class="act-card">
+      <h3>The decision to free everyone</h3>
+      <ul>
+        <li>Zanthar took the <strong>Skeleton Key</strong> &mdash; which doubles as a bonused thieves' toolkit, a fact Bai Jian had to point out after failing to Force Open at DC 27 &mdash; and picked the first cell lock in two successes.</li>
+        <li>The door opened on a mass cell: stale sweat, mounds of straw for beds, people packed shoulder to shoulder with nowhere to lie down, all trying to push past the party at once. <strong>It was a hazard, not a fight.</strong> Bai Jian, deadpan on seeing initiative rolled: <em>"Oh yeah, it's a hazard. Of course."</em></li>
+        <li><strong>Panacea cast Calm into the mob</strong> &mdash; not to stop them, but <em>"so they can get out orderly like"</em> &mdash; scoring the first success toward disabling it. Her follow-up Recall Knowledge never happened: her Foundry client crashed to a black screen, and the GM covered it in fiction.</li>
+        <li><strong>Cyrathul closed it out with No Cause for Alarm</strong>, a 3-action skill feat he'd evidently never had a use for (<em>"I can't think of another situation which could use it"</em>), hero-pointed for safety. The mob froze <em>"like deer caught in headlights,"</em> then began politely asking to squeeze past: <em>"Excuse me, can I squeeze through right here?"</em></li>
+        <li><strong>The party banked an Uprising point.</strong></li>
+        <li><strong>The scope decision.</strong> These weren't Hellbreakers &mdash; the party recognised nobody. Zanthar: <em>"some criminals maybe."</em> <strong>Cyrathul: <em>"Yeah, but it's what the current Chelaxian regime views as criminals, so I don't know if I trust their judgment on this matter."</em></strong> Then, to the cell: <strong><em>"Yes, we're freeing everyone in this prison. So if you want to get out of here, now's your chance."</em></strong></li>
+        <li>Panacea gave them the route and one instruction &mdash; <em>"there's a hole downstairs in the wall&hellip; but don't go all the way downstairs into the torture chamber."</em></li>
+        <li>A dozen prisoners pointed the way: <strong>the Hellbreakers are in high security on the third floor.</strong> Panacea, failing to list her own recruits: <em>"a little dwarf veteran and a&hellip; oh gosh, I can't remember all of the people."</em></li>
+        <li>Rooms cleared: a tool room (Bai Jian took a <strong>crowbar</strong>) and an <strong>evidence locker</strong> of confiscated prisoner property &mdash; <strong>Leoz: <em>"This seems to be the evidence locker. Evidence of injustice."</em></strong> Cyrathul talked them into looting it anyway: <em>"it's just a lost and found. It's been there too long."</em> Bai Jian took <strong>bracers granting a 20-foot climb speed</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI &middot; Combat &middot; The Arrow-Slit Corridor</div>
+    <div class="act-card">
+      <h3>"Silence is compliance"</h3>
+      <ul>
+        <li>A winding corridor hung with manacles, its inner wall lined with <strong>arrow slits</strong> &mdash; bows firing from a room the party could not reach or even see into. Zanthar, on the shooters' accuracy: <em>"That seems like a personal problem."</em></li>
+        <li><strong>Finding the way in took three of them.</strong> <strong>Leoz</strong> worked the geometry first. <strong>Bai Jian</strong> sent <strong>Ren</strong> forward on scent; the hound rolled a natural 1, Bai Jian <strong>spent a hero point</strong> (10 &rarr; +10 house rule &rarr; <strong>32</strong>), and Ren held out a paw at a blank stretch of wall &mdash; a gesture <strong>Bai Jian couldn't see</strong> (<em>"you just hear him barking"</em>). Bai Jian then made the same check on a plain <strong>26</strong> and spotted a <strong>half-moon of scratch marks</strong> where a hidden door swings &mdash; <em>"I shouldn't have used the hero point."</em></li>
+        <li>He forced the door open onto three <strong>elite archer sentries</strong> and a <strong>mage for hire</strong>. Cyrathul <strong>mirrored through an arrow slit</strong> to flank, <em>"I'll give like a nice toothy dragon smile,"</em> and opened with a crit.</li>
+        <li><strong>The argument.</strong> It had a prologue: four minutes earlier Bai Jian had already conceded, <em>"I think at this point we should just accept it. Just kill people."</em> Then Zanthar: <em>"Guess we're just killing everybody."</em> Panacea: <em>"These aren't good people."</em> <strong>Bai Jian argued the other way anyway</strong> &mdash; <em>"I mean, they're prison guards. They're just doing their job."</em> Panacea shut that down: <em>"No. They're torturing people in the basement. <strong>They knew</strong> they were torturing people in the basement. Don't act like they didn't."</em> And Bai Jian rebutted <strong>himself</strong>: <em>"they're accomplices. <strong>Silence is compliance.</strong>"</em> Three minutes later, still chewing: <em>"I don't think at this point we're just killing innocent guards."</em></li>
+        <li><strong>Two sentries died; the third</strong> dropped his shortsword, fell to his knees, and surrendered: <em>"I only make two gold a week."</em> Bai Jian, immediately: <em>"Now I feel that."</em></li>
+        <li><strong>Judge Leoz flipped a coin for him.</strong> The table made him actually roll it. It came up in the guard's favour. Bai Jian: <em>"Well, it's your lucky day. You get to join your friends."</em></li>
+        <li>Panacea turned the surrender into an asset &mdash; <em>"I want you to lead the way, please"</em> &mdash; and Bai Jian took his <strong>ring of keys</strong>. Zanthar stripped the dead mage and finally got what he'd complained about all night: a <strong>thieves' toolkit and a seven-spell spellbook</strong>.</li>
+        <li>Session ends with the party holding the keys, a guide, and a building they have emptied &mdash; one floor below the people they came for.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<h2>Combat Encounters</h2>
+
+<div class="log-warning">
+&#9888; <strong>Log note.</strong> The GM cleared Foundry's chat twice for performance, so the roll log arrived in four exports &mdash; two of which overlap. The duplicate paste (97 messages fully contained inside a 152-message export) was discarded before any figure below was computed. A <strong>~25-minute window (8:27&ndash;8:52 pm) is missing entirely</strong>, covering the back half of the Prison Break hazard and the room-clearing after it; those beats are reconstructed from the recording alone.
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; The Wall Breach &middot; Trivial &middot; 40 XP</div>
+  <h3>Sniper &times;1 (arquebus, guard tower) &middot; Artillerist &times;2 (ballista)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Sniper 31 &middot; Panacea 27 &middot; Art. A 24 &middot; Cyrathul 22 &middot; Bai Jian 20 &middot; Art. B 20 &middot; Leoz 15 &middot; Zanthar 14</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">42 (36 Bai Jian, 6 Ren)</div></div>
+    <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">All three dead</div></div>
+  </div>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Sniper</strong> opened before the party had acted: <strong>Arquebus critical hit on Bai Jian, 36 damage</strong> (fatal d12, natural 20). Second shot critically missed.</li>
+    <li><strong>Panacea</strong> moved for line of sight and hit <strong>Battle Medicine</strong> (Assurance, one action via Doctor's Visitation) &mdash; <strong>26 healed</strong> on Bai Jian. The tower was 20 feet up, putting the sniper outside her 30-foot hex range; she ended without casting.</li>
+    <li><strong>Artillerist A</strong> fired a <strong>Bombard</strong> (basic Reflex DC 19): <strong>Panacea, Zanthar and Bai Jian all critically succeeded</strong> (Bai Jian on Bulwark +3). <strong>Ren</strong> was the only one who merely <em>succeeded</em> &mdash; which is exactly why he was the only creature to take damage: <strong>6</strong>.</li>
+    <li><strong>Cyrathul (GM-run)</strong> used the <strong>Mirror Cloak</strong> to put himself on the watchtower and bit: <strong>critical hit, 30 damage</strong>. <em>(Mechanically a stretch &mdash; Mirror's Reflection projects an image within 15 feet, and the tower was 20 feet up. A GM ruling on a GM-run PC.)</em></li>
+    <li><strong>Bai Jian</strong> spent the round on movement &mdash; Stride to a door, open it, climb a ladder toward a closed trapdoor. <strong>He made no attack rolls in this entire encounter.</strong> The reason is structural: since the S13 respec he has <strong>no ranged option at all</strong>, and every enemy was 20 feet up a tower.</li>
+    <li><strong>Leoz</strong> used <strong>Ten Paces</strong> for his free 10-foot step, found his first position left the sniper 45 feet away (outside Demoralize range) and took the movement back &mdash; then <strong>critically hit the Sniper for 42</strong> with the +1 striking bane cold iron dueling pistol (2d10 + Slinger's Precision 1d4 + fatal d10), triggering the firearm crit-spec Fortitude save at DC 22. <em>"This bullet just ripped through this guy&hellip; in his side and comes out his other side."</em> He closed with <strong>Raconteur's Reload</strong> &mdash; pistol twirl, <em>"you're guilty,"</em> John Wick reload &mdash; and a <strong>Demoralize on an Artillerist that failed</strong>.</li>
+    <li><strong>Zanthar</strong> cast <strong>Blazing Bolt</strong> at all three. First ray missed the sniper; he <strong>spent a hero point</strong>, rerolled (4 &rarr; 12, no +10 because the reroll beat 10), hit for <strong>13</strong> and <strong>killed the Sniper</strong> &mdash; the bolt going in through the bullet hole <em>"Robin Hood style."</em> Second ray missed; third <strong>critically hit for 34</strong>.</li>
+    <li><strong>Artillerist B</strong> spent its turn reloading the ballista and never fired it.</li>
+  </ul>
+
+  <h4>Round 2 &mdash; Panacea alone</h4>
+  <ul>
+    <li><strong>Moonlight Ray</strong> hit Artillerist A for <strong>12</strong>, killing him &mdash; <em>"my Moonlight Ray went through right over the dead guy and exploded that guy"</em> &mdash; then <strong>Trade Death for Life</strong> on Artillerist B, who <strong>critically failed</strong> the DC 22 Fortitude save for <strong>18</strong> and died. Serrafina's ray <em>"bounced off of him and beheaded him."</em> The fast healing went up the tower to Cyrathul, the only ally she could see.</li>
+    <li><strong>All three enemies dead before the party's second turn came around. Bai Jian never swung.</strong></li>
+    <li>&#9888; <strong>Both Artillerists were Quickened for the entire encounter and never once used the extra action.</strong> That, plus one of them spending a turn reloading, is the real reason a three-enemy ambush produced only two attack rolls.</li>
+  </ul>
+  <p style="color:var(--gold)">Loot: 2&times; dueling pistol, arquebus, 4&times; silencer, 2&times; artisan's toolkit (siege weaponry), 2&times; repair toolkit, 40 pistol rounds, 18 arquebus rounds.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; The Torture Chamber &middot; Trivial &middot; 40 XP</div>
+  <h3>Rovimi Scaphe (interrogator) &middot; Torturer (bodyguard)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Zanthar 29 &middot; Panacea 29 &middot; Rovimi 29 &middot; Bai Jian 26 &middot; Cyrathul 22 &middot; Leoz 14 &middot; Torturer 10</div></div>
+    <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">Rovimi 109 &middot; Torturer 50</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">52 &mdash; all of it Bai Jian</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-size:14px">Rovimi Scaphe: AC 21/19 off-guard, war razor +17 (agile, backstabber, deadly d8), <strong>Torment</strong> +1d8 mental vs frightened, <strong>Blood and Fear</strong> Will DC 18 emanation. Foundry auto-rolled Bai Jian a 17; the GM overrode it to his declared <strong>26</strong> &mdash; which is why he acts before Cyrathul, and why the Round 2 delay was available at all.</p>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Rovimi</strong> opened on the newcomer &mdash; war razor at <strong>Leoz</strong>, missed by 3.</li>
+    <li><strong>Zanthar</strong> cast <strong>Fear</strong>; Rovimi <strong>succeeded</strong> (<em>"his unshakable will kind of got shook a little bit"</em>). <strong>Hand of the Apprentice</strong> missed.</li>
+    <li><strong>Panacea</strong> cast <strong>Divine Lance</strong> for <strong>11</strong>, then <strong>Trade Death for Life</strong> (Fortitude failure) for <strong>7</strong>, fast healing to Bai Jian (<strong>+3</strong>). Serrafina's <em>Familiar of Paired Perplexity</em> put <strong>Stupefied 1</strong> on Rovimi. <em>(She also called Absorb Magic, but neither enemy cast a spell all encounter &mdash; no trigger, never resolved.)</em></li>
+    <li><strong>Ren</strong> Tumbled Through (Acrobatics vs Reflex DC 21, success) to set the flank.</li>
+    <li><strong>Bai Jian</strong> popped his <strong>Retrieval Prism</strong> for a free-action <strong>Scroll of Sure Strike</strong>, then hit for <strong>14</strong>.</li>
+    <li><strong>Cyrathul failed Exploit Vulnerability by 1</strong> (falling back to personal antithesis), then bit for <strong>22</strong>.</li>
+    <li><strong>Leoz</strong> hit for <strong>14</strong>, reloaded, and <strong>Demoralized &mdash; failed by 6</strong>.</li>
+    <li><strong>Torturer</strong> swung the greatclub at <strong>Ren twice and missed both</strong> &mdash; <em>"Ren is just way too nimble for that large club."</em></li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Rovimi critically hit Bai Jian for 27</strong> and left <strong>persistent 2d4 bleed</strong>, then triggered <strong>Blood and Fear</strong> (Will DC 18): <strong>Bai Jian failed</strong> (Frightened 1, Bravery reducing it from 2); <strong>Zanthar failed</strong>; <strong>Leoz critically succeeded</strong>; <strong>Panacea</strong> and <strong>Ren</strong> succeeded; <strong>Cyrathul hero-pointed</strong> a natural 1 into a <strong>critical success</strong> (reroll 10, +10 &rarr; 32). Rovimi's third attack hit Bai Jian again for <strong>25</strong>, including <strong>2d8 Torment mental</strong> &mdash; which only applied <em>because</em> the fear had landed.</li>
+    <li><strong>Two details from that save block.</strong> <strong>Panacea passed by exactly zero</strong> (18 vs DC 18) with <code>Regalia +1</code> in her breakdown &mdash; Cyrathul's brand-new implement was <em>literally</em> the margin that kept the healer un-frightened. And <strong>Zanthar's is the only save without <code>Regalia +1</code></strong>: he stood outside the 15-foot aura, and he is the only PC who stayed Frightened.</li>
+    <li><strong>Zanthar</strong> hurled his <strong>+1 striking maul</strong> for <strong>21</strong> &mdash; deliberately non-lethal, and disappointed: <em>"I was hoping I'd knock him out."</em></li>
+    <li><strong>Panacea</strong> cast <strong>Heal</strong> on Bai Jian (<strong>14</strong>, +1 from the Staff of Healing) and sustained Trade Death for Life (<strong>+3</strong>).</li>
+    <li><strong>Bai Jian delayed to sit behind Cyrathul's turn</strong> so <strong>Regalia's aura</strong> would strip his Frightened at the end of it &mdash; and <strong>it bought the kill</strong>. His falcata went out at the full <strong>+17</strong> with no Frightened &minus;1, and crit the Torturer's flanked AC 14 by <em>exactly</em> <strong>+10</strong>. At Frightened 1 that same die is a 23 &mdash; an ordinary hit for half the damage, and the bodyguard survives.</li>
+    <li><strong>Cyrathul: Draconic Frenzy &mdash; killed Rovimi Scaphe</strong> with the first jaws (<strong>20</strong>), drawing <em>"boss, no!"</em> from the bodyguard. He then <strong>succeeded on Exploit Vulnerability against the Torturer</strong> (DC 15), found no weakness (<em>"he has no weaknesses, as most humanoids do"</em>), and spent the question on its <strong>weakest save: Will</strong>.</li>
+    <li><strong>Ren</strong> bit the Torturer for <strong>16</strong>. <strong>Bai Jian critically hit for 34</strong> (Crushing rune &rarr; Clumsy 1 + Enfeebled 1) and <strong>killed him</strong> &mdash; narrated as Ren biting the leg to distract while Bai Jian jumped off a desk and cut him open through the chest.</li>
+    <li>Post-combat, Bai Jian <strong>critically failed</strong> his DC 11 flat check on a natural 1 and <strong>spent a hero point</strong>, which the +10 house rule makes an automatic success against that DC.</li>
+  </ul>
+  <p style="color:var(--gold)">Loot: +1 war razor, healer's toolkit, shackle keys. Rescued: <strong>Sarevial</strong> and <strong>Osney</strong>.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 &middot; Prison Break &middot; Hazard &middot; no XP awarded</div>
+  <h3>The stampede &mdash; a mass cell emptying through a corridor the party was standing in</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Prison Break 36 &middot; Panacea 30 &middot; Cyrathul 27 &middot; Leoz 16 &middot; Bai Jian 14 &middot; Zanthar 13</div></div>
+    <div><div class="combat-stat-label">Crush</div><div class="combat-stat-value">Basic Reflex DC 25 &middot; 2d10+9 = 21</div></div>
+    <div><div class="combat-stat-label">Disabled by</div><div class="combat-stat-value">2 successes &mdash; Calm, then No Cause for Alarm</div></div>
+  </div>
+  <ul>
+    <li><strong>The whole thing lasted one round, and only two people ever acted in it</strong> &mdash; Panacea and Cyrathul. Leoz, Bai Jian and Zanthar never reached their turns.</li>
+    <li>The rush ran as a <strong>single improvised d20+19 Athletics disarm</strong> against everyone in the hall (the GM couldn't get the hazard token to roll: <em>"we'll just roll a standard d20 and add 19 to it"</em>). It came up <strong>23</strong> and beat four of six Reflex DCs &mdash; but <strong>nobody was actually disarmed</strong>: Bai Jian corrected the table mid-resolution (<em>"disarm just makes this minus 2, unless it's a crit success"</em>), and the encounter ended before the penalty mattered.</li>
+    <li><strong>Failed the crush</strong>: Cyrathul (&minus;9), Zanthar (&minus;8), Bai Jian (&minus;6) &mdash; 21 each. <strong>Succeeded</strong>: Panacea (+5), Leoz (+6), Ren (+1) &mdash; half. <em>Leoz was briefly logged for a full 21 on top of his 10 before the table caught the double-application. Cyrathul's 21 went the other way &mdash; never applied at all, and he surfaced it himself six minutes later: "Oh, was I supposed to take damage?"</em></li>
+    <li><strong>Panacea cast Calm</strong> &mdash; <strong>first success</strong>. Her intent was not to stop them but to let them leave <em>"orderly like."</em> Her follow-up <strong>Recall Knowledge never happened</strong>: her Foundry client crashed to a black screen, and the GM covered it in fiction.</li>
+    <li><strong>Cyrathul used No Cause for Alarm</strong> &mdash; a <strong>3-action</strong> skill feat, which is why the GM ruled he couldn't also move &mdash; and <strong>hero-pointed</strong> it. <strong>Second success, hazard disabled.</strong> The mob froze <em>"like deer caught in headlights,"</em> then queued up saying <em>"excuse me, can I squeeze through right here?"</em></li>
+    <li><strong>+1 Uprising point</strong> banked. Afterward Panacea landed a <strong>3-action Heal</strong> for <strong>7</strong> across the party.</li>
+    <li><strong>Bai Jian's contribution here was entirely table-side</strong>, and there was a lot of it: he caught a <code>Crowd :: Athletics</code> roll card the GM had misfired to the players, corrected the Disarm rules read, prompted Panacea's Recall Knowledge, and called the group heal afterward.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 &middot; The Arrow-Slit Corridor &middot; Low &middot; 48 XP</div>
+  <h3>Archer Sentry &times;3 (elite) &middot; Mage for Hire</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2 (ended on a surrender)</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Leoz 31 &middot; Sentries 27/27 &middot; Bai Jian 26 &middot; Panacea 24 &middot; Sentry 22 &middot; Cyrathul 19 &middot; Zanthar 15 &middot; Mage 9</div></div>
+    <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">181</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">24 &mdash; all of it Cyrathul</div></div>
+  </div>
+  <div class="log-warning">
+  <strong>These sentries were run with the Elite template.</strong> The book <em>Archer Sentry</em> is level 2, AC 17, 30 HP; these ran at <strong>AC 19, longbow +12, shortsword 1d6+6</strong> &mdash; Elite exactly, i.e. <strong>level 3 and roughly 45 HP</strong>. Three confirmations: Zanthar says <em>"he's the elite guy"</em> out loud; a 34-damage crit failed to kill a fresh one; and the XP closes precisely (3&times;15 + 15 for the Mage = 60, scaled to five PCs = <strong>48, rated Low</strong>). Non-elite would have paid 36.
+  </div>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li>The sentries fired blind through arrow slits and <strong>missed every shot</strong> &mdash; two at Bai Jian, two at Cyrathul including a critical miss, then two more at Cyrathul. The GM's explanation was mechanical and merciless: <em>"It is hard to shoot through arrow slits."</em> Six shots, six misses.</li>
+    <li><strong>Finding the way in was a three-way effort.</strong> <strong>Leoz</strong> worked the geometry first. <strong>Bai Jian</strong> sent <strong>Ren</strong> forward; the hound rolled a <strong>natural 1</strong>, Bai Jian <strong>spent a hero point</strong> (10, +10 &rarr; <strong>32</strong>), and Ren pointed a paw at blank wall &mdash; which <strong>Bai Jian could not see</strong>. Bai Jian then made the same check on a plain <strong>26</strong>, spotted the <strong>half-moon of scratch marks</strong>, and said the line of the night: <em>"I shouldn't have used the hero point."</em> He forced the door and <strong>Raised Dueling Parry</strong>.</li>
+    <li><strong>Panacea</strong> crossed 40 feet for line of sight and put <strong>Guidance</strong> on Bai Jian. She thought she'd wasted it &mdash; <em>"oh shoot, it was wasted then"</em> &mdash; because he has his own via Hedge Mage. <strong>He corrected her, and he was right</strong>: <em>"No, no, it's fine. Because I don't have to cast it myself."</em> Her action saved him an action, and that +1 is in the log on his Grease save.</li>
+    <li><strong>Cyrathul</strong> mirrored through an arrow slit into flanking position and <strong>critically hit a sentry for 28</strong>; both follow-up claws missed, the second critically.</li>
+    <li><strong>Zanthar</strong> cast <strong>Blazing Bolt</strong>: <strong>two critical hits, 34 and 34</strong> (both on a die roll of 17, by margin rather than natural 20). The second <em>"completely blasts this person's head like a watermelon. All over the other two people."</em> Zanthar: <em>"I'm a killer machine."</em></li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Mage for Hire</strong> cast <strong>Grease</strong> across the entrance; <strong>Leoz failed the DC 20 Reflex by 1</strong>. He asked to reroll; the GM instead offered a straight auto-success, and Leoz spent his <strong>first hero point of the night</strong>.</li>
+    <li><strong>Leoz</strong> hit a sentry for <strong>7</strong>. A sentry <strong>critically hit Cyrathul for 24</strong> &mdash; the only damage the party took all encounter.</li>
+    <li><strong>Ren</strong> made his Grease save and bit a sentry for <strong>16</strong> &mdash; <em>"tears their femoral artery right out of their leg."</em></li>
+    <li><strong>Bai Jian critically succeeded the Grease save at 30</strong> (on Panacea's Guidance), then <strong>critically hit the Mage for Hire for 40</strong> &mdash; a <strong>Critical Hit by +20</strong> against its off-guard AC 16 &mdash; and <strong>killed it outright</strong>. A 30-HP caster, one-shot, before it ever took a second turn. <em>"He dares to cast a spell."</em></li>
+    <li><strong>Panacea</strong> hit the last sentry with <strong>Divine Lance</strong> for <strong>13</strong> and <strong>Trade Death for Life</strong> for <strong>9</strong> (Fortitude failure), healing to Zanthar. That sentry survived on those 22 points and <strong>surrendered</strong> rather than swing again.</li>
+  </ul>
+  <p style="color:var(--gold)"><strong>Kill credit</strong> &mdash; Cyrathul's 28 + Zanthar's second bolt 34 &rarr; <strong>Zanthar</strong> (the "watermelon"). Zanthar's first bolt 34 + Leoz's 7 + Ren's 16 &rarr; <strong>Ren</strong>, most likely. The Mage &rarr; <strong>Bai Jian</strong>, outright. Two sentries died, one lived.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-leoz">
+    <h4>Judge Leoz Balake &middot; the Night Judge</h4>
+    <ul>
+      <li><strong>The debut landed.</strong> Not "a gunslinger joins the party" but a fully-formed person: a well-loved, high-integrity magistrate, tough on crime, who never took a bribe &mdash; until somebody threw <strong>acid in his face</strong>. He's been a vigilante since, and that's how the League found him. He was supposed to be at the safehouse meeting; <strong>arriving late is the only reason he isn't in the Gyve with everyone else.</strong></li>
+      <li><strong>He speaks about himself in third person and ties his mechanics to his fiction.</strong> His first act was asking whether Leoz's knowledge of prisons, <em>"from being who he is,"</em> could place the charges. His second was the best line of the night: <strong><em>"I've got a detonator," he says as he pulls out his pistol.</em></strong></li>
+      <li><strong>He hits like a truck.</strong> First round of play, ever: a <strong>critical hit for 42</strong> through the tower sniper &mdash; narrated as the bullet going in one side and out the other. He closed with a full <strong>Raconteur's Reload</strong> flourish: the pistol twirl, the steely glare, <em>"you're guilty,"</em> and a John Wick reload. The Demoralize itself failed. Nobody cared.</li>
+      <li><strong>He is the party's conscience in a way none of the others are.</strong> In the torture chamber, before a single die was rolled, he muttered <em>"this is injustice."</em> In the evidence locker: <em>"This seems to be the evidence locker. <strong>Evidence of injustice.</strong>"</em> And turning the party toward the stairs: <strong><em>"No time to waste. Justice waits for no one."</em></strong> The Night Judge names what he's looking at &mdash; and Bai Jian, hearing that last one, said <em>"I like the sound of that."</em> One session in, the new man is supplying the party's watchwords.</li>
+      <li><strong>And he owns the moral weight of the ending.</strong> When the last guard surrendered and said he only makes two gold a week, Leoz didn't argue for mercy or execution &mdash; <strong>he flipped a coin.</strong> The table made him roll it for real. It came up in the guard's favour. That is a <em>judge</em> who has stopped believing in his own judgment, and it is a hell of a thing to establish in one session.</li>
+      <li><strong>He is already contributing tactically, not just atmospherically.</strong> He offered to take point with a <strong>silenced shot</strong> loaded; flagged that a barracks room could be locked from outside before the party walked past it; was the first to work the geometry of the arrow-slit corridor before Bai Jian sent the dog; and checked the penalty for shooting into melee rather than assuming it.</li>
+      <li>Also, gamely, a new player learning Foundry in public &mdash; targeting, macros, the party stash &mdash; and cracking jokes about it. On critically failing initiative: <em>"He's slow. He's new. He's got to get with the rhythm."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-panacea">
+    <h4>Panacea &middot; the One Who Asks the Hard Question</h4>
+    <ul>
+      <li><strong>She ran the session's planning and she ran its conscience.</strong> While everyone else argued about who got to hold the bomb, Panacea asked: <strong><em>"And while we're planning this, are we also planning on what we're going to do with the people that we free?"</em></strong> &mdash; and when the table drifted again, <em>"this is why we should be discussing it. We need a good plan."</em></li>
+      <li><strong>She took the recap hero point unprompted</strong> (<em>"I'll do it if nobody else wants to"</em>) and delivered a genuinely accurate three-minute account of Session 17 from memory.</li>
+      <li><strong>Natural 20 on Society</strong> to place the diversionary charges across the city, and the GM handed her the credit in narration: <em>"Panacea really seems like she knows what she's doing&hellip; almost like she's done this before."</em> Her Society check also turned up the torture chamber before they ever went down there.</li>
+      <li><strong>She is still, at Session 18, the table's first-time roleplayer</strong> &mdash; she says so out loud at session zero &mdash; and she is running the party's logistics, its healing, and its ethics.</li>
+      <li><strong>The moral spine of the ending is hers.</strong> When Bai Jian made the case that the prison guards were just doing their job, Panacea didn't hedge: <strong><em>"No. They're torturing people in the basement. They knew they were torturing people in the basement. Don't act like they didn't."</em></strong> She had just come up from that basement.</li>
+      <li><strong>And she is kind in the small places.</strong> She shouted Milani's recognition phrase into a courtyard that turned out to be empty, on the off-chance. She checked whether the freed torture victim needed healing. She told the released prisoners the way out <em>and</em> warned them off the basement. She asked the surrendering guard to lead them, with a <em>"please."</em> And when she couldn't remember her own recruits' names, it played as a woman rattled by what she'd just seen, hunting for people she'd personally signed up.</li>
+      <li>Two kills in the wall breach, both narrated with relish &mdash; a Moonlight Ray that went <em>"right over the dead guy,"</em> and Serrafina's ray bouncing off a skull and beheading its owner.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-zanthar">
+    <h4>Zanthar Melodune III &middot; the Do-Gooder Who Kept Score</h4>
+    <ul>
+      <li><strong>He has the session's clearest arc, and it is a great one.</strong> At session zero: <em>"a gnome that's particularly small&hellip; he's just looking for, trying to be better, trying to do good things for the world. <strong>He's a do-gooder.</strong>"</em></li>
+      <li>Then he looked up at the guard tower and said <strong><em>"I think this is a we-don't-care-if-they-die situation"</em></strong> &mdash; and that one sentence became the party's rules of engagement for the whole night, replacing six sessions of scrupulous non-lethal doctrine. Nobody voted. Nobody argued.</li>
+      <li>Then he <strong>hero-pointed a Blazing Bolt</strong> to finish the sniper, sending it down the hole Leoz's bullet had already made, <em>"Robin Hood style."</em></li>
+      <li>Then, two acts later, he swung his maul at the interrogator <strong>deliberately non-lethally</strong> and was disappointed it wasn't enough: <em>"I was hoping I'd knock him out."</em> The do-gooder is still in there.</li>
+      <li>Then, walking into the last corridor, <strong><em>"We're gonna kill them all!"</em></strong> Then he burst a sentry's head <em>"like a watermelon"</em> on a second consecutive critical Blazing Bolt: <strong><em>"That's it. I'm a killer machine."</em></strong></li>
+      <li>And then, minutes later, he was the one who said it out loud: <em>"Guess we're just killing everybody."</em> He opened the door on this and he's the first to notice where it went.</li>
+      <li><strong>He was also the party's key that opened the prison.</strong> Zanthar picked lock after lock with the Skeleton Key all night while wryly noting the gap in his kit: <em>"I really need to get a thief's toolkit, because I've got the skill, but not the&hellip;"</em> <strong>The session's last act paid it off</strong>: he stripped the dead Mage for Hire and walked away with a <strong>thieves' toolkit and a seven-spell spellbook</strong>.</li>
+      <li>Comedy throughout: claiming the biggest bomb in the pit because <em>"that sounds like fun"</em>; refusing to be first through any door (<em>"I go down real quick"</em>); and when Foundry disconnected him mid-turn and his token ran back upstairs, <strong><em>"I'm so embarrassed I ran away."</em></strong></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-cyrathul">
+    <h4>Cyrathul &middot; the Dragon Who Set the Terms</h4>
+    <ul>
+      <li><strong>Half his session was played by the GM</strong> &mdash; Snowgeen arrived at the break &mdash; and the GM's version of him still charged a guard tower alone, because Bai Jian vouched for it: <em>"He's brave. He runs in all the time."</em> Mirror Cloak to the tower top, jaws, critical hit, 30. His first words on taking the character back: <em>"Seems to be working pretty well."</em></li>
+      <li><strong>He supplied the principle that made the prison break stick.</strong> Freeing prisoners for cover was already in Jenverick's S17 plan &mdash; Zanthar's addition to it. But the plan assumed <em>Hellbreakers</em>. When the second cell held a dozen strangers and Zanthar shrugged that they were <em>"some criminals maybe,"</em> Cyrathul answered the actual question: <strong><em>"Yeah, but it's what the current Chelaxian regime views as criminals, so I don't know if I trust their judgment on this matter."</em></strong> Then, to the cell: <strong><em>"Yes, we're freeing everyone in this prison."</em></strong> A tactical diversion became a moral position, and it was his.</li>
+      <li><strong>He ended the stampede with a feat he'd been carrying for nothing.</strong> <em>"I do have a skill feat called No Cause for Alarm&hellip; I can't think of another situation which could use it."</em> He hero-pointed it, roared the corridor down, and a crushing mob turned into a queue saying <em>"excuse me, can I squeeze through right here?"</em></li>
+      <li><strong>His Exploit Vulnerability lane carried both fights he was present for</strong> &mdash; a failed check on the interrogator that fell back to personal antithesis, then a clean success on the bodyguard returning <em>no weakness</em> and a spent question on its weakest save: <strong>Will</strong>. He also brought a <strong>second implement, Regalia</strong>, whose fear aura Bai Jian immediately learned to time his turn around.</li>
+      <li><strong>He is warm with the rescued, and he is the one who does the unlocking.</strong> Cyrathul personally unshackled both prisoners; Sarevial fell to his knees sobbing as the second manacle came off, and Cyrathul told him <em>"Yes, it'll be all right. We have a handle on things now. You can come with us."</em> Before that he asked the harder question first &mdash; <strong>drawing a finger across his own throat</strong> to ask whether Sarevial had given anything up. To Osney, who gave up nothing: <em>"As expected."</em></li>
+      <li>Dry about everything else. On robbing the evidence locker: <em>"it's just a lost and found. It's been there too long."</em> On mirroring through an arrow slit into a room of archers: <em>"I'll give like a nice toothy dragon smile."</em></li>
+      <li>And he gets the session's last word, agreeing with Bai Jian without a flicker of protest: <em>"We're the bad guys."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-baijian">
+    <h4>Bai Jian &middot; the One Who Wouldn't Let It Be Easy</h4>
+    <ul>
+      <li><strong>He ate the session.</strong> A 36-damage arquebus crit before initiative had gone once. A 27-damage crit and a 25-damage follow-up in the basement, the second carrying 2d8 mental because the thing that cut him had already made him afraid of it. A failed Reflex against the stampede for 21 more. He is the frontline of one, and every encounter opened on him.</li>
+      <li><strong>His best mechanical play was patience, not damage.</strong> Frightened in the torture chamber, he <strong>delayed his turn to slot in behind Cyrathul's</strong> so the dragon's brand-new Regalia aura would strip the condition at the end of it. He read a teammate's new class feature and rebuilt his action order around it inside one round &mdash; and it turned an ordinary hit into the crit that killed the bodyguard.</li>
+      <li><strong>He is the party's problem-solver at the seams, and most of it is unglamorous.</strong> Failed Force Open at DC 27, then noticed the <strong>Skeleton Key doubles as a bonused thieves' toolkit</strong> and handed the job to Zanthar. Spent a hero point on <strong>Ren's</strong> Perception, found the hidden door on his own plain roll a moment later, and grumbled <em>"I shouldn't have used the hero point."</em> In the stampede he never got a turn at all and still did four things: caught a roll card the GM had misfired to the players, corrected the table's Disarm rules read, prompted Panacea's Recall Knowledge, and called the group heal afterward.</li>
+      <li><strong>He knows exactly what he is.</strong> On stealth: <em>"You look at Bai Jian, heavy armor, big ass sword, and a dog. Yeah, no. You need someone to guide him."</em> Follow the Expert, every time.</li>
+      <li><strong>Two kills, both narrated as teamwork with his dog</strong> &mdash; the bodyguard opened up from a desk-jump while Ren tore at his leg, and a <strong>40-damage critical hit that one-shot the Mage for Hire</strong> (<em>"He dares to cast a spell"</em>). He also gave up his own healing for Ren and then took it back: <em>"Actually, do it on me. Don't do it on Ren&hellip; I'm going to steal it from my dog."</em></li>
+      <li><strong>The session's real weight sits on him.</strong> <em>"We're here to disrupt the party. You gotta stop this madness"</em> to the torturer. <em>"We won't abandon our comrades"</em> to Sarevial. And when Leoz called the march upstairs with <em>"justice waits for no one,"</em> it was Bai Jian who took the line and endorsed it: <em>"I like the sound of that."</em></li>
+      <li><strong>And he is the only one who refused to let the killing become comfortable.</strong> Four minutes before the famous exchange he had already given up once &mdash; <em>"I think at this point we should just accept it. Just kill people."</em> Then he argued the other way anyway: <em>"they're prison guards, they're just doing their job."</em> Then he rebutted <strong>himself</strong> &mdash; <em>"they're accomplices. <strong>Silence is compliance.</strong>"</em> And then, three minutes later, still not settled: <strong><em>"I don't think at this point we're just killing innocent guards."</em></strong> That is not indecision. That is resignation, devil's advocacy, self-rebuttal, and a conclusion, in that order, with nobody prompting any of it.</li>
+      <li>When the surrendering guard mentioned two gold a week his answer was <em>"now I feel that,"</em> and when the coin came up mercy: <em>"it's your lucky day."</em> He closes the night on <strong>"I guess we're the bad guys now"</strong> &mdash; the only person at the table who spent the whole session trying to hold both halves of it at once.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ren">
+    <h4>Ren &middot; the Boarhound Who Pointed the Way</h4>
+    <ul>
+      <li>Tumbled Through into a flanking position on the interrogator, ate two greatclub swings from the bodyguard and dodged both (<em>"Ren is just way too nimble for that large club"</em>), and tore a sentry's femoral artery out.</li>
+      <li><strong>He pointed the way to the hidden door.</strong> Sent forward on scent into a corridor with no visible entrance, he rolled a natural 1, got a hero point spent on him, came back a <strong>32</strong> &mdash; and stood holding out a paw at a blank stretch of wall that <strong>his handler couldn't see him pointing at.</strong> Ren aimed him; Bai Jian found it.</li>
+      <li>Reliable saves all night: successes against Blood and Fear, the stampede crush, and Grease. His one blemish is the Bombard, where he was the <em>only</em> PC or companion who merely succeeded instead of critically succeeding &mdash; which is precisely why he was the only one who took damage from it.</li>
+    </ul>
+  </div>
+
+</div>
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item"><div class="loot-name">2&times; Dueling Pistol</div><div class="loot-source">Artillerists</div><div class="loot-note">One claimed by Leoz as a backup</div></div>
+  <div class="loot-item"><div class="loot-name">Arquebus</div><div class="loot-source">Sniper</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">4&times; Silencer</div><div class="loot-source">Sniper</div><div class="loot-note">Claimed by Leoz &mdash; one minute to attach, consumed on the first shot</div></div>
+  <div class="loot-item"><div class="loot-name">2&times; Artisan's Toolkit (Siege Weaponry)</div><div class="loot-source">Artillerists</div><div class="loot-note">Nobody in the party is a crafter</div></div>
+  <div class="loot-item"><div class="loot-name">2&times; Repair Toolkit</div><div class="loot-source">Artillerists</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item"><div class="loot-name">40 pistol rounds &middot; 18 arquebus rounds</div><div class="loot-source">The tower</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">+1 War Razor</div><div class="loot-source">Rovimi Scaphe</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item"><div class="loot-name">Healer's Toolkit</div><div class="loot-source">Rovimi Scaphe</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">Eternal Eruption &middot; 2&times; Frozen Lava</div><div class="loot-source">The Aegis pit</div><div class="loot-note">Enough for the wall, diversions, <em>and</em> spares. Zanthar carries the eruption in his sleeve</div></div>
+  <div class="loot-item"><div class="loot-name">Crowbar</div><div class="loot-source">Prison tool room</div><div class="loot-note">Bai Jian &mdash; reduces Force Open DC</div></div>
+  <div class="loot-item"><div class="loot-name">Lesser silver scrap bomb components</div><div class="loot-source">Prison tool room</div><div class="loot-note">Taken on Cyrathul's "you never know"</div></div>
+  <div class="loot-item magical"><div class="loot-name">Bracers (climb speed 20 ft)</div><div class="loot-source">Prison evidence locker</div><div class="loot-note">Bai Jian &mdash; frees him from needing hands to climb</div></div>
+  <div class="loot-item magical"><div class="loot-name">Spellbook (7 spells)</div><div class="loot-source">Mage for Hire</div><div class="loot-note">Zanthar &mdash; the payoff to a session of complaining about his kit</div></div>
+  <div class="loot-item"><div class="loot-name">Thieves' Toolkit</div><div class="loot-source">Mage for Hire</div><div class="loot-note">Zanthar &mdash; he picked locks all night without one</div></div>
+  <div class="loot-item magical"><div class="loot-name">Potion of Invisibility</div><div class="loot-source">Mage for Hire</div><div class="loot-note">To the stash</div></div>
+  <div class="loot-item"><div class="loot-name">~50 gp confiscated contraband</div><div class="loot-source">Prison stores</div><div class="loot-note">Party funds</div></div>
+  <div class="loot-item"><div class="loot-name">Signal Whistle</div><div class="loot-source">Archer Sentry</div><div class="loot-note">Zanthar</div></div>
+  <div class="loot-item magical"><div class="loot-name">Ring of prison master keys</div><div class="loot-source">The surrendered guard</div><div class="loot-note">Bai Jian &mdash; opens the third floor</div></div>
+  <div class="loot-item"><div class="loot-name">On-duty armoury</div><div class="loot-source">Behind the sentries</div><div class="loot-note">Any common weapon, free for the taking</div></div>
+</div>
+<div class="xp-banner">Experience &middot; 40 wall breach &middot; 40 torture chamber &middot; 48 arrow-slit corridor = <strong>128 XP each</strong> &middot; +1 Uprising point</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Leoz:</strong> "I've got a detonator," he says as he pulls out his pistol.
+<span class="attribution">Zanthar had just pointed out that bombs are no good if you have to stand there and set them off. Leoz's second contribution to the party, ever.</span></blockquote>
+
+<blockquote><strong>Leoz:</strong> "I kind of twirl my gun around and give him a steely glare. And I say, 'You're guilty,' as I do some kind of fancy John Wick-style reload appropriate for the weapon and setting."
+<span class="attribution">After putting 42 damage through the tower sniper's ribs. The Demoralize failed; the entrance did not.</span></blockquote>
+
+<blockquote><strong>Leoz:</strong> "Judge Leoz flips a coin."
+<span class="attribution">The last guard has surrendered and just said he makes two gold a week. The table made him roll it for real. It came up in the guard's favour.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "I think this is a we-don't-care-if-they-die situation."
+<span class="attribution">The gnome who described himself an hour earlier as "a do-gooder," looking up at the guard tower. It set the rules of engagement for the rest of the night.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "Can I carry the eruption? That sounds like fun&hellip; I'll put it in my sleeve so it's kind of protected from going boom on accident."
+<span class="attribution">Claiming the largest bomb in the pit.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "That's it. I'm a killer machine."
+<span class="attribution">Immediately after bursting a sentry's head "like a watermelon" with a second consecutive critical Blazing Bolt. Two acts earlier he was swinging a maul non-lethally at a torturer because he was hoping to knock him out.</span></blockquote>
+
+<blockquote><strong>Panacea:</strong> "And while we're planning this, are we also planning on what we're going to do with the people that we free?"
+<span class="attribution">The question nobody else asked, during an hour of planning that kept drifting toward explosives.</span></blockquote>
+
+<blockquote><strong>Panacea:</strong> "If you are friends of the rose, come over here to the prisoners!"
+<span class="attribution">Shouted into the Gyve's courtyard mid-firefight, on the chance that any of her people were out there. The yard was empty &mdash; no forced-labour detail, in a prison she'd been told used one. Nobody heard her.</span></blockquote>
+
+<blockquote><strong>Panacea:</strong> "No. They're torturing people in the basement. They <strong>knew</strong> they were torturing people in the basement. Don't act like they didn't."
+<span class="attribution">Refusing to let the party off the hook mid-argument &mdash; and she is the one who had just been down in that basement.</span></blockquote>
+
+<blockquote><strong>Cyrathul:</strong> "Yeah, but it's what the current Chelaxian regime views as criminals, so I don't know if I trust their judgment on this matter."
+<span class="attribution">On whether the strangers in the second cell deserved to be let out. This is the line that turned a rescue into a prison break.</span></blockquote>
+
+<blockquote><strong>Cyrathul:</strong> "Well, it seems none of our escapees got their stuff back, so I think it's fair game&hellip; You know, it's just a lost and found. It's been there too long."
+<span class="attribution">Talking the party into robbing the evidence locker.</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "Yeah, no, we're here to disrupt the party. You gotta stop this madness."
+<span class="attribution">Answering the torturer's "coming to join the party?" across a room full of shackles and blades.</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "I mean, they're prison guards. They're just doing their job&hellip; They're working for the oppressors&hellip; They're accomplices. Silence is compliance."
+<span class="attribution">Part of a 22-second run in which he defends the guards, gets rebutted by Panacea, and then rebuts himself &mdash; and still isn't finished. Three minutes later: "I don't think at this point we're just killing innocent guards."</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "I guess we're the bad guys now." &mdash; <strong>Cyrathul:</strong> "We're the bad guys."
+<span class="attribution">The last exchange of the session, over a corridor of bodies and one guard who lived on a coin toss.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The third floor is next session's first scene.</strong> The Hellbreakers taken in the S17 raid are in high security on the third floor. The party has a keyring, a surrendered guard willing to guide them, and a building they've emptied of guards. The stairs are just outside the corridor.</li>
+  <li><strong>The party freed the entire prison.</strong> Not a tactical decision &mdash; an explicit moral one, made by Cyrathul and executed by everyone. Dozens of unaffiliated prisoners are loose in a locked-down capital, pointed at a hole in a wall by Panacea. That is either the diversion of the century or a body count waiting to be blamed on the League.</li>
+  <li><strong>The doctrine is dead.</strong> Every S11&ndash;S17 city encounter resolved non-lethally and Suppression stayed at 0. This session the party killed three tower crew, two torturers, two elite sentries and a hired mage &mdash; and argued about it only <em>after</em> the seventh body. <strong>Suppression has not been checked against this.</strong></li>
+  <li><strong>Jenverick is alone at the stables.</strong> She disobeyed a stay-put order once already tonight. The plan has her clearing the military stables solo, with a needle dagger and a broken arm. Nobody has checked on her since.</li>
+  <li><strong>Diversionary charges are placed around the city and unused.</strong> Panacea's nat-20 placements are sitting out there. The escape plan assumes they get lit.</li>
+  <li><strong>Sarevial talked.</strong> He told the interrogators everything, and he knows the safehouses, the founders, the couriers, and the party. Nobody has asked him what "everything" covered.</li>
+  <li><strong>Osney gave up nothing</strong> &mdash; and knows it. A goblin burglar with a proven spine, now free and owing the party.</li>
+  <li><strong>The surrendered guard lives by a coin flip.</strong> He is now a witness who has seen the party's faces behind their scarves, and a man who was shown mercy by the Night Judge.</li>
+  <li><strong>The boat is gone.</strong> Quoster sails when he's loaded. The horses are the only way out, and they aren't secured yet.</li>
+  <li><strong>Ezio's return clause is still live.</strong> Cyrathul failed a Cloud of Plague follow-up save in S16 and has never been treated. The party still owns no spare rank-3 Cleanse Affliction scroll.</li>
+  <li><strong>The Watchmage's spellbook from the S17 docks remains unread</strong> &mdash; and so does the question of what the Aegis's ritual caster was doing.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Bai Jian did this session</h3>
+<ul>
+  <li>Stood watch outside the Aegis and caught <strong>one</strong> set of boots in the snow (Perception 21). Turned his back to the building to warn the others. <strong>Did not hear the second man at all</strong> &mdash; Leoz was simply there.</li>
+  <li>Tried to bench <strong>Jenverick</strong>. She refused, produced a needle-thin dagger, and took a lookout post instead.</li>
+  <li>Argued to keep <strong>Shared Invisibility</strong> prepared for the prison job. Confirmed it only covers five &mdash; the party, not the rescued.</li>
+  <li>Ran <strong>Gather Information</strong> at the White Stag breakfast under a Masquerade Scarf (Diplomacy 26): prisoners held on the <strong>second and third floors</strong>, unless out in the yard on forced labour.</li>
+  <li>Took <strong>first watch</strong> at the inn. Heard soldiers marching in formation all night. Noticed nothing.</li>
+  <li>Ate a <strong>36-damage arquebus crit</strong> in the first second of the wall breach, before initiative had gone around once. Made <strong>zero attacks</strong> in that entire encounter &mdash; no ranged option, and every enemy 20 feet up a tower.</li>
+  <li>In the torture chamber: <strong>Retrieval Prism &rarr; Sure Strike scroll &rarr; 14</strong> on the interrogator. Took a <strong>27 crit</strong> with persistent bleed, failed the fear save, then a <strong>25 hit</strong> carrying 2d8 mental <em>because</em> he was frightened.</li>
+  <li><strong>Delayed his turn</strong> to sit behind Cyrathul so the new <strong>Regalia</strong> aura would strip his Frightened. It worked &mdash; and the un-penalised attack crit by exactly the margin the &minus;1 would have eaten.</li>
+  <li><strong>Killed the Torturer</strong> &mdash; 34-damage crit off a desk, coordinated with Ren biting the leg.</li>
+  <li>Failed <strong>Force Open at DC 27</strong> on the first cell door, then noticed the <strong>Skeleton Key doubles as a bonused thieves' toolkit</strong> and told Zanthar.</li>
+  <li>Never got a turn in the stampede, and still caught a misfired roll card, corrected the Disarm rules read, prompted Panacea's Recall Knowledge, and called the group heal.</li>
+  <li>Sent <strong>Ren</strong> to scout the blank corridor wall; <strong>spent a hero point on the dog's Perception</strong> (nat 1 &rarr; 32), then found the hidden door on his own roll anyway.</li>
+  <li><strong>Critically succeeded the Grease save (30)</strong> on Panacea's Guidance, then <strong>crit the Mage for Hire for 40</strong> and killed it outright.</li>
+  <li>Took the surrendered guard's <strong>ring of keys</strong>.</li>
+</ul>
+
+<h3>Things Bai Jian knows that the party does not</h3>
+<ul>
+  <li>He is the only one who noticed that <strong>Leoz made no sound arriving.</strong> Jenverick's boots were audible in snow from a distance; the man who came with her was not. The GM said it outright: <em>"You didn't hear a second foot or a second set of footsteps or notice anybody, but seemingly out of the shadows, someone steps out."</em></li>
+  <li><strong>Sarevial told them everything.</strong> Bai Jian was in the room for the confession. Nobody has asked what "everything" means, and Sarevial has been walking with the party since.</li>
+  <li>The <strong>courtyard was empty</strong> when the wall came down. No forced-labour detail, in a prison the party was told uses one. Either the labour was stood down, or the yard was cleared in advance.</li>
+  <li>He talked himself from <em>"just doing their job"</em> to <em>"silence is compliance"</em> and back again inside four minutes, in front of everyone, and nobody called it. <strong>He is not sure which of the two he actually believes.</strong></li>
+</ul>
+
+<h3>What Bai Jian is thinking about</h3>
+<ul>
+  <li><strong>The party has stopped fighting non-lethally and nobody decided to.</strong> Zanthar said one sentence at the wall and it became doctrine. Six sessions of clean Suppression, spent in an evening.</li>
+  <li><strong>He is the damage sponge and the encounters keep opening on him.</strong> 36 before he acted at the wall; 27 and 25 in the basement; 21 in the stampede. He eats the alpha strike every time and only gets to swing on round two.</li>
+  <li><strong>Leoz solves a real gap.</strong> Master-proficiency ranged spike (a 42-damage crit in his first round of play), Expert Stealth, silencers, and a second Demoralize source &mdash; though both attempts failed tonight. He is also the only one who arrived willing to kill, and the party followed him there.</li>
+  <li><strong>Ren is worth hero points.</strong> The dog pointed at the hidden door. He is also the best save on the team.</li>
+  <li><strong>The bracers change his climbing problem.</strong> 20-foot climb speed means no more choosing between the falcata and a wall.</li>
+  <li><strong>He owes Jenverick an answer about the stables.</strong> She is out there alone with a broken arm because the plan needs horses.</li>
+  <li>&#9888; <strong>Check the Foundry sheet.</strong> The log shows AC 25 parried / 24 unparried &mdash; a +1 delta on a +2 Dueling Parry. The character sheet says 24 base / 26 parried. Something is stale or misconfigured, and it is a live &minus;1 on every incoming attack.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who is on the third floor, and how many are still alive?</strong> The party never established exactly who was in the room at the raid.</li>
+  <li><strong>What did Sarevial give up?</strong> Names, safehouses, the founders, the party's faces?</li>
+  <li><strong>Why was the yard empty?</strong></li>
+  <li><strong>Where is Jenverick, and did the breach actually pull the stable guards?</strong></li>
+  <li><strong>What happens to a city with a prison's worth of freed inmates loose in it during a lockdown</strong> &mdash; and who gets blamed?</li>
+  <li><strong>Is the surrendered guard a liability?</strong> He saw the party behind their scarves and lived on a coin flip. So did every prisoner they released.</li>
+  <li><strong>How did the army know about the safehouse meeting?</strong> Still unanswered from S17 &mdash; and Sarevial's confession happened <em>after</em> the raid, so it can't be the source.</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Where it stops</span>
+  <p>A corridor of bodies, a guard on his knees who lived because a coin came up right, and a ring of keys in Bai Jian's hand. The stairs to the third floor are visible through the arrow slits. Somewhere below, a prison's worth of strangers are pouring out through a ten-foot hole in the wall, and somewhere outside, a woman with a broken arm is trying to steal an army's horses alone.</p>
+  <span class="big-line">"I guess we're the bad guys now."</span>
+  <span class="speaker">&mdash; Bai Jian. Cyrathul, without hesitating: "We're the bad guys."</span>
+</div>
+
+</div>
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+
+</body>
+</html>

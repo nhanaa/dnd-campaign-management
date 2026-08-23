@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 7 — The Eater of History</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7a4bc014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d8632c14 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d8632c12 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style></head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Eater of History</h1>
+  <div class="subtitle">Session 7 — a throne full of someone else's memories, a city-sized shopping trip, and six fights under the Isle of Xin</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-22</span>
+    <span class="meta-pill">PF2e Remastered · Mythic</span>
+    <span class="meta-pill">Level 15 → 16</span>
+    <span class="meta-pill">~3h 20m</span>
+    <span class="meta-pill">~5 in-game days</span>
+    <span class="meta-pill">Mithtirith absent</span>
+  </div>
+</header>
+
+<div class="note-banner">
+  <strong>Book Two opens.</strong> The peacock throne turns out to be a memory engine, the Emerald Chambers turn out to be where Xanderghul is manufacturing Risen, and the Isle of Xin turns out to be six fights in three hours — a mythic haunt wearing Zutha's face, a clockwork whale, three sedacthy and their caster, a living tsunami, a mutant octopus, and a mythic kraken who calls himself the <em>Eater of History</em>. Three PCs, no cleric. <em>"You guys breezed through things today."</em> Level 16. Baolen's hoard is still unsearched.
+</div>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:60%"></div>
+  <div class="comp-seg comp-rp" style="width:10%"></div>
+  <div class="comp-seg comp-explore" style="width:8%"></div>
+  <div class="comp-seg comp-social" style="width:12%"></div>
+  <div class="comp-seg comp-loot" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat &amp; hazards</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Lore &amp; visions</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; downtime</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-sevek">
+    <div class="char-name">Sevek</div>
+    <div class="char-class">Human (Sky Dragonblood) Monk 15 — Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-paya">
+    <div class="char-name">Paya</div>
+    <div class="char-class">Leshy (pineapple) Fighter 15 — halberd, Kineticist archetype, Medic</div>
+    <div class="char-player">Kelsie</div>
+  </div>
+  <div class="char-card char-aureys">
+    <div class="char-name">Aureys Hollow</div>
+    <div class="char-class">Fey Dragonet Rogue (Scoundrel) 15 — fighting fan + claws, Living Nexus + Draconic Acolyte</div>
+    <div class="char-player">Anna</div>
+  </div>
+  <div class="char-card char-mith" style="opacity:0.55">
+    <div class="char-name">Mithtirith</div>
+    <div class="char-class">Elf Cleric of Nethys — absent (Chicago). Healed to full off-screen; encounters balanced for three.</div>
+    <div class="char-player">Jesse · absent</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Book Two opens on the throne nobody had sat in yet. The gemstone peacock feathers turn out to be glass — <em>"the stash behind it is where all the good stuff is"</em> — but the throne itself is a memory engine, and one by one the party sits in it and relives Xanderghul's last year from the inside: the heart of an immense eclipse, the possession of Aethusa, the research into raising Risen Runelords, and the decision to relocate that work to the <strong>Emerald Chambers</strong>, the lost Thassilonian crypt of First King Xin and the Runelords who followed him. The last vision is the one that matters. The Risen are bound to him — <strong>if Xanderghul is slain, he simply moves into one of them</strong>, and as long as he has the Chambers he can make as many as he wants. Aureys, who has by now sat on the throne twice because she is "certainly got a lot of pride," says the quiet part for everyone: <em>"we probably have to kill them first."</em> The throne also turns out to be the exit — it's paired with the Throne of the Troll King, and she's through it before anyone else has stood up.</p>
+
+<p>Kandirvek is waiting on the far side, a little perplexed, and has a lead: the <strong>Isle of Xin</strong>, off Varisia's west coast, where Thassilon designed its inventions — including the Chambers — and where a sunken temple might hold the plans. First, Absalom. He knows someone with a teleportation circle; the party sells a stash the size of a small armory at a level-20 settlement, banks <strong>8,514 gp each</strong>, and Aureys goes looking for the sewer dragons who will become her kobolds. On the flight west Kandirvek admits what the level-15 party has quietly noticed: <em>"I fear in combat I soon will be more hindrance than boon."</em></p>
+
+<p>The Isle of Xin is six fights in three hours. The altar on the islet is a mythic haunt wearing <strong>Zutha's</strong> face, vomiting spectral maggots and swinging a bone scythe that has to be <em>performed</em> at to be disabled — Aureys lands three of the four successes and takes no damage; Sevek, with a +0 in every one of those skills' key abilities, eats the belch, the maggots, and a 91-void scythe roll that a mythic reroll turns into 26. Below the islet, underwater: a <strong>clockwork whale</strong> that crits Paya into its jaws and is dead by the end of round two; a trio of <strong>sedacthy</strong> — fish-people who greet the party as "a feast… just as the Eater of History foretold" — whose crimson-scaled caster <strong>Maddenmist</strong> puts 102 points into Sevek in a single turn and is grappled by a tail for his trouble; a living <strong>tsunami</strong> that can't be tripped because it's water; a giant mutant octopus, <strong>Quoroc</strong>, and two more sedacthy, whom Aureys kills by groveling at them until they hold still; and, in a 200-foot octagon beneath a missing colossus, the Eater of History himself — <strong>Baolen</strong>, a mythic kraken with 60-foot tentacles, who declares <em>"Your history comes to an end here, my unfortunate explorers,"</em> spends every mythic point he has answering Sevek's Trips and Electric Arc, and is cut to pieces by Aureys' fan.</p>
+
+<p>The session ends at <strong>level 16</strong>, with Baolen's hoard unsearched and Cody apologizing. The dice had been ugly on his side of the screen all afternoon; when Sevek's second critical Trip landed on the kraken, he said, mid-fight, that <em>"most things are going to start having Kip Up"</em> — and then took it back, twice, before the goodbyes. (Pax's notes on that are in a separate file.)</p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act mystery">
+  <div class="act-label">Act I · Lore · The Peacock Throne</div>
+  <div class="act-card">
+    <h3>Five memories in a chair, and the one that matters</h3>
+    <ul>
+      <li>Cody opens with no combat for the day; the garden is empty except the shattered Runewell and the throne. <strong>Aureys</strong>: <em>"I'm going to go be a dragon and look for valuables everywhere."</em> The gems on the throne are not gems. The <strong>stash behind it</strong> is real — Bands of Force (Greater), a +2 greater striking greater vitalizing mace, more.</li>
+      <li>Nobody has Detect Magic without Mithtirith; the statues are inert. <strong>Sevek</strong>: <em>"Want to try sitting on it? Anyone want to try sitting on it?"</em> — <em>"Go ahead, Mr. Pineapple."</em> <strong>Paya</strong>: <em>"I am the prideful pineapple… With nothing else making itself known to me, I will sit on the throne."</em></li>
+      <li><strong>Paya's vision</strong>: being lost inside the heart of an <strong>immense eclipse</strong> and slowly consumed, before an immense warshard rips you free and sends you hurtling to crash into Xin-Cyrusian — Xanderghul's own memory of riding the Trinity Star. The eclipse is new; Paya's Religion check (26) doesn't place it.</li>
+      <li><strong>Aureys' vision</strong> (<em>"I'm certainly got a lot of pride"</em> — Cody: <em>"You certainly do"</em>): joy at having a body, frustration born of pride at having to borrow Aethusa's, and <strong>plans to forge a new body</strong> in his old likeness — which the mirror-visions already showed he has done.</li>
+      <li><strong>Sevek's vision</strong> (<em>"I'm not very prideful, but I shall try it"</em> — and to Paya, <em>"You said you were prideful, okay? Don't take it back now."</em>): research into the ritual that creates Risen Runelords, and a decision to <strong>relocate to the Emerald Chambers</strong> for access to the raw materials. The Chambers are a Thassilonian crypt — First King Xin's, and many Runelords after him — hidden somewhere in the Saga Lands; the location was secret even in Thassilon's day. The Risen <em>"are not the real Runelords. They're far too weak for that"</em> — they are Xanderghul's own ritual, fueled by the belongings and magic items of the Runelords they imitate, and with the Chambers he can make <em>a lot</em> of them, some far stronger than the ones just killed. Sevek: <em>"That's not good."</em></li>
+      <li><strong>Aureys' second vision</strong> (Paya nominated her: <em>"the most prideful, the most majestic, if you will"</em>): binding the Risen to himself; they are unfalteringly loyal. And the key fact: <strong>Xanderghul's body and the Risen's bodies are magically tied. If he is slain, he transfers into one of them.</strong> <em>"So long as more Runelords are around, Xanderghul cannot be killed."</em> Aureys: <em>"we probably have to go find this Emerald Chamber… if we kill Xanderghul, he'll just arise again and take over one of the other Risen Runelords, so we probably have to kill them first."</em></li>
+      <li>One more thing in the chair: <strong>the peacock throne is linked to the Throne of the Troll King.</strong> Sit and envision the other, and you teleport. Aureys: <em>"Oh, and I've figured out the whole magic thing… Boop."</em> Paya follows on trust: <em>"At least if Aureys doesn't come back through and say, Wait! That was bad! Don't do it! Then I trust it."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act rp">
+  <div class="act-label">Act II · Roleplay · Kandirvek and the Isle of Xin</div>
+  <div class="act-card">
+    <h3>A perplexed dragon, a lead, and an admission</h3>
+    <ul>
+      <li>The Kodar cold hits exposed skin and <strong>Kandirvek</strong> is there, <em>"a bit perplexed"</em> — he didn't expect them back this way. The trolls are fighting each other over Gavergash's empty throne ("might makes right"), so he's had little trouble. <strong>Paya</strong> says the plain thing first: <em>"Yes, we went to Xin-Cyrusian. We have grim tidings, but we should definitely get off this chair."</em></li>
+      <li>Told about the Emerald Chambers, he ponders: <em>"Many have tried, and if my own research is to be believed, a few have succeeded. But finding the Chambers is only half the battle. Most who go there don't come back."</em> The Chambers are a maze — <em>"many people die of old age exploring the chambers before reaching their destination."</em></li>
+      <li>His lead: the <strong>Isle of Xin</strong>, west of the Saga Lands, where many Thassilonian inventions — including the Chambers — were dreamt up, and a <strong>sunken temple beneath the isle</strong> that may hold information. <em>"Even for me, the Isle of Xin is dangerous."</em></li>
+      <li>Kandirvek can smell the magic coming off them. Nowhere in the Saga Lands can buy that much; he knows an ally with a <strong>teleportation circle to Absalom</strong>. <strong>Aureys</strong>: <em>"I've never been to the big city."</em> Then: <em>"Aureys goes to Absalom to find her dragons who will become our kobolds. The sewer dragons. I shall take over them. The sewer kings."</em> Cody: <em>"when a level 15 little dragonette shows up, the kobolds will follow."</em></li>
+      <li>On the flight west, the admission: <em>"you've grown in power quickly… I feel your mythic power may be accelerating your growth. As such, and as the creatures we deal with become more dangerous, I fear in combat I soon will be more hindrance than boon. But I'll aid in what ways I can, whether it be through research or contacts."</em> <strong>Sevek</strong>: <em>"Thank you… We'll bring you back with news."</em> Cody, out of character: Kandirvek is level 15. They've caught up.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act III · Downtime · Absalom</div>
+  <div class="act-card">
+    <h3>A level-20 settlement and 8,514 gold each</h3>
+    <ul>
+      <li><strong>The sell-off</strong> (Paya runs it): the Greater Sturdy Shield, eight +2 striking frost battle axes, the vitalizing mace, <strong>all eight bec de corbins</strong> including Gavergash's, the elven chain and five raiment leathers, the Greater Bands of Force (<em>"it doesn't scale with your level"</em>), four potions of flying (<em>"we got down here with flying"</em>), the truth potion, four greater darkvision elixirs, the jade bauble, the octopus bottle, and five addiction suppressants (Sevek: <em>"I don't think any of us has any addictions"</em>). Sevek keeps the Antiplague: <em>"I'm drinking this. This is actually kind of useful."</em></li>
+      <li><strong>8,514 gp each.</strong> Cody: <em>"I imagine most of you forgot just like one or two expensive items you want."</em> Sevek spends most of his on the <strong>+3 potency rune</strong> for the staff (<em>"That's actually most of the money… I'm broke"</em>). Aureys takes the stash's +3 rune on her handwraps for 80 gp transfer, buys a <strong>Keen rune</strong> and an <strong>Elemental Wayfinder (Water)</strong> for the Black Pearl Aeon Stone. Paya buys <strong>twenty-one lesser Sea Touch Elixirs</strong> (<em>"Sorry, 21 lessers, not any other amount. That would be crazy"</em>). Aureys buys two greater ones, <em>"one definitely for me and then… if I need to help a friend, I'll buy two."</em></li>
+      <li>A day passes; Cody heals Mithtirith to full off-screen and says encounters will be balanced for three. Kandirvek warns the temple is submerged and he won't fit in half-collapsed Thassilonian ruins — his role will be making sure nothing follows them down.</li>
+      <li>Three days later the Isle of Xin rises ahead — <em>"those who have made any study of ancient Thassilon have heard its name abundantly."</em> He drops them on a <strong>small islet to the southwest</strong>: toppled columns and slabs of black marble, the upper halves of titanic statues breaking the waterline, a triumphal arch missing its top <em>"as if swatted by one of the submerged statue's giant hands,"</em> and before the arch, a block of marble serving as an altar.</li>
+      <li>Sevek has Water Breathing (8 hours) on everyone already; he casts <strong>Feet to Fins</strong> from a wand at rank 6 — a 70-foot swim speed until tomorrow's preparations.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act IV · Mythic Hazard · Zutha's Legacy</div>
+  <div class="act-card">
+    <h3>A Runelord's ghost, and the three skills nobody brought</h3>
+    <ul>
+      <li>Aureys goes looking for traps and "stuff." <em>"Stuff indeed, and stuff can be found, but mayhap not the stuff you want."</em> The altar shakes; overwhelming hunger and nausea — <em>"like you're surrounded by food that's spoiled, even by your standards"</em> — and it explodes in void energy. In its place hovers a heavyset spectral figure with a scythe of bone: <strong>Zutha, last Runelord of Gluttony.</strong> Screaming mouths manifest on the broken pillars and spit streams of spectral maggots.</li>
+      <li>Paya's Recall Knowledge: different magic entirely from the Risen — a very, very angry haunt, disabled by <strong>Occultism, Intimidation, or Performance</strong>, <em>"and a good one. Definitely expect to burn some Mythic Points."</em> <strong>Sevek</strong>: <em>"Wow, that's great, because I suck at all of them… I suck as in I have no modifier at all."</em></li>
+      <li>Four successes later the pillar is gone and beneath it is a <strong>single entrance leading down</strong>. As a mythic hazard, everyone's mythic points refill. <strong>Aureys</strong>, who took zero damage: <em>"I was made for this."</em> <strong>Sevek</strong>: <em>"Yes, you are. While I'm suffering over here."</em> (See Combat Encounters.)</li>
+      <li>Loot scattered around the islet, <em>"some of them very valuable"</em>: a <strong>key</strong>, a scroll of water breathing, a divine <strong>scroll of Sunburst</strong> (Sevek: <em>"I can cast it, but I don't have hands, I guess. I'm going to save them"</em>), and more.</li>
+      <li>Pre-dive: Aureys Bolsters Flesh (16 temp HP) and activates the wayfinder; Paya drinks the first of twenty-one elixirs.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act V · Exploration &amp; Combat · The Sunken Temple</div>
+  <div class="act-card">
+    <h3>Four fights, one breath of air, and "are we officially in a dungeon?"</h3>
+    <ul>
+      <li>Down the stairwell into a chamber whose floor has collapsed into a rubble-choked pool; salt deposits say it connects to the sea. Aureys, hidden, flies across — the way on is an underwater passage east. <strong>Sevek</strong>: <em>"I do have a lot of water inside my body, so I guess—"</em> <strong>Paya</strong>: <em>"You just are water, you are not a water human."</em> <strong>Sevek</strong>: <em>"As someone said, be water, my friend. I don't know who said that, though, but somehow I knew it."</em></li>
+      <li>As they descend, blood-red light from the <em>other</em> passage — the one to the ocean — and the creaking of machinery straining against itself. A whale with lights for eyes: an <strong>enormous construct</strong>, "trained on you all." Break. Paya: <em>"My orange cat has decided that this clockwork whale is reason enough to jump on me."</em> Nothing on it is salvageable afterward.</li>
+      <li>The next chamber: a smaller pool, steps rising to a pillared landing, <strong>chisels striking stone</strong> from an archway beyond. Paya: <em>"let the trap finder go first. It has helped us innumerably in Sandpoint."</em> Sevek: <em>"Are we in a dungeon? Like, officially in a dungeon?"</em> Cody: <em>"Yes, we are."</em></li>
+      <li>On the landing, a workshop of slab tables, shattered tablets, and broken statuary, and <strong>three sedacthy</strong> — fish-like humanoids of Golarion's oceans — two pale blue with tridents, the tallest crimson with emerald eyes and a staff. They grin: <strong>"Ah, a feast has come to us today, friends. It's just as the Eater of History foretold."</strong> Sevek: <em>"You're right, I haven't had fish in a while."</em> Cody: <em>"If you say shit like that, they're just gonna straight up attack."</em> They do. Afterward, Aureys gnaws on <em>"a few bits of sushi."</em> Loot: <strong>two +2 greater striking shock tridents</strong>, a second <strong>Bands of Force (Greater)</strong>, and a <strong>Greater Staff of Arcane Might</strong> — Aureys: <em>"this has Mithtirith's name all over it."</em></li>
+      <li>A side passage: the second Aureys touches the water, it thickens into viscous tendrils and culminates in a wave that holds its shape — <em>"It is not a hazard, it's a creature."</em> <strong>Elemental tsunami.</strong> Aureys: <em>"I mean, that's awesome."</em> Afterward Paya's Unusual Treatment to scrub Sevek's Drained 2 rolls a <strong>natural 1</strong>, and the mythic reroll rolls <strong>another natural 1</strong> — <em>"Hate to let you know, I rolled another one."</em></li>
+      <li>Doubling back west (Sevek: <em>"since it's in the opposite direction, we might as well do that before heading deeper in"</em>): a collapsed vault with giant-clam grottos draped in seaweed, more kraken callers, and <strong>an enormous octopus — not any normal octopus — looking at you all hungrily.</strong> Aureys: <em>"Paya will tell you I'm very good at my job."</em> Paya: <em>"She is."</em> Afterward — Aureys: <em>"Stupid fish people. I'm going to take a bite. Oh, there's also some calamari."</em> — Paya's second Unusual Treatment finally lands: Drained cleared.</li>
+      <li>Their hoard: <em>"They've been hoarding some powerful stuff"</em> — a talisman, a <strong>major striking rune</strong>, a <strong>greater flaming runestone</strong> (Sevek: <em>"I have Flaming as well, which I would love to upgrade"</em> — banked to the stash), and a magic skullcap heard but not identified.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VI · Mythic Boss · Baolen, Eater of History</div>
+  <div class="act-card">
+    <h3>"Your history comes to an end here"</h3>
+    <ul>
+      <li>The corridor opens into an <strong>octagonal chamber nearly 200 feet across</strong>, entirely submerged: seven archways into collapsed side rooms, harsh yellow light on a plinth holding <strong>a pair of titanic stone feet</strong> — the rest of the colossus long gone — tree-sized columns holding up a ceiling 100 feet up, and a hallway north.</li>
+      <li>A very large, dark shape squeezes through the north passage, filling it, and expands as it leaves. <strong>An enormous kraken</strong> takes the center of the room: <em>"And so I found the ones who slaughtered my loyal subjects. I sense the destinies within you, the history, the paths to come — but none of it shall be. Your history comes to an end here, my unfortunate explorers."</em> — <strong>Baolen, Eater of History.</strong> Aureys: <em>"That's a cool name. We think we heard something about him before."</em></li>
+      <li>Sevek Trips him critically twice and Rippling-Spins a third Trip off the kraken's own arm; every one of Baolen's three mythic points goes to standing up or surviving Sevek's Electric Arc; Paya crits him for 110 off the Taunt's off-guard; and <strong>Aureys takes the kill</strong> — <em>"you cut this enormous kraken to pieces. As those pieces float upward and away, we are out of combat."</em> +2 mythic points to her, +1 to the others. (See Combat Encounters.)</li>
+      <li>Cody calls it there: <strong>level 16</strong>. Baolen's chamber is unsearched — <em>"you'll find a bunch of items and you will also learn some info about where you're going next."</em> Aureys: <em>"Aureys definitely feels like she's a powerful little dragon with her little horde of sewer dragons."</em> She'll tell Jesse to level up and shop; <em>"there'll probably be some stuff in the stash that he would definitely want to look at."</em></li>
+      <li>And the apology. After the Kip Up remark mid-fight, Cody walks it back — <em>"that was something in the moment I should not have said… that's on me"</em> — and again at the goodbyes: <em>"thank you all for putting up with me. I'm sorry for the grumpiness."</em> Sevek asked one question: whether retraining would be available. <em>"There will."</em></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Mythic complex hazard · Level 18 · Three rounds</div>
+  <h3>Zutha's Legacy</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Hazard</span><span class="stat-value">Stealth +48 (initiative 67) · AC 40, hardness · Vomit Maggot (Fort DC 42, 3d12 persistent + Slowed 1) · Spectral Scythe (Reflex DC 42; crit fail 12d10+30 void + Drained 2) · Poisonous Belch (Fort DC 44, 10d8 poison)</span></div>
+    <div><span class="stat-label">Disable</span><span class="stat-value">Four successes — Occultism, Intimidation, or Performance, DC 42, from anywhere on the islet, only after a Recall Knowledge</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Hazard 67 · Paya 50 · Sevek 45 · Aureys 39</span></div>
+    <div><span class="stat-label">Successes</span><span class="stat-value">Aureys 3 (all Performance) · Paya 1 (Occultism) · Sevek 0 of 1</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Sevek 112 · Paya 24 · Aureys 0</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">Six spent (two each) — all refunded on completion</span></div>
+  </div>
+  <h4>Round 1 — Maggots, a natural 20, and the first dance</h4>
+  <ul>
+    <li>Maggots into <strong>Paya</strong> — fail, Slowed 1, 24 persistent piercing. Scythe at <strong>Aureys</strong> — <strong>natural 20</strong>.</li>
+    <li><strong>Paya</strong>, slowed, Recall-Knowledges the disable skills and hits the haunt for <strong>9</strong> through hardness, then clears the persistent on a 16.</li>
+    <li><strong>Sevek</strong> enters Whirlwind Stance, <strong>Guidance on Aureys</strong>, and flurries: miss, miss (<em>"Boom. Nope. Boom. Nope. Never mind"</em>).</li>
+    <li><strong>Aureys</strong> activates the Hollow Robes (invisible) and <strong>dances: Performance 44 with Guidance — success 1.</strong> The maggot-faces crack.</li>
+  </ul>
+  <h4>Round 2 — Halfway there</h4>
+  <ul>
+    <li>Maggots into <strong>Sevek</strong> — fail by 2 (40 vs 42), Slowed 1, 18 persistent. Scythe at Aureys — crit success again (46).</li>
+    <li><strong>Paya: Occultism, mythic reroll, 44 — success 2</strong>; the faces shatter and toxic magic coalesces around the haunt — <em>"You're halfway there."</em> He hits it for 10.</li>
+    <li><strong>Sevek</strong>, slowed: <strong>Intimidation with a mythic reroll, 34 — fail.</strong></li>
+    <li><strong>Aureys</strong> readies to Aid Paya, then <strong>Performance 41, mythic reroll 49 — success 3.</strong></li>
+  </ul>
+  <h4>Round 3 — The bad one, and the last dance</h4>
+  <ul>
+    <li>The hazard gains a third action. <strong>Poisonous Belch</strong> on everyone: Paya and Aureys crit-save (Aureys on a mythic reroll); <strong>Sevek fails — 56 poison, Sickened 1.</strong></li>
+    <li>Scythe at <strong>Sevek</strong> (the d6 finds him again — <em>"Doesn't like you in particular"</em>): he burns <strong>Prevailing Position</strong> for +4 Reflex and rolls a <strong>natural 2</strong> — his Lucky Number, with no reaction left to claim it — <em>"91 points of void and become Drained 2."</em> <strong>Mythic reroll: 46, success — 26 void.</strong></li>
+    <li><strong>Aureys crit-Aids Paya's Performance (+4)</strong>; Paya rolls it with a mythic point and comes up <strong>39 against 42</strong> — <em>"Fuck!"</em> — then hits the haunt for 18.</li>
+    <li><strong>Sevek</strong> takes 12 more persistent (crit-failing the recovery on a 2), <strong>crit-Aids Aureys with Intimidation (+2)</strong> — Cody lets the Aid carry across skills — and re-enters Whirlwind Stance.</li>
+    <li><strong>Aureys</strong>, on that Aid: <strong>Performance 46 — success 4.</strong> <em>"You will watch as the screaming faces shatter, and what was left of Zutha's Legacy vanishes."</em> Beneath the pillar: the way down.</li>
+    <li>Neither Aid was the margin (43 and 44 cleared 42 without them). Afterward: Paya Treat Wounds 54 on both, Fresh Produce 60 — Sevek: <em>"I'm full."</em></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Level 17 rare construct · Underwater · Two rounds</div>
+  <h3>The Clockwork Whale</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemy</span><span class="stat-value">AC 38 (off-guard 36) · Jaws +31 / 3d12+16, Improved Grab · Tail +31 agile, Push · Gearsong (60-ft emanation underwater, 15d6−2 sonic, Fort DC 36, Stunned 1) · Swallow Whole · mindless, no mental/spirit/void, <strong>electricity weakness</strong></span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Paya 37 · Whale 36 · Aureys 36 · Sevek 32</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys 175 · Sevek 87 · Paya 76 (152 rolled — three of five damage types zeroed) — 338 total</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 72 · Sevek 60 · Aureys 0</span></div>
+    <div><span class="stat-label">Kill</span><span class="stat-value">Sevek — Inner Upheaval flurry</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">Aureys 1 (Gearsong) · Paya 1 (Escape)</span></div>
+  </div>
+  <h4>Round 1 — Gearsong, and a pineapple in the jaws</h4>
+  <ul>
+    <li><strong>Paya</strong> Sudden Charges through the water, hits for 21 — Nightmare, Astral, and Decaying all zeroed (Sevek: <em>"Oh, wow"</em>) — and misses the follow-up.</li>
+    <li><strong>Gearsong</strong> — 49 sonic, everyone: <strong>all three critically succeed</strong> (Aureys on a mythic point). Then <strong>Jaws crits Paya for 72</strong> and the Improved Grab crit-succeeds — <strong>Restrained</strong>. Aureys: <em>"He only wants to eat pineapple."</em></li>
+    <li><strong>Aureys</strong> flies in, <strong>Grovels — critical Feint (48 vs DC 38)</strong>, off-guard to everyone, and <strong>crits with the fan for 77</strong> (persistent fire); claw miss (<em>"It cannot be frightened"</em>).</li>
+    <li><strong>Sevek</strong> enters Whirlwind, asks how Trip works underwater (<em>"Vanilla rules, no. But my rules, you can"</em>), and Flurry-of-Maneuvers: <strong>critical failure, prone</strong> (32 vs DC 34) — then <strong>Trip, success (40)</strong> — then <strong>Kip Up</strong>.</li>
+  </ul>
+  <h4>Round 2 — Escape, a natural 20 each way, and the weakness</h4>
+  <ul>
+    <li><strong>Paya Escapes the jaws on a mythic point — exact success (42)</strong> — and <strong>Vicious Swings for 22 + 9</strong> (Cody catches the missing dice: <em>"It only rolled 3d10 instead of 5"</em>).</li>
+    <li>The whale stands — <strong>Stand Still misses by 1</strong>; Paya's Reactive Strike hits for 24; Aureys' Opportune Backstab for 17. <strong>Jaws at Sevek: natural 20, 60 damage</strong>, Fortification flat check declined; the grapple rolls a 4 and fails; tail crit-misses Aureys.</li>
+    <li><strong>Aureys</strong> channels Draconic Essence, misses twice, then <strong>crits at MAP −8 on a natural 20 for 78.</strong></li>
+    <li><strong>Sevek</strong>, last in the round: <strong>Electric Arc — 25, failed, +15 from the weakness for 40</strong> (Aureys absorbs it). <strong>Inner Upheaval flurry: hit 37, hit 45 → 19 + 28 through resistances. "And with that, it's down"</strong> — the first Strike already had it. <em>"All right, quick work."</em> Paya: Fresh Produce 53, Dash of Herbs 36.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Sedacthy caster + 2 kraken callers · Underwater · Five rounds</div>
+  <h3>The Workshop — Maddenmist and the Kraken Callers</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Maddenmist</strong> — AC 39, Jaws +31 / 3d8+19 + 3d6 bleed; 8th-rank arcane (Desiccate, Polar Ray, Frigid Flurry, Disintegrate, Shield) · <strong>2× Kraken Caller</strong> — AC 33–34, Trident +29 / 3d8+12 + 1d8 electricity, Jaws +28 + bleed, Shared Feast, underwater mobility</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Paya 45 · Caller A 42 · Aureys · Sevek 38 · Maddenmist 35 · Caller B 34</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Paya 558 (596 with persistent) · Aureys 228 · Sevek 226</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 201 · Sevek 180 (96 self-healed) + Drained 2 · Aureys 67</span></div>
+    <div><span class="stat-label">Kills</span><span class="stat-value">Caller B — Aureys (Opportune Backstab) · Caller A — Aureys (fan) · Maddenmist — Paya (106 crit)</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">One — Paya's Disintegrate save</span></div>
+  </div>
+  <h4>Round 1 — "Woe is me! I'm just a tiny dragon!"</h4>
+  <ul>
+    <li>Aureys' Battle Cry puts <strong>Frightened 1 on B</strong> by exactly 0 — the only reason <strong>Paya's</strong> opening <strong>Vicious Swing for 56</strong> connects (33 against AC 33). A's two tridents miss Paya.</li>
+    <li><strong>Aureys Grovels B</strong>, Feint + Distracting, fan 35 and claw 50 — Enfeebled 1 and a speed penalty. <strong>Sevek</strong> enters Whirlwind, steps, and <strong>flurries B: crit 60 — the Phantasmal Doorknob's blind save comes due (Cody's house rule: a Fortitude save against Class DC, not automatic) — + 29 flanking.</strong> <strong>Aureys' Opportune Backstab for 42 — B down.</strong></li>
+    <li><strong>Maddenmist</strong> steps back and <strong>Desiccates</strong> — 67 void: Paya crit-saves, <strong>Sevek and Aureys both fail for 67.</strong> Aureys absorbs the spell.</li>
+  </ul>
+  <h4>Round 2 — Shared Feast, and the line that sweeps through</h4>
+  <ul>
+    <li><strong>Paya</strong>, Spear Dancer ×3 at A: 42, miss, miss. A uses <strong>Shared Feast</strong> on Paya (Foundry still had Sevek targeted — <em>"Oh wait, that's me. You hit me"</em> — but Cody had called Paya before the roll, and 39 beats AC 37 clean): 26 + bleed, and <strong>Maddenmist's reaction jaws crits Paya for 70</strong>.</li>
+    <li>Aureys' Grovel on A comes up a natural 1; <strong>Majestic Presence</strong> — A fails (Frightened 2), Maddenmist crit-succeeds; a Feint on Maddenmist fails by 1. <strong>Sevek</strong> Elf Steps, <strong>Inner Upheaval flurry into A: 67</strong>, and <strong>Taunts A</strong>.</li>
+    <li>Maddenmist casts <strong>Frigid Flurry</strong> — <strong>Paya's Reactive Strike hits for 43, Sevek's Stand Still for 35</strong>. 75 cold/slashing: Aureys crit-saves, <strong>Paya fails for 61.</strong> He casts Shield.</li>
+  </ul>
+  <h4>Round 3 — 108, a kill, and the grapple</h4>
+  <ul>
+    <li><strong>Paya Vicious-Swing crits A for 108</strong> (persistent void + fire). A's tridents at Sevek: crit miss, miss — <em>"They have not hit once with their damn tridents."</em> <strong>Aureys</strong> Grovels A (success), <strong>Overwhelming Combination 66 — A down.</strong> She calls her spectral dragon.</li>
+    <li><strong>Sevek Tumbles Through Maddenmist</strong>, <strong>grapples him with the Constricting Whip Tail (39 vs DC 38)</strong>, hits for 35, <strong>Taunts.</strong> Maddenmist, grabbed and taunted, passes the DC 5 flat check and casts <strong>Polar Ray point-blank at Sevek</strong> — Paya's Reactive Strike hits for 49 — <strong>hit, 66 cold, Drained 2.</strong> Then <strong>Jaws on Sevek: 36 + bleed</strong> — Sevek checks Prevailing Position and correctly passes (42 still ties 42). <em>"I'm in a bit of a pickle."</em> — Cody: <em>"I think Maddenmist might be hazardous to your health."</em></li>
+  </ul>
+  <h4>Round 4 — 110, a one-action Heal, and Disintegrate</h4>
+  <ul>
+    <li><strong>Paya Vicious-Swing crits for 110.</strong> Aureys' Frightening Power: crit success (<em>"He has very good will"</em>); fan and claw miss — <em>"You jerk."</em></li>
+    <li><strong>Sevek</strong>, near the floor, casts the <strong>Mortal Herald Heal, one action, 96</strong>; re-grapples (44); crit-misses the strike; Taunts.</li>
+    <li>Maddenmist never tries to Escape — he casts <strong>Disintegrate at Paya</strong> (Paya's Reactive Strike hits for 44) — <strong>Paya crit-saves on a mythic point, no damage.</strong> Aureys' Opportune Backstab 35. Jaws at Sevek (40) — <strong>Prevailing Position, AC 42, miss.</strong></li>
+  </ul>
+  <h4>Round 5 — Down</h4>
+  <ul>
+    <li><strong>Paya Vicious-Swing crits for 106</strong> — 47 against the off-guard 37 that Sevek's grapple hung on him; against AC 39 it's a plain hit. <strong>Maddenmist down.</strong> <em>"That hurt. That was pretty vicious."</em></li>
+    <li>Afterward: Fresh Produce 53 ×3, Ocean's Balm 41, Dash of Herbs 27, Torrent in the Blood 23, Treat Wounds crit 59. Paya: <em>"We got there in ten minutes, folks."</em></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Water elemental · Underwater · Two rounds</div>
+  <h3>The Elemental Tsunami</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemy</span><span class="stat-value">AC 38 · Wave +33 reach 20 (3d12+12 + 1d12 acid, Mindwarp Ink) · Surge (5d10+18, Fort DC 36, pushed 20 ft on a fail) · immune to Trip by ruling</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Aureys 49 · Sevek 46 · Paya 45 · Tsunami 32</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys 280 · Sevek 138 · Paya 0 — 418</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Aureys 44 · Sevek 23</span></div>
+    <div><span class="stat-label">Kill</span><span class="stat-value">Sevek — Inner Upheaval flurry</span></div>
+  </div>
+  <h4>Round 1 — 118, a Trip that was water, and a crit by exactly 10</h4>
+  <ul>
+    <li><strong>Aureys'</strong> Feint fails (<em>"I'm so scared of waving things"</em>); she channels Draconic Essence and <strong>Overwhelming-Combinations it for 118</strong> (claw crit).</li>
+    <li><strong>Sevek</strong> Whirlwinds, closes, <strong>Trips — 40, a success — ruled no effect: "it cannot be knocked prone, it is water"</strong>; hits for 31 (Aureys' Opportune Backstab rides it for 36); Taunts. Paya's Vicious Swing misses by 1.</li>
+    <li><strong>Surge</strong>: Paya and Sevek crit-save, <strong>Aureys fails — 44 and pushed 20 feet</strong> (<em>"I'm a small dragon. Tiny dragon"</em>). <strong>Wave at Sevek — a crit by exactly 10 once Taunt's penalty doesn't apply</strong> — <strong>Prevailing Position drops it to a hit: 23.</strong></li>
+  </ul>
+  <h4>Round 2 — 126, and the flurry that ended it</h4>
+  <ul>
+    <li><strong>Aureys</strong> flies back in, <strong>Majestic Presence — fail, Frightened 2</strong>, and <strong>crits again for 126.</strong></li>
+    <li><strong>Sevek's</strong> Electric Arc is crit-saved on a natural 20 (Aureys absorbs it anyway); <strong>Inner Upheaval flurry: crit 48 and hit 36 — 107 through fire resistance — "This thing does dissipate back into the waves."</strong> Cody: <em>"the amount of crits is getting a bit much, I have to admit."</em></li>
+    <li>Afterward: Paya's <strong>Unusual Treatment rolls a natural 1</strong>, he spends his last mythic point, and <strong>rolls another natural 1</strong> — Sevek takes 4 from the Risky Surgery cut and keeps Drained 2; Fresh Produce 52 on both.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · Giant mutant octopus + 2 kraken callers · Underwater · Four rounds</div>
+  <h3>The Clam Vault — Quoroc and the Kraken Callers</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Quoroc</strong> — level 15, AC 36, Arm +33 reach 10 agile, Grab / 3d10+14 + 2d6 acid, Beak 3d12+14 + Quoroc Toxin (Fort DC 36, Clumsy → Paralyzed) · <strong>2× Kraken Caller</strong> — AC 34</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Quoroc 48 · Caller A 43 · Aureys 37 · Paya 36 · Sevek 35 · Caller B 27</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys 358 · Paya 357 · Sevek 219</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 153 · Sevek 72 · Aureys 0</span></div>
+    <div><span class="stat-label">Kills</span><span class="stat-value">All three — Aureys (Opportune Backstab 31 · fan 89 · Aether Beam crit-fail 70)</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">None</span></div>
+  </div>
+  <h4>Round 1 — "Do you know who you're attacking?"</h4>
+  <ul>
+    <li>Aureys' Battle Cry <strong>crits Quoroc — Frightened 2.</strong> Quoroc's arm hits Paya for 35, misses Sevek. A's <strong>tridents finally land — 37 and 32 on Paya</strong> (<em>"the first times any of them have hit"</em>).</li>
+    <li><strong>Aureys</strong>: <strong>Majestic Presence</strong> on all three (Quoroc fails and stays at 2, the callers save to Frightened 1), <strong>Grovel-Feint on Quoroc crits</strong>, then fan and claw — <em>"a one and a two"</em> — crit miss and miss.</li>
+    <li><strong>Paya Vicious Swings Quoroc for 45</strong>, Spear Dancer misses at −10. <strong>Sevek</strong> Whirlwinds, <strong>Inner Upheaval: hit 45</strong>, miss — <strong>Aureys' Opportune Backstab rides it for 43, Enfeebled 1</strong> — then <strong>Taunts Quoroc.</strong> B, last, puts a trident into Sevek for 32 and misses the second.</li>
+  </ul>
+  <h4>Round 2 — The toxin, 120, and the octopus goes down</h4>
+  <ul>
+    <li>Quoroc's <strong>beak hits Paya for 37 and the toxin lands — 12 poison, Clumsy 1</strong>; two arms miss on Taunt and Frightened. A's Shared Feast jaws on <strong>Sevek: 28 + bleed</strong>; B's reaction bite misses.</li>
+    <li><strong>Aureys</strong> calls the spectral dragon, <strong>Frightening Power</strong> (<strong>Caller A fails to Frightened 2</strong> — the −2 that prices the next two crits), and <strong>Overwhelming-Combinations Quoroc for 83.</strong></li>
+    <li><strong>Paya Vicious-Swing crits for 120</strong> — <em>"If he survives, I will attack it."</em> — <em>"I'm guessing he survives."</em> — <strong>Aureys' Opportune Backstab for 31 drops Quoroc.</strong> Paya's Spear Dancer then <strong>crits Caller A for 86</strong> on a 19 at MAP −10 — <em>"critical hit on a 19, we take those every day."</em></li>
+    <li><strong>Sevek flurries A: crit 41 and hit 33 for 103</strong>, with the doorknob's blind save owed; a third Strike misses; steps. B's tridents miss Sevek twice.</li>
+  </ul>
+  <h4>Round 3 — Blind tridents, 89, and the second caller</h4>
+  <ul>
+    <li>A, burning, throws three tridents at Sevek: the first never has damage rolled — Sevek asks for the doorknob's Class-DC save first, and Cody waves it off (<em>"we're not going back there"</em>) — the second <strong>hits — Prevailing Position, miss at 42</strong>, the third crit-misses.</li>
+    <li><strong>Aureys</strong> Feints A and <strong>Overwhelming-Combinations for 89 — A down.</strong> She Grovels B into Distracting Feint. <strong>Paya</strong>: Spear Dancer 55, <strong>Vicious Swing 51</strong> into B. <strong>Sevek</strong>: Frostbite (saved, 11), flurry 60. B throws three tridents at Sevek — miss, miss, miss.</li>
+  </ul>
+  <h4>Round 4 — Vaporized</h4>
+  <ul>
+    <li><strong>Aureys'</strong> fan 42, then <strong>Aether Beam up the corridor: B critically fails, 70 — "they are vaporized."</strong></li>
+    <li>Afterward: Treat Wounds <strong>crit against DC 40 for 84</strong> — <strong>Unusual Treatment clears Sevek's Drained 2 at last</strong> — Fresh Produce 54, Dash of Herbs 38.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · Mythic kraken · Level 18 · Underwater · Four rounds</div>
+  <h3>Baolen, Eater of History</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Enemy</span><span class="stat-value">AC 40 (off-guard 38) · Tentacle +34 reach 60 ft agile (3d10+15, Grab) · Arm +34 reach 40 ft (4d10+15, Grab) · Double Attack (repeatable) · Jet 280 ft · Reactive Strike · Remove a Condition (1 MP) · Undying Myth (all MP → 50% HP)</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Paya 50 · Aureys 39 · Sevek 39 (mythic reroll, nat 1 → 6) · Baolen 36</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys 273 · Paya 266 · Sevek 58 — 597 total; Undying Myth fired at 388</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value">Paya 176 · Aureys 64 · Sevek 64</span></div>
+    <div><span class="stat-label">Baolen's Strikes</span><span class="stat-value">16 thrown, 6 hit — 4 of 6 before Taunt, 2 of 10 after (5 at Sevek, none landed)</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value">Baolen 3 — all answering Sevek (two Trips, one Electric Arc) · Party 2 — both Sevek's rerolls · Refund: Aureys +2, others +1</span></div>
+  </div>
+  <h4>Round 1 — Sixty-foot reach, a critical Trip, and Jet</h4>
+  <ul>
+    <li><strong>Paya</strong> Sudden Charges — Baolen's <strong>Reactive Strike crits him for 54</strong> from 60 feet out — and hits for 47. <strong>Aureys</strong> flies in — <strong>second Reactive Strike, crit, 64</strong> (<em>"See, that's why it's good, so you can take it"</em>) — Feint fails, <strong>Overwhelming Combination 87.</strong></li>
+    <li><strong>Sevek</strong> enters Reflective Ripple, swims 70 ft, and <strong>Flurry of Maneuvers: critical Trip (52) for 3</strong>, then a miss by 1.</li>
+    <li>Baolen <strong>spends a mythic point</strong> to remove Prone, stands without provoking, and <strong>Double Attacks</strong>: arm at Sevek <strong>hits by +0 for 38</strong> — <strong>Rippling Spin: Step and Trip — natural 1, mythic reroll, 36 against DC 36, prone again</strong> — and the arm at Aureys misses. Then <strong>Jet</strong>: 280 feet across the room, no reactions, while prone — Sevek: <em>"That's crazy."</em></li>
+  </ul>
+  <h4>Round 2 — "The amount of threes I am getting tonight"</h4>
+  <ul>
+    <li><strong>Paya</strong> Sudden Charges again — the tentacle Reactive Strike misses by exactly 1, the prone −2 (<em>"It's teamwork"</em>) — and hits for <strong>46 and 43</strong>, the first of them by 1 against the prone AC.</li>
+    <li><strong>Aureys</strong> moves 15 feet under mobility, Feints (success, Distracting), and <strong>Majestic Presence — Frightened 1.</strong></li>
+    <li><strong>Sevek</strong> swims in through a Reactive Strike (26), <strong>Inner Upheaval flurry: miss, critical miss</strong> — <em>"that's definitely so bad"</em> — and <strong>Taunts.</strong></li>
+    <li>Baolen spends a <strong>second mythic point</strong> to stand, <strong>Double Attacks: Sevek miss, Paya crit 80</strong>; Double Attacks again (Sevek: <em>"Awful."</em> — Cody: <em>"It's cool though. Very cool"</em>): Sevek crit miss, Aureys miss.</li>
+  </ul>
+  <h4>Round 3 — 110, Undying Myth, and the Kip Up line</h4>
+  <ul>
+    <li><strong>Paya Vicious-Swing crits for 110</strong> — 49 against the off-guard 38 that Taunt hung on the kraken; against 40 it's a plain hit — persistent void and fire, and the Nightmare rune's Stupefied 1; he crit-misses the MAP strike. <strong>Aureys'</strong> Frightening Power: Frightened 1 again; fan-dance Feint; fan 35, claw miss.</li>
+    <li><strong>Sevek Electric Arcs for 17 — and Baolen hits zero: "he will use Undying Myth. He burns all of his Mythic Points, which is just one, but that brings him back to half health."</strong> Sevek: <em>"Oh boy. Oh boy, oh boy."</em> Then <strong>Flurry of Maneuvers: critical Trip (47)</strong> — Cody: <em>"You realize most things are going to start having Kip Up."</em> — and a hit for 35. <strong>Aureys' Opportune Backstab 49.</strong></li>
+    <li>With no mythic points left, <strong>Baolen stays on the floor</strong>: from prone he <strong>Double Attacks three times</strong> — six Strikes: Paya hit 42, then miss, crit miss, crit miss, crit miss, miss. The first arm at Sevek (36) would have hit standing. Persistent damage ticks 20.</li>
+  </ul>
+  <h4>Round 4 — Cut to pieces</h4>
+  <ul>
+    <li>Paya: miss, crit miss. <strong>Aureys: Aether Beam up the corridor (saved, 19), then Overwhelming Combination for 83 — "you cut this enormous kraken to pieces."</strong></li>
+  </ul>
+  <p style="color:var(--gold);margin-top:14px">Level 16. Baolen's chamber unsearched — next session opens here.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+  <h4>Sevek · Be Water</h4>
+  <div class="lede">Pax — the one the d6 kept finding, the grapple-and-Taunt turn on a caster, and three Trips that cost a mythic kraken every point he had</div>
+  <ul>
+    <li><strong>He held the line with none of the skills the day asked for.</strong> The haunt wanted Occultism, Intimidation, or Performance at DC 42; he's trained in two of them off a +0 ability and untrained in the third. He said so plainly — <em>"I suck as in I have no modifier at all"</em> — and then did the thing the build is actually for: Guidance on Aureys' first success, a <strong>critical Aid</strong> on her last, a mythic-rerolled Intimidation of his own that came up 34 against 42, and a Whirlwind-Stance body for Cody's d6 to land on. It landed on him three times out of five. He took <strong>112 of the 136 damage</strong> the haunt dealt.</li>
+    <li><strong>The 91 that wasn't — and the 2.</strong> His Lucky Number for the day, rolled at morning prep, was <strong>2</strong>. The scythe came at him with his reaction already spent on Prevailing Position, and the Reflex die came up <strong>a natural 2</strong> — <em>"Oh, I rolled a two. Oh wait, hold on. Lucky number. Oh no, I already used my reaction. No! No!"</em> — <em>"91 points of void and become Drained 2."</em> He rerolled with a mythic point, succeeded, and took 26 instead.</li>
+    <li><strong>He took a natural 20 for 60 and declined the flat check.</strong> Foundry offered the Fortification rune Cody ruled illegal in S4. <em>"No fortification. I still don't know where that comes from. I don't have it on me. I'm going to take that damage."</em> Then he killed the whale: Electric Arc into its electricity weakness for 40, and an Inner Upheaval flurry that hit twice — <em>"And with that, it's down."</em></li>
+    <li><strong>Underwater Trip, house-ruled in.</strong> <em>"How does trip work underwater? Does it work at all?"</em> — <em>"Vanilla rules, no. But my rules, you can."</em> First attempt crit-failed and dumped him prone; second landed; Kip Up. On Baolen the engine did what it's for: a <strong>critical Trip (52)</strong> to open, a <strong>Rippling Spin Trip off the kraken's own hit</strong> (mythic-rerolled from a natural 1 to exactly the DC), a second <strong>critical Trip (47)</strong> after Undying Myth — <strong>two of Baolen's three mythic points went to standing up.</strong> That was the moment Cody said the Kip Up line.</li>
+    <li><strong>The Maddenmist turn is the whole character.</strong> Tumble Through the caster's space, <strong>grapple him with the tail</strong>, hit him, <strong>Taunt</strong> — so the point-blank Polar Ray (66, Drained 2) and the jaws (36 + bleed) came at him instead of Paya, who had just eaten a 70 crit. The next turn he spent the <strong>Mortal Herald one-action Heal for 96</strong> on himself mid-grapple, kept the grip, and taunted again. <em>"I'm in a bit of a pickle."</em> When Maddenmist switched to Paya with Disintegrate: <em>"This guy is just casting spell, don't care."</em></li>
+    <li><strong>Taunt was the party's armor all day</strong>: once it was up on Baolen, the kraken landed two of his next ten Strikes (five of them at Sevek; none hit), and Paya's 110 crit was a plain hit without the off-guard it hung on him; across two fights the kraken callers put <strong>twelve trident Strikes</strong> into AC 38–40 and landed one. He spent Prevailing Position <strong>four times</strong> — the tsunami's crit into a hit, the caller's hit into a miss, Maddenmist's jaws into a miss at 42, and the scythe's Reflex — and the Ascended Celestial reroll never came up.</li>
+    <li><strong>Drained 2 from Polar Ray until the clam vault.</strong> Paya's cure rolled two consecutive natural 1s, and he finished the Maddenmist fight and fought the tsunami and Quoroc's room down 30 max HP and −2 on every Fortitude save. He still crit-succeeded the Surge save.</li>
+    <li><strong>The flurry that couldn't.</strong> Inner Upheaval on Baolen — the focus spell that had hit in every other fight: miss, critical miss. <em>"That's definitely so bad. Oh my god. Come on. Are you kidding."</em> He salvaged the turn with Taunt — which is what turned Paya's next swing into a 110 crit.</li>
+    <li><strong>He ran the exploration.</strong> Proposed sitting in the throne when nobody else would touch it, drove the search of the statues and the Runewell (<em>"This guy's full of himself"</em> — Paya: <em>"He's the Runelord of Pride. That's his whole thing"</em>), made the routing calls in the temple, and kept Paya honest on the throne: <em>"You said you were prideful, okay? Don't take it back now."</em></li>
+    <li><strong>The voice stayed plain.</strong> <em>"Are we in a dungeon? Like, officially in a dungeon?"</em> — <em>"Be water, my friend. I don't know who said that, though."</em> — to the fish-men who called the party food: <em>"You're right, I haven't had fish in a while."</em> — and when the DM said mid-fight that the build would be designed around: <em>"I mean, surely not everything, right?"</em> Afterward he made the point once — <em>"I don't think that makes sense, that's all"</em> — and then asked the procedural question: <em>"may I ask if we will have the ability to retrain during the campaign down the line?"</em></li>
+  </ul>
+</div>
+
+<div class="spotlight s-paya">
+  <h4>Paya · the Prideful Pineapple</h4>
+  <div class="lede">Kelsie — first into the throne, five Vicious Swing crits over 100, twenty-one elixirs, and two natural 1s in a row</div>
+  <ul>
+    <li><strong>He sat on the throne first.</strong> Sevek asked for a volunteer; Paya was it. <em>"I am the prideful pineapple. Your honor. With nothing else making itself known to me, I will sit on the throne."</em> His vision was the eclipse — the one detail nobody can place — and his Religion check was the first attempt to.</li>
+    <li><strong>The party's plainest voice on the plot, again.</strong> To Kandirvek, before anyone else had said a word: <em>"Yes, we went to Xin-Cyrusian. We have grim tidings, but we should definitely get off this chair."</em> And on following Aureys through an unknown portal: <em>"At least if Aureys doesn't come back through and say, Wait! That was bad! Don't do it! Then I trust it."</em></li>
+    <li><strong>He ran the economy.</strong> The entire sell-off — weapons, armor, potions, the Bands of Force and why they don't scale — and the one purchase that defined the day: <em>"I'm just going to buy 24 lessers. Sorry, 21 lessers, not any other amount. That would be crazy."</em> Twenty-one Sea Touch Elixirs at ten minutes apiece, one before each dive.</li>
+    <li><strong>He killed Maddenmist and set up half of everything else.</strong> Vicious Swing crits of <strong>108</strong> (Kraken Caller A), <strong>110</strong> and <strong>106</strong> (Maddenmist — the second one the kill), <strong>120</strong> (Quoroc), <strong>110</strong> (Baolen); a Spear Dancer crit of 86 on a 19 at MAP −10; <strong>three Reactive Strikes into Maddenmist's spellcasting</strong> (43, 49, 44) that never disrupted but always hurt — <em>"One of these days I will interrupt. Not apparently today."</em> He opened the Baolen fight with a Sudden Charge into a 60-foot tentacle reach, ate a crit for 54 on the way in, and swung anyway.</li>
+    <li><strong>He ate the most.</strong> Whale jaws crit 72 into a Restrained grapple (<em>"Going for an escape"</em> — mythic point, exact success); Maddenmist's 70 crit on the back of a Shared Feast bite; Frigid Flurry 61; Quoroc's beak and toxin (Clumsy 1); two of Baolen's three landed crits (54, 80). <strong>~630 damage taken across six fights</strong>, most of it as the body out front.</li>
+    <li><strong>The healing lane never stopped</strong>: Treat Wounds (54, 59, 84 on a DC-40 crit), Fresh Produce every break, Dash of Herbs, Ocean's Balm, Torrent in the Blood, Risky Surgery cutting himself for +2 — and the single worst medical outcome of the campaign: <strong>Unusual Treatment on Sevek's Drained 2, natural 1, mythic reroll, natural 1.</strong> <em>"Hate to let you know, I rolled another one. That's insane."</em> He got it on the second try one fight later, on a crit against DC 40.</li>
+    <li><strong>The bits</strong>: <em>"I am a fighter. I do try to fight."</em> <em>"Hi, I'm fully muted and talking all the same. That's kind of just how I roll."</em> <em>"I am both not speaking and not muted. What a life to live."</em> <em>"You just are water, you are not a water human."</em> And the orange cat who chose the clockwork whale's arrival as the moment to sit on him.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-aureys">
+  <h4>Aureys Hollow · Queen of the Sewer Dragons</h4>
+  <div class="lede">Anna — the visions that set the plan, the throne that was the door, Grovel every fight, and six of the nine kills</div>
+  <ul>
+    <li><strong>She sat in the throne twice and understood it.</strong> <em>"I'm certainly got a lot of pride."</em> Paya nominated her for the second sitting: <em>"You seem the most prideful, the most majestic, if you will."</em> Her visions were the two that matter most — Xanderghul's plan for a new body, and the binding that makes him unkillable while Risen exist — and she was the one who turned them into a plan: <em>"we probably have to go find this Emerald Chamber… we probably have to kill them first."</em> Then she found the way out (<em>"Oh, and I've figured out the whole magic thing… Boop"</em>) and was through it before the others had decided.</li>
+    <li><strong>Absalom got a new monarch.</strong> <em>"Aureys goes to Absalom to find her dragons who will become our kobolds. The sewer dragons. I shall take over them. The sewer kings."</em> She closed the session on the same note: <em>"a powerful little dragon with her little horde of sewer dragons."</em></li>
+    <li><strong>Grovel is the tactic of the night.</strong> Majestic Presence first (<em>"I assume I did it in front of my friends in the morning. I am so awesome"</em>), then every fight: flutter in, <em>"Woe is me! I'm just a tiny dragon!"</em> — <em>"I'm so, so weak and helpless"</em> — <em>"do you know who you're attacking? …oh, but I'm just a little dragon!"</em> — <em>"oh, you're thick and terrible. Your tentacle is so large, your teeth."</em> A Feint at 30 feet against Will instead of Perception, then Distracting Feint so everyone gets the off-guard, then fan-and-claw. Critical Feint on the whale, critical Feint on Quoroc. <em>"I learned this from the sewer dragons."</em></li>
+    <li><strong>She killed six of the nine things in the temple</strong> — Kraken Caller B (Opportune Backstab) and A (a Grovel, then the fan) in the workshop, <strong>Quoroc</strong> (Opportune Backstab, 31, after Paya's 120 — <em>"If he survives, I will attack it"</em>), Kraken Caller A in the clam room (89), Kraken Caller B with an <strong>Aether Beam critical failure for 70</strong> (<em>"they are vaporized"</em>), and <strong>Baolen</strong> — Aether Beam up the corridor, then an Overwhelming Combination for 83 that <em>"cut this enormous kraken to pieces."</em> Biggest numbers of the day were hers too: <strong>118 and 126 into the tsunami</strong>, 87 into Baolen on her first turn.</li>
+    <li><strong>The haunt was hers.</strong> Three of four disable successes, all of them <strong>Performance</strong> — dancing at a Runelord's ghost in invisible robes — one with Sevek's Guidance, one mythic-rerolled, the last on his critical Aid, plus a crit Aid of her own for Paya. <strong>Zero damage taken</strong>: the first scythe save was a natural 20, the second a success that legendary Reflex upgraded to a crit. <em>"Aureys says, I was made for this."</em></li>
+    <li><strong>Absorb Magic kept her Overflowing all day</strong> — off Maddenmist's Desiccate, Sevek's Electric Arcs and Frostbite, both Aether Beams fueled by stolen spells. <em>"I'll steal a little magic."</em> She also spent a mythic point on her own Gearsong save — the only one of the three crit-saves that needed buying.</li>
+    <li><strong>Small dragon, large opinions</strong>: pushed 20 feet by the tsunami — <em>"That tracks. I mean, I'm a small dragon. Tiny dragon."</em> Of the clockwork whale with Paya in its mouth: <em>"He only wants to eat pineapple."</em> Of the sedacthy's caster: <em>"That looks cool."</em> Of the kraken's name: <em>"That's a cool name."</em> Of the clam vault's dead: <em>"Stupid fish people. I'm going to take a bite. Oh, there's also some calamari."</em> And she thanked Cody for running, first, before anyone else did.</li>
+  </ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">+3 weapon potency rune</div>
+    <div class="loot-source">Party stash — Gavergash's bec de corbin, sold on as a +2</div>
+    <div class="loot-note">→ Aureys' handwraps (80 gp transfer)</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Throne stash — Bands of Force (Greater), a +2 greater striking greater vitalizing mace, misc.</div>
+    <div class="loot-source">Behind the peacock throne</div>
+    <div class="loot-note">Sold</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">8,514 gp each</div>
+    <div class="loot-source">The Absalom sell-off</div>
+    <div class="loot-note">Shield, 8 frost axes, 8 bec de corbins, elven chain, 5 raiment leathers, Bands of Force, 4 potions of flying, truth potion, 4 darkvision elixirs, jade bauble, octopus bottle, addiction suppressants. Paya ran the sale; Mithtirith's share held</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Absalom shopping</div>
+    <div class="loot-source">Level-20 settlement · retroactive purchases allowed</div>
+    <div class="loot-note">Sevek: +3 potency rune (the staff), Wand of Feet to Fins · Aureys: Keen rune, Elemental Wayfinder (Water), 2 greater Sea Touch Elixirs · Paya: 21 lesser Sea Touch Elixirs</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">A key · scroll of water breathing · scroll of Sunburst (divine) · more</div>
+    <div class="loot-source">Zutha's Legacy — the islet</div>
+    <div class="loot-note">"Some of them very valuable." Sevek holds the Sunburst scroll</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">2× +2 greater striking shock trident · Bands of Force (Greater) · Staff of Arcane Might (Greater)</div>
+    <div class="loot-source">Maddenmist and the callers</div>
+    <div class="loot-note">Staff earmarked for Mithtirith — "this has Mithtirith's name all over it"</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">A talisman · a major striking rune · a greater flaming runestone · a magic skullcap</div>
+    <div class="loot-source">Quoroc's clam vault</div>
+    <div class="loot-note">Stash. Both Sevek and Aureys would take the greater flaming; unassigned. Skullcap name unconfirmed</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Baolen's chamber</div>
+    <div class="loot-source">Unsearched</div>
+    <div class="loot-note">Next session opens here — "a bunch of items" and "info about where you're going next"</div>
+  </div>
+</div>
+<div class="xp-banner">
+  Mythic points · six refunded on Zutha's Legacy · Aureys +2 on Baolen, Sevek and Paya +1 · <strong>Level 16</strong>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Paya:</strong> "I am the prideful pineapple. Your honor. With nothing else making itself known to me, I will sit on the throne."
+<span class="attribution">First into the peacock throne, because nobody else would.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "Aureys goes to Absalom to find her dragons who will become our kobolds. The sewer dragons. I shall take over them. The sewer kings."
+<span class="attribution">On hearing the party was going to the city at the center of the world.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kandirvek (DM):</strong> "I fear in combat I soon will be more hindrance than boon. But I'll aid in what ways I can, whether it be through research or contacts."
+<span class="attribution">On the flight to the Isle of Xin. He's level 15. They've caught up.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek:</strong> "Wow, that's great, because I suck at all of them. The problem is, like, I suck as in I have no modifier at all."
+<span class="attribution">On learning the haunt is disabled by Occultism, Intimidation, or Performance.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "Aureys says, I was made for this."<br>
+<strong>Sevek:</strong> "Yes, you are. While I'm suffering over here."
+<span class="attribution">After Zutha's Legacy — she took 0, he took 112.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "You just are water, you are not a water human."<br>
+<strong>Sevek:</strong> "As someone said, be water, my friend. I don't know who said that, though, but somehow I knew it."
+<span class="attribution">Bruce Lee. Who does not exist on Golarion. Sevek noticed. Nobody at the table did.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "Woe is me! I'm just a tiny dragon!"
+<span class="attribution">Groveling at a kraken caller, thirty feet out, immediately before killing it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek:</strong> "I'm in a bit of a pickle."
+<span class="attribution">Grappling Maddenmist by the tail, Drained 2, having just taken 102 in one turn.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "One of these days I will interrupt. Not apparently today."
+<span class="attribution">Reactive Strike into Disintegrate — hit, no disruption, again.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya:</strong> "Hate to let you know, I rolled another one."
+<span class="attribution">Unusual Treatment on Sevek's Drained 2: natural 1, mythic reroll, natural 1.</span>
+</blockquote>
+
+<blockquote>
+<strong>Baolen (DM):</strong> "I sense the destinies within you, the history, the paths to come — but none of it shall be. Your history comes to an end here, my unfortunate explorers."
+<span class="attribution">Aureys' review: "That's a cool name."</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys:</strong> "Oh, you're thick and terrible. Your tentacle is so large, your teeth."
+<span class="attribution">Feinting a mythic kraken.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Emerald Chambers.</strong> Xanderghul is making Risen there, from First King Xin's crypt, with the raw materials on hand to make many — some stronger than Angothane and Thybidos. Nobody knows where it is; Kandirvek's research says a few have found it and most who go in die of old age in the maze.</li>
+  <li><strong>Xanderghul cannot be killed while Risen exist.</strong> His body and theirs are magically tied; slain, he transfers into one of them. The order of operations is now set: find the Chambers, kill the Risen, then him.</li>
+  <li><strong>The Isle of Xin's sunken temple</strong> is only half-explored — seven collapsed side chambers off the octagon, the hall to the north Baolen came from, and whatever he was hoarding. Cody: you'll learn <em>"where you're going next"</em> there.</li>
+  <li><strong>Baolen knew them.</strong> "The ones who slaughtered my loyal subjects" — the sedacthy were his, and the sedacthy said the Eater of History foretold the party's arrival. He "sensed the destinies within you, the history, the paths to come." Who told a kraken under the Isle of Xin to expect them, and what is the "history" he eats?</li>
+  <li><strong>The eclipse.</strong> Paya's throne vision: Xanderghul lost inside the heart of an immense eclipse, being consumed, before the Warshard tore him free. That detail is new — not in the mirror visions, not in the descent. Paya's Religion couldn't place it.</li>
+  <li><strong>The peacock throne is a door.</strong> It pairs with the Troll King's throne; anyone who has sat in both can teleport between them. The garden is now reachable from the Kodars at will — and so is whatever else is in it.</li>
+  <li><strong>Kandirvek is out of the fighting.</strong> He said so himself: level 15, and the party has passed him. Research and contacts from here. Who else does he know with a teleportation circle?</li>
+  <li><strong>Mithtirith returns at 16</strong> with a Greater Staff of Arcane Might, a second Bands of Force, and a "Runic" skullcap waiting in the stash, plus 8,514 gp and a trip to Absalom he hasn't taken yet.</li>
+  <li><strong>Kip Up.</strong> Cody said, then unsaid, that enemies will start getting ways around Trip — "maybe one or two more things." He confirmed retraining will be available if it comes to that. Watch it.</li>
+  <li><strong>Level 16.</strong> Sevek's 15 picks landed as Third Path to Perfection on <strong>Will</strong> (legendary) and Canny Acumen (Reflex); 16 is a class feat and a skill feat — Fuse Stance was the plan.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+  <li>Sat in the throne and saw <strong>where the Risen come from</strong>: a ritual, fueled by the belongings of the real Runelords, now being moved to the <strong>Emerald Chambers</strong>. "That's not good." Aureys' second vision is the one that sets the order: <strong>Risen first, then Xanderghul</strong>, or he just moves house.</li>
+  <li>Spent most of the Absalom money on the <strong>+3 potency rune</strong>. Attack +29, Trip +32. Broke.</li>
+  <li><strong>Feet to Fins</strong> from the wand before the dive, rank 6 — swim 70 until the next daily prep. Worth the slot; swam the length of Baolen's room in two actions while Paya was still charging.</li>
+  <li>Zutha's Legacy: <strong>Guidance on Aureys</strong> on the first success, a <strong>crit Aid</strong> on the last. Own Intimidation with a mythic point: 34 against 42. Took the belch (56), the maggots (30 over two rounds), and the scythe: <strong>Prevailing Position, then a natural 2</strong> — 91 and Drained 2 on the table, rerolled to 26. <strong>Lucky Number was 2.</strong> The die was a 2. The reaction was already gone. Don't spend Prevailing Position on a Reflex save while Lucky Number is live — the +4 is worth less than the reroll.</li>
+  <li><strong>Killed the clockwork whale</strong>: Electric Arc into the weakness (40), then the Inner Upheaval flurry. Took a natural 20 for 60 first. <strong>Declined the Fortification flat check again</strong> — strip the rune.</li>
+  <li><strong>Grappled Maddenmist with the tail, hit him, Taunted him.</strong> He put Polar Ray (66, Drained 2) and his jaws (36 + bleed) into me instead of Paya. <strong>Mortal Herald Heal, one action, 96</strong> the next turn. Held the grip two rounds. Paya got the kill.</li>
+  <li><strong>Drained 2 from Polar Ray until the clam vault.</strong> Paya's Unusual Treatment rolled two natural 1s in a row. Finished Maddenmist, fought the tsunami and the octopus room at −30 max HP. Cleared on a DC-40 crit before the kraken.</li>
+  <li><strong>Killed the tsunami</strong> — flurry crit for 107 with Inner Upheaval. Trip succeeded on the dice and was ruled off: "it is water."</li>
+  <li><strong>Baolen</strong>: crit Trip (52), <strong>Rippling Spin Trip</strong> off his own arm hit (nat 1, mythic, exactly 36), crit Trip (47) after Undying Myth. <strong>He spent all three mythic points standing up or not dying — every one of them on something I did.</strong> The third Trip, with his points gone, kept him on the floor for his last six Strikes. Inner Upheaval flurry: miss, crit miss. After Taunt went up he landed two of ten; seven Strikes came at me all fight, two hit.</li>
+  <li><strong>Prevailing Position four times</strong>: tsunami crit → hit (23), Kraken Caller A hit → miss, Maddenmist jaws → miss at 42, the scythe Reflex. The reaction is doing its job; the cost is losing Whirlwind for a turn.</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+  <li>Standing preps for the day: <strong>See the Unseen</strong> (rank 5, 8 hours), <strong>Lucky Number (2)</strong>, <strong>Mind of Menace</strong>, <strong>Life Connection</strong> (on nobody useful — Mithtirith is absent), <strong>Water Breathing</strong> (rank 3, 8 hours) on the whole party, <strong>Feet to Fins</strong> (rank 6, all day) on himself.</li>
+  <li><strong>The Sunburst scroll is divine.</strong> I can Trick Magic Item it. Save it for something that needs daylight.</li>
+  <li><strong>Third Path went to Will, not Fortitude.</strong> Will is legendary now; Fort stays master by choice. Nothing targeted Will all day, so the upgrade never got tested, and the Ascended Celestial reroll wasn't needed once. Every hard save today was Fortitude — DC 42 maggots, DC 44 belch, DC 37 Desiccate — and master +21 is what I'm bringing to those. Update character-sheet.md (it still says the plan was Fort).</li>
+  </ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+  <li><strong>The Kip Up line.</strong> He said it mid-fight, after my second crit Trip on a mythic boss that had already paid two mythic points to stand. He walked it back — "maybe one or two more things," "that's on me" — and confirmed retraining is available. I made the point once and asked the question. The build works; keep playing it. Notes in the other file.</li>
+  <li><strong>Taunt + Prevailing Position is the tank.</strong> Not Bodyguard, not intercepts — standing where the enemy has to swing at AC 40 and paying +4 on the one that would land. Baolen after Taunt: ten Strikes, two hits, none on me. And the off-guard it hangs on him is what buys Paya's crits.</li>
+  <li><strong>The grapple-and-Taunt turn on a caster is the best thing I did all day.</strong> Tail grapple doesn't need a hand, and a Taunted, grabbed caster either shoots me point-blank or eats the penalty. The flat check to cast while grabbed is only DC 5 — he passed it both times and cast straight through the grab. Right play, no payoff. Do it to every caster anyway.</li>
+  <li><strong>Underwater rules</strong>: Trip works at Cody's table with the size extension; Stand Still and Rippling Spin both fired; Elf Step and Tumble Through work swimming. Flying doesn't — Feet to Fins is the answer for every water day.</li>
+  <li><strong>Without Mithtirith the healing is Paya and me.</strong> Mortal Herald is 1/day. Ocean's Balm and Fresh Produce carried three fights. If the next session is another six-fight day, the Heal goes earlier, not later.</li>
+  <li><strong>Aureys' Grovel is a 30-foot off-guard button</strong> that works on Will instead of Perception. Every sneak attack she landed on the octopus and the kraken came off it. My Trip stacks prone on top. She and I should be on the same target by default.</li>
+  <li><strong>Kandirvek is done fighting.</strong> He said it plainly. We are the top of the food chain he knows about.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What did <strong>Baolen</strong> hoard, and what's the "info about where you're going next"?</li>
+  <li><strong>Who told the Eater of History we were coming?</strong> The sedacthy said he foretold it. Aethusa's journals said the trolls expected her. Somebody keeps announcing arrivals.</li>
+  <li><strong>What is the eclipse</strong> Xanderghul was lost in before the Warshard pulled him out?</li>
+  <li><strong>Where are the Emerald Chambers</strong>, and does the temple actually hold the plans, or just the map to them?</li>
+  <li><strong>Fuse Stance at 16</strong> — Reflective Ripple + Whirlwind. Confirm with Cody.</li>
+  <li>The <strong>greater flaming runestone</strong> — Aureys and I both want it. Hers is a flaming fan; mine is a flaming staff. Talk to her before the next stash split.</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Next session</span>
+  <p>A kraken in pieces, floating upward through a chamber two hundred feet across. A hoard nobody has touched. Seven collapsed rooms, a hallway north, and somewhere in it, the thing Kandirvek sent them for — the way to the Emerald Chambers.</p>
+  <div class="big-line">"Your history comes to an end here, my unfortunate explorers."</div>
+  <span class="speaker">— Baolen, Eater of History, about fourteen minutes before the end of his</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 **System**: Pathfinder 2e Remastered (Free Archetype · Gradual Boosts · Ancestry Paragon)
 **Duration**: ~3h22m (in-game: the first week of summer, 7108 IC — days 2–5 after Willowshore's reclamation)
 
-*New proper nouns this session (Karahai, Commander Wen, Duyu River, Gord Lake, Sahina Shinzo, Yix, Xi Yang) are best-effort spellings from audio — the GM posted several in Foundry chat; verify against the scrollback.*
+*New proper nouns this session (Karahai, Commander Wen, Duyu River, Gord Lake, Asahina Shinzo, Yix, Xi Yang) are best-effort spellings from audio — the GM posted several in Foundry chat; verify against the scrollback.*
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## Session Summary
 
-The victory lap lasted exactly one scene. A day after the party reclaimed Willowshore, the GM counted the cost — **nearly three dozen dead, the town at 225 souls, the Governor's Manor simply *gone*** — and Old Matsuki asked the heroes to carry the news to **Karahai**, the fortified settlement on the Sea of Ghosts that is Willowshore's closest neighbor and most important trade partner. The party geared up (runes, a Gate Attenuator, a Ring of Discretion for Zhen's wrapped nodachi), met a too-smooth traveling merchant named **Sahina Shinzo** on the way out of town, and rode southeast along the Duyu River.
+The victory lap lasted exactly one scene. A day after the party reclaimed Willowshore, the GM counted the cost — **nearly three dozen dead, the town at 225 souls, the Governor's Manor simply *gone*** — and Old Matsuki asked the heroes to carry the news to **Karahai**, the fortified settlement on the Sea of Ghosts that is Willowshore's closest neighbor and most important trade partner. The party geared up (runes, a Gate Attenuator, a Ring of Discretion for Zhen's wrapped nodachi), met a too-smooth traveling merchant named **Asahina Shinzo** on the way out of town, and rode southeast along the Duyu River.
 
 They never arrived. A few hours short of the coast — with **Karahai's fortress actually visible on the bluffs** — an unnaturally thick fog descended, and moments after entering it the party found themselves back where they started. They camped at Gord Lake in a thunderstorm and tried again at dawn; the fog bounced them a second time, and worse: what felt like moments inside cost a full day outside. Two days gone, message undelivered. **Willowshore is cut off, and the curse now has a shape: a wall.**
 
@@ -34,8 +34,8 @@ So the heroes went home and did what hometown heroes do — they worked. From Ma
 - Gear-up: the party returned the stolen jewelry to its families, sold loot (~106 gold), and spent it — **Iryoku** a Gate Attenuator, **Zhen** a +1 potency rune for the nodachi, **Kaelen** transferring his spear's +1 rune to the bo staff (plus a potency crystal), **Kaoru** moving the silver dagger's +1 to his ninjato. The **Ring of Discretion** went to Zhen — his "big-ass sword" now walks through town invisible.
 - Along the way the table settled exploration activities (Mu-Jin Investigating — the GM rules it grants a free Recall Knowledge at initiative; Kaoru swapping Slashing Gust for Detect Magic; Kaelen Avoiding Notice), and Kaoru quietly noted the party may have seen more of him than he's said: *"Depends on how observant you were in the battle — I did change."*
 
-**Act II — Sahina Shinzo (the merchant who shouldn't be here)**
-- On the way out of town, a **man with a raven in a horse-drawn cart**: traveling merchant **Sahina Shinzo** and his raven **Yix**, looking to add Willowshore to his route. Mu-Jin's hero-pointed Sense Motive read him clean: *solely here to set up shop.*
+**Act II — Asahina Shinzo (the merchant who shouldn't be here)**
+- On the way out of town, a **man with a raven in a horse-drawn cart**: traveling merchant **Asahina Shinzo** and his raven **Yix**, looking to add Willowshore to his route. Mu-Jin's hero-pointed Sense Motive read him clean: *solely here to set up shop.*
 - He takes orders for next visit (a walking cauldron for Mu-Jin; journey bread and iron wine for Zhen — his stock is level-locked to the party's level, per the GM), stays "in no place longer than 24 hours," and — when Zhen asked directly where he came from — answered, *"I came from out there somewhere… where I come from, it's not important."*
 - Mu-Jin, courteous and pointed: *"Be careful with your words. It was very recent — literally a day ago — that we lost over three dozen people."* Zhen's first answer had been grimmer — asked what happened to the town: *"Nothing good. That's for sure."*
 - The question nobody could answer by session's end: **the fog bounces the party — so how did Shinzo get in?**
@@ -125,7 +125,7 @@ A bookkeeping-and-brains session for the Face. Iryoku ran the entire economy —
 > **Zhen**: "So I guess it's just going to be fate that we can meet again."
 *To Shinzo, who stays nowhere longer than 24 hours — samsaran fatalism as small talk.*
 
-> **Sahina Shinzo**: "I came from out there somewhere… Well, where I come from, it's not important."
+> **Asahina Shinzo**: "I came from out there somewhere… Well, where I come from, it's not important."
 *The merchant's answer to Zhen's direct question. It did not make him less sus.*
 
 > **Mu-Jin**: "I see you're a kind man, so I know you probably won't mean it, but be careful with your words. It was very recent — literally a day ago — that we lost over three dozen people."

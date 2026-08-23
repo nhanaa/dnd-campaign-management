@@ -33,6 +33,7 @@ The third great empire of the Tian-Shu, founded **6642 IC** by emperor Wuo Wu Zh
 
 ## Willowshore
 
+- **Geography** (Player's Guide): Willowshore sits on the banks of the **Ceiba River**, near its confluence with its distributary the **Duyue River** to the east (rendered "Duyu" in the S4 notes), with **Dragonfly Creek** to the south.
 - **Government**: appointed governor **Heh Shan-Bao**.
 - **Two factions** (reputation tracked in play):
   - **Southbank** — old settlers, traditionalists, self-sufficient, anti-jorogumo. *(Zhen's lean.)*
@@ -159,7 +160,7 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 - RK (multiple PCs, hero points burned): beyond current knowledge — some **curse settled on the land**, tied to the invasion and the governor's vanishing.
 - The **long-abandoned village north of town** (no name anyone remembers) sits at the fog's *edge* — reachable, but the wall hangs just past it. It's Matsuki's plan for **emergency winter crops**: if the curse holds, **Willowshore's food will not last the winter**. Kaelen's standing theory: the fog's source is near the village.
 
-**New NPC — Sahina Shinzo**: a traveling merchant with a raven, **Yix**, arrived to set up shop *despite the fog*. Sense Motive (hero-pointed): genuinely here only to sell. Dodges questions about his origin ("I came from out there somewhere"). Takes orders for future visits — stock **level-locked to party level**; ordered so far: a walking cauldron (Mu-Jin), journey bread + iron wine (Zhen). Stays nowhere longer than 24 hours. Party consensus: "sus." Open question: did he cross the wall, or was he already inside? (Kaoru: "we can't say he was able to walk through the fog at all.")
+**New NPC — Asahina Shinzo**: a traveling merchant with a raven, **Yix**, arrived to set up shop *despite the fog*. Sense Motive (hero-pointed): genuinely here only to sell. Dodges questions about his origin ("I came from out there somewhere"). Takes orders for future visits — stock **level-locked to party level**; ordered so far: a walking cauldron (Mu-Jin), journey bread + iron wine (Zhen). Stays nowhere longer than 24 hours. Party consensus: "sus." Open question: did he cross the wall, or was he already inside? (Kaoru: "we can't say he was able to walk through the fog at all.")
 
 **The help list (Matsuki's, worked as a quest board):**
 - **Willowshore Stables rebuilt** (10-Victory-Point project, Survival/Crafting, two days; Zhen's blessed-coin crit led day one) — open for business again. **+1 South Bank rep, 10 XP.**
@@ -171,7 +172,7 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 
 **Character thread:** **Mu-Jin may adopt Desna** — realized in play he's never had a deity and asked the GM about taking her. The kami guard *her* shrine.
 
-**New NPCs (in play):** Sahina Shinzo + Yix (merchant + raven) · Commander Wen (Karahai — named, not met) · the elder kappa · Xi Yang (lawyer) · the Nagaji dockworker (name unverified).
+**New NPCs (in play):** Asahina Shinzo + Yix (merchant + raven) · Commander Wen (Karahai — named, not met) · the elder kappa · Xi Yang (lawyer) · the Nagaji dockworker (name unverified).
 **New locations (in play):** Karahai · the Duyu River · Gord Lake · Peachwood Grove · the Sea of Ghosts · the long-abandoned village north of town (at the fog's edge).
 
 **Carried-forward threads:** the **wrong-gods lantern** (S2 — the re-blessed coins' blessing carried Zhen's stables crit; the wrong gods are answering anyway); **Ugly Cute** (still untracked, went east); the **governor's manor**; **"blood will rise"**; the **two pearls** (Eyes of Fumeiyoshi, northwest, unvisited); **both Slime Rot infections**.
@@ -204,6 +205,36 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 **New locations (in play):** the Canary Inn (burned, NE) · the Leshy's Salon · the **Gorge of Fangs and Teeth** (S) · the **infested grove** (S, beside the Gorge) · the Great Willow's hill.
 
 **Carried-forward threads:** the wrong-gods lantern secret (S2 — coins now *permanent*); "blood will rise"; the governor ("chose to leave"?) and his estate; Ugly Cute (→ the Gorge); the mists (→ the Willow, post-rescue); the tea house claim; Kaelen's Slime Rot status; Mu-Jin's Desna adoption.
+
+
+### Session 6 (2026-08-21) — The Kind of Friend Kaelen Is (days 9–11 of summer, 7108 IC)
+*All five PCs present. XP: 276 this session (120 + 96 + 60); party **reached level 3** after the elders' briefing. House rule revealed: **background Lore rises to expert at L3.** Place names per the Player's Guide gazetteer (Dragonfly Creek, Ceiba River); the merchant is Asahina Shinzo.*
+
+**The infested grove — the Great Willow's friend's grove (W bank of Dragonfly Creek, S of town):**
+- Overgrown with gray/pale-yellow fungus sheets; the fungus itself was largely harmless (RK). Its one resident — the "foul-tempered mushroom" — was a **myceloid** (run elite: AC 22, fist +16, Purple Pox DC 22) carrying **purple pox**, the exact infection the Great Willow brought home. It claimed it was chased from an underground colony and welcomed by the **kodama** who dwelled here, who "vanished decades ago" — a lie.
+- **The campaign's first genuinely dangerous fight**: its spores gave Kaelen purple pox and then **Spore Domination** made him *helpful* to it for a minute (no hostile actions); it knocked **Zhen** out (two fists) and **Iryoku** (two crits, 28 + 26); Mu-Jin ran out of healing. **Kaoru killed it** (Sky Laughs at Waves → Spellstrike + Ignition). The fungus receded within the hour; the grove is **restored**. The Willow's friend herself: **unaccounted for** (the kodama are gone). **120 XP.**
+
+**The Gorge of Fangs and Teeth — Ugly Cute found:**
+- Zhen tracked the sound of grinding rock to **Ugly Cute**, the Spider Gate's stone guardian, wounded and being *eaten* by three **living boulders** (earth elementals, burrowers). The party readied actions and killed all three as they surfaced (Iryoku, Zhen ×2). **96 XP.**
+- **Ugly Cute speaks — and knows every PC and Weaver by name.** Its testimony: it was *"confronted by a group of faceless monsters who were tormenting people on Willowshore's outskirts,"* pursued them, and returned wounded; it had **visions of an abandoned Willowshore crumbling into ruins after a monstrous invasion**, and *that vision woke it*; **the Reenactment festival was not the source of the curse, but whatever caused it took place during the height of the ceremony itself**; **the mists are "the beginning of the town's doom,"** a curse brought by an unknown force tied to the faceless monsters; they have **claimed an old lumber camp west of town near the Ceiba River's source**; **farther west it senses an even stronger malevolence**, beyond the range it can travel from Willowshore. It is **healing in the Gorge for "a few days"** (needs a repair kit / time; no one owns one). It declined Mu-Jin's offer to fetch one — the party has more important things to do.
+- Gift: a shard of its carapace → **Ugly Cute's Gift** (+1 spiked gauntlet; 1/day Ghost Touch + 2 spirit damage for 1 min). Taken by **Iryoku**.
+- **Noppera-bo** (very hard RK, Zhen + Mu-Jin): humanoids **warped by curses into naturally spawning yokai**; faceless; cruel, revel in frightening/tormenting humanoids; **purple blood** (seen in play).
+
+**Town (night of day 10 → day 11):**
+- The elders (Lady of Souls, sunrise) heard the full report; Granny Hu and Matsuki sniped at each other throughout ("a greater fear than hammering your finger doing carpentry"). Plan: rest, research, then the lumber camp.
+- **Level 3.** Zhen: Dispel Magic (the GM confirmed the myceloid's domination was magical). Kaelen: Fleet, Natural Skill → Survival + Diplomacy. Mu-Jin: Noise Blast, Loose Time's Arrow, Deception trained, Learn a Spell (Occultism 21, 6 gp). Iryoku: healing.
+- **Lumber camp intel** (Iryoku's nat-20 Society, the only success): abandoned two years; layout known locally — front gate, back gate, and a **secret gap in the stockade wall** the woodworkers used to sneak out.
+- **Shinzo returned** with the S4 orders (iron wine, journey bread, walking cauldron). Asked whether the party would fight the faceless things or *fool* them; when Zhen asked for a method, produced a **Noppera-Bo Hood** (item 4, rare; disguise kit for your own ancestry + 1/day Illusory Disguise as a **morph** effect) and gave it **free, "no strings attached"** → party stash. Kaoru's Sense Motive on "I came from the south" vs the fog: GM — *"I don't think he comes in and out. He seems to be telling the truth."* Zhen: "Nothing is free in this world." Orders placed: Dancing Scarf (Iryoku). He has no striking runes yet (town is level 4).
+
+**The old lumber camp (8 miles W on the N bank of the Ceiba River):**
+- 15-ft log stockade sharpened to stakes; from outside, **a rowdy celebration, smoke and roasting meat**. The party used the **secret side gap**. Outbuildings: toilets, **conspicuously empty stables**, and a **dormitory** — *"Blood splatters and weapon marks cover the walls. Pools of dried blood stain the floor and bedding. On the southeastern wall, several humanoid silhouettes have been painted using blood."* The sound of **crossbows** from a larger building.
+- **Four noppera-bo grunts** in the dormitory **ignored the party** until Mu-Jin announced they were from Willowshore ("You from Willowshore?" — "Indeed." — attack). Three killed (Iryoku ×2, Kaoru), **one knocked out alive by Zhen for interrogation**. **60 XP.** Session ended inside the camp with the door closed; the main compound has not noticed.
+- GM at close: the AP follows a **four-act** (kishōtenketsu-style) structure — *"You're still on the first act."*
+
+**New NPCs/creatures (in play):** Ugly Cute (speaking; ally; healing in the Gorge) · the myceloid (dead) · noppera-bo grunts (3 dead, **1 prisoner**).
+**New locations (in play):** the infested grove / Dragonfly Creek (S; restored) · the Gorge of Fangs and Teeth (S; visited) · the old lumber camp / the Ceiba River (W; **live**).
+
+**Carried-forward threads:** the wrong-gods lantern secret (S2); "blood will rise"; the governor ("chose to leave"?) and his estate; the tea house claim; the Great Willow's promise to map the curse's edges (grove saved — collectable); the Willow's friend (unaccounted for); **Kaelen's S4 Slime Rot** (unmentioned S5 and S6); Mu-Jin's Desna adoption; **Shinzo** (passes every check; "doesn't come in and out"); **the stronger malevolence farther west**.
 
 ---
 
