@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session 7 — Old Souls and Stolen Faces</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Old Souls and Stolen Faces</h1>
+  <div class="subtitle">Session 7 &mdash; Season of Ghosts &middot; The Old Lumber Camp, West of Willowshore</div>
+  <div class="meta-row">
+    <span class="meta-pill">August 28, 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~2h 56m</span>
+    <span class="meta-pill">Day 11 of Summer, 7108 IC</span>
+    <span class="meta-pill">288 XP</span>
+    <span class="meta-pill">4 PCs &middot; Iryoku Absent</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:46%"></div>
+    <div class="comp-seg comp-explore" style="width:18%"></div>
+    <div class="comp-seg comp-rp" style="width:16%"></div>
+    <div class="comp-seg comp-mystery" style="width:12%"></div>
+    <div class="comp-seg comp-social" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 46%</span>
+    <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 18%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 16%</span>
+    <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery 12%</span>
+    <span><span class="legend-dot" style="background:var(--lantern)"></span>Social 8%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-zhen">
+      <div class="char-name">Zhen Stillness</div>
+      <div class="char-class">Samsaran (Hungerseed) Animist &mdash; Liturgist &middot; Druid FA</div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-kaelen">
+      <div class="char-name">Kaelen Ashford</div>
+      <div class="char-class">Human Monk &mdash; bo staff, Staff Acrobat</div>
+      <div class="char-player">cajun_code</div>
+    </div>
+    <div class="char-card char-kaoru">
+      <div class="char-name">Kaoru</div>
+      <div class="char-class">Kitsune Magus &mdash; Aloof Firmament</div>
+      <div class="char-player">magus player</div>
+    </div>
+    <div class="char-card char-mujin">
+      <div class="char-name">Mu-Jin</div>
+      <div class="char-class">Witch &mdash; Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+      <div class="char-player">snotierknave69</div>
+    </div>
+    <div class="char-card char-iryoku absent">
+      <div class="char-name">Iryoku-Yasha</div>
+      <div class="char-class">Yaksha Kineticist (Wood/Fire)</div>
+      <div class="char-absent-tag">Absent this session</div>
+      <div class="char-player">legendfather</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Four PCs, no Kineticist, and a stockade full of faceless things. The party picked up exactly where Session 6 left off &mdash; standing over three dead noppera-bo and one live one &mdash; and the first thing they did was try to make the prisoner talk. It gave them nothing. <em>&ldquo;I&rsquo;m only a lonely guard. What would I know why we attacked Willowshore?&rdquo;</em> Mu-Jin pressed, threatened, and finally rolled Sense Motive: the thing genuinely did not care whether it lived. <em>&ldquo;I have nothing to say to people from Willowshore.&rdquo;</em> Mu-Jin turned to the one person at the table carrying a sword &mdash; <em>&ldquo;Old Zhen, can you take care of it?&rdquo;</em> Zhen, whose entire life is an argument for restraint, agreed on a condition (<em>&ldquo;I mean, I can, if you don&rsquo;t want to&rdquo;</em>), then pushed it straight back (<em>&ldquo;you can also do it yourself&rdquo;</em>), and when Mu-Jin asked for a kneeling, sword-to-the-neck execution because <em>&ldquo;this is kind of a medieval Japan period,&rdquo;</em> Zhen refused the theatre: <em>&ldquo;We&rsquo;re not in medieval Japan.&rdquo;</em> Mu-Jin closed it himself &mdash; <em>&ldquo;We kill the guy&rdquo;</em> &mdash; and the GM&rsquo;s entire narration was four words: <strong>&ldquo;Essentially, he&rsquo;s dead.&rdquo;</strong> Who actually swung was never established. This was the same prisoner Zhen had knocked out nonlethally in Session 6 specifically so the party could question him.</p>
+
+    <p>Then the night became a methodical, building-by-building sack of the camp. Cackling from a western island drew them across the water, where four &ldquo;heroic adventurers&rdquo; were beating a <strong>kappa</strong> half to death and cheerfully invited the party to join in. Zhen tried to talk them off it; Kaoru, who had called it before anyone, watched the disguises drop and said <strong>&ldquo;Told you. Disguise.&rdquo;</strong> The party killed all four, and the battered kappa paid them back with the single most useful thing they learned all night: there is <strong>friction between two of the noppera-bo leaders</strong>, and their names are <strong>Zoudou</strong> and <strong>Mugirou</strong>. The camp is not one enemy. It&rsquo;s two.</p>
+
+    <p>The southern building held two <strong>noppera-bo occultists</strong> &mdash; red-robed, masked, one of them wearing a human face it was still trying to press into place. One of them reached for Kaoru&rsquo;s face and nearly took it; he burned a hero point on the Fortitude save and made it <strong>by exactly one</strong>. The other spent the fight slamming the door in the party&rsquo;s face until Zhen dropped Earth&rsquo;s Bile through the gap for exactly enough damage to kill it, then ran down the survivor and finished it with a hero-pointed <strong>natural 20</strong> through the nodachi. Behind a curtain at the back of that room was a human being at death&rsquo;s door: <strong>Kum Soon-Chong</strong>, the man who runs the Willowshore stables &mdash; the same stables this party rebuilt for him. Zhen healed him, and he asked for the only thing he wanted. <em>&ldquo;I know I asked for your help with the stables &mdash; but they took my son. Please, can you save them?&rdquo;</em> The party nearly walked out before hearing the rest, and the rest was the session: the son, <strong>Meng-Soon</strong>, was taken <strong>northwest, to the end of a trail</strong>; he is <em>&ldquo;some sort of <strong>old soul</strong>&rdquo;</em>; and the cultists were eager to use him as <strong>an offering to something they called the Great Kugapti</strong>. Mu-Jin hero-pointed a <strong>natural 20</strong> on Willowshore Lore and got back almost nothing &mdash; <em>an ancient and long-dead monster</em>, and no more than that.</p>
+
+    <p>The rest of the camp came apart in pieces. Three hunting spiders in the storage room went straight for <strong>Weaver</strong> instead of the party (<em>&ldquo;Territorial,&rdquo;</em> said the GM) and put venom in him. Two more occultists were found <strong>praying</strong> to a misshapen effigy in a room lit by dozens of blood-red candles carved into the shapes of different ancestries, burning without smoke; one tried to take Zhen&rsquo;s face and failed; Mu-Jin dropped the first with a natural-20 Needle Darts before it ever took a turn, and Zhen closed the second with an Earth&rsquo;s Bile that also caught Kaelen in the blast. Six more grunts were staging a rat fight in the courtyard over roasting meat and didn&rsquo;t even look up until the party opened on them. And in an office at the west end, Mu-Jin disturbed something on the floor and woke three <strong>elite air wisps</strong>, the only creatures all night that fought back properly: they knocked <strong>Mu-Jin unconscious</strong> on the first enemy turn of the fight &mdash; one round after he&rsquo;d spent his own turn learning they had no weaknesses &mdash; then battered Zhen for 17. Kaelen answered with an Inner Upheaval crit for <strong>36</strong> &mdash; enough that a <em>second</em> wisp detonated itself trying to shield the first, and still not enough to save it. Mu-Jin, back on his feet with a potion in him and Weaver shaving a point off the thing&rsquo;s AC, put the last one down himself.</p>
+
+    <p>They ended the night looking at a second courtyard to the north with <strong>five people in a cage, spaced out</strong> &mdash; and the GM called it three minutes early, on purpose, <em>&ldquo;just so Iryoku can take part in it when he comes back next week.&rdquo;</em> Six fights, one execution, two rescues, and a name nobody can look up.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; The Prisoner</div>
+      <div class="act-card">
+        <h3>Dawn, Day 11 &mdash; Inside the Camp</h3>
+        <ul>
+          <li>Mu-Jin&rsquo;s session recap earned the table its opening hero points and immediately relitigated Session 6: <em>&ldquo;Kaelen was mind-controlled by the fungi, considered it its friend, and decided to just stand there and watch it be murdered. So that&rsquo;s what Kaelen&rsquo;s like towards his friends. Keep that in mind, everyone.&rdquo;</em> Kaelen: <em>&ldquo;You&rsquo;re not going to let that go, aren&rsquo;t you?&rdquo;</em> The GM, cheerfully: <em>&ldquo;I&rsquo;ll bring it up every session for you.&rdquo;</em></li>
+          <li>The GM confirmed <strong>Iryoku is simply absent</strong> &mdash; no DMPC, four PCs. Mu-Jin&rsquo;s contingency: <em>&ldquo;Kaelen, you&rsquo;re going to be the tank for this party right now.&rdquo;</em> Zhen: <em>&ldquo;As long as he doesn&rsquo;t turn back on us, that&rsquo;s fine.&rdquo;</em></li>
+          <li><strong>Zhen opened the day with a full Garden of Healing cycle</strong> (20d4 = 53) and noted his healing had grown with level 3 &mdash; <em>&ldquo;my healing is even more OP now.&rdquo;</em> Mu-Jin: <em>&ldquo;Animists are fucking broken.&rdquo;</em> Zhen: <em>&ldquo;Can also be useless, depending on how you play.&rdquo;</em></li>
+          <li>The three dead noppera-bo <strong>bled purple</strong> &mdash; Zhen flagged it as confirmation of the S6 lore. Loot: an <strong>Oil of Potency</strong> (Mu-Jin identified it, Occultism 25). Kaelen offered it round &mdash; <em>&ldquo;Okay, does Kaoru need it?&rdquo;</em> &mdash; and when it turned out both Kaoru and Zhen already had one, settled it with <em>&ldquo;just put it in the stash until someone needs it.&rdquo;</em></li>
+          <li><strong>The interrogation.</strong> The prisoner was bound and woken. It refused to speak aloud, only <em>&ldquo;hissing &mdash; imagine something without a face hissing angrily at you. And also hissing in your mind, because they have telepathy.&rdquo;</em> Zhen answered it telepathically: <strong><em>&ldquo;Shut the hell up. Can we talk?&rdquo;</em></strong> Kaelen offered to cut the hand off a corpse and slap the prisoner with it &mdash; which prompted the <strong>GM</strong> to post Kaelen&rsquo;s own deity into Foundry chat without comment, and Mu-Jin&rsquo;s verdict: <em>&ldquo;I don&rsquo;t think this is a character problem, I think this is a <strong>player</strong> problem. He keeps forgetting he&rsquo;s a light-side Jedi and keeps acting like a Sith.&rdquo;</em></li>
+          <li>Mu-Jin&rsquo;s <strong>Demoralize</strong> (Intimidation 14, exact success) shifted it from hostile to unfriendly. It still gave nothing: <em>&ldquo;Everyone has a leader. Don&rsquo;t you listen to yours? Isn&rsquo;t that why you&rsquo;re here? Why you&rsquo;re all here?&rdquo;</em> Zhen, dryly: <em>&ldquo;Yes, we do have a reputation.&rdquo;</em></li>
+          <li>Mu-Jin&rsquo;s <strong>Sense Motive</strong> (Perception 14, exact success) confirmed it was neither lying nor magically compelled &mdash; it genuinely did not care if it died.</li>
+          <li><strong>Mu-Jin: <em>&ldquo;Old Zhen, can you take care of it?&rdquo;</em></strong> Zhen agreed conditionally &mdash; <em>&ldquo;I mean, I can, if you don&rsquo;t want to&rdquo;</em> &mdash; and when Mu-Jin pressed (<em>&ldquo;You have a sword&rdquo;</em>) he handed it back: <em>&ldquo;to a degree, you can also do it yourself.&rdquo;</em> Mu-Jin wanted a ceremony; Zhen declined it: <strong><em>&ldquo;We&rsquo;re not in medieval Japan.&rdquo;</em></strong> Mu-Jin: <em>&ldquo;Never mind. Forget it. We move on. <strong>We kill the guy.</strong>&rdquo;</em> GM: <strong><em>&ldquo;Essentially, he&rsquo;s dead.&rdquo;</em></strong> The recording never establishes whose hand did it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Island and the Kappa</div>
+      <div class="act-card">
+        <h3>The Log Pond, West</h3>
+        <ul>
+          <li>Cackling and taunting voices carried from a small island across a sagging bridge, where logs are floated for storage. <strong>Mu-Jin pushed to investigate</strong> (<em>&ldquo;We should investigate that first&rdquo;</em>); Zhen was ready to skip the whole thing &mdash; <em>&ldquo;Do we even want to encounter them?&rdquo;</em> &mdash; right up until he saw what they were doing to the kappa. <strong><em>&ldquo;That thing, you gotta save the turtle.&rdquo;</em></strong> Then he argued the party in, and they swam across.</li>
+          <li>Four figures who read as <strong>human guards</strong> were beating a <strong>kappa</strong>. They greeted the party in perfect good cheer: <strong><em>&ldquo;We&rsquo;re heroic adventurers, taking out this monstrous threat here. Would you like to join us?&rdquo;</em></strong></li>
+          <li><strong>Kaoru saw through it immediately</strong> &mdash; <em>&ldquo;It looks like that thing&rsquo;s suffering from shell shock&rdquo;</em> &hellip; <em>&ldquo;I question their heroism. By beating on a poor defenseless kappa.&rdquo;</em> Zhen tried diplomacy; Mu-Jin asked to roll Persuasion and the GM never called for it, going straight to the reveal. <strong>Kaoru: <em>&ldquo;Told you. Disguise.&rdquo;</em></strong></li>
+          <li><strong>The kappa&rsquo;s testimony</strong> &mdash; the party&rsquo;s first hard intel on the camp&rsquo;s internal politics: there is <strong>treasure nearby</strong> near some floating logs; and <em>&ldquo;the only thing I&rsquo;ve heard is that there&rsquo;s some <strong>friction between two of the individuals</strong>&rdquo;</em> &mdash; <strong>Zoudou</strong> and <strong>Mugirou</strong>.</li>
+          <li><strong>Mu-Jin ran the folklore courtesy that has now worked on kappa twice</strong> (cf. S4&rsquo;s elder kappa): <em>&ldquo;Greetings, kappa. We are friends with some cousins of yours to the southeast of Willowshore&rdquo;</em> &mdash; and afterwards directed it to those settlements as somewhere safer. It was <strong>Zhen&rsquo;s</strong> follow-up question about the camp that pulled the two names loose. Kaelen sent the creature off with <em>&ldquo;Peace be with you, Brother Kappa.&rdquo;</em></li>
+          <li>Party decision: <strong>do not</strong> fight the front-gate guards, who could raise the alarm. Back around through the secret stockade gap and work the buildings one at a time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act III &middot; Mystery &middot; The Man Behind the Curtain</div>
+      <div class="act-card">
+        <h3>The Southern Building</h3>
+        <ul>
+          <li>Zhen picked the southern buildings as the more self-contained target and handed Kaelen the door: <em>&ldquo;You want to take the honor of opening the door, Mr. Kaelen?&rdquo;</em></li>
+          <li>Inside: <strong>red-robed noppera-bo with masks</strong>, one of them with <strong><em>&ldquo;a human face trying to attach to itself.&rdquo;</em></strong> They opened with recognition, not surprise: <strong><em>&ldquo;Heroes. Here to rescue your prisoner, I see.&rdquo;</em></strong> Zhen: <em>&ldquo;Yes, we are.&rdquo;</em> Straight to initiative. Kaoru: <em>&ldquo;Ain&rsquo;t nobody got time for that, apparently.&rdquo;</em></li>
+          <li><strong>Steal Face on Kaoru.</strong> He rolled a 6, spent a hero point, and cleared DC 18 <strong>by exactly one</strong> &mdash; walking away merely Dazzled. Afterwards: <strong><em>&ldquo;Since they like trying to grab my face &mdash; I know I&rsquo;m cute and all, but damn.&rdquo;</em></strong></li>
+          <li>The second occultist spent the fight <strong>closing the door</strong> on the party, which triggered a table-wide grievance. <strong>Zhen solved it by opening the door himself and casting Earth&rsquo;s Bile through the gap</strong> &mdash; the GM: <em>&ldquo;Because it failed, that is literally just enough damage to kill it.&rdquo;</em> The survivor <strong>tried to escape out a back window</strong>; Kaelen cut it off, and Zhen finished it with a <strong>hero-pointed natural 20</strong>.</li>
+          <li><strong>Mu-Jin&rsquo;s free Recall Knowledge (crit success)</strong>, a rider off his exploration activity, bought two facts: they are <strong>noppera-bo occultists</strong>, <em>&ldquo;essentially the same as the grunts, except this one harnesses their natural magic further to frighten people,&rdquo;</em> and they have <strong>sensitive hearing &mdash; a weakness to sonic and anything with the auditory trait.</strong></li>
+          <li><strong>Behind the curtain: a human, near death.</strong> The GM: <em>&ldquo;That&rsquo;s actually the guy in charge of the stables.&rdquo;</em> &mdash; <strong>Kum Soon-Chong</strong>, a South Bank man, and the beneficiary of the party&rsquo;s own downtime work rebuilding the Willowshore Stables. Mu-Jin: <em>&ldquo;God, I just suck in medicine&rdquo;</em> &mdash; <strong>Zhen healed him with focus healing</strong> and rolled it out for the whole party.</li>
+          <li>He asked for one thing: <strong><em>&ldquo;I know I asked for your help with the stables &mdash; but they took my son. Please, can you save them?&rdquo;</em></strong> <strong>Kaoru made the call</strong>: <em>&ldquo;Just get out of here. We&rsquo;ll deal with it. We will see what we can do about his son.&rdquo;</em></li>
+          <li><strong>They almost left before the payload.</strong> The GM: <em>&ldquo;I&rsquo;m guessing you didn&rsquo;t want to hear what else he had to say.&rdquo;</em> <strong>Zhen re-opened it</strong>, and got the session&rsquo;s real intel: the son, <strong>Meng-Soon</strong>, was <strong>taken to the northwest, at the end of a trail</strong>; the son is <strong><em>&ldquo;some sort of old soul&rdquo;</em></strong>; and <strong>the cultists were eager to use him as an offering to something, or someone, they called a &ldquo;Great Kugapti.&rdquo;</strong></li>
+          <li><strong>Mu-Jin hero-pointed Willowshore Lore into a natural 20</strong> &mdash; and the GM gated it hard: <em>&ldquo;Even with the nat 20, you <strong>barely</strong> recognize the name&hellip; it&rsquo;s that of an <strong>ancient and long-dead monster</strong> of some sort, but other than that you don&rsquo;t.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act IV &middot; Exploration &middot; Spiders, Candles, Courtyard</div>
+      <div class="act-card">
+        <h3>Working the Camp, Building by Building</h3>
+        <ul>
+          <li><strong>The storage room.</strong> Skittering behind the door; Kaelen opened it onto <strong>three giant hunting spiders</strong>, one <strong>quickened</strong>. Kaelen, still nursing the door grievance: <strong><em>&ldquo;At least they won&rsquo;t shut doors on you.&rdquo;</em></strong></li>
+          <li>The spiders <strong>ignored the PCs and went for Weaver</strong> &mdash; the GM&rsquo;s justification: <strong><em>&ldquo;Territorial.&rdquo;</em></strong> Weaver ate a crit and <strong>Hunting Spider Venom</strong>, and failed the DC 16 Fortitude save even with a hero-point reroll. Zhen: <em>&ldquo;Weaver, no.&rdquo;</em> Mu-Jin: <em>&ldquo;Stop attacking Weaver.&rdquo;</em></li>
+          <li>Kaelen&rsquo;s tech collapsed mid-fight and the <strong>GM rolled his turn for him</strong> &mdash; which still produced two bo staff hits for 16 and the first spider dead. A spider then lunged at Zhen and missed twice: <strong><em>&ldquo;Not today, Spider. You need ten or a hundred more years if you want to do that.&rdquo;</em></strong></li>
+          <li><strong>The candle room.</strong> <em>&ldquo;An elevated floor takes up the majority of this room. Dozens of blood-red candles carved into the shapes of various ancestries are lit here, their wicks burning without smoke.&rdquo;</em> At the centre of the ring of lights hunkered <strong>a misshapen effigy carved from a badly deformed burl</strong>. Two more <strong>noppera-bo occultists</strong>, <strong>praying</strong> to it, ignored the party entirely until the doors opened.</li>
+          <li><strong>Steal Face on Zhen</strong> &mdash; Fortitude 25 vs DC 18, clean save, no hero point needed. Kaelen took Parry over a third attack on principle: <strong><em>&ldquo;Because I don&rsquo;t want to get my face taken off. Not today.&rdquo;</em></strong> It cast <strong>Phantom Pain</strong> at him instead; he made the Will save and took 5.</li>
+          <li><strong>Mu-Jin killed the first occultist</strong> with a natural-20 Needle Darts before it ever took a turn; <strong>Zhen killed the second</strong> with an Earth&rsquo;s Bile that also caught Kaelen in the burst. Zhen: <strong><em>&ldquo;Small price to pay. I&rsquo;ll heal you up, don&rsquo;t worry.&rdquo;</em></strong> Kaelen: <em>&ldquo;Hey, I&rsquo;m still alive, aren&rsquo;t I?&rdquo;</em></li>
+          <li><strong>Break</strong>, and with it the GM&rsquo;s top-of-the-hour hero points plus a <strong>2nd-rank Guidance innate spell</strong> installed on Kaelen&rsquo;s sheet. Kaelen minded the room and pinged everyone back.</li>
+          <li>On return the party spotted <strong>a second courtyard to the north with a cage &mdash; and people in it</strong>. Mu-Jin&rsquo;s call: <em>&ldquo;Let&rsquo;s try to take out the noppera-bo to the left first, and then we&rsquo;ll go and rescue the guys to the north.&rdquo;</em></li>
+          <li><strong>The courtyard revel.</strong> <em>&ldquo;Sounds of revelry and the scent of cooking meat come from here.&rdquo;</em> <strong>Six noppera-bo grunts</strong> around a fire, <strong>staging a fight between two caged giant rats</strong>. Kaelen set his own threshold: <strong><em>&ldquo;If they&rsquo;re just tormenting rats, then cool. If they&rsquo;re actually harming humans, then we&rsquo;re going to have to do it.&rdquo;</em></strong> No humans in that cage. They attacked anyway.</li>
+          <li>Kaoru drew fire in nearly every fight; Zhen noticed out loud &mdash; <em>&ldquo;Why does it always end up Kaoru being the target?&rdquo;</em> Mu-Jin: <strong><em>&ldquo;That&rsquo;s only because Iryoku&rsquo;s not here.&rdquo;</em></strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act V &middot; Combat &middot; The Haunted Office</div>
+      <div class="act-card">
+        <h3>&hellip; and the Cage They Didn&rsquo;t Open</h3>
+        <ul>
+          <li>Two buildings at the west end. The first was <strong>an office</strong>. Mu-Jin disturbed something on the floor, and it woke up. Kaelen: <em>&ldquo;Oh shit &mdash; or even worse. That&rsquo;s a ghost. Fantastic.&rdquo;</em> <strong>Zhen: <em>&ldquo;A haunted office.&rdquo;</em></strong></li>
+          <li><strong>Mu-Jin&rsquo;s Recall Knowledge</strong>: <strong>air wisps</strong>, air and elemental traits. He asked for weaknesses. <em>&ldquo;No weaknesses.&rdquo;</em> Mu-Jin: <em>&ldquo;Goddammit.&rdquo;</em> One round later the wisp he had woken knocked him unconscious.</li>
+          <li>The fight&rsquo;s defining mechanic: an air wisp&rsquo;s <strong>Accord Essence</strong> reaction lets it <strong>detonate itself, permanently</strong>, to give its allies temporary hit points. Kaelen&rsquo;s Inner Upheaval crit hit hard enough that one wisp blew itself up trying to save another &mdash; and the other died anyway.</li>
+          <li><strong>Mu-Jin &mdash; dropped in round one &mdash; landed the killing blow on the last wisp</strong> in round three, with Weaver&rsquo;s <strong>Familiar of Balanced Luck</strong> shaving the wisp&rsquo;s AC to 17 to make the Needle Darts connect.</li>
+          <li>Cleanup: <strong>Kaelen force-opened a locked door</strong> (Athletics DC 23) on a hero-pointed <strong>natural 20</strong> after critically failing the first attempt. Inside: a looted storeroom of empty shelves and open chests. All four Search checks failed DC 18 &mdash; and the GM pointed out <strong>a hidden trap door between two of the northern shelves</strong> regardless. <em>Unexplored.</em></li>
+          <li>Final loot sweep, then the north courtyard: <strong>five captives in a cage, each one spaced apart.</strong> The party was mid-plan on how to pull the fight away from them when the GM called it &mdash; deliberately, three minutes early, <strong><em>&ldquo;just so Iryoku can take part in it when he comes back next week.&rdquo;</em></strong></li>
+          <li>Closing table talk. Zhen, holding the line on what the party actually knows: <strong><em>&ldquo;Taking their face seems like just one of the occultist&rsquo;s abilities. We haven&rsquo;t seen any of these others do it.&rdquo;</em></strong> Mu-Jin, from the lore: <em>&ldquo;The noppera-bo run to two extremes &mdash; some are just pranksters who like being jackasses, but some are evil bastards who like inflicting harm and causing terror in mortals.&rdquo;</em> Zhen: <em>&ldquo;These are definitely on the latter side. Because they&rsquo;ve been capturing people &mdash; and remember the house? It was like blood stuff.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>1 &mdash; The Log Island: Four &ldquo;Heroic Adventurers&rdquo;</h3>
+    <div class="combat-meta">4 Noppera-bo Grunts &middot; AC 15 &middot; HP 18 &middot; Disguised as Human Guards</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">48</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Mu-Jin, Zhen, Kaoru, Kaelen</div></div>
+      <div><div class="combat-stat-label">Party Damage</div><div class="combat-stat-value">Kaoru 21, Kaelen 5</div></div>
+    </div>
+    <p><strong>Initiative</strong>: Kappa 29 (nat 20 &rarr; 4 actions, quickened) &middot; <strong>Kaoru 25</strong> &middot; Grunt 23 &middot; Grunt 13 &middot; Kaelen 12 &middot; Mu-Jin 12 &middot; Zhen 11 &middot; Grunt 11 &middot; Grunt 6</p>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Zhen swapped his apparition vessel back to Earth&rsquo;s Bile</strong> thirty seconds before initiative &mdash; he&rsquo;d been holding Garden of Healing for the morning&rsquo;s healing.</li>
+      <li><strong>Kaoru</strong> opened with <strong>Breathe Fire</strong> (15-ft cone) into a perfect three-target line &mdash; 5 damage to all three.</li>
+      <li><strong>Grunts</strong> converged on Kaoru across two turns: spear hit for 3, then a <strong>critical hit for 12</strong>, then two more hits for 3 each. Kaoru dropped from 38 to <strong>17 HP</strong>.</li>
+      <li><strong>Kaelen</strong> used <strong>Electric Arc</strong> &mdash; a spell he&rsquo;d had since level 1 and never once cast (GM: <em>&ldquo;You mean the spell that you&rsquo;ve had since first level?&rdquo;</em>). Rolled 10 on 3d4: one grunt saved for 5, the other failed for the full 10. <strong>15 across two targets</strong>, setting up Mu-Jin&rsquo;s kill. <em>&ldquo;Okay, so that&rsquo;s what that does. Glad I tried it.&rdquo;</em></li>
+      <li><strong>Mu-Jin</strong> cast <strong>Nudge Fate</strong> on Kaoru, then <strong>Needle Darts (cold iron)</strong>: missed on a natural 6, spent a <strong>hero point</strong>, rerolled to hit, and put 10 into a grunt already down to 3. <strong>Kill #1</strong>, bought outright with the hero point.</li>
+      <li><strong>Zhen</strong> moved in and <strong>critically hit with the +1 nodachi for 20</strong> &mdash; <strong>kill #2</strong> (<em>&ldquo;That guy&rsquo;s a goner&rdquo;</em>) &mdash; then dropped <strong>Earth&rsquo;s Bile</strong> on the next grunt for 7.</li>
+      <li>The near-dead grunt (1 HP) swung three times at <strong>Kaelen</strong> &mdash; <strong>natural 1, natural 2, then a natural 20</strong> at &minus;10 multiple attack penalty, which upgraded into a hit for 5. GM: <em>&ldquo;I get a three. Nope, I got a nat 20 instead. 1, 2, 20.&rdquo;</em></li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li>The GM removed the Kappa from the tracker, which made the order skip Kaoru. Mu-Jin caught it &mdash; <em>&ldquo;Did you skip Kaoru&rsquo;s step?&rdquo;</em> &mdash; and the GM backed up.</li>
+      <li><strong>Kaoru</strong> used <strong>Spellstrike</strong>, channeling <strong>Ray of Frost</strong> through the +1 ninjato: <strong>critical hit for 12</strong> plus 8 cold &mdash; <strong>kill #3</strong>, and the only kill in the fight on a grunt still at full 18 HP. Last action: <strong>Shield</strong>.</li>
+      <li><strong>Kaelen</strong> finished with <strong>Electric Arc</strong> &mdash; the last grunt rolled a <strong>natural 19 and made its save</strong>, and died to the halved 3 anyway. He&rsquo;d wanted to Flurry: <em>&ldquo;He&rsquo;s dead. I didn&rsquo;t get to do what I wanted to do.&rdquo;</em> <strong>Kill #4.</strong></li>
+    </ul>
+    <p><em>Kaelen was away feeding his cats for the opening exchange and came back to find Kaoru being focused down: &ldquo;Oh my god, Kaoru&rsquo;s getting targeted this time.&rdquo;</em></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>2 &mdash; The Southern Building: Two Noppera-bo Occultists</h3>
+    <div class="combat-meta">2 Noppera-bo Occultists &middot; AC 17 &middot; HP 30 &middot; Steal Face, Phantom Pain, Shield</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">48</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zhen &times;2</div></div>
+      <div><div class="combat-stat-label">Party Damage</div><div class="combat-stat-value">5 total</div></div>
+      <div><div class="combat-stat-label">Hero Points</div><div class="combat-stat-value">4 spent</div></div>
+      <div><div class="combat-stat-label">Damage Dealt</div><div class="combat-stat-value">Mu-Jin 21 &middot; Kaelen 16 &middot; Zhen 15 &middot; Kaoru 8</div></div>
+    </div>
+    <p><strong>Initiative</strong>: Kaoru 19 &middot; Occultist 18 &middot; Zhen 17 &middot; Occultist 11 &middot; Kaelen 11 &middot; Mu-Jin 9</p>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Kaoru</strong> struck with the ninjato &mdash; <strong>natural 1</strong>, hero point, reroll to 20 &mdash; hit for 2. Then <strong>Shield</strong>.</li>
+      <li><strong>Occultist</strong>: raised <strong>Shield</strong> and <strong>slammed the door</strong> in the party&rsquo;s face. Kaelen: <em>&ldquo;It locks him in?&rdquo;</em> GM: <em>&ldquo;Nah, just closed the door.&rdquo;</em></li>
+      <li><strong>Zhen</strong> moved, <strong>opened the door himself</strong>, and dropped <strong>Earth&rsquo;s Bile</strong> through the gap: both occultists failed the DC 19 Reflex <em>through standard cover</em> &mdash; 4 each.</li>
+      <li><strong>Occultist</strong>: <strong>Steal Face</strong> on <strong>Kaoru</strong> &mdash; DC 18 Fortitude, natural 6 for a total of 15. <strong>Hero point. Reroll. 19 &mdash; success by exactly one.</strong> Dazzled instead of faceless. It clubbed him with its staff and missed. <em>(Steal Face carries the Incapacitation trait, but a level-2 creature against a level-3 party gave Kaoru nothing &mdash; the hero point was genuinely load-bearing.)</em></li>
+      <li><strong>Kaelen</strong> used <strong>Flurry of Blows</strong> &mdash; first strike missed, <strong>hero point, reroll to 24</strong>, and the hit was partly eaten by the occultist&rsquo;s <strong>Shield Block</strong> (5 absorbed, 6 through); the second <strong>critically</strong> missed off that same +1. Then <strong>Electric Arc</strong> for 2.</li>
+      <li><strong>Mu-Jin</strong>: <strong>Nudge Fate</strong>, then <strong>Needle Darts</strong> for <strong>12</strong>, putting the door-closer on 6.</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Kaoru</strong>, Dazzled, cleared the DC 5 flat check and caught both occultists with <strong>Electric Arc</strong> for 3 each, then <strong>Shield</strong>.</li>
+      <li><strong>Occultist</strong> cast <strong>Phantom Pain</strong> on Kaoru &mdash; he <strong>made</strong> the Will save (24 vs DC 18) and took the full 5 mental with <strong>no persistent damage</strong>. It was the last thing it did.</li>
+      <li><strong>Zhen</strong> cast <strong>Earth&rsquo;s Bile</strong> again. The door-closer, on 3 HP, failed and died &mdash; <em>&ldquo;that is literally just enough damage to kill it.&rdquo;</em> The other <strong>critically succeeded through greater cover</strong> and took nothing. <strong>Zhen kill.</strong></li>
+      <li><strong>Occultist</strong>: with its partner dead, it <strong>opened a back window and ran.</strong></li>
+      <li><strong>Kaelen</strong> cut it off, <strong>Flurried</strong> for 8, then spent his last action on an <strong>Inner Upheaval</strong> strike at &minus;10. Zhen tried to rule it out as a second Flourish; the GM overruled him. Miss.</li>
+      <li><strong>Mu-Jin</strong> landed <strong>Needle Darts</strong> for 9, leaving it on 4.</li>
+    </ul>
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Kaoru</strong> missed with <strong>Ray of Frost</strong> &mdash; and deliberately <strong>held his last hero point</strong> (<em>&ldquo;I want to save it for a little bit&rdquo;</em>).</li>
+      <li><strong>Mu-Jin</strong> cashed a <strong>free Recall Knowledge</strong> and <strong>critically succeeded</strong> (Occultism 30 vs DC 18): noppera-bo occultists, <strong>weak to sonic.</strong></li>
+      <li><strong>Zhen</strong> stepped in and missed &mdash; then spent a hero point, rerolled a <strong>natural 20</strong>, and crit for <strong>19</strong> into a creature with 4 left. <strong>Zhen kill.</strong></li>
+    </ul>
+    <p><em>Cover shaped the whole fight: both round-1 saves failed <strong>through</strong> standard cover, and the round-2 burst that killed one occultist whiffed on the other <strong>through greater cover</strong>.</em></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>3 &mdash; The Storage Room: Three Hunting Spiders</h3>
+    <div class="combat-meta">3 Hunting Spiders &middot; AC 17 &middot; HP 16 &middot; One Quickened</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">None awarded</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Kaelen &times;2, Zhen</div></div>
+      <div><div class="combat-stat-label">PC Damage</div><div class="combat-stat-value">Zero &mdash; all of it hit Weaver</div></div>
+    </div>
+    <p><em>The Foundry chat truncated across this fight&rsquo;s opening AND across all of Round 2. Initiative, the spiders&rsquo; first turns, and the killing blow are reconstructed from the recording.</em></p>
+    <ul>
+      <li>Kaelen opened the door &mdash; <em>&ldquo;At least they won&rsquo;t shut doors on you&rdquo;</em> &mdash; onto three giant spiders, one <strong>quickened</strong>.</li>
+      <li><strong>The spiders opened on Weaver, not on any PC.</strong> GM: <em>&ldquo;Territorial.&rdquo;</em> Zhen, watching a full quickened turn land: <em>&ldquo;Wait, did it attack three times?&rdquo;</em></li>
+      <li><strong>Weaver was bitten repeatedly</strong> &mdash; roughly 12 damage of fangs, including a critical hit for 6 &mdash; and exposed to <strong>Hunting Spider Venom</strong>. The GM volunteered that hero points <em>could</em> be spent on a familiar&rsquo;s save (not RAW &mdash; a table precedent), so Mu-Jin spent one: <strong>natural 2, reroll floored to 10, total 15 vs DC 16 &mdash; a failure by one.</strong> Stage 1 hit for 4 more poison and off-guard, <strong>leaving Weaver at 5 HP.</strong> Zhen: <em>&ldquo;Weaver, no.&rdquo;</em></li>
+      <li><strong>Kaelen&rsquo;s turn was rolled by the GM</strong> while he restarted Discord &mdash; after Mu-Jin cut through a Tumble Through ruling by pointing out Kaelen&rsquo;s 40-foot Speed. <strong>Two bo staff hits, 16 damage &mdash; exactly the quickened spider&rsquo;s full hit points.</strong> The one chewing on Weaver died first.</li>
+      <li><strong>Mu-Jin&rsquo;s</strong> Needle Darts hit the second spider for <strong>12</strong>. <strong>Zhen</strong> missed, spent a hero point (<em>&ldquo;Fuck it. Take it out.&rdquo;</em>), hit for 6 and <strong>killed it</strong>, then dropped <strong>Earth&rsquo;s Bile</strong> on the last for 1.</li>
+      <li><strong>The last spider</strong> climbed to Zhen and <strong>missed him twice</strong>. <strong><em>&ldquo;Not today, Spider. You need ten or a hundred more years if you want to do that.&rdquo;</em></strong></li>
+      <li><strong>Kaoru critically hit for 12</strong> and followed with 2 &mdash; leaving it on <strong>exactly 1 hit point.</strong> <strong>Round 2</strong>: <strong>Kaelen&rsquo;s Flurry finished it</strong>, and he was audibly cheated of the moment: <em>&ldquo;I couldn&rsquo;t have killed it. I could have killed it.&rdquo;</em></li>
+      <li>&#9888; <strong>Weaver is at Stage 1 of Hunting Spider Venom and no interval saves were ever rolled</strong> (1-round interval, maximum duration 6 rounds).</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>4 &mdash; The Candle Room: Two Praying Occultists</h3>
+    <div class="combat-meta">2 Noppera-bo Occultists &middot; AC 17 &middot; HP 30 &middot; At Prayer Before a Misshapen Effigy</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">48</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Mu-Jin, Zhen</div></div>
+      <div><div class="combat-stat-label">Party Damage</div><div class="combat-stat-value">9 &mdash; 4 of it friendly fire</div></div>
+    </div>
+    <p><strong>Initiative</strong>: Occultist 24 &middot; Zhen 20 &middot; Mu-Jin 18 &middot; <strong>Kaoru 16</strong> <em>(natural 1 &rarr; hero point &rarr; 16, dodging the house-rule Slowed 1)</em> &middot; Occultist 14 &middot; Kaelen 9</p>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Occultist</strong> (acting before the party): <strong>Steal Face</strong> on <strong>Zhen</strong> &mdash; Fortitude <strong>25</strong> vs DC 18, clean success, no hero point spent; merely <strong>Dazzled</strong>. It then raised a <strong>Shield</strong> cantrip, putting itself at AC 18.</li>
+      <li><strong>Zhen</strong>, Dazzled, dropped <strong>Earth&rsquo;s Bile</strong> on both (4 and 2), walked in, cleared the DC 5 flat check, and <strong>critically hit for 17</strong> with the nodachi &mdash; leaving that occultist on 11.</li>
+      <li><strong>Mu-Jin finished it</strong>: Nudge Fate, then <strong>Needle Darts on a natural 20 &mdash; 16 damage into 11 HP.</strong> GM: <em>&ldquo;That&rsquo;s definitely enough.&rdquo;</em> <strong>First occultist down, and it never got a turn.</strong></li>
+      <li><strong>Kaoru</strong>: <strong>Phase Bolt</strong> at the shielded one (the cantrip strips shield bonuses) &mdash; natural 2, miss &mdash; then Shield.</li>
+      <li><strong>Kaelen</strong> moved up and used <strong>Inner Upheaval &rarr; Flurry of Blows</strong> (Spirit damage): first strike missed and was rescued by a <strong>hero point</strong>, 11 through; second missed at MAP. Third action: <strong>Parry</strong> &mdash; <em>&ldquo;Because I don&rsquo;t want to get my face taken off. Not today.&rdquo;</em></li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Occultist</strong>: <strong>Phantom Pain</strong> on <strong>Kaelen</strong> &mdash; he <strong>made</strong> the Will save (25 vs DC 18) and took 5 &mdash; then swung its staff into his Parry-raised AC 21 and missed.</li>
+      <li><strong>Zhen</strong> hit for 7, then closed with <strong>Earth&rsquo;s Bile for 8 &mdash; killing it, and catching Kaelen in the burst</strong> (Kaelen made the DC 19 Reflex for 4). <em>&ldquo;Small price to pay. I&rsquo;ll heal you up, don&rsquo;t worry.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>5 &mdash; The Courtyard Revel: Six Grunts</h3>
+    <div class="combat-meta">6 Noppera-bo Grunts &middot; AC 15 &middot; HP 18 &middot; Cookfire, Roasting Meat, a Staged Rat Fight</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">72</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Kaoru &times;2, Kaelen &times;2, Zhen, Mu-Jin</div></div>
+      <div><div class="combat-stat-label">Party Damage</div><div class="combat-stat-value">3 &mdash; all Kaoru</div></div>
+    </div>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Zhen went first</strong> and opened with <strong>Earth&rsquo;s Bile</strong> across three grunts. Double 1s &mdash; 2 damage total. Foundry posted <em>&ldquo;takes no damage&rdquo;</em> on the two that saved; the GM overruled it (<em>&ldquo;they at least take a minimum one damage&rdquo;</em>), and the one that failed took the full 2 plus <strong>persistent fire</strong>. He followed with <strong>Electric Arc</strong> for 9, doubled to <strong>18</strong> on a critical failure &mdash; <strong>one grunt down</strong> &mdash; and 4 on the other.</li>
+      <li><strong>Kaelen</strong>, playing through a laptop that had died mid-session, had the GM post his <strong>Electric Arc</strong>: 10 into one grunt, 5 into the burning one. GM: <em>&ldquo;That one goes down.&rdquo;</em> <strong>One grunt down</strong> &mdash; the only death of the night the chat log can&rsquo;t corroborate, because his client was offline and the GM was applying his damage by hand.</li>
+      <li><strong>Mu-Jin</strong>: Nudge Fate, then <strong>Needle Darts</strong> into the burning grunt for exactly <strong>11</strong> &mdash; <em>&ldquo;That is just enough to bring that one down, too.&rdquo;</em> <strong>One grunt down.</strong></li>
+      <li><strong>Kaoru</strong> cast <strong>Sky Laughs at Waves</strong>, flew his full Speed into a flank, and the Strike the conflux spell grants <strong>crit for 12</strong>. The spell recharged his Spellstrike, which he spent immediately &mdash; <strong>Ignition through the ninjato for 20</strong> into the same grunt. <strong>One grunt down</strong>, and he dropped out of the air afterward. Zhen, reading the dice off the screen: <em>&ldquo;Was that maximum damage? Five, five, six.&rdquo;</em></li>
+      <li>The grunts answered: two spear Strikes at <strong>Kaelen</strong> that bounced off AC 21, and four at <strong>Kaoru</strong> &mdash; three misses, one critical miss, and one hit for <strong>3</strong> while he was flanked.</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Zhen</strong> stepped in, hit for <strong>6</strong>, and sustained <strong>Earth&rsquo;s Bile</strong> for 5 &mdash; halved to 2 on the save, leaving a grunt on <strong>1 HP</strong>.</li>
+      <li><strong>Kaelen</strong>: <strong>Electric Arc</strong>, both targets saved for 5 apiece &mdash; and the first 5 was enough. <strong>One grunt down.</strong> He&rsquo;d wanted Flurry of Blows; the GM: <em>&ldquo;Sadly, you&rsquo;re not close enough.&rdquo;</em> He <strong>Parried</strong> instead.</li>
+      <li><strong>Mu-Jin</strong> rolled a <strong>natural 1</strong>, spent a <strong>hero point</strong>, rerolled to 13, and put <strong>6</strong> into the last grunt. GM: <em>&ldquo;One hit point left.&rdquo;</em></li>
+      <li><strong>Kaoru</strong> finished it with another <strong>critical hit</strong> for 6.</li>
+    </ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>6 &mdash; The Haunted Office: Three Elite Air Wisps</h3>
+    <div class="combat-meta">3 Elite Air Wisps &middot; Level 2 &middot; AC 18 &middot; HP 22 &middot; No Weaknesses &middot; Resonance + Accord Essence</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">XP</div><div class="combat-stat-value">72</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Kaelen, Mu-Jin &middot; one self-destructed</div></div>
+      <div><div class="combat-stat-label">PCs Downed</div><div class="combat-stat-value">Mu-Jin</div></div>
+      <div><div class="combat-stat-label">Party Damage</div><div class="combat-stat-value">Zhen 17 &middot; Kaelen 12 &middot; Mu-Jin dropped</div></div>
+    </div>
+    <p><em>The Foundry chat truncated across this fight&rsquo;s opening, so initiative and the turn that dropped Mu-Jin come from the recording.</em></p>
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Mu-Jin</strong> went first and spent his turn on <strong>Recall Knowledge</strong>: air wisps, air and elemental traits. He asked for weaknesses. <em>&ldquo;No weaknesses.&rdquo;</em> &mdash; <em>&ldquo;Goddammit.&rdquo;</em></li>
+      <li>Seconds later the wisp he had woken came straight back at him &mdash; the GM: <em>&ldquo;you&rsquo;re the one that stepped on it&rdquo;</em> &mdash; put <strong>three tendril strikes</strong> into <strong>Mu-Jin</strong>, and <strong>knocked him unconscious.</strong> <em>&ldquo;Well, I&rsquo;m down.&rdquo;</em> Kaelen: <em>&ldquo;We got you, buddy.&rdquo;</em></li>
+      <li><strong>Both other wisps converged on Zhen</strong> &mdash; 7 and 5 from one, 5 from the other: <strong>17 in a single round, 41 &rarr; 24.</strong> <em>&ldquo;I&rsquo;m also in trouble.&rdquo;</em></li>
+      <li><strong>Zhen</strong> answered with a two-action <strong>Heal for 12</strong>, putting Mu-Jin back on his feet with <strong>Wounded 1</strong>. <strong>Kaoru&rsquo;s Ignition</strong> rolled 18 &mdash; exactly the wisp&rsquo;s AC &mdash; and was turned aside by a point of cover.</li>
+      <li><strong>Kaelen</strong> closed the round with the best turn of the night: <strong>Inner Upheaval</strong> (spirit damage, over Zhen&rsquo;s pitch for force) into <strong>Flurry of Blows</strong> &mdash; a <strong>natural 20, critical hit by +15</strong>, plus a second hit, for <strong>36 damage</strong> on the wisp that had dropped Mu-Jin.</li>
+      <li>And the wisp <em>beside</em> it answered with <strong>Accord Essence</strong>: it <strong>detonated itself, permanently</strong>, pushing <strong>11 temporary HP</strong> onto both survivors. GM: <em>&ldquo;We&rsquo;ve completely gone and&hellip; removed [it] from this encounter&rdquo;</em> &mdash; then, <em>&ldquo;However, even with the temporary hit points, this one will go down.&rdquo;</em> <strong>Two of three wisps gone on one turn</strong>, and the sacrifice bought its friend a single round.</li>
+    </ul>
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Mu-Jin</strong> burned all three actions getting upright: one to pull the Minor Healing Potion off his body, one to drink it (5), one to stand. <em>&ldquo;I&rsquo;m going to get that fucking bandolier when I get it back.&rdquo;</em></li>
+      <li>The last wisp turned on Kaelen &mdash; <em>&ldquo;You&rsquo;re the one that killed its friends&rdquo;</em> &mdash; for 5 and 7, then critically missed. <strong>Kaelen 47 &rarr; 35.</strong></li>
+      <li><strong>Zhen</strong> hit for <strong>8</strong> and watched all of it vanish into temporary HP, missed his second swing by 1, and cast <strong>Shield</strong>. <strong>Kaoru</strong> hero-pointed a <strong>Ray of Frost</strong> off a natural 1 and still missed. He finished the fight 0 for 3.</li>
+      <li><strong>Kaelen&rsquo;s Electric Arc</strong> was <strong>critically saved</strong> against (a 30 against DC 15), but the Flurry got there &mdash; a hero-point reroll turned a 6 into a 13, both staff hits landed for <strong>14</strong>, and the last 3 points of temporary HP finally broke.</li>
+    </ul>
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Mu-Jin</strong> sent <strong>Weaver</strong> in, <strong>Familiar of Balanced Luck</strong> dropping the wisp&rsquo;s AC to <strong>17</strong>, and put <strong>Needle Darts</strong> through it for <strong>11.</strong> GM: <em>&ldquo;That is just enough.&rdquo;</em> <strong>The PC who was unconscious in round one landed the killing blow.</strong></li>
+    </ul>
+    <p><em>Total on the last wisp: 22 HP + 11 temporary = 33, and it took precisely 8 + 14 + 11 = 33 &mdash; every point of the dead wisp&rsquo;s sacrifice spent, and not one wasted.</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Oil of Potency</div>
+      <div class="loot-source">Dormitory bodies (S6 kills)</div>
+      <div class="loot-note">+1 striking weapon or +1 resilient armor for 1 minute. Kaelen offered it around &mdash; &ldquo;does Kaoru need it?&rdquo; &mdash; and it ended in the <strong>party stash</strong>; Kaoru already owns one and Zhen carries one as an heirloom.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">+1 Battle Axe</div>
+      <div class="loot-source">Log island grunts</div>
+      <div class="loot-note">Party stash &mdash; it encumbered Mu-Jin.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Treasure near the floating logs</div>
+      <div class="loot-source">Pointed out by the rescued kappa</div>
+      <div class="loot-note"><strong>Reported but not confirmed collected &mdash; follow up.</strong></div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Unusual alchemical bomb</div>
+      <div class="loot-source">Storage room (spiders)</div>
+      <div class="loot-note">Usable by Kaoru as a Magus &mdash; noted as Iryoku&rsquo;s lane too.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Item from a body&rsquo;s arm</div>
+      <div class="loot-source">Candle room occultists</div>
+      <div class="loot-note"><strong>Claimed by Mu-Jin</strong> with the party&rsquo;s agreement &mdash; &ldquo;definitely most useful&rdquo; to him.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Oil of Mending</div>
+      <div class="loot-source">Haunted office</div>
+      <div class="loot-note">Identified vs DC 18. The GM noted it&rsquo;s &ldquo;helpful for anyone who uses shields&rdquo; &mdash; nobody benefits, since Kaoru&rsquo;s Shield cantrip regenerates on its own.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Invisibility Potion</div>
+      <div class="loot-source">Storeroom (forced door)</div>
+      <div class="loot-note">Identified by Mu-Jin (Occultism 21, exact) and Zhen (Religion 26).</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Silver ingot, leather pouch, documents</div>
+      <div class="loot-source">Storeroom</div>
+      <div class="loot-note">The documents have not been read.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">3 gp and 4 cp</div>
+      <div class="loot-source">Two separate pile splits</div>
+      <div class="loot-note"><strong>Each</strong> player received 3 gp from one split and 4 cp from the other &mdash; five shares, Iryoku&rsquo;s included.</div>
+    </div>
+  </div>
+  <div class="xp-banner">
+    Experience &middot; 48 island grunts &middot; 48 southern occultists &middot; 48 candle room &middot; 72 courtyard &middot; 72 air wisps = <strong>288 XP each</strong>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-zhen">
+      <h4>Zhen Stillness &middot; the Hand That Was Asked</h4>
+      <ul>
+        <li><strong>He was asked to kill the prisoner, and he didn&rsquo;t refuse.</strong> Zhen took this one alive in Session 6 for exactly this conversation, and when the conversation produced nothing, Mu-Jin turned to him. He said yes on a condition (<em>&ldquo;if you don&rsquo;t want to&rdquo;</em>), pushed it back once (<em>&ldquo;you can also do it yourself&rdquo;</em>), and refused to make a ritual of it (<em>&ldquo;We&rsquo;re not in medieval Japan&rdquo;</em>). Mu-Jin narrated the kill for the party. Whose hand it was never came up. His own sheet called this exactly: <em>&ldquo;It would not be a thing he chose. It would be a thing that was asked of him.&rdquo;</em></li>
+        <li><strong>He carried the leadership tier.</strong> Three of the four noppera-bo occultists died to him: both in the southern building (an Earth&rsquo;s Bile through a door gap for <em>exactly</em> lethal damage, then a hero-pointed <strong>natural 20</strong> crit on the one that ran out a window) and the second in the candle room. The fourth he crit down to 11 and Mu-Jin took. <strong>Six kills across the night &mdash; tied with Kaelen for the most.</strong></li>
+        <li><strong>He kept talking first.</strong> He tried to defuse the island before it was a fight, answered the prisoner&rsquo;s telepathic hissing with <em>&ldquo;Shut the hell up. Can we talk?&rdquo;</em>, and re-opened the conversation with the stable master when the rest of the party was already walking out the door &mdash; which is the only reason anyone knows the words &ldquo;Great Kugapti.&rdquo;</li>
+        <li><strong>He ran the party&rsquo;s healing economy end to end</strong>: the opening Garden of Healing cycle, focus healing for Kum Soon-Chong, the in-combat <strong>Heal</strong> that brought Mu-Jin off the floor, and a full 20d4 pulse between every fight. Level 3 made it noticeably better and he noticed: <em>&ldquo;my healing is even more OP now&rdquo;</em> &mdash; followed immediately by <em>&ldquo;Can also be useless, depending on how you play.&rdquo;</em></li>
+        <li><strong>He caught Kaelen in his own AoE and owned it in one line</strong> &mdash; <em>&ldquo;Small price to pay. I&rsquo;ll heal you up, don&rsquo;t worry.&rdquo;</em></li>
+        <li>Still the rules anchor, and not always right: he tried to rule Kaelen&rsquo;s Inner Upheaval out as a second Flourish and the GM overruled him (though he was correct about the multiple attack penalty). He worked the cover math with the GM, coached positioning all night, and closed the session by refusing to over-generalize the party&rsquo;s own intel about Steal Face.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaelen">
+      <h4>Kaelen Ashford &middot; the One Who Goes First</h4>
+      <ul>
+        <li><strong>He took point all night, and he kept volunteering for it.</strong> Zhen handed him the honor formally (<em>&ldquo;You want to take the honor of opening the door, Mr. Kaelen?&rdquo;</em>), and he took it every single time &mdash; onto three giant spiders, onto a locked storeroom he critically failed to force and then broke open on a hero-pointed natural 20. After a night in which his microphone died, his Discord had to be restarted and his laptop rebooted itself out of the session, Mu-Jin said <em>&ldquo;this time you get in front of me&rdquo;</em> and Kaelen&rsquo;s answer was <em>&ldquo;All right, are you guys ready?&rdquo;</em> &mdash; and he went first again.</li>
+        <li><strong>He is the most generous player at the table about loot, and it never gets noticed.</strong> Offered the Oil of Potency, his first question was <em>&ldquo;Okay, does Kaoru need it?&rdquo;</em>, and he settled it with <em>&ldquo;Or just put it in the stash until someone needs it.&rdquo;</em> When Mu-Jin wanted the item off the occultist&rsquo;s arm: <em>&ldquo;If it&rsquo;s useful to you, take it.&rdquo;</em> When Mu-Jin beat himself up over a Medicine roll, Kaelen caught it: <em>&ldquo;That&rsquo;s cool. Hey, don&rsquo;t we all?&rdquo;</em></li>
+        <li><strong>He owns the Session 6 joke before anyone else can make it.</strong> Asked to distract an enemy: <strong><em>&ldquo;Are you sure you want me to dance for him? We know how well that goes.&rdquo;</em></strong> Three other people made that joke at him this session; this is the one time he made it himself, first, unprompted.</li>
+        <li><strong>Six kills across the night &mdash; tied with Zhen for the most at the table</strong> &mdash; and <strong>his best turn effectively deleted two elite creatures at once.</strong> Inner Upheaval into Flurry of Blows: a <strong>critical hit by +15</strong> plus a second hit, <strong>36 damage</strong> &mdash; enough that a neighboring air wisp detonated itself to grant temporary hit points, and enough to kill through them anyway.</li>
+        <li><strong>He set his own moral threshold out loud</strong> before the courtyard fight &mdash; <em>&ldquo;If they&rsquo;re just tormenting rats, then cool. If they&rsquo;re actually harming humans, then we&rsquo;re going to have to do it&rdquo;</em> &mdash; had it checked with a Recall Knowledge, and held to the answer. He also <strong>chose defense over greed on principle</strong>, taking Parry instead of a third swing: <em>&ldquo;Because I don&rsquo;t want to get my face taken off. Not today.&rdquo;</em></li>
+        <li><strong>The wit is his, not just aimed at him</strong>: the corpse-hand slapping proposal that got the GM to quietly post his own deity into chat; <em>&ldquo;At least they won&rsquo;t shut doors on you&rdquo;</em> on opening a door onto giant spiders; and finishing a spider that had one hit point left, then being audibly cheated of the moment.</li>
+        <li>He also ran the break: minded the room, counted people down, pinged everyone back. When the GM asked the table how the campaign was going, he was the only player who answered &mdash; <em>&ldquo;It&rsquo;s really fun.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-kaoru">
+      <h4>Kaoru &middot; the One Who Called It</h4>
+      <ul>
+        <li><strong>He read the disguise before anyone else and was proven right on the spot.</strong> <em>&ldquo;It looks like that thing&rsquo;s suffering from shell shock&rdquo;</em> &rarr; <em>&ldquo;I question their heroism. By beating on a poor defenseless kappa&rdquo;</em> &rarr; and the instant the masks dropped: <strong><em>&ldquo;Told you. Disguise.&rdquo;</em></strong> Two sessions running, his instinct about what&rsquo;s actually in front of the party has been the sharpest at the table.</li>
+        <li><strong>He nearly lost his face and made it by one.</strong> Steal Face &mdash; a Curse/Polymorph effect with the Incapacitation trait &mdash; DC 18 Fortitude, natural 6, hero point, reroll, <strong>19</strong>. A plain failure would have cost him his face only until the end of the occultist&rsquo;s next turn; a <em>critical</em> failure is the one that sticks. His entire comment on the save: <strong><em>&ldquo;Since they like trying to grab my face &mdash; I know I&rsquo;m cute and all, but damn.&rdquo;</em></strong></li>
+        <li><strong>He made the call on the stable master.</strong> With the party circling the question of whether to hold the dying man or send him home, Kaoru cut it: <strong><em>&ldquo;Just get out of here. We&rsquo;ll deal with it. We will see what we can do about his son.&rdquo;</em></strong> That decision is what the back half of the session was about. He is also the one who <strong>spotted the captive cage first</strong> &mdash; 95 minutes before the party went to it.</li>
+        <li><strong>Highest crit rate at the table</strong>: four critical hits, including the <strong>Sky Laughs at Waves</strong> flight into a flanking crit and the <strong>Spellstrike + Ignition for 20</strong> in the courtyard that had Zhen counting the dice out loud (<em>&ldquo;Was that maximum damage? Five, five, six.&rdquo;</em>).</li>
+        <li><strong>He scouted before anyone committed</strong>, reading the front gate off the map and asking the question nobody else did &mdash; <em>&ldquo;Or are we spotted?&rdquo;</em> The committed South-Banker of the party also clocked that the rescued man was <strong>South Bank</strong> before deciding what to do with him.</li>
+        <li><strong>He was the enemy&rsquo;s favorite target all night</strong> &mdash; spear crits on the island, the Steal Face, Phantom Pain, and spear hits in the courtyard &mdash; and Mu-Jin named the reason without being asked: <em>&ldquo;That&rsquo;s only because Iryoku&rsquo;s not here.&rdquo;</em> Kaoru absorbed the aggro the missing tank would have taken and kept swinging.</li>
+        <li><strong>He advocated for other players&rsquo; turns</strong>, backing Mu-Jin&rsquo;s ruling that got Kaelen moving during the spider fight, and pushing the party to check the courtyard cage because he&rsquo;d spotted it first. The S6 callback is his to run now: <em>&ldquo;Alright, Kaelen. <strong>Go punch Ghost.</strong>&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-mujin">
+      <h4>Mu-Jin &middot; the One Who Asks the Next Question</h4>
+      <ul>
+        <li><strong>He ran the interrogation from open to close</strong> &mdash; Demoralize to shift it off hostile, three rounds of pressing it on motive and leadership, then Sense Motive to establish it truly didn&rsquo;t care whether it died. When the well was dry he said so plainly and made the call: <em>&ldquo;I will speak plainly. Either you come up with a reason, or you give us something worth our while, or we&rsquo;re just going to kill you here.&rdquo;</em></li>
+        <li><strong>His folklore-correct courtesy worked on a kappa for the second campaign running</strong> &mdash; <em>&ldquo;Greetings, kappa. We are friends with some cousins of yours to the southeast of Willowshore&rdquo;</em> &mdash; and he followed it up unprompted by telling the wounded creature where it could go to be safe. That courtesy is what opened the door; <strong>Zhen&rsquo;s follow-up question</strong> is what pulled the Zoudou/Mugirou split out of it.</li>
+        <li><strong>He is the knowledge engine and he keeps asking the right specific question.</strong> A <em>critical success</em> free Recall Knowledge on the occultists got him both their nature and their <strong>sonic weakness</strong> &mdash; and he immediately went looking for the Noise Blast he&rsquo;d taken at level 3, then talked himself out of it on range. His hero-pointed <strong>natural 20</strong> on Willowshore Lore is the only reason the party knows &ldquo;Great Kugapti&rdquo; is a monster and not a person.</li>
+        <li><strong>He was knocked unconscious by the first air wisp turn of the fight and then killed the last one himself</strong> &mdash; potion, stand up, Weaver&rsquo;s Familiar of Balanced Luck to drop its AC by 1, Needle Darts for exactly enough. He also spent the fight buffing rather than hoarding: Nudge Fate on Kaelen twice, and on Zhen.</li>
+        <li><strong>He&rsquo;s the party&rsquo;s institutional memory and its conscience about the mission.</strong> He gave the session recap, tracked the loot, relayed every promise to the NPCs in character (<em>&ldquo;Thank you for the information. We&rsquo;ll rescue your son ASAP&rdquo;</em>), and closed the night by putting the noppera-bo on a moral spectrum from the lore and placing this camp firmly at the wrong end of it.</li>
+        <li>Best line of the night is still his opener, and it&rsquo;s now permanent table canon: <em>&ldquo;So that&rsquo;s what Kaelen&rsquo;s like towards his friends. Keep that in mind, everyone.&rdquo;</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Kaoru:</strong> &ldquo;Told you. Disguise.&rdquo;
+    <span class="attribution">The instant the four &ldquo;heroic adventurers&rdquo; dropped their human faces &mdash; after he&rsquo;d been calling it for five minutes</span>
+  </blockquote>
+
+  <blockquote><strong>Kaoru:</strong> &ldquo;Since they like trying to grab my face &mdash; I know I&rsquo;m cute and all, but damn.&rdquo;
+    <span class="attribution">After surviving Steal Face by exactly one point on a hero-pointed Fortitude save</span>
+  </blockquote>
+
+  <blockquote><strong>Kaoru:</strong> &ldquo;Just get out of here. We&rsquo;ll deal with it. We will see what we can do about his son.&rdquo;
+    <span class="attribution">Cutting through the debate over the dying stable master &mdash; and setting the rest of the session&rsquo;s agenda</span>
+  </blockquote>
+
+  <blockquote><strong>Mu-Jin:</strong> &ldquo;Kaelen was mind-controlled by the fungi, considered it its friend, and decided to just stand there and watch it be murdered. So that&rsquo;s what Kaelen&rsquo;s like towards his friends. Keep that in mind, everyone.&rdquo;<br>
+    <strong>Kaelen:</strong> &ldquo;You&rsquo;re not going to let that go, aren&rsquo;t you?&rdquo;<br>
+    <strong>GM:</strong> &ldquo;I&rsquo;ll bring it up every session for you.&rdquo;
+    <span class="attribution">The session recap, first two minutes</span>
+  </blockquote>
+
+  <blockquote><strong>Mu-Jin:</strong> &ldquo;I will speak plainly. Either you come up with a reason, or you give us something worth our while, or we&rsquo;re just going to kill you here.&rdquo;<br>
+    <strong>GM (the prisoner):</strong> &ldquo;Kill me? I have nothing to say to people from Willowshore.&rdquo;
+    <span class="attribution">The end of the interrogation, and the reason there was an execution</span>
+  </blockquote>
+
+  <blockquote><strong>Mu-Jin:</strong> &ldquo;Greetings, kappa. We are friends with some cousins of yours to the southeast of Willowshore.&rdquo;
+    <span class="attribution">The folklore courtesy, working on a kappa for the second time in the campaign</span>
+  </blockquote>
+
+  <blockquote><strong>Zhen:</strong> &ldquo;Shut the hell up. Can we talk?&rdquo;
+    <span class="attribution">Answering the faceless prisoner&rsquo;s telepathic hissing, in kind</span>
+  </blockquote>
+
+  <blockquote><strong>Zhen:</strong> &ldquo;I mean, I can, if you don&rsquo;t want to.&rdquo;
+    <span class="attribution">Asked by Mu-Jin to kill the prisoner Zhen had taken alive in Session 6. He agreed on a condition, pushed it back once, and refused to make a ritual of it &mdash; &ldquo;We&rsquo;re not in medieval Japan&rdquo;</span>
+  </blockquote>
+
+  <blockquote><strong>Zhen:</strong> &ldquo;Not today, Spider. You need ten or a hundred more years if you want to do that.&rdquo;
+    <span class="attribution">To a hunting spider that had just missed him twice</span>
+  </blockquote>
+
+  <blockquote><strong>Zhen:</strong> &ldquo;Small price to pay. I&rsquo;ll heal you up, don&rsquo;t worry.&rdquo;<br>
+    <strong>Kaelen:</strong> &ldquo;Hey, I&rsquo;m still alive, aren&rsquo;t I?&rdquo;
+    <span class="attribution">After Zhen&rsquo;s killing Earth&rsquo;s Bile caught Kaelen in the blast radius</span>
+  </blockquote>
+
+  <blockquote><strong>Kaelen:</strong> &ldquo;Are you sure you want me to dance for him? We know how well that goes.&rdquo;
+    <span class="attribution">Asked to distract an enemy &mdash; making the Session 6 joke about himself, first, before anyone else could</span>
+  </blockquote>
+
+  <blockquote><strong>Kaelen:</strong> &ldquo;At least they won&rsquo;t shut doors on you.&rdquo;
+    <span class="attribution">Opening a door onto three giant hunting spiders, still bitter about the occultist who&rsquo;d spent a whole fight closing them</span>
+  </blockquote>
+
+  <blockquote><strong>Kaelen:</strong> &ldquo;Because I don&rsquo;t want to get my face taken off. Not today.&rdquo;
+    <span class="attribution">Choosing Parry over a third attack, one room after watching Kaoru nearly lose his</span>
+  </blockquote>
+
+  <blockquote><strong>GM (Kum Soon-Chong, the stable master):</strong> &ldquo;I know I asked for your help with the stables &mdash; but they took my son. Please, can you save them?&rdquo;
+    <span class="attribution">Behind the curtain, at death&rsquo;s door, in the building the party had just cleared</span>
+  </blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>Meng-Soon, the stable master&rsquo;s son.</strong> Taken <strong>northwest, at the end of a trail</strong>. Described as <em>&ldquo;some sort of old soul.&rdquo;</em> The active rescue objective. <em>(Spelling unverified &mdash; the GM&rsquo;s chat paste was lost to truncation.)</em></li>
+      <li><strong>The &ldquo;Great Kugapti.&rdquo;</strong> The entity the cultists intend to offer Meng-Soon to. A hero-pointed <strong>natural 20</strong> on Willowshore Lore returned only <em>&ldquo;an ancient and long-dead monster of some sort.&rdquo;</em> Almost certainly connected to Ugly Cute&rsquo;s <strong>&ldquo;even stronger malevolence farther west.&rdquo;</strong> <em>(Spelling unverified.)</em></li>
+      <li><strong>Zoudou and Mugirou.</strong> Two noppera-bo leaders at the camp with <strong>friction between them</strong>. Foundry has Mugirou tokened as <strong>&ldquo;Mugirou the Rebel&rdquo;</strong> &mdash; level 2 <strong>elite</strong>, AC 18, HP 30. Neither has been met. The split is exploitable.</li>
+      <li><strong>Five captives in a cage</strong> in the northern courtyard, <strong>spaced apart</strong>. The session ended on the plan to draw the fight away from them. <strong>This is next session&rsquo;s opening, and the GM parked it deliberately for Iryoku&rsquo;s return.</strong></li>
+      <li><strong>The hidden trap door</strong> between two northern shelves in the storeroom. Revealed and unexplored.</li>
+      <li><strong>The effigy in the candle room</strong> &mdash; a misshapen figure carved from a deformed burl, ringed by blood-red ancestry-shaped candles, with two occultists praying to it. Nobody examined it. In a camp preparing an offering to a Great Kugapti, this is the most likely place that offering was being prepared.</li>
+      <li><strong>The Noppera-Bo Hood has still never been used.</strong> Mu-Jin flagged it in the recap &mdash; <em>&ldquo;it literally morphs your body into that of a noppera-bo&hellip; so far, we have not used it at all&rdquo;</em> &mdash; and the party then spent an entire session infiltrating a noppera-bo camp with its Face absent. Iryoku is back next week.</li>
+      <li><strong>Weaver is poisoned</strong> &mdash; Hunting Spider Venom, initial save failed, and no interval saves were ever rolled. Track the affliction stage.</li>
+      <li><strong>Steal Face</strong>: an occultist ability, or a noppera-bo ability? Zhen explicitly refused to generalize from two data points. Unknown.</li>
+      <li><strong>Noppera-bo occultists are weak to sonic / auditory damage.</strong> Mu-Jin has Noise Blast, but its 10-ft burst has so far been too short-ranged to use well. Kaoru was advised toward Thunderstrike in S6.</li>
+      <li><strong>The treasure near the floating logs</strong> on the log island &mdash; flagged by the kappa, not confirmed collected.</li>
+      <li><strong>The blood-painted silhouettes</strong> in the S6 dormitory now read as a tally, not decoration &mdash; Zhen connected them to the captives in the closing conversation.</li>
+      <li><strong>Kaelen&rsquo;s S4 Slime Rot</strong> &mdash; still never addressed, four sessions running. <strong>Ask the GM.</strong></li>
+      <li>Carried forward: the wrong-gods lantern secret (S2) &middot; &ldquo;blood will rise&rdquo; &middot; the vanished governor and his estate &middot; the tea house claim &middot; the Great Willow&rsquo;s promise to map the curse&rsquo;s edges &middot; the Willow&rsquo;s missing friend &middot; <strong>Shinzo</strong> &middot; Mu-Jin&rsquo;s Desna adoption.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="cliffhanger">
+    <span class="label">Session End &middot; Called Three Minutes Early, On Purpose</span>
+    <p>Five people in a cage in the northern courtyard, each one spaced apart so they can&rsquo;t be freed together. The party was still working out how to pull the fight away from them when the GM stopped the clock &mdash; not because the night was over, but because the player who wasn&rsquo;t there deserved to be in the room for this one.</p>
+    <span class="big-line">&ldquo;Just so Iryoku can take part in it when he comes back next week.&rdquo;</span>
+    <span class="speaker">&mdash; AndeGM, calling it</span>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax&rsquo;s Notes &mdash; Zhen Stillness&rsquo;s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+  <h3>What Zhen did this session</h3>
+  <ul>
+    <li>Opened the day healing the party to full, and did it again between every fight. The <strong>Garden of Healing</strong> cycle is meaningfully stronger at level 3.</li>
+    <li>Spoke into the bound prisoner&rsquo;s mind when it would only hiss: <em>Shut the hell up. Can we talk?</em> It would not talk.</li>
+    <li>Agreed to kill the bound prisoner when Mu-Jin asked &mdash; conditionally, then pushed it back once. Refused the kneeling-execution ceremony Mu-Jin wanted. The prisoner died. Nobody said whose hand.</li>
+    <li>Tried to talk the four &ldquo;heroes&rdquo; off the kappa before it became a fight. It became a fight.</li>
+    <li><strong>Killed three of the four noppera-bo occultists</strong> across two buildings. Two crits, one of them a hero-pointed natural 20; one Earth&rsquo;s Bile through a door gap for exactly lethal damage; one closing burst. The fourth he crit down to 11 and Mu-Jin finished.</li>
+    <li>Solved the door-closing occultist by <strong>opening the door himself</strong> and casting through the gap.</li>
+    <li><strong>Healed Kum Soon-Chong</strong> off death&rsquo;s door, and was the one who stopped the party walking out before the man finished talking.</li>
+    <li>Won initiative on the courtyard and opened with Earth&rsquo;s Bile across three, then Electric Arc for the first kill.</li>
+    <li>Took 17 damage in one round from the air wisps &mdash; the worst single round he&rsquo;s had since the myceloid. <strong>Healed Mu-Jin up off the floor</strong> mid-fight.</li>
+    <li>Caught Kaelen in his own Earth&rsquo;s Bile and healed it back.</li>
+    <li>Closed the night arguing the party should <em>not</em> assume Steal Face is universal to noppera-bo.</li>
+  </ul>
+
+  <h3>Things Zhen knows that the party does not</h3>
+  <ul>
+    <li>Six kills tonight &mdash; three of them with the nodachi, the rest with Earth&rsquo;s Bile and Electric Arc. Four of the six were thinking creatures that spoke. It stays unwrapped. The rule his father set &mdash; <em>never draw it until you are certain you are ready</em> &mdash; has quietly stopped being the operative question.</li>
+    <li>He did not say no. He hedged, he handed it back, he stripped the ritual off it &mdash; and a bound, disarmed prisoner he had personally spared six days ago is dead, and he does not get to file that under someone else&rsquo;s decision. <em>Enkhar Glory</em> would not have needed to be asked at all.</li>
+    <li>The lantern coins were blessed by the wrong gods. Granny Hu still does not know. Nothing has visibly gone wrong yet.</li>
+  </ul>
+
+  <h3>What Zhen is thinking about</h3>
+  <ul>
+    <li><strong>&ldquo;Old soul.&rdquo;</strong> The stable master&rsquo;s word for his son, and apparently the reason the cultists want that boy specifically rather than any of the five in the cage. Zhen is a samsaran. Does &ldquo;old soul&rdquo; mean what it sounds like it means &mdash; and if it does, is the offering after a <em>person</em>, or after a soul that has been through this before?</li>
+    <li><strong>Zoudou and Mugirou.</strong> Two leaders, one of them tokened as <em>the Rebel</em>, and friction between them. A camp with a faction split can be turned. Worth asking the captives who they answer to before killing anything else.</li>
+    <li><strong>Sonic is the lever.</strong> The occultists are weak to auditory damage. Mu-Jin has Noise Blast but a 10-ft burst; Kaoru was pointed at Thunderstrike last level. Somebody should be able to deliver it at range before the next occultist.</li>
+    <li><strong>Earth&rsquo;s Bile keeps catching allies.</strong> Twice now. It is the right spell and the burst is small; the fix is calling the target before placing it, not dropping the spell.</li>
+    <li><strong>Dispel Magic has still never been cast.</strong> He took it for exactly this kind of enemy. Steal Face is a curse with the polymorph trait &mdash; but a plain failure wears off on its own by the end of the caster&rsquo;s next turn. It is a <em>critical</em> failure that sticks, and that is the case Dispel is for.</li>
+    <li>The party has no Face and no Kineticist wall this week, and Kaoru absorbed every hit that would have gone to Iryoku. It held. It would not have held against something like the myceloid.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>What is the Great Kugapti?</strong> Ancient, long dead, a monster &mdash; and someone is preparing an offering to it. Dead things that receive offerings do not stay dead. Ugly Cute sensed a stronger malevolence <em>farther west</em>; the trail with Meng-Soon on it runs <em>northwest</em>. Same thing, or two?</li>
+    <li><strong>Why an &ldquo;old soul&rdquo;?</strong> What does the offering actually require &mdash; the body, the soul, or the specific continuity of a reincarnated one?</li>
+    <li><strong>Who are the five in the cage,</strong> and are any of them from Willowshore? The blood silhouettes on the dormitory wall were a count of something.</li>
+    <li><strong>Where does the hidden trap door go?</strong> Nobody has opened it.</li>
+    <li><strong>Can Zoudou and Mugirou be turned against each other,</strong> and which one is &ldquo;the Rebel&rdquo; rebelling against?</li>
+    <li><strong>Is Steal Face an occultist trick or a noppera-bo trait?</strong> Two saves made, no data.</li>
+    <li><strong>Weaver is poisoned.</strong> Does the venom progress overnight?</li>
+    <li><strong>Kaelen&rsquo;s Slime Rot</strong> &mdash; four sessions unaddressed. Ask the GM directly this time.</li>
+  </ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

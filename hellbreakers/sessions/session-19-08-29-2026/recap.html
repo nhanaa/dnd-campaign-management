@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 19 — War Is Hell, Though</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>War Is Hell, Though</h1>
+  <div class="subtitle">Session 19 &middot; The third floor, the warden, and a very bad chase out of Elidir</div>
+  <div class="meta-row">
+    <span class="meta-pill">29 Aug 2026</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">3h 12m</span>
+    <span class="meta-pill">~19 Abadius 4727 AR</span>
+    <span class="meta-pill">Level 6</span>
+  </div>
+</header>
+
+<h2>Session Composition</h2>
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:45%"></div>
+  <div class="comp-seg comp-explore" style="width:25%"></div>
+  <div class="comp-seg comp-rp" style="width:18%"></div>
+  <div class="comp-seg comp-social" style="width:7%"></div>
+  <div class="comp-seg comp-loot" style="width:5%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 45%</span>
+  <span><span class="legend-dot" style="background:var(--teal)"></span>The Chase 25%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 18%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>The Cells 7%</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 5%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-baijian">
+    <div class="char-name">Bai Jian</div>
+    <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster + Hedge Mage &middot; Lv 6</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-cyrathul">
+    <div class="char-name">Cyrathul</div>
+    <div class="char-class">Lunar Dragon Thaumaturge (Mirror Cloak + Regalia) &middot; Draconic Ravager &middot; Lv 6</div>
+    <div class="char-player">Snowgeen</div>
+  </div>
+  <div class="char-card char-panacea">
+    <div class="char-name">Panacea</div>
+    <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic + Living Nexus &middot; Lv 6</div>
+    <div class="char-player">Bog Witch</div>
+  </div>
+  <div class="char-card char-zanthar">
+    <div class="char-name">Zanthar Melodune III</div>
+    <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &middot; Lv 6</div>
+    <div class="char-player">Scott Smith</div>
+  </div>
+  <div class="char-card char-ren">
+    <div class="char-name">Ren</div>
+    <div class="char-class">Isgeri Boarhound &middot; mature animal companion</div>
+    <div class="char-player">Bai Jian's</div>
+  </div>
+</div>
+<p style="margin-top:16px;color:var(--text-dim);font-size:14px;"><em>Four PCs and a dog again. <strong>Obie (Judge Leoz Balake) has left the campaign</strong> after his single session; the GM wrote Leoz out in one line at the top of the night &mdash; the gunslinger stays in the basement to guard Sarevial and Osney while the party goes up. Panacea gave the recap and took the hero point for it.</em></p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Last week ended with the party one floor below their people and agreeing out loud that they were the bad guys. This week they spent three hours trying, mostly, not to be &mdash; and the dice, the prison, and a dragon on horseback kept deciding otherwise.</p>
+
+<p>The third floor of the Gyve opened on two faces the party had every reason to remember. <strong>Rencelos Azri</strong>, the legionnaire darts champion they framed for buying stolen talismans in Session 16, was in the first cell, armed, and knew exactly who had put him there &mdash; <em>"You! You're the reason I'm in here! You tricked us!"</em> His nephew <strong>Moccoviz</strong> &mdash; the noble brat who had thrown silver at them after the Daeodon &mdash; came out of the next cell feinting. What followed was the hardest <em>Moderate</em> encounter the table has had in weeks, fought by a party actively trying not to kill two people it had already wronged: Panacea opened by telling the kid <em>"we want to let you out of here"</em> and casting Fear on his uncle &mdash; who crit-saved it and laughed in her face: <em>"you die here"</em> &mdash; Bai Jian put Moccoviz to bed with the flat of a Sure-Strike falcata (<em>"Well kid, let's go to bed"</em>), Rencelos put a dagger into Panacea and a longsword into Cyrathul and Bai Jian, and Cyrathul &mdash; after the party had just agreed to keep him alive &mdash; rolled 19 of a possible 20 on the dice and cut the man's jugular. He stayed on his feet anyway (<em>Battle Scarred</em>, the GM explained: <em>they don't call it Last Stand anymore</em>), crit Cyrathul for <strong>38</strong> (<em>"I told you I wasn't done"</em>), and went down non-lethal under Bai Jian's blade before the round was out. Both Azris are alive. Bai Jian: <em>"Just for the record, I didn't kill them."</em> The GM: <em>"He might not know that."</em></p>
+
+<p>Then the cells. <strong>Roxy. Oramos</strong> (<em>"I was debating my choice whether or not I should have joined you, but you saved us"</em>). <strong>Hexroot</strong>, the party's own former leshy, grinning &mdash; <em>"I knew you guys wouldn't leave us behind."</em> <strong>Father Kindness</strong> (<em>"This is impossible"</em>), the Thieves' Guild kid with his curt nod, the costume-maker, a red-eyed prisoner with the shakes whom the GM called <em>"the alligator"</em> &mdash; almost certainly <strong>Zarok</strong>, the Aleigator &mdash; and <strong>Otton Nettlebrush</strong> &mdash; three days a prisoner, bamboo shoots still splintered under every fingernail, sobbing that he had told them everything. On the warden's desk, the notes confirmed it: <em>the authorities learned about the Hellbreakers hideout after they captured Otton and tortured him over several days.</em> The S17 question &mdash; how did the army know about the safehouse meeting &mdash; is answered, and it isn't Jenverick and it isn't Sarevial. It's a kind manservant who broke.</p>
+
+<p>The warden herself, <strong>Irkazer</strong>, six foot five with the biggest flail anyone had seen, charged Zanthar the moment the party came up the stairs and took him from 62 to <strong>10</strong> in one round (<em>"I'm still alive!"</em>). The fight that followed was the party at its most coordinated: Bai Jian hero-pointed a Slam Down into a <strong>36 crit</strong> and tripped her, Cyrathul hero-pointed a nat-1 Twisting Tail into a <strong>nat-20</strong> that kept her on the floor (<em>"make up for my entire turn of nothing happening"</em>), Panacea kept Zanthar breathing with Battle Medicine and a Trade Death for Life, Bai Jian cast Guidance on himself and crit her again, and Cyrathul opened her throat with what he called <em>"the tried and true jugular slash."</em> Her last words were <em>"Who are you?"</em> Panacea: <em>"You'll never know."</em></p>
+
+<p>Then the escape, run as a Pathfinder chase &mdash; five obstacles in fifteen-minute rounds &mdash; and the party was very, very bad at it. They bluffed the front gate with the day's passphrase (<em>"pineapple juice"</em>, off the warden's desk) and were asked where their uniforms were; Bai Jian walked up to ask what was going on and was told, by a jailer, that there was a prison break (<em>"It's a prison break?"</em> &mdash; <em>"my job is just not good. He is not good at this, guys"</em>); three Deception rolls failed and Cyrathul simply conjured a staircase over the wall. A whiteout blizzard hit. Panacea's memory of the city and Cyrathul's asking around found the stables, a familiar voice met them there with the horses intact, Bai Jian tore the tack shed open and calmed a stable of spooked warhorses (<em>"I have experience taming an animal right here. Surely these horses can't be harder than this guy"</em>), and the party rode out with every rescued Hellbreaker behind them. A gawking crowd cost them a round; a hundred imps overhead cost them two; the watch mages twisted the road back toward the prison for three more. In between, two street fights: the party killed three of the first patrol (Cyrathul bit two heads clean off from horseback &mdash; <em>"I don't mean to. I just keep killing people"</em>) and then, chastened, took the entire second patrol alive, including a pistol-drawing <em>unsanctioned sheriff</em> who opened with a <strong>nat-20 for 39</strong> into Bai Jian's shoulder. Panacea's second Arcana unravelled the mages' labyrinth <em>"like a bow on a Christmas present"</em>, the <strong>Druma Road Gate</strong> rose fifty feet in front of them &mdash; and a Hellknight cavalry brigade, a line of infantry and a standard bearer were waiting under it. <em>"Kill the Hellbreakers!"</em> Pin. <strong>280 XP.</strong></p>
+</div>
+
+<h2>The Night</h2>
+<div class="timeline">
+
+  <div class="act combat">
+    <div class="act-label">Act I &middot; Combat &middot; The Third Floor</div>
+    <div class="act-card">
+      <h3>The Azri cell</h3>
+      <ul>
+        <li>The GM opened with the key ring: the surrendered guard's keys open <em>almost every door in the place</em>. A small goblin voice from the doorway &mdash; <em>"You guys okay? I hear lots of commotion"</em> &mdash; and the sound of the rest of the prison emptying itself. <strong>Leoz</strong> volunteers to stay in the basement and guard Sarevial and Osney; that is his exit.</li>
+        <li>Panacea Treat-Wounded Ren, Cyrathul and herself before going up (28 / 26 / 30). Zanthar, catching up on the loot: <em>"I have three spell books."</em></li>
+        <li>Third floor: solid wooden cell doors with head-height panels, moans and sad laughter, <em>"the stench of misery."</em> The first door Bai Jian opened held <strong>Rencelos Azri</strong> &mdash; armed &mdash; who recognised them on sight. Bai Jian's honest first reaction: <em>"Remind me again who he was?"</em> &rarr; <em>"Oh, he's the one we blamed for everything."</em> &rarr; to Rencelos: <em>"Why would you blame us? We don't do anything wrong."</em> (Someone, off-mic: <em>"We're just innocently wandering around the third floor of a prison."</em>)</li>
+        <li><strong>Moccoviz Azri</strong> &mdash; Rencelos's nephew, the S11 street brat who had thrown silver at them &mdash; stepped out of the next cell, furious: <em>"You're the reason we're in this cell!"</em> The GM confirmed to Panacea that the party had framed <strong>both</strong> of them.</li>
+        <li>Panacea's opening move was a plea, not a spell: <em>"Listen kid, we want to let you out of here. We don't want to have to hurt you."</em> Then Fear on Rencelos, framed in her own words as a way <em>"to make it clear that I was trying not to kill him."</em> Rencelos laughed in her face: <em>"Did you really think that was going to work? You die here."</em></li>
+        <li>Bai Jian asked the table the question directly &mdash; <em>"Are we killing this young kid or not?"</em> &mdash; and Panacea answered for everyone: <em>"Probably shouldn't. I think that we've killed enough."</em> Cyrathul: <em>"I don't think they'd care if we killed him because he's a prisoner, but yeah."</em></li>
+        <li>Mid-fight, with Rencelos bloodied and cornered, Bai Jian offered terms &mdash; <em>"You're cornered. Surrender."</em> Rencelos: <em>"You ruined my reputation. You kill my nephew and you think we can negotiate now?"</em> Bai Jian, for the record: <em>"I didn't kill them."</em></li>
+        <li>The other argument of the night, in two lines. Bai Jian: <em>"He's like an innocent."</em> Cyrathul: <em>"Innocent is a strong word for this man&hellip; We might have framed him, but he's still, at the very least, essentially a Chelaxian noble. Almost guaranteed deals in slavery."</em> Panacea's verdict: <em>"We're the good guys. War is hell, though."</em> Bai Jian: <em>"I think that ship has already sailed last session, but I'm trying to keep it alive right now. Keep it not sinking."</em></li>
+        <li>Panacea drew her <strong>+1 striking dancer's spear</strong> in anger for the first time &mdash; <em>"This is my first time with my weapon&hellip; Okay, I'm excited now"</em> &mdash; and missed twice (<em>"I'm just not so good with the spear yet"</em>). Bai Jian used the downtime between her turns to teach her the <strong>Aid</strong> action.</li>
+        <li>Rencelos survived a cut jugular on <strong>Battle Scarred</strong> and dropped non-lethally to Bai Jian before the round ended: <em>"You'll regret this, Hellbreakers."</em> Both Azris alive, unconscious, left in their cell. <em>"It was a moderate encounter,"</em> the GM said. Bai Jian: <em>"That was harder than it should have been&hellip; We gave them a chance."</em> And: <em>"Bai Jian feels conflicted because his mercy may have almost downed Cy also."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act II &middot; The Cells &middot; Opening Every Door</div>
+    <div class="act-card">
+      <h3>"We wouldn't leave comrades behind"</h3>
+      <ul>
+        <li>Loot off the Azris: <strong>high-fashion fine clothing</strong> (Cyrathul: <em>"I'm gonna steal his clothing"</em>), a <strong>rapier</strong>, <strong>loaded dice</strong>, a <strong>+1 longsword</strong>, <strong>half plate</strong>, and Rencelos's <strong>signet ring</strong>.</li>
+        <li>Twenty minutes of healing and refocusing: Panacea's Heal and Treat Wounds, Zanthar's Lay on Hands &times;2 for 18 apiece (<em>"I feel useful."</em> &mdash; Panacea: <em>"You are useful. You're always useful."</em>), Life Boost sustained for another 12. Bai Jian wanted a second ten minutes; Zanthar: <em>"You might as well take it because I'm going to have to refocus anyway."</em></li>
+        <li>Bai Jian: <em>"We should free them all."</em> Every door on the floor, in order: <strong>Roxy</strong> (<em>"You guys came for us?"</em>); <strong>Oramos</strong> (<em>"I was debating my choice&hellip; but you saved us"</em>); <strong>Hexroot</strong>, <em>"super happy"</em> &mdash; <em>"I knew you guys wouldn't leave us behind"</em> (Bai Jian: <em>"We wouldn't leave comrades behind"</em>); <em>"the alligator"</em> &mdash; red-eyed, with the DTs, <em>"hasn't had a drink in a while"</em> &mdash; which can only be the Aleigator, <strong>Zarok</strong> (the GM never said the name); the <strong>Thieves' Guild kid</strong> (a curt nod, nothing said); <strong>Father Kindness</strong> (<em>"You guys are breaking us out of the Gyve? This is impossible"</em>); <strong>Otton Nettlebrush</strong>; the <strong>costume-maker</strong>, whose cell someone described as <em>"high fashion."</em> Beans, Ievis and Padisco were on the GM's roster too.</li>
+        <li><strong>Otton</strong> was the worst of it. <em>"No! I don't even deserve this! It's my fault!&hellip; They captured me three days ago&hellip; They tortured me. I told them everything. I'm so sorry."</em> Bamboo shoots under almost every fingernail on both hands, chewed at the ends where he had tried to work them out with his teeth. Bai Jian: <em>"You didn't have a choice."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III &middot; Combat &middot; The Warden</div>
+    <div class="act-card">
+      <h3>"Just stop! In the name of the law!"</h3>
+      <ul>
+        <li>Upstairs, past the cell block: <em>"Intruders. I thought I heard something outside."</em> <strong>Warden Irkazer</strong> stood up from behind her desk &mdash; six foot five &mdash; hefted a flail <em>"the biggest-looking flail you've ever seen"</em> and charged straight at Zanthar: <em>"Just stop! In the name of the law!"</em></li>
+        <li>Her Demoralize was a natural 1 (<em>"Zanthar is unshakeable"</em>); her flail was not &mdash; <strong>34</strong>, a crit, before he had acted. Zanthar: <em>"It's not unkillable. I'm going to cast this right in your face"</em> &mdash; Dizzying Colors, which she crit-saved and <em>"spit a rainbow at you."</em> He ran, and her reactive strike took <strong>18</strong> more. <em>"I'm still alive!"</em></li>
+        <li>The turn that decided it: Bai Jian's Slam Down (hero point: nat 2 &rarr; 9, +10) for a <strong>36 crit</strong> and a Trip; then Cyrathul's Twisting Tail (hero point: nat 1 &rarr; nat 20) for <strong>32</strong> as she tried to stand &mdash; <em>"So she's still prone."</em> She never got upright with a full set of actions again.</li>
+        <li><em>"Who are you? What are you doing in my prison?"</em> Two rounds, dead on Cyrathul's claw. Panacea, to her last words: <em>"You'll never know."</em></li>
+        <li>Loot off the Warden: <strong>+1 striking flail, +1 composite longbow + 20 arrows, +1 gauntlet, half plate</strong>, and a chest in the back corner Cyrathul found holding <strong>five silver ingots</strong> (Bai Jian: <em>"Anyone want a silver weapon?"</em>).</li>
+        <li><strong>The desk.</strong> Two things on it. First, the answer to Session 17's open question: <em>the authorities learned about the Hellbreakers hideout after they captured Otton and had tortured him over the period of several days.</em> Second, a note that <strong>all the Hellbreakers were on the third floor except two in the basement</strong>, and the guards' <strong>daily passphrase: "pineapple juice."</strong> (Somebody: <em>"Would have been helpful knowledge at the beginning of this."</em>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act IV &middot; The Chase &middot; The Front Gate</div>
+    <div class="act-card">
+      <h3>"Pineapple juice"</h3>
+      <ul>
+        <li>Back down through the dark to the front gate, the cannon on the far tower firing every six seconds and <em>hundreds</em> of prisoners crushing toward the hole in the wall. The GM announced the <strong>chase subsystem</strong>: an obstacle per stage, fifteen-minute rounds, a set number of successes per obstacle, and the option to spend a round healing or refocusing instead. Nobody at the table had done one (<em>"First edition, that's about it"</em>). Break.</li>
+        <li>After the break, <strong>everyone got a second hero point</strong> and Panacea had the first good idea of the chase: <em>"We have the keys. We could just go out the front entrance."</em> She unlocked the gate and Zanthar opened the door &mdash; straight into two jailers and a watch officer who turned around expecting reinforcements.</li>
+        <li>Cyrathul's Diverse Lore recalled the passphrase. He got within shouting distance and <strong>yelled "pineapple juice."</strong> Deception 23 &mdash; suspicious, but <em>"that is the passphrase."</em> The next question: <em>"Where's your uniforms?"</em> (The S18 disguise kit had long since worn off; the GM let it stand.) Cyrathul: <em>"We had to make an emergency change. We got torn up in the chaos."</em></li>
+        <li>Bai Jian's turn: <em>"I'll let the dog come first."</em> He walked up and asked what was going on &mdash; and a jailer told him: <em>"Turn around! Those prisoners are escaping! There's a prison break!"</em> Bai Jian: <em>"It's a prison break?"</em> Then, to the table, in the third person: <em>"Okay, my job is just not good. He is not good at this, guys."</em> Cyrathul (<em>"You're needed at the breach"</em>), Panacea (<em>"We're relieving you of your post"</em>) and Bai Jian (<em>"We're tired. We couldn't handle them"</em>) all rolled Deception; all three failed, and nobody spent the new hero point (<em>"I'm not going to bother"</em>). The jailer: <em>"If you continue coming through here, we'll be forced to kill you."</em></li>
+        <li>Bai Jian: <em>"Are we forcing it, guys?&hellip; I'll take the guards."</em> Panacea: <em>"It's either these three guards or the whole crowd. How tall is the wall?"</em> Cyrathul remembered his <strong>three scrolls of Helpful Steps</strong> (a 40-foot conjured staircase). Bai Jian <strong>closed the gate on the guards</strong> as his second action; Cyrathul dropped a staircase up the 30-foot wall and another down the far side, and the whole party &mdash; plus every freed prisoner &mdash; went over it while a <strong>whiteout blizzard</strong> started.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act V &middot; The Chase &middot; The Stables</div>
+    <div class="act-card">
+      <h3>"Surely these horses can't be harder than this guy"</h3>
+      <ul>
+        <li><em>"It is snowing so hard&hellip; hard to tell left from right."</em> <strong>Panacea's Society (28)</strong> remembered the city layout; <strong>Zanthar's failed (17)</strong> and he had to be <em>"lifted up out of the snow bank"</em> by the others; <strong>Cyrathul asked the crowd</strong> (Diplomacy 29 vs DC 27) and got them there &mdash; the GM credited <em>"the two of you putting your heads together."</em></li>
+        <li>The military stables were nearly unoccupied, and from around the corner <em>"a familiar voice"</em>: <em>"Oh, I'm so glad you guys made it. There's horses here, intact. Is anybody good with horses?"</em> The GM never said the name; by the plan, it is <strong>Jenverick</strong>. Bombing from the prison towers continued in the background &mdash; <em>"they're bombing the people still that are trying to escape out the other side."</em></li>
+        <li><strong>Bai Jian forced the tack shed</strong> (Athletics 33 vs DC 28, on a reroll). Panacea tacked half the horses with a hero-pointed <strong>Crafting (31)</strong>. Zanthar's <strong>Skeleton Key</strong> cast Knock on the second locked cupboard &mdash; <em>"Seemed worth it, for sure. I need to get better at that skill if I'm the thief in the party."</em> Cyrathul asked the rescued Hellbreakers for anyone who could handle horses (Diplomacy 24): <em>"Oh no, no, I'll be lucky if I can get on one."</em></li>
+        <li><strong>Bai Jian calmed the warhorses</strong> (Nature 27): <em>"I have experience taming an animal right here"</em> &mdash; pointing at Ren &mdash; <em>"Surely these horses can't be harder than this guy."</em> GM: <em>"Trained warhorses are nothing compared to an unruly Isgeri hound."</em> Everyone mounted; the Hellbreakers followed as a single token.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI &middot; The Chase &middot; The Crowd and the First Patrol</div>
+    <div class="act-card">
+      <h3>"I don't mean to. I just keep killing people."</h3>
+      <ul>
+        <li>Shocked residents stood in the streets in the blizzard, <em>"deer caught in the headlights."</em> <strong>Panacea's Acrobatics (26)</strong> stayed in the saddle; <strong>Zanthar's Intimidation</strong> failed even on a hero-pointed reroll (25 vs 27), <em>"standing on top of the saddle, trying to scream out at them"</em> &mdash; the crowd's answer: <em>"Hey buddy, I don't mean to be in your way"</em>; <strong>Cyrathul's roar (18)</strong> did no better; <strong>Bai Jian's Nature (24)</strong> pushed the horses through. <em>"Unfortunately, the delay has cost you guys."</em></li>
+        <li>Bai Jian initially refused to mount &mdash; <em>"my speed is the same as the horse"</em> &mdash; and asked whether the horses acted on their own or cost an action to command. The GM asked for a Fortitude save (19) for running in a whiteout (<em>"Oh boy, how am I regretting my decision now?"</em>), then clarified the horses got a free move each turn, and he rode.</li>
+        <li>A stretch of Foundry refusing to let anyone own a horse (<em>"from the land of make-believe"</em> &mdash; <em>"Imagine you're riding horses"</em>), then two watch officers and two infantry: <em>"Stop! In the name of the law!"</em> See Combat Encounters. <strong>Three dead, one left alive.</strong></li>
+        <li>Bai Jian, after killing the first officer: <em>"Not that I don't know if it matters too much at this point. I think we're kind of forsaken."</em> Cyrathul, after the second decapitation and Bai Jian's <em>"this dragon is a little violent"</em>: <em>"I don't mean to. I just keep killing people."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII &middot; The Chase &middot; The Imps and the Sheriff</div>
+    <div class="act-card">
+      <h3>"Hit me. I can take it."</h3>
+      <ul>
+        <li><em>"About 100 imps have been released and are on the lookout for you guys"</em> &mdash; a swarm like ravens over the whole city. Options: Religion to ward, Stealth, Survival to mask the passage.</li>
+        <li>Round one went 1-for-4: Ren's Survival failed by one (Bai Jian routed the roll through the dog &mdash; <em>"you have a pretty strong bond with Ren"</em>), Cyrathul's Religion was a natural 1 (<em>"I'm out of hero points, guys. I'm sorry"</em>), Panacea's Religion couldn't reach her patron, and <strong>Zanthar's Shared Invisibility</strong> &mdash; <em>"on a person and a horse and a person and a horse for the two worst people at sneaking"</em> &mdash; was an automatic success.</li>
+        <li>Round two: Ren again &mdash; <em>"Ren, come on. I didn't spend all that food on you just for this, man. You're fired"</em> &mdash; natural 1. Cyrathul failed again. <strong>Panacea's Religion (23)</strong> finally connected &mdash; Serrafina <em>"paying attention a little bit more"</em> &mdash; and half the imps banked off toward the other side of Elidir. Zanthar's Stealth reroll landed on <strong>26 vs DC 27</strong>. The imps screeched, pointed, and a group of sheriffs knew exactly where to stand.</li>
+        <li>A <em>"cowboy looking guy"</em> in the middle of the street: <em>"Stop in the name of the law."</em> Bai Jian: <em>"Hit me. I can take it."</em> The <strong>Unsanctioned Sheriff</strong> drew <em>"just like Jesse James"</em> and rolled a <strong>natural 20 &mdash; 39 damage</strong> through Bai Jian's shoulder. Bai Jian: <em>"Well, he didn't just try, he actually shot me in the face."</em></li>
+        <li>The party took <strong>all three alive</strong>. Cyrathul double-crit the sheriff (<em>"Oh my gosh. Oh my gosh. Oh my gosh&hellip; This poor sheriff. Don't kill him"</em>) and pulled his third attack; Bai Jian burned a second Retrieval Prism and his last Sure Strike scroll for a <strong>52 non-lethal crit</strong> that dropped him; Zanthar's Blazing Bolts and Cyrathul's claws and Bai Jian's falcata all went non-lethal on the infantry. Cyrathul's Exploit Vulnerability crit on a plain guard produced the night's best nonsense &mdash; <em>"What's his favorite sandwich? Bologna and peanut butter"</em> (GM: <em>"It's an Elidiran favorite"</em>) &mdash; and, sparing him: <em>"Well, you will live to eat another bologna and peanut butter sandwich."</em></li>
+        <li><strong>Retrieval Prism ruling</strong>: the GM first said one talisman a day, then corrected himself &mdash; one talisman <em>affixed at a time</em>, and affixing takes ten minutes, which the party had spent on the healing stops. So the second prism stood. <em>"Okay, I'll keep that in mind then."</em> Panacea's natural-20 Needle Darts on the sheriff, by contrast, never landed at all &mdash; Foundry rolled it un-doubled and dropped it on Zanthar's token, and nobody noticed. Zanthar wanted the sheriff's badge; there was no time to loot.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VIII &middot; The Chase &middot; The Labyrinth and the Gate</div>
+    <div class="act-card">
+      <h3>"Like a bow on a Christmas present"</h3>
+      <ul>
+        <li>Past the sheriff, the road began to twist: the <strong>watch mages</strong> working together to <em>"twist the road beneath your feet and try to lead you back towards the prison,"</em> a Labyrinth effect. Counter it with magic, or let Ren guide.</li>
+        <li>Three rounds. Ren failed three times (a 2, a 4, and a 12 that missed by one). Cyrathul's Religion failed twice more &mdash; a natural 1 (<em>"I do not know how to do this. I don't know why I keep trying. Evidently I have no idea what I'm doing"</em>; the GM had him finger through his esoterica <em>"like Constantine does"</em> and drop it) &mdash; but his <strong>Occultism (26)</strong> landed in between. Zanthar's Arcana failed twice, once by one. <strong>Panacea's Arcana succeeded twice</strong> &mdash; the first on a hero-point reroll (<em>"we got to get out of here"</em>), the second a clean 31: <em>"like a bow on a Christmas present, it just unravels, and the road straightens out."</em> In between she spent a round bandaging Bai Jian (25). Bai Jian: <em>"We're not cut out for this subsystem."</em></li>
+        <li><strong>The Druma Road Gate</strong>: a massive wooden door fifty feet above the city walls. A battle cry from beneath it &mdash; a <strong>Hellknight Cavalry Brigade</strong>, a line of <strong>Line Infantry</strong>, and a <strong>Standard Bearer</strong> in formation across the road. Initiative rolled, party still mounted. Bai Jian's last words of the session: <em>"We don't have to do this. Stop getting in the way."</em> The answer: <strong><em>"Kill the Hellbreakers!"</em></strong></li>
+        <li>GM's sign-off: <em>"Lots of bad rolls tonight. But it was still fun. You guys are alive. You have all the Hellbreakers with you. You're mounted up. Just one obstacle left."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; The Azri Cell &middot; Moderate &middot; 80 XP</div>
+  <h3>Rencelos Azri (elite veteran noble, 105 HP, AC 26, Battle Scarred) &middot; Moccoviz Azri (elite noble, 65 HP, AC 20, Noble Ruse)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Moccoviz 33 (nat 20) &middot; Panacea 27 (delayed) &middot; Cyrathul 22 &middot; Rencelos 21 &middot; Bai Jian 17 &middot; Zanthar 16</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">100 (Cyrathul 52, Bai Jian 31, Panacea 17)</div></div>
+    <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Both Azris alive, unconscious &middot; no hero points</div></div>
+  </div>
+  <p><em>Doctrine: keep both alive. Bai Jian fought non-lethal (&minus;2) on every swing; Zanthar's Telekinetic Projectile and Panacea's first spear thrust were non-lethal; Cyrathul's Round-3 jaws was non-lethal but his claws were not; Ren bites lethal.</em></p>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Moccoviz</strong>: Noble Ruse &mdash; Feint (26 vs Perception DC 22, success) then <strong>fist 27 hit, 14</strong> with sneak attack into Bai Jian; rapier 23 &mdash; Foundry called it a hit against a Feint-reduced AC 23; Bai Jian argued the Feint's off-guard only covered the fist, and against his real AC 25 it missed. (Dueling Parry wasn't applying in Foundry at the time &mdash; a post-update bug, fixed mid-round.)</li>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability on Moccoviz (21, success &mdash; no weakness, personal antithesis); Stride; <strong>jaws 21 hit, 28</strong> (<em>"almost max damage"</em>).</li>
+    <li><strong>Panacea</strong> (after delaying): the <em>"listen kid"</em> plea; <strong>Fear</strong> on Rencelos &mdash; <strong>crit success (34)</strong>; then moved up behind Bai Jian.</li>
+    <li><strong>Rencelos</strong>: thrown <strong>dagger 23 hit on Panacea, 17</strong>; Stride to get behind Cyrathul &mdash; <strong>Twisting Tail reaction: 27 hit, 15</strong>; <strong>longsword 22 hit on Cyrathul, 14</strong> (flanked).</li>
+    <li><strong>Bai Jian</strong>: Retrieval Prism &rarr; Scroll of Sure Strike (1 action); non-lethal falcata on Moccoviz, rolled twice &mdash; <em>"double 14"</em> &mdash; <strong>29 crit, 48</strong> &rarr; Moccoviz down, unconscious. <em>"Well kid, let's go to bed."</em> (The flank was load-bearing: 29 crits only against the flanked AC 18; against 20 it is a plain hit and the kid stays up.)</li>
+    <li><strong>Zanthar</strong>: Electric Arc on Rencelos &mdash; <strong>Reflex success, 3</strong>.</li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability on Rencelos &mdash; <strong>natural 1, crit fail</strong> (off-guard until his next turn; GM: <em>"It's almost like you didn't meet him at the party before"</em>); Draconic Frenzy &mdash; <strong>jaws 29 hit, 16</strong>; claw 17 miss; <strong>claw 26 hit (nat 19), 19</strong>.</li>
+    <li><strong>Panacea</strong>: Life Boost (rank 3, fast healing 6) on herself; drew the dancer's spear; non-lethal spear thrust (rolled as the dagger item in Foundry) <strong>17 &mdash; miss</strong>. Serrafina: Rencelos Stupefied 1.</li>
+    <li><strong>Rencelos</strong>: <strong>longsword 27 hit on Bai Jian, 17</strong>; longsword 23 miss; gauntlet 11 crit miss on Cyrathul.</li>
+    <li><strong>Bai Jian</strong>: Command Ren &mdash; <strong>Ren jaws 30 hit, 20</strong> (<em>"rips out a huge piece of his calf"</em>); Step to flank; non-lethal <strong>falcata 22 &mdash; miss by 2, exactly the non-lethal penalty</strong>.</li>
+    <li><strong>Zanthar</strong>: non-lethal Telekinetic Projectile &mdash; <strong>31 hit (nat 19), 14</strong>. <em>"The man in front of you looks bloodied. He grins from ear to ear: is that all you have?"</em></li>
+  </ul>
+
+  <h4>Round 3</h4>
+  <ul>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability &mdash; <strong>31, success</strong> (weakest save: Fort); the table agreed to keep Rencelos alive; Frenzy &mdash; non-lethal jaws 22 (untargeted, miss), then a lethal <strong>claw 29 hit &mdash; 19 of a possible 20 on the dice, +5 antithesis = 24</strong> against 18 HP &mdash; <em>"I cut his jugular"</em> &mdash; <strong>Battle Scarred: Rencelos stays at 1 HP, Enfeebled 2</strong> (<em>"Not yet"</em>); claw 16 miss.</li>
+    <li><strong>Panacea</strong>: Life Boost tick (+6, to 45); spear thrust 22 &mdash; miss (this one rolled without the &minus;2). <em>"Listen, we're trying to keep you alive here."</em></li>
+    <li><strong>Rencelos</strong>: <strong>longsword 33 crit on Cyrathul, 38</strong> (<em>"I told you I wasn't done"</em>); longsword 18 miss; gauntlet 23 miss on Bai Jian.</li>
+    <li><strong>Bai Jian</strong>: non-lethal <strong>falcata 27 hit, 13</strong> &rarr; Rencelos to 0, unconscious, non-lethal. <em>"You'll regret this, Hellbreakers."</em> The GM ruled the jugular staunched by <em>"his will alone."</em></li>
+  </ul>
+  <p><em>Cyrathul ended at 16/68 &mdash; "his mercy may have almost downed Cy." The mercy's real cost was Bai Jian's Round-2 miss by exactly the non-lethal 2: a hit there ends the fight a round earlier, before the claw and the 38.</em></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; Warden Irkazer &middot; Moderate &middot; 80 XP</div>
+  <h3>Warden Irkazer (level 8, 120 HP, AC 26; flail +19, Reactive Strike, Demoralize +16)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Irkazer 28 &middot; Zanthar 25 &middot; Bai Jian 22 &middot; Panacea 20 &middot; Cyrathul 12</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">71 (Zanthar 52, Cyrathul 19)</div></div>
+    <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">Bai Jian 74 &middot; Cyrathul 57 (kill) &middot; Panacea 4</div></div>
+    <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Bai Jian (Slam Down) &middot; Cyrathul (Twisting Tail)</div></div>
+  </div>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Irkazer</strong>: Demoralize Zanthar &mdash; <strong>natural 1</strong> (<em>"Zanthar is unshakeable"</em>); <strong>flail 34 crit on Zanthar, 34</strong>.</li>
+    <li><strong>Zanthar</strong>: Dizzying Colors in her face &mdash; <strong>Will crit success (34)</strong>; Stride away &rarr; <strong>Reactive Strike flail 29 hit, 18</strong>. Zanthar at <strong>10/62</strong>. <em>"I'm still alive!"</em></li>
+    <li><strong>Bai Jian</strong>: Stride (Ren moved up); <strong>Slam Down &mdash; nat 2, hero point &rarr; nat 9 +10 = 36, crit, 36 damage</strong> (Crushing: Clumsy 1 / Enfeebled 1; crit spec: off-guard); <strong>Trip 27 vs Reflex DC 23 &mdash; prone</strong>.</li>
+    <li><strong>Panacea</strong>: Doctor's Visitation (Stride + <strong>Battle Medicine on Zanthar, 26</strong>); <strong>Trade Death for Life</strong> on Irkazer &mdash; Fort success, 4 damage, fast healing 3 on Zanthar.</li>
+    <li><strong>Cyrathul</strong>: Stride; Frenzy &mdash; <strong>jaws 20, claw 19, claw 20, all miss</strong> (<em>"You need a dice jail"</em>).</li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Irkazer</strong> tried to Stand &mdash; and both reactions fired: <strong>Bai Jian's Reactive Strike 21, miss (nat 4)</strong>, and <strong>Cyrathul's Twisting Tail: nat 1, hero point &rarr; nat 20, 35 crit, 32 damage</strong> &mdash; the crit disrupts the move; she stays prone (<em>"So she's still prone"</em>). Standing again cost her second action and drew nothing (<em>"nobody else can do anything about it this time"</em>); <strong>flail 27 hit on Cyrathul, 19</strong> (Foundry still had Zanthar targeted; the GM re-pointed it). Irkazer at <strong>48/120</strong>.</li>
+    <li><strong>Zanthar</strong>: Drain Bonded Item &rarr; <strong>Fear</strong> &mdash; <strong>Will 27, upgraded to a crit success</strong>, no effect; Hand of the Apprentice (<em>"hit her with my hammer"</em>) 20 &mdash; miss. Fast healing +3 on Zanthar.</li>
+    <li><strong>Ren</strong>: jaws 14 &mdash; miss (nat 2).</li>
+    <li><strong>Bai Jian</strong>: Guidance on himself (<em>"she has a reactive strike&hellip; so I'm not going to do that"</em> &mdash; abandoned a second scroll); <strong>Snagging Strike 33 crit (Guidance +1), 28</strong> &mdash; a crit by exactly 10, so Guidance, her Clumsy 1 and the flank were each necessary; falcata 31 hit, <strong>10</strong>. Irkazer at 10.</li>
+    <li><strong>Panacea</strong>: sustained TDfL; <strong>Heal (rank 2, two actions) on Cyrathul, 25</strong> rolled, 19 applied &mdash; back to full.</li>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability 23 &mdash; fail by 1 (personal antithesis only); Frenzy &mdash; jaws 20 miss; <strong>claw 26 hit, 20 (max on 2d6+8) +5 = 25</strong> &rarr; <strong>Irkazer dead</strong>; the third Strike was never needed. <em>"The tried and true jugular slash."</em> &mdash; <em>"Who are you?"</em> &mdash; <em>"You'll never know."</em></li>
+  </ul>
+  <p><em>Irkazer never used Improved Knockdown. Post-fight, Panacea kept sustaining TDfL for 24 more on Zanthar ("That spell's real good" &mdash; Bai Jian).</em></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 &middot; The First Patrol &middot; Low &middot; 60 XP &middot; mounted, in a blizzard</div>
+  <h3>Watch Officer &times;2 (45 HP, AC 19) &middot; Infantry Soldier &times;2 (elite, 43 HP, AC 20)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3 (ended on Cyrathul's kill)</div></div>
+    <div><div class="combat-stat-label">Order as run</div><div class="combat-stat-value">Infantry B (nat 20) &middot; Panacea &middot; Zanthar &middot; Infantry A &middot; Officer B &middot; Cyrathul &middot; Bai Jian &middot; Officer A</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">0 &mdash; six enemy attacks, six misses</div></div>
+    <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">Officer B (Bai Jian), Officer A + Infantry B (Cyrathul) dead &middot; Infantry A KO'd</div></div>
+  </div>
+  <p><em>Horses got a free 40-ft move each turn; commanding one cost an action. Officer A = the one Panacea lanced; Officer B = the one Zanthar's Fear took; Infantry B = the one who fled.</em></p>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Infantry B</strong>: crossbow at Cyrathul &mdash; crit miss; drops it, draws sword, Raise a Shield.</li>
+    <li><strong>Panacea</strong>: Command horse 60 ft; <strong>Divine Lance 28 hit on Officer A, 9</strong>.</li>
+    <li><strong>Zanthar</strong>: Reach Spell + <strong>Fear (rank 3, three actions) on all four</strong> &mdash; Officer A crit success; <strong>Infantry B crit fail (nat 1) &mdash; Frightened 3, Fleeing</strong>; Infantry A crit success (nat 20); <strong>Officer B fail &mdash; Frightened 2</strong>.</li>
+    <li><strong>Infantry A</strong>: crossbow 18 miss on Zanthar (rolled off the officer's sheet by misclick); drops it, draws sword, Raise a Shield.</li>
+    <li><strong>Officer B</strong> (Frightened 2): Sudden Charge &mdash; warhammer 14 miss on Zanthar (<em>"this tiny little guy has terrified him"</em>); Raise a Shield.</li>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability on Officer B &mdash; <strong>nat 20, crit success</strong>; Frenzy &mdash; <strong>jaws 24 hit, 19 +5 = 24</strong>; claws 13, 12 miss.</li>
+    <li><strong>Bai Jian</strong>: free horse move; <strong>Snagging Strike 22 hit, 9</strong>; <strong>falcata 23 hit, 14</strong> &rarr; <strong>Officer B dead</strong>. The GM asked for a d20 &mdash; Bai Jian rolled a <strong>12</strong>, <em>"I passed it."</em></li>
+    <li><strong>Officer A</strong>: Sudden Charge at Bai Jian &mdash; warhammer 23 miss (AC 27), 15 crit miss.</li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Infantry B</strong> (Fleeing): runs 75 feet up the street.</li>
+    <li><strong>Panacea</strong>: <strong>Divine Lance 31 crit on Officer A (nat 19), 10</strong>; <strong>Trade Death for Life</strong> &mdash; Fort fail, 6, fast healing on Cyrathul; Stupefied 1.</li>
+    <li><strong>Zanthar</strong>: non-lethal <strong>Telekinetic Projectile (paving stone) 25 hit on Officer A, 13</strong> &mdash; <em>"slammed into the side of his temple."</em></li>
+    <li><strong>Infantry A</strong>: shortsword 20 miss on Zanthar.</li>
+    <li><strong>Cyrathul</strong>: horse to flank; <strong>jaws 30 crit on Officer A, 46</strong> &rarr; <strong>dead</strong> &mdash; <em>"You bite this man's head completely off&hellip; like a cherry just pops."</em> Commanded the horse for a second move; claw 17 miss on Infantry A.</li>
+    <li><strong>Bai Jian</strong>: Ren's Support benefit; <strong>Slam Down 29 crit on Infantry A, 41</strong>; <strong>Trip 33 crit success</strong>, 1 damage &rarr; Infantry A at <strong>1 HP, prone</strong>. <em>"He's just barely standing. I didn't kill him, guys."</em> (The GM asked Cyrathul for a d20 for the beheading &mdash; a <strong>3</strong>. <em>"We were not good."</em>)</li>
+  </ul>
+
+  <h4>Round 3</h4>
+  <ul>
+    <li><strong>Infantry B</strong> comes running back (Frightened 2 now).</li>
+    <li><strong>Panacea</strong>: Needle Darts on Infantry B &mdash; nat 2, <strong>hero point &rarr; nat 20, crit, 28 + 3 bleed</strong> (<em>"a spray of blood come out behind him"</em>); moved with the party; sustained TDfL.</li>
+    <li><strong>Zanthar</strong>: horse Step; non-lethal <strong>Electric Arc on the prone Infantry A &mdash; Reflex crit fail, 18</strong> &rarr; KO'd, <em>"gyrating like somebody that's been hit by a taser&hellip; foaming at the mouth."</em></li>
+    <li><strong>Cyrathul</strong>: Exploit Vulnerability on Infantry B &mdash; crit success (32); Frenzy &mdash; <strong>jaws 24 hit, 17 +5 = 22</strong> &rarr; <strong>dead</strong> (<em>"another drive-by decapitation"</em>; d20: 16). The fight ended there; Bai Jian never got a Round-3 turn.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 &middot; The Unsanctioned Sheriff &middot; Low &middot; 60 XP &middot; non-lethal throughout</div>
+  <h3>Unsanctioned Sheriff (75 HP, AC 22, dueling pistol fatal d10) &middot; Infantry Soldier &times;2</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2 (ended on Bai Jian's turn)</div></div>
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Sheriff 32 &middot; Bai Jian 22 (delayed after Cyrathul) &middot; Panacea 21 &middot; Cyrathul 21 &middot; Infantry 14, 13 &middot; Zanthar 13</div></div>
+    <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">39 (Bai Jian, nat-20 pistol)</div></div>
+    <div><div class="combat-stat-label">Result</div><div class="combat-stat-value">All three alive &middot; no hero points</div></div>
+  </div>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Sheriff</strong>: <em>"Stop in the name of the law"</em> &mdash; the GM rolled a d4 for a target and got Bai Jian <em>before</em> <em>"Hit me. I can take it"</em> &mdash; <strong>dueling pistol, natural 20, 39</strong> into Bai Jian (92 &rarr; 53); reload.</li>
+    <li><strong>Panacea</strong>: <strong>Needle Darts &mdash; natural 20, 32 vs AC 22, a crit that never landed</strong>: Foundry rolled the damage un-doubled (12) and applied it to <em>Zanthar's</em> token, and nobody at the table noticed. Had the 24 hit the Sheriff, Cyrathul's lethal claw crit two turns later would have killed him at &minus;6. <strong>Trade Death for Life</strong> &mdash; Fort success, 3; the fast healing was still sitting on a full-HP Cyrathul from the last fight.</li>
+    <li><strong>Cyrathul</strong>: Command horse (two Strides); Frenzy on the Sheriff &mdash; <strong>jaws 34 crit (nat 19), 34</strong>; <strong>claw 31 crit (nat 20), 20</strong>; <em>"This poor sheriff. Don't kill him"</em> &mdash; third claw switched to non-lethal, 10 crit miss.</li>
+    <li><strong>Bai Jian</strong>: Ren moved; Command horse; <strong>second Retrieval Prism &rarr; last Scroll of Sure Strike</strong>; non-lethal <strong>falcata 34 crit (nat 19), 52</strong> &rarr; <strong>Sheriff down, alive</strong> (75 &rarr; 72 &rarr; 38 &rarr; 18 &rarr; 0). (Talisman ruling: one affixed at a time, ten minutes to affix &mdash; the GM counted the heal stop as the affix.)</li>
+    <li><strong>Infantry &times;2</strong>: shortsword 15, 15, 15 &mdash; three critical misses on Bai Jian, whose Parry had lapsed (AC 25) (<em>"Cy must have given me his dice"</em>). One Raise a Shield.</li>
+    <li><strong>Zanthar</strong>: rode 40 ft; Drain Bonded Item &mdash; his second of the day; the GM queried it, Zanthar cited <em>"one for each one of your levels"</em>, and it was allowed (Remaster: once per day) &rarr; <strong>Blazing Bolt (2 actions), non-lethal</strong> &mdash; <strong>29 hit, 10</strong> on Infantry A; <strong>23 hit, 13</strong> on Infantry B.</li>
+  </ul>
+
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Panacea</strong>: <strong>Needle Darts 21 hit on Infantry A, 10</strong>; sustained TDfL &mdash; this time on Bai Jian (+3).</li>
+    <li><strong>Cyrathul</strong>: horse move around the guard (a near-provoke he caught himself); Exploit Vulnerability &mdash; <strong>crit success (31)</strong> (<em>"Bologna and peanut butter"</em>); <strong>jaws 25 hit, 15</strong> (still lethal); non-lethal <strong>claw 21 hit, 14</strong> &rarr; <strong>Infantry A KO'd</strong> &mdash; <em>"you will live to eat another bologna and peanut butter sandwich."</em></li>
+    <li><strong>Bai Jian</strong>: Ren Strides through Infantry B's reactive strike (15, miss) and <strong>bites 21, 11</strong>; Command horse; non-lethal <strong>Snagging Strike 26 hit, 12</strong>; <strong>falcata 26 hit, 12</strong> &rarr; <strong>Infantry B KO'd</strong>. <em>"Knock him to the floor, riding by on horseback."</em> The fight ended on his turn &mdash; Zanthar and Infantry B never got a Round 2.</li>
+  </ul>
+  <p><em>Zanthar wanted the sheriff's badge; the chase clock said no.</em></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">The Chase &middot; five obstacles &middot; 15-minute rounds</div>
+  <h3>Obstacle by obstacle</h3>
+  <ul>
+    <li><strong>1 &middot; The front gate</strong> (2 jailers + watch officer) &mdash; Panacea: unlock (key). Cyrathul: Esoteric Lore 31 &#10003; (passphrase), Deception 23 &#10003;, Deception 15 &#10007;. Bai Jian: Deception 8 &#10007;, closed the gate. Panacea: Deception 16 &#10007;. Cyrathul: 2&times; Helpful Steps scrolls over the 30-ft wall. <strong>Passed &mdash; over the wall.</strong></li>
+    <li><strong>2 &middot; Whiteout blizzard &rarr; the stables</strong> &mdash; Panacea Society 28 &#10003; &middot; Zanthar Society 17 &#10007; &middot; Cyrathul Diplomacy 29 &#10003; (asked the crowd) &middot; Bai Jian Athletics 33 &#10003; (reroll; tack shed) &middot; Panacea Crafting 31 &#10003; (hero point; tack) &middot; Zanthar Skeleton Key/Knock &#10003; (second cupboard) &middot; Cyrathul Diplomacy 24 (no handler) &middot; Bai Jian Nature 27 &#10003; (calmed the warhorses). <strong>Passed &mdash; mounted.</strong></li>
+    <li><strong>3 &middot; The gawking crowd</strong> &mdash; Panacea Acrobatics 26 &#10003; &middot; Zanthar Intimidation 25 &#10007; (hero point) &middot; Cyrathul Intimidation 18 &#10007; &middot; Bai Jian Nature 24 &#10003;. <em>"The delay has cost you"</em> &rarr; <strong>Encounter 3.</strong></li>
+    <li><strong>4 &middot; ~100 imps</strong> &mdash; R1: Ren Survival 23 &#10007; &middot; Cyrathul Religion nat 1 &#10007; &middot; Panacea Religion 17 &#10007; &middot; Zanthar Shared Invisibility auto-&#10003;. R2: Ren nat 1 &#10007; &middot; Cyrathul Religion 18 &#10007; &middot; Panacea Religion 23 &#10003; &middot; Zanthar Stealth 26 &#10007; (hero point, DC 27). <strong>Spotted &rarr; Encounter 4.</strong></li>
+    <li><strong>5 &middot; The watch mages' labyrinth</strong> &mdash; R1: Ren 14 &#10007; &middot; Cyrathul Religion nat 1 &#10007; &middot; Panacea Arcana 27 &#10003; (hero point) &middot; Zanthar Arcana 19 &#10007;. R2: Ren 16 &#10007; &middot; Cyrathul Occultism 26 &#10003; &middot; Panacea Treat Wounds (Bai Jian +25) &middot; Zanthar Arcana 22 &#10007;. R3: Ren 24 &#10007; &middot; Cyrathul Religion 19 &#10007; &middot; Panacea Arcana 31 &#10003;. <strong>Passed &mdash; the Druma Road Gate.</strong></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 &middot; The Druma Road Gate &middot; cliffhanger &middot; initiative only</div>
+  <h3>Hellknight Cavalry Brigade (lvl 8 troop, 135 HP, AC 27) &middot; Line Infantry (lvl 6, 96 HP, AC 24) &middot; Standard Bearer (lvl 4, 60 HP)</h3>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Bai Jian 27 &middot; Zanthar 27 &middot; Cavalry 25 &middot; Cyrathul 19 &middot; Line Infantry 19 &middot; Standard Bearer 15 &middot; Panacea 13 &middot; the Hellbreakers 12</div></div>
+    <div><div class="combat-stat-label">Troop notes</div><div class="combat-stat-value">Cavalry: weakness 8 area/splash, resist slashing 5 &amp; mental 5 &middot; Infantry: area/splash weakness &middot; Standard Bearer: Inspiring Aura +1</div></div>
+    <div><div class="combat-stat-label">Party state</div><div class="combat-stat-value">Mounted &middot; Bai Jian 81/92 &middot; others at or near full &middot; hero points spent</div></div>
+  </div>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-baijian">
+    <h4>Bai Jian &middot; the Flat of the Blade</h4>
+    <ul>
+      <li>Asked the question every fight this session hinged on, out loud and early: <em>"Are we killing this young kid or not?"</em> &mdash; and then held the line he was given. Both Azris, the sheriff and an infantryman went down under the flat of his blade; the one man he killed &mdash; a watch officer, on two swings he never called non-lethal &mdash; he rolled the GM's d20 for. His own verdict on the Azri fight: <em>"We gave them a chance."</em></li>
+      <li>Not soft about it, either. To the Warden, mid-crit: <em>"I don't think we're going to keep you alive."</em> After Rencelos's 38 on Cyrathul: <em>"Okay, this is just rude. Do we even keep him alive at this point?"</em> &mdash; and then, because the man still hadn't dropped, took him down non-lethal anyway. When the second patrol appeared: <em>"I dread that more, actually."</em></li>
+      <li>Offered terms to a man he had framed (<em>"You're cornered. Surrender"</em>), was refused, and put his own name on the record anyway: <em>"Just for the record, I didn't kill them."</em> The GM's answer &mdash; <em>"He might not know that"</em> &mdash; is the whole moral position of the party in six words, and Bai Jian was the one who forced it into the open.</li>
+      <li>Owned the worst bluff of the night and narrated it in the third person: walked up to a jailer to ask what was going on, was informed there was a prison break, said <em>"It's a prison break?"</em>, and turned to the table &mdash; <em>"Okay, my job is just not good. He is not good at this, guys."</em> Then fixed it in the next action by <strong>closing the gate</strong> on them.</li>
+      <li>The party's animal man, twice over: tore the tack shed open, then calmed a stable of spooked warhorses on his own Nature by pointing at Ren &mdash; <em>"Surely these horses can't be harder than this guy."</em></li>
+      <li>Taught Panacea the <strong>Aid</strong> action mid-fight, unprompted, when she said she was stuck with nothing to do. Argued for a second ten minutes of healing when everyone wanted to move. Delayed his turn behind Cyrathul in the sheriff fight. Made a point of letting Ren <em>"participate"</em> &mdash; <em>"I'll come in, Ren, so that he can get a love bite in."</em></li>
+      <li>Combat: five crits &mdash; <strong>48</strong> non-lethal on Moccoviz (Sure Strike), <strong>36</strong> on the Warden (hero point, Slam Down + Trip), <strong>28</strong> Snagging Strike on the Warden off his own Guidance, <strong>41</strong> on an infantryman (Slam Down + crit Trip), <strong>52</strong> non-lethal on the sheriff (second Retrieval Prism + last Sure Strike scroll). Ate a <strong>39</strong> nat-20 pistol shot for the team (<em>"Hit me. I can take it"</em>). Spent both hero points; ended the night on 81/92.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-cyrathul">
+    <h4>Cyrathul &middot; the Dragon on a Horse</h4>
+    <ul>
+      <li>Set the party's ethical floor in the Azri cell with the sharpest line of the argument: <em>"Innocent is a strong word for this man&hellip; essentially a Chelaxian noble. Almost guaranteed deals in slavery"</em> &mdash; and then, having said it, agreed to keep the man alive. Rolled 19 of 20 on the dice and cut his throat anyway. The GM: <em>"Tell me how you accidentally kill this man."</em></li>
+      <li>Killed the Warden (<em>"the tried and true jugular slash"</em>) and two of the first patrol, both by biting their heads off at a gallop &mdash; the GM's <em>"drive-by beheading&hellip; like a cherry just pops."</em> His own review: <em>"It's just a dragon riding through town biting people's heads off. I don't know why a dragon on a horse is so effective. You might want to look into that."</em></li>
+      <li>And then, unprompted, stopped: after the sheriff fight opened with two crits, <em>"This poor sheriff. Don't kill him"</em> &mdash; third attack pulled non-lethal, and the finishing blow on the next guard too. <em>"I'll not make the mistake again."</em> His answer to <em>"this dragon is a little violent"</em> &mdash; <em>"I don't mean to. I just keep killing people"</em> &mdash; is a joke and a confession at once.</li>
+      <li>Carried the party out of the prison: remembered the second hero point at the break (<em>"I technically get another hero point"</em>) and declined to spend it on a bluff he didn't believe in; Diverse Lore recalled <em>"pineapple juice"</em>, his Deception carried the bluff as far as it went (<em>"We had to make an emergency change. We got torn up in the chaos"</em>), and when the bluff failed he remembered his <strong>three Helpful Steps scrolls</strong> and built a staircase over a 30-foot wall for the whole party and every prisoner behind them. In the blizzard it was his Diplomacy (29) asking the crowd that found the stables.</li>
+      <li>The hero point of the night: nat 1 on a Twisting Tail as the Warden stood up, rerolled to a <strong>natural 20</strong>, crit for 32, and <em>disrupted the move</em> &mdash; she stayed prone. <em>"Make up for my entire turn of nothing happening."</em></li>
+      <li>His Esoteric Lore was the comic engine of the back half: a crit Exploit Vulnerability on a plain guard revealed his favourite sandwich (bologna and peanut butter &mdash; <em>"an Elidiran favorite"</em>), and four Religion failures against the imps and the mages had him narrating his own incompetence with real grace: <em>"Evidently I have no idea what I'm doing."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-panacea">
+    <h4>Panacea &middot; the One Who Tried Words First</h4>
+    <ul>
+      <li>Opened the Azri fight with a speech instead of a spell &mdash; <em>"Listen kid, we want to let you out of here. We don't want to have to hurt you"</em> &mdash; then cast Fear on Rencelos specifically <em>"to make it clear that I was trying not to kill him."</em> He crit-saved it and laughed: <em>"You die here."</em> Her answer: <em>"Well, I guess we'll see."</em> When Bai Jian asked whether to kill Moccoviz, she was the one who answered: <em>"I think that we've killed enough."</em> Her line for the session, delivered flat: <em>"We're the good guys. War is hell, though."</em></li>
+      <li>Got the Warden's last question &mdash; <em>"Who are you?"</em> &mdash; and answered it: <em>"You'll never know."</em></li>
+      <li>Had the single best idea of the escape and said it as if it were obvious: <em>"We have the keys. We could just go out the front entrance."</em> Then, when the bluff collapsed, the second best: <em>"It's either these three guards or the whole crowd. How tall is the wall?"</em> &mdash; the prompt that reminded Cyrathul he owned a staircase.</li>
+      <li>Drew her spear for the first time &mdash; <em>"This is my first time with my weapon&hellip; Okay, I'm excited now"</em> &mdash; and told the man she was stabbing <em>"we're trying to keep you alive here."</em> Missed twice, learned Aid from Bai Jian, and took the lesson the way she takes everything: <em>"That was a lot."</em></li>
+      <li>Kept the party pointed at the exit: asked where Otton was so she could heal him, and twice steered everyone back to the stables (<em>"Guess we better get to the stables then, yeah?"</em>). Then the chase's most reliable roller by a distance &mdash; Society, Crafting, Acrobatics (<em>"I do not have the animal touch, but I do have some Acrobatics"</em>), the Religion that finally turned half the imps, <strong>both</strong> Arcana successes that broke the labyrinth. Three hero points spent, all three on rolls that mattered. <em>"Yay, finally something succeeded!"</em></li>
+      <li>Held the party together mechanically for three hours &mdash; Treat Wounds &times;6, Heal &times;2, Battle Medicine on a 10-HP Zanthar, Life Boost, Trade Death for Life sustained through two fights, a natural-20 Needle Darts crit on the sheriff &mdash; and said out loud what nobody else would: <em>"But boy, am I running out of spells. This has been a long one."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-zanthar">
+    <h4>Zanthar Melodune III &middot; the Thief in the Party</h4>
+    <ul>
+      <li>Took the Warden's charge alone at the top of the stairs &mdash; 34 crit, then 18 for running &mdash; and announced <em>"I'm still alive!"</em> from 10 HP. Later, in the street, on purpose: <em>"I'm tanking for everybody. Taking the hits."</em></li>
+      <li>Cast Dizzying Colors <em>"right in your face"</em> at a woman a foot and a half taller than the whole party and watched her spit a rainbow; drained his bonded item for a Fear she also saved; threw his hammer and missed. Not one spell landed on the Warden all fight, and he still went back for more each round.</li>
+      <li>Made the first declared non-lethal attack of the night &mdash; a Telekinetic Projectile on Rencelos in the second round of the first fight &mdash; and then became the party's non-lethal conscience by ordnance: <em>"I'm just gonna non-lethally hit this guy with a telekinetic projectile. Pick up a paving stone and go after him."</em> &rarr; <em>"What's better than non-lethal fireballs that are coming?"</em> &rarr; <em>"I think it's time for a non-lethal fireball."</em> His non-lethal Electric Arc left an infantryman <em>"gyrating like somebody that's been hit by a taser."</em> Rank-3 Fear on all four of the first patrol sent one fleeing on a crit fail.</li>
+      <li>Proposed the search of the warden's desk that turned up the Otton note and the passphrase (<em>"We can do a quick search of the desk"</em>), opened the gate door on three guards, rationed his spells on purpose (<em>"I don't know that I really want to use up something too useful on these guys"</em>), and had the Drain Bonded Item rule ready when the GM queried a second use.</li>
+      <li>The thief in the party, and self-aware about it: Skeleton Key on the tack cupboard &mdash; <em>"I need to get better at that skill if I'm the thief in the party"</em> &mdash; and, at the sheriff's body, <em>"I'm going to try and steal the sheriff's badge before we go on."</em></li>
+      <li>Lay on Hands for 18, twice, after the Azri fight: <em>"I feel useful."</em> Panacea: <em>"You are useful. You're always useful."</em></li>
+      <li>Solved the imps for two people with one spell &mdash; <em>"shared invisibility on a person and a horse and a person and a horse for the two worst people at sneaking"</em> &mdash; then fell into a snow bank, failed Intimidation on a hero point, failed Stealth on a hero point by one, and failed Arcana twice, once by one. <em>"Probably fail,"</em> he said before the Society roll in the blizzard. He was right, and he kept rolling.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ren">
+    <h4>Ren &middot; the Boarhound Who Got Fired</h4>
+    <ul>
+      <li>Tore <em>"a huge piece of"</em> Rencelos's calf out on a 30 (Bai Jian: <em>"Oh my god, Ren. I didn't know you were like that"</em>), missed the Warden on a 2, and bit an infantryman for 11 in the last fight.</li>
+      <li>Rolled Survival for the party five times against the imps and the labyrinth and failed all five &mdash; a 1, a 2, a 4, an 11 and a 12 on the die. <em>"Ren, come on. I didn't spend all that food on you just for this, man. You're fired."</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical"><div class="loot-name">+1 Striking Flail</div><div class="loot-source">Warden Irkazer</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">+1 Composite Longbow + 20 arrows</div><div class="loot-source">Warden Irkazer</div><div class="loot-note">Party stash &mdash; the first real ranged weapon the stash has held</div></div>
+  <div class="loot-item magical"><div class="loot-name">+1 Gauntlet</div><div class="loot-source">Warden Irkazer</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">+1 Longsword</div><div class="loot-source">Rencelos Azri</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item"><div class="loot-name">Half Plate &times;2</div><div class="loot-source">Rencelos / Irkazer</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item"><div class="loot-name">Signet Ring (Azri)</div><div class="loot-source">Rencelos Azri</div><div class="loot-note">A noble family's seal</div></div>
+  <div class="loot-item"><div class="loot-name">High-fashion fine clothing</div><div class="loot-source">Moccoviz Azri</div><div class="loot-note">"I'm gonna steal his clothing"</div></div>
+  <div class="loot-item"><div class="loot-name">Rapier &middot; Loaded Dice</div><div class="loot-source">Moccoviz Azri</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">5&times; Silver Ingot</div><div class="loot-source">Chest, warden's office</div><div class="loot-note">"Anyone want a silver weapon?"</div></div>
+  <div class="loot-item"><div class="loot-name">Trained warhorses + tack</div><div class="loot-source">Military stables</div><div class="loot-note">Eight on the GM's roster &mdash; the party's and the Hellbreakers' mounts</div></div>
+  <div class="loot-item"><div class="loot-name">Prison master key ring</div><div class="loot-source">S18</div><div class="loot-note">Opened every door on the third floor and the front gate</div></div>
+</div>
+<p style="margin-top:16px;color:var(--text-dim);font-size:14px;"><em>Consumed: Bai Jian's two Retrieval Prisms and both Scrolls of Sure Strike; two of Cyrathul's three Scrolls of Helpful Steps; Zanthar's Skeleton Key daily Knock; Panacea's rank-2 and rank-1 Heals; every hero point at the table.</em></p>
+<div class="xp-banner">Experience &middot; 80 Azris &middot; 80 Warden &middot; 60 patrol &middot; 60 sheriff = <strong>280 XP each</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Bai Jian:</strong> "Well kid, let's go to bed."
+<span class="attribution">Retrieval Prism, Scroll of Sure Strike, and the flat of a falcata &mdash; Moccoviz Azri, unconscious in one hit.</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "Just for the record, I didn't kill them." &mdash; <strong>DM:</strong> "He might not know that."
+<span class="attribution">Rencelos had just refused to surrender: "You kill my nephew and you think we can negotiate now?"</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "It's a prison break?" &hellip; "Okay, my job is just not good. He is not good at this, guys."
+<span class="attribution">Having walked up to a jailer, in the middle of the prison break he started, to ask what was going on.</span></blockquote>
+
+<blockquote><strong>Bai Jian:</strong> "I have experience taming an animal right here. Surely these horses can't be harder than this guy."
+<span class="attribution">Pointing at Ren, before calming a stable of spooked warhorses on a 27.</span></blockquote>
+
+<blockquote><strong>Cyrathul:</strong> "Innocent is a strong word for this man. We might have framed him, but he's still, at the very least, essentially a Chelaxian noble. Almost guaranteed deals in slavery."
+<span class="attribution">Bai Jian had just called Rencelos "like an innocent." Cyrathul agreed to keep him alive anyway &mdash; then rolled 19 of 20 on the dice.</span></blockquote>
+
+<blockquote><strong>Cyrathul:</strong> "It's just a dragon riding through town biting people's heads off. I don't know why a dragon on a horse is so effective. You might want to look into that."
+<span class="attribution">Two consecutive crits on the sheriff, moments after two drive-by decapitations.</span></blockquote>
+
+<blockquote><strong>Cyrathul:</strong> "I don't mean to. I just keep killing people."
+<span class="attribution">Answering "this dragon is a little violent." Every attack he made after this was non-lethal.</span></blockquote>
+
+<blockquote><strong>Panacea:</strong> "Listen kid, we want to let you out of here. We don't want to have to hurt you. We want you to be able to be free right now."
+<span class="attribution">Her opening words of the Azri fight, before a Fear on Rencelos that he crit-saved and laughed off &mdash; "You die here." Her reply: "Well, I guess we'll see."</span></blockquote>
+
+<blockquote><strong>Panacea:</strong> "We're the good guys. War is hell, though."
+<span class="attribution">The verdict on whether to keep a framed man alive.</span></blockquote>
+
+<blockquote><strong>Warden Irkazer:</strong> "Who are you?" &mdash; <strong>Panacea:</strong> "You'll never know."
+<span class="attribution">The Warden's last words, throat cut, collapsing.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "I'm still alive!"
+<span class="attribution">After the Warden's 34-damage crit and an 18-damage reactive strike &mdash; 10 of 62 left.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "I'm going to cast shared invisibility on a person and a horse and a person and a horse for the two worst people at sneaking."
+<span class="attribution">The only automatic success of the imp obstacle.</span></blockquote>
+
+<blockquote><strong>Zanthar:</strong> "I feel useful." &mdash; <strong>Panacea:</strong> "You are useful. You're always useful."
+<span class="attribution">Lay on Hands for 18, after a fight in which none of his spells had landed.</span></blockquote>
+
+<blockquote><strong>The gate contingent:</strong> "Kill the Hellbreakers!"
+<span class="attribution">Bai Jian had just said "We don't have to do this. Stop getting in the way." End of session.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Druma Road Gate.</strong> A Hellknight cavalry troop, a line of infantry and a standard bearer between the party and the road out, initiative rolled, party mounted and hero points gone. Troops take extra damage from area and splash effects &mdash; and the spacious pouch still holds spare eternal eruptions and frozen lava from the Aegis. The cavalry also resist slashing and mental damage: Bai Jian's falcata and Zanthar's Fear are both the wrong tool.</li>
+  <li><strong>The Azris are alive and know exactly who did this to them.</strong> Rencelos recognised the party on sight, named the frame out loud, and is lying unconscious in an open cell with the run of the prison. <em>"He might not know that"</em> Bai Jian didn't kill his nephew &mdash; but he knows everything else.</li>
+  <li><strong>Otton was the leak.</strong> The warden's notes say the army found the safehouse by torturing Otton for several days. He is free, riding with the party, and believes it's his fault. Jenverick's <em>"I feel like such a failure"</em> and Sarevial's confession were never the source.</li>
+  <li><strong>Four kills on the record tonight &mdash; the Warden and three in the street</strong> &mdash; and the GM asked for a d20 after each of the street kills (12, 3, 16). What those rolls governed was never said. Suppression has still not been checked out loud.</li>
+  <li><strong>Every rescued Hellbreaker is with the party</strong> &mdash; Roxy, Oramos, Otton, Father Kindness, the Thieves' Guild kid, the costume-maker, <strong>Hexroot &mdash; and, if the red-eyed "alligator" is who he sounds like, Zarok</strong>. Nobody has asked what state they're in, who can fight, or what happens to them at the gate.</li>
+  <li><strong>Leoz, Sarevial and Osney</strong> were last placed in the basement. The GM's <em>"you have all the Hellbreakers with you"</em> may or may not include them &mdash; nobody asked.</li>
+  <li><strong>Jenverick</strong> &mdash; the familiar voice at the stables, never named on-screen. Presumably riding with the Hellbreakers.</li>
+  <li><strong>~50 imps</strong> are still over the city and the <strong>watch mages</strong> are still awake. The city knows a dragon on a horse is loose.</li>
+  <li><strong>Quoster's ship</strong> is loaded at the berth and the party is leaving by the <em>land</em> gate.</li>
+  <li><strong>The sheriff's badge</strong> and whatever else was on the Unsanctioned Sheriff &mdash; unlooted.</li>
+  <li><strong>The +1 composite longbow</strong> in the stash. Bai Jian has had no ranged option since Session 13.</li>
+  <li><strong>Battle Scarred and Bai Jian's mercy.</strong> Rencelos went to 0 twice &mdash; once lethal, once not. The GM ruled him alive. If he wakes and talks, that mercy has a price.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Bai Jian did this session</h3>
+<ul>
+  <li>Opened the first cell on the third floor and found <strong>Rencelos Azri</strong> &mdash; armed, and holding a grudge Bai Jian had to be reminded of. Asked the table straight out whether they were killing the nephew. The answer was no. Held to it.</li>
+  <li><strong>Retrieval Prism &rarr; Sure Strike &rarr; non-lethal falcata, double 14, 48 crit.</strong> Moccoviz down in one. Later offered Rencelos surrender, was told <em>"you kill my nephew,"</em> and put the correction on record. Took the man down non-lethal on the last swing after Cyrathul's jugular cut failed to finish him.</li>
+  <li>Took <strong>14 + 17</strong> from the Azris; ended the fight at 61. Cyrathul ended it at 16.</li>
+  <li>Taught <strong>Panacea the Aid action</strong> while she was stuck with nothing to do. She's got the spear now; she'll get the hang of it.</li>
+  <li>Pushed for twenty minutes of healing instead of ten before the stairs. Right call: the Warden opened on Zanthar for 52.</li>
+  <li><strong>Slam Down on the Warden: nat 2, hero point, 36 crit, tripped.</strong> Then Guidance on himself and a <strong>28 Snagging Strike crit</strong> &mdash; the shortcut to a second Sure Strike was off the table because of her reactive strike, and he caught that before committing.</li>
+  <li>Freed every cell: Roxy, Oramos, <strong>Hexroot</strong>, the red-eyed <em>"alligator"</em> &mdash; <strong>Zarok</strong>, surely &mdash; the Thieves' Guild kid, Father Kindness, Otton, the costume-maker. <em>"We wouldn't leave comrades behind."</em></li>
+  <li>Told Otton <em>"You didn't have a choice."</em> Read the warden's notes that say the raid came from Otton's torture.</li>
+  <li>At the gate: let Ren go first, asked a jailer what was going on, got told there was a prison break. Failed Deception on an 8. <strong>Closed the gate on them</strong> and let Cyrathul's staircase do the rest.</li>
+  <li><strong>Athletics 33</strong> on the tack shed (reroll). <strong>Nature 27</strong> on the warhorses, <strong>Nature 24</strong> through the crowd. Refused a horse, was asked for a Fortitude save for running in a whiteout, took the horse.</li>
+  <li>First patrol: <strong>Snagging Strike + falcata, 9 + 14, killed a watch officer.</strong> Rolled the GM's d20 &mdash; 12. Then <strong>Slam Down 41 crit + crit Trip</strong> on an infantryman that left him at 1 HP instead of dead.</li>
+  <li>Told the sheriff <em>"Hit me. I can take it."</em> Took <strong>39</strong> from a natural 20. Delayed behind Cyrathul, spent a <strong>second prism and the last Sure Strike scroll</strong> for a <strong>52 non-lethal crit</strong> that dropped him. GM flagged the talisman rule &mdash; one affixed at a time, ten minutes to swap &mdash; and counted the heal stop as the swap.</li>
+  <li>Non-lethal Snagging Strike + falcata to knock out the last infantryman from horseback.</li>
+  <li>Routed five Survival rolls through Ren against the imps and the labyrinth. Five failures, two natural 1s. Fired the dog.</li>
+  <li>Ended at <strong>81/92</strong>, 0 hero points, no Sure Strike scrolls, no prisms, in initiative against a cavalry brigade.</li>
+</ul>
+
+<h3>Things Bai Jian knows that the party does not</h3>
+<ul>
+  <li><strong>He is the reason both Azris are alive.</strong> Cyrathul went lethal and rolled 19 of 20; Battle Scarred saved Rencelos by the book, and Bai Jian's non-lethal 13 then took him from 1 to 0 the ordinary way. On a man without that ability, Cyrathul's claw was a killing &mdash; after the table had just agreed not to.</li>
+  <li><strong>Rencelos said "you kill my nephew" and meant it.</strong> Bai Jian said he didn't. The GM said <em>"he might not know that."</em> Nobody has told Rencelos anything since; he was unconscious. He will wake up in an open cell believing the Hellbreakers killed Moccoviz. Moccoviz is asleep ten feet away from him.</li>
+  <li><strong>Otton is the leak, not Jenverick and not Sarevial.</strong> The desk said so. Otton is riding with them right now and thinks he doesn't deserve to be rescued. Jenverick spent last week thinking she got everyone arrested. Nobody has said either of those things out loud to either of them.</li>
+  <li>The jailers at the gate said <strong>"where's your uniforms?"</strong> The disguise-kit story from S18 is a fiction the GM allowed to stand. The party's cover, such as it is, was three failed Deception checks and a closed door.</li>
+  <li>The GM told him <strong>"you're good at magic now"</strong> during the labyrinth. Hedge Mage gives him Guidance, not an Arcana score; his Occultism against DC 23 is worse odds than Ren's +12 against DC 25. Ren was the right call, even at 0 for 5.</li>
+  <li><strong>The talisman rule.</strong> One Retrieval Prism affixed at a time; swapping takes ten minutes. Tonight's second prism was only legal because of the heal stops &mdash; plan the swap next time.</li>
+</ul>
+
+<h3>What Bai Jian is thinking about</h3>
+<ul>
+  <li><strong>The party decided to fight non-lethal and then did &mdash; mostly.</strong> Both Azris alive. The sheriff and both of his men alive. The infantryman Zanthar tased, alive. Three dead in the first patrol, two of them Cyrathul's, one his. Then the dragon <em>stopped himself</em> in the very next fight &mdash; <em>"this poor sheriff, don't kill him."</em> That's the first time since the wall that Cyrathul pulled a blow on his own. Worth noticing.</li>
+  <li><strong>Cyrathul's "innocent is a strong word" was right and Bai Jian knows it.</strong> He called Rencelos an innocent because they framed him, not because he is one. Both things are true. He put a slaver in the Gyve on a lie, and then refused to let him die there. He's not sure that's a position; it might just be two reflexes.</li>
+  <li><strong>He is the alpha-strike sponge again.</strong> 14 from Moccoviz's opener, 39 from the sheriff's &mdash; that's S18 and S19 back to back of eating the first hit before acting. AC 27 with the parry and they still crit through it.</li>
+  <li><strong>The chase was a disaster and he can see why.</strong> Deception is his worst skill and he rolled it. Survival through Ren failed five times because the DCs were 24&ndash;25 and the dog rolled a 1, a 2, a 4, an 11 and a 12 on +12. Nature is the only chase skill he owns &mdash; he passed both times. Next time: push for the check he can make, don't take the one he can't.</li>
+  <li><strong>The longbow in the stash.</strong> +1 composite longbow. He is a master with swords and trained with everything else. He has made zero ranged attacks since Session 13 and one whole encounter in S18 was spent climbing a ladder. He should at least carry it.</li>
+  <li><strong>The troops at the gate have splash/area weakness.</strong> The pouch has spare Aegis munitions. Zanthar has a detonator in the sense that he has fire spells. Somebody should say this before initiative comes around.</li>
+  <li><strong>Everyone got out. Every cell.</strong> Hexroot &mdash; and, it seems, Zarok &mdash; who left the table, are back in the story. That is worth more than the XP.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>How do you get eight PCs' worth of horses, a dozen prisoners, and a dog through a cavalry brigade?</strong> Fight, bluff, or bomb the gate?</li>
+  <li><strong>What are the GM's d20 rolls after each kill?</strong> Three so far &mdash; 12, 3, 16. Suppression? Witnesses? He has never explained them.</li>
+  <li><strong>What did Otton tell them?</strong> <em>"Everything"</em> &mdash; the safehouse, obviously. The founders? Quoster? The party's faces under the scarves?</li>
+  <li><strong>Do the Azris know the party's faces?</strong> Rencelos knew them on sight. They were at the gala unmasked.</li>
+  <li><strong>Where are Leoz, Sarevial and Osney?</strong> Still in the basement of a prison the whole city is now pouring into.</li>
+  <li><strong>Was that Jenverick at the stables?</strong> If so, is she riding with the Hellbreakers now &mdash; and does she know about Otton's confession?</li>
+  <li><strong>What happens to the prisoners who <em>aren't</em> Hellbreakers</strong> &mdash; the hundreds still pushing through the wall while the tower bombs them?</li>
+  <li><strong>Is there a second daily passphrase for the city gate,</strong> and does anyone in the party still have the Esoteric Lore to find it?</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Where it stops</span>
+  <p>A fifty-foot gate, a blizzard, eight warhorses carrying a dragon, a gnome, a catfolk, a man in full plate and every prisoner they came for, and a Hellknight cavalry brigade drawn up across the only road out of Elidir. Initiative is rolled. Nobody has a hero point left.</p>
+  <span class="big-line">"Kill the Hellbreakers!"</span>
+  <span class="speaker">&mdash; the gate contingent. Bai Jian, a second earlier: "We don't have to do this. Stop getting in the way."</span>
+</div>
+
+</div>
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+</style>
+
+</body>
+</html>

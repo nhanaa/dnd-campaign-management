@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 13 — Ten Feathers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>Ten Feathers</h1>
+  <div class="subtitle">Session 13 · A rematch won, a talking dragon fled, three dens cleared — and the qualifying number reached on the morning of Day 2</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-30</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 56m</span>
+    <span class="meta-pill">Day 2 of 3 · southern Bonmou</span>
+    <span class="meta-pill">Level 13 → 14</span>
+    <span class="meta-pill">Feathers 8 → 10</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:58"></div>
+  <div class="comp-seg comp-explore" style="flex:16"></div>
+  <div class="comp-seg comp-rp" style="flex:13"></div>
+  <div class="comp-seg comp-social" style="flex:8"></div>
+  <div class="comp-seg comp-loot" style="flex:5"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · six encounters</span>
+  <span><span class="legend-dot comp-explore"></span>Exploration · hex crawl, a shrine, a watchtower</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay</span>
+  <span><span class="legend-dot comp-social"></span>Social · Tino's Toughest, Tamikan, Gomwai</span>
+  <span><span class="legend-dot comp-loot"></span>Loot &amp; market</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard (Maestro) / Living Nexus</div>
+    <div class="char-player">Pax · "Mingzhu"</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Master Medicine · two den kills</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · the wall</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">Wayang · she/her</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>The Nameless hit ten feathers.</strong> Not on Day 3, not on the mountain — in the middle of Day 2, in a nothing hex on the southern shore, off a feather somebody else had dropped while running for their life. Seva said <em>"By the gods, we did it."</em> Clutch said <em>"All right, let's go retire."</em> Then the same hex turned out to be a creature den, and the session went on for another two and a half hours.</p>
+
+<p>The number is the headline; holding it is now the whole game. Ten feathers means every remaining encounter is downside-only — and the island noticed. Forty minutes after they hit the mark, the <strong>enforcers</strong> stepped out of a manor house and wagered <em>three of them</em> on a fight the party was not allowed to refuse.</p>
+
+<p>It opened with a rematch. <strong>Tino's Toughest</strong> — the team that fought them to a draw on the beach at level 11, in the session that cost the party its monk — came back for an official bout, and this time it was not close. Four rounds, one feather, a handshake. It cost Sovael more than anyone: he opened round two with a <strong>rank-6 Roaring Applause</strong> across all four opponents, was told to his face by the DM <em>"I warn you, this will make you a target,"</em> answered <strong><em>"It is what it is,"</em></strong> and then spent the fight being the target — a Disintegrate, two Takatorra criticals, and finally the floor at Dying 2. He took <strong>237 damage</strong> — nearly twice what anyone else in that fight took — and for two rounds he was right: with the enemy team's reactions switched off, Ferrok crossed to the archer untouched and Clutch moved freely. The irony is exact — <strong>the table ran the spell as sustained, and it died the moment he did.</strong> Sattva ran into Takatorra's reach to revive him thirty seconds later, was puzzled that Takatorra had a Reactive Strike at all, and Sovael had to explain from the floor what had been keeping it switched off for two rounds — pointing out, with some heat, that this was not the first time he'd cast it in this campaign. <strong>The reactions were back because he was down.</strong> Takatorra swung and missed on a natural 2. Afterward: <em>"I think I did quite a bit. I provided values."</em> Ferrok, immediately: <strong><em>"You were essential to the battle."</em></strong></p>
+
+<p>Then the island reminded them it does not care about their record. <strong>Tamikan</strong> — a kongamato, level 16, and the first wild thing on Bonmou that <em>talks</em> — hovered overhead and opened a conversation. Sattva got the first word in (<em>"You can speak?"</em>); Sovael pressed her for a body count and then, when she declined, tried to arrest her (<em>"You got a license for that? Gotta see your credential."</em>). She was not amused — <em>"No, you're trying to ease your own fear by making quips. I've seen it before"</em> — and opened with <strong>18d6 of sonic screech</strong> that parted the water and left a rut in the ground. The party got exactly two actions all fight: Clutch's Battle Cry Demoralize critically failed, and <strong>Sattva's Recall Knowledge rolled a natural 20 and still failed a DC 45.</strong> They ran on resource cost. Ferrok tipped his hat. Sovael promised a rematch when he's bigger. Sattva covered their tracks. Zero XP, and the DM's flat assessment: <em>"She's one of the nastier things you can find out here."</em></p>
+
+<p>The middle of the day was the best of it. A shrine to <strong>Baba Nabi</strong>, mountain god of scripture, storytellers and travelers, asked for ten minutes of reading aloud — so Ferrok read vampire poetry (<em>"They're so sad because they live forever and they're sad about it"</em>), Seva cried behind her mask, and Clutch talked the table through a kholo picture-book history. Then the tenth feather, on a branch, at the end of a trail of long running strides. Then three creature dens: a <strong>Dread Roc</strong> that carried Clutch off in its beak and Ferrok in its talons, an <strong>enforcer camp</strong> that cost them nothing and paid 500 platinum, and a <strong>mammoth turtle</strong> that Ferrok tried to befriend and that ate him for it.</p>
+
+<p>And it ended in a farce. Two gargantuan <strong>cave worms</strong> swallowed, at various points, Sattva, Ferrok, and Clutch three separate times — Sattva got lost inside one across five failed escapes, Clutch cut himself out of one with a 68-damage critical and then stood back inside its reach and narrated being eaten again as a dive (<em>"what do you mean, that I can't miss?"</em>), and Ferrok critically missed goring his way out of a stomach and later reviewed the accommodation: <strong><em>"it's softer from the inside."</em></strong> Sattva finally surfaced with a blank expression, refused to speak, and drank a potion. Then he grew a cave worm's jaw with <strong>Animal Feature</strong>, bit the worm down to two hit points, and ate through it to find Clutch. Seva called the finish — <em>"This has been a fucking circus. I'm ending it here"</em> — and killed it. Sovael, surveying the wreckage: <strong><em>"Everyone's a little part of the club now. I guess we are in this together."</em></strong></p>
+
+<p>Level 14. <strong>800 platinum</strong> still in the pot. Ten feathers, a day and a half to hold them, and an enforcer of higher rank than Gomwai somewhere out there whose entire job is taking feathers out of circulation. <em>"You may run into them. <strong>May.</strong>"</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act combat">
+  <div class="act-label">Act I · Combat · Rematch: Tino's Toughest (0:08 – 0:53) · Team win · Feathers 8 → 9</div>
+  <div class="act-card">
+    <h3>"It's time to see how much you've grown."</h3>
+    <ul>
+      <li>Ryu opened on the arithmetic: <strong>8 of 10 feathers</strong>, and the reminder that qualifying means <em>holding</em> them to the end of Day 3. The team-encounter DC had risen to <strong>19</strong> (17 inside a team base).</li>
+      <li>Ten minutes in, <strong>Clutch stated the party's whole doctrine</strong> and nobody argued: <em>"I mean, I think this is great. If we just fight every team before the tournament and knock them out, there's nobody left to fight."</em> Everything he does for the rest of the session follows from that sentence.</li>
+      <li>The first Traverse produced a familiar silhouette. <strong>Takatorra</strong> called the wager. <strong>Tino</strong>: <em>"Just know we've gotten a bit tougher ourselves these past few days. This island puts you through it."</em> <strong>Sovael</strong>: <em>"Well, let's see then. Because we also got tougher ourselves."</em></li>
+      <li><strong>Ji-yook rolled highest at 43 and immediately Delayed</strong> to after Tino — Ryu: <em>"Running in there alone is not what she's built for."</em></li>
+      <li><strong>Clutch's Limit Break bit was born here.</strong> He held out a paw, yelled <strong>"LIMIT BREAK"</strong>, and — after a beat of table silence — added: <strong><em>"The screen shatters."</em></strong></li>
+      <li>Seva clocked Yabin from across the field: <strong><em>"Is that man corn? Oh no, sorry. He's a Nagaji. He's a Nagaji with a mohawk."</em></strong> The bit paid off seven minutes later when <strong>Ferrok</strong> dropped him: <strong><em>"The corn is down, I repeat."</em></strong></li>
+      <li><strong>★ Sovael's round-2 gamble</strong> — a <strong>rank-6 Roaring Applause</strong> catching all four opponents. Takatorra failed (no reactions, Slowed 1); the other three succeeded (no reactions). Ryu, before the dice: <em>"I warn you, this will make you a target."</em> Sovael: <strong><em>"It is what it is."</em></strong></li>
+      <li><strong>Ferrok Time Jumped across the field and put 128 into Yabin in one action-pair</strong> — a critical Ignition Spellstrike, 76 weapon plus 52 fire. Yabin burned <strong>Wooden Double</strong> to claw 35 back. Ferrok's reason: <em>"I am tired of becoming a pincushion."</em></li>
+      <li><strong>Sovael became the enemy's whole plan.</strong> Yabin's rank-6 <strong>Disintegrate</strong> — which <strong>Clutch's Bonekeeper's Bane downgraded from a critical hit</strong> — landed for 28 through a made save. <strong>Ji-yook rolled a natural 20 on Sattva for 92.</strong> Takatorra crossed and <strong>critically hit Sovael for 60</strong>, then came back a round later for <strong>62</strong> — Dying 2, Unconscious, Blinded, Prone.</li>
+      <li><strong>★ And that ended Roaring Applause.</strong> Sovael was sustaining it; it went down with him. Thirty seconds later <strong>Sattva ran into Takatorra's reach to revive him with Healer's Gloves for 31</strong> — then asked why Takatorra had a Reactive Strike to make at all, since he hadn't provoked one. Sovael answered from the floor, and the frustration in it wasn't about the ruling: <strong><em>"It's because of Roaring Applause. Come on, guys. Come on. I casted it like three times already."</em></strong> Two rounds of total reaction denial across four opponents, and the people it protected hadn't registered that it was there — or that it had just stopped, because he had. <strong>Takatorra swung and missed on a natural 2.</strong></li>
+      <li><strong>Yabin went down twice, but not to the same person.</strong> Ferrok dropped him first; <strong>Tino spent his last focus point on Lay on Hands</strong> to bring him back at 22 HP; <strong>Clutch's Hasted bite dropped him again.</strong></li>
+      <li><strong>Sattva was the fight's #2 damage dealer at 260</strong> — a hero-pointed <strong>85-damage Thundering crit</strong> in round 2, then a <strong>69 crit plus 32</strong> at point-blank in round 4. <em>"That's what you get for hitting my friend."</em></li>
+      <li><strong>Tino's Toughest forfeited mid-round 4.</strong> <strong>Ji-yook</strong>, at the handshake: <strong><em>"You guys are weird. You realize that? … But will you be eight hours from now when you're exhausted?"</em></strong> <strong>Ferrok</strong>: <em>"We the Nameless, thank you for the match. Look forward to the final."</em></li>
+      <li><strong>160 XP.</strong> Feathers 8 → 9.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act mystery">
+  <div class="act-label">Act II · Combat · Tamikan (0:55 – 1:03) · Fled · 0 XP</div>
+  <div class="act-card">
+    <h3>The first thing on Bonmou that talks</h3>
+    <ul>
+      <li>Ryu: <em>"a flying pterodactyl-like creature… it seems to fly faster than anything you've seen in the past."</em> It hovered, and then it <strong>spoke</strong>: <strong><em>"Ah, more of these tournament fighters. Ample prey they've brought to us."</em></strong></li>
+      <li><strong>Sattva got the first word in</strong> — <em>"You can speak?"</em> — and she turned to him for it. <strong>Clutch</strong>, less reverently: <em>"I can't really hear you. Could you come closer?"</em></li>
+      <li>Ryu: <strong><em>"And what dragon is incapable of speech, hmm? You didn't think everything on this island was some mindless brute, did you?"</em></strong></li>
+      <li><strong>★ Sovael pressed her for intelligence.</strong> <em>"How many people have you eaten? … Sounds like you have encountered other teams before."</em> She stonewalled him and claimed the island — <strong><em>"surely you all knew the risks. This is our island, and you all trespass"</em></strong> — so he went straight at the deed: <strong><em>"You got a license for that? Gotta see your credential."</em></strong> Tamikan, to him specifically: <strong><em>"Don't deign to get smart with me, runt. … No, you're trying to ease your own fear by making quips. I've seen it before."</em></strong></li>
+      <li><strong>Ferrok tried the honest exit</strong>: <em>"We have no quarrel with you. If this is your area, we can move on."</em> Tamikan: <strong><em>"You've given up your lives just by stepping into my domain."</em></strong></li>
+      <li><strong>The party got exactly two actions all fight, and both were bad news.</strong> Clutch's <strong>Battle Cry Demoralize critically failed</strong> against a Will DC of 38. <strong>Sattva's free Recall Knowledge rolled a natural 20 and still failed a DC 45.</strong></li>
+      <li>She flew 20 feet up and opened with <strong>Sonic Screech — 18d6, a 100-foot line, DC 37 basic Reflex.</strong> Sattva and Ferrok both rolled to exactly 36 and failed by one, taking 63. Then she flew a further <strong>75 feet on her Quickened action.</strong></li>
+      <li><strong>The second group escape in campaign history</strong> — narrated rather than run as a declared round. <strong>Ferrok</strong>: <em>"We'll tip his hat and then leave."</em> <strong>Sovael</strong>: <strong><em>"I'll see you again, big dragon. Maybe one day I'll grow bigger and then I'll come by for revenge."</em></strong> <strong>Sattva</strong>: <em>"And I cover her tracks."</em></li>
+      <li>Ryu, after: <strong><em>"She's one of the nastier things you can find out here."</em></strong> <strong>Zero XP</strong> — <em>"literally the first thing you guys did was run away."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act rp">
+  <div class="act-label">Act III · Roleplay &amp; Exploration · The Hex Crawl (1:04 – 1:11) · ★ Feathers 9 → 10</div>
+  <div class="act-card">
+    <h3>A shrine, a book of vampire poetry, and a feather on a branch</h3>
+    <ul>
+      <li>Four hexes swept along the southern shore: another <strong>docks</strong>, a <strong>Shrine of Gozreh</strong> team base (unoccupied), and a <strong>gold priest's estate</strong> — which prompted <strong>Ferrok</strong>: <strong><em>"Is it against the rules to put graffiti on their base walls or anything?"</em></strong> He got his chance forty-eight minutes later, typing into Foundry chat: <strong>"Ferrok carves 'Ferrok was here' into the wall."</strong></li>
+      <li><strong>★ The shrine of Baba Nabi</strong> — a Temoutan shrine to the <strong>mountain god of scripture, storytellers, and travelers</strong>. Honoring her costs ten minutes of reading aloud. <strong>Seva</strong> set it up as an in-fiction prompt: <strong><em>"Oh, Ferrok, tell us about your previous journey before coming here."</em></strong></li>
+      <li><strong>Ferrok</strong> read a book of <strong>vampire poetry</strong>: <strong><em>"They're so sad because they live forever and they're sad about it."</em></strong> <strong>Seva</strong>: <strong><em>"That's so sad. Seva cried. Seva started crying behind her mask."</em></strong> <strong>Clutch</strong> read <em>"a picture book of the kholo's history"</em> and talked the table through it.</li>
+      <li>Reward: <strong>Baba Nabi's blessing — the Gift of Sight.</strong> A <strong>+2 circumstance bonus to saves against blinded and dazzled</strong> for the rest of their stay on Bonmou.</li>
+      <li><strong>★ The tenth feather.</strong> Ryu apologised in advance — <em>"this is kind of anticlimactic"</em> — and then: <strong><em>"a bunch of footsteps, long striding footsteps, as though someone were running for their lives… snagged on a branch here is a single silver feather."</em></strong></li>
+      <li><strong>Seva</strong>: <strong><em>"By the gods, we did it."</em></strong> <strong>Clutch</strong>: <strong><em>"All right, let's go retire."</em></strong> <strong>Sattva</strong>, already planning: <em>"Okay, so we're gonna be sneaking through the rest of the map."</em> <strong>Feathers 9 → 10 — the qualifying number, on the morning of Day 2.</strong></li>
+      <li>Then Ryu finished the sentence: <strong><em>"But you soon find out what precisely they were running from, because this is also a creature den."</em></strong> <strong>Clutch</strong>: <strong><em>"Grab the feather and dip!"</em></strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act IV · Combat · The Dread Roc (1:11 – 1:38) · Den · 600 pp</div>
+  <div class="act-card">
+    <h3>"It's a bird. How magic can it be?"</h3>
+    <ul>
+      <li>The party considered leaving — they already had the feather — until Ryu offered the calibration: <strong><em>"not everything is threat level Tamikan. It's just a giant chicken."</em></strong> <strong>Sattva</strong>, sizing it up: <strong><em>"It's a bird. How magic can it be?"</em></strong> He was wrong within thirty seconds.</li>
+      <li><strong>★ A level-1 general feat bought the party the alpha strike.</strong> Ryu called the 38–38 initiative tie for the enemy; Sovael remembered his <strong>Pilgrim's Token</strong> and went first, spending it on Courageous Anthem, Lingering (3 rounds), and a Recall Knowledge Ryu answered generously: <strong>no resistances, no weaknesses, best save Fortitude.</strong></li>
+      <li>The roc opened with <strong>Frozen Feathers</strong>, a 60-foot cone on a <strong>non-basic save</strong> that only Sattva failed — and <strong>Clutch immediately Intercepted the worse damage roll off him and ate 49 instead.</strong> <strong>Sattva took zero damage in the entire fight.</strong></li>
+      <li><strong>The bird's whole gimmick was leverage</strong>: a 30-foot wing reach, a <strong>Wing Rebuff</strong> reaction punishing anyone closing (a 66-point crit on Seva, a 50-point crit on Ferrok), <strong>Improved Grab</strong>, and <strong>Snatch</strong>. In round 2 it grabbed <strong>Clutch in its beak and Ferrok in its talons and flew 30 feet backwards with both.</strong> Seva: <strong><em>"Oh god, we are so fucked."</em></strong></li>
+      <li><strong>★ Seva walked into the roc's reaction range twice on purpose</strong> — once to stabilise herself when both frontliners were airborne, and once to reach Clutch, where she <strong>hero-pointed a natural 2 into a natural 19 for a critical Battle Medicine worth 74 hit points.</strong></li>
+      <li><strong>Ferrok broke a grab by exactly zero and then ordered dinner.</strong> Escape check: 41 against a DC of 41. Then: <strong><em>"You know what? I want fried chicken, so Ignition Spellstrike."</em></strong> It landed for 60, and he finished as top damage at <strong>128</strong>.</li>
+      <li><strong>Clutch is the reason the fight was winnable.</strong> His Shielding Taunt held the roc <strong>off-guard at AC 34 from round 2 onward</strong> — the roll log flags it as <em>essential</em> on three of the fight's four decisive rolls, including his own <strong>58-point Armored Counterattack crit, a reaction in a round he never got a turn in.</strong> He absorbed 172 damage, <strong>152 of it redirected off other people.</strong></li>
+      <li>Sovael contributed <strong>zero damage</strong> — a Needle Darts that missed by exactly 1, a Demoralize the game rejected as "too far," and two full rounds of Striding that left him 40 feet short on a 25-foot fly speed. <em>"That's biting me in the ass right now."</em></li>
+      <li><strong>Sattva killed it</strong> — a round-4 Hunted Shot that <strong>critted for 92 into 29 remaining hit points</strong>. <strong>Ferrok</strong>: <em>"I call a drumstick."</em> <strong>120 XP. Sixth den — 600 platinum.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act V · Combat &amp; Social · The Enforcer Camp (1:54 – 2:35) · Win · 500 pp · Three feathers defended</div>
+  <div class="act-card">
+    <h3>"I am Gomwai, head enforcer of Bonmou."</h3>
+    <ul>
+      <li>Table banter first, and it landed real worldbuilding: Ryu had to check his notes because <em>"there's y'all and then there's the Saturday Ruby Phoenix group."</em> <strong>Ferrok</strong>: <em>"We're better than them."</em> Ryu: <strong><em>"They've killed Jaiban."</em></strong> <strong>Seva</strong>: <em>"You are lying. There's no way they killed Jaiban."</em></li>
+      <li><strong>Clutch's hex-crawl procedure, executing his stated doctrine:</strong> <strong><em>"Clutch will yell out — who here is not a coward?"</em></strong> Seva: <em>"Don't, Clutch. Don't."</em> <strong>Ferrok</strong>: <em>"We're doing the vacuuming method."</em> <strong>Sattva</strong>: <strong><em>"The Roomba method."</em></strong></li>
+      <li>A middle-aged orc stepped out of an old manor: <strong><em>"Well met. As I understand, you're a team that's yet to find a name. I am Gomwai, head enforcer of Bonmou."</em></strong> <strong>Ferrok</strong>: <strong><em>"We have a name. It's the Nameless."</em></strong> Gomwai, grudgingly: <strong><em>"I cannot say it's what I would have chosen, but well met, Nameless."</em></strong></li>
+      <li><strong>The terms were brutal for a team sitting on exactly ten feathers</strong>: <em>"You will wager three feathers against us… This is not a challenge you can refuse without forfeiting feathers."</em> <strong>Sovael</strong>: <strong><em>"Time to protect our feathers."</em></strong></li>
+      <li><strong>Ferrok's Gladiator archetype surfaced in fiction for the only time this session</strong>: <em>"Can I still consider this one with spectators for my gladiator stuff?"</em> — and then <strong><em>"What? I'm known for good times."</em></strong> <strong>Seva</strong>: <strong><em>"You're known for</em> a <em>good time?"</em></strong></li>
+      <li><strong>★ Ingdani planted the season's next hook</strong>, unprompted: <strong><em>"Gomwai is the head enforcer for this base, though there is technically one of higher rank than he. One who is also responsible in weeding out the weak and taking feathers out of circulation. You may run into them. May."</em></strong></li>
+      <li><strong>Clutch got the first debuff in before initiative finished</strong> — a Battle Cry Demoralize on the Mage, which Sattva immediately turned into a Hunt Prey target. Two shots, 104 damage, before the enforcers moved.</li>
+      <li><strong>Sovael opened with Dirge of Doom rather than Courageous Anthem</strong> — no save, with a Frightened floor the enemies could not recover past. Lingered on a <strong>critical Performance (45)</strong> for four rounds; it <strong>downgraded exactly three enemy criticals to normal hits.</strong></li>
+      <li><strong>★ Ferrok's best mechanical play of the session, on a rules argument he won</strong> — <strong>Emergency Targe</strong> retroactively raised his AC to downgrade a Warrior crit, then <strong>Bastion's extra reaction Shield Blocked 20</strong> of what got through. Twelve damage from what should have been a critical.</li>
+      <li><strong>The Monk's trip build was the story.</strong> Seva went down first (<em>"Fuck me without Kip Up"</em>) and narrated every second: <strong><em>"Don't trip me. Don't trip me. They're gonna trip ya. I'm never getting up!"</em></strong> Ryu, with feeling: <strong><em>"Look, just share my pain for a brief moment, because when players have trip builds, this is the reality."</em></strong></li>
+      <li><strong>★ Sattva answered a trip build by announcing one he never made</strong>: <strong><em>"I fake a trip and shoot the Monk in the face."</em></strong> Natural 20 for 61, then 23. Seva: <strong><em>"What a feint!"</em></strong></li>
+      <li><strong>★ And Seva killed the Monk from the floor.</strong> A <strong>Reactive Strike</strong> she earned by watching it stride past had put her <strong>Deathseeker's wounding rune</strong> on it; her Spellstrike refreshed the bleed and left it on exactly 6 HP. The bleed rolled a <strong>6</strong>. <strong>Gomwai called it</strong>: <strong><em>"That is enough. The Nameless, you have earned your victory. Well fought."</em></strong></li>
+      <li><strong>120 XP, 500 platinum, no feathers lost.</strong> <strong>Sattva</strong>: <strong><em>"My shins hurt."</em></strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">★ Level 14 (2:33 – 2:43)</div>
+  <div class="act-card">
+    <h3>400 XP exactly</h3>
+    <ul>
+      <li>Ryu's ledger: <strong>160</strong> for Tino's Toughest (<em>"that was meant to be an extreme encounter"</em>), <strong>0</strong> for Tamikan, <strong>120</strong> for the Dread Roc, <strong>120</strong> for the enforcers — exactly 400, and <strong>level 14</strong>. Ferrok: <em>"14 with 80 experience."</em></li>
+      <li><strong>Sattva</strong> took a <strong>weakness-calling ability</strong> — <em>"I can call out vulnerabilities on enemies and tell you guys where to hit"</em> — worth <strong>2d8 extra damage</strong> on an ally's next attack. He was using it in fiction within the hour.</li>
+      <li><strong>Ferrok</strong> picked up <strong>It's Not Over</strong> (Gladiator — pop back up at 28 HP when reduced to 0) and the ability to <strong>Demoralize with Performance</strong>. His Charisma is +4. <em>"He's an actor."</em> Sovael: <em>"What? He invested."</em></li>
+      <li><strong>Clutch</strong> took the hyena form he'd passed on last level — one size larger, more reach, and the ability to wrestle bigger things.</li>
+      <li><strong>Sovael got his Arcane casting back</strong>, restoring his Wand of Tailwind and his movement: <strong><em>"I can now have 35 feet of movement again. Oh my god."</em></strong></li>
+      <li><strong>★ Ferrok found the party's answer to fliers and Sovael priced it.</strong> Sattva framed the need, Ferrok produced <strong>Falling Sky</strong> and <strong>Earthbound</strong>, and <strong>Clutch</strong> named the gap: <strong><em>"Oh, huge. We've come up against a bunch of those and not had an answer."</em></strong> Sovael took <strong>True Target</strong> instead: <em>"These sound more like scroll spells for me."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VI · Combat · The Friendship Turtle (2:45 – 3:03) · Den · 700 pp</div>
+  <div class="act-card">
+    <h3>"No, I want to befriend the turtle."</h3>
+    <ul>
+      <li>Ryu: <em>"one of the rocks starts moving towards you. And then the rock grows a head. And then the rock opens its mouth. That's not a rock. That's a turtle."</em> <strong>Ferrok, instantly and sincerely:</strong> <strong><em>"No, I want to befriend the turtle."</em></strong> Ryu, resigned: <em>"Sure. Friend. Go ahead and roll initiative."</em></li>
+      <li>Sovael's <strong>Whispers of Weakness</strong>: no weakness, <strong>weakest save Reflex</strong> — converted immediately into <strong>Sure Strike → Shadow Signet Fire Ray for 50</strong>, plus burning ground that ticked another <strong>27</strong>.</li>
+      <li>The turtle grabbed Ferrok in round 1 and <strong>swallowed him whole</strong> in round 2. Ryu: <em>"It's acidic. It's gross. It's hot. You're upside down now."</em> Ferrok, from inside: <strong><em>"Now I'm roasting inside."</em></strong></li>
+      <li><strong>★ The Hall of Swallow was founded here.</strong> <strong>Sovael</strong>: <strong><em>"Hey, so Ferrok joined the club, okay? The club has three people now."</em></strong> — and then, formally: <strong><em>"You have been officially inducted to the Hall of Swallow."</em></strong> <strong>Seva</strong>: <em>"Welcome to the club."</em></li>
+      <li><strong>Clutch made this fight free.</strong> In his new <strong>Paragon's Guard</strong> stance he Intercepted both Jaws strikes aimed at Seva and answered each with an Armored Counterattack — <strong>Seva ended the fight completely untouched.</strong> Then the turtle whiffed a Grapple badly enough that the critical-failure rider handed him a free knockdown — Ryu: <strong><em>"As Clutch flips a turtle"</em></strong> — and it finished <strong>prone and off-guard at AC 35.</strong></li>
+      <li><strong>★ Sattva refused to shoot — after missing four times first.</strong> <strong><em>"I can't bring myself to shoot at the friendship turtle."</em></strong> <strong>Sovael</strong> backed him: <strong><em>"This animal doesn't look like a predator. It looks too friendly."</em></strong> So he looked away, waved a hand, and cast <strong>Scatter Scree</strong>. One round later he put a <strong>natural 20</strong> through it — 87 rolled into 63 remaining hit points.</li>
+      <li><strong>700 platinum — the seventh den.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act VII · Exploration &amp; Loot · The Market, the Idol, the Watchtower (3:03 – 3:19)</div>
+  <div class="act-card">
+    <h3>An immunity idol and a tower they walked away from</h3>
+    <ul>
+      <li><strong>An abandoned magic shop</strong> in a shipyard hex: a <strong>Major Staff of Phantasms</strong>, <strong>two Scrolls of Chain Lightning</strong>, a <strong>rank-6 Wand of Heroism</strong>, and <strong>two rank-6 Scrolls of Heal</strong> — split between Sovael and Sattva: <em>"So you can cast Heal as well. So I'll take one, you take one."</em></li>
+      <li><strong>360 platinum each</strong> at the stone market. Sovael stocked up on Scrolls of Heal; Ferrok bought a potion patch. Then <strong>Sattva did the unglamorous thing nobody else remembered</strong>: <strong><em>"Oh, don't forget to get your resilience rune for your armour. You're 14 now."</em></strong> — <em>"Gotta keep track of the fundamentals."</em> At 3,440 gp, not everyone could afford one.</li>
+      <li><strong>★ The Jade Phoenix Idol.</strong> On a pedestal in an otherwise empty hex, inscribed: <strong><em>"Give this idol to an enforcer to decline a single match."</em></strong> One free refusal, no feathers lost. <strong>Ferrok</strong>: <em>"She's like Survivor."</em> With ten feathers on the line it is arguably now the party's most valuable item.</li>
+      <li><strong>A second haunted watchtower</strong>, with <em>"a pair of these creatures clinging to the wall"</em> and the same awful presence as the western-shore one. <strong>Sovael</strong>: <em>"I don't think we're coming closer."</em> <strong>Ferrok</strong>: <strong><em>"I tip my hat to them. We move on. Nothing to be gained from weird shadow creatures."</em></strong></li>
+      <li>Also found: a <strong>library</strong>, a <strong>distillery</strong> (<em>"you can tell the team that's living here tried"</em>), a <strong>shipyard</strong>, an <strong>ice house</strong>, a <strong>salt quarry</strong>, and a <strong>fourth transport tower</strong>.</li>
+      <li><strong>Clutch's search technique remained consistent.</strong> <strong><em>"Clutch will call out — MARCO!"</em></strong> Ryu: <strong><em>"You hear no echo of Polo, I am sorry to say."</em></strong> <strong>Sovael</strong>, on the total absence of rival teams all afternoon: <strong><em>"I think maybe our reputation has spread and people are avoiding us. The Nameless."</em></strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VIII · Combat · The Cave Worms (3:19 – 3:56) · Den · 800 pp · Six rounds</div>
+  <div class="act-card">
+    <h3>"This has been a fucking circus. I'm ending it here."</h3>
+    <ul>
+      <li>Ryu: <em>"You see not one, but two absolutely gargantuan worms. Mouths lined with teeth."</em> <strong>Sattva</strong>: <strong><em>"Not friend-shaped."</em></strong> Immune to fear — <strong>Ferrok</strong>: <em>"So it's not scared."</em> <strong>Sattva</strong>: <strong><em>"It does not know fear."</em></strong></li>
+      <li><strong>Sattva was swallowed in round 1</strong>, off a natural-17 critical for 93 into a grab into Fast Swallow. <strong>Seva</strong>, from outside: <em>"Oh shit, he's gonna die in there. Can I heal him? … No line of sight."</em></li>
+      <li><strong>★ Sattva's escape attempts became the session's running joke.</strong> <strong><em>"I start going the wrong way, then I turn around."</em></strong> — <strong><em>"I get lost. I get lost."</em></strong> Ryu: <em>"How do I get lost inside a worm? It's one way."</em> Seva: <strong><em>"Follow our voice!"</em></strong> — <em>"The other way."</em> <strong>Five failed escapes across two hero points before the sixth landed.</strong></li>
+      <li><strong>★ Sovael's two Chain Lightnings, and the correction between them.</strong> The first (from the looted scroll) caught both worms and <strong>both made their saves</strong> — 24 apiece: <em>"wow, double successes, sad."</em> So he <strong>cancelled a Courageous Anthem with two rounds still on it</strong>, put up <strong>Dirge of Doom</strong> to drive their saves down, and cast again. Both saved again — but Worm B was on 23 hit points and half damage was 23. <strong><em>"B drops."</em></strong> Clutch, inside it, came out with the corpse.</li>
+      <li><strong>★ Clutch was swallowed three times</strong> — B, then A, then A again — and cut himself out of the middle one with a <strong>68-damage critical against a Rupture-32 threshold</strong>. The third he stood back into reach for and narrated as a choice: <strong><em>"Clutch is like, what do you mean? That I can't miss?"</em></strong> — <strong><em>"And then dives into its mouth."</em></strong> <strong>Ferrok</strong>: <strong><em>"It's like Drax from Guardians of the Galaxy."</em></strong></li>
+      <li><strong>Ferrok was swallowed too</strong>, for his second den running. Ryu: <em>"This is getting a little too familiar for you, Ferrok. This is the party bus now."</em> He critically missed goring the stomach wall from inside, got out in round 6, missed twice more with the sword — <strong><em>"Never mind then, I missed, but I look cool doing it"</em></strong> — and delivered the definitive assessment: <strong><em>"It's softer from the inside."</em></strong></li>
+      <li>Sovael ran <strong>Whispers of Weakness</strong> a fifth time this session — no weakness, Reflex/Will tie — and answered it with a <strong>Shadow Signet Fire Ray for 42</strong> rather than swinging at AC 36. Then he ended his turn in his own burning ground and took 26 for it.</li>
+      <li><strong>★ Sattva's exit, and his revenge.</strong> He swam out on the sixth attempt: <strong><em>"You see Sattva swim out and he just has a blank expression on his face."</em></strong> — <strong><em>"He doesn't answer. He uses a free action to get a potion out of his Retrieval Belt and then chugs it."</em></strong></li>
+      <li><strong>Sovael offered him the finish, and then spent his whole turn buying it.</strong> <em>"It's been a tragic comedy. Please just get out. If you can get out, I'll make a song for you."</em> When Sattva asked for the kill: <strong><em>"Okay, hold on, hold on. Let me help you, let me help you. I'm gonna cast Courageous Anthem"</em></strong> — then a Demoralize on the worm that failed even on a hero point — before handing it over: <strong><em>"Alright, Sattva. Be the hero that you want to be. … If you can kill it, I'll write a song about you."</em></strong></li>
+      <li><strong>Sattva cast Animal Feature — and grew the worm's own jaw.</strong> <strong><em>"He starts dislocating his jaw, and you will see his jaw turn into a version of the cave worm's jaw."</em></strong> He flanked with Ferrok and bit it down to <strong>two hit points.</strong></li>
+      <li><strong>Seva finished it.</strong> <strong><em>"This has been a fucking circus. I'm ending it here."</em></strong> Then, in fiction: <strong><em>"I call out the Clutch like a dog. Come here, Clutch. Come here."</em></strong> <strong>Sattva</strong>: <em>"Sattva eats through it and finds Clutch."</em></li>
+      <li><strong>Sovael caught a bookkeeping error a beat too late</strong>: his Fire Ray's burning ground never ticked on Worm A. <strong><em>"Oh, wait. It should have died sooner. I forgot about the fire."</em></strong> Ryu: <em>"I don't think it would make a difference in the end on this one."</em> Sovael: <strong><em>"I think it would have made Sattva the killer of the worm."</em></strong> With the worm ending on 2 HP, he was right.</li>
+      <li><strong>Eighth den — 800 platinum</strong>, still in the party pot. <strong>Sovael</strong>: <strong><em>"Everyone's a little part of the club now. I guess we are in this together."</em></strong> <strong>Ferrok</strong>: <strong><em>"We're all really disfigured."</em></strong></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Tino's Toughest · Tournament match · WIN via forfeit · Feathers 8 → 9</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">Tino 320 HP / AC 33 · Takatorra 345 / AC 33 · Ji-yook 295 · Yabin the Just 295 / AC 33 — all level-13 elite</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Ji-yook 43 (Delayed) · Sovael 42 · Sattva 39 · Ferrok 39 · Tino 37 · Clutch 37 · Yabin 35 · Takatorra 31 · Seva 26</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Ferrok 339 · Sattva 260 · Seva 135 · Clutch 48 · Sovael 31</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Sovael 237 · Clutch 139 · Sattva 121 · Ferrok 120 · Seva 45</div></div>
+    <div><div class="stat-label">Result</div><div class="stat-value">Forfeit mid-round 4 · 160 XP (extreme)</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Sattva ×1 · Clutch ×1 · Seva ×1</div></div>
+  </div>
+
+  <h4>Round 1 — the opener misfires</h4>
+  <ul>
+    <li><strong>Sovael</strong> leads on Diplomacy initiative; his Lingering Composition comes up a <strong>natural 1</strong> and he weighs a hero point and eats it. <strong>Divine Wrath</strong> on three: Tino failed for 21 + Sickened 1, Yabin succeeded for 10, Takatorra rolled a natural 20.</li>
+    <li><strong>Sattva</strong> Hunt Preys Tino and Takatorra and misses twice. <strong>Ferrok</strong> opens with <strong>Haste</strong> — free Arcane Cascade — then finds Stretching Reach is also a stance and can't enter it.</li>
+    <li><strong>Tino's three-action Qi Blast</strong>, a 60-foot cone, catches the whole party: Clutch failed for 39, Sattva critically succeeded. <strong>Ji-yook</strong> Skirmish Strikes Ferrok for 22.</li>
+    <li><strong>Clutch</strong> drinks a Potion of Quickness, calls LIMIT BREAK, Defensive Advances, misses. <strong>Yabin's Arrow Salvo</strong> (8d10, DC 35 Reflex) hits four of five — Ferrok Shield Blocks, Sattva critically saves. <strong>Seva</strong> strikes Tino for 43 plus 8 rune bleed.</li>
+  </ul>
+
+  <h4>Round 2 — the decisive round</h4>
+  <ul>
+    <li><strong>Sovael</strong>: Courageous Anthem, Lingering on a 45, free Talent Envy Demoralize on Takatorra, then <strong>rank-6 Roaring Applause on all four</strong> — Takatorra failed (no reactions + Slowed 1), the other three succeeded (no reactions). Ryu: <em>"I warn you, this will make you a target."</em></li>
+    <li><strong>Sattva</strong> Elf Steps clear and hero-points a Hunted Shot into an <strong>85-damage Thundering crit</strong> on Takatorra.</li>
+    <li><strong>Ferrok Time Jumps to Yabin and lands one critical Ignition Spellstrike — 76 + 52 = 128 in a single action-pair.</strong> Yabin burns <strong>Wooden Double</strong> to claw 35 back.</li>
+    <li><strong>Yabin</strong> answers with Sure Strike → <strong>rank-6 Disintegrate</strong> on Sovael — <strong>downgraded from a critical hit by Clutch's Bonekeeper's Bane</strong> — 57 rolled, <strong>28 through a made basic Fortitude save</strong>. <strong>Ji-yook criticals Sattva for 92.</strong> <strong>Takatorra criticals Sovael for 60.</strong></li>
+    <li><strong>Seva</strong> Doctor's Visitations to Ferrok, then <strong>crits Yabin for 40</strong>. <strong>Clutch</strong> Taunts three at once and Defensive Advances.</li>
+  </ul>
+
+  <h4>Round 3 — Sovael goes down, and takes his spell with him</h4>
+  <ul>
+    <li><strong>Sovael</strong> face-tanks, <strong>casts a rank-6 Heal on himself</strong>, and sustains Roaring Applause. <strong>Sattva</strong> stands, Battle Medicines himself, Hunted Shots Takatorra.</li>
+    <li><strong>Ferrok drops Yabin</strong>: <em>"The corn is down, I repeat."</em> <strong>Tino spends his last focus point on Lay on Hands</strong> to bring him back at 22 HP, eats a Reactive Strike from Seva, then flurries her for 77 — <strong>Clutch Intercepts all 70 of it.</strong></li>
+    <li><strong>Clutch</strong> Shielding Taunts and <strong>re-drops Yabin with a Hasted bite</strong>. <strong>Takatorra criticals Sovael for 62 — Dying 2, Unconscious, Blinded, Prone — which ends the sustained Roaring Applause.</strong></li>
+    <li><strong>Seva</strong> Battle Medicines Clutch and hero-points a Spellstrike into Tino.</li>
+  </ul>
+
+  <h4>Round 4 — the revive, and the forfeit</h4>
+  <ul>
+    <li><strong>Sattva runs into Takatorra's reach and revives Sovael with Healer's Gloves for 31</strong>, then asks why Takatorra gets a Reactive Strike when he never provoked one. Sovael explains from the floor that Roaring Applause had been suppressing reactions for two rounds and lapsed when he dropped. <strong>Takatorra strikes and misses on a natural 2.</strong> Sattva then point-blanks him for a <strong>critical 69 plus 32</strong>.</li>
+    <li><strong>Ferrok</strong> strides to Tino: Force Fang, Ignition Spellstrike, 41 + 25. <strong>Tino</strong> flurries Clutch and <strong>critically misses</strong>. <strong>Ji-yook</strong> misses Sattva twice. <strong>Clutch</strong> bites, misses, and Taunts — <strong>and Tino's Toughest forfeit.</strong> Takatorra and Seva never got round-4 turns.</li>
+    <li><strong>Final state</strong>: Tino 66/320, Yabin twice dropped, <strong>Takatorra 85/345</strong>, Ji-yook untouched at 295. No PC kills — a forfeit.</li>
+  </ul>
+  <p style="color: var(--gold);">160 XP · One silver feather · Feathers 8 → 9</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · Tamikan (kongamato, level 16) · FLED — the second group escape in campaign history · 0 XP</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">Tamikan — 450 HP, AC 39, Fort +31 / Ref +29 / Will +28, fly 130 ft, permanently Quickened, Boat Breaker, immune paralyzed &amp; sleep</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Tamikan 33 · Sovael 32 · Ferrok 32 · Sattva 27 · Clutch 25 · Seva 21</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Sattva 63 · Ferrok 63 · Sovael 18 (13 absorbed by False Vitality)</div></div>
+    <div><div class="stat-label">PC damage dealt</div><div class="stat-value">Zero</div></div>
+  </div>
+  <h4>Round 1 — and only round 1</h4>
+  <ul>
+    <li>The party got two actions off before she moved, and both told them everything. <strong>Clutch's Battle Cry Demoralize critically failed</strong> against a Will DC of 38. <strong>Sattva's free Recall Knowledge rolled a natural 20 and still failed a DC 45</strong> — Ryu handed over Boat Breaker, fly 130 and the dragon trait as a courtesy.</li>
+    <li>She flew 20 feet up and opened with <strong>Sonic Screech — 18d6 in a 100-foot line, DC 37 basic Reflex.</strong> Sattva and Ferrok both rolled to exactly 36 and failed by one; Sovael made it at 39 and halved it. Clutch and Seva were outside the line.</li>
+    <li>She then flew a further <strong>75 feet on her Quickened action</strong> — 130 feet of movement and a 63-point line, in one turn, before anyone else acted.</li>
+    <li>Nobody else got a turn. The party talked it through on resource cost — Ryu, agreeing: <em>"you might win, but you might totally drain yourselves in the process"</em> — and he <strong>waved them out rather than running a declared escape round</strong>, the one procedural difference from the Jaiban escape in S11.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · The Dread Roc · Den · WIN · 600 pp · Killed by Sattva</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">Dread Roc — level 15, 400 HP, AC 36 (34 off-guard), Fort +28 / Ref +21 / Will +24, permanently Quickened</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Dread Roc 38 · Sovael 38 — won the tie on Pilgrim's Token and opened the fight · Seva 33 · Ferrok 29 · Sattva 28 · Clutch 23</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Ferrok 128 · Sattva 126 · Clutch 95 · Seva 51 · Sovael 0 — exactly 400</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Ferrok 175 · Clutch 172 (152 intercepted off other people) · Seva 153 · Sovael 18 · Sattva 0</div></div>
+    <div><div class="stat-label">Rounds</div><div class="stat-value">4 · 120 XP</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Seva ×1 (the critical Battle Medicine)</div></div>
+  </div>
+  <ul>
+    <li><strong>Round 1</strong> — Ryu called the 38–38 tie for the enemy; Sovael remembered <strong>Pilgrim's Token</strong> and went first, spending it on Courageous Anthem + Lingering (3 rounds) and a Recall Knowledge Ryu answered despite the roll. Clutch had already stuck <strong>Frightened 1</strong> on it off his Battle Cry. The roc opened with <strong>Frozen Feathers</strong>, a non-basic save only Sattva failed — <strong>and Clutch Intercepted the worse damage roll off him and took 49 instead.</strong></li>
+    <li><strong>Round 2</strong> — it grabbed <strong>Clutch in its beak and Ferrok in its talons and flew 30 feet back with both</strong> via <strong>Snatch</strong>. <strong>Seva</strong> walked into its reaction range to stabilise herself under a <strong>Wing Rebuff</strong>. <strong>Ferrok broke the grab by exactly zero</strong> (41 vs DC 41) and answered with <strong>Ignition Spellstrike for 60</strong>.</li>
+    <li><strong>Round 3</strong> — the roc crit Ferrok for 80, flew 60 feet off, and ate a reactive strike leaving. <strong>Seva hero-pointed a natural 2 into a natural 19 for a critical Battle Medicine — 74 into Clutch.</strong></li>
+    <li><strong>Clutch's Shielding Taunt is what actually killed it</strong> — the roc spent rounds 2–4 <strong>off-guard at AC 34</strong>, flagged <em>essential</em> on three of the fight's four decisive rolls, including his own <strong>58-point Armored Counterattack crit</strong>, a reaction in a round he never got a turn in.</li>
+    <li><strong>Sovael contributed zero damage</strong> — a Needle Darts that missed by exactly 1 even with Whispers of Weakness's +2, a Demoralize the game rejected as "too far," and two full rounds of Striding still 40 feet short. He held his slots deliberately.</li>
+    <li><strong>Round 4</strong> — <strong>Sattva's Hunted Shot critted for 92 into 29 remaining hit points.</strong></li>
+  </ul>
+  <p style="color: var(--gold);">120 XP · 600 platinum · Sixth creature den</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · The Enforcer Camp · Challenge, 3 feathers wagered · WIN · 500 pp · No feathers lost</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">Enforcer Warrior 270 HP / AC 34 (level-14 elite Weapon Master) · Mage 240 · Rogue 245 / AC 36 · Monk 250 / AC 34 (trip build)</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Sattva 45 · Warrior 44 · Mage 43 · Sovael 36 · Ferrok 33 · Seva 32 · Rogue 28 · Monk 27 · Clutch 24</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Clutch 245 · Ferrok 218 · Sattva 194 · Seva 56 (+8 bleed) · Sovael 44</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Sattva 207 · Clutch 264 · Seva 90 · Ferrok 67 · Sovael 24</div></div>
+    <div><div class="stat-label">Rounds</div><div class="stat-value">4 · 120 XP</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Clutch ×1 (nat 1 → hit) · Ferrok ×1 (nat 2 → 3, still missed) · Sovael ×1 (nat 1 → hit)</div></div>
+  </div>
+  <ul>
+    <li><strong>Clutch opened before initiative finished</strong> — a Battle Cry Demoralize landing Frightened 1 on the Mage, which <strong>Sattva</strong> immediately turned into a Hunt Prey target: <em>"since the mage is frightened, hunt the mage."</em> Two shots, 104 damage, before the enforcers moved. The Warrior answered with a clean 49 crit on Sattva for <strong>62</strong>.</li>
+    <li><strong>Sovael opened with Dirge of Doom rather than Courageous Anthem</strong> — no save, with a Frightened floor the enemies could not recover past. Lingered on a <strong>critical Performance (45)</strong> for four rounds, plus a free Talent Envy Demoralize crit on the Warrior for <strong>Frightened 2</strong>. It <strong>downgraded exactly three enemy criticals</strong> to normal hits.</li>
+    <li><strong>Ferrok and Clutch focused the Mage down</strong> — 70 from an Ignition Spellstrike, then a Snagging Strike and a <strong>Combat Grab that left it grabbed and immobilised</strong>. <strong>Sattva's Hunted Shot finished it</strong> at the top of round 2.</li>
+    <li><strong>Clutch tanked the entire camp</strong> — <strong>six Intercept Attacks</strong>, an <strong>Armored Counterattack on all but the first</strong> (including a natural-20 crit for 54), <strong>264 absorbed, 245 dealt</strong>, and he <strong>killed the Rogue</strong> in round 3 with a 64-damage crit. He also declined to hero-point his own failed Battle Medicine: <em>"one hero point left in an hour and a half, I guess we'll keep it."</em></li>
+    <li><strong>Ferrok's round-3 Emergency Targe + Bastion Shield Block</strong> turned a Warrior critical into 12 damage. He then <strong>forgot to refocus</strong>, burned his hero point on a Strike that still missed, and drew <strong>first blood on the Warrior in round 4</strong> — 30 damage, leaving it at 240/270.</li>
+    <li><strong>The Monk was the problem</strong> — it tripped Seva in round 1 and kept her prone into round 3, and dropped a <strong>91-damage combined Punch Down on a prone Sattva</strong>. <strong>Sovael was never targeted once</strong>, spending the fight on Dirge uptime and <strong>97 healing into Clutch</strong> off two Scrolls of Heal.</li>
+    <li><strong>Sattva</strong> stood in the Monk's face, announced a trip he had no intention of making, and Hunted Shot it: <strong>natural 20 for 61</strong>, then 23.</li>
+    <li><strong>And Seva killed it from the floor.</strong> A <strong>Reactive Strike</strong> on the striding Monk in round 3 had put her <strong>Deathseeker's wounding rune</strong> on it; her round-4 Spellstrike refreshed the bleed and left it on exactly 6 HP. The bleed rolled a <strong>6</strong>.</li>
+  </ul>
+  <p style="color: var(--gold);">120 XP · 500 platinum · Three feathers defended</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · The Mammoth Turtle · Den · WIN · 700 pp · Killed by Sattva</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">Mammoth Turtle — 400 HP, AC 37, attack +31, Gargantuan, Quickened, Improved Grab + Swallow Whole (Rupture 38)</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Sovael 38 · Seva 38 · Ferrok 36 · Turtle 33 · Sattva 33 · Clutch 26</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Clutch 111 · Seva 78 (+5 bleed) · Sovael 77 · Sattva 72 · Ferrok 57 — exactly 400</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Ferrok 95 · Clutch 59 · Sovael 12 · Sattva 8 · Seva 0</div></div>
+    <div><div class="stat-label">Rounds</div><div class="stat-value">3</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">None — the only fight after lunch where nobody had to reroll</div></div>
+  </div>
+  <ul>
+    <li><strong>Sovael's Whispers of Weakness</strong> returned <strong>no weakness, weakest save Reflex</strong>, converted into <strong>Sure Strike → Shadow Signet Fire Ray for 50</strong> plus burning ground that ticked another <strong>27</strong> the moment the turtle ended its turn in it.</li>
+    <li><strong>Ferrok</strong> opened with an Ignition Spellstrike for 57 and got grabbed for it; the turtle <strong>swallowed him whole</strong> in round 2, and he spent the rest of the fight failing escapes and casting Glass Shield through a flat check from inside a stomach.</li>
+    <li><strong>Clutch made this fight free.</strong> In <strong>Paragon's Guard</strong> he Intercepted both Jaws strikes aimed at Seva and answered each with an Armored Counterattack — turning 59 absorbed into 57 returned. <strong>Seva ended the fight completely untouched.</strong></li>
+    <li>Then the turtle whiffed a Grapple on Clutch badly enough that the <strong>critical-failure rider handed him a free knockdown</strong> — Ryu: <em>"As Clutch flips a turtle"</em> — and it finished the fight <strong>prone and off-guard at AC 35.</strong></li>
+    <li>After two volleys of misses, <strong>Sattva RP'd his way out of aiming</strong> and cast <strong>Scatter Scree</strong> instead (the turtle saved, took 9, and got difficult terrain anyway). One round later he put a <strong>natural 20</strong> through it — 87 rolled into 63 remaining hit points.</li>
+  </ul>
+  <p style="color: var(--gold);">700 platinum · Seventh creature den</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · Two Cave Worms · Den · WIN · 800 pp · Worm B by Sovael, Worm A by Seva</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">Cave Worm A &amp; B — level 15, 400 HP each, AC 35–36, Fort +31 / Ref +24 / Will +24, immune immobilized &amp; visual. Thrash, Improved Grab, Fast Swallow (reaction), Swallow Whole (Rupture 32), venom DC 38–39</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Worm B 45 · Sovael 42 · Seva 34 · Sattva 31 · Worm A 31 · Ferrok 29 · Clutch 25</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Clutch 231 · Ferrok 188 · Sovael 140 · Seva 127 (+24 bleed) · Sattva 90</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">Sattva 232 · Clutch 216 · Ferrok 152 · Sovael 115 · Seva 66</div></div>
+    <div><div class="stat-label">Rounds</div><div class="stat-value">6 — the session finale</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Seva ×1 · Sattva ×2 · Ferrok ×2 · Sovael ×1 — 13 spent across the session</div></div>
+  </div>
+  <ul>
+    <li><strong>Sattva was grabbed and Fast Swallowed in round 1</strong>, off a natural-17 critical for 93.</li>
+    <li><strong>Sovael's first Chain Lightning</strong> — from the scroll he'd looted forty minutes earlier — caught both worms and <strong>both made their saves</strong>, 24 apiece: <em>"wow, double successes, sad."</em> He cancelled a Courageous Anthem with two rounds still on it, put up <strong>Dirge of Doom</strong> to drive their saves down, and cast again. Both saved again — but Worm B was on 23 hit points and the half-damage was 23. <strong>"B drops."</strong> Clutch, inside it, came out with the corpse.</li>
+    <li><strong>Clutch was swallowed three times</strong> — B, then A, then A again — cutting himself out of the middle one with a <strong>68-damage critical against a Rupture-32 threshold</strong>. <strong>Ferrok was swallowed</strong> for the second den running and burned a hero point on an escape that came up a natural 1. <strong>Sattva failed five escapes across two hero points</strong> before the sixth landed.</li>
+    <li>Between them, <strong>Clutch Intercepted five hits and answered four with Armored Counterattack</strong> — 111 of his 231 damage dealt was generated by tanking for somebody else — and <strong>Seva's Interstitial Escape ate 19 of a natural-20 body strike.</strong></li>
+    <li><strong>Sovael</strong> ran <strong>Whispers of Weakness</strong> again (no weakness, Reflex/Will tie) and answered with a <strong>Shadow Signet Fire Ray for 42</strong> rather than swing at AC 36 — then knowingly ended his turn in his own burning ground and took 26 for it.</li>
+    <li><strong>Round 6</strong> — Sovael re-cast Courageous Anthem and threw a Demoralize that failed even on a hero point. <strong>Sattva cast Animal Feature</strong>, grew the worm's own jaw, ran back to flank with Ferrok, and bit it down to <strong>2 hit points</strong>. <strong>Seva finished it.</strong></li>
+    <li><em>Bookkeeping: Sovael's Fire Ray leaves burning ground, and it never ticked on Worm A. With the worm ending on 2 HP, he is right that it would have made Sattva the killer — Ryu's ruling that it wouldn't have changed the fight's outcome is also true.</em></li>
+  </ul>
+  <p style="color: var(--gold);">800 platinum · Eighth creature den · Still in the party pot</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+  <h4>Sovael · the Flaming Pearl, who paid for it</h4>
+  <ul>
+    <li><strong>He opened the rematch by making himself the target, on purpose.</strong> A rank-6 <strong>Roaring Applause</strong> across all four of Tino's Toughest — every one stripped of reactions, Takatorra also Slowed. Ryu warned him to his face; his answer was <strong><em>"It is what it is."</em></strong> He then absorbed <strong>237 damage</strong>, nearly twice the next-highest total in that fight, ending on the floor at Dying 2.</li>
+    <li><strong>For two rounds it was the best thing on the board, and nobody noticed.</strong> Ferrok crossed to the archer unpunished and landed 128 in one action-pair; Clutch moved through threatened squares freely. The table ran the spell as <em>sustained</em>, so <strong>it died the moment he did</strong> — and the moment it lapsed, Sattva asked why the enemy suddenly had reactions. Sovael's answer, from the floor, is the most human thing he said all session: <strong><em>"It's because of Roaring Applause. Come on, guys. Come on. I casted it like three times already."</em></strong> The gripe was never with the DM. It was that the single best thing he does is invisible to the people it protects until it stops.</li>
+    <li><strong>He pressed the talking apex predator for intelligence when nobody else did.</strong> When she stonewalled him and claimed the island — <em>"This is our island, and you all trespass"</em> — he demanded to see the deed: <strong><em>"You got a license for that? Gotta see your credential."</em></strong> Tamikan read him exactly right (<em>"you're trying to ease your own fear by making quips"</em>) — the sharpest character read any NPC has landed on him.</li>
+    <li><strong>He diagnosed his own build problem live and out loud.</strong> Two rounds of the roc fight spent Striding and still 40 feet short, because <strong>Living Nexus</strong> had cost him Fleet <em>and</em> his Arcane casting <em>and</em> therefore his Wand of Tailwind. At 14 he got the Arcane back: <em>"I can now have 35 feet of movement again. Oh my god."</em></li>
+    <li><strong>Five Whispers of Weakness, five no-weakness answers</strong> — and he converted three of them anyway: Fire Ray for 50 on the turtle, a hero-pointed 44 on the Monk, a Shadow Signet 42 on the worm. He also respected the build that beat the spell: <strong><em>"Nice build. Very nice build."</em></strong></li>
+    <li><strong>He gave the last kill away.</strong> Sattva asked the table if he could have it; Sovael cast Courageous Anthem and threw a Demoralize to set it up, and said <strong><em>"Be the hero that you want to be."</em></strong> When Seva landed the finish instead, he worked out that his own forgotten burning ground would have made Sattva the killer — and volunteered it against his own damage credit.</li>
+    <li><strong>The Hall of Swallow is his.</strong> He named it and inducted Ferrok formally — he and Seva have been charter members since a spinosaurus took her and a tyrannosaur took him in S12 — and closed the session on it: <strong><em>"Everyone's a little part of the club now. I guess we are in this together."</em></strong></li>
+  </ul>
+</div>
+
+<div class="spotlight s-ferrok">
+  <h4>Ferrok the Unyielding · who tried the honest exit first</h4>
+  <ul>
+    <li><strong>He decided the tournament fight in a single action-pair.</strong> A <strong>Time Jump</strong> across the field, then one <strong>critical Ignition Spellstrike into Yabin the Just for 128</strong> — 76 weapon, 52 fire — and 251 damage into him over the fight. His reason was pure grievance: <em>"I am tired of becoming a pincushion."</em> And the callout that made the session's running gag canon: <strong><em>"The corn is down, I repeat."</em></strong></li>
+    <li><strong>He is the party's diplomat when the party's diplomat is being a smartass.</strong> With Tamikan hovering and Sovael demanding a license, Ferrok tried the honest exit: <strong><em>"We have no quarrel with you. If this is your area, we can move on."</em></strong> When the escape came he made it a gesture rather than a rout — <em>"We'll tip his hat and then leave"</em> — and after the Tino forfeit he was the one who said <strong><em>"Don't get us disqualified."</em></strong></li>
+    <li><strong>★ He read vampire poetry aloud at a shrine and made Seva cry.</strong> Prompted to talk about his journey, he chose <em>"a book of vampire poetry"</em> and explained it with total sincerity: <strong><em>"They're so sad because they live forever and they're sad about it."</em></strong> It bought the whole party a permanent blessing.</li>
+    <li><strong>★ His best mechanical play of the session was a rules argument he won.</strong> Critically hit by the enforcer Warrior, he used <strong>Emergency Targe</strong> to retroactively raise his AC and downgrade the crit, then spent Bastion's <em>extra</em> reaction to <strong>Shield Block 20 more</strong> — and talked Ryu through why two reactions against one activity was legal. Twelve damage from what should have been a critical.</li>
+    <li><strong>His answer to being carried off by a giant bird was to order dinner.</strong> Airborne, having just broken a grab by exactly zero: <strong><em>"You know what? I want fried chicken, so Ignition Spellstrike."</em></strong> He landed it. Afterward: <em>"I call a drumstick."</em></li>
+    <li><strong>He wanted to befriend the turtle</strong>, got eaten by it, and came out of a worm still delivering commentary — <strong><em>"never mind then, I missed, but I look cool doing it"</em></strong> and <strong><em>"it's softer from the inside."</em></strong> He also made the team logo between sessions, said the team's name out loud to the head enforcer of Bonmou, found the party's two candidate answers to fliers at level-up, and carved <em>"Ferrok was here"</em> into a rival team's base wall.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-sattva">
+  <h4>Sattva · the Back Line</h4>
+  <ul>
+    <li><strong>He killed two of the three dens.</strong> The <strong>Dread Roc</strong> — a round-4 Hunted Shot that critted for 92 into 29 remaining hit points — and the <strong>mammoth turtle</strong>, on a natural 20. He also finished the <strong>enforcer Mage</strong>, and was the <strong>number-two damage dealer in the tournament fight at 260</strong>, on the back of two Thundering-rune criticals.</li>
+    <li><strong>★ He is the party's entire rest economy and nobody says so out loud.</strong> Master Medicine, Risky Surgery, Ward Medic, greater Healer's Gloves. Five separate ten-minute healing rotations this session, each planned aloud — and at the market, the reminder nobody else remembered: <strong><em>"Gotta keep track of the fundamentals."</em></strong></li>
+    <li><strong>★ In the tournament fight he ran into Takatorra's reach to revive an unconscious Sovael</strong> with Healer's Gloves, took the Reactive Strike the party thought had been switched off, and got away with it on a natural 2. He made the call instantly and without asking.</li>
+    <li><strong>★ He answered a trip build by announcing a trip he never made.</strong> <strong><em>"You know what would be really funny? If I tripped you."</em></strong> — <strong><em>"I fake a trip and shoot the Monk in the face."</em></strong> Natural 20 for 61, then 23.</li>
+    <li><strong>He refused to shoot the friendship turtle</strong> — after missing it four times first, which is the funnier and truer version — and found a way to fight anyway: looking away, waving a hand, and sharpening the sand with <strong>Scatter Scree</strong> rather than aiming. Then he killed it. Both things are him. He also spoke to Tamikan before anyone else did, and took a <strong>weakness-calling ability</strong> at 14 he was using in fiction within the hour: <strong><em>"It's like a blind spot. Trust me."</em></strong></li>
+    <li><strong>And then he got eaten and lost.</strong> <strong><em>"I start going the wrong way, then I turn around. I get lost. I get lost."</em></strong> Five failed escapes, two hero points, one seated surrender, and finally an exit with <strong><em>"a blank expression on his face"</em></strong>, a silent potion, and — three minutes later — a <strong>dislocated jaw grown into the shape of the worm's own</strong>, so he could bite his way back in and eat through to Clutch. In S12 he told the swallow club <em>"I reject your invitation."</em> He is a member now.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-clutch">
+  <h4>Clutch · the Wall That Yells First — On Purpose</h4>
+  <ul>
+    <li><strong>★ He stated the party's strategy at minute six and then executed it all session.</strong> <strong><em>"I mean, I think this is great. If we just fight every team before the tournament and knock them out, there's nobody left to fight."</em></strong> Every hex he yelled into afterward — <em>"who here is not a coward?"</em>, <em>"MARCO!"</em>, a war cry — is that plan, not recklessness. Nobody at the table argued with it.</li>
+    <li><strong>He took 850 damage this session, the most in the party, and most of it wasn't aimed at him.</strong> Intercept after Intercept off Ferrok, Seva, Sattva and Sovael, each answered with <strong>Armored Counterattack</strong>. In the enforcer camp: <strong>six Intercepts, 264 absorbed, 245 dealt</strong>, and the Rogue killed. In the roc fight, <strong>152 of the 172 he took was redirected off other people</strong>, and his Shielding Taunt held the roc off-guard at AC 34 for three rounds. He noticed the pattern himself: <strong><em>"I should really make that Intercept Attack shorter."</em></strong></li>
+    <li><strong>★ His best play of the session was invisible and nobody noticed it.</strong> <strong>Bonekeeper's Bane</strong> — the level-13 feat he reasoned his way to from first principles last session — put a −1 on Yabin the Just as he stood adjacent, which <strong>downgraded Yabin's rank-6 Disintegrate on Sovael from a critical hit to a hit.</strong> That is 28 damage instead of 57 on the party's most fragile PC.</li>
+    <li><strong>★ He reasons out loud better than anyone at the table.</strong> The Bonekeeper's Bane automation negotiation with Ryu mid-fight. The affliction-resistance call against the worms' venom (<em>"Clutch was built for this"</em>). Naming the flier gap at level-up so the party finally went looking for an answer: <strong><em>"Oh, huge. We've come up against a bunch of those and not had an answer."</em></strong> And the question nobody else thought to ask when the roc landed: <em>"Are we just running? Do we already have the feather?"</em></li>
+    <li><strong>He declined to spend a hero point on his own failed Battle Medicine</strong> — <em>"one hero point left in an hour and a half, I guess we'll keep it"</em> — in a fight where he was absorbing everything. That is resource discipline under a DM who hands out three a session and no refresh.</li>
+    <li><strong>LIMIT BREAK.</strong> He held out a paw, yelled it, waited a beat, and added the detail that made it: <strong><em>"The screen shatters."</em></strong> It came back an hour later in Seva's mouth — <em>"Break your limits, as you said."</em></li>
+    <li><strong>★ He got swallowed three times and made the third one his idea.</strong> Cut out of a cave worm with a 68-damage critical, then stood back inside its reach and narrated the next one as a dive: <strong><em>"what do you mean, that I can't miss?"</em></strong> Ferrok's verdict — <em>"It's like Drax from Guardians of the Galaxy"</em> — is exactly right. He also flipped a Gargantuan turtle onto its shell.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-seva">
+  <h4>Seva · the One Who Ends It</h4>
+  <ul>
+    <li><strong>She closed the session.</strong> Sattva had failed, Sovael had failed, Ferrok had missed from inside a stomach, and it came to her with the worm on two hit points: <strong><em>"This has been a fucking circus. I'm ending it here."</em></strong> Deathseeker into Gouging Claw, and it was over.</li>
+    <li><strong>★ She also killed the enforcer Monk, from the floor, on a reaction she earned by paying attention.</strong> Prone and out of Spellstrike, she watched the Monk stride past and took a <strong>Reactive Strike</strong> for it — which put her Deathseeker's <strong>wounding rune</strong> on it. Her Spellstrike refreshed the bleed; it rolled a max 6 into exactly 6 remaining hit points. She spent that entire fight being tripped and never stopped generating value from the ground.</li>
+    <li><strong>★ She reads the board and says what she sees.</strong> Mid-tournament, unprompted: <em>"I think, honestly, our backline's a bit gone"</em> — and then went and fixed it. She earned a second Reactive Strike the same way, by clocking Tino's action type out loud. And when Takatorra put Sovael on the floor, her response was not a heal: <strong><em>"You fucking birds are dead."</em></strong></li>
+    <li><strong>She walked into a dread roc's reaction range twice on purpose</strong> — once to stabilise herself when both frontliners had been carried off, and once to reach Clutch, where she <strong>hero-pointed a natural 2 into a natural 19 for a critical Battle Medicine worth 74 hit points.</strong></li>
+    <li><strong>She named the enemy team's mage "corn" and the table never recovered.</strong> <strong><em>"Is that man corn? Oh no, sorry. He's a Nagaji. He's a Nagaji with a mohawk."</em></strong> Ferrok made it official when Yabin dropped; she echoed it back — <em>"The corn is down."</em></li>
+    <li><strong>The enforcer Monk put her on the floor and kept her there, and she narrated every second.</strong> <strong><em>"Don't trip me. Don't trip me. They're gonna trip ya. I'm never getting up!"</em></strong> — and, given the option to stand: <strong><em>"I could just sit here, but I'll stand up. It's kind of nice down here."</em></strong> Her handshake afterward was perfect: <strong><em>"That Monk can trip. I shake their hand. And I attempt to trip. No, I'm kidding."</em></strong> She also cried at Ferrok's vampire poetry, set that whole scene up in the first place, and remains the person who accidentally named this team.</li>
+  </ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Rewards</h2>
+<div class="loot-grid">
+  <div class="loot-item magical"><div class="loot-name">★ 1 Silver Feather</div><div class="loot-source">Snagged on a branch, treasure hex</div><div class="loot-note">Feathers 9 → 10 — the qualifying number</div></div>
+  <div class="loot-item magical"><div class="loot-name">1 Silver Feather</div><div class="loot-source">Tino's Toughest, won</div><div class="loot-note">Feathers 8 → 9</div></div>
+  <div class="loot-item magical"><div class="loot-name">★ Jade Phoenix Idol</div><div class="loot-source">Pedestal, treasure hex</div><div class="loot-note">"Give this idol to an enforcer to decline a single match." One free refusal, no feathers lost</div></div>
+  <div class="loot-item magical"><div class="loot-name">Baba Nabi's blessing — Gift of Sight</div><div class="loot-source">Temoutan shrine</div><div class="loot-note">+2 circumstance to saves vs. blinded and dazzled, for the rest of the stay on Bonmou</div></div>
+  <div class="loot-item magical"><div class="loot-name">Major Staff of Phantasms</div><div class="loot-source">Abandoned magic shop</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">Wand of Heroism (rank 6)</div><div class="loot-source">Abandoned magic shop</div><div class="loot-note">Claimed by Sovael</div></div>
+  <div class="loot-item magical"><div class="loot-name">2 × Scroll of Chain Lightning</div><div class="loot-source">Abandoned magic shop</div><div class="loot-note">Claimed by Sovael — one spent in the worm fight, one still held</div></div>
+  <div class="loot-item magical"><div class="loot-name">2 × Scroll of Heal (rank 6)</div><div class="loot-source">Abandoned magic shop</div><div class="loot-note">One to Sovael, one to Sattva</div></div>
+  <div class="loot-item"><div class="loot-name">600 platinum</div><div class="loot-source">Dread Roc — 6th den</div><div class="loot-note">—</div></div>
+  <div class="loot-item"><div class="loot-name">500 platinum</div><div class="loot-source">Enforcer camp</div><div class="loot-note">"A satchel of 500 platinum pieces"</div></div>
+  <div class="loot-item"><div class="loot-name">700 platinum</div><div class="loot-source">Mammoth Turtle — 7th den</div><div class="loot-note">Reconstructed from the split, not stated cleanly on tape</div></div>
+  <div class="loot-item"><div class="loot-name">800 platinum</div><div class="loot-source">Cave Worms — 8th den</div><div class="loot-note">Still in the party pot</div></div>
+  <div class="loot-item"><div class="loot-name">360 platinum each</div><div class="loot-source">Stone market distribution</div><div class="loot-note">From the first three payouts (1,800 pp)</div></div>
+  <div class="loot-item"><div class="loot-name">Resilient runes, potions, scrolls</div><div class="loot-source">Stone market · 3,440 gp for the rune</div><div class="loot-note">Sattva's reminder. Not everyone could afford one</div></div>
+</div>
+<div class="xp-banner">Experience · 160 Tino's Toughest (extreme) · 0 Tamikan (fled) · 120 Dread Roc · 120 Enforcers = <strong>400 XP → Level 14</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Ryu (as the DM):</strong> "I warn you, this will make you a target."<br>
+<strong>Sovael:</strong> "It is what it is."
+<span class="attribution">Round 2 of the rematch, immediately before the rank-6 Roaring Applause that stripped all four opponents' reactions. He was made a target. He was also right — for two rounds, until his own unconsciousness switched the spell off.</span>
+</blockquote>
+
+<blockquote>
+<strong>Tamikan:</strong> "Surely you all knew the risks. This is our island, and you all trespass."<br>
+<strong>Sovael:</strong> "You got a license for that? Gotta see your credential."<br>
+<strong>Tamikan:</strong> "Don't deign to get smart with me, runt. … No, you're trying to ease your own fear by making quips. I've seen it before."
+<span class="attribution">A kongamato claims to own Bonmou; Sovael asks to see the paperwork.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Alright, Sattva. Be the hero that you want to be. … If you can kill it, I'll write a song about you."
+<span class="attribution">Handing the last kill of the session to the man who had spent forty minutes lost inside a worm.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "I mean, I think this is great. If we just fight every team before the tournament and knock them out, there's nobody left to fight."
+<span class="attribution">Ten minutes into the session. Everything he yells into a hex for the next four hours follows from this.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Clutch is like, what do you mean? That I can't miss?" … "And then dives into its mouth."
+<span class="attribution">Having just cut his way out of that exact cave worm.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "You know what? I want fried chicken, so Ignition Spellstrike."
+<span class="attribution">Thirty feet up, having just broken a dread roc's grab by exactly zero.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Never mind then, I missed, but I look cool doing it." … "It's softer from the inside."
+<span class="attribution">Just out of a cave worm, whiffing twice more — and reviewing the accommodation he'd critically missed goring his way out of five minutes earlier.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "They're so sad because they live forever and they're sad about it."
+<span class="attribution">Explaining the book of vampire poetry he read aloud at Baba Nabi's shrine.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "What? I'm known for good times."<br>
+<strong>Seva:</strong> "You're known for <em>a</em> good time?"
+<span class="attribution">Ferrok checking whether an enforcer camp counts as having spectators for his Gladiator feats.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "You know what would be really funny? If I tripped you. … I fake a trip and shoot the Monk in the face."
+<span class="attribution">The party's answer to a dedicated trip build. Natural 20.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I can't bring myself to shoot at the friendship turtle."
+<span class="attribution">He'd already missed it four times. He cast Scatter Scree instead, then killed it on a natural 20 two rounds later.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "Is that man corn? Oh no, sorry. He's a Nagaji. He's a Nagaji with a mohawk."<br>
+<strong>Ferrok</strong>, seven minutes later: "The corn is down, I repeat."
+<span class="attribution">Yabin the Just, may he rest.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "This has been a fucking circus. I'm ending it here."
+<span class="attribution">The last turn of the session. She was correct on both counts.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ji-yook:</strong> "You guys are weird. You realize that? … But will you be eight hours from now when you're exhausted? We might have gotten you — but then we'd be out of steam for the next eight hours."
+<span class="attribution">The handshake after the forfeit — and the best strategic argument any NPC has made to this party.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Ten feathers, held.</strong> The qualifying number is reached, but qualification requires <em>holding</em> it to the end of Day 3. Every remaining encounter is now downside-only — and anything past ten is confiscated, so there is no cushion to build.</li>
+  <li><strong>The higher-ranking enforcer.</strong> Ingdani, unprompted: <em>"there is technically one of higher rank than [Gomwai]. One who is also responsible in weeding out the weak and taking feathers out of circulation. <strong>You may run into them. May.</strong>"</em> The clearest telegraph the campaign has given.</li>
+  <li><strong>The Jade Phoenix Idol</strong> — one free refusal of a match, no feathers lost. With ten feathers, the correct time to spend it is probably the next unwinnable challenge.</li>
+  <li><strong>Tamikan.</strong> Level 16, 450 HP, AC 39, flies at 130 feet, and <em>talks</em>. Sovael promised her a rematch. <strong>The party has no answer to a flier</strong> — Clutch named the gap, Ferrok found Falling Sky and Earthbound, and nobody took either.</li>
+  <li><strong>Jaiban is beatable.</strong> The rival Saturday group has killed him. The party's own estimate: level 15, Day 3, maybe. Ferrok still wants to tame him.</li>
+  <li><strong>The second haunted watchtower.</strong> Shadow creatures clinging to the wall, the same awful presence as the western-shore tower with the unlit pyre. Both now deferred.</li>
+  <li><strong>Tino's Toughest expect the final.</strong> <em>"I'm predicting we'll see you guys in the main tournament."</em> — <em>"Look forward to the final."</em></li>
+  <li><strong>The house-sized eggshell</strong> from S12 remains unidentified.</li>
+</ul>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Opened every fight he was present for with the same package</strong> — Lingering Composition → Courageous Anthem or Dirge of Doom → free Talent Envy Demoralize. <strong>Seven Lingering Compositions</strong>: one natural 1 (eaten deliberately rather than hero-pointed), then 45, 38, 45, 39, 38, 39, holding the buff three to four rounds each time. Unglamorous and near-invisible in the damage log, and again probably the single most valuable thing he did.</li>
+  <li><strong>★ Rank-6 Roaring Applause on all four of Tino's Toughest, turn two.</strong> Every one stripped of reactions; Takatorra also Slowed 1. This is the spell his S12 journal named as <em>"the clearest unused tool of the night."</em> He used it at full rank, on the first team fight, into four targets, knowing the cost.</li>
+  <li><strong>Paid for it in full: 237 damage in that fight</strong> — nearly twice Clutch's 139, and the only PC to hit Dying. A Disintegrate (halved on a made save, and downgraded from a crit by Clutch's aura), then two Takatorra criticals for 60 and 62.</li>
+  <li><strong>Two Chain Lightnings in the worm fight.</strong> The first (scroll) had both worms <em>succeed</em> — 24 apiece, not the crit-success zero he feared. He then swapped Courageous Anthem out for <strong>Dirge of Doom</strong> to lower their saves and cast again; both saved again, but half-damage was exactly Worm B's remaining 23. <strong>It killed the worm and freed Clutch.</strong></li>
+  <li><strong>Five Whispers of Weakness, five no-weakness answers</strong> (roc, monk, turtle, turtle again, worm). Three were converted into hits anyway: Sure Strike → Fire Ray 50 on the turtle, a hero-pointed Fire Ray 44 on the monk, Shadow Signet → Fire Ray 42 on the worm.</li>
+  <li><strong>Healing was light and correct</strong> — 97 into Clutch across two rank-4 Scrolls of Heal in the enforcer camp, a rank-5 scroll on Clutch in the worms, one rank-6 Heal on himself mid-tournament. The party has three medics; his slots were better spent elsewhere and mostly were.</li>
+  <li><strong>Took roughly 425 damage across the session — second-least in the party</strong>, behind Seva, and 237 of it came from one fight he deliberately drew fire in. <strong>He was never targeted once in the enforcer camp.</strong></li>
+  <li>⚠️ <strong>Forgot his own Fire Ray burning ground on Cave Worm A.</strong> It should have ticked at the end of his turn and killed the worm a turn early, with the credit going to Sattva. He caught it himself, after the fact, and said so — and the arithmetic backs him: the worm ended on <strong>2 hit points</strong>.</li>
+</ul>
+
+<h3>★ The calls worth being proud of</h3>
+<ul>
+  <li><strong>1. Roaring Applause on turn two, knowing the price.</strong> The DM told him out loud it would make him the target. He answered <em>"It is what it is"</em> and cast it. Four enemies without reactions is why Ferrok crossed to the archer unpunished and landed 128 in a single action-pair, and why Clutch moved freely. <strong>The caveat is the important part</strong>: the table ran it as <em>sustained</em>, not the printed ten minutes, so <strong>it died the moment he did</strong> — and the party only asked what it had been doing at the moment it stopped doing it. Two rounds of four-target reaction denial went entirely unremarked. That is the tax on playing this lane; it is not a reason to stop.</li>
+  <li><strong>2. Dirge of Doom over Courageous Anthem in the enforcer camp, and again in the worms.</strong> Both reads were correct and specific. Against four enforcers he wanted a <em>no-save</em> Frightened with a floor they couldn't recover past — it held four full rounds and <strong>downgraded exactly three enemy criticals</strong>. Against two worms with strong saves he wanted the saves down before a Chain Lightning, and <strong>the second Chain Lightning is the one that killed Worm B.</strong> Cancelling a live Courageous Anthem with two rounds on it to do it was the right trade and not an obvious one.</li>
+  <li><strong>3. Pilgrim's Token in the roc fight.</strong> Ryu called the 38–38 tie for the enemy; Sovael remembered a level-1 general feat and took the alpha strike off it, buying a three-round Anthem before the bird did anything.</li>
+  <li><strong>4. Giving the last kill away and then arguing for it.</strong> He set Sattva up with Anthem and a Demoralize, said <em>"be the hero that you want to be,"</em> and when Seva landed the finish instead he was the one who worked out that his own forgotten burning ground would have made Sattva the killer — volunteering a mistake that cost him nothing and Sattva the credit.</li>
+  <li><strong>5. Holding slots in the roc fight.</strong> Two rounds out of position, zero damage contributed, and he deliberately declined to spend a slot he could not aim. With Tamikan an hour behind them and three more dens ahead, that was right.</li>
+</ul>
+
+<h3>Honest ledger</h3>
+<ul>
+  <li><strong>He was out of the roc fight entirely.</strong> Zero damage, four rounds, two of them spent Striding. That is a build problem, not a dice problem. His Anthem still shows up in the log as <em>essential</em> on Seva's round-4 hit, which is the honest counterweight.</li>
+  <li><strong>The opening round of the tournament was his worst of the session</strong> — a natural 1 on Lingering Composition that he chose to eat, then a Divine Wrath returning 21 to Tino, 10 to Yabin, and a natural 20 from Takatorra. The Sickened 1 was the real return and it was small.</li>
+  <li><strong>Whispers of Weakness is 0-for-5 on weaknesses this session and roughly 1-for-8 across three sessions.</strong> Every use costs a Cursebound stack and a point of persistent fire. <strong>It is buying <em>lowest-save</em> information, not weaknesses</strong> — genuinely useful with the Shadow Signet behind it, and he should stop expecting the other half. The fourth cast, at the turtle, he spent purely for the +2 attack rider, which is the honest use of it.</li>
+  <li><strong>Talent Envy Demoralize crits flipped nothing measurable again.</strong> It is free; keep taking it; stop counting on it.</li>
+  <li><strong>He ended the session having spent two of three hero points</strong> — one on a Fire Ray that landed, one on a Demoralize that failed anyway. Ferrok, Sattva and Seva each spent all three.</li>
+</ul>
+
+<h3>The build problem, stated plainly</h3>
+<ul>
+  <li><strong>Living Nexus cost him movement, and the roc fight is the bill.</strong> Taking the archetype at 11 meant dropping Fleet <em>and</em> his Arcane casting, which meant no Wand of Tailwind, which meant a <strong>25-foot fly speed against a creature with 30 feet of reach that repositioned 30–60 feet a round</strong>. He spent two full rounds Striding and was still 40 feet short. He diagnosed it correctly and live — <em>"that's biting me in the ass right now"</em> — and <strong>level 14 restored the Arcane casting</strong>, and with it Tailwind and 35 feet.</li>
+  <li><strong>But 35 feet is still not an answer to a flier.</strong> Ferrok found the actual answers out loud at level-up — <strong>Falling Sky</strong> (rank 8; forces fliers down <em>and</em> damages them) and <strong>Earthbound</strong> — and Sovael correctly priced them as scroll purchases rather than known spells, taking <strong>True Target</strong> instead. That is the right pick for a boss fight and the wrong pick for Tamikan. <strong>He was standing in a stone market an hour later stocking up on Scrolls of Heal, and did not buy this one.</strong></li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li>Nothing withheld in fiction. Privately, three things:</li>
+  <li><strong>Tamikan spoke in the plural.</strong> <em>"Ample prey they've brought to <strong>us</strong>"</em> — and <em>"this is <strong>our</strong> island."</em> She was not speaking only for herself, and nobody at the table picked it up.</li>
+  <li><strong>Ingdani volunteered the higher enforcer without being asked</strong>, in the same conversational slot where she volunteered the coin warning in S12. When she offers information nobody requested, it is a telegraph, not colour.</li>
+  <li><strong>Ten feathers means the party's incentives have inverted.</strong> Everything past this point is downside. The Jade Phoenix Idol is worth more than any item in the stash, and the correct play for the rest of Day 2 and Day 3 is to avoid rival teams entirely — which is exactly what Sattva said out loud (<em>"we're gonna be sneaking through the rest of the map"</em>) and the exact opposite of Clutch's stated doctrine, which the party has never actually argued about.</li>
+</ul>
+
+<h3>Resolved from last session</h3>
+<ul>
+  <li><strong>S12's journal asked: "Is there a clean way back to the arcane list, or is the Living Nexus a sunk cost worth keeping?"</strong> Level 14 answered it — the Arcane casting came back on its own, and with it the Wand of Tailwind and 35 feet of movement. The rebuild was a two-level tax, not a permanent loss.</li>
+  <li><strong>S12's journal named Roaring Applause "the clearest unused tool of the night."</strong> It came out on turn two of the first fight this session, at rank 6, into four targets, and it was the best thing he did.</li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Buy the Falling Sky scroll.</strong> The party has met two fliers it could not answer and has explicitly identified the fix. He has the money, he was at a market, and he did not.</li>
+  <li><strong>Roaring Applause is proven and should be the default opener against any team of 3+</strong> — ten targets at rank 6, not an incapacitation spell, strips reactions <em>even on a success</em>. <strong>But this table runs it sustained</strong>, which changes the calculus: it is worth most in a fight where he is <em>not</em> also the focus target, and it is worth confirming the duration with Cody before relying on it again.</li>
+  <li><strong>Positioning against reach creatures is the recurring failure.</strong> The roc has 30 feet of reach and he could not get inside it; the worms have 15 and he ended a turn inside a burning square he had created himself. Same problem, different clothes.</li>
+  <li><strong>The Hall of Swallow is now the whole party.</strong> He and Seva were charter members from S12; Ferrok joined at the turtle, then Sattva and Clutch at the worms. Worth noticing that <strong>every swallowing this session happened to someone standing in melee</strong> — and that the same distance problem that cost him the roc fight is the reason he wasn't there for any of them.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who is the enforcer above Gomwai</strong>, and does the Jade Phoenix Idol work on them?</li>
+  <li><strong>Can a team challenge a team that already holds ten feathers</strong>, and does the excess-confiscation rule mean winning an eleventh is actively worthless?</li>
+  <li><strong>What was Tamikan's "us"?</strong> Are there more kongamatos, or is she speaking for something larger on Bonmou?</li>
+  <li><strong>The second watchtower</strong> — same shadow creatures, same unlit-pyre pattern? Two now deferred.</li>
+  <li><strong>How much of Day 2 is left</strong>, and is the correct play to burn the remaining hours on dens (safe, lucrative, no feather risk) rather than letting Clutch yell into hexes?</li>
+</ul>
+</section>
+</body>
+</html>

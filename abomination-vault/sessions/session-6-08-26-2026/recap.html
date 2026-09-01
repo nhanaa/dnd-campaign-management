@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 6 — Full Moon Over the Empty Shrine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-snagg { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+.char-crew  { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-snagg { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>Full Moon Over the Empty Shrine</h1>
+<div class="subtitle">Abomination Vault — Session 6 · A Werewolf, a Curse, and the Shrine of Nhimbaloth</div>
+<div class="meta-row">
+  <span class="meta-pill">August 26, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~4h 20m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">The Gauntlight · Floor 3 and below</span>
+  <span class="meta-pill">DM · Lap</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:66%"></div>
+  <div class="comp-seg comp-rp" style="width:16%"></div>
+  <div class="comp-seg comp-social" style="width:8%"></div>
+  <div class="comp-seg comp-explore" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat (2 fights)</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>RP &amp; Downtime</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>The Mayor &amp; Klorte</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Explore</span>
+</div>
+
+<div class="party-grid">
+  <div class="char-card char-snagg">
+    <div class="char-name">Snagg ★</div>
+    <div class="char-class">Goblin (Razortooth) · Fighter 5 (jaws + sturdy shield) / Medic</div>
+    <div class="char-player">Pax — now officially on the Gauntlight job</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human · Thaumaturge (returning chakram + mirror implement)</div>
+    <div class="char-player">Ricardo — three natural 20s in one fight</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf · Divine Sorcerer (Pharasma; Psychopomp)</div>
+    <div class="char-player">Twan — full support mode</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling · Monk (Crane Stance)</div>
+    <div class="char-player">Ben — cursed</div>
+  </div>
+</div>
+
+<div class="summary">
+  <p>The morning after the pirate raid, the Gauntlight business became official. At the mayor's manor, Wrin restated the stakes of the blueprints (a restored Gauntlight dooms Absalom and the whole region), the mayor closed the pirate thread himself — the dock messenger was glimpsed (a human) but not caught, the two captives go to Absalom for trial, and Black Eel's island is the Absalom Navy's problem now — and then turned to the goblin: <em>"You are the best guy that we have right now... I would like you to accompany them and see the threat of the Gauntlight is dealt with."</em> <strong>Snagg</strong>, who had gone home to his retired goblin parents the night before and reported for work like any other day, shrugged it into his job description: <em>"I guess a nice break from all these boring jobs."</em> Klorte walked him out, put a hand on his shoulder — <em>"I know this is very dangerous. Don't die. Come back in one piece"</em> — and got <em>"No promise, though"</em> for his trouble, plus 50 gold from the mayor personally. The party spent the day identifying loot (the elven-runed chest is a dead lock-glyph; the skull staff reached for Snagg's life force the moment he touched it — a hero point turned the critical failure into a plain one, no drain — and went straight into the locked box; Alder claimed the slide pistol), retraining feats, and buying a scroll and a bow, then rode the newly reactivated floor-2 teleport circle down to a third floor that was quieter than it had ever been.</p>
+  <p>Below the floor-3 stairs — the route the armored knight took — the party opened a door onto a stone pavilion ten feet above an underground lake, where a pale, dry-voiced man and a wolf sat at a campfire. He wanted them gone; Xurl wanted to know who he was; Ruben pitched the Gauntlight mission and blanked on the name of the town he was protecting (<em>"Otari,"</em> Snagg supplied). When <em>"I don't fucking care about Otari"</em> came back, Xurl looked over his shoulder — <em>"Punch in time?"</em> — and the fight was on. The wolf mauled Xurl, three reactions cut it down as it tried to break away, and then the man dropped to all fours, turned into a wolf, and crit Xurl with a bite that carried the <strong>curse of the werewolf</strong>. Snagg's local knowledge named him: <strong>Jaul Mezmin</strong>, 300 gold bounty, the werewolf who killed the wife of Kaledo, owner of Otari Market — <em>"Hey, I know that guy."</em> <strong>Alder's</strong> turn was the stuff of table legend — a natural 20 on Exploit Vulnerability, then a natural 20 on the chakram, then a Critical Hit Deck card that read <em>triple damage and a Fortitude save</em> — and a level-7 elite werewolf with 109 of his 140 hit points still in him failed the save by one. <em>"I don't think he dies. Fucking save or die effects."</em> Jaul's locket (<em>"Isla, my love"</em>) is the bounty proof. Ruben's examination confirmed the worst: <strong>Xurl is cursed</strong>, the full moon is tonight or tomorrow, and — the DM swears he didn't plan it — the Gauntlight's graveyard night was a new moon exactly two weeks ago.</p>
+  <p>They pressed on into a domed chamber whose walls were carved as a graveyard, ghosts rising toward a giant eye at the apex, and a seven-fingered stone hand of an altar clutching a flicker of blue light: a <strong>shrine to Nhimbaloth</strong>, outer god of emptiness, despair, and ghosts — <em>"the empty death,"</em> as Ruben named her. The room itself frightened anyone who looked too long; Snagg's verdict, seconds before the altar disgorged five crawling hands and five will-o'-wisps, was <em>"It seems suspiciously minor."</em> It wasn't. Two and a half hours and nine rounds later — magic-immune wisps confusing the party into swinging at each other, a hand clamped on Snagg's throat, and then two <strong>Cairn Wights</strong> bursting from a sarcophagus (tripped by Alder's mirror-image stepping fifteen feet too close) to chain <strong>seven critical hits in eighteen swings</strong> behind a fear-chant that kept everyone Frightened — Ruben had gone down once, Alder twice, Xurl had been saved by a Halfling Luck reroll of a natural 1 and then knocked to zero by a dying wight's last swing, and Snagg had ripped the second wight's head off and thrown it across the room. Its last words, in gasping Common: <em>"Leave this place."</em> The DM called it an Extreme encounter, admitted his damage-carry-over house rule was the only thing between the party and a TPK, and reminded everyone on the way out: <em>"Xurl is cursed."</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Social · The Mayor's Manor</div>
+    <div class="act-card">
+      <h3>"Don't die. Come back in one piece."</h3>
+      <ul>
+        <li><strong>Snagg's morning</strong>: the DM established that Snagg lives at home in Otari with his <strong>parents — both goblins, both Otari Lumber lifers, recently retired</strong>. He reported to Klorte as usual, and Klorte walked him to the mayor's house where the party had slept.</li>
+        <li><strong>Wrin's summary</strong> of the blueprints: fully restored, the Gauntlight's reach isn't just Absalom but the whole region.</li>
+        <li><strong>The mayor closes the pirate thread</strong>: his men only <em>glimpsed</em> the dock messenger — <strong>a human</strong> — and he assumes that person knows the plan is blown. The two prisoners go to <strong>Absalom for trial</strong>; the island hideout gets reported to the <strong>Absalom Navy</strong>. <em>"Thank you for what you did for us. I will take care of that from now on."</em></li>
+        <li><strong>Gold</strong>: the second 50 gp of the pirate job, split three ways among the veterans (17 gp each). Snagg, pointedly not included (<strong>Xurl</strong>: <em>"Just taking psychic damage because you don't get the gold"</em>).</li>
+        <li><strong>Snagg is assigned to the Gauntlight</strong>: <em>"You are the best guy that we have right now — I mean, except Klorte."</em> Snagg: <em>"Wasn't it for me? ... I guess a nice break from all these boring jobs."</em></li>
+        <li><strong>Klorte's send-off</strong> in the hallway, hand on shoulder: <em>"I know this is very dangerous. Don't die. Come back in one piece, okay?"</em> — <em>"No promise, though."</em> — <em>"God damn it. Think of the town. Think of your parents."</em> — (Pax, above the table: <em>"Does Snagg have parents?"</em>) — <em>"Don't worry about it. You know how good I am. It's going like a piece of cake."</em> Then a bag of <strong>50 gp from the mayor personally</strong>, for Snagg alone: <em>"That's a very good motivation. Now count on me."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act II · Downtime · Loot, Identification, Retraining</div>
+    <div class="act-card">
+      <h3>The staff that bites back</h3>
+      <ul>
+        <li><strong>Xurl</strong> dumped the party's mystery loot on <em>"whoever looks the most confident"</em>: the runed chest, a vial of oil, and the skull staff. <strong>Ruben, as an Aiuvarin who reads Elven</strong>, translated the chest: a <strong>lock glyph, no longer powered</strong> — a well-made lockbox. Kept for the base.</li>
+        <li><strong>The staff</strong>: Alder's Occultism failed (14 vs DC 22). <strong>Snagg</strong> tried — <strong>natural 1</strong> — and the DM ran the critical failure as the staff itself biting back: <em>"the negative energy consume your mind... Snagg, you are Drained 1."</em> <strong>Ruben</strong>: <em>"I knew that stuff was nothing but trouble."</em> <strong>Snagg spent his one hero point</strong> — the table's degree-bump rule turned the critical failure into a plain failure — and walked away undrained. The staff went into the locked chest at the hideout, unidentified; nobody wants it (<em>"this staff doesn't deserve to be used"</em>).</li>
+        <li><strong>The slide pistol</strong> went to <strong>Alder</strong>: five shots, no ammunition for sale in Otari. Snagg suggested making it his weapon implement; Alder: <em>"Just five shots is not worth making my weapon implement."</em></li>
+        <li><strong>Retraining</strong> (the DM opened it up): Alder swapped Instructive Strike → <strong>Breached Defenses</strong>; Xurl swapped <strong>Suplex → Combat Grab</strong> (<em>"I've never once had the ability to trigger it"</em>); Ruben swapped Positive Attunement → <strong>Blessing of Vigor</strong>. Alder bought a <strong>composite bow</strong> and a rank-2 <strong>Tailwind</strong> scroll (cast on himself before the descent). Ghost Touch (75 gp) discussed and not bought.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act III · Explore · The Descent</div>
+    <div class="act-card">
+      <h3>"Look at us taking the main path for once"</h3>
+      <ul>
+        <li>Left town before sunset. <strong>Reactivated the floor-2 teleport circle</strong> (10 minutes) and rode it to floor 3 — the party's first teleport: dizzy, shaking, and <em>"on the third floor without any incidents."</em> <strong>Snagg</strong> beforehand: <em>"I don't trust these magical things. I guess if we all go in, I'll go."</em></li>
+        <li><strong>Floor 3 is quieter than ever</strong> (Ruben, Perception 28). The party skipped the unfinished ghoul room — <em>"we have bigger things to worry about now than some loose ghouls"</em> (<strong>Ruben</strong>) — and took the stairs <strong>the armored knight used</strong> (<strong>Xurl</strong>: <em>"The man who definitely didn't retrieve a grimoire directly from in front of our faces"</em>).</li>
+        <li><strong>Snagg</strong>: <em>"Remind me what we're here to do again."</em> <strong>Xurl</strong>: <em>"find a way to turn off the light. Which is almost certainly the ninth layer."</em></li>
+        <li>Wrin's answer to Ruben's map request: the blueprints are a how-it-works document, <strong>not a floor plan</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · The Pavilion and the Werewolf</div>
+    <div class="act-card">
+      <h3>"Punch in time?"</h3>
+      <ul>
+        <li>The door at the bottom opened onto a <strong>stone pavilion 10 ft above an underground lake</strong>, cold and wet, brown fungus on the far shore, a <strong>man and a wolf at a campfire</strong>. Pale, skinny, two knives, a <strong>cracked, dry voice</strong>. <em>"I don't care who you are, leave."</em></li>
+        <li><strong>The parley</strong>: <strong>Xurl</strong> — <em>"That's great, but I actually do care who you are. We're on a job"</em> (the word <em>job</em> visibly worried him). <strong>Snagg</strong>: <em>"Yeah, we can just leave your territory. Like, after we just get past it."</em> <strong>Ruben</strong> — <em>"our only mission here is to prevent the Gauntlight activating... this is our mission to protect... God damn it, I forgot the name of the town."</em> <strong>Snagg</strong>: <em>"Otari."</em> Diplomacy 18 at −2: <em>"I don't fucking care about Otari."</em> <strong>Xurl</strong>, over his shoulder: <em>"Punch in time?"</em> <strong>Alder</strong>: <em>"I don't want to fight you, but we're gonna get through."</em></li>
+        <li><strong>Jaul Mezmin</strong> — named by <strong>Snagg's</strong> Society check once the man shifted into a wolf: <strong>300 gp bounty</strong>, killed the wife of <strong>Kaledo, owner of Otari Market</strong> <em>(spelling tentative)</em>, about a year ago. <em>"Hey, I know that guy."</em></li>
+        <li><strong>Alder's execution</strong>: two natural-20 Exploit Vulnerabilities and a natural-20 chakram in one fight; the crit-deck card killed a werewolf with 109 HP left outright. <em>"Well, I kind of just blew his head off."</em> <em>(Full round-by-round below.)</em></li>
+        <li><strong>Loot</strong>: Jaul's katar and a <strong>locket</strong> — a woman's portrait, <em>"Isla, my love."</em> Bounty proof: <em>"That's easier than lugging his whole head back"</em> (Xurl). Snagg: <em>"Can't pass on bounty."</em></li>
+        <li><strong>Xurl is cursed.</strong> <strong>Alder</strong> flagged it first (<em>"Careful, guys"</em> — Xurl: <em>"You already bit me"</em>); <strong>Ruben</strong> checked him over and the DM was explicit: a curse, not a disease. Werewolves turn under <strong>direct moonlight on the full moon</strong> and rampage; the full moon is <strong>tonight or tomorrow</strong> (the graveyard night was a new moon two weeks ago — <em>"I'm not making this up"</em>). Xurl: <em>"Is it a cool curse?"</em> / <em>"if I manage to turn into a werewolf I will be an absolute fucking nightmare if I retain any of my class feats."</em></li>
+        <li><strong>Snagg's surgery on the spot</strong>: Risky Surgery on Xurl — 4 slashing, critical success, <strong>21 healed</strong>. When the heal went through without the cut, Pax in chat: <em>"you need to take the damage as well."</em></li>
+        <li><strong>The cave beyond</strong>: water flowing in to feed the lake, a <strong>metal pipe near the ceiling</strong> (Alder), passages NE / NW / SW — unexplored. A north door led to a tight <strong>spiral stair</strong> going up and down; the party went <strong>up</strong>. Snagg, in the dark: <em>"I can't see shit."</em> Alder: <em>"Yep, I am giving you light."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act V · Mystery · The Shrine of Nhimbaloth</div>
+    <div class="act-card">
+      <h3>"It seems suspiciously minor"</h3>
+      <ul>
+        <li>A <strong>domed chamber</strong>, ceiling 30 ft up: the walls carved as a graveyard with <strong>ghosts rising toward a giant eye</strong> at the dome's center; a 15-ft circular platform three feet high; on it an <strong>altar assembled from stone slabs into a seven-fingered hand</strong> clutching a flicker of <strong>blue light</strong>, with a small object on top.</li>
+        <li><strong>Recall Knowledge</strong>: the DM routed the identification through <strong>Ruben's</strong> prior-party knowledge (Religion 27) — <strong>Snagg's Religion 28</strong> was the table's high roll — a <strong>shrine to Nhimbaloth</strong>, outer god of <strong>emptiness, despair, and ghosts</strong>; her shrines have nothing in them but the altar. Ruben: <em>"The empty death."</em></li>
+        <li><strong>The room effect</strong>: DC 22 Will at the start of every turn — fail Frightened 1, crit fail Frightened 2, crit success immune; the fear lasts until you leave. <strong>Snagg</strong> failed and shrugged it off with Bravery: <em>"It seems suspiciously minor."</em></li>
+        <li>Then the light inside the hand skipped, and <strong>small hands came crawling out of the altar</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Altar Fight</div>
+    <div class="act-card">
+      <h3>Nine rounds, two wights, seven crits</h3>
+      <ul>
+        <li>Five crawling hands and five will-o'-wisps, then <strong>two Cairn Wights</strong> bursting from a sarcophagus at round 3 — nine rounds, ~2h30m of table time, an <strong>Extreme</strong> encounter by the DM's own accounting.</li>
+        <li><strong>Ruben down</strong> (round 4), <strong>Alder down</strong> (round 7) and <strong>again</strong> (round 8), Xurl at <strong>3 HP</strong> then <strong>0 HP</strong>. Both of Xurl's potions and the "Reaction Heal" went into the downed casters; Xurl stayed upright on Snagg's Battle Medicine (23), Ruben's Lay on Hands (18), a Halfling Luck reroll of a natural 1, and finally Orc Ferocity. <strong>Snagg</strong> ended it by pulling the second wight's head off. <em>(Full round-by-round below.)</em></li>
+        <li><strong>Post-mortem</strong> (DM): the encounter triggered because <strong>Alder's mirror reflection</strong> stepped within 15 ft of the sarcophagi (<em>"It's an illusion, but it still counts"</em>); the hands were level 1; <em>"those wisps immune to magic is the problem"</em>; and <em>"if I'm not doing that carry damage over it might be a TPK."</em></li>
+        <li><strong>Going home</strong>: Alder Drained 3, Ruben Drained 1, Xurl at 8 HP with persistent bleed, and a werewolf in the party. <strong>Xurl's</strong> plan for the moon: <em>"go up to the first floor, past the barrier, inside the secret room in Belcorra's office. With the door shut, there is a solid stone wall on all sides"</em> — wait until noon, then go home.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Pavilion · ~26 min · 2 rounds · Severe (~120 XP)</div>
+  <h3>Jaul Mezmin (werewolf) and his wolf</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Jaul</div><div class="value">Lv 7 elite · 140 HP · AC 26</div></div>
+    <div class="combat-stat"><div class="label">Wolf</div><div class="value">Lv 5 elite · 75 HP · AC 23</div></div>
+    <div class="combat-stat"><div class="label">Kills</div><div class="value">Alder (Jaul) · Xurl (wolf)</div></div>
+    <div class="combat-stat"><div class="label">Damage taken</div><div class="value">Xurl 42 — only</div></div>
+    <div class="combat-stat"><div class="label">Nat 20s</div><div class="value">Alder ×3 · Xurl ×1</div></div>
+    <div class="combat-stat"><div class="label">Cost</div><div class="value">Xurl cursed</div></div>
+  </div>
+  <p class="combat-note">Initiative: wolf 33 · Xurl 32 · Jaul 31 · Alder 31 · Ruben 27 · Snagg 17 — "We rolled great. They rolled better." Jaul's silver weakness went unexploited: "We just don't have one." Before the dice: Ruben's Diplomacy at −2 landed an 18 on a man who doesn't care about Otari; Snagg's first Society check (13) — familiar, can't place him.</p>
+
+  <h4>Round 1 — First Blood</h4>
+  <ul>
+    <li>The <strong>wolf</strong> opened on Xurl — jaws for <strong>16</strong>, Knockdown trip failed. <strong>Xurl</strong> entered <strong>Crane Stance</strong> and tumbled past the wolf (failed, then succeeded — <em>"Step around"</em>).</li>
+    <li><strong>Jaul</strong>, two knives, rushed Xurl — <em>"Hey, nice to meet you"</em> — and missed twice, by 2 and 5. <strong>Alder</strong> delayed to after Snagg.</li>
+    <li><strong>Ruben</strong> cast <strong>Spiritual Armament</strong>: a natural 2 at the wolf (<em>"we know he's at the very least got an AC of 24"</em> — it was 23), then <strong>Guidance</strong> on Snagg.</li>
+    <li><strong>Snagg</strong>: Snagging Strike missed by 1, Guidance and all; <strong>Combat Grab</strong> connected (fist, 8) — wolf <strong>Grabbed</strong>.</li>
+    <li><strong>Alder</strong>: <strong>Exploit Vulnerability — natural 20</strong> (the DM answered about the wrong creature first — <em>"skinny... Fort save is the lowest"</em> — then: <em>"the wolf is a wolf. But the man is not human"</em>). The chakram into the grabbed, off-guard wolf: <strong>natural 18, critical, 33</strong> (<em>"Wowzers. That was fantastic"</em> / DM: <em>"Choke that wolf"</em>).</li>
+  </ul>
+
+  <h4>Round 2 — The Pile-On and the Card</h4>
+  <ul>
+    <li>The <strong>wolf</strong> escaped Snagg's grab (24 vs DC 23), bit at Snagg — <strong>natural 1</strong>, fumble card: <strong>it bit itself for 13</strong> (<em>"He bit his lip"</em>) — and broke away. That provoked: <strong>Snagg's Reactive Strike</strong> missed (natural 2), <strong>Alder's Implement's Interruption</strong> throw hit (14), and <strong>Xurl's Stand Still</strong> Crane Wing landed for one more than it had left — <em>"you guys just pile on him and you see that the wolf fall down."</em> <em>"I feel kind of bad. That was fucking brutal."</em></li>
+    <li><strong>Xurl's</strong> own turn went into Jaul: Step, Flurry — <strong>natural 20, critical, 22</strong> (crit card declined for plain double damage) and a natural 2. Stunning Blows failed by 2 but incapacitation bumped it to a success; the <strong>brawling crit-spec</strong> failed — <strong>Slowed 1</strong>. His new Combat Grab at full MAP whiffed.</li>
+    <li><strong>Jaul</strong>, down to two actions, <strong>dropped to all fours and became a wolf</strong>, and bit Xurl: <strong>natural 18, crit for 26, plus Curse of the Werewolf (DC 25)</strong> — Xurl's Fortitude save was a <strong>20. Failed.</strong> Xurl at 24 of 66: <em>"Fucking furries."</em></li>
+    <li><strong>Snagg's second Society check</strong> (14, +2 now that the shape was showing) named him: <strong>Jaul Mezmin</strong>, 300 gold, Kaledo's wife. <em>"Hey, I know that guy."</em></li>
+    <li><strong>Ruben</strong> sustained the Armament (miss, 20 vs AC 26) and put a <strong>rank-2 Heal into Xurl (23)</strong>.</li>
+    <li><strong>Snagg</strong> walked in, <strong>Snagging Strike hit Jaul (9)</strong> — off-guard to everyone now — and raised his shield.</li>
+    <li><strong>Alder</strong>: <em>"You guys probably weren't paying attention to Alder this fight, but he was holding a mirror in his left hand"</em> — <strong>Mirror's Reflection</strong>, then <strong>Exploit Vulnerability — natural 20 again</strong> (a werewolf; a curse, not a disease; <em>"Poison ain't going to work on him too well. But Silver is"</em>), then the chakram: <strong>natural 20 — Critical Hit Deck #32: triple damage and a Fortitude save.</strong> DC by level: 20. Jaul, at +14, needed a 6 and rolled a 5 — <strong>19</strong>. <em>"Zero of five."</em> <em>"I don't think he dies. Fucking save or die effects."</em> No damage roll: the DM zeroed him — <strong>109, his exact remaining hit points</strong>. Alder: <em>"Well, I kind of just blew his head off."</em> Xurl: <em>"What the fuck was that fight?"</em></li>
+  </ul>
+  <p class="combat-xp">Applied: Alder 156 (39 rolled + 8 Personal Antithesis + the 109 execution) · Xurl 29 · Snagg 17 · the wolf 13 to itself · Ruben 23 healed. Taken: Xurl 42 — the only PC touched. Hero points: none in the fight (Snagg's went on the staff). Afterward Snagg cut Xurl open on the spot — Risky Surgery, 4 slashing, crit success, 21 back — "you need to take the damage as well."</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Shrine of Nhimbaloth · ~2h 30m · 9 rounds · Extreme (~230 XP)</div>
+  <h3>5 crawling hands + 5 will-o'-wisps, then 2 Cairn Wights</h3>
+  <div class="combat-stats">
+    <div class="combat-stat"><div class="label">Wisps</div><div class="value">Lv 3 elite ×5 · immune to magic</div></div>
+    <div class="combat-stat"><div class="label">Wights</div><div class="value">Lv 5 elite ×2 · 82 HP · +16</div></div>
+    <div class="combat-stat"><div class="label">Wight dice</div><div class="value">5 nat 20s · 7 crits / 18</div></div>
+    <div class="combat-stat"><div class="label">Knockdowns</div><div class="value">Ruben · Alder ×2 · Xurl to 0</div></div>
+    <div class="combat-stat"><div class="label">Damage taken</div><div class="value">256 vs 238 pool</div></div>
+    <div class="combat-stat"><div class="label">Kills</div><div class="value">Snagg 7 · Ruben 3 · Xurl 2</div></div>
+  </div>
+  <p class="combat-note">Initiative: Snagg 31 · wights 31 / 25 · wisps 23–14 · Ruben 23 · Xurl 22 · hands 20–9 · Alder 15. Room effect all fight: DC 22 Will each turn (Frightened 1 / 2, crit success immune). Wisps: Shock +13, Flicker DC 20 Will → Confused, Consume Confusion heals. Wights: longsword +16, Drain Life DC 20 Fort → Drained (stacking), temp HP on hit, Funereal Dirge DC 23 Will → party-wide Frightened, Final Spite, and they speak Common. Wisp targets and confused PCs' targets were rolled on a Foundry table literally named "Eeny, meeny, miny, moe."</p>
+
+  <h4>Round 1 — The Hands Die Fast</h4>
+  <ul>
+    <li><strong>Snagg</strong> first: Snagging Strike <strong>crit (24) one-shot a hand</strong>, shield up. A wisp shocked him for 11 (the shield ate 8) and <strong>fumbled its second Shock into one of its own hands — 14</strong> (<em>"It's actually a critical hit now. It's even worse"</em>).</li>
+    <li><strong>Ruben</strong> — <em>"These are obviously undead. I wonder if I should just nuke the whole room"</em> — cast <strong>3-action Heal (19)</strong>: three hands failed and <strong>crumbled</strong>, one saved at half; the wisps weren't touched.</li>
+    <li>A wisp shocked Xurl (8); <strong>Xurl</strong> stanced and Flurried — miss, miss (<em>"A four and a five"</em>). Another wisp <strong>crit Xurl (natural 20, 10)</strong> — the crit card needed a beast (<em>"luckily you're not an animal, beast, or fae"</em>) — and <strong>Flickered him Confused</strong>.</li>
+    <li><strong>Alder</strong>: Exploit Vulnerability (success), <strong>Mirror's Reflection</strong>, and a chakram that became a hit once Foundry recognized he was flanking with himself (<strong>19</strong>). The wisps whiffed at Alder; the last hand clawed at him and missed twice.</li>
+  </ul>
+
+  <h4>Round 2 — Confusion</h4>
+  <ul>
+    <li><strong>Snagg</strong> bit a wisp (<strong>16</strong>, killing the first — DM: <em>"It tastes like ghost"</em>), missed, shield up; a wisp Flickered him and he saved (<em>"you are able to raise your shield and block those lights"</em>).</li>
+    <li><strong>Ruben's Divine Lance</strong> passed straight through a wisp — <strong>immune to magic</strong>; his Recall Knowledge named them will-o'-wisps, hurt only by specific spells. He cast <strong>Shield</strong>: <em>"Looks like I'm on full support mode."</em> A wisp shocked him (11) and <strong>Flickered him Confused</strong> (<em>"Luckily, will saves are my best save"</em> — a natural 4 — <em>"You speak too soon"</em>).</li>
+    <li><strong>Confused Xurl</strong> rolled a d10 for a target — <strong>Snagg</strong> — and swung twice at the goblin, missing both (<em>"pulls the punch at the last step... the fuck?"</em>). A wisp missed Xurl twice — <strong>Crane Stance flipped one</strong>.</li>
+    <li><strong>Alder</strong> re-cast the mirror, Exploited (no body: Fort lowest), missed.</li>
+    <li>As a wisp broke off to hunt Ruben, <strong>Snagg's Reactive Strike bit it for 18</strong> (<em>"Ah, not enough to kill. Close, though"</em>); it <strong>crit Ruben (natural 18, 12)</strong> — the crit itself ended his confusion — and its second Shock crit-missed (Mystic Armor + Shield).</li>
+    <li>The last <strong>hand crit Snagg (natural 20, 8) and took him by the throat</strong> — Grabbed.</li>
+  </ul>
+
+  <h4>Round 3 — The Sarcophagus Opens</h4>
+  <ul>
+    <li><strong>Snagg</strong>, hand on his neck: Snagging Strike <strong>crit (24) killed the wisp he'd bitten</strong> (<em>"the energy of the light disappear"</em>), then <strong>bit the hand off his own throat and chewed it</strong> (14, dead — <em>"Disgusting"</em>), then, hand swallowed, <strong>Doctor's Visitation → Battle Medicine on Ruben (20)</strong>.</li>
+    <li>A sarcophagus in the wall burst: <strong>a Cairn Wight</strong> dragged itself out with a longsword and <strong>crit Alder (natural 17, 22)</strong> — <strong>Ruben's Protector's Sacrifice</strong> ate 9, Alder took 13 and failed Drain Life: <strong>Drained 1</strong>. The second wight closed on Xurl and <strong>missed by 1 — Crane Stance again</strong> (<em>"saves him once again"</em>).</li>
+    <li><strong>Ruben</strong> (Frightened 1 by the room) cast <strong>Benediction</strong> and <strong>Shield</strong>; a wisp Flickered him Confused again, shocked him (5), and the damage flat-check cleared it.</li>
+    <li><strong>Xurl</strong>: a <strong>natural 20 on the room save — immune to the shrine's fear</strong>; Flurry miss/miss — <strong>his hero point bumped one to a hit (12)</strong>; Combat Grab missed; an <strong>Assurance Demoralize</strong> on the wight was ignored (<em>"you are the smallest one"</em>).</li>
+    <li><strong>Alder</strong> (Frightened 1): two misses and a <strong>failed Exploit Vulnerability</strong> on the wight (<em>"Welcome to my shit"</em>).</li>
+  </ul>
+
+  <h4>Round 4 — The Dirge, then Ruben Down</h4>
+  <ul>
+    <li>The first wight chanted the <strong>Funereal Dirge</strong>: Xurl Frightened 2, Alder 1, Snagg 1 (Bravery), <strong>Ruben a natural-20 crit success</strong>.</li>
+    <li><strong>Snagg</strong> failed the room save (Frightened 1), bit the third wisp (<strong>20</strong> — <em>"the light is so dim now, but it's still here"</em>), crit-missed.</li>
+    <li>The <strong>second wight</strong> on Ruben: <strong>crit (natural 18, 24)</strong> — Shield blocked 10, <strong>Drained 1</strong> — then Xurl for 17 (Xurl's natural-20 Drain save), then, at −10 MAP, <strong>natural 20: crit for 28 — Ruben Dying 2.</strong> (<em>"I'm in danger."</em> — <em>"You are, in fact, in danger."</em>) The DM RP-cleared Xurl's fear: <em>"You remember your purpose."</em></li>
+    <li>A wisp missed Xurl and he <strong>crit-succeeded the Flicker — immune</strong> (<em>"My mind is a fortress now. Unfortunately, my body is frail and bleeding"</em>); a wisp missed Snagg three times.</li>
+    <li><strong>Xurl</strong>: potion into Ruben (<strong>10</strong> — conscious), <strong>shoved him out of the wight's reach</strong> (Snagg's suggestion), and a <strong>Crane Wing crit (natural 19) killed the 1-HP wisp</strong> — the DM carried the leftover <strong>15 into the next one</strong>. A wisp shocked Snagg (5); he saved the Flicker.</li>
+    <li><strong>Alder</strong>: a <strong>natural 2 on the room save — Frightened 2</strong> (hero point offered; <em>"It's fine"</em>); mirror, a miss by 1 that the fear cost him, then a hit (13).</li>
+  </ul>
+
+  <h4>Round 5 — Four Lights Down</h4>
+  <ul>
+    <li>The first wight turned toward Ruben — up at 10, still on the floor — and <strong>couldn't move</strong>: <em>"something in his mind prevent it to step forward."</em> The DM called for Recall Knowledge from everyone: <strong>Alder rolled a natural 1</strong> (Dubious Knowledge — no lie this time); nobody learned anything.</li>
+    <li><strong>Snagg</strong> bit the fourth wisp dead (crit 18 on a 5-HP light; <strong>13 carried</strong> into the fifth), then <strong>Battle Medicine on Xurl — crit success, 23</strong>.</li>
+    <li><strong>Ruben</strong> stood and <strong>Lay on Hands</strong> on himself (18) — <em>"Don't you teleport away from me again"</em> (to Alder's mirror). The <strong>second</strong> wight raised its sword over Xurl and again <strong>couldn't move its arms</strong> — <em>"I am very curious what's happening here."</em></li>
+    <li>A wisp <strong>Flickered Alder Confused (2 rounds)</strong> and <strong>Consume Confusion healed itself 8</strong> (<em>"You bastard"</em> — Snagg).</li>
+    <li><strong>Xurl</strong>: Flurry 12 + 7 on the last wisp (<em>"It's a ribbon of light, what did you expect?"</em>), Stunning Blows crit-saved, a strike and a Combat Grab both crit-missed (<em>"Never."</em>). <strong>Confused Alder</strong> rolled the first wight — hit (16 → 11 after temp HP), miss. <em>"I think that's the fun part of Confuse."</em></li>
+  </ul>
+
+  <h4>Round 6 — Lights Out, Then the Balls</h4>
+  <ul>
+    <li>The first wight rolled again and stayed frozen. <strong>Snagg</strong> stepped to flank and killed the <strong>last wisp</strong> (15 — a 4 on the die hit exactly): <em>"So all the light is gone. There's no light anywhere."</em></li>
+    <li><strong>Ruben's Vitality Lash</strong> hit the first wight (<strong>17</strong>, failed save). The <strong>second</strong> wight failed its own save, slashed Snagg (<strong>15</strong>, Drain saved), and chanted the <strong>second Dirge — all four failed</strong> (Xurl and Alder Frightened 2).</li>
+    <li><strong>Xurl's Dirty Trick</strong> debut — <em>"this time we're gonna go ahead and try and hook some shit"</em> — <strong>critical failure, prone</strong>: <em>"The dirty trick in your mind is go for the balls. You reach down. There's no fucking balls."</em> Stood, Flurried: miss and a <strong>natural 1</strong> (fumble card: Slowed).</li>
+    <li><strong>Confused Alder</strong> again: three attacks on the first wight to eleven <em>"Let's go!"</em>s — miss, <strong>hit 13</strong>, and a <strong>natural 20 at −8 MAP</strong> — crit-card choice: <strong>Clumsy 1, one hand useless</strong>, plus half damage (18).</li>
+  </ul>
+
+  <h4>Round 7 — Alder Down</h4>
+  <ul>
+    <li>The clumsy wight swung three times at Alder and <strong>missed all three</strong> — the last by 1: <em>"Because of Benediction, baby."</em></li>
+    <li><strong>Snagg</strong>: Snagging Strike <strong>12</strong>, <strong>Combat Grab 17 — the second wight Grabbed</strong> (<em>"I love being a fighter"</em>), shield up; the goblin's low-light vision picked out <strong>more sarcophagi in the walls, some still closed</strong> (Ruben: <em>"Throwing double-digit monsters at us"</em>).</li>
+    <li><strong>Ruben</strong> (Frightened 2): Divine Lance missed, <strong>Guidance on Alder</strong>.</li>
+    <li>The second wight, grabbed and swinging anyway: <strong>natural 20 on Xurl — crit for 30</strong> (card: +2 AC to the wight); crit-miss on Snagg; and <strong>natural 20 on Alder — crit for 34: Alder Dying 2</strong>, chakram, everlight crystal and mirror on the floor, <strong>Drained 2</strong>. <em>"To balls or not to balls?"</em> — the DM.</li>
+    <li><strong>Xurl</strong> (Slowed, Frightened): Flurry into the +2 AC wight, miss, miss; a kick at the other, miss.</li>
+  </ul>
+
+  <h4>Round 8 — Alder Down Again</h4>
+  <ul>
+    <li>The clumsy wight hit the <strong>unconscious Alder</strong> (18 vs AC 17) — <strong>Dying 3</strong> — <em>"Good luck, Alder"</em> — and raised its sword to finish him, and <strong>again stopped</strong>; this time it spoke, faint and gaspy, in <strong>Common: "Leave."</strong></li>
+    <li><strong>Snagg</strong> delayed behind Ruben: <strong>3-action Heal (12)</strong> — Alder up, Snagg and Ruben +12, the wights took 6 each (the "Reaction Heal"; <em>"Why are you dead again?"</em>). <strong>Snagg</strong>: jaws hit (<strong>7</strong> — <em>"This game's a stupid joke, man"</em>), <strong>Slam Down</strong> trip failed (natural 2). <strong>Alder</strong> picked up the chakram, stood, and hit the clumsy wight (<strong>15</strong> — <em>"Personal Antithesis!"</em>).</li>
+    <li>The grabbed wight passed an Intelligence check to pick a random target — <strong>natural 20: crit for 28. Alder Dying 3</strong>; his <strong>hero-point reroll</strong> on the Drain save came up a natural 1, then an 11 — still a fail: <strong>Drained 3</strong>. <em>"I smell TPK."</em> It hit Xurl (16) — <strong>Halfling Luck</strong>: a natural 1 rerolled to a 10, save made, <strong>Xurl at 3 HP</strong> — and fumbled a natural 1 at Snagg (card: <strong>Fatigued</strong>). <em>"Thank you for having mercy."</em></li>
+    <li><strong>Xurl</strong>: second potion into Alder (<strong>19</strong> — <em>"Wake up, samurai!"</em>), then <strong>Crane Wing — natural 20, crit 26 + 8 = 34 "bludgeoning damage to the skull"</strong> — the <strong>clumsy wight died</strong> (the DM forgot its Final Spite and let it stand), and <strong>22 carried into the grabbed one</strong> (<em>"Goodbye, sweet dream"</em> — Snagg).</li>
+  </ul>
+
+  <h4>Round 9 — The Head</h4>
+  <ul>
+    <li><strong>Ruben</strong>: Vitality Lash (crit-saved), <strong>Lay on Hands on Xurl (18)</strong>.</li>
+    <li><em>"Bite his ankles"</em> — <strong>Snagg's Snagging Strike (17) dropped the wight he had grabbed</strong>, and its <strong>Final Spite</strong> answered: <strong>natural 20, crit for 32 on Xurl</strong> (card: persistent bleed) — <strong>Xurl to 0</strong> — <strong>Orc Ferocity + One Hundred Victories</strong> stood him back up at ancestry HP, <em>"throws his arm up and flings that shit back."</em></li>
+    <li>The DM: <strong>Snagg leapt, seized the wight's head, and pulled it off</strong>, and before he threw it across the room it spoke once more — <em>"Leave this place."</em> Fight over, 00:28.</li>
+  </ul>
+  <p class="combat-xp">Applied: Snagg 170 (2 hands, 4 wisps, 1 wight) · Alder 89 · Xurl 81 (1 wisp, 1 wight) · Ruben 73 (3 hands by Heal). Taken: Xurl 107 (162% of his max) · Ruben 63 (nine volunteered via Protector's Sacrifice) · Alder 55 · Snagg 31 — 256 against a 238-HP party. In-combat healing 149: Ruben 77 · Snagg 43 · Xurl 29 (potions). Hero points: Xurl's Flurry bump (R3); Alder's Drain-save reroll (R8). Halfling Luck and Orc Ferocity were feats. The wights' holds: four times a wight had a downed PC in reach and couldn't advance — each rolled a Will save at the top of its turn, held on 24+, attacked on 21–22, with a −2 stacking per prior save. The DM never named the effect.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">After-Action · out of initiative</div>
+  <h3>Walking Out</h3>
+  <ul>
+    <li><strong>Snagg's Treat Wounds</strong> on Xurl (Risky Surgery: 5 slashing — <em>"So I have one HP"</em> — then a 2 upgraded to crit success, 7 healed): Xurl walked out at <strong>8</strong> with the bleed unresolved.</li>
+    <li>Conditions going home: <strong>Alder Drained 3, Ruben Drained 1</strong>, Xurl <strong>cursed</strong> and Wounded 1. Snagg clean — the staff's drain was bought off with his hero point.</li>
+  </ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-snagg">
+    <h4>Snagg · the Company Man, Now Under Contract</h4>
+    <ul>
+      <li>The session opened on his life: a home in Otari, <strong>two retired goblin parents</strong> who gave Otari Lumber their whole working lives, and a security lead who reports to Klorte the morning after a pirate battle like it's any other Tuesday. The mayor's assignment made the temporary escort permanent — <em>"a nice break from all these boring jobs"</em> — and the <strong>Klorte hallway scene</strong> was the best two minutes of RP he's had: <em>"Don't die. Come back in one piece"</em> / <em>"No promise, though"</em> / <em>"Think of your parents"</em> / <em>"You know how good I am. It's going like a piece of cake."</em> He pocketed the mayor's private 50 gp — <em>"That's a very good motivation. Now count on me."</em></li>
+      <li><strong>Otari-local lane, delivered</strong>: his Society check named <strong>Jaul Mezmin</strong> and unlocked the bounty, Kaledo, and Isla — the fight's only piece of story context, and the reason the locket means anything. <em>"Hey, I know that guy."</em> He supplied <em>"Otari"</em> when Ruben blanked mid-speech, offered the werewolf the only deal on the table (<em>"we can just leave your territory... after we just get past it"</em>), and rolled the room's best Religion (28) on the shrine.</li>
+      <li><strong>The natural 1 on the staff</strong> (<em>"Wow. What the fuck?"</em> / <em>"Hell no"</em>) — and the hero point he spent turning it into a plain failure, no drain. Comedy elsewhere: his standing distrust of teleporters (<em>"I don't trust these magical things"</em>), <em>"Remind me what we're here to do again,"</em> <em>"Why are there so many doors down here?"</em> and <em>"I can't see shit."</em></li>
+      <li><strong>The jaws did the heavy lifting again</strong> — session-high <strong>187 damage and seven kills</strong> (four wisps, two hands, a wight) on a night when he <strong>never rolled a natural 20</strong> (<em>"I don't think I had a nat 20 tonight at all"</em>). A <strong>Reactive Strike for 18</strong> on a wisp flying past to hunt Ruben set up his crit-kill on it next round; a hand crawled up and <strong>grabbed him by the throat</strong>, so — hand still on his neck — he crit-bit a wisp dead, then bit the hand off and chewed it: <em>"Disgusting."</em> He called the wight's random target onto himself — <em>"Hit me. Hit me, me, me"</em> / <em>"I can take it"</em> — and ate 15 for it. He ended the fight with Snagging Strike into <strong>Combat Grab</strong> (<em>"I love being a fighter"</em>), then the finisher: <em>"Just fucking bite his head off. Just yank it off"</em> — the DM had him leap, seize the wight's head, tear it free, and throw it across the room.</li>
+      <li><strong>Medic and triage lead</strong>: Doctor's Visitation + Battle Medicine on Ruben (<strong>20</strong>) once the hand was chewed off, a crit-success Battle Medicine on Xurl (<strong>23</strong>) mid-fight, Risky Surgery on Xurl after both fights (21, then 7). He also made the calls: the <strong>shove-Ruben-clear</strong> play Xurl executed, the kill priority (<em>"stop the body so that Ruben can heal us"</em>), and <strong>delaying behind Ruben</strong> so the 3-action Heal could land first. The one blank: a Slam Down trip that rolled a 2. His mood in the trough: <em>"I roll fucking seven damage... This game's a stupid joke, man."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-xurl">
+    <h4>Xurl · the Cursed Sailor Who Gives No Fucks</h4>
+    <ul>
+      <li>He ran the pavilion parley with exactly the patience the man deserved — <em>"That's great, but I actually do care who you are"</em> / <em>"We're not asking you to trust us. We just want to walk past you"</em> — and when diplomacy died, he ended it with two words: <em>"Punch in time?"</em> (<em>"Xurl gives no fucks."</em>)</li>
+      <li><strong>The curse</strong> is his now, and he took it like a sailor: <em>"Fucking furries"</em> on the bite, <em>"Is it a cool curse?"</em> on the diagnosis, <em>"I just like that we end up fighting an unshifted werewolf on the night of the full moon,"</em> and the threat: <em>"if I manage to turn into a werewolf I will be an absolute fucking nightmare if I retain any of my class feats."</em> He immediately started staying out of the light and, by session's end, had the full plan: the sealed stone room in Belcorra's office, door shut, until noon.</li>
+      <li><strong>Killed the wolf</strong> with a Stand Still as it fled, and landed a <strong>natural-20 Crane Wing on Jaul</strong> that Slowed him — the reason Jaul only had two actions when he turned. Later, <strong>Combat Grab</strong> finally on his sheet and whiffing all night: <em>"Just for you, Lap, that would have been a Combat Grab."</em> — <em>"Never."</em></li>
+      <li><strong>The fight's field medic and rules-brain</strong>: two healing potions, both poured into downed allies (<em>"you're fucking lucky I carry two healing potions"</em> / <em>"Wake up, samurai!"</em> / <em>"And why are you dead again, motherfucker?"</em>), the shove that got Ruben out of a wight's reach, and the judgement calls — flanking off a prone-but-conscious Alder, <em>"now is the time to blow any spells you have."</em> He crit-succeeded the shrine's fear and then the wisps' Flicker: <em>"My mind is a fortress now. Unfortunately, my body is frail and bleeding."</em></li>
+      <li>His <strong>Dirty Trick</strong> debut crit-failed him prone — the DM: <em>"The dirty trick in your mind is go for the balls. You reach down. There's no fucking balls"</em> — and he spent a round pondering (<em>"That's a girl zombie"</em>). Then a <strong>natural 20 for 34 to the skull</strong> killed the first wight (<em>"Goodbye, sweet dream"</em> — Snagg), and the second wight's dying swing took him to zero — Orc Ferocity and the tattoo stood him back up at ancestry HP, bleeding, and <em>"he just fucking throws his arm up and flings that shit back."</em> He walked out at 8.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-ruben">
+    <h4>Ruben Falmoor · Full Support Mode</h4>
+    <ul>
+      <li>The <strong>Aiuvarin who reads Elven</strong> opened the session in character (<em>"Oh, wait. Wrong voice. I can speak the Elven language"</em>), translated the lock-glyph chest, and declined the cursed staff on Ruben's behalf twice over. <strong>Undead lore lane</strong>: he carried the identification of the <strong>shrine of Nhimbaloth</strong> and its empty-room signature, went and read up on her mid-fight — <em>"The empty death"</em> — and ran the <strong>lycanthropy exam</strong> on Xurl with the bedside manner of a Pharasmin: <em>"I am sorry, my friend, but it seems that you have caught the... Jesus Christ, what the hell? ... It seems that you have contracted the curse."</em></li>
+      <li>The face, as ever, and for once the face fumbled: <em>"our only mission here is to prevent the Gauntlight activating... this is our mission to protect... God damn it, I forgot the name of the town."</em> The Diplomacy check landed on a man who doesn't care about Otari.</li>
+      <li><strong>The 3-action Heal</strong> that wiped three crawling hands at once — <em>"I wonder if I should just nuke the whole room"</em> — and the discovery, one wasted Divine Lance later, that the wisps are <strong>immune to magic</strong>: <em>"Looks like I'm on full support mode."</em> Which he then ran flawlessly: <strong>Protector's Sacrifice</strong> on the wights' opening crit against Alder, <strong>Benediction</strong> (which turned a wight hit into a miss and was still up while he lay unconscious — <em>"It's a good thing my spell's still active, even though I'm unconscious"</em>), Shield blocking 10 off a crit, <strong>Lay on Hands</strong> on himself and Xurl, and the <strong>3-action Heal that stood Alder up</strong> from Dying 3 — the table's "Reaction Heal."</li>
+      <li><strong>Down once</strong>: two wight crits in one turn (<em>"Luckily, will saves are my best save"</em> had aged badly minutes earlier — <em>"You speak too soon"</em>). His diagnosis: <em>"You ran away from your healer. And now your healer is exposed. Number one in the party. Always protect your..."</em> His verdict on the DM: <em>"Throwing double-digit monsters at us."</em></li>
+      <li><strong>100 HP of in-combat healing</strong> — the party's #1 healer again — and two natural 20s all night, both on non-attack rolls (a Recall Knowledge, and the Will save that shrugged off the first Funereal Dirge). His own count: <em>"Neither did I. Oh no, I had one. And it was a Will save."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-alder">
+    <h4>Alder Ungram · the Man in the Mirror</h4>
+    <ul>
+      <li><strong>The kill of the campaign so far.</strong> <em>"You guys probably weren't paying attention to Alder this fight, but he was holding a mirror in his left hand"</em> — then Mirror's Reflection, a natural-20 Exploit Vulnerability that read the werewolf's whole sheet (<em>"Poison ain't going to work on him too well. But Silver is"</em>), and a natural-20 chakram whose Critical Hit Deck card asked a boss with 109 HP left to make a Fortitude save. Jaul failed it by one. <em>"Well, I kind of just blew his head off."</em> The DM's tally: one critical Strike and two critical Exploit Vulnerabilities in one fight. He'd already hit the fleeing wolf with an <strong>Implement's Interruption</strong> throw a minute earlier.</li>
+      <li><strong>The mirror implement</strong> is new and he leaned on it all night — flanking with himself (the table's standing joke, per Xurl: <em>"It is the flanking line. It happens in every game with flanking"</em>), repositioning the reflection round after round, and, in the end, being the reason the wights woke up: <em>"Fucking Alder's illusion"</em> (Xurl). <em>"But I was here, right? This is at 20 feet?"</em> It wasn't.</li>
+      <li>He was also the first to say the word: <em>"Oh, well, yeah, like lycanthropy. Careful, guys"</em> — before Ruben's exam confirmed it — and the party's light source in the dark (<em>"Yep, I am giving you light"</em>). Character in the small moments: refusing the pistol as an implement, <em>"That looks terrifying"</em> when the sarcophagus opened, <em>"Contemplating the meaning of life"</em> for a prone, ball-less Xurl, and — standing up from Dying 3 with a chakram in hand — <em>"Personal Antithesis!"</em> and <em>"Bring your no ball having ass."</em></li>
+      <li><strong>The wights hunted him</strong>: Drained 1, 2, then 3 across two knockdowns — the first a natural-20 crit for 34 that stripped chakram, crystal, and mirror from his hands; the second a natural-20 crit for 28 with a hero point burned on a natural-1 Drain save. Before either, his <strong>confused turns</strong> were the best thing that happened all fight — three attacks on the same wight to a chorus of <em>"Let's go!"</em>, including a <strong>natural 20 at −8 MAP</strong> whose card left the wight <strong>Clumsy 1</strong> and one-handed. <em>"I think that's the fun part of Confuse."</em></li>
+      <li>Still the party's practical voice: <em>"By the way, we can't go back because we have the Lycanthropy,"</em> the Breached Defenses retrain, the composite bow, the Tailwind scroll — and a hero point held in reserve (he declined one on a crit-failed room save — <em>"It's fine"</em>) until the worst possible moment.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot &amp; Advancement</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">50 gp — for Snagg personally</div>
+    <div class="loot-source">The mayor, via Klorte</div>
+    <div class="loot-note">"Get whatever you need and come back alive."</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">17 gp each (Alder, Ruben, Xurl)</div>
+    <div class="loot-source">The mayor's second 50 gp for the pirate job</div>
+    <div class="loot-note">Split three ways; Snagg not included in the pirate-job split.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Jaul's Locket — "Isla, my love"</div>
+    <div class="loot-source">Jaul Mezmin's body</div>
+    <div class="loot-note">Proof for the 300 gp bounty posted by Kaledo of Otari Market.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Jaul's Katar</div>
+    <div class="loot-source">Jaul Mezmin's body</div>
+    <div class="loot-note">Magical in Foundry; the DM called it +1 striking (confirm).</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Slide Pistol → Alder</div>
+    <div class="loot-source">Party stash</div>
+    <div class="loot-note">5 shots, no ammo in Otari; not an implement.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Elven-Runed Chest</div>
+    <div class="loot-source">Party stash</div>
+    <div class="loot-note">A dead lock glyph; well-made; kept at the base as a lockbox.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Skull Staff (unidentified, necromantic)</div>
+    <div class="loot-source">Party stash → the locked chest</div>
+    <div class="loot-note">Tried to drain Snagg on contact (hero point: no drain); nobody will use it.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Composite Bow · Tailwind Scroll · Retraining</div>
+    <div class="loot-source">Bought / DM allowance</div>
+    <div class="loot-note">Alder → Breached Defenses; Xurl → Combat Grab; Ruben → Blessing of Vigor.</div>
+  </div>
+</div>
+<div class="xp-banner">Encounters · Pavilion ≈ 120 XP (Severe) · Shrine ≈ 230 XP (Extreme) — no level-up announced; party remains <strong>level 5</strong>. Bounty not yet collected.</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Snagg:</strong> "No promise, though."<span class="attribution">To Klorte's hand-on-the-shoulder "Don't die. Come back in one piece, okay?" — followed by "Think of your parents."</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Disgusting."<span class="attribution">Having bitten off and chewed the crawling hand that had him by the throat.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Hit me. Hit me, me, me." / "I can take it."<span class="attribution">Calling the wight's random-target die onto himself. It listened.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Punch in time?"<span class="attribution">Looking back at the party after "I don't fucking care about Otari."</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Is it a cool curse?"<span class="attribution">Ruben's diagnosis had just landed.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "My mind is a fortress now." / "Unfortunately, my body is frail and bleeding."<span class="attribution">Immune to the shrine's fear and the wisps' confusion, at a fraction of his HP.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Alright, so, you're fucking lucky I carry two healing potions." / "Wake up, samurai!" / "And why are you dead again, motherfucker?"<span class="attribution">Second potion of the night, into the second downed Alder of the night.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "But this is our mission to protect... God damn it, I forgot the name of the town."<span class="attribution">Mid-Diplomacy, to a werewolf. Snagg: "Otari."</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "I am sorry, my friend, but it seems that you have caught the... Jesus Christ, what the hell? ... It seems that you have contracted the curse."<span class="attribution">Bedside manner, interrupted by the dice.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "It's a good thing my spell's still active, even though I'm unconscious."<span class="attribution">Benediction, from the floor.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "So you guys probably weren't paying attention to Alder this fight, but he was holding a mirror in his left hand."<span class="attribution">Two natural 20s later, Jaul Mezmin was dead.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Well, I kind of just blew his head off."<span class="attribution">Answering Xurl's "What the fuck was that fight?"</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Bring your no ball having ass."<span class="attribution">Back on his feet from Dying 3, chakram in hand.</span></blockquote>
+
+<blockquote><strong>DM (Lap):</strong> "I don't think he dies. Fucking save or die effects."<span class="attribution">Jaul Mezmin, +14 Fortitude, needing a 6, rolling a 5.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Xurl is a werewolf.</strong> Cursed by Jaul's bite; turns under direct moonlight on the full moon and rampages under GM control. The full moon is <strong>tonight or tomorrow</strong>. Plan: the sealed secret room in Belcorra's office on floor 1 until noon. Cure unknown.</li>
+  <li><strong>Kaledo's bounty</strong> — 300 gp for Jaul Mezmin, proof in hand (the locket). Otari Market. Snagg knows him.</li>
+  <li><strong>The shrine's sarcophagi</strong> — the wights came out of one; the goblin saw <strong>more, some still closed</strong>, and the triggering radius is 15 ft. Whatever the altar holds (the object on top, the blue light) is unexamined.</li>
+  <li><strong>Nhimbaloth</strong> — outer god of emptiness, despair, and ghosts; this floor is dedicated to her alone. Belcorra's tomb door on floor 3 is a Nhimbaloth shrine too (S3). Ruben is reading up.</li>
+  <li><strong>"Leave. Leave this place."</strong> — the wights spoke Common, and four times one of them <em>couldn't</em> advance on a downed PC — a Will save at the top of each wight turn, escalating −2 per attempt, that they mostly passed. The DM never explained what held them.</li>
+  <li><strong>The pavilion cave</strong> — water inflow, a metal pipe near the ceiling, passages NE / NW / SW, and the spiral stair that also goes <strong>down</strong>. Unexplored.</li>
+  <li><strong>The pirate ring is closed by the mayor</strong> — captives to Absalom, Black Eel to the Navy. The <strong>human dock-watcher</strong> is still loose and presumably knows the plan failed.</li>
+  <li><strong>Drained 3 on Alder</strong> — three days of rest to clear; Ruben Drained 1. The staff that tried to drain Snagg is unidentified in a lockbox.</li>
+  <li><strong>The ghouls on floor 3</strong> — still not cleared; the party walked past them.</li>
+  <li><strong>Jaul's territory</strong> — what was a werewolf doing camped on the Gauntlight's third floor, and why did "job" frighten him?</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">The Moon</span>
+  <p>Xurl is cursed. The full moon is tonight or tomorrow, and the only safe place is a sealed stone room three floors up, on the far side of a barrier that closes at dawn.</p>
+  <div class="big-line">"Xurl is cursed."</div>
+  <span class="speaker">— the DM, on the way out. "It just happened perfectly. I didn't plan that at all."</span>
+</div>
+
+</div>
+
+<section class="pax-notes">
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<h2>Pax's Notes — Snagg's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Snagg did this session</h3>
+<ul>
+  <li>Slept at home. Reported to Klorte in the morning like normal. Ended up in the mayor's parlor being told I'm the best they've got — except Klorte — and that I'm on the Gauntlight job now. Fine. Beats guarding lumber.</li>
+  <li>Klorte walked me out. Hand on the shoulder, "come back in one piece," "think of your parents." Told him no promises and that it'd be a piece of cake. He gave me <strong>50 gold</strong> from the mayor's own purse. Just for me. The other three split their fifty.</li>
+  <li>Touched the skull staff. Rolled the worst roll a person can roll. It reached into my head for something — and I got it back out before it took. Cost me my luck for the night. Staff's in the lockbox now. Nobody touch it.</li>
+  <li>Rode the teleporter. Don't trust the thing. Came out fine.</li>
+  <li>Told the wolf-man we'd leave his territory once we were past it. He didn't want a deal. Put a name to him once he changed: <strong>Jaul Mezmin</strong>. Three hundred gold on his head, posted by <strong>Kaledo</strong> at Otari Market for his wife <strong>Isla</strong>. Alder killed him in one throw. We have the locket. Cut Xurl open after and put 21 back in him.</li>
+  <li>The shrine: killed <strong>seven</strong> — two hands, four of the lights, one of the sword-things. Bit a light out of the air with a hand still on my throat, then bit the hand off. Told the sword-thing to hit me instead of the others, and it did. Grabbed it so it couldn't get away. Pulled its head off at the end and threw it.</li>
+  <li>Patched Ruben (20) once the hand was off my neck, patched Xurl (23) mid-fight, and cut Xurl open again on the way out for 7 more. Called the shove that got Ruben clear, called the kill order, and held my turn so Ruben's heal could land first. No nat 20 all night. Didn't need one.</li>
+</ul>
+
+<h3>Things Snagg knows that the party does not</h3>
+<ul>
+  <li><strong>Kaledo.</strong> I know the man; I know the market. The bounty gets paid faster if a local walks it in.</li>
+  <li>My parents worked the lumber company their whole lives. Klorte knows that. That's why "think of your parents" — he wasn't guessing.</li>
+  <li>I can see in the dark down here better than the rest of them. The wall had <strong>more sarcophagi</strong> — some closed. I saw them. I don't think anyone else registered it.</li>
+</ul>
+
+<h3>What Snagg is thinking about</h3>
+<ul>
+  <li><strong>Xurl is a werewolf now.</strong> Bit on the night before a full moon. If he turns down here, he turns next to us. His plan is the sealed room upstairs until noon. Good plan. I'm sleeping across the door.</li>
+  <li>Two of these things nearly killed all four of us, and they came out of the <em>wall</em>. There are more coffins. Alder's mirror woke these. Nobody stands within fifteen feet of a sarcophagus again.</li>
+  <li>The lights were immune to magic and the healer was the one they kept knocking down. Whatever the plan is next time, it starts with where Ruben stands.</li>
+  <li>The mayor's washed his hands of the pirates. Navy's problem. The watcher on the docks is still in town, though, and he's human. Locals talk to locals.</li>
+  <li>Alder's Drained 3. Ruben's at one. We're not going back down until that's cleared.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Does the moon catch Xurl before noon? And if it does — do I hit him?</li>
+  <li>What's in the stone hand on the altar, and what happens if we take it?</li>
+  <li>Why couldn't the sword-things step forward when they wanted to? Something stopped them four times. What?</li>
+  <li>What was a werewolf doing camped three floors down under the Gauntlight — and why did the word "job" scare him?</li>
+  <li>Where do the passages off the lake cave go, and what's the pipe near the ceiling for?</li>
+</ul>
+
+</section>
+
+</body>
+</html>

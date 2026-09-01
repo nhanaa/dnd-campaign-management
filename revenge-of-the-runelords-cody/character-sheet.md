@@ -60,13 +60,13 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 
 - **Attack +31** · **3d8 + 10, plus 1d6 fire + 1d6 astral + 1d8 spirit** ≈ 35 per hit
 - Greater Weapon Specialization (15): +4 damage (master)
-- **Celestial Armaments (16)**: the staff sheds torchlight, deals **+1d8 spirit**, and grants **critical specialization** (staff crit spec = free prone). On crit: **Fort save vs class DC 38 or blinded 1d4 rounds**
+- **Celestial Armaments (16)**: the staff sheds torchlight, deals **+1d8 spirit**, and grants **critical specialization** (staff crit spec = free prone). On crit: **Fort save vs class DC 35 or blinded 1d4 rounds**
 - **Phantasmal Doorknob (Greater)**: on crit: **dazzled** until end of next turn (superseded by the blind if they fail the save)
 - The **trip trait** means no free hand needed *and* the weapon's potency adds to Trip checks
 - **parry** is what the fused stance requires; **monk** is what Monastic Weaponry needs for Flurry
 - **Herald's Weapon** (1/hr, 1 action): the staff goes **all-spirit + sanctified + 2d4 spirit** for a minute — bypasses physical resistance and points holy damage at an AP full of unholy Risen
 
-**Crit stack:** prone (staff crit spec) + **blinded 1d4 rounds** (Celestial Armaments, Fort DC 38) + dazzled (Doorknob, redundant if blinded). A blinded creature is off-guard to everyone and flat-checks DC 11 to target anything.
+**Crit stack:** prone (staff crit spec) + **blinded 1d4 rounds** (Celestial Armaments, Fort DC 35) + dazzled (Doorknob, redundant if blinded). A blinded creature is off-guard to everyone and flat-checks DC 11 to target anything.
 
 **Trip: +34** — 16 + 8 (legendary Athletics) + 6 Str + 3 item (staff potency) + 1 circumstance (Reflective Ripple)
 *Item bonuses don't stack: Sash of Prowess +3 and the staff's potency +3 are both item, take one.*
@@ -93,7 +93,7 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 **Class feats:** Monastic Weaponry · **Reflective Ripple Stance** (Natural Ambition) · **Qi Spells** (2) · **Flurry of Maneuvers** (4) · **Stand Still** (6) · **Rippling Spin** (8) · **Prevailing Position** (12) · **Peerless Form** (14) · **Fuse Stance** (16) · **Celestial Armaments** (16)
 
 **Fuse Stance (16)** — Reflective Ripple + Whirlwind fused. One action entry gets the +1 circ to Trip (Ripple), the +2 circ AC (Whirlwind), and the Rippling Spin reaction. The Whirlwind sweep attack is dropped from the fusion.
-**Celestial Armaments (16)** — the staff sheds torchlight, adds 1d8 spirit, grants crit spec, and on crit: Fort DC 38 or **blinded 1d4 rounds**. See Offense.
+**Celestial Armaments (16)** — the staff sheds torchlight, adds 1d8 spirit, grants crit spec, and on crit: Fort DC 35 or **blinded 1d4 rounds**. See Offense.
 **Prevailing Position (12)** — reaction: targeted by an attack or making a Reflex save vs damage while in a stance → leave the stance for **+4 circumstance to AC or that save**. S5 debut: blanked a +33 bec de corbin hit at effective AC 41. S7: used **four times** in one session (tsunami crit→hit, caller hit→miss, Maddenmist jaws miss at AC 44, scythe Reflex). The cost is real (stance gone until re-entered), so it's for the hit that would actually connect.
 **Peerless Form (14)** — +2 status to Fort and Will, permanently; he stops aging.
 
@@ -134,7 +134,7 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 **Mythic feats:** Ears That Hear the Truth (2) · **Fiery Rebirth** (4) · Correct the Story (6) · **Summon Mythic Power** (8) · **Become Destiny** (10) · Ascended Celestial Dedication (12) · **Ascend** (14) · **Celestial Armaments** (16)
 
 > **Ascend is the level-14 anchor**: permanent fly = Speed, **Flyby Attack**, and the 1/day 140-ft burst.
-> **Celestial Armaments (16)** is the level-16 anchor: +1d8 spirit per hit, crit spec on every crit, and Fort DC 38 or blinded 1d4 rounds. Combined with the Phantasmal Doorknob, every crit is a potential fight-ender.
+> **Celestial Armaments (16)** is the level-16 anchor: +1d8 spirit per hit, crit spec on every crit, and Fort DC 35 or blinded 1d4 rounds. Combined with the Phantasmal Doorknob, every crit is a potential fight-ender.
 > **MP economy note:** recurring costs are only Become Destiny, rerolls, and (at 18) Shining Glory — roughly 2 discretionary points per fight against 3/day + Summon + this AP's kill refunds. Don't add more MP mouths.
 
 ## Gear
@@ -145,7 +145,7 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 
 ## How it plays
 
-**The engine is Trip + crit blind, and S4–S7 priced it.** At +34 Trip, crits land on anything within 14 of the DC — and every crit now carries a Fort DC 38 blind (Celestial Armaments) on top of prone (staff crit spec). Paya's two-hander can't maneuver, Aureys converts everyone's debuffs into crits — prone is the debuff that feeds *all* melee, and it works on the mental-immune.
+**The engine is Trip + crit blind, and S4–S7 priced it.** At +34 Trip, crits land on anything within 14 of the DC — and every crit now carries a Fort DC 35 blind (Celestial Armaments) on top of prone (staff crit spec). Paya's two-hander can't maneuver, Aureys converts everyone's debuffs into crits — prone is the debuff that feeds *all* melee, and it works on the mental-immune.
 
 - **Flurry of Maneuvers** — two Trips for one action at MAP 0 / −5
 - **Bullying Staff** — Trip or Shove up to Gargantuan
@@ -166,7 +166,7 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 2. **Weakness to all damage — once per Strike, or once per damage type?** The resistance rules apply "resistance to all damage" separately per type with a worked example; weakness lacks the parallel. Decides whether Marked for Rebuke (18) is +10 or +60 per Strike. Ask as a rules question on the resistance parallel.
 3. ~~**Fuse Stance at 16**~~ — **RESOLVED**: Reflective Ripple + Whirlwind fused. Whirlwind sweep dropped from the fusion.
 4. **How much aerial combat is coming?** Asked plainly — it prices the whole flight investment and the ground-only riders. Cody trims the AP himself; he knows.
-5. **Phantasmal Doorknob automation.** The crit blind is house-ruled as a Fort save vs class DC (38), but there's no Foundry automation — Pax has to remember every time. S7 proved this bites: one of three Doorknob crits owed a save that was never rolled (the other two targets died before acting). Ask Cody to add a chat reminder or macro.
+5. **Phantasmal Doorknob automation.** The crit blind is house-ruled as a Fort save vs class DC (35), but there's no Foundry automation — Pax has to remember every time. S7 proved this bites: one of three Doorknob crits owed a save that was never rolled (the other two targets died before acting). Ask Cody to add a chat reminder or macro.
 
 ## Foundry sheet
 

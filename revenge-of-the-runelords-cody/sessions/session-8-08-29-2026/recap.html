@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 8 — The Trial of Runes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style></head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Trial of Runes</h1>
+  <div class="subtitle">Session 8 &middot; Seven questions, six answers, and a door that finally opened</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-08-29</span>
+    <span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+    <span class="meta-pill">3h 50m</span>
+    <span class="meta-pill">Level 16</span>
+    <span class="meta-pill">~5 days in-game</span>
+  </div>
+</header>
+
+<div class="note-banner">
+  <strong>New player.</strong> <strong>Kreebnock</strong> &mdash; gnome Psychic 16 with a Bard archetype &mdash; joins at level 16, introduced by Kandirvek as an old ally who carries mythic power of his own. His player's name is unconfirmed: Cody greets them as <em>"Arrakis"</em> and, later, <em>"Arrakis's new character"</em>. Those two renderings are the only forms anywhere in the recording &mdash; confirm the spelling before the next recap.
+</div>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:40%"></div>
+  <div class="comp-seg comp-rp" style="width:22%"></div>
+  <div class="comp-seg comp-social" style="width:16%"></div>
+  <div class="comp-seg comp-explore" style="width:14%"></div>
+  <div class="comp-seg comp-loot" style="width:8%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Social</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; downtime</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-sevek">
+    <div class="char-name">Sevek</div>
+    <div class="char-class">Human (Sky Dragonblood) Monk 16 &mdash; Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-paya">
+    <div class="char-name">Paya</div>
+    <div class="char-class">Leshy (pineapple) Fighter 16 &mdash; halberd, Kineticist archetype, Medic</div>
+    <div class="char-player">Kelsie</div>
+  </div>
+  <div class="char-card char-aureys">
+    <div class="char-name">Aureys Hollow</div>
+    <div class="char-class">Fey Dragonet Rogue (Scoundrel) 16 &mdash; fighting fan + claws, Living Nexus + Draconic Acolyte</div>
+    <div class="char-player">Anna</div>
+  </div>
+  <div class="char-card char-mith">
+    <div class="char-name">Mithtirith</div>
+    <div class="char-class">Elf Cleric of Nethys 16 &mdash; Hedge Mage, Staff of Healing (True)</div>
+    <div class="char-player">Jesse</div>
+  </div>
+  <div class="char-card char-kreebnock">
+    <div class="char-name">Kreebnock &middot; "Kree"</div>
+    <div class="char-class">Gnome Psychic 16 &mdash; Bard archetype, Unleash Psyche</div>
+    <div class="char-player">"Arrakis" &mdash; new</div>
+  </div>
+  <div class="char-card">
+    <div class="char-name">Cody McGraw</div>
+    <div class="char-class">Dungeon Master &mdash; "Ryu" in Foundry</div>
+    <div class="char-player">DM</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+  <p>Book Two's road finally has a map on it. The party finishes picking over Baolen's chamber and finds that the nine alcoves are a gallery of Runelord landmarks &mdash; the Black Squares of Ungevik, Sekhnavali, the Storval Stairs, Rimeskull, the Dome Hive, the Sunken Queen &mdash; and, in the fourth alcove, a flawless green gem that is not a gem. The <strong>Emerald Eye</strong> is a living blueprint of the Emerald Chambers, and studying it that night in Absalom gives up the one thing nobody had: <strong>where the entrance is.</strong> The Velashu Uplands, a sprawl of grassland in the Saga Lands, three days out on Kandirvek's back.</p>
+  <p>Between the temple and the road, two pieces of housekeeping. Paya runs the sell-off &mdash; the kukri, the tridents, the shield, the Staff of Arcane Might, the Bands of Force, the Potency Crystal all go out the door for <strong>4,788 gp each</strong> &mdash; and Sevek finally claims the greater flaming runestone that has been sitting in the stash since Quoroc's vault. And Kandirvek makes an introduction: an old ally of his, a mythic one, a gnome who looks like a kindly grandfather until you notice the blood-red left eye. <strong>Kreebnock</strong> floats a few feet off the ground, bows without landing, and says he's looking forward to ending this threat so he can get back to wandering.</p>
+  <p>The Uplands are not empty. Three armies are camped around the dais where seven enormous carved Runelord heads circle in the air: Velashu Horselords under <strong>Nood Helarsin</strong>, a Shoanti tribe under <strong>Roaring Storm</strong>, and &mdash; the reason everyone is nervous &mdash; an army flying the flag of <strong>Runelord Belimarius</strong>, led by an Azlanti man with violet eyes calling himself <strong>General Lograsi</strong>. Paya calls the approach (<em>"trying to stop Doomsday by starting a war seems counterproductive"</em>) and suggests the white flag; Aureys runs the parley, and over an honest accounting of what they've come for, wins a truce. Lograsi is delighted: the heroes can deal with the heads, and <em>"all the better for us."</em></p>
+  <p>The heads are the <strong>Trial of Runes</strong>. Mithtirith presents the party's mythic power as proof of a right to rule, and then six of the seven Runelords ask a question each. The party answers by playing to each sin, workshopping every one out loud, and lands <strong>five of six</strong>. Only Alderpash rejects them: the table's answer was to ally with the weaker enemy and betray them later, and Cody ruled the question had already named both as enemies. Then the seventh head &mdash; Xanderghul's &mdash; takes a long pause and refuses the game entirely. <em>"Nothing you say will suffice, intruders. The only answer I'll accept is your death."</em> His head splits like an eggshell and a <strong>peacock phoenix</strong> unfolds out of it; the five satisfied heads crash to the ground, and only Alderpash stays airborne, eyes lighting with runic fire.</p>
+  <p>That five-out-of-six is the whole fight. The Rune Sentries are a complex hazard that gets <strong>one action per surviving head</strong> &mdash; six heads would have meant six Lightning Arcs a round, roughly 190 points of electricity the party never had to eat. They faced one. It is still an extreme-threat fight: the phoenix opens with a 102-damage Reactive Strike crit that puts Paya on 69 before round one ends, then drops Phantasmagoria on everyone and <strong>Confuses Sevek and Mithtirith</strong> &mdash; Sevek puts 38 into Paya's back, and Mithtirith swings a staff in melee for the first time in fifteen levels and rolls a natural 1. Aureys does 188 of the phoenix's 400 herself, moves her astral rune onto her fan mid-fight to beat its incorporeal resistance, and finishes it with a keen claw crit. <strong>She takes zero damage all fight.</strong> The sentry itself is an <em>object</em> &mdash; hardness 28, immune to crits &mdash; and simply cannot be killed fast; Mithtirith disables it on his third legendary Arcana attempt, at DC 45, with <strong>10 HP left on the thing.</strong></p>
+  <p>Below, the Emerald Chambers: infinite branching corridors that swallow people for a lifetime, navigable only by the Eye. A day in, five <strong>Silent Devotees</strong> come around a corner at a sprint and make no sound at all &mdash; pale, eyeless things with emerald pits for sockets, wearing a ten-foot aura that suppresses hearing and speech, teleporting thirty feet a turn without provoking, and dealing sneak-attack damage to anyone who is merely <em>bleeding.</em> Cody ran five PL+0 bodies at 325 HP each: <strong>200 XP, the exact Extreme threshold for a five-player table</strong>, and forty-eight minutes of real time.</p>
+  <p>Another day's walk, a full rest, and then an emerald door bearing the seven-pointed Star of Thassilon. Through it: the <strong>Crypt of Runes</strong> itself &mdash; an eighty-foot circular chamber, seven doors around a seven-pointed star, six ajar and the seventh sealed in glowing runes. And one occupant. <strong>Czaresia</strong>, a rune giant with the rune of pride carved over and over into her skin. Six hundred hit points, a twenty-foot reach, and a Wide Swing that rolls once and applies to two people. Sevek Trips her, Taunts her twice, and takes 188 &mdash; but the Taunt does not keep her off the casters: in round three she walks past everyone to Wide Swing Kreebnock and Mithtirith, eating the off-guard to do it. Paya answers with two natural 20s. And in round four, with the giant at 27 hit points, Aureys puts both halves of an Earth to Heavens Strike through her.</p>
+  <p>Six doors stand open. The seventh is still sealed.</p>
+</div>
+
+<h2>The Session, Act by Act</h2>
+<div class="timeline">
+
+  <div class="act explore">
+    <div class="act-label">Act I &middot; Exploration &middot; The Nine Alcoves</div>
+    <div class="act-card">
+      <h3>A gallery of everything the Runelords built</h3>
+      <ul>
+        <li>The party finishes searching Baolen's chamber under the Isle of Xin. The pocket alcoves are murals, each depicting a Runelord landmark; Cody waives the checks &mdash; <em>"there's no reason you wouldn't be able to identify these."</em></li>
+        <li>Counterclockwise from the south: the <strong>Black Squares of Ungevik</strong> (Zutha's necromantic engine, still under the sea off Varisia); <strong>Sekhnavali</strong>, the Hanging Monastery, greatest temple to the peacock spirits; the <strong>Storval Stairs</strong> and the colossi flanking them (Karzoug); and the <strong>Emerald Chambers</strong> themselves &mdash; built as a memorial for <strong>First King Xin</strong> and a tomb for the Runelords who followed.</li>
+        <li><strong>Aureys</strong> searches the Emerald Chambers alcove and turns up a single flawless green gem: the <strong>Emerald Eye</strong>. Peering into it shows shifting passageways &mdash; a live map. Aureys: <em>"It will be a centerpiece of my hoard."</em> Paya: <em>"Yes, but first it'll be very useful in our travels."</em> Sevek: <em>"It can be both."</em></li>
+        <li><strong>Mithtirith</strong> insists on seeing the rest &mdash; <em>"I'll indulge my obsession with the Runelords"</em> &mdash; and gets five more: the obelisk forest of <strong>Mundatei</strong>; the <strong>Shining Queen</strong> (today the <strong>Sunken Queen</strong>), Sorshen's pyramid in the eastern Mushfens, whose carving Cody notes bears a striking resemblance to Xin-Eurythnia; <strong>Rimeskull</strong>, whose skull-carved mountainside once bore First King Xin's face; the <strong>Dome Hive</strong> and its legions of bureaucrats; and <strong>Azaradne's Gardens</strong>, grown by the third Runelord of Sloth from seeds that never needed tending.</li>
+        <li>Up and out. Kandirvek is circling above the isle. Aureys holds up the gem. <em>"Plus, I like flying on your back."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act II &middot; Downtime &amp; RP &middot; Absalom, and a New Ally</div>
+    <div class="act-card">
+      <h3>The sell-off, and a floating grandfather</h3>
+      <ul>
+        <li>Kandirvek: <em>"I took the liberty of contacting an old ally of mine&hellip; They've mythic power like yourselves."</em> Aureys: <em>"They're more than welcome to join our little band."</em> Paya: <em>"Doom-driven heroes should work together."</em></li>
+        <li><strong>The sell-off</strong>, Paya running it as loot master: the +2 greater striking keen kukri, three +2 greater striking shock tridents, the Major Sturdy Shield, the <strong>Greater Staff of Arcane Might</strong> (nobody can invest a second staff), the second Greater Bands of Force, and the Major Potency Crystal (<em>"unless you have an Investigator, they're generally just very sad"</em>). Kept: the Scroll of Teleport, the scroll case, the countering charm &mdash; and the Emerald Eye. <strong>4,788 gp each.</strong></li>
+        <li><strong>The greater flaming runestone finally lands.</strong> Sevek: <em>"I will take the greater flaming, though, if you guys don't mind."</em> The S7 stash argument is over in one sentence. The <strong>Runic Skullcap</strong> goes to Mithtirith; <strong>Paya</strong> keeps the <strong>Paradigm Cube</strong> &mdash; <em>"if you spend a mythic point on it, you just get to choose, and I do like that."</em></li>
+        <li><strong>Kreebnock's introduction.</strong> An elderly gnomish man, orange and green hair, kindly-grandfather face ruined by a <strong>scarlet blood-red left eye</strong> (the right is bright amber). He floats the entire conversation and never touches the ground. <em>"You can call me Kreebnock, or Kree, if you prefer. I've been called both."</em> Aureys, after he mentions his mother's preference: <em>"Alright, let's not offend the mama."</em></li>
+        <li><strong>Aureys</strong> introduces herself as a very small dragon in slightly oversized robes: <em>"I am Aureys. Hello. You may have heard of me."</em> Kreebnock has: <em>"Kandirvek did mention you and your companion."</em> <strong>Paya</strong> removes his helmet to reveal a pineapple head, explains he's a fruit leshy, and shakes hands: <em>"Hi, I'm Paya. Nice to meet you."</em></li>
+        <li>Asked whether he's coming out of retirement, Kreebnock: <em>"Oh, no retirement. Just wandering. My kind of retirement."</em></li>
+        <li>Mithtirith's Staff of Healing won't cast above 3rd rank. A few minutes of Cody-and-Paya debugging finds it: the staff was set to three charges instead of eight. <em>"Oh, that's an easy fix."</em></li>
+        <li>Studying the Emerald Eye overnight gives up the entrance: the <strong>Velashu Uplands</strong>, hundreds of miles of rolling grassland home to <strong>Shoanti</strong> tribes and <strong>Velashu Horselords</strong>. Three days on dragonback. <em>"Once you're in the Crypt of Runes, it may take some time before you emerge again."</em> Paya buys bottled sunlight.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act III &middot; Social &middot; Three Armies</div>
+    <div class="act-card">
+      <h3>A truce between people who intend to kill each other</h3>
+      <ul>
+        <li>The destination is a stone dais on the highest hill for miles, with <strong>seven enormous carved heads circling in the air above it</strong> &mdash; Xirie, Xanderghul, and others, each a perfect and eerily lifelike likeness. Around the hill: three full-sized armies at a standoff.</li>
+        <li>Velashu Horselords; a Shoanti tribe; and an army in steel and enchanted gear flying the flag of <strong>Runelord Belimarius</strong> &mdash; <em>"prior to the Risen of the Trinity Star and Queen Sorshen herself, the only surviving Runelord."</em> <strong>Mithtirith</strong> asks about Belimarius' history with Sorshen: they have never gotten along, Sorshen was the more powerful by a wide margin, and with Sorshen out of the picture Belimarius may be feeling confident.</li>
+        <li>Mithtirith also asks the sharpest question of the scene, about the scenery: <em>"the description of the carved Runelord heads makes it sound like they're iron stones revolving around something. Is that the vibe it's giving off?"</em> Cody: <em>"It's not dissimilar magic, but they're too large to be iron stones."</em></li>
+        <li><strong>Paya</strong> says the obvious thing out loud &mdash; <em>"trying to stop Doomsday by starting a war seems counterproductive"</em> &mdash; and it's Paya who proposes the white flag and the neutral ground. Aureys agrees and takes the talking.</li>
+        <li>One rider from each army. <strong>Nood Helarsin</strong> of the Horselords, mid-thirties, battle-scarred, auburn. <strong>Roaring Storm</strong> of the Shoanti, deep scowl, bird tattoos across her neck and scalp. And from Belimarius' army, an <strong>Azlanti</strong> man with a well-groomed beard, black leather armor, and almost-glowing violet eyes: <strong>General Lograsi</strong>.</li>
+        <li>Introductions all round. Aureys: <em>"my companions and I are heroes of these lands. You may have heard of me."</em> Paya: <em>"Hi, I'm Paya. We're here to stop Doom."</em> Sevek: <em>"I'm just a guy that's trying to do good."</em> Kreebnock bows without landing. Mithtirith: <em>"I am Mithtirith, Nethys's humble servant."</em></li>
+        <li>Lograsi senses the mythic power on them and presses the real question twice: <strong>why are you here?</strong> Aureys gives the honest answer, and then the dragon answer &mdash; <em>"there is probably wonderful, delicious stuff, and maybe a few undead treats inside. Snacks, if you will."</em> Nood: <em>"A dragon, no matter the dragon, is still a dragon, I suppose."</em></li>
+        <li>Lograsi turns it into a truce: <em>"My lady Belimarius has no care for the Runelord of Pride&hellip; I say we allow them the chance to at least deal with those heads, yes? All the better for us."</em> Roaring Storm had already promised him an arrow in the throat and never audibly agrees to anything. Nood nods &mdash; to the party, not to Lograsi: <em>"If you've come for that area, by all means. But know, we will be watching."</em></li>
+        <li>Aureys closes it: <em>"And if we do not return, you may well have to deal with this yourselves."</em> Lograsi: <em>"Confident, aren't we?"</em> Aureys: <em>"I am a dragon after all."</em></li>
+        <li>Kandirvek stays topside &mdash; Thassilonian magic is unreliable down there, he has contacts to work, and he'll make sure nobody follows. His parting read: <em>"I expect once you descend down into the Emerald Chambers, they're primed to start killing one another."</em> Aureys, unbothered: <em>"if you have to kill a few to keep the rest in line, yeah, you do what you gotta do, guy."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act IV &middot; Puzzle &amp; RP &middot; The Trial of Runes</div>
+    <div class="act-card">
+      <h3>Six questions from six dead tyrants</h3>
+      <ul>
+        <li>The seven heads descend as the party sets foot on the dais &mdash; each eight feet tall and nearly as wide &mdash; and speak in one merged voice: <em>"You seek entrance to the Emerald Chambers, the final resting place of First King Xin. To begin the trial, show us, the Lords of Thassilon, proof of your right to rule through your command of rune magic."</em></li>
+        <li><strong>Mithtirith's</strong> Recall Knowledge reads the assignment: cast a spell of rune magic, or present an item inscribed with it. Cody rules it narrative, not mechanical. Mithtirith presents his own mythic power and his study of Thassilon; the sentries' eyes flash and the heads begin to circle. The party's working theory is his too: <strong>play to each Runelord's sin.</strong></li>
+        <li><strong>Kaliphesta, Gluttony</strong> &mdash; <em>"What separates the living, the mindless dead, the dead that think, and that which moves without spirit?"</em> Mithtirith burns <strong>Scholarly Recollection</strong> on a riddle rather than a fight. &rarr; <strong>Aureys</strong>: <em>"For what they hunger."</em> &#10003;</li>
+        <li><strong>Envy</strong> &mdash; <em>"How does a ruler ensure the loyalty of those who serve?"</em> &rarr; <strong>Kreebnock</strong>, cold, with no table discussion at all: <em>"By serving those beneath him."</em> &#10003;</li>
+        <li><strong>Greed</strong> &mdash; <em>"What fills your coffers more quickly, and why: truth or lies?"</em> The table splits &mdash; Mithtirith: <em>"I feel like this is a philosophical difference in the party"</em> &mdash; and Paya notes he wouldn't lie himself but has watched Aureys do very well at it. &rarr; <strong>Aureys</strong>: <em>"Lies. Because through schemes and deception, you are able to fill your coffer as quickly as possible."</em> &#10003;</li>
+        <li><strong>Xirie, Sloth</strong> &mdash; <em>"What is the shortest path to greatness?"</em> Aureys offers <em>"letting it come to you"</em>; Paya offers <em>"sacrifice"</em>; <strong>Sevek</strong> synthesises and delivers it: <em>"Step on the path that others have laid for yourself, so you don't have to build a path yourself."</em> &#10003;</li>
+        <li><strong>Alderpash, Wrath</strong> &mdash; <em>"You have two enemies. One camps at your borders but could be crushed easily. The other poses no immediate threat but is more formidable. How do you proceed?"</em> &#10007; <strong>The one wrong answer, and it was the whole table's.</strong> Aureys opened with <em>"destroy them both"</em>; <strong>Kreebnock</strong> proposed the mechanism (<em>"play one against the other, and then strike when they're both weakened"</em>); <strong>Sevek</strong> shaped it &mdash; and then <strong>raised the exact objection Cody would later rule on</strong>: <em>"I think in this question it says exclusively to enemies."</em> Paya and Mithtirith both endorsed the plan; Aureys added the betrayal; Sevek gave the final version anyway. Cody, after: <em>"The word 'enemies' dictates they're already both against you."</em> <strong>The party had the right read in the room and answered past it.</strong></li>
+        <li><strong>Sorshen, Lust</strong> &mdash; <em>"Which of my works will be best remembered?"</em> Aureys names the city, <strong>Paya</strong> supplies the name, and Aureys delivers it: <em>"Your mighty city of Xin-Eurythnia."</em> &#10003;</li>
+        <li><strong>Five of six.</strong> It's <strong>Paya</strong> who names the miss afterward, and then immediately lets it go: <em>"I will take one out of six. That's pretty good."</em></li>
+        <li>The seventh head is <strong>Xanderghul's</strong>, and it does not ask a question. A long, uncomfortable pause. His head cracks open like an eggshell; an enormous spectral <strong>peacock phoenix</strong> unfolds out of the iridescent light. Five heads crash to the ground. <strong>Alderpash's remains airborne</strong>, glowing with runic energy. Kreebnock, on the phoenix: <em>"Cool. I want one of those."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V &middot; Combat &middot; The Peacock Phoenix</div>
+    <div class="act-card">
+      <h3>The difficulty dial nobody knew they were turning</h3>
+      <ul>
+        <li>See <strong>Combat Encounters</strong> below for the round-by-round. The short version: <strong>the trial answers were the fight's difficulty dial.</strong> Cody, mid-fight: <em>"Imagine this fight if you had gotten them all wrong."</em> Paya: <em>"Maybe if you had gotten three wrong even, it would be very hard."</em></li>
+        <li>The phoenix opens with a 102-damage Reactive Strike crit into Paya, then Phantasmagoria for 63 across the party &mdash; <strong>Confusing Sevek and Mithtirith</strong>, both of whom spent resources on the save and failed anyway.</li>
+        <li><strong>Aureys</strong> does 188 of the phoenix's 400, moves her astral rune onto her fan mid-fight to beat incorporeal resistance, and kills it with a keen claw crit. <strong>She takes zero damage in six rounds.</strong></li>
+        <li>The <strong>Rune Sentry</strong> is an <em>object</em> &mdash; hardness 28, immune to crits and precision &mdash; and the party discovers that the hard way over two rounds. <strong>Mithtirith</strong> ends it with a legendary Arcana check at DC 45, on his third attempt, with 10 HP left on the thing.</li>
+        <li>After the sentry falls, a staircase manifests in a glyph of runes beneath the dais. Aureys pre-buffs with Bolster Flesh and Summon Mythic Power, reminds the table to do the same, and goes down first looking for traps.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI &middot; Exploration &amp; Combat &middot; Into the Emerald Chambers</div>
+    <div class="act-card">
+      <h3>A maze that kills people slowly, and five things that do it fast</h3>
+      <ul>
+        <li><em>"Tall, sprawling hallways that seem to go on forever. A maze of passageways that spiral out into infinity."</em> Magnificent locked doors, catacombs and tombs that could hold riches, all of it passed by. Cody's line for the place: <em>"It is not an uncommon story to hear of one who somehow finds the Emerald Chambers, dying of old age well before they reach their target plunder."</em> Only the Emerald Eye makes it navigable.</li>
+        <li>Not far in: <em>"You don't hear them. You never hear them."</em> Five <strong>Silent Devotees</strong> &mdash; skin ice pale, eyes pits of emerald green, barefoot, leaving no sound or mark on the tile &mdash; sprinting at the party in total silence. Mithtirith, on the art: <em>"Looks like overcompensation to me."</em></li>
+        <li>The fight runs <strong>forty-eight minutes of real time</strong> and six rounds. Loot: five <strong>+2 greater striking wounding frost longswords.</strong> Sevek, watching the party total climb: <em>"I still need some time to get accustomed to the big numbers."</em></li>
+        <li>A day's travel and a full rest inside the Chambers. Then the destination: <strong>a magnificent emerald door inscribed with the seven-sided Star of Thassilon.</strong> Aureys pre-buffs at the threshold &mdash; Bolster Flesh, then Hollow Robes for invisibility.</li>
+        <li>Through the door, a flash of prismatic light, and the party is somewhere entirely new: the <strong>Crypt of Runes.</strong> An 80-foot circular chamber, ceiling twice that. A seven-pointed star set into the floor, its tips aimed at seven doors. <strong>Six stand ajar; the seventh, directly north, glows with runes.</strong> A statue of a long-haired man holding a staff stands on a plinth at the center, facing a mural on the southern wall.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VII &middot; Mythic Boss &middot; Czaresia</div>
+    <div class="act-card">
+      <h3>The guardian of the Crypt of Runes</h3>
+      <ul>
+        <li>One occupant: a towering female <strong>rune giant</strong> with burning red eyes and a mace <em>"so large it may as well be a scepter, even by her standards."</em> On every inch of exposed skin, the <strong>rune of pride, inscribed over and over.</strong></li>
+        <li><em>"What is this? Who are you? And how have you all come here?"</em> <strong>Kreebnock</strong>, deadpan: <em>"Well, it all started with a dream."</em> <strong>Paya</strong>, flatly honest: <em>"Heroes of Golarion, here to stop Xanderghul."</em></li>
+        <li><em>"Is that so? Your honesty would be charming if it wasn't so foolish. I am <strong>Czaresia</strong>, servant of Runelord Xanderghul and guardian of the Crypt of Runes. I don't know how you all found your way here, but in doing so, you've forfeited your lives."</em></li>
+        <li>Four rounds, 600 hit points, and a Wide Swing that rolls once and applies to two people. She never got a fourth turn.</li>
+        <li><strong>Aureys</strong> kills her with an Earth to Heavens Strike, both halves connecting. Cody calls the session on the description: <em>"the dragonet carves a giant hole through her torso, and there is a torrent of blood that cascades down onto the stones as she falls dead."</em></li>
+        <li>Cody switches the backdrop to Book Two's art and immediately notes he can't use it as a landing page: <em>"it's a spoiler, you know."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; 6 rounds &middot; 14:10&ndash;15:02 &middot; Extreme threat</div>
+  <h3 style="margin-top:0">The Peacock Phoenix and Rune Sentry Alderpash</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Peacock Phoenix</span><span class="stat-value">Book: lvl 17, AC 39, 240 HP. <strong>Run at AC 43, 400 HP</strong>, spell DC 44, Radiant Beam 12d12/DC 42, Radiant Wing +38 &mdash; and <strong>no Rebirth</strong></span></div>
+    <div><span class="stat-label">Rune Sentries</span><span class="stat-value">Complex hazard, <strong>run exactly to book</strong>: AC 43, hardness 28, 110 HP, immune to crits and precision, disable DC 45 Arcana (legendary)</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Alderpash 65 &middot; <strong>Aureys 51</strong> &middot; Phoenix 49 &middot; Paya 47 &middot; Sevek 38 (Delayed for Haste) &middot; Kreebnock 33 &middot; Mithtirith 29</span></div>
+    <div><span class="stat-label">Damage taken</span><span class="stat-value"><strong>637</strong> &mdash; 468 phoenix, 119 from six Lightning Arcs, <strong>50 from the party's own Confused PCs</strong></span></div>
+  </div>
+
+  <p><strong>The setup that decided it.</strong> The hazard gets <strong>one action per surviving head</strong>, each spent on Lightning Arc (3d12+19, DC 42 basic Reflex, random target). Five heads had crashed on correct answers, so the party faced <strong>one arc a round instead of six</strong> &mdash; roughly 190 points of electricity a round they never had to eat. The healing clause is smaller than it sounds and still real: unused arcs restore 20 HP each to the phoenix, and with six sentries against five PCs exactly one would have gone begging &mdash; <strong>20 HP a round.</strong></p>
+
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Alderpash</strong> zaps Mithtirith (12).</li>
+    <li><strong>Aureys</strong> critically fails a Recall Knowledge; Cody gives her the disable method anyway. She Hides in the open on Legendary Sneak.</li>
+    <li><strong>Phoenix</strong> flies down and opens <strong>Radiant Beam</strong> &mdash; 77 force &mdash; on Sevek and Paya. Sevek spends a mythic point to save at mythic proficiency (33 through); Paya eats all 77.</li>
+    <li><strong>Paya</strong> leaps in on Needle in the Gods' Eyes, makes her Radiant Panoply save by exactly zero, and takes a <strong>Reactive Strike crit for 102 mental</strong> on the way in &mdash; <strong>69 of 248 before round one is over.</strong> One halberd hit lands for 42.</li>
+    <li><strong>Kreebnock</strong>, one round into his first session, drops <strong>Rallying Anthem and Haste on all five.</strong></li>
+    <li><strong>Sevek</strong> fuses Reflective Ripple and Whirlwind, Flurries two Trips into the phoenix's <strong>Reflex DC 46</strong> and misses by 4 and by 1, and Taunts instead.</li>
+    <li><strong>Mithtirith</strong> puts <strong>116 into Paya.</strong></li>
+  </ul>
+
+  <h4>Round 2 &mdash; Phantasmagoria</h4>
+  <ul>
+    <li><strong>Alderpash</strong> finds Mithtirith again (29).</li>
+    <li><strong>Aureys</strong> spends an action <strong>moving her astral rune from her handwraps onto her fan</strong> &mdash; the direct answer to the incorporeal read &mdash; then Feints for exactly the DC and lands fan-and-claw for <strong>63</strong>, leaving the phoenix <strong>enfeebled 1.</strong></li>
+    <li><strong>Phoenix</strong>'s Radiant Wing misses Sevek by 1 <em>because of Taunt</em>; Sevek points out the penalty shouldn't apply when he's the target and takes the <strong>40</strong> anyway. Then <strong>Phantasmagoria</strong>: 16d6, 63, everyone. Kreebnock and Aureys critically succeed for nothing; Paya saves for 31. <strong>Sevek burns his Ascended Celestial Will reroll and still fails; Mithtirith spends a mythic point for mythic proficiency and still fails.</strong> Both take 63 and both are <strong>Confused.</strong></li>
+    <li><strong>Paya</strong> auto-crit-Trips the phoenix prone off Slam Down.</li>
+    <li><strong>Kreebnock</strong>'s first Unleash Psyche fires an amped Daze &mdash; 46 rolled, halved, 8 through resistance.</li>
+    <li><strong>Sevek</strong>, confused, rolls Paya, phoenix, Aureys &mdash; <strong>38 into Paya's back</strong>, 45 into the phoenix, and a miss on Aureys by 1.</li>
+    <li><strong>Mithtirith</strong>, confused, Frostbites Kreebnock for 12 and then swings a staff in melee <strong>for the first time in fifteen levels &mdash; natural 1.</strong> Both shake the condition at end of turn.</li>
+  </ul>
+
+  <h4>Round 3</h4>
+  <ul>
+    <li><strong>Alderpash</strong> goes for Mithtirith a third straight time and rolls a <strong>natural 20</strong> into a critical success &mdash; nothing. Cody: <em>"I don't know what Alderpash has against Mithtirith, but the universe has decided."</em></li>
+    <li><strong>Aureys</strong> lands <strong>Majestic Presence</strong> (frightened 1), then the fight's biggest turn: fan hit plus <strong>keen claw crit, 130 rolled, 97 through precision immunity.</strong></li>
+    <li><strong>Phoenix</strong> spends a <strong>mythic point on Remove a Condition</strong> to stand for free, then Radiant Beams again. <strong>Sevek</strong> burns <strong>Prevailing Position</strong>, gives up the stance for +4, fails anyway, and drops to <strong>53 of 248 (21%)</strong>; Paya spends a mythic point and critically succeeds.</li>
+    <li><strong>Paya</strong>'s Vicious Swing puts in 54. <strong>Kreebnock</strong>'s Murder of Crows lands 26 and <strong>Razzle-Dazzle</strong> stretches the dazzle to two rounds.</li>
+    <li><strong>Sevek</strong>'s Inner Upheaval Flurry misses three times, the last a natural 1. He moves to <strong>Group Taunt the phoenix and the sentry together</strong> &mdash; Cody stops him before any action is spent: <em>"You can't taunt the sentry because the sentry is not a creature. It is a hazard."</em> He Taunts the phoenix instead.</li>
+    <li><strong>Mithtirith</strong> three-action Heals for 42 across four PCs.</li>
+  </ul>
+
+  <h4>Round 4 &mdash; the phoenix dies on turn two</h4>
+  <ul>
+    <li><strong>Alderpash</strong> finally picks someone else (Paya, 30).</li>
+    <li><strong>Aureys</strong> steps to line up an <strong>Aether Beam</strong> across both the phoenix and the sentry &mdash; force, chosen specifically to beat incorporeal resistance &mdash; and it does nothing to either: the phoenix critically succeeds, and the sentry's halved 26 dies against hardness 28. Then the fan: <strong>natural 19 on a keen rune, critical hit, 90 rolled, 70 through &mdash; and the phoenix only had 28 left.</strong> <em>"It explodes into iridescent light and is gone."</em> <strong>+2 mythic points to Aureys, +1 to everyone else.</strong></li>
+    <li><strong>Phoenix total: 400 damage exactly.</strong> Aureys 188, Paya 133, Sevek 45 (all of it thrown while Confused), Kreebnock 34.</li>
+    <li>The rest of the round is the party discovering what an object is. <strong>Kreebnock</strong>'s Blinding Foam rolls a <strong>natural 20</strong> &mdash; the hazard is immune to critical hits, but Cody doubles it anyway, and that ruling is the only reason <strong>16</strong> gets past hardness. <strong>Sevek</strong>'s Electric Arc does literally nothing, and the Jolt Coil plan dies with it: <em>"it's not really going to help against object hardness, because it's against all damage."</em> <strong>Mithtirith</strong>'s first Arcana: <strong>43 vs DC 45.</strong></li>
+  </ul>
+
+  <h4>Rounds 5&ndash;6 &mdash; the object</h4>
+  <ul>
+    <li>For two rounds almost nothing clears hardness 28. Aureys hits it once for 21, absorbed. Sevek hits it once for 33, absorbed. <strong>Both of them stop swinging and start Aiding</strong>, and that turns out to be the correct read &mdash; Sevek's +3 is the entire margin on Paya's round-6 hit (44 vs AC 43).</li>
+    <li>What actually lands: <strong>Paya</strong>'s two Vicious Swings (22, 18) and <strong>Kreebnock</strong>'s amped Imaginary Weapon &mdash; <em>"a comically large hammer"</em> &mdash; for <strong>43 through hardness</strong>, taking it from 54 to 11.</li>
+    <li><strong>Sevek</strong> rolls a <strong>natural 20</strong> and gets nothing: <em>"it's also immune to crits because it is an object&hellip; it only takes the persistent fire at the end of that"</em> &mdash; and the persistent fire couldn't beat hardness either. Kreebnock's persistent acid never got a point through; both ticks read <em>"takes no damage."</em></li>
+    <li>The arc finds Aureys (natural 20, nothing) and then Sevek (<strong>48</strong>, through a second Prevailing Position).</li>
+    <li><strong>Resolution: not a kill, a disable.</strong> <strong>Aureys</strong> tries first &mdash; <em>"this is my job, and I don't care if I have to lie to do it"</em> &mdash; Trained Arcana, mythic reroll, <strong>42.</strong> <strong>Mithtirith</strong> goes three times at legendary +29, mythic rerolls on the last two: <strong>43, 43, 46.</strong> <em>"Ironically, when it had 10 HP left, that is when you get the success."</em></li>
+  </ul>
+  <p style="color:var(--gold)">Party floors: Paya 69/248 in round 1, Sevek 53/248 in round 3. <strong>Aureys took nothing at all.</strong></p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; 6 rounds &middot; 15:24&ndash;16:11 &middot; 48 minutes of real time</div>
+  <h3 style="margin-top:0">Five Silent Devotees</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Scaling</span><span class="stat-value">Book lvl 14, AC 36, 255 HP. <strong>Run at AC 39, 325 HP</strong>, attack +33, all saves +3, longsword 3d8+19, Cruel Sneak 3d6 &mdash; PL&minus;2 turned into PL+0</span></div>
+    <div><span class="stat-label">Difficulty</span><span class="stat-value"><strong>100 XP (Moderate) as written &middot; 200 XP (Extreme) as run</strong> &mdash; the exact Extreme threshold for a five-PC party</span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value">Paya 51 &middot; <strong>Aureys 48</strong> &middot; C 46 &middot; A 46 &middot; E 41 &middot; B 40 &middot; D 37 &middot; Kreebnock 37 (mythic Prescience) &middot; Sevek 32 &middot; Mithtirith 32</span></div>
+    <div><span class="stat-label">Damage dealt</span><span class="stat-value">Aureys ~584 &middot; Paya ~544 &middot; Sevek ~283 &middot; Kreebnock ~214 &mdash; <strong>1,625, exactly five full bars</strong></span></div>
+  </div>
+
+  <p><strong>What they do.</strong> <em>Transdimensional Step</em> &mdash; a 30-foot teleport with no move, concentrate, or manipulate traits, so it never provokes. <em>Pall of Silence</em> &mdash; a 10-foot aura blocking auditory actions and any spell without the subtle trait. <em>Cruel Sneak Attack</em> &mdash; +3d6 against anyone off-guard <strong>or taking persistent bleed</strong>, and their wounding longswords apply bleed on every hit. <strong>The loop is self-sustaining: one landed hit makes every later hit a sneak attack</strong>, and it ran on Paya, Sevek, and Kreebnock all fight.</p>
+
+  <h4>Rounds 1&ndash;2 &mdash; the backline gets teleported into, and B dies</h4>
+  <ul>
+    <li><strong>Paya</strong> opens with Needle in the Gods' Eyes (47 into B). <strong>Aureys</strong> critically Feints B and puts <strong>126</strong> into it on a natural-20 claw.</li>
+    <li>The devotees ignore the front line entirely: C strides to Mithtirith &mdash; <strong>Sevek's Stand Still catches it on the way in and misses</strong> &mdash; A teleports behind Paya (Deflecting Wave cuts 39 to 17), E strides to Sevek, B teleports into a flank and lands the fight's first Cruel Sneak Attack, and D teleports onto Aureys for an <strong>80-point crit.</strong></li>
+    <li><strong>Mithtirith</strong> goes <strong>invisible</strong>; Cody rules the devotees can't see through it, which hands the next two rounds of attention to Kreebnock.</li>
+    <li><strong>Paya</strong> spends <strong>two mythic points</strong> on back-to-back <strong>Divide and Conquer</strong>: 44 into A, an 84 crit into B, then a natural 20 for 82. <em>"This one falls. Even as they hit the floor, they make no sound."</em> &mdash; <strong>first kill, Paya.</strong></li>
+    <li>E answers with an <strong>80-point crit on Kreebnock</strong>; his gnome <strong>Unexpected Shift</strong> lands the DC 11 flat check for resistance 16.</li>
+  </ul>
+
+  <h4>Rounds 3&ndash;4 &mdash; Sevek turns into a speed bump, and A dies</h4>
+  <ul>
+    <li>E hits <strong>Sevek</strong> and <strong>Rippling Spin fires: a critical Trip, Reflex DC 41 by 11.</strong> Cody makes him honour the reach clause &mdash; <em>"you do need to take that damage, and step and end it within the attacker's reach"</em> &mdash; and <strong>E never gets up again</strong>, fighting prone for the rest of its life.</li>
+    <li><strong>Sevek Group Taunts E, C, and A</strong> onto himself and eats it: C crits him and <strong>Prevailing Position downgrades it to a plain hit</strong>, ~39 damage erased on one reaction.</li>
+    <li><strong>Aureys</strong> stacks Majestic Presence and Frightening Power and grovels through a Feint every round; A becomes the frightened, sickened, burning, bleeding centre of the fight until <strong>Paya</strong>'s Needle in the Gods' Eyes takes it apart. <em>"And with that, A is down."</em></li>
+  </ul>
+
+  <h4>Round 5 &mdash; two at once</h4>
+  <ul>
+    <li><strong>Aureys</strong> Feints D and lands <strong>Earth to Heavens Strike with both halves critting for 158 &mdash; D dies where it stands.</strong></li>
+    <li><strong>Sevek</strong>'s <strong>second critical Trip</strong> (DC 41 by 10) puts C on the floor.</li>
+    <li><strong>Kreebnock</strong> finishes E with the comically large hammer, a 52-point Imaginary Weapon; E's Reactive Strike on the manipulate trait misses by one first. <em>"You're faster as you bring the hammer down, and they are dead &mdash; because he was prone, see, he was lying at your feet."</em></li>
+  </ul>
+
+  <h4>Round 6 &mdash; the last one</h4>
+  <ul>
+    <li>C teleports out, <strong>crits Aureys for 82</strong> on the way (her floor, 67 of 200), then whiffs twice.</li>
+    <li><strong>Paya</strong> crits it for 68, <strong>Sevek</strong> grinds 37 through, and <strong>Aureys finishes it on an Opportune Backstab off Sevek's hit</strong> &mdash; <em>"I will stab down at him when he lands."</em> <em>"And with that, the last of them is down."</em></li>
+  </ul>
+  <p><strong>Rules notes.</strong> Both Sevek (Electric Arc) and Kreebnock cast spells inside a Pall of Silence. <strong>Kreebnock caught it himself, after the fact.</strong> Cody let both stand &mdash; <em>"I didn't catch it, you guys didn't catch it, it's how it is."</em> Separately, the devotees' own stat block carries constant truesight &mdash; Cody's ruling on the invisible Mithtirith went the party's way.</p>
+  <p style="color:var(--gold)">Mithtirith healed 378 across four Heals, mostly into Sevek. Party floors: Kreebnock 22%, Aureys 33%, Sevek 35%, Paya 44%.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 &middot; 4 rounds &middot; 16:19&ndash;16:53 &middot; The session ended on the kill</div>
+  <h3 style="margin-top:0">Czaresia, Guardian of the Crypt of Runes</h3>
+  <div class="combat-stats">
+    <div><span class="stat-label">Scaling</span><span class="stat-value">Book lvl 18, AC 41, 375 HP. <strong>Run at lvl 19: AC 42, 600 HP</strong>, mace +37, Perception +34. Elite-shaped on every stat, with <strong>HP set by hand at 1.60&times; the book</strong></span></div>
+    <div><span class="stat-label">Initiative</span><span class="stat-value"><strong>Aureys 48</strong> &middot; Czaresia 40 &middot; Mithtirith 39 &middot; Paya 39 &middot; Sevek 36 &middot; Kreebnock 28 &mdash; Paya and Sevek both Delayed behind Kreebnock for Haste</span></div>
+    <div><span class="stat-label">Mythic points</span><span class="stat-value"><strong>Czaresia spent three</strong> &mdash; two Invoke Rune recharges, one Remove a Condition to stand from Sevek's Trip. The party spent one.</span></div>
+    <div><span class="stat-label">Totals</span><span class="stat-value"><strong>704 damage taken</strong> off a 1,096-HP party, 386 healed back. Nobody dropped; low-water mark Aureys at 54%</span></div>
+  </div>
+
+  <p><strong>Her kit.</strong> 20-foot reach mace, permanently quickened. <strong>Wide Swing</strong> &mdash; one attack roll compared against the AC of <em>two</em> targets in reach; one action, counts as two attacks for MAP, no flourish trait, so she repeats it. <strong>Invoke Rune</strong> &mdash; a 30-foot 8d12 electricity cone that also stacks a rune onto her mace (she took Rune of Flames, +3d6 fire), rechargeable with a mythic point. <strong>Flashing Runes</strong> &mdash; a free Fortitude save inside 10 feet whenever she uses an arcane ability. <strong>Two Reactive Strikes a turn.</strong> Immune to fire.</p>
+  <p><strong>Note on her AC.</strong> It reads <strong>41</strong> for two rounds and <strong>42</strong> afterward. That is not a stat change &mdash; it is <strong>Aureys' Demoralize</strong>, and frightened 1 applies a status penalty to every DC she has, including AC. Her clean AC was 42 all fight.</p>
+
+  <h4>Round 1 &mdash; everything happens</h4>
+  <ul>
+    <li><strong>Aureys</strong> opens invisible with a Demoralize that sticks, two failed Feints, then fan and claw for <strong>77.</strong></li>
+    <li><strong>Czaresia</strong> strides in and her first <strong>Wide Swing crits both Aureys and Paya</strong> &mdash; 92 into Aureys, and Paya blunts a 100-damage roll to 52 with Deflecting Wave. <strong>Invoke Rune</strong> catches Mithtirith on a <strong>critical failure (61)</strong> and Paya (18); <strong>Flashing Runes</strong> fires off it and both targets critically succeed. A second Wide Swing at MAP &minus;10 still hits <strong>Sevek for 48 and Paya for 42.</strong> <em>"There is just this onslaught of this mace, as she twirls, launches bolts of electricity and fire, and the whole room is just lit up in this maelstrom."</em></li>
+    <li><strong>Mithtirith</strong> Heals Paya for <strong>111</strong> and burns <strong>Scholarly Recollection</strong> on the Recall Knowledge that finds the fire immunity: <em>"I will tell everyone not to try to use fire, because she's immune."</em></li>
+    <li><strong>Kreebnock</strong> lands <strong>Haste on everyone</strong> plus Courageous Anthem.</li>
+    <li><strong>Paya</strong> eats a Reactive Strike on her leap and answers with a hit and a <strong>natural-20 Spear Dancer crit for 100.</strong></li>
+    <li><strong>Sevek</strong> enters the fused stance, walks into the second Reactive Strike, misses twice with Inner Upheaval up, and <strong>Taunts.</strong></li>
+  </ul>
+
+  <h4>Round 2 &mdash; the Trip</h4>
+  <ul>
+    <li><strong>Aureys</strong> re-applies frightened with Majestic Presence and lands 37.</li>
+    <li><strong>Czaresia</strong> dislikes her Invoke Rune recharge roll and <strong>spends a mythic point to recharge it anyway</strong>, then Wide Swings Sevek (49) and Paya (44) &mdash; which triggers <strong>Rippling Spin</strong> into a <strong>Bullying Staff Trip, Reflex DC 40 by 3. The rune giant goes down.</strong> She burns a <strong>second mythic point on Remove a Condition</strong> to stand without using the move trait, denying the party the reactions a Stand would have provoked.</li>
+    <li><strong>Mithtirith</strong> heals Aureys 92. <strong>Kreebnock</strong>'s Blinding Foam critically misses. <strong>Paya</strong> adds 38.</li>
+    <li><strong>Sevek</strong> fires <strong>Herald's Weapon</strong>, critically misses twice, then connects at MAP &minus;10 for 28, and Taunts again.</li>
+  </ul>
+
+  <h4>Round 3 &mdash; the round she went at the casters anyway</h4>
+  <ul>
+    <li><strong>Aureys</strong>' Frightening Power gets a critical success and does nothing.</li>
+    <li><strong>Czaresia</strong> strides, and <strong>three party reactions land on one movement</strong>: Paya's Reactive Strike for 39, Aureys' <strong>Opportune Backstab for 45</strong>, and Sevek's <strong>Stand Still missing by exactly 1.</strong> She arrives and <strong>Wide Swings Kreebnock (55) and Mithtirith (45)</strong> &mdash; the Taunt is live and she simply eats the off-guard rather than stay on the frontline. Cody, plainly: <em>"This'll just keep going at the two spellcasters here."</em> A <strong>third mythic point</strong> recharges Invoke Rune; the cone puts 54 into Sevek and 29 into Aureys.</li>
+    <li><strong>Kreebnock</strong>'s Canticle of Everlasting Grief is critically saved and does nothing.</li>
+    <li><strong>Paya</strong> provokes with another leap, eats a <strong>124-damage crit (78 after Deflecting Wave)</strong>, and answers with a <strong>second natural 20 &mdash; Needle in the Gods' Eyes for 86.</strong></li>
+    <li><strong>Sevek</strong> Elf Steps, fires the <strong>one-action Mortal Herald Heal for 94</strong>, strides into her second Reactive Strike &mdash; a critical that resolves as a normal hit for 37 &mdash; and puts both halves of a Flurry through her for <strong>69. Twenty-seven hit points left.</strong></li>
+  </ul>
+
+  <h4>Round 4 &mdash; one turn</h4>
+  <ul>
+    <li><strong>Aureys</strong> whiffs a Feint, steps in, and puts both halves of an <strong>Earth to Heavens Strike</strong> into her; the second connects by 8 and it is over before Czaresia's turn comes back around. <strong>She never got a fourth turn.</strong></li>
+  </ul>
+  <p style="color:var(--gold)">Damage dealt: Paya <strong>311</strong> (52%) &middot; Aureys <strong>186</strong> (31%) &middot; Sevek <strong>97</strong> (16%). <strong>Mithtirith and Kreebnock did zero</strong> &mdash; Force Barrage never resolved, Blinding Foam critically missed, Canticle was critically saved. Her fire immunity ate roughly 100 more, including both of Paya's persistent-fire crit riders and the flaming runes on the party's two best weapons. Sevek: <em>"Too bad I have a flaming rune."</em></p>
+  <p>Damage taken: Paya <strong>234</strong>, Sevek <strong>188</strong>, Aureys <strong>121</strong>, Mithtirith <strong>106</strong>, Kreebnock <strong>55</strong>.</p>
+</div>
+
+<h2>Damage &amp; Contribution</h2>
+<table class="contrib-table">
+  <thead><tr><th>PC</th><th>Damage</th><th>Attacks</th><th>Hit rate</th><th>Crits</th><th>Kills</th></tr></thead>
+  <tbody>
+    <tr><td>Paya</td><td>~1,028</td><td>37</td><td>54%</td><td>6</td><td>Devotees A, B</td></tr>
+    <tr><td>Aureys</td><td>~958</td><td>36</td><td><strong>61%</strong></td><td><strong>6</strong></td><td>Peacock Phoenix, Devotees C &amp; D, <strong>Czaresia</strong></td></tr>
+    <tr><td>Sevek</td><td>~425</td><td>36</td><td><strong>36%</strong></td><td>2</td><td>&mdash;</td></tr>
+    <tr><td>Kreebnock</td><td>~307</td><td>7 spell attacks</td><td>57%</td><td>1</td><td>Devotee E</td></tr>
+    <tr><td>Mithtirith</td><td>0</td><td>1 (confused, nat 1)</td><td>&mdash;</td><td>0</td><td>Rune Sentry (<strong>disabled</strong>, Arcana DC 45)</td></tr>
+  </tbody>
+</table>
+<div class="xp-banner">Mithtirith's contribution is <strong>378 points of healing in the devotee fight alone</strong>, plus the Recall Knowledge that found Czaresia's fire immunity and the check that shut down the Rune Sentry. Sevek's is <strong>six Taunts, four Prevailing Positions, three successful Trips (two critical), a Stand Still, and Aid actions that supplied the winning margin on Paya's hits.</strong></div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-sevek">
+    <h4>Sevek &middot; Ashava's Dancing Partner <span style="color:var(--text-dim);font-weight:400">(Pax)</span></h4>
+    <ul>
+      <li><strong>He had the worst dice night of his run and kept working anyway.</strong> 36 attacks, 13 hits, five critical misses &mdash; 36%, against a party average near 55% &mdash; and he narrated every stretch of it (<em>"let's see how many things I can miss"</em>, <em>"I'm not hitting anything today"</em>, <em>"one of those days"</em>). What he did instead of damage: <strong>six Taunts</strong>, four <strong>Prevailing Positions</strong>, <strong>two Rippling Spin critical Trips</strong> plus a plain Trip on a rune giant, a Stand Still, and Aid actions that supplied the exact winning margin on two of Paya's hits.</li>
+      <li><strong>The Taunt line is the character.</strong> <em>"Let's dance together. Don't go anywhere. Focus on me."</em> &mdash; the worshipper of Ashava, whose edict is to dance even when there is no music, delivering a Guardian ability as an invitation.</li>
+      <li><strong>The best single reaction of the session was defensive.</strong> Mid-devotee-fight, Devotee C crit him by +12; <strong>Prevailing Position</strong> dropped the stance for +4 and converted it into a plain hit, erasing about 39 damage on one reaction. He used the same reaction against Czaresia's crit later in the day.</li>
+      <li><strong>He answered two of the six Trial questions.</strong> Sloth landed clean. Wrath did not &mdash; but the wrong answer was the whole table's, assembled from Kreebnock's mechanism and Aureys' amendment, and <strong>Sevek is the one who flagged the problem before it went in</strong>: <em>"I think in this question it says exclusively to enemies."</em> That is precisely the reading Cody ruled on a minute later. He delivered the final version anyway, and <strong>Paya</strong> was the one who named it as the miss afterward.</li>
+      <li><strong>He claimed the greater flaming runestone</strong> he and Aureys had both wanted since Quoroc's vault, in one sentence, with no argument &mdash; <em>"if you guys don't mind"</em> &mdash; and it was settled. He then spent the rest of the day discovering that flaming does nothing to an object with hardness 28, and nothing to a rune giant immune to fire.</li>
+      <li><strong>He was the party's welcome committee for Kreebnock</strong>, twice: the nickname exchange at the introduction, and a running deference to Aureys in front of the new guy &mdash; <em>"I aspire to be like Aureys. Teach me to be a better dragon"</em> / <em>"I gotta shrink myself if I want to be like Aureys, I guess."</em></li>
+      <li><strong>He Delayed on turn one of the phoenix fight to take Haste first</strong>, which reshaped the initiative order for the rest of the encounter &mdash; the kind of call that doesn't show up in a damage column. The Mortal Herald Heal fired at exactly the right moment too: 94 HP in the round Czaresia was critting him for 37 and 49.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-paya">
+    <h4>Paya &middot; the Prideful Pineapple <span style="color:var(--text-dim);font-weight:400">(Kelsie)</span></h4>
+    <ul>
+      <li><strong>He is the party's conscience in a knight's helmet, and he set the approach to the armies.</strong> <em>"Trying to stop Doomsday by starting a war seems counterproductive"</em> &mdash; then the white flag and the neutral ground were his suggestion, before Aureys ever opened her mouth. At the parley: <em>"Hi, I'm Paya. We're here to stop Doom."</em> And to a rune giant demanding to know who they were, the same again with no hedging, which is what earned Czaresia's <em>"your honesty would be charming if it wasn't so foolish."</em></li>
+      <li><strong>The introduction bit still lands, and he plays it straight through.</strong> A knight in full plate removes his helmet to reveal a pineapple head, explains he's a fruit leshy, and firmly shakes the new man's hand: <em>"Hi, I'm Paya. Nice to meet you."</em></li>
+      <li><strong>Top damage of the session</strong> (~1,028) with six criticals &mdash; including two natural 20s into Czaresia (a <strong>Spear Dancer</strong> crit for 100 and a <strong>Needle in the Gods' Eyes</strong> crit for 86) and a <strong>Divide and Conquer</strong> sequence that killed Devotee B: two mythic points, a cross-target 44 into A, and back-to-back crits of 84 and 82 into B. He killed Devotees A and B.</li>
+      <li><strong>He ran the sell-off, taught the new player Foundry, and healed everyone.</strong> Ocean's Balm, Dash of Herbs, Torrent in the Blood, Fresh Produce, a critical-success Treat Wounds at master DC, and <strong>Deflecting Wave four separate times</strong> &mdash; including twice against Czaresia's mace, once cutting a 100-damage roll to 52. He also spent a real chunk of the session walking Kreebnock through auras and macros &mdash; <em>"the cup at the top left of your character sheet should be your best friend as a spellcaster"</em> &mdash; and Mithtirith through his staff charges.</li>
+      <li><strong>He gives the new guy credit unprompted.</strong> Landing a MAP&minus;10 hit that only connected because of Courageous Anthem: <em>"Thank your local bard, folks."</em> Then, when Kreebnock corrected him &mdash; <em>"to be fair, it was a poem"</em> &mdash; <em>"it was an oratory, but it's still a performance."</em></li>
+      <li><strong>The warmest line of the session is his.</strong> Healing Aureys mid-fight, after she told him he was still her god: <em>"Well, you're still my favorite dragon, don't tell Kandirvek."</em></li>
+      <li><strong>The loot-master comedy is a bit he's fully committed to.</strong> On offering a shield nobody wants: <em>"I know we don't, but sometimes people pick up Shield Block and then they get mad I sell them."</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-aureys">
+    <h4>Aureys Hollow &middot; Still, Obviously, a Dragon <span style="color:var(--text-dim);font-weight:400">(Anna)</span></h4>
+    <ul>
+      <li><strong>She ran the parley and it was pure Aureys.</strong> Paya picked the approach; the talking was hers, and she opened on brand: <em>"my companions and I are heroes of these lands. You may have heard of me."</em> Pressed twice by Lograsi for the real reason, she gave the honest one and then, without a flicker, the other honest one: <em>"there is probably wonderful, delicious stuff, and maybe a few undead treats inside. Snacks, if you will."</em> It worked.</li>
+      <li><strong>Three of the five correct Trial answers were hers</strong>, and all three were her reading a Runelord's sin rather than the question. Gluttony got <em>"for what they hunger"</em>; Greed got <em>"lies"</em> with a schemes-and-deception justification; Lust got her own ruined home city named back at her. She also found the Emerald Eye in the first place.</li>
+      <li><strong>She killed the phoenix, killed Czaresia, and killed two of the five devotees</strong> &mdash; on <strong>6 criticals in 36 attacks</strong>, the best crit rate at the table. The phoenix: 188 of its 400 HP, capped by a keen claw crit. Devotee D: <strong>158 in one Earth to Heavens Strike</strong>, dead where it stood. Devotee C: an <strong>Opportune Backstab</strong> off Sevek's hit. Czaresia: the last 46 of 600.</li>
+      <li><strong>The best mechanical read of the session was hers.</strong> Told the phoenix was incorporeal, she spent an action <strong>moving the astral rune off her handwraps onto her fan</strong> &mdash; and every point she did to it afterward bypassed resistance 15. <strong>She took zero damage in that entire six-round extreme-threat fight.</strong></li>
+      <li><strong>Grovel is the engine and she performs it every single time.</strong> <em>"Oh great, mighty phoenix, you're awesome"</em> into a Feint. <em>"You awesome, silent, whatever you are, creepy green asshole &mdash; I am so afraid."</em> <em>"But I'm so weak and insignificant."</em> And the best one, to a Silent Devotee: <em>"You know, you're so awesome! But not as good as my pineapple."</em> The mechanical payload is the same every time; the bit never repeats.</li>
+      <li><strong>She is the party's pre-buff nag</strong>, in character and out: Bolster Flesh at the stair, Bolster Flesh again at the emerald door, Hollow Robes invisibility before opening it, and a reminder to the whole table to spend Summon Mythic Power before resting so it refreshes.</li>
+      <li><strong>The one time she was uninjured it alarmed people.</strong> Mithtirith: <em>"Oh, are you uninjured? That's weird for you."</em> Aureys: <em>"It really is."</em> She then took 80 and 82 from devotee crits and 92 from Czaresia's opening mace, and finished the session at 85%.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-mith">
+    <h4>Mithtirith &middot; the One Who Turned the Lightning Around <span style="color:var(--text-dim);font-weight:400">(Jesse)</span></h4>
+    <ul>
+      <li><strong>He unlocked the Trial, and then he unlocked the door.</strong> The Recall Knowledge that identified what the heads were asking for was his; the demonstration of rune magic they accepted was his mythic power and his study of Thassilon; he burned a focus spell (<strong>Scholarly Recollection</strong>) on a riddle rather than a fight; and the strategy the party used on all six questions &mdash; <em>"I like your theory of playing to each Runelord's sin"</em> &mdash; is the one that got five of them right.</li>
+      <li><strong>The Rune Sentry was his, and it took three tries at DC 45.</strong> Legendary Arcana, +29 base. 43, fail. 43 <em>after</em> a mythic-proficiency reroll, fail. Then <strong>46</strong> &mdash; one point over. Cody: <em>"ironically, when it had 10 HP left, that is when you get the success."</em> The party had spent two full rounds failing to punch a crit-immune object with hardness 28; Mithtirith turned the lightning back on it instead.</li>
+      <li><strong>The sharpest deduction of the day was his, and it was about the scenery.</strong> Looking down at seven carved heads orbiting a dais: <em>"the description of the carved Runelord heads makes it sound like they're iron stones revolving around something. Is that the vibe it's giving off?"</em> Cody: <em>"It's not dissimilar magic, but they're too large to be iron stones."</em> Nobody else was looking at the heads as a <em>mechanism.</em></li>
+      <li><strong>He was the sentry's favorite target and took it with the driest possible grace.</strong> Alderpash's arc picks a target at random each round; it rolled Mithtirith three times running. Cody: <em>"I don't know what Alderpash has against Mithtirith, but the universe has decided."</em> Paya: <em>"Sometimes giant floating heads really just hate that cleric in particular."</em></li>
+      <li><strong>First melee attack in fifteen levels.</strong> Confused by Phantasmagoria &mdash; after spending a mythic point on the save and failing anyway &mdash; and forced to swing his Staff of Healing at Kreebnock, he asked the table <em>"Have I done this before, guys?"</em> Paya: <em>"No. No."</em> <em>"First time for everything."</em> Natural 1.</li>
+      <li><strong>The healing lane held all session</strong>: 116 into Paya on the phoenix fight's first round, a three-action burst that caught four PCs for 42 each, <strong>378 points across the devotee fight</strong>, 111 into Paya and 92 into Aureys against Czaresia. He also called the one piece of tactical information that mattered against the giant &mdash; <em>"I will tell everyone not to try to use fire, because she's immune"</em> &mdash; and went <strong>invisible</strong> against the devotees, buying the backline two rounds.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kreebnock">
+    <h4>Kreebnock &middot; The Grandfather with the Red Eye <span style="color:var(--text-dim);font-weight:400">("Arrakis")</span></h4>
+    <ul>
+      <li><strong>He introduced himself floating and never came down.</strong> Elderly gnome, orange and green hair, kindly-grandfather face, <em>"if not for his left eye being like a scarlet blood red."</em> The right one is amber. He bows to three generals <em>"while standing a few feet in the air."</em></li>
+      <li><strong>He answered the Envy question cold and correctly, with no table discussion at all.</strong> <em>"How does a ruler ensure the loyalty of those who serve?"</em> &mdash; <em>"By serving those beneath him."</em> The eyes flashed and the heads moved on. That was his second in-fiction sentence to the party.</li>
+      <li><strong>He said no to retirement in a way that told you the whole character.</strong> Aureys: <em>"And go back into retirement?"</em> Kreebnock: <em>"Oh, no retirement. Just wandering. My kind of retirement."</em></li>
+      <li><strong>He narrates his magic in fiction, constantly, on his first night.</strong> <em>"I will speak a little poem."</em> <em>"I've got multicolored energy flowing all around me now. Feeling pumped up."</em> <em>"Kreebnock will say a few words about the glory of battle."</em> <em>"I'm going to come up and form a comically large hammer and swing down at it."</em> <em>"Kreebnock is going to move, but you don't see him move &mdash; he just suddenly appears forty feet away."</em> Nobody asked him to do that.</li>
+      <li><strong>The Bard half was doing work by his second turn ever.</strong> Haste on all five PCs plus Rallying Anthem in round one of the phoenix fight (<em>"it seems a little desperate, so let's go all out"</em>), and Courageous Anthem essentially every round after &mdash; enough +1s that Paya started calling them out loud on his own hit confirmations.</li>
+      <li><strong>The Psychic half is a wrecking ball once Unleash Psyche is up.</strong> An amped Daze for 63 into Devotee E; the <strong>Imaginary Weapon</strong> that killed E while it was prone; and an amped Imaginary Weapon for <strong>43 through hardness 28</strong> on the Rune Sentry &mdash; more than every melee weapon in the party managed against it combined.</li>
+      <li><strong>He caught a rules point nobody else did, against his own interest.</strong> Mid-fight, after the fact: he shouldn't have been able to cast inside the Silent Devotees' Pall of Silence at all. He said so out loud. Cody let it stand &mdash; <em>"I didn't catch it, you guys didn't catch it, it's how it is."</em></li>
+      <li><strong>He took the worst of the devotees and stayed on his feet.</strong> Two crits inside three rounds &mdash; an 80 his gnome <strong>Unexpected Shift</strong> cut to 64 on a DC 11 flat check, then a later crit that put him on <strong>41 of 184 HP, 22%</strong>, the lowest anyone reached all session.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">The Emerald Eye</div>
+    <div class="loot-source">Baolen's chamber &middot; found by Aureys</div>
+    <div class="loot-note">A live blueprint of the Emerald Chambers. Lets you always Sense Direction inside them. <strong>The party cannot navigate the Chambers without it.</strong></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Flaming (Greater) runestone</div>
+    <div class="loot-source">Quoroc's vault &middot; &rarr; Sevek</div>
+    <div class="loot-note">Resolves the S7 stash dispute in one sentence. Then proceeded to do nothing at all against an object and a fire-immune giant.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Runic Skullcap</div>
+    <div class="loot-source">S7 stash &middot; &rarr; Mithtirith</div>
+    <div class="loot-note">Finally assigned.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Paradigm Cube</div>
+    <div class="loot-source">Mirror of Glory (S6) &middot; &rarr; Paya</div>
+    <div class="loot-note">Rare mythic invested item, one colour per day. <em>"If you spend a mythic point on it, you just get to choose."</em></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">5&times; +2 greater striking wounding frost longsword</div>
+    <div class="loot-source">The Silent Devotees</div>
+    <div class="loot-note">Unassigned.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Kept in the stash</div>
+    <div class="loot-source">Sunken Temple</div>
+    <div class="loot-note">Scroll of Teleport, the scroll case, and the countering charm.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Sold in Absalom</div>
+    <div class="loot-source">Paya running the sell-off</div>
+    <div class="loot-note">+2 greater striking keen kukri &middot; 3&times; +2 greater striking shock trident &middot; Sturdy Shield (Major) &middot; Staff of Arcane Might (Greater) &middot; Bands of Force (Greater) &middot; Potency Crystal (Major)</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Equipment changes</div>
+    <div class="loot-source">Foundry log</div>
+    <div class="loot-note">Aureys' fighting fan moved <strong>Astral &rarr; Flaming &rarr; Holy</strong> over the day; both swaps show up mid-combat. Worth a word with Cody about rune-transfer timing.</div>
+  </div>
+</div>
+<div class="xp-banner">Coin &middot; <strong>4,788 gp each</strong> from the Sunken Temple sell-off, with Kreebnock given an equivalent starting share. <strong>No XP award was announced on-screen &mdash; the party remains level 16.</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+  <strong>Kreebnock</strong>: "You can call me Kreebnock, or Kree, if you prefer. I've been called both."<br>
+  <strong>Aureys Hollow</strong>: "Alright, let's not offend the mama."<br>
+  <strong>Sevek</strong>: "I call you Kree, because I feel like that makes us closer. And also — the real reason — I just have trouble pronouncing longer names, you see."
+  <span class="attribution">The new player's first thirty seconds at the table.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Kreebnock</strong>: "Oh, no retirement. Just wandering. My kind of retirement."
+  <span class="attribution">Aureys asks whether ending the threat means going back into retirement.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Paya</strong>: "Trying to stop Doomsday by starting a war seems counterproductive."
+  <span class="attribution">Looking down on three armies at a standoff from Kandirvek's back — the line that set the whole approach, followed by his own suggestion of the white flag.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Aureys Hollow</strong>: "And speaking only for myself, I'm also here because there is probably wonderful, delicious stuff, and maybe a few undead treats inside. Snacks, if you will."
+  <span class="attribution">Answering, for the second time, a Runelord's general asking why the party has come to the Velashu Uplands. It worked.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Sevek</strong>: "I'm just a guy that's trying to do good and help these people here achieve their goal, which I guess is to stop doom."
+  <span class="attribution">Introducing himself to three generals, immediately after Aureys announced herself as a hero of the lands they may have heard of.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Mithtirith</strong>: "I feel like this is a philosophical difference in the party."
+  <span class="attribution">The Runelord of Greed asks whether truth or lies fill your coffers faster, and the table discovers it does not agree.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Xanderghul's head</strong>: "Nothing you say will suffice, intruders. The only answer I'll accept is your death."
+  <span class="attribution">The seventh Runelord does not ask a question.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Kreebnock</strong>: "I've got multicolored energy flowing all around me now. Feeling pumped up."
+  <span class="attribution">Unleashing his Psyche for the first time in front of the party, one round into his first session.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Mithtirith</strong>: "Have I done this before, guys?"<br>
+  <strong>Paya</strong>: "No. No. I can safely say that in the last fifteen levels, this has not happened."<br>
+  <strong>Mithtirith</strong>: "First time for everything."
+  <span class="attribution">Confused by Phantasmagoria and forced to swing his Staff of Healing in melee. Natural 1.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Mithtirith</strong>: "Looks like overcompensation to me."
+  <span class="attribution">On the Silent Devotees' oversized swords, which turned out to be longswords with a five-foot reach.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Sevek</strong>: "I have been nothing but a meat shield."<br>
+  <strong>Paya</strong>: "But you were a very good one."
+  <span class="attribution">Sevek, on a 36% night, taking an Ocean's Balm from Paya.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Aureys Hollow</strong>: "You know, you're so awesome! But not as good as my pineapple."
+  <span class="attribution">Groveling at a Silent Devotee to set up a Distracting Feint.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Sevek</strong>: "Let's dance together. Don't go anywhere. Focus on me."
+  <span class="attribution">Taunting a Silent Devotee off the party. Ashava's edicts include dancing even when there is no music.</span>
+</blockquote>
+
+<blockquote>
+  <strong>Paya</strong>: "Well, you're still my favorite dragon, don't tell Kandirvek."
+  <span class="attribution">Healing Aureys mid-fight, after she told him he was still her god.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+  <ul>
+    <li><strong>The seventh door.</strong> Six of the seven doors off the Crypt of Runes stand ajar; the north one glows with runes and is sealed. The star's tips point at all seven.</li>
+    <li><strong>The statue and the mural.</strong> A long-haired man with a staff on a plinth in the middle of the seven-pointed star, deliberately facing a mural on the southern wall. Unexamined.</li>
+    <li><strong>Belimarius has an army in the Velashu Uplands</strong> &mdash; the last surviving true Runelord besides Sorshen, who covets Sorshen's domain and knows she's missing. <strong>General Lograsi</strong> is Azlanti, not Thassilonian, with violet eyes and a truce he is clearly using.</li>
+    <li><strong>Kandirvek is topside and out of contact.</strong> Thassilonian magic works oddly down here; he is holding the stair and working contacts, and expects the three armies to start killing each other the moment the party is underground.</li>
+    <li><strong>Alderpash's question is unanswered.</strong> The party got five of six; the Runelord of Wrath's head is on the ground, but the trial's own verdict was that they failed it. Whether that costs anything deeper in is unknown.</li>
+    <li><strong>Five +2 greater striking wounding frost longswords</strong> are unassigned, and the party has passed <em>"magnificent locked doors, catacombs, and tombs"</em> it deliberately did not open.</li>
+    <li><strong>The Risen of the Trinity Star are down here.</strong> Cody's framing of the emerald door: behind it lies the Crypt of Runes, <em>"where the Risen of the Trinity Star are conspiring and devising whatever horrid plans they have for Golarion."</em></li>
+    <li><strong>Whose tomb is this?</strong> The Emerald Chambers were built as a memorial for First King Xin. The Silent Devotees were founded to guard <em>Xin's tomb</em>, and cut out their own eyes and tongues so the location would never spread. Nobody has seen Xin's tomb yet.</li>
+    <li><strong>Two Runelord heads went unnamed on purpose.</strong> Cody named the Envy and Greed questioners on-mic, but the renderings match nothing in the AP data or Golarion canon. Get the spellings from him before they go into <code>world.md</code>.</li>
+  </ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next session</span>
+  <p>A rune giant dead on the floor of an eighty-foot chamber. Six open doors, a sealed seventh glowing with runes, and a statue on a plinth staring at a mural nobody has looked at yet. Somewhere past all of it, the Risen of the Trinity Star, and the tomb of the first king of Thassilon.</p>
+  <div class="big-line">"Your honesty would be charming if it wasn't so foolish."</div>
+  <span class="speaker">— Czaresia, guardian of the Crypt of Runes, about thirty minutes before the end of her</span>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+  <li><strong>Took the greater flaming runestone</strong> out of the party stash without argument. Aureys wanted it too; her fan ended the day on a <strong>Holy</strong> rune instead. Both parties happy.</li>
+  <li><strong>Answered two of the Runelords' six questions.</strong> Sloth accepted <em>"step on the path that others have laid for yourself."</em> <strong>Wrath did not.</strong> The answer was assembled by the whole table — Kreebnock proposed playing one enemy against the other, Aureys added the betrayal — and Sevek shaped it and delivered it. <strong>But he also called the problem out loud before it went in</strong>: <em>"I think in this question it says exclusively to enemies."</em> That is the exact reading Cody ruled on a minute later. The table liked the plan and it went in regardless. <strong>Alderpash's head stayed in the air because of that answer, and that head was the entire second half of the fight.</strong> Paya named the miss afterward, not Sevek.</li>
+  <li><strong>Introduced himself to three generals as "just a guy that's trying to do good."</strong> Aureys had just claimed the room as a hero of the lands. Sevek did not correct her and did not compete.</li>
+  <li><strong>Went 13 for 36.</strong> Five critical misses, two crits, ~425 damage against Paya's and Aureys' thousand-plus. What he did instead: <strong>six Taunts, four Prevailing Positions, two critical Trips via Rippling Spin, one Trip on a rune giant, one Stand Still (missed by 1), and Aid actions that supplied the exact winning margin on Paya's hits.</strong> Delayed on turn one of the phoenix fight to take Haste first.</li>
+  <li><strong>Was Confused by Phantasmagoria and put 38 into Paya's back.</strong> Shook it at end of turn.</li>
+  <li><strong>Used Herald's Weapon and the one-action Mortal Herald Heal (94) against Czaresia</strong>, on the round she was critting him.</li>
+  <li><strong>Spent a mythic point to reroll initiative at mythic proficiency against Czaresia and rolled worse</strong> — 37 down to 36.</li>
+  <li><strong>Cast Electric Arc inside the Silent Devotees' Pall of Silence.</strong> Illegal. Kreebnock caught his own version of it; Cody let both stand.</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+  <li><strong>The trial answers were the encounter's difficulty dial, and nobody at the table knew that while they were answering.</strong> The Rune Sentries hazard gets one action per surviving head. Five right answers meant one Lightning Arc a round instead of six — roughly 190 points of electricity a round the party never had to eat — plus denying the phoenix 20 HP a round from arcs with no target. Cody said the quiet part: <em>"Imagine this fight if you had gotten them all wrong."</em> <strong>Expect more encounters built this way in this book.</strong></li>
+  <li><strong>Flaming is dead weight twice over right now.</strong> Hardness applies to the whole damage packet, not per type, so Electric Arc did zero to the sentry and the flaming rider did nothing either. Then Czaresia was <strong>immune to fire</strong> and ate the rest of it. The staff has been a stick with a +3 on it for two of three fights.</li>
+  <li><strong>Taunt does not work on hazards.</strong> The Rune Sentry was an object; Group Taunt was stopped before an action was spent. Long-Distance Taunt's 120 feet was never the problem. In a dungeon built out of Thassilonian complex hazards, that limitation will come up again.</li>
+  <li><strong>Taunt did not keep Czaresia off the casters.</strong> This is the correction worth writing down. With Taunt live in round three, she strode past the frontline and <strong>Wide Swung Kreebnock and Mithtirith for 55 and 45</strong>, accepting the &minus;1 and the off-guard to do it. Cody said it out loud: <em>"This'll just keep going at the two spellcasters here."</em> What Taunt actually bought was the &minus;1 and the off-guard, and the off-guard is what fed the flanking math — Aureys' 45 Opportune Backstab and two hit-by-exactly-zero strikes.</li>
+  <li><strong>Czaresia has two Reactive Strikes a turn</strong>, and Sevek confirmed it the expensive way. Assume every rune giant down here does.</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+  <li><strong>The new gnome is the softest body the party has ever fielded, and Bodyguard is still assigned to Mithtirith.</strong> Kreebnock has 184 HP and AC 37/38, floated the whole session, and still bottomed at 22% — the lowest anyone reached. Mithtirith solved his own exposure problem last book by leaving the ground; Kreebnock is <em>already</em> off the ground and it didn't help. <strong>Reassign Bodyguard, or accept that the Taunt lane no longer covers the backline at all.</strong></li>
+  <li><strong>The tank math needs a harder look than "it held."</strong> Six Taunts across three fights bought a phoenix that missed and a rune giant that walked past him anyway. Prevailing Position was the reaction that actually paid — it erased a devotee crit worth ~39 and downgraded a giant's crit to a normal hit. <strong>The mitigation is in the reactions, not the aggro.</strong></li>
+  <li><strong>The Trial was a skill check the character couldn't roll.</strong> Int 10, untrained Arcana, no Thassilon Lore. He answered two questions anyway because this table workshops out loud, and got one wrong. Playing to the sin was the right frame; reading a question's literal terms is the part he missed. <strong>The Chambers are a Thassilonian test, and this book is built out of them.</strong></li>
+  <li><strong>Kreebnock is a control-and-buff engine, not a striker, and that raises Sevek's floor.</strong> Haste on five bodies, two anthems up every round, amped Dazes, and the single best hit anyone landed on the Rune Sentry. Courageous Anthem was live on several of the few attacks Sevek connected with. The party's action economy just went up by a third.</li>
+  <li><strong>Paya and Aureys are carrying the damage and it is not close</strong> — roughly 2,000 of the session's ~2,700. That's fine, but it prices the next class choices toward more control and more mitigation, not toward chasing damage the dice aren't giving.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>What is behind the seventh door?</strong> Six stand open; the north one is sealed in runes. That is the answer.</li>
+  <li><strong>Who is the statue?</strong> A long-haired man with a staff, on a plinth in the middle of the seven-pointed star, deliberately facing a mural on the south wall. First King Xin, or Xanderghul, or neither.</li>
+  <li><strong>Where is First King Xin's tomb?</strong> The Chambers were built as his memorial, and the Silent Devotees mutilated themselves to keep its location secret. It's down here.</li>
+  <li><strong>How many Risen are in the Crypt of Runes, and which ones?</strong> Cody's framing was plural and present tense. <strong>Kill order is still: Risen first, Xanderghul last.</strong></li>
+  <li><strong>Does failing Alderpash's question cost anything else?</strong> The trial recorded a failure, and this is a complex built to test people.</li>
+  <li><strong>Does Belimarius' army follow?</strong> Kandirvek is holding the stair and expects the truce to collapse. Lograsi said "all the better for us" and meant it.</li>
+</ul>
+
+<h3>Bookkeeping to raise with Cody</h3>
+<ul>
+  <li><strong>Third Path to Perfection was not applied to the Phantasmagoria failure.</strong> Sevek failed a Will save — his legendary save — and took the full 63. Third Path halves damage on a failed save of that type; it should have been 31. <strong>That's 32 HP he shouldn't have lost, two rounds before he bottomed at 21%.</strong> There is no Foundry automation for it, so <strong>it is on Pax to call it every time.</strong></li>
+  <li><strong>Pall of Silence.</strong> Two illegal casts went through this session. Better settled now than retroactively in a bigger fight.</li>
+</ul>
+<p style="color:var(--text-dim);font-size:14px"><em>Not issues, for the record:</em> the <strong>Celestial Armaments blind DC is 35</strong>, and Foundry was right — it's Sevek's <strong>class DC</strong>: 10 + 16 + 4 (expert) + 5 (Dex) = 35. <code>character-sheet.md</code> had 38 in six places (it assumed Str and master; the monk class DC keys off <strong>Dex</strong> here) and has been <strong>corrected</strong>. The one <code>AC 40/42</code> reading in the log is Foundry's 39/41 with <strong>Rallying Anthem +1</strong> on top — Kreebnock's anthem, not a second baseline. And the Mortal Herald Heal logging as the <strong>two-action</strong> variant is correct: the feat's whole point is casting the two-action Heal <em>for one action</em>.</p>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+</div>
+</body>
+</html>
