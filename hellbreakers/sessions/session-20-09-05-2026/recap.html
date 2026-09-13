@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 20 — Things Are Looking Up, Allegedly</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Things Are Looking Up, Allegedly</h1>
+  <div class="subtitle">Session 20 &middot; The Druma Road Gate, and what the Hellbreakers found on the other side</div>
+  <div class="meta-row">
+    <span class="meta-pill">5 Sep 2026</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~3h 15m</span>
+    <span class="meta-pill">19 Abadius &ndash; 1 Calistril 4727 AR</span>
+    <span class="meta-pill">Level 6 &rarr; 7</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:42%"></div>
+    <div class="comp-seg comp-rp" style="width:22%"></div>
+    <div class="comp-seg comp-explore" style="width:16%"></div>
+    <div class="comp-seg comp-social" style="width:12%"></div>
+    <div class="comp-seg comp-loot" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 42%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 22%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Travel 16%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Council 12%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 8%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster + Hedge Mage &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Lunar Dragon Thaumaturge (Mirror Cloak + Regalia) &middot; Draconic Ravager &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Snowgeen</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, divine) &middot; Medic + Living Nexus &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Scott Smith</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Isgeri Boarhound &middot; mature animal companion &middot; unconscious for most of the gate</div>
+      <div class="char-player">Bai Jian's</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Serrafina</div>
+      <div class="char-class">Two-headed witch familiar &middot; handed Panacea the healing staff mid-fight</div>
+      <div class="char-player">Panacea's</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The session opened where the last one ended: in initiative, fifty feet from the Druma Road Gate, with a Hellknight cavalry brigade between the party and the rest of their lives. It nearly killed all of them. The GM said so out loud afterward &mdash; <em>"boy, I thought we were having a TPK. You guys scared me there for a minute. I thought, oh no, this wasn't supposed to be that hard."</em> Foundry flagged <strong>every single round</strong> of the six as <code>threat extreme</code>. Zanthar bottomed out at <strong>1 hit point</strong>, Cyrathul at <strong>9</strong>, Bai Jian at <strong>15</strong>, and Ren spent most of the fight unconscious and dying on the ground while Bai Jian narrated his own dog's obituary in real time.</p>
+    <p>What made it that hard was structural, and <strong>Bai Jian diagnosed it at the table before the GM ruled on it</strong>. When Cyrathul lined up a Demoralize, Bai Jian warned him off &mdash; <em>"If you're doing it on the troop, don't do it"</em> &mdash; and he was right: PF2e troops are immune to single-target non-damaging effects, so Demoralize, Snagging Strike's off-guard and sword crit specialization all did nothing. Cyrathul asked the right question back, though &mdash; <em>"Would I know this?"</em> &mdash; the table agreed he wouldn't, Bai Jian waved him on, and he spent the action in character. It rolled a 28 against a Will DC of 27 and the GM ruled it off regardless. Against a level-8 troop with a DC 26 lance charge and a once-per-round area attack, backed by a level-6 infantry troop with its own, half the party's control kit was dead on arrival. What was left was damage, saves, and Panacea.</p>
+    <p>They won it on four things. <strong>Zanthar opened with the biggest single action of the night</strong> &mdash; a Frozen Lava bead into the centre of the formation for <strong>76 damage across three targets</strong> &mdash; after working out aloud that a troop's formation is also its weakness. <strong>Bai Jian held the line, crit twice</strong> for 36 and 20, and <strong>cast Bless from a scroll in Round 1 that stayed up the entire fight</strong> &mdash; the export flags it as the margin on two separate kills, including Cyrathul's Brigade-killer, which landed at exactly <code>Hit by +0</code>. <strong>Cyrathul killed all three enemies.</strong> And underneath all of it, <strong>Panacea healed 88 of the party's 111 hit points restored</strong> while running visibly dry.</p>
+    <p>Then the session exhaled for two hours. They rode into a blizzard, and after Ren led them in a circle back toward Elidir, Bai Jian took the Survival check himself and found the road. They stumbled into the crossroads inn at sunrise to find <strong>Fang, Moob and Wing</strong> failing loudly to raise the mast on the sailing ship the party left them. They sold the prison's loot, reached <strong>Saringallow</strong>, and were met by Maire Phelan, Quoster, Jenverick swinging Quoster in a circle, and <strong>Rhokrag</strong> &mdash; <em>"You broke into the frigging prison in the capital of Isger, and you made it out alive. I never doubted you for a minute."</em> Nine openly ceremonial XP later, the party hit <strong>level 7</strong>.</p>
+    <p>Rhokrag's surprise was a keep. Two covered wagons, two days into the mountains, and an abandoned hobgoblin lair with a newly rebuilt bridge. Six days of work turned it into a garrison with a kitchen, an arsenal and beds for everyone they had just broken out of the Gyve &mdash; each PC contributing through the skill they actually own. Then <strong>Grizzo</strong> knocked: the burned goblin the party kept alive in Umok after the Hell Hounds, who had walked to a mountain keep in winter to hand-deliver a letter from <strong>Ion Marbleberg</strong>. Her co-signatory was <strong>Fessimeth Finwinkle</strong> &mdash; the priestess the party left locked in a terrified room back in Session 14 and never went back for. She is alive.</p>
+    <p>The session ended at Rhokrag's dinner table, and the dinner was not celebratory for long. Phoebe read out the reply <strong>Caeto Vulaunex</strong> &mdash; the acting steward who cleared and deputized the party in S15 &mdash; sent to the city's request for aid: <em>"Isger has greater problems than a few undead. The Hellbreakers are a pest that must be nipped in the bud."</em> Alceo's answer was to take the whole crisis on themselves. Cyrathul's Esoteric Lore surfaced a children's story about an undead witch; Rhokrag, goaded by a Deception check Zanthar had quietly Aided up to a 37, let slip the name: <strong>a Pallid Princess</strong>. Panacea asked the only question that mattered &mdash; <em>"if the story is that she's in the south, how are you going to find her in the north?"</em> &mdash; and got <em>"triangulation"</em> for an answer.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The Night, Act by Act</h2>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I &middot; Combat &middot; The Druma Road Gate</div>
+      <div class="act-card">
+        <h3>Severe, and the GM's own near-TPK</h3>
+        <ul>
+          <li>The session resumes mid-initiative. The magic in the stolen tack <strong>dissipates on arrival</strong> &mdash; no mounted combat, and <strong>no forward progress on the map</strong>. <strong>Oramos</strong> volunteers to hold the horses: <em>"I'm better with a pen than a sword anyway."</em></li>
+          <li><strong>Zanthar reasons his way to the opening move</strong>, working out that a troop is a single unit with an area weakness, then hurling <strong>Frozen Lava</strong> into the centre. The Line Infantry <strong>critically fails</strong> for <strong>41</strong>; the Brigade fails for <strong>26</strong>; the Standard Bearer succeeds and still takes <strong>9</strong>. <strong>76 damage in one action</strong>, before anyone swung a weapon.</li>
+          <li><strong>Bai Jian casts Bless from a scroll</strong> &mdash; never sustained, up all fight, and by the export's own flags the reason two later kills connect.</li>
+          <li>The brigade answers with a three-action <strong>Lance Charge</strong> (DC 26). Bai Jian and Ren take <strong>29</strong> each. Both he and Zanthar burn hero points on the save; Bai Jian's still fails. <em>"This DC is really high."</em></li>
+          <li><strong>The troop rules eat half the party's kit &mdash; and Bai Jian calls it first.</strong> His Snagging Strike off-guards <em>nothing</em>; the GM confirms troops are immune to single-target non-damaging effects. <em>"This is when we need blaster, guys."</em></li>
+          <li><strong>Two turns later, the table plays the knowledge gap straight.</strong> Cyrathul lines up a Demoralize; Bai Jian warns him off out of character &mdash; <em>"It doesn't work. If you're doing it on the troop, don't do it."</em> Cyrathul's answer is <em>"Would I know this?"</em>, Zanthar's is <em>"He wouldn't"</em>, and Bai Jian immediately waves him on: <em>"So actually, yeah, go."</em> Cyrathul spends the action in character, rolls a <strong>28 against Will DC 27</strong> &mdash; and the GM rules it off anyway.</li>
+          <li>The Standard Bearer's <strong>"Stay in the Fight!"</strong> hands out 10 temporary hit points three separate times &mdash; 40 points of absorbed chip damage, including all of Panacea's offensive output.</li>
+          <li><strong>Ren goes down in Round 2</strong> and never really recovers. Bai Jian shouts Panacea's Heal off himself and onto the dog mid-turn: <em>"Heal Ren! Get him off! No, heal Ren, please."</em></li>
+          <li><strong>Bai Jian's Round 2 nat 20</strong> &mdash; a Snagging Strike crit for <strong>36</strong>, leaving the segment clumsy, enfeebled and off-guard.</li>
+          <li><strong>Cyrathul's Round 3 nat 20</strong> &mdash; a claw crit for <strong>32</strong>. <em>"You take five of them out with just a single claw segment."</em> His Demoralize the same round rolls 28 vs DC 27 and is ruled ineffective anyway.</li>
+          <li><strong>Zanthar bottoms out at 1 hit point</strong> in Round 4. Panacea's second Battle Medicine brings him back 29.</li>
+          <li><strong>Cyrathul kills the Brigade</strong> (R4), the <strong>Standard Bearer</strong> (R5) and the <strong>last infantry</strong> (R6). <strong>112 XP, Severe.</strong> Bai Jian: <em>"I was ready to say goodbye to Ren, honestly."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act II &middot; Travel &middot; The Blizzard and the Crossroads</div>
+      <div class="act-card">
+        <h3>A whiteout, a circle, and a boat that won't stand up</h3>
+        <ul>
+          <li>The party rides into a whiteout <em>"the kind where you can't really see 10 feet in front of you."</em> Bai Jian routes the <strong>Survival</strong> check through Ren, who leads them in a circle back toward Elidir &mdash; then takes it himself and finds the road. <em>"Alright, Ren. I know you're tired, but you can do this."</em> &rarr; <em>"That shit. I'll do it myself."</em></li>
+          <li>They travel all night, healing on the move via sustained Life Boost and Trade Death for Life. Bai Jian and Zanthar work out between them that <strong>Continual Recovery</strong> lets the party keep healing on ten-minute intervals.</li>
+          <li>The <strong>crossroads inn</strong> at sunrise: one room upstairs, one queen bed, a common-room floor for a dozen freed prisoners. Cyrathul pays the silver.</li>
+          <li>Hammering out back is <strong>Fang, Moob and Wing</strong> repairing the party's sailing ship, badly &mdash; Moob screaming at Fang about which way to push the mast, which falls down again the moment they turn to look at the party. Four or five days from seaworthy; they can't take the refugees.</li>
+          <li><strong>Panacea tells the goblins to lie low.</strong> Moob produces a vial from his waistband: <em>"I got something for any Chelaxian dogs that would come my way."</em></li>
+          <li><strong>Otton</strong> &mdash; three days tortured a week ago &mdash; comes around the corner leading <strong>sixteen horses</strong>, groomed, fed and bedded down. He had spent the whole night on them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III &middot; Social &middot; Saringallow, and Nine Ceremonial XP</div>
+      <div class="act-card">
+        <h3>The town they left is exactly the town they left</h3>
+        <ul>
+          <li>A sleepy guard, no increased Chelaxian presence &mdash; <em>"the sleepy town that you guys left just several weeks ago."</em></li>
+          <li>A long, funny <strong>loot liquidation</strong>, run mostly by Bai Jian. They keep the Lifebloom Glaive, the siege toolkit, the repair kit and <strong>one of five silver ingots</strong>; they sell the rest, including the high-fashion clothing off Rencelos's back &mdash; <em>"I'm not going to any more parties. Bai Jian had enough parties for his life after that one."</em></li>
+          <li><strong>Bai Jian argues the party's only Invisibility Potion onto Panacea's sheet</strong> rather than his own, because she can go invisible without taking hostile actions.</li>
+          <li><strong>195 gp 1 sp each</strong>, then another <strong>28 gp 1 sp each</strong>.</li>
+          <li>At the safehouse: Maire Phelan &mdash; <em>"We thought you were all dead."</em> Quoster &mdash; <em>"You actually succeeded."</em> Jenverick picks Quoster up and swings him in a circle while he says <em>"put me down."</em></li>
+          <li><strong>Rhokrag</strong> awards <strong>9 XP</strong> the GM cheerfully admits isn't in the book. <strong>Level 7.</strong> Zanthar had predicted the exact number minutes earlier.</li>
+          <li>Phoebe's first reaction to a dozen new Hellbreakers: <em>"Where are we going to put everybody?"</em> Rhokrag: <em>"I've got an idea"</em> &mdash; and runs out the door. Rabbit and Cole tap a keg nobody knew was there.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act IV &middot; Exploration &middot; The Fort</div>
+      <div class="act-card">
+        <h3>A home base, for the first time in the campaign</h3>
+        <ul>
+          <li>Two covered wagons, two days of travel, a single-file mountain trail, and a keep across a freshly rebuilt bridge &mdash; <em>"I was here just last week getting this done."</em> An old hobgoblin lair: holes in the roof, snow coming through, rats.</li>
+          <li>The wagons are full of <strong>roofing material, building stone, beds and a whole kitchen array</strong>. <em>"I figure this is a nice new Hellbreakers headquarters."</em></li>
+          <li><strong>Six days, four skills, each PC in their own lane.</strong> Panacea and Zanthar craft (29 and 32); <strong>Cyrathul, who says outright he cannot craft at all, rolls Diplomacy to direct the other Hellbreakers</strong> (30); Bai Jian rolls Athletics to lift the heavy beams (27).</li>
+          <li>Result: a working kitchen, a full garrison, an arsenal, and beds for everyone. Jenverick kicks the door open, sends half-eaten bones flying, and jumps up and down: <em>"I've never had&mdash; I mean, I've had a place of my own, but it was just a small apartment."</em></li>
+          <li><strong>Grizzo</strong> knocks &mdash; the burned goblin who collapsed in <strong>Umok</strong> fleeing the Hell Hounds in S7, now living under the gnomes' protection. She has walked to a mountain keep in winter to hand-deliver a sealed letter. <strong>Cyrathul invites her in out of the storm.</strong></li>
+          <li>The letter, from <strong>Ion Marbleberg</strong> and <strong>Fessimeth Finwinkle</strong>: <em>"The undead are becoming an issue here in the Southlands. We have written to the capital and it seems to have fallen on deaf ears."</em> <strong>Fessy's signature quietly closes a thread open since Session 14.</strong></li>
+          <li>Cyrathul, aloud: <em>"Hopefully that won't come up later."</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act V &middot; Council &middot; Rhokrag's Table, and the Pallid Princess</div>
+      <div class="act-card">
+        <h3>The bad news, over dinner</h3>
+        <ul>
+          <li>Four downtime days: <strong>Panacea</strong> works the hospital (two Medicine crits), <strong>Bai Jian</strong> hauls freight, <strong>Zanthar</strong> crafts and learns spells, <strong>Cyrathul</strong> busks &mdash; and <strong>Lezinia</strong>, the singer from the Elidir gala, walks past and recognises him: <em>"I didn't know you busked too."</em> She independently confirms the southern undead problem and that <strong>Caeto is sending no troops</strong>.</li>
+          <li>Guests at the house include <strong>Ellery "Gram" Smalltoes</strong>, halfling editor of the <em>Saringallow Gazetteer</em>, who hands over today's copy and waits, beaming. Bai Jian: <em>"I don't really follow the news."</em></li>
+          <li><strong>Caeto's letter</strong>, read aloud by Phoebe as <em>"the reply Vulaunex sent to Logos"</em> &mdash; the same Paralictor who deputized them in S15: <em>"Isger has greater problems than a few undead. The Hellbreakers are a pest that must be nipped in the bud before their dissidence spreads like a plague. Though their self-righteous act may still be of some use, your concerns are noted."</em></li>
+          <li><strong>Alceo's answer</strong>: <em>"If the so-called leaders of Isger won't protect its people from the undead, I suppose we'll have to deal with it ourselves."</em></li>
+          <li><strong>Cyrathul's Esoteric Lore (31)</strong> surfaces the rumour of an <strong>undead witch</strong> south of the Chitterwood &mdash; a location he explicitly doubts. Alceo heard the source was <strong>a curse</strong>; Phoebe suggests <strong>triangulating</strong> it from which southern caravan routes have gone unsafe.</li>
+          <li><strong>Rhokrag bets a hundred gold a head.</strong> Cyrathul tries to raise it &mdash; <em>"Why not 200?"</em> &mdash; and Rhokrag counters <em>"Why not 100 gold from each of you?"</em></li>
+          <li><strong>Cyrathul goads him</strong> with Deception: 35 on the roll, <strong>37 with the +2 Zanthar quietly Aided in</strong>. Rhokrag lets slip the name &mdash; <em>"some sort of <strong>Pallid Princess</strong> somewhere that's causing all this trouble, and I'm going to be the first one to find her."</em></li>
+          <li><strong>Assignments.</strong> The party takes the south: <strong>Thorngrip within three days</strong>, then Swiftrun, Stumpfield, Umok, Vordia &mdash; and <strong>Wolf Point</strong>, which Rhokrag raises with a straight face, asking whether they know anything about bandits who only rob Chelaxians. (They do: <strong>Runa Bloodhammer's Steel Circle</strong>, from S5.)</li>
+          <li>A <strong>Wand of Dream Message</strong> goes to Zanthar. Rescued civilians go to Saringallow. Reconvene on the 9th.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat &mdash; The Druma Road Gate</h2>
+  <div class="combat-box">
+    <div class="combat-meta">Encounter 1 &middot; Severe &middot; 112 XP &middot; 6 rounds &middot; all six flagged THREAT EXTREME</div>
+
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Hellknight Cavalry Brigade</div><div class="combat-stat-value">Lv 8 troop &middot; 135 HP &middot; AC 27</div></div>
+      <div><div class="combat-stat-label">Line Infantry</div><div class="combat-stat-value">Lv 6 troop &middot; 96 HP &middot; AC 24</div></div>
+      <div><div class="combat-stat-label">Standard Bearer</div><div class="combat-stat-value">Lv 4 &middot; 60 HP &middot; AC 20</div></div>
+      <div><div class="combat-stat-label">Party low-water</div><div class="combat-stat-value">Zanthar 1 &middot; Cyrathul 9 &middot; Bai Jian 15</div></div>
+      <div><div class="combat-stat-label">Hero points / rerolls</div><div class="combat-stat-value">4 hero points &middot; 5 Elidir fortunes</div></div>
+      <div><div class="combat-stat-label">Healing</div><div class="combat-stat-value">111 total &middot; Panacea 88 of it</div></div>
+    </div>
+
+    <div class="log-warning"><strong>ONE Line Infantry, not two.</strong> A second infantry token sits in the scene roster but never rolled a save, took a point of damage, or held an initiative slot &mdash; the rest of the line was cleared by NPC Hellbreakers in narration.</div>
+
+    <h4>Damage contribution &mdash; two ways of counting, and they disagree</h4>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Cyrathul</div><div class="combat-stat-value">121 applied &middot; 83 effective</div></div>
+      <div><div class="combat-stat-label">Zanthar</div><div class="combat-stat-value">119 applied &middot; 103 effective</div></div>
+      <div><div class="combat-stat-label">Bai Jian</div><div class="combat-stat-value">112 applied &middot; 105 effective</div></div>
+      <div><div class="combat-stat-label">Panacea</div><div class="combat-stat-value">12 applied &middot; 0 effective</div></div>
+    </div>
+    <p><em>Applied</em> is what the party rolled onto targets; <em>effective</em> strips out overkill and the 40 temporary hit points the Standard Bearer handed out. The three damage dealers were within nine points of each other &mdash; <strong>this was not carried by one person.</strong> Panacea's entire offensive contribution was absorbed by temp HP, which is a scheduling accident rather than a comment on her: she spent the fight healing.</p>
+    <p><strong>Damage taken</strong>: Cyrathul 93 &middot; Bai Jian 91 &middot; Ren 76 &middot; Zanthar 49.</p>
+
+    <h4>Round 1 &mdash; the opener and the charge</h4>
+    <ul>
+      <li><strong>Zanthar</strong> activates and hurls <strong>Frozen Lava</strong>: Line Infantry crit-fails (<strong>41</strong>), Brigade fails (<strong>26</strong>), Standard Bearer succeeds (<strong>9</strong>). <strong>76 total.</strong></li>
+      <li><strong>Bai Jian</strong> casts <strong>Bless</strong> from a scroll, moves up with Ren.</li>
+      <li><strong>Brigade</strong>: three-action <strong>Lance Charge</strong>, DC 26. Ren and Bai Jian take <strong>29</strong>; Zanthar 14. Zanthar hero-points into a success; Bai Jian hero-points a crit-fail up to a plain failure.</li>
+      <li><strong>Line Infantry</strong>: Bolt Salvo, 6 apiece.</li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability fails (21 vs DC 24); jaws miss.</li>
+      <li><strong>Standard Bearer</strong>: <em>"Stay in the Fight, lads!"</em> &mdash; 10 temp HP to two troops.</li>
+      <li><strong>Panacea</strong>: Spiritual Armament, hero-pointing a nat 4 into a 19 to hit, for 5; then Trade Death for Life onto Bai Jian.</li>
+    </ul>
+
+    <h4>Round 2 &mdash; the first crit</h4>
+    <ul>
+      <li><strong>Zanthar</strong>: Chilling Spray, 13.</li>
+      <li><strong>Bai Jian</strong>: <strong>nat 20</strong>, Snagging Strike crit for <strong>36</strong> &mdash; clumsy, enfeebled, off-guard on the segment.</li>
+      <li><strong>Brigade</strong>: Stab from the Saddle (DC 23) &mdash; Bai Jian 30, Ren 25, Cyrathul 15. Cyrathul hero-points a nat 1 into a success.</li>
+      <li><strong>Cyrathul</strong>: Exploit Vulnerability fails twice more; Frenzy opener misses.</li>
+      <li><strong>Panacea</strong>: the three-action Heal is proposed, then abandoned when Bai Jian points out it would heal the enemy too &mdash; goes off as the <strong>two-action version redirected to Ren</strong> for 13. Ren is at dying 1 when it lands.</li>
+    </ul>
+
+    <h4>Round 3 &mdash; the low point</h4>
+    <ul>
+      <li><strong>Zanthar</strong>: Hand of the Apprentice hits for 19.</li>
+      <li><strong>Bai Jian</strong>: drinks an <strong>Elixir of Life</strong> (14), stands Ren up, and <strong>crits for 20</strong> &mdash; <em>"you swing and then backswing and you take out several of the mounted Hellknights."</em> Brigade to two segments.</li>
+      <li><strong>Brigade</strong>: Stab from the Saddle again &mdash; Ren to 13 and wounded 1, Cyrathul and Zanthar 15 each. Bolt salvo follows.</li>
+      <li><strong>Cyrathul</strong>: rolls a <strong>28 Demoralize against Will DC 27 and it is ruled ineffective against the formation</strong>, then <strong>crits a claw for 32</strong>.</li>
+      <li><strong>Panacea</strong>: Battle Medicine on Cyrathul for 25, on Assurance, and sustains.</li>
+    </ul>
+
+    <h4>Round 4 &mdash; the Brigade falls</h4>
+    <ul>
+      <li><strong>Zanthar</strong>: Electric Arc, crit-saved by the Brigade.</li>
+      <li><strong>Ren</strong>, back up, gives the <strong>Isgeri Boarhound support benefit</strong> (+1); <strong>Bai Jian</strong> hits for 10.</li>
+      <li><strong>Brigade</strong>: Stab from the Saddle hits four targets; Cyrathul takes 23. A bolt salvo takes <strong>Zanthar to 1</strong>; Panacea's second Battle Medicine returns 29.</li>
+      <li><strong>Cyrathul kills the Hellknight Cavalry Brigade</strong> &mdash; <em>"I'll just jump up and then rip them off their horse."</em> The jaws Strike landed at <code>Hit by +0</code>: <strong>without Bai Jian's Bless it misses.</strong></li>
+      <li>His follow-up Twisting Tail reaction strikes the wrong target and misses.</li>
+    </ul>
+
+    <h4>Round 5 &mdash; the Standard Bearer falls</h4>
+    <ul>
+      <li><strong>Zanthar</strong>: <strong>Illusory Creature</strong> as a non-lethal guard dog, to flank and chip.</li>
+      <li><strong>Bai Jian</strong>: Snagging-Strikes the Standard Bearer for 16 while flanking &mdash; and because the Bearer is a normal creature rather than a troop, <strong>the off-guard actually sticks</strong>.</li>
+      <li><strong>Line Infantry</strong>: Clash of Steel, 10 to Cyrathul.</li>
+      <li><strong>Cyrathul</strong>: heals himself 9 from a scroll, then <strong>crits the Standard Bearer with jaws for 40 and kills him</strong> &mdash; the off-guard from Bai Jian's flank was live but not load-bearing here, since a 32 crits AC 20 as well as AC 18 &mdash; and carries the Frenzy into the infantry for 15.</li>
+    </ul>
+
+    <h4>Round 6 &mdash; the last troop</h4>
+    <ul>
+      <li><strong>Zanthar</strong>: sustains the illusion (6 mental); Hand of the Apprentice misses.</li>
+      <li><strong>Bai Jian</strong>: hits twice for <strong>18 and 12</strong> &mdash; <em>"you slice through and you see three men fall to the ground"</em> &mdash; breaking the troop to two segments.</li>
+      <li><strong>Line Infantry</strong>: Clash of Steel for 8 and 17.</li>
+      <li><strong>Cyrathul finishes the encounter</strong> with a Frenzy jaws hit for 20. <em>"You tear through the last crowd of these men."</em></li>
+    </ul>
+
+    <div class="log-warning"><strong>Two reroll systems, told apart.</strong> Nine two-d20 lines appear in the log. Two carry a <code>+ 10</code> &mdash; the table's hero-point house rule firing on a reroll of 10 or lower. The rest split cleanly: Panacea and Cyrathul say "hero point" aloud, and Bai Jian settles his own Round 1 case later when the GM says he's used both Elidir rerolls and he corrects him &mdash; <em>"OK, I only used one."</em> Four of the five Elidir rerolls came up 10 or lower and <strong>none</strong> took the +10, which is the tell.</div>
+
+    <p style="color:var(--gold)"><strong>112 XP (Severe).</strong> The GM afterward: <em>"That was awesome. I mean, skin to teeth."</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Rules Memory</h4>
+      <ul>
+        <li><strong>He was the table's rules engine all night, almost never for his own benefit.</strong> Bless doesn't need sustaining; Panacea's Heal is 30 feet and the three-action version would heal the enemy; Ren's wounded and dying thresholds; Twisting Tail against troop movement; Cyrathul striking the wrong target; Draconic Frenzy isn't single-target; Trick Magic Item is retryable; Continual Recovery for the ten-minute heal loop. Three of the four biggest tactical corrections of the night were his, and none were about his own character &mdash; and when Cyrathul asked whether <em>Cyrathul</em> would know a Demoralize was pointless, he dropped it in one line rather than pushing.</li>
+        <li><strong>He diagnosed the troop problem before the GM ruled on it.</strong> <em>"It doesn't work. If you're doing it on the troop, don't do it."</em> He'd already worked it out on his own Snagging Strike: <em>"This is when we need blaster, guys."</em></li>
+        <li><strong>The highest-leverage thing he did was a one-action scroll.</strong> The Round 1 Bless is the margin on Cyrathul's Brigade kill (<code>Hit by +0</code>) and on his own Round 3 crit &mdash; <strong>Bless flipped two rolls that mattered: his own Round 3 hit into the 20-damage crit, and Cyrathul's Brigade-killing jaws from a miss into a hit.</strong> Both are provable against the log.</li>
+        <li><strong>105 effective damage, the highest in the party</strong>, on two crits (36 and 20) and four hits &mdash; while taking 91, second-most, and bottoming at 15.</li>
+        <li><strong>Ren nearly died and he narrated all of it.</strong> <em>"Heal Ren! Get him off! No, heal Ren, please."</em> &rarr; <em>"I mean, we can forsake him."</em> &rarr; <em>"I think I might actually lose him."</em> Then, in the blizzard: <em>"Alright, Ren. I know you're tired, but you can do this."</em></li>
+        <li><strong>Quartermaster with a generous streak</strong> &mdash; ran the loot sale, kept the Glaive and the healing consumables, and argued the party's only Invisibility Potion onto <em>Panacea's</em> sheet rather than his own.</li>
+        <li>Dry to the last: <em>"I'm not going to any more parties."</em> And, four seconds after Cyrathul said things were looking up: <em>"They might be just raiding us tomorrow and then we're none the wiser."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Closer</h4>
+      <ul>
+        <li><strong>He killed all three enemies</strong> &mdash; the Cavalry Brigade in Round 4, the Standard Bearer in Round 5, the last Line Infantry in Round 6 &mdash; and narrated every one, from ripping riders off horses to cutting a man's Achilles tendon while he faced Bai Jian.</li>
+        <li><strong>121 damage applied, the most in the party</strong>, on a nat-20 claw crit for 32 and a jaws crit for 40 &mdash; while also taking the most damage of anyone (93).</li>
+        <li><strong>His Exploit Vulnerability had a genuinely bad night</strong> &mdash; four failures against DC 24, and the one Demoralize that beat the DC was ruled off by the formation. He spent most of the fight's action economy on tools that didn't fire, and kept swinging anyway.</li>
+        <li><strong>He is the party's mouth, and he knows exactly what he's not.</strong> <em>"All right, well, I can't craft at all"</em> &mdash; and then spent the six-day fort rebuild running Diplomacy to direct everyone else's hands, which the GM narrated as him taking <em>"a superficial role."</em></li>
+        <li><strong>The warmest beat of the night was his.</strong> Grizzo &mdash; shy, burned, hopping foot to foot on the threshold after walking to a mountain keep in winter &mdash; got <em>"Do you want to stay for a little bit? Maybe get a break from the storm?"</em></li>
+        <li><strong>He got the Pallid Princess out of Rhokrag</strong> with a deliberate goad: talk him up, let him boast, let the name fall out. A 37 Deception with Zanthar's Aid.</li>
+        <li>And he read the room correctly twice, without knowing it: <em>"Hopefully that won't come up later"</em> about the southern undead, and <em>"Things are looking up, allegedly."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Reason Everyone Lived</h4>
+      <ul>
+        <li><strong>88 of the party's 111 hit points restored.</strong> Battle Medicine 25 to Cyrathul and 29 to Zanthar &mdash; both automatic on Assurance &mdash; a Heal redirected to Ren, and the fast-healing ticks that kept Bai Jian and the dog upright. Zanthar hit 1 HP and Bai Jian 15; both finished the fight standing solely because she got to them.</li>
+        <li><strong>She fought the whole encounter on empty and said so.</strong> <em>"And then for my last action &mdash; oh my gosh, I am running out of stuff, guys."</em> Every offensive point she dealt was absorbed by temp HP, so the log credits her with zero damage; the log is a bad witness here.</li>
+        <li><strong>She adapted her turn three times under pressure</strong> &mdash; abandoned the three-action Heal when told it would heal the enemy, redirected it to the dying dog, and dropped Spiritual Armament rather than sustain it because <em>"everybody needed heals."</em></li>
+        <li><strong>The only person at the crossroads thinking about operational security</strong>: telling Wing and Moob to be <em>"on the DL about being Hellbreakers"</em> and to watch for Chelaxians asking questions.</li>
+        <li><strong>She punctured Rhokrag's whole plan in one sentence</strong> &mdash; <em>"if the story is that she's in the south, how are you going to find her in the north?"</em> &mdash; and got <em>"triangulation"</em> for an answer, which is not an answer.</li>
+        <li>She also asked the practical question nobody else did: when the party saves people in the south, where do they actually send them?</li>
+        <li>Level 7 gave her <strong>master Medicine</strong> and armor proficiency. <em>"Can you wear armor?"</em> / <em>"I can now."</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Opening Move</h4>
+      <ul>
+        <li><strong>He worked out the fight's whole solution out loud in Round 1</strong> &mdash; that a troop is one unit, that you only need to hit one of them, and that the formation is therefore the weakness &mdash; and then threw Frozen Lava into the middle of it for <strong>76 damage across three targets</strong>, including a crit-failed troop that ate 41 at once. Biggest single action of the night.</li>
+        <li><strong>103 effective damage on 35% of the party's output</strong>, mostly from consumables and cantrips, while being the squishiest body on the field.</li>
+        <li><strong>He also nearly died for it</strong> &mdash; dropped to 15, then to <strong>1</strong>, twice pulled back by Panacea. He spent the fight standing exactly where the area attacks landed because that's where the spells reached.</li>
+        <li><strong>The illusory guard dog</strong> was the session's quiet joke and a real tactical piece: a second dog to flank with, summoned while the party's actual dog lay unconscious twenty feet away &mdash; and he specified its Strikes were <strong>non-lethal</strong> unprompted.</li>
+        <li><strong>He is the other half of the party's rules desk</strong>, correcting the Bless ruling mid-Cyrathul's-turn and calling Wounded 3 as the death threshold when Bai Jian was tracking Ren.</li>
+        <li><strong>He quietly Aided Cyrathul's Deception</strong> with his own roll &mdash; the +2 that turned a 35 into the 37 that got the Pallid Princess out of Rhokrag &mdash; and ended the night holding the <strong>Wand of Dream Message</strong> as the party's designated contact.</li>
+        <li>Called his shot on the XP award (<em>"we might get nine experience somehow"</em>) and delivered the night's driest line about the adventure's broken map: <em>"But Wikipedia is great."</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot &amp; Gains</h2>
+  <div class="loot-grid">
+    <div class="loot-item"><div class="loot-name">195 gp, 1 sp each</div><div class="loot-source">Sale of the Gyve loot</div><div class="loot-note">Main distribution</div></div>
+    <div class="loot-item"><div class="loot-name">28 gp, 1 sp each</div><div class="loot-source">Second distribution</div><div class="loot-note">The remainder</div></div>
+    <div class="loot-item magical"><div class="loot-name">Wand of Dream Message</div><div class="loot-source">Alceo, at the dinner</div><div class="loot-note">Held by Zanthar &mdash; one minute of speech nightly to Gram in Saringallow</div></div>
+    <div class="loot-item magical"><div class="loot-name">A mountain keep</div><div class="loot-source">Rhokrag</div><div class="loot-note">Rebuilt over six days into a garrison with kitchen, arsenal and beds</div></div>
+    <div class="loot-item"><div class="loot-name">Silver ingot &times;1</div><div class="loot-source">Kept from the warden's chest</div><div class="loot-note">Four sold. Earmarked for silvering Zanthar's maul and Panacea's spear</div></div>
+    <div class="loot-item magical"><div class="loot-name">Invisibility Potion</div><div class="loot-source">Party stash</div><div class="loot-note">To Panacea, at Bai Jian's argument</div></div>
+    <div class="loot-item"><div class="loot-name">Elixirs of Life</div><div class="loot-source">Party stash</div><div class="loot-note">To Bai Jian &mdash; "they're helpful on your belt, not in the party stash"</div></div>
+    <div class="loot-item"><div class="loot-name">Saringallow Gazetteer</div><div class="loot-source">Gram, at the dinner</div><div class="loot-note">Unread</div></div>
+    <div class="loot-item"><div class="loot-name">+1 Armor Potency Rune</div><div class="loot-source">Confirmed available, Saringallow</div><div class="loot-note">NOT purchased on screen &mdash; the GM deferred shopping to the week</div></div>
+  </div>
+  <div class="xp-banner">Experience &middot; 112 Druma Road Gate (Severe) &middot; 9 Rhokrag's ceremonial award = <strong>121 XP each &rarr; Level 7</strong></div>
+  <p style="margin-top:16px"><strong>Level 7 changes</strong>: max HP Bai Jian 92&rarr;113, Cyrathul 68&rarr;78, Zanthar 62&rarr;71, Panacea 56&rarr;64. Bai Jian to <strong>master Athletics</strong>; Panacea to <strong>master Medicine</strong> and armor proficiency; Zanthar to <strong>master Arcana</strong>; Cyrathul to <strong>master Esoteric Lore</strong> and expert Diplomacy. Rank-4 spells come online for the casters.</p>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Gamemaster</strong>: "Boy, I thought we were having a TPK. You guys scared me there for a minute. I thought, oh no, this wasn't supposed to be that hard &mdash; but the frigging ones and twos, man."
+  <span class="attribution">Post-session, on the Druma Road Gate. Severe encounter; the Hellknights were level 8.</span></blockquote>
+
+  <blockquote><strong>Bai Jian</strong>: "It doesn't work. If you're doing it on the troop, don't do it."
+  <span class="attribution">Stopping Cyrathul's Demoralize before he spends the action &mdash; the correct troop ruling, called from the player seat minutes before the GM confirms it</span></blockquote>
+
+  <blockquote><strong>Bai Jian</strong>: "Heal Ren! Get him off! No, heal Ren, please." &hellip; "I mean, we can forsake him."
+  <span class="attribution">Eight seconds apart, Round 2, with his dog dying on the ground</span></blockquote>
+
+  <blockquote><strong>Bai Jian</strong>: "Honestly &mdash; Panacea, I should keep that on her, because a second-rank invisibility is pretty useful for Panacea, since she can get away with no hostile actions."
+  <span class="attribution">Arguing the party's only Invisibility Potion onto someone else's sheet during the loot split</span></blockquote>
+
+  <blockquote><strong>Cyrathul</strong>: "I'll just jump up and then rip them off their horse."
+  <span class="attribution">Killing the Hellknight Cavalry Brigade, Round 4</span></blockquote>
+
+  <blockquote><strong>Cyrathul</strong>: "Things are looking up, allegedly. We don't know what Cheliax is going to do next. I suppose we'll find out."<br>
+  <strong>Bai Jian</strong>: "They might be just raiding us tomorrow and then we're none the wiser."
+  <span class="attribution">Standing in the finished fort, four seconds apart, one scene before Grizzo knocks with the letter about the undead</span></blockquote>
+
+  <blockquote><strong>Cyrathul</strong>: "Do you want to stay for a little bit? Maybe get a break from the storm?"
+  <span class="attribution">To Grizzo &mdash; the burned goblin from Umok &mdash; who had walked to a mountain keep in winter to hand-deliver a letter</span></blockquote>
+
+  <blockquote><strong>Panacea</strong>: "And then for my last action &mdash; oh my gosh, I am running out of stuff, guys."
+  <span class="attribution">Round 5, having spent the fight as the only thing keeping three characters upright</span></blockquote>
+
+  <blockquote><strong>Panacea</strong>: "But if the story is that she's in the south, that she's south of the Chitterwood, how are you going to find her in the north?"<br>
+  <strong>Rhokrag</strong>: "Triangulation."
+  <span class="attribution">Immediately after Rhokrag bet a hundred gold a head that he'd find the Pallid Princess first</span></blockquote>
+
+  <blockquote><strong>Panacea</strong>: "I want to also tell Wing and Moob to be on the DL about being Hellbreakers right now, and be careful of Chelaxian people coming through looking for us."
+  <span class="attribution">The only person at the crossroads who thought about operational security</span></blockquote>
+
+  <blockquote><strong>Zanthar</strong>: "Guard dog." &hellip; "You just strike your men. Non-lethal."
+  <span class="attribution">Asked what his Illusory Creature looks like, with the party's actual dog unconscious twenty feet away</span></blockquote>
+
+  <blockquote><strong>Zanthar</strong>: "I'm sure if we go talk to the Hellbreakers, we might get nine experience somehow."
+  <span class="attribution">Minutes before the GM awarded exactly nine experience</span></blockquote>
+
+  <blockquote><strong>Zanthar</strong>: "But Wikipedia is great."
+  <span class="attribution">After the GM discovered the published adventure's map distances are roughly triple what they should be</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Pallid Princess.</strong> An undead witch, believed real by much of Isger, rumoured south of the Chitterwood &mdash; a location Cyrathul explicitly doubts. Alceo separately heard the source was <strong>a curse</strong>. Nobody has seen her.</li>
+      <li><strong>Thorngrip, in three days.</strong> Alceo needs to know whether the goblins will fight alongside the Hellbreakers. The party has the only standing relationship with them, it's a three-day ride, and the clock is already running.</li>
+      <li><strong>Rhokrag's hundred-gold bet</strong> &mdash; a hundred from each PC &mdash; that he and Maire find the source first from the north. He only bets when he thinks it's a week's work.</li>
+      <li><strong>Triangulating the undead.</strong> Southern caravan merchants know which routes have gone unsafe. Ask in enough settlements and the origin falls out of the map.</li>
+      <li><strong>The southern circuit</strong>: Swiftrun, Stumpfield, Umok, Vordia &mdash; and <strong>Wolf Point</strong>, where Rhokrag pointedly raised bandits who only rob Chelaxians. That is <strong>Runa Bloodhammer's Steel Circle</strong>, on the deal the party struck in S5. He appears to know, and asked anyway.</li>
+      <li><strong>Umok's letter</strong> is answered only with "we'll come if it worsens." <strong>Fessy Finwinkle is confirmed alive</strong> &mdash; the S14 thread is closed, and the party owes Umok a visit.</li>
+      <li><strong>Caeto Vulaunex &mdash; acting steward, and the man who cleared them of Hedvend's murder &mdash; has named the Hellbreakers a target</strong> in writing &mdash; and said their <em>"self-righteous act may still be of some use."</em> Somebody in Cheliax has a plan for them.</li>
+      <li><strong>Caeto is sending no troops south</strong>, per Lezinia &mdash; the acting steward is letting an undead crisis run.</li>
+      <li><strong>The ship at the crossroads</strong> is four or five days from seaworthy under Fang, Moob and Wing.</li>
+      <li><strong>The new fort has no name</strong> and no garrison beyond the freed prisoners and Oramos.</li>
+      <li><strong>Reconvene on the 9th</strong>, location TBD &mdash; Alceo says probably not Saringallow.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax's Notes &mdash; Bai Jian's Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Fought the <strong>Druma Road Gate</strong> as the party's only real frontline. Took <strong>91 damage</strong>, second-most in the party, and bottomed out at 15 HP.</li>
+    <li>Cast <strong>Bless</strong> from a scroll in Round 1 and left it up the whole fight. It is the margin on Cyrathul's Brigade kill (<code>Hit by +0</code>) and on his own Round 3 crit &mdash; <strong>the single highest-leverage action he took all night was a one-action scroll.</strong></li>
+    <li><strong>Two critical hits</strong> &mdash; 36 in Round 2, 20 in Round 3 &mdash; plus hits for 10, 16, 18 and 12. <strong>112 damage applied, 105 effective</strong>, the highest effective total in the party.</li>
+    <li><strong>Softened the Standard Bearer for Cyrathul's killing crit</strong> &mdash; 16 damage and an off-guard from the flank, though the crit itself cleared the un-lowered AC anyway.</li>
+    <li><strong>Called the troop rules correctly from the player seat</strong>, twice: identified that his own Snagging Strike off-guard would do nothing, and stopped Cyrathul wasting an action on Demoralize before the GM ruled.</li>
+    <li>Ran rules support for the whole table all night &mdash; Bless not needing sustain, Panacea's Heal range and the three-action version healing the enemy, Ren's wounded/dying thresholds, Twisting Tail vs. troop movement, Cyrathul striking the wrong target, Draconic Frenzy not being single-target, Trick Magic Item being retryable, and Continual Recovery for the ten-minute heal loop.</li>
+    <li>Spent the fight managing <strong>Ren</strong>, who dropped in Round 2 and never fully recovered. Stood him up twice, redirected Panacea's Heal to him, and used his support benefit for a +1 in Round 4.</li>
+    <li>Burned a <strong>hero point</strong> on the Round 1 Lance Charge save and <strong>both</strong> Elidir fortune rerolls.</li>
+    <li>Drank an <strong>Elixir of Life</strong> for 14 rather than spend another of Panacea's actions.</li>
+    <li>After Ren blew the blizzard <strong>Survival</strong> check and led the party in a circle, took it himself and found the road.</li>
+    <li>Ran the <strong>loot liquidation</strong> &mdash; kept the Lifebloom Glaive and the healing consumables, sold the rest, and argued the Invisibility Potion onto Panacea's sheet rather than his own.</li>
+    <li>Rolled <strong>Athletics</strong> to lift the fort's heavy beams during the six-day rebuild, and <strong>Earn Income</strong> hauling freight in Saringallow for 4 gp.</li>
+    <li>Pushed the party toward the <strong>+1 armor potency rune</strong>, and argued the kept silver ingot should go into Zanthar's maul and Panacea's spear before they head south.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li>Nothing withheld this session &mdash; the intelligence all arrived at Rhokrag's table in front of everyone.</li>
+    <li>Worth noting privately: <strong>he is the party's rules memory.</strong> Three of the four biggest tactical corrections of the night came from him, none of them about his own character. He also doesn't push them &mdash; when Cyrathul asked whether <em>Cyrathul</em> would know the Demoralize was pointless and the answer was no, Bai Jian dropped it in one line and let him spend the action.</li>
+    <li>He has now said twice, unprompted, that he <strong>will not do another high-society party</strong>. Buttering up the Colonel at the gala left a mark he brought up again months later, and he was explicit he'd take a Hellbreakers drinking party over an Elidir one.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The troop problem is a build problem.</strong> Snagging Strike, Slam Down and sword crit specialization all produce single-target off-guard, and a troop is immune to all of it. Against formations he is a damage stick and nothing else. Second session running that a structural gap cost the party &mdash; S18 was the ranged gap, this was the control gap.</li>
+    <li><strong>The ranged gap is still open.</strong> The +1 composite longbow off Warden Irkazer is still in the stash, he is trained with it, and nobody has picked it up.</li>
+    <li><strong>The Bless scroll outperformed his own weapon.</strong> One action of party-wide +1 decided two kills. Worth carrying more &mdash; and worth noticing that his best contribution to a hard fight was not a Strike.</li>
+    <li><strong>Ren cannot keep taking area damage.</strong> 60 HP and the best Reflex on the team did not matter &mdash; three separate area attacks caught him and he spent most of the fight at dying 1. Lock Jaws is still a level away.</li>
+    <li><strong>Level 7 gave him master Athletics</strong> &mdash; his own read: <em>"we have a skill increase to master, that's the most important part, actually. Not that it changed too much for me."</em></li>
+    <li>Undead are next. <strong>Silver matters now</strong>, and his falcata already has it. The rest of the party's does not.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Will <strong>Thorngrip</strong> stand with the Hellbreakers? Three days to find out.</li>
+    <li><strong>Where is the Pallid Princess actually?</strong> Cyrathul doesn't believe the south-of-the-Chitterwood story and Rhokrag is betting on the north. Both can't be right.</li>
+    <li><strong>What is the curse Alceo heard about</strong>, and is it the same thing as the witch or the cause of her?</li>
+    <li>What did Caeto mean by the Hellbreakers' <em>"self-righteous act may still be of some use"</em>? That is not the sentence of someone who only wants them dead.</li>
+    <li><strong>Does Rhokrag already know about the Steel Circle deal?</strong> He raised Wolf Point unprompted and asked, with a straight face, whether the party knew anything about bandits who only rob Chelaxians.</li>
+    <li>Does the party's <strong>Suppression</strong> score still exist? Nobody has mentioned it since S19 and the GM's silent d20s were never explained.</li>
+    <li><strong>Who garrisons the new fort</strong> while the party goes south?</li>
+  </ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Where it leaves off</span>
+  <p>A fortress in the mountains, a dozen freed prisoners with beds, and a hundred-gold bet on the table. And in Cheliax, a letter already written naming the Hellbreakers a pest to be nipped in the bud &mdash; whose <em>self-righteous act may still be of some use.</em></p>
+  <span class="big-line">"I believe there's probably some sort of Pallid Princess somewhere that's causing all this trouble &mdash; and I'm going to be the first one to find her."</span>
+  <span class="speaker">&mdash; Rhokrag, betting a hundred gold a head, 1 Calistril 4727 AR</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>

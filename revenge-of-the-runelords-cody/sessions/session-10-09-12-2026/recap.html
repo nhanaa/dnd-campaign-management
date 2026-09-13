@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 10 — The Cult's House</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style></head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Cult's House</h1>
+<div class="subtitle">Session 10 &middot; Revenge of the Runelords &middot; the Crypt of Pride</div>
+<div class="meta-row">
+<span class="meta-pill">2026-09-12</span>
+<span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+<span class="meta-pill">3h 35m</span>
+<span class="meta-pill">Level 16</span>
+<span class="meta-pill">4 fights &middot; 12 kills</span>
+</div>
+</header>
+
+<div class="composition-bar">
+<div class="comp-seg comp-combat" style="width:62%"></div>
+<div class="comp-seg comp-explore" style="width:20%"></div>
+<div class="comp-seg comp-rp" style="width:10%"></div>
+<div class="comp-seg comp-loot" style="width:8%"></div>
+</div>
+<div class="composition-legend">
+<span><span class="legend-dot" style="background:var(--blood)"></span>Combat 62%</span>
+<span><span class="legend-dot" style="background:var(--jade)"></span>Exploration 20%</span>
+<span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay 10%</span>
+<span><span class="legend-dot" style="background:var(--ember)"></span>Loot 8%</span>
+</div>
+
+<h2>Party</h2>
+<div class="party-grid">
+<div class="char-card char-sevek">
+<div class="char-name">Sevek</div>
+<div class="char-class">Human (Sky Dragonblood) Monk 16 — Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+<div class="char-player">Pax</div>
+</div>
+<div class="char-card char-paya">
+<div class="char-name">Paya</div>
+<div class="char-class">Leshy (pineapple) Fighter 16 — halberd, Kineticist archetype, Medic</div>
+<div class="char-player">Kelsie</div>
+</div>
+<div class="char-card char-aureys">
+<div class="char-name">Aureys Hollow</div>
+<div class="char-class">Fey Dragonet Rogue (Scoundrel) 16 — fighting fan + claws, Living Nexus + Draconic Acolyte</div>
+<div class="char-player">Anna</div>
+</div>
+<div class="char-card char-mith">
+<div class="char-name">Mithtirith</div>
+<div class="char-class">Elf Cleric of Nethys 16 — Hedge Mage, Staff of Healing (True)</div>
+<div class="char-player">Jesse</div>
+</div>
+<div class="char-card char-kreebnock">
+<div class="char-name">Kreebnock</div>
+<div class="char-class">Gnome Psychic 16 — Bard archetype, Unleash Psyche</div>
+<div class="char-player">"Arrakis"</div>
+</div>
+<div class="char-card">
+<div class="char-name">Cody McGraw</div>
+<div class="char-class">Dungeon Master ("Ryu" in Foundry)</div>
+<div class="char-player">DM</div>
+</div>
+</div>
+
+<div class="note-banner">
+<strong>Two carry-forward notes.</strong> The new player's name is still unconfirmed — it was not said on-mic this session either, so "Arrakis" carries over from S8's two renderings. And <strong>"Kree" was not spoken once</strong>, two sessions running now; the nickname Sevek coined in S8 is dead. Nobody uses anything but "Kreebnock."
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Haphrama ran last session, and the party spends this one finding out what he ran <em>to</em>. The answer is that the Crypt of Pride is not a tomb any more — it is a <strong>headquarters</strong>. Bedrooms with made beds. A library with cross-referenced research. A workbench heaped with magic items. An alchemical lab. Xanderghul's cult lives here, and the party spends three and a half hours walking through their house, killing everything in it, and reading their notes.</p>
+
+<p>Four fights, twelve kills, and nobody drops. A cracked statue of a winged woman peels off its plinth as <strong>Vogorond</strong> — a creature that shrugs off physical damage and whose debris aura <em>grows</em> every time somebody crits it — and two rounds in, two <strong>Risen Runelords of Sloth</strong> step onto a balcony thirty feet up to watch. Tannaris and Ivamura fight the whole battle in the air and from behind walls: Gravity Wave, Implosion, Weight of the World, Disintegrate, and finally a <strong>Wall of Stone</strong> that seals Sevek, Paya and Aureys into a stone box with a lid on it. Sevek punches a hole in the wall and flies out through it. Both Risen die in the air, and both of them have to spend Mythic Points to get that far.</p>
+
+<p>Then the house fights back twice. Four <strong>Pridespawn Cultists</strong> ambush the party the instant Aureys cracks a secret door — and the fight's best moment is a reaction: Sevek's Stand Still crits a cultist and the Celestial Armaments save <strong>blinds it for two rounds</strong>, after which it rolls two natural 20s at Aureys and misses both on the flat check. She finishes that fight at full health. Later, while Mithtirith and Aureys read the cult's research and Sevek stands guard outside the door, <strong>Haphrama comes back</strong> — with <strong>Xirie</strong>, a Runelord of Sloth whose stone face asked the party a question at the Trial of Runes two sessions ago. Aureys deletes a third of the enemy line with a <strong>free-action Battle Cry</strong> that sends a cultist fleeing off the map and never brings it back. Haphrama answers with a <strong>Prismatic Wall</strong> across the corridor. Mithtirith spends his entire turn and a Mythic Point on a mythic-proficiency counteract check and <strong>takes it down</strong>. Xirie Translocates out and abandons Haphrama where he stands — <em>"Xirie, you wretch!"</em> — and Aureys, who had delayed her whole turn betting the wall would fall, kills him. The Risen who escaped at 94% HP last session does not escape twice.</p>
+
+<p>The last fight is two <strong>Chromatic Oozes</strong> — 550 hit points each, thirty feet of reach, five Strikes a round, and a reaction that swaps their element every time somebody finds the one they're weak to. They are also <strong>mindless</strong>, which quietly switches off Aureys' entire debuff engine: no Demoralize, no Feint, no Stupefied, no Frightened. So the job of dragging their AC down falls to Sevek, and he does it with two of his own tools — Greater Crushing's Clumsy on every crit, and his own Taunt for the off-guard — walking them from AC 28 to 24. The party converts that into <strong>nine critical hits</strong>, and Sevek kills both. In between, the party reads the cult's research and gets the plainest statement of the campaign's stakes yet — Xanderghul intends to <strong>destroy Golarion and use the energy of its destruction to become a god</strong> — and Aureys finds a wall in the northeast that is <em>"illusion on illusion on enchantments,"</em> the work of <em>"not just a master, but a legend,"</em> which cannot be brute-forced and needs a formula nobody has yet.</p>
+
+<p>They open one more door with four minutes left on the clock. Behind it: <strong>four steel vats</strong> burbling with foul liquid, work tables of surgical tools, jars of eyeballs and strips of flesh. Nobody at the table says it out loud, but this is the room from Aureys' portal-vision in Session 6 — the one where Aethusa was carried out unconscious. Xirie is there. So is a <strong>Risen Runelord of Gluttony, Kaliphesta</strong>, who snaps her fingers and boils the vats over. Cody looks at the clock and stops.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act explore">
+<div class="act-label">Act I · Exploration · The Study</div>
+<div class="act-card">
+<h3>A comet with three tails, and Aethusa's spellbook</h3>
+<ul>
+<li>Cold open immediately after S9's entrance fight. <strong>Paya runs the heal queue</strong> — Fresh Produce, Ocean's Balm, Dash of Herbs, Torrent in the Blood — and has to talk Mithtirith through dropping his own Invisibility to be healed. Mithtirith, still invisible: <em>"I will grab his hand and guide it to me."</em></li>
+<li>Aureys scouts east into an <strong>L-shaped study</strong>: tables of maps and scribbled notes to the south, bookshelves to the north, and where the arms meet, cushioned benches around a dais holding a tall <strong>lectern</strong>. A gemstone inlay on its face forms <strong>a blazing comet with three tails</strong>.</li>
+<li>Not trapped, but very valuable. Aureys pries the gems off and takes an <strong>Aeon Stone (Amplifying)</strong>; Cody volunteers that the lectern also holds a <strong>folio containing a planar displacement formula</strong>, which Mithtirith asks about, Aureys reads out, and Paya logs into the stash.</li>
+<li>The aeon stone gets negotiated in twenty seconds. Mithtirith: <em>"I'm trying not to drool."</em> Aureys: <em>"Well, you're our main spellcaster, so drool away."</em> Sevek: <em>"You and Kreebnock can do rock, paper, scissors."</em> Kreebnock: <em>"I've already got two stones that help me, so I'm good."</em> Mithtirith: <em>"Well, if you're good, I'll be greedy."</em> Paya, notarizing: <em>"It's a perfect 50-50 split. One of you is good and one of you is great."</em> It goes to <strong>Mithtirith</strong>.</li>
+<li><strong>Mithtirith sweeps the shelves with Detect Magic</strong>, which is how the party learns which books are enchanted before anyone starts reading.</li>
+<li>The bookshelves hold history, philosophy, religion and a great deal of arcane theory. Two things stand out: a collection of <strong>treatises</strong>, and a book titled <strong>"Thrice Born Souls"</strong> with a <strong>heavily enchanted dagger</strong> shoved in as a bookmark. It is a wizard's spellbook, and it belongs to <strong>Aethusa</strong>.</li>
+<li>Sevek sets the route before anyone opens a door: <em>"Do we want to check the room down there? … I think big rooms maybe before all the little rooms?"</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act II · Combat · Vogorond, and the Runelords of Sloth</div>
+<div class="act-card">
+<h3>A statue with wings for arms, and an hour in the air</h3>
+<ul>
+<li>An archway east opens on an octagonal chamber 70 feet across. At the center, an <strong>enormous statue</strong> of cracked stone: a <strong>feminine figure with feathered wings in place of arms</strong>, her face crumbled away, the carvings in her hair suggesting she once wore <strong>a crown of flowers</strong>. An altar slab lies at her feet.</li>
+<li>It springs to life as Aureys approaches, debris rising around it in a <strong>swirling aura</strong>. Sevek: <em>"Classic."</em></li>
+<li>Mithtirith burns <strong>Scholarly Recollection</strong> for two Recall Knowledge rolls and gets nothing — <em>"you're actually not certain what this being is."</em> Rare creature. Mithtirith: <em>"That's extra scary."</em> … <em>"Though there's lots of things in life I haven't encountered."</em></li>
+<li>The creature's shape emerges the hard way: <strong>heavy physical resistance</strong> turns Paya's 45 into 22, and when Paya's Reactive Strike crits it, Cody names the mechanic — <em>"because that crits, the aura goes from 10 to 20 feet."</em> <strong>It gets stronger the harder you hit it.</strong></li>
+<li>Vogorond's second Launch Rubble is <strong>centred on itself</strong> to catch more of the party, eating 25 of its own damage. It never lands an attack all fight.</li>
+<li><strong>Round 3 — two humanoid figures appear thirty feet up.</strong> <em>"Runelord Tannaris and Runelord Ivamura, Runelords of Sloth."</em> Tannaris: <em>"Well, if it isn't the roaches who have been making a mess of the crypts."</em> Ivamura: <em>"Let's get on with it, shall we?"</em></li>
+<li><strong>Paya kills Vogorond on the same beat they arrive</strong> — a Vicious Swing crit, 92 rolled and 60 after resistance. Cody: <em>"Well, just in time, as this thing will shatter."</em></li>
+<li>The fight goes vertical and stays there. <strong>Sevek flies up and critically Grapples Ivamura</strong>; she spends a <strong>Mythic Point</strong> to break it. Paya <strong>Godspeeds</strong> and jumps 35 feet straight up. Aureys flies 60.</li>
+<li><strong>The Wall of Stone.</strong> Tannaris quickens it and boxes Aureys, Paya and Sevek into a sealed cube, ceiling included. Kreebnock: <em>"Do your Kool-Aid Man impression."</em> Aureys: <em>"Mix me a hole."</em> <strong>Sevek Flurries a section apart for 76 and flies out through the gap.</strong></li>
+<li><strong>Mithtirith kills Ivamura with Tempest Surge</strong> — a critical failure on a <strong>natural 1</strong>, 98 into her last 10 hit points. <strong>Sevek kills Tannaris</strong> a round later on the first swing of a Flurry.</li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act III · Exploration · The Wall That Can't Be Forced</div>
+<div class="act-card">
+<h3>Illusion on illusion on enchantment</h3>
+<ul>
+<li>Aureys searches the balcony and the chamber beyond with <strong>Sevek assisting</strong>, and finds it: the <strong>northeast wall is not mundane</strong>. <em>"Illusion on illusion on enchantments,"</em> expertly hidden, concealing something.</li>
+<li>Cody is explicit that there is no brute-force answer: <em>"the work of not just a master, but a legend among this kind of magic."</em> It needs <strong>a specific formula</strong>.</li>
+<li><strong>Kreebnock makes the connection nobody else does</strong>: <em>"Perhaps we can search in the library? That planar displacement formula?"</em> — tying the folio Aureys pocketed an hour earlier to the wall they can't open. Paya, immediately: <em>"Oh, that's true."</em></li>
+<li>Mithtirith's Arcana and Kreebnock's Occultism both come up short. Sevek hunts for a bypass instead — <em>"Is there any teleportation? … like fifth rank Translocate, if it's a magical gate"</em> — and gets nowhere.</li>
+<li><strong>Sevek calls the session's ending five seconds before Paya seconds it</strong>: <em>"Come back. I say that and then we come back and everything's gone."</em> Paya: <em>"Surely we'll be able to come back and nothing bad will happen."</em></li>
+<li>After the break, south: a sitting area and <strong>six identical bedrooms</strong>, nothing valuable. Sevek: <em>"Maybe there's treasure under this bed."</em> Cody: <em>"Maybe the treasure is the bed, you don't know."</em> Kreebnock: <em>"It's the rest you get along the way."</em></li>
+<li>At the end of a side hallway Aureys finds a <strong>secret door</strong>, and the wall slides open on a great wide chamber — which is exactly when doors to the south start swinging open.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act IV · Combat · Four Pridespawn Cultists</div>
+<div class="act-card">
+<h3>The blind that blanked two natural 20s</h3>
+<ul>
+<li><em>"With Bec de Corbin brandished, they'll attack."</em> Sevek rolls a <strong>natural 1 for initiative</strong> and goes last all fight — everything he contributes before his own turn is a reaction.</li>
+<li>Paya calls the shape of the fight before anyone gets punished for it: <strong>"These guys are reactive strikers from book one."</strong> Nobody eats a Reactive Strike they hadn't chosen to.</li>
+<li><strong>The reaction that decided the fight.</strong> Cultist B strides through Sevek's reach; <strong>Stand Still fires, natural 20</strong>, and the <strong>Celestial Armaments Fortitude save comes up a natural 1 — blinded, two rounds.</strong></li>
+<li><strong>And the blind pays out completely.</strong> The blinded cultist rolls <strong>two natural 20s at Aureys in the same turn and misses both on the DC 11 flat check.</strong> Cody: <em>"the blind saved you from a crit."</em> <strong>Aureys finishes the entire fight without taking a single point of damage.</strong></li>
+<li>Aureys runs the Grovel/Feint engine all fight, and after a cultist puts two hits into Paya: <strong>"I don't like people who hit my pineapple, but you are beautiful, I will admit. So pretty."</strong> → <em>"Don't hit my pineapple."</em> Cody: <em>"One hell of a euphemism."</em></li>
+<li>⚠️ <strong>The Fortification rune bug surfaced again.</strong> Cody: <em>"go ahead and make the fortification rune."</em> Sevek: <em>"No, there's no fortification."</em> Cody: <em>"Where does it keep saying that from?"</em></li>
+<li><strong>Sevek closes the fight in a single turn</strong>: Elf Step, Inner Upheaval, then a Flurry with one attack on each remaining cultist — <strong>both critical hits, 98 apiece, killing Cultist A and Cultist C back to back.</strong></li>
+<li>Searching afterward, <strong>Sevek sees the cult's treasure workbench first</strong>: <em>"Oh, I see a lot of gold. And by gold, I mean gold color."</em> … <strong>"This is like the dragon's dream right here."</strong> Aureys: <em>"A treasure hoard! Aureys is like, yes!"</em></li>
+<li><strong>The research pays off in ten minutes.</strong> Xanderghul has adopted the <strong>Crypt of Pride as his headquarters</strong>; by robbing the other Runelords' crypts he gathered the objects to create <strong>many of</strong> the Risen; <strong>most of the cult is elsewhere</strong>; and his objective is stated plainly for the first time — <strong>destroy Golarion and use the energy of its destruction to become a god.</strong> Aureys: <em>"That tracks."</em></li>
+<li>Mithtirith, three minutes before it matters: <em>"I feel like the people that ran away didn't just run away, you know what I mean?"</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V · Combat · Haphrama Returns, with Xirie</div>
+<div class="act-card">
+<h3>A wall of seven colours, and one turn spent well</h3>
+<ul>
+<li><strong>From his post at the door, Sevek sees them coming.</strong> More Pridespawn, <strong>Runelord Haphrama</strong>, and a figure the party recognises — <em>"it was her face who asked you a question."</em> <strong>Runelord of Sloth, Xirie.</strong></li>
+<li>Xirie, to Haphrama: <em>"So these were the ones who gave you such a fright."</em> Haphrama: <em>"Silence. Just deal with them."</em></li>
+<li><strong>Aureys deletes a third of the enemy line with a free action.</strong> Battle Cry on the initiative roll: a <strong>natural 20</strong> Demoralize against a Pridespawn Cultist, <strong>Frightened 2 and Fleeing</strong>. It runs and <strong>never comes back</strong> — nobody in the party ever touches it.</li>
+<li><strong>Sevek and Kreebnock both spend Mythic Points on initiative.</strong> Kreebnock's 51 is the highest in the fight, which is why he opens it with a Telekinetic Bombardment that throws two cultists prone.</li>
+<li>Xirie's <strong>Phantasmagoria</strong> lands worst on exactly the wrong person: <strong>Kreebnock is Confused.</strong> Cody: <em>"How did the psychic do the worst on the will save?"</em> He rolls a random target, gets <strong>Aureys</strong>, and hits her for 28. Aureys: <strong>"What did I do to you, little man?"</strong></li>
+<li>⚠️ <strong>Kreebnock had prepared for this.</strong> He carries <strong>Still Earth</strong> as an anti-Confused reaction, checked for it the moment it landed, and found it on cooldown — he'd spent it in the morning's first fight.</li>
+<li><strong>Paya kills Cultist A</strong> on a <strong>natural 20</strong>, and his next strike sets up <strong>Aureys' Opportune Backstab, a crit for 95 that kills Cultist B.</strong></li>
+<li><strong>Haphrama raises a Prismatic Wall</strong> — 30 feet high, seven layers, cutting the corridor. <strong>Sevek is on the far side of it with no answer of his own</strong>, so he names <strong>Dispel Magic</strong> to Mithtirith and tells Aureys to hold her turn for it. <strong>Aureys delays her entire turn</strong> on the chance it works.</li>
+<li><strong>Mithtirith takes it down, and it costs him his whole turn</strong> — Mythic Casting plus a rank-8 Dispel Magic, three actions and a Mythic Point, rolling <strong>41 plus 4 for mythic = 45.</strong> Kreebnock, mourning: <em>"It was so pretty though."</em></li>
+<li><strong>Xirie Translocates out and abandons Haphrama</strong> — <em>"Xirie, you wretch!"</em> Aureys: <em>"They really are quite cruel to one another."</em> She had taken <strong>10 damage</strong> all fight.</li>
+<li><strong>Aureys kills Haphrama</strong> with a critical Earth to Heavens Strike. The Risen who Translocated out at 94% HP last session does not get to do it twice.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act VI · Combat · The Portal, and the Chromatic Oozes</div>
+<div class="act-card">
+<h3>Two mindless things, and the AC that walked down</h3>
+<ul>
+<li>Up the stairs, set into the north wall, a <strong>window 30 feet in diameter</strong> onto an expanse of <strong>wispy multicolored mist</strong> — and out of it <em>"bright glowing eyes and mouths stare back at you. Gaunt, sunken faces that are the only source of real light out there."</em> They watch <em>"as if daring you to enter."</em></li>
+<li>Aureys defers to the casters; <strong>Kreebnock and Mithtirith both fail to identify it.</strong> Kreebnock: <em>"Yeah, that sounds terrible. Let's not go there."</em> Paya: <em>"Definitely not. The door definitely isn't staring back, right, Cody?"</em></li>
+<li>The east door smells of sulfur. Aureys: <em>"Unfortunately, it's not undead. I mean, because I'm kind of getting hungry."</em> Kreebnock: <em>"And breach."</em></li>
+<li>Beyond, an <strong>alchemical lab</strong> with an <strong>iron cauldron nearly 10 feet across</strong> full of liquid <em>"that rapidly shifts between all colors of the spectrum."</em> Aureys flies in and the substance smells her back. <strong>Two Chromatic Oozes.</strong></li>
+<li>They are <strong>mindless</strong>, and it costs Aureys her whole kit — Demoralize ruled out, round-1 Feint failed on the die, round-2 Feint <em>succeeded</em> and was <em>then</em> ruled out. She commits to the bit anyway: <em>"Oh, aren't you so oozealicious?"</em></li>
+<li><strong>With her debuff engine off, the AC job falls to Sevek</strong> — Greater Crushing's Clumsy on every crit (28 → 26) and his own Taunt for the off-guard (26 → 24). <strong>Nine of the encounter's seventeen party crits came off that drop</strong>, only five of them his.</li>
+<li><strong>He reads the Chromatic Shift correctly</strong>: <em>"A is now weak to fire and resistant to electricity."</em> Forcing a second shift converts the old resistance into <strong>weakness 20</strong>, and the party plays both oozes back and forth across it for +20 twice.</li>
+<li>Paya spends <strong>Unbelievable Interception</strong> on a hit aimed at Mithtirith and <strong>Deflecting Wave</strong> on an 80-point crit — and finishes as the fight's <strong>top damage dealer on seven crits from eight rolls.</strong></li>
+<li><strong>Sevek kills both oozes.</strong> Loot: bombs, Elixirs of Life, and a cauldron <strong>Kreebnock identifies as orichalcum</strong> — extremely valuable, nearly immovable. Paya: <em>"If right before we teleport, I transform into a Tyrannosaurus and then pick it up, would that be okay?"</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VII · Mystery · The Vats</div>
+<div class="act-card">
+<h3>The room from Aureys' vision</h3>
+<ul>
+<li>One more door, four minutes on the clock. Cody makes the party walk into the room rather than get caught in the hallway.</li>
+<li><strong>Four steel vats</strong> burbling with foul liquid fill the southern leg of an L-shaped room. The northern half is work tables <em>"cluttered with surgical tools, as well as anatomical drawings and jars in which eyeballs, strips of flesh, and other body parts are suspended."</em></li>
+<li><strong>This is the room from Aureys' Session 6 portal-vision</strong> — Aethusa unconscious among magical apparatuses and four immense steel vats, Xanderghul's ghost leaving her for a fresh body. <strong>Nobody at the table says it out loud.</strong></li>
+<li><strong>Xirie</strong> is here, two Pridespawn Cody suggests <em>"might well be the two that have ran away before"</em> — and one more Risen, known <em>"not from personal memory, but if only from historical texts."</em> <strong>One of the Runelords of Gluttony: Kaliphesta.</strong></li>
+<li>She snaps her fingers, the cauldrons boil over, and <em>"twisted amalgamations of flesh and bone tumble forth."</em></li>
+<li>Aureys: <em>"Oh, tasty."</em> Paya: <em>"I'm glad one of us is appetized."</em> Mithtirith: <em>"Fancy."</em></li>
+<li>Cody stops there. <strong>Next session opens on this fight, at level 17</strong>, and he expects to finish the Crypt of Runes in it.</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 · 8 rounds · 13:19–14:20 (~60 min) · the longest fight of the session</div>
+<h3>Vogorond, then Runelords Tannaris and Ivamura</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Vogorond</span><span class="stat-value">340 HP · AC 40 (38) · heavy physical resistance · rare</span></div>
+<div><span class="stat-label">Risen Runelord Tannaris</span><span class="stat-value">400 HP · AC 40 · Sloth · resist mythic 6 · Mythic Ferocity</span></div>
+<div><span class="stat-label">Risen Runelord Ivamura</span><span class="stat-value">400 HP · AC 40 · Sloth · resist mythic 6 · Mythic Ferocity</span></div>
+<div><span class="stat-label">Outcome</span><span class="stat-value">All three killed · nobody dropped</span></div>
+</div>
+
+<h4>Rounds 1–2 — the statue</h4>
+<ul>
+<li><strong>Paya</strong> opens with Needle in the Gods' Eyes; one strike lands and 45 becomes 22 — the party learns about the physical resistance.</li>
+<li><strong>Mithtirith</strong> burns Scholarly Recollection for two Recall Knowledge rolls and gets nothing. Rare creature.</li>
+<li><strong>Vogorond</strong> spends two actions on <strong>Launch Rubble</strong> (20-ft burst), which <em>consumes</em> its debris aura, then reapplies it at 10 feet.</li>
+<li><strong>Sevek's</strong> Reflex save comes up a <strong>natural 2 — he spends a Mythic Point to reroll at mythic proficiency and still eats 75.</strong> He fuses Reflective Ripple and Whirlwind, <strong>lands a Trip</strong>, and misses the follow-up.</li>
+<li><strong>Aureys'</strong> Feint fails by one against Will; Majestic Presence lands Frightened; her Overwhelming Combination watches 42 become 19. <strong>Kreebnock</strong> opens Courageous Anthem.</li>
+<li>Round 2: the Trip costs Vogorond an action to stand, <strong>Paya's Reactive Strike crits</strong>, and the aura grows from 10 to 20 feet. Vogorond then <strong>centres its second Launch Rubble on itself</strong>, eating 25 of its own damage.</li>
+</ul>
+
+<h4>Round 3 — reinforcements, a kill, and the fight goes vertical</h4>
+<ul>
+<li>Two figures appear on a platform thirty feet up. <strong>Paya's Vicious Swing crits Vogorond</strong> — 92 rolled, 60 after resistance, into 31 remaining hit points. No Mythic Point refund; the statue was never mythic.</li>
+<li><strong>Tannaris</strong> answers with a three-action <strong>Force Rain</strong> (no save).</li>
+<li><strong>Sevek</strong> flies up and <strong>critically Grapples Ivamura</strong>, Restraining her; <strong>she spends a Mythic Point on Remove a Condition</strong> to break it, then Gravity Waves him prone. <strong>Aureys</strong> flies sixty feet up.</li>
+</ul>
+
+<h4>Rounds 4–5 — Implosion, and the box</h4>
+<ul>
+<li><strong>Tannaris</strong> throws <strong>Implosion</strong> at Aureys; <strong>Draconic Salvation</strong> converts the failure to a success, which her build upgrades to a <strong>critical</strong>.</li>
+<li><strong>Mithtirith</strong> answers Ivamura's Force Rain with <strong>Vindictive Thoughts</strong>, crit-fails the Will save on a natural 1, <strong>spends a second Mythic Point to reroll</strong> and lands a 19 for half — and Ivamura critically succeeds against the mental damage. Two points, one halved save.</li>
+<li><strong>Paya</strong> Godspeeds, jumps thirty-five feet straight up for a 98-damage crit, then crits again on a Reactive Strike for 64 — leaving Tannaris on <strong>2 hit points</strong>, where <strong>the persistent fire and void off his runes tick him to zero.</strong> Tannaris burns <strong>Mythic Ferocity</strong>; Cody catches his own automation: <em>"It should be all of his Mythic Points to do this, not just one."</em></li>
+<li><strong>The Wall of Stone.</strong> Tannaris quickens it and seals Aureys, Paya and Sevek into a cube. <strong>Sevek Flurries a section apart for 76 and flies out.</strong> <strong>Mithtirith</strong> uses the same wall for cover and Hides.</li>
+</ul>
+
+<h4>Rounds 6–8 — attrition in the air</h4>
+<ul>
+<li><strong>Ivamura</strong> can't reach Mithtirith with Implosion and drops <strong>Weight of the World</strong> on him instead: stunned 2, dazzled. <strong>Tannaris</strong> tries it on Sevek a round later and <strong>Sevek critically succeeds for nothing at all.</strong></li>
+<li><strong>Sevek</strong> Group Taunts both and Flurries Ivamura for 73. When she flies clear she eats <strong>Sevek's Stand Still for 37 and Paya's Reactive Strike for 48</strong>, which would have killed her — <strong>so she burns her own Mythic Ferocity.</strong></li>
+<li><strong>Ivamura's</strong> 7th-rank Disintegrate at Kreebnock <strong>misses on a natural 3</strong>. Paya: <em>"Some days you spend all your Mythic points leading up to the big spell, and then the big spell misses."</em></li>
+<li><strong>Mithtirith kills Ivamura with Tempest Surge</strong> — critical failure on a natural 1, 98 into 10 remaining hit points.</li>
+<li><strong>Sevek kills Tannaris</strong>: Electric Arc for 9 (saved), then the first swing of a Flurry for 43 into 12 remaining hit points. The second swing was never needed.</li>
+</ul>
+
+<p><strong>Kills:</strong> Vogorond → <strong>Paya</strong> · Ivamura → <strong>Mithtirith</strong> · Tannaris → <strong>Sevek</strong><br>
+<strong>Enemy mythic spend:</strong> Ivamura — Remove a Condition + Mythic Ferocity · Tannaris — Mythic Ferocity<br>
+<strong>Party mythic spend:</strong> Mithtirith 2 · Sevek 1 · Paya 1<br>
+<strong>Damage taken:</strong> Sevek ~275 · Mithtirith ~249 · Paya 61 · Aureys 40 · <strong>Kreebnock 0</strong><br>
+<em>Vogorond never landed an attack all fight.</em></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 · 4 rounds · 14:43–15:17 (~34 min)</div>
+<h3>Four Pridespawn Cultists</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Pridespawn Cultist A–D</span><span class="stat-value">315 HP each · AC 37 (35) · F+30 R+27 W+25</span></div>
+<div><span class="stat-label">Kit</span><span class="stat-value">Bec de corbin at reach 10 · Cruel Sneak Attack · imprecise sense 30 ft</span></div>
+<div><span class="stat-label">Defences</span><span class="stat-value">Resist mental 10 · +4 status to mental saves · immune controlled</span></div>
+<div><span class="stat-label">Outcome</span><span class="stat-value">All four killed · Aureys took zero damage</span></div>
+</div>
+
+<h4>Round 1 — the reaction that decided the fight</h4>
+<ul>
+<li><strong>Sevek</strong> rolls a <strong>natural 1 for initiative</strong> and goes last all fight. Cultist D outruns its allies, crit-Feints <strong>Paya</strong> and opens on him for 38.</li>
+<li><strong>Paya</strong> spends the fight's <strong>only Mythic Point</strong> on <strong>Divide and Conquer</strong> — a hit on A, a crit on D, <strong>Sickened 2 on both</strong> — then enters <strong>Lunging Stance</strong>.</li>
+<li><strong>Kreebnock's</strong> rank-8 Daze does <strong>zero damage</strong> into resist mental 10 plus a +4 to mental saves. <strong>Aureys</strong> fails her Feint and lands an <strong>Overwhelming Combination on D for 129</strong>. Cultist C answers with a <strong>natural 20 on Mithtirith for 65</strong>.</li>
+<li><strong>Cultist B strides through Sevek's reach; Stand Still fires, natural 20, 76 damage</strong>, Greater Crushing stamps Clumsy 2 and Enfeebled 2 — and the <strong>Celestial Armaments Fortitude save (DC 34) comes up a natural 1. Blinded, two rounds.</strong></li>
+<li><strong>Cultist A</strong> flanks Sevek for a <strong>Cruel Sneak Attack critical, 68 damage</strong>, and Foundry asks for a fortification check he doesn't have.</li>
+</ul>
+
+<h4>Round 2 — the blind pays out</h4>
+<ul>
+<li>D Demoralizes Sevek in Aklo and hits him — triggering <strong>Rippling Spin</strong>, and <strong>Sevek's natural-20 Trip</strong> puts D on the floor. The Stand feeds <strong>Paya's Reactive Strike</strong> and <strong>Aureys' Opportune Backstab</strong> back to back.</li>
+<li><strong>Mithtirith</strong> casts <strong>Humble</strong> to strip the manipulate trait off his next spell, denying a Reactive Strike Cody had already announced, then lands Fear on two of four.</li>
+<li><strong>Paya's Whirlwind Strike kills Cultist D.</strong> Kreebnock's Blinding Foam is downgraded to a miss by the incapacitation trait.</li>
+<li><strong>The blinded cultist rolls two natural 20s at Aureys and misses both on the DC 11 flat check.</strong> Cody: <em>"the blind saved you from a crit."</em> One roll later he takes his <strong>third natural 20 in a row</strong> — on a Feint.</li>
+<li><strong>Sevek</strong> Flurries B and <strong>Group Taunts all three survivors.</strong></li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+<li><strong>Paya's</strong> Needle in the Gods' Eyes provokes from both survivors: B's Reactive Strike lands for 33, and <strong>C's misses by exactly one — the margin Taunt was buying.</strong> His strikes crit A for 94.</li>
+<li>Cultist C flanks Sevek and takes him to <strong>82 HP, 33%.</strong> <strong>Aureys kills Cultist B</strong> with a fan strike off her own Feint.</li>
+<li><strong>Sevek</strong> grinds A — Guidance, Flurry, third Strike, <strong>78 damage</strong> — and Mithtirith's rank-8 Heal puts 123 back into him.</li>
+</ul>
+
+<h4>Round 4 — two kills in one turn</h4>
+<ul>
+<li><strong>Paya's</strong> second Whirlwind Strike crits C for 76. C strides; <strong>Sevek's Stand Still crit-misses on a natural 1</strong>, but <strong>Paya's Reactive Strike crits for 82.</strong> C puts Paya to <strong>65 HP</strong>, the party's low-water mark.</li>
+<li><strong>Sevek ends it in one turn</strong>: Elf Step, <strong>Inner Upheaval</strong>, <strong>Flurry of Blows with one attack on each remaining cultist — both critical hits, 98 apiece</strong> (the second a natural 20) — <strong>killing Cultist A and Cultist C back to back.</strong></li>
+</ul>
+
+<p><strong>Kills:</strong> D → <strong>Paya</strong> · B → <strong>Aureys</strong> (her own turn) · A and C → <strong>Sevek</strong>, same Flurry<br>
+<strong>Mythic spend:</strong> Paya, 1 point. Nothing else, either side.<br>
+<strong>Damage taken:</strong> Paya 195 · Sevek 166 · Mithtirith 115 · <strong>Aureys 0 · Kreebnock 0</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 3 · 3 rounds · 15:25–15:54 (~29 min)</div>
+<h3>Risen Runelords Haphrama and Xirie, plus three Pridespawn Cultists</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Risen Runelord Haphrama</span><span class="stat-value">400 HP · AC 40 (38) · Greed · Vanishing Death</span></div>
+<div><span class="stat-label">Risen Runelord Xirie</span><span class="stat-value">400 HP · AC 40 · Sloth · resist mythic 6</span></div>
+<div><span class="stat-label">Pridespawn Cultist A / B / C</span><span class="stat-value">315 HP each · AC 37 (35)</span></div>
+<div><span class="stat-label">Outcome</span><span class="stat-value">Haphrama killed · Xirie and Cultist C escaped</span></div>
+</div>
+
+<h4>Initiative</h4>
+<ul>
+<li><strong>Sevek</strong>, on guard duty, spots the entourage and warns the party.</li>
+<li><strong>Aureys uses Battle Cry for a free Demoralize — natural 20 against Cultist C, critical success by 10, Frightened 2 and Fleeing.</strong> C runs on its turn and never comes back. One free action deletes a third of the enemy line.</li>
+<li><strong>Sevek and Kreebnock both spend Mythic Points to roll initiative at mythic proficiency</strong>; Kreebnock's 51 is the highest in the fight.</li>
+</ul>
+
+<h4>Round 1</h4>
+<ul>
+<li><strong>Kreebnock</strong> opens with <strong>Telekinetic Bombardment</strong> into all three cultists — A and B thrown prone — then Courageous Anthem.</li>
+<li><strong>Paya</strong> enters Lunging Stance and Needles in the Gods' Eyes, hit and crit into A. <strong>Sevek</strong> Flurries: <strong>natural 20, and Cultist A rolls a natural 1 on the Fortitude save — blinded two rounds</strong>, with Greater Crushing's Enfeebled 2 on top. A's two follow-up swings produce a miss-by-1 and a critical miss against AC 41.</li>
+<li><strong>Xirie's Phantasmagoria</strong> catches everyone but Mithtirith, who is out of her line of sight: <strong>Kreebnock is Confused</strong>, <strong>Paya</strong> succeeds and loses his reactions, and <strong>Aureys succeeds outright and keeps her reaction</strong>, which is why the Opportune Backstab is available to her next round.</li>
+<li><strong>Haphrama</strong> answers with a three-action <strong>Force Rain</strong>: no save, no roll. Cultist B stands, strides and <strong>crits Aureys for 88</strong>. Aureys grovels, Feints, adds Distracting Feint, and <strong>double-crits Cultist B with Earth to Heavens Strike</strong> (74 and 60). <strong>Mithtirith</strong> heals her out of the danger zone.</li>
+</ul>
+
+<h4>Round 2 — the wall</h4>
+<ul>
+<li><strong>Confused Kreebnock</strong> rolls the d6, gets <strong>Aureys</strong>, and puts a Telekinetic Projectile into her for 28; forced to close, he eats <strong>Cultist B's Reactive Strike crit for 80</strong>, then clears the Confused on the flat check.</li>
+<li><strong>Paya kills Cultist A</strong> on a <strong>natural 20</strong> — after eating A's Reactive Strike for 33 on the Leap — and his second Strike into B sets up <strong>Aureys' Opportune Backstab, a crit for 95 that kills it.</strong></li>
+<li><strong>Sevek</strong> strides to flank, Flurries Haphrama, and <strong>Group Taunts all three remaining enemies.</strong></li>
+<li><strong>Xirie</strong> spends a Mythic Point to <strong>Recharge</strong> and casts Phantasmagoria again; <strong>Kreebnock burns his last Mythic Point</strong> and critically succeeds.</li>
+<li><strong>Haphrama raises a Prismatic Wall</strong> — 30 feet high, seven layers. <strong>Paya</strong> Reactive Strikes the cast and rolls a natural 2. <strong>Aureys delays her entire turn.</strong></li>
+<li><strong>Mithtirith spends his whole turn and a Mythic Point on it</strong> — Mythic Casting plus a rank-8 Dispel Magic, three actions: <strong>41 on the die plus 4 for mythic = 45. Wall gone.</strong></li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+<li><strong>Kreebnock</strong> steps back and pulls a <strong>scroll of Soothe</strong> from his retrieval belt for Paya.</li>
+<li><strong>Paya</strong> lands <strong>all three strikes</strong> on Haphrama (38, a crit for 90, and 31 at MAP −10). <strong>Sevek</strong> Electric Arcs both Runelords, then Inner Upheaval into a Flurry, both hits landing.</li>
+<li><strong>Xirie Translocates out and abandons him</strong> — <em>"Xirie, you wretch!"</em> — having taken <strong>10 damage all fight</strong>, all of it from Sevek's cantrip.</li>
+<li>Haphrama's last acts are a <strong>Plasma Whirl</strong> and a polearm strike into Aureys. Then <strong>Aureys kills him</strong>: Earth to Heavens Strike, the claw a <strong>critical hit for 86.</strong></li>
+</ul>
+
+<p><strong>Kills:</strong> Cultist A → <strong>Paya</strong> · Cultist B → <strong>Aureys</strong> (Opportune Backstab) · Haphrama → <strong>Aureys</strong> (+2 MP, everyone else +1)<br>
+<strong>Escaped:</strong> <strong>Xirie</strong> at 10 damage, and <strong>Pridespawn Cultist C</strong>, Demoralized into Fleeing and never touched<br>
+<strong>Party mythic spend:</strong> Kreebnock 3 · Sevek 1 · Paya 1 · Mithtirith 1 · <strong>Enemy:</strong> Xirie 1 · <strong>Haphrama never spent a point on Mythic Ferocity</strong><br>
+<strong>Damage taken:</strong> Aureys 230 · Kreebnock 133 · Paya 103 · Sevek 43 · <strong>Mithtirith 0</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 4 · 3 rounds · 16:02–16:34 (~32 min)</div>
+<h3>Two Chromatic Oozes</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Chromatic Ooze A / B</span><span class="stat-value">550 HP each · AC 28 (26 Clumsy, 24 also off-guard)</span></div>
+<div><span class="stat-label">Reach &amp; offence</span><span class="stat-value">30 ft reach · Pseudopod Eruption + a third Strike = <strong>five Strikes a round</strong></span></div>
+<div><span class="stat-label">Defences</span><span class="stat-value">Mindless · immune to critical hits · Chromatic Shift reaction · Improved Grab</span></div>
+<div><span class="stat-label">Outcome</span><span class="stat-value">Both killed by Sevek · Paya top damage</span></div>
+</div>
+
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> goes first, tries a Feint (fails on the die), and lands a fan hit — the fire damage triggers <strong>Chromatic Shift</strong> and the ooze superheats. She flies to the top of a bookshelf.</li>
+<li>Ooze A strides and <strong>Pseudopod Erupts</strong>; <strong>Sevek's Stand Still crits it</strong> — crit damage halved, blind ruled out (<em>"blinded will not have any kind of effect"</em>), but <strong>Greater Crushing's Clumsy 2 lands and the AC drops to 26.</strong></li>
+<li>Ooze B erupts into the other half of the party, catching Kreebnock. <strong>Paya</strong> strides around and hits the clumsy one twice.</li>
+<li><strong>Mithtirith's</strong> Recall Knowledge fails — rare again — and he uses <strong>Fast Channel</strong> to two-action a Heal. <strong>Kreebnock</strong> puts <strong>Force Rain</strong> on both.</li>
+<li><strong>Sevek</strong>, last in the order, enters his stance and Flurries A: <strong>two critical hits at natural 6 and natural 10</strong>, both only crits because of his own Clumsy. He <strong>Taunts both oozes</strong>, which is the second −2.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+<li>Both oozes erupt again — five Strikes each — and A crits Mithtirith and grabs at Aureys.</li>
+<li><strong>Paya</strong> spends <strong>Unbelievable Interception</strong> to take a hit aimed at Mithtirith, and <strong>Deflecting Wave</strong> on an 80-point crit.</li>
+<li><strong>Aureys'</strong> Feint <em>succeeds</em> and is then ruled out for mindlessness; she uses <strong>Aether Beam</strong> on both instead. <strong>Kreebnock</strong> unleashes Psyche and throws.</li>
+<li><strong>Sevek</strong> Electric Arcs both — <strong>both oozes Chromatic Shift to electricity resistance</strong> — and he reads the trade out loud: <em>"A is now weak to fire and resistant to electricity."</em> His Flurry crits both and <strong>kills Ooze A</strong>, the fire weakness turning a halved 90 into 63.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+<li><strong>Paya</strong> crits Ooze B repeatedly; his Greater Flaming rider forces a <strong>second Chromatic Shift to fire, converting the electricity resistance into weakness 20.</strong></li>
+<li><strong>Aureys</strong> swaps her fan's rune back to fire mid-combat and lands Earth to Heavens Strike, with an <strong>Opportune Backstab claw crit</strong> off Paya's hit. <strong>Kreebnock</strong> heals and throws.</li>
+<li><strong>Sevek</strong> cashes the weakness he set up: an <strong>Electric Arc that rolled 22 lands for 42</strong>, then <strong>Inner Upheaval into a crit for 96 kills Ooze B.</strong></li>
+</ul>
+
+<p><strong>Kills:</strong> both oozes → <strong>Sevek</strong><br>
+<strong>Top damage:</strong> <strong>Paya</strong> (~355 applied) on <strong>seven critical hits from eight rolls</strong> · Sevek ~303<br>
+<strong>The AC read:</strong> 28 → 26 is Sevek's Greater Crushing. 26 → 24 is off-guard — <strong>his Taunt</strong> on Ooze A, <strong>flanking</strong> on Ooze B. Nine of the encounter's seventeen party crits came off the reduced AC.<br>
+<strong>Damage taken:</strong> Paya 216 · Mithtirith 185 · Aureys 174 · Sevek 137 · Kreebnock 120</p>
+</div>
+
+<h2>Session Ledger</h2>
+<table class="contrib-table">
+<tr><th>PC</th><th>Damage rolled</th><th>Damage taken</th><th>Kills</th></tr>
+<tr><td>Paya</td><td>2,570</td><td>575</td><td>3</td></tr>
+<tr><td>Sevek</td><td>1,372</td><td><strong>621</strong> (most)</td><td><strong>5</strong></td></tr>
+<tr><td>Aureys</td><td>1,162</td><td>444</td><td>3</td></tr>
+<tr><td>Mithtirith</td><td>— (support)</td><td>549</td><td>1</td></tr>
+<tr><td>Kreebnock</td><td>— (support)</td><td>253</td><td>0</td></tr>
+</table>
+<div class="xp-banner">
+<strong>12 of 14 enemies killed.</strong> Xirie and one Pridespawn Cultist escaped. No XP was announced — Cody said to come prepared for <strong>level 17</strong>. <em>Note: "damage rolled" overstates output in the ooze fight specifically, where crit immunity halved every critical hit — 1,622 rolled became roughly 1,109 applied.</em>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+<h4>Sevek · the One Standing in Front</h4>
+<ul>
+<li><strong>Five kills — more than anyone at the table — 1,372 damage rolled, and the most damage taken in the party at 621.</strong> He was in the front rank of all four fights and never dropped.</li>
+<li><strong>He is the party's answer to walls.</strong> Tannaris sealed three PCs into a stone cube with a ceiling on it, and Sevek's response was to punch through — Flurry of Blows on the wall for 76, destroy it, fly out the hole, keep fighting.</li>
+<li><strong>Two crit-blinds in two fights, both on natural-1 saves, and the first one was worth more than the kill.</strong> A cultist walked through his reach, Stand Still crit it, and the save failed — <strong>blinded two rounds</strong>, during which it rolled <strong>two natural 20s at Aureys and missed both on the flat check.</strong> She took zero damage in that entire fight, and that's why.</li>
+<li><strong>He ended two fights personally.</strong> The Pridespawn ambush died to one turn — Inner Upheaval, then a Flurry with a crit on each of the two survivors, 98 apiece. Both oozes died to his staff as well.</li>
+<li><strong>The ooze fight is the one where the debuff job was genuinely his.</strong> Mindlessness switched off Aureys' entire Feint/Demoralize engine — the reverse of the usual arrangement — so Sevek supplied it himself: Greater Crushing's Clumsy on every crit, his own Taunt for the off-guard, AC 28 down to 24. Nine of the party's seventeen crits that fight came off that drop, and only five were his. <strong>He built the condition; everyone spent it.</strong> Paya spent it best.</li>
+<li><strong>He read the Chromatic Shift correctly and said so plainly</strong>: <em>"A is now weak to fire and resistant to electricity."</em> Forcing a second shift turns the old resistance into weakness 20, and the party played both oozes across it for +20 twice.</li>
+<li><strong>Off the battlefield he took the unglamorous jobs and they paid.</strong> He assisted Aureys' search on the hidden wall. He hunted for a teleport bypass. And he volunteered to stand watch so the casters could research — <em>"I'll do my old job. I used to be a bodyguard"</em> — which is the only reason the party got warning that Haphrama was coming back.</li>
+<li><strong>He also called the session's ending before it happened.</strong> Debating whether to research now or later: <em>"Come back. I say that and then we come back and everything's gone."</em> Paya seconded it five seconds later, and the recap of that argument is the whole of Act V.</li>
+<li>When the party dithered after Haphrama died, he ended it: <em>"They're just going to keep coming. Might as well go find them."</em> And on spotting the cult's treasure hoard first and immediately handing the moment to Aureys: <em>"This is like the dragon's dream right here."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-aureys">
+<h4>Aureys Hollow · the Compliment Before the Knife</h4>
+<ul>
+<li><strong>Three kills, and she killed Haphrama</strong> — the Risen who got away last session at 94% HP without dealing a single point of damage. Earth to Heavens Strike, the claw a critical hit for 86, and he vanished into light.</li>
+<li><strong>She deleted an enemy with a free action.</strong> Battle Cry on the initiative roll: a <strong>natural 20</strong> Demoralize, critical success, <strong>Frightened 2 and Fleeing.</strong> The cultist ran off the map and never came back, and nobody in the party ever had to touch it. That is a third of the enemy line removed before round one.</li>
+<li><strong>She found everything worth finding this session.</strong> The lectern's gems and the Aeon Stone. The <strong>planar displacement folio</strong>. The <strong>secret door</strong>. And the <strong>hidden northeast wall</strong> — <em>"the work of a legend"</em> — which she then argued the party into spending real time on. Mithtirith diagnosed it exactly: <em>"This is your greed talking, isn't it?"</em> / <em>"It is."</em> She'd set that up ninety minutes earlier: <em>"I'll put the rest of the stones in what I like to think of as my hoard — but it's the party stash."</em></li>
+<li><strong>The flattery patter is a mechanic and a bit at the same time</strong>, and it ran in all four fights — including the one where it couldn't possibly work. To a Runelord of Sloth: <em>"oh, you're so energetic, my lovely sloth lord"</em> … <em>"You're just lovely and slow."</em> To his colleague: <em>"Oh, you're so awesome, Ivamura! Why did I think that other dude was great?"</em> To a mindless ooze that has no mind to flatter: <em>"Oh, aren't you so oozealicious?"</em></li>
+<li><strong>The best line of the session is a defense of Paya.</strong> After a cultist put two hits into him: <strong>"I don't like people who hit my pineapple, but you are beautiful, I will admit. So pretty."</strong> Then, flatly: <em>"Don't hit my pineapple."</em></li>
+<li><strong>Her reaction economy was the sharpest at the table.</strong> <strong>Draconic Salvation</strong> turned a failed Implosion save into a success, which her build upgraded to a <strong>critical</strong> — the only save conversion anyone managed all session. She then cleared both of Xirie's Phantasmagorias on plain successes and <em>kept</em> her reaction where Paya lost his, which is why the <strong>Opportune Backstab that killed a cultist</strong> was available at all.</li>
+<li><strong>And she took almost nothing for it.</strong> Zero damage across the entire Pridespawn ambush, courtesy of the blind Sevek stapled onto the thing swinging at her.</li>
+<li>She also refuses to be ignored, in character, thirty feet up: <em>"I'm down here. Don't disregard me. I'm a dragon after all."</em> And when Cody said a Risen wasn't impressed by her Majestic Presence: <em>"You just haven't seen enough."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-paya">
+<h4>Paya · the Man Who Reads the Fight First</h4>
+<ul>
+<li><strong>Top damage in the party by a wide margin, three kills, and the best dice night at the table</strong> — including <strong>seven critical hits from eight attack rolls</strong> in the ooze fight, where he out-damaged everyone.</li>
+<li><strong>He killed Vogorond on the exact beat the reinforcements arrived</strong> — a Vicious Swing crit as two Runelords stepped onto the balcony. Cody: <em>"Well, just in time, as this thing will shatter."</em></li>
+<li><strong>He calls the shape of a fight before it costs anyone anything.</strong> One look at the Pridespawn: <em>"These guys are reactive strikers from book one."</em> Nobody ate a Reactive Strike they hadn't chosen to.</li>
+<li><strong>His own reaction economy is a weapon.</strong> Tactical Reflexes gives him two Reactive Strikes a round and he used them: a crit for 82 punishing a Stride, a crit for 64 that set up Tannaris' death by persistent damage, and the strike that fed Aureys' Opportune Backstab kill.</li>
+<li><strong>He is still the whole out-of-combat healing lane, and he runs it as a queue by name</strong> — <em>"We've got Mithtirith and Sevek left up for the Ocean's Balm. Then just Sevek for the Dash of Herbs."</em> At the end of the night: <em>"We're not short of out-of-combat healing. I made sure of it."</em></li>
+<li><strong>He spent mythic resources on other people twice</strong>: Unbelievable Interception to eat a hit aimed at Mithtirith, and Deflecting Wave on an 80-point crit.</li>
+<li><strong>The comic timing is deliberate and it landed twice.</strong> Sudden Charge, flying, into a polearm strike: <em>"Like a screaming missile with a polearm"</em> — which Aureys amended to <em>"a screaming missile who looks like a pineapple."</em> And on a Runelord who shrugged off a Majestic Presence: <em>"It's the eyebrows of someone who's never been impressed."</em></li>
+<li><strong>His two best lines are both about how this dungeon is going to betray them.</strong> Seconding Sevek on the library: <em>"Surely we'll be able to come back and nothing bad will happen."</em> And on a portal full of faces watching them: <em>"Definitely not. The door definitely isn't staring back, right, Cody?"</em></li>
+<li>And the loot-master's honest self-assessment, on why the Elixirs should be handed out now: <em>"Otherwise I will just completely forget about them, like every other item in here."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-mith">
+<h4>Mithtirith · the Answer to the Wall</h4>
+<ul>
+<li><strong>He killed Ivamura and he took down the Prismatic Wall</strong> — two of the session's most consequential acts, both from one of the quietest seats at the table.</li>
+<li><strong>The Prismatic Wall dispel is the play of the session, and it cost him everything he had that turn.</strong> Haphrama split the party with a 30-foot, seven-layer wall nobody could safely cross. Mithtirith worked out mid-turn that a Mythic Point could push a counteract check to mythic proficiency, confirmed mythic casting with Cody, and spent <strong>all three actions and the point</strong> on it. He rolled 41, plus 4 for mythic, for <strong>45</strong>. Wall gone. And Aureys, who had <strong>delayed her turn on the chance he could do it</strong>, flew straight through the gap and killed Haphrama.</li>
+<li><strong>He asked the rules question that changed his own turns.</strong> Mid-fight: <em>"Can you cast two spells in a round if you have the action economy for it?"</em> Yes, if one is single-action. <em>"That's what I wanted to hear."</em></li>
+<li><strong>The Ivamura kill was a Tempest Surge into a natural 1</strong> — she critically failed the Reflex save and took 98 into her last 10 hit points.</li>
+<li><strong>He saw Act V coming.</strong> Three minutes before Haphrama walked back in with a Runelord and a fresh escort: <em>"I feel like the people that ran away didn't just run away, you know what I mean?"</em> The party talked past it.</li>
+<li><strong>He solves his own exposure without asking anyone to solve it for him.</strong> Sealed outside the Wall of Stone with two flying wizards overhead, he used the wall for cover and Hid. In the Haphrama fight he stayed out of Xirie's line of sight and took <strong>zero damage all fight</strong>. Earlier, invisible and needing to be healed, he took Paya's hand and put it where it needed to go.</li>
+<li><strong>And he's the one who can actually use the loot.</strong> When the party turned up a Wand of Widening Fireball nobody else could cast, he answered <em>"Because I can, if so"</em> and took it — Legendary Arcana via Hedge Mage, and the arcane gap this campaign spent two books complaining about is now just closed.</li>
+<li><strong>The driest voice at the table, unchanged.</strong> On being within reach of anything: <em>"God, I don't like to be this close."</em> On his failed Recall Knowledge: <em>"Though there's lots of things in life I haven't encountered."</em> And on the campaign's arithmetic, after two more Risen died: <em>"I mean, theoretically, theoretically, they've risen every Runelord."</em></li>
+<li>He took <strong>549 damage</strong>, third most, and never once made it anyone else's problem.</li>
+</ul>
+</div>
+
+<div class="spotlight s-kreebnock">
+<h4>Kreebnock · the Man Who Remembered the Folio</h4>
+<ul>
+<li><strong>He made the deduction that unlocks the rest of the dungeon.</strong> Standing in front of a wall Cody had just described as impossible without a specific formula, with the party out of angles, he was the one who said: <strong>"Perhaps we can search in the library? That planar displacement formula?"</strong> — connecting a folio Aureys had pocketed an hour earlier to the thing they couldn't open. Paya, immediately: <em>"Oh, that's true."</em> That is the thread the party is now pulling.</li>
+<li><strong>He bought the opening move of the Haphrama fight with a Mythic Point.</strong> He spent one on initiative for mythic proficiency, rolled <strong>51 — the highest in the fight</strong> — and used going first to put a Telekinetic Bombardment into all three cultists, throwing two of them prone before anyone else acted. A deliberate resource decision, not a lucky roll.</li>
+<li><strong>He had also prepared for the thing that went wrong.</strong> When Phantasmagoria Confused him, he immediately checked for <strong>Still Earth</strong>, an anti-Confused reaction off one of his aeon stones — and found it on cooldown, because he'd spent it in the first fight of the day. He'd bought the answer; the clock beat him to it.</li>
+<li><strong>He organises the party out of combat, consistently.</strong> <em>"Yeah, clear up behind us"</em> before they went deeper. <em>"Everyone take a table"</em> — the search that produces the campaign's clearest statement of Xanderghul's goal. <em>"And breach"</em> at the lab door. He picks the staircase from memory, names the orichalcum, and leads the deduction about where Xirie's Translocate could have taken her.</li>
+<li><strong>Courageous Anthem essentially every round of every fight</strong>, plus Unleash Psyche, Telekinetic Bombardment, Force Rain into both oozes, Emotional Surge, and the amped <strong>Message that handed Paya a free reaction Strike</strong> in the first fight. The buffs and the action economy are the contribution; the damage never has been, and he plays it that way on purpose.</li>
+<li><strong>He narrates his magic in fiction, every single time.</strong> <em>"Let's say a nice poem about battle."</em> <em>"A word about the glory of battle."</em> <em>"Multicolored energy swirling around my form."</em> Two sessions of data now say this is not a gimmick, it's how he plays.</li>
+<li><strong>And he has the best throwaway lines at the table.</strong> On Sevek punching through a wall: <em>"Do your Kool-Aid Man impression."</em> On six empty bedrooms: <em>"It's the rest you get along the way."</em> On his own floating: <em>"Kreebnock just floats there even though he didn't rise in the air the whole battle."</em> On burning all four charges of a Healing Well he'd been carrying unused: <em>"Gotta justify my purchase."</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+<div class="loot-item magical">
+<div class="loot-name">Aeon Stone (Amplifying)</div>
+<div class="loot-source">The study's lectern</div>
+<div class="loot-note">Went to Mithtirith by table consensus</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">Folio — planar displacement formula</div>
+<div class="loot-source">The study's lectern</div>
+<div class="loot-note">⚠️ The candidate key to the hidden northeast wall</div>
+</div>
+<div class="loot-item">
+<div class="loot-name">Lectern gemstones</div>
+<div class="loot-source">The study's lectern</div>
+<div class="loot-note">Pried off; the lectern itself is too big to move</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">"Thrice Born Souls" (spellbook)</div>
+<div class="loot-source">Study bookshelves</div>
+<div class="loot-note">Aethusa's wizard spellbook — not yet read</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">Heavily enchanted dagger</div>
+<div class="loot-source">Bookmarking the spellbook</div>
+<div class="loot-note">Not yet identified</div>
+</div>
+<div class="loot-item">
+<div class="loot-name">Collection of treatises</div>
+<div class="loot-source">Study bookshelves</div>
+<div class="loot-note">Flagged for the caster</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">4× +2 greater striking shock bec de corbin</div>
+<div class="loot-source">Pridespawn Cultists (Enc. 2)</div>
+<div class="loot-note">Unassigned</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">4× +2 greater resilient raiment leather armor</div>
+<div class="loot-source">Pridespawn Cultists (Enc. 2)</div>
+<div class="loot-note">Unassigned</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">More becs de corbin + raiment armor</div>
+<div class="loot-source">Pridespawn (Enc. 3)</div>
+<div class="loot-note">Aureys collected during the healing</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">Wand of Widening Fireball (7th-rank)</div>
+<div class="loot-source">Workbench hoard</div>
+<div class="loot-note">Taken by Mithtirith — the only PC who can cast it</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">Aeon stone</div>
+<div class="loot-source">Workbench hoard</div>
+<div class="loot-note">Unassigned</div>
+</div>
+<div class="loot-item">
+<div class="loot-name">Workbench hoard</div>
+<div class="loot-source">Southern bedroom</div>
+<div class="loot-note">"Just filled with treasure and magical items"</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">Orichalcum cauldron (10 ft diameter)</div>
+<div class="loot-source">Alchemical lab</div>
+<div class="loot-note">Extremely valuable, nearly immovable — the party's one "big item" pick</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">3× major Elixir of Life</div>
+<div class="loot-source">Alchemical lab</div>
+<div class="loot-note">2 to Aureys, 1 to Paya</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name">4× moderate Elixir of Life</div>
+<div class="loot-source">Alchemical lab</div>
+<div class="loot-note">Unassigned</div>
+</div>
+<div class="loot-item">
+<div class="loot-name">Bombs</div>
+<div class="loot-source">Alchemical lab</div>
+<div class="loot-note">Offered to Aureys; she declined</div>
+</div>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Aureys</strong>: "I don't like people who hit my pineapple, but you are beautiful, I will admit. So pretty."<br>
+<strong>Aureys</strong>: "Don't hit my pineapple."<br>
+<strong>Cody (DM)</strong>: "One hell of a euphemism."
+<span class="attribution">After a Pridespawn Cultist put two hits into Paya. Aureys' entire combat kit is flattery, and this is the one time it doubled as a threat.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "Oh, you're so bald, so purple-eyed and beautiful, and I love the gems in your head." … "Anyway, I love the gems that I'm going to take out of your head when you're dead."
+<span class="attribution">To Haphrama, two rounds before she killed him.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "What did I do to you, little man?"
+<span class="attribution">Taking 28 damage from her own ally — Kreebnock, Confused by Phantasmagoria, rolled a random target and got her.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "Come back. I say that and then we come back and everything's gone."<br>
+<strong>Paya</strong>: "Surely we'll be able to come back and nothing bad will happen."
+<span class="attribution">On leaving the cult's library unresearched. He called it first; Paya seconded it. They came back. Something bad had happened.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "I'll do my old job. I used to be a bodyguard."
+<span class="attribution">Volunteering to stand watch while the casters research — which is the only reason the party got warning that Haphrama was coming back.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "They're just going to keep coming. Might as well go find them."
+<span class="attribution">Ending four minutes of debate about which way to go, and moving the party toward the vats.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya</strong>: "These guys are reactive strikers from book one."
+<span class="attribution">Read off the Pridespawn Cultists before anyone walked into one.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya</strong>: "Like a screaming missile with a polearm."<br>
+<strong>Aureys</strong>: "A screaming missile who looks like a pineapple."
+<span class="attribution">Sudden Charge, flying, into a Runelord.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya</strong>: "Thank you for flanking, no matter where I am."<br>
+<strong>Sevek</strong>: "That's the reason it was a crit."
+<span class="attribution">A 90-point crit into Haphrama, and Paya stopping mid-turn to say where it came from.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "I feel like the people that ran away didn't just run away, you know what I mean?"
+<span class="attribution">Three minutes before Haphrama came back with a Runelord and a fresh escort. The party talked past it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "This is your greed talking, isn't it?"<br>
+<strong>Aureys</strong>: "It is."
+<span class="attribution">On Aureys' insistence that the party stop and crack the hidden wall.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "I'm forgetting the term for it, but with using the mythic point, would that boost the counteract check?"
+<span class="attribution">The question that took down the Prismatic Wall. He spent his whole turn and a Mythic Point on the answer.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "Perhaps we can search in the library? That planar displacement formula?"
+<span class="attribution">The quietest player at the table connecting a folio from an hour earlier to the wall nobody could open.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "Do your Kool-Aid Man impression."
+<span class="attribution">To Sevek, immediately before Sevek punched a hole in a Wall of Stone and flew out of it.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+<li><strong>The fight is already running.</strong> Next session opens mid-scene: <strong>Xirie</strong>, <strong>Risen Runelord Kaliphesta</strong> (Gluttony), two Pridespawn, and whatever climbed out of the four vats. No initiative was rolled.</li>
+<li><strong>Two of the Trial of Runes heads are now the boss line-up.</strong> <strong>Xirie</strong> (Sloth) and <strong>Kaliphesta</strong> (Gluttony) were both among the six carved Runelord heads the party <em>talked their way past</em> in Session 8. The ones they satisfied with answers are the ones showing up in person.</li>
+<li><strong>The four steel vats are the room from Aureys' Session 6 portal-vision</strong> — Aethusa unconscious among magical apparatuses and four immense steel vats, Xanderghul's ghost leaving her body for a fresh one. The party has now physically walked into it. <strong>Nobody at the table made the connection out loud.</strong></li>
+<li><strong>The hidden northeast wall.</strong> Illusion on illusion on enchantment, <em>"the work of not just a master, but a legend."</em> It needs a specific formula. The <strong>planar displacement folio</strong> is the live hypothesis and the library is where to test it. <strong>They never went back.</strong></li>
+<li><strong>The library is unfinished.</strong> Ten minutes of research produced the campaign's clearest statement of Xanderghul's goal, and Cody said explicitly there is <em>"much more to learn."</em></li>
+<li><strong>Xanderghul's stated objective</strong>: destroy Golarion and use the energy released in its destruction to become a god. The Crypt of Pride is the cult's headquarters, and <strong>most of the cult is currently elsewhere.</strong></li>
+<li><strong>Xirie escaped at 10 damage</strong> and Translocated to the vat room, where she is waiting. Second Risen this campaign to leave a losing fight — and unlike Haphrama, she did it by abandoning an ally mid-fight.</li>
+<li><strong>The portal window.</strong> A 30-foot window into an unidentifiable dimension of multicolored mist, with gaunt glowing faces watching from inside <em>"as if daring you to enter."</em> Kreebnock and Mithtirith both failed to identify it. Not entered.</li>
+<li><strong>The winged statue.</strong> The Vogorond wore the shape of a feminine figure with <strong>feathered wings for arms</strong> and <strong>a crown of flowers</strong>, on a plinth with an altar slab at her feet. Nobody identified her.</li>
+<li><strong>The comet with three tails</strong> inlaid in the lectern. Undiscussed at the table.</li>
+<li><strong>Aethusa's spellbook and the enchanted dagger</strong> — neither read nor identified.</li>
+<li>⚠️ <strong>Sevek's Foundry sheet still carries the Fortification rune Cody ruled illegal in Session 4.</strong> It has now appeared in <strong>S4, S6, S7 and S10</strong>, and this time Cody asked out loud where it keeps coming from. <strong>Strip it.</strong></li>
+<li>⚠️ <strong>The Foundry Taunt bug persists</strong> — the −1 is still being applied to attacks that <em>target</em> Sevek, which is backwards. Three occurrences this session, down from eight in S9 only because Taunt was live for fewer rounds.</li>
+<li>⚠️ <strong>Aureys swapped her fan's rune mid-combat again</strong> — the fourth instance. Rune-transfer timing is still unsettled with Cody.</li>
+<li><strong>Table business, post-campaign.</strong> Cody is scoping the slot after Revenge of the Runelords — the campaign is <strong>past its halfway point</strong> — and will pitch at the start of book three. He was explicit that a time slot doesn't carry over automatically and whoever continues gets a say. Candidates: <strong>Hellfire Crisis</strong> (Hellbreakers → Hell's Destiny), <strong>Troubles in Grace → Bastions of Blasphemy</strong>, or <strong>Dead God's Hand → homebrew Absalom → "Vault Lines"</strong> (an 11–20 AP in the Darklands; <em>title unverified</em>). Pax flagged he's nearly finished Hellfire Crisis with another group and is interested in the other two.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Cliffhanger · Four minutes on the clock</span>
+<p>Four steel vats. Surgical tools, anatomical drawings, jars of eyeballs and strips of flesh. Xirie, two Pridespawn — and a Risen Runelord of Gluttony the party only knows from historical texts. She snaps her fingers, and the cauldrons begin to boil over.</p>
+<div class="big-line">"What effort the cleanup will be after this. But so be it."</div>
+<span class="speaker">— Risen Runelord Kaliphesta, as twisted amalgamations of flesh and bone tumble forth</span>
+</div>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+<li>Fought all four fights from the front. <strong>Took 621 damage — more than anyone.</strong> Never went down, never needed picking up.</li>
+<li><strong>Killed five things</strong>: Risen Runelord Tannaris, Pridespawn Cultists A and C (same turn), and both Chromatic Oozes.</li>
+<li><strong>Broke out of Tannaris' Wall of Stone</strong> by Flurrying a section apart for 76 and flying through the hole. Three PCs were sealed in a stone box with a lid.</li>
+<li><strong>Two crit-blinds, both on natural-1 Fortitude saves</strong> (DC 34, Celestial Armaments). The first — a <strong>Stand Still crit</strong> on a Pridespawn Cultist — is the one that mattered: the blinded cultist then rolled <strong>two natural 20s at Aureys and missed both on the flat check.</strong> She took zero damage in that entire fight.</li>
+<li>Ended the Pridespawn fight in one turn: <strong>Elf Step, Inner Upheaval, Flurry with one attack on each survivor — both crits, 98 each.</strong></li>
+<li>Taunted six times. <strong>Group Taunt on all three enemies</strong> twice.</li>
+<li>Grabbed Ivamura in the air (a critical Grapple, Restrained) and forced her to spend a <strong>Mythic Point</strong> to get out of it.</li>
+<li><strong>Spent 2 Mythic Points</strong>: one on a round-1 Reflex reroll at mythic proficiency that came up a natural 2 and still ate 75, and one on initiative before the Haphrama fight.</li>
+<li><strong>Volunteered to stand guard</strong> while the casters researched. Spotted Haphrama's entourage and warned the party before they were caught reading.</li>
+<li>Cut off on the far side of the Prismatic Wall with no answer of his own, <strong>put Dispel Magic in front of Mithtirith and told Aureys to hold her turn for it.</strong> Both did. Then credited her for the wait.</li>
+<li>Assisted Aureys' Seek on the hidden wall, and hunted for a teleport bypass when brute force was ruled out.</li>
+<li>Read the oozes' <strong>Chromatic Shift</strong> correctly and alternated damage types across it.</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+<li><strong>The Fortification rune is still on the Foundry sheet.</strong> Cody ruled it illegal in Session 4. It has now surfaced in <strong>S4, S6, S7 and S10</strong>, and this time Cody asked out loud where it keeps coming from. Nobody knows. <strong>Fix it.</strong></li>
+<li><strong>The Celestial Armaments blind should be DC 35, and Foundry fires it at 34.</strong> Pax's call: <strong>35 is correct.</strong> The arithmetic explains the gap exactly: <strong>class DC</strong> = 10 + 16 + expert 4 + <strong>Str 5</strong> = <strong>35</strong>, while his <strong>occult spell DC</strong> = 10 + 16 + expert 4 + <strong>Wis 4</strong> = <strong>34</strong>. Nothing is missing from the sheet — <strong>Foundry's macro is rolling against his spell DC instead of his class DC.</strong> The <code>class-spell</code> reference needs to point at <code>class</code>.</li>
+<li><strong>Foundry is still applying Taunt's −1 to attacks that target Sevek himself</strong> — backwards, since the penalty only exists for actions that <em>exclude</em> the guardian. Three instances this session. Neither of the two in the ooze fight changed an outcome, but every enemy roll against him is being logged one point too low.</li>
+<li><strong>The ooze crit streak was manufactured, not lucky.</strong> Greater Crushing stamps Clumsy 2 on every critical hit, and Taunt supplies the off-guard on top: AC 28 → 26 → 24. Five of six crits that fight would have been ordinary hits at base AC. But <strong>the second −2 is Taunt and flanking, not the rune</strong> — and <strong>nine of the party's seventeen crits</strong> came off that drop, only five of them his. He built the condition; Paya cashed it hardest.</li>
+<li><strong>Prevailing Position was never used.</strong> Four fights, 621 damage taken, and the reaction that erased a critical hit twice in each of the last two sessions did not come out once. Confirmed twice over: it ends the stance, and he entered both stances exactly four times — once per fight, no mid-fight re-entry anywhere.</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+<li><strong>He is the highest-damage-taken PC in the party and that is the job working.</strong> 621 taken, 1,372 dealt, five kills, and nobody in the party dropped all session.</li>
+<li><strong>The staff has changed shape.</strong> It is now <strong>+3 Greater Striking Greater Flaming Astral Greater Crushing</strong>, with a <strong>Jolt Coil</strong> spellheart for +1d6 electricity. Greater Crushing is doing more than its damage suggests: Clumsy 2 and Enfeebled 2 on every crit is a debuff engine that feeds Paya and Aureys as much as it feeds him — and against <strong>mindless</strong> enemies, where Aureys' whole Feint/Demoralize kit switches off, it is the party's <em>only</em> source of that math. Worth remembering the next time something has no mind.</li>
+<li><strong>Stand Still is quietly the best feat in the kit.</strong> Three triggers this session: one crit that blinded a cultist and blanked two natural 20s, one crit for 31 on a Runelord's minion, one natural-1 crit-miss. It costs nothing and fires on the enemy's turn.</li>
+<li><strong>The Chromatic Shift lesson, stated correctly</strong>: a second shift on the <em>same</em> creature converts its <em>previous</em> resistance into <strong>weakness 20</strong>. Hit with X, it resists X; hit with Y, it resists Y and becomes weak to X; go back to X. Not "the shift creates a weakness somewhere else" — the weakness is on the creature you just forced to shift. It paid twice for +20 each.</li>
+<li><strong>Prevailing Position going unused for a whole session is worth examining.</strong> Either the incoming crits weren't worth burning a stance over, or it isn't front of mind any more. It erased ~40 damage twice in S9.</li>
+<li><strong>Level 17 next session.</strong> Canny Acumen (Reflex) upgrades to <strong>master</strong> — the save that has been the weak link, and the one he spent a Mythic Point rerolling in round 1 of this session.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+<li><strong>What is behind the northeast wall?</strong> Illusion on illusion on enchantment, described as the work of a legend, unopenable without a formula. The party has a <strong>planar displacement folio</strong> and an unfinished library. Only Kreebnock has connected the two out loud, once.</li>
+<li><strong>The four steel vats are the room from Aureys' Session 6 vision.</strong> Where was Aethusa carried? Is she still in this complex? The vision showed her unconscious and taken <em>out</em> past the vats.</li>
+<li><strong>Two of the Trial of Runes heads are here in person.</strong> Xirie and Kaliphesta both asked the party questions in Session 8 and were both satisfied. Does that history mean anything to them, or was the trial just a lock?</li>
+<li><strong>Who was the winged statue?</strong> Feathered wings in place of arms, a crown of flowers, an altar at her feet, and a Vogorond wearing her shape. The chamber was empty after.</li>
+<li><strong>The lectern's inlay is a blazing comet with three tails.</strong> The Trinity Star had three tails. Nobody mentioned it at the table. Worth asking.</li>
+<li><strong>What is on the other side of the portal window?</strong> Gaunt glowing faces in multicolored mist. Neither caster could identify it. The party walked past.</li>
+<li><strong>How many Risen are there?</strong> Mithtirith's read: <em>"theoretically, they've risen every Runelord."</em> The count is now <strong>nine killed</strong> out of <strong>eleven encountered</strong> — Xirie and Kaliphesta are both still standing, and Xanderghul cannot die while any exist.</li>
+<li><strong>Does the party owe Karzoug 10% of any of this?</strong> The debt was for wealth recovered from <em>the despoiled tombs.</em> The Crypt of Pride is a headquarters, not a tomb. Nobody has raised it.</li>
+</ul>
+</section>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+
+</div>
+</body>
+</html>

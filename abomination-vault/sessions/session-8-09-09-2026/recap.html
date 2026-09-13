@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 7 — The Chain Woman and the Long Way Around</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-snagg { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+.char-crew  { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-snagg { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head><body>
+<div class="container">
+
+<header class="header">
+<h1>Don't Touch My Friend</h1>
+<div class="subtitle">Abomination Vault — Session 8 · One Fight, Ten Rounds, and the Voice That Came After</div>
+<div class="meta-row">
+  <span class="meta-pill">September 9, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~3h 50m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">The Gauntlight · Fourth Floor</span>
+  <span class="meta-pill">DM · Lap</span>
+  <span class="meta-pill">Level 5 → 6</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:70%"></div>
+  <div class="comp-seg comp-explore" style="width:10%"></div>
+  <div class="comp-seg comp-rp" style="width:10%"></div>
+  <div class="comp-seg comp-social" style="width:5%"></div>
+  <div class="comp-seg comp-loot" style="width:5%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat 70%</span>
+  <span><span class="legend-dot" style="background:var(--moss)"></span>Exploration 10%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 10%</span>
+  <span><span class="legend-dot" style="background:var(--steel)"></span>Social 5%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Loot 5%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-snagg">
+    <div class="char-name">Snagg</div>
+    <div class="char-class">Goblin (Razortooth) Fighter 5 — jaws, sturdy shield, Medic archetype</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human Thaumaturge — returning chakram + cracked mirror implement</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf Divine Sorcerer of Pharasma (psychopomp bloodline)</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling Monk (wrestler; Crane Stance) — cursed with lycanthropy</div>
+    <div class="char-player">Ben</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>One fight. Ten rounds. Two hours and fifty minutes of table time. The party opened the wrong door on the fourth floor and found a pale man standing in a lounge who turned around wrong — no humanoid stands up that way — and whose face, up close, was moving. It was a human-shaped body packed with worms and maggots, and it opened its mouth and asked, in Common, in a very deep voice, <em>"Who are you?"</em></p>
+<p>Ruben answered honestly, because it had asked honestly: the place posed a danger to the nearby city, and they were hired to establish how much. The door behind them swung shut on its own. The thing started laughing. <strong>"Of course. That's the reason we built this thing."</strong> Then it was initiative, and the party spent the next three hours discovering, one dead lever at a time, that they had walked into a creature built specifically to no-sell them.</p>
+<p>Ten minutes in, a Recall Knowledge finally placed the clothes — <strong>they matched a portrait of Volluk</strong>, the name Argon took off a dead scribe in Session 3 — and the fight was going so badly by then that nobody stopped to say it out loud. Xurl couldn't grapple it, couldn't trip it, couldn't stun it and couldn't Demoralize it, and said so inside twelve minutes: <em>"So I can't punch it or grapple it, so I'm completely fucking useless."</em> Snagg, who is the reason this party retreats at all now, called for the exit inside twenty minutes and organised a fighting withdrawal around a door that would not open.</p>
+<p>They never got the door open. And around the ninety-minute mark the retreat stopped being possible, because Alder went down paralyzed with doubled persistent damage chewing forty hit points a round out of a forty-three-point health bar, and leaving meant leaving him. Xurl asked the real question — <em>"I guess the question is, Ricardo, how much do you like Alder?"</em> — and Ricardo refused to make it easy: <em>"Hey, man, do what your character would do."</em></p>
+<p>Snagg ran back in. <em>"Don't touch my friend. I was hired for this job. I won't abandon you."</em> He hit hard and turned to the room: <em>"It might be winnable, guys. Come back here."</em> Xurl: <em>"Fuck it, we ball. Fucking heroes."</em> And a few minutes later, with every resource spent: <strong>"Either we survive this or we TPK. I don't accept any other thing. I mean, that's me. You guys can run, but that's me."</strong></p>
+<p>Nobody ran. It took three natural 20s and the same triple-damage crit card pulled twice to finish it, with Snagg unconscious and dying on the floor and Alder one failed roll from gone. And then, in the quiet after, the dungeon went completely silent, a heartbeat-deep hum came up through the floor, the walls shook — and the lights went out. What followed was worse than the fight.</p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act explore">
+<div class="act-label">Act I · Exploration · The Lounge Door</div>
+<div class="act-card">
+<h3>"Who Are You?"</h3>
+<ul>
+  <li>Picked over the dining-room remains from last session: a <strong>bracelet</strong>, an <strong>arrow</strong>, and <strong>48 gp</strong> off the guests' corpses. Snagg's Seek turned up a natural 19.</li>
+  <li>Worked the ring of unopened doors. <strong>Alder</strong> wiggled his and found it open — <em>"hey, this one's open. Guess we need to find another way out."</em></li>
+  <li><strong>Snagg</strong> flagged the pattern: <em>"the last time we found a door that leads to another door, we run away. Let's be careful this time."</em></li>
+  <li>Found a <strong>pale man standing in a lounge</strong>, back turned, who stood up in a way no humanoid should. Up close: <strong>a human-shaped body filled with worms and maggots</strong>, speaking Common in a very deep voice.</li>
+  <li><strong>Recall Knowledge failed on a natural 4</strong> — <em>"this is not something that you ever recall studying in a book, or anyone that talked about it."</em> Ruben's danger read came back: <em>"This will be a hard fight."</em></li>
+  <li><strong>Snagg deferred the talking</strong>: <em>"I sense the danger, and Snagg will let the other who's better at talking talk this time."</em> Alder: <em>"We're investigating here."</em> Ruben laid out the party's commission honestly.</li>
+  <li><strong>The door behind them closed on its own.</strong> The thing laughed. <strong>"Of course. That's the reason we built this thing."</strong></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act II · Combat · Ten Rounds With a Worm</div>
+<div class="act-card">
+<h3>The Lockout</h3>
+<ul>
+  <li><strong>Xurl opened by grappling it</strong> and came away with <em>"a handful of worms and maggots."</em> Immunity to grabbed, prone and restrained killed his Grapple, his trips, and Snagg's Combat Grab in a single line of stat block.</li>
+  <li>Volluk opened with <strong>Stinking Cloud</strong> — the DM's one admitted homebrew addition — leaving the party <strong>Sickened 1 and Slowed 1</strong> and rolling a save at the end of every turn.</li>
+  <li><strong>Mid-fight, the party got its name.</strong> The earlier clothing detail resolved: <em>"at this point you finally remember — this thing wears the same clothes as one of the portraits, which belongs to <strong>Volluk</strong>."</em> Nobody stopped to say what that meant.</li>
+  <li><strong>Snagg called the dispel; Ruben landed it.</strong> <em>"Can you dispel magic? Does it seem magical?"</em> / <em>"I can certainly try."</em> A failed counteract, a hero point to bump it to a success, and <strong>the mist came down.</strong></li>
+  <li><strong>Alder found the weakness the hard way</strong> — Recall Knowledge failed, Scholarly Recollection failed too, and a second <strong>Exploit Vulnerability</strong> finally produced it: broad-area damage. The DM, immediately: <em>"I don't think anyone here has that."</em></li>
+  <li><strong>The door finally got explained</strong>, by the only PC trained in Arcana. Alder's Recall Knowledge diagnosed the floor: <strong>magic here automatically closes and re-locks any door left open</strong> — and it isn't a trap. <em>"It's more like just make sure everything is closed and locked."</em> Snagg: <em>"It's like a smart house, basically."</em></li>
+  <li><strong>The DM told them what they were in</strong>: <em>"just to be open with you guys — <strong>he is the main boss for this floor</strong>."</em> Then, rolling: <em>"if he succeeds, you guys make TPK here."</em></li>
+  <li><strong>Snagg planted himself before the famous line</strong>, in third person the way he does: <em>"Snagg here, I'm gonna play Snagg. And Snagg, he will try to stand his ground. Because he had enough."</em></li>
+  <li><strong>The turn.</strong> Alder paralyzed, bleeding forty a round, about to be left behind. Xurl: <em>"how much do you like Alder?"</em> Ricardo: <em>"do what your character would do."</em> <strong>Snagg: "I'll run back in."</strong> — <em>"Don't touch my friend. I was hired for this job. I won't abandon you."</em></li>
+  <li><strong>Round 10 — Xurl's natural 20</strong>, off-guard, Bless up: a critical hit and the <strong>triple-damage crit card for the second time that night</strong>. <em>"Xurl just fucking kicks through his chest. Just splatters bugs in every fucking direction."</em></li>
+  <li>The DM: <em>"There's no internal organ. There's no bones. There's nothing in there."</em> The energy holding the shape let go and the maggots fell. <strong>Some were dead. Some were still moving.</strong></li>
+  <li><strong>No one died.</strong> <em>"This is by far the hardest fight that you guys have been in your whole life."</em> Later: <em>"I was expecting to kill at least one or two."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act III · Mystery · Thirteen Voices</div>
+<div class="act-card">
+<h3>The Void, and the Thing That Used Snagg's Mouth</h3>
+<ul>
+  <li>The dungeon went <strong>completely silent</strong> — no water, no insects — then a hum felt rather than heard, a vibration like a heartbeat, dust from the ceiling, stone flaking off the walls. Then <strong>total darkness</strong>, so complete Ruben couldn't see his own hand.</li>
+  <li><strong>Thirteen voices</strong>, all around, unlocatable. Crying, cursing, laughing; one whispering a prayer; several in languages nobody knew. Each distinct, none intelligible.</li>
+  <li>Then <strong>twelve. Eleven. Ten.</strong> One by one they went out. With every silence the air got colder and the pressure heavier until nobody could move. Fear and despair.</li>
+  <li>The last voice went out. Then <strong>thirteen presences, surrounding them, watching.</strong> Then everything lifted and they were back in the cave — <em>"your instinct tells you that something went wrong."</em></li>
+  <li>Xurl: <em>"Am I the only one who just had a wild fucking hallucination?"</em> Ruben pushed it down and cast a three-action Heal on the dying Snagg.</li>
+  <li><strong>Belcorra Haruvex took Snagg's body.</strong> His eyes opened white and pupil-less, he began to hover, and a cold, beautiful female voice came out of him: <em>"Ah, I know you. So you have wandered so far into my home. You have torn apart my servants. You have defiled my will."</em></li>
+  <li>She studied each of them, then softened, <em>like talking to a friend</em>: <em>"Leave. Walk away from this place. And perhaps I will allow you to keep what little remains of your lives."</em></li>
+  <li>Snagg's head turned at an angle no humanoid neck allows; a cruel laugh came out of his throat; the skin and muscle of his face tore into a wide grin. <em>"But if you continue — I will take everything from you. Your friends, your home, your little victories. Everything you have fought so hard to protect. You will watch it all crumble. And you'll know this is your own foolishness that brought your hand upon it."</em></li>
+  <li><em>"Go now. Or stay. And let me show you what it meant to be an enemy of Belcorra Haruvex."</em> Then Snagg's body dropped to the floor.</li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act IV · Exploration · Triage and the Sealed Stair</div>
+<div class="act-card">
+<h3>Nothing in the Pockets</h3>
+<ul>
+  <li><strong>Snagg diagnosed the Foundry bug live</strong>: hitting Heal on a downed character was <em>advancing</em> the dying condition instead of removing it. Ruben's fix for the table: <em>"whenever you're down, remove the dying condition first, then push the heal button."</em> The DM confirmed it.</li>
+  <li>Snagg treated himself with <strong>Risky Surgery at 6 HP</strong> — stabbed himself for 8, healed 13. Ruben: <em>"Never use Risky Surgery when you have eight hit points left."</em> Xurl: <em>"Is he one surgical mishap away from a tragedy?"</em> Snagg: <em>"My gamble has paid off."</em></li>
+  <li><strong>All that was left of the creature was its clothes on the floor</strong> — the familiar clothing — and nothing in the pockets. Xurl, calling it: <em>"I swear if I succeed and you just say a worm, I'm going to be mad."</em></li>
+  <li><strong>The worms scattered.</strong> Some dead, some crawling away. Nobody had area damage to finish them.</li>
+  <li><strong>Xurl took the lounge door off its hinges</strong> so it could never seal them in again — <em>"This door is not closing again"</em> — then kept doing it to other doors out of grudge. Snagg: <em>"He just wants to break stuff. Xurl has had enough."</em></li>
+  <li>Searched the lounge: walls covered in <strong>paintings of haunted places</strong> — a graveyard, a swamp, an abandoned church — that <strong>made ghost noises every minute or two</strong>. Ruben: <em>"There is much evil in this room. Let us grab what we need and hurry up."</em></li>
+  <li>Xurl cut up a couch cushion into <strong>makeshift gloves</strong> to handle a painting without touching it — and as he cut it free, discovered the ghost noises <strong>were not coming from the painting. They were coming from behind it.</strong> He left it.</li>
+  <li>On the way out: <strong>the magical barrier over the stairs down has solidified and gone active.</strong> Inert last session, now a wall that cannot be broken by normal means. Ruben: <em>"It seems that the ones who noticed us have blocked off our route down further."</em></li>
+  <li><strong>The party leveled to 6</strong> — an off-schedule award. <em>"Hopefully you guys have more tools in your belt so that I don't need to hold back."</em> Snagg: <em>"I actually don't need more tools. I just need a fucking nat 20."</em></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat</h2>
+
+<div class="combat-box">
+<div class="combat-meta">The Only Encounter · ≈20:39–23:13 · Victory, Barely</div>
+<h3>Volluk, the Worm That Walks</h3>
+<p><strong>Enemy:</strong> <strong>Volluk</strong> — a worm-that-walks, <strong>level 8 elite</strong>. <strong>105 HP · AC 27</strong> (25 off-guard) · <strong>Fort +15 / Ref +19 / Will +17</strong> · Tendril <strong>+20</strong> for <strong>2d8+10 persistent</strong> piercing. <em>(Named in-fiction when a Recall Knowledge matched its clothing to a portrait. The surname "Azrinae" is Foundry-only and was never spoken at the table.)</em></p>
+<p><strong>Initiative:</strong> Xurl 29 · Ruben 27 · Volluk 27 · Snagg 23 · Alder 16. <em>Ruben's Pilgrim's Token broke the 27–27 tie with the worm, putting him ahead of it.</em></p>
+
+<div class="combat-stats">
+  <div class="combat-stat"><div class="label">Rounds</div><div class="value">10</div></div>
+  <div class="combat-stat"><div class="label">Damage Dealt</div><div class="value">~175</div></div>
+  <div class="combat-stat"><div class="label">Rolled / Eaten</div><div class="value">293 / 119</div></div>
+  <div class="combat-stat"><div class="label">Xurl</div><div class="value">96</div></div>
+  <div class="combat-stat"><div class="label">Snagg</div><div class="value">30</div></div>
+  <div class="combat-stat"><div class="label">Alder</div><div class="value">26</div></div>
+  <div class="combat-stat"><div class="label">Ruben</div><div class="value">23</div></div>
+  <div class="combat-stat"><div class="label">Knockdowns</div><div class="value">Snagg ×3</div></div>
+</div>
+
+<h4>The Lockout — why this played the way it did</h4>
+<ul>
+  <li><strong><code>immune[grabbed, prone, restrained]</code></strong> — Xurl's Grapple, Snagg's <strong>Combat Grab</strong>, all trips and shoves. <em>But not Snagging Strike.</em></li>
+  <li><strong><code>immune[precision]</code></strong> — all precision damage.</li>
+  <li><strong><code>resist[physical 7]</code></strong> — ate <strong>119 of the 293 damage the party rolled</strong>, across 15 resisted applications.</li>
+  <li><strong><code>fast healing 7</code></strong> — <strong>70 HP regenerated over 10 procs</strong>. Effective HP 105 → <strong>~175</strong>, which is almost exactly what the party managed to deal.</li>
+  <li><strong><code>weak[area 7, splash 7]</code></strong> — the advertised counterplay, guarded by <strong>Reflex +19</strong>, its best save.</li>
+  <li><strong>Tendril 2d8+10 <em>persistent</em></strong> — hit Snagg's AC 23 on a 3, and <strong>doubled to ~40 a round on a crit</strong>. Healing cannot outpace a wound that reopens.</li>
+  <li><strong>Discorporate at 0 HP</strong> — it doesn't actually die without area or splash damage.</li>
+</ul>
+
+<h4>Two things the party did land</h4>
+<ul>
+  <li><strong>Snagg turned his own critical hit into a debuff.</strong> Round 2, natural 20 on Jaws, Crit Deck #24. The DM offered the standard choice — <em>"take the normal damage and the critical effect, or just do double damage."</em> Snagg took the effect, <strong>halving his own crit to 10</strong>, to apply <strong>Clumsy 3 and Enfeebled 3</strong>. <em>"Clumsy 3 for a round until his next round is really good anyway."</em> Its AC fell from 27 to <strong>22 while off-guard</strong>, and Xurl immediately landed a hit that would otherwise have missed by three.</li>
+  <li><strong>Snagging Strike never stopped working.</strong> Immunity to <em>grabbed</em> killed Combat Grab, but Snagging Strike only imposes <strong>off-guard</strong> — and Snagg spotted it at the table: <em>"it's not Grapple, it's Snagging Strike, so he's off-guard. So even if we can't flank, we can still impose off-guard."</em> <strong>21 of 48 attack rolls resolved against AC 25 instead of 27</strong>, turning four outright misses into hits.</li>
+</ul>
+
+<p class="combat-note"><strong>And the one that stings.</strong> The party <em>did</em> have an area option. Ruben cast <strong>Inner Radiance Torrent</strong> (rank 2, 60-foot line, basic Reflex) straight into the creature's advertised weakness, while it was sitting at <strong>Clumsy 3</strong> from Snagg's crit card — Reflex reduced to +16. It rolled a 15. <strong>Critical success. Zero damage. The weakness never triggered.</strong> Snagg bought a −3 to exactly the right save and it changed nothing.</p>
+
+<h4>Round by Round</h4>
+<ul>
+  <li><strong>R1</strong> — <strong>Xurl acts first</strong>; his Grapple succeeds mechanically and accomplishes nothing. Ruben's Spectral Blade hits for 15, and it heals 7 straight back. Volluk opens with <strong>Stinking Cloud</strong> — three of four fail, <strong>Sickened 1 + Slowed 1</strong> across the party. Xurl fails on a natural 1 and hero-points into a 3. <strong>And the party gets its name.</strong></li>
+  <li><strong>R2</strong> — Alder's Recall Knowledge fails, his Scholarly Recollection reroll fails, and a second <strong>Exploit Vulnerability</strong> lands the area weakness — which Alder alone can exploit, via <strong>Mortal Weakness</strong> on his chakram. <strong>Snagg calls for a dispel and Ruben counteracts the Stinking Cloud.</strong> Snagg's natural 20 buys Clumsy 3 + Enfeebled 3.</li>
+  <li><strong>R3</strong> — The longest round of the night. First Tendril lands on Snagg: 2d8+10 <strong>persistent</strong>. Phantom Pain. Ruben's Inner Radiance Torrent is crit-saved for zero. Snagg's Treat Wounds cycles begin.</li>
+  <li><strong>R4</strong> — <strong>Snagg goes down (Dying 1)</strong>, failing his flat check on an 11.</li>
+  <li><strong>R5–R6</strong> — Worm's Repast (20). <strong>Snagg goes down a second time (Dying 2, Wounded 1)</strong> after a natural-1 flat check. <strong>Alder's Arcana Recall Knowledge finally explains the door.</strong> Xurl drops his backpack to get under the encumbrance limit and physically carries Snagg out of reach.</li>
+  <li><strong>R7 — the turn.</strong> Alder crit-fails a Will save and is <strong>paralyzed</strong> (<em>"I can't do anything except Recall Knowledge"</em>). Volluk <strong>Dimension Doors</strong> and Demoralizes. The DM: <em>"he is the main boss for this floor"</em> — and <em>"if he succeeds, you guys make TPK here."</em> Xurl asks whether to leave Alder; Ricardo declines to answer for the party; <strong>Snagg runs back in</strong>, connects, and calls the party back to the fight.</li>
+  <li><strong>R8</strong> — <strong>Volluk crits Alder</strong>, doubling his persistent damage to <strong>2×(2d8+10) ≈ 40 a round</strong> against a 43-point bar. <strong>Suggestion lands on Ruben</strong>, locking him to healing-only. Xurl burns a hero point. Alder, prone and bleeding, casts <strong>Bless</strong> from a scroll.</li>
+  <li><strong>R9</strong> — <strong>Gasping Marsh</strong>: Snagg critically fails and takes <strong>42 poison</strong>. The DM awards the whole table a hero point for not looking the stat block up online. <strong>Ruben breaks his own Suggestion on a natural 20.</strong></li>
+  <li><strong>R10</strong> — Vomit Swarm, another Squirming Embrace. <strong>Snagg goes down a third time (Dying 3, Wounded 2)</strong> and stays down. Then <strong>Xurl, natural 20</strong>, off-guard, Bless up: critical hit, <strong>crit-deck card #29 — triple damage, the second time that card came up tonight</strong> — <strong>29 damage into a creature sitting at 16 HP.</strong> Discorporate fires. Alder is one failed roll from dead. <strong>Nobody dies.</strong></li>
+</ul>
+
+<p class="combat-note"><strong>Suggestion locked Ruben into healing-only for a minute, and Alder was paralyzed for four turns off a critically-failed Will save</strong> — for a stretch of the middle rounds the party was effectively two functioning characters. <strong>Hero points:</strong> seven spent — Xurl three, Ruben three, Alder one, Snagg none. Three landed <em>before</em> the DM's mid-fight award, so the long rest alone can't account for them. <em>(Not hero points: Xurl's Force Open reroll was <strong>Halfling Luck</strong>. And this table does <strong>not</strong> use the +10-on-a-low-reroll house rule — the rerolls came up 3, 8, 9 and 20 with no bonus.)</em></p>
+
+<p class="combat-note"><strong>The DM's own accounting, after:</strong> <em>"the only thing I did is add a spell to his list, and the spell is Stinking Cloud. Everything else is from the AP."</em></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-snagg">
+<h4>Snagg · the one who turned around</h4>
+<ul>
+  <li><strong>He tried to leave. That's what makes the rest of it land.</strong> Inside twenty minutes he had read the fight correctly and said so — <em>"we're at a massive disadvantage here, do we even want to fight"</em>, <em>"I don't think it's winnable as long as we're in this room"</em> — and then ran the withdrawal like a job: hand off the crowbar, delay after Ruben, push Alder out of the way, force the door. The Session 7 doctrine, applied on time.</li>
+  <li><strong>And then he threw the doctrine away, on purpose, for one reason.</strong> When the only remaining exit ran through abandoning Alder, he stopped arguing and went back in: <em>"Don't touch my friend. I was hired for this job. I won't abandon you."</em> Argon held a doorway in Session 4 so the others could get out; Snagg has now refused to let that trade happen twice.</li>
+  <li><strong>He pulled the party back with him.</strong> One good hit and an immediate read of the room — <em>"It might be winnable, guys. Come back here."</em> — flipped a retreat into a stand. Then he made the stakes explicit and gave everyone else an out he wasn't taking: <em>"Either we survive this or we TPK... You guys can run, but that's me."</em></li>
+  <li><strong>The single best mechanical decision of the night was his, and it cost him damage.</strong> Round 2, natural 20, Crit Deck #24 — he halved his own crit to 10 and took <strong>Clumsy 3 and Enfeebled 3</strong> instead, because <em>"Clumsy 3 for a round until his next round is really good anyway."</em> He also worked out that <strong>Snagging Strike still functioned</strong> against something immune to grabs, which is why a fifth of the party's swings resolved against the lower AC.</li>
+  <li><strong>The medic worked the whole night, mostly while dying.</strong> Three knockdowns, four failed flat checks against a wound that would not close, and he still ran Treat Wounds cycles after — including Risky Surgery on himself at <strong>6 hit points</strong>. <em>"My gamble has paid off."</em></li>
+  <li><strong>He was also the table's rules engine</strong>: caught the Foundry heal-advances-dying bug from his own death spiral and handed the table the fix, and diagnosed the fight's actual shape out loud — <em>"it's just a math problem... when you hit it for 13 damage, it takes 5, and then heals for 7."</em></li>
+  <li><strong>His closing note was the best thing anyone said all night</strong>, and it wasn't about tactics: <em>"When I changed my perspective, it was much more fun. It's like, how absurd can we get to survive this fight?"</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-xurl">
+<h4>Xurl · the halfling who dropped his pack</h4>
+<ul>
+  <li><strong>His entire kit was disabled and he stayed useful anyway.</strong> Grapple, trip, stun, Demoralize — all dead on arrival (six Stunning Blows saves, six critical successes). He named it immediately: <em>"So I can't punch it or grapple it, so I'm completely fucking useless."</em> Then he punched it for <strong>55% of the party's total damage.</strong></li>
+  <li><strong>The best summary of the fight came from him</strong>, delivered as a complaint: <em>"entirely resistant to your damage type, resistant to your free archetype, and immune to your gimmick from other items you've acquired."</em></li>
+  <li><strong>He dropped his backpack to carry Snagg.</strong> Literally shed encumbrance mid-combat so he could pick the goblin up and run — <em>"just a three-foot-four halfling deadlifting and carrying a fully armored goblin."</em> Second session running he's hauled Snagg out of something.</li>
+  <li><strong>He called the stand thirteen minutes before Snagg did.</strong> <em>"We've already established that thing's intelligent. So if we don't escape now, it's just going to be chaos on that retreat. So I think fuck it. We ball and pray for some crits."</em> When Snagg finally turned around, his answer was instant — <em>"Fuck it, we ball. Fucking heroes."</em></li>
+  <li><strong>He tried to taunt it with no taunt.</strong> With allies bleeding out and nothing left in his kit, he shouted at it anyway and said so plainly: <em>"Oi, fucker! Look at me!... I have no mechanical way to taunt it. I just want to taunt it."</em></li>
+  <li><strong>He landed the kill</strong> — round 10, natural 20, off-guard, and the triple-damage crit card for the second time that night. <em>"Xurl just fucking kicks through his chest... splatters bugs in every fucking direction. If there's some kind of core in the middle, just shatters it."</em></li>
+  <li><strong>His comedy is destruction with a reason.</strong> He took the lounge door off its hinges so it could never seal them in again — <em>"This door is not closing again"</em> — then kept going out of grudge. And he cut up a couch cushion into gloves to steal a haunted painting, which is both funny and the correct call.</li>
+</ul>
+</div>
+
+<div class="spotlight s-alder">
+<h4>Alder Ungram · the one who could only use his mind</h4>
+<ul>
+  <li><strong>He is the only person in this party trained in Arcana, and that is what finally explained the room.</strong> The DM asked who had it and got exactly one hand — <em>"Alder's the only one."</em> His Recall Knowledge diagnosed the whole floor: <strong>there is magic here that automatically closes and re-locks any door left open</strong>, and crucially it isn't a trap — <em>"it's more like just make sure everything is closed and locked."</em> That answer is why the party never got out, and why Xurl eventually started taking doors off their hinges.</li>
+  <li><strong>He found the weakness through two failed rolls — and he was the only one who could actually use it.</strong> Recall Knowledge failed; the Scholarly Recollection reroll failed too; Dubious Knowledge handed him a fire reading he identified on the spot as half a lie. A second <strong>Exploit Vulnerability</strong> got the real answer — and the <strong>Mortal Weakness</strong> he took off it made his own chakram trigger that weakness. <strong>His were the only physical hits all night that landed full instead of shedding 7 to resistance.</strong></li>
+  <li><strong>He chose to stay.</strong> Told that his escape needed an 18 with no hero point left, and offered the chance to do something else instead, he picked the fight: <em>"Yeah, I'll just fucking attack it."</em></li>
+  <li><strong>He took the worst of it by a distance.</strong> A critical Tendril doubled his persistent damage against a 43-point health bar, and he took <strong>48, then 40, then 40</strong> — a full health bar in a single tick, three times over. He reported it flatly: <em>"So just an FYI, that was actually my full health bar in damage?"</em></li>
+  <li><strong>Prone and bleeding out, he pulled a scroll and cast Bless</strong> for everyone else's attack rolls, and it was still up when Xurl's killing crit landed. He also kept picking his chakram back off the floor and swinging with it.</li>
+  <li><strong>Ricardo made the session's most generous out-of-character call.</strong> Asked point-blank whether the party should cut Alder loose, he refused to let anyone off the hook — <em>"Hey, man, do what your character would do."</em> That line is why Snagg's stand is a character moment and not a tactical one.</li>
+  <li><strong>Paralyzed, freshly crit, and told his turn was over, he went hunting for anything he could still contribute</strong> — and found it: <em>"I guess I can Guidance Xurl."</em> Then, brightening: <em>"I can Guidance everyone, actually."</em></li>
+  <li><strong>He cheered the kill from the floor</strong>, flat on his back and bleeding: <em>"Ayo! Ayo! Or die! Or is it save-or-die? Or die!"</em> — and had the night's most honest reaction to a critical failure on a 16: <em>"This is bullshit."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ruben">
+<h4>Ruben Falmoor · the one who answered honestly</h4>
+<ul>
+  <li><strong>He set the tone of the encounter by taking it seriously.</strong> The thing asked who they were, and Ruben's instinct was <em>"well, he asked us a question, so let's answer it earnestly"</em> — and then he did, explaining the danger to Otari and the party's commission, in good faith, to a creature made of worms. The parley failed because of what the creature was, not because Ruben mishandled it.</li>
+  <li><strong>He called the fight correctly before anyone else did</strong>: <em>"if his AC is that high, then this is another entity here that we can't fight right now."</em> Second time in two sessions his first read has been the right one.</li>
+  <li><strong>He took the mist off the board.</strong> Stinking Cloud had the whole party Sickened, Slowed, and saving at the end of every turn. Snagg asked whether it could be dispelled; Ruben said <em>"I can certainly try"</em> and did — a rank-2 <strong>Dispel Magic</strong>, his first counteract ever in Foundry, failed on the roll and bumped to a success with a hero point. <strong>It cleared.</strong> In a fight where almost nothing the party did stuck, that one landed.</li>
+  <li><strong>His own stated virtue was used as the weapon against him.</strong> The DM asked, out of nowhere, <em>"Are you a team player, or more the selfish one?"</em> Ruben answered without hesitating — <em>"Ruben's a team player."</em> Two minutes later <strong>Suggestion</strong> landed and compelled exactly that: heal only, nothing else, for a full minute, in the one fight where healing could never keep up. <em>"That's fucked. He can only heal. I'm under Suggestion. I cannot attack."</em></li>
+  <li><strong>He broke it himself on a natural 20</strong>, and the table heard about it: <em>"Yay!"</em></li>
+  <li><strong>He carried the healing against a wound that kept reopening</strong> — Spectral Blade for the party's opening damage, Lay on Hands, and the three-action Heal emanation.</li>
+  <li><strong>His Heal is what Belcorra hijacked.</strong> He pushed a hallucination of thirteen dying voices out of his mind to go save his friend, and got a five-hundred-year-dead tyrant talking out of Snagg's mouth for his trouble.</li>
+  <li><strong>He's the party's caution and its conscience in the lounge</strong>: <em>"There is much evil in this room. Let us grab what we need and hurry up"</em>, and, when Xurl went for the paintings, <em>"I suggest not actually touching the paintings. There is something foul about them."</em> He was right; there was something behind them.</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Detailed Blueprints of the Abomination Vaults</div>
+    <div class="loot-source">Lounge desk</div>
+    <div class="loot-note">A second set. The first went to Wrin and became the Gauntlight decode.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Scroll × 3</div>
+    <div class="loot-source">Lounge desk</div>
+    <div class="loot-note">Unidentified. <em>"Anyone know what any of this shit is?"</em></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Staff (skull on top)</div>
+    <div class="loot-source">Party stash — carried over</div>
+    <div class="loot-note">Item 6, 230 gp. <strong>Still unidentified after three sessions.</strong> Ruben insists it's cursed; Xurl doesn't remember that.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Bracelet</div>
+    <div class="loot-source">Guests' remains, dining room</div>
+    <div class="loot-note">—</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Arrow</div>
+    <div class="loot-source">Guests' remains, dining room</div>
+    <div class="loot-note">—</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">48 gp</div>
+    <div class="loot-source">Guests' remains, dining room</div>
+    <div class="loot-note">—</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">A haunted painting</div>
+    <div class="loot-source">Lounge wall</div>
+    <div class="loot-note">Cut from its frame with improvised cushion gloves — <strong>then left behind</strong> when the noises turned out to come from <em>behind</em> it.</div>
+  </div>
+</div>
+<div class="xp-banner">The creature dropped nothing. Only its clothes on the floor, pockets empty. · <strong>Party leveled to 6</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>DM (as the worm-thing):</strong> "Of course. That's the reason we built this thing."
+<span class="attribution">The door has just locked behind the party. Ruben has explained, honestly, that they were hired to find out how dangerous this place is.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Well, he asked us a question, so... yeah, let's answer it earnestly."
+<span class="attribution">Deciding to negotiate in good faith with a man made of maggots. It was the right instinct and it changed nothing.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Hey, so I can't punch it or grapple it, so I'm completely fucking useless."
+<span class="attribution">Twelve minutes in, having discovered his entire character is immune.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Entirely resistant to your damage type, resistant to your free archetype, and immune to your gimmick from other items you've acquired."
+<span class="attribution">The most concise description of the fight anyone managed.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "I guess the question is, Ricardo, how much do you like Alder?"<br>
+<strong>Ricardo:</strong> "Hey, man, do what your character would do."<br>
+<strong>Snagg:</strong> "I'll run back in."
+<span class="attribution">The turn. Alder paralyzed and bleeding forty a round, the party mid-retreat.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Don't touch my friend. I was hired for this job. I won't abandon you."
+<span class="attribution">Snagg's Strike connects.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Either we survive this or we TPK. I don't accept any other thing. I mean, that's me. You guys can run, but that's me."<br>
+<strong>Xurl:</strong> "Fuck it, we ball. Fucking heroes."
+<span class="attribution">Every resource spent, three rounds still to go.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "So just an FYI, that was actually my full health bar in damage?"
+<span class="attribution">One tick of doubled persistent damage.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I guess I can Guidance Xurl." — "I can Guidance everyone, actually."
+<span class="attribution">Paralyzed, freshly critically hit, and told his turn was over — still hunting for something he could contribute.</span></blockquote>
+
+<blockquote><strong>DM (as Belcorra):</strong> "Leave. Walk away from this place. And perhaps I will allow you to keep what little remains of your lives."
+<span class="attribution">Spoken out of Snagg's mouth, hovering, eyes white, face torn into a grin.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "What the hell happened? Did we win?"
+<span class="attribution">Waking up on the floor immediately afterward, having missed all of it.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "I suggest not actually touching the paintings. There is something foul about them."
+<span class="attribution">He was right.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "This door is not closing again."
+<span class="attribution">Taking the lounge door off its hinges, and then several other doors, out of principle.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "When I changed my perspective, it was much more fun. It's like, how absurd can we get to survive this fight?"
+<span class="attribution">Post-game, on how he got through three hours of it.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The worm-thing is not dead.</strong> Discorporate fired, no area or splash damage was applied, and the DM narrated the maggots scattering away alive. By its own stat block it re-forms — typically within <strong>1d10 days</strong>. Nobody at the table has area damage that lands.</li>
+  <li><strong>Belcorra Haruvex has issued an ultimatum, in person, through Snagg's body.</strong> Leave and live; stay and lose everything. She knows them now — <em>"Ah, I know you"</em> — and she has demonstrated she can reach inside the party.</li>
+  <li><strong>The thirteen voices.</strong> Thirteen distinct dying voices in a lightless void, then thirteen presences watching. The number is unexplained. <em>(Seven is Nhimbaloth's number; thirteen is something else.)</em></li>
+  <li><strong>They killed Volluk, and nobody has said out loud what that means.</strong> The creature counted itself among the Gauntlight's builders, and a mid-fight Recall Knowledge matched its clothing to <strong>a portrait of Volluk</strong> — the name Argon pulled off a dead scribe in Session 3: <strong>Belcorra's assistant, and the weeping scribe-ghost's lost love.</strong> <strong>The ghost on floor three is still grieving him.</strong> She cannot be killed by damage — only talked down or exorcised. She can now be told he is dead.</li>
+  <li><strong>The way down is sealed.</strong> The barrier over the stairs was inert last session and is now <strong>solidified and active</strong>, and cannot be broken by normal means. <em>"It seems that the ones who noticed us have blocked off our route down further."</em></li>
+  <li><strong>Something is behind the paintings.</strong> The ghost noises in the lounge come from behind the frames, not from the canvases. The party deliberately walked away.</li>
+  <li><strong>The chain woman is still there.</strong> Mid-fight the DM called the worm <em>"the main boss for this floor"</em>; afterward he said it was <strong>not</strong> the hardest fight on this floor — and that she isn't either. <em>"You'll find out soon."</em></li>
+  <li><strong>The east side and the lake</strong> of the fourth floor remain unexplored.</li>
+  <li><strong>Xurl's curse</strong> — 1 of 3 full moons banked; still weak to silver; Snagg still carries silver.</li>
+  <li><strong>Jaul Mezmin's body</strong> still owed to Waluwin for the armour rune; <strong>Snagg's level-5 armour potency rune</strong> was a week-long special order.</li>
+  <li><strong>The skull staff</strong> has still never been successfully identified.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where It Ends</span>
+<p>The worm came apart under a halfling's foot, the party caught its breath, and the dungeon went silent. Then a hum like a heartbeat, then dust, then dark. Thirteen voices went out one at a time, and something reached into a dying goblin and used his mouth to make an offer.</p>
+<p class="big-line">"Go now. Or stay."</p>
+<span class="speaker">Belcorra Haruvex, through Snagg — fourth floor of the Gauntlight</span>
+</div>
+
+</div>
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Snagg's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Snagg did this session</h3>
+<ul>
+  <li>Searched the dining-room dead and pocketed a <strong>bracelet</strong>, an <strong>arrow</strong>, and <strong>48 gp</strong> for the party stash.</li>
+  <li>Deferred the parley to <strong>Ruben</strong> — recognised a talking situation and stayed out of it.</li>
+  <li>Read the fight as unwinnable inside twenty minutes and <strong>called for the exit</strong>: get the door open, get out, come back prepared.</li>
+  <li>Asked the question that cleared the mist — <em>"Can you dispel magic? Does it seem magical?"</em> — and Ruben's counteract took Stinking Cloud off the board.</li>
+  <li>Spent a natural 20 on a <strong>debuff instead of damage</strong>, halving his own crit to put <strong>Clumsy 3 and Enfeebled 3</strong> on it. Worked out that <strong>Snagging Strike</strong> still applied off-guard to something immune to grabs.</li>
+  <li>Ran the withdrawal as an operation: passed the crowbar, called delays, tried to get <strong>Alder</strong> clear, kept trying the door. It never opened.</li>
+  <li><strong>Went down three times</strong> — Dying 1, then Dying 2, then Dying 3 — against a wound that would not close. Failed four recovery checks, including a natural 1.</li>
+  <li><strong>Ran back into the fight</strong> rather than leave Alder paralyzed on the floor, and told the room it might be winnable.</li>
+  <li>Landed the hit that turned the retreat into a stand, and stated the terms out loud: survive or TPK, everyone else free to run.</li>
+  <li>Woke up after the fight with no memory of the void, the voices, or the thing that used his body.</li>
+  <li>Post-fight: <strong>Risky Surgery on himself at 6 HP</strong>, then Treat Wounds cycles on the party. Diagnosed the Foundry heal bug and gave the table the workaround.</li>
+  <li><strong>Leveled to 6.</strong></li>
+</ul>
+
+<h3>Things Snagg knows that the party does not</h3>
+<ul>
+  <li><strong>Nothing — and that is the problem.</strong> Snagg was unconscious for the void, the thirteen voices, and Belcorra's entire speech. <strong>She used his body and his mouth to say it.</strong> The other three watched his face tear open into a grin. He has only their account of it.</li>
+  <li>He does not know what his own face did, or that he hovered, or that his head turned to an angle a neck doesn't make.</li>
+  <li>The others saw thirteen presences. Snagg saw nothing.</li>
+</ul>
+
+<h3>What Snagg is thinking about</h3>
+<ul>
+  <li><strong>The doctrine held right up until it cost a friend.</strong> He read the fight correctly and called the retreat on time — the Session 7 template worked. It just ran into a door that wouldn't open and a man who couldn't move. Learning the weakness and coming back prepared is still the right answer; it needs an exit to be an answer at all.</li>
+  <li><strong>He would make the same call again.</strong> Argon died holding a doorway so the rest could leave. That is not happening twice.</li>
+  <li><strong>The maths of that thing were the real enemy, not its abilities.</strong> Thirteen damage becomes five, and then it heals seven. No amount of good play fixes that.</li>
+  <li><strong>Area damage alone is not the answer — landing it is.</strong> Ruben <em>had</em> the area spell. He cast it into the creature's stated weakness while it was Clumsy 3, and it critically succeeded its Reflex save for zero. Bombs would need to beat the same +19.</li>
+  <li><strong>Silver worked out. This is the next gap.</strong> And the thing left worms crawling away, which means it is coming back.</li>
+  <li><strong>Belcorra knows the party by sight now.</strong> She offered a way out and named the price of refusing: friends, home, everything. Snagg has parents in Otari.</li>
+  <li>Being told to leave by a five-hundred-year-dead tyrant is not, in itself, a reason to leave. But it is the first time she has bothered.</li>
+  <li><strong>The perspective shift is worth keeping.</strong> Treating an unwinnable fight as a question of how absurd it can get made three hours survivable.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>How do we land damage in an area against a Reflex like that?</strong> Bombs, scrolls, or something that targets a different save. This is the party's biggest structural hole.</li>
+  <li><strong>The worms crawled away — how long until it re-forms, and does it remember us?</strong></li>
+  <li><strong>What were the thirteen voices?</strong> Seven is Nhimbaloth's number. Thirteen is not.</li>
+  <li><strong>The thing was Volluk</strong> — the name on the pendant Argon took off the dead scribe in Session 3, Belcorra's assistant. <strong>The weeping scribe-ghost on floor three has been grieving him for five hundred years.</strong> She can't be killed by damage, only laid to rest. Does telling her he's dead end her?</li>
+  <li><strong>Can Belcorra do that again, to anyone, at any time?</strong> She reached into a body from wherever she is.</li>
+  <li><strong>What is behind the paintings?</strong></li>
+  <li><strong>The way down is sealed and cannot be broken normally.</strong> Who sealed it — Belcorra, or the thing they killed?</li>
+  <li><strong>The worm was called "the main boss for this floor," and it still wasn't the hardest fight here.</strong> Neither is the chain woman. So what is?</li>
+  <li>Identify the skull staff. It has now been carried unidentified for three sessions.</li>
+</ul>
+</section>
+
+</body>
+</html>

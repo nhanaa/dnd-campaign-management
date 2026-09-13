@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 14 — The Tenth Feather</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Tenth Feather</h1>
+  <div class="subtitle">Session 14 · A feather lost in eleven minutes, five straight wins to take it back, and the Ruby Phoenix herself over Mount Haminabu</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-09-06</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 42m</span>
+    <span class="meta-pill">Day 2 evening → Day 3, Bonmou</span>
+    <span class="meta-pill">Level 14 · 580 XP · 840/1000</span>
+    <span class="meta-pill">Feathers 10 → 9 → 10</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:62"></div>
+  <div class="comp-seg comp-explore" style="flex:14"></div>
+  <div class="comp-seg comp-rp" style="flex:11"></div>
+  <div class="comp-seg comp-social" style="flex:8"></div>
+  <div class="comp-seg comp-loot" style="flex:5"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · six encounters, one lost</span>
+  <span><span class="legend-dot comp-explore"></span>Exploration · hex crawl, three shrines, a treasure hex</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · the post-mortem, the shrine dance</span>
+  <span><span class="legend-dot comp-social"></span>Social · the Biting Roses, Hao Jin, Koto Zekora</span>
+  <span><span class="legend-dot comp-loot"></span>Loot &amp; market</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard (Maestro) / Living Nexus</div>
+    <div class="char-player">Pax · "Mingzhu" · three kills</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · 550 in one fight</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Master Medicine · the crab intel</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · quartermaster · 296 absorbed</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">Wayang · she/her · rules conscience</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>They walked in holding all ten feathers and lost one in the first eleven minutes.</strong> The Nameless had spent S13 clawing to the qualifying number; S14 opened with a troupe stepping out of the trees, asking pleasantly how the day was treating them, and then taking a feather off them in two rounds. It was the party's first real thrashing in a long time, and nobody at the table pretended otherwise.</p>
+
+<p><strong>The Biting Roses</strong> were not a grudge match or a rival with history — they were four strangers who were simply better on the day. Yarrika Mulandez opened with <strong>Phantasmal Calamity</strong> into the whole party; Lantondo, a <strong>Wyrwood</strong>, followed with a fifth-rank Fireball and then a <strong>Frigid Flurry that critically failed Ferrok for 93 out of 84 hit points</strong>, putting him on the floor; and <strong>Grandfather Mantis</strong> pounced on Seva and <strong>critically hit her twice in one turn</strong> — 92 on a natural 14 that beat her AC by eleven, then 58 on a natural 20 — leaving her restrained, blinded and dying. Sovael's rank-5 Heal got her up once and Clutch's Battle Medicine got her up again. Then Grandfather Mantis came for Sovael, hit for 40, grabbed him, hit again for 43, and <strong>picked him up and started eating him.</strong> <em>"I'm sorry, guys. I'm sorry. It can't be."</em></p>
+
+<p>The arithmetic is the whole story: across roughly two rounds the party put <strong>122 damage</strong> into about 1,270 hit points of enemies and absorbed <strong>792</strong>. They never landed a single point on <strong>Yarrika or Artus</strong>, who finished the fight untouched at full health. They conceded. There is no single voice on the tape calling it — the concession sits inside one un-diarized crosstalk blob — so it reads as what it was: everyone arriving at the same conclusion at once.</p>
+
+<p>Then the Biting Roses did something that reframed the whole loss. Yarrika called her mantis off — <strong><em>"Grandfather Mantis. That is not food. Let them go"</em></strong> — and <strong>healed the party she had just beaten</strong>, apologising for the cone. Artus said <em>"well fought."</em> And then, turning her prize over in her hand, she asked: <strong><em>"Wait, what did we want these for again?"</em></strong> Lantondo had to explain that ten feathers is how you enter the tournament. <em>"Oh, that's what we're doing! I thought you just liked them because they were shiny."</em> She skipped away with her team trailing after her. <strong>Sovael</strong>, watching her go: <strong><em>"I love her."</em></strong> <strong>Sattva</strong>: <em>"At least they're friendly."</em> Ninety seconds before any of this, unprompted, Sovael had warned her about something dangerous on the southern side of the island.</p>
+
+<p>The post-mortem that followed is the best conversation of the night, and it's a genuine disagreement rather than a group shrug. Sovael argued the shape of the loss was positional — <em>"I really think, Clutch, you should stick more to your Seva and me at the beginning, because I feel like you charging in kind of made us a bit too exposed"</em> — and Clutch answered with the actual bind he was in: <strong><em>"If I stay back, the mage kills us. If I move forward, the mage kills us."</em></strong> Seva took her share (<em>"that's my bad… I was just, like, away, so I couldn't react"</em>), the DM called it <em>"a damned-if-you-do, damned-if-you-don't situation with how the initiative and casters lined up,"</em> and Sattva landed it: <strong><em>"double crits and failing all saves, which was just unlucky. So it's fine. You live and you learn."</em></strong> Ferrok, drily: <strong><em>"We haven't been soundly thrashed in a while, so…"</em></strong></p>
+
+<p><strong>Then they went and won five straight.</strong> Forty-five minutes later the <strong>Trembling Meteor</strong> handed the tenth feather back. That fight opened with the single biggest enemy action of the session — one Rain of Arrows roll of 45 that hit Clutch for 23 and <strong>critically hit Sovael, Sattva and Seva for 62 each, 209 damage in one action</strong> — and was then decided by one spell in reply. Sovael cast a Quickened <strong>Incarnate Ancient Specter</strong>, and the DM walked all four opponents through the save one at a time: <em>"Success — prone for the archer. Success — prone for the mage. Prone on a success is pretty good."</em> Every one of them made the save and every one of them went down anyway, because only a critical success avoids it. It cost the enemy team a full round of standing up and <strong>broke the Meteor mage's turn outright</strong>. Sovael then killed the Swordsman himself with a Shadow Signet Fire Ray; Ferrok's crit killed the Mage; and the Archer, left alone, forfeited.</p>
+
+<p><strong>Under the Pale Sun</strong> was the grudge match — the team from S11 — and Ferrok took it personally (<em>"this time it's personal"</em>) and accounted for <strong>550 of the party's ~1,019 damage</strong>. But the fight turned on a wall. Sovael put a <strong>Wall of Wind</strong> between the party and two archery specialists, announcing it as <em>"about to do something funny."</em> Arrows cannot cross it, and the DM confirmed it on the spot: <em>"anything going through that won't work."</em> Archer output fell from <strong>157 damage before the wall to 44 after it</strong> — helped enormously by Ferrok's Reactive Strikes, which cancelled two Rain of Arrows mid-declaration and killed Archer A in the middle of one. Both archers ended up <strong>Grabbed, Off-Guard and Immobilized</strong> by Clutch, and died there. Sovael killed Swordsman A with a rank-7 Electric Arc; Sattva hero-pointed a Fist that killed Swordsman B and knocked his helmet off. <strong>Under the Pale Sun were eliminated from the tournament</strong> — ten years out — and Sovael, when Ferrok jeered, said: <em>"Hey, let's be graceful."</em></p>
+
+<p>There was a lot of nonsense in between — a mid-afternoon dance party at <strong>Umantar's shrine</strong> where Sovael pointed out that he was <em>singing, not dancing</em>, two more <strong>Taumatan shrines</strong> (Nisaye and Ramijav), a stop at a stone market wired into Goka's Endless Market, and a sustained bit about the whole party getting <strong>matching tattoos of Sovael</strong> on their backs (<em>"He's a Pyro dragon. He's a shiny Pyro dragon"</em>). Day 2 closed at a carpenter's-shed team base, where <strong>Clutch — who runs the party's coin — proposed selling the staff of illusions</strong>, a decision that came back four hours later.</p>
+
+<p><strong>Day 3 opened with the sky on fire.</strong> A plume of red flame erupted from Mount Haminabu and twisted into a blazing phoenix, and <strong>Hao Jin</strong> spoke across the whole island: a palace on the peak, an evening with <strong>Empress Nai Yan Fei</strong>, and the terms — <strong><em>"simply bring me your necklace and ten silver feathers."</em></strong> They have until the end of the day to reach the top.</p>
+
+<p>They did not get to contemplate it, because something ten feet tall, red-skinned and horned crashed down into the Temple of Irori. <strong>Koto Zekora</strong>, an Onidoshi and <strong>head enforcer of Bonmou</strong>, had been tasked by the Ruby Phoenix with weeding out the weak — and she wanted <strong>three feathers</strong> on a fight they were not allowed to refuse. <em>"If it makes you feel any better, my job is to beat the shit out of a few people today. You were just closest."</em> Sattva's answer was two words: <strong><em>"Do it."</em></strong> It was the session's hardest fight by a distance — <strong>968 damage taken</strong>, an Eclipse Burst opener that <strong>all five PCs failed at DC 41</strong>, two Reactive-Strike criticals that put 170 into Clutch, and a Falling Stars that dropped Sovael to Dying 1, prone and burning from his own Oracle curse. Sattva's healer's gloves brought him back for 30, and — still Wounded, still on fire — he asked the table <em>"Should I gamble, or should I heal?"</em> Ferrok said <em>"I say go for it."</em> His fifth-rank <strong>Thunderstrike</strong> hit for 31 and put her into single digits, and the free <strong>Foretell Harm</strong> off it set 10 more to land at the start of her turn — <strong>which is what actually dropped her.</strong> Foundry still shows her at 3 of 500 only because Cody waved the tick through rather than entering it. She never got that turn, and that was the point: her Eclipse Burst had already made <strong>all five PCs fail a DC 41</strong>, and a second one could have ended the party. She conceded, grinning: <em>"You all pass. A good match… Orders from the big boss lady — not allowed to kill anyone."</em> Then she flew off to go test somebody else.</p>
+
+<p>The rest was a victory lap through two dens. A <strong>Duneshaker Solifugid</strong> — 500 hit points and Quickened — ate the best action-economy play of the night. Sovael's Lingering Composition Performance critically succeeded, firing <strong>Talent Envy</strong> for a free critical Demoralize, and he followed it with <strong>Roaring Applause</strong>, which the creature failed. Slowed 1 <strong>cancelled its Quickened outright</strong> — the MAP progression proves it, four Strikes in round 1 and exactly three in every round after — and because the applause carries the <strong>manipulate</strong> trait, the thing had to stop and clap on its own turn. In rounds three and four that produced <strong>four provoked Reactive Strikes, two of them natural 20s, for 141 damage — 28% of the creature's health.</strong> The DM enjoyed it enormously: <em>"this thing is just chomping, flailing at you, causing earthquakes — and the whole time, with its little pincers, it's going clap, clap, clap, clap."</em> Sovael's Fire Ray then took it from 53 hit points to 1, and Ferrok's Force Fang collected the last point. Sattva, of the giant camel spider: <strong><em>"It's friend-shaped. I can't shoot it."</em></strong></p>
+
+<p>Last came a <strong>Berberoka</strong>, which Sattva's Recall Knowledge revealed was <strong>terrified of crabs</strong> — a weakness the party could not exploit, because they had sold the staff of illusions that morning. <em>"No, we shouldn't have sold the staff."</em> Ferrok did a Goring Charge <em>"doing his best impression of a crab walk"</em> anyway. Seva's Rooting rune critical <strong>immobilized the giant for the entire fight</strong>, which is why a boss with fifteen feet of reach stood still and punched. Clutch finished it with a Combat Grab Claw critical — 69, plus 7 from Sattva's shared Warden's Boon, into a creature with 75 left — and then threw the corpse back into its own pool. Among the remains: a single silver feather, and a team that had not fared as well.</p>
+
+<p><strong>Ten feathers, confiscation-capped, going into the last day.</strong> The mountain is marked on the map.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act combat">
+  <div class="act-label">Act I · Combat · The Biting Roses (03:19 – 22:49) · LOSS by forfeit · Feathers 10 → 9</div>
+  <div class="act-card">
+    <h3>"Oh, no, no, no. That's not fine."</h3>
+    <ul>
+      <li>A troupe met them mid-hex, friendly and unhurried. <strong>Yarrika Mulandez</strong> — dark flowing outfit, headset, eyes half-closed, humming a cheery tune — opened with <em>"Hello. How's the day treating you all?"</em></li>
+      <li><strong>★ Sovael warned them about the island</strong> before anyone mentioned stakes: <em>"I don't know if you've ever been to the southern side, but there's something very dangerous there. So, be careful."</em></li>
+      <li><strong>Lantondo</strong> got to business: <em>"You're another team, right? So I suppose we should do the whole song and dance. Feathers, right?"</em> Sattva tried <em>"I'm fine with walking away."</em> Lantondo: <strong><em>"Oh, no, no, no. That's not fine."</em></strong></li>
+      <li><strong>Yarrika opened with Phantasmal Calamity</strong> — 11d6 mental in a 30-ft burst, 34 to all five. <strong>Lantondo</strong> followed with a rank-5 <strong>Fireball</strong>, then a Harrow Card for 35 into Ferrok.</li>
+      <li><strong>★ Grandfather Mantis critically hit Seva twice in one turn</strong> — a Pounce claw for <strong>92</strong> (a natural 14 that beat AC 35 by eleven), a critical Grapple leaving her <strong>Restrained</strong>, a natural-1 critical miss, and then a <strong>natural 20</strong> for <strong>58</strong>. Seva, dropped: <strong><em>"Do not get me back up."</em></strong> Then, seconds later: <em>"No, no — go, give it a try, give me a turn."</em></li>
+      <li><strong>★ Lantondo's Frigid Flurry dropped two PCs at once.</strong> Seva went down a second time; <strong>Ferrok critically failed and took 93 out of 84 hit points</strong>, unconscious. Both burned hero points on saves; both failed.</li>
+      <li><strong>★ Grandfather Mantis then took Sovael.</strong> Pounce, claw for <strong>40</strong>, <strong>Grapple</strong>, claw for <strong>43</strong> — he ended at <strong>27/176</strong>, Grabbed, Off-Guard and Immobilized, carried and being eaten. <em>"I'm sorry, guys. I'm sorry. It can't be."</em></li>
+      <li><strong>The party conceded.</strong> Ingdani: <em>"And the winners are — the Biting Roses."</em> <strong>122 dealt, 792 taken — and Yarrika and Artus finished at full health, having taken nothing at all.</strong></li>
+      <li><strong>★ Yarrika called off her mantis and healed the party she'd just beaten.</strong> <strong><em>"Grandfather Mantis. That is not food. Let them go."</em></strong> … <em>"Sorry about the cone, dear."</em> <strong>Artus</strong>: <em>"Well fought."</em></li>
+      <li><strong>★ The feather bit.</strong> <strong><em>"Wait, what did we want these for again?"</em></strong> → Lantondo explains → <strong><em>"Oh, that's what we're doing! I thought you just liked them because they were shiny."</em></strong> <strong>Sovael</strong>, watching her go: <strong><em>"I love her."</em></strong> <strong>Sattva</strong>: <em>"At least they're friendly."</em></li>
+      <li><strong>Lantondo is a Wyrwood</strong> — an animated wooden construct. <strong>Ferrok</strong>: <em>"A radioactive tree bit him."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act rp">
+  <div class="act-label">Act I½ · Roleplay · The post-mortem (24:48 – 26:37)</div>
+  <div class="act-card">
+    <h3>"You live and you learn."</h3>
+    <ul>
+      <li><strong>Sovael opened the positional critique</strong>: <em>"I really think, Clutch, you should stick more to your Seva and me at the beginning, because I feel like you charging in kind of made us a bit too exposed."</em></li>
+      <li><strong>Clutch answered with the actual bind</strong>: <strong><em>"If I stay back, the mage kills us. If I move forward, the mage kills us."</em></strong> The DM independently agreed — <em>"a damned-if-you-do, damned-if-you-don't situation with how the initiative and casters lined up."</em></li>
+      <li><strong>Seva took her share unprompted</strong>: <em>"That's my bad, because there's a reason why I'm staying close to Clutch — I can, as a reaction, follow him in. I was just, like, away, so I couldn't react."</em></li>
+      <li><strong>Sattva ended it</strong>: <strong><em>"double crits and failing all saves, which was just unlucky. So it's fine. You live and you learn."</em></strong></li>
+      <li><strong>Ferrok</strong>: <em>"We haven't been soundly thrashed in a while, so…"</em> <strong>Seva</strong>: <em>"Ugh, I forgot what this looked like."</em> <strong>Sovael</strong>, de-escalating the argument he started: <em>"This has been close. A lot of times."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act II · Combat · The Trembling Meteor (36:19 – 69:27) · WIN · Feather 9 → 10</div>
+  <div class="act-card">
+    <h3>"They all saved, but none crit-saved, so they're all thrown."</h3>
+    <ul>
+      <li><strong>Ferrok</strong> named the team to strangers: <em>"We at the Nameless accept."</em> <strong>Sovael</strong>: <em>"Time to get back this feather."</em></li>
+      <li><strong>★ The Archer opened with the session's biggest single action</strong> — one <strong>Rain of Arrows</strong> roll of 45 that hit Clutch for 23 and <strong>critically hit Sovael, Sattva and Seva for 62 each. 209 damage from one enemy action.</strong></li>
+      <li><strong>Sovael's reply opened with Dirge of Doom</strong>, lingered to three rounds, then a <strong>Quickened Incarnate Ancient Specter (rank 7)</strong>. Its <em>Kneel, Peons!</em> trigger forces a Will save in a 60-ft emanation where <strong>even a success drops the target Prone as a free action.</strong></li>
+      <li><strong>★ All four went down on successful saves</strong> — 35 / 43 / 36 / 41 against DC 34, none reaching the crit-success threshold of 44. Four enemy actions spent standing; everyone off-guard to melee meanwhile.</li>
+      <li><strong>★ It broke the mage's turn outright.</strong> DM: <em>"I think it's only fair they're going to put down a Howling Blizzard. Well, actually, no — they won't be able to do that, because that's three actions. They don't have the luxury if they're going to stand up."</em></li>
+      <li>The <strong>Depart</strong> trigger put persistent bleed on three; the <strong>Mage critically failed its recovery.</strong> <strong>Ferrok</strong>: <em>"Good spell."</em> <strong>Sovael</strong>: <strong><em>"When you have the action economy to cast them, they're pretty good."</em></strong></li>
+      <li><strong>★ Sovael killed the Swordsman</strong> with Sure Strike → <strong>Shadow Signet Fire Ray</strong>, resolved against <strong>Reflex DC 31</strong> instead of AC. <strong>★ Ferrok's +16 critical Spellstrike killed the Mage.</strong></li>
+      <li><strong>Seva was top damage at 264</strong> on three Deathseeker criticals. <strong>Clutch's round-3 Intercept Attack absorbed 80 points off her.</strong></li>
+      <li><strong>Clutch sprinted the length of the beach</strong> at the Archer — by then the sole survivor: <em>"arms pumping, legs pumping. He just starts running."</em> The Trembling Meteor forfeited. <strong>Tenth feather returned.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act rp">
+  <div class="act-label">Act II½ · Roleplay · Umantar's shrine (73:39 – 74:22)</div>
+  <div class="act-card">
+    <h3>"Wait, I'm singing, not dancing."</h3>
+    <ul>
+      <li>The shrine asked for a dance. <strong>Ferrok</strong>: <em>"Let's go dancing."</em> <strong>Sovael</strong>: <em>"Let me join, let me join"</em> — then, establishing jurisdiction: <strong><em>"Wait, I'm singing, not dancing."</em></strong></li>
+      <li><strong>Clutch</strong> on his contribution: <em>"It's the worm. Just a lot of very physical dance moves."</em> <strong>Ferrok</strong>: <em>"Push-ups."</em></li>
+      <li><strong>Blessing of Umantar</strong> — while on Bonmou, step into non-magical difficult terrain freely.</li>
+      <li>Two more <strong>Taumatan shrines</strong> this session: <strong>Nisaye</strong>, the Joyful Chronicler (maps, exploration, foragers), and <strong>Ramijav</strong> (relaxation, self-care and comedy).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act III · Combat · Under the Pale Sun (76:58 – 123:55) · WIN · Opponents ELIMINATED</div>
+  <div class="act-card">
+    <h3>"I'm about to do something funny."</h3>
+    <ul>
+      <li>A rematch with the team from S11. <strong>Sovael</strong>: <em>"Ah! Revenge!"</em> <strong>Ferrok</strong>: <strong><em>"This time it's personal."</em></strong></li>
+      <li>The archers opened exactly as built: Archer A's <strong>Double Shot critically hit Sovael for 52</strong>; Archer B's <strong>Rain of Arrows critically hit Clutch for 76</strong> (68 after intercept). <strong>157 damage before the wall.</strong></li>
+      <li><strong>★ Sovael's Wall of Wind.</strong> <em>"Alright, I'm about to do something funny by casting Wall of Wind. 60 foot long, 30 feet high, and it will block ranged attacks."</em> Ammunition cannot cross it. DM: <em>"anything going through that won't work."</em></li>
+      <li><strong>The archers had to abandon the firing line.</strong> The DM had said a round earlier there was <em>"no benefit to them moving right now"</em>; after the wall, <em>"they're going to the other side of the wall."</em> <strong>Post-wall output across five turns: 44 damage, total.</strong></li>
+      <li><strong>Ferrok's Reactive Strikes did the rest</strong> — cancelling two Rain of Arrows mid-declaration, one of them <strong>killing Archer A in the middle of the action</strong>. <strong>Both archers ended Grabbed, Off-Guard and Immobilized</strong> by Clutch, and died there.</li>
+      <li><strong>★ Sovael's Heroism on Ferrok converted three ordinary hits into criticals</strong> — 76, 70, 74. The log flags the +2 as decisive on all three, <strong>and flags Clutch's off-guard as equally decisive on the same rolls.</strong> <strong>Sovael</strong>: <em>"I love Heroism. I should cast that some more, actually."</em></li>
+      <li><strong>★ Sovael killed Swordsman A</strong> with a rank-7 <strong>Electric Arc</strong> the target critically failed — 42 into 18 remaining. <strong>★ Sattva hero-pointed a Fist that killed Swordsman B</strong> and knocked his helmet off.</li>
+      <li><strong>★ The biggest single hit went the other way</strong>: Swordsman A's <strong>natural-20 Reactive Strike on Ferrok for 110</strong>, survivable only because <strong>Sovael had burned a rank-4 Heal scroll on him the turn before.</strong></li>
+      <li><strong>Eliminated.</strong> Ten years off the island. When Ferrok jeered, <strong>Sovael</strong>: <strong><em>"Hey, let's be graceful."</em></strong> The eleventh feather was <strong>confiscated for 100 platinum</strong>.</li>
+      <li><strong>Day 2 closed</strong> at a carpenter's-shed team base with a <strong>stone market</strong> wired into Goka's Endless Market. <strong>Clutch proposed selling the staff of illusions</strong> and distributed the proceeds.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act social">
+  <div class="act-label">Act IV · Social · Dawn of Day 3 — Hao Jin and the Mountain (133:39 – 136:46)</div>
+  <div class="act-card">
+    <h3>"Bring me your necklace and ten silver feathers."</h3>
+    <ul>
+      <li><em>"A dull roar, like an earthquake… a plume of red fire erupts from the peak of Mount Haminabu… the blinding flames paint the sky violet and blast away the clouds before dramatically twisting into the unmistakable form of a blazing crimson phoenix."</em></li>
+      <li><strong>★ Hao Jin, the Ruby Phoenix</strong>: <em>"I have placed a palace here on the peak of Mount Haminabu, and invite you to join me and my guest, <strong>Empress Nai Yan Fei</strong>, for a pleasant evening of stimulating conversation, fine local food, and rousing entertainment. <strong>To join us, simply bring me your necklace and ten silver feathers.</strong> This will secure your access into the palace, as well as the Ruby Phoenix Tournament."</em></li>
+      <li><em>"I await all of you who are worthy of the honor. You have until the end of this day to reach the mountain top. Fight well, combatants."</em></li>
+      <li><strong>Ferrok</strong>, asking the rules question: <em>"So now with ten feathers, we can just go there and be done, right?"</em> <strong>DM</strong>: <em>"Correct. But you might miss out on some of the goodies of Bonmou."</em></li>
+      <li><strong>Encounter DC updated</strong>: teams are so thinned that a random meeting now needs a <strong>natural 20</strong> — except in Mount Haminabu's hex and those adjacent, where it drops to <strong>18</strong>, because everyone is converging on the peak.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act V · Combat · Koto Zekora, Head Enforcer (136:46 – 164:44) · WIN · 3 feathers defended</div>
+  <div class="act-card">
+    <h3>"This is not a challenge you can refuse."</h3>
+    <ul>
+      <li>Something came down into the <strong>Temple of Irori</strong>: <em>"a ten-foot-tall, red-skinned, horned woman… armored skirt, armored breastplates, all brilliant gold and red. Her hands dance with infernal flames, and on her back, an enormous spiked club."</em> <strong>Sovael</strong>: <em>"Oh my god."</em></li>
+      <li><em>"You all — you're the Nameless ones, yes?"</em> <strong>Sovael</strong>: <strong><em>"I guess our reputation persists."</em></strong></li>
+      <li><strong>★ The challenge</strong>: <em>"I am Koto Zekora. I'm the head enforcer here on Bonmou. The Ruby Phoenix has tasked me with weeding out the weak on this final day… You will fight me, and you'll bet three of those pretty little silver feathers you've got. <strong>This is not a challenge you can refuse.</strong>"</em></li>
+      <li><em>"If it makes you feel any better, my job is to beat the shit out of a few people today. You were just closest."</em> <strong>Clutch</strong>, setting the stake: <em>"We want to win this one, right? Yeah, it's three feathers."</em> <strong>Sattva</strong>: <strong><em>"Do it."</em></strong> <strong>Koto</strong>: <em>"That's the attitude."</em></li>
+      <li><strong>★ She opened with Eclipse Burst, and all five PCs failed the DC 41 save.</strong></li>
+      <li><strong>★ Both of her critical hits on Clutch were Reactive Strikes</strong> on his own turns, provoked by his repositioning — <strong>170 damage in two reactions.</strong> She also critically hit Ferrok, and deliberately stood inside her own Falling Stars for 40.</li>
+      <li><strong>★ What the Synesthesia scroll actually bought — and why it looked worse than it was.</strong> She <em>made</em> the save. Its <strong>Clumsy 3 flipped exactly one roll</strong>: Koto's basic Reflex save against Sovael's own <strong>Thunderstrike</strong> — <strong>nat 6 + 26 = 32 against DC 34, a failure</strong>, where 35 without it succeeds and halves it. <strong>It doubled the finisher from 15 to 31.</strong> The AC channel returned nothing across eight attacks, but that is not the scroll's fault: <strong>the party lost flanking on her for six consecutive attacks</strong>, so she carried Clumsy 3 without off-guard (AC 37 instead of 35). The one attack that had both landed at <strong>AC 35</strong> — the penalties stack correctly; her 10-foot reach and Reactive Strikes had just made repositioning to flank too expensive. The <strong>Dazzled</strong> did fire — three DC 5 flat checks, one a failure — but that failure landed on <strong>Falling Stars</strong>, an area spell, which resolved anyway for 465 damage.</li>
+      <li><strong>Seva survived a 158-damage round on 18 hit points</strong> and <strong>spent her last hero point</strong> to keep Clutch up. <strong>Clutch spent one of his own at 6 HP.</strong></li>
+      <li><strong>★ Falling Stars dropped Sovael</strong> — Dying 1, unconscious, prone, and burning from his <strong>own Oracle curse</strong>. <strong>Sattva revived him with greater healer's gloves, 30.</strong></li>
+      <li><strong>★ Sovael put her away from the floor.</strong> Still Prone, Wounded 1 and burning, he asked <em>"Should I gamble, or should I heal?"</em> — <strong>Ferrok</strong>: <em>"I say go for it."</em> A fifth-rank <strong>Thunderstrike</strong> for 31 (DM: <em>"She is in single digits"</em>), then the free <strong>Foretell Harm</strong> off it — twice the spell's rank, <strong>10 at the start of her turn, and that is what dropped her.</strong> Foundry's 3-of-500 is an artefact; Ryu waved the tick through instead of entering it.</li>
+      <li><strong>★ And the reason it mattered was not the damage — it denied her a turn.</strong> Her <strong>Eclipse Burst had already made all five PCs fail a DC 41.</strong> A second area save at that DC, with the party this far down, could have ended the run. Foretell Harm meant she never rolled it.</li>
+      <li><strong>Koto</strong>: <em>"You all pass. A good match… <strong>Barely works. Orders from the big boss lady — not allowed to kill anyone.</strong>"</em> Then: <em>"I'm off to catch my breath and then go beat the shit out of some more tournament-goers."</em> <strong>1,000 platinum.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VI · Combat · Duneshaker Solifugid (170:29 – 197:33) · WIN · Den · 1,000 pp</div>
+  <div class="act-card">
+    <h3>"It's going clap, clap, clap, clap, clap."</h3>
+    <ul>
+      <li><strong>DM</strong>: <em>"I want to give a preface by saying arachnophobia warning."</em> <strong>Sattva</strong>: <em>"Spider-Man?"</em> → <strong><em>"Man Spider"</em></strong> — the Man-Bat/Bat-Man swap. <strong>DM</strong>: <em>"Okay, if you say Manspider, I have to do this."</em> The bit ran two minutes and came back later.</li>
+      <li>A <strong>500-HP, Quickened</strong> gargantuan camel spider. <strong>Venom Spray</strong> opened for 52 poison across the party; <strong>Earth Shaker</strong> knocked Ferrok and Seva prone on approach.</li>
+      <li><strong>★ Sovael's Lingering Composition Performance hit 42 against DC 31 — a critical success</strong>, which both extended the composition to four rounds <em>and</em> fired <strong>Talent Envy</strong> for a free <strong>critical Demoralize</strong>. Then a third-rank <strong>Roaring Applause</strong>, which the Solifugid <strong>failed</strong>: <em>"Alright, slow one. And no reaction."</em></li>
+      <li><strong>★ Slowed 1 cancelled its Quickened outright.</strong> The MAP progression proves it independently — four Strikes in round 1, exactly three in each of rounds 2, 3 and 4. <strong>DM</strong>: <em>"So, three actions because slowed."</em></li>
+      <li><strong>★ And it had to clap.</strong> The applause carries the <strong>manipulate</strong> trait. Round 2 produced none — everyone had already spent reactions on its Pounce movement — but <strong>rounds 3 and 4 produced four provoked Reactive Strikes, two of them natural 20s, for 141 damage: 28% of the creature's health.</strong></li>
+      <li><strong>DM</strong>: <em>"So this thing is just chomping, flailing at you, causing earthquakes. And the whole time, with its little pincers, it's going clap, clap, clap, clap, clap. It's so funny."</em> → <em>"It's not funny."</em></li>
+      <li><strong>★ And then Sovael stacked a second spell on the first.</strong> <strong>True Target</strong> designated the Solifugid for <strong>all four allies at once</strong> — the first strike each of them made rolled twice, keeping the better die. All four connected, and <strong>Ferrok's was a natural 20 for 78, on one of the Reactive Strikes the clapping had provoked.</strong> One spell made the opening; the other guaranteed it landed.</li>
+      <li><em>Two footnotes for the record</em>: the creature <strong>had no Reactive Strike of its own</strong>, so the spell's reaction-denial clause bought nothing — Slowed and the clap were the entire value. And the Frightened 2 did <strong>not</strong> cause the failed save (30, or 32 without it — both short of DC 34).</li>
+      <li><strong>Clutch absorbed 296 damage</strong>, over half the party's intake. <strong>Seva took nothing at all</strong> — Clutch intercepted both hits meant for her.</li>
+      <li><strong>★ Sovael's Sure Strike → Fire Ray took it from 53 hit points to 1.</strong> Ferrok — <em>"I kid you not, it's got one"</em> — collected the last point with a <strong>Force Fang</strong>, on Sovael's <em>"Alright, finish it."</em> <strong>Ferrok top damage at 143.</strong></li>
+      <li><strong>Sattva</strong>, on the spider: <strong><em>"It's friend-shaped. I can't shoot it."</em></strong> <strong>Ferrok</strong>, afterwards: <em>"None of us got eaten that time. That's cool."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act explore">
+  <div class="act-label">Act VI½ · Exploration · The treasure hex (200:33 – 201:44)</div>
+  <div class="act-card">
+    <h3>Under the floorboards</h3>
+    <ul>
+      <li>An old outpost, and under its floorboards: <strong>three major elixirs of life</strong>, a <strong>major charm of electricity resistance</strong>, and a set of <strong>Moonlit Chain</strong> — a +1 silver chain shirt. <strong>Ferrok</strong>: <em>"That's kind of hefty."</em></li>
+      <li>Elsewhere on the crawl: a <strong>temple to Shizuru</strong>, head of the Tian Xia pantheon; an old rain shelter; a tannery; and a school house with the session's quietest line — <em>"Even Bonmou had civilization and children once, but no longer."</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="act combat">
+  <div class="act-label">Act VII · Combat · The Berberoka (204:00 – 217:24) · WIN · Den · 1,100 pp + a feather</div>
+  <div class="act-card">
+    <h3>"Throw him back in the pool."</h3>
+    <ul>
+      <li>A <strong>425-HP</strong> waterlogged giant with <strong>15 feet of reach</strong>. <strong>Spray Water</strong> opened by knocking the front line down. <em>"You all stay right there!"</em></li>
+      <li><strong>Clutch's Battle Cry Demoralize failed.</strong> <strong>Sovael's</strong> landed instead — a <strong>critical Demoralize off a Performance of 48</strong> for <strong>Frightened 2</strong> — and his <strong>Whispers of Weakness</strong> reported <em>"no weakness, weakest save is Reflex."</em></li>
+      <li><strong>★ Sattva's Recall Knowledge turned up the real weakness</strong>: <em>"you also know they are terrified of <strong>crabs</strong>. So I tell Sovael that, so he can summon a crab or something — can't do that, sorry."</em> <strong>Sattva</strong> proposed the workaround — <em>"Or, like, make an illusion"</em> — and <strong>Sovael</strong>, with feeling: <strong><em>"No, we shouldn't have sold the staff."</em></strong></li>
+      <li><strong>Ferrok did it anyway</strong>: <em>"Ferrok is going to do a <strong>Goring Charge</strong>, doing his best impression of a crab walk as he does so."</em> It provoked the creature's Reactive Strike — which the DM had twice forgotten it had.</li>
+      <li><strong>★ Seva's Rooting rune critical immobilized the giant for the entire fight</strong> — which is why a boss with fifteen feet of reach stood in place and punched. She also <strong>delayed twice on Sovael's suggestion</strong> to get inside his Courageous Anthem.</li>
+      <li><strong>Sattva enlarged Clutch</strong> to wrestle it: <em>"I'll make him big. Big and large. Let's go."</em> <strong>Clutch intercepted twice</strong> — 27 off Ferrok, 38 off Seva — and landed two critical Jaws for 48 each.</li>
+      <li><strong>★ The kill.</strong> After a failed Grapple, <strong>Combat Grab</strong> → <strong>critical Claw for 69</strong>, a roll the log flags as requiring <strong>three</strong> things at once: Sovael's <strong>Courageous Anthem</strong>, the <strong>Frightened</strong> from Sovael's Demoralize, and the <strong>Off-Guard from Clutch's own Taunt</strong>. Remove any one and it's a plain hit. <strong>Sattva's shared Warden's Boon added 7</strong> — <strong>76 into a creature with 75 left.</strong></li>
+      <li>The <strong>Whirling Throw that followed was the corpse toss</strong> — <em>"throw him back in the pool."</em> <strong>Sovael</strong>: <em>"Throw his body back to the water."</em> <strong>DM</strong>: <em>"You were a little over the top for that one. But this is your victory lap."</em></li>
+      <li>Among the remains: <strong>a single silver feather</strong>, and the implication of a team that had been eaten. Confiscated at the cap for <strong>100 platinum</strong>.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · The Biting Roses · Tournament match · LOSS by forfeit · Feathers 10 → 9</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">Yarrika Mulandez 280 HP · Lantondo (Wyrwood) 305 · Artus Rodrivan 305 · Grandfather Mantis 380</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Yarrika 49 · Lantondo 44 · Clutch 38 · Grandfather Mantis 33 · Seva 33 · Sovael 32 · Artus 31 · Sattva 28 · Ferrok 28</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Ferrok 70 · Sattva 52 — <strong>122 total</strong></div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">792 across the party · Sovael 159 · Clutch 90</div></div>
+    <div><div class="stat-label">Untouched</div><div class="stat-value">Yarrika 280/280 · Artus 305/305 — the party never landed a point on either</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Ferrok ×1 · Seva ×1 — both on saves, both failed</div></div>
+  </div>
+
+  <h4>Round 1 — the alpha strike</h4>
+  <ul>
+    <li><strong>Yarrika</strong> opens with <strong>Phantasmal Calamity</strong> (11d6 mental, 30-ft burst) — 34 to all five. <strong>Lantondo</strong> follows with a rank-5 <strong>Fireball</strong>, then a <strong>Harrow Card</strong> for 35 into Ferrok.</li>
+    <li><strong>Clutch</strong> Paragon's Guard, Doctor's Visitation self-heal 49, <strong>Taunt</strong>. <strong>Artus</strong> shoots him repeatedly — including an <strong>Attack of Opportunity</strong> and a <strong>Veering Miss</strong> re-roll; Clutch Shield Blocks twice.</li>
+    <li><strong>Grandfather Mantis Pounces Seva</strong> — critical claw <strong>92</strong> (nat 14), critical <strong>Grapple</strong> (Restrained, nat 17), critical miss (nat 1), critical claw <strong>58</strong> (nat 20). She is Restrained, blinded and <strong>Dying 2</strong>.</li>
+    <li><strong>Sovael</strong> spends his turn on a <strong>rank-5 Heal for 64</strong> to get her up. <strong>Sattva</strong> lands two bow hits on the Mantis (28, 24). <strong>Ferrok</strong> Ignition Spellstrikes Lantondo for <strong>70</strong>.</li>
+  </ul>
+
+  <h4>Round 2 — two PCs down and a concession</h4>
+  <ul>
+    <li><strong>Yarrika's Spirit Song</strong> (rank 8) catches Seva, Ferrok, Sovael <strong>and Grandfather Mantis for 21</strong> — her own ally. <strong>Ferrok hero-points the save and fails.</strong></li>
+    <li><strong>Lantondo's Frigid Flurry drops two at once</strong>: Seva down a second time (<strong>hero-pointed the save, failed</strong>), and <strong>Ferrok critically fails for 93 out of 84 HP — unconscious.</strong> Clutch's Doctor's Visitation Battle Medicine, <strong>54</strong>, brings Seva back.</li>
+    <li><strong>Grandfather Mantis Pounces Sovael</strong> — claw <strong>40</strong>, <strong>Grapple</strong>, claw <strong>43</strong>. He ends at <strong>27/176</strong>, Grabbed, Off-Guard and Immobilized — carried and being eaten, but <strong>never dying</strong>.</li>
+    <li><strong>Forfeit.</strong> Ingdani: <em>"And the winners are — the Biting Roses."</em> Ferrok is at <strong>10/196</strong>. Sattva runs three Treat Wounds cycles (70, 58, 54 — all critical successes).</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Trembling Meteor · Tournament match · WIN via enemy forfeit · Feathers 9 → 10</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">Archery Specialist 190 HP · Monk 230 · Mage 220 · Swordsman 250</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Archer 45 · Swordsman 41 · Monk 39 · Sovael 38 · Sattva 37 · Ferrok 36 · Seva 34 · Mage 31 · Clutch 31</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Seva 264 · Sattva 175 · Ferrok 156 · Sovael 78 · Clutch 37 — <strong>710 total</strong></div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">283 · Clutch 102 · Ferrok 0</div></div>
+    <div><div class="stat-label">Result</div><div class="stat-value">3 rounds · three enemies killed, the Archer forfeited as sole survivor</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Clutch ×1 (Whirling Throw) — the fight's only one</div></div>
+  </div>
+
+  <h4>Round 1 — 209 damage in one enemy action</h4>
+  <ul>
+    <li><strong>The Archer's Rain of Arrows</strong> rolls a 45 and compares it to everyone: Clutch hit for 23, and <strong>Sovael, Sattva and Seva all critically hit for 62 each.</strong> The single biggest enemy action of the session.</li>
+    <li><strong>Sovael</strong> opens with <strong>Dirge of Doom</strong>, lingered to three rounds — the Monk's Frightened 1 is its fingerprint.</li>
+    <li><strong>Sattva</strong> Hunt Preys and opens up; <strong>Ferrok</strong> closes; <strong>Clutch</strong> Battle Cry Demoralizes the Swordsman on initiative.</li>
+  </ul>
+
+  <h4>Round 2 — the spell that decided it</h4>
+  <ul>
+    <li><strong>★ Sovael casts Incarnate Ancient Specter (rank 7) with a Quickened Casting.</strong> <em>Kneel, Peons!</em> in a 60-ft emanation. <strong>Archer 35 · Mage 43 · Monk 36 · Swordsman 41 — all successes against DC 34, all Prone anyway</strong> (crit-success threshold 44; the Mage missed it by one).</li>
+    <li><strong>Four enemy actions go to standing up</strong>, and all four are off-guard to melee in the meantime. <strong>The Mage's three-action Howling Blizzard is cancelled outright.</strong></li>
+    <li><strong>Sovael's critical Demoralize</strong> puts Frightened 2 on the Swordsman. <strong>Clutch critical Grapples</strong>, then <strong>hero-points a Whirling Throw</strong> that lands as a normal success.</li>
+    <li><strong>Seva</strong> lands three Deathseeker criticals across the fight (+14, +14, +17) for a fight-topping <strong>264</strong>.</li>
+  </ul>
+
+  <h4>Round 3 — three kills and a forfeit</h4>
+  <ul>
+    <li>The Specter's <strong>Depart</strong> trigger puts persistent bleed on Archer, Mage and Monk; the <strong>Mage critically fails its recovery check.</strong></li>
+    <li><strong>★ Sovael kills the Swordsman</strong> — Sure Strike into a <strong>Shadow Signet Fire Ray</strong>, resolved against <strong>Reflex DC 31</strong> instead of AC.</li>
+    <li><strong>★ Ferrok's +16 critical Ignition Spellstrike kills the Mage.</strong></li>
+    <li><strong>★ Clutch's Intercept Attack absorbs 80 points off Seva.</strong> Then he sprints the length of the beach at the last enemy standing, and <strong>the Archer forfeits.</strong></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Under the Pale Sun · Tournament match · WIN · Opponents ELIMINATED</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponents</div><div class="stat-value">2 × Archery Specialist 190 HP / AC 35 (lvl 13) · 2 × Swordsman 250 HP</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Sovael 49 · Ferrok 39 · Clutch 38 · Sattva 37 · Archer A 35 · Archer B 30 · Swordsman B 30 · Swordsman A 28 · Seva 28</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Ferrok 550 · Sattva 231 · Seva 141 · Clutch 52 · Sovael (the Electric Arc kill) — <strong>~1,019 total</strong></div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">568 · Ferrok 228 · Seva 93 · Sovael 90 · Sattva 22</div></div>
+    <div><div class="stat-label">Archer output</div><div class="stat-value">157 before Wall of Wind · <strong>44 after it</strong>, across five turns</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Sattva ×1 — the Fist that killed Swordsman B</div></div>
+  </div>
+
+  <h4>Rounds 1–2 — the archers open, and then can't</h4>
+  <ul>
+    <li><strong>Archer A's Double Shot critically hits Sovael for 52</strong>; <strong>Archer B's Rain of Arrows critically hits Clutch for 76</strong> (68 after intercept). This is what an archery team does when it has a firing line.</li>
+    <li><strong>Sovael</strong>: Courageous Anthem + Lingering + Demoralize, then <strong>Heroism on Ferrok</strong>.</li>
+    <li><strong>★ Wall of Wind.</strong> Ammunition cannot cross it. The DM had ruled a round earlier there was <em>"no benefit to them moving right now"</em>; now <em>"they're going to the other side of the wall."</em></li>
+    <li><strong>Swordsman A critically hits Ferrok</strong> (+13); Ferrok crits him back (+6).</li>
+  </ul>
+
+  <h4>Rounds 3–5 — grappled, and dead</h4>
+  <ul>
+    <li><strong>Ferrok's Reactive Strikes cancel two Rain of Arrows mid-declaration</strong>, one of them <strong>killing Archer A in the middle of the action.</strong></li>
+    <li><strong>Clutch grapples both archers</strong> — Archer A Grabbed/Off-Guard/Immobilized by 14:53, Archer B by 14:59. Neither leaves.</li>
+    <li><strong>★ Ferrok crits Archer A for 88, then 76; Archer B for 70, then 74.</strong> The last three are flagged by the log as <strong>made criticals by Sovael's Heroism <em>and</em> by Clutch's off-guard</strong> — both required.</li>
+    <li><strong>★ Sattva hero-points a Fist that kills Swordsman B</strong> (+12) and knocks his helmet off. <strong>★ Sovael kills Swordsman A</strong> with a rank-7 <strong>Electric Arc</strong> on a critical failure — 42 into 18 remaining.</li>
+    <li><strong>★ The fight's biggest hit was Swordsman A's natural-20 Reactive Strike on Ferrok for 110</strong> — survivable only because <strong>Sovael spent a rank-4 Heal scroll on him the turn before.</strong></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 · Koto Zekora, Onidoshi · Enforcer challenge · WIN · 3 feathers defended · 1,000 pp</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">Koto Zekora, head enforcer of Bonmou — 500 HP · greatclub, 10-ft reach · Eclipse Burst · Falling Stars</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Sattva 44 · Ferrok 41 · Sovael 38 · Seva 35 · Koto 35 · Clutch 33</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Sattva 181 · Ferrok 147 · Seva 98 · Sovael 31 — <strong>457 from the party</strong>, plus 40 she dealt herself</div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value"><strong>968</strong> — the session's hardest fight · Clutch 277 · Ferrok 175</div></div>
+    <div><div class="stat-label">Result</div><div class="stat-value">3 rounds · <strong>dropped by Foretell Harm and conceded</strong> — Foundry reads 3/500 because the tick was waved through, not entered</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">Seva ×1 (her last) · Clutch ×1 (at 6 HP)</div></div>
+  </div>
+
+  <h4>Round 1 — an opener nobody saved against</h4>
+  <ul>
+    <li><strong>★ Eclipse Burst. All five PCs fail the DC 41 save.</strong></li>
+    <li><strong>Sovael</strong>: Courageous Anthem + Lingering + <strong>Whispers of Weakness</strong> (<em>"Will, no weaknesses"</em>). He announces <strong>Bon Mot</strong>, finds the target outside its 30-foot range, and Steps instead — <strong>it is never cast.</strong></li>
+    <li><strong>Koto's first Reactive Strike critically hits Clutch</strong> (+14) as he repositions.</li>
+  </ul>
+
+  <h4>Round 2 — 170 into the tank, and Sovael on the floor</h4>
+  <ul>
+    <li><strong>Koto critically hits Ferrok</strong> (+14) and <strong>critically Reactive-Strikes Clutch again</strong> (+10) — <strong>170 damage into Clutch across two reactions.</strong> She also stands in her own Falling Stars for 40.</li>
+    <li><strong>★ Sovael's scroll of Synesthesia flips exactly one roll — the right one.</strong> Koto <em>makes</em> the save, but the Clumsy 3 makes her <strong>fail the basic Reflex save against Sovael's own Thunderstrike</strong> — 32 vs DC 34, where 35 succeeds — <strong>doubling the finisher from 15 to 31.</strong> Its −3 to AC flips nothing only because the party had lost flanking and she was carrying Clumsy without off-guard.</li>
+    <li><strong>Sattva's natural-20 bow critical for 96</strong>; Koto critically succeeds the Thundering rune save.</li>
+    <li><strong>Falling Stars drops Sovael</strong> — Dying 1, unconscious, prone, persistent fire from his own Oracle curse. <strong>Seva survives a 158-damage round on 18 HP and spends her last hero point</strong> to keep Clutch up; <strong>Clutch spends one at 6 HP.</strong></li>
+  </ul>
+
+  <h4>Round 3 — off the floor</h4>
+  <ul>
+    <li><strong>Sattva revives Sovael with greater healer's gloves, 30.</strong> <strong>Ferrok</strong> Running Recharge → Sure Strike → Spellstrike at 21 HP for 72.</li>
+    <li><strong>★ Sovael, still Prone / Wounded 1 / burning, asks the table <em>"Should I gamble, or should I heal?"</em></strong> Ferrok: <em>"I say go for it."</em> A <strong>fifth-rank Thunderstrike for 31</strong> — DM: <em>"She will fail. She is in single digits"</em> — then the free <strong>Foretell Harm</strong> off it for <strong>10 more at the start of her turn (twice the spell's rank). That is the damage that drops her</strong>, and it denies her the turn entirely — which mattered, because her Eclipse Burst had already made all five PCs fail a DC 41. Foundry's 3-of-500 is an artefact: Ryu waved the tick through rather than applying it.</li>
+    <li><strong>Courageous Anthem flipped no attack rolls this entire fight</strong> — it paid in +1 damage per hit only. One Absorb Magic reaction.</li>
+    <li><strong>Koto</strong>: <em>"You all pass. A good match… Barely works. Orders from the big boss lady — not allowed to kill anyone."</em></li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 5 · Duneshaker Solifugid · Creature den · WIN · 1,000 pp</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">500 HP · AC 40 · <strong>Quickened</strong> · Venom Spray 15d6 poison DC 36 · Earth Shaker · 10-ft Jaws — <strong>and no Reactive Strike of its own</strong></div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Solifugid 46 · Sattva 43 · Sovael 40 · Seva 38 · Ferrok 37 · Clutch 24</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Ferrok 143 · Clutch 138 · Sattva 106 · Seva 79 · Sovael 52 — <strong>518 total</strong></div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">458 · Clutch 296 · Ferrok 81 · Sattva 69 · Sovael 16 · <strong>Seva 0</strong></div></div>
+    <div><div class="stat-label">Applause dividend</div><div class="stat-value">4 provoked Reactive Strikes in rounds 3–4 · 2 natural 20s · <strong>141 damage, 28% of its health</strong></div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">None</div></div>
+  </div>
+
+  <h4>Round 1 — four actions, and then three forever after</h4>
+  <ul>
+    <li><strong>Venom Spray</strong> for 52 poison across the party. <strong>Earth Shaker</strong> knocks Ferrok and Seva prone; Clutch saves. The creature takes <strong>four Strikes</strong> — its one Quickened round.</li>
+    <li><strong>★ Sovael's Lingering Composition Performance hits 42 against DC 31 — a critical success</strong>, extending the composition to four rounds <em>and</em> firing <strong>Talent Envy</strong> for a free <strong>critical Demoralize</strong> (Frightened 2).</li>
+    <li><strong>★ Roaring Applause (rank 3). The Solifugid fails</strong> — 30 against DC 34. <strong>No reactions, Slowed 1.</strong> <em>(The Frightened 2 did not cause this: 32 without it, still short.)</em></li>
+    <li><strong>★ Slowed cancels Quickened.</strong> From round 2 onward it takes <strong>exactly three Strikes per round</strong>, provable from the MAP progression alone.</li>
+  </ul>
+
+  <h4>Rounds 2–4 — the clapping</h4>
+  <ul>
+    <li><strong>★ The applause carries the <em>manipulate</em> trait, so the creature must clap on its own turn.</strong> Round 2 produced no provoked strikes — everyone had spent their reaction on its Pounce movement — but <strong>rounds 3 and 4 produced four, two of them natural 20s, for 141 damage.</strong></li>
+    <li><strong>★ True Target (rank 7, one action) designated the Solifugid for all four allies</strong> — each one's first attack against it rolled twice and kept the better die. <strong>All four hit</strong>: Seva 16, Clutch 15, Sattva 19, and <strong>Ferrok a natural 20 for 78</strong> — on a <strong>Reactive Strike the clapping had provoked.</strong> Roaring Applause made the opening; True Target made sure it landed.</li>
+    <li>Solifugid <strong>critically hits Clutch</strong> (84 → 76 through) and <strong>Ferrok</strong> (+10). <strong>Ferrok crits back</strong> (+10); <strong>Seva crits</strong> (+10).</li>
+    <li><strong>Clutch soaked 296</strong>, over half the party's intake, and <strong>Seva took nothing at all</strong> — he intercepted both hits meant for her. <strong>Fear crit-succeeded — no effect.</strong></li>
+    <li><strong>★ Sovael's Sure Strike → Fire Ray takes it from 53 to 1.</strong> <strong>Ferrok's Force Fang collects the last point.</strong> Sovael sustained the Applause two rounds and declined the third once it was decided.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 6 · The Berberoka · Creature den · WIN · 1,100 pp + a feather</div>
+  <div class="combat-stats">
+    <div><div class="stat-label">Opponent</div><div class="stat-value">425 HP · AC 37 · Quickened · <strong>15-ft reach</strong> · Spray Water 10d8 in a 60-ft line, DC 35</div></div>
+    <div><div class="stat-label">Initiative</div><div class="stat-value">Seva 38 · Berberoka 36 · Sovael 35 · Sattva 32 · Clutch 24 · Ferrok 22</div></div>
+    <div><div class="stat-label">PC damage</div><div class="stat-value">Clutch 165 · Seva 144 · Sattva 77 · Sovael 40 · Ferrok 0 — <strong>426 total</strong></div></div>
+    <div><div class="stat-label">Damage taken</div><div class="stat-value">144 · Clutch 92 · Ferrok 25 · Seva 25 · Sovael 2</div></div>
+    <div><div class="stat-label">Result</div><div class="stat-value">2 rounds · killed by Clutch's Combat Grab Claw critical</div></div>
+    <div><div class="stat-label">Hero points</div><div class="stat-value">None</div></div>
+  </div>
+
+  <h4>Round 1 — pinned in place</h4>
+  <ul>
+    <li><strong>Spray Water</strong>: 25 Seva, 25 Ferrok, 27 through Clutch's shield. <strong>Clutch's Battle Cry Demoralize fails</strong> (−6).</li>
+    <li><strong>Sovael</strong>: Courageous Anthem + Lingering on a <strong>Performance of 48</strong> → <strong>critical Demoralize → Frightened 2</strong> → <strong>Whispers of Weakness</strong> (<em>"no weakness, weakest save is Reflex"</em>) → Shield.</li>
+    <li><strong>★ Seva's Deathseeker critical (+13) applies her Rooting rune — the giant is Immobilized for the rest of the fight</strong> and never escapes. This is why a boss with 15 feet of reach stands still and punches.</li>
+    <li>Persistent bleed stacks 30 + 60. <strong>Sattva enlarges Clutch</strong>, and his Recall Knowledge finds the <strong>fear of crabs</strong>.</li>
+  </ul>
+
+  <h4>Round 2 — the kill</h4>
+  <ul>
+    <li>The Berberoka's turn: a Fist into Ferrok (<strong>Clutch intercepts, takes 27</strong>), a Fist into Seva (<strong>Clutch intercepts, takes 38</strong>), and a <strong>natural-2 critical failure into Clutch's shield.</strong></li>
+    <li><strong>Clutch's two critical Jaws</strong> at +13 and +16 for 48 each. <strong>Sovael's Sure Strike → Fire Ray for 40</strong>, resolved against the Reflex DC his own Whispers of Weakness had just named.</li>
+    <li><strong>Ferrok's Goring Charge</strong> provokes the creature's Reactive Strike and misses; he ends the fight on <strong>zero damage dealt.</strong> <em>"And I'm done. It's like in Kung Fu Panda."</em></li>
+    <li><strong>★ The kill.</strong> Grapple fails → <strong>Combat Grab</strong> → <strong>critical Claw for 69</strong>, a roll requiring <strong>three</strong> essential modifiers at once: Sovael's <strong>Courageous Anthem</strong>, the <strong>Frightened</strong> from Sovael's Demoralize, and the <strong>Off-Guard from Clutch's own Taunt</strong>. <strong>Sattva's shared Warden's Boon adds 7</strong> — <strong>76 into a creature with 75 left.</strong> The Whirling Throw that follows is the corpse toss.</li>
+  </ul>
+
+  <p style="color:var(--gold);margin-top:18px"><strong>Session total: 580 XP · party at 840 XP</strong></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+  <h4>Sovael · the Flaming Pearl, who fights from the floor</h4>
+  <ul>
+    <li><strong>He was kind to the people who were about to eat him.</strong> Ninety seconds before the Biting Roses took a feather off him and their mantis picked him up, he warned Yarrika about the dangerous part of the island — unprompted, and for nothing. Two hours later, when Ferrok jeered at Under the Pale Sun, a team that had just been eliminated for ten years, he said <strong><em>"Hey, let's be graceful."</em></strong> Same character, twice, in the two scenes where it cost him something.</li>
+    <li><strong>He lost the first fight and immediately diagnosed why, out loud, to the person he thought caused it.</strong> The critique to Clutch was a positional argument, and he defended it when Clutch and the DM pushed back — then de-escalated it himself: <em>"This has been close. A lot of times."</em></li>
+    <li><strong>His three big control casts each broke a specific enemy plan, and he called all three in advance.</strong> <em>"I'm about to do something funny by casting Wall of Wind"</em> against a team built on archery — output 157 → 44. The Quickened <strong>Incarnate Ancient Specter</strong> that put four opponents on the ground on <em>successful</em> saves and cancelled the Meteor mage's turn. And <strong>Roaring Applause</strong> into a Quickened boss, killing its fourth action and leaving it clapping into four Reactive Strikes worth 141 damage. He'd tried the wall a whole fight earlier and been one action short.</li>
+    <li><strong>★ The Solifugid fight is the best two-spell sequence he has run in this campaign.</strong> <strong>Roaring Applause</strong> forced the creature to clap on its own turn, handing the party free Reactive Strikes — then <strong>True Target</strong> designated it for <strong>all four allies at once</strong>, so each one's first strike rolled twice and kept the better die. All four connected: Seva 16, Clutch 15, Sattva 19, and <strong>Ferrok a natural 20 for 78 — on one of the Reactive Strikes the clapping had provoked.</strong></li>
+    <li><strong>★ His Synesthesia scroll bought one roll — his own finisher.</strong> Koto <em>made</em> the save; the Clumsy 3 then made her <strong>fail the basic Reflex save against his Thunderstrike</strong> (32 vs DC 34; 35 succeeds), <strong>doubling the damage of the spell that ended the fight.</strong></li>
+    <li><strong>★ He has three kills this session and put a fourth enemy on one hit point.</strong> A Shadow Signet <strong>Fire Ray</strong> killed the Trembling Meteor Swordsman by attacking Reflex instead of AC. A rank-7 <strong>Electric Arc</strong> killed Pale Sun Swordsman A on a critical failure. His <strong>Fire Ray</strong> took the 500-HP Solifugid from 53 to 1 for Ferrok to finish. And his <strong>Thunderstrike + Foretell Harm</strong> ended Koto Zekora at 3 hit points.</li>
+    <li><strong>His buffs are measurably load-bearing — and he shares the credit.</strong> Heroism on Ferrok converted three ordinary hits into criticals (76, 70, 74), though the log flags Clutch's off-guard as equally decisive on all three. His rank-4 <strong>Heal scroll</strong> on Ferrok the turn before a 110-damage natural 20 is the only reason that hit was survivable.</li>
+    <li><strong>★ He beat the head enforcer of Bonmou from the floor, and he did it by denying her a turn.</strong> Dying 1, prone, burning from his own curse; Sattva scraped him up for 30. He asked <em>"Should I gamble, or should I heal?"</em>, took Ferrok's go-ahead, and spent the turn on Thunderstrike for 31 — then the free <strong>Foretell Harm</strong> off it, 10 more at the start of her turn, <strong>which is what actually dropped her.</strong> The read behind it is the real credit: her opening <strong>Eclipse Burst had already made all five PCs fail a DC 41</strong>, and the party could not have absorbed a second. He didn't just finish her — he made sure she never acted again.</li>
+    <li><strong>He is unusually honest about not wanting to be in fights</strong> — <em>"Oh, God. I just don't want to fight ever"</em> — and then spends every fight sustaining a spell that keeps a monster clapping. The comedy is dry: <strong><em>"Wait, I'm singing, not dancing"</em></strong>, and the map completionism (<em>"My OCD, though. I still want to cover the whole map at least"</em>).</li>
+  </ul>
+</div>
+
+<div class="spotlight s-clutch">
+  <h4>Clutch · the quartermaster who ends fights with his body</h4>
+  <ul>
+    <li><strong>He runs the party's money and makes the calls that cost it.</strong> He distributes the coin, and <strong>he proposed selling the staff of illusions</strong> — <em>"We want to sell the staff of phantasms?"</em> — the decision the session's best running gag hangs on four hours later. He also set the party's stake against Koto Zekora: <em>"We want to win this one, right? Yeah, it's three feathers."</em></li>
+    <li><strong>He gave the best answer of the post-mortem, and it was a defense of a decision he'd already been blamed for.</strong> <strong><em>"If I stay back, the mage kills us. If I move forward, the mage kills us."</em></strong> No excuse, no counter-accusation — just the shape of the trap. The DM independently agreed with him.</li>
+    <li><strong>His damage numbers understate him badly, because most of his work is subtraction.</strong> <strong>296</strong> absorbed from the Solifugid — more than half the party's intake. <strong>277</strong> from Koto Zekora across two Reactive-Strike criticals. <strong>80 intercepted off Seva</strong> against the Trembling Meteor, and twice more against the Berberoka. Seva took literally zero from the Solifugid because he stood in front of all of it.</li>
+    <li><strong>He plays his Strikes for other people.</strong> Snagging Strike is something he runs for the casters; his <strong>Taunt</strong> generated the off-guard the log flags as essential to his own killing critical; and his grapples generated the off-guard that made Ferrok's three Heroism crits possible.</li>
+    <li><strong>He ends fights with his body rather than his damage.</strong> He ran the length of a beach at the Trembling Meteor's last survivor until they forfeited. He killed the Berberoka with a Combat Grab critical and <strong>threw the corpse back into its own pool</strong>. Offered a choice earlier: <em>"Do we want to beat on this creature, or should I throw it into the ocean? Let's throw it."</em></li>
+    <li><strong>He is funny in a completely deadpan register.</strong> After Koto landed a reactive-strike critical: <strong><em>"Couldn't be me."</em></strong> Asked whether he had stretchy powers: <em>"Got long teeth."</em> Honest about his ceilings: <em>"I'm not legendary in Athletics, so I still can't grab these Gargantuan creatures"</em> — which is why Sattva made him <strong>big</strong>.</li>
+  </ul>
+</div>
+
+<div class="spotlight s-ferrok">
+  <h4>Ferrok the Unyielding · the grudge, personally</h4>
+  <ul>
+    <li><strong>He carried the Pale Sun fight outright — 550 of ~1,019 damage</strong> — and told everyone why beforehand: <strong><em>"This time it's personal."</em></strong> Five criticals, three of them made criticals by Sovael's Heroism and Clutch's grapples. <strong>His Reactive Strikes cancelled two Rain of Arrows mid-declaration</strong>, one of them killing Archer A in the middle of the action — at least as much of the archers' collapse as the wall itself.</li>
+    <li><strong>He was top damage against the Solifugid at 143</strong> and collected the kill on Sovael's setup with the most casual possible description: <em>"Ferrok will just lazily wave his sword and send a phantom blade at it."</em> His <strong>+16 critical Spellstrike killed the Trembling Meteor Mage.</strong></li>
+    <li><strong>He also went down in the first fight and the party nearly lost him.</strong> Frigid Flurry critically failed him for 93 out of 84 hit points. He came back at 10/196, took a natural-20 Reactive Strike for 110 in the next fight, and kept walking at people.</li>
+    <li><strong>He names the team to strangers</strong> — <em>"We at the Nameless accept"</em> — and he's the one who wants the collection completed: <strong><em>"I want the achievement for all the shrines too. I'm worried I missed one."</em></strong> It was Ferrok who talked the party into finishing the hexcrawl before the mountain.</li>
+    <li><strong>He is the party's tonal thermostat.</strong> After the loss: <strong><em>"We haven't been soundly thrashed in a while, so…"</em></strong> After Koto: <em>"Crit or be critted, is what it was."</em> After the spider: <em>"None of us got eaten that time. That's cool."</em> When Koto crashed in at dawn: <em>"Well, so much for sleeping in."</em></li>
+    <li><strong>He asks the questions that create work for the DM, on purpose.</strong> <em>"I'm going to ask each one of them their names now."</em> → DM: <em>"Why would you do that to me?"</em> He also floated grinding an over-level boss down over ten hours of kiting, because <em>"he surely can't Treat Wounds — he's a monster."</em></li>
+    <li><strong>He commits to a bit physically.</strong> Told the Berberoka fears crabs and the party can't make one, he did a <strong>Goring Charge</strong> <em>"doing his best impression of a crab walk."</em></li>
+  </ul>
+</div>
+
+<div class="spotlight s-sattva">
+  <h4>Sattva · the one who takes the loss well and the spider personally</h4>
+  <ul>
+    <li><strong>He defused the post-mortem without dismissing it.</strong> <em>"I think it's more of a case of double crits and failing all saves, which was just unlucky. So it's fine. You live and you learn."</em> Two people had just been arguing about positioning; he pointed at the dice, and the conversation ended there.</li>
+    <li><strong>★ He tried to avoid the fight, and then took the loss with total grace.</strong> <em>"I'm fine with walking away"</em> before it started; <em>"At least they're friendly"</em> after it ended, agreeing with Sovael's <em>"I love her"</em> about the woman who had just taken a feather off them.</li>
+    <li><strong>He answered Koto Zekora's unrefusable challenge with two words.</strong> <em>"Do it."</em> Koto: <em>"That's the attitude."</em> He then top-damaged that fight at <strong>181</strong>, including a <strong>natural-20 bow critical for 96.</strong></li>
+    <li><strong>He killed Pale Sun Swordsman B with a hero-pointed punch</strong> and knocked the man's helmet off doing it. <em>"I will punch Swordsman B in the face."</em> → <em>"It punched his helmet off."</em></li>
+    <li><strong>He is the party's force multiplier as much as its healer.</strong> Warden's Boon shared to whoever is about to connect — it added the 7 that finished the Berberoka. The <strong>Enlarge on Clutch</strong> so he could wrestle a giant. The taxi service: <em>"I pick you up — here comes the taxi."</em> And the <strong>Recall Knowledge that found the Berberoka's fear of crabs.</strong></li>
+    <li><strong>He revived Sovael off the floor</strong> against Koto Zekora, and ran an almost unbroken chain of critical Treat Wounds between every fight in the session.</li>
+    <li>The line of the session, delivered with total sincerity about a 500-HP gargantuan camel spider: <strong><em>"It's friend-shaped. I can't shoot it."</em></strong></li>
+  </ul>
+</div>
+
+<div class="spotlight s-seva">
+  <h4>Seva · the table's rules conscience</h4>
+  <ul>
+    <li><strong>★ She twice read a rule out loud that cost her, when nobody would have known.</strong> Mid-heal, she looked up and volunteered that <strong>healer's gloves carry the manipulate trait</strong> — costing herself the action. Later, against Koto Zekora, she ruled the one-activity reaction limit for the whole table: <em>"It's one activity — you can't take two reactions for one activity."</em> That call is what let Clutch spend his hero point correctly. Nobody asked her to make either.</li>
+    <li><strong>She took her share of the loss unprompted, and it was the most technical self-assessment at the table.</strong> <em>"That's my bad, because there's a reason why I'm staying close to Clutch — I can, as a reaction, follow him in. I was just, like, away, so I couldn't react."</em> Nobody had accused her of anything.</li>
+    <li><strong>She was the Trembling Meteor fight's top damage dealer at 264</strong>, on three Deathseeker criticals, and she reads targets before she swings: <em>"I also have something for my Deathseeker, since her Will is low."</em> Against the Berberoka her <strong>Rooting rune critical immobilized a fifteen-foot-reach giant for the whole fight</strong> — the single reason that boss stood still.</li>
+    <li><strong>She plays position deliberately.</strong> She delayed twice against the Berberoka on Sovael's suggestion, purely to get inside the Courageous Anthem. She asked the question that produced the session's only ancestry lore, and she was the player actually engaging with the shrines.</li>
+    <li><strong>She spent her last hero point on someone else.</strong> After surviving a 158-damage round on 18 hit points: <em>"I'll reroll my last hero point. We need to keep Clutch up."</em> She cheered when he survived a hit he shouldn't have: <em>"But you're still up! Oh my god."</em></li>
+    <li><strong>She had the worst opening fight of anyone and refused to be sidelined.</strong> Two critical hits in one turn left her restrained, blinded and dying; she went down again to the Frigid Flurry. Dropped, she first said <strong><em>"Do not get me back up"</em></strong> — then reversed herself within seconds: <em>"No, no — go, give it a try, give me a turn."</em> And after eating a 70-damage Disintegrate: <strong><em>"I'm tanking."</em></strong></li>
+  </ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Rewards</h2>
+<div class="loot-grid">
+  <div class="loot-item magical"><div class="loot-name">− 1 Silver Feather</div><div class="loot-source">The Biting Roses, lost</div><div class="loot-note">Feathers 10 → 9 — the session's only loss</div></div>
+  <div class="loot-item magical"><div class="loot-name">★ 1 Silver Feather</div><div class="loot-source">The Trembling Meteor, won</div><div class="loot-note">Feathers 9 → 10 — back to the cap</div></div>
+  <div class="loot-item magical"><div class="loot-name">3 × Major Elixir of Life</div><div class="loot-source">Treasure hex, under an outpost's floorboards</div><div class="loot-note">Party stash</div></div>
+  <div class="loot-item magical"><div class="loot-name">Major Charm of Electricity Resistance</div><div class="loot-source">Treasure hex</div><div class="loot-note">Invested</div></div>
+  <div class="loot-item magical"><div class="loot-name">Moonlit Chain</div><div class="loot-source">Treasure hex</div><div class="loot-note">+1 silver chain shirt, level 7 — <em>"That's kind of hefty."</em></div></div>
+  <div class="loot-item magical"><div class="loot-name">Blessing of Nisaye</div><div class="loot-source">Taumatan shrine — the Joyful Chronicler</div><div class="loot-note">For the stay on Bonmou, always know the location of every site visited — survives lost maps and altered memories</div></div>
+  <div class="loot-item magical"><div class="loot-name">Blessing of Ramijav</div><div class="loot-source">Taumatan shrine — relaxation, self-care, comedy</div><div class="loot-note">Recover from fatigued with one hour of rest instead of eight</div></div>
+  <div class="loot-item magical"><div class="loot-name">Blessing of Umantar</div><div class="loot-source">Taumatan shrine, earned with a group dance</div><div class="loot-note">While on Bonmou, step into non-magical difficult terrain freely</div></div>
+  <div class="loot-item"><div class="loot-name">1,000 platinum</div><div class="loot-source">Koto Zekora, head enforcer</div><div class="loot-note">Enforcers pay coin, never feathers</div></div>
+  <div class="loot-item"><div class="loot-name">1,000 platinum</div><div class="loot-source">Duneshaker Solifugid — den</div><div class="loot-note">Running total 2,000</div></div>
+  <div class="loot-item"><div class="loot-name">1,100 platinum</div><div class="loot-source">Berberoka — den</div><div class="loot-note">Stated as a self-correction; bounty vs. running total isn't fully separable on the tape</div></div>
+  <div class="loot-item"><div class="loot-name">200 platinum</div><div class="loot-source">Two confiscated feathers</div><div class="loot-note">100 pp each — you cannot hold more than ten</div></div>
+  <div class="loot-item"><div class="loot-name">— Staff of illusions</div><div class="loot-source">Sold at the stone market, end of Day 2</div><div class="loot-note"><strong>Clutch's proposal.</strong> Sold hours before meeting a Berberoka terrified of crabs</div></div>
+</div>
+<div class="xp-banner">Experience · 580 XP this session = <strong>840 / 1,000 XP</strong> — level 15 is a fight or two away</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Sovael:</strong> "I don't know if you've ever been to the southern side, but there's something very dangerous there. So, be careful."
+<span class="attribution">Said to the Biting Roses, ninety seconds before they took a feather off him and their mantis picked him up to eat him.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "If I stay back, the mage kills us. If I move forward, the mage kills us."
+<span class="attribution">The post-mortem on the session's only loss — answering Sovael's positional critique with the actual bind, in one sentence. The DM independently agreed with him.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I think it's more of a case of double crits and failing all saves, which was just unlucky. So it's fine. You live and you learn."
+<span class="attribution">Ending the post-mortem. Two teammates were arguing about positioning; he pointed at the dice.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "We haven't been soundly thrashed in a while, so…"
+<span class="attribution">Immediately after the forfeit — a full accounting in nine words.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "Do not get me back up."<br>
+<strong>Seva</strong>, seconds later: "No, no — go, give it a try, give me a turn."
+<span class="attribution">Dropped by the second of two critical hits in one turn, and reversing herself before anyone could act on the first instruction.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I love her."<br>
+<strong>Sattva:</strong> "At least they're friendly."
+<span class="attribution">Watching Yarrika Mulandez skip away with the feather she'd just taken off them — having first called her giant mantis off Sovael, and then healed the party.</span>
+</blockquote>
+
+<blockquote>
+<strong>Yarrika Mulandez:</strong> "Wait, what did we want these for again?"<br>
+<strong>Lantondo:</strong> "We need ten, because then we enter the tournament, Yarrika."<br>
+<strong>Yarrika:</strong> "Oh, that's what we're doing! I thought you just liked them because they were shiny."
+<span class="attribution">The team that had just beaten them, discovering the rules of the tournament.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Alright, I'm about to do something funny by casting Wall of Wind. 60 foot long, 30 feet high, and it will block ranged attacks."
+<span class="attribution">Against Under the Pale Sun's two archery specialists. It was funny. Their output fell from 157 damage to 44, and both of them died grappled in melee.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "When you have the action economy to cast them, they're pretty good."
+<span class="attribution">To Ferrok's "good spell," after Incarnate Ancient Specter put all four Trembling Meteor fighters on the ground and cancelled their mage's turn.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "It's one activity — you can't take two reactions for one activity."
+<span class="attribution">Ruling the table's reaction economy mid-fight, against her own side's interest. It is what let Clutch spend his hero point correctly.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "We want to win this one, right? Yeah, it's three feathers."
+<span class="attribution">Setting the party's stake against an unrefusable challenge from the head enforcer of Bonmou.</span>
+</blockquote>
+
+<blockquote>
+<strong>Koto Zekora:</strong> "If it makes you feel any better, my job is to beat the shit out of a few people today. You were just closest."<br>
+<strong>Sattva:</strong> "Do it."<br>
+<strong>Koto Zekora:</strong> "That's the attitude."
+<span class="attribution">Ninety seconds after Hao Jin lit up the sky over Mount Haminabu.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "I want the achievement for all the shrines too. I'm worried I missed one."
+<span class="attribution">With one day left, ten feathers in hand, and a guaranteed tournament seat waiting on a mountain.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "It's friend-shaped. I can't shoot it."
+<span class="attribution">On a gargantuan camel spider with 500 hit points that had just poisoned the entire party.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Mount Haminabu, by end of Day 3.</strong> Ten feathers plus the Phoenix Necklace buys the palace, the tournament seat, and dinner with <strong>Empress Nai Yan Fei</strong>. The party has the ten. <strong>They chose to finish the hexcrawl first</strong> — Ferrok wanting the shrine completion, Sovael by session's end conceding he was <em>"probably done exploring the island."</em> The mountain is last.</li>
+  <li><strong>Hold ten, gain nothing.</strong> Every feather past ten is confiscated for 100 pp, so every remaining team fight is pure downside — and this session showed exactly what one bad matchup costs.</li>
+  <li><strong>Koto Zekora is alive and still working.</strong> She went straight from her concession to <em>"beat the shit out of some more tournament-goers."</em> She is the <strong>head</strong> enforcer, tasked personally by the Ruby Phoenix with weeding out the weak on the final day — and she liked them.</li>
+  <li><strong>The Biting Roses are alive, friendly, and one feather richer.</strong> Yarrika didn't know what the feathers were for, has a team that manages her, and expects to see the Nameless in the tournament. Ferrok expects Koto to run into Lantondo next: <em>"She beats up that wooden guy."</em></li>
+  <li><strong>Encounter density has collapsed.</strong> A random team meeting now needs a <strong>natural 20</strong> anywhere except Mount Haminabu's hex and those adjacent to it, where it's <strong>18</strong> — teams are converging on the peak.</li>
+  <li><strong>Jaiban is still unvisited</strong>, and the DM named it explicitly as remaining content. Sattva is holding an Enlarge for it.</li>
+  <li><strong>Level 15 is the milestone Sovael is playing toward</strong> — <em>"I need that level 15 so I can get Master's focus."</em> The DM agreed 14 is a rough level for a full caster.</li>
+  <li><strong>Someone's team got eaten by the Berberoka.</strong> Their feather was in the wreckage.</li>
+</ul>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Warned the Biting Roses about the southern side of the island</strong> before stakes were mentioned. They took a feather off him twenty minutes later, and their mantis ate him.</li>
+  <li><strong>Lost a feather</strong> and spent his only meaningful turn of that fight on a <strong>rank-5 Heal</strong> to get Seva off the floor rather than on damage or control. Was then grabbed and eaten. Ended at <strong>27/176</strong>, never dying.</li>
+  <li><strong>Said the quiet part out loud afterwards</strong> — argued to Clutch that charging in left the back line exposed, held the position when Clutch and Ryu pushed back, then de-escalated it himself.</li>
+  <li><strong>Opened the Trembling Meteor fight with Dirge of Doom</strong>, then cast <strong>Incarnate Ancient Specter with a Quickened Casting</strong>. All four opponents saved and all four went <strong>Prone</strong> anyway. Cost the enemy team four actions and cancelled the mage's Howling Blizzard. <strong>Then killed the Swordsman</strong> with a Shadow Signet Fire Ray against Reflex DC 31. <strong>78 damage that fight.</strong></li>
+  <li><strong>Cast Wall of Wind</strong> against Under the Pale Sun's two archers — output 157 → 44 — <strong>cast Heroism on Ferrok</strong>, which made three of his hits into crits (76, 70, 74), <strong>burned a rank-4 Heal scroll</strong> on Ferrok the turn before he ate a 110-damage natural 20, and <strong>killed Swordsman A</strong> with a rank-7 Electric Arc on a critical failure.</li>
+  <li><strong>Told Ferrok to be graceful</strong> about a team that had just been eliminated for ten years.</li>
+  <li><strong>Was dropped by Koto Zekora's Falling Stars</strong> — Dying 1, prone, burning from his own curse — revived by Sattva for 30, asked the table whether to gamble or heal, took Ferrok's go-ahead, and <strong>ended the head enforcer of Bonmou with a fifth-rank Thunderstrike (31) into a free Foretell Harm (10 at the start of her turn — the damage that actually dropped her).</strong> Foundry never applied the tick; Ryu waved it through.</li>
+  <li><strong>Cast Roaring Applause</strong> on the Duneshaker Solifugid off a free <strong>Talent Envy</strong> critical Demoralize. It failed: <strong>Slowed 1 cancelling its Quickened</strong>, and it had to <strong>clap every round</strong> — worth four provoked Reactive Strikes and 141 damage in rounds 3–4. <strong>Then took it from 53 hit points to 1</strong> with a Fire Ray.</li>
+  <li><strong>Cast True Target on the Solifugid for all four allies</strong> — every one of their first attacks rolled twice and every one hit, including <strong>Ferrok's natural 20 for 78 on a Reactive Strike the Roaring Applause had forced.</strong> The two spells were one combo.</li>
+  <li>Three <strong>critical Demoralizes</strong>, two <strong>Whispers of Weakness</strong> scans, a scroll <strong>Synesthesia</strong>, and two <strong>Absorb Magic</strong> reactions across the session. Courageous Anthem + Lingering Composition in every fight.</li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>He warned Yarrika Mulandez about the island before she took a feather off him</strong>, and she never acknowledged it. He is the only one who knows he did that.</li>
+  <li><strong>His damage share is not small any more, and nobody has noticed.</strong> Three kills this session — the Trembling Meteor Swordsman, Pale Sun Swordsman A, and the finishing sequence on Koto Zekora — plus taking the Solifugid to 1 hit point for Ferrok. The table still treats him as the buff bot.</li>
+  <li><strong>Foretell Harm is the reason the Koto fight ended when it did</strong>, and it never appeared in Foundry. Ryu waved the tick through, so the sheet says she stopped at 3. What it actually bought was her whole next turn — and her Eclipse Burst had already made all five of them fail a DC 41.</li>
+  <li><strong>Heroism is doing more work than Courageous Anthem is.</strong> Anthem flipped no attack rolls at all against Koto Zekora. Heroism flipped three in one fight.</li>
+  <li><strong>The Solifugid never had a Reactive Strike.</strong> He told Sattva to move freely <em>"because this has no reaction,"</em> crediting Roaring Applause for something the creature never had. The Slow and the forced clapping were doing all the work.</li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>The loss was a positional problem before it was a dice problem.</strong> Sattva is right that the double crits decided it. Sovael is also right that he spent his one good turn healing instead of controlling, and that he only had to because the front line was too far forward to intercept. Both things are true. The hard number: the party never touched Yarrika or Artus at all.</li>
+  <li><strong>His whole value is denial, and denial needs the actions to deploy.</strong> Every fight the party won, it won because an enemy plan stopped working: the Meteor mage couldn't cast, the Pale Sun archers couldn't shoot, the Solifugid lost its fourth action and had to applaud, Koto never got another turn. The fight they lost is the one where he never got a control spell off — healing on turn one, grabbed by turn two.</li>
+  <li><strong>Denying a turn beats dealing damage, and the Koto fight proved it.</strong> Ten points of Foretell Harm were worth more than any Strike on the board, because they removed a DC 41 area save from a party that had already failed one five-for-five.</li>
+  <li><strong>Quickened Casting on a rank-7 spell is not RAW.</strong> It worked at this table and it decided the Trembling Meteor fight. Worth knowing before building around it again.</li>
+  <li><strong>Level 15 for Master's focus.</strong> Ryu agreed 14 is where full casters feel furthest behind martials.</li>
+  <li><strong>Ten feathers is a defensive position, not a win.</strong> Every remaining team fight can only lose ground — the eleventh feather is worth 100 platinum and nothing else. The party chose to finish the hexcrawl anyway.</li>
+  <li><strong>Heroism is underused.</strong> <em>"I love Heroism. I should cast that some more, actually."</em> One 10-minute buff on the party's damage dealer bought three criticals in a single fight — with Clutch's grapples doing half the work.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>What is on the peak?</strong> A palace, Hao Jin, and <strong>Empress Nai Yan Fei</strong> — an empress attending a martial-arts tournament in person is not set dressing.</li>
+  <li><strong>How much of Bonmou is left, and is any of it worth the risk?</strong> They have the seat already. Ferrok wants the shrine set completed.</li>
+  <li><strong>Jaiban is still unvisited.</strong> Ryu named it as remaining content unprompted.</li>
+  <li><strong>What happens to a team that reaches the mountain with nine feathers?</strong> The Biting Roses have one of the party's, and no clear idea what to do with it.</li>
+  <li><strong>Who else is Koto Zekora testing today, and does anyone beat her?</strong> She went straight from a concession to the next team.</li>
+  <li><strong>Whose team did the Berberoka eat?</strong> A silver feather was in the remains.</li>
+</ul>
+</section>
+</body>
+</html>

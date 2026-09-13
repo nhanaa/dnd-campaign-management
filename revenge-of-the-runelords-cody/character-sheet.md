@@ -18,28 +18,28 @@
 
 | Str | Dex | Con | Int | Wis | Cha |
 |---|---|---|---|---|---|
-| **22** (+6) | **20** (+5) | **18** (+4) | 10 (+0) | **20** (+5) | 10 (+0) |
+| **+5** | **+4** | **+4** | +0 | **+4** | +0 |
 
-Boosts: **1** Str/Con/Dex/Wis · **5** Str/Con/Wis/Dex · **10** Str/Wis/Con/Dex · **15** Str/Wis/Dex/Con — Int deliberately dropped for Dex. All four physical+Wis hit 18+ by 15; Str leads at 22.
+> **Reconciled to the S10 Foundry export (2026-09-12).** Every modifier above is read directly off Sevek's own roll breakdowns — Strikes (`Strength +5`), Reflex (`Dexterity +4`), Fortitude (`Constitution +4`), Will and Perception (`Wisdom +4`). **The previous table ran one step high on Str, Dex and Wis** (it listed 22/20/20), which inflated attack, damage, Trip, Perception, saves and skills by 1 across the sheet. Pax's confirmed **class DC 35** independently requires Str +5. Int and Cha never appear in the log and are carried over. Copy exact scores from the Foundry actor if they're wanted.
 
-**Dex 20 exceeds Scaly Hide's +3 AC cap on purpose** — the excess buys +1 Reflex, Acrobatics, and initiative. Reflex is worth more than Int at this table.
+**Dex +4 still exceeds Scaly Hide's +3 AC cap by one** — the excess buys +1 Reflex and Acrobatics, not AC. (Initiative is Perception, so Dex doesn't touch it.)
 
 ## Defenses
 
 | | Value | Source |
 |---|---|---|
-| **AC** | **40** → **42 in Fused Stance** | 10 + 16 + 6 (master unarmored, *Graceful Mastery*) + 3 Dex (Scaly Hide cap) + 3 potency + **2 Scaly Hide** |
+| **AC** | **39** → **41 in Fused Stance** | 10 + 16 + 6 (master unarmored, *Graceful Mastery*) + 3 Dex (Scaly Hide cap) + **2 potency** (the clothing is **+2**, not +3) + **2 Scaly Hide** — matches Foundry's 39 / 41 |
 | HP | **248** | 8 human + 16×(10 monk + 4 Con) + 16 Toughness |
-| **Fort** | **+28** | master — **Path to Perfection: success → crit**, incl. **Peerless Form +2 status** |
-| Reflex | **+25** | expert — **Canny Acumen (Reflex)** taken at 15, grants expert now → **master at 17**. The Dex-5 and Greater Resilient rune carry it until then |
-| **Will** | **+31** | **legendary** — **Third Path to Perfection (15)**: crit fail → fail; failed save vs damage → half. Plus **Peerless Form +2 status** and the Ascended Celestial 1/hr reroll. ⚠️ S5 receipts: the reroll failed *twice* in one session — it's insurance, not immunity |
-| Perception | +27 w/ goggles → **+29 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | expert |
+| **Fort** | **+30** | Con +4, master +22, Greater Resilient +2, **Peerless Form +2 status** — **Path to Perfection: success → crit** |
+| Reflex | **+26** | Dex +4, expert +20, Greater Resilient +2 — **Canny Acumen (Reflex)** taken at 15, grants expert now → **master at 17** (next session). S10: a Reflex save came up a natural 2 and he spent a Mythic Point to reroll it |
+| **Will** | **+32** | Wis +4, **legendary** +24, Greater Resilient +2, **Peerless Form +2 status** — **Third Path to Perfection (15)**: crit fail → fail; failed save vs damage → half. Plus **Peerless Form +2 status** and the Ascended Celestial 1/hr reroll. ⚠️ S5 receipts: the reroll failed *twice* in one session — it's insurance, not immunity |
+| Perception | **+24** · +26 w/ goggles → **+28 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | Wis +4, expert +20 |
 
 **Peerless Form (14)** is a *status* bonus to Fort/Will — it won't stack with other status bonuses to saves (Protection, Bless-style effects). He also no longer ages.
 
 Scaly Hide's +2 is **explicitly cumulative** with explorer's clothing potency runes. The fused stance's +2 is a **circumstance** bonus (from Whirlwind) and stacks with everything.
 
-⚠️ **No Fortification rune** — Cody ruled it illegal on explorer's clothing (medium/heavy armor only) mid-S4, after a flat check had already succeeded. It's off the sheet; the crit that dropped Sevek that day stood.
+⚠️ **No Fortification rune** — Cody ruled it illegal on explorer's clothing (medium/heavy armor only) mid-S4, after a flat check had already succeeded. It's off this sheet, but **it is still live in Foundry** — it fired again in S10 (fourth occurrence: S4, S6, S7, S10) and Cody asked out loud where it keeps coming from. **Strip it from the Foundry actor.**
 
 ## Speed & flight — the altitude stack
 
@@ -56,11 +56,14 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 
 ## Offense
 
-**+3 Greater Striking Flaming Astral Bo Staff** — 1d8 B, traits **monk, parry, reach, trip**
+**+3 Greater Striking Greater Flaming Astral Greater Crushing Bo Staff** + **Jolt Coil** spellheart — 1d8 B, traits **monk, parry, reach, trip**; Foundry also tags it **cold iron + silver**
 
-- **Attack +31** · **3d8 + 10, plus 1d6 fire + 1d6 astral + 1d8 spirit** ≈ 35 per hit
-- Greater Weapon Specialization (15): +4 damage (master)
-- **Celestial Armaments (16)**: the staff sheds torchlight, deals **+1d8 spirit**, and grants **critical specialization** (staff crit spec = free prone). On crit: **Fort save vs class DC 35 or blinded 1d4 rounds**
+- **Attack +30** (Str +5, master +22, potency +3)
+- **Damage 3d8 + 11** (Str +5, Greater Weapon Specialization +6) **+ 1d6 fire** (Greater Flaming; **+2d10 persistent fire on a crit**) **+ 1d6 spirit** (Astral) **+ 1d8 spirit** (Celestial Armaments) — ≈ 36 per hit, ≈ 39 with Jolt Coil live
+- Greater Weapon Specialization (15): **+6** damage at master
+- **Greater Crushing** *(new since S9)*: on a critical hit the target is **Clumsy 2 and Enfeebled 2 until the end of your next turn.** This is a **party debuff engine, not a damage rider** — Clumsy 2 is −2 AC for everyone swinging. S10 receipts: against the **mindless** Chromatic Oozes, where Aureys' Feint/Demoralize kit was ruled out entirely, it was the party's only source of AC reduction (28 → 26, with Taunt's off-guard taking it to 24). Nine of the party's seventeen crits that fight came off it.
+- **Jolt Coil** *(spellheart, new since S9)*: cast an electricity spell by activating the coil (in practice, **Electric Arc**) and your Strikes deal **+1d6 electricity until the end of your next turn**. ⚠️ The Remaster item text says **1d4**; Foundry rolls **1d6** — confirm which version is slotted. Pairs with **Chromatic Shift**-style adaptive resistances: S10's Electric Arc into a freshly-shifted ooze landed 42 off a 22.
+- **Celestial Armaments (16)**: the staff sheds torchlight, deals **+1d8 spirit**, and grants **critical specialization** (staff crit spec = free prone). On crit: **Fort save vs class DC 35 or blinded 1d4 rounds** — class DC = 10 + 16 + expert 4 + Str 5. ⚠️ **Foundry's macro rolls it against his occult *spell* DC 34** (10 + 16 + expert 4 + Wis 4) instead. Nothing is missing from the sheet; the `@Check[fortitude|against:class-spell]` reference points at the wrong statistic. Ask Cody to change it to `class`.
 - **Phantasmal Doorknob (Greater)**: on crit: **dazzled** until end of next turn (superseded by the blind if they fail the save)
 - The **trip trait** means no free hand needed *and* the weapon's potency adds to Trip checks
 - **parry** is what the fused stance requires; **monk** is what Monastic Weaponry needs for Flurry
@@ -68,13 +71,13 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 
 **Crit stack:** prone (staff crit spec) + **blinded 1d4 rounds** (Celestial Armaments, Fort DC 35) + dazzled (Doorknob, redundant if blinded). A blinded creature is off-guard to everyone and flat-checks DC 11 to target anything.
 
-**Trip: +34** — 16 + 8 (legendary Athletics) + 6 Str + 3 item (staff potency) + 1 circumstance (Reflective Ripple)
+**Trip: +33** — 16 + 8 (legendary Athletics) + 5 Str + 3 item (staff potency) + 1 circumstance (Reflective Ripple)
 *Item bonuses don't stack: Sash of Prowess +3 and the staff's potency +3 are both item, take one.*
 
 ## Skills
 
-**Legendary:** Athletics **+30**
-**Master:** Acrobatics **+27** · **Religion +27** (+2 more from Shining Symbol on checks)
+**Legendary:** Athletics **+29** (+32 with an item bonus)
+**Master:** Acrobatics **+26** · **Religion +26** (+2 more from Shining Symbol on checks)
 **Trained:** Intimidation, Nature, Occultism, Society, Stealth, Survival *(Arcana, Crafting, and Medicine dropped to untrained in the resolved rebuild — mythic-proficiency rerolls are the emergency key for out-of-lane checks, proven in the S5 hazard)*
 **Lores:** **Warfare** (master, *Additional Lore*) · **Art** *(Local Savior)*
 
@@ -82,7 +85,7 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 
 Thassilonian is the one ancient language the guide says actually **gates communication** in this AP. Aklo already paid off — S4's siktemporas Demoralized in it ("Punished for speaking languages").
 
-**Occultism is trained, not master, and that's deliberate.** Int 10 means he was never going to be the Recall Knowledge PC. **Always roll Perception for initiative** (+26, wins ties).
+**Occultism is trained, not master, and that's deliberate.** Int 10 means he was never going to be the Recall Knowledge PC. **Always roll Perception for initiative** (+28, wins ties).
 
 **Religion is the party's real source** — Mithtirith is only *trained* in it despite being the Cleric. Master Religion satisfies the **Mortal Herald** prerequisite outright and carried six days of Oppose the Risen in S4 (3,600 gp of consumables).
 
@@ -111,7 +114,7 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 | **Guardian** | Dedication → **Taunt** · Basic Defender → **Bodyguard** · **Advanced Defender → Long-Distance Taunt (Taunt at 120 ft)** · **Group Taunt** (8 — Taunt all enemies within 120 ft at once) |
 | **Staff Acrobat** | Dedication · **Bullying Staff** · **Whirlwind Stance** (+2 circ AC, fused into Ripple via **Fuse Stance**) |
 | **Druid** *(via Multitalented)* | Dedication (**Wave order**) → **Electric Arc**, **Frostbite** |
-| **Mortal Herald** | Dedication (1/day self Heal; free action at 0 HP — **used correctly in S5**: one action, 81 HP, mid-duel) · **Herald's Weapon** (14 — S5 debut fed the Gavergash kill) · **Celestial Armaments** (16 — +1d8 spirit, crit spec, Fort DC 38 or blinded) |
+| **Mortal Herald** | Dedication (1/day self Heal; free action at 0 HP — **used correctly in S5**: one action, 81 HP, mid-duel) · **Herald's Weapon** (14 — S5 debut fed the Gavergash kill) · **Celestial Armaments** (16 — +1d8 spirit, crit spec, **Fort DC 35** or blinded) |
 
 **The level-14 rebuild retired every intercept** — Guardian's Intercept, Unbelievable Interception, and Mythic Strike are retrained out. Deliberate identity shift: the tank works by **Group Taunt at 120 ft + AC 42 + flight + kill pressure**, not by taking hits for people. Bodyguard stays on **Mithtirith** (the enemy magnet at the table's lowest AC).
 
@@ -139,13 +142,13 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 
 ## Gear
 
-**+3 Greater Striking Flaming Astral Bo Staff** (Celestial Armaments applied daily) · **+2 Greater Resilient Quenching Stanching Explorer's Clothing** (no Fortification — see Defenses) · **Sash of Prowess** · **Greater Boots of Bounding** (+10 Speed, +3 High/Long Jump) · **Obsidian Goggles (Greater)** (+2 Perception/initiative) · **Phantasmal Doorknob (Greater)** (crit rider: Fort DC 38 or blind — house-ruled, no Foundry automation; grants Figment + Vision of Death) · **Shining Symbol (Greater)** (+2 Religion) · **Retrieval Belt (Greater)** · **Ring of Primal Might** · **Constricting Whip Tail** (tail graft — Grapple without a free hand, +2 item; twice proven *not* to work on Huge trolls) · **Charm of Fire Resistance (Greater)** · Pilgrim's Token · the wand suite (see Spells) · Cat's Eye Elixir · Potion of Quickness
+**+3 Greater Striking Greater Flaming Astral Greater Crushing Bo Staff** with a **Jolt Coil** spellheart (Celestial Armaments applied daily) · **+2 Greater Resilient Stanching Advancing Explorer's Clothing** (**Advancing**, not Quenching, per Foundry; no Fortification — see Defenses) · **Sash of Prowess** · **Greater Boots of Bounding** (+10 Speed, +3 High/Long Jump) · **Obsidian Goggles (Greater)** (+2 Perception/initiative) · **Phantasmal Doorknob (Greater)** (crit rider: Fort save vs class DC **35** or blind — house-ruled, no Foundry automation; grants Figment + Vision of Death) · **Shining Symbol (Greater)** (+2 Religion) · **Retrieval Belt (Greater)** · **Ring of Primal Might** · **Constricting Whip Tail** (tail graft — Grapple without a free hand, +2 item; twice proven *not* to work on Huge trolls) · **Charm of Fire Resistance (Greater)** · Pilgrim's Token · the wand suite (see Spells) · Cat's Eye Elixir · Potion of Quickness
 
 ---
 
 ## How it plays
 
-**The engine is Trip + crit blind, and S4–S7 priced it.** At +34 Trip, crits land on anything within 14 of the DC — and every crit now carries a Fort DC 35 blind (Celestial Armaments) on top of prone (staff crit spec). Paya's two-hander can't maneuver, Aureys converts everyone's debuffs into crits — prone is the debuff that feeds *all* melee, and it works on the mental-immune.
+**The engine is Trip + crit blind, and S4–S7 priced it.** At +33 Trip, crits land on anything within 13 of the DC — and every crit now carries a Fort DC 35 blind (Celestial Armaments) on top of prone (staff crit spec). Paya's two-hander can't maneuver, Aureys converts everyone's debuffs into crits — prone is the debuff that feeds *all* melee, and it works on the mental-immune.
 
 - **Flurry of Maneuvers** — two Trips for one action at MAP 0 / −5
 - **Bullying Staff** — Trip or Shove up to Gargantuan
@@ -170,4 +173,10 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 
 ## Foundry sheet
 
-✅ **Matches this record** (post-S7 export, 2026-08-22). Deity set to **Ashava**. Level 16.
+⚠️ **Reconciled to the S10 roll log (2026-09-12)** — attributes, AC, saves, Perception, skills and the staff now match Foundry. Deity **Ashava**. Level 16, **17 next session**.
+
+**Still wrong on the Foundry side** (fix before S11):
+1. **Fortification rune** still on the explorer's clothing — ruled illegal S4, fired again S10.
+2. **Celestial Armaments blind** rolls against occult spell DC **34** instead of class DC **35**.
+3. **Taunt's −1** is applied to attacks that *target* Sevek, which is backwards (3 occurrences in S10).
+4. **Jolt Coil** rolls 1d6; the Remaster item says 1d4 — confirm the slotted version.

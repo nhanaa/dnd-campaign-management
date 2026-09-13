@@ -380,3 +380,29 @@
 - **Glowing Embers (Battlemage, lvl 13)**: AC 32, **spell DC 33 / attack +27**, **Fort +24 / Ref +21 / Will +26**, ~217–223 HP. **Soft spots: AC and Reflex. Will is effectively untouchable.** Wooden Double absorbs 25 off a crit; their `2d20kh` is Sure Strike, not a hero point.
 - **Golarion's Finest (ki adepts, lvl ~12)**: **AC 31**, Fist +25/+26, **Fort/Ref +21, Will DC 31**, ~215–230 HP (A and G ran markedly tougher at 363 and 282). **Punch Down +2d10 vs Prone**, Trip +24, Harmonize Self heals 36.
 - **Brarkor (lvl ~14)**: the adept chassis **+4 across the board** — AC 35, attack +29/+30, saves +25, DCs 35, Athletics +28, focus rank 7, ~250 HP. Opens by grappling.
+
+## Character Relationships (Session 13 Observations)
+
+- **Sovael**: Made himself the target on purpose with a rank-6 Roaring Applause across all four of Tino's Toughest, was warned to his face, and answered *"It is what it is."* Took **237 damage**, nearly twice anyone else. The frustration afterwards wasn't at the DM — it was that the best thing he does is invisible to the people it protects until it stops. **Gave the last kill away** to Sattva, then volunteered evidence against his own damage credit.
+- **Clutch**: Stated the party's doctrine and nobody argued — *"If we just fight every team before the tournament and knock them out, there's nobody left to fight."* Everything the party did that session followed from it.
+- **Ferrok**: Read vampire poetry at a shrine, tipped his hat to a level-16 dragon they were fleeing, and reported a kill as *"The corn is down, I repeat."*
+- **Sattva**: A natural 20 on Recall Knowledge that still failed a DC 45. *"That's what you get for hitting my friend."*
+- **Seva**: Coined the team name by accident in S12 and closed the cave-worm farce with *"This has been a fucking circus. I'm ending it here."*
+
+## Character Relationships (Session 14 Observations)
+
+- **The party had its first real post-mortem argument, and it was healthy.** After the Biting Roses loss, **Sovael** argued the shape of the defeat was positional and named Clutch directly; **Clutch** answered with the bind rather than an excuse (*"If I stay back, the mage kills us. If I move forward, the mage kills us"*) and the DM independently agreed with him; **Seva** volunteered her own error unprompted; **Sattva** ended it on the dice (*"You live and you learn"*). Nobody got defensive. This is the first time the group has disagreed tactically in the open and come out fine.
+- **Sovael's lane has shifted — he is now support *and* finisher.** Three kills in one session (Trembling Meteor Swordsman via Shadow Signet Fire Ray, Pale Sun Swordsman A via rank-7 Electric Arc, and the Thunderstrike→Foretell Harm that ended Koto Zekora), plus taking the Solifugid from 53 HP to 1. **The table has not noticed** and still plays him as the buff bot. His damage column stays small because his kills are surgical, not sustained.
+- **Clutch is the party's quartermaster.** He distributes coin, proposes the sales (the staff of illusions was his call), and sets the party's stake in negotiated matches. His combat value is overwhelmingly **subtraction** — 296 absorbed from the Solifugid, 277 from Koto, 80 intercepted off Seva — and his Taunt and grapples generate the off-guard that other people's criticals depend on.
+- **Seva is the table's rules conscience**, twice this session at her own expense: she volunteered that healer's gloves carry the *manipulate* trait, and she ruled the one-activity reaction limit for everyone, which is what let Clutch spend a hero point correctly. She also spent her **last** hero point on keeping Clutch upright.
+- **Sattva absorbs bad outcomes better than anyone at the table.** He tried to walk away from the fight, lost it, and then said *"At least they're friendly"* about the woman who beat them. He answered an unrefusable enforcer challenge with *"Do it."*
+- **Ferrok drives the party's completionism.** He wanted the full shrine set and talked the group into finishing the hexcrawl before the mountain, with a guaranteed tournament seat already in hand.
+
+## Session 14 — Key Patterns / Lessons
+
+- **Denial beat damage in three of five wins.** Incarnate Ancient Specter (Prone on a *success* — four actions taxed, a three-action spell cancelled), Roaring Applause (Slowed cancels Quickened; the *manipulate* applause provokes Reactive Strikes every round — 141 damage over two rounds), and Wall of Wind (blocks ammunition outright, so an archery team loses its firing line). **Measure control spells in enemy tempo, never in enemy hit rate.**
+- **Buffs are jointly owned.** Every one of Ferrok's three Heroism-made criticals also required Clutch's off-guard; Clutch's killing critical on the Berberoka required Sovael's Anthem, Sovael's Frightened *and* Clutch's own Taunt. Credit both ends.
+- **Courageous Anthem is the weaker of Sovael's two buffs right now.** It flipped **zero** attack rolls in the Koto fight (+1 damage only), while a single Heroism flipped three in the Pale Sun fight. Heroism is underused.
+- **A successful save does not mean a wasted spell.** Synesthesia's Clumsy 3 survived a made save and then flipped Koto's basic Reflex save against Thunderstrike, doubling the damage of the spell that ended the fight.
+- **The front line has to be reachable.** The one fight the party lost is the one where Sovael spent turn one healing and was grabbed by turn two, and never got a control spell off.
+- **Ten feathers is a defensive position.** Excess is confiscated for 100 pp, so every remaining team fight is downside-only.

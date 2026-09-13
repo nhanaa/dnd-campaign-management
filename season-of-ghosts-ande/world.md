@@ -258,6 +258,51 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 
 **Carried-forward threads:** the wrong-gods lantern secret (S2); "blood will rise"; the governor and his estate; the tea house claim; the Great Willow's promise to map the curse's edges; the Willow's missing friend; **Shinzo**; Mu-Jin's Desna adoption; **the Noppera-Bo Hood, still never used**; **Kaelen's S4 Slime Rot, still unaddressed**; **Weaver poisoned** (Hunting Spider Venom, initial save failed, no interval saves rolled).
 
+### Session 8 (2026-09-04) — The Shadow Behind the Mist (day 11 of Sola → the end of summer, 7108 IC)
+*All five PCs — **Iryoku back**. XP: 80 + 72 + 20 + 80 = **252 logged**, plus an unlogged award for the Mugirou negotiation. **Milestone: level 4. Book One complete.** Two fights, no deaths, one PC to 10 HP.*
+
+*⚠️ Two S7 spellings are now settled by Foundry tokens: the stable master's son is **Kum Meng-Sung** (S7 recorded "Meng-Soon" from audio) and the entity is **Kugaptee** (S7 recorded "Great Kugapti"). Both token-sourced, so the spelling is solid and the pronunciation is not.*
+
+**Mugirou the Rebel — the S7 "friction between the leaders" paid off as an alliance, not a fight.**
+- The camp's last unopened corner held a tent, **four captured farmers in a cage**, and a noppera-bo who **did not attack**. It opened telepathically and immediately distanced itself: *"Keep in mind that I was not the one who orchestrated the abductions… Your real vengeance should be towards Zoudou."*
+- **The caged farmers were never a peace offering.** *"This is just a way for Zoudou to pass off undesirable trash. I've kept this trash alive long enough."*
+- **The deal**: kill every red-robed cultist in the camp and at the ritual site → *"I will release the prisoners. And you may leave the camp unharmed."* Mu-Jin's Sense Motive came back sincere. Mugirou gave a **Battle Medic's Baton** as a token of friendship, and **the GM awarded XP without rolling initiative.**
+- **Mugirou kept their word** and released the farmers as the party left. *(Never gendered on the recording or in the log — pronouns unconfirmed.)* **They are alive and hold the camp.**
+
+**The ritual site (northwest, at the end of the trail) — a fifty-foot wall of screaming mist.**
+- *"The clearing's northwestern side is obscured by a seething wall of mist that reaches fifty feet into the sky. Now and then, what appear to be silently screaming ghosts thrash and writhe through this mist."* A **three-tiered stone shrine** stood near the wall; a dome-shaped cage of bent branches to the east held nothing.
+- **Zoudou the Zealous** (she/her; level 3, HP 45, AC 19) had **Kum Meng-Sung** bound on the top tier mid-**Consecrate ritual**, flanked by two **Noppera-bo Occultists**. She offered to release him if **one PC replaced him**; Zhen refused before she finished (*"No one's going to fall today for your ritual"*), and she answered *"I'm not surprised by your lack of conviction and spiritual cowardice."*
+- **One round.** Zoudou rolled a natural 7 for initiative and **never took a turn**; no enemy acted at all. Kaoru opened with a conflux spell and Spellstrike (24 into her), Mu-Jin's **Noise Blast** confirmed the sonic weakness and **Elemental Betrayal** opened a fire weakness, and **Zhen's Electric Arc killed Zoudou and an occultist in the same action.** **80 XP.**
+
+**The second phase — Kugaptee is real, and it could not get through.**
+- Stopping the ritual triggered it: ***"there is a vaguely humanoid shadow rearing up from beyond this wall. The shadow lunges at the wall from the far side, causing the misty barrier to suddenly flex and bulge as if it were a solid wall being pushed against from beyond."*** **The shadow vanished. The wall held.**
+- Then **every noppera-bo in the clearing, living or dead, burst apart** into three **Kugaptee's Blessing** (level 2, HP 70, AC 15, **weak vitality 10 / slashing 10**, **void healing**, immune mental/bleed/death effects, slowed 1; Fist +11 1d12+5 reach 10 with **Improved Push**). Mu-Jin's free Recall Knowledge: *"a variant zombie brute… mindless, undead, unholy zombies."*
+- Two rounds. Kills: **Mu-Jin** (Needle Darts crit), **Zhen** (+1 Nodachi crit, 44), **Kaelen** (Inner Upheaval + Flurry crit, 57 — damage type chosen off **Iryoku's** vitality read). Kaelen took 37 and finished at **10 of 47**; Zhen took none. **72 XP.**
+- **The ritual was a door.** Meng-Sung was an **offering** because he is *"some sort of old soul."* The party stopped the opening; they did not stop the thing wanting in.
+
+**Loot:** Battle Medic's Baton (Mugirou) · a **tattered leather-bound ledger** in **Aklo and Chthonian** teaching the **Consecrate ritual** — only **Mu-Jin** can read it, taken as a project · an **unusual dagger** used *"to send souls to empower Kugaptee"* (Kaoru identified it on a nat 20) · a **crafter's eyepiece** from **the freed farmers** in thanks → Mu-Jin.
+
+**Willowshore — roughly eighty days of downtime across three months.**
+- **The Cerulean Tea House is RESTORED** — a base of operations and a reopened business. Mu-Jin (Crafting, one nat 20), Kaoru (Engineering Lore, and the finishing Athletics check) and Kaelen worked it; **+1 reputation with each faction**. **Yami**, a grey feral cat living there since the previous summer, was **befriended by Kaelen**. Mu-Jin intends to run it as the tea maker, with **Weaver as the mascot**.
+- **The Eternal Blaze Ironworks dispute.** The Imperial Guards, allied with Northridge, pressured the blacksmith to forge arms and armour free of charge. Iryoku, Kaelen and Kaoru argued **Zhang Peng** (guard office) down in a single day; he agreed to funds or an IOU instead. **+1 Southbank.**
+- **The peachwood.** The Woodcarver's Guild needed fallen peachwood branches for rare **fulu** paper (imports are cut off). Five days of Nature/Survival gathering. **+1 Northridge, 20 XP**, two fulus and a **fulu formula** — **unusable**, since all fulus require **magical crafting** and nobody is even expert in Crafting.
+- Earn Income: Iryoku and Kaelen at the **milling houses**; Zhen at the **Mother's Coil**, then **Religion at the Lady of Souls** (level 5 task, DC 20).
+- **Ended the season liked by BOTH Northridge and Southbank.**
+
+**The succession crisis — resolved without a duel.**
+- With no one governing Willowshore, **Old Man Matsuki publicly challenged Granny Hu** for the leadership, and the two agreed to settle it by a **duel between chosen champions in seven days**, drawing on a Willowshore tradition for public disputes. The town read it as a coming bloodbath. **Both elders courted the party** — *"the support of those who relit the Eternal Lantern will definitely go a long way."*
+- The party stood as a **collective third candidate** and went further: **all five PCs plus both elders as a governing council.** Cost: **seven influence points with each elder.**
+- **Levers discovered**: **Granny Hu** (Northridge, development, retired guard captain) fears the town cannot subsist — appeals invoking **food shortages** drop her DC by 2. **Old Man Matsuki** (Southbank, tradition, the old Tan Sugi carpenter whose mansion was a safe house) **disdains appeals to trust the younger generation**, and is a **drunkard** (Alcohol Lore is a valid influence skill on him).
+- **Resolved in two of the seven days.** Mu-Jin critically succeeded on a famine story; **Kaelen landed the final two points on Granny Hu with no hero points left**; Mu-Jin's traditionalist pitch closed Matsuki. **+2 reputation with both factions. 80 XP. No duel.**
+- The GM's closing frame: the council governs **"temporarily until the missing governor is found."**
+
+**New NPCs (in play):** **Mugirou the Rebel** (noppera-bo leader — **alive, allied, holds the camp**) · **Kum Meng-Sung** (rescued, returned) · **Zhang Peng** (Imperial Guard office) · **Yami** (the tea house cat) · the **Eternal Blaze Ironworks** blacksmith (unnamed) · the **Woodcarver's Guild** head (unnamed).
+**Dead:** **Zoudou the Zealous** and both her occultists — killed twice over, once as noppera-bo and again as Kugaptee's Blessings.
+**New locations (in play):** the **ritual site** and its three-tiered shrine, at the end of the northwest trail, before the **mist wall** · the **Cerulean Tea House** (restored, party base) · the guard office.
+
+**Carried-forward threads:** **the Great Kugaptee, on the far side of the mist, actively trying to get through** · **the Consecrate ritual's text** (in the ledger, Mu-Jin's to translate) · **who else is an "old soul"** · **the missing governor** · **Mugirou's truce holding once Willowshore learns of it** · Mu-Jin's Shinzo theory (either Shinzo can break the curtain Kugaptee cannot, *or the curse only stops people getting **out***) · the wrong-gods lantern secret (S2) · "blood will rise" · the governor's estate · the Great Willow's promise to map the curse's edges · the Willow's missing friend · **the Noppera-Bo Hood, still never used** · **Kaelen's S4 Slime Rot** · **Weaver's hunting-spider venom (S7)** · **the lumber camp storeroom's hidden trap door, still unexplored** · Mu-Jin's Desna adoption.
+
+
 ---
 
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

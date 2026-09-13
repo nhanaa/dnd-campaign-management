@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 8 &mdash; The Shadow Behind the Mist</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>The Shadow Behind the Mist</h1>
+  <div class="subtitle">Season of Ghosts &middot; Session 8 &middot; the end of Book One</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-09-04</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 29m</span>
+    <span class="meta-pill">Day 11 of Sola &rarr; the end of summer, 7108 IC</span>
+    <span class="meta-pill">Level 3 &rarr; 4</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:24%"></div>
+  <div class="comp-seg comp-rp" style="width:16%"></div>
+  <div class="comp-seg comp-explore" style="width:10%"></div>
+  <div class="comp-seg comp-social" style="width:30%"></div>
+  <div class="comp-seg comp-mystery" style="width:20%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 24%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 16%</span>
+  <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 10%</span>
+  <span><span class="legend-dot" style="background:var(--lantern)"></span>Downtime &amp; Influence 30%</span>
+  <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery &amp; Debrief 20%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-zhen">
+    <div class="char-name">Zhen Stillness</div>
+    <div class="char-class">Samsaran (Hungerseed) Animist &mdash; Liturgist &middot; Druid FA</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kaelen">
+    <div class="char-name">Kaelen Ashford</div>
+    <div class="char-class">Human Monk &mdash; bo staff, Mountain Stance, Staff Acrobat</div>
+    <div class="char-player">cajun_code</div>
+  </div>
+  <div class="char-card char-kaoru">
+    <div class="char-name">Kaoru</div>
+    <div class="char-class">Kitsune Magus &mdash; Aloof Firmament</div>
+    <div class="char-player">magus player</div>
+  </div>
+  <div class="char-card char-mujin">
+    <div class="char-name">Mu-Jin</div>
+    <div class="char-class">Witch &mdash; Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+    <div class="char-player">snotierknave69</div>
+  </div>
+  <div class="char-card char-iryoku">
+    <div class="char-name">Iryoku-Yasha</div>
+    <div class="char-class">Yaksha Kineticist (Wood/Fire)</div>
+    <div class="char-player">legendfather &middot; back after S7</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-style:italic;margin-top:14px">All five present for the first time since Session 6 &mdash; which is exactly why the GM cut Session 7 three minutes early.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The thing Session 7 set up paid off in the first fifteen minutes, and it paid off by <em>not</em> being a fight. The last unopened corner of the lumber camp held a tent, a cage of captured farmers, and the second name the beaten kappa had coughed up: <strong>Mugirou the Rebel</strong>. They did not attack. They greeted the party telepathically, and the first thing they said was that they were not the one who ordered the abductions &mdash; <em>&ldquo;Your real vengeance should be towards Zoudou.&rdquo;</em> The caged farmers had been handed to them as a peace offering, which they understood perfectly well for what it was: <em>&ldquo;This is just a way for Zoudou to pass off undesirable trash. I&rsquo;ve kept this trash alive long enough.&rdquo;</em> They offered a deal. Kill every red-robed cultist in the camp and at the ritual site, and they would release the prisoners and let the party walk out. Zhen, who had spent Session 7 doing exactly that, answered them with the driest line of the night &mdash; <em>&ldquo;I believe the job is already half done&rdquo;</em> &mdash; and then asked the only question that mattered: <em>&ldquo;But how do we guarantee that you don&rsquo;t go back on your words?&rdquo;</em> Mu-Jin ran a Sense Motive, got sincerity, and closed it with a promise and a threat in the same breath. Mugirou handed over a <strong>Battle Medic&rsquo;s Baton</strong> as a token of friendship. The GM awarded experience without anyone rolling initiative. The party had turned the camp&rsquo;s civil war into an alliance.</p>
+
+<p>Northwest, at the end of the trail, they found the rest of it. <strong>Zoudou the Zealous</strong> stood on the second step of a three-tiered shrine with <strong>Kum Meng-Sung</strong> bound hand and foot on the top tier, gagged and thrashing, mid-<strong>Consecrate ritual</strong>, in front of a fifty-foot wall of screaming mist. She would not stop for shouting. She offered a trade instead, and Zhen saw it coming and said it out loud before she could &mdash; <em>&ldquo;What? Replacing him? Is that what you&rsquo;re going to say?&rdquo;</em> &mdash; <em>&ldquo;That is correct. Only one of you.&rdquo;</em> Zhen&rsquo;s refusal was flat and immediate: <strong><em>&ldquo;No way. No one&rsquo;s going to fall today for your ritual.&rdquo;</em></strong> Kaelen drew his bo staff, and Zoudou answered the drawn weapon with the session&rsquo;s best villain line: <em>&ldquo;I&rsquo;m not surprised by your lack of conviction and spiritual cowardice.&rdquo;</em> The fight that followed lasted <strong>one round</strong>, and was over four turns into it. Zoudou had rolled a natural 7 for initiative. <strong>She never took a turn in her own boss fight</strong> &mdash; and neither did Iryoku, or any enemy at all.</p>
+
+<p>Killing them did not end it. Stopping the ritual did something worse. A shadow reared up beyond the mist and <strong>lunged at the wall from the far side</strong>, bulging it like a solid thing being pushed against &mdash; and failed to come through. Then every noppera-bo in the clearing, <em>living or dead</em>, burst apart, and three <strong>Kugaptee&rsquo;s Blessings</strong> climbed out of the wreckage: mindless unholy zombie brutes with moldy wicker cages for heads, filled with blood-coloured butterflies. <em>&ldquo;It&rsquo;s like every single boss fight in a game,&rdquo;</em> said Kaelen. <em>&ldquo;It has a second phase.&rdquo;</em> Seventy hit points each, healed by void, weak to vitality and slashing &mdash; and they hit like trucks. Over two rounds they shoved Kaelen, shoved Iryoku, shoved Kaoru off the altar, and dropped a 22-point critical into Kaelen that left him at <strong>10 of 47</strong>. Zhen took nothing at all. Mu-Jin&rsquo;s free Recall Knowledge named them, then his Needle Darts <strong>critically hit</strong> for the first kill. Zhen took the second &mdash; and said why out loud first: <em>&ldquo;Since I&rsquo;m flanking Kaelen on this one and he is in danger, I&rsquo;m going to try to finish this game.&rdquo;</em> The nodachi came down for a <strong>critical hit, 44 damage</strong>. Then he turned to Kaelen, at 10 HP with one enemy left, and talked him into the focus spell he&rsquo;d been sitting on. Kaelen&rsquo;s Inner Upheaval Flurry critted for <strong>57</strong>.</p>
+
+<p>Mu-Jin walked up past the gore and untied the boy himself. <em>&ldquo;Your father was looking for you.&rdquo;</em> Mugirou kept their word and released the farmers. And then the session did something this campaign has not done before: it stopped being an adventure and became a <strong>town</strong>. Roughly <strong>eighty days of downtime across three months</strong>, and the party spent all of it &mdash; restoring the <strong>Cerulean Tea House</strong> into a base of operations, arguing the Imperial Guard out of conscripting the blacksmith, and harvesting peachwood for fulu paper. Both jobs bought reputation, and the party ended the season <strong>liked by Northridge and Southbank both</strong> &mdash; which turned out to matter enormously.</p>
+
+<p>Because the last thing summer produced was a succession crisis. With no one governing Willowshore, <strong>Old Man Matsuki publicly challenged Granny Hu</strong>, and the two agreed to settle it by a champions&rsquo; duel in seven days. The town read that correctly as a coming bloodbath. The party refused to pick a side &mdash; and went further: not one of them as governor, but <strong>all five, plus both elders, as a council</strong>. It required seven influence points with each. <strong>They finished in two of the seven days.</strong> No duel. Then the milestone landed. <strong>Level 4. Book One is over.</strong></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Act I &middot; Negotiation &middot; Mugirou&rsquo;s Truce</div>
+    <div class="act-card">
+      <h3>The camp&rsquo;s last corner, and the enemy who talked</h3>
+      <ul>
+        <li><strong>Mu-Jin</strong> opened with the session recap, earning the table its first hero points &mdash; the interrogation that gave nothing, the kappa, the stable master, and <em>&ldquo;some friction among the noppera-bo, between Zoudou and Mugirou.&rdquo;</em></li>
+        <li><strong>Zhen</strong> investigated the camp outhouses and <strong>critically failed a DC 18 Fortitude save on a natural 1</strong>, catching <strong>enfeebled 1 for ten minutes</strong>. His public-service announcement: <em>&ldquo;This is a reminder, kids, don&rsquo;t go to any weird toilet.&rdquo;</em></li>
+        <li>The last unopened corner held a tent, <strong>four captured farmers in a cage</strong>, and a noppera-bo who <strong>did not attack</strong>. It opened telepathically &mdash; <em>&ldquo;You must be here for the farmers&rdquo;</em> &mdash; and immediately distanced itself: <em>&ldquo;Keep in mind that I was not the one who orchestrated the abductions.&rdquo;</em></li>
+        <li>Mu-Jin asked straight out: <em>&ldquo;Would you perhaps be Zoudou or Mugirou?&rdquo;</em> &mdash; <strong>&ldquo;Mugirou.&rdquo;</strong> <em>&ldquo;Your real vengeance should be towards Zoudou.&rdquo;</em></li>
+        <li><strong>The farmers were never a peace offering.</strong> <em>&ldquo;I had meant them to be a peace offering. But&hellip; there&rsquo;s no peace offering. This is just a way for Zoudou to pass off undesirable trash.&rdquo;</em></li>
+        <li><strong>The deal</strong>: eliminate every cultist in the camp and at the ritual site &rarr; <em>&ldquo;I will release the prisoners. And you may leave the camp unharmed.&rdquo;</em> <strong>Zhen</strong>: <em>&ldquo;I believe the job is already half done&hellip; But how do we guarantee that you don&rsquo;t go back on your words?&rdquo;</em></li>
+        <li><strong>Mu-Jin&rsquo;s Sense Motive</strong> came back sincere, and he sealed it with a threat: <em>&ldquo;If you play false with us, if any harm comes to the villagers, we will find you.&rdquo;</em> Mugirou gave a <strong>Battle Medic&rsquo;s Baton</strong> as a token of friendship.</li>
+        <li><strong>The GM awarded XP and explicitly did not roll initiative</strong> &mdash; <em>&ldquo;I said no need to roll initiative or anything.&rdquo;</em> A named enemy leader resolved entirely through negotiation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II &middot; Combat &middot; The Ritual Site</div>
+    <div class="act-card">
+      <h3>Zoudou the Zealous, and the offer nobody took</h3>
+      <ul>
+        <li><em>&ldquo;The clearing&rsquo;s northwestern side is obscured by a seething wall of mist that reaches fifty feet into the sky. Now and then, what appear to be silently screaming ghosts thrash and writhe through this mist.&rdquo;</em> A three-tiered stone shrine stood near the wall.</li>
+        <li><strong>Zoudou the Zealous</strong> (she/her) stood on the second step with <strong>Kum Meng-Sung</strong> bound on the top tier, <em>&ldquo;squirming and thrashing and shrieking through gagged wares.&rdquo;</em> Two noppera-bo occultists flanked the base.</li>
+        <li>Four of the five PCs rolled Recall Knowledge; the party learned they were <strong>in the middle of a Consecrate ritual</strong>. Zoudou ignored the shouting and kept casting.</li>
+        <li>Her counter-offer, telepathically: <em>&ldquo;If you truly wish to save him, then I agree to release him under one condition.&rdquo;</em> <strong>Zhen called it before she said it</strong> &mdash; <em>&ldquo;What? Replacing him? Is that what you&rsquo;re going to say?&rdquo;</em> &mdash; <em>&ldquo;That is correct. Only one of you.&rdquo;</em> &mdash; <strong><em>&ldquo;Typical. No way. No one&rsquo;s going to fall today for your ritual.&rdquo;</em></strong></li>
+        <li><strong>Kaelen answered by drawing</strong>: <em>&ldquo;I pull out my bo staff.&rdquo;</em> <strong>Zoudou</strong>: <em>&ldquo;I&rsquo;m not surprised by your lack of conviction and spiritual cowardice.&rdquo;</em> Kaelen, unmoved: <em>&ldquo;So you can go at yourself.&rdquo;</em></li>
+        <li><strong>Kaoru</strong> charged his blade &mdash; <em>&ldquo;you can actually see the electric sparks flying down it&rdquo;</em> &mdash; and Kaelen sent him in: <em>&ldquo;Show him what you&rsquo;re made of.&rdquo;</em></li>
+        <li><strong>Kaelen&rsquo;s laptop had desynced to the old lumber camp map at 6,000 ms ping</strong>; the GM rolled his initiative for him.</li>
+        <li><strong>One round</strong>, decided four turns in. <em>&ldquo;Oh, we killed them real fast,&rdquo;</em> said Mu-Jin.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III &middot; Mystery &middot; The Second Phase</div>
+    <div class="act-card">
+      <h3>Something on the other side of the wall</h3>
+      <ul>
+        <li><em>&ldquo;Having stopped the ritual, there is a sudden rumble, as if an enormous tree suddenly toppled over, rolls out from beyond the wall of mist.&rdquo;</em> The surviving cultist <strong>dropped to its knees</strong>, saying something the party could not hear.</li>
+        <li><strong><em>&ldquo;But as you look up, there is a vaguely humanoid shadow rearing up from beyond this wall. The shadow lunges at the wall from the far side, causing the misty barrier to suddenly flex and bulge as if it were a solid wall being pushed against from beyond.&rdquo;</em></strong> The shadow vanished. <strong>The wall held.</strong></li>
+        <li><em>&ldquo;But the noppera-bo, living or dead, suddenly burst apart as immense mockeries of their previous forms climb out of their bodies&hellip; <strong>Instead of heads, they have moldy wicker cages filled with blood-colored butterflies.</strong>&rdquo;</em></li>
+        <li><strong>Kaelen</strong>: <em>&ldquo;It&rsquo;s like every single boss fight in a game. It has a second phase.&rdquo;</em> <strong>Mu-Jin</strong>: <em>&ldquo;I was thinking, this battle is going really easy. Ah, there we go, second phase.&rdquo;</em></li>
+        <li>Mu-Jin&rsquo;s Elemental Betrayal did <strong>not</strong> carry over to the new forms, and the GM ruled the transformation too sudden for Kaoru to recharge his Spellstrike.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act IV &middot; Rescue &middot; The Walk Home</div>
+    <div class="act-card">
+      <h3>The boy, the ledger, and a promise kept</h3>
+      <ul>
+        <li><strong>Mu-Jin untied the boy himself</strong>: <em>&ldquo;Mu-Jin walks up past the gore and unbinds Meng-Sung, saying, &lsquo;Your father was looking for you.&rsquo;&rdquo;</em> &mdash; the direct payoff of Kum Soon-Chong&rsquo;s plea in Session 7.</li>
+        <li>Loot from the shrine: a <strong>tattered leather-bound ledger</strong> and an <strong>unusual dagger</strong>. <strong>Kaoru</strong> identified the dagger on a <strong>natural 20</strong> &mdash; used <em>&ldquo;to send souls to empower Kugaptee.&rdquo;</em> <strong>Iryoku&rsquo;s</strong> verdict: <em>&ldquo;That&rsquo;s a bad unique weapon.&rdquo;</em></li>
+        <li><strong>The ledger is written in Aklo and Chthonian</strong> and needed both to decipher &mdash; which only <strong>Mu-Jin</strong> has (<em>&ldquo;I picked those things on random. Glad to hear that they worked.&rdquo;</em>). It teaches the <strong>Consecrate ritual</strong>, and he took it as a long-term project.</li>
+        <li><strong>Mugirou kept their word</strong> and released the farmers as the party left. The freed farmers gave them a <strong>crafter&rsquo;s eyepiece</strong> in thanks. Every abductee walked home alive.</li>
+        <li>Mu-Jin&rsquo;s summary, and the session&rsquo;s honest limit: <em>&ldquo;We stopped quite possibly an evil ritual, but we still didn&rsquo;t quite learn if they had anything to do with the curse.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act V &middot; Downtime &middot; Roughly Eighty Days</div>
+    <div class="act-card">
+      <h3>The season the party spent building a town</h3>
+      <ul>
+        <li><strong>The Cerulean Tea House.</strong> <em>&ldquo;The building&rsquo;s core is sound &mdash; and once repaired could actually serve well as a base of operations in addition to bringing back a beloved local business.&rdquo;</em> Mu-Jin worked it twice on Crafting (one a <strong>natural 20</strong>), Kaoru swapped in <strong>Engineering Lore</strong> when Architecture Lore didn&rsquo;t apply &mdash; and <strong>Kaoru finished it</strong> on borrowed gold and an Athletics check he had no confidence in. <em>&ldquo;Are you even good at athletics?&rdquo;</em> &mdash; <em>&ldquo;Not great. I&rsquo;m trained in it, but still.&rdquo;</em> <strong>Restored. +1 reputation with each faction.</strong></li>
+        <li><strong>Yami.</strong> A grey feral cat had been hiding in the tea house since the previous summer. <strong>Kaelen befriended her</strong> &mdash; <em>&ldquo;Yami does take a liking to you and allows you to pet and hold her&rdquo;</em> &mdash; though the GM noted she stays randomly standoffish, <em>&ldquo;you know, cats.&rdquo;</em></li>
+        <li><strong>Iryoku and Kaelen</strong> worked the <strong>milling houses</strong> on Athletics. <strong>Zhen</strong> earned income at the <strong>Mother&rsquo;s Coil</strong>, then closed the season with <strong>Religion at the Lady of Souls</strong> &mdash; a level 5 task at DC 20, the highest anyone attempted, and the one job that matched his character exactly.</li>
+        <li><strong>The blacksmith&rsquo;s problem.</strong> The <strong>Eternal Blaze Ironworks</strong> was being pressured by the Imperial Guards to forge arms free of charge. Iryoku, Kaelen and Kaoru argued <strong>Zhang Peng</strong> down across two-hour blocks &mdash; <em>&ldquo;I can understand the need for it, but she can&rsquo;t do it for free.&rdquo;</em> <strong>Won in a single day</strong>; he agreed to an IOU instead. <strong>+1 Southbank.</strong></li>
+        <li><strong>The peachwood.</strong> Five days gathering fallen branches for the Woodcarver&rsquo;s Guild&rsquo;s fulu paper &mdash; a critical failure would have locked a grove for a year. <strong>+1 Northridge</strong>, <strong>20 XP</strong>, two free fulus, and a <strong>fulu formula</strong> nobody can use, since all fulus need <strong>magical crafting</strong>.</li>
+        <li>The party ended the summer <strong>liked by both Northridge and Southbank</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VI &middot; Influence &middot; The Governing Council</div>
+    <div class="act-card">
+      <h3>A duel in seven days, resolved in two</h3>
+      <ul>
+        <li><em>&ldquo;The friendliness between Granny Hu and Old Man Matsuki has effectively broken down.&rdquo;</em> <strong>Matsuki publicly challenged Granny Hu</strong> for the leadership, and the two resolved to settle it <em>&ldquo;via a duel between chosen champions, drawing upon a Willowshore tradition for solving public disputes.&rdquo;</em> <strong>Seven days hence.</strong></li>
+        <li><em>&ldquo;As word spreads through the town, dread grows as folks realize that a duel will likely lead to a bloodbath.&rdquo;</em> <strong>Both elders invited the party in</strong> &mdash; <em>&ldquo;the support of those who relit the Eternal Lantern will definitely go a long way.&rdquo;</em></li>
+        <li><strong>Mu-Jin</strong> reconstructed both factions from memory, killed the walk-away option (<em>&ldquo;That&rsquo;s just going to lead to bloodshed&rdquo;</em>), and asked the honest question: <em>&ldquo;I think we&rsquo;re the guardians of this village, but are any of us leadership material?&rdquo;</em></li>
+        <li><strong>The council idea landed when someone reframed it</strong>: <em>&ldquo;Collective is not just one of us being the leader. It&rsquo;s all five of us being the leaders.&rdquo;</em> <strong>Zhen</strong>: <em>&ldquo;I like the sound of that.&rdquo;</em> Cost: <strong>seven influence points with each elder</strong>.</li>
+        <li><strong>Discoveries found the levers.</strong> <strong>Granny Hu</strong> fears the town cannot subsist &mdash; any appeal invoking <strong>food shortages</strong> dropped her DC by 2. <strong>Matsuki</strong> disdains appeals to trust the younger generation, and is a <strong>drunkard</strong>. <strong>Zhen&rsquo;s</strong> discovery turned up the cheapest lever on the board: <strong>DC 18 Diplomacy</strong>.</li>
+        <li><strong>Matsuki, at night, over wine.</strong> Mu-Jin <em>&ldquo;started jabbering to him about some of his favourite folk tales.&rdquo;</em> <strong>Iryoku</strong> found the loophole in the generational penalty: <strong><em>&ldquo;Probably none of us should suffer from that, because I&rsquo;m older than him.&rdquo;</em></strong> <strong>Kaelen</strong> volunteered to cook, entirely unqualified: <em>&ldquo;I&rsquo;m going to make him a bowl of spaghetti.&rdquo;</em></li>
+        <li><strong>Granny Hu, in the mornings.</strong> Day one ended at <strong>3 of 7</strong>. <strong>Zhen&rsquo;s own influence attempt failed even after a hero point.</strong> <strong>Mu-Jin critically succeeded</strong> with <em>&ldquo;a very chilling story of this one time a village was destroyed during a famine&rdquo;</em> &mdash; straight into her weakness &mdash; putting her at <strong>5</strong>.</li>
+        <li><strong>Kaelen took the last roll with no hero points left to protect it.</strong> The GM warned him: <em>&ldquo;Oh, dang. You have no hero points left.&rdquo;</em> He rolled Diplomacy anyway. <strong><em>&ldquo;And that&rsquo;s two.&rdquo;</em> Seven of seven. Kaelen closed Granny Hu.</strong></li>
+        <li><strong>Resolved in two of the seven days.</strong> A governing council with both elders. <strong>+2 reputation with both factions. 80 XP.</strong> No duel.</li>
+        <li>The GM&rsquo;s closing summary: <em>&ldquo;the ending of the noppera-bo menace, the bringing together of the council of Willowshore to take over temporarily <strong>until the missing governor is found</strong>. And with a new season comes a new season of problems.&rdquo;</em></li>
+        <li><strong>Milestone: level 4. Book One complete.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; The Ritual Site &middot; One Round &middot; 80 XP</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Zoudou the Zealous (Lv3, HP 45, AC 19) + 2 Noppera-bo Occultists (Lv2, HP 30, AC 17)</div></div>
+    <div><div class="combat-stat-label">Weakness</div><div class="combat-stat-value">Sonic (auditory)</div></div>
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1 &mdash; over on turn 4 of 8</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">0</div></div>
+  </div>
+
+  <p style="color:var(--amber)"><strong>Initiative</strong>: Kaoru 26 &middot; Kaelen 25 &middot; Mu-Jin 23 &middot; Zhen 22 &middot; <em>Occultist 22</em> &middot; Iryoku 16 &middot; <strong><em>Zoudou 15</em></strong> &middot; <em>Occultist 11</em></p>
+  <p><strong>Zoudou the Zealous rolled a natural 7 and never took a single action in her own boss fight.</strong> No enemy acted at all.</p>
+
+  <h4>Before initiative &mdash; the setup that won it</h4>
+  <ul>
+    <li><strong>Mu-Jin</strong> flagged his Noise Blast template and told everyone to stay out of the yellow squares; <strong>Kaoru</strong> read the placement and answered <em>&ldquo;If that&rsquo;s where you&rsquo;re going to put it, I have an idea,&rdquo;</em> positioning so the burst caught all three without clipping a PC. That coordination is why four turns were enough.</li>
+  </ul>
+
+  <h4>Round 1 &mdash; four turns, three enemies down to one</h4>
+  <ul>
+    <li><strong>Kaoru</strong> opened with <strong>Sky Laughs at Waves</strong>, the one-action conflux spell that flies him up to his Speed and Strikes: <strong>+1 Ninjato</strong> hit on Zoudou for <strong>5</strong>, revealing her AC (<em>&ldquo;That allows you to know that their AC is 19&rdquo;</em>). The conflux <strong>recharged his Spellstrike</strong>, which he spent immediately: Ninjato <strong>6</strong> + <strong>Shocking Grasp 13</strong>. <strong>24 into Zoudou in one turn.</strong></li>
+    <li><strong>Kaelen</strong> spent one action on <strong>Flurry of Blows</strong>. The first Strike came up a <strong>natural 2</strong> and he <strong>spent a hero point</strong>; under AndeGM&rsquo;s Heroic Reroll rule (<em>any result under 10 becomes a 10</em>) the reroll floored to exactly 10 and hit for <strong>10</strong>. <em>&ldquo;Aw, it wasn&rsquo;t a nat 20.&rdquo;</em> Second Strike missed at MAP. Last action: <strong>Parry</strong> &mdash; <em>&ldquo;Because you never know what these people or what they&rsquo;re going to throw at you.&rdquo;</em></li>
+    <li><strong>Mu-Jin</strong> dropped a 10-foot <strong>Noise Blast</strong> (2d10 sonic, DC 19 Fort) on all three: Zoudou <strong>succeeded</strong> (23), one occultist <strong>failed</strong> (12), one <strong>succeeded</strong> (24) &mdash; <strong>5 / 9 / 5</strong> with the sonic weakness. Then <strong>Elemental Betrayal</strong> on Zoudou for <strong>fire weakness 2</strong>, and Weaver&rsquo;s <strong>Familiar of Balanced Luck</strong> handed Zhen <strong>+1 AC</strong>.</li>
+    <li><strong>Zhen</strong>, told <em>&ldquo;Oh, and she&rsquo;s weak to fire&rdquo;</em>, answered <em>&ldquo;Thank you. Okay, that&rsquo;s good, because I&rsquo;m going to do this.&rdquo;</em> <strong>Earth&rsquo;s Bile</strong>, DC 19 basic Reflex, catching <strong>all three</strong>: Zoudou failed for <strong>10</strong> (with the new fire weakness), one occultist failed for <strong>8</strong>, one succeeded for <strong>4</strong>.</li>
+    <li>Then he read the board: <em>&ldquo;I think this may actually get both of them. I will then cast on these two an Electric Arc.&rdquo;</em> <strong>3d4 = 7.</strong> Zoudou <strong>failed</strong> and took the full <strong>7</strong> &mdash; she was on <strong>6 HP</strong>. The occultist <strong>succeeded</strong> and took <strong>3</strong> &mdash; it was on <strong>3 HP</strong>. <strong><em>Both died in the same action.</em></strong></li>
+    <li><strong>Iryoku never took a turn</strong> (initiative 16, sixth of eight), and neither did Zoudou or the last occultist. The third occultist ended the round alive at <strong>21 of 30</strong>, dropped to its knees when the ritual broke &mdash; then burst apart with the other two. <strong>Mugirou&rsquo;s contract was satisfied; nothing walked away.</strong></li>
+  </ul>
+  <p style="color:var(--lantern)"><strong>Damage into enemies</strong> &middot; Zhen <strong>32</strong> (2 kills) &middot; Kaoru <strong>24</strong> &middot; Mu-Jin <strong>19</strong> &middot; Kaelen <strong>10</strong> &middot; Iryoku <strong>0</strong>. No PC took a point of damage.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; Kugaptee&rsquo;s Blessing &middot; Two Rounds &middot; 72 XP</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3 &times; Kugaptee&rsquo;s Blessing (Lv2, HP 70 each, AC 15)</div></div>
+    <div><div class="combat-stat-label">Weak / Immune</div><div class="combat-stat-value">Vitality 10, slashing 10 &middot; void healing &middot; immune mental, bleed, death effects</div></div>
+    <div><div class="combat-stat-label">Attack</div><div class="combat-stat-value">Fist +11, 1d12+5, reach 10 ft, Improved Push &middot; slowed 1 all fight</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">82</div></div>
+  </div>
+
+  <p style="color:var(--amber)"><strong>Initiative</strong>: Iryoku 25 &middot; Kaoru 22 &middot; <em>Blessing 20</em> &middot; <em>Blessing 18</em> &middot; Mu-Jin 17 &middot; Zhen 16 &middot; <em>Blessing 11</em> &middot; Kaelen 9</p>
+
+  <h4>Round 1 &mdash; finding the weakness</h4>
+  <ul>
+    <li><strong>Iryoku</strong> &mdash; <em>&ldquo;Well, they&rsquo;re slowed at least&rdquo;</em> &mdash; moved and threw a two-action <strong>Elemental Blast</strong> at an off-guard target for <strong>10</strong>.</li>
+    <li><strong>Kaoru</strong> probed with the <strong>+1 Ninjato</strong>: <em>&ldquo;Well, let&rsquo;s just start with doing the basics. See what cuts.&rdquo;</em> Hit for <strong>14</strong> &mdash; and the number gave the party the fight: <strong>these things are weak to slashing.</strong> Second Strike missed by 1. Last action: <strong>Shield</strong>.</li>
+    <li><strong>Enemy</strong>: a Blessing hit <strong>Kaelen</strong> for <strong>8</strong> and Shoved him. Foundry then showed his bo staff dropped &mdash; until the GM found his own mistake: <em>&ldquo;I accidentally set to dying and it forced you to drop it. So, my bad.&rdquo;</em> <strong>Zhen was the one who caught it</strong>: <em>&ldquo;Dropped it? I thought you dropped it. He never dropped it.&rdquo;</em> Actions restored. <strong>No disarm ever happened.</strong> A second Blessing struck and Shoved <strong>Kaoru</strong>.</li>
+    <li><strong>Mu-Jin</strong> cast <strong>Loose Time&rsquo;s Arrow</strong>, quickening up to six allies (extra action for Step or Stride only) &mdash; the tempo button for the whole round.</li>
+    <li><strong>Zhen</strong> led with <strong>Earth&rsquo;s Bile</strong>, using the spread the enemies&rsquo; own shoves had created: <em>&ldquo;Because you shoved, I can actually do this safely, so I will get all three of them.&rdquo;</em> Two <strong>critical failures</strong>, which <strong>doubled the persistent fire</strong>: <strong>4 and 4</strong>. Then the quickened Stride to a flank, <strong>+1 Nodachi</strong> for <strong>19</strong>, and <strong>Shield</strong>.</li>
+    <li><strong>Enemy</strong>: a Blessing hit <strong>Iryoku</strong> for <strong>8</strong>, Shoved him, then hit again for <strong>14</strong>.</li>
+    <li><strong>Kaelen</strong> stepped, cast <strong>Electric Arc</strong> (DC 15) on two &mdash; one <strong>critical failure</strong> for <strong>18</strong>, one failure for <strong>9</strong> &mdash; then two bo staff Strikes, the first another <strong>natural 2 rescued by his second hero point</strong>, for <strong>16</strong> total.</li>
+  </ul>
+
+  <h4>Round 2 &mdash; three kills</h4>
+  <ul>
+    <li><strong>Iryoku</strong>: <em>&ldquo;Because I have a whip, I can trip from reach.&rdquo;</em> <strong>Trip on a natural 20</strong> &mdash; critical success by 18, prone, <strong>6</strong> damage. Then <strong>Weapon Infusion</strong> changing his blast to <strong>slashing</strong>, straight into the weakness, for <strong>20</strong>.</li>
+    <li><strong>Kaoru</strong> rolled a <strong>natural 2</strong> and spent a hero point on it &mdash; <em>&ldquo;Oh, fuck. I don&rsquo;t want to use hero point on that one&rdquo;</em> &mdash; and rerolled into a <strong>natural 20</strong>. <strong>Critical hit for 18.</strong> Then <strong>Electric Arc</strong>: one failed for <strong>7</strong>, one critically failed for <strong>14</strong>.</li>
+    <li><strong>Enemy</strong>: a Blessing <strong>critically hit Kaelen for 22</strong>, taking him to <strong>10 of 47</strong>, then missed twice. A second spent its turn on <strong>Kaoru</strong> &mdash; a hit for <strong>8</strong> and a Shove off the altar &mdash; then swung at <strong>Zhen</strong> and <strong>critically missed</strong>.</li>
+    <li><strong>Mu-Jin</strong> used his <strong>Investigate</strong> activity for a free Recall Knowledge: <em>&ldquo;This is a variant zombie brute. These are Kugaptee&rsquo;s Blessing. They&rsquo;re mindless, undead, unholy zombies.&rdquo;</em> Learning they were <strong>mindless</strong> told him his cold iron was useless. <strong>Needle Darts critically hit for 18.</strong> <strong>Kill 1.</strong></li>
+    <li><strong>Zhen</strong> opened with <strong>Electric Arc</strong> (4 and a critically-failed <strong>16</strong>), then named his target and his reason: <strong><em>&ldquo;Since I&rsquo;m flanking Kaelen on this one and he is in danger, I&rsquo;m going to try to finish this game.&rdquo;</em></strong> <strong>+1 Nodachi, critical hit by 17, 44 damage.</strong> <strong>Kill 2.</strong></li>
+    <li><strong>Kaelen</strong>, at 10 HP with one enemy standing, was talked into his focus spell by <strong>Zhen</strong> &mdash; <em>&ldquo;That&rsquo;s another good one. You should use that.&rdquo;</em> <strong>Inner Upheaval</strong> into <strong>Flurry of Blows</strong>, with the damage type <strong>Iryoku&rsquo;s call</strong>: <em>&ldquo;Probably also weak to vitality, because they&rsquo;re variant zombies.&rdquo;</em> Weaver&rsquo;s Familiar of Balanced Luck and the flank had the target at <strong>AC 12</strong>. Critical hit, then a hit: <strong>47 rolled &rarr; 57 applied.</strong> <strong>Kill 3.</strong> <em>&ldquo;They are destroyed.&rdquo;</em></li>
+  </ul>
+  <p style="color:var(--lantern)"><strong>Damage into enemies</strong> &middot; Kaelen <strong>100</strong> (1 kill) &middot; Zhen <strong>91</strong> (1 kill) &middot; Kaoru <strong>53</strong> &middot; Iryoku <strong>36</strong> &middot; Mu-Jin <strong>18</strong> (1 kill) &middot; persistent fire <strong>4</strong>. <em>Total 302 against 210 hit points &mdash; the 92-point difference is overkill on three finishing blows, all critical hits into a weakness.</em></p>
+  <p style="color:var(--lantern)"><strong>Damage taken</strong> &middot; Kaelen <strong>37</strong> (47 &rarr; 10) &middot; Kaoru <strong>23</strong> &middot; Iryoku <strong>22</strong> &middot; <strong>Zhen 0</strong> &middot; <strong>Mu-Jin 0</strong>. <em>Taken from the log&rsquo;s HP snapshots; Foundry&rsquo;s chat truncation swallowed two enemy attack rolls in round 1.</em></p>
+  <p><strong>The distribution is the story of the fight.</strong> The two tanks absorbed 59 of the 82; Kaoru took the rest; the party&rsquo;s healer and its squishiest caster were never touched at all.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-zhen">
+    <h4>Zhen Stillness &middot; the Refusal</h4>
+    <ul>
+      <li><strong>He said no before the offer finished leaving her mouth.</strong> Zoudou&rsquo;s trade &mdash; the boy for one of them &mdash; got <em>&ldquo;What? Replacing him? Is that what you&rsquo;re going to say?&rdquo;</em> and then <em>&ldquo;Typical. No way.&rdquo;</em> No deliberation, no table discussion. For a character whose upbringing was an argument for restraint, the restraint is what makes the refusal fast: he already knew what he wouldn&rsquo;t do.</li>
+      <li><strong>The only one who asked how the deal would be enforced.</strong> Everyone else weighed whether Mugirou&rsquo;s terms were acceptable; Zhen asked <em>&ldquo;How do we guarantee that you don&rsquo;t go back on your words?&rdquo;</em> Same instinct as his S7 <em>&ldquo;Nothing is free in this world.&rdquo;</em></li>
+      <li><strong>The double kill.</strong> Earth&rsquo;s Bile across all three, then reading the remaining HP and calling it: <em>&ldquo;I think this may actually get both of them.&rdquo;</em> A 3d4 cantrip killed <strong>Zoudou and an occultist in the same action</strong> &mdash; the boss died without ever taking a turn.</li>
+      <li><strong>He killed to protect, and said so first.</strong> Nodachi crit, 44 damage. Then he immediately turned to Kaelen &mdash; still at 10 HP &mdash; and talked him into the Inner Upheaval that ended the fight. <strong>He set up someone else&rsquo;s best moment thirty seconds after his own.</strong></li>
+      <li><strong>Untouched.</strong> Zero damage across both fights; the single Strike aimed at him was a critical miss. He also caught the GM&rsquo;s own Foundry error live (<em>&ldquo;He never dropped it&rdquo;</em>) and healed the party afterward without comment.</li>
+      <li>And he got the biggest laugh of the night off a <strong>natural 1 in a latrine</strong>. He is not precious about himself.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-mujin">
+    <h4>Mu-Jin &middot; the Hand on the Rope</h4>
+    <ul>
+      <li><strong>He closed the alliance.</strong> Ran the Sense Motive, relayed it to the party, and sealed it with a line that was both signature and warning: <em>&ldquo;If you play false with us, if any harm comes to the villagers, we will find you.&rdquo;</em> Every noppera-bo scene this campaign has gone through him.</li>
+      <li><strong>He untied the boy himself.</strong> No ceremony, no roll &mdash; <em>&ldquo;Your father was looking for you.&rdquo;</em> Session 7&rsquo;s whole emotional debt, paid in one sentence.</li>
+      <li><strong>The party&rsquo;s brain, again.</strong> Noise Blast into the sonic weakness and Elemental Betrayal opening a fire weakness on the boss, in one turn. A free Recall Knowledge that named the Kugaptee&rsquo;s Blessings and established they were mindless. A <strong>critical-hit Needle Darts</strong> for the first kill. And he is the only PC who can read the Aklo-and-Chthonian ledger: <em>&ldquo;I picked those things on random. Glad to hear that they worked.&rdquo;</em></li>
+      <li><strong>He framed the entire political arc.</strong> Reconstructed both elders and both factions from memory, killed the do-nothing option, asked the honest question (<em>&ldquo;are any of us leadership material?&rdquo;</em>), and <strong>critically succeeded</strong> on the famine story that broke Granny Hu.</li>
+      <li><strong>And he wants to run a tea shop.</strong> <em>&ldquo;He&rsquo;s kind of thinking about just going over there and being the main tea guy&rdquo;</em> &mdash; with <strong>Weaver as the mascot</strong>. A spider. As the mascot. Of a tea house.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaelen">
+    <h4>Kaelen Ashford &middot; the Closing Argument</h4>
+    <ul>
+      <li><strong>He drew first.</strong> Zoudou was still monologuing when Kaelen said <em>&ldquo;I pull out my bo staff&rdquo;</em> &mdash; which is what earned the &ldquo;spiritual cowardice&rdquo; line &mdash; and then declined to be impressed by it: <em>&ldquo;So you can go at yourself.&rdquo;</em></li>
+      <li><strong>He took the beating so nobody else had to.</strong> 37 of the party&rsquo;s 82 damage, finishing at <strong>10 of 47</strong>, and he never stepped back from the front. He spent <strong>two hero points</strong>, both rescuing natural 2s, because the front rank doesn&rsquo;t get to whiff.</li>
+      <li><strong>The biggest single hit of the campaign so far.</strong> Inner Upheaval into Flurry of Blows: <strong>57 damage</strong>, enough that Mu-Jin narrated it as a Fist of the North Star pressure-point technique and Kaelen&rsquo;s only comment was <em>&ldquo;Ew, I got zombie all over me.&rdquo;</em></li>
+      <li><strong>He closed Granny Hu with nothing in reserve.</strong> At 5 of 7, with the GM warning him <em>&ldquo;you have no hero points left,&rdquo;</em> he took the roll anyway. <em>&ldquo;And that&rsquo;s two.&rdquo;</em> <strong>The council exists because of that check.</strong></li>
+      <li><strong>Running gag of the season: he cannot say &ldquo;Diplomacy.&rdquo;</strong> It is <em>&ldquo;democracy&rdquo;</em> &mdash; twice, unprompted, including <em>&ldquo;I&rsquo;m spreading the democracy technique.&rdquo;</em> He also volunteered to cook Matsuki dinner seconds after the GM confirmed he has no Cooking Lore, and befriended <strong>Yami</strong>, who now lets him pick her up.</li>
+      <li>All of this through a laptop running at <strong>6,000 ms</strong>, which cost him his initiative roll and desynced him onto the wrong map. He played the whole night anyway.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaoru">
+    <h4>Kaoru &middot; the First Yes</h4>
+    <ul>
+      <li><strong>He opened the boss fight and he finished the tea house</strong> &mdash; the two bookends of the session, and neither was loud. A one-action conflux spell to fly in and Strike, then an immediate Spellstrike: <strong>24 damage into Zoudou in a single turn</strong>, plus the AC reveal the whole party then worked from.</li>
+      <li><strong>He is the one who finds out.</strong> <em>&ldquo;Well, let&rsquo;s just start with doing the basics. See what cuts.&rdquo;</em> That probing hit came back for 14 and told the party the Blessings were <strong>weak to slashing</strong> &mdash; which is what turned Iryoku&rsquo;s Weapon Infusion and Zhen&rsquo;s nodachi into the fight&rsquo;s two best turns.</li>
+      <li><strong>His biggest mechanical moment was a hero point he didn&rsquo;t want to spend.</strong> <em>&ldquo;Oh, fuck. I don&rsquo;t want to use hero point on that one.&rdquo;</em> He spent it on a natural 2 anyway and rerolled into a <strong>natural 20</strong> &mdash; a critical hit for 18.</li>
+      <li><strong>He gave the tea house its first yes.</strong> The moment Mu-Jin floated it: <em>&ldquo;I&rsquo;ll help you with it. We&rsquo;ll see it back up and running.&rdquo;</em> Then he kept working it after his own lore didn&rsquo;t apply, borrowed 10 gold, and <strong>finished the restoration on an Athletics check he openly expected to fail</strong>. <strong>The party&rsquo;s base of operations exists because the guy with the wrong skills kept volunteering.</strong></li>
+      <li><strong>He ran the victory-point ledger</strong> through the Zhang Peng negotiation, and asked the political question nobody else wanted to: <em>&ldquo;Yeah, but do we want Old Man Matsuki to step aside?&rdquo;</em> &mdash; a South Banker&rsquo;s instinct, in a party drifting toward compromise.</li>
+      <li><strong>And he has the driest mouth at the table.</strong> On three undead rolling terribly: <em>&ldquo;Apparently, they say that they suck.&rdquo;</em> On Kaelen complaining about gore: <em>&ldquo;Well, at least you don&rsquo;t have to get it out of your fur.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-iryoku">
+    <h4>Iryoku-Yasha &middot; the Elder</h4>
+    <ul>
+      <li><strong>Back after a session away, and he came back committed.</strong> When Mugirou&rsquo;s terms landed, Iryoku didn&rsquo;t negotiate &mdash; <em>&ldquo;Yeah, it&rsquo;s something we should be doing anyway&rdquo;</em> &mdash; and then held the party to it: <em>&ldquo;We did swear to kill all the occultists.&rdquo;</em> The yaksha keeps its word.</li>
+      <li><strong>He got zero turns in the first fight and it didn&rsquo;t slow him down.</strong> In the second he opened with a <strong>natural 20 Trip from reach</strong> off the whip, then used <strong>Weapon Infusion to change his blast to slashing</strong> &mdash; straight into the weakness Kaoru had just uncovered &mdash; for 20.</li>
+      <li><strong>The read that ended the fight was his.</strong> <em>&ldquo;Probably also weak to vitality, because they&rsquo;re variant zombies.&rdquo;</em> The GM confirmed it and recommended Vitality to Kaelen, and that choice was worth <strong>10 extra damage</strong> on the killing blow. He called a creature&rsquo;s second weakness off nothing but the sprite colour.</li>
+      <li><strong>He is the table&rsquo;s systems brain.</strong> Pre-read the influence encounter&rsquo;s whole skill list before anyone rolled, worked out the peachwood task levels on the fly, ran the fulu-formula analysis and picked the party&rsquo;s formula, and correctly declined the level-4 milling task for the level-3 one rather than gamble.</li>
+      <li><strong>His best line was a rules exploit played completely straight.</strong> Told that Matsuki penalises anyone appealing to trust the younger generation: <strong><em>&ldquo;Probably none of us should suffer from that, because I&rsquo;m older than him.&rdquo;</em></strong> Iryoku is an ancient nature spirit who has been in Willowshore since its founding. He is, technically, correct.</li>
+      <li><strong>And he gave the sharpest table-level critique of the night after Pax&rsquo;s</strong> &mdash; that influence encounters are <em>&ldquo;horrifically undertuned,&rdquo;</em> that seven days finishing in two proves it, and that the DCs should be higher when <em>&ldquo;we have people rocking like 11.&rdquo;</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Battle Medic&rsquo;s Baton</div>
+    <div class="loot-source">Mugirou &mdash; token of friendship</div>
+    <div class="loot-note">Item bonus to Medicine. Iryoku flagged it for Zhen.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Tattered leather-bound ledger</div>
+    <div class="loot-source">The shrine</div>
+    <div class="loot-note">Written in <strong>Aklo and Chthonian</strong> &mdash; needs both to read, which only Mu-Jin has. Teaches the <strong>Consecrate ritual</strong>. Taken as a project.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Unusual dagger</div>
+    <div class="loot-source">The shrine &middot; identified by Kaoru on a nat 20</div>
+    <div class="loot-note">Used <em>&ldquo;to send souls to empower Kugaptee&rdquo;</em>; slows fiends on a crit. Taken by Mu-Jin.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Crafter&rsquo;s eyepiece</div>
+    <div class="loot-source">The freed farmers, on the road home</div>
+    <div class="loot-note">Their thank-you &mdash; <em>&ldquo;They will thank you in the form of this.&rdquo;</em> Went to Mu-Jin, the only PC trained in Crafting.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Unusual alchemical bomb</div>
+    <div class="loot-source">Earlier loot, identified in town</div>
+    <div class="loot-note">A pebble with a sonic effect &mdash; <em>&ldquo;would have been useful against the noppera-bo who have sensitive hearing.&rdquo;</em> Identified too late to matter.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">2 &times; fulu + a fulu formula</div>
+    <div class="loot-source">Woodcarver&rsquo;s Guild, for the peachwood</div>
+    <div class="loot-note">Iryoku ran the analysis and picked the formula. <strong>Unusable for now</strong> &mdash; all fulus require magical crafting.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Standard artisan&rsquo;s toolkit</div>
+    <div class="loot-source">Purchased, 4 gp</div>
+    <div class="loot-note">So Mu-Jin can Earn Income crafting tea at the Cerulean.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Silver ingot</div>
+    <div class="loot-source">Party stash</div>
+    <div class="loot-note">Sold.</div>
+  </div>
+</div>
+<div class="xp-banner">Experience &middot; 80 Zoudou &middot; 72 Kugaptee&rsquo;s Blessing &middot; 20 peachwood &middot; 80 the council = <strong>252 logged</strong>, plus an unlogged award for the Mugirou negotiation &mdash; <strong>milestone to level 4</strong></div>
+<p style="color:var(--text-dim)"><strong>Reputation</strong> &middot; +1 both factions (the tea house) &middot; +1 Southbank (Zhang Peng) &middot; +1 Northridge (peachwood) &middot; <strong>+2 both factions</strong> (the council). Ended the season <strong>liked by both</strong>.</p>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>The Great Kugaptee is real, and it is on the other side of the mist.</strong> A vaguely humanoid shadow reared up beyond the wall and lunged at it hard enough to make it bulge &mdash; and could not get through. The Consecrate ritual, and Meng-Sung as <em>&ldquo;some sort of old soul,&rdquo;</em> were the means of letting it in. The party stopped that. They did not stop it wanting in.</li>
+  <li><strong>Mu-Jin&rsquo;s Shinzo theory.</strong> Either Shinzo is <em>&ldquo;some sort of supremely powerful being that can just break through the curtain that even Kugaptee couldn&rsquo;t get in&rdquo;</em> &mdash; or the curse never stopped anyone coming <em>in</em>, only the people of Willowshore getting <em>out</em>. Iryoku&rsquo;s alternative: <em>&ldquo;Alternatively, Shinzo&rsquo;s just lying.&rdquo;</em></li>
+  <li><strong>Mugirou the Rebel is alive, holds the camp, and kept their word.</strong> The party has a working relationship with a noppera-bo leader. Nobody discussed what happens to that when the town finds out.</li>
+  <li><strong>The missing governor.</strong> The GM was explicit that the council governs <em>&ldquo;temporarily until the missing governor is found.&rdquo;</em></li>
+  <li><strong>The curse is still unexplained.</strong> <em>&ldquo;We stopped quite possibly an evil ritual, but we still didn&rsquo;t quite learn if they had anything to do with the curse.&rdquo;</em></li>
+  <li><strong>The Cerulean Tea House is restored</strong> &mdash; a base of operations and a reopened business, with Yami in residence. Nobody has yet said what they intend to <em>use</em> the base for.</li>
+  <li><strong>The fulu formula</strong> is dead weight until someone reaches expert Crafting with magical crafting.</li>
+  <li><strong>Carried forward, still untouched</strong>: the wrong-gods lantern secret (S2); &ldquo;blood will rise&rdquo;; the governor&rsquo;s estate; the Great Willow&rsquo;s promise to map the curse&rsquo;s edges; the Willow&rsquo;s missing friend; the <strong>Noppera-Bo Hood, still never used</strong>; <strong>Kaelen&rsquo;s S4 Slime Rot</strong>; <strong>Weaver&rsquo;s hunting-spider venom</strong>; the <strong>hidden trap door</strong> in the lumber camp storeroom, still unexplored; Mu-Jin&rsquo;s Desna adoption.</li>
+  <li><strong>A new season, and Book Two.</strong></li>
+</ul>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Zhen</strong>: &ldquo;I believe the job is already half done&hellip; and we will finish it either way. But how do we guarantee that you don&rsquo;t go back on your words?&rdquo;
+<span class="attribution">To Mugirou, on being offered a deal to kill the cultists Zhen had already spent a session killing.</span></blockquote>
+
+<blockquote><strong>Zoudou</strong>: &ldquo;If you truly wish to save him, then I agree to release him under one condition.&rdquo;<br>
+<strong>Zhen</strong>: &ldquo;What? Replacing him? Is that what you&rsquo;re going to say?&rdquo;<br>
+<strong>Zoudou</strong>: &ldquo;That is correct. Only one of you.&rdquo;<br>
+<strong>Zhen</strong>: &ldquo;Typical. No way. <strong>No one&rsquo;s going to fall today for your ritual.</strong>&rdquo;
+<span class="attribution">Zhen saw the trade coming and refused it before she finished offering.</span></blockquote>
+
+<blockquote><strong>Zhen</strong>: &ldquo;This is a reminder, kids, don&rsquo;t go to any weird toilet.&rdquo;
+<span class="attribution">After searching the lumber camp&rsquo;s outhouses, critically failing a DC 18 Fortitude save on a natural 1, and catching enfeebled 1 for ten minutes.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;If you play false with us, if any harm comes to the villagers, we will find you.&rdquo;
+<span class="attribution">Closing the deal with Mugirou, straight after a Sense Motive came back sincere.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;Mu-Jin walks up past the gore and unbinds Meng-Sung, saying &mdash; your father was looking for you.&rdquo;
+<span class="attribution">The payoff of Kum Soon-Chong&rsquo;s plea from Session 7, delivered without ceremony.</span></blockquote>
+
+<blockquote><strong>Kaelen</strong>: &ldquo;I don&rsquo;t want to get eaten, or I don&rsquo;t want to be used for rituals. So you can go at yourself.&rdquo;
+<span class="attribution">Answering Zoudou&rsquo;s &ldquo;spiritual cowardice&rdquo; line with his bo staff already drawn.</span></blockquote>
+
+<blockquote><strong>Kaelen</strong>: &ldquo;Ew, I got zombie all over me.&rdquo;<br>
+<strong>Kaoru</strong>: &ldquo;Well, at least you don&rsquo;t have to get it out of your fur.&rdquo;
+<span class="attribution">After Kaelen&rsquo;s Inner Upheaval crit for 57 detonated the last Kugaptee&rsquo;s Blessing &mdash; which Mu-Jin had just narrated as a Fist of the North Star pressure-point technique.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;As you see, Kaoru turns his sword, and you can actually see the electric sparks flying down it.&rdquo;
+<span class="attribution">Charging the ninjato with Shocking Grasp as the talking stopped.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;I&rsquo;ll help you with it. We&rsquo;ll see it back up and running.&rdquo;
+<span class="attribution">The first yes to the Cerulean Tea House, seconds after Mu-Jin floated the idea. Kaoru went on to finish the restoration himself.</span></blockquote>
+
+<blockquote><strong>Kaelen</strong>: &ldquo;I&rsquo;m going to make him a bowl of spaghetti.&rdquo;
+<span class="attribution">On learning Cooking Lore was a valid way to influence Old Man Matsuki. The GM had just confirmed he does not have Cooking Lore.</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;Probably also weak to vitality, because they&rsquo;re variant zombies.&rdquo;
+<span class="attribution">Calling a creature&rsquo;s second weakness off the sprite colour. The GM confirmed it, Kaelen took the recommendation, and it was worth ten extra damage on the killing blow.</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;Probably none of us should suffer from that, because I&rsquo;m older than him.&rdquo;
+<span class="attribution">On discovering that Old Man Matsuki penalises anyone appealing to trust in the younger generation. Iryoku is an ancient yaksha who has been in Willowshore since its founding.</span></blockquote>
+
+<blockquote><strong>The Gamemaster</strong>: &ldquo;But as you look up, there is a vaguely humanoid shadow rearing up from beyond this wall. The shadow lunges at the wall from the far side, causing the misty barrier to suddenly flex and bulge as if it were a solid wall being pushed against from beyond.&rdquo;
+<span class="attribution">The moment the ritual broke.</span></blockquote>
+
+<section class="pax-notes">
+<h2>Pax&rsquo;s Notes &mdash; Zhen Stillness&rsquo;s Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Zhen did this session</h3>
+<ul>
+  <li>Searched the camp outhouses and got a lungful for it. <strong>Critically failed the stench save on a natural 1</strong> &mdash; enfeebled 1 for ten minutes, walked it off, and never let the table forget it.</li>
+  <li>Held the line in the negotiation with <strong>Mugirou</strong>. Confirmed the terms cost the party nothing they weren&rsquo;t already committed to, then pressed the only real question &mdash; <strong>enforcement</strong>. Refused to let anyone approach the tent alone.</li>
+  <li><strong>Refused Zoudou&rsquo;s trade outright</strong>, and named it before she could finish making it. Offered her own life as the substitute instead.</li>
+  <li>Opened Encounter 1 with <strong>Earth&rsquo;s Bile</strong> after Mu-Jin flagged Zoudou&rsquo;s fire weakness, then read the HP totals and closed with a two-target <strong>Electric Arc that killed Zoudou and an occultist in the same action</strong>.</li>
+  <li>In Encounter 2: opened with Earth&rsquo;s Bile using the spread the enemies&rsquo; own shoves had created (two critical failures, doubled persistent fire), then took the quickened Stride to a flank and struck with the nodachi. <strong>Took zero damage all fight.</strong></li>
+  <li><strong>Healed the party out of combat</strong> with a 10-foot burst once the last Blessing was down. Unremarked, and the reason nobody needed anything else.</li>
+  <li><strong>Killed the second Kugaptee&rsquo;s Blessing with a nodachi critical hit for 44</strong>, chosen deliberately because Kaelen was at 10 HP and in reach of it.</li>
+  <li><strong>Talked Kaelen into using Inner Upheaval</strong> on the last one. That crit for 57 and ended the fight.</li>
+  <li>Downtime: Earn Income at the <strong>Mother&rsquo;s Coil</strong>, then <strong>Religion at the Lady of Souls</strong> (a level 5 task at DC 20 &mdash; the highest anyone took). Gathered peachwood on Nature/Survival.</li>
+  <li>On Granny Hu: ran the discovery that turned up <strong>DC 18 Diplomacy</strong>, the cheapest lever the party had on her. His one influence attempt <strong>failed even after a hero point</strong>. Then, at 5 of 7, deliberately <strong>stood down</strong> rather than risk a critical failure &mdash; and Kaelen closed it.</li>
+  <li>Told the GM, at stars and wishes, that the influence subsystem is <em>&ldquo;just skill checks&rdquo;</em> and that the same scene roleplayed out would have been better. He took it well.</li>
+</ul>
+
+<h3>Things Zhen knows that the party does not</h3>
+<ul>
+  <li>Nothing new was hidden from him this session. The asymmetry runs the other way: <strong>Mu-Jin is the only one who can read the ledger</strong>, and therefore the only one who knows what the Consecrate ritual actually says. Worth asking him directly rather than waiting for him to volunteer it.</li>
+  <li><strong>The wrapped nodachi has now crit in two consecutive sessions.</strong> His father&rsquo;s rule was to keep it always and never draw it until certain. He is drawing it more, and faster, and it is working. That is not a secret from the party &mdash; it is a thing he has not said to anyone, including himself.</li>
+  <li>He remains the party&rsquo;s only real Perception (+9). In a horror AP where the threat is currently on the far side of a wall, that is a job, not a stat.</li>
+</ul>
+
+<h3>What Zhen is thinking about</h3>
+<ul>
+  <li><strong>The shadow did not get through.</strong> It hit the wall hard enough to deform it and then it stopped. Whatever the mist is, it is currently the only thing between Willowshore and Kugaptee &mdash; which means the curse holding the town prisoner is also the thing keeping it alive. That is an unpleasant shape for a problem to have.</li>
+  <li><strong>The ritual was a door, not a weapon.</strong> Meng-Sung was not being killed for power; he was an <strong>offering</strong>, and an &ldquo;old soul.&rdquo; They needed a specific kind of person. That implies there are others, and that being an old soul is a liability in this town. Zhen is a samsaran. He should think about whether that puts him on the same list.</li>
+  <li><strong>Mugirou is a working relationship with a monster</strong>, made in good faith on both sides, and nobody in Willowshore knows about it. It held tonight. It will not hold the first time the town wants vengeance instead of prisoners.</li>
+  <li>Tactically: three of the four kills tonight were <strong>crits into a weakness</strong>. But <strong>Kaelen took thirty-seven and finished at ten</strong> while Zhen took none. The tank is soaking everything and the healer is untouched. That is the wrong distribution, and it worked only because the fight ended in two rounds.</li>
+  <li><strong>Level 4.</strong> Earth&rsquo;s Bile has been the workhorse two sessions running, and Electric Arc has now closed out three enemies across two fights. Garden of Healing has not been needed <em>in</em> a fight yet.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>What does the ledger say?</strong> Ask Mu-Jin directly, and get the Consecrate ritual&rsquo;s actual text &mdash; not a summary.</li>
+  <li><strong>Who else in Willowshore is an &ldquo;old soul&rdquo;?</strong> And does anyone besides the noppera-bo know how to tell?</li>
+  <li><strong>What was the surviving cultist saying when it dropped to its knees?</strong> The GM was explicit that the party could not hear it.</li>
+  <li><strong>Where is the governor?</strong> The council is temporary by the GM&rsquo;s own framing, which means the governor is a plot, not a vacancy.</li>
+  <li><strong>The storeroom trap door</strong> in the lumber camp is still unopened, and the party has now left the camp.</li>
+  <li><strong>Does Mugirou stay bought?</strong> And what happens to them when Willowshore hears the party made a deal with a faceless thing.</li>
+  <li><strong>Shinzo.</strong> Mu-Jin&rsquo;s two theories are both worse than they sound. If the curse only stops people getting <em>out</em>, then nothing has ever been keeping anything <em>in</em>.</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">End of Book One</span>
+  <p>Summer is over. The noppera-bo menace is ended, the council is seated, and the thing that wanted through the wall is still on the other side of it.</p>
+  <div class="big-line">&ldquo;And with a new season comes a new season of problems.&rdquo;</div>
+  <span class="speaker">&mdash; AndeGM, closing the season</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>
