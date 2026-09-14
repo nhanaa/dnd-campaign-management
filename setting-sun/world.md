@@ -108,6 +108,19 @@ Two dens closed the day. The **Duneshaker Solifugid** (500 HP, Quickened) ate th
 
 **Three Taumatan shrines** found (Nisaye, Ramijav, Umantar), a treasure hex (3 major elixirs of life, a major charm of electricity resistance, Moonlit Chain), and **3,300 pp** in bounties and confiscations.
 
+### Book 4, Session 15 — Bonmou, One Hundred Percent (2026-09-13)
+**Day 3, morning → last light. Bonmou 100% cleared.** **Level 14 → 15** after the second Watchtower (140 XP + 40 for finding every team base). **Level 15 is the Bonmou cap; the table returns to milestone XP from here.** Feathers held at 10. Six fights, six wins, no team fights — Cody had run out of teams (*"I am out of teams"*).
+
+The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks and a stone market, a **cemetery**, a **temple of Hei Feng**, a **lighthouse**), the last transport tower, and a **Taumatan shrine to the god of games, competition and boasting** (name as heard, "Chihindvara" — confirm), honoured with rock, paper, scissors and a roll-off Clutch won on a natural 20.
+
+**All four Watchtowers were cleared.** Each held an incorporeal pair that re-forms in 12 hours unless the tower's signal brazier is lit; the garrisons had died before they could light them, and lighting each one in bright purple flame laid the spirits to rest. **Poltergeists** (Clutch and Sattva kills) → +2 greater striking greater flaming returning chakram · **Shadows** (Seva and Clutch) → major staff of elemental power · **Banshees** (Ferrok and Seva; Seva left **Drained 4** for the day) → major boreal staff · **Wraiths** (Ferrok ×2; Seva's Rooting rune pinned both) → scalding gauntlets (sold).
+
+**Jaiban, the Lord of the Island, was killed** — the revenge Sovael swore in S11. True Target for four set up natural-20 crits from Clutch and Ferrok; Ferrok's Spellstrike left it on 1 HP; Sovael's natural-20 Sure Strike Fire Ray hit for 100 and forced **Earth-Shaking Ferocity** (Cody: back up at 100 HP + a free Quaking Stomp); **Seva's Gouging Claw Spellstrike finished it.** 12th den, **1,200 pp.** Cody: *"the other group brought him down at level 14."* He reminded the table that **the beasts brought down in the qualifier are resurrected by the Ruby Phoenix afterward** — Sovael: *"Let's be respectful. At least we proved our might."*
+
+**Tamikan was killed** — the flier the party fled in S13. Ferrok had named Earthbind at the S13 level-up; Sovael bought two scrolls and **grounded her twice**, held her reactions with Roaring Applause, and ended her with Whispers of Weakness → Fire Ray hitting by exactly zero. Clutch took 317 damage and intercepted 167 of it for others. No bounty announced.
+
+**Cliffhanger.** Climbing Mount Haminabu at dusk, the party found the **gates of the Ruby Palace** besieged by **about ten armed fighters from a collection of teams**, hammering on the doors and shouting for Hao Jin (*"You'll pay for this humiliation, even if we have to bash this damn door down"*) — who turned on the Nameless: *"The doors only open for the feathers. But I'm betting you they've got some."* Next session: *"some in-between stuff"* before the tournament proper.
+
 ## The Qualifying Round — structure (established S10)
 
 *Full transcript of Ingdani's briefing lives in `sessions/session-10-07-26-2026/recap.md`.*
@@ -213,6 +226,7 @@ Two dens closed the day. The **Duneshaker Solifugid** (500 HP, Quickened) ate th
 - **The Nightmares** (beaten S11, one dead) — four dark-armored wakizashi skirmishers who blend into the forest; Tumbling Attack, feint, sneak attack, weak Fortitude. First rival team the party beat; one bled out mid-turn (a real death — wildlife rules don't protect duelists from persistent damage in the fiction of the moment; the survivor forfeited burning).
 - **The Last Breath** (beaten S11) — a team of three: a katana swordsman on the Pale Sun statline, an unarmed monk (Qi Blast force cone, trip + **Punch Down** +2d10 vs prone, nonlethal fists), and a magus ("mage") with Quickened Translocate, Zephyr Slip, a rank-7 telekinetic boulder, and **Disintegrate**. The magus died to Ferrok; the swordsman was dropped; the monk forfeited nearly untouched.
 - **Jaiban, the Lord of the Island** — "legendary beast of Bonmou," a titanic croc-saurian ("CrocaMantis") laired behind a waterfall amid giant reptile bones. Perception +34, AC low-40s, RK DC ~48, **permanently quickened** (4-action turns), Jaws +37 reach 20, Tail +35 reach 25, **Quaking Stomp** (1A, 1/min — Earthquake, 11d6+4, DC 41 basic Reflex, 100 ft). Ingdani: *"mayhap the most dangerous thing on this island"* — every team faces his wrath eventually. The party fled via group escape; Sovael has sworn revenge. The DM joked a mate and a "Jaiban's dad" statblock exist.
+  - **KILLED S15 (level 15).** Book block is level 15 / 170 HP; Cody ran it at **470 HP, AC 41**, Quickened (removed mid-fight), plus **Earth-Shaking Ferocity** (reaction at 0 HP — ran as regain 100 HP and a free Quaking Stomp). Also **Whiptail** (Fortitude save, stun) and Jaws **Grab** that restrains. Sovael's Fire Ray forced the Ferocity; Seva landed the killing blow. *"I told you I will come back for you, Jaiban."* **Resurrected by the Ruby Phoenix after the qualifier** — he'll be back on Bonmou.
 - **Tivael** — Sovael's cousin and the previous campaign's PC. **Told Sovael he would attend this tournament and has not appeared.** Ferrok's last knowledge is that the old party disbanded and Tivael went off alone.
 
 
@@ -228,6 +242,7 @@ Two dens closed the day. The **Duneshaker Solifugid** (500 HP, Quickened) ate th
   - **Grandfather Mantis** (380 HP) — giant praying mantis. **Pounce**, **Improved Grab**, agile claws at +32. Grabbed and began eating Sovael.
 - **Under the Pale Sun** — **ELIMINATED from the tournament** in S14 (ten years off the island). Two Archery Specialists (190 HP, **AC 35**) and two Swordsmen (250 HP).
 - **The Trembling Meteor** — beaten in S14; three killed, the archer forfeited as sole survivor. Archer / Monk / Mage / Swordsman.
+- **The crowd at the Ruby Palace gates** (S15, cliffhanger) — about ten armed tournament-goers, *"disparate outfits and ancestries… a collection of teams,"* besieging the palace at dusk on Day 3 and demanding Hao Jin answer for calling them *"halfway across the world, then just send us off."* Realising *"the doors only open for the feathers,"* they turned on the Nameless. Whether they are eliminated teams or teams short of ten feathers is unknown. Clutch had predicted a King-of-the-Hill finish; Ferrok, that the late teams would be desperate.
 
 ## Key Locations
 
@@ -238,12 +253,16 @@ Two dens closed the day. The **Duneshaker Solifugid** (500 HP, Quickened) ate th
 - **Mount Haminabu (Bonmou)**: the tallest peak on the island. On **Day 3**, teams holding 10 feathers ascend it to lock in their tournament seat. A shrine hex at its base held real treasure (Candle of Truth, golden spyglass, greater healing potions). *(Spelling as heard — confirm.)*
 - **The Strange Village (Bonmou)**: a village of aggressively plain humans with weapons and gear far below tournament grade, glaring "mad-dog" stares at passers-by, daring an approach. The party detoured around it. Unresolved.
 - **Transport towers (Bonmou)**: intact rune-engraved teleportation platforms; each discovered tower links to all other discovered towers. **Three found (S11 ×2, S12 ×1)** — the network is live. Teams can meet at them.
-- **★ The Watchtower (Bonmou, S12) — UNRESOLVED, and the biggest deliberate hook on the board.** *"Not a transport tower nor a lighthouse, but what almost looks like a very tall, secluded brazier. The tower itself is made of stone and goes up several stories, though it's pretty narrow… At the top is a pyre, one that seems like it could be lit, but you'd have to reach the top first, and you have a feeling that that might prove dangerous. There's a dark energy surrounding this place, a sense of unease… **Something nasty haunts that tower.**"* Cost to attempt: **10 minutes, pass or fail, "similar to an encounter."** The party marked the hex and walked around it. Sovael: *"I think that's a comeback for later."* **The only site Cody has flagged as a discrete, optional, dangerous objective.**
+- **★ The Watchtowers (Bonmou) — ALL FOUR CLEARED S15.** Four narrow haunted signal towers, each two squares from a transport tower, each held by an incorporeal pair with **Rejuvenation** (re-forms in 12 hours unless the brazier is lit). The garrisons died before they could light the braziers; lighting one in bright purple flame lays its spirits to rest permanently and leaves a reward. Poltergeists → +2 greater striking greater flaming returning chakram · Shadows → major staff of elemental power · Banshees → major boreal staff · Wraiths ("the most dangerous tower") → scalding gauntlets. *Original S12 description follows.*
+- **The Watchtower (Bonmou, S12) — first sighting.** *"Not a transport tower nor a lighthouse, but what almost looks like a very tall, secluded brazier. The tower itself is made of stone and goes up several stories, though it's pretty narrow… At the top is a pyre, one that seems like it could be lit, but you'd have to reach the top first, and you have a feeling that that might prove dangerous. There's a dark energy surrounding this place, a sense of unease… **Something nasty haunts that tower.**"* Cost to attempt: **10 minutes, pass or fail, "similar to an encounter."** The party marked the hex and walked around it. Sovael: *"I think that's a comeback for later."* **The only site Cody has flagged as a discrete, optional, dangerous objective.**
 - **The house-sized eggshell (Bonmou, S12) — UNRESOLVED.** *"An enormous, broken eggshell lies on this small beach. The shell is as large as a house and over a foot thick."* **Three Recall Knowledge attempts failed** — Sattva (master Nature), Seva, and Ferrok. Sattva: *"This is something unnatural."* Cody, unprompted: *"there are other kaiju in the world besides Jaiban."* Whatever hatched is still on the island.
 - **The Taumatan shrines (Bonmou, S12)** — three found in one afternoon, each honoured by an action rather than a check, each granting a blessing **for the duration of the stay on Bonmou**. Identifying a shrine requires **training in Religion** (*"those of you trained in Religion, as we've established, are capable of identifying these"*).
   - **Shrine of Kantiani** — god of charity, feasts and cooks. Honour: prepare and eat a meal. **Blessing: one meal a day provides a full day's nourishment.**
   - **Shrine of Jinyapur** — god of sailing, swimming and wind. Honour: swim in Bonmou's waters at least 10 minutes. **Blessing: any success on an Athletics check to Swim becomes a critical success.**
   - **Shrine of Angonar, "the Melodious Wind"** — god of messengers, music and love. Honour: **perform a love song**. Sovael sang it under protest; it turned into a whole-party number at sunset. **Blessing — Incorruptible Messages: each character may cast *Tongues* once as a divine innate spell while on Bonmou.** ⚠️ **Jaiban is a legendary beast, not a dumb animal** — the table noticed immediately that this makes a conversation with him possible.
+  - **Shrine of the god of games, competition and boasting** (S15; name as heard "Chihindvara"/"Shehan Davara" — confirm with Cody). Honour: play a game for 10 minutes (rock, paper, scissors, then a d20 roll-off — Clutch won on a natural 20). **Blessing: +1 circumstance to skill checks in non-combat competitions on Bonmou.**
+- **Team bases found in the final loop (S15)**: a **shrine of Tsukiyo** (with docks and a stone market), a **cemetery**, a **temple of Hei Feng**, and a **lighthouse** — the last team base. Finding every team base was worth 40 XP. **Cody: *"You have walked everywhere on Bonmou."***
+- **The Ruby Palace (Mount Haminabu summit, S15)** — Hao Jin's palace. Reached at dusk on Day 3; its gates were besieged by about ten fighters from several teams. *"The doors only open for the feathers."*
 - **Goka**: the Tian city where Hao Jin returned and where the Ruby Phoenix Tournament is based.
 - **Talmandor's Bounty**: Andoran colony, resupply point
 - **Vil-Azmar**: Island with cave systems leading underground
@@ -447,7 +466,7 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 ### Session 13 New Enemies (Ruby Phoenix, Book 4)
 
 - **Tino's Toughest** (rematch, level-13 elite): Tino 320 HP / AC 33 · Takatorra 345 / AC 33 · Ji-yook 295 · Yabin the Just 295 / AC 33. Tino's three-action **Qi Blast** is a 60-ft cone; Yabin's **Arrow Salvo** is 8d10 at DC 35 Reflex; Yabin burns **Wooden Double** when dropped.
-- **Tamikan** — **kongamato**, level 16, **AC 39, 450 HP, fly 130**. Immune to paralyzed and sleep. **Boat Breaker** (ignores half a shield's Hardness). **Sonic Screech**: 18d6 in a 100-ft line, DC 37 basic Reflex. Talks. **Fled from — the party has no answer to a flier.**
+- **Tamikan** — **kongamato**, level 16, **AC 39, 450 HP, fly 130**. Immune to paralyzed and sleep. **Boat Breaker** (ignores half a shield's Hardness). **Sonic Screech**: 18d6 in a 100-ft line, DC 37 basic Reflex. Talks. **Fled from — the party has no answer to a flier.** **KILLED S15** (book block: level 16, 295 HP, 12d6 screech) — grounded twice by Sovael's Earthbind scrolls, reactions stripped by Roaring Applause, killed by his Fire Ray. Also **Flying Strafe** (fly 130 + two wing Strikes) and a tail Reactive Strike.
 - **Dread Roc**, **mammoth turtle**, **two gargantuan cave worms** (swallow whole), and an **enforcer camp**.
 
 ### Session 14 New Enemies (Ruby Phoenix, Book 4)
@@ -461,6 +480,18 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 - **Koto Zekora**, Onidoshi (**500 HP**): **Eclipse Burst** at **DC 41** (all five PCs failed), **Falling Stars** (6d10 bludgeoning + 14d6 electricity, and she will stand in her own), greatclub at 10-ft reach, **Reactive Strikes on approach** — both of her criticals on Clutch were reactions, for 170 total.
 - **Duneshaker Solifugid** (**500 HP, AC 40, Quickened**): **Venom Spray** 15d6 poison in a 30-ft cone at DC 36 (blinds on a failure), **Earth Shaker** on approach, 10-ft reach Jaws. ⚠️ **It has no Reactive Strike of its own** — reaction-denial is worthless against it; **Slowed is what matters**, because it cancels the Quickened.
 - **Berberoka** (**425 HP, AC 34, Quickened, 15-ft reach**): **Spray Water** 10d8 in a 60-ft line at DC 35, knocks prone and pushes. **Terrified of crabs** — a real, exploitable Fear trigger if anyone can produce a crab or an illusion of one.
+
+### Session 15 New Enemies (Ruby Phoenix, Book 4)
+
+*Full per-axis tuning analysis in `sessions/session-15-09-13-2026/encounter-analysis.md`.*
+
+- **Watchtower ghosts (all four)**: incorporeal — **resistance 15 to all damage except force, ghost touch and vitality**; immune to precision, bleed, death effects, paralyzed. **Rejuvenation** unless the tower's brazier is lit. Spirit damage does NOT bypass (Spirit Blast was resisted); vitality does (Spiritual Torrent, Vitality Lash). Ghost touch lets a grappler grab them.
+- **Watchtower Poltergeist** (190 HP, AC 36): **Telekinetic Storm** — one attack against every creature in range, MAP applied only after all are made. Invisible until it Frightens.
+- **Watchtower Shadow** (250 HP at the table; book 190): Translocate once, Shadow Hand +30 (4d10+17 void), goes for the back line.
+- **Watchtower Banshee** (255 HP, AC 37): **Wails of the Damned** — void AoE, **drained on a failure** (Seva hit Drained 4), a death effect; **Terrifying Touch** (Frightened 2, DC +5 on a crit); **Vengeful Spite** when critted.
+- **Watchtower Wraith** (285 HP, AC 39): best save Will, **worst Fortitude, sunlight powerlessness**; at the table it cast **rank-7 Howling Blizzard** and **Eclipse Burst** (not in the book block), Grip of Fear, Spectral Hand +32 void with Drain Life, Reactive Strike at 5 ft. Rooting pins them in flight.
+- **Jaiban** and **Tamikan**: see Key NPCs / Session 13 entries above.
+- **Drained has no cheap fix at level 15**: Treat Condition covers only clumsy/enfeebled/sickened; counteracting needs a high-rank spell.
 
 ### The action-economy lesson from S14
 Three of the five wins were decided by **denying enemy actions, not by damage**:
