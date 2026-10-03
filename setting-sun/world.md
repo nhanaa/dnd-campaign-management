@@ -121,14 +121,59 @@ The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks
 
 **Cliffhanger.** Climbing Mount Haminabu at dusk, the party found the **gates of the Ruby Palace** besieged by **about ten armed fighters from a collection of teams**, hammering on the doors and shouting for Hao Jin (*"You'll pay for this humiliation, even if we have to bash this damn door down"*) — who turned on the Nameless: *"The doors only open for the feathers. But I'm betting you they've got some."* Next session: *"some in-between stuff"* before the tournament proper.
 
-## The Qualifying Round — structure (established S10)
+### Book 4, Session 16 — The Doors Only Open for the Feathers (2026-09-20)
+**Day 3 dusk → the following evening. THE QUALIFYING ROUND IS OVER — ten feathers surrendered to Hao Jin, the Nameless are in the tournament.** No XP, no level-up (level 15 is the Bonmou cap; milestone from here). Four fights, four wins.
+
+**The gate.** The mob from S15's cliffhanger called themselves **the Fallen Moon** — not a team but the remains of several eliminated ones, ten fighters deep, blaming Hao Jin personally for what Bonmou cost them (*"Calling us halfway across the world and sicking these monsters on us?"*). They turned on the Nameless for their feathers, and **Ran-to** (Lightkeepers), **Mafika Ayuwari** (Speakers to the Wind) and **Tino** (Tino's Toughest) fell in beside the party unprompted. The allied NPCs took six of the ten kills (Tino 3, Ran-to 2, Mafika 1) to the party's four (Seva 2, Ferrok 1, Sattva 1) — but **Sovael did 739 of the 2,430 damage**, off an eighth-rank Divine Armageddon that caught nine of the ten. Nobody has followed up on what happened to the Fallen Moon afterward.
+
+**Hao Jin, in person.** She met them at the gate — Tian woman, violet robes, vermilion hair — apologised for the ambush (*"I was about to step in and deal with the Fallen Moon myself, but at a point it seemed you were all enjoying yourselves"*), took the ten silver feathers, and opened the Ruby Palace. Sovael got her autograph on a spell scroll; Ferrok answered her in Tien. **Ingdani departed**, her guide duty done.
+
+**The feast and the final eight.** An infinite self-replenishing buffet, then Hao Jin named the bracket: **the Arms of Balance, the Biting Roses, the Lightkeepers, the Speakers to the Wind, the Steps of the Sun, Tino's Toughest, Winter's Roar, and the Nameless.** The room openly sized the Nameless up — word had spread that they **killed Jaiban**. Then Hao Jin walked to a balcony and **threw a vermilion phoenix over Bonmou, resurrecting every beast the teams had killed** (Jaiban and Tamikan included). *"Well then, dessert anyone?"*
+
+**The tournament proper is DOUBLE ELIMINATION** — a winners' bracket and a losers' bracket; a team must lose twice to go out, and the losers' bracket survivor meets the winners' bracket survivor in the final. Timeline: boats the day after the exhibition → a week at sea → several days to **Goka** → one week of tournament.
+
+**The exhibition.** Held the next evening in the Ruby Palace courtyard for the sponsors, including **Nai Yan Fei, Empress of Goka**, personal guest of the Ruby Phoenix. **Four bouts per team** — three opponents of Hao Jin's choosing, one team-vs-team. No bearing on seeding; victories earn prizes (none awarded yet). The Nameless won three and **the fourth, team versus team, is still owed.**
+- **Bout 1 — five Butterfly Blades** (235 HP each), the Empress's personal guard: twin butterfly swords, Parry, feints, mobility strides, Reactive Strike. Won; the fifth Blade was still standing at 77 HP when the bout was called. Clutch was dropped and revived.
+- **Bout 2 — two Rune Giants** (level 16, 330 HP, AC 38, **immune to fire**, 20-ft-reach greatswords, Invoke Rune, Wide Swing, **a bonus Reactive Strike reaction each turn**). Won. Decided by Sovael's sixth-rank Roaring Applause, which both failed.
+- **Bout 3 — Clockwork Dragon (400 HP, AC 42, physical resistance 15 bypassed by adamantine, 20d6 Breathe Oil on a fixed two-round timer) + two Clockwork Choppers (275 each)**. **Weakness: electricity 15.** The hardest fight of the night — ~1,530 damage into the party, 776 of it absorbed by Clutch. Won.
+
+**Cody put the campaign at roughly the halfway point of the AP**, and noted he runs Ruby Phoenix as *"a much longer Book 1 and a much shorter Book 2"* because of Book 2's pacing. The tournament proper could begin next session.
+
+### Book 4, Session 17 — The First Bell (2026-09-27)
+**Bonmou exhibition closed 4/4 → level 16 → a week at sea to Goka → final exhibition → THE TOURNAMENT HAS BEGUN. The Nameless are 1–0.** Three fights, three wins, no deaths.
+
+**Exhibition bout 4 (team vs team) — the Steps of the Sun**, a troupe of performers. Both musicians opened with Spirit Song; **Sovael was dropped in round 2** (Amihan's 94-point Confident Finisher, a Telekinetic Bombardment and Halspin's bow) and brought back by Clutch's Battle Medicine, then Seva's. Clutch killed **Maalya**, Sattva killed **Amihan**, and **Halspin and Joon-seo forfeited** at the top of round 6. Elsewhere: Tino's Toughest beat the Biting Roses, the Lightkeepers crushed the Arms of Balance, and **Mafika Ayuwari beat Ernak Lostwind** in the last duel of Speakers to the Wind vs Winter's Roar.
+
+**Prizes: 60,000 gp, 12,000 each** (Cody quoted per-win tiers of 5k/10k/15k/20k and the 60,000 total). **No more treasure from fights.** **Level 16**, plus one retrained feat each during the week at sea (Sovael: Gifted Power → Debilitating Dichotomy; Clutch: Shielding Taunt → Long-Distance Taunt).
+
+**Goka.** Thousands of fans at the docks, dragon-drawn cart races in the sky, an escort of monks and priests of Abadar, fireworks; the Nameless' Bonmou record arrived before them. Hao Jin housed the teams in **the Ruby Village**. The **Steps of the Sun threw a party** for every team (most of the Lightkeepers stayed away — Ran-to came; **Syu and Shino did not**). Seva canvassed the teams' motives: Winter's Roar want to compete, **Mafika wants an artifact of Old-Mage Jatembe** he believes Hao Jin holds, the Lightkeepers said nothing, the Biting Roses and Tino's Toughest will decide if they win. The Nameless' own answers: realm travel (Sattva), a resurrection-ritual scroll or strength (Clutch), **to be champion, then a gladiatorial school** (Ferrok), rub it in Tivael's face (Sovael), nothing from the vault (Seva — her reasons are her own). **Seva is suspicious of the Lightkeepers** — there was cheating at the last tournament ten years ago, and things feel *"a little too smoothly."* Clutch, who was there, says his own loss was clean.
+
+**Final exhibition — two Thrasfyrs** at the Ruby Phoenix Arena, before Hao Jin, the Empress and senior priests of Abadar. Won in 7 rounds; Sattva killed B, Clutch killed A (both finishing blows flipped by Sovael's True Target — Ferrok 20/1, Clutch 20/15). ⚠️ **Cody did not apply the Thrasfyrs' cold suppression of regeneration consistently** — two of B's ticks (50 HP) landed after Sovael's Frigid Flurry and cold Foretell Harm should have stopped them.
+
+**Tournament match 1 — the Arms of Balance**, won in 3 rounds with no PC down. **Sovael 646 of ~1,640 damage (45% of the monks' real HP)**: Divine Armageddon 266, Spirit Song (Jivati crit-failed for 102, stunned 2), and a Frigid Flurry that killed **Pravan**. Ferrok killed **Ranya** and **Jivati**; Sattva killed **Usvani**. The Lightkeepers beat Tino's Toughest; **Tino's Toughest and the Arms of Balance drop to the losers' bracket.**
+
+**Next: the Nameless vs the Biting Roses** (who beat them in S14). Seva's player is out next week. **Cody has closed StartPlaying applications** — *"It's going to be you five all the way through"* — and expects the campaign to end around November–December.
+
+## The Tournament Proper — structure (from S16–S17)
+
+- **Double elimination.** All eight teams start in the winners' bracket. A loss drops a team to the losers' bracket; a loss there eliminates it. The losers'-bracket survivor meets the winners'-bracket winner in the final.
+- **The second-place team in the winners' bracket is seeded** in the losers' bracket and needs only three wins there instead of four.
+- **One match per day.** Cody: *"Don't hoard spell slots or abilities. You're going to get to use them every fight."*
+- **No prize money between matches**, but shopping is allowed (Goka = level-20 settlement).
+- **+1 hero point for every finished match** (including the exhibition), on top of the usual three per session.
+- The Ruby Village is home for a week regardless of results. Fights are broadcast across Tian Xia; the announcer is **Emi**.
+- **Bracket as of S17**: Round 1 — **Nameless def. Arms of Balance**, **Lightkeepers def. Tino's Toughest**. Next — **Nameless vs Biting Roses**. Losers' bracket: Tino's Toughest, Arms of Balance.
+
+## The Qualifying Round — structure (established S10) — **COMPLETE as of S16 (2026-09-20)**
+
+> **The qualifying round is over.** The ten silver feathers were handed to Hao Jin in person at the Ruby Palace gate and the Nameless are in the tournament proper. Everything below is retained as the historical record of how the qualifier ran — the feather economy, the encounter checks and the hex clock no longer apply.
 
 *Full transcript of Ingdani's briefing lives in `sessions/session-10-07-26-2026/recap.md`.*
 
 | | |
 |---|---|
 | **Goal** | Hold **10 Silver Feathers** at the end of Day 3 |
-| **Current count** | **10 — the qualifying number, held.** S13 went 8 → 9 → 10; S14 went 10 → 9 (lost to the Biting Roses) → 10 (won back from the Trembling Meteor) and held it through a 3-feather enforcer match. **Two excess feathers were confiscated for 100 pp each** — there is no cushion to build. |
+| **Current count** | **0 — surrendered to Hao Jin at the gate in S16; the seat is secured.** Historically: **10, the qualifying number, held.** S13 went 8 → 9 → 10; S14 went 10 → 9 (lost to the Biting Roses) → 10 (won back from the Trembling Meteor) and held it through a 3-feather enforcer match. **Two excess feathers were confiscated for 100 pp each** — there is no cushion to build. |
 | **Team name** | **THE NAMELESS** (S12). Coined accidentally by Seva mid-challenge, ratified after the Embers, declared in-fiction by Clutch to Golarion's Finest. |
 | **Duration** | 3 days · active hours 6:00 AM – 10:00 PM |
 | **Wager** | 1–3 feathers per match, negotiable |
@@ -244,6 +289,21 @@ The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks
 - **The Trembling Meteor** — beaten in S14; three killed, the archer forfeited as sole survivor. Archer / Monk / Mage / Swordsman.
 - **The crowd at the Ruby Palace gates** (S15, cliffhanger) — about ten armed tournament-goers, *"disparate outfits and ancestries… a collection of teams,"* besieging the palace at dusk on Day 3 and demanding Hao Jin answer for calling them *"halfway across the world, then just send us off."* Realising *"the doors only open for the feathers,"* they turned on the Nameless. Whether they are eliminated teams or teams short of ten feathers is unknown. Clutch had predicted a King-of-the-Hill finish; Ferrok, that the late teams would be desperate.
 
+### New NPCs — Session 17 (2026-09-27)
+
+- **The Steps of the Sun** — a troupe of performers; lost exhibition bout 4 to the Nameless by forfeit; hosted the teams' party in the Ruby Village. All run at level 16, AC 38. **They run Sovael's own playbook** (Courageous Anthem + Lingering Composition, Spirit Song openers).
+  - **Amihan** (350 HP) — dancer, swashbuckler with a star knife. Vexing Tumble, Confident/Mobile Finisher (a 94-point crit on Sovael), Kip Up, **"Enjoy the Show"** Perform. Killed by Sattva.
+  - **Maalya** (350) — dancer, scimitar and shield. Shield Drum (Demoralize), Reactive Strike. Killed by Clutch.
+  - **Joon-seo** (375) — musician, whip. Spirit Song, Telekinetic Bombardment, Phantasmal Calamity, Blink Charge, Courageous Anthem. Forfeited.
+  - **Halspin the Stung** (350) — musician, bow. Spirit Song, Phantasmal Calamity, True Strike. Forfeited: *"Well fought."*
+- **The Arms of Balance** — four monks from the **Houses of Perfection**, *"masters of the elements."* Lost round 1 to the Nameless → losers' bracket. (Also lost their exhibition to the Lightkeepers.)
+  - **Usvani** (380) — Qi Blast (60-ft cone), Inner Upheaval, Flurry of Blows with Tornado Lunge. Killed by Sattva.
+  - **Pravan Majinapti** (350) — **Breath of the Glacier** (30-ft cone, encases: −15 ft Speed until 30 fire damage or DC 39 Escape). Killed by Sovael.
+  - **Ranya Shibhatesh** (350) — **Draw of the Aurora** (four 60-ft electricity lines that pull targets 5/15 ft). Killed by Ferrok.
+  - **Jivati Rovat** (350) — Winding Flow, **Magma's Grasp** (10-ft, Will save; failure loses a Focus Point + 3d6 persistent fire), Stand Still. Killed by Ferrok.
+- **Emi** — the tournament announcer. Human woman, early 30s, medium-length brown hair, tunic with the Ruby Phoenix emblem; circles the arena on a magical device. Surname heard as "Tagata" — unconfirmed.
+- **Mafika Ayuwari** (Speakers to the Wind) — **wants one of the artifacts of Old-Mage Jatembe**, which he believes Hao Jin holds. Beat **Ernak Lostwind** (Winter's Roar) in the exhibition's last duel.
+
 ## Key Locations
 
 - **Isle of Bonmou** ("Danger Island"): remote island hosting the Ruby Phoenix prequalifier. Vast, full of ancient ruins and sites untouched for centuries, deliberately stocked with dangerous wildlife as part of the test. Hao Jin reclaimed it and assigned each of the 32 teams a residence somewhere on it. *(Published AP spells it Bonmu; the GM says "Bonmou.")*
@@ -263,7 +323,9 @@ The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks
   - **Shrine of the god of games, competition and boasting** (S15; name as heard "Chihindvara"/"Shehan Davara" — confirm with Cody). Honour: play a game for 10 minutes (rock, paper, scissors, then a d20 roll-off — Clutch won on a natural 20). **Blessing: +1 circumstance to skill checks in non-combat competitions on Bonmou.**
 - **Team bases found in the final loop (S15)**: a **shrine of Tsukiyo** (with docks and a stone market), a **cemetery**, a **temple of Hei Feng**, and a **lighthouse** — the last team base. Finding every team base was worth 40 XP. **Cody: *"You have walked everywhere on Bonmou."***
 - **The Ruby Palace (Mount Haminabu summit, S15)** — Hao Jin's palace. Reached at dusk on Day 3; its gates were besieged by about ten fighters from several teams. *"The doors only open for the feathers."*
-- **Goka**: the Tian city where Hao Jin returned and where the Ruby Phoenix Tournament is based.
+- **Goka**: the Tian city where Hao Jin returned and where the Ruby Phoenix Tournament is based. An enormous city-state on Tian Xia's western shore, south of the Wall of Heaven — the largest city the party has seen. Dragons and drakes pull racing carts through the sky. Its market is a level-20 settlement.
+- **The Ruby Village (Goka, S17)**: a walled compound of red villas in Goka's wealthy upper city, patrolled by monks, priests and drake-riders. Each villa has hot springs, a sauna, private rooms and attendants. The teams' home for the week of the tournament, win or lose.
+- **The Dragon Bridge** and **the Ruby Phoenix Arena (Goka, S17)**: the arena seats thousands, with boxes for the wealthy and team stands; fights are broadcast across Tian Xia.
 - **Talmandor's Bounty**: Andoran colony, resupply point
 - **Vil-Azmar**: Island with cave systems leading underground
 - **Azlanti Prison**: Ancient prison beneath Vil-Azmar, formerly run by Camazotz cult
@@ -287,6 +349,7 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 - **Ancestry**: Dragonet (Aiuvarin heritage → Pearl Dragonet via Ascended Dragonet Heritage)
 - **Role**: Primary healer + AoE artillery + buff/debuff engine + the party's only counteract magic
 - **Replaces**: Tivael (retired to the Azlanti excavation). **Tivael's cousin** — took the phoenix-sealed invitation that was addressed to Tivael.
+- **Level 16 as of S17 (2026-09-27).** Necklace of Allure → CHA +6, spell DC 39.
 - **See**: `character-sheet.md`
 
 ### Clutch — Guardian — *(Bargrum's player)*
@@ -492,6 +555,11 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 - **Watchtower Wraith** (285 HP, AC 39): best save Will, **worst Fortitude, sunlight powerlessness**; at the table it cast **rank-7 Howling Blizzard** and **Eclipse Burst** (not in the book block), Grip of Fear, Spectral Hand +32 void with Drain Life, Reactive Strike at 5 ft. Rooting pins them in flight.
 - **Jaiban** and **Tamikan**: see Key NPCs / Session 13 entries above.
 - **Drained has no cheap fix at level 15**: Treat Condition covers only clumsy/enfeebled/sickened; counteracting needs a high-rank spell.
+
+### Session 17 New Enemies (Ruby Phoenix, Book 4)
+
+- **Steps of the Sun** and **Arms of Balance**: see *New NPCs — Session 17*.
+- **Thrasfyr** (×2, final exhibition): 450 HP, AC 39. **Weak to cold and cold iron 15**; **resistance 15 to non-cold-iron physical** (ate every bleed tick); **Regeneration 25, deactivated by cold or acid**. Fortitude best, **Will worst**. Tail breath weapon (8d12 fire cone, DC 38–40, recharge), **Tangling Chains** (18d6, 15-ft emanation, immobilize), Whirling Frenzy (one attack per target, no MAP until done), Improved Knockdown. ⚠️ Cody missed the cold suppression twice on B.
 
 ### The action-economy lesson from S14
 Three of the five wins were decided by **denying enemy actions, not by damage**:

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 22 — He Is Stronger Dead</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+  --frost: #7aa8c0;
+  --frost-glow: #7aa8c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-elaine { border-left-color: var(--frost); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-elaine { border-left-color: var(--frost); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>He Is Stronger Dead</h1>
+  <div class="subtitle">Session 22 &middot; A new elf at the thorn wall, two Hell Knights who disobeyed, and a goblin who finished the ritual after he died</div>
+  <div class="meta-row">
+    <span class="meta-pill">19 Sep 2026</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~3h 10m</span>
+    <span class="meta-pill">4 &ndash; 6 Calistril 4727 AR</span>
+    <span class="meta-pill">Level 7 &middot; ~220 XP</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:22%"></div>
+    <div class="comp-seg comp-social" style="width:18%"></div>
+    <div class="comp-seg comp-rp" style="width:24%"></div>
+    <div class="comp-seg comp-explore" style="width:28%"></div>
+    <div class="comp-seg comp-loot" style="width:8%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 22%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Parlay &amp; Recruit 18%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 24%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Travel &amp; Exploration 28%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Lore 8%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster + Hedge Mage &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, Divine) &middot; Medic + Living Nexus &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Scott</div>
+    </div>
+    <div class="char-card char-elaine">
+      <div class="char-name">Elaine Stormfrost <span class="new-badge">&middot; NEW</span></div>
+      <div class="char-class">Arctic Elf Rogue (Mastermind) &middot; Twilight Speaker &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Storm</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Lunar Dragon Thaumaturge &middot; Draconic Ravager &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Snowgeen &middot; absent, GM-run</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Boarhound animal companion &middot; 69 HP &middot; found the caravan road</div>
+      <div class="char-player">Bai Jian&rsquo;s companion</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The Hellbreakers left Thorngrip at ten in the morning on the 4th of Calistril with a forty-mile walk south ahead of them and a goblin elder riding a dog at the back of the column. Zanthar spoke the night&rsquo;s win into the Wand of Dream Message &mdash; <em>we found it, we won the bet</em> &mdash; and while he was still talking, a goblin guard came running: someone had walked up to a village nobody can find. She let herself be seen, gave up her stealth entirely, and bowed. <strong>Elaine Stormfrost</strong>, sent by Alceo and Phoebe, with master&rsquo;s stealth, a silver whip and a flat refusal to be anywhere near the front. Bai Jian took one look at the party&rsquo;s record and welcomed her on exactly that basis: <em>&ldquo;We&rsquo;re a bit loud. We are not sneaky at all.&rdquo;</em></p>
+    <p>Two fights later they came out of the Chitterwood onto farmland and found <strong>two Hell Knights of the Order of the Pike</strong> fighting a pair of skeletal giants. The party killed the giants in a single round &mdash; neither giant ever took a turn &mdash; and then did something the Hellbreakers have never once managed with a Hell Knight: they talked. <strong>Zanthar called the parlay</strong> instead of the fight. <strong>Hestlebeth and Hecatinia</strong> are Isgerian twins who were <em>ordered to ignore the undead</em> and disobeyed, lost their whole contingent to an ambush, and were down to one scroll and each other. They named the officer who gave the order &mdash; <strong>Vulaunex</strong> &mdash; and nobody at the table reacted to the name at all. The twins handed over a rare <strong>Divine Keystone</strong> ritual scroll and its components, the party burned their dead for them, and between Elaine&rsquo;s Make an Impression, Zanthar&rsquo;s cover story and Panacea&rsquo;s hero-pointed recruit roll, two Hell Knights became a <strong>Hell Knight Cavalry Brigade</strong> on the Hellbreakers&rsquo; side.</p>
+    <p>The town itself was Gillamoor: empty, cursed, and holding one survivor &mdash; <strong>Sister Endreah</strong>, the Lucent Mission&rsquo;s head sister, whom this party manacled in her own monastery in Session 6 and who is now dying on a cot with the curse pulling the soul out of her body. Up the hill, in a graveyard where every headstone had been dug up from the inside, the source was a single grave marked <em>forever in the memory of the 27th contingent of the Mercenary League</em>, bones roiling with void energy at the bottom of it. Brakknap sat down in the lotus position, his eyes lit blue, his ancestors stacked up behind him to the sky, and he began a ritual the goblins said would take minutes instead of the scroll&rsquo;s four days. The graves answered. Four <strong>Deathless Acolytes of Urgathoa</strong> came out of the ground and a <strong>Godclaw Hellcrown</strong> rose over the graveyard on a column of smoke and asked, <em>&ldquo;You dare counteract the will of Urgathoa?&rdquo;</em> Then it threw a rock at a ten-hit-point goblin and killed him instantly &mdash; the only attack it made in the entire fight &mdash; and Brakknap&rsquo;s soul stood up off his own corpse and kept chanting, louder. Panacea: <em>&ldquo;Oh, so he&rsquo;s stronger dead.&rdquo;</em></p>
+    <p>They finished a <strong>Severe</strong> encounter in two rounds. The curse broke, the graveyard became a tree, and Brakknap&rsquo;s ancestors chained their arms together and carried him up into a sky that went blue-green and then went quiet. The party healed the woman who still thinks they destroyed her monastery, and she gave them an hourglass charm and nowhere to go. In the dead surveyor&rsquo;s backpack at the bottom of the grave was a diary that names the next stop &mdash; <strong>Finder&rsquo;s Gulch</strong>, rumoured hideout of the <strong>Wight Mother of Isger</strong>, a child of Urgathoa said to be destined to conquer Isger with an army of wights. It is a hundred and forty miles <em>north</em>. They carried Brakknap&rsquo;s body back to Thorngrip and gave it to Neemi, who already knew.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="log-warning"><strong>Source note.</strong> The Foundry export lost the window 19:25 &rarr; 20:17 &mdash; the recruit roll, the reputation award, the whole Sister Endreah scene, and <strong>all of Round 1 of the graveyard fight</strong>. Everything in that window is reconstructed from the recording, and Round-1 damage numbers were never spoken aloud. They are marked unstated rather than guessed.</div>
+  <div class="timeline">
+
+    <div class="act social">
+      <div class="act-label">Act I &middot; Social &middot; Leaving Thorngrip</div>
+      <div class="act-card">
+        <h3>The Message, and the Stranger at the Wall</h3>
+        <ul>
+          <li><strong>Zanthar&rsquo;s Dream Message to Alceo</strong>: the curse is at Gillamoor, the party is going south, Rhokrag has lost the bet. <strong>Panacea</strong> was the one who remembered to send it &mdash; she flagged it inside her own session recap &mdash; and <strong>Bai Jian</strong> pushed to include the undead witch: <em>&ldquo;We also should tell them about the witch, no?&rdquo;</em></li>
+          <li>A goblin guard interrupted mid-message: someone was outside the thorn wall. They had only noticed because she had nearly been stepped on.</li>
+          <li><strong>Elaine Stormfrost introduced herself by choice</strong> &mdash; dropped stealth on being spotted and went into a performative bow. Sent by <strong>Alceo and Phoebe</strong> as support, already a Hellbreaker: <em>&ldquo;I usually try to stay away from things as much as possible.&rdquo;</em></li>
+          <li>Bai Jian welcomed her on the party&rsquo;s actual weakness: <em>&ldquo;I think we need that because we&rsquo;re part of the group. We&rsquo;re a bit loud. We are not sneaky at all.&rdquo;</em></li>
+          <li><strong>Brakknap said goodbye to Neemi.</strong> She embraced him and looked worried anyway; he told her <em>&ldquo;I have seen this, and this is the best course of action.&rdquo;</em> Nobody at the table registered it as foreshadowing.</li>
+          <li><strong>The horses stayed at Thorngrip.</strong> Bai Jian opened the question and argued the upkeep; <strong>Panacea</strong> supplied the terrain case &mdash; <em>&ldquo;If we&rsquo;re going through the forest, they&rsquo;re not gonna help.&rdquo;</em> Between them it decided the last twenty minutes of the session.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II &middot; Combat &middot; The Wights on the Trail</div>
+      <div class="act-card">
+        <h3>Four Wights, Two Rounds, Sixteen Damage</h3>
+        <ul>
+          <li>Midday halt. <strong>Panacea smelled them first</strong> &mdash; the rotting-corpse smell she now knows on sight. <strong>Bai Jian missed it entirely</strong>; he was feeding Ren boar off his own plate.</li>
+          <li><strong>Elaine opened with a natural 20</strong> against the wight&rsquo;s off-guard AC &mdash; she had initiative on Stealth and was undetected &mdash; for 34, then stepped straight back out of reach.</li>
+          <li>Cyrathul, Bai Jian, Zanthar and Elaine took one wight each. <strong>Zanthar killed his from 500 feet</strong> with Hand of the Apprentice, which meant the wight&rsquo;s <strong>Final Spite</strong> death-throe found nobody to hit.</li>
+          <li><strong>Panacea&rsquo;s Trade Death for Life did nothing at all</strong> &mdash; void damage into a void-healing creature. The wight <em>failed</em> its save and still took zero, and because it took no damage the hex&rsquo;s fast-healing rider never fired for Cyrathul either. A whole turn negated on both ends.</li>
+          <li>Panacea, immediately: <em>&ldquo;Should have used my other one.&rdquo;</em> Bai Jian said the lesson out loud for the table &mdash; <em>void damage is not very good against undead.</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III &middot; Exploration &middot; South Through the Forest</div>
+      <div class="act-card">
+        <h3>A Caravan Road the Scourge Closed</h3>
+        <ul>
+          <li>Camp, watches, and a quiet night: a doe and two fawns, owls, and three goblins snoring in a pile <em>&ldquo;like a Donald Duck cartoon.&rdquo;</em> <strong>Elaine took first watch</strong> &mdash; as she would again the following night.</li>
+          <li><strong>Bai Jian flagged that he had the party&rsquo;s best Perception and then gave the watch away anyway</strong> &mdash; he could take it &ldquo;mechanically,&rdquo; he said, but he was not going to; someone else took second watch. On the way back north he took second watch himself, and couldn&rsquo;t concentrate through the noise.</li>
+          <li>Morning. <strong>Panacea led the party back the way they had come</strong>; <strong>Ren overruled her</strong>, wagged his tail, and found an <strong>abandoned caravan road</strong> running dead south &mdash; a route the Scourge closed years ago.</li>
+          <li>An hour later, an old village on a hillock and the sound of a blade on armour. <strong>Panacea, Zanthar and Elaine heard it; Bai Jian didn&rsquo;t</strong> &mdash; Elaine 27, Zanthar 30, Panacea 31, Bai Jian 21 on a natural 6 with Master Perception.</li>
+          <li><strong>Panacea drew the conclusion</strong>, crediting Elaine for the thought: <em>&ldquo;Yeah, you&rsquo;re right, Elaine. The undead wouldn&rsquo;t be crying out in pain.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV &middot; Combat &rarr; Parlay &middot; The Order of the Pike</div>
+      <div class="act-card">
+        <h3>Two Hell Knights Who Disobeyed</h3>
+        <ul>
+          <li>Two armoured figures fighting <strong>two skeletal giants</strong> on the hillside, both still at full health. The one in front: <em>&ldquo;Please, I beseech you &mdash; help us.&rdquo;</em></li>
+          <li>The party killed both giants inside one round; <strong>neither giant nor either Hell Knight ever took a turn.</strong></li>
+          <li><strong>Bai Jian nearly Sudden-Charged the Hell Knights by mistake and caught it himself</strong> &mdash; <em>&ldquo;Oh, wait. Are they on our side? Shit, I forgot&rdquo;</em> &mdash; then rerouted around a 10-foot cliff to reach an actual giant.</li>
+          <li><strong>Bai Jian also remembered Cyrathul&rsquo;s Exploit Vulnerability carries a free Recall Knowledge rider</strong>, asked for it, and spent it on the giants&rsquo; weakest save: <strong>Will</strong>. Cyrathul being GM-run, that was Pax&rsquo;s play.</li>
+          <li><strong>Zanthar called the parlay</strong> rather than the fight. Both knights sheathed immediately.</li>
+          <li><strong>The reveal</strong>: twins, Order of the Pike, both born Isgerian. Their commander <strong>ordered them to ignore the undead</strong>. They disobeyed, researched it themselves, traced the corruption to Gillamoor, and were ambushed on arrival &mdash; four piles of bones and several dead Hell Knights still lie around the hill. Hecatinia named the officer: <strong>Vulaunex</strong>.</li>
+          <li><strong>Zanthar held the cover story together on a Deception 23</strong> when the twins pointed out that no village on this side of the Chitterwood is still inhabited.</li>
+          <li><strong>Elaine&rsquo;s Glad-Hand Make an Impression</strong> opened them up &mdash; Master Society, natural 5, hero point, reroll of 10, the table&rsquo;s <strong>+10 house rule</strong>, final <strong>36</strong>.</li>
+          <li>They gave up the <strong>graveyard</strong> as the suspected source and handed over a rare scroll of <strong>Divine Keystone</strong> plus its full 200 gp component set &mdash; as Hell Knights they could not cast it themselves.</li>
+          <li><strong>The recruit</strong>: the party argued them out of going home, on the reasoning that deserters who lost their company have nothing good waiting at the fort. <strong>Panacea rolled it on a hero point</strong> and treated Hecatinia&rsquo;s limp while the negotiation ran. <strong>Hell Knight Cavalry Brigade recruited &middot; +2 reputation.</strong></li>
+          <li>The party <strong>burned the fallen Hell Knights</strong> so nothing could raise them. Hecatinia cried. The twins would not let them strip the armour &mdash; <em>&ldquo;not without passing the tests first.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act V &middot; Roleplay &middot; Sister Endreah</div>
+      <div class="act-card">
+        <h3>Sixteen Sessions Later, Dying on a Cot</h3>
+        <ul>
+          <li><strong>Elaine spotted a figure through a window</strong> nobody else was looking at. Soft groaning inside. She declined to open the door &mdash; <em>&ldquo;I&rsquo;ll just chill over here if someone wants to open this door&rdquo;</em> &mdash; and <strong>Bai Jian opened it</strong> with no idea whether the dying woman was the witch they had come for.</li>
+          <li>Inside: <strong>Sister Endreah</strong>, head sister of the Lucent Mission, last seen manacled by this party in <strong>Session 6</strong>. Pale, dying. <em>&ldquo;After you destroyed the monastery.&rdquo;</em></li>
+          <li>Bai Jian, immediately: <em>&ldquo;We didn&rsquo;t destroy the monastery. We just knocked a lot of people out.&rdquo;</em></li>
+          <li>The undead drove her from the mission; she came to Gillamoor for answers and the curse got into her. <strong>Brakknap diagnosed it</strong> &mdash; she is dying and <em>will rise again</em> unless the curse is removed. <em>&ldquo;Her ways and her beliefs have allowed whatever evil is in the ground to infect her soul.&rdquo;</em></li>
+          <li>Brakknap offered the ancestors&rsquo; route instead of the scroll&rsquo;s four days: <em>&ldquo;We will impart the spirit of the forest back into this desecrated land if you will allow us to.&rdquo;</em></li>
+          <li>The party <strong>locked Endreah in the house</strong> and went up the hill.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI &middot; Combat &middot; The Graveyard (Severe)</div>
+      <div class="act-card">
+        <h3>&ldquo;You Dare Counteract the Will of Urgathoa?&rdquo;</h3>
+        <ul>
+          <li>The path up was clear of snow because <strong>skeletal feet had marched it flat.</strong> A ten-foot wrought iron fence, a dying tree, and graves dug open <strong>from the inside.</strong></li>
+          <li><strong>Elaine found the source</strong> &mdash; a hole pouring off void energy, headstone reading <em>&ldquo;forever in the memory of the 27th contingent of the Mercenary League.&rdquo;</em> Bones at the bottom with black tar boiling off them.</li>
+          <li><strong>Brakknap performed the ritual.</strong> Lotus position, blue fire in his eyes, a voice that was not his, the ancestor-goblins stacked behind him. <em>&ldquo;It feels like it&rsquo;s trying to almost fight with something not natural.&rdquo;</em></li>
+          <li>The graveyard answered: <strong>four Deathless Acolytes of Urgathoa</strong> punched out of the ground, and a <strong>Godclaw Hellcrown</strong> &mdash; smoke with a burning face &mdash; rose above the fence and addressed Brakknap directly.</li>
+          <li><strong>The acolytes kept standing back up.</strong> Round 2, <strong>Elaine&rsquo;s critical Recall Knowledge</strong> explained why: each projects a <strong>20-foot void-healing aura</strong>, live as long as any one of them still stands. Bai Jian drew the conclusion &mdash; <em>&ldquo;But we gotta take them all down, then&rdquo;</em> &mdash; and the party cleared the ground before touching the boss.</li>
+          <li><strong>The Hellcrown killed Brakknap</strong> &mdash; a telekinetic rock, a critical hit, 26 damage into a 10 HP goblin. It was the <strong>only attack it made all fight</strong>.</li>
+          <li><strong>His soul stood up off his own body and kept chanting</strong>, brighter than before, his ancestors stacked in a line behind him that ran all the way up toward the heavens.</li>
+          <li><strong>Bai Jian flew</strong> &mdash; Dragon&rsquo;s Flight to get airborne, closed, hit the hovering Hellcrown for 21, then took the fall damage on the way down rather than not reach it at all.</li>
+          <li><strong>Zanthar ended it</strong>: Lightning Bolt through the centre of the thing, then Hand of the Apprentice &mdash; his own maul, hurled &mdash; natural 20, straight through its face.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VII &middot; Mystery &middot; The Tree</div>
+      <div class="act-card">
+        <h3>A Release Throughout the Entirety of the Forest</h3>
+        <ul>
+          <li>Brakknap&rsquo;s soul brought the ritual to a crescendo. Green light poured into the grave, the void energy washed out, and <strong>a tree grew out of the graveyard.</strong></li>
+          <li>Brakknap appeared on a branch ten feet up, <strong>looking younger than the party had ever seen him</strong>, hanging by his knees: <em>&ldquo;Fear not, my friends. This was what was meant to happen.&rdquo;</em></li>
+          <li>His ancestors chained their arms together, took hold of his feet, and <strong>lifted him into the sky.</strong> It went bright blue-green, warbled, and dissipated. Snow started falling on the new tree.</li>
+          <li>His two guards were crying and smiling at once &mdash; <em>&ldquo;as if they knew that this might happen.&rdquo;</em> Panacea: <em>&ldquo;So did the other, the one that was leading him out. She knew, too. She was sad before we left.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VIII &middot; Mystery &middot; The Diary and the Charm</div>
+      <div class="act-card">
+        <h3>The Wight Mother of Isger</h3>
+        <ul>
+          <li><strong>Sister Endreah survived.</strong> <em>&ldquo;What did you do? I don&rsquo;t feel like my insides are being ripped to the outside.&rdquo;</em> Panacea treated her wounds and the colour came back.</li>
+          <li>She has no home and nowhere to go. She gave the party <strong>an hourglass-shaped charm</strong> off her own neck. Bai Jian and Panacea sent her to <strong>Saringallow</strong>, and Bai Jian apologised for the monastery.</li>
+          <li>A <strong>backpack at the bottom of the grave</strong>, pushed up by the tree&rsquo;s growth: the surveyor&rsquo;s <strong>diary</strong>, <strong>a disgusting skull</strong>, and the coin he was carrying.</li>
+          <li><strong>The diary</strong>: he surveyed caravan routes through Isger. His survey took him near <strong>Finder&rsquo;s Gulch</strong>, <em>&ldquo;rumoured to be the hideout of the Wight Mother of Isger.&rdquo;</em> He felt sickly afterward; his last entry, months later, complains of <strong>dysentery</strong> and rejoices that he will reach Gillamoor in the morning. He never left it.</li>
+          <li><strong>Cyrathul&rsquo;s lore crit</strong>: the Wight Mother is <em>&ldquo;a child of Urgathoa&hellip; destined to conquer Isger with an army of wights.&rdquo;</em> <strong>+5 reputation.</strong></li>
+          <li><strong>Zanthar drew the practical conclusion</strong> &mdash; the surveyor died of the thing he caught out there &mdash; and started pricing <strong>anti-plague</strong>. Bai Jian backed him. The moderate ones are level 6 and 35 gp, so Thorngrip can&rsquo;t supply them; it waits for Logos.</li>
+          <li><strong>Elaine&rsquo;s Recall Knowledge placed it</strong>: Finder&rsquo;s Gulch is 140 miles <strong>north</strong>, past Logos. Their horses are at Thorngrip. They turned around.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act IX &middot; Roleplay &middot; Back to Thorngrip</div>
+      <div class="act-card">
+        <h3>Neemi at the Gate</h3>
+        <ul>
+          <li>The forest was <strong>loud</strong> on the way back &mdash; deer herds, foxes, night birds, chipmunks. Bai Jian stood a watch he couldn&rsquo;t concentrate through; the forest had been almost dead before and was now full of life, and he half-feared he wouldn&rsquo;t hear an attack through it.</li>
+          <li><strong>Rhokrag&rsquo;s dream-rant reached Zanthar in his sleep</strong>: <em>&ldquo;I can&rsquo;t believe you fuckers actually found out where it was. And you already lifted the curse. My coin purse is going to be so light.&rdquo;</em></li>
+          <li><strong>Neemi met them at the gate</strong> and unstrapped Brakknap&rsquo;s body from the dog herself, sobbing, waving off the guard who tried to help. <em>&ldquo;I knew he was planning that this was going to happen, but it never does prepare you.&rdquo;</em> He will be planted under the sequoia.</li>
+          <li>Panacea: <em>&ldquo;His death brought life back to the land here and where it was cursed.&rdquo;</em></li>
+          <li><strong>Alceo&rsquo;s overnight message closes the session</strong>: Rhokrag concedes the bet, and <strong>the Hellclad Goblins have retaken Logos</strong> &mdash; they decided Logos needed saving from an undead encroachment, stole weapons and armour off a band of Hell Knights, and took the city. The League is in peace treaties with them. <strong>All recruits now report to Logos, not Saringallow.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Combat 1 &mdash; Wights on the Trail</h3>
+    <div class="combat-meta">threat low &middot; 2 rounds &middot; 60 XP &middot; 4&times; Wight (lvl 3, 40 HP, AC 18)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Cyrathul 1 &middot; Bai Jian 1 &middot; Zanthar 1 &middot; Elaine 1</div></div>
+      <div><div class="combat-stat-label">Effective damage</div><div class="combat-stat-value">Elaine 74 &middot; Bai Jian 40 &middot; Zanthar 40 &middot; Cyrathul 6 &middot; Panacea 0</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">16 (Bai Jian 8, Cyrathul 8)</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">None</div></div>
+    </div>
+    <p><em>Fueled by spite &middot; void healing &middot; immune to death effects, disease, paralysis, poison, unconscious, bleed. <strong>Final Spite</strong>: on being reduced to 0 HP, a wight gets one last Strike before it is destroyed. <strong>Corrupting Spite</strong> rider, DC 17 Fort.</em></p>
+    <p><strong>Initiative</strong>: Elaine 38 (Stealth) &middot; Cyrathul 38 (Esoteric Lore, nat 20) &middot; Bai Jian 33 &middot; Wight 30 &middot; Wight 28 &middot; Goblin Commando 24 &middot; Zanthar 21 &middot; Wight 17 &middot; Wight 17 &middot; Panacea 15 &middot; Goblin Pyro 6 &middot; Brakknap 4</p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Elaine</strong> &mdash; Stride, <strong>Thorn Whip natural 20 &rarr; critical hit by +21</strong> vs the wight&rsquo;s off-guard AC 16 (undetected off her Stealth initiative; nobody had acted yet, so this was not flanking). <strong>34 damage</strong>, and the whip&rsquo;s critical specialization <strong>Slowed it 1</strong>. She stepped straight back out &mdash; <em>&ldquo;we&rsquo;ll pop on back because I don&rsquo;t want to get smacked.&rdquo;</em></li>
+      <li><strong>Cyrathul</strong> &mdash; closed and <strong>Jaws hit by +2 for 22 &rarr; wight destroyed</strong>, finishing the 6 HP Elaine had left on it. Bit its head off.</li>
+      <li><strong>Bai Jian</strong> &mdash; Command Ren into flanking position, <strong>Sudden Charge</strong>, <strong>falcata critical hit by +17 &rarr; 42 damage, wight destroyed.</strong> The roll bundles the vitalizing rune&rsquo;s doubled persistent vitality into that total and it never got to tick; the crit also applied <strong>Enfeebled 1</strong>. <em>&ldquo;It doesn&rsquo;t even need the flank.&rdquo;</em></li>
+      <li><strong>Wights</strong> &mdash; the dying wight&rsquo;s <strong>Final Spite</strong> claw caught <strong>Cyrathul for 8</strong> (still carrying the Enfeebled 1 Bai Jian&rsquo;s crit had just applied); Cyrathul crit-saved Corrupting Spite on a nat 20. A live wight threw <strong>three dagger Strikes</strong> at <strong>Bai Jian&rsquo;s AC 26</strong> and landed none &mdash; miss by 9, <strong>critical miss on a natural 1</strong>, miss by 6.</li>
+      <li><strong>Goblin Commando</strong> &mdash; planted himself in front of Brakknap with a long-bladed spear and held.</li>
+      <li><strong>Zanthar</strong> &mdash; Stride &times;2, <strong>Hand of the Apprentice, critical hit by +11 &rarr; 62 damage, wight destroyed</strong>; the maul&rsquo;s critical specialization knocked it prone on a failed DC 24 Fort save. Because he killed it from 500 feet, its <strong>Final Spite found nobody in reach</strong>.</li>
+      <li><strong>Panacea</strong> &mdash; Stride &times;2, <strong>Trade Death for Life</strong>. The wight <strong>failed</strong> the save and <strong>took zero damage</strong> (void healing), so the hex&rsquo;s fast-healing rider never fired for Cyrathul either. The wight was at full HP, so nothing was actually healed &mdash; the cost was the negated turn.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Elaine</strong> &mdash; <strong>critical hit by +18 for 38</strong>, then a second Strike at MAP&minus;5 into the flank for <strong>10 &rarr; destroyed</strong>. That killing blow landed <code>Hit by +1</code> and only connected because of <strong>Gang Up</strong> off-guard; against base AC 18 it misses.</li>
+      <li><strong>Final Spite</strong> put a claw into <strong>Bai Jian for 8</strong>; he crit-saved Corrupting Spite.</li>
+    </ul>
+    <p>Panacea&rsquo;s Treat Wounds (Assurance, DC 20) healed 24 and 23 afterward. <span style="color:var(--gold)"><strong>60 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 2 &mdash; The Skeletal Giants</h3>
+    <div class="combat-meta">threat trivial &middot; 1 round &middot; 40 XP &middot; 2&times; Skeletal Giant (lvl 3, 50 HP, AC 17)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Elaine 1 &middot; Bai Jian 1</div></div>
+      <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">Elaine 50 &middot; Cyrathul 19 &middot; Bai Jian 18 &middot; Panacea 13</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Zero &mdash; no enemy attack roll exists</div></div>
+      <div><div class="combat-stat-label">Enemy resistance</div><div class="combat-stat-value">Slashing / piercing 5 (applied 3&times;)</div></div>
+    </div>
+    <p><em>NPCs in the fight: <strong>Hestlebeth</strong> (45 HP, AC 18) and <strong>Hecatinia</strong> (45 HP, AC 19), Hell Knights of the Order of the Pike &mdash; both at <strong>full health</strong> when the party arrived, despite the scene&rsquo;s framing. Neither took a turn. Neither giant took a turn either.</em></p>
+    <p><strong>Initiative</strong>: Elaine 35 (Stealth, undetected) &middot; Bai Jian 30 (<strong>delayed</strong> to after Panacea and Cyrathul) &middot; Panacea 28 &middot; Cyrathul 24 &middot; Hestlebeth 21 &middot; Zanthar 18 &middot; Giants 17 / 17 &middot; Hecatinia 10</p>
+
+    <h4>Round 1 &mdash; and only Round 1</h4>
+    <ul>
+      <li><strong>Elaine</strong> &mdash; <strong>critical hit by +21 (nat 19) for 31</strong>, then a second <strong>critical hit by +17 (nat 20) at MAP for 25 &rarr; Skeletal Giant destroyed.</strong> Two crits, one turn, same target. The giant <strong>critically succeeded both DC 24 Fort saves</strong> against the whip&rsquo;s critical-specialization Slow, and it made no difference.</li>
+      <li><strong>Panacea</strong> &mdash; Stride &times;2, <strong>Divine Lance</strong> hit for <strong>13</strong> spirit. <em>&ldquo;You see the burn left onto the bone.&rdquo;</em></li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Exploit Vulnerability</strong> (Esoteric Lore 21 vs DC 18): <strong>no weaknesses</strong>. <strong>Claw hit for 19</strong> &mdash; the only physical hit of the fight the resistance didn&rsquo;t reduce. <strong>Bai Jian asked for the free Recall Knowledge rider</strong> and spent it on the giants&rsquo; weakest save: <strong>Will</strong>.</li>
+      <li><strong>Bai Jian</strong> &mdash; nearly Sudden-Charged the Hell Knights, <strong>caught it himself</strong>, rerouted around a 10-foot cliff, commanded Ren forward to set the flank, and <strong>Sudden Charged: falcata natural 20 &rarr; critical hit by +24 &rarr; 60 damage &rarr; Skeletal Giant destroyed.</strong> The giant was at <strong>18/50</strong> at the time, so 42 of that was overkill. Ended on <strong>Dueling Parry</strong>.</li>
+      <li><strong>Zanthar</strong> &mdash; his initiative turn <em>is</em> the parlay; the decision to talk happens inside the encounter.</li>
+    </ul>
+    <p>Loot: two suits of <strong>half plate</strong>, transferred to the party stash by Zanthar. <span style="color:var(--gold)"><strong>40 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 3 &mdash; The Graveyard</h3>
+    <div class="combat-meta">threat severe &middot; 2 rounds &middot; 4&times; Deathless Acolyte of Urgathoa + Godclaw Hellcrown</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Elaine 2 acolytes &middot; Cyrathul 1 (+1 in R1) &middot; Zanthar the Hellcrown</div></div>
+      <div><div class="combat-stat-label">Boss</div><div class="combat-stat-value">115 HP exactly &middot; AC 24 &middot; fast healing 2</div></div>
+      <div><div class="combat-stat-label">R2 damage into boss</div><div class="combat-stat-value">Zanthar 73 &middot; Bai Jian 21 &middot; Panacea 16</div></div>
+      <div><div class="combat-stat-label">Casualty</div><div class="combat-stat-value">Brakknap</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">None</div></div>
+    </div>
+    <p><em>Each acolyte (lvl 3, 36 HP, AC 17 &mdash; one at 15) projects a <strong>20-foot void-healing aura</strong> that keeps the others up as long as one of them stands. The Hellcrown flies, has <strong>Field of Undeath fast healing 2</strong>, and a <strong>Telekinetic Projectile</strong> for 5d6.</em></p>
+    <div class="log-warning"><strong>Round 1 is not in the roll log.</strong> What follows for Round 1 comes from the recording. The one hard number that can be recovered: the Hellcrown was at <strong>73/115 at the top of Round 2</strong>, so it took exactly <strong>42 damage in Round 1</strong>. Zanthar took 12; Bai Jian took 26; Elaine and Cyrathul took none. Individual Round-1 damage numbers were never said aloud.</div>
+
+    <h4>Round 1 &mdash; from the recording</h4>
+    <ul>
+      <li>Brakknap began the ancestral ritual; fists burst out of the graves.</li>
+      <li><strong>Elaine</strong> &mdash; Strike, then a second Strike at MAP that killed an acolyte. <em>&ldquo;You just tear through this carcass looking thing. It smells bad when this thing dies.&rdquo;</em></li>
+      <li><strong>Cyrathul</strong> &mdash; Exploit Vulnerability: <strong>no weaknesses</strong> again. <strong>Bai Jian again asked for the free rider</strong> and spent it on whether the acolytes were mindless (<strong>they are not</strong>). <strong>Draconic Frenzy</strong> tore one in half.</li>
+      <li><strong>Bai Jian</strong> &mdash; Command Ren, closed, Strike (rolled a 3, still hit), converted to <strong>Snagging Strike</strong> for off-guard, and hit again.</li>
+      <li><strong>The Godclaw Hellcrown rose</strong> &mdash; <em>&ldquo;almost looks like smoke with a face, with a fiery face on it&rdquo;</em> &mdash; climbed higher, and addressed Brakknap. <strong>It did not attack this round.</strong></li>
+      <li><strong>Panacea</strong> &mdash; moved toward Brakknap, <strong>Vitality Lash</strong> into the Hellcrown. <em>&ldquo;Barely did anything.&rdquo;</em></li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Force Barrage</strong> into the Hellcrown.</li>
+      <li><strong>Acolytes stood back up</strong> &mdash; the party&rsquo;s first sight of the aura without knowing what it was. One hit <strong>Zanthar</strong>; another swung at him for 5, then declined a swing at Bai Jian entirely (<em>&ldquo;realizes it doesn&rsquo;t have a chance of hitting him at all&rdquo;</em>). Cyrathul&rsquo;s <strong>Twisting Tail</strong> reaction missed. The Goblin Commando swapped his horse chopper for a short bow and shot at the flier.</li>
+    </ul>
+
+    <h4>Round 2 &mdash; logged</h4>
+    <ul>
+      <li><strong>Elaine</strong> &mdash; <strong>Recall Knowledge, natural 20 &rarr; Religion 31, critical success.</strong> Learned the <strong>void-healing aura</strong> and the immunity list. Then <strong>hit by +9 for 12 &rarr; acolyte destroyed</strong>, and at MAP <strong>hit by +8 for 20 &rarr; acolyte destroyed.</strong> Both targets were at <strong>2 HP and 1 HP</strong> &mdash; the aura had been reviving them at the bottom of their health, which is why they kept getting up.</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Empower Wings</strong>, flew across the field, <strong>Jaws 21</strong> and <strong>Claw 23 &rarr; the last acolyte destroyed</strong>, at full 36 HP. That is the kill that shut the aura off.</li>
+      <li><strong>Godclaw Hellcrown</strong> &mdash; fast healing 2 (73 &rarr; 75), then <strong>Telekinetic Projectile at Brakknap (AC 10): critical hit by +19 &rarr; 26 damage. Massive damage, instantly killed.</strong> His soul stood up off the body and continued the ritual, stronger. <strong>This was the Hellcrown&rsquo;s only attack of the entire encounter.</strong></li>
+      <li><strong>Bai Jian</strong> &mdash; had <strong>delayed</strong> to this point. <strong>Dragon&rsquo;s Flight</strong> to get airborne, then closed and struck: <strong>hit by +6 for 21</strong> (75 &rarr; 54). He tried to combine Dragon&rsquo;s Flight with <strong>Sudden Charge</strong>, raised the problem himself (<em>&ldquo;I can&rsquo;t use Sudden Charge along with&rdquo;</em>) and the GM agreed &mdash; it resolved as two movement actions plus the Strike. RAW backs the ruling: Sudden Charge only substitutes Flying <em>&ldquo;if you have the corresponding movement type,&rdquo;</em> and Dragon&rsquo;s Flight grants a fly Speed <em>&ldquo;for this movement&rdquo;</em> only. He then <strong>fell 10 feet for 9 damage</strong> and landed prone with no action left to stand &mdash; <strong>78/113</strong>.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Vitality Lash</strong>, Hellcrown <strong>failed</strong> the DC 26 Fort save, <strong>16 damage</strong> (54 &rarr; 38).</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Lightning Bolt</strong>, Hellcrown <strong>failed</strong> the DC 26 Reflex save by 2, <strong>31 electricity</strong> (38 &rarr; 7). Then <strong>Hand of the Apprentice: natural 20, critical hit by +12 &rarr; 42 damage. Destroyed</strong> with 35 overkill. <em>&ldquo;The Lightning Bolt scatters its body out, and then the hammer just goes smashing through this thing&rsquo;s face.&rdquo;</em></li>
+    </ul>
+    <p style="color:var(--gold)"><strong>GM&rsquo;s verdict:</strong> <em>&ldquo;You made that severe encounter pretty trivial. It was freaking amazing.&rdquo;</em></p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Open Door</h4>
+      <ul>
+        <li><strong>Welcomed the new player before anyone else did, and did it by naming the party&rsquo;s real flaw.</strong> Elaine explained she avoids trouble; Bai Jian turned that into the reason she belonged: <em>&ldquo;I think we need that because we&rsquo;re part of the group. We&rsquo;re a bit loud. We are not sneaky at all.&rdquo;</em> He then made sure she had a last chance to shop before they left.</li>
+        <li><strong>He was the one who opened Sister Endreah&rsquo;s door.</strong> Elaine found the figure through the window and explicitly declined to go in. Bai Jian walked up and opened it &mdash; <em>&ldquo;Police here&rdquo;</em> &mdash; with no idea whether the dying woman was the witch they had come for.</li>
+        <li><strong>He corrected the record and then apologised for it anyway.</strong> Endreah opened with <em>&ldquo;after you destroyed the monastery&rdquo;</em>; Bai Jian pushed back immediately, and twenty minutes later, once she had been healed and had nowhere left to go, closed with <em>&ldquo;And sorry about the monastery.&rdquo;</em></li>
+        <li><strong>He ran an absent player&rsquo;s character better than the sheet did.</strong> Twice &mdash; on the skeletal giants and again on the acolytes &mdash; he remembered that Exploit Vulnerability carries a free Recall Knowledge rider, asked the GM for it, and chose the question. That produced the giants&rsquo; weakest save (Will) and the confirmation that the acolytes were <strong>not</strong> mindless.</li>
+        <li><strong>He taught the lesson that cost the party a turn.</strong> When Panacea&rsquo;s Trade Death for Life did nothing to a wight, he called it in plain language &mdash; <em>void damage is not very good against undead</em> &mdash; the same diagnostic instinct that named the troop problem in S20 and the resistance problem in S21.</li>
+        <li><strong>He drew five of the six wight attacks and lost eight hit points doing it.</strong> Three dagger Strikes came at his AC 26 in Round 1 alone; all three missed, one on a natural 1. When a dying wight&rsquo;s Final Spite claw found him anyway: <em>&ldquo;Ah, why me? I didn&rsquo;t even kill you.&rdquo;</em></li>
+        <li><strong>He flew at the boss.</strong> The Hellcrown parked out of reach where nothing on the ground could touch it. Bai Jian burned Dragon&rsquo;s Flight, closed, connected for 21 &mdash; then took 9 falling out of the sky and landed prone with no action left to stand, because the alternative was not reaching it at all.</li>
+        <li><strong>The horses.</strong> He opened the question and argued the upkeep; Panacea supplied the terrain case. It was right, and it is also why the session ends with a 140-mile walk in the wrong direction.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the One Who Kept Reading the Room</h4>
+      <ul>
+        <li><strong>She ran the whole social half of the Hell Knight encounter and proposed the recruit before anyone else saw it.</strong> While the table was still deciding whether the twins were enemies, she had already jumped to <em>&ldquo;Maybe we can recruit them after?&rdquo;</em> &mdash; then asked the question that actually opened them (<em>&ldquo;So you disobeyed your orders?&rdquo;</em>) and answered their story with the line that bought their trust. <strong>She rolled the recruit itself, on a hero point</strong>, and treated Hecatinia&rsquo;s limp while the negotiation was running.</li>
+        <li><strong>She is the party&rsquo;s early-warning system.</strong> She smelled the wights through a boar-and-berry lunch while Bai Jian was feeding his dog, and rolled the Seek that found them. She also volunteered the session recap unprompted, gave a clean and complete one, and it was inside that recap that she reminded Zanthar to send the Dream Message at all.</li>
+        <li><strong>&ldquo;Oh, so he&rsquo;s stronger dead.&rdquo;</strong> A rock had just killed Brakknap outright and his soul had stood up off his own corpse still chanting. Panacea named it. Best line of the night, delivered flat.</li>
+        <li><strong>She owned the grief.</strong> She is the one who insisted on going back through Thorngrip at all &mdash; <em>&ldquo;Pay our respects anyway, because, you know, he sacrificed himself&rdquo;</em> &mdash; and the one who found the words for Neemi at the gate. She had also already clocked that Neemi knew: <em>&ldquo;She was sad before we left.&rdquo;</em></li>
+        <li><strong>She healed the woman who hates them.</strong> Endreah&rsquo;s first words after being cured were a complaint; Panacea treated her anyway and then told her where to go to be safe.</li>
+        <li><strong>She caught the thing the party was about to walk away from.</strong> With the curse broken and everyone packing up, Panacea stopped: <em>&ldquo;I thought there was a witch involved. I haven&rsquo;t seen any witch.&rdquo;</em> That question is the next arc.</li>
+        <li><strong>Three hero points, all on other people&rsquo;s problems</strong> &mdash; the recruit roll and two Survival checks to keep the party on the road. Mechanically a lean night otherwise: a Trade Death for Life that returned nothing, a Divine Lance for 13, and two Vitality Lashes into a Severe boss.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Man Who Reads the Footnotes</h4>
+      <ul>
+        <li><strong>He killed the boss.</strong> Lightning Bolt down the line for 31, then Hand of the Apprentice &mdash; a wizard hurling his own maul 500 feet &mdash; natural 20, 42 damage, through the Hellcrown&rsquo;s face. He had done the same thing in Combat 1: a crit that knocked a wight prone and killed it for 62, from far enough away that the wight&rsquo;s Final Spite death-throe found nobody to hit.</li>
+        <li><strong>He chose the parlay.</strong> With two armoured Hell Knights in front of him and the party&rsquo;s entire history of Hell Knight encounters being violence, Zanthar asked <em>&ldquo;Are we still going to fight them?&rdquo;</em>, walked up, and said hello instead. Every single thing the party gained this session &mdash; the scroll, the brigade, the reputation, the location of the graveyard &mdash; came out of that decision. He then <strong>held the cover story together on a Deception 23</strong> when the twins pointed out that no village on this side of the forest is still inhabited.</li>
+        <li><strong>The dysentery catch.</strong> The surveyor&rsquo;s diary ended with a complaint about dysentery. Everyone else read it as flavour on the way to the place-name. Zanthar read it as a symptom and immediately started pricing <strong>anti-plague</strong> before the party went anywhere near Finder&rsquo;s Gulch. Bai Jian backed him; the item is a level higher than Thorngrip stocks, so it waits for Logos.</li>
+        <li><strong>He ruled against his own party, out loud.</strong> He stopped the GM to point out that the Godclaw Hellcrown <strong>had not received fast healing it was owed</strong> &mdash; and the GM then handed the enemy +2 HP. He also spent most of a turn probing whether Bai Jian&rsquo;s persistent vitality had shut off the acolytes&rsquo; regeneration, concluded it hadn&rsquo;t, and cancelled a plan on the strength of it, flagging his own rules-lawyering as <em>&ldquo;open meta&rdquo;</em> while he did it.</li>
+        <li><strong>&ldquo;This should fetch a good price.&rdquo;</strong> Handed a rare ritual scroll by a desperate knight who had nothing else to give. Beat. <em>&ldquo;I&rsquo;m kidding.&rdquo;</em> He is also carrying the party&rsquo;s comms, and relayed everything to Alceo the moment the curse broke.</li>
+        <li><strong>Running gag</strong>: he cast <strong>Hand of the Emperor</strong> twice tonight before correcting himself both times. <em>&ldquo;Sorry, I&rsquo;m thinking of a different game.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-elaine">
+      <h4>Elaine Stormfrost &middot; the Best First Impression</h4>
+      <ul>
+        <li><strong>She introduced herself by getting caught on purpose.</strong> Spotted at the thorn wall, she dropped stealth entirely and went into a big performative bow &mdash; <em>&ldquo;Ah, I&rsquo;m Elaine&rdquo;</em> &mdash; which is a character choice, not a failed Stealth check, and it set her register for the whole night.</li>
+        <li><strong>She opened her first fight with a natural 20</strong> for 34, and in Combat 2 <strong>crit twice in a single turn</strong> &mdash; a 19 for 31, then a natural 20 at full MAP for 25 &mdash; to kill a skeletal giant before most of the party had acted. She personally did <strong>50 of that fight&rsquo;s 100 enemy hit points</strong>, alone, on turn one. She narrated her own kills: <em>&ldquo;just tie the whip around its head and sort of just pull as she decapitates it.&rdquo;</em></li>
+        <li><strong>She won the Hell Knights over with a hero point and a bow.</strong> Glad-Hand into an immediate Make an Impression on Master Society, came up a 5 &mdash; then hero-pointed it, rerolled low, and the table&rsquo;s <strong>+10 house rule</strong> turned it into a <strong>36</strong>. Hers is the only hero-point reroll in the entire session&rsquo;s log.</li>
+        <li><strong>She found both of the session&rsquo;s two discoveries</strong> &mdash; Sister Endreah through a window nobody else was looking at, and, up in the graveyard, the one grave out of a whole field of opened graves that was actually pouring void energy.</li>
+        <li><strong>Her critical Recall Knowledge decided the Severe fight.</strong> Round 2, with acolytes getting back up faster than the party could drop them, she rolled a natural 20 on Religion for a 31 and learned the mechanic: a <strong>20-foot void-healing aura on each acolyte, live as long as any one of them still stands.</strong> She then killed two of them herself in the same turn &mdash; both sitting at 2 and 1 HP, which is exactly what the aura had been doing to the party&rsquo;s work. The fight ended five turns later.</li>
+        <li><strong>She also reversed the party&rsquo;s direction of travel</strong> &mdash; the Recall Knowledge that placed Finder&rsquo;s Gulch 140 miles north, past Logos, is hers.</li>
+        <li><strong>She took first watch both nights</strong>, and plays the angles, including the funny ones. <em>&ldquo;Do they look rich?&rdquo;</em> (of two starving Hell Knights). <em>&ldquo;I&rsquo;ll just chill over here if someone wants to open this door.&rdquo;</em> She looted a dagger off a dead wight and then put it back.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; Run in Absentia</h4>
+      <ul>
+        <li>Snowgeen never logged on and never messaged. <strong>Kaazz ran Cyrathul all session</strong>, said more than once that he hates playing other people&rsquo;s characters, and twice said <em>&ldquo;I hope he&rsquo;s okay.&rdquo;</em> Credit here is real but the performance isn&rsquo;t Snowgeen&rsquo;s &mdash; and Bai Jian, not the GM, is the one who kept remembering Cyrathul&rsquo;s Diverse Lore rider.</li>
+        <li>Rolled a <strong>natural 20 on Esoteric Lore for initiative</strong> in Combat 1 and bit the head off the first wight &mdash; though Elaine had already taken it from 40 to 6, so the jaws did the last 6.</li>
+        <li><strong>He killed the last acolyte standing, at full 36 HP</strong> &mdash; the kill that actually switched off the void-healing aura and let the party turn on the boss.</li>
+        <li>Exploit Vulnerability came back <strong>&ldquo;no weaknesses&rdquo;</strong> on both the skeletal giants and the acolytes, but the free Recall Knowledge rider paid both times.</li>
+        <li>Draconic Frenzy tore one acolyte in half and Empower Wings carried him across the graveyard.</li>
+        <li><strong>The Wight Mother reveal is his.</strong> Charm off the belt, waved in the air.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Scroll of Divine Keystone</div>
+      <div class="loot-source">Hestlebeth &amp; Hecatinia &middot; rank 4, rare</div>
+      <div class="loot-note">A consecration ritual, handed over freely &mdash; Hell Knights can&rsquo;t cast it. <strong>Unspent</strong>; Brakknap&rsquo;s ritual solved Gillamoor instead.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Ritual components &middot; 200 gp</div>
+      <div class="loot-source">Hestlebeth &amp; Hecatinia</div>
+      <div class="loot-note">Holy water, powdered silver and purified chalk &mdash; the full set for the scroll above.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Hourglass-shaped charm</div>
+      <div class="loot-source">Sister Endreah</div>
+      <div class="loot-note">Taken off her own neck. <strong>Unidentified.</strong> The S14 Reeves Rest talisman had the same motif.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">The surveyor&rsquo;s diary</div>
+      <div class="loot-source">The grave at Gillamoor</div>
+      <div class="loot-note">Names <strong>Finder&rsquo;s Gulch</strong> and the <strong>Wight Mother of Isger</strong>. His own name is garbled in the recording.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">A &ldquo;disgusting skull&rdquo;</div>
+      <div class="loot-source">The grave at Gillamoor</div>
+      <div class="loot-note">Found with the diary. <strong>Unexamined.</strong></div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">The surveyor&rsquo;s purse</div>
+      <div class="loot-source">The grave at Gillamoor</div>
+      <div class="loot-note">Buried with the money he was carrying. Amount unrecorded.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">2&times; Half plate</div>
+      <div class="loot-source">Skeletal Giants</div>
+      <div class="loot-note">Into the party stash.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Hell Knight Cavalry Brigade</div>
+      <div class="loot-source">Recruited at Gillamoor</div>
+      <div class="loot-note">The twins went to talk to their aunt. <strong>+2 reputation.</strong></div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">The Gillamoor curse, lifted</div>
+      <div class="loot-source">Brakknap&rsquo;s ritual</div>
+      <div class="loot-note">A regional curse broken at the cost of the man who broke it. <strong>+5 reputation.</strong></div>
+    </div>
+  </div>
+  <div class="xp-banner">Experience &middot; 60 wights &middot; 40 giants &middot; ~120 graveyard (Severe, estimated) &middot; + story award = <strong>~220 XP each</strong></div>
+  <div class="log-warning"><strong>Two XP caveats.</strong> The Severe award and the story award both fell <em>after</em> the export cut off at 20:30, so the total is estimated from the PF2e budget and needs Kaazz&rsquo;s numbers. Separately, <strong>Foundry left Panacea off the recipient list on both logged awards</strong> (<code>Recipients: Bai Jian Cyrathul Zanthar Elaine</code>) &mdash; the same bug recorded in S21. Worth checking her sheet.</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;Oh, so he&rsquo;s stronger dead.&rdquo;
+    <span class="attribution">A telekinetic rock had just killed Brakknap outright, and his soul had stood up off his own corpse to finish the ritual</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;It sounds like we have the same enemy, actually, and it sounds like you have some good morals.&rdquo;
+    <span class="attribution">To two Hell Knights who had just admitted to disobeying a direct order &mdash; the read that turned an enemy order into an ally</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;His death brought life back to the land here and where it was cursed.&rdquo;
+    <span class="attribution">To Neemi, at the Thorngrip gate, as she unstrapped Brakknap&rsquo;s body from the goblin dog herself</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;I think we need that because we&rsquo;re part of the group. We&rsquo;re a bit loud. We are not sneaky at all.&rdquo;
+    <span class="attribution">Welcoming Elaine by naming the exact hole she fills, thirty seconds after meeting her</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;Oh, wait. Are they on our side? Shit, I forgot.&rdquo;
+    <span class="attribution">Mid-Sudden-Charge at two Hell Knights who had just begged the party for help. He caught it himself</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;We didn&rsquo;t destroy the monastery. We just knocked a lot of people out.&rdquo;
+    <span class="attribution">To Sister Endreah, dying, immediately on being accused. He apologised for the monastery anyway, twenty minutes later</span></blockquote>
+
+  <blockquote><strong>Elaine:</strong> &ldquo;I usually try to stay away from things as much as possible.&rdquo;
+    <span class="attribution">Her first real line in the campaign, asked whether she had run into undead on the road</span></blockquote>
+
+  <blockquote><strong>Elaine:</strong> &ldquo;Do they look rich?&rdquo;
+    <span class="attribution">On two exhausted Hell Knights who had just lost their entire contingent</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> &ldquo;This should fetch a good price.&rdquo; &mdash; <em>beat</em> &mdash; &ldquo;I&rsquo;m kidding.&rdquo;
+    <span class="attribution">Being handed a rare ritual scroll by a desperate knight with nothing else left to give</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> &ldquo;Maybe buy some anti-plagues? Because you did mention dysentery.&rdquo;
+    <span class="attribution">Reading the surveyor&rsquo;s cause of death out of a diary everyone else was reading for the place-name</span></blockquote>
+
+  <blockquote><strong>Cyrathul</strong> <em>(GM-voiced)</em><strong>:</strong> &ldquo;The legendary Wight Mother of Isger is supposedly a child of Urgathoa and is said to be destined to conquer Isger with an army of wights.&rdquo;
+    <span class="attribution">Charm off the belt, waved in the air &mdash; the reveal that names the next arc</span></blockquote>
+
+  <blockquote><strong>Godclaw Hellcrown:</strong> &ldquo;You dare counteract the will of Urgathoa?&rdquo;
+    <span class="attribution">Rising over the graveyard fence on a column of smoke with a burning face, addressing a very old goblin sitting in the dirt</span></blockquote>
+
+  <blockquote><strong>Brakknap:</strong> &ldquo;Fear not, my friends. This was what was meant to happen. You have all done well, and I have done my part.&rdquo;
+    <span class="attribution">Hanging upside down by his knees from a tree that had just grown out of the grave that killed him, looking decades younger</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The Wight Mother of Isger</strong> &mdash; a child of Urgathoa, destined to conquer Isger with an army of wights. The &ldquo;undead witch&rdquo; the party has been chasing since S20 now has a title, a parentage and an address.</li>
+      <li><strong>Finder&rsquo;s Gulch</strong> &mdash; her rumoured hideout, <strong>north of Logos</strong>, ~140 miles away. The party is walking back for the horses. <em>Spelling as heard &mdash; six of seven renderings in the recording are &ldquo;Finder&rsquo;s&rdquo;; confirm with Kaazz.</em></li>
+      <li><strong>Vulaunex ordered Hell Knights to ignore the undead.</strong> Two of his own knights said so to the party&rsquo;s face. On the reasonable inference that this is <strong>Paralictor Caeto Vulaunex</strong>, whose S20 letter called the Hellbreakers <em>&ldquo;a pest that must be nipped in the bud&rdquo;</em> while dismissing the undead, that is twice he reads as actively suppressing the response to the Scourge. <strong>Nobody at the table reacted to the name</strong> &mdash; the party has not made this connection in fiction.</li>
+      <li><strong>The hourglass charm</strong> &mdash; unidentified. The S14 Reeves Rest murder scene produced a <em>used decomposition talisman</em> with an hourglass motif <strong>found alongside an onyx idol of Urgathoa</strong>. Given this session&rsquo;s Urgathoa content, that pairing is worth a second look.</li>
+      <li><strong>The disgusting skull</strong> in the surveyor&rsquo;s backpack &mdash; pulled out of a grave that was the anchor of a regional curse, and not looked at since.</li>
+      <li><strong>The 27th contingent of the Mercenary League</strong> &mdash; whose grave anchored the curse. Why that grave, and what the Mercenary League has to do with Urgathoa, is unasked.</li>
+      <li><strong>Sister Endreah</strong> is alive, cured, homeless, and headed for <strong>Saringallow</strong> on the party&rsquo;s recommendation &mdash; the town the League has just been told to stop sending people to. She still believes they destroyed her monastery.</li>
+      <li><strong>Logos has been retaken by the Hellclad Goblins</strong>, who stole Hell Knight weapons and armour to do it. The League is in peace treaties with them. <strong>All recruits now route to Logos.</strong></li>
+      <li><strong>The Hell Knight Cavalry Brigade</strong> is coming &mdash; the twins went to &ldquo;talk to Auntie.&rdquo; Nobody has met the aunt.</li>
+      <li><strong>Thorngrip has lost its ancestor-speaker.</strong> Brakknap goes under the sequoia. The party agreed Thorngrip&rsquo;s autonomy terms with him personally; what his death does to that agreement is untested.</li>
+      <li><strong>Anti-plague</strong> &mdash; Zanthar wants moderate anti-plague before Finder&rsquo;s Gulch. Level 6, 35 gp; Thorngrip is a level-3 settlement and can&rsquo;t stock it. It waits for Logos.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax&rsquo;s Notes &mdash; Bai Jian&rsquo;s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Opened the question of <strong>leaving the horses at Thorngrip</strong> and argued the upkeep; Panacea made the terrain case. Correct for the forest. Wrong for what came after &mdash; Finder&rsquo;s Gulch is 140 miles north and we are now walking back for them.</li>
+    <li><strong>Welcomed Elaine</strong> and made sure she had a chance to resupply before we left. She is the first genuinely sneaky person this party has ever had.</li>
+    <li>Killed a <strong>wight</strong> (falcata crit, 42) and a <strong>skeletal giant</strong> (natural 20, 60 &mdash; though the giant was already down to 18, so 42 of that was overkill).</li>
+    <li><strong>Drew five of the six wight attacks in Combat 1.</strong> Three daggers into AC 26, all missed, one on a natural 1. Took 8 from a death-throe claw and crit-saved the Corrupting Spite.</li>
+    <li><strong>Remembered Cyrathul&rsquo;s Diverse Lore free Recall Knowledge twice</strong> &mdash; on the giants and on the acolytes &mdash; and chose the question both times. Got the giants&rsquo; weakest save (Will) and confirmation the acolytes were not mindless. Cyrathul was GM-run; that was mine.</li>
+    <li>Nearly <strong>Sudden-Charged two Hell Knights</strong> who had asked for help. Caught it myself before committing the action.</li>
+    <li><strong>Opened Sister Endreah&rsquo;s door</strong> when Elaine wouldn&rsquo;t.</li>
+    <li>Told Endreah we did not destroy her monastery. Then <strong>apologised for the monastery</strong> once she had been healed and had nowhere to go, and sent her to Saringallow.</li>
+    <li><strong>Flew</strong> &mdash; Dragon&rsquo;s Flight to get airborne, then closed and hit the Hellcrown for 21, then took 9 falling out of the air and landed prone with no actions left to stand.</li>
+    <li>Told the party what <strong>void damage does to undead</strong> after Panacea&rsquo;s Trade Death for Life returned nothing.</li>
+    <li>Cast <strong>Tailwind off a wand</strong> using Trick Magic Item on Nature with Assurance. It worked.</li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li><strong>Brakknap&rsquo;s vision in S21 was aimed at him.</strong> <em>&ldquo;There is something or someone you are looking for. I believe at the end of this path, the catalyst may be that thing.&rdquo;</em> Brakknap is now dead and nobody else at the table has connected that prophecy to the family member Bai Jian came to Isger to find. The man who said it cannot be asked to clarify.</li>
+    <li>He was the only one who <strong>didn&rsquo;t hear the battle</strong> at Gillamoor &mdash; Panacea, Zanthar and Elaine all did, and he rolled a natural 6 with Master Perception. He also missed the wights at lunch. Twice in one session his senses were the ones that failed.</li>
+    <li><strong>Nobody reacted when Hecatinia said &ldquo;Vulaunex.&rdquo;</strong> The party has the name of the man who ordered Hell Knights to stand down against the undead, from two of his own knights, and has not connected it to the Paralictor who called them a pest to be nipped in the bud.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>The S21 resistance problem is still live.</strong> The <strong>skeletal giants resisted slashing and piercing 5</strong> &mdash; a 65-damage crit was applied as 60, and Elaine&rsquo;s whip lost 5 twice. The wights and the Hellcrown took full slashing, so it is two enemy types out of three, not none. The falcata is still a slashing weapon and the warhammer is still off-group with no feats behind it.</li>
+    <li><strong>The vitalizing rune has yet to actually pay.</strong> Three fights, and its persistent vitality never ticked once &mdash; every target it hit was destroyed by the same strike that applied it. Its Enfeebled 1 rider did land, on a wight that was already dying.</li>
+    <li><strong>The ranged gap cost him again, differently.</strong> The Hellcrown parked out of reach and the only way he could touch it was to fly at it and then fall. Zanthar&rsquo;s maul reaches 500 feet. The <strong>+1 composite longbow</strong> from Warden Irkazer is still in the stash, still unclaimed, and he is trained with it.</li>
+    <li><strong>Dragon&rsquo;s Flight + Sudden Charge doesn&rsquo;t work yet &mdash; but it will at level 9.</strong> The GM&rsquo;s ruling was right: Sudden Charge only substitutes Flying if you already have a fly Speed, and Dragon&rsquo;s Flight grants one &ldquo;for this movement&rdquo; only. <strong>True Dragon&rsquo;s Flight</strong> (level 9, prereq Dragon&rsquo;s Flight) gives a fly Speed of 20 feet <em>at all times</em>, which makes exactly tonight&rsquo;s play legal. Two levels out.</li>
+    <li><strong>Elaine changes the party&rsquo;s shape.</strong> Master Stealth and Master Perception, Trap Finder, Glad-Hand, and a Recall Knowledge that decided a Severe encounter plus another that reversed the party&rsquo;s route. Follow the Expert now has a second anchor besides Zanthar, and a better one for scouting.</li>
+    <li><strong>Void damage does nothing to undead. Vitality damage is the answer and Panacea is the only reliable source of it.</strong> Protect that.</li>
+    <li>The forest came back to life the moment the curse broke &mdash; loud enough he couldn&rsquo;t hold a watch. Whatever was in that grave was suppressing an entire region.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>What is the <strong>hourglass charm</strong> Endreah gave them? The S14 Reeves Rest talisman had the same motif and was found next to an <strong>onyx idol of Urgathoa</strong> &mdash; that is a much stronger link than the shape alone.</li>
+    <li><strong>Whose skull</strong> is in the surveyor&rsquo;s backpack, and why was it buried with him?</li>
+    <li><strong>Who were the 27th contingent of the Mercenary League</strong>, and why was one of their graves the anchor for a curse that reached forty miles?</li>
+    <li>Does <strong>Thorngrip&rsquo;s agreement survive Brakknap</strong>? The terms were made with him.</li>
+    <li>Who is the twins&rsquo; <strong>&ldquo;Auntie&rdquo;</strong>, and what does a Hell Knight Cavalry Brigade joining the Hellbreakers actually cost?</li>
+    <li><strong>Is the Wight Mother &ldquo;Illcayna&rdquo;?</strong> A child of Urgathoa, destined to rule Isger, matches <em>&ldquo;Illcayna will reward you when Isger is hers&rdquo;</em> from the S14 cipher uncomfortably well &mdash; and the S14 scene had an Urgathoa idol in it. Nobody at the table has said this out loud.</li>
+    <li>Why is <strong>Sister Endreah</strong> being sent to Saringallow on the same night the League moved its muster to Logos?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Where It Leaves Off</h2>
+  <div class="cliffhanger">
+    <span class="label">End of Session</span>
+    <p>A goblin elder is being prepared for burial under the sequoia at Thorngrip. The forest around him is loud with animals for the first time in living memory. And a hundred and forty miles north, past a city that changed hands while the party was underground in a graveyard, something that calls itself a child of Urgathoa is still waiting.</p>
+    <span class="big-line">&ldquo;Destined to conquer Isger with an army of wights.&rdquo;</span>
+    <span class="speaker">&mdash; Cyrathul, reading the legend off a charm</span>
+  </div>
+</section>
+
+</div>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>

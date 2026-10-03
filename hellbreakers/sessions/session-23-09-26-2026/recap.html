@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 23 — Don't Let Her Raise Me</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+  --frost: #7aa8c0;
+  --frost-glow: #7aa8c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-elaine { border-left-color: var(--frost); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-elaine { border-left-color: var(--frost); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Don&rsquo;t Let Her Raise Me</h1>
+  <div class="subtitle">Session 23 &middot; A goblin buried under the sequoia, an army gathering at Logos, and five fights on the road into the Wight Mother&rsquo;s town</div>
+  <div class="meta-row">
+    <span class="meta-pill">26 Sep 2026</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~3h 19m</span>
+    <span class="meta-pill">~7 &ndash; 9 Calistril 4727 AR</span>
+    <span class="meta-pill">Level 7 &middot; 410 XP</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:52%"></div>
+    <div class="comp-seg comp-social" style="width:14%"></div>
+    <div class="comp-seg comp-rp" style="width:10%"></div>
+    <div class="comp-seg comp-explore" style="width:18%"></div>
+    <div class="comp-seg comp-loot" style="width:6%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 52%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Logos &amp; Parley 14%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay 10%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Travel &amp; Exploration 18%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Shopping 6%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) &middot; Beastmaster + Hedge Mage &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, Divine) &middot; Medic + Living Nexus &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) &middot; Blessed One &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Scott</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Lunar Dragon Thaumaturge &middot; Draconic Ravager &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Snowgeen &middot; back after missing S22</div>
+    </div>
+    <div class="char-card char-elaine">
+      <div class="char-name">Elaine Stormfrost</div>
+      <div class="char-class">Arctic Elf Rogue (Mastermind) &middot; Twilight Speaker &middot; <strong>Lv 7</strong></div>
+      <div class="char-player">Storm &middot; absent &mdash; &ldquo;disappears into the night&rdquo;</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Boarhound animal companion &middot; 69 HP &middot; killed an Erinyes sister by the ankle</div>
+      <div class="char-player">Bai Jian&rsquo;s companion</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Brakknap went into the ground at the foot of the sequoia on the morning of the 7th. Neemi sang him down &mdash; a song for her betrothed &mdash; and every goblin in Thorngrip took a turn with the shovel and a line of thanks. Panacea thanked him for showing her <em>&ldquo;that in death sometimes we can be stronger&rdquo;</em>; Bai Jian bowed and promised to remember; Cyrathul, back at the table after missing the last session, said nothing and put his handful of earth on the grave. The roots closed over the cairn and glowed the same blue that used to burn in Brakknap&rsquo;s eyes. Neemi told the party Thorngrip would keep every promise he&rsquo;d made them.</p>
+    <p>They collected the horses and rode north to <strong>Logos</strong>, which the goblins had just freed from an undead siege, and found a war camp outside the gates flying Hellbreaker colours: goblins in stolen Hell Knight plate, hobgoblin battalions, the Wolf Point rogues, and the twins&rsquo; <strong>Hell Knight cavalry</strong>, still visibly unsure what side of the camp they belong on. One of them said the thing out loud &mdash; the undead are <em>&ldquo;more important to a free Isger than it is to whatever <strong>Caeto</strong> wanted us to do.&rdquo;</em> <strong>Alceo and Phoebe</strong> are marching the whole army on <strong>Finder&rsquo;s Gulch in three days</strong>, and asked the party to go ahead and scout it. The party sold off the stash, bought anti-plague, and left that afternoon.</p>
+    <p>The road north was a night-time swarm of crow skulls that wasn&rsquo;t undead, a guard post of two fungus-eaten <strong>redcaps</strong> who wanted snacks and served a <em>&ldquo;Mistress,&rdquo;</em> and then the ruins of Finder&rsquo;s Gulch itself: a hundred-year-dead ghost town where a <strong>Skeletal Hellknight Bonesinger</strong> announced <em>&ldquo;the living will feed me&rdquo;</em> and Bai Jian ended it with a warhammer &mdash; the answer he went looking for after S21. A second swarm spoke inside Cyrathul&rsquo;s head. And at a cathedral with no god&rsquo;s markings on it, three <strong>Erinyes sisters</strong> &mdash; succumbed to the same blight that nearly killed Sister Endreah &mdash; were chanting over a <strong>sulfur zombie</strong>. Cyrathul went down; Ren tore one of the sisters off her feet by the ankle; Bai Jian&rsquo;s Sure Strike crit exploded the zombie in a thirty-foot fireball. Bai Jian pushed the cathedral door open, and from inside came voices speaking <strong>Aklo</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="log-warning"><strong>Source note.</strong> Elaine&rsquo;s player was absent; Kaazz declined to run her (<em>&ldquo;I am not down to play somebody else&rsquo;s character&rdquo;</em>) and she made no rolls. The Foundry roll log for the <strong>second swarm fight (Combat 4)</strong> starts partway through Round 1 &mdash; Kaazz cleared the chat log mid-fight (<em>&ldquo;I&rsquo;m going to try to clear this chat log&rdquo;</em>), a few minutes after rebuilding the swarm&rsquo;s missing attacks. Everything before Bai Jian&rsquo;s turn in that fight is from the recording.</div>
+  <div class="timeline">
+
+    <div class="act rp">
+      <div class="act-label">Act I &middot; Roleplay &middot; Thorngrip, Morning</div>
+      <div class="act-card">
+        <h3>Brakknap&rsquo;s Funeral</h3>
+        <ul>
+          <li><strong>Panacea opened the session with the S22 recap</strong> &mdash; the funeral, Endreah, and the switch of the muster from Saringallow to Logos.</li>
+          <li>The whole village gathered at the sequoia. <strong>Neemi sang in Goblin &mdash; a song for her betrothed going to his final reward</strong> &mdash; and she and the blacksmith lowered Brakknap into a small, deep grave. Every goblin took a scoop of earth and a line of thanks: <em>&ldquo;thank you for teaching me to fish&rdquo;</em>; <em>&ldquo;thank you for teaching me how to do that magic trick to catch his brother on fire.&rdquo;</em></li>
+          <li><strong>Panacea</strong>: <em>&ldquo;Thank you for showing me that in death sometimes we can be stronger, and you&rsquo;re a hero.&rdquo;</em> Neemi squeezed her shoulder.</li>
+          <li><strong>Bai Jian</strong> walked up and bowed: <em>&ldquo;You did a lot. I will remember your sacrifice. I hope you find peace.&rdquo;</em></li>
+          <li><strong>Cyrathul</strong> walked over silently and put some dirt on the grave. Neemi smiled at him and stayed silent too.</li>
+          <li>The sequoia&rsquo;s roots grew over the cairn and glowed with the blue light that had always been in Brakknap&rsquo;s eyes.</li>
+          <li><strong>Neemi</strong>: Thorngrip will <strong>still send the promised battalions to Logos and honor its agreement</strong>. <em>&ldquo;He told me this would be the most likely outcome for him. He was happy to cure the land with his final sacrifice.&rdquo;</em> The S22 worry that the terms wouldn&rsquo;t survive him is answered.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act II &middot; Social &middot; North to Logos</div>
+      <div class="act-card">
+        <h3>An Army Under a Hellbreaker Flag</h3>
+        <ul>
+          <li>Out of the Chitterwood: Ren chased the scent of a forest hare east until <strong>Panacea</strong> redirected him. Camp at the forest&rsquo;s edge; <strong>Bai Jian took first watch</strong> and found goblin tracks behind the camp &mdash; escort or watchers, unclear.</li>
+          <li><strong>Panacea kept the shopping list alive</strong> &mdash; she asked the table what the rogue had wanted last session (anti-plague), because the dead surveyor had dysentery.</li>
+          <li><strong>Logos, 2 p.m.</strong> &mdash; the former capital, still patched from the Goblinblood Wars. Outside the gates: the <strong>Hellclad Goblins in ill-fitting Hell Knight plate</strong>, and a Hellbreaker-flagged Hell Knight camp with the blonde twins in it.</li>
+          <li><strong>Panacea greeted the twins first</strong>: <em>&ldquo;So you kept your word and came along, didn&rsquo;t you?&rdquo;</em> One of them: <em>&ldquo;It&rsquo;s very strange to stand on this side, but the undead menace is more important to a free Isger than it is to whatever <strong>Caeto</strong> wanted us to do.&rdquo;</em> Panacea: <em>&ldquo;I hope that you start to feel a little bit more at home soon.&rdquo;</em></li>
+          <li><strong>Logos is a level-8 city.</strong> On Zanthar&rsquo;s and Cyrathul&rsquo;s suggestion the party sold the Staff of Phantasms, the half plate and loose gemstones &mdash; <strong>82 gp to each PC</strong> &mdash; and bought <strong>anti-plague</strong>. <strong>Bai Jian</strong> reminded everyone without an armor potency rune to buy one.</li>
+          <li><strong>Alceo and Phoebe</strong>: the army &mdash; goblin rebels, hobgoblin battalions, the Wolf Point rogues, the Hell Knight cavalry &mdash; <strong>marches on Finder&rsquo;s Gulch in three days</strong>; the party goes ahead to scout. <strong>Panacea</strong> explained the Hell Knights to a disbelieving Phoebe and suggested they might help organize the army.</li>
+          <li><strong>Cyrathul</strong> asked after <strong>Rhokrag</strong>: arriving tomorrow, <em>&ldquo;both pleased and scorned&rdquo;</em> by the lost bet, and <em>&ldquo;a hobgoblin of honor.&rdquo;</em> Finder&rsquo;s Gulch is just over 50 miles. They left at 3:20 that afternoon.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III &middot; Combat &middot; The Night Camp</div>
+      <div class="act-card">
+        <h3>A Swarm of Crow Skulls That Wasn&rsquo;t Undead</h3>
+        <ul>
+          <li>An hour and a half into the night, <strong>Panacea smelled undead again</strong>, woke the camp, and warned them to watch the trees: <em>&ldquo;we need to make sure that we don&rsquo;t have another one of those flying guys.&rdquo;</em></li>
+          <li>Zanthar asked out loud whether it was undead; Cyrathul put it to Kaazz. <strong>It is not.</strong> Demoralize did nothing, and Panacea&rsquo;s Vitality Lash did nothing &mdash; Bai Jian reminded her as she cast: <em>&ldquo;I don&rsquo;t think they&rsquo;re undead, though.&rdquo;</em></li>
+          <li><strong>Zanthar debuted Floating Flame</strong> &mdash; a natural-1 critical failure for <strong>44</strong> &mdash; then sustained it and added a Fireball. <strong>81</strong> from him, the most anyone put in.</li>
+          <li>Round 2 the swarm came apart into falling heads and bit all three frontliners &mdash; <strong>Cyrathul crit for 38</strong>, Ren 24, Bai Jian 19.</li>
+          <li>Kaazz let slip a hint while Bai Jian checked Ren&rsquo;s support benefit: <em>&ldquo;without giving all the cards away, it may be affected by that&rdquo;</em> &mdash; Ren&rsquo;s bonus damage keys to fiends or undead.</li>
+          <li><strong>Bai Jian finished it</strong>: Guidance, Ren&rsquo;s support, flank, <strong>critical hit for 54</strong>. <em>&ldquo;Bai Jian just somehow does a very quick maneuver that just killed multiple of the crows dead at the same time, after most of them have been burnt off by Zanthar.&rdquo;</em></li>
+          <li>Bai Jian&rsquo;s read afterward: <em>&ldquo;I think having an AoE person is important.&rdquo;</em> <strong>Cyrathul&rsquo;s Seek</strong>: the swarm had been hopping tree to tree <em>toward</em> them, from the direction they&rsquo;re headed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act IV &middot; Combat &middot; The Guard Post</div>
+      <div class="act-card">
+        <h3>&ldquo;Burn My Body. Don&rsquo;t Let Her Raise Me.&rdquo;</h3>
+        <ul>
+          <li>The trail died into a deer path and the surveyor&rsquo;s hundred-year-old map stopped matching. Around 4 p.m. an old caravan route reappeared. Zanthar, on the approach: <em>&ldquo;Yeah, we&rsquo;re good. We&rsquo;re sneaky people.&rdquo;</em> Then <strong>Bai Jian&rsquo;s full plate crunched through the refrozen ice.</strong></li>
+          <li>Voices ahead <strong>in Fae</strong>. <strong>Zanthar</strong> understood and answered: <em>&ldquo;We are. Come and talk to us.&rdquo;</em> They wanted snacks.</li>
+          <li><strong>Panacea&rsquo;s Medicine</strong> read them: gnome-like creatures under <strong>fungal growth</strong>. <em>&ldquo;What are you infected with?&rdquo;</em> &mdash; <em>&ldquo;What makes you think I&rsquo;m infected?&rdquo;</em> &mdash; <em>&ldquo;I see some growth upon you.&rdquo;</em> They guard the road for <strong>&ldquo;Mistress.&rdquo;</strong></li>
+          <li><strong>Cyrathul&rsquo;s bluff</strong>: <em>&ldquo;This is just a big misunderstanding. We actually work for her.&rdquo;</em> A 4, hero-pointed &mdash; natural 1. Kaazz refunded the point.</li>
+          <li><strong>Bai Jian</strong>: <em>&ldquo;Well, fuck your mistress. I take no order. I shall do whatever I want.&rdquo;</em> A natural 20 for 56 nearly cleaved the first one in half &mdash; then he stopped: <em>&ldquo;Do we kill or do we not kill, guys?&rdquo;</em> Panacea: they work for the witch. Natural 19, dead. Zanthar: <em>&ldquo;That was kind of sad.&rdquo;</em></li>
+          <li><strong>Cyrathul&rsquo;s Exploit Vulnerability</strong> found cold iron and <strong>divine revulsion</strong> &mdash; the second redcap had seen Panacea cast and was fleeing. As his jaws closed: <em>&ldquo;Burn my body. Don&rsquo;t let her raise me.&rdquo;</em></li>
+          <li><strong>Panacea</strong>: <em>&ldquo;Well, I guess we better burn them and do their final request.&rdquo;</em> Bai Jian: <em>&ldquo;Finish the wish.&rdquo;</em> Cyrathul: <em>&ldquo;I think that&rsquo;s overkill. These poor guys.&rdquo;</em> They burned both bodies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act V &middot; Combat &middot; Finder&rsquo;s Gulch</div>
+      <div class="act-card">
+        <h3>The Warhammer Answer</h3>
+        <ul>
+          <li>Nightfall. <strong>Cyrathul</strong> led on darkvision and his Shining Symbol and called for stealth; Bai Jian took Zanthar&rsquo;s <strong>Everlight Crystal</strong>.</li>
+          <li>Slow, heavy footsteps. <em>&ldquo;The living will feed me.&rdquo;</em> Bai Jian: <em>&ldquo;Oh my god, not a fucking skeleton again.&rdquo;</em> A <strong>Skeletal Hellknight Bonesinger</strong> &mdash; the same kind of creature that resisted his falcata down to 4 damage in S21 &mdash; summoned a Skeletal Giant.</li>
+          <li><strong>Bai Jian had planned for it.</strong> Falcata crit on the giant (30, vitalizing rune applied), then <strong>swapped to the +1 striking warhammer</strong>.</li>
+          <li>Next round he noticed the giant&rsquo;s persistent vitality hadn&rsquo;t ticked &mdash; summons have no initiative slot &mdash; rolled it: <strong>6, and the giant was destroyed.</strong> After three fights without ticking, the rune finally killed something.</li>
+          <li><strong>Cyrathul&rsquo;s crit Exploit Vulnerability</strong> named the whole resistance line; Mortal Weakness, tail for 31, twice. <strong>Bai Jian&rsquo;s warhammer, natural 20: 26, not resisted.</strong></li>
+          <li>The Bonesinger <strong>crit Cyrathul for 42</strong>, undoing Panacea&rsquo;s 29-point Doctor&rsquo;s Visitation. <em>&ldquo;There goes all your healing.&rdquo;</em> Panacea hissed at it.</li>
+          <li>It tried to cast. <strong>Bai Jian&rsquo;s Reactive Strike with the warhammer: 19, destroyed.</strong> <em>&ldquo;He was saying his incantation and I&rsquo;m like, ah, the audacity of this guy &mdash; and then just bash him in the head.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI &middot; Combat &middot; The Ghost Town</div>
+      <div class="act-card">
+        <h3>A Voice in Cyrathul&rsquo;s Head</h3>
+        <ul>
+          <li>Creeping through the ghost town, <strong>Cyrathul</strong> smelled the smell from the night before and heard the chattering of beaks.</li>
+          <li>A voice spoke <strong>inside Cyrathul&rsquo;s head</strong>: <em>&ldquo;These guys are real creative. They like death.&rdquo;</em></li>
+          <li><strong>Cyrathul</strong>, as initiative went up: <em>&ldquo;Well, at least we now know it&rsquo;s a fiend.&rdquo;</em> His Exploit Vulnerability later found it weak to holy and splash &mdash; <em>&ldquo;which I did not find out last time.&rdquo;</em></li>
+          <li>Foundry had lost the swarm&rsquo;s attacks; Kaazz rebuilt them mid-fight, then cleared the chat log.</li>
+          <li>Bai Jian hero-pointed a natural-1 Will save and rerolled a <strong>natural 20</strong>.</li>
+          <li><strong>Panacea&rsquo;s hero-pointed Moonlight Ray</strong> &mdash; holy into a holy weakness &mdash; hit on the +10 house rule for <strong>54</strong>. <strong>Cyrathul</strong> finished it: <em>&ldquo;I&rsquo;ll just do a little spin around and flail my tail everywhere.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII &middot; Combat &middot; The Cathedral</div>
+      <div class="act-card">
+        <h3>Three Sisters and a Sulfur Zombie</h3>
+        <ul>
+          <li>A garden gone rank and poisonous, and a <strong>large cathedral</strong> with no markings of any god the party knows. Cyrathul: <em>&ldquo;Sitting in a town full of undead, chanting slowly in the night.&rdquo;</em></li>
+          <li><strong>Three Erinyes sisters</strong> of the Lucent Mission, turned by the blight that nearly took Sister Endreah: <em>&ldquo;It&rsquo;s those that desecrated our&hellip;&rdquo;</em> <strong>Cyrathul</strong>, on the thing in the centre: <em>&ldquo;Looks like someone with a severe smoking problem&hellip; Maybe they were trying to summon lung cancer.&rdquo;</em> A <strong>sulfur zombie</strong>.</li>
+          <li><strong>Bai Jian</strong> killed the first sister on his opening swing. The zombie and a sister&rsquo;s flurry took <strong>Cyrathul from 55 to 2</strong>; Bai Jian explained why his failed Blinding Sulfur save still counted &mdash; it&rsquo;s incapacitation.</li>
+          <li><strong>Ren killed a sister</strong>: <em>&ldquo;Ren immediately understands and just kind of runs out to the back and just bites the ankle and takes her down.&rdquo;</em> GM: <em>&ldquo;Ren really loves undead flesh.&rdquo;</em></li>
+          <li><strong>Cyrathul went down.</strong> <strong>Zanthar</strong> brought him back with a 24-point Lay on Hands through Reach Spell, after <strong>Bai Jian</strong> read him the feat text.</li>
+          <li><strong>Bai Jian: Sure Strike scroll, critical &mdash; 83.</strong> <em>&ldquo;Fatal 12 is crazy.&rdquo;</em> The zombie exploded in a 30-foot burst of fire; Cyrathul crit-failed the save. Zanthar: <em>&ldquo;I&rsquo;m 35 feet away.&rdquo;</em></li>
+          <li>Cyrathul burning again afterward; <strong>Panacea&rsquo;s Cloak of Light</strong> and <strong>Zanthar&rsquo;s</strong> assisted recovery got him back to full. The zombie left <strong>Dust of Corpse Animation</strong>. Zanthar: <em>&ldquo;Cool, we can make our own zombies!&rdquo;</em> Bai Jian: <em>&ldquo;Oh, you guys magical people will do that. I&rsquo;m just gonna stick to my own thing.&rdquo;</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VIII &middot; Mystery &middot; The Door</div>
+      <div class="act-card">
+        <h3>Voices in Aklo</h3>
+        <ul>
+          <li>Cyrathul: <em>&ldquo;I have a sneaking suspicion the witch will be in this cathedral.&rdquo;</em></li>
+          <li>Bai Jian wondered aloud what the sisters had been doing out there; Panacea guessed a graveyard.</li>
+          <li><strong>Bai Jian pushed the door open.</strong> <em>&ldquo;Bonk.&rdquo;</em></li>
+          <li>From farther inside came voices speaking <strong>Aklo</strong>. Nobody at the table speaks it. End of session.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Combat 1 &mdash; The Crow-Skull Swarm</h3>
+    <div class="combat-meta">threat severe &middot; 2 rounds &middot; 100 XP &middot; Sarcovalt Swarm (lvl 9, 155 HP, AC 27)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Bai Jian</div></div>
+      <div><div class="combat-stat-label">Damage in</div><div class="combat-stat-value">Zanthar 81 &middot; Bai Jian 68 &middot; Panacea 6 &middot; Cyrathul 0</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Cyrathul 49 &middot; Ren 24 &middot; Bai Jian 19</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">None</div></div>
+    </div>
+    <p><em>Weak area 10 / holy 10 / splash 10; resist bludgeoning 5, piercing 10, slashing 10; immune disease, poison, precision, swarm-mind, grabbed/prone/restrained. Not undead. Droning Waste (Will DC 27), Swarming Bites (basic Fort DC 27 + bleed), Aura of Blight (Fort DC 25), and a raining-heads attack that bites every creature once.</em></p>
+    <p><strong>Initiative</strong>: Cyrathul 33 &middot; Panacea 32 (nat 20) &middot; Swarm 22 &middot; Zanthar 19 &middot; Bai Jian 18 (nat 1)</p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Cyrathul</strong> &mdash; Exploit Vulnerability (34 vs DC 26): <strong>weak splash</strong>. Strode in and Demoralized &mdash; a success, but a swarm-mind shrugs it off.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Needle Darts</strong> hit for 16, <strong>6</strong> after resistance. Shield.</li>
+      <li><strong>Swarm</strong> &mdash; Droning Waste on Cyrathul (crit success); Swarming Bites <strong>7 + persistent bleed</strong>.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Floating Flame</strong> (new spell): natural-1 critical failure, <strong>44</strong>.</li>
+      <li><strong>Bai Jian</strong> &mdash; Ren moved into the flank on his own action; <strong>Sudden Charge</strong>, hit, <strong>9</strong> after resistance; MAP Strike (flank made it <code>Hit by +1</code>), <strong>9</strong>. <em>&ldquo;Unfortunately, most of it&rsquo;s going to be resisted.&rdquo;</em></li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Aura of Blight</strong> &mdash; Bai Jian failed by 1, Ren succeeded.</li>
+      <li><strong>Cyrathul</strong> &mdash; Draconic Frenzy plus a fourth Strike: <strong>all four missed</strong> (nat 4, 5, 9, 10). Bleed ticked for 4 and ended.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Vitality Lash</strong>: crit-failed save, <strong>no damage</strong> &mdash; not undead.</li>
+      <li><strong>Swarm</strong> &mdash; heads rained down: <strong>Bai Jian 19</strong>, <strong>Ren 24</strong>, <strong>Cyrathul critical, 38</strong> (the grab failed).</li>
+      <li><strong>Zanthar</strong> &mdash; sustained Floating Flame <strong>17</strong>, <strong>Fireball 20</strong>. Swarm at 50.</li>
+      <li><strong>Bai Jian</strong> &mdash; Guidance, Ren&rsquo;s support benefit, flank: <strong>critical, 54 (50 effective) &rarr; destroyed.</strong></li>
+    </ul>
+    <p>Panacea&rsquo;s Treat Wounds (Assurance) healed Cyrathul 25 and Ren 20; Life Boost on Cyrathul. <span style="color:var(--gold)"><strong>100 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 2 &mdash; The Redcap Guard Post</h3>
+    <div class="combat-meta">threat low &middot; 1 round &middot; 50 XP &middot; 2&times; Redcap (lvl 5, 60 HP, AC 21)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian 1 &middot; Cyrathul 1</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">None &mdash; neither redcap acted</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Cyrathul 1 (pre-combat, refunded)</div></div>
+    </div>
+    <p><em>Weak cold iron 5, divine revulsion, fast healing 10 (never ticked), immune visual.</em></p>
+    <p><strong>Initiative</strong>: Bai Jian 33 &middot; Zanthar 31 (nat 20) &middot; Panacea 30 &middot; Cyrathul 27 &middot; Redcap 26 &middot; Redcap 17. <strong>Pre-combat</strong>: Cyrathul&rsquo;s Deception 4 &rarr; hero point &rarr; natural 1; Kaazz refunded the point.</p>
+
+    <h4>Round 1 &mdash; and only Round 1</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; Stride, <strong>Snagging Strike natural 20 &rarr; critical, 56</strong>; <em>&ldquo;Do we kill or do we not kill, guys?&rdquo;</em>; second Strike <strong>natural 19 &rarr; critical, 63 &rarr; Redcap 1 destroyed.</strong> <em>&ldquo;One in the stomach, second one into the head.&rdquo;</em></li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Hand of the Apprentice</strong> hit, <strong>19</strong>; <strong>Fear</strong>, failed save.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Divine Lance 15</strong>; <strong>Trade Death for Life</strong>, crit-failed save, <strong>20</strong>. <em>&ldquo;Do you want to surrender?&rdquo;</em> No surrender came.</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Exploit Vulnerability critical</strong> (33): cold iron and divine revulsion; the redcap failed its revulsion save and fled (Foundry showed Frightened 6 by summing the sources; RAW only the higher value applies). <strong>Jaws critical, 56 &rarr; Redcap 2 destroyed.</strong> <em>&ldquo;Burn my body. Don&rsquo;t let her raise me.&rdquo;</em></li>
+    </ul>
+    <p><span style="color:var(--gold)"><strong>50 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 3 &mdash; The Skeletal Hellknight Bonesinger</h3>
+    <div class="combat-meta">threat moderate &middot; 3 rounds &middot; 80 XP &middot; Bonesinger (lvl 8, 130 HP, AC 26) + summoned Skeletal Giant (50 HP, AC 17)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian &mdash; both</div></div>
+      <div><div class="combat-stat-label">Damage into boss</div><div class="combat-stat-value">Cyrathul 62 &middot; Bai Jian 36 &middot; Panacea 18 &middot; Zanthar 14</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Cyrathul 71 &middot; Bai Jian 12 &middot; Panacea 12</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">None</div></div>
+    </div>
+    <p><em>Weak holy 10 / vitality 10; resist cold, electricity, fire, piercing, slashing 10; void healing; warhammer +20 (2d8+9). The giant has a 15-ft-reach glaive and Broad Swipe.</em></p>
+    <p><strong>Initiative</strong>: Bonesinger 35 (nat 20) &middot; Bai Jian 34 &middot; Zanthar 30 &middot; Cyrathul 21 &middot; Panacea 13 (nat 1)</p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Bonesinger</strong> &mdash; <em>&ldquo;The living will feed me.&rdquo;</em> <strong>Summon Undead</strong>: a Skeletal Giant burst from the ground and hit Cyrathul for <strong>13</strong>.</li>
+      <li><strong>Bai Jian</strong> &mdash; moved up, Ren&rsquo;s support, <strong>Snagging Strike critical on the giant, 30</strong> (vitalizing rune applied); <strong>swapped to the +1 striking warhammer</strong>.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Dizzying Colors</strong>: the Bonesinger rolled a natural 20 and critically saved.</li>
+      <li><strong>Cyrathul</strong> &mdash; <strong>Exploit Vulnerability critical</strong> (37), Mortal Weakness, <strong>tail 31</strong>.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Vitality Lash</strong> on the giant, <strong>18</strong> (giant at 2).</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Skeletal Giant</strong> &mdash; Broad Swipe: <strong>Bai Jian 12</strong>, <strong>Panacea 12</strong>.</li>
+      <li><strong>Bonesinger</strong> &mdash; at Cyrathul: critical miss, then <strong>16</strong>.</li>
+      <li><strong>Bai Jian</strong> &mdash; rolled the giant&rsquo;s missed persistent tick: <strong>6 &rarr; Skeletal Giant destroyed.</strong> Ran past the Bonesinger (its reaction swing missed), Guidance, <strong>warhammer natural 20 &rarr; critical, 26</strong>, not resisted.</li>
+      <li><strong>Zanthar</strong> &mdash; Hand of the Apprentice, <strong>14</strong>; a second cantrip missed.</li>
+      <li><strong>Cyrathul</strong> &mdash; Frenzy plus a fourth Strike: <strong>tail 31</strong>, three misses.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Doctor&rsquo;s Visitation</strong> &rarr; Battle Medicine, Cyrathul <strong>+29</strong>; <strong>Vitality Lash</strong>, saved, <strong>18</strong>. Bonesinger at 10.</li>
+    </ul>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Bonesinger</strong> &mdash; <strong>natural 20 on Cyrathul, 42.</strong> <em>&ldquo;There goes all your healing.&rdquo;</em> Then it began to cast &mdash; <strong>Bai Jian&rsquo;s Reactive Strike with the warhammer: 19 &rarr; destroyed.</strong></li>
+    </ul>
+    <p>Loot: Hellknight plate and a second <strong>+1 striking warhammer</strong>. <span style="color:var(--gold)"><strong>80 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 4 &mdash; The Second Swarm</h3>
+    <div class="combat-meta">threat severe &middot; 2 rounds &middot; 100 XP &middot; Sarcovalt Swarm (as Combat 1)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">2</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Cyrathul</div></div>
+      <div><div class="combat-stat-label">Logged damage</div><div class="combat-stat-value">Panacea 54 &middot; Zanthar 29 &middot; Cyrathul 16 &middot; Bai Jian 6 &middot; + 50 unlogged in R1</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Bai Jian 2 &middot; Cyrathul 1 &middot; Panacea 1</div></div>
+    </div>
+    <div class="log-warning"><strong>Round 1 before Bai Jian&rsquo;s turn is not in the roll log</strong> &mdash; the chat was cleared. Zanthar&rsquo;s Fireball and Cyrathul&rsquo;s tail took <strong>50</strong> between them; the split isn&rsquo;t recoverable.</div>
+
+    <h4>Round 1 &mdash; partly from the recording</h4>
+    <ul>
+      <li><strong>Swarm</strong> &mdash; went first. A voice in <strong>Cyrathul&rsquo;s</strong> head: <em>&ldquo;These guys are real creative. They like death.&rdquo;</em> Heads flew at him; one hit.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Fireball</strong> off his staff, placed to avoid the building. Saved, but <em>&ldquo;it takes quite a bit of damage anyway.&rdquo;</em></li>
+      <li><strong>Panacea</strong> &mdash; Doctor&rsquo;s Visitation wasn&rsquo;t available again for an hour; <strong>Life Boost</strong> on Cyrathul.</li>
+      <li><strong>Cyrathul</strong> &mdash; Exploit Vulnerability: <strong>weak holy and splash</strong>. Tail hit; Kaazz added the fiend bane Foundry had missed.</li>
+      <li><strong>Bai Jian</strong> &mdash; natural 2, <strong>hero point &rarr; 11, hit, 6</strong>; MAP Strike missed.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Swarm</strong> &mdash; Aura of Blight: Cyrathul hero-pointed a 3 into another 3; the +10 house rule made it a success. Droning Waste: <strong>Bai Jian natural 1 &rarr; hero point &rarr; natural 20</strong>; Ren crit-failed (Stupefied). It moved onto Ren and Cyrathul &mdash; <strong>Bai Jian&rsquo;s Reactive Strike missed</strong> &mdash; and bit: Ren saved for half, <strong>8</strong>; Cyrathul crit-saved.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Floating Flame</strong>, failed save, <strong>29</strong>.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Moonlight Ray, hero point</strong>: 7 &rarr; 7, and the <strong>+10 house rule made it hit</strong> (33 vs AC 27) &mdash; <strong>54</strong>.</li>
+      <li><strong>Cyrathul</strong> &mdash; Draconic Frenzy, <strong>tail 23 (16 to finish) &rarr; destroyed.</strong></li>
+    </ul>
+    <p><span style="color:var(--gold)"><strong>100 XP each.</strong></span></p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Combat 5 &mdash; The Cathedral</h3>
+    <div class="combat-meta">threat moderate &middot; 3 rounds &middot; 80 XP &middot; 3&times; Erinys Sister Wight (lvl 3, 40 HP, AC 18) + Sulfur Zombie (lvl 6, 125 HP, AC 23)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">3</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Bai Jian 3 (2 sisters + zombie) &middot; Ren 1</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Cyrathul ~87 rolled (downed) &middot; Ren 24 &middot; Bai Jian 9</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Cyrathul 1</div></div>
+    </div>
+    <p><em>Sisters: Final Spite, Corrupting Spite (DC 17 Fort, Drained), flurry of blows, void healing. Zombie: weak slashing 7 / vitality 7, immune fire and mental; fist + persistent fire; Blinding Sulfur (incapacitation); Death Throes &mdash; 30-ft burst, 2d10 bludgeoning + 2d10 fire, DC 21 basic Reflex.</em></p>
+    <p><strong>Initiative</strong>: Bai Jian 26 &middot; Cyrathul 26 &middot; Sulfur Zombie 25 &middot; Sister 22 &middot; Panacea 18 &middot; Sister 17 &middot; Zanthar 12 &middot; Sister 11</p>
+
+    <h4>Round 1</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; <strong>falcata critical, 44 &rarr; Sister 1 destroyed</strong>; her Final Spite missed. Dueling Parry.</li>
+      <li><strong>Cyrathul</strong> &mdash; Exploit Vulnerability on the zombie failed; strode, <strong>tail 24</strong>.</li>
+      <li><strong>Sulfur Zombie</strong> &mdash; fist <strong>critical on Cyrathul, 20</strong> + persistent fire; Blinding Sulfur failed but upgraded (incapacitation &mdash; <strong>Bai Jian explained the ruling</strong>). Fist <strong>10</strong>; second Blinding Sulfur: natural 1, <strong>hero point &rarr; 11</strong>, critical success.</li>
+      <li><strong>Sister</strong> &mdash; flurry on Cyrathul: <strong>7</strong> (Drained), critical miss, then a claw logged as a miss by 1 whose <strong>9</strong> was applied anyway. <strong>Cyrathul at 2.</strong></li>
+      <li><strong>Panacea</strong> &mdash; <strong>Life Boost</strong> on Cyrathul (the staff heal was out of range).</li>
+      <li><strong>Sister</strong> &mdash; three claws at Ren, all missed.</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Blazing Bolt</strong> at two sisters: <strong>15</strong> and <strong>17</strong>.</li>
+    </ul>
+
+    <h4>Round 2</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; <strong>falcata critical, 43 &rarr; Sister 2 destroyed</strong>. <strong>Ren: jaws critical, 24 &rarr; Sister 3 destroyed</strong>; her Final Spite crit Ren for 20.</li>
+      <li><strong>Cyrathul</strong> &mdash; Sure Strike, Frenzy: <strong>tail 25</strong>, two misses. Fire tick 8 &mdash; back to 2 &mdash; but the flat check ended it, and a crit-success cleared the Drained.</li>
+      <li><strong>Sulfur Zombie</strong> &mdash; fist, <strong>15 &rarr; Cyrathul down</strong>. Swung at Bai Jian, missed.</li>
+      <li><strong>Panacea</strong> &mdash; <strong>Cloak of Light</strong> (heals only those who start a turn adjacent; nothing before the fight ended).</li>
+      <li><strong>Zanthar</strong> &mdash; <strong>Lay on Hands through Reach Spell, 24 &rarr; Cyrathul up.</strong> Maul, <strong>19</strong>.</li>
+    </ul>
+
+    <h4>Round 3</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> &mdash; <strong>Sure Strike scroll, critical, 83 (57 effective) &rarr; Sulfur Zombie destroyed.</strong> <em>&ldquo;Fatal 12 is crazy.&rdquo;</em> <strong>Death Throes</strong>: Cyrathul crit-failed (<strong>18</strong>), Bai Jian <strong>9</strong>, Ren <strong>4</strong>, Panacea saved; Zanthar out of range.</li>
+    </ul>
+    <p>After: Cyrathul burning again from the zombie&rsquo;s last fist; Panacea sustained Cloak of Light while he rolled recovery with Zanthar assisting. <span style="color:var(--gold)"><strong>80 XP each.</strong></span></p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian &middot; the Answer to Last Time</h4>
+      <ul>
+        <li><strong>He came back to the Bonesinger with a plan.</strong> In S21 the same kind of monster resisted his falcata down to 4 damage and crit him twice. Tonight he opened on the summoned giant with the falcata, <strong>swapped to the warhammer before the boss ever reached him</strong>, and killed it twice over &mdash; a natural-20 crit for 26 the resistance never touched, then a <strong>Reactive Strike when it tried to cast</strong>. <em>&ldquo;He was saying his incantation and I&rsquo;m like, ah, the audacity of this guy.&rdquo;</em></li>
+        <li><strong>He made the vitalizing rune pay.</strong> It had not ticked once in three fights since he installed it. On the Skeletal Giant he noticed the persistent damage hadn&rsquo;t fired &mdash; summons have no initiative slot &mdash; asked Kaazz, rolled the 2d6, and the 6 destroyed it.</li>
+        <li><strong>At the funeral he bowed and said the right amount</strong>: <em>&ldquo;You did a lot. I will remember your sacrifice. I hope you find peace.&rdquo;</em></li>
+        <li><strong>He asked the question mid-swing.</strong> His first crit had nearly cut a redcap in half; before the second he stopped: <em>&ldquo;Do we kill or do we not kill, guys?&rdquo;</em> &mdash; the question he&rsquo;s been asking since the party&rsquo;s lethality flipped in S18. Panacea answered that they work for the witch, and he swung again.</li>
+        <li><strong>&ldquo;Well, fuck your mistress. I take no order. I shall do whatever I want.&rdquo;</strong> &mdash; the redcaps&rsquo; refusal to let the living pass, answered.</li>
+        <li><strong>He kept the table&rsquo;s rules straight</strong> &mdash; explained why Cyrathul&rsquo;s failed Blinding Sulfur save counted (it&rsquo;s incapacitation), read out the Reach Spell text so Zanthar&rsquo;s Lay on Hands could reach a dying Cyrathul, and diagnosed the swarm on the spot: <em>&ldquo;I think having an AoE person is important.&rdquo;</em></li>
+        <li><strong>He killed the first swarm, a redcap, the Skeletal Giant, the Bonesinger, two sisters and the sulfur zombie</strong> &mdash; seven of the night&rsquo;s ten enemies. The zombie was an 83-damage Sure Strike crit. Ren got the other sister.</li>
+        <li><strong>He opened the door.</strong> <em>&ldquo;I&rsquo;m pushing the door open. Bonk.&rdquo;</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea &middot; the Nose and the Hands</h4>
+      <ul>
+        <li><strong>She spoke first at the grave</strong> &mdash; <em>&ldquo;thank you for showing me that in death sometimes we can be stronger, and you&rsquo;re a hero&rdquo;</em> &mdash; last week&rsquo;s <em>&ldquo;he&rsquo;s stronger dead,&rdquo;</em> said to his face this time.</li>
+        <li><strong>She&rsquo;s the party&rsquo;s early warning, again.</strong> She smelled the swarm at the night camp and woke everyone, then warned them to watch the trees for <em>&ldquo;another one of those flying guys.&rdquo;</em></li>
+        <li><strong>She ran the Logos social scene.</strong> She greeted the twins first, asked how they were mending, and told them she hoped they&rsquo;d feel at home; she explained their recruitment to Phoebe and suggested their discipline might help organize the army.</li>
+        <li><strong>She read the redcaps</strong> &mdash; a Medicine check that spotted the fungus, <em>&ldquo;What are you infected with?&rdquo;</em>, and the question that got the word <em>&ldquo;Mistress&rdquo;</em> out of them. She offered the second one surrender, and when it died asking to be burned, she was the one who said they&rsquo;d honour it.</li>
+        <li><strong>She kept the party&rsquo;s memory.</strong> She opened the session with the S22 recap and was the one who asked what the rogue had wanted bought &mdash; the anti-plague.</li>
+        <li><strong>She kept Cyrathul alive through two fights</strong> &mdash; Treat Wounds, Doctor&rsquo;s Visitation for 29, Life Boost four times, and a sustained <strong>Cloak of Light</strong> that carried him back to full after the fight while he was still burning. Serrafina handed her the healing staff mid-fight.</li>
+        <li><strong>Her hero-pointed Moonlight Ray did 54 to the second swarm</strong> &mdash; holy into a holy weakness, the biggest hit of that fight.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III &middot; the Fire Behind the Blade</h4>
+      <ul>
+        <li><strong>He talked to the redcaps in their own language.</strong> He was the only one who understood the Fae, relayed it to the party quietly, and answered them in it: <em>&ldquo;We are. Come and talk to us.&rdquo;</em></li>
+        <li><strong>Floating Flame&rsquo;s debut was the first swarm&rsquo;s biggest spell hit</strong> &mdash; a critical-failure save for 44 &mdash; and his 81 total was the most anyone put into it; Bai Jian&rsquo;s killing blow was narrated straight off it. He reused it on the second swarm for 29.</li>
+        <li><strong>He brought Cyrathul back up.</strong> With the dragon down and on fire, he spent Lay on Hands through Reach Spell for 24, then assisted his recovery checks until the fire went out.</li>
+        <li><strong>He felt the redcap kill.</strong> After Bai Jian bisected the first one: <em>&ldquo;That was kind of sad.&rdquo;</em> Then, an hour later: <em>&ldquo;Cool, we can make our own zombies!&rdquo;</em> about a pile of corpse dust. He also offered the table a dead redcap&rsquo;s hat.</li>
+        <li><strong>He was the table&rsquo;s comic undercut.</strong> Heading up the trail: <em>&ldquo;Yeah, we&rsquo;re good. We&rsquo;re sneaky people.&rdquo;</em> Minutes later Bai Jian&rsquo;s plate crunched through the ice and gave them all away. On the second swarm: <em>&ldquo;A fireball on them. Why not? It worked so well the first time.&rdquo;</em></li>
+        <li><strong>He banked his hero point</strong> at the start of the session &mdash; <em>&ldquo;I think I&rsquo;m going to save my hero point&rdquo;</em> &mdash; and never spent it.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul &middot; the Lamp in the Dark</h4>
+      <ul>
+        <li><strong>Back at the table.</strong> He walked over to Brakknap&rsquo;s grave without a word and put his handful of earth on it.</li>
+        <li><strong>He tried to talk them in.</strong> <em>&ldquo;This is just a big misunderstanding. We actually work for her. She&rsquo;ll be expecting us if you&rsquo;ll lead us to her.&rdquo;</em> A natural 1 on the hero-point reroll &mdash; and he&rsquo;d committed to it.</li>
+        <li><strong>His Exploit Vulnerability ran the whole night.</strong> Splash on the first swarm; cold iron and divine revulsion on the redcaps (<em>&ldquo;I know a lot of fey have like a goofy weakness&rdquo;</em>); the Bonesinger&rsquo;s full resistance line; and on the second swarm the holy weakness he&rsquo;d missed the first time. He&rsquo;d already called it as that fight started: <em>&ldquo;at least we now know it&rsquo;s a fiend.&rdquo;</em></li>
+        <li><strong>He killed the second redcap</strong> &mdash; clamped on the back of its neck as it asked him to burn its body &mdash; and then felt for it: <em>&ldquo;I think that&rsquo;s overkill. These poor guys.&rdquo;</em> <strong>He finished the second swarm</strong> with a tail spin.</li>
+        <li><strong>He led the way in.</strong> With night down he took point on darkvision and his Shining Symbol, called for stealth, and flagged that his light made them a target. He also set the Logos sell list and knew enough redcap lore to say <em>&ldquo;Let&rsquo;s burn them up.&rdquo;</em></li>
+        <li><strong>He was the most-hit PC of the night.</strong> The first swarm&rsquo;s 38-damage crit, the giant&rsquo;s glaive, the Bonesinger&rsquo;s 42-damage crit, and in the cathedral a sulfur zombie and a sister together &mdash; <strong>down to 2 HP, then down</strong>. A voice in his head in the ghost town.</li>
+        <li><strong>He was funny the whole way down.</strong> <em>&ldquo;Looks like someone with a severe smoking problem&hellip; Maybe they were trying to summon lung cancer.&rdquo;</em> On the cultists: <em>&ldquo;Sitting in a town full of undead, chanting slowly in the night.&rdquo;</em> And: <em>&ldquo;I have a sneaking suspicion the witch will be in this cathedral.&rdquo;</em></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item">
+      <div class="loot-name">82 gp each</div>
+      <div class="loot-source">Sold at Logos</div>
+      <div class="loot-note">The Staff of Phantasms, the half plate, and loose gemstones.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Anti-plague</div>
+      <div class="loot-source">Logos alchemist &middot; a very excitable halfling</div>
+      <div class="loot-note">Bai Jian and Panacea; one bought for Elaine. The dead surveyor had dysentery.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Everlight Crystal</div>
+      <div class="loot-source">Zanthar &rarr; stash &rarr; Bai Jian</div>
+      <div class="loot-note">His light source for the night march.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Hellknight plate</div>
+      <div class="loot-source">Skeletal Hellknight Bonesinger</div>
+      <div class="loot-note">To the stash.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">+1 striking warhammer (second)</div>
+      <div class="loot-source">Skeletal Hellknight Bonesinger</div>
+      <div class="loot-note">Identified by Zanthar, Bai Jian and Panacea &mdash; Panacea on a natural 20. To the stash.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Dust of Corpse Animation</div>
+      <div class="loot-source">The sulfur zombie&rsquo;s remains &middot; ~100 gp</div>
+      <div class="loot-note">Cyrathul put it in the stash. Zanthar: <em>&ldquo;Cool, we can make our own zombies!&rdquo;</em></div>
+    </div>
+  </div>
+  <div class="xp-banner">Experience &middot; 100 swarm &middot; 50 redcaps &middot; 80 Bonesinger &middot; 100 swarm &middot; 80 cathedral = <strong>410 XP each</strong></div>
+  <div class="log-warning"><strong>Foundry left Panacea off every XP recipient list again</strong> (<code>Recipients: Bai Jian Cyrathul Zanthar</code>), as in S21 and S22. Worth checking her sheet.</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;You did a lot. I will remember your sacrifice. I hope you find peace.&rdquo;
+    <span class="attribution">At Brakknap&rsquo;s grave, after a bow</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;Well, fuck your mistress. I take no order. I shall do whatever I want.&rdquo;
+    <span class="attribution">Rolling initiative on the redcaps, who had just said the Mistress allows no living things up the road</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> &ldquo;He was saying his incantation and I&rsquo;m like, ah, the audacity of this guy &mdash; and then just bash him in the head.&rdquo;
+    <span class="attribution">Describing the warhammer Reactive Strike that killed the Bonesinger mid-cast</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;Thank you for showing me that in death sometimes we can be stronger, and you&rsquo;re a hero.&rdquo;
+    <span class="attribution">The first handful of earth on Brakknap&rsquo;s grave</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;So you kept your word and came along, didn&rsquo;t you?&rdquo;
+    <span class="attribution">To the Hell Knight twins, in their camp outside Logos under a Hellbreaker flag</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> &ldquo;What are you infected with?&rdquo;
+    <span class="attribution">To a fungus-covered redcap, who immediately wanted to know what made her think so</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> &ldquo;We are. Come and talk to us.&rdquo;
+    <span class="attribution">In Fae, answering a pair of guards who wanted to know who was coming up the road</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> &ldquo;Cool, we can make our own zombies!&rdquo;
+    <span class="attribution">Over a fresh pile of Dust of Corpse Animation. Bai Jian: &ldquo;Yeah, I don&rsquo;t know about that one.&rdquo;</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> &ldquo;This is just a big misunderstanding. We actually work for her. She&rsquo;ll be expecting us if you&rsquo;ll lead us to her.&rdquo;
+    <span class="attribution">The bluff at the redcap post. Hero-pointed; natural 1</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> &ldquo;Looks like someone with a severe smoking problem from what I can see. Maybe they were trying to summon lung cancer.&rdquo;
+    <span class="attribution">On first sight of the sulfur zombie the sisters were chanting over</span></blockquote>
+
+  <blockquote><strong>Redcap:</strong> &ldquo;Burn my body. Don&rsquo;t let her raise me.&rdquo;
+    <span class="attribution">Its last words, with Cyrathul&rsquo;s jaws on its neck. The party did</span></blockquote>
+
+  <blockquote><strong>Hell Knight twin:</strong> &ldquo;The undead menace is more important to a free Isger than it is to whatever Caeto wanted us to do.&rdquo;
+    <span class="attribution">In the Logos war camp, flying the Hellbreakers&rsquo; flag</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>The cathedral</strong> &mdash; no god&rsquo;s markings, better built than anything else in town, and voices inside speaking <strong>Aklo</strong>. The door is open. Cyrathul&rsquo;s bet: the witch is in there.</li>
+      <li><strong>&ldquo;Mistress&rdquo;</strong> &mdash; the redcaps&rsquo; word for whoever set their guard post, and the one they begged not to be raised by. Almost certainly the <strong>Wight Mother of Isger</strong>.</li>
+      <li><strong>The voice in Cyrathul&rsquo;s head</strong> &mdash; <em>&ldquo;These guys are real creative. They like death.&rdquo;</em> Spoken as the second swarm attacked &mdash; possibly the swarm itself, possibly whatever it serves. It spoke to him specifically.</li>
+      <li><strong>The swarms are fiends, not undead</strong> &mdash; and the first one was hopping tree to tree south, toward the party, before it found them.</li>
+      <li><strong>The Erinyes sisters</strong> &mdash; three of the Lucent Mission&rsquo;s sisters, turned by the blight, chanting over a sulfur zombie. Sister Endreah nearly became this. What were they summoning?</li>
+      <li><strong>The redcaps were infected</strong> &mdash; fungal growth on both. What&rsquo;s the infection, and is it the Mistress&rsquo;s?</li>
+      <li><strong>The army marches in three days</strong> from Logos. The party is its advance scout, and is standing in Finder&rsquo;s Gulch now.</li>
+      <li><strong>&ldquo;Whatever Caeto wanted us to do&rdquo;</strong> &mdash; the twins named him by first name tonight, having named him by surname (&ldquo;Vulaunex&rdquo;) in S22: <strong>Paralictor Caeto Vulaunex</strong>. The Paralictor who deputized the party ordered his knights to ignore the undead.</li>
+      <li><strong>Rhokrag</strong> arrives in Logos tomorrow to pay the bet.</li>
+      <li><strong>Thorngrip&rsquo;s terms hold</strong> &mdash; Neemi confirmed the agreement and the battalions. (Resolves the S22 thread.)</li>
+      <li><strong>Dust of Corpse Animation</strong> in the stash. Zanthar is enthusiastic.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax&rsquo;s Notes &mdash; Bai Jian&rsquo;s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Bowed at <strong>Brakknap&rsquo;s grave</strong>. Said what he had to say.</li>
+    <li>Sold the stash at Logos with the party, bought <strong>anti-plague</strong>, told the party to buy armor potency runes.</li>
+    <li><strong>Killed the first swarm</strong> &mdash; Guidance, Ren&rsquo;s support, flank, crit for 54 after Zanthar burned most of it.</li>
+    <li><strong>Killed the first redcap</strong> on two crits &mdash; asked between them whether we were killing them. We were.</li>
+    <li><strong>Killed the Bonesinger</strong> &mdash; swapped to the warhammer before it reached me, crit it on a natural 20 for 26 unresisted, and Reactive-Struck it for 19 when it tried to cast.</li>
+    <li><strong>The vitalizing rune finally ticked</strong> &mdash; 6 persistent vitality killed the Skeletal Giant. The summon had no initiative slot, so it had to be rolled by hand.</li>
+    <li>Hero-pointed a natural 1 on the second swarm&rsquo;s Droning Waste into a natural 20.</li>
+    <li><strong>Explained the Blinding Sulfur incapacitation ruling</strong> when the table was confused why Cyrathul&rsquo;s failed save counted as a success; read out the Reach Spell text so Zanthar could Lay on Hands him.</li>
+    <li>Killed <strong>two Erinyes sisters and the sulfur zombie</strong> &mdash; 83 on a Sure Strike crit. Ren took the third sister by the ankle.</li>
+    <li><strong>Opened the cathedral door.</strong></li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li><strong>Brakknap&rsquo;s S21 vision was aimed at him</strong> &mdash; <em>&ldquo;at the end of this path, the catalyst may be that thing&rdquo;</em> &mdash; and the path has now led into the Wight Mother&rsquo;s town. Nobody else has connected it to Bai Feng.</li>
+    <li><strong>Ren&rsquo;s foe scent is set to undead.</strong> Kaazz hinted mid-fight that the swarm <em>&ldquo;may be affected by that&rdquo;</em> &mdash; the swarms are fiends, and Ren&rsquo;s bonus damage keys to whichever one he sets at daily prep.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>Weapon-swap discipline.</strong> Falcata against things that bleed; warhammer against things that resist slashing. The swap costs an action &mdash; make it before the target reaches me, as tonight.</li>
+    <li><strong>AoE matters.</strong> Zanthar put 81 into the first swarm with Floating Flame and Fireball &mdash; more than anyone. Swarms and troops both want area damage, and the party has one source.</li>
+    <li><strong>Cyrathul took the most damage tonight</strong> and went down once, in the cathedral.</li>
+    <li><strong>Two hero points spent on the second swarm.</strong> Walk into the cathedral assuming none left.</li>
+    <li>Something spoke <strong>into Cyrathul&rsquo;s head</strong> during the second swarm fight &mdash; the swarm, or whatever it answers to.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>Who is speaking <strong>Aklo</strong> in the cathedral &mdash; and why a cathedral with no god&rsquo;s markings?</li>
+    <li>Who is <strong>&ldquo;Mistress&rdquo;</strong>? The redcaps feared being raised by her.</li>
+    <li>What were the <strong>Erinyes sisters</strong> summoning with the sulfur zombie?</li>
+    <li>The swarms are <strong>fiends</strong>. Why are fiends working with an undead witch?</li>
+    <li><strong>Caeto</strong> gave the order to ignore the undead. What does he want from this?</li>
+    <li>Rhokrag arrives tomorrow. The army in three days. How long do we have inside?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Where It Leaves Off</h2>
+  <div class="cliffhanger">
+    <span class="label">End of Session</span>
+    <p>Ten enemies dead, one dragon who went down and got back up, and a cathedral in a hundred-year-dead town with no god&rsquo;s name on it anywhere. The sisters had been chanting at its back. Bai Jian put his hand on the door and pushed. Somewhere inside, farther in than the light reaches, voices answered in a language nobody at the table speaks.</p>
+    <span class="big-line">&ldquo;Don&rsquo;t let her raise me.&rdquo;</span>
+    <span class="speaker">&mdash; a redcap, to Cyrathul, about the Mistress</span>
+  </div>
+</section>
+
+</div>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>

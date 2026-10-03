@@ -93,6 +93,8 @@ split into `=== ENCOUNTER N ===` blocks auto-detected from initiative clusters.
 
 > ⚠️ **This rule is table-specific — confirm before assuming it.** **`setting-sun/` (Cody McGraw / "Ryu") does NOT use it** (confirmed by Pax 2026-07-26, after S10 produced four rerolls of ≤10 that never got the bonus). Cody's hero-point homebrew is instead **3 per session, rationed, no hourly refresh** (see `setting-sun/world.md`). Do not apply the +10 to setting-sun logs.
 
+> ⚠️ **`abomination-vault/` (Lap) does NOT use it either** (confirmed S9, 2026-09-16). Lap's homebrew is **reroll OR bump one degree of success** — a success can become a critical success. In his own words, offering to revert it: *"I will also remove every house rule about hero point, saying that automatically increased by success — it will be just reroll"* / *"if he's able to roll a success, he can use a hero point to pump him up to a critical success."* **Consequence for roll-log analysis: a degree bump leaves NO second d20 in the export, so a reroll count is always a FLOOR, never a total** — S9 logged 5 reroll lines against 8 confirmed in-fight spends. **As of S10 there is also a floor: a PC starting a session with zero hero points automatically gets one** (long-rest refresh continues; cap 3). See `abomination-vault/dynamics.md`.
+
 **How it appears in the export.** A hero-point reroll renders as *two* d20 blocks on one line. Compare the formula header to the dice:
 
 ```
@@ -153,6 +155,24 @@ Also check, every time:
 - **Whether the archetype's feats are reachable.** `Advanced [X]` feats set your effective class level to *half your character level*, so a level-8 class feat needs character level 16.
 
 Enumerate before recommending. `node pf2e-lookup/pf2e-search.js --archetype` with no argument lists all 256; `--archetype "<name>"` prints one archetype's full feat list. Do not shortlist from memory — Pax has called this out explicitly ("you find like 3 archetypes that you have in your memory and then just go... for nothing").
+
+## Verify before asserting — and never launder a subagent's claim
+
+**Every factual claim reaching Pax must be one I checked myself, in the source.** Not "a reviewer said so," not "it sounded right," not "the transcript implied it." This has cost him real time correcting things that a thirty-second grep would have caught.
+
+**The campaign files are the first place to check, not the last.** `world.md`, `dynamics.md`, `character-sheet.md` and past `sessions/*/recap.md` are authoritative for what the party can do and what has already happened. Check them *before* the transcript and *before* the roll log, because they already contain the answer to most capability questions.
+
+**Negative claims need MORE verification than positive ones, not less.** "X doesn't have that ability," "that isn't RAW," "that was a house ruling," "the party has never done Y" — these feel safe to repeat and are the easiest to get wrong. Two things that are never evidence for a negative:
+- **Absence of a string in the roll log.** Foundry logs what a client received, under whatever name the module used. Not finding "Reactive Strike" does not mean nobody has it.
+- **A single DM line addressed to one character.** It never generalizes to another PC, and it may be a misstatement the table corrected two minutes later.
+
+**When Pax names a spell, feat, item or rule, look it up — never guess what he means.** Run `node pf2e-lookup/pf2e-search.js "<name>" -d` first. **If the local pack doesn't have it, search the internet (Archives of Nethys, `2e.aonprd.com`) before answering.** Never substitute a similar-sounding name from memory (S17: "Phantasmagoria" was treated as a Phantasmal spell and dismissed as area damage; it is a Remaster rank-9 spell that **targets any number of creatures**). Campaign files record what happened at the table — they are not a rules reference.
+
+**Read the actual rules text before describing what a spell or feat does.** Use `node pf2e-lookup/pf2e-search.js "<name>" -d`. Range, targets, duration and action cost all get misremembered — *"cast Energy Aegis on the party"* when the spell is **touch, 1 creature** is the kind of error that makes the whole write-up untrustworthy.
+
+**Subagent reports are leads, not findings.** Review agents produce confident, polished prose that reads like verified fact and frequently isn't. Before any reviewer claim enters a file *or a message to Pax*, trace it to the primary source myself. The failure mode that actually happened (S16): a reviewer asserted two PCs lacked Reactive Strike, I wrote it into the recap **and surfaced it to Pax as tactical advice** — while `world.md` already recorded one of them using it, and already documented the exact combo as established. Relaying an unchecked claim as a recommendation is worse than writing it into a file, because it asks him to act on it.
+
+**If I can't verify it, don't say it.** Cutting an unverifiable detail costs nothing. Asserting it costs Pax a correction cycle and costs the document its credibility.
 
 ## Interpretation discipline
 

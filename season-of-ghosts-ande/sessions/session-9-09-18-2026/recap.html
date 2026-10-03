@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 9 &mdash; The First Long Night</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>The First Long Night</h1>
+  <div class="subtitle">Season of Ghosts &middot; Session 9 &middot; the opening of Book Two</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-09-18</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 17m</span>
+    <span class="meta-pill">Fall, weeks 1&ndash;6 &middot; 7108 IC</span>
+    <span class="meta-pill">Level 4 &middot; no combat</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-social" style="width:50%"></div>
+  <div class="comp-seg comp-rp" style="width:25%"></div>
+  <div class="comp-seg comp-mystery" style="width:18%"></div>
+  <div class="comp-seg comp-explore" style="width:7%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--lantern)"></span>Downtime &amp; Festival 50%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay &amp; Events 25%</span>
+  <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery 18%</span>
+  <span><span class="legend-dot" style="background:var(--cyan)"></span>Tracking 7%</span>
+  <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 0%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-zhen">
+    <div class="char-name">Zhen Stillness</div>
+    <div class="char-class">Samsaran (Hungerseed) Animist &mdash; Liturgist &middot; Druid FA</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kaelen">
+    <div class="char-name">Kaelen Ashford</div>
+    <div class="char-class">Human Monk &mdash; bo staff, Mountain Stance, Staff Acrobat</div>
+    <div class="char-player">cajun_code</div>
+  </div>
+  <div class="char-card char-kaoru">
+    <div class="char-name">Kaoru</div>
+    <div class="char-class">Kitsune Magus &mdash; Aloof Firmament</div>
+    <div class="char-player">magus player</div>
+  </div>
+  <div class="char-card char-mujin">
+    <div class="char-name">Mu-Jin</div>
+    <div class="char-class">Witch &mdash; Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+    <div class="char-player">snotierknave69</div>
+  </div>
+  <div class="char-card char-iryoku">
+    <div class="char-name">Iryoku-Yasha</div>
+    <div class="char-class">Yaksha Kineticist (Wood/Fire)</div>
+    <div class="char-player">legendfather</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-style:italic;margin-top:14px">No combat and no roll log. Every outcome here comes from the recording; results that were never said aloud are marked as such. The Foundry point-tracking journal and the Subsystems &rarr; Research tab hold the exact numbers.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Book Two opened on a change of season rather than a fight. Iryoku recapped the lumber camp for the table&rsquo;s first hero point, and the GM moved the story into fall: the summer rains gone, the monsters that menaced the region dead, a governing council that includes all five PCs, and a town that takes little comfort from any of it. The governor is still missing. The curse still keeps anyone from leaving or arriving, except <strong>Shinzo</strong>, who comes and goes and <em>&ldquo;is unsure of why.&rdquo;</em> Winter is coming, and Willowshore cannot stockpile enough to survive it alone. <em>&ldquo;Fortunately for Willowshore, the townsfolk aren&rsquo;t alone in this plague. Because they have all of you&hellip; to look up to.&rdquo;</em></p>
+<p>What followed was the AP&rsquo;s fall downtime system, run week by week for six weeks. Each week the party took up to four <strong>preparation activities</strong> (aid the harvest, aid the hunt, aid the townsfolk, reinforce the buildings, host a tea ceremony) to build three town tracks: <strong>Food</strong>, <strong>Security</strong> and <strong>Hope</strong>. Each PC also took a standard downtime activity, and a new option was <strong>researching the curse</strong> itself. The party settled into lanes fast. <strong>Kaoru</strong> reinforced the town&rsquo;s buildings with Engineering Lore every week without exception. <strong>Iryoku</strong> and <strong>Zhen</strong> worked the fields and fences on Athletics. The fifth seat (the aider) rotated: <strong>Kaelen</strong> in weeks one and three, <strong>Zhen</strong> in weeks two, four and six, and Zhen&rsquo;s aids turned two of those rolls into crits. <strong>Mu-Jin</strong> did the research that mattered. Summer&rsquo;s work paid off too: because the party had secured the northern farmland, the first harvest roll each week was upgraded a degree, which Iryoku worked out means <em>&ldquo;guaranteeing two food points a week.&rdquo;</em> <strong>Security reached its twelve-point minimum in week three, Hope during the festival, Food in week four.</strong></p>
+<p>Every week also brought an event, and those carried the roleplay. Zhen named <strong>inari sushi</strong> as the right offering for a boy who believes a white fox was Daikitsu&rsquo;s messenger. He relocated a nest of vipers from a man&rsquo;s outhouse with Mu-Jin weaving him a basket, and thanked Mu-Jin for the help like the elder he is. The <strong>First Long Night</strong> festival was three contests and the party won all three: Mu-Jin&rsquo;s moon poetry on the Art Lore he&rsquo;d <em>&ldquo;finally&rdquo;</em> found a use for, Kaoru&rsquo;s wire-to-wire win at <strong>bundle cutting</strong>, and a sky lantern Mu-Jin spent his last hero point on and shaped like Ugly Cute. A haunting at <strong>Mama Bao&rsquo;s</strong> steamed-bun shop turned out to be <strong>Hinode Akari</strong>, an herbalist whose corpse was once found with every hair plucked from her head. Mu-Jin called her by name and failed to reach her. Zhen prayed, and between the prayer and Mu-Jin&rsquo;s calming words <strong>the haunting ended</strong>. The story behind it came out afterward: Mama Bao&rsquo;s grandfather built the shop on money that arrived a few nights before Akari&rsquo;s body was found.</p>
+<p>Then the dead started walking. <strong>Elizeth Candora</strong>, head priestess of Pharasma, privately asked the party to find a corpse that had gotten up and left, and she suspects <strong>You So-Jin</strong>. Zhen tracked the shambling prints through the river and across town to the one place none of them expected: <strong>their own tea house</strong>. The corpse was crouched in the bushes out back, and beside it sat <strong>Yami</strong>, the tea house cat, who looked up and spoke. <em>&ldquo;I see you found her. This lady was the one who fed me during her life. So I wish to keep her. She also dances well in the moonlight.&rdquo;</em> Yami is a <strong>bakeneko</strong>. Kaelen befriended it and Iryoku talked it into letting her go, and Kaelen asked for the burial the party gave her. Behind all of this, Mu-Jin&rsquo;s research kept turning up breakpoints, and in week six it turned up the one he stopped the table for: <strong>a specialized ritual that might allow passage through the fog wall.</strong> The session ended on a faceless thing in a stone mask lurking in a bachelor&rsquo;s yard. It is a <strong>Dalgyal Gwishin</strong>, jealous of charismatic people, and it is not friendly. <strong>Combat next session.</strong></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Prologue &middot; Downtime &middot; Fall Comes to Willowshore</div>
+    <div class="act-card">
+      <h3>A new season, and a town that has to survive the winter</h3>
+      <ul>
+        <li><strong>Iryoku recapped the lumber camp</strong> (the Mugirou deal, the ritual, Kugaptee&rsquo;s failed push through the fog) for the table&rsquo;s opening hero point.</li>
+        <li>The GM closed summer at roughly day 14. The rest went to retraining, Earn Income, crafting, <strong>restoring the tea house</strong>, and making friends with the grey cat that lives there.</li>
+        <li><strong>Fall narration</strong>: new leaders in place (<em>&ldquo;all of you as well as the other two&rdquo;</em>); the governor and his manor still missing; the curse still sealing the town; <strong>Shinzo alone can come and go</strong>, and <em>&ldquo;has no insight into the curse&rsquo;s nature.&rdquo;</em></li>
+        <li><strong>The subsystem.</strong> Three victory-point tracks: <strong>Hope</strong>, <strong>Food</strong> (12 recommended), <strong>Security</strong> (12 recommended). Up to <strong>four preparation activities a week</strong>, with the fifth PC able to aid one. Each PC also gets a standard downtime activity, and <strong>Research the Curse</strong> takes the full week. Every week brings an event.</li>
+        <li><strong>Iryoku asked for the activity list in Discord</strong>, and the GM posted it.</li>
+        <li><strong>The farmland perk</strong>: for securing the northern farm in summer, <strong>+1 circumstance to Aid Harvest, and the first Aid Harvest roll each week is improved one degree</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Weeks 1&ndash;2 &middot; Downtime &amp; Events &middot; The Fox and the Vipers</div>
+    <div class="act-card">
+      <h3>Fields, fences, and two small kindnesses</h3>
+      <ul>
+        <li><strong>Week 1.</strong> <strong>Zhen, Aid Harvest &rarr; critical success</strong> (+2 food): <em>&ldquo;Zhen go out and just use his strength to help people moving stuff around and harvest.&rdquo;</em> <strong>Iryoku, Aid Townsfolk &rarr; crit</strong> (1 security + 1 hope). <strong>Mu-Jin, Willowshore Lore &rarr; success</strong> with <strong>Kaelen</strong> aiding. <strong>Kaoru, Reinforce Buildings &rarr; success.</strong></li>
+        <li><strong>Mu-Jin researched with You So-Jin</strong> and rolled a <strong>critical success</strong>, the most that track can give, reaching <strong>the first breakpoint</strong>: the <strong>West Wall might be able to be broken</strong>. Only Mu-Jin can study <strong>Zoudou&rsquo;s notes</strong> (Aklo + Chthonian).</li>
+        <li><strong>Minhwan and the white fox.</strong> A boy who nursed an injured fox dreamed it was <strong>Daikitsu&rsquo;s messenger</strong>. <strong>Zhen knew the offering: inari sushi.</strong> Iryoku: <em>&ldquo;Daikitsu is a goddess of rice.&rdquo;</em> 80 XP, +1 hope.</li>
+        <li><strong>Week 2.</strong> Zhen took the aid slot and <strong>dragged Kaelen into the fields</strong>: <em>&ldquo;Come on, be good to your friend.&rdquo;</em> Kaelen&rsquo;s Aid Harvest came up a <strong>crit</strong>, and Zhen suggested a career change.</li>
+        <li>Iryoku &rarr; success. Mu-Jin failed, hero-pointed &rarr; success. <strong>Kaoru &rarr; success</strong> (<em>&ldquo;Oh, almost&rdquo;</em>). Mu-Jin&rsquo;s Solo Investigations &rarr; success, <strong>three research points</strong>.</li>
+        <li><strong>Zhen earned income with Religion at the Lady of Souls</strong> (level 5 task; degree not stated). <strong>Kaelen earned 49 sp.</strong></li>
+        <li><strong>Matsu&rsquo;s outhouse vipers.</strong> Mu-Jin wove a basket (Crafting aid) and <strong>Zhen&rsquo;s Survival critically succeeded</strong> in relocating the swarm: <em>&ldquo;I&rsquo;ve done this in the past&hellip; And thank you for the help, young man.&rdquo;</em> 80 XP, +1 hope, 2 gp, and treasure that was evidently the <strong>ghost touch rune</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Week 3 &middot; Downtime &middot; Security Holds</div>
+    <div class="act-card">
+      <h3>The first minimum, and a breakpoint from an unexpected hand</h3>
+      <ul>
+        <li><strong>Zhen, Aid Harvest, hero point &rarr; crit</strong> (+2 food). Iryoku read the tracker: <strong>10 security, 9 food, 6 hope.</strong></li>
+        <li><strong>Mu-Jin, Aid Townsfolk &rarr; success, which Kaelen&rsquo;s aid turned into a crit</strong>. <strong>Kaoru reinforced</strong>: <em>&ldquo;A lot of stuff needs to be rebuilt in this town.&rdquo;</em></li>
+        <li><strong>Security reached 12 &rarr; 40 XP and +1 reputation</strong>, placed in <strong>Northridge</strong> to even the factions (19 Southbank / 17 Northridge; <em>Admired</em> by both).</li>
+        <li><strong>Festival preparations</strong> replaced downtime. <strong>Mu-Jin rolled a natural 20</strong> on Willowshore Lore: 2 hope and +1 to every contest check. Zhen tried Society (DC 21) and failed.</li>
+        <li>With no festival skills, <strong>Kaoru researched on Arcana &rarr; critical success</strong>, unlocking the next breakpoint. <strong>Iryoku tried the Great Willow</strong>: <em>&ldquo;All right, I won&rsquo;t succeed, but we&rsquo;ll see. Nope.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">The First Long Night &middot; Festival &middot; Three Contests, Three Wins</div>
+    <div class="act-card">
+      <h3>Moon poetry, bundle cutting, and a lantern shaped like Ugly Cute</h3>
+      <ul>
+        <li><strong>Admiring the Moon</strong>: poetry to the harvest moon, <em>&ldquo;as the night goes on, tea is invariably replaced with wine and spirits.&rdquo;</em> <strong>Mu-Jin used Art Lore</strong> (<em>&ldquo;Holy shit, I can finally use that damn thing&rdquo;</em>), Iryoku Performance as oratory, Zhen Religion. <strong>Mu-Jin critted the last check for 6 VP</strong>: a <strong>Cognitive mutagen</strong>.</li>
+        <li><strong>Bundle Cutting</strong>: escape your bonds, grab a stone dagger, cut straw. It is disguised training for escaping <strong>jorogumo webbing</strong>, with ropes knotted to look as unlike webs as possible. Mu-Jin tried to sit it out, joined anyway, and saw the escape dialog call his +10 the party&rsquo;s best: <em>&ldquo;I&rsquo;m the best in the party? What the fuck? I&rsquo;m a witch.&rdquo;</em> (Iryoku has +12.) He refused to spend a hero point and lost a VP.</li>
+        <li><strong>Kaoru chose Thievery</strong> (<em>&ldquo;Don&rsquo;t break anything&rdquo;</em>), rolled a <strong>natural 20 and a run of crits</strong>, and led from start to finish. Kaelen: <em>&ldquo;Did you get a nat 20?&hellip; Good job.&rdquo;</em></li>
+        <li><strong>Kaoru and Iryoku both reached 6 VP</strong>: a <strong>striking rune</strong>, which Iryoku gave away on the spot (<em>&ldquo;Who needs striking? Because I can&rsquo;t use either of these.&rdquo;</em>).</li>
+        <li><strong>Lantern Making</strong>: never crows or ravens, <em>&ldquo;due to the famed jorogumo&rsquo;s intense dislike of tengu.&rdquo;</em> Crafting only, so all Mu-Jin: fail, crit, crit, then <strong>his last hero point</strong> on the final check. <em>&ldquo;I hope you guys are happy I used all my hero points on this shit.&rdquo;</em> His lantern is a little <strong>Ugly Cute</strong>.</li>
+        <li><strong>Hope reached 12 &rarr; 40 XP.</strong> Festival close: <strong>+1 hope and 120 XP</strong>; all three contests won &rarr; <strong>+1 reputation with both factions</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Week 4 &middot; Mystery &middot; The Hair in the Buns</div>
+    <div class="act-card">
+      <h3>Hinode Akari, and a grandfather&rsquo;s windfall</h3>
+      <ul>
+        <li>Mu-Jin (Aid Hunt) and Kaelen (Aid Harvest) brought <strong>Food to 12 &rarr; 40 XP</strong>. <strong>Zhen aided Iryoku to a crit</strong>, taken as 1 security + 1 hope: <em>&ldquo;Gotta get the hope up.&rdquo;</em> / <em>&ldquo;Hope seems harder to build.&rdquo;</em> / <em>&ldquo;Always gotta make this place more hopeful.&rdquo;</em></li>
+        <li>Nobody who worships a deity has that deity&rsquo;s Lore. <em>&ldquo;They&rsquo;re not devout enough, I&rsquo;m sorry.&rdquo;</em> Zhen: <em>&ldquo;I&rsquo;m just a casual.&rdquo;</em></li>
+        <li><strong>Mama Bao</strong>&rsquo;s bun shop had hair hanging from the ceiling each morning, and today customers <em>&ldquo;spit out clumps of hair mixed in with the bun fillings.&rdquo;</em> Every strand was from one head, <strong>plucked at the root, not cut</strong>.</li>
+        <li>The party stayed up. An hour after midnight <strong>a ghostly woman drifted in and began pulling out her own hair</strong>. Kaelen: <em>&ldquo;Guys, do we need to call Ghostbusters? &hellip; We are the Ghostbusters.&rdquo;</em></li>
+        <li><strong>Rune break</strong>: Zhen argued striking onto Kaelen&rsquo;s bigger dice; Iryoku argued ghost touch for Kaoru&rsquo;s Spellstrikes, then reversed (<em>&ldquo;Kaelen&rsquo;s damage potential is lower&rdquo;</em>). <strong>Both runes went on Kaelen&rsquo;s bo staff</strong>. Zhen bought striking; Kaoru is 40 gp short of ghost touch.</li>
+        <li>Willowshore Lore named her: <strong>Hinode Akari</strong>, an herbalist found near Gord Lake with every hair plucked. Mu-Jin: <em>&ldquo;Her name is Akari. Call her Akari.&rdquo;</em> Kaelen, on the no-water rule: <em>&ldquo;Ew, I stepped in a puddle.&rdquo;</em></li>
+        <li>Mu-Jin&rsquo;s named Diplomacy <strong>failed</strong>. <strong>Zhen&rsquo;s prayer succeeded</strong>, and the GM ended the haunt on both: <em>&ldquo;convince the spirit to abandon the haunting with prayer, and Mu-Jin being able to calm her down.&rdquo;</em> +1 hope.</li>
+        <li>Mama Bao&rsquo;s grandfather <strong>came into sudden money a few nights before Akari&rsquo;s body was found</strong>, built the shop with it, and blamed <em>&ldquo;an old collection of wigs&rdquo;</em> sold to a puppet maker. Mu-Jin: <em>&ldquo;Mama Bao is herself completely innocent, she suffered the collateral damage.&rdquo;</em> She will honor Akari&rsquo;s memory: +1 hope, +1 Northridge.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Week 5 &middot; Tracking &middot; The Corpse That Walked Away</div>
+    <div class="act-card">
+      <h3>A trail through the river, to their own back door</h3>
+      <ul>
+        <li>Mu-Jin (Aid Hunt), Kaoru (Reinforce), Iryoku (Aid Harvest, +2 food), <strong>Zhen, Aid Townsfolk</strong>: <em>&ldquo;Get the barn set up and the fences.&rdquo;</em></li>
+        <li>Mu-Jin&rsquo;s research failed. Iryoku failed the Great Willow again, and told the table: <em>&ldquo;Mu-Jin can only do so much on his own.&rdquo;</em> <strong>Zhen gave up a crit Earn Income to aid</strong> (<em>&ldquo;I&rsquo;ll take back the crit success&rdquo;</em>), hero-pointed the aid, and turned it into a <strong>success and a new breakpoint</strong>.</li>
+        <li><strong>Elizeth Candora</strong>, head of the Lady of Souls: an elderly villager&rsquo;s corpse walked off the night she died of flu, and she suspects <strong>You So-Jin</strong>.</li>
+        <li>Shambling prints north; <strong>Zhen&rsquo;s trained Survival</strong> followed them into the <strong>Ceiba River</strong> west of Dawnstep Bridge, out of the mud, and across town <strong>to the Cerulean Tea House</strong>.</li>
+        <li>Behind it, the corpse, and <strong>Yami</strong>, who spoke: <em>&ldquo;This lady was the one who fed me during her life. So I wish to keep her. She also dances well in the moonlight.&rdquo;</em> Zhen: <em>&ldquo;Make sure this is really a cat.&rdquo;</em></li>
+        <li><strong>Zhen and Kaelen</strong> identified it: <strong>a bakeneko</strong> (Iryoku: <em>&ldquo;It means a hellcat&rdquo;</em>). Zhen took its lore; Kaelen took <strong>AC 20, HP 35</strong>.</li>
+        <li><strong>Kaelen befriended Yami</strong>, and <strong>Iryoku&rsquo;s Diplomacy succeeded</strong> without the Weaver +2 Mu-Jin had offered. Mu-Jin: <em>&ldquo;It&rsquo;s a zombie, man. We&rsquo;re not letting it play with people&rsquo;s corpses.&rdquo;</em> Yami let her fall.</li>
+        <li><strong>Kaelen asked for a proper burial</strong>; Mu-Jin carried her to the cemetery. +1 hope, 80 XP, 4 lesser healing potions, a <strong>vitalizing rune</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Week 6 &middot; Mystery &middot; The Faceless Ghost</div>
+    <div class="act-card">
+      <h3>A way through the wall, and a mask in the dark</h3>
+      <ul>
+        <li><strong>Zhen aided Kaoru&rsquo;s Reinforce Buildings to a crit.</strong> Iryoku and Kaelen both took Aid Harvest (Kaelen with a hero-point reroll).</li>
+        <li><strong>Zhen researched the Great Willow on Nature</strong> with Iryoku aiding; the willow still needs a point at the close, so it evidently didn&rsquo;t land.</li>
+        <li><strong>Mu-Jin &rarr; success &rarr; a new breakpoint: a specialized ritual that might allow passage through the fog wall.</strong> <em>&ldquo;That&rsquo;s pretty important, guys.&rdquo;</em></li>
+        <li>One of Willowshore&rsquo;s most eligible bachelors found <em>&ldquo;a vaguely humanoid shape made of mist and smoke&rdquo;</em> in a long dark robe in his yard, wearing <strong>a featureless stone mask</strong>.</li>
+        <li><strong>A Dalgyal Gwishin</strong> (undead, unholy). Iryoku: <em>&ldquo;It&rsquo;s an egg ghost, because it looks like an egg.&rdquo;</em> Mu-Jin took its lore.</li>
+        <li><strong>Zhen&rsquo;s two answers</strong>: it is <strong>easily jealous of more charismatic characters</strong>, so it <em>might</em> go after <strong>Iryoku</strong> first; its <strong>lowest save is Fortitude +9</strong>. <em>&ldquo;Predictable, but it&rsquo;s good to confirm.&rdquo;</em></li>
+        <li><strong>It is not friendly. Combat next session.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Close &middot; Stars &amp; Wishes</div>
+    <div class="act-card">
+      <h3>Two research points, six weeks</h3>
+      <ul>
+        <li>Zhen: <em>&ldquo;I think it was good, actually. It was a long time, but I didn&rsquo;t mind it.&rdquo;</em></li>
+        <li>Mu-Jin, self-critical: <em>&ldquo;As a group, we should have focused more on researching the curse&hellip; We literally just recently discovered a possible way to get through the fog wall.&rdquo;</em></li>
+        <li>The GM: <strong>two more research points unlock everything</strong>, with <strong>six more weeks of downtime after the next fight</strong>. Plan: personal investigations plus the Great Willow (<em>&ldquo;I can do the willow tree&rdquo;</em>, Zhen).</li>
+        <li><strong>Mu-Jin reads 540 XP</strong>; the GM expects <strong>level 5 by the end of the chapter</strong>. Zhen called 5 one of his least favorite levels: no proficiency bump.</li>
+        <li>The GM: Season of Ghosts has <em>&ldquo;pretty much the best downtime in the adventure paths.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<p style="color:var(--text-dim)">None. The session was entirely downtime. The <strong>Dalgyal Gwishin</strong> in the bachelor&rsquo;s yard is hostile, and the fight opens next session.</p>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-zhen">
+    <h4>Zhen Stillness &middot; the Elder</h4>
+    <ul>
+      <li><strong>He gave up a critical success to push the research.</strong> He&rsquo;d already critted his Earn Income in week five. When Iryoku told the table the research needed more hands, Zhen&rsquo;s first answer was that he didn&rsquo;t have the skill; Mu-Jin pointed him at Nature and asked the GM whether aid counts. Zhen then asked to swap and handed back the money (<em>&ldquo;I&rsquo;ll take back the crit success&rdquo;</em>). He failed the aid, hero-pointed it, and turned Mu-Jin&rsquo;s failure into the breakpoint. Then he took the Great Willow himself in week six and volunteered for it again at the close.</li>
+      <li><strong>The elder.</strong> The best character work of the night was small. He dragged Kaelen out to the fields (<em>&ldquo;Come on, be good to your friend&rdquo;</em>), then ribbed him when the harvest crit (<em>&ldquo;Maybe you should reconsider your occupation&hellip; Maybe as a side job&rdquo;</em>). He cleared the vipers like it was routine (<em>&ldquo;I&rsquo;ve done this in the past&rdquo;</em>) and thanked Mu-Jin for the basket with <em>&ldquo;thank you for the help, young man.&rdquo;</em> He&rsquo;s in his fifties and plays it without making a show of it.</li>
+      <li><strong>Half of the prayer that ended the haunting.</strong> Mu-Jin&rsquo;s named Diplomacy call failed. Zhen&rsquo;s Religion prayer succeeded, and the GM ended the haunt on both: <em>&ldquo;convince the spirit to abandon the haunting with prayer, and Mu-Jin being able to calm her down.&rdquo;</em></li>
+      <li><strong>The town&rsquo;s folklorist and tracker.</strong> He knew <strong>inari sushi</strong> for Daikitsu&rsquo;s fox, took every trained Survival check on the corpse&rsquo;s trail through the river and across town, and when the cat spoke he wanted it checked (<em>&ldquo;Make sure this is really a cat&rdquo;</em>). It wasn&rsquo;t one. On the Dalgyal Gwishin he used his two questions on the two things that matter tactically, <strong>who it will likely target and which save to hit</strong>, and filed it without fuss: <em>&ldquo;Predictable, but it&rsquo;s good to confirm.&rdquo;</em></li>
+      <li><strong>The aider.</strong> He took the fifth seat three weeks out of six. His aids turned Iryoku&rsquo;s week-four roll and Kaoru&rsquo;s week-six roll into crits, and he cheered the hope pick on the first one (<em>&ldquo;Gotta get the hope up&hellip; Always gotta make this place more hopeful&rdquo;</em>). He started the rune discussion, argued striking onto Kaelen&rsquo;s bigger dice, and bought his own striking rune. On having no deity Lore after a lifetime of rites: <em>&ldquo;I&rsquo;m just a casual.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-mujin">
+    <h4>Mu-Jin &middot; the Festival&rsquo;s Champion</h4>
+    <ul>
+      <li><strong>He is the research.</strong> He ran five of the six weeks&rsquo; research himself, starting with a <strong>critical success with You So-Jin</strong> that maxed that track and reached the first breakpoint. He finished on the week-six find that <strong><em>&ldquo;a specialized ritual might allow passage&rdquo;</em> through the fog wall</strong>, which he stopped the table for (<em>&ldquo;that&rsquo;s pretty important, guys&rdquo;</em>). At the close he criticized the group, himself included, for not prioritizing it sooner.</li>
+      <li><strong>He won two of the three festival contests almost alone.</strong> A <strong>natural 20</strong> on the preparations bought himself +1 to every contest. He took moon poetry on the Art Lore he&rsquo;d been carrying unused (<em>&ldquo;Holy shit, I can finally use that damn thing&rdquo;</em>) and critted the last check for the win. He carried lantern making single-handed as the party&rsquo;s only Crafter, spending <strong>his last hero point</strong> on the final check and making sure everyone knew it. His lantern is a little <strong>Ugly Cute</strong>.</li>
+      <li><strong>The folklorist.</strong> He asked for the Eight Practices at the right moment and turned them into a plan: <em>&ldquo;Her name is Akari. Call her Akari.&rdquo;</em> He read Mama Bao&rsquo;s situation through the genre (<em>&ldquo;ghosts will haunt you even if you didn&rsquo;t directly do it&hellip; because your ancestors did something wrong&rdquo;</em>), which cleared Mama Bao herself. He also gave the setting its best one-line summary: Shenmen is <em>&ldquo;the land of ghosts and spiders. That is literally what this place is called. This is the place our characters chose to live in.&rdquo;</em></li>
+      <li><strong>Ran the social side of the week-4 and week-5 events.</strong> He stepped out to call Akari by name, pushed to tell Mama Bao the story (<em>&ldquo;I&rsquo;m curious about what her relation with Miss Akari might be&rdquo;</em>), and set up the Yami Diplomacy with Weaver&rsquo;s +2 on offer. When the cat&rsquo;s claim came up, he said <em>&ldquo;It&rsquo;s a zombie, man. We&rsquo;re not letting it play with people&rsquo;s corpses,&rdquo;</em> and carried the body back to the cemetery.</li>
+      <li><strong>Generous and very funny.</strong> He offered his own 60 gp and the stash for everyone&rsquo;s runes. He wove the basket that turned Zhen&rsquo;s viper check into a crit. He tried to sit out bundle cutting, joined anyway, and reacted to the escape dialog calling him the party&rsquo;s best (it was wrong, since Iryoku is): <em>&ldquo;I&rsquo;m the best in the party? What the fuck? I&rsquo;m a witch.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaelen">
+    <h4>Kaelen Ashford &middot; the Proper Burial</h4>
+    <ul>
+      <li><strong>He asked for the burial.</strong> After the zombie fell, Kaelen was the one who asked <em>&ldquo;Do we want to give the corpse a proper burial?&rdquo;</em>, and the party carried her to the cemetery. He&rsquo;d also been the one voice for the cat&rsquo;s side (<em>&ldquo;It&rsquo;s a zombie. It&rsquo;s its friend.&rdquo;</em>), and his successful attempt to befriend Yami that scene was part of what the GM credited for getting it to let go (<em>&ldquo;you were nice to Yami&rdquo;</em>).</li>
+      <li><strong>The fifth seat, filled well.</strong> He took the aid slot in week one as soon as Iryoku raised who&rsquo;d sit out (<em>&ldquo;I&rsquo;ll aid y&rsquo;all&rdquo;</em>), and his aid later turned <strong>Mu-Jin&rsquo;s success into a critical success</strong>. With Zhen aiding him in week two, his own Aid Harvest came up a <strong>crit</strong>. His week-four harvest helped push <strong>Food to its twelve-point minimum</strong>.</li>
+      <li><strong>Generous again.</strong> He <strong>ended up with both found runes</strong> by table consensus. He didn&rsquo;t lobby for them, and when Kaoru was 40 gp short of his own ghost touch, Kaelen offered to cover it immediately (<em>&ldquo;Let&rsquo;s see how much gold I have&rdquo;</em>).</li>
+      <li><strong>The comedy.</strong> He called the ghost in true Kaelen fashion (<em>&ldquo;Guys, do we need to call Ghostbusters? &hellip; We are the Ghostbusters.&rdquo;</em>), stepped in an imaginary puddle when the no-water-near-ghosts rule came up (<em>&ldquo;Ew, I stepped in a puddle&rdquo;</em>), cheered Kaoru&rsquo;s natural 20 in bundle cutting (<em>&ldquo;Did you get a nat 20?&hellip; Good job&rdquo;</em>), and looked after Zhen on the stakeout: <em>&ldquo;Hey, Kaelen says, you&rsquo;ll be fine.&rdquo;</em></li>
+      <li><strong>Practical questions.</strong> When Yami turned out to be a bakeneko, he used his Recall Knowledge on the numbers (<strong>AC 20, HP 35</strong>), since the party might need them.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaoru">
+    <h4>Kaoru &middot; the Builder</h4>
+    <ul>
+      <li><strong>He reinforced Willowshore every week.</strong> Six weeks, six Engineering Lore checks, and <strong>not one failure heard on tape</strong>: <em>&ldquo;Use it while I got it.&rdquo;</em> Week two nearly crit (<em>&ldquo;Oh, almost&rdquo;</em>), and week six crit with Zhen&rsquo;s aid. Security was the first track to reach its minimum, and Kaoru&rsquo;s week-in, week-out check is a large part of why. His reason was also the most civic line of the night: <em>&ldquo;A lot of stuff needs to be rebuilt in this town.&rdquo;</em></li>
+      <li><strong>He cracked a curse breakpoint.</strong> With no festival skills to use in week three, he spent his downtime researching on Arcana and <strong>critically succeeded</strong>, unlocking the next breakpoint.</li>
+      <li><strong>He won bundle cutting.</strong> He thought about it (<em>&ldquo;I&rsquo;m just thinking which one&rdquo;</em>), chose finesse over force (<em>&ldquo;Don&rsquo;t break anything.&rdquo; &ldquo;Thievery.&rdquo;</em>), then rolled a <strong>natural 20 and a run of crits</strong> and led from start to finish, sharing the win with Iryoku at 6 VP for the party&rsquo;s striking rune. When the rune came up, he made his own bid for it (<em>&ldquo;We can put it on my sword&rdquo;</em>) before the table settled on Kaelen.</li>
+      <li><strong>A quiet night at the table</strong>, but every contribution was structural. He was also saving toward ghost touch for his own blade: <em>&ldquo;Once I get 40 gold&hellip; that gives me a ghost touch. That&rsquo;s what I need.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-iryoku">
+    <h4>Iryoku-Yasha &middot; the Most Charismatic Man in Willowshore</h4>
+    <ul>
+      <li><strong>The one the ghost will come for.</strong> The Dalgyal Gwishin is <em>&ldquo;easily jealous of more charismatic characters,&rdquo;</em> and the GM said it <em>&ldquo;might&rdquo;</em> go after <strong>Iryoku</strong> first. That&rsquo;s the price of being the party&rsquo;s Face, and it&rsquo;s the setup for next session.</li>
+      <li><strong>He talked the bakeneko down.</strong> When the party needed Yami to let the corpse go, it went to Iryoku&rsquo;s Diplomacy, and it succeeded even though he forgot to apply the Weaver +2 Mu-Jin had offered (<em>&ldquo;Oh, I hit it without applying a bonus. Oh, well.&rdquo;</em>).</li>
+      <li><strong>The table&rsquo;s systems brain, again.</strong> He opened the session with the recap. He asked for the activity list in Discord. He saw right away what the farmland perk meant (<em>&ldquo;guaranteeing two food points a week&rdquo;</em>) and read the tracker out when anyone asked. Then he worked through the rune question in public: ghost touch on Kaoru for his Spellstrikes, then a reversal to Kaelen <em>&ldquo;because Kaelen&rsquo;s damage potential is lower. The resistance will affect him more.&rdquo;</em> That argument settled it.</li>
+      <li><strong>Gave away his own prize.</strong> He hit 6 VP in bundle cutting and immediately offered the striking rune to whoever needed it: <em>&ldquo;Who needs striking? Because I can&rsquo;t use either of these.&rdquo;</em> He took hope over security on his crits, because <em>&ldquo;Hope seems harder to build.&rdquo;</em></li>
+      <li><strong>Pushed the table toward the research</strong>, and took his own share. He tried the Great Willow twice and failed both, the first time with the night&rsquo;s most honest line (<em>&ldquo;All right, I won&rsquo;t succeed, but we&rsquo;ll see. Nope.&rdquo;</em>), then told the party <em>&ldquo;Mu-Jin can only do so much on his own.&rdquo;</em> Zhen&rsquo;s swap into research came straight after. He also supplied the table&rsquo;s knowledge of what inari sushi is and what the word bakeneko means (<em>&ldquo;It means a hellcat&rdquo;</em>), and the Dalgyal Gwishin&rsquo;s most memorable description: <em>&ldquo;It&rsquo;s an egg ghost, because it looks like an egg.&rdquo;</em></li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">Ghost touch rune</div>
+    <div class="loot-source">Matsu &mdash; for relocating the vipers (evidently)</div>
+    <div class="loot-note">On <strong>Kaelen&rsquo;s bo staff</strong>.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Striking rune</div>
+    <div class="loot-source">First Long Night &mdash; Bundle Cutting (Kaoru &amp; Iryoku)</div>
+    <div class="loot-note">On Kaelen&rsquo;s bo staff, now <strong>+1 striking ghost touch</strong>. His potency crystal was removed as redundant.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Cognitive mutagen</div>
+    <div class="loot-source">First Long Night &mdash; Admiring the Moon (Mu-Jin)</div>
+    <div class="loot-note">Mu-Jin&rsquo;s stash. +2 to most of his checks, &minus;2 to weapon attacks he never makes.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Vitalizing rune</div>
+    <div class="loot-source">Elizeth Candora&rsquo;s temple</div>
+    <div class="loot-note">Party stash. +1d6 persistent vitality vs undead; enfeebled 1 on a crit. Zhen: <em>&ldquo;Vitalizing rune is pretty good. In this campaign, at least.&rdquo;</em></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">4 &times; lesser healing potion</div>
+    <div class="loot-source">Elizeth Candora&rsquo;s temple</div>
+    <div class="loot-note">Party stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Striking rune (purchased)</div>
+    <div class="loot-source">Zhen &mdash; 65 gp</div>
+    <div class="loot-note">For the nodachi. He was 50 gp short of ghost touch (75 gp).</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">2 gp</div>
+    <div class="loot-source">Matsu</div>
+    <div class="loot-note">As promised.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Ghost touch fund</div>
+    <div class="loot-source">Kaoru</div>
+    <div class="loot-note">40 gp short. Kaelen offered gold toward it.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Pied Dancing Scarf?</div>
+    <div class="loot-source">Iryoku &mdash; asked to buy at 0:23</div>
+    <div class="loot-note">Level 3, should be available. Purchase not confirmed on tape.</div>
+  </div>
+</div>
+<div class="xp-banner">Experience &middot; 80 fox &middot; 80 vipers &middot; 40 security &middot; 40 hope &middot; 120 festival &middot; 40 food &middot; 80 walking corpse = <strong>480 announced</strong> &mdash; Mu-Jin reads <strong>540</strong> on the sheet</div>
+<p style="color:var(--text-dim)"><strong>Reputation</strong> &middot; +1 Northridge (Security 12) &middot; <strong>+1 both factions</strong> (festival sweep) &middot; +1 Northridge (Mama Bao). <strong>Town tracks</strong> &middot; Security 12 by week 3 &middot; Hope 12 at the festival &middot; Food 12 in week 4. <strong>Research</strong> &middot; breakpoints in weeks 1, 3, 5 and 6; <strong>two points left</strong>.</p>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>A way through the fog wall.</strong> Mu-Jin&rsquo;s week-six breakpoint: <strong>a specialized ritual that might allow passage.</strong> The week-one finding said <strong>the West Wall might be breakable</strong>, and that&rsquo;s where Zoudou held her ritual. Kugaptee is on the other side of that wall. Getting out and letting something in may turn out to be the same act.</li>
+  <li><strong>Two research points left</strong>, and <strong>six weeks of downtime after the next fight</strong> to earn them. The plan is personal investigations plus the Great Willow (Zhen). <strong>Zoudou&rsquo;s notes</strong> are Mu-Jin-only at Religion DC 19, roughly a coin flip.</li>
+  <li><strong>The Dalgyal Gwishin.</strong> Hostile, undead, unholy, lowest save <strong>Fortitude +9</strong>, and <strong>jealous of charismatic characters</strong>, so Iryoku <em>&ldquo;might&rdquo;</em> be its first target. <strong>Combat next session.</strong></li>
+  <li><strong>Yami is a bakeneko.</strong> The cat living in the party&rsquo;s base is a yokai that speaks Common, kept a corpse as a friend, and says she <em>&ldquo;dances well in the moonlight.&rdquo;</em> It let her go because the party asked nicely. Nobody has asked what else it can do, or whether it&rsquo;s still living at the tea house.</li>
+  <li><strong>You So-Jin and Elizeth Candora.</strong> The Pharasman head priestess suspected <strong>You So-Jin</strong> (Zhen&rsquo;s close friend, and Mu-Jin&rsquo;s old herbalism teacher) of animating the dead. The real answer was the cat. <strong>Whether anyone told Candora that isn&rsquo;t on tape</strong>, and a suspicion like that doesn&rsquo;t go away by itself.</li>
+  <li><strong>Mama Bao&rsquo;s grandfather.</strong> He built the shop on money that arrived a few nights before Akari&rsquo;s body was found, with every hair taken. The haunting is settled. The question of what he did isn&rsquo;t, and he may still be alive.</li>
+  <li><strong>Shinzo</strong> is still the only person who can come and go, and he <em>&ldquo;has no insight into the curse&rsquo;s nature.&rdquo;</em></li>
+  <li><strong>Carried forward</strong>: the Consecrate ledger (Mu-Jin); who else is an &ldquo;old soul&rdquo;; the missing governor; Mugirou&rsquo;s truce; the wrong-gods lantern secret (S2); &ldquo;blood will rise&rdquo;; the Great Willow&rsquo;s promise to map the curse&rsquo;s edges; the Willow&rsquo;s missing friend; the <strong>Noppera-Bo Hood, still never used</strong>; <strong>Weaver&rsquo;s hunting-spider venom</strong> (S7); the lumber camp storeroom&rsquo;s <strong>hidden trap door</strong>; Mu-Jin&rsquo;s Desna adoption.</li>
+</ul>
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Zhen</strong>: &ldquo;You&rsquo;re pretty good at this farming thing, Kaelen. Maybe you should reconsider your occupation.&rdquo;<br>
+<strong>Kaelen</strong>: &ldquo;Are you sure I should?&rdquo;<br>
+<strong>Zhen</strong>: &ldquo;You never know. Maybe as a side job.&rdquo;
+<span class="attribution">After Zhen dragged Kaelen into the fields (&ldquo;Come on, be good to your friend&rdquo;) and Kaelen&rsquo;s Aid Harvest came up a critical success.</span></blockquote>
+
+<blockquote><strong>Zhen</strong>: &ldquo;I&rsquo;ve done this in the past. &hellip; And thank you for the help, young man.&rdquo;
+<span class="attribution">After a critical success relocating Matsu&rsquo;s outhouse vipers. Mu-Jin had woven the basket.</span></blockquote>
+
+<blockquote><strong>Zhen</strong>: &ldquo;Make sure this is really a cat.&rdquo;
+<span class="attribution">When Yami spoke up beside the corpse behind the tea house. It was a bakeneko.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;Do you know what Shenmen is called in this setting? It&rsquo;s the land of ghosts and spiders. That is literally what this place is called. This is the place our characters chose to live in.&rdquo;
+<span class="attribution">During the bundle-cutting lore, which is disguised training for escaping jorogumo webs.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;I&rsquo;m the best in the party? What the fuck? I&rsquo;m a witch.&rdquo;<br>
+<strong>Iryoku</strong>: &ldquo;I think we&rsquo;re all the best in the party.&rdquo;
+<span class="attribution">When the escape dialog listed Mu-Jin&rsquo;s +10 as the party&rsquo;s best. It wasn&rsquo;t: Iryoku has +12 (&ldquo;I guess that dialogue box is misleading&rdquo;).</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;Her name is Akari. Call her Akari.&rdquo;
+<span class="attribution">Applying the First Practice (never call a ghost a ghost) to the haunting at Mama Bao&rsquo;s.</span></blockquote>
+
+<blockquote><strong>Kaelen</strong>: &ldquo;Guys, do we need to call Ghostbusters? &hellip; We are the Ghostbusters.&rdquo;
+<span class="attribution">An hour after midnight, as the ghost drifted into the bun shop and began pulling out her own hair.</span></blockquote>
+
+<blockquote><strong>Kaelen</strong>: &ldquo;Ew, I stepped in a puddle.&rdquo;
+<span class="attribution">On the Third Practice: avoid bodies of water when a ghost is near. &ldquo;He was making a joke,&rdquo; the GM clarified.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;A lot of stuff needs to be rebuilt in this town.&rdquo;
+<span class="attribution">Taking Reinforce Buildings for the third straight week. He took it all six.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;Don&rsquo;t break anything.&rdquo; &hellip; &ldquo;Thievery.&rdquo;
+<span class="attribution">Choosing his bundle-cutting approach, then rolling a natural 20 and a run of crits to lead the contest from start to finish.</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;You probably want to shift some downtime focus over to doing the research. Mu-Jin can only do so much on his own.&rdquo;
+<span class="attribution">After failing the Great Willow twice. Zhen gave up an Earn Income crit to aid the research right after.</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;It&rsquo;s an egg ghost, because it looks like an egg.&rdquo;
+<span class="attribution">On the Dalgyal Gwishin, the thing that is jealous of charismatic people and might be coming for him.</span></blockquote>
+
+<blockquote><strong>Yami</strong>: &ldquo;I see you found her. &hellip; This lady was the one who fed me during her life. So I wish to keep her. She also dances well in the moonlight.&rdquo;
+<span class="attribution">The tea house cat, crouched beside a walking corpse, speaking for the first time.</span></blockquote>
+
+<section class="pax-notes">
+<h2>Pax&rsquo;s Notes &mdash; Zhen Stillness&rsquo;s Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Zhen did this session</h3>
+<ul>
+  <li>Worked the fields in week one. <strong>Aid Harvest, critical success</strong> on the farmland upgrade.</li>
+  <li>Took the aid slot in week two and <strong>brought Kaelen to the harvest with him</strong>. Kaelen critted.</li>
+  <li>Named <strong>inari sushi</strong> as the offering for <strong>Minhwan&rsquo;s</strong> fox, Daikitsu&rsquo;s messenger.</li>
+  <li><strong>Relocated Matsu&rsquo;s vipers</strong>. Survival, critical success, with <strong>Mu-Jin&rsquo;s</strong> basket. The ghost touch rune came out of it.</li>
+  <li>Earn Income: <strong>Religion at the Lady of Souls</strong> (week 2), then Earn Income again in week 4.</li>
+  <li>Week 3: <strong>Aid Harvest, hero-pointed to a critical success</strong>. Tried the festival preparations on Society and failed.</li>
+  <li>The First Long Night: moon poetry on Religion; bundle cutting on Athletics.</li>
+  <li>Week 4: <strong>aided Iryoku to a crit</strong> and took the hope.</li>
+  <li>Started the rune discussion. Backed <strong>striking on Kaelen</strong>. <strong>Bought striking</strong> for the nodachi. 50 gp short of ghost touch.</li>
+  <li><strong>Prayed Hinode Akari&rsquo;s haunting to rest</strong> (Religion, success) after Mu-Jin&rsquo;s Diplomacy failed. The GM credited the prayer and Mu-Jin&rsquo;s calming together.</li>
+  <li>Week 5: <strong>Aid Townsfolk</strong> (barn and fences). <strong>Gave up a critical Earn Income to aid Mu-Jin&rsquo;s research</strong>, then hero-pointed the aid. That unlocked a breakpoint.</li>
+  <li><strong>Tracked the walking corpse</strong> across the Ceiba and through town to the tea house on trained Survival.</li>
+  <li>Wanted <strong>Yami</strong> checked (<em>&ldquo;Make sure this is really a cat&rdquo;</em>). Identified it on Recall Knowledge and took its lore.</li>
+  <li>Week 6: <strong>aided Kaoru&rsquo;s Reinforce Buildings to a crit</strong>. <strong>Researched the Great Willow on Nature</strong> with Iryoku aiding. Evidently failed, since the GM still counts a point needed there.</li>
+  <li><strong>Dalgyal Gwishin</strong>: learned it targets the charismatic, and that its <strong>lowest save is Fortitude +9</strong>.</li>
+</ul>
+
+<h3>Things Zhen knows that the party does not</h3>
+<ul>
+  <li>Nothing new was kept from the party this session. Everything he learned, he said out loud.</li>
+  <li><strong>You So-Jin was accused by Candora of raising the dead.</strong> So-Jin is Zhen&rsquo;s close friend, and Zhen tracked the corpse to the real culprit. He has earned income at the Lady of Souls, so he is well placed to set it straight there if nobody has.</li>
+  <li>Carried forward: he is a <strong>samsaran</strong>, and Meng-Sung was taken because he was <em>&ldquo;some sort of old soul.&rdquo;</em> Nothing this session changed that.</li>
+</ul>
+
+<h3>What Zhen is thinking about</h3>
+<ul>
+  <li><strong>Religion is a real tool against haunts.</strong> Akari&rsquo;s haunt ended on his prayer plus Mu-Jin&rsquo;s calming, after a named Diplomacy call alone had failed. Worth offering early next time.</li>
+  <li><strong>The research is the long game</strong>, and it has been one person&rsquo;s job. Two points left. Take the Great Willow every week until it&rsquo;s done.</li>
+  <li><strong>The fog wall ritual.</strong> A way through the mist is also a way in. Kugaptee is on the other side and already tried once. Find out what the ritual costs before anyone celebrates it.</li>
+  <li><strong>The Dalgyal Gwishin will likely go for Iryoku.</strong> Fortitude +9 is the target. <strong>Earth&rsquo;s Bile is Reflex and won&rsquo;t hit the weak save.</strong> Look for a Fortitude option. Keep Heal ready for Iryoku. The <strong>vitalizing rune</strong> in the stash (+1d6 persistent vitality against undead, enfeebled 1 on a crit) fits the nodachi&rsquo;s open property slot and is exactly the right tool against an unholy undead.</li>
+  <li><strong>Yami is a yokai living in the party&rsquo;s house.</strong> It kept the corpse because she fed it. It is loyal to kindness. Worth staying on its good side.</li>
+  <li><strong>Level 5 is coming.</strong> No proficiency bump for Zhen. Third-rank spells are the upside.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Did anyone tell Candora it wasn&rsquo;t You So-Jin?</strong></li>
+  <li><strong>What exactly is the fog-wall ritual?</strong> Get the breakpoint text from the research tab, not the summary.</li>
+  <li><strong>What did Mama Bao&rsquo;s grandfather do?</strong> Is he still alive?</li>
+  <li><strong>What else can Yami do</strong>, and does it still consider the tea house home?</li>
+  <li><strong>How does the Dalgyal Gwishin fight?</strong> Its non-emotion action is divine. Nobody asked what it does.</li>
+</ul>
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Next Session &middot; Combat</span>
+  <p>A long dark robe around a shape of mist and smoke, a featureless stone mask, and a jealousy of anyone more charismatic than it. It is waiting in a bachelor&rsquo;s yard, and the party&rsquo;s Face is the most likely first target.</p>
+  <div class="big-line">&ldquo;It is not friendly, and it will be combat.&rdquo;</div>
+  <span class="speaker">&mdash; AndeGM, closing the session</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

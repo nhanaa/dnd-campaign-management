@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 16 — The Doors Only Open for the Feathers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Doors Only Open for the Feathers</h1>
+  <div class="subtitle">Session 16 · Ten feathers surrendered, the qualifying round closed, and three exhibition bouts won in front of the Empress of Goka</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-09-20</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 48m</span>
+    <span class="meta-pill">Day 3 dusk → the next evening</span>
+    <span class="meta-pill">Level 15 · milestone XP</span>
+    <span class="meta-pill">Feathers 10 → 0 · qualified</span>
+    <span class="meta-pill">4 fights · 4 wins</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:56"></div>
+  <div class="comp-seg comp-social" style="flex:22"></div>
+  <div class="comp-seg comp-rp" style="flex:14"></div>
+  <div class="comp-seg comp-loot" style="flex:8"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · four fights, four wins</span>
+  <span><span class="legend-dot comp-social"></span>Social · the turn-in, the feast, the eight teams</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · the doll, the speech, the sauna</span>
+  <span><span class="legend-dot comp-loot"></span>Stash &amp; market</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard / Living Nexus / Sorcerer</div>
+    <div class="char-player">Pax · "Mingzhu" · 739 damage at the gate</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · died once, got better</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva the Unerring</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Irorian · 328 damage vs the dragon</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch the Rampart</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · 776 taken · 552 of it for others</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva the Shade</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">she/her · session kill leader, 5</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>The Nameless qualified.</strong> The session opened on the cliffhanger from S15 — a mob of eliminated fighters hammering on the Ruby Palace gates, screaming for Hao Jin to answer for the island she'd sent them to — and it ended a day later with the party three-for-three in the Ruby Phoenix exhibition, in front of the Empress of Goka. In between: ten silver feathers turned in, an infinite buffet, the final eight teams named, and Hao Jin raising every beast on Bonmou from the dead with a flick of her hand.</p>
+
+<p>The gate mob called themselves <strong>the Fallen Moon</strong> — not a team but a collection of them, ten fighters deep, who turned on the Nameless the moment someone pointed out that <em>"the gate opens for the feathers, nothing more"</em> and <em>"bet you they've got some on them."</em> Clutch answered the ultimatum in kind — <em>"I would say the same to you. If you value your life, turn away"</em> — and then three more voices came out of the wind behind the party. <strong>Ran-to</strong> of the Lightkeepers (<em>"Bunch of sore fucking losers. Didn't we beat half of you once already?"</em>), <strong>Mafika Ayuwari</strong> of the Speakers to the Wind, and <strong>Tino</strong> of Tino's Toughest all fell in beside them. It was the first fight of the campaign the party did not have to win alone, and it showed: of the ten Fallen Moon, <strong>the allied NPCs put down six.</strong> Tino alone opened with a 130-damage Inner Upheaval flurry and killed three, which prompted Seva's dry <em>"Wait, we're kind of getting shown up, team."</em></p>
+
+<p>The kill list undersold what actually happened. <strong>Sovael did 739 of the fight's 2,430 damage — thirty percent, more than any allied NPC and more than the other four PCs combined.</strong> His opener was Courageous Anthem, Lingering Composition, a Talent Envy Demoralize off the same Performance check, then an <strong>eighth-rank Divine Armageddon</strong> across nine of the ten: <strong>six failures, two successes, and a critical failure that took the Sneak for 132.</strong> Six of the ten were at or below half health before most of those NPC kills landed. Ferrok answered with a Sure Strike <strong>Beheading Buzz Saw Spellstrike</strong> — a critical hit plus a doubled 48 on a natural-1 Reflex crit-fail, <strong>176 of the swordsman's 270 hit points in one action</strong> — though Sovael caught that the decapitation was a <em>second</em> save, and the man survived it. Ferrok then ate a Telekinetic Bombardment, went prone, and dropped that same swordsman from the dirt: <em>"Well, I've fought on the ground before."</em></p>
+
+<p>Afterward came the part of the session that will be remembered longer than the fight. <strong>Sattva's Risky Surgery went catastrophically, repeatedly wrong</strong> outside the gates — ninety seconds of stabbing Ferrok and Sovael while trying to heal them. Ferrok: <em>"Why did you just stab me?"</em> Sattva: <em>"Stop moving so much."</em> The joke has a real mechanical spine: he <strong>failed three straight DC-40 Treat Wounds</strong>, drawing blood each time and healing nothing, then gave up and <strong>dropped to DC 30</strong> — <em>"Okay, fine. I'll stop using my experimental methods. I'll just massage you. Here, a deep tissue"</em> — and immediately <strong>critically succeeded twice, for 56 and 51 across the party.</strong> Clutch delivered the verdict: <em>"I don't think we needed the deep tissue massages."</em></p>
+
+<p>At the gate stood a Tian woman in violet robes with vermilion hair, who apologised for the ambush — <em>"I was about to step in and deal with the Fallen Moon myself, but at a point it seemed you were all enjoying yourselves"</em> — collected ten silver feathers, and opened the Ruby Palace. <strong>Sovael did not play it cool.</strong> <em>"I'm a big fan. Can I get an autograph?"</em> — then realised he had nothing to sign, pulled out a spell scroll, and got <strong>Hao Jin's signature on it</strong>: <em>"I'll treasure this scroll and I'll never cast it."</em> Ferrok, the only one at the table who speaks Tien, answered her in it. Seva, a beat late: <em>"Oh, it <strong>is</strong> her! Oh my gosh, I bow."</em></p>
+
+<p>Inside: <strong>Ingdani's farewell</strong> after three days of guiding them, a suite with its own hot spring, and a few hours to decompress. Sattva took a sauna and stepped straight out into the snow to meditate. Ferrok worked on his forms and drafted a speech. Sovael worked on the song he owed Sattva from S13. Clutch produced a threadbare doll, sat facing a corner, and practised saying <em>"I must break you."</em> Then a feast that Cody described as <em>"a scene out of Dragon Ball Z"</em> — an infinite, self-replenishing buffet where the roast duck respawned the instant someone carried it off. Sovael, watching it: <em>"This could have fed my whole village. Not that I had one, anyway."</em></p>
+
+<p><strong>Hao Jin named the final eight</strong> — the Arms of Balance, the Biting Roses (Grandfather Mantis included; Sovael: <em>"Yep, that Mantis"</em>), the Lightkeepers, the Speakers to the Wind, the Steps of the Sun, Tino's Toughest, Winter's Roar, and the Nameless last. The room turned and openly sized them up, because word had spread that these were <strong>the ones who killed Jaiban</strong>. Then she walked to a balcony, let vermilion flame run down her arm, and threw a phoenix out over the island — and every beast the teams had killed on Bonmou <strong>roared back to life</strong>. <em>"Well then, dessert anyone?"</em> Sovael went for dessert; Clutch went for both — <em>"This means all the monsters have revived. And Clutch will turn to the party and say, let's go again."</em></p>
+
+<p>The tournament proper is a <strong>double-elimination bracket</strong> — winners' and losers' — so a team must lose twice to go out. Before that, one more evening: <strong>an exhibition in front of the sponsors</strong>, including <strong>Nai Yan Fei, Empress of Goka</strong>, personal guest of the Ruby Phoenix. Four bouts per team, three against opponents of Hao Jin's choosing and one against another team. Clutch asked when they'd get to fight the dignitaries. Sattva had to explain: <em>"They fight in a different way. They fight with words."</em></p>
+
+<p><strong>Bout one was the Empress's own personal guard — five Butterfly Blades</strong>, identically armed twin-blade duellists with Parry, feints, mobility strides and Reactive Strikes. It ran thirty-eight minutes and cost the party a body: the Blades swarmed Clutch and put him down. He had opened by <strong>howling into Animal Form for the crowd</strong>, which dropped his AC from <strong>41 to 33</strong> — eight points — and which he took anyway: <em>"It looks cool, and it increases size and reach."</em> Sattva landed a clean 100-damage crit; Seva sank her dagger into Clutch's enormous shadow, drew it out as a greatsword (<strong>Inscribe Shadow Pamor</strong>) and asked the dice <em>"Please hit. I really want to impress people"</em>; Sovael's rank-6 Divine Wrath finished one outright. Clutch got up on a Kip Up, killed another, then grappled a third and <strong>Whirling Threw him out of the ring</strong> purely for style. Cody: <em>"Just so you know, it's not a ring out kind of thing."</em> Seva: <em>"We're here for flair."</em> The fifth Blade was still standing at 77 hit points when the bout was called. Afterwards Sattva, having concealed an arrow in a high five for a Battle Medicine that failed and healed nothing: <em>"I hope the Empress didn't see me stabbing you."</em> Sovael: <em>"I think she saw everything."</em></p>
+
+<p><strong>Bout two was a pair of Rune Giants</strong>, level 16, 330 HP each, AC 38, with 20-foot-reach greatswords and Invoke Rune — a 30-foot electricity cone that also charges the sword with 3d6 fire. Ferrok marked the moment with <strong>the speech of the session</strong>, bellowed to the crowd before initiative: <em>"We are the Nameless, and though we don't have names yet, I am Ferrok the Unyielding. We have Seva the Shade, Clutch the Rampart, Sattva the Unerring, and Sovael the Cryptic. We will win this tournament and earn true names."</em> Sovael, flatly: <em>"I was never the cryptic, though. I'm always very transparent."</em> Ferrok, unbothered: <em>"He didn't get any feedback from you guys on those. He doesn't say."</em></p>
+
+<p>The giants were <strong>immune to fire</strong>, which blanked Ferrok's Ignition Spellstrike and taxed the Flaming rune on every swing that landed; Sovael started to send a Fire Ray into one before Cody stopped him at the declaration. What decided it was <strong>a sixth-rank Roaring Applause that both giants failed on a natural 2 and a natural 3.</strong> The half that mattered most was the quiet half: rune giants carry a bonus reaction each turn usable only for Reactive Strike, and those reactions had already taken <strong>85 HP off the party in round one alone</strong>. After the applause landed, <strong>they got none for the rest of the fight</strong> — across at least five repositions through 20-foot reach. The loud half was the <em>manipulate</em> rider: the giants had to clap on their own turns, which Sovael flagged for the table and then narrated — <em>"Clap, clap, clap for the audience."</em> That bought four provoked Strikes for 72, <strong>one of which was Seva's natural-20 crit that killed Rune Giant B on its own turn-start, before it ever acted.</strong> Cody: <em>"No one's ever failed it until now is the thing."</em> Clutch tripped and grappled <em>both</em> giants off Legendary Athletics, and Ferrok killed the other. Sovael finished on <strong>16 of 188 hit points</strong>, having lost 114 in a single enemy turn — his Cursebound flames suppress his own fire resistance, so every point of the giants' Rune of Flames landed: <em>"I'm still alive. I'm still standing. And I'm burning as well."</em></p>
+
+<p><strong>Bout three was a Clockwork Dragon and two Clockwork Choppers</strong>, and it was the hardest fight of the night by a distance — <strong>roughly 1,530 damage into the party across six rounds.</strong> The dragon had AC 42, 400 HP, a 120-foot fly speed, Draconic Frenzy, <strong>physical resistance 15</strong> that only adamantine bypassed, and a <strong>20d6 Breathe Oil</strong> cone it got back on a fixed two-round timer rather than a recharge roll. It fired that breath <strong>three times</strong> — 67, 79 and 76. The lever was <strong>electricity</strong>, weakness <strong>15</strong>: Sovael's opening Chain Lightning arced Chopper A → Dragon → Chopper B for 33 / 51 / 33 and exposed it on the first action of the fight. <strong>Sattva then led the damage with 328 of the party's 1,000.</strong></p>
+
+<p>The fight was carried on the defensive end, and the single best number in the session is Clutch's: <strong>he absorbed 776 damage, and 552 of it was aimed at somebody else.</strong> Eight Intercept Attacks, three party-wide Taunts, four Battle Medicines, Paragon's Guard the whole way, and one of those Battle Medicines rerolled with <strong>his last hero point</strong> to stay upright. Sovael, by contrast, finished on <strong>131 taken</strong> — because Clutch ate a 158-damage crit-failed breath and a 48 on his behalf. Before accepting one of those Intercepts, Sovael stopped to ask: <em>"Do you have HP, brother?"</em></p>
+
+<p>Ferrok was reduced to 0 by the third oil breath and <strong>sprang back up on It's Not Over</strong> at exactly 25 hit points, having spent the previous five minutes insisting to a sceptical table that he could come back to life (<em>"No, seriously, I can. I have the feat for it"</em>). Sattva went scroll-first — sixth, sixth and seventh-rank Heals out of his retrieval belt (<em>"These are cheap at this point. We're living rich"</em>) — <strong>shot Chopper B's head off</strong> with a critical Hunted Shot, and closed by putting two arrows in the dragon's eyes for what Cody could only call <em>"insane."</em> Seva killed Chopper A and hero-pointed a <strong>Comet Charge Spellstrike for 57</strong>. Ferrok put the dragon down with a <strong>Live Wire Spellstrike for 82</strong> into a construct sitting on 74.</p>
+
+<p>A small, good moment near the end: Sovael cast <strong>Incarnate Skeletal Giant</strong> and Sattva asked whether it was Jaiban's skeleton. Seva: <em>"Jaiban's not dead!"</em> Sovael: <em>"Oh yeah, it can't be Jaiban."</em> The phoenix had put him back that morning.</p>
+
+<p>Three bouts, three wins. Cody: <em>"Exhibition number three, you are victorious."</em> Seva: <em>"Hopefully the last."</em> Cody: <em>"Well, no, that's four."</em> <strong>Seva: <em>"There's more?"</em></strong> — the fourth bout, <strong>team versus team</strong>, is still owed.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Social · The Gate</div>
+    <div class="act-card">
+      <h3>"The gate opens for the feathers, nothing more"</h3>
+      <ul>
+        <li>The session picks up exactly where S15 ended: a mob at the Ruby Palace doors, weapons drawn, shouting <em>"I said get out here, Hao Jin! You've got a lot to answer for. Calling us halfway across the world and sicking these monsters on us?"</em></li>
+        <li>A second voice tells him it won't work — <em>"The gate opens for the feathers, nothing more."</em> A third notices the Nameless: <em>"Well, what about them? Bet you they've got some on them."</em></li>
+        <li>They advance. The leader offers terms: <em>"No quarrel with you. But if you value your life, hand over all your feathers and walk away."</em></li>
+        <li><strong>Clutch</strong> gives the first PC line of the session: <em>"I would say the same to you. If you value your life, turn away."</em></li>
+        <li>Three voices answer from behind the party. <strong>Ran-to</strong>, the frost goblin of the Lightkeepers: <em>"Bunch of sore fucking losers. Didn't we beat half of you once already?"</em> <strong>Mafika Ayuwari</strong> of the Speakers to the Wind: <em>"You were defeated fair and square."</em> And <strong>Tino</strong>, of Tino's Toughest.</li>
+        <li><strong>Ferrok</strong>: <em>"I don't think this rabble's capable of keeping us out."</em> Tino: <em>"My thoughts exactly. Well, maybe we show them again why we got here."</em></li>
+        <li>Cody calls for initiative against <strong>the Fallen Moon</strong> — a collection of eliminated teams, ten fighters on the map, with three allied NPCs joining the party.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Fight 1 · The Fallen Moon</div>
+    <div class="act-card">
+      <h3>Ten against eight, with help</h3>
+      <ul>
+        <li><strong>Tino opens before any PC acts</strong> — Inner Upheaval into a flurry, a critical hit and a hit for <strong>130</strong> on Monk A.</li>
+        <li><strong>Sovael's full opener</strong>: Courageous Anthem → Lingering Composition → <strong>Talent Envy Demoralize</strong> → <strong>eighth-rank Divine Armageddon</strong> across nine targets. DC 37 Fortitude: <strong>six failures, two successes, one critical failure.</strong> 66 to the failures, 32 to the successes, <strong>132 to Sneak A</strong>.</li>
+        <li><strong>Cody rules against Sovael on Foretell Harm riding an area spell.</strong> Sovael cites Pathfinder Society errata and offers a link; Cody: <em>"That is not how I have ever understood it, and that is not how I run it, I am sorry to say."</em> Sovael concedes in one line and retargets.</li>
+        <li>Archer B's <strong>Rain of Arrows critically hits Ferrok and Ran-to</strong> — 67 to Ferrok. A monk Qi Rushes to Sovael to trip him, fails, and falls prone instead.</li>
+        <li><strong>Ferrok: Sure Strike → Beheading Buzz Saw Spellstrike, critical hit.</strong> 94 from the weapon crit plus a <strong>doubled 48</strong> on a natural-1 Reflex crit-fail, plus persistent fire and bleed — <strong>176 of Swordsman B's 270 hit points.</strong> Sovael catches that the decapitation is a <em>second</em> save; the man survives on a +6.</li>
+        <li>A mage's <strong>Telekinetic Bombardment</strong> catches three PCs — only Ferrok fails, taking 50 and going prone. He fights from the ground and <strong>drops Swordsman B anyway.</strong></li>
+        <li><strong>Sovael's Aether Beam</strong> lands twice. Sattva christens it: <em>"following up on Sovael's Kamehameha."</em> Sovael adopts it instantly — <em>"Setting up for my Kamehameha."</em></li>
+        <li>Mage B Sure Strikes into <strong>Disintegrate</strong>, crits, and <strong>Ran-to critically fails the Fortitude save on a natural 1 — 162 damage</strong>, the biggest hit of the fight.</li>
+        <li><strong>Clutch Intercepts twice</strong> — for Seva against a Howling Blizzard, and for Sovael against Sneak B, eating 28 so Sovael took nothing, then Armored-Counterattacking for 33.</li>
+        <li><strong>Seva hero-points a natural 1 into a natural 20</strong> to kill Monk B — the only hero point spent in this fight.</li>
+        <li><strong>Courageous Anthem flipped four rolls outright</strong> — two misses into hits, two hits into criticals, including Tino's. It was running on the allied NPCs too.</li>
+        <li><strong>Kills</strong>: Tino 3 · Ran-to 2 · Mafika 1 · <strong>Seva 2</strong> · <strong>Ferrok 1</strong> · <strong>Sattva 1</strong> (the last one standing — <em>"Take this punch."</em>).</li>
+        <li><strong>The damage ledger tells a different story from the kill list.</strong> Of 2,430 damage dealt, <strong>Sovael did 739 — 30%</strong>, more than any allied NPC and more than the other four PCs combined. Nobody on the party was dropped.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act III · Roleplay · Outside the Gates</div>
+    <div class="act-card">
+      <h3>The deep-tissue massage</h3>
+      <ul>
+        <li><strong>Sattva fails three straight DC-40 Treat Wounds with Risky Surgery on</strong>, cutting Ferrok and Sovael each time and healing nothing. Ferrok: <em>"Why did you just stab me?"</em> Sattva: <em>"Stop moving so much."</em></li>
+        <li>Seva refuses to participate: <em>"I don't want to be a part of this."</em> Sattva, defeated: <em>"Okay, fine. I'll stop using my experimental methods. I'll just massage you. Here, a deep tissue."</em> — which is him <strong>lowering the DC to 30</strong>. He immediately crit-succeeds twice for <strong>56 and 51</strong>.</li>
+        <li>Sattva, inspecting his equipment: <em>"Are they not sharp enough? I need to sharpen my arrows a bit."</em> Sovael: <em>"I don't know if sharpness is the problem, man."</em></li>
+        <li><strong>Sovael baits a cantrip out of Seva purely to trigger Absorb Magic</strong>, then spends the overflow on <strong>Healing Nexus</strong> to top himself off for free — out-tricking her fire-eating party piece in the process. Seva: <em>"I've never used this cantrip. It's so useless."</em></li>
+        <li><strong>Clutch</strong> delivers the verdict: <em>"I don't think we needed the deep tissue massages."</em></li>
+        <li><strong>Mafika introduces himself and his students</strong>, all from <strong>the Magaambya</strong>. Ferrok: <em>"All the way from Talmandor's Bounty."</em> Mafika: <em>"I've heard something of that incident. Of the tower that arose from the sea and blocked out the sun."</em> — the first outside confirmation that Shades of Blood is known beyond the isles.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · The Turn-In</div>
+    <div class="act-card">
+      <h3>Hao Jin, in person</h3>
+      <ul>
+        <li>At the gate stands <strong>a beautiful Tian woman in magnificent violet robes, her hair this beautiful vermilion.</strong> She bows and apologises: <em>"I was about to step in and deal with the Fallen Moon as they called themselves myself, but at a point it seemed you were all enjoying yourselves, so I just saw fit to let you handle it."</em></li>
+        <li><strong>Ferrok answers her in Tien</strong> — the only member of the Nameless who speaks it: <em>"Yes, we have. And the fight was of no consequence."</em></li>
+        <li><strong>Ten silver feathers change hands.</strong> The gates slide inward on a set of red steps. <em>"Allow me to welcome you into the tournament, Nameless."</em> <strong>The qualifying round is over.</strong></li>
+        <li><strong>Sovael</strong>: <em>"I'm a big fan. Can I get an autograph?"</em> — then has nothing to sign, pulls a spell scroll, and gets it signed. <em>"I'll treasure this scroll and I'll never cast it."</em> Ferrok: <em>"Just sign my chest."</em> Seva, late: <em>"Oh, it <strong>is</strong> her! Oh my gosh, I bow."</em></li>
+        <li><strong>Ingdani departs</strong> after three days as their guide: <em>"It's been an honour to travel with you all these past few days, and I wish you good fortune in the tournament to come."</em> Sovael thanks her for the guidance — and for delivering all that money.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act V · Roleplay · The Guest Quarters</div>
+    <div class="act-card">
+      <h3>A few hours to decompress</h3>
+      <ul>
+        <li>A suite with bedrooms, an enormous parlour, and <strong>its own private hot spring</strong>, looking out over the peaks of Mount Haminabu with snow falling.</li>
+        <li><strong>Sattva</strong> takes a hot bath, uses the sauna, <em>"and immediately step out into the snow. And just meditate."</em> — pure Irorian discipline.</li>
+        <li><strong>Ferrok</strong> takes a bath, works on his forms, and starts writing <em>"his speech for once we actually get into the main fights"</em> — eighty-six minutes before he delivers it.</li>
+        <li><strong>Sovael</strong> works on his song: <em>"I still need to write a song for Sattva. I promised him when he killed that worm."</em> — a debt from S13.</li>
+        <li><strong>Clutch</strong> pulls out <em>"this, like, kind of threadbare doll, and then sits facing a corner and practising saying, I must break you. I must break you."</em> Ferrok: <em>"Not weird at all. That's fine, yeah."</em></li>
+        <li><strong>Seva</strong> trains.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VI · Social · The Feast</div>
+    <div class="act-card">
+      <h3>The eight, and the phoenix</h3>
+      <ul>
+        <li>An enormous communal dining hall and <strong>an infinite, self-replenishing buffet</strong> — Sovael watches a Kholo from the Speakers to the Wind carry off an entire roast duck and another appear instantly in its place. Cody: <em>"it looks like a scene out of Dragon Ball Z."</em></li>
+        <li><strong>Sattva is the only person who asks whether the food is illusory.</strong> It isn't.</li>
+        <li>Sovael: <em>"This could have fed my whole village. Not that I had one, anyway."</em></li>
+        <li>The party negotiates its own history. Sovael: <em>"And running away from all the monsters."</em> Ferrok: <em>"Let's get our story straight. We never ran from a single fight."</em> Sattva: <em>"We tactically retreated when the situation required of us."</em> Sovael: <em>"It's called fighting smart."</em></li>
+        <li><strong>Hao Jin names the final eight</strong>: the Arms of Balance, the Biting Roses (with Grandfather Mantis — Sovael: <em>"Yep, that Mantis"</em>), the Lightkeepers, the Speakers to the Wind, the Steps of the Sun, Tino's Toughest, Winter's Roar, and <strong>the Nameless</strong> last.</li>
+        <li>The room <strong>sizes them up</strong> as they stand. <em>"It seems word's gotten around that you all are the ones who defeated Jaiban."</em> Sovael: <em>"I'll enjoy the attention. Whatever the cause is."</em></li>
+        <li><strong>Hao Jin walks to a balcony and throws a phoenix over Bonmou.</strong> Vermilion flame runs down her arm; an enormous bird flies out over the island, sparks falling like orange snow, and <strong>every beast the teams killed roars back to life.</strong> <em>"Well then, dessert anyone?"</em></li>
+        <li>Sovael called the dessert first; Clutch wanted both — <em>"This means all the monsters have revived. And Clutch will turn to the party and say, let's go again."</em> Sovael: <em>"Let's leave it for tomorrow. I just want some ice cream right now. I've been burning myself all day."</em></li>
+        <li><strong>The tournament structure</strong>: double elimination, winners' and losers' brackets. A team must lose twice to be out. Boats the day after the exhibition, a week at sea, several more days to <strong>Goka</strong>, then one week of tournament.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VII · Social · The Exhibition Opens</div>
+    <div class="act-card">
+      <h3>The Empress of Goka</h3>
+      <ul>
+        <li>Delegates arrive by magic — merchants, politicians, <em>"one man seems to have the caliber of a general about him."</em></li>
+        <li>Above all of them: <strong>Nai Yan Fei, Empress of Goka</strong>, in blue robes and silver jewellery, carrying an impressive fighting fan as casually as an ordinary one — <strong>personal guest of the Ruby Phoenix.</strong> She casts an appraising eye over the party and turns back to Hao Jin.</li>
+        <li>Tino is nervous: <em>"They've got some big players here."</em> Seva: <em>"And to impress the Empress of Goka is really something."</em></li>
+        <li><strong>Clutch</strong>: <em>"When do we get to fight them?"</em> … <em>"Oh, I thought everyone was here to fight."</em> <strong>Sattva</strong>: <em>"They might employ you to fight in the future… They fight in a different way. They fight with words."</em></li>
+        <li><strong>Format</strong>: four bouts per team — three opponents of Hao Jin's choosing, one team-vs-team. No bearing on seeding; victories earn prizes.</li>
+        <li><strong>Downtime</strong>: the stash is sold for <strong>1,070 gp each</strong>. Sovael claims the <strong>Boreal Staff (Major)</strong>; Clutch takes the <strong>charm of electricity resistance</strong>; Ferrok buys <strong>Advancing Fortification Dawnsilver</strong> plate. Seva's Drained is removed free by the palace physicians.</li>
+        <li>On the way in, <strong>Seva and Sattva have their fortunes read</strong> and Seva casts <strong>Lucky Number</strong> (her number: 1). Clutch casts his own and rolls a 9.</li>
+        <li>Sovael casts <strong>Energy Aegis</strong> on himself during the break — the spell is touch, one creature — which pays for itself an hour later against the Rune Giants.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VIII · Combat · Bout 1 · The Butterfly Blades</div>
+    <div class="act-card">
+      <h3>The Empress's personal guard</h3>
+      <ul>
+        <li>Five identically dressed duellists in yellow-and-red trimmed robes, twin butterfly swords each. Cody rules them <strong>immune to fleeing but still frightened</strong> — <em>"Would be a bit unfortunate if the Empress's guards ran away."</em></li>
+        <li><strong>Clutch howls into Animal Form for the crowd</strong> — dropping his AC from <strong>41 to 33</strong>. He keeps it: <em>"It looks cool, and it increases size and reach."</em> His size also denies the Blades flanking angles on everyone else.</li>
+        <li><strong>Sattva crits for a clean 100</strong> at point-blank, then jumps clear — <em>"carried by Clutch's arms."</em> He RPs Warden's Boon as a read on the opposition: <em>"they like to step to the left and attack with their right hand at the same time… They're too synchronized."</em></li>
+        <li><strong>Seva's Inscribe Shadow Pamor</strong> — dagger into Clutch's shadow, drawn out as a greatsword — into a Gouging Claw Spellstrike. <em>"I really want to impress people."</em></li>
+        <li>The Blades <strong>swarm Clutch and drop him.</strong> Cody confirms the bouts are <strong>non-lethal with the Phoenix Necklaces in effect.</strong> Seva: <em>"Are you done? Fuck! Clutch, no!"</em> Sattva Battle Medicines him back up; Seva heals him 66.</li>
+        <li><strong>Seva's Reactive Strike with the Rooting rune immobilises a Blade mid-stride</strong> — <em>"I saved your life!"</em></li>
+        <li><strong>Sovael</strong>: Whispers of Weakness (no weakness; Fortitude and Will tied for lowest) → rank-4 then <strong>rank-6 Divine Wrath, which kills Blade C</strong> → Foretell Harm → a hero-pointed Needle Darts.</li>
+        <li><strong>Clutch Kips Up, kills Blade D</strong>, then grapples Blade A and <strong>Whirling Throws him out of the arena.</strong> Not a ring-out. Done anyway. Seva: <em>"We're here for flair."</em></li>
+        <li><strong>The Blades tried to feint Seva three times and never once fooled her</strong> — they just stabbed her anyway. <em>"You can't fool me and I get punched in the gut."</em></li>
+        <li><strong>Kills</strong>: Sovael 1 · Clutch 2 · Seva 1. <strong>The fifth Blade was still standing at 77 HP when the bout was called.</strong> Ferrok was top damage at ~313 with no kill. <strong>Sovael and Sattva finished untouched.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IX · Combat · Bout 2 · The Rune Giants</div>
+    <div class="act-card">
+      <h3>"We will win this tournament and earn true names"</h3>
+      <ul>
+        <li>A <strong>crimson portal over 30 feet high</strong> opens mid-air, and two Rune Giants step through side by side, greatswords drawn. Cody: <em>"the greatswords of these Rune Giants have a reach of 20 feet."</em></li>
+        <li><strong>Ferrok's speech</strong>, to the crowd, before initiative: <em>"We are the Nameless, and though we don't have names yet, I am Ferrok the Unyielding. We have Seva the Shade, Clutch the Rampart, Sattva the Unerring, and Sovael the Cryptic. We will win this tournament and earn true names."</em> Sovael: <em>"I was never the cryptic, though. I'm always very transparent."</em></li>
+        <li><strong>Sovael critically succeeds his Lingering Composition</strong> — which rescues a <strong>natural-2 Intimidation</strong> into a successful Talent Envy Demoralize on the degree bump. Whispers of Weakness returns no weakness, weakest save Reflex: <em>"it's predictable."</em></li>
+        <li><strong>Clutch takes Paragon's Guard and strides into reach deliberately to eat the first swing</strong>, then Taunts both giants.</li>
+        <li>Both giants <strong>Invoke Rune</strong> — 30-foot electricity cones — and charge their greatswords with fire. <strong>Fire immunity blanks Ferrok's Ignition Spellstrike</strong> and costs him the Flaming rune on all four connecting swings. Sovael declares a Fire Ray and Cody stops him before the roll; he pivots to <strong>Telekinetic Projectile</strong> through the Shadow Signet.</li>
+        <li><strong>THE PLAY: sixth-rank Roaring Applause. Both giants fail — natural 2 and natural 3 vs DC 37 Will.</strong></li>
+        <li><strong>The reaction denial was the bigger half.</strong> Rune giants get a bonus reaction each turn usable only for Reactive Strike; in round 1 those cost the party <strong>85 HP</strong>. After the applause: <strong>zero for three rounds</strong>, across at least five repositions through 20-foot reach.</li>
+        <li><strong>The manipulate rider was the loud half</strong> — the clapping forced a manipulate action at each turn-start. <strong>Four provoked Strikes, three hits, 72 damage</strong> — including <strong>Seva's natural-20 critical that killed Rune Giant B at its own turn-start, before it acted at all.</strong> <em>"Clap, clap, clap for the audience."</em> Cody: <em>"No one's ever failed it until now is the thing."</em></li>
+        <li><strong>Clutch trips and grapples <em>both</em> giants</strong> off Legendary Athletics — a critical-success Trip and a natural-20 Combat Grab for 45 — and <strong>hero-points a natural 1 into a natural 19</strong> to land the grab that pinned Rune Giant B until it died.</li>
+        <li><strong>Kills: Seva 1 (Rune Giant B), Ferrok 1 (Rune Giant A).</strong> Ferrok's Goring Charge, taken <em>"because it's cool,"</em> missed on a natural 3.</li>
+        <li><strong>Damage taken ~553</strong>: <strong>Sovael 172</strong>, ending on <strong>16 of 188</strong> — 114 of it in a single enemy turn, with his Cursebound flames suppressing his own fire resistance. <em>"I'm still alive. I'm still standing. And I'm burning as well."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act X · Combat · Bout 3 · The Clockwork Dragon</div>
+    <div class="act-card">
+      <h3>The longest fight of the night</h3>
+      <ul>
+        <li>Another portal, and the sound of whirring gears. Two mechanical humanoids with <strong>enormous axe blades ending where their hands would be</strong>, a single red eye each — and between them, pulling itself through, <strong>an enormous mechanical dragon.</strong></li>
+        <li><strong>Sovael's opening Chain Lightning</strong> arcs Chopper A → Dragon → Chopper B for 33 / 51 / 33 and <strong>exposes the electricity weakness — 15 — on the first action of the fight.</strong> 146 of his 152 total damage came on that one turn.</li>
+        <li><strong>Chopper B Delays</strong> in round 1 to act after the dragon. Seva: <em>"They have tactics. They have tactics."</em></li>
+        <li><strong>Breathe Oil, 20d6 in a 40-foot cone, fires three times</strong> — rounds 1, 3 and 5, for <strong>67, 79 and 76</strong>. The second critically failed Sovael for 158 (Clutch took it). The third failed on both Clutch and Ferrok and <strong>dropped Ferrok.</strong> Cody: <em>"it's so creatures can't use breath weapons back to back."</em></li>
+        <li><strong>Clutch is the fight</strong>: 8 Intercept Attacks, 3 party-wide Taunts, 4 Battle Medicines, Paragon's Guard throughout, and a Battle Medicine on himself <strong>rerolled with his last hero point</strong> (natural 2 into a 14, a critical success for 71). <strong>Of the 776 he absorbed, 552 was aimed at someone else.</strong></li>
+        <li><strong>Sovael takes only 131</strong>, because Clutch Intercepted the 158 and the 48 aimed at him. He burns Wooden Double on a Draconic Frenzy critical, a Healing Nexus, an Elf Step, a 6th-rank Heal scroll and a 5th-rank Heal on Clutch. Before accepting an Intercept: <em>"Do you have HP, brother?"</em></li>
+        <li><strong>Ferrok is reduced to 0 and comes straight back up on It's Not Over</strong> — 10 + level 15 + CON 0 = <strong>25 HP</strong>. <em>"No, there's a gladiator feat that brings me back."</em> Sattva, choosing where to burn a 7th-rank Heal scroll: <em>"I'll trust Ferrok's reincarnation powers."</em></li>
+        <li><strong>The party plays the dragon's reaction economy deliberately.</strong> Ferrok: <em>"I will Force Fang since he's out of reactions to recharge my Spellstrike."</em></li>
+        <li><strong>Seva kills Chopper A</strong>, cuts a 62 to 42 with Interstitial Escape, and hero-points a rank-7 <strong>Comet Charge Spellstrike — 6d12 = 42, 57 with the weakness.</strong></li>
+        <li><strong>Sattva kills Chopper B</strong> with a critical Hunted Shot for 87 — <em>"I shot its head off"</em> — and closes by putting two arrows in the dragon's eyes. Cody: <em>"That's insane."</em> <strong>He led the party's damage with 328 of 1,000.</strong></li>
+        <li><strong>Sovael's Incarnate Skeletal Giant</strong> — the dragon makes the Fortitude save on arrival, but the spell's <em>Depart</em> lands the next round. Sattva asks if it's Jaiban's skeleton; Seva: <em>"Jaiban's not dead!"</em></li>
+        <li><strong>Ferrok kills the Clockwork Dragon</strong> with a <strong>Live Wire Spellstrike</strong> — 67 on the dice, <strong>82 applied</strong> with the weakness, into a dragon sitting on 74.</li>
+        <li><strong>The Self-Destruct never went off.</strong> Foundry auto-posted the reaction text the instant the dragon hit 0 — the same way it posted each Chopper's Integrated Launcher on death — but there is no 15d10, no DC 40 saves and no Thievery attempt in the log, and Cody called <em>"It is down. We are out of combat"</em> five seconds later.</li>
+        <li><strong>Hero points: five</strong> — Clutch, Sattva, Seva, Ferrok (wasted on a Goring Charge that rerolled a 4 into a 4), and <strong>Sovael, who rerolled the critically failed Reflex save against the second oil breath and critically failed it again.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 1 · The Fallen Moon at the Gates · ~41 min · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">10 Fallen Moon — 2 Sneaks (245), 2 Archers (210), 2 Monks (250), 2 Swordsmen (270), 2 Mages (240)</span></div>
+  <div><span class="stat-label">Allies</span><span class="stat-value">Tino (370) · Ran-to (420) · Mafika Ayuwari (505)</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">2,430 — Sovael 739 (30%)</span></div>
+  <div><span class="stat-label">Party losses</span><span class="stat-value">None dropped. Ferrok 169 taken, Sovael 105</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">1 — Seva (nat 1 → nat 20, killed Monk B)</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Tino 3 · Ran-to 2 · Mafika 1 · Seva 2 · Ferrok 1 · Sattva 1</span></div>
+</div>
+<h4>The opener</h4>
+<ul>
+  <li><strong>Tino</strong> acts before any PC — Inner Upheaval flurry, crit + hit, <strong>130</strong> on Monk A.</li>
+  <li><strong>Sovael</strong>: Courageous Anthem → Lingering Composition → Talent Envy Demoralize → <strong>eighth-rank Divine Armageddon</strong> on nine targets. DC 37 Fort: <strong>6 failures (66), 2 successes (32), 1 critical failure (132 on Sneak A)</strong>.</li>
+  <li><strong>Cody rules against Foretell Harm riding an area spell.</strong> Sovael cites PFS errata, concedes in one line, retargets Sneak A.</li>
+</ul>
+<h4>The grind</h4>
+<ul>
+  <li>Archer B's <strong>Rain of Arrows crits Ferrok and Ran-to</strong> — 67 to Ferrok.</li>
+  <li><strong>Ferrok: Sure Strike → Beheading Buzz Saw Spellstrike, critical hit</strong> — 94 weapon crit + doubled 48 on a natural-1 Reflex crit-fail + persistent fire and bleed = <strong>176 of 270</strong>. Sovael catches the decapitation is a second save; Swordsman B survives on a +6.</li>
+  <li><strong>Telekinetic Bombardment</strong> on three PCs — only Ferrok fails, 50 and prone. He <strong>kills Swordsman B from the ground.</strong></li>
+  <li><strong>Sovael's Aether Beam</strong> lands twice — christened "the Kamehameha" by Sattva.</li>
+  <li><strong>Disintegrate</strong>: Sure Strike crit + a natural-1 crit-failed Fortitude save = <strong>162 into Ran-to</strong>, the fight's biggest hit.</li>
+  <li><strong>Clutch Intercepts twice</strong> — for Seva against Howling Blizzard, and for Sovael against Sneak B (eating 28, then countering for 33).</li>
+  <li><strong>Courageous Anthem flipped four rolls outright</strong> — 2 misses → hits, 2 hits → crits, including Tino's. It ran on the allied NPCs too.</li>
+</ul>
+<p style="color:var(--gold)">The kill list says the NPCs carried it. The damage ledger says Sovael set the table — six of the ten were at or below half health from his opener before most of those kills landed.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 2 · Exhibition Bout 1 · Five Butterfly Blades · ~38 min · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">5 × Butterfly Blade, 235 HP each — the Empress's personal guard</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Twin butterfly swords (Agile, Disarm, Finesse, Parry, Twin), Sneak Attack, Reactive Strike, mobility strides, feints</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">598 — Clutch 395 · Seva 140 · Ferrok 63 · Sovael 0 · Sattva 0</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Ferrok ~313 · Sattva 264 · Clutch 209 · Seva 193 · Sovael 143</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">2 — Ferrok (86-damage hit), Sovael (Needle Darts). Seva used Lucky Number instead of hers.</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sovael 1 (C) · Clutch 2 (D, A) · Seva 1 (B) · Blade E survived at 77 HP</span></div>
+</div>
+<h4>Round 1 — the crowd-pleaser</h4>
+<ul>
+  <li><strong>Clutch's Battle Cry critically succeeds</strong> at initiative. Cody rules the Blades <strong>immune to fleeing but still frightened.</strong></li>
+  <li><strong>Clutch howls into Animal Form (Canine)</strong> for the crowd — <strong>AC 41 → 33</strong>, an eight-point drop, with five duellists already converging. He keeps it for the reach and the spectacle.</li>
+  <li><strong>Sovael</strong>: Courageous Anthem + Lingering → Talent Envy Demoralize → Shield.</li>
+</ul>
+<h4>Rounds 2–3 — Clutch goes down</h4>
+<ul>
+  <li><strong>Sattva crits for exactly 100</strong> at point-blank on Blade C, then jumps clear — <em>"carried by Clutch's arms."</em></li>
+  <li><strong>Seva: Inscribe Shadow Pamor</strong> — her dagger drawn out of Clutch's shadow as a greatsword — into Gouging Claw Spellstrike.</li>
+  <li>The Blades <strong>swarm Clutch and drop him.</strong> Non-lethal under the Phoenix Necklaces. Sattva Battle Medicines him up; Seva heals 66.</li>
+  <li><strong>Seva's Rooting-rune Reactive Strike immobilises a Blade mid-stride.</strong> Cody reverses himself on air to allow it.</li>
+  <li><strong>Sovael's rank-6 Divine Wrath kills Blade C.</strong></li>
+</ul>
+<h4>Round 4 — flair</h4>
+<ul>
+  <li><strong>Clutch Kips Up, kills Blade D</strong>, grapples Blade A on a natural 20 and <strong>Whirling Throws him 35 feet out of the arena.</strong> Cody: <em>"it's not a ring out kind of thing."</em></li>
+  <li><strong>Sattva's concealed-arrow Battle Medicine on Seva fails outright</strong> — no healing, and it burns her immunity for the hour.</li>
+  <li><strong>All three feints on Seva fail.</strong> The Blades stab her anyway; the last is a crit for 50 that Clutch intercepts.</li>
+  <li><strong>Seva kills Blade B.</strong> Cody: <em>"One to go. He is the last one standing. You've won this one."</em></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 3 · Exhibition Bout 2 · Two Rune Giants · ~24 min · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">2 × Rune Giant — level 16, 330 HP, AC 38, Fort +33 / Ref +26 / Will +28, IMMUNE TO FIRE</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Greatswords, 20-ft reach · Invoke Rune (30-ft electricity cone, then +3d6 fire on the blade) · Wide Swing · bonus Reactive Strike reaction each turn</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">~553 — Sovael 172 (ended 16/188) · Clutch 152 · Seva 149 · Sattva 63 · Ferrok 17</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">660 — Seva 191 · Ferrok 162 · Clutch 150 · Sattva 106 · Sovael 51</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">2 — Seva (nat 1 → nat 20, 106 damage), Clutch (nat 1 → nat 19, the pinning grab)</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Seva 1 (Rune Giant B) · Ferrok 1 (Rune Giant A)</span></div>
+</div>
+<h4>Round 1 — 85 HP to reactions</h4>
+<ul>
+  <li><strong>Ferrok's team-introduction speech</strong> to the crowd before initiative.</li>
+  <li><strong>Sovael crits his Lingering Composition Performance check</strong> — which rescues a <strong>natural-2 Intimidation</strong> into a successful Talent Envy Demoralize on the degree bump. Whispers of Weakness: no weakness, weakest save Reflex.</li>
+  <li><strong>Clutch takes Paragon's Guard and strides into reach on purpose to eat the first swing</strong>, then Taunts both.</li>
+  <li>Both giants <strong>Invoke Rune</strong>; the cones land and both greatswords catch fire for a minute. <strong>The giants' bonus Reactive Strikes cost the party 85 HP this round alone</strong>, including a 118-damage crit on Seva cut to 78 by Interstitial Escape.</li>
+</ul>
+<h4>Round 2 — the applause</h4>
+<ul>
+  <li><strong>Sixth-rank Roaring Applause. Both giants fail — natural 2 and natural 3 vs DC 37 Will.</strong> Slowed 1, no reactions.</li>
+  <li><strong>Zero Reactive Strikes for the remaining three rounds</strong>, across at least five PC repositions through 20-foot reach. Slowed 1 costs Rune Giant A two further actions.</li>
+  <li>The manipulate rider opens two trigger windows. <strong>Four provoked Strikes, three hits, 72 damage</strong> — including <strong>Seva's natural-20 crit that kills Rune Giant B at its own turn-start, before it acts.</strong> Ferrok's strike nine seconds earlier had left it on 4 HP.</li>
+  <li><em>"Clap, clap, clap for the audience."</em> Cody: <em>"No one's ever failed it until now is the thing."</em></li>
+</ul>
+<h4>Rounds 3–4 — grinding down A</h4>
+<ul>
+  <li><strong>Fire immunity blanks Ferrok's Ignition Spellstrike</strong> and taxes the Flaming rune on all four connecting swings (~42). Sovael declares a Fire Ray, Cody stops him at the declaration, and he pivots to <strong>Telekinetic Projectile</strong> through the Shadow Signet for 35.</li>
+  <li><strong>Clutch trips and grapples both giants</strong> off Legendary Athletics — critical-success Trip, natural-20 Combat Grab for 45 — and spends round 3 entirely on defence: a critical Doctor's Visitation self-healing him to a full 280, an Intercept for Sattva, and an Armored Counterattack.</li>
+  <li><strong>Sattva</strong> contributes 106 and 25 HP of healer's gloves into Seva: <em>"I give you a fist bump and heal you with the healer's gloves."</em></li>
+  <li><strong>Ferrok kills Rune Giant A</strong> with a Live Wire Spellstrike. His Goring Charge, taken <em>"because it's cool,"</em> missed on a natural 3.</li>
+  <li><strong>Sovael finishes on 16 hit points</strong> — 114 lost in one enemy turn, with Cursebound suppressing his own fire resistance so every point of Rune-of-Flames damage landed.</li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 4 · Exhibition Bout 3 · Clockwork Dragon + 2 Choppers · ~48 min · 6 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Clockwork Dragon — 400 HP, AC 42, Perception +32, fly 120 · 2 × Clockwork Chopper — 275 HP each</span></div>
+  <div><span class="stat-label">Dragon kit</span><span class="stat-value">Draconic Frenzy · Breathe Oil 20d6 / 40-ft cone on a fixed 2-round timer · physical resistance 15 bypassed by adamantine · tail Reactive Strike · Self-Destruct</span></div>
+  <div><span class="stat-label">Weakness</span><span class="stat-value">Electricity 15 — found on the first action of the fight</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">~1,530 — Clutch 776 · Ferrok 319 · Seva 217 · Sovael 131 · Sattva 91</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">1,000 — Sattva 328 · Ferrok 228 · Seva 186 · Sovael 152 · Clutch 106</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">5 — Clutch, Sattva, Seva, Ferrok (wasted), Sovael (rerolled a crit-failed breath save into another crit fail)</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Seva (Chopper A) · Sattva (Chopper B) · Ferrok (the Dragon)</span></div>
+</div>
+<h4>Round 1 — the diagnostic</h4>
+<ul>
+  <li><strong>Sovael's Chain Lightning</strong> arcs Chopper A → Dragon → Chopper B for 33 / 51 / 33 and <strong>exposes the electricity weakness immediately.</strong> Foretell Harm follows, also electricity. 146 of his 152 total damage comes on this turn.</li>
+  <li><strong>Chopper B Delays</strong> to act after the dragon. Seva: <em>"They have tactics."</em></li>
+  <li><strong>Breathe Oil #1 — 67</strong>, catching four PCs for 33 and Seva for 67, plus persistent damage.</li>
+</ul>
+<h4>Rounds 2–4 — Clutch holds it together</h4>
+<ul>
+  <li><strong>Clutch: 8 Intercept Attacks, 3 party-wide Taunts, 4 Battle Medicines</strong>, Paragon's Guard throughout, plus Doctor's Visitation. <strong>552 of the 776 he absorbed was aimed at someone else.</strong></li>
+  <li><strong>Breathe Oil #2 — 79</strong>, critically failing Sovael for 158. <strong>Clutch Intercepts it</strong>, which is why Sovael's total for the fight is only 131.</li>
+  <li><strong>Sovael</strong> burns Wooden Double on a Draconic Frenzy critical, Healing Nexus, an Elf Step out of a flank, a 6th-rank Heal scroll and a 5th-rank Heal on Clutch. <em>"Do you have HP, brother?"</em></li>
+  <li><strong>Seva kills Chopper A</strong> with a Gouging Claw Spellstrike crit; Interstitial Escape cuts a 62 to 42 and teleports her clear.</li>
+  <li><strong>Clutch rerolls a Battle Medicine on himself with his last hero point</strong> — natural 2 into a 14, a critical success for 71. He also crit-fails one into Ferrok for 8, with nothing left to fix it.</li>
+</ul>
+<h4>Rounds 5–6 — the finish</h4>
+<ul>
+  <li><strong>Breathe Oil #3 — 76</strong>, failing on both Clutch and Ferrok and <strong>dropping Ferrok to 0. It's Not Over</strong> brings him straight back at <strong>25 HP</strong>.</li>
+  <li><strong>Sattva kills Chopper B</strong> with a critical Hunted Shot for 87 — <em>"I shot its head off"</em> — after three healing scrolls out of his belt.</li>
+  <li><strong>The party plays the dragon's reaction economy</strong>: Ferrok Force Fangs specifically because it is out of reactions; Seva's Dazzled rider negates a landed claw on a DC 5 flat check.</li>
+  <li><strong>Seva hero-points a rank-7 Comet Charge Spellstrike</strong> — 6d12 = 42, <strong>57 with the weakness.</strong></li>
+  <li><strong>Sattva puts two arrows in the dragon's eyes.</strong> Cody: <em>"That's insane."</em></li>
+  <li><strong>Ferrok kills the Clockwork Dragon</strong> — Live Wire Spellstrike, 67 on the dice, <strong>82 applied</strong>, into a dragon on 74.</li>
+  <li><strong>The Self-Destruct never resolved.</strong> Foundry auto-posted the reaction text on death, exactly as it posted each Chopper's Integrated Launcher. No 15d10, no DC 40 saves, no Thievery attempt — and Cody called combat five seconds later.</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Flaming Pearl</h4>
+<ul>
+  <li><strong>Talked to his hero and completely lost his composure.</strong> Meeting Hao Jin — the immortal sorcerer whose tournament he has structured his entire life around, and whose fanaticism is literally his background — he opened with <em>"I'm a big fan. Can I get an autograph?"</em>, realised he had nothing to sign, dug a spell scroll out of his belt, and got it signed: <em>"I'll treasure this scroll and I'll never cast it."</em> Seva bowed and Ferrok offered his chest, but Sovael is the one who treated her as a <em>celebrity</em> rather than a host.</li>
+  <li><strong>Ran the fight-winning play of the exhibition.</strong> The sixth-rank Roaring Applause that both Rune Giants failed on a natural 2 and 3 shut off their bonus Reactive Strikes for three straight rounds — reactions that had cost the party 85 HP in round one — and the manipulate rider forced them to clap into four more Strikes, one of which killed Rune Giant B before it acted. <em>"Clap, clap, clap for the audience."</em></li>
+  <li><strong>Probed for weakness with damage.</strong> With no Recall Knowledge on the table, his opening Chain Lightning against three unknown constructs doubled as a diagnostic and found the electricity weakness on the first action of the fight.</li>
+  <li><strong>Did 739 of the 2,430 damage at the gate</strong> — thirty percent, more than any allied NPC and more than the other four PCs combined — off a single eighth-rank Divine Armageddon that caught nine bodies before the melee closed.</li>
+  <li><strong>Lost a rules argument gracefully.</strong> He cited Pathfinder Society errata on Foretell Harm riding an area spell and offered a link; Cody ruled against it. Sovael took it in one line — <em>"Okay, you can run it that way, then"</em> — retargeted and moved on without costing the table a minute.</li>
+  <li><strong>Kept checking on people.</strong> Offered to burn a spell reducing Seva's Drained before the DM waived it for free; asked Clutch <em>"Do you have HP, brother?"</em> before accepting an Intercept that would have cost him nothing to take silently.</li>
+  <li><strong>Comedy in a very dry register.</strong> At the infinite buffet: <em>"This could have fed my whole village. Not that I had one, anyway."</em> On the party's history of fleeing monsters: <em>"It's called fighting smart."</em> On Ferrok's improvised title for him: <em>"I was never the cryptic, though. I'm always very transparent."</em></li>
+  <li><strong>Paid the fire tax, and took the hit for it.</strong> He reached for a Fire Ray against a fire-immune Rune Giant and Cody stopped him at the declaration. He finished that fight on <strong>16 of 188 hit points</strong> — 114 lost in one enemy turn, because Cursebound suppresses his own fire resistance. <em>"I'm still alive. I'm still standing. And I'm burning as well."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok · the Unyielding</h4>
+<ul>
+  <li><strong>Gave the team its names.</strong> Seconds before two Rune Giants stepped out of a crimson portal, in front of the Empress of Goka, he stopped and made a speech naming every member of the Nameless and staking the team's identity on winning. Nobody asked him to — and he had told the table he was drafting it eighty-six minutes earlier, in the palace hot spring. Only the titles were improvised. When it landed flat, he committed harder: <em>"He didn't get any feedback from you guys on those. He doesn't say."</em></li>
+  <li><strong>The gladiator is not a costume.</strong> He rolled Performance for initiative with an audience bonus, asked <em>"I assume I have an audience for this"</em>, upgraded to gleaming Dawnsilver plate for the exhibition, and picked Goring Charge and Comet Charge over better options on the honest grounds that they look cool. Between bouts, speculating about what Hao Jin would send out next — <em>"Bring out the lions"</em> — he landed the thesis: <em>"I'm a gladiator. I build all my life up to this point."</em></li>
+  <li><strong>Spent the session being right about his own feat.</strong> He told the table repeatedly, to open scepticism, that he could come back from the dead. <em>"No, seriously, I can. I have the feat for it."</em> Five minutes later the Clockwork Dragon's oil breath reduced him to 0 and <strong>It's Not Over</strong> put him straight back on his feet at 25 HP.</li>
+  <li><strong>Top damage against the Butterfly Blades (~313) and the finisher on the two biggest single targets of the night</strong> — Rune Giant A and the Clockwork Dragon — plus a Fallen Moon swordsman he dropped <em>from prone</em> off a Beheading Buzz Saw Spellstrike that took 176 of the man's 270 hit points in one action.</li>
+  <li><strong>Adapted off his signature fast.</strong> Ignition Spellstrike is his whole thesis and the Rune Giants were immune to fire. He swore once, said <em>"Better to know now,"</em> and switched to Live Wire for the rest of the night — which is what killed Rune Giant A and, two hours later, the Clockwork Dragon.</li>
+  <li><strong>The only one who speaks Tien.</strong> At the gate he answered the Ruby Phoenix herself in her own language, and it was Ferrok who told Mafika where the Nameless had come from — which is how the party learned their own story had travelled.</li>
+  <li><strong>Best indignation of the night</strong>, after the Beheading Buzz Saw very nearly took a man's head off and the man hit him back: <em>"That's rude. I just tried to cut his head off."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Rampart</h4>
+<ul>
+  <li><strong>Spoke first and set the tone.</strong> The mob at the gate told the party to hand over their feathers and walk away. Clutch turned it around without raising his voice: <em>"I would say the same to you. If you value your life, turn away."</em></li>
+  <li><strong>Absorbed 776 damage in a single fight</strong> against the Clockwork Dragon — and 395 more from the Butterfly Blades. <strong>552 of that 776 was damage aimed at someone else</strong>; only 224 was ever pointed at him. Eight Intercepts, four Battle Medicines, and <strong>his last hero point</strong> spent on one of them — not to do something impressive, but to stay upright long enough to keep intercepting.</li>
+  <li><strong>Chose flair over survivability on purpose.</strong> Howling into Animal Form for the crowd <strong>dropped his AC from 41 to 33</strong> — eight points — in a fight where five duellists were already swarming him. It is the whole reason he absorbed 395 and went down. He kept it: <em>"It looks cool, and it increases size and reach."</em> Later he grappled a Butterfly Blade and <strong>Whirling Threw him out of the arena.</strong> Cody warned him it wasn't a ring-out. He did it anyway.</li>
+  <li><strong>Tripped and grappled two level-16 Rune Giants</strong> off Legendary Athletics — a critical-success Trip and a natural-20 Combat Grab — and hero-pointed a natural 1 into a natural 19 to land the grab that pinned one until it died.</li>
+  <li><strong>The doll.</strong> Given a luxury suite with a private hot spring and a few hours to decompress, Clutch produced a threadbare doll, sat facing a corner, and rehearsed: <em>"I must break you. I must break you."</em></li>
+  <li><strong>Genuinely funny about being a Kholo among diplomats.</strong> On the visiting sponsors: <em>"When do we get to fight them?"</em> … <em>"Oh, I thought everyone was here to fight."</em> On the dragon's resistance 15, which only adamantine cut through: <em>"I got to shop wherever Wolverine shops."</em></li>
+  <li><strong>Quietly does the party's admin</strong> — ran the stash sale, corrected a rules call on Beheading Buzz Saw's second save being incapacitation, pathed his Defensive Advances so Seva could ride along on her own reaction, and delivered the definitive verdict on Sattva's medical care: <em>"I don't think we needed the deep tissue massages."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the Unerring</h4>
+<ul>
+  <li><strong>The party's buff engine and its busiest healer.</strong> Hunt Prey and <strong>Warden's Boon</strong> on someone almost every round, three healing scrolls out of his retrieval belt in the Clockwork fight alone (<em>"These are cheap at this point. We're living rich"</em>), Battle Medicine on Clutch whenever he dropped, and the sharpest read on why: <em>"That's why you heal the Guardian."</em></li>
+  <li><strong>Led the party's damage in the hardest fight of the night</strong> — 328 of 1,000 against the Clockwork Dragon and its choppers — and killed Chopper B with a critical Hunted Shot for 87: <em>"I shot its head off."</em> He also killed the last Fallen Moon standing (<em>"Take this punch."</em>) and closed the session putting two arrows in the dragon's eyes, which Cody could only describe as <em>"insane."</em></li>
+  <li><strong>Roleplays his mechanics instead of announcing them.</strong> Warden's Boon became a tactical observation delivered out loud — <em>"they like to step to the left and attack with their right hand at the same time… They're too synchronized."</em> His 100-damage point-blank crit came with choreography: <em>"Point blank, then I jump away, carried by Clutch's arms."</em></li>
+  <li><strong>The Irorian is always there under the jokes.</strong> Given free hours in a palace suite, he took a hot bath, used the sauna, stepped directly out into the snow, and meditated. He was the only person at an infinite magical buffet who thought to ask <em>"Is this food illusory, I wonder?"</em> And when Clutch couldn't understand why a room full of merchants and politicians wasn't there to fight, Sattva gave him the honest answer: <em>"They fight in a different way. They fight with words."</em></li>
+  <li><strong>Carried the session's best running bit without ever breaking character.</strong> Three straight DC-40 Treat Wounds failures outside the gate, each one drawing blood off Risky Surgery and healing nothing, while Ferrok and Sovael bled on him — <em>"Stop moving so much"</em> / <em>"Are they not sharp enough? I need to sharpen my arrows a bit"</em> — until he surrendered and lowered the DC: <em>"Okay, fine. I'll stop using my experimental methods. I'll just massage you. Here, a deep tissue."</em> Then crit-succeeded twice for 56 and 51. He did it <strong>again</strong> mid-bout in front of the Empress, concealing an arrow in a high five for a Battle Medicine that failed and healed nothing, and looked away: <em>"I hope the Empress didn't see me stabbing you."</em></li>
+  <li><strong>All of it on dice he was openly disgusted by</strong>: <em>"My average roll today is below a 10, so it just makes sense."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-seva">
+<h4>Seva · the Shade</h4>
+<ul>
+  <li><strong>She is the session's kill leader, and nobody at the table noticed.</strong> Five: Monk B and Sneak B at the gate, the last Butterfly Blade to fall, <strong>Rune Giant B</strong>, and Chopper A — one in every single fight. The Rune Giant is the one to point at: Ferrok's strike left it on 4 HP, and Seva's natural-20 Reactive Strike killed it <strong>at its own turn-start, before it ever acted</strong>, off the manipulate trigger Sovael's Roaring Applause had opened.</li>
+  <li><strong>Plays to the crowd harder than anyone, and says so.</strong> <em>"Gouging Claw. Please hit. I really want to impress people."</em> Her opening move of the exhibition was <strong>Inscribe Shadow Pamor</strong> — sinking her dagger into Clutch's enormous shadow and drawing it back out as a greatsword — chosen specifically because it would look good. <em>"Man, I want to make it flashy too."</em></li>
+  <li><strong>The party's emotional weather report.</strong> She is the one who notices things out loud: <em>"Wait, we're kind of getting shown up, team"</em> when Tino was outclassing everyone at the gate; <em>"Are you done? Fuck! Clutch, no!"</em> the instant Clutch dropped; <em>"I definitely want to get Clutch up… I'm worried about his AC"</em> in the same breath. Her tactical priority all through bout 1 was keeping the tank standing, and she said why.</li>
+  <li><strong>Self-aware about her one recurring flaw and completely unable to fix it.</strong> Three rounds of standing in flanked squares: <em>"I keep getting flanked!"</em> / <em>"My team! Where's my team?"</em> / <em>"I'm just drawn to it, you know?"</em> And on being stabbed after a feint that failed: <em>"It's always a fucking hit!"</em></li>
+  <li><strong>Managed her resources better than anyone.</strong> She saved a hero point in bout 1 by spending a <strong>Lucky Number</strong> she and Sattva had picked up from a fortune-teller on the way in, then spent hero points where they mattered — a natural 1 into a natural 20 for 106 damage against the Rune Giants, and a rank-7 <strong>Comet Charge Spellstrike for 57</strong> to close the night.</li>
+  <li><strong>Best fangirl beat of the session</strong>, a full beat behind everyone else: <em>"Oh, I thought it was a Ruby Phoenix herself."</em> … <em>"Oh, it <strong>is</strong> her! Oh my gosh, I bow."</em></li>
+  <li><strong>Gets the last line of the session.</strong> Told they'd won exhibition three, she said <em>"Hopefully the last."</em> Cody: <em>"Well, no, that's four."</em> Seva: <strong><em>"There's more?"</em></strong></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Stash</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">1,070 gp each</div>
+    <div class="loot-source">Stash sale before the exhibition</div>
+    <div class="loot-note">The log records four items sold: Scalding Gauntlets (Major), Staff of Elemental Power (Major), +1 Returning Chakram, Moonlit Chain. The party also agreed to clear out the spare weapons and armour.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Boreal Staff (Major)</div>
+    <div class="loot-source">Claimed from stash</div>
+    <div class="loot-note"><strong>Sovael</strong></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Charm of Electricity Resistance (Major)</div>
+    <div class="loot-source">Claimed from stash</div>
+    <div class="loot-note"><strong>Clutch</strong></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+2 Greater Resilient Advancing Fortification Dawnsilver Full Plate</div>
+    <div class="loot-source">Bought in the shopping break</div>
+    <div class="loot-note"><strong>Ferrok</strong> — <em>"Ferrok is now wearing gleaming Dawnsilver armour. He looks all fancy."</em> The Fortification rune matters against the crit-heavy opponents ahead.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Lucky Number</div>
+    <div class="loot-source">A fortune-teller on the way to the exhibition</div>
+    <div class="loot-note"><strong>Seva</strong> (rolled 1) and <strong>Clutch</strong> (rolled 9). Seva spent hers in bout 1 instead of a hero point.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Hao Jin's autograph, on a spell scroll</div>
+    <div class="loot-source">The Ruby Palace gate</div>
+    <div class="loot-note"><strong>Sovael</strong> — <em>"I'll treasure this scroll and I'll never cast it."</em></div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Ten Silver Feathers</div>
+    <div class="loot-source">Surrendered to Hao Jin</div>
+    <div class="loot-note">Their purpose is discharged. The qualifying round is over.</div>
+  </div>
+</div>
+<div class="xp-banner">
+Experience · <strong>No XP and no level-up.</strong> Level 15 was the Bonmou cap and the table is on milestone from here. Exhibition prizes were promised — <em>"subsequent victories will earn prizes"</em> — but none have been awarded yet, with three wins banked.
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Clutch:</strong> "I would say the same to you. If you value your life, turn away."
+<span class="attribution">The first line of the session, answering the mob's ultimatum at the Ruby Palace gates.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "We are the Nameless, and though we don't have names yet, I am Ferrok the Unyielding. We have Seva the Shade, Clutch the Rampart, Sattva the Unerring, and Sovael the Cryptic. We will win this tournament and earn true names."<br>
+<strong>Sovael:</strong> "I was never the cryptic, though. I'm always very transparent."<br>
+<strong>Ferrok:</strong> "He didn't get any feedback from you guys on those. He doesn't say."
+<span class="attribution">Ferrok christens the whole team to a packed arena, seconds before two Rune Giants step through a crimson portal.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I'm a big fan. Can I get an autograph?" … "I'll treasure this scroll and I'll never cast it."
+<span class="attribution">Meeting Hao Jin. He had nothing to sign, so he pulled out a spell scroll.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Yes, we have. And the fight was of no consequence."
+<span class="attribution">Answering the Ruby Phoenix in Tien — the only member of the Nameless who speaks it — while handing over ten silver feathers.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Clutch pulls out this kind of threadbare doll, and then sits facing a corner and practising saying, I must break you. I must break you."
+<span class="attribution">How a Kholo Guardian unwinds in a luxury suite with a private hot spring.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "He will go take a hot bath and if there's a sauna, he will use it. And immediately step out into the snow. And just meditate."
+<span class="attribution">Given a few free hours in a palace suite, after three days of fighting.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I hope the Empress didn't see me stabbing you."<br>
+<strong>Sovael:</strong> "I think she saw everything."
+<span class="attribution">A Battle Medicine on Seva mid-bout, in front of the Empress of Goka. It failed and healed nothing.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "I keep getting flanked!" … "My team! Where's my team?" … "I'm just drawn to it, you know?"
+<span class="attribution">Three rounds of standing in exactly the wrong square, diagnosed in real time.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "Gouging Claw. Please hit. I really want to impress people."
+<span class="attribution">Her opening Spellstrike of the exhibition, with the Empress watching.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Clap, clap, clap for the audience."<br>
+<strong>Seva:</strong> "You gotta tell me what spell you did. That's really impressive." … "Oh, it was Roaring Applause. I didn't know it had that benefit. That's pretty awesome."
+<span class="attribution">Sovael narrating two Rune Giants being forced to applaud him mid-fight — and the only moment all session that anyone stops to credit him for the play that won the bout.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "When do we get to fight them?"<br>
+<strong>Sattva:</strong> "They fight in a different way. They fight with words."
+<span class="attribution">Clutch, on the merchants, politicians and generals who arrived to watch the exhibition.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Yeah, I'll get some ice cream."<br>
+<strong>Clutch:</strong> "This means all the monsters have revived. And Clutch will turn to the party and say, let's go again."
+<span class="attribution">Hao Jin has just resurrected every beast on Bonmou with a phoenix. Sovael wants dessert; Clutch wants dessert <em>and</em> the rematch.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "No, there's a gladiator feat that brings me back."
+<span class="attribution">Insisting, correctly, about five minutes before he needed it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Cody (DM):</strong> "Well, no, that's four."<br>
+<strong>Seva:</strong> "There's more?"
+<span class="attribution">The last exchange of the session, after three straight exhibition wins.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Bout 4 — team versus team — is still owed.</strong> The one exhibition fight against live opposition, and the party hasn't been told who.</li>
+  <li><strong>Exhibition prizes.</strong> Hao Jin said <em>"subsequent victories will earn prizes."</em> Three wins banked, nothing handed over yet.</li>
+  <li><strong>Mafika Ayuwari may be the strongest competitor in the tournament.</strong> Cody singled out <strong>two</strong> fighters as standing above the field — Mafika and <strong>Ernak Lostwind</strong>, leader of Winter's Roar, <em>"fighting brutally and efficiently"</em> — and said the consensus lands on Mafika. He fought <em>beside</em> the party at the gate.</li>
+  <li><strong>The Lightkeepers are "absolutely one of the teams to beat."</strong> The Nameless have forfeited to them once already.</li>
+  <li><strong>The Biting Roses are in the final eight</strong> — Yarrika Mulandez, Lantondo, Artus Rodrivan and Grandfather Mantis, the only team that has ever beaten the Nameless outright.</li>
+  <li><strong>Nai Yan Fei, Empress of Goka</strong>, watched all three bouts. The stated point of the exhibition is securing patronage beyond the tournament.</li>
+  <li><strong>Bonmou is fully restocked.</strong> Hao Jin's phoenix revived every beast the teams killed — Jaiban and Tamikan included.</li>
+  <li><strong>The double-elimination bracket.</strong> Two losses to be eliminated; the losers' bracket is a real second path to the final.</li>
+  <li><strong>Sovael still owes Sattva a song</strong>, promised in S13 for the cave-worm kill, worked on in the hot spring, not finished.</li>
+  <li><strong>The Fallen Moon.</strong> Ten fighters left unconscious outside the Ruby Palace gates, and nobody followed up on what happened to them.</li>
+  <li><strong>Clutch is still on Bonmou's trail for his missing cousin Clinch</strong> — unmentioned this session, unresolved.</li>
+  <li><strong>The team's titles</strong>, improvised by Ferrok and never ratified: Seva the Shade, Clutch the Rampart, Sattva the Unerring, Sovael the Cryptic. <em>"We will win this tournament and earn true names."</em></li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next · The Fourth Bout</span>
+  <p>Three opponents of Hao Jin's choosing, three wins — the Empress's own guard, a pair of rune giants and a clockwork dragon. One bout left, and it is the only one against a living team. Cody put the campaign at roughly the halfway point of the AP and said the tournament proper could begin next session.</p>
+  <div class="big-line">"There's more?"</div>
+  <span class="speaker">— Seva, on being told the exhibition was four bouts, not three</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Sovael did this session</h3>
+<ul>
+  <li>Opened the gate brawl with the standard round-one package — <strong>Courageous Anthem, Lingering Composition, Talent Envy Demoralize</strong> — then an <strong>eighth-rank Divine Armageddon</strong> across nine of the Fallen Moon. Six failed, two succeeded, one critically failed for 132. <strong>739 of the fight's 2,430 damage was his.</strong></li>
+  <li>Argued the <strong>Foretell Harm + area</strong> ruling with Cody, citing Pathfinder Society errata. <strong>Lost the ruling.</strong> Conceded and retargeted without burning table time.</li>
+  <li>Landed <strong>Aether Beam</strong> twice in the gate fight. Sattva named it the Kamehameha; the name stuck.</li>
+  <li>Pulled a <strong>Scroll of Sure Strike</strong> from the retrieval belt into <strong>Fire Ray</strong> — hit by +3 for 48.</li>
+  <li>Caught that <strong>Beheading Buzz Saw's decapitation is a second save</strong>, not an instant kill. Ferrok's swordsman survived because of it.</li>
+  <li>Baited a cantrip out of Seva purely to trigger <strong>Absorb Magic</strong>, then spent the overflow on <strong>Healing Nexus</strong> to top himself off for free. Out-tricked her fire-eating party piece in the process.</li>
+  <li>Asked <strong>Hao Jin for an autograph</strong> and got it, on a spell scroll he will never cast. Thanked <strong>Ingdani</strong> on the party's behalf.</li>
+  <li>Cast <strong>Energy Aegis (rank 7)</strong> on himself during the break, and claimed the <strong>Boreal Staff (Major)</strong> from the stash.</li>
+  <li>Bout 1: <strong>Whispers of Weakness</strong> on a Butterfly Blade (no weakness; Fortitude and Will tied for lowest) → rank-4 and then <strong>rank-6 Divine Wrath, which killed it</strong> → <strong>Foretell Harm</strong> → a hero-pointed <strong>Needle Darts</strong>. Finished the bout untouched.</li>
+  <li>Bout 2: <strong>critical</strong> Lingering Composition Performance check — which rescued a <strong>natural-2 Intimidation</strong> into a successful Talent Envy Demoralize on the degree bump — then the fight-winner: <strong>sixth-rank Roaring Applause that both Rune Giants failed on a natural 2 and 3.</strong> It shut off the giants' bonus Reactive Strikes for three straight rounds after those reactions had cost the party 85 HP in round one, and the manipulate rider bought four more Strikes for 72, including <strong>Seva's kill on Rune Giant B</strong>. Declared a <strong>Fire Ray</strong> into a fire-immune giant and was stopped at the declaration; pivoted to Telekinetic Projectile through the Shadow Signet. <strong>Ended the fight on 16 of 188.</strong></li>
+  <li>Bout 3: <strong>Chain Lightning</strong> exposed the constructs' electricity weakness — <strong>15</strong> — on the first action of the fight, and accounted for 146 of his 152 damage for the whole encounter. Burned <strong>Wooden Double</strong>, <strong>Healing Nexus</strong>, an <strong>Elf Step</strong>, a <strong>6th-rank Heal scroll</strong> and a <strong>5th-rank Heal</strong> on Clutch. <strong>Spent a hero point rerolling the crit-failed oil-breath save — and crit-failed it again.</strong> Took only 131, because Clutch Intercepted the 158 and the 48 aimed at him.</li>
+</ul>
+
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>Cody named two fighters as standing above the field — Mafika Ayuwari and Ernak Lostwind, leader of Winter's Roar — and said the consensus is that Mafika is the strongest person in the tournament.</strong> Mafika fought <em>beside</em> them at the gate — the party has seen his Unfolding Wind Blitz and Frigid Flurry up close, and nobody else in the field has had that look at him. That is a real, one-sided information edge over six of the seven other teams.</li>
+  <li><strong>Mafika's students are Magaambya</strong>, and all look to be in their early twenties. The Speakers to the Wind are a teacher and four apprentices — a possible soft spot if the Nameless draw them, and a reason they may be more dangerous than their ages suggest.</li>
+  <li>The Fallen Moon were not a team. They were <strong>the remains of several eliminated teams</strong> who blamed Hao Jin personally for what Bonmou cost them. Nobody has asked what happened to them after the gate.</li>
+  <li><strong>Hao Jin watched the ambush happen and chose not to intervene</strong> because the party looked like they were enjoying themselves. She said so, pleasantly, while apologising.</li>
+  <li><strong>Fire is now a known liability.</strong> Rune Giants were immune; the Clockwork constructs resisted physical. Two of three exhibition opponents blanked a chunk of his kit.</li>
+  <li>The room sized the Nameless up at the feast specifically because <strong>word of Jaiban has spread.</strong> They are no longer an unknown wildcard entry.</li>
+</ul>
+
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Roaring Applause is the single best spell he owns against a reaction-heavy opponent — but for the boring half, not the flashy one.</strong> The manipulate rider is the fun part and it bought 72 damage; <strong>the reaction denial bought more.</strong> The giants' bonus Reactive Strikes took 85 HP off the party in round one and then nothing at all for three rounds. Both halves are real and both are repeatable — this is the third time the combo has paid (the Duneshaker Solifugid ate 141 damage the same way in S14). Against the tournament teams, stripping reactions from up to ten enemies is worth more than any damage spell in the repertoire.</li>
+  <li><strong>Whispers of Weakness cannot solve the fire problem.</strong> It returns weaknesses and the lowest save — <strong>never immunities</strong> — and he <em>did</em> cast it first against the Rune Giants; it could not have surfaced the immunity. The real lesson is narrower: against an unknown opponent, <strong>spend the cheap probe before the focus point.</strong> Chain Lightning found the constructs' electricity weakness on action one in bout 3. A cantrip or a small AoE is a better opening question than a 16d6 Fire Ray, because an Oracle of Flames whose entire signature is fire will reach for it by reflex — and two of the three exhibition opponents punished exactly that.</li>
+  <li><strong>Energy Aegis paid for itself — on him alone.</strong> It is <em>touch, 1 creature</em>, so the break-time cast covered Sovael and nobody else. Rune Giant A's Invoke Rune rolled 47 electricity: Seva took the full 47, Sattva 23, and <strong>Sovael 42</strong>. Keep casting it before every bout — and note that protecting anyone else costs another minute-long casting each.</li>
+  <li><strong>Divine Armageddon is the right opener against a crowd and the wrong one against a party.</strong> It caught nine bodies at the gate because the allied NPCs hadn't closed yet. In a four-on-five team bout there will be no such window — <strong>Divine Wrath stays the only enemies-only burst.</strong></li>
+  <li><strong>The exhibition is an audition, not a bracket.</strong> Hao Jin said outright that the people watching are potential patrons and that the bouts have no bearing on seeding. The value of a Whirling Throw out of the ring or a howl into Animal Form is real here in a way it will not be next week.</li>
+  <li><strong>The party is running hot on consumables.</strong> Sattva burned three healing scrolls in the last fight alone and called them cheap. Seva's Lucky Number let her save a hero point in bout 1 — Clutch has one too, rolled at 9.</li>
+  <li><strong>Clutch took 776 damage in one fight and 552 of it was aimed at somebody else.</strong> The Intercept umbrella is the only reason Sovael finished that fight on 131 instead of on the floor. Staying inside his reach is not optional any more; it is the position.</li>
+  <li><strong>He still owes Sattva a song.</strong> Promised in S13 for the cave worm, worked on in the hot spring, not finished.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who is bout 4 against?</strong> Seven other teams. The Biting Roses beat them outright once. The Lightkeepers have taken a feather off them. Either would be a measuring stick; neither would be kind.</li>
+  <li><strong>What are the exhibition prizes</strong>, and does three-for-three already qualify for them?</li>
+  <li><strong>Does the fourth bout happen before the boats leave for Goka</strong>, or does it slip to the tournament week?</li>
+  <li><strong>What happened to the Fallen Moon?</strong> Ten fighters were left unconscious outside the Ruby Palace gates and nobody followed up.</li>
+  <li><strong>Do the Speakers to the Wind remember the gate as a debt?</strong> Mafika volunteered to fight beside them for nothing. If the Nameless draw him, does that cut either way?</li>
+  <li><strong>Is the Phoenix Necklace ruling still in effect for tournament bouts in Goka</strong>, or only for the qualifier and exhibition?</li>
+  <li><strong>What does the losers' bracket actually cost?</strong> A loss is not elimination, but it presumably means more fights on a shorter clock.</li>
+</ul>
+</section>
+</body>
+</html>

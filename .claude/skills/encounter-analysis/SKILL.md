@@ -53,7 +53,9 @@ Classify each ability in the roll log into one of these two buckets for the syst
 2. **Flat resistance reads as phantom HP.** A creature with resistance-to-all (e.g. War of Immortals `mythic resistance N`, or golem-style physical resistance) sheds N from *every applicable hit*, and the roll log shows only the post-resistance applied damage on some tables — or the pre-resistance roll on others. Either way, `applied_total ≈ base_HP + (resistance × hits that paid it)`. If the pack JSON lists a flat resistance, back it out **before** comparing to book HP; a ×1.2–1.3 "inflation" on a 10-hit kill is often just resistance math.
 3. **Overkill** on the killing blow (and area effects landing past death) inflates the raw total — that's why the *targeted floor* is the trustworthy number, not the raw sum. **Quote the floors in the report, not the applied totals** — big-crit tables (100+ point killing blows) pad applied totals far past the death line, and floors are what falsify or confirm an Elite/scaled hypothesis.
 3. **Party debuffs lower the AC you observe.** If a creature was **Frightened** (e.g. a no-save fear aura), **off-guard** (taunt / flanking / blinded / dazzled), or otherwise penalized when it was hit, the attack totals that connected landed against an AC already reduced. So the AC you infer from hit-totals is a *floor* on the creature's true AC — it was tankier on defense than the raw hits suggest. Check the transcript for which buffs/debuffs were active.
-4. **Hidden enemy rolls.** Enemy attack rolls are often logged with the modifier hidden (e.g. `1d20 + ??`), so you **cannot** count incoming crits or the DM's luck from the log. You *can* measure the players' luck (their modifiers are shown). State this limit explicitly; don't claim the DM "ran hot" from the log alone.
+4. **Enemy roll visibility — CHECK, don't assume.** Some tables log enemy attacks with the modifier hidden (`1d20 + ??`), and then you cannot measure the DM's luck. **Others show it in full** (`Modifier +34 :: 1d20 + 34 = 43`) — the `foundry-export.js` v2 format on Cody's setting-sun table does. **Grep an enemy Strike line before writing a word about visibility.**
+
+   > ⚠️ **Observed failure (S16):** the report stated *"enemy attack modifiers are hidden, so DM luck is not measurable"* — copied from this very paragraph's old wording, never checked. The log showed every modifier. Once measured, the Clockwork Dragon had rolled **cold** (mean natural 8.83, z −1.23), which *strengthened* the Extreme verdict: the fight took 139% of the party's HP pool **with the boss rolling below average**. The false caveat had hidden the single most useful fact about the fight.
 
 ## Step-by-step
 
@@ -71,6 +73,8 @@ Identify the creatures from the user's initiative order + the transcript. Glob t
 **Check the payload separately from the chassis.** A GM can leave the defensive chassis honest (or even weaken it) while rebuilding the offense. Diff the **printed Strike damage dice and `items[]` ability list** against what actually appeared in the log:
 
 > **Observed (S12):** the same Weak adepts hit with `3d6+13 + 1d6 spirit` where the book says `2d6+11`, and used `Qi Rush`, `Inner Upheaval` (+2d6) and `Harmonize Self` (36 HP) — **none of which are in the printed ability list**. Book average ~18 per punch became ~34, or ~45 with a prone rider. So: *easier to hit than the book, hitting ~2× the book.* This is the signature that produces "the XP said Severe but it felt Extreme," and it is invisible if you only compare HP and AC.
+
+> ⚠️ **Observed failure (S16): a defence-only analysis.** The first report diffed HP and AC and stopped — no attack bonuses, damage dice, save modifiers or ability DCs — and attributed a 139%-of-pool fight entirely to HP. The payload diff, done after the player asked *"why did you check enemies for defenses only?"*, showed the boss was scaled on **every** axis (attack +3, strikes ×1.3, breath weapon DC 37→40 and 16d6→20d6), and the crit-fail counterfactual put **~370 points** of the fight's damage on the breath payload alone. **It also inverted a creature verdict:** the Butterfly Blades looked like a light AC bump and were in fact +5 to hit and ×1.8 damage with Fort −2 — *easier to damage than to survive.* **Every creature gets two tables — defence and offence — every time.**
 
 ### 2. Build the per-creature damage ledger (the heart of it)
 Parse the roll log for every `<target> takes <N> damage`, in order, attributing each to a source ability (scan backward for the nearest ability keyword / weapon-dice fingerprint) and tagging targeted vs area. **Build the ability→PC map and the target-name normalizer from the actual party roster and the session's enemies — do not hardcode names.** Skeleton:
@@ -129,7 +133,7 @@ Flag any creature whose real HP is >1.4× its book HP as **scaled** — but only
 Parse the roll log for `<PC> takes <N>` and `<PC> is healed for <N>`, bucketed into fights by line-range (find fight boundaries from each fight's creatures' first/last appearance). Per fight compute: **damage party took**, **healing burned**, **per-PC damage taken** (the tank should dominate — that's the taunt/intercept umbrella working), and **survival margin = (party HP pool + healing) − damage taken**.
 
 ### 6. (Optional) Player luck
-For every `1d20 + <known N>` (these are mostly PC rolls — enemy rolls hide the modifier), compute the natural die and tally the distribution + nat-20 rate + crit-damage (`2 *`) count. This measures the *players'* luck only.
+For every `1d20 + <known N>`, compute the natural die and tally the distribution + nat-20 rate + crit-damage (`2 *`) count. **Do this for enemies too whenever their modifiers are visible** (see Adjustment 4) — enemy luck is often the missing context for a threat verdict.
 
 ## The two-axis difficulty verdict
 
@@ -289,6 +293,38 @@ A `+1` should flip about **5% of rolls at the hit boundary and 5% at the crit bo
 ### Cross-check against the player's own count before publishing
 Players notice their buffs working and will hand-count. If their number and yours differ by more than the sanity-check band, **assume your parser is broken and find the bug**, then explain which tier each number corresponds to. On S12 the player's 11 hand-counted swings were *all* genuine Tier-2 flips; the analysis had reported 3.
 
+### Converting flips into damage — cap every flip at the target's remaining HP
+
+A flip count says *how often* a modifier mattered. Players then ask *how much*, and the naive answer is badly inflated. **A flip is only worth the HP it actually removed that would not otherwise have come off.**
+
+| Flip | Value |
+|---|---|
+| miss → hit | `min(applied, HP_remaining)` |
+| hit → crit | `min(crit_applied, HP_remaining) − min(normal_applied, HP_remaining)`, with `normal ≈ crit ÷ 2` |
+| crit-miss → miss | **0** — same outcome |
+
+**Use `DMG :: … :: damage hp delta -N` for the "with" case, not `takes N damage`.** `takes` is the pre-cap number; `hp delta` is what actually came off. The gap between them *is* the overkill, and it is where the flip value disappears.
+
+> **Observed (S16), Courageous Anthem: 12 flips. Naive value ~327. Real value ~224.** The two most dramatic flips were both worth **zero**:
+> - An allied NPC's Anthem-flipped crit applied **122** — `hp delta -48`. The target had 48 HP. A normal hit (~61) kills it too.
+> - Sattva's Anthem-flipped crit applied **87** — `hp delta -46`. See the combined-roll trap below.
+>
+> The value lived almost entirely in **miss→hit** (7 flips, ~172). Hit→crit flips look spectacular and are disproportionately overkill, because big crits tend to land on already-damaged targets.
+
+**Trap — combined damage rolls.** Some abilities roll several Strikes as **one** damage roll: Hunted Shot, Flurry-style combines, Double Slice on some tables. When the flip is on *one* of those Strikes, the counterfactual is not "this crit becomes a hit" — it is **"hit+crit becomes hit+hit"**, and the applied total is the combination.
+
+> **Observed (S16):** Sattva fired two arrows at 16:31:14 (hit) and 16:31:16 (Anthem-flipped crit); Hunted Shot rolled them as **one** 105-point roll, applied 87 into a Chopper on 46 HP. Treating the 87 as a single crit gave "a normal hit (~43) would leave it on 3 HP — the flip was a kill." Wrong. Hit+hit ≈ 55 applied — **dead either way**. **Before valuing any flip, list every Strike by the same attacker against the same target in that damage window.**
+
+**Trap — `HP ::` snapshots are stale.** They are emitted only on the creature's *own* rolls, so the latest one can predate several hits. Use it as a ceiling, not as current HP. For overkill detection, the capped `hp delta` on the application line is the authoritative number.
+
+### Status buffs add damage too — count the flat component
+
+Most accuracy buffs also add **flat damage** — Courageous Anthem is +1 status to attack **and** damage. That component never produces a flip and never shows up in an `MM :: ESSENTIAL` tag, so a flip-only analysis silently drops it.
+
+Count it separately: **+1 per damage roll carrying the buff, ×2 on crits, and one per target hit for area spells.**
+
+> **Observed (S16): Anthem's flat +1 was worth ~107** — roughly half as much as its flips (~224), invisible to every other method. All-in, **~330 damage across five one-action casts, ~66 per action**, spread nearly evenly across the four martials. Report both components and the per-action rate; for a support caster that per-action figure is usually the number that matters.
+
 ## Healing: separate IN-COMBAT from downtime
 
 **Never report a single healing total.** Out-of-combat healing (Treat Wounds, Medicine-based rest healing, regeneration ticks between fights) is a 10-minute exploration activity and measures a completely different thing from healing delivered under fire.
@@ -315,7 +351,7 @@ This converts "I felt unlucky" into a number, and separates two very different c
 Bucket every PC d20 into **attack/offensive** vs **non-attack (skills + saves)** and report per PC: `n`, mean natural, nat-20 count, nat-1 count, and `z`. Notes:
 - PC saves are usually in the indented `SAVE ::` lines with a different format (`nat 13 = 37`) than inline checks (`1d20 + 12 = 28`) — **parse both** or the save column comes back empty.
 - On a reroll line (two d20 blocks), take the **first** die for luck purposes.
-- Enemy attack modifiers are typically hidden, so this measures **player** luck only — say so.
+- **Check whether enemy attack modifiers are visible before claiming they aren't.** If they are, add an enemy-luck table (per creature: n, mean natural, z). If they genuinely aren't, say so explicitly.
 - Watch for split personalities: a PC can be hot on attacks and freezing on everything else. That's worth reporting; it explains both their damage and their failed checks in one line.
 
 ## Judging a support character fairly
@@ -336,16 +372,19 @@ In S12 the caster was 4th of 5 on raw damage (12.9%) and, once the other four ax
 
 A report covering, in this order:
 
-1. **Per-creature table** — real HP (**targeted floor**, never applied total) vs book, template applied (Elite / Weak / neither), payload-vs-book note, effective level.
+1. **Per-creature tables — TWO of them, both mandatory.**
+   - **Defence:** HP (targeted floor or export-header exact), AC (from CTX), saves — book → as run.
+   - **Offence:** attack bonus, damage per hit (with averages), ability/spell DCs and dice — book → as run.
+   Then a one-line template verdict per creature (Elite / Weak / book / scaled-on-which-axes) and the per-axis level profile (AC / **DC** / HP). A report with only the defence table is incomplete.
 2. **Per-fight table** — grind / threat / healing / margin / rounds, with damage *concentration* called out (who ate it).
 3. **The two-axis verdict + re-priced budget** against the empirical levels.
 4. **Per-PC damage contribution** — per fight and session total, with shares.
-5. **What the control package bought** — flips converted, split offensive/defensive, credited by source, with annotation coverage stated.
+5. **What the control package bought** — flips converted, split offensive/defensive, credited by source, with annotation coverage stated. **Then convert the headline buffs' flips into damage, overkill-capped, and add their flat damage component** (see *Converting flips into damage*). Enumerate the individual flips for any buff the player asks about.
 6. **In-combat healing** (downtime excluded) — by healer, by method, by recipient.
 7. **Roll analysis** — attack vs non-attack, per PC, with z-scores; plus the **save-luck counterfactual** for any save-based caster.
 8. **What didn't fire** — printed abilities that never appeared in the log (panic buttons, signature actions, reaction abilities). Unused signature abilities are analysis gold: they usually mean the party's action-denial or kill speed censored the enemy's best material, and naming them is the concrete receipt.
 
-Lead with the honest headline, and flag every estimate's uncertainty (hidden enemy attack modifiers, regen/resistance back-out, overkill brackets, annotation coverage).
+Lead with the honest headline, and flag every estimate's uncertainty (enemy-modifier visibility — *checked, not assumed* — regen/resistance back-out, overkill brackets, annotation coverage).
 
 **Tone.** Players often ask for this expecting bad news about themselves ("I didn't do as much as I hoped"). Give them the real number, then give them the *other four axes* — a support PC's damage share is genuinely not the measure of their night, and saying so with receipts is the point of the exercise. Equally: if a call they are proud of didn't actually pay off, say so plainly. Don't flatter and don't manufacture consolation — just measure everything that counted, not only the column that's easy to count.
 
@@ -362,7 +401,7 @@ Lead with the honest headline, and flag every estimate's uncertainty (hidden ene
 - **When HP/AC/DC disagree about a creature's level, report a per-axis profile, not one verdict** — and separate grind inflation (HP) from threat inflation (DCs/damage).
 - **Derive level benchmarks from the local packs, not from memory** — and run the crit-fail counterfactual (table DC vs book DC) on every large area save.
 - **Targeted floor > raw sum** for HP. Don't let area overkill inflate a creature.
-- **Don't claim the DM rolled hot/cold from the log** — enemy attack modifiers are usually hidden. You can only measure player luck. (Enemy *saves* against PC spells **are** fully logged with modifiers — those you can and should analyse.)
+- **Never assert that enemy modifiers are hidden without grepping a Strike line first.** On some tables they are; on the v2 export they usually are not. If visible, measure DM luck — it is often the context that makes a threat verdict make sense. (Enemy *saves* against PC spells are always logged with modifiers.)
 - **Back out Fast Healing, regeneration, AND flat/mythic resistance** before calling a creature "scaled" — read those fields from the full pack JSON *first* (step 1), don't discover them after publishing a verdict.
 - **Compute template deltas from the book, not from the other creatures in the fight** — and check **Weak** as well as Elite.
 - **Diff the payload (damage dice + ability list) separately from the chassis (HP/AC/saves).** A GM can leave one honest and rebuild the other.
@@ -373,3 +412,7 @@ Lead with the honest headline, and flag every estimate's uncertainty (hidden ene
 - **Never report enemy critical-failure counts as party value** — a crit miss and a miss are the same outcome.
 - **Never judge a support PC on damage share alone.** Run all five axes in *Judging a support character fairly*; leading with the damage column produces a verdict that is both wrong and demoralising.
 - **State annotation coverage whenever you quote a flip count**, and extrapolate rather than pretending the provable number is the true one.
+- **Cap every flip's damage value at the target's remaining HP**, using `DMG :: hp delta`, not `takes N`. Crit flips on dying targets are routinely worth zero.
+- **Check for combined damage rolls (Hunted Shot et al.) before valuing a flip** — the counterfactual is hit+hit vs hit+crit, not crit vs hit.
+- **Count a buff's flat damage bonus separately from its flips** — it never produces a flip tag and is easy to drop entirely.
+- **Every creature gets a defence table AND an offence table.** Stopping at HP/AC is the single most common way this analysis goes wrong.

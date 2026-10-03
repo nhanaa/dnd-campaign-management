@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 17 — The First Bell</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <h1>The First Bell</h1>
+  <div class="subtitle">Session 17 · The exhibition closed four-for-four, a week at sea to Goka, and the Nameless open the Ruby Phoenix Tournament with a sweep</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-09-27</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 33m</span>
+    <span class="meta-pill">Bonmou → a week at sea → Goka</span>
+    <span class="meta-pill">Level 15 → 16</span>
+    <span class="meta-pill">60,000 gp prize · 12,000 each</span>
+    <span class="meta-pill">3 fights · 3 wins · tournament 1–0</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:62"></div>
+  <div class="comp-seg comp-social" style="flex:14"></div>
+  <div class="comp-seg comp-explore" style="flex:6"></div>
+  <div class="comp-seg comp-rp" style="flex:6"></div>
+  <div class="comp-seg comp-loot" style="flex:12"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · three fights, three wins</span>
+  <span><span class="legend-dot comp-social"></span>Social · the villa party, the vault question</span>
+  <span><span class="legend-dot comp-explore"></span>Arrival · Goka and the Ruby Village</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · the crowd, the songs</span>
+  <span><span class="legend-dot comp-loot"></span>Prizes, level 16 &amp; shopping</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard / Living Nexus / Sorcerer</div>
+    <div class="char-player">Pax · "Mingzhu" · 646 into the Arms of Balance</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · all 1s, then all 20s</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva the Unerring</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Irorian · a kill in every fight</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch the Rampart</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · broke a Thrasfyr's spine</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva the Shade</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">she/her · watching the Lightkeepers</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>The Nameless are 1–0 in the Ruby Phoenix Tournament.</strong> The session opened on the one exhibition bout still owed from S16 — team versus team, against a troupe of performers called <strong>the Steps of the Sun</strong> — and ended three hours later with a sweeping first-round win over the monks of <strong>the Arms of Balance</strong>, in front of thousands, with an announcer calling the kills.</p>
+
+<p>The Steps of the Sun were two dancers and two musicians, and the musicians went first. <strong>Joon-seo opened with Spirit Song, and Halspin the Stung cast it again straight after</strong> — two top-rank cones before most of the party had acted, stunning Seva and Sattva; Sovael saved both, the second on a natural 20. Sovael answered with his own round-one package — Courageous Anthem, a Lingering Composition that failed, and an <strong>eighth-rank Divine Armageddon across all four</strong> — and all four made the save. Then the dancers went to work. <strong>Amihan</strong>, a swashbuckler with a star knife, Vexing-Tumbled clean through Ferrok and landed a <strong>Confident Finisher on Sovael for 94</strong>. Joon-seo followed with a Telekinetic Bombardment, then cast <strong>Courageous Anthem and Lingering Composition</strong> on his own side — and succeeded at the Lingering check Sovael had just failed. Sovael: <em>"They're doing my thing."</em> Seva: <em>"Except he actually succeeded the trick."</em> When Halspin's Phantasmal Calamity came in, Sovael critically succeeded and threw <strong>Ferocious Will</strong> back at him for 29 — and then Halspin simply shot him. <strong>Sovael went down in the second round.</strong> Seva: <em>"Fuck! Sovael! … We'll get you up."</em></p>
+
+<p>Clutch got him up first — Taunt on three of the four, a Doctor's Visitation to Sovael's side and a Battle Medicine for 48 — then finished <strong>Maalya</strong> with a Hasted bite he hadn't expected to kill her (<em>"I wasn't expecting her to die, but I guess let's take advantage"</em>). Seva followed with a critical Battle Medicine for 62: <em>"Told you we'll get you up."</em> From the ground, Sovael kept casting. The musicians kept finding him — <em>"I took all the AoE spells this fight"</em> — and his answer was an <strong>Incarnate Ancient Specter</strong> that knocked Amihan and Halspin prone (Halspin failed and couldn't stand for the spell's duration), a <strong>sixth-rank Roaring Applause</strong> that stripped both musicians' reactions, and later an <strong>eighth-rank Chain Lightning</strong> and two Foretell Harms. Ferrok spent the middle rounds unable to hit anything — Seva counted the magi's misses, four in a row, then six; Ferrok spat into his palms <em>"like a Major League batter,"</em> re-gripped, and missed again (<em>"I will continue to look foolish and end my turn"</em>). <strong>Sattva put Amihan down</strong> — <em>"I need to kill her first." / Sovael: "Hey, no killing here." / "Incapacitate her first."</em> — and at the top of round six, <strong>Halspin and Joon-seo forfeited</strong>. <em>"Well fought."</em> Sovael, to his fellow performers: <em>"I enjoy your performances. I didn't do so well today."</em> When Cody had them react — <em>"you're a bard? What?"</em> — he held his ground — <em>"I haven't warmed up today, okay?"</em> — for about four seconds: <em>"To be fair, actually, that was a lie."</em></p>
+
+<p><strong>Four for four.</strong> The other results: Tino's Toughest beat the Biting Roses, the Lightkeepers <em>"utterly decimated"</em> the Arms of Balance, and the Speakers to the Wind beat Winter's Roar in a long fight that came down to <strong>Mafika Ayuwari against Ernak Lostwind</strong>, which Mafika won. Hao Jin closed the evening, and the prize purse landed: <strong>60,000 gold, 12,000 each</strong> (Cody quoted tiers of 5,000, 10,000, 15,000 and 20,000 per win, then the 60,000 total, which is what was paid). Seva: <em>"Swimming in money."</em> Then <strong>level 16</strong>, a shopping break against Goka's level-20 market, and a week of retraining. Sovael took his new feat with a warning: <em>"You guys are going to see Sovael hurting himself even more."</em> Ferrok: <em>"That's why he's the cryptic, because I don't understand."</em> Clutch swapped Shielding Taunt for <strong>Long-Distance Taunt</strong>; Ferrok cleared a rare spell, <em>Take Your Places</em> — <em>"It's his theme. Most important part of a character. It's all theme."</em></p>
+
+<p><strong>Goka</strong> was the largest city any of them had seen — dragon-drawn carts racing through the sky, thousands of fans on the docks for the teams' ships, an escort of monks and priests of Abadar, fireworks, and the Nameless' names shouted in the street because word of Bonmou had arrived before them. Hao Jin led them to <strong>the Ruby Village</strong>, a walled compound of red villas in the upper city, patrolled from the air by drake-riders. Sattva meditated to steady a mind the bards had rattled. Sovael sat down to <strong>write songs and practise</strong> — <em>"so that I don't screw it up again on stage."</em> That night the <strong>Steps of the Sun threw a party</strong> and every team came except most of the Lightkeepers (<strong>Ran-to</strong> showed; <em>"Of course, Ran-to, my boy… I like him"</em>).</p>
+
+<p>The party was where the question of the session got asked. Seva asked <strong>Takatorra</strong> what Tino's Toughest wanted after the tournament (they'll decide if they win), then worked the room, team by team: Winter's Roar are in it to compete; <strong>Mafika Ayuwari wants one of the artifacts of Old-Mage Jatembe</strong>, which he believes Hao Jin holds; the Lightkeepers kept quiet; the Biting Roses will see what's there. Then Sattva turned it on the party — <em>"all this questioning of other teams has made me think, what do you guys want out of the vault?"</em> <strong>Sattva</strong> wants an item that can take him to any realm. <strong>Clutch</strong>, after visible effort, wants a scroll of the resurrection ritual, or something to make him stronger — and asked the better question of everyone else: <em>"Is it just to have the thing, or is there a place you want to take it, a thing you want to do?"</em> <strong>Ferrok</strong> wants <em>"the same thing I've wanted since I first set foot in [an] arena, which is just to be the champion"</em> — and after that, to open his own gladiatorial school; Clutch promised him the belt for the mantle. <strong>Sovael</strong> will find his cousin Tivael <em>"and then rub it in his face,"</em> and after that, maybe a prestigious post somewhere — or retire early. <strong>Seva</strong> wants nothing from the vault — <em>"I doubt Hao Jin has anything that I would want"</em> (Sovael: <em>"Don't let Hao Jin hear that"</em>) — and admitted her reasons for being here are <em>"purely selfish,"</em> and hers. Ferrok, helpfully: <em>"Are you going to assassinate Hao Jin?"</em></p>
+
+<p>Then Seva voiced something she'd been carrying. <strong>Syu and Shino hadn't come</strong>, and she didn't like it. Ten years ago, she said, there had been cheating at the last tournament — and things now felt <em>"a little too smoothly."</em> She turned to Clutch, who was <em>there</em> ten years ago. Clutch was honest about his own loss: <em>"Clutch was just out grappled and squeezed"</em> — a tougher opponent, not a cheat — but he'll keep his eyes open.</p>
+
+<p>The <strong>final exhibition</strong> was at the <strong>Ruby Phoenix Arena</strong> across the Dragon Bridge, before Hao Jin, Empress Nai Yan Fei and a row of senior priests of Abadar. The Nameless drew <strong>two Thrasfyrs</strong> — red-scaled, twelve-foot bear-reptiles with chained arms and a second mouth at the end of a dragon's tail. They opened with <strong>a double breath weapon</strong>; Clutch's new <strong>Improved Reflexive Shield</strong> spread his block to Seva, and Sovael threw <strong>Scintillating Safeguard</strong> over three allies before the second breath. Sovael's <strong>Whispers of Weakness</strong> found the fight's key — <strong>weak to cold and cold iron, Will their worst save</strong> — and the Thrasfyrs' <strong>regeneration only shut off to cold or acid</strong>, which the party barely carried. Sovael had it in the <strong>Boreal Staff</strong>: he flew the length of Thrasfyr B in a <strong>Frigid Flurry</strong> (ally-safe — <em>"This doesn't hit Clutch"</em>), then followed with a new L16 trick, <strong>Debilitating Dichotomy</strong>, which he narrated as <em>"for some reason Sovael is shivering and saying nonsense"</em> — 66 mental into a Thrasfyr that failed on a natural 2, while Sovael's own half critically succeeded. Seva: <em>"Oh, I love this one."</em> <strong>Clutch grabbed Thrasfyr B <em>"real hard"</em> and broke its spine</strong> — Cody: <em>"That echoes across the arena as something snapped."</em> <strong>Sattva killed B</strong>; after a round of <strong>Bon Mot, Synesthesia, a critical Demoralize, True Target on four allies and a fresh Anthem</strong> from Sovael, <strong>Clutch finished A</strong> off a turn he'd opened with <em>"maybe Clutch's post-tournament plans are to become a chiropractor."</em></p>
+
+<p>Hao Jin laid out the bracket again — double elimination, and <strong>the second-place team in the winners' bracket is seeded</strong>, needing only three losers'-bracket wins. <strong>+1 hero point for every match finished.</strong> Round one: <strong>Tino's Toughest vs the Lightkeepers; the Nameless vs the Arms of Balance.</strong></p>
+
+<p>Opening day. Streets of screaming fans, the Dragon Bridge, an arena broadcast across Tian Xia, and the announcer, <strong>Emi</strong>: <em>"They might be the underdogs of this tournament, but have they ever shown promise? Give a welcome to the Nameless."</em> Sattva unfurled his wings and backflipped; Ferrok waved his black sword in gleaming dawnsilver; Clutch, a little overwhelmed, asked the crowd <em>"Who wants to fight after this? You? You?"</em> Seva: <em>"Oh my god, why am I nervous?"</em></p>
+
+<p><strong>The Arms of Balance</strong> were four monks from the Houses of Perfection — Usvani (Qi Blast, Inner Upheaval), <strong>Pravan Majinapti</strong> (Breath of the Glacier: a cone that encases and slows), <strong>Ranya Shibhatesh</strong> (Draw of the Aurora: four 60-foot lines of lightning that drag their targets in) and <strong>Jivati Rovat</strong> (Magma's Grasp, which burns a Focus Point off anyone who fails). Cody's advice before the bell: <em>"Don't hoard spell slots… You're going to get to use them every fight."</em> <strong>Sovael took him at his word.</strong> Round one, a hero point rescued a natural-1 Lingering Composition, Talent Envy Demoralized Pravan, and <strong>Divine Armageddon at DC 39 landed on three failures and a success — 266 damage</strong> before the monks had moved. The monks answered hard — Qi Blast, Breath of the Glacier encasing Sovael and Sattva, Draw of the Aurora pulling the party together, then Jivati's Magma's Grasp stripping Focus Points from Sovael and Ferrok. In round two Sovael took a Stand Still hit on the way out, kept moving, and cast <strong>Spirit Song into three monks: two failures and a critical failure — Jivati took 102 and was stunned 2</strong> (Seva: <em>"102 damage. Stunned two. Yes."</em>). Then a quickened sixth-rank Heal on himself, and a Bounce Away off Usvani's Inner Upheaval.</p>
+
+<p>After that it was, in Cody's words, <em>"crit, crit, crit, crit, crit, crit."</em> <strong>Ferrok's Disintegrate Spellstrike and a MAP −10 follow-up flung Ranya twenty feet across the arena</strong> — Emi: <em>"the first combatant to fall with a devastating series of strikes."</em> Seva ate a double-critical flurry from Pravan and answered with <strong>Wooden Double</strong> — <em>"I learned this from Sovael"</em> — which soaked 25 of the 154 and left her standing on 25 HP. Sovael spent his last Focus Point on Ancestral Memories and <strong>flew the length of the line in a second Frigid Flurry, dropping Pravan</strong>. <strong>Ferrok's Blink Charge crit took Jivati</strong> (Cody: <em>"with Ferrok, it's either all 20s all the time, or all 1s all the time"</em>; Sovael: <em>"The ultimate Magus experience"</em>), and <strong>Sattva's Hunted Shot finished Usvani</strong>. Emi: <em>"It is a sweeping victory for the Nameless as they proceed to the next bracket."</em> Sovael, flying slowly over everyone: <em>"Guys, did we win? Did we win?"</em> Group high five.</p>
+
+<p><strong>Sovael did 646 of the ~1,640 damage the party rolled in that fight — about 39%, and 45% of the monks' actual 1,430 hit points</strong> — with one kill. Tino's Toughest lost to the Lightkeepers and dropped to the losers' bracket with the Arms of Balance. <strong>Next: the Nameless vs the Biting Roses</strong>, the team that beat them in S14. Sovael: <em>"Guys, take care of the Mantis."</em></p>
+
+<p>Out of character: <strong>Seva's player is out next week</strong>; <strong>Cody has closed StartPlaying applications</strong> — <em>"It's going to be you five all the way through"</em> — and expects to finish the campaign around November or December.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act combat">
+    <div class="act-label">Act I · Combat · Exhibition Bout 4 · The Steps of the Sun</div>
+    <div class="act-card">
+      <h3>"They're doing my thing"</h3>
+      <ul>
+        <li>The last exhibition bout: <strong>the Nameless vs the Steps of the Sun</strong> — dancers <strong>Amihan</strong> (star knife, swashbuckler) and <strong>Maalya</strong> (scimitar and shield), musicians <strong>Joon-seo</strong> (whip) and <strong>Halspin the Stung</strong> (bow). Not a ring-out.</li>
+        <li><strong>Clutch rolls back-to-back natural 20s</strong> — initiative, then a Battle Cry Demoralize that crits Maalya to Frightened 2. <em>"I'm sorry, everybody. That was my luck for the session."</em></li>
+        <li><strong>Double Spirit Song</strong> from both musicians (only Sattva has acted); Seva and Sattva are stunned 1; Sovael saves both.</li>
+        <li><strong>Sovael</strong>: Anthem → Lingering (fail) → <strong>Divine Armageddon</strong> (all four save) → Foretell Harm on Maalya. <strong>Amihan's Confident Finisher hits him for 94.</strong></li>
+        <li>Joon-seo Telekinetic-Bombards the back line and <strong>runs Sovael's own opener</strong> — Anthem, Lingering (success). <em>"They're doing my thing."</em></li>
+        <li>Sovael crit-saves Halspin's Phantasmal Calamity → <strong>Ferocious Will</strong> for 29 → <strong>Halspin's bow drops him</strong> (dying 1) in round two.</li>
+        <li><strong>Clutch's Battle Medicine brings Sovael back (48)</strong>; Clutch's Hasted bite kills <strong>Maalya</strong>. Seva crit-Battle-Medicines Sovael for 62. <em>"Told you we'll get you up."</em></li>
+        <li>Sovael from prone: <strong>Incarnate Ancient Specter</strong> (Halspin pinned prone, Amihan prone, Joon-seo nat 20), rank-6 <strong>Roaring Applause</strong> (both musicians lose reactions), <strong>Dirge of Doom</strong> lingered, rank-8 <strong>Chain Lightning</strong>. A rules exchange on whether dropping prone provokes — Cody says no; Sovael: <em>"it's your ruling."</em></li>
+        <li><strong>Sattva downs Amihan</strong> — <em>"Incapacitate her first."</em> At the top of round six <strong>Halspin and Joon-seo forfeit.</strong> Exhibition: <strong>4 for 4</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act II · Social · Prizes, Level 16 &amp; the Week at Sea</div>
+    <div class="act-card">
+      <h3>"Swimming in money"</h3>
+      <ul>
+        <li>Tino's Toughest beat the Biting Roses; the Lightkeepers crush the Arms of Balance; <strong>Mafika Ayuwari beats Ernak Lostwind</strong> in the last duel of Speakers to the Wind vs Winter's Roar.</li>
+        <li>Hao Jin closes the exhibition: ships to Goka tomorrow, tournament in a week.</li>
+        <li><strong>60,000 gp prize</strong>, 12,000 each. <strong>Level 16.</strong> A 15-minute shopping break; a week's travel allows <strong>one retrained feat</strong> each. Cody: no more treasure from fights.</li>
+        <li><strong>Sovael</strong> retrains <strong>Gifted Power → Debilitating Dichotomy</strong> and takes <strong>Fortissimo Composition</strong>, <strong>Ancestral Memories</strong>, <strong>Scare to Death</strong> and <strong>Canticle of Everlasting Grief</strong>; buys the <strong>Necklace of Allure</strong> (CHA +6) and six <strong>Orchestral Brooches</strong>; sells the Messenger's Ring. <em>"You guys are going to see Sovael hurting himself even more."</em></li>
+        <li><strong>Clutch</strong>: Shielding Taunt → <strong>Long-Distance Taunt</strong> (120 ft); gains <strong>Improved Reflexive Shield</strong>. <strong>Ferrok</strong>: <em>Take Your Places</em> (rare) and a +3 potency rune — <em>"It's his theme."</em></li>
+        <li>Cody: when this campaign ends, players who continue in the slot get a vote on the next game (Starfinder is on his list).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act III · Explore · Goka and the Ruby Village</div>
+    <div class="act-card">
+      <h3>"Welcome to the Ruby Village"</h3>
+      <ul>
+        <li>A week later the ships reach <strong>Goka</strong> — dragons pulling racing carts through the sky, thousands of fans at the docks, monks and priests of Abadar as escort, fireworks; the Nameless' Bonmou record is already known.</li>
+        <li>Hao Jin shows them to <strong>the Ruby Village</strong>: a walled compound of red villas with hot springs and attendants, patrolled by drake-riders. One more exhibition tomorrow night.</li>
+        <li>Sattva meditates, <em>"seeing how distracting the bard's songs were."</em> <strong>Sovael writes songs and practises</strong> — <em>"so that I don't screw it up again on stage."</em> Clutch, in chat: <em>"heads to the gym, then the sauna, then the hot spring."</em></li>
+        <li>The <strong>Steps of the Sun throw a party</strong>. Seva: <em>"We should mingle."</em> Every team attends except most of the Lightkeepers; Ran-to comes (<em>"Of course, Ran-to, my boy"</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · The Vault Question</div>
+    <div class="act-card">
+      <h3>"What do you guys want out of the vault?"</h3>
+      <ul>
+        <li><strong>Seva</strong> asks Takatorra what Tino's Toughest want after the tournament, then canvasses the room: Winter's Roar want to compete; <strong>Mafika wants an artifact of Old-Mage Jatembe</strong>; the Lightkeepers say nothing; the Biting Roses will decide later.</li>
+        <li><strong>Sattva</strong> turns it on the Nameless: realm travel (Sattva) · a resurrection-ritual scroll or strength (Clutch) · <em>"just to be the champion,"</em> then a gladiatorial school (Ferrok) · rub it in Tivael's face, then employment or early retirement (Sovael) · nothing from the vault, reasons of her own (Seva).</li>
+        <li><strong>Clutch</strong> asks the question under the question: <em>"Is it just to have the thing, or is there, like, a place you want to take it, a thing you want to do?"</em></li>
+        <li>Sovael to Seva: <em>"Don't let Hao Jin hear that."</em> Seva: <em>"No, I will let her hear."</em> Ferrok: <em>"Are you going to assassinate Hao Jin?"</em></li>
+        <li><strong>Seva's warning</strong>: Syu and Shino skipped the party; there was cheating ten years ago; things feel <em>"a little too smoothly."</em> Clutch, who was there, says his own loss was clean — <em>"Clutch was just out grappled and squeezed."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · Final Exhibition · Two Thrasfyrs</div>
+    <div class="act-card">
+      <h3>"That echoes across the arena as something snapped"</h3>
+      <ul>
+        <li>Before Hao Jin, the Empress and senior priests of Abadar. Two Thrasfyrs, 450 HP each: <strong>weak to cold and cold iron, regeneration 25 stopped only by cold or acid, resistant to non-cold-iron physical, Will their worst save.</strong></li>
+        <li>Double breath weapon opens. <strong>Clutch's Improved Reflexive Shield</strong> covers Seva; <strong>Sovael's Scintillating Safeguard</strong> gives Seva, Clutch and Ferrok fire resistance before the second breath. <strong>Ferrok hastes the party.</strong></li>
+        <li><strong>Sovael</strong>: Whispers of Weakness → <strong>Ancestral Memories + Frigid Flurry</strong> from the Boreal Staff → <strong>Debilitating Dichotomy</strong> (66, nat-2 failure) → Aether Beam ×2 → a quickened sixth-rank Heal on Clutch → <strong>Scare to Death</strong> → <strong>Bon Mot, Synesthesia, a critical Demoralize, True Target</strong> for four and a fresh Anthem.</li>
+        <li><strong>Clutch's critical Spinebreaker</strong> on B — <em>"We're going to grab it real hard and break its spine."</em></li>
+        <li><strong>Seva's Ray of Frost Spellstrikes</strong> are the cold the table tracked against the regeneration — 111 on A off a natural 20. (Sovael's Frigid Flurry and cold Foretell Harm should have stopped it earlier on B; the suppression wasn't applied.)</li>
+        <li><strong>Sattva kills Thrasfyr B; Clutch kills Thrasfyr A</strong> off a True-Targeted natural 20 — after <em>"maybe Clutch's post-tournament plans are to become a chiropractor."</em></li>
+        <li>Post-fight: the party had almost no cold or cold iron. Cody points to <strong>Cold Iron Blanch</strong> for arrows.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · Tournament Match 1 · The Arms of Balance</div>
+    <div class="act-card">
+      <h3>"A sweeping victory for the Nameless"</h3>
+      <ul>
+        <li>Hao Jin re-explains the <strong>double-elimination bracket</strong>; second place in the winners' bracket is seeded. <strong>+1 hero point per finished match.</strong> One fight per day.</li>
+        <li><strong>Emi</strong> introduces both teams; the Nameless are billed as the <strong>underdogs</strong> who hold the Bonmou monster-kill record. Ferrok: <em>"Against, oops, all monks."</em></li>
+        <li><strong>Round 1</strong>: Sovael hero-points a nat-1 Lingering, Demoralizes Pravan, and lands <strong>Divine Armageddon</strong> for 266 across four. Ferrok hastes the party again.</li>
+        <li>The monks' AoE round: Qi Blast, <strong>Breath of the Glacier</strong> (encases Sovael and Sattva), <strong>Draw of the Aurora</strong> (Ferrok crit-fails, dragged in), <strong>Magma's Grasp</strong> (Sovael and Ferrok lose a Focus Point each).</li>
+        <li><strong>Sovael's Spirit Song</strong>: Jivati crit-fails (102, stunned 2), Pravan and Usvani fail (51 each). Quickened sixth-rank Heal on himself.</li>
+        <li><strong>Ferrok knocks Ranya out</strong> (Disintegrate Spellstrike + a natural-20 MAP −10 strike). <strong>Seva's Wooden Double</strong> soaks 25 of a 154-point double crit — <em>"I learned this from Sovael."</em></li>
+        <li><strong>Sovael's second Frigid Flurry drops Pravan.</strong> <strong>Ferrok's Blink Charge crit drops Jivati.</strong> <strong>Sattva's Hunted Shot ends Usvani.</strong> Sovael: <em>"Guys, did we win? Did we win?"</em></li>
+        <li>Lightkeepers beat Tino's Toughest. <strong>Next: the Biting Roses.</strong> Sovael: <em>"Guys, take care of the Mantis."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 1 · Exhibition Bout 4 · The Steps of the Sun · ~50 min · 5 rounds · WIN BY FORFEIT</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Amihan (350, swashbuckler) · Maalya (350, sword and shield) · Joon-seo (375, whip, occult) · Halspin the Stung (350, bow, occult) — all run at level 16, AC 38</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Sovael ~297 · Sattva ~296 · Seva ~235 · Clutch ~122 · Ferrok ~113</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Sattva ~314 · Sovael ~263 (+13 temp; dropped) · Clutch ~180 · Seva ~129 · Ferrok ~125</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Sovael (nat-1 initiative) · Seva ×2 (both Spellstrikes) · possibly Ferrok on a Spirit Song save</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Clutch 1 (Maalya) · Sattva 1 (Amihan) · Halspin and Joon-seo forfeit</span></div>
+</div>
+<h4>Round 1 — Two Spirit Songs</h4>
+<ul>
+  <li><strong>Clutch</strong>'s Battle Cry critically Demoralizes Maalya (his second natural 20: Frightened 2); <strong>Sattva</strong> opens with two hits on her (46 + 34).</li>
+  <li><strong>Joon-seo casts Spirit Song, then Halspin casts it again.</strong> Seva fails the first and Sattva the second — <strong>both stunned 1</strong>. Sovael saves the first (False Vitality soaks most of it) and crit-saves the second on a natural 20. Seva's Shadow Tempo is shut off.</li>
+  <li><strong>Sovael</strong>: Courageous Anthem → Lingering Composition (<strong>fail</strong>) → <strong>eighth-rank Divine Armageddon</strong>, DC 37 Fort — <strong>all four succeed, 37 each (148)</strong> → Foretell Harm on Maalya (16).</li>
+  <li><strong>Clutch</strong>: Defensive Advance (Maalya's Reactive Strike misses), a bite on Maalya, a Potion of Quickness. <strong>Amihan</strong> Vexing-Tumbles through Ferrok and lands a <strong>critical Confident Finisher on Sovael for 94</strong>. <strong>Maalya</strong> Shield-Drums a Demoralize and hits Seva for 56.</li>
+  <li><strong>Ferrok</strong>: Sure Strike → <strong>Disintegrate Spellstrike</strong> on Amihan (39 + 41). Sovael Absorbs Magic. <strong>Seva</strong>, stunned, hero-points a missed Gouging Claw Spellstrike into a hit on Maalya (49, +7 from Sattva's gift).</li>
+</ul>
+<h4>Round 2 — Sovael drops, Maalya falls</h4>
+<ul>
+  <li><strong>Sattva</strong>, stunned, puts Maalya on 32 (45 + a 69 crit). <strong>Joon-seo</strong> Telekinetic-Bombards the back line — Sovael fails (54, knocked prone) — then casts Courageous Anthem and a <em>successful</em> Lingering Composition. <em>"They're doing my thing."</em></li>
+  <li><strong>Halspin</strong>: Phantasmal Calamity — <strong>Sovael crit-saves and fires Ferocious Will</strong> (29, Halspin fails) — then shoots him for the last 32. <strong>Sovael drops to dying 1</strong>; his initiative moves up before Halspin's.</li>
+  <li><strong>Clutch</strong> Taunts three and Doctor's-Visitations to Sovael through a missed Reactive Strike. <strong>Battle Medicine for 48 brings Sovael up</strong>, then a <strong>critical Hasted bite kills Maalya</strong>. Paragon's Guard.</li>
+  <li><strong>Amihan</strong> tumbles through Sovael and Sattva, crit-Demoralizes Sattva on a natural 20, and Mobile-Finishers a star knife at him — <strong>Clutch intercepts</strong> (44). <strong>Ferrok</strong>'s Goring Charge misses twice. <strong>Seva</strong> crit-Battle-Medicines Sovael (62) and herself (61), then Dimensional Assaults Amihan.</li>
+</ul>
+<h4>Round 3 — The Specter</h4>
+<ul>
+  <li><strong>Sattva</strong> hits Amihan twice (40 + 34). Joon-seo is out of rank-7 and -8 slots; his rank-6 Phantasmal Calamity catches Sovael again (25).</li>
+  <li><strong>Sovael (prone)</strong>: <strong>Incarnate Ancient Specter</strong> — <strong>Halspin fails</strong> (prone, can't stand), <strong>Amihan succeeds</strong> (prone), <strong>Joon-seo natural 20</strong>. Cody rules dropping prone doesn't provoke.</li>
+  <li><strong>Halspin</strong> fires from prone — a <strong>critical hit on Sattva that Clutch intercepts for 75</strong> — then Telekinetic Bombardment. Clutch Battle-Medicines himself and bites Amihan (22). <strong>Amihan</strong> Kips Up and <strong>crits Sattva for 99</strong> (Shield Block eats 20). Ferrok: Force Fang; Halspin crit-saves the Buzz Saw.</li>
+</ul>
+<h4>Round 4 — Reactions off</h4>
+<ul>
+  <li>Joon-seo's last rank-6 Phantasmal Calamity; a song-blast at Sovael (23). <strong>Sovael</strong>: <strong>Healing Nexus</strong> → <strong>sixth-rank Roaring Applause</strong> — <strong>Halspin and Joon-seo succeed and lose their reactions</strong>; Amihan crit-succeeds. The Specter departs in tears of blood; Foretell Harm on Halspin (14).</li>
+  <li><strong>Halspin</strong>'s last Phantasmal Calamity — Seva and Ferrok fail (32 each). <strong>Clutch</strong> Medic-pushes a second self-Battle Medicine and grabs Amihan (27). Amihan's <strong>"Enjoy the Show"</strong> on Sattva and a Confident Finisher (52). Ferrok spits in his palms and misses by one. <strong>Seva</strong>: hero-point reroll, Gouging Claw on Amihan (21 + 32).</li>
+</ul>
+<h4>Round 5 — The forfeit comes</h4>
+<ul>
+  <li><strong>Sattva: Hunted Shot drops Amihan</strong> — <em>"Incapacitate her first."</em> <strong>Joon-seo</strong> Blink-Charges Ferrok; his Anthem ends.</li>
+  <li><strong>Sovael</strong> lets Roaring Applause go and re-Lingers <strong>Dirge of Doom</strong> (success, three rounds) → Talent Envy Demoralize on Joon-seo → <strong>eighth-rank Chain Lightning</strong> on Joon-seo and Halspin (both succeed, 24 each) → Foretell Harm on Joon-seo (never landed).</li>
+  <li><strong>Halspin</strong> True-Strikes Sattva (34). <strong>Clutch</strong> bites Joon-seo (26); both grabs miss. Ferrok misses twice more — <em>"I will continue to look foolish and end my turn."</em> <strong>Seva</strong> lands a critical Spellstrike on Joon-seo (51 + 64).</li>
+  <li><strong>Round 6: Halspin (193/350) and Joon-seo (162/375) forfeit.</strong> <em>"Well fought."</em></li>
+</ul>
+<p style="color:var(--gold)">Sovael was the fight's top damage dealer (~297: Divine Armageddon 148, Chain Lightning 48, Specter bleed ~42, Foretell Harm 30, Ferocious Will 29) and the only PC dropped. The Steps of the Sun ran his own playbook at him — and his Specter and Roaring Applause took both musicians out of the reaction game.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 2 · Final Exhibition · Two Thrasfyrs · ~63 min · 7 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">2 × Thrasfyr, 450 HP, AC 39 — weak cold / cold iron 15, resist non-cold-iron physical 15, regeneration 25 (off to cold or acid)</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">8d12 fire tail-breath, Tangling Chains (18d6, immobilize), Whirling Frenzy, Improved Knockdown</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Ferrok ~326 · Seva ~297 · Sattva ~228 · Sovael ~155 · Clutch ~69 — 1,075 = 900 HP + 175 regenerated (50 of it shouldn't have happened)</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Clutch ~558 · Seva ~380 · Ferrok ~276 · Sattva ~203 · Sovael ~107</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sattva 1 (B) · Clutch 1 (A)</span></div>
+</div>
+<h4>Rounds 1–2 — Fire, then cold</h4>
+<ul>
+  <li>Clutch's Battle Cry crits B. <strong>Sovael</strong>: Anthem → Lingering (success) → <strong>Whispers of Weakness</strong> (cold / cold iron; Fort best, Will worst) → Shield.</li>
+  <li><strong>Both breathe.</strong> Clutch and Seva crit-fail B's (126); <strong>Improved Reflexive Shield</strong> gives Seva Clutch's 15. Before A's, <strong>Scintillating Safeguard</strong> gives Seva, Clutch and Ferrok resistance 10; Ferrok crit-fails anyway (112).</li>
+  <li><strong>Ferrok hastes the party.</strong> Clutch crit-trips B; Seva crits and roots it; Sattva crits it for 72 and Battle-Medicines Sovael (58).</li>
+  <li><strong>Sovael</strong>: <strong>Ancestral Memories → Frigid Flurry</strong> along B (it still saves by one, 35) → <strong>Foretell Harm, cold</strong> (29 against the weakness). B regenerated on its next turn anyway — the Flurry's cold should have switched it off, but Cody didn't apply the suppression.</li>
+  <li>Seva's reaction crit (44) as B stands; Tangling Chains immobilises Clutch. Ferrok's Sprinting Spellstrike Buzz Saw on A. Clutch debuts <strong>Long-Distance Taunt</strong> at 120 ft.</li>
+</ul>
+<h4>Round 3 — Debilitating Dichotomy</h4>
+<ul>
+  <li><strong>Sovael: Debilitating Dichotomy</strong> on B — <strong>natural-2 failure, 66 mental</strong>; his own save crits. (His Ancestral Memories before it did nothing — Dichotomy is a feat, not a spell.)</li>
+  <li>B crits Clutch for 69; Clutch Intercepts the horn off Seva. After the break, Ferrok <strong>Echo-Jumps out of the chains</strong>; Clutch finally grabs B; Seva crit-Battle-Medicines Clutch (64).</li>
+</ul>
+<h4>Rounds 4–5 — The spine, and B falls</h4>
+<ul>
+  <li><strong>Sovael</strong>: Aether Beam (natural-20 save, 0) → <strong>quickened sixth-rank Heal on Clutch (73)</strong>.</li>
+  <li>A's chain crits Sattva (84) and drags him prone. <strong>Clutch: critical Spinebreaker on B</strong> — Restrained, Clumsy 2. <em>"That echoes across the arena as something snapped."</em> <strong>Seva's Ray of Frost</strong> shuts off B's regeneration.</li>
+  <li><strong>Sovael</strong>: <strong>Scare to Death</strong> (crit reduced by incapacitation → Frightened 2) → Aether Beam (25). Ferrok's <strong>Emergency Targe</strong> and <strong>Horizon Thunder Sphere</strong> (69 on A). <strong>Sattva's crit kills Thrasfyr B.</strong></li>
+</ul>
+<h4>Rounds 6–7 — A goes down</h4>
+<ul>
+  <li><strong>Sovael</strong>: <strong>Bon Mot (crit) → scroll Synesthesia</strong> on A. A's Improved Knockdown rolls a natural 1 and <strong>A falls prone itself</strong> — Cody: <em>"1v3 and prone."</em> <strong>Seva's natural-20 Ray of Frost Spellstrike: 111.</strong></li>
+  <li><strong>Sovael</strong>: <strong>critical Demoralize</strong> → <strong>True Target</strong> on four allies → Anthem. Ferrok's True-Targeted Gouging Claw — a <strong>20 and a 1</strong>, a critical miss turned into a crit (43 + 47 + 15).</li>
+  <li><strong>Clutch</strong>: <em>"maybe Clutch's post-tournament plans are to become a chiropractor"</em> — a second Spinebreaker fails, then a True-Targeted natural-20 claw <strong>kills Thrasfyr A</strong>.</li>
+</ul>
+<p style="color:var(--gold)">Sovael's True Target flipped both finishing blows: Ferrok rolled a 20 and a 1 (critical miss → crit), Clutch a 20 and a 15 (non-lethal hit → the killing crit). Cody didn't apply the regeneration suppression after Sovael's Frigid Flurry and cold Foretell Harm, so two of B's ticks (50 HP) landed that shouldn't have. The party still brought almost no cold into a cold-weakness fight.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 3 · Tournament Match 1 · The Arms of Balance · ~34 min · 3 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Usvani (380) · Pravan Majinapti (350) · Ranya Shibhatesh (350) · Jivati Rovat (350) — monks of the Houses of Perfection</span></div>
+  <div><span class="stat-label">Kit</span><span class="stat-value">Qi Blast, Inner Upheaval · Breath of the Glacier (encase) · Draw of the Aurora (4 pulling lines) · Magma's Grasp (lose a Focus Point) · Stand Still</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Sovael 646 (~39% rolled, 45% of real HP) · Ferrok ~364 · Sattva ~316 · Clutch ~180 · Seva ~133</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Sovael ~254 · Sattva ~237 · Seva ~235 · Clutch ~154 · Ferrok ~124 — nobody dropped</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Seva 2 (initiative, R3 Spellstrike) · Sovael 1 (Lingering) · Ferrok 1 (Magma's Grasp save)</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Ferrok 2 (Ranya, Jivati) · Sovael 1 (Pravan) · Sattva 1 (Usvani)</span></div>
+</div>
+<h4>Round 1 — Divine Armageddon, then the monks' AoE round</h4>
+<ul>
+  <li>Clutch's Battle Cry on Usvani fails. <strong>Seva hero-points a natural-1 initiative</strong> and delays.</li>
+  <li><strong>Sovael</strong>: Anthem + Lingering (<strong>nat 1 → hero point → success</strong>) → Talent Envy Demoralize on Pravan → <strong>Divine Armageddon, DC 39</strong>: Jivati, Pravan, Usvani fail (76 each), Ranya succeeds (38) — <strong>266</strong>.</li>
+  <li><strong>Usvani</strong>: three-action Qi Blast (45). <strong>Ferrok</strong>: <strong>seventh-rank Haste</strong> on the party. <strong>Pravan</strong>: <strong>Breath of the Glacier</strong> encases Sovael and Sattva. <strong>Ranya</strong>: <strong>Draw of the Aurora</strong> — Ferrok crit-fails (60) and is dragged in; Clutch's shield covers adjacent allies.</li>
+  <li><strong>Clutch</strong> grabs Ranya and Taunts; <strong>Sattva</strong> Battle-Medicines himself (78) and puts Ranya at half (84 crit + 30). <strong>Jivati</strong>: <strong>Magma's Grasp</strong> — Ferrok (after a reroll) and Sovael each lose a Focus Point.</li>
+</ul>
+<h4>Round 2 — Spirit Song, and Ranya out</h4>
+<ul>
+  <li><strong>Sovael</strong> strides through Jivati's Stand Still (a hit, 33) → <strong>Spirit Song</strong>: <strong>Jivati crit-fails (102, stunned 2)</strong>, Pravan and Usvani fail (51 each, stunned 1) → <strong>quickened sixth-rank Heal on himself</strong> (79). Usvani's Inner Upheaval → <strong>Bounce Away</strong>.</li>
+  <li><strong>Ferrok</strong>: Sure Strike → <strong>Disintegrate Spellstrike</strong>, natural-20 crit (92 + 40) → a natural-20 MAP −10 strike, 86: <strong>Ranya out</strong>. Emi: <em>"the first combatant to fall with a devastating series of strikes."</em></li>
+  <li><strong>Pravan double-crits Seva for 154</strong> → <strong>Wooden Double</strong> soaks 25; she's on 25. <em>"I learned this from Sovael."</em></li>
+  <li><strong>Clutch</strong>: Taunt all three, Paragon's Guard, Doctor's Visitation (75 into Seva), Jaws crit on Pravan (68). <strong>Sattva</strong>: Battle Medicine on Seva (77), <strong>scroll Heal into Sovael (73)</strong>, crit on Pravan (91). Jivati flurries Seva — <strong>Clutch Intercepts all 109</strong> and his counter-bite crits (48).</li>
+</ul>
+<h4>Round 3 — Three down</h4>
+<ul>
+  <li><strong>Sovael</strong> (last Focus Point): <strong>Ancestral Memories on Usvani → Frigid Flurry</strong> over all three — Usvani fails (65), <strong>Pravan fails (65) — down</strong>, Jivati succeeds (32, left on 17) → Foretell Harm on Usvani (14).</li>
+  <li>Usvani's last Qi Blast and a flurry on Sattva, who takes it. <strong>Ferrok: Blink Charge crit, 108 — Jivati down.</strong> <em>"The ultimate Magus experience."</em></li>
+  <li>Seva hero-points a Gouging Claw into Usvani; Clutch strikes twice and grabs, leaving Usvani on 35. <strong>Sattva: Hunted Shot, 111 — match over.</strong></li>
+</ul>
+<p style="color:var(--gold)">Sovael removed 45% of the monks' real hit points — a Divine Armageddon, a Spirit Song and a Frigid Flurry — and landed the kill on Pravan. Cody: <em>"You guys got hammered on the first round, and then it was like, crit, crit, crit, crit, crit, crit."</em></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Opening Act</h4>
+<ul>
+  <li><strong>He was the table's performer in a fight between performers, and he took the ribbing in character.</strong> The Steps of the Sun ran his own opener back at him — Anthem, Lingering, and a Lingering check that <em>succeeded</em> where his had failed — and he named it on the spot: <em>"They're doing my thing."</em> When they forfeited, he went to them as a colleague — <em>"I enjoy your performances… I didn't do so well today"</em> — and when Cody had them ask <em>"you're a bard?"</em>, he answered like one — <em>"I haven't warmed up today, okay?"</em> — then gave it up: <em>"To be fair, actually, that was a lie."</em> The next thing he did in Goka was sit down to write songs and practise, <em>"so that I don't screw it up again on stage."</em></li>
+  <li><strong>At the party he was easy company.</strong> <em>"Of course, Ran-to, my boy… I like him."</em> When Seva said Hao Jin had nothing she wanted: <em>"Oh, wow. Don't let Hao Jin hear that."</em> And when Clutch asked what everyone would do <em>after</em>, his answer was pure Sovael: find cousin Tivael <em>"and then rub it in his face,"</em> then a prestigious post — or retire early (<em>"Fire. Fire."</em>).</li>
+  <li><strong>He kept the bout non-lethal out loud.</strong> When Sattva said <em>"I need to kill her first,"</em> Sovael cut in — <em>"Hey, you're not, no killing here"</em> — and Sattva amended it to <em>"Incapacitate her first."</em></li>
+  <li><strong>Dropped in round two and kept casting from the floor.</strong> He saved both Spirit Songs, but a 94-point Confident Finisher, a Telekinetic Bombardment that knocked him prone and a bow shot put him at dying 1. Back up on Clutch's Battle Medicine and Seva's, he stayed prone and ran Incarnate Ancient Specter, Roaring Applause, Healing Nexus and an eighth-rank Chain Lightning from prone. <em>"I took all the AoE spells this fight."</em></li>
+  <li><strong>Level 16 turned him into a finisher with a new vocabulary.</strong> Against the Thrasfyrs: <strong>Ancestral Memories → Frigid Flurry</strong> from the Boreal Staff (ally-safe — <em>"This doesn't hit Clutch"</em>), then <strong>Debilitating Dichotomy</strong>, played as a bit — <em>"for some reason Sovael is shivering and saying nonsense"</em> — for 66 on a natural-2 failure while his own save crit. Then Scare to Death, Bon Mot into a scroll Synesthesia, a critical Demoralize, <strong>True Target for four</strong> — which turned Ferrok's natural 1 and Clutch's non-lethal 15 into two natural-20 crits, the second of them the kill — and a fresh Anthem in the closing round.</li>
+  <li><strong>He carried the tournament opener.</strong> <strong>646 of the ~1,640 damage the party rolled against the Arms of Balance (about 39%; 45% of the monks' real HP)</strong>: a Divine Armageddon for 266 after a hero-point-rescued Lingering, a <strong>Spirit Song that crit-failed Jivati for 102 and stunned her 2</strong>, and a second Frigid Flurry — flying <em>"over all three of them in a line"</em> — that <strong>dropped Pravan</strong>. He took a Stand Still hit to reach the Spirit Song position, then quickened a Heal onto himself and Bounced Away from Usvani's Inner Upheaval.</li>
+  <li><strong>Comedy</strong>: <em>"You guys are going to see Sovael hurting himself even more"</em> (the Debilitating Dichotomy reveal); <em>"I'm about to fail even more performance checks because I got Fortissimo"</em>; flying slowly over the party asking <em>"Guys, did we win? Did we win?"</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok · the All-or-Nothing</h4>
+<ul>
+  <li><strong>The sportsman of the day.</strong> <em>"It's the last match of the day. Let's go all out"</em> set the tone for bout four, and after the forfeit he complimented the man who'd beaten him all fight: <em>"Very nimble on your feet there, Halspin."</em></li>
+  <li><strong>He owned the cold streak with style.</strong> <em>"Ferrok will spit into his palms like a Major League batter and re-grip his sword"</em> — then missed; <em>"He's practically foaming at the mouth now because he can't hit this guy… I will continue to look foolish and end my turn."</em></li>
+  <li><strong>Then it turned.</strong> Against the Arms of Balance he <strong>knocked out Ranya</strong> (a Disintegrate Spellstrike and a MAP −10 strike for 86 — Emi's <em>"devastating series of strikes"</em>) and <strong>dropped Jivati with a Blink Charge crit</strong> for 108. Cody: <em>"with Ferrok, it's either like all 20s all the time, or all 1s all the time."</em></li>
+  <li><strong>The party's quickener.</strong> Seventh-rank <strong>Haste on the whole party</strong> in both the Thrasfyr fight and the tournament match. Against the Thrasfyrs he Echo-Jumped out of Tangling Chains (teleport, no move trait) and took a Gouging Claw Spellstrike into a near-dead Thrasfyr A.</li>
+  <li><strong>Named the next fight before it started</strong>: <em>"Against, oops, all monks."</em> And in the middle of the slump, <em>"Ferrok waves to everybody and ends his turn."</em></li>
+  <li><strong>Character over optimisation</strong>: bought the rare spell <em>Take Your Places</em> because <em>"It's his theme. Most important part of a character. It's all theme"</em>; wants <em>"just to be the champion"</em> and then to open <strong>a gladiatorial combat school</strong>; asked Seva, deadpan, <em>"Are you going to assassinate Hao Jin?"</em> In Foundry chat he caught a thrown rose in his teeth on the walk in and bought the stadium hot-dog combo, grumbling about the prices.</li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Chiropractor</h4>
+<ul>
+  <li><strong>The question behind the question.</strong> When everyone else was naming items, Clutch asked what they were <em>for</em>: <em>"Is it just to have the thing, or is there, like, a place you want to take it, a thing you want to do?"</em> His own answer took visible effort — <em>"you see the wheels turning and it's uncomfortable for him"</em> — a <strong>resurrection-ritual scroll</strong>, or something to grow stronger. And to Ferrok's school: <em>"If there's a belt, we'll have to give you the belt so you can put it up on the mantle."</em></li>
+  <li><strong>Downtime Clutch</strong>: in Foundry chat he <em>"heads to the gym, then the sauna, then the hot spring."</em> When Seva said she was just here for the ride, he nodded along — <em>"Right on. Just living in the moment."</em></li>
+  <li><strong>Honest about his own history.</strong> When Seva asked about cheating ten years ago, he didn't reach for it: <em>"Clutch was just out grappled and squeezed"</em> — a tougher opponent, fair and square — but he'll keep an eye open.</li>
+  <li><strong>Got Sovael off the floor first.</strong> Taunt on three, Doctor's Visitation, Battle Medicine for 48 — then <strong>killed Maalya</strong> with the Hasted bite on the same turn.</li>
+  <li><strong>Two kills in the exhibitions.</strong> Maalya in bout four, and <strong>Thrasfyr A</strong>, off a True-Targeted natural-20 claw after a <em>"maybe Clutch's post-tournament plans are to become a chiropractor"</em> turn. In between, a critical <strong>Spinebreaker</strong> on Thrasfyr B (<em>"We're going to grab it real hard and break its spine"</em> — <em>"That echoes across the arena as something snapped"</em>) left it Restrained and Clumsy 2 for Sattva's kill.</li>
+  <li><strong>New toys, used immediately</strong>: <strong>Improved Reflexive Shield</strong> spread his block to Seva against the opening double breath weapon; the retrained <strong>Long-Distance Taunt</strong> reached both Thrasfyrs at 120 feet. He took the most damage of anyone in the Thrasfyr fight (~558) and <strong>fully intercepted</strong> Jivati's flurry off Seva in the tournament.</li>
+  <li><strong>Comedy</strong>: two natural 20s in a row at initiative, one of them a Battle Cry crit — <em>"That was my luck for the session"</em>; overwhelmed by the arena crowd — <em>"Who wants to fight after this? You? You?"</em>; in chat, throwing the fans' roses back, <em>"how dare they attempt these vegetative attacks on the party."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the Unerring</h4>
+<ul>
+  <li><strong>He asked the party the real question.</strong> <em>"All this questioning of other teams has made me think, what do you guys want out of the vault?"</em> — and gave his own answer: <em>"an item that lets me travel to any realm I like… I'll continue traveling, but this time my scope will be bigger."</em></li>
+  <li><strong>The bards got to him.</strong> In Goka: <em>"seeing how distracting the bard's songs were to Sattva, he is trying to steady his mind."</em></li>
+  <li><strong>Three kills, one in every fight</strong>: <strong>Amihan</strong> (after Sovael's correction — <em>"Incapacitate her first"</em>), <strong>Thrasfyr B</strong>, and <strong>Usvani</strong> with the Hunted Shot that won the match.</li>
+  <li><strong>Showman, despite himself</strong>: backflipped through a breath weapon on legendary Reflex, and on opening day — the meditator who'd spent the week steadying his mind — <em>"Sattva loses focus for a second and unfurls his wings and does a backflip to rile up the crowd."</em></li>
+  <li><strong>The Risky Surgery bit continues, now with props</strong>: two failed DC-40 Battle Medicines on himself against the Thrasfyrs — <em>"When it comes to healing, I can't roll above a nine… You see Sattva pull out a golden arrow and try to stab himself, but he keeps missing."</em> Later: <em>"I stab you in the back with a golden arrow"</em> (a successful Battle Medicine on Seva, for 77) and a scroll Heal into Sovael.</li>
+  <li><strong>Comedy</strong>: <em>"A scroll that turns you level 20, but you need to be level 22"</em>; <em>"I can fail more healing checks"</em>; on Seva's secret — <em>"So you're telling me Seva sneaks away to try to assassinate someone, right?… Well, if it's Seva, we won't see."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-seva">
+<h4>Seva · the Shade</h4>
+<ul>
+  <li><strong>The party's social engine.</strong> When the music started next door she was the one who said <em>"We should mingle."</em> At the party she made the rounds on purpose — <em>"I'm just interested in each team's motivation, why they're here"</em> — which is how the party learned Mafika wants the Jatembe artifacts. Then she ran the Nameless' own round-robin, turning to Sattva, then Clutch (<em>"I think Seva kind of gets a little bit excited to hear Clutch's answer"</em>), then Ferrok — and when Sovael and Ferrok talked about retiring early: <em>"I don't think Seva's ever going to retire, though."</em> On the bracket: <em>"Yeah, I'm ready for a rematch."</em></li>
+  <li><strong>She's carrying a suspicion.</strong> Syu and Shino skipped the party, there was cheating ten years ago, and <em>"things have been going a little too smoothly… Something seems strange about the Lightkeepers."</em> She checked her read against Clutch, the one person at the table who was there — and allowed she <em>"could be just paranoid."</em></li>
+  <li><strong>And a secret.</strong> Nothing from the vault — <em>"I doubt Hao Jin has anything that I would want"</em> — and when Sovael warned her Hao Jin might hear: <em>"No, I will let her hear."</em> Her reasons for being here are <em>"purely selfish,"</em> and she's keeping them.</li>
+  <li><strong>Kept her promise to Sovael.</strong> When he dropped: <em>"Fuck! Sovael!… We'll get you up."</em> Clutch reached him first; Seva followed with a critical Battle Medicine for 62: <em>"Told you we'll get you up."</em></li>
+  <li><strong>Wooden Double, learned from Sovael.</strong> A double-critical flurry from Pravan, and she took the reaction she'd picked up watching him — <em>"I learned this from Sovael"</em> — and the wooden block ate 25 of a 154-point double crit, leaving her on 25 HP as a pillar of ice erupted where she had stood.</li>
+  <li><strong>Biggest single hit against the Thrasfyrs</strong>: a <strong>Ray of Frost Spellstrike for 111</strong> on Thrasfyr A — exactly the cold damage that fight needed; her Ray of Frost hits were the cold the table actually tracked against the regeneration. She also Battle-Medicined Clutch, pinned targets with her Rooting rune, and took ~380 damage, second only to Clutch.</li>
+  <li><strong>Comedy and generosity</strong>: <em>"Their theme song is really good, you guys"</em>; on Amihan dancing through the line, <em>"Damn it. That was really cool, though"</em>; ribbing Sovael's failed Lingering — <em>"Except he actually succeeded the trick"</em>; the magus cold streak — <em>"Only six missed attacks in a row"</em>; <em>"Unless I have Ferrok Luck."</em> After the win: <em>"Damn, that announcer knows how to hype it up."</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Level-Up</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">60,000 gp · 12,000 each</div>
+    <div class="loot-source">Exhibition prizes, 4/4 wins</div>
+    <div class="loot-note">Cody quoted per-win tiers of 5k / 10k / 15k / 20k and a 60,000 total; 12,000 each was paid. No treasure from fights from here on.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">+1 hero point per match</div>
+    <div class="loot-source">Tournament rule</div>
+    <div class="loot-note">Every finished match, including the exhibition — on top of the session's three.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Necklace of Allure</div>
+    <div class="loot-source">Bought in Goka</div>
+    <div class="loot-note"><strong>Sovael</strong> — apex: CHA +6 → spell DC 39 / +29. Replaces the Messenger's Ring (sold).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Orchestral Brooch ×6</div>
+    <div class="loot-source">Bought in Goka</div>
+    <div class="loot-note"><strong>Sovael</strong> — a Performance success becomes a critical success.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Take Your Places (rare spell)</div>
+    <div class="loot-source">Cleared with Cody</div>
+    <div class="loot-note"><strong>Ferrok</strong> — <em>"It's his theme."</em> Plus a +3 potency rune.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Greater Cold Iron Blanch</div>
+    <div class="loot-source">Clutch (card posted after the Thrasfyrs)</div>
+    <div class="loot-note">Cody's recommended fix for the cold-iron gap; can't go on Clutch's hand wraps.</div>
+  </div>
+</div>
+<div class="xp-banner">
+Experience · <strong>Level 16</strong> (milestone), taken between the last Bonmou bout and the Goka exhibition. Retraining: one feat per character during the week at sea — Sovael <strong>Gifted Power → Debilitating Dichotomy</strong>, Clutch <strong>Shielding Taunt → Long-Distance Taunt</strong>.
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Sovael:</strong> "They're doing my thing."<br>
+<strong>Seva:</strong> "Except he actually succeeded the trick."
+<span class="attribution">Joon-seo casts Courageous Anthem and Lingering Composition — and makes the Lingering check Sovael had just failed.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I enjoy your performances. I didn't do so well today." … "I haven't warmed up today, okay?" … "To be fair, actually, that was a lie."
+<span class="attribution">To the Steps of the Sun after the forfeit, when they react to learning he's a bard.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I'll go find my cousin Tivael and then rub it in his face."
+<span class="attribution">What he'll do after the tournament.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "Told you we'll get you up."
+<span class="attribution">After her critical Battle Medicine on Sovael, who had been dropped in round two.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "I'm just very suspicious that things have been going a little too smoothly… Something seems strange about the Lightkeepers."
+<span class="attribution">At the Steps of the Sun's party, after Syu and Shino don't show.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Is it just to have the thing, or is there, like, a place you want to take it, a thing you want to do?"
+<span class="attribution">When the party is going round naming vault items.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "We're going to grab it real hard and break its spine."<br>
+<strong>Cody:</strong> "That echoes across the arena as something snapped."
+<span class="attribution">Spinebreaker on Thrasfyr B.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Maybe Clutch's post-tournament plans are to become a chiropractor, so we'll try it again."
+<span class="attribution">The turn that finished Thrasfyr A.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Ferrok will spit into his palms like a Major League batter and re-grip his sword."
+<span class="attribution">Mid-slump in bout four. He missed.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "It's his theme. Most important part of a character. It's all theme."
+<span class="attribution">Buying the rare spell Take Your Places.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I need to kill her first."<br>
+<strong>Sovael:</strong> "Hey, you're not, no killing here."<br>
+<strong>Sattva:</strong> "Incapacitate her first."
+<span class="attribution">Then he did — Amihan, down.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "When it comes to healing, I can't roll above a nine… You see Sattva pull out a golden arrow and try to stab himself, but he keeps missing."
+<span class="attribution">Two failed DC-40 Battle Medicines on himself against the Thrasfyrs.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Next match: the Biting Roses</strong> — the team that beat the Nameless in S14. Sovael: <em>"Guys, take care of the Mantis."</em> <strong>Seva's player is out next week.</strong></li>
+  <li><strong>Seva's suspicion of the Lightkeepers.</strong> Syu and Shino skipped the party; there was cheating at the last tournament ten years ago; <em>"things have been going a little too smoothly."</em> The Lightkeepers crushed the Arms of Balance in the exhibition and Tino's Toughest in round one.</li>
+  <li><strong>Seva's secret.</strong> An undercover contender with a reason to be here she won't share, and nothing she wants from the vault.</li>
+  <li><strong>Mafika Ayuwari wants the artifacts of Old-Mage Jatembe</strong>, which he believes Hao Jin holds. He beat <strong>Ernak Lostwind</strong> in the Speakers/Winter's Roar duel.</li>
+  <li><strong>What the Nameless want from the vault</strong>: realm travel (Sattva), a resurrection ritual or strength (Clutch), to be the champion, then a gladiatorial school (Ferrok), Tivael's face after (Sovael). <strong>Clutch's cousin Clinch</strong> is still an open thread from Bonmou.</li>
+  <li><strong>The bracket</strong>: Tino's Toughest and the Arms of Balance are in the losers' bracket. The Nameless and the Lightkeepers are still unbeaten.</li>
+  <li><strong>The cold / cold-iron gap.</strong> The party carried almost none into a cold-weakness fight. Cold Iron Blanch for arrows; Seva's Ray of Frost and Sovael's Boreal Staff are the only cold sources.</li>
+  <li><strong>Cody's next campaign</strong>: continuing players get a vote; Starfinder is on his list. This one should end around November–December.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next · Winners' Bracket, Round 2</span>
+  <p>One match down and the Nameless unbeaten. Next up are the Biting Roses — Yarrika Mulandez, Lantondo, Artus Rodrivan and Grandfather Mantis, the only team that has ever beaten them outright — and Seva won't be at the table.</p>
+  <div class="big-line">"Guys, take care of the Mantis."</div>
+  <span class="speaker">— Sovael, on hearing the next draw</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Bout 4 (Steps of the Sun)</strong>: Anthem, a failed Lingering, <strong>eighth-rank Divine Armageddon</strong> on all four — all four saved, 37 each — then Foretell Harm on Maalya.</li>
+  <li>Saved both Spirit Songs (the second on a natural 20). Hit for <strong>94 by Amihan's Confident Finisher</strong>, 54 by Telekinetic Bombardment, crit-saved Phantasmal Calamity and fired <strong>Ferocious Will</strong> (29), then <strong>dropped to Halspin's bow</strong> in round two. Brought back by <strong>Clutch's Battle Medicine</strong> (48), topped up by Seva's (62). Hero point spent on a natural-1 initiative.</li>
+  <li>From prone: <strong>Incarnate Ancient Specter</strong> (Halspin pinned prone, Amihan prone, Joon-seo nat 20), <strong>Absorb Magic → Healing Nexus</strong>, rank-6 <strong>Roaring Applause</strong> (both musicians lost reactions), a re-Lingered <strong>Dirge of Doom</strong> (success, three rounds), a Talent Envy Demoralize on Joon-seo, <strong>rank-8 Chain Lightning</strong> (48, both saved), and Foretell Harm on Maalya (16), Halspin (14) and Joon-seo (never landed — the forfeit came first).</li>
+  <li>Lost a rules exchange on whether dropping prone provokes. Conceded in one line.</li>
+  <li>Told Sattva there's no killing in an exhibition.</li>
+  <li><strong>Level 16.</strong> Retrained Gifted Power → <strong>Debilitating Dichotomy</strong>. Took <strong>Fortissimo Composition</strong>, <strong>Ancestral Memories</strong>, <strong>Scare to Death</strong>, <strong>Canticle of Everlasting Grief</strong>. Bought the <strong>Necklace of Allure</strong> (CHA +6; DC 39) and <strong>six Orchestral Brooches</strong>. Sold the Messenger's Ring.</li>
+  <li>Wrote songs in the Ruby Village. At the Steps of the Sun's party: called Ran-to his boy, told Seva not to let Hao Jin hear her, and answered Clutch's after-the-tournament question (find Tivael, rub it in).</li>
+  <li><strong>Thrasfyrs</strong>: Whispers of Weakness (cold / cold iron; Will worst), <strong>Scintillating Safeguard</strong> on Seva, Clutch and Ferrok, <strong>Ancestral Memories + Frigid Flurry</strong> (B still made the save by one), <strong>Ancestral Memories → Debilitating Dichotomy</strong> (the −3 did not apply — Dichotomy is a feat, not a spell; 66 on a nat-2 fail anyway; own save crit), <strong>Aether Beam</strong> twice (one into a natural-20 save), <strong>quickened rank-6 Heal on Clutch</strong> (73), <strong>Scare to Death</strong> (Frightened 2), <strong>Bon Mot → Synesthesia</strong> scroll, <strong>critical Demoralize</strong>, <strong>True Target</strong> for four, Anthem.</li>
+  <li><strong>Arms of Balance</strong>: hero point on a natural-1 Lingering, Talent Envy Demoralize on Pravan, <strong>Divine Armageddon for 266</strong>. Lost a Focus Point to Magma's Grasp. Took Jivati's Stand Still, then <strong>Spirit Song — Jivati 102 and stunned 2</strong>, Pravan and Usvani 51. <strong>Quickened rank-6 Heal on himself</strong> (79). <strong>Bounce Away</strong> off Inner Upheaval. Last Focus Point on <strong>Ancestral Memories → Frigid Flurry</strong>: <strong>Pravan down</strong>, Usvani 65, Jivati 32. Foretell Harm on Usvani. <strong>646 of ~1,640 damage rolled.</strong></li>
+</ul>
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>The Steps of the Sun ran his exact opener</strong> — Anthem, then Lingering — and made the check. They're the same kind of fighter he is, and they're in the tournament.</li>
+  <li><strong>Mafika Ayuwari is hunting a specific artifact</strong> — something of Old-Mage Jatembe's — and believes Hao Jin has it. A competitor who wants one particular thing is a competitor with a line he won't cross, or one he will.</li>
+  <li><strong>Seva has a reason to be here she won't name</strong>, and she's watching the Lightkeepers for cheating. Syu, their leader, is an occult witch.</li>
+  <li><strong>The Arms of Balance's Magma's Grasp strips Focus Points.</strong> Whoever meets them next in the losers' bracket will lose their focus pool. Worth remembering if they climb back.</li>
+  <li><strong>Cold shuts regeneration off — call it out at the table when it lands.</strong> His Frigid Flurry and cold Foretell Harm should have switched off Thrasfyr B's regeneration; Cody didn't apply it, and two ticks (50 HP) went through anyway. The party carries almost no cold beyond Seva's cantrip and his staff.</li>
+</ul>
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>The round-one AoE gets saved against.</strong> Bout 4's Divine Armageddon went 0-for-4 at DC 37; the tournament's went 3-for-4 at DC 39. Two points of DC (level 16 + the Necklace) moved it from a table-setter to a fight-winner.</li>
+  <li><strong>Ancestral Memories, Bon Mot and Frightened are all <em>status</em> penalties — they don't stack.</strong> Only the biggest applies. Ancestral Memories (−3) is the tool for a target that isn't already Bon Mot'd or frightened; on one that is, it buys at most the difference. Spend the Focus Point where the target is clean. <strong>And it only works on spells</strong> — it did nothing for Debilitating Dichotomy, which is a feat action; the Thrasfyr's save line shows no −3. Pair it with Frigid Flurry, Spirit Song, Divine Armageddon, Canticle or a Fire Ray attack, never with Dichotomy, Aether Beam or Scare to Death.</li>
+  <li><strong>Fortissimo vs Lingering.</strong> They're both spellshapes on the same Anthem — one or the other. With the brooches, a guaranteed-crit Fortissimo is a +3 Anthem for a round; a Lingering is +1 for three or four. Against a tough boss with the martials all swinging, +3 may be worth more.</li>
+  <li><strong>Debilitating Dichotomy is a free 21d6.</strong> Master Will plus Mysterious Resolve means his own half almost always crits. It costs a Cursebound step — and the curse suppresses his own fire resistance.</li>
+  <li><strong>He goes down when he's in front.</strong> Round two of bout 4: a 94-point finisher, a bombardment and a bow shot. The Steps of the Sun's skirmisher went straight for him, as enemy teams have before. Fly first; stay near Clutch.</li>
+  <li><strong>The Biting Roses beat the Nameless once.</strong> In S14 he spent turn one healing and got grabbed on turn two. This time: open with control, stay out of grappling reach, and <em>"take care of the Mantis."</em></li>
+  <li><strong>He still owes Sattva a song.</strong></li>
+</ul>
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What does Seva actually suspect the Lightkeepers of — and what is her own secret?</li>
+  <li>What composition should open against the Biting Roses: Fortissimo or Lingering?</li>
+  <li>Does Clutch's resurrection-ritual answer have to do with Clinch?</li>
+  <li>What does Mafika want the Jatembe artifact for?</li>
+  <li>With Seva out next week, who covers her healing and the second magus slot?</li>
+</ul>
+</section>
+</body>
+</html>

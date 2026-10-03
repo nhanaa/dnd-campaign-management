@@ -303,6 +303,28 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 **Carried-forward threads:** **the Great Kugaptee, on the far side of the mist, actively trying to get through** · **the Consecrate ritual's text** (in the ledger, Mu-Jin's to translate) · **who else is an "old soul"** · **the missing governor** · **Mugirou's truce holding once Willowshore learns of it** · Mu-Jin's Shinzo theory (either Shinzo can break the curtain Kugaptee cannot, *or the curse only stops people getting **out***) · the wrong-gods lantern secret (S2) · "blood will rise" · the governor's estate · the Great Willow's promise to map the curse's edges · the Willow's missing friend · **the Noppera-Bo Hood, still never used** · **Kaelen's S4 Slime Rot** · **Weaver's hunting-spider venom (S7)** · **the lumber camp storeroom's hidden trap door, still unexplored** · Mu-Jin's Desna adoption.
 
 
+### Session 9 (2026-09-18) — The First Long Night (fall, weeks 1–6, 7108 IC)
+*All five PCs. All downtime, no combat, no roll log. XP: **480 announced on tape** (Mu-Jin reads 540 on the sheet). Book Two opens.*
+
+**The fall downtime subsystem.** Three victory-point tracks: **Hope**, **Food** and **Security** (12 recommended for Food and Security; Hope "the more the better"). Up to **4 preparation activities a week** (Aid Harvest, Aid Hunt, Aid Townsfolk, Reinforce Buildings, Host a Tea Ceremony), with the fifth PC able to aid one, plus one standard downtime activity each, including **Research the Curse** (full week; PF2e Subsystems → "the Willowshore curse"). One event every week. **Farmland perk** from summer: +1 to Aid Harvest, and the first Aid Harvest each week is upgraded a degree. **All three tracks reached 12** (Security week 3, Hope at the festival, Food week 4).
+
+**Research the Curse.** Breakpoints reached: week 1 (Mu-Jin with **You So-Jin**, crit): **the West Wall might be able to be broken**; week 3 (Kaoru, Arcana crit); week 5 (Mu-Jin + Zhen's aid); week 6 (Mu-Jin): **a specialized ritual that might allow passage through the fog wall.** **Two research points left** to unlock everything. **Zoudou's notes** need Aklo + Chthonian (Mu-Jin only), Religion DC 19. **Six downtime weeks remain after the next fight.**
+
+**Weekly events.**
+- **Minhwan** (audio spelling), a boy who nursed an injured fox, dreamed it was **Daikitsu's messenger**. Zhen named the offering: **inari sushi**.
+- **Matsu** (not Old Matsuki): a viper swarm in his outhouse, relocated (Zhen's Survival crit, Mu-Jin's basket). Reward: 2 gp and, evidently, the **ghost touch rune**.
+- **The First Long Night festival**: three contests (**Admiring the Moon**, **Bundle Cutting**, **Lantern Making**), all won → +1 reputation with both factions. Bundle cutting is disguised training for escaping bandits and **jorogumo webbing**. Sky lanterns are never crows or ravens because of *"the famed jorogumo's intense dislike of tengu."* Shenmen is *"the land of ghosts and spiders."*
+- **Mama Bao's steamed-bun shop** (downtown) was haunted by **Hinode Akari** (audio spelling), a local herbalist whose corpse was found near **Gord Lake** with every hair plucked from her scalp. Laid to rest by Zhen's prayer and Mu-Jin's calming. **Mama Bao's grandfather came into a sudden windfall a few nights before the body was found** and built the shop with it ("an old collection of wigs" sold to a puppet maker). Mama Bao will honor Akari's memory. +1 Northridge.
+- **The walking corpse.** **Elizeth Candora** privately asked the party to find an elderly villager's corpse that walked off the night she died of flu. **She suspects You So-Jin.** The trail crossed the **Ceiba River** ~200 ft west of Dawnstep Bridge and ended **behind the Cerulean Tea House**, where **Yami is a bakeneko** (beast, speaks Common, AC 20, HP 35) keeping the woman who fed it (*"She also dances well in the moonlight"*). Kaelen befriended it; Iryoku's Diplomacy got it to let her go; she was reburied. Reward: 80 XP, 4 lesser healing potions, a vitalizing rune. **Whether Candora was told isn't on tape.**
+- **The faceless ghost.** One of Willowshore's most eligible bachelors saw a robed shape of mist and smoke with **a featureless stone mask** in his yard: a **Dalgyal Gwishin** (undead, unholy; *"easily jealous of more charismatic characters"* → likely targets Iryoku; lowest save Fortitude +9). **Hostile. Combat next session.**
+
+**Loot:** ghost touch + striking (festival prize) both on **Kaelen's bo staff** (+1 striking ghost touch; potency crystal removed) · **Cognitive mutagen** (Mu-Jin) · **vitalizing rune** + 4 lesser healing potions (stash) · Zhen bought striking. Reputation before S9 awards: 19 Southbank / 17 Northridge, *Admired* by both (30 = Revered).
+
+**New NPCs (in play):** Minhwan · Matsu · **Mama Bao** · **Hinode Akari** (dead, at rest) · the eligible bachelor (unnamed) · **Yami = bakeneko**.
+**New creatures:** bakeneko · **Dalgyal Gwishin**.
+
+**Carried-forward threads:** the fog-wall passage ritual · two research points left · the Dalgyal Gwishin · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami's nature · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
+
 ---
 
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*
