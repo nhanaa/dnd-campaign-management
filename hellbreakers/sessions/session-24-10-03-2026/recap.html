@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 24 — You Could Have Been on a Vacation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+  --frost: #7aa8c0;
+  --frost-glow: #7aa8c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-elaine { border-left-color: var(--frost); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-elaine { border-left-color: var(--frost); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="container">
+
+<header class="header">
+  <h1>You Could Have Been on a Vacation</h1>
+  <div class="subtitle">Session 24 · A witch of the Whispering Way in a desecrated temple, a war shard in the Wight Mother, and a grotto of the old Isgeri spirits</div>
+  <div class="meta-row">
+    <span class="meta-pill">3 Oct 2026</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~3h</span>
+    <span class="meta-pill">8 → 9 Calistril 4727 AR</span>
+    <span class="meta-pill">Level 7 · 80 XP</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:24%"></div>
+    <div class="comp-seg comp-social" style="width:22%"></div>
+    <div class="comp-seg comp-rp" style="width:20%"></div>
+    <div class="comp-seg comp-explore" style="width:28%"></div>
+    <div class="comp-seg comp-loot" style="width:6%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Combat 24%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Parley &amp; Interrogation 22%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Grotto &amp; Research 20%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Town, River &amp; Shrine 28%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 6%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian">
+      <div class="char-name">Bai Jian</div>
+      <div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) · Beastmaster + Hedge Mage · <strong>Lv 7</strong></div>
+      <div class="char-player">Pax</div>
+    </div>
+    <div class="char-card char-panacea">
+      <div class="char-name">Panacea</div>
+      <div class="char-class">Catfolk Witch (Paradox of Opposites, Divine) · Medic + Living Nexus · <strong>Lv 7</strong></div>
+      <div class="char-player">Bog Witch</div>
+    </div>
+    <div class="char-card char-zanthar">
+      <div class="char-name">Zanthar Melodune III</div>
+      <div class="char-class">Gnome Wizard (generalist) · Blessed One · <strong>Lv 7</strong></div>
+      <div class="char-player">Scott</div>
+    </div>
+    <div class="char-card char-cyrathul">
+      <div class="char-name">Cyrathul</div>
+      <div class="char-class">Lunar Dragon Thaumaturge · Draconic Ravager · <strong>Lv 7</strong></div>
+      <div class="char-player">Snowgeen</div>
+    </div>
+    <div class="char-card char-elaine">
+      <div class="char-name">Elaine Stormfrost</div>
+      <div class="char-class">Arctic Elf Rogue (Mastermind) · Twilight Speaker · <strong>Lv 7</strong></div>
+      <div class="char-player">Storm · back after missing S23</div>
+    </div>
+    <div class="char-card char-ren">
+      <div class="char-name">Ren</div>
+      <div class="char-class">Boarhound animal companion · 69 HP · took 35 from one bat in one turn; found the road to the shrine</div>
+      <div class="char-player">Bai Jian’s companion</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Behind the cathedral door in Finder’s Gulch, voices were talking in Aklo and a buzzing Necril — <strong>Illcayna</strong> would not be back for eleven days; <em>“she will perform the ceremony on the 19th as it was written”</em>; she had gone to fetch <em>“the last piece for her puzzle.”</em> Then, to the door: <em>“You may come inside.”</em> Inside was a gutted temple of <strong>Pharasma</strong> daubed with the signs of <strong>Tar-Baphon</strong>, two huge undead bats, a lone beaked fiend, and a tall, pale woman in black leather robes — <strong>Varlario Demicci</strong>, a diplomat, she said, for <em>“those that whisper along the way,”</em> lodged there as Illcayna’s guest. She offered wine. The party called it poison; she was delighted to be offended. <strong>Cyrathul</strong> asked her, more than once and very politely, to take a vacation. She was on assignment. She stepped into the party’s huddle to share <em>“a secret too”</em> — in Aklo — and the party fanned out.</p>
+    <p>It was an Extreme fight and it was over in four rounds. <strong>Bai Jian</strong> read a Bless scroll and opened with a 57-damage crit on the first bat; the fiend’s own <strong>Malodorous Shriek</strong> then blew that bat apart. <strong>Elaine</strong>’s whip crit slowed the fiend, <strong>Cyrathul</strong>’s critical Demoralize and Draconic Frenzy tore its head off, and <strong>Zanthar</strong>’s Slow and a Sure Strike crit, Bai Jian’s hero-pointed 44 and Elaine’s whip put Varlario on her knees: <em>“I’ll give you anything. Just spare my life.”</em> The party took the surrender on its own terms — no walking away, manacles on — and <strong>Bai Jian spent his turn getting her to call the last bat down</strong> where he could reach it. It answered that it would eat him. <strong>Panacea</strong>’s Divine Lance crit left it at 4 HP, and Bai Jian ran up <strong>Cyrathul’s conjured spiral staircase</strong> and leapt off it to kill the thing, taking 13 falling damage <em>“for a style point.”</em></p>
+    <p>The interrogation was the session’s real prize. Varlario is from the <strong>Whispering Way</strong>, allied with Tar-Baphon, sent to spy on the Pallid Princess — and the <strong>Wight Mother has fused a war shard, a fragment of the dead god Gorum, into herself</strong>. Varlario traded her research — <strong>an occult magnet that will tear the shard out once the right ritual is performed</strong>, and notes that set <strong>Illcayna’s final sacrifice for dusk on 19 Calistril</strong>, through the new Urgathoan temple across the frozen river — for her freedom, and left as a bat. Then a frozen river that dropped Bai Jian and Zanthar through the ice, a riverbed corpse that gave Elaine an aeon stone and a <strong>Devilwing Badge</strong>, a hidden road <strong>Ren</strong> sniffed out, and a sealed grotto of <strong>seasonal murals</strong> that Zanthar’s <strong>Bounty’s Light</strong> lit a path into. Cyrathul’s <strong>Lifebloom Glaive</strong> woke the spirits of the old Isgeri tribes; the summer mural put everyone but Bai Jian to sleep for a full night’s rest; and eight hours of research turned up a <strong>Pallid Plague vaccine</strong>, a <strong>save bonus in Bounty’s Light against Illcayna’s spells</strong>, and a way to make <strong>wights flee from the Lifebloom Glaive</strong>. Bai Jian, napping under the summer mural, dreamed of a woman in white ash who bleached into a wight in front of him while her horse rotted to bone.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="log-warning"><strong>Source note.</strong> The recording’s diarization merged Pax and Bog Witch into one speaker label, and split Kaazz across two. Bai Jian’s and Panacea’s lines are attributed only where the roll log, a GM name-call, or a class mechanic pins them; several surrender-debate and interrogation lines could belong to either and are left unattributed.</div>
+  <div class="timeline">
+
+    <div class="act social">
+      <div class="act-label">Act I · Social · The Cathedral, Evening of the 8th</div>
+      <div class="act-card">
+        <h3>A Diplomat in Pharasma’s House</h3>
+        <ul>
+          <li>Overheard through the door: <strong>Illcayna</strong> won’t be back for <strong>at least 11 days</strong>; <em>“she will perform the ceremony on the 19th as it was written”</em>; she went <em>“to get the last piece for her puzzle.”</em> <strong>Elaine</strong> relayed what she understood. Then: <em>“You may come inside.”</em></li>
+          <li>Inside: shattered, boarded windows, <strong>two huge undead bats (Skavelings)</strong>, a lone beaked fiend (<strong>a Sarcovalt</strong>), and a tall, very pale woman in black leather robes. <em>“You must be the Hellbreakers that have been causing such a ruckus in the south.”</em> <strong>Zanthar</strong>: <em>“We’re famous.”</em></li>
+          <li><strong>Cyrathul</strong> opened with diplomacy and the attacks on the road; she called them the <strong>Witch Queen’s</strong> servants: <em>“We’re here on a diplomatic mission”</em> — from <em>“those that whisper along the way.”</em> Illcayna had <em>“graced us with this wonderful abode.”</em></li>
+          <li><strong>Elaine’s Religion (28)</strong>: a <strong>temple of Pharasma</strong>, desecrated with the signs of <strong>Tar-Baphon</strong>. <em>“Pharasma hates the dead.”</em> Cyrathul: <em>“Or undead. That’s what the whispering was about.”</em></li>
+          <li>In the huddle, <strong>Elaine</strong>: <em>“This being here seems like an abomination to this temple”</em> — but try diplomacy first. Varlario offered wine; called poison, she was theatrically offended: <em>“I can’t believe you would think so lowly of me.”</em></li>
+          <li><strong>Cyrathul</strong>: <em>“We seem to be at a bit of an impasse here.”</em> — <em>“Leave my home?”</em> — <em>“It doesn’t seem very homely. I’m sure you could take a vacation.”</em> She was on assignment.</li>
+          <li>She joined the huddle to share <em>“a secret too”</em> — in <strong>Aklo</strong>. The party <em>“fanned out, exploring the place.”</em> Initiative.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act II · Combat · Varlario’s Court</div>
+      <div class="act-card">
+        <h3>Four Rounds, One Surrender</h3>
+        <ul>
+          <li><strong>Round 1</strong>: the bat’s <strong>Bone-Chilling Screech</strong>; <strong>Bai Jian</strong>’s Bless scroll and a <strong>57 crit</strong>; <strong>Elaine</strong>’s Faux Bulwark and a crit that slowed the fiend; <strong>Zanthar</strong>’s <strong>Slow</strong> on Varlario for a minute; <strong>Panacea</strong>’s Divine Lance crit; Varlario’s <strong>Confusion</strong> hero-pointed into a Cyrathul crit success; the fiend’s <strong>Malodorous Shriek blew its own bat apart</strong>.</li>
+          <li><strong>Round 2</strong>: Bai Jian’s natural 1 → hero point → <strong>44 crit</strong> on Varlario (<em>“The duality of man”</em>); a bat mauled <strong>Ren</strong> for 35 (<em>“Leave my dog alone”</em>); <strong>Cyrathul’s crit Demoralize and Frenzy took the fiend’s head off</strong>; Zanthar’s Sure Strike Blazing Bolt crit Varlario for 34.</li>
+          <li><strong>Varlario surrendered</strong> at ~15 of 110 HP: <em>“I said I was an emissary.”</em> Cyrathul: <em><strong>“You could have been on a vacation.”</strong></em> <em>“I’ll give you anything. Just spare my life.”</em></li>
+          <li><strong>Round 3</strong>: surrender accepted, terms not — <em>“Simply leaving is not enough anymore.”</em> <strong>Bai Jian</strong> spent his turn getting her to call the bat down <em>“so that we can jump it”</em>: <em>“I’ll be benevolent… Bai Jian has always been a kind person at heart.”</em> The bat: <em>“He says he will eat you.”</em> Cyrathul: <em>“Unfortunately, that violates our treaty.”</em></li>
+          <li>Cyrathul’s <strong>Helpful Steps</strong> — a 40-ft spiral staircase; Zanthar’s thrown maul (<em>“Thank you, Maul”</em>); Panacea’s <strong>38 crit</strong>.</li>
+          <li><strong>Round 4</strong>: Bai Jian <strong>ran up the staircase, killed the last bat and jumped off</strong> — 13 falling damage, for fun.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act III · Social · Terms &amp; Interrogation</div>
+      <div class="act-card">
+        <h3>The Whispering Way and the War Shard</h3>
+        <ul>
+          <li>Bai Jian’s <strong>vitalizing rune</strong> kept burning her — she has <strong>void healing</strong>. <em>“We’re not really geared to trying to kill someone to heal them”</em> (Cyrathul); <strong>Assisted Recovery</strong> stopped it at 9 HP. Manacles on. <em>“I thought we had an accord.”</em> — <em>“We said we’d tie you up. I think manacles are similar. Probably more comfortable.”</em></li>
+          <li><strong>Panacea</strong> Treated Wounds on Bai Jian (25) while the questions ran.</li>
+          <li><strong>Cyrathul’s Esoteric Lore (29)</strong>: the <strong>Whispering Way</strong> — a secret cult that holds undeath to be the perfect state, <strong>in league with Tar-Baphon</strong>. Elaine’s Society had it on the tip of her tongue. Cyrathul tied them to <strong>Ezio</strong>, <em>“the fat man from the ball.”</em></li>
+          <li>Varlario: <em>“To spy on our good friend the pallid princess… <strong>The Wight Mother has a war shard that she’s fused with herself.</strong> How are you so ignorant of all these things?”</em> — <em>“We’ve been caught up in politics.”</em> <strong>Panacea knew</strong>: a shard of the dead god of war, <strong>Gorum</strong>.</li>
+          <li><strong>Elaine</strong>: <em>“Out with it, please. You’re not in the best situation to keep secrets.”</em> — <em>“The Way doesn’t really believe that the Urgathoans are very controllable.”</em> Manacles off? <em>“Not a chance. Definitely not… We know you’re a caster.”</em></li>
+          <li>The deal: <strong>an occult magnet</strong> and her <strong>notes</strong>, for her freedom. <strong>Bai Jian</strong>, as she cast to open her cache: <em>“We have several reactive strikes. I’ll stand here. Go ahead.”</em> Cyrathul: <em>“You do anything funny, we’ll kill you.”</em> <em>“Very hard to research how to kill the lion while sitting in the lion’s den.”</em></li>
+          <li><strong>Zanthar</strong>: <em>“You need to leave and not come back… We treated you well.”</em> Zanthar asked her name — <strong>“Varlario.”</strong> She became a bat and flew into the night.</li>
+          <li><strong>The notes</strong> (Elaine read the Necril aloud): <strong>Illcayna’s final sacrifice — dusk, 19 Calistril — finalizes the curse</strong>, somewhere reached <strong>through the new Urgathoan temple across the frozen stream</strong>. It is the evening of the 8th.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act IV · Exploration · The Town &amp; the River</div>
+      <div class="act-card">
+        <h3>A Wight Factory and Thin Ice</h3>
+        <ul>
+          <li><strong>Elaine</strong> dragged the undead out of Pharasma’s temple; on <strong>Zanthar</strong>’s call the party burned them behind the building, out of sight of the door.</li>
+          <li><strong>Elaine and Panacea</strong> searched the houses south of the cathedral: a <strong>black onyx</strong> from <strong>Create Undead</strong> rituals, and correspondence from <strong>Illcayna’s servants</strong> — the town mass-produced <strong>wights and skeletons</strong>, <em>“slitting throats and then immediately moving to raise those same people back up.”</em></li>
+          <li>On the frozen river everyone but <strong>Panacea</strong> went prone; the ice cracked and <strong>Bai Jian and Zanthar went through</strong> — <em>“I still fail even with the hero point.”</em> Underwater, <strong>Zanthar</strong> spotted something shiny.</li>
+          <li><strong>Panacea</strong> threw the rope and hauled them out — <em>“Panacea is just strong”</em> — and: <em>“You guys are probably getting hypothermia, so probably need to make a fire.”</em> Cyrathul: <em>“I would help, but unfortunately I’m not that kind of dragon.”</em></li>
+          <li><strong>Elaine</strong> — cold-resistant, roped, on Zanthar’s <strong>Air Bubble</strong> — brought up an <strong>aeon stone</strong> and a <strong>Devilwing Badge (Greater)</strong> off a corpse on the riverbed. Panacea holds the badge for now.</li>
+          <li>Crossing one at a time — <strong>Zanthar</strong> first (<em>“This place looks like a Pokemon region”</em>), Ren and Bai Jian last. Everyone missed the Perception check; <strong>Bai Jian rolled for Ren</strong>, and Ren found a <strong>hidden bank and a road</strong>. <em>“Good boy. He’s finally useful, guys.”</em> Kaazz: <em>“He’s been useful a lot.”</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act V · Exploration · The Desecrated Shrine</div>
+      <div class="act-card">
+        <h3>Chains of Phalanges and a Hidden Door</h3>
+        <ul>
+          <li>The road ran into a cave shrine, <strong>desecrated with Urgathoan hedonism</strong> and draped in <strong>chains of phalanges</strong>.</li>
+          <li><strong>Zanthar’s Seek</strong> found a locked box in an old stash behind the altar.</li>
+          <li><strong>Elaine</strong> picked a <em>“really hard lock”</em> over four successes, a hero point to save her only set of tools: <em>“God dang, this thing does not want to be opened.”</em></li>
+          <li>Inside: a <strong>greater staff of healing</strong> (Elaine holds it; Panacea already has one) and a <strong>potion of flying</strong> — <em>“That doesn’t bode well.”</em> Panacea: <em>“Honestly, I think we need some Earthbind at this level.”</em></li>
+          <li><strong>Panacea</strong> touched a wall and <strong>a hidden door slid open</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VI · Mystery · The Grotto of Seasons</div>
+      <div class="act-card">
+        <h3>The Murals and the Spirits</h3>
+        <ul>
+          <li><strong>Bounty’s Light</strong> sprang to life in the passage, lighting glowing hand- and footprints into a cavern open to the stars, with a warm, clear pool and four murals.</li>
+          <li><strong>Winter</strong> (<em>“This doesn’t sound like Urgathoa”</em>): <strong>Panacea</strong> named <strong>Abadar and Shelyn</strong>; the third should be Zon-Kuthon, and isn’t.</li>
+          <li><strong>Spring</strong>: <strong>Cyrathul</strong> touched the mural with the <strong>Lifebloom Glaive</strong> and the old Isgeri spirits rose. <strong>Zanthar and Cyrathul drank</strong> from the pool to understand them. The last <em>“preacher”</em> here was undead with <em>“a scythe for an arm”</em> — <em>“I’m almost positive she is kin.”</em> <em>“I cannot believe that Lifebloom Glaive has returned to us.”</em></li>
+          <li>Bai Jian and Elaine recognized the spring animals as <strong>Desna’s and Pharasma’s</strong>; Cyrathul read the wind as <strong>Gozreh</strong>.</li>
+          <li><strong>Summer</strong>: a Will save, and <strong>everyone fell asleep except Bai Jian and Ren</strong> — a full long rest, once every seven days. Bai Jian slapped <em>“the sleeping dragon”</em>: <em>“He got rewarded for failing?… Well, whatever. I’m martial. I don’t care.”</em> His Survival: <strong>Sarenrae, Erastil, Gorum</strong>.</li>
+          <li><strong>Autumn</strong>: Cyrathul read the serpent as <strong>Asmodeus</strong>, the jackals <strong>Rovagug</strong>, the scorpions <strong>Lamashtu</strong> — <em>“as if the Isgeri predicted Cheliax’s infernal future”</em> (Kaazz). A woman on horseback with a <strong>black scythe</strong> and <strong>stripes of white ash</strong> — not Urgathoa; no flies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act VII · Mystery · Research Overnight</div>
+      <div class="act-card">
+        <h3>The Dream and Eight Hours of Answers</h3>
+        <ul>
+          <li><strong>Bai Jian</strong> napped under the summer mural. A field after the final harvest; a tall woman in white ash rides up, <strong>bleaches into a wight</strong>, her horse rotting to bone: <em>“This is what the Isgeri chose to defend their land… evoke the true goddess of the harvest to cleanse the scythe.”</em> <em>“What the hell was that?”</em></li>
+          <li><strong>Panacea</strong>, on her last hero point, crit: the <strong>Pallid Plague</strong> recipe — a <strong>temporary vaccine</strong>.</li>
+          <li><strong>Cyrathul</strong> crit: anyone in <strong>Bounty’s Light</strong>’s bright light gains a <strong>bonus to saves against Illcayna’s spells</strong>.</li>
+          <li>Around 1 a.m.: Cyrathul’s Diplomacy with the spirits crit; Zanthar’s second drink cost him a headache; <strong>Elaine</strong> worked the mural puzzles — the <strong>Lifebloom Glaive</strong> can be <strong>brandished (1 action) to make wights flee</strong>.</li>
+          <li>The spirit hinted there’s more to find in town. <strong>~5 a.m., 9 Calistril.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Varlario’s Court — the Desecrated Cathedral</h3>
+    <div class="combat-meta">threat extreme · 4 rounds · 80 XP · Varlario Demicci (lvl 8, 110 HP, AC 25) · 2× Skaveling · Sarcovalt (elite)</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">4</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Cyrathul — Sarcovalt · Bai Jian — Skaveling · Sarcovalt — its own Skaveling</div></div>
+      <div><div class="combat-stat-label">Damage in (applied)</div><div class="combat-stat-value">Bai Jian 115 · Zanthar 78 · Panacea 72 · Cyrathul 65 · Elaine 51</div></div>
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Bai Jian 37 (13 self) · Ren 35 · Elaine 15 · Cyrathul 11 · Panacea 11</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Zanthar · Panacea · Cyrathul · Bai Jian — one each</div></div>
+      <div><div class="combat-stat-label">Outcome</div><div class="combat-stat-value">Varlario surrendered</div></div>
+    </div>
+    <p><em>Varlario: Whispering Way witch, void healing (vitality hurts her, Harm heals her), Confusion. Skavelings (80 HP, AC 22; one run elite, 100 HP / AC 24): undead bats, immune poison, Bone-Chilling Screech (DC 22 Will), fangs 2d8+10, wing 2d4+10, Swift Dart. Sarcovalt (elite, 95 HP, AC 23): weak holy 5, Malodorous Shriek (20-ft cone, 3d6 sonic + 3d6 poison, DC 22 basic Reflex).</em></p>
+    <p><strong>Initiative</strong>: Skaveling 30 · Zanthar 29 · Bai Jian 25 · Elaine 25 · Skaveling 24 · Panacea 19 · Cyrathul 16 · Varlario 15 · Sarcovalt 14 (nat 1). Zanthar delayed until after Cyrathul, Panacea until after Zanthar.</p>
+
+    <h4>Round 1 — The Shriek Kills Its Friend</h4>
+    <ul>
+      <li><strong>Skaveling</strong> — <strong>Bone-Chilling Screech</strong>: Cyrathul, Bai Jian, Elaine and Ren crit succeeded; <strong>Zanthar hero-pointed</strong> a 2 into a 4, +10 house rule → success (Frightened 1); <strong>Panacea</strong> failed while Foundry kept rolling Serrafina instead.</li>
+      <li><strong>Bai Jian</strong> — <strong>Bless</strong> (scroll); Ren to the flank; <strong>Snagging Strike critical, 57</strong> + persistent vitality.</li>
+      <li><strong>Elaine</strong> — <strong>Faux Bulwark</strong> (DC 22 Will): Sarcovalt failed (Frightened 1), Varlario saved by 0. <strong>Thorn Whip critical on the Sarcovalt, 28</strong> + bleed → <strong>Slowed 1</strong>.</li>
+      <li><strong>Skaveling</strong> — fangs missed Elaine; <strong>wing, 15</strong>.</li>
+      <li><strong>Cyrathul</strong> — Exploit Vulnerability: no weaknesses. Jaws, natural 1.</li>
+      <li><strong>Zanthar</strong> — <strong>Slow</strong> on Varlario: failed → <strong>Slowed 1 for a minute</strong>.</li>
+      <li><strong>Panacea</strong> — <strong>Divine Lance critical, 20</strong> → wounded Skaveling at 3 HP.</li>
+      <li><strong>Varlario</strong> — <strong>Confusion</strong> on Cyrathul: 4 → <strong>hero point</strong> → 10 +10 = <strong>35, critical success</strong>.</li>
+      <li><strong>Sarcovalt</strong> (slowed) — <strong>Malodorous Shriek</strong>: Bai Jian failed (<strong>24</strong>), Cyrathul saved (11), <strong>Panacea hero-pointed</strong> 7 → 18 (11) — and <strong>its own Skaveling failed and was blown apart</strong>. <em>“It just blasts its friend apart.”</em></li>
+    </ul>
+
+    <h4>Round 2 — The Fiend Loses Its Head</h4>
+    <ul>
+      <li><strong>Bai Jian</strong> — Snagging Strike on Varlario: <strong>natural 1 → hero point → 18, critical, 44</strong>. <em>“The duality of man.”</em> Dueling Parry.</li>
+      <li><strong>Elaine</strong> — <strong>Thorn Whip on Varlario, 17</strong> + bleed; MAP whip at the Skaveling missed.</li>
+      <li><strong>Skaveling</strong> — <strong>fangs on Ren, 23; wing, 12</strong>. <em>“Leave my dog alone.”</em> Swift Dart, 15 ft up.</li>
+      <li><strong>Cyrathul</strong> — <strong>Demoralize critical (39) → Frightened 2</strong>. <strong>Draconic Frenzy</strong>: <strong>jaws critical, 48</strong> (a crit only because the fear dropped its AC); claw missed; <strong>claw, 20 → Sarcovalt destroyed</strong>. <em>“Yeah, this is why I demoralize.”</em></li>
+      <li><strong>Zanthar</strong> — <strong>Sure Strike</strong> + two-ray <strong>Blazing Bolt</strong>: <strong>Varlario, natural 20, critical, 34</strong>; Skaveling, <strong>13</strong>.</li>
+      <li><strong>Panacea</strong> — <strong>Divine Lance, 14</strong>; <strong>Life Boost on Ren</strong>.</li>
+      <li><strong>Varlario</strong> — <strong>surrendered</strong>. <em>“I’ll give you anything. Just spare my life.”</em></li>
+    </ul>
+
+    <h4>Round 3 — The Staircase</h4>
+    <ul>
+      <li><em>Varlario’s persistent vitality and bleed ticked; the bleed ended.</em> Surrender accepted — manacles, no leaving.</li>
+      <li><strong>Bai Jian</strong> — no attack: got Varlario to call the bat down. It said it would eat him.</li>
+      <li><strong>Elaine</strong> — Recall Knowledge on Varlario (failed); readied a whip Strike.</li>
+      <li><strong>Skaveling</strong> — dove at Cyrathul (missed), back up 15 ft.</li>
+      <li><strong>Cyrathul</strong> — <strong>Helpful Steps</strong>: a 40-ft spiral staircase. <strong>Demoralize</strong> (Frightened 1).</li>
+      <li><strong>Zanthar</strong> — <strong>Hand of the Apprentice</strong>, maul, <strong>24</strong>; <strong>Electric Arc, 7</strong>.</li>
+      <li><strong>Panacea</strong> — sustained Life Boost; <strong>Divine Lance critical, 38</strong> → bat at 4 HP.</li>
+      <li><strong>Varlario</strong> — on her knees; persistent vitality <strong>8</strong> (→ 3 HP).</li>
+    </ul>
+
+    <h4>Round 4 — For a Style Point</h4>
+    <ul>
+      <li><strong>Varlario</strong> — Kaazz resolved her turn early: <strong>Harm</strong> on herself, <strong>30</strong>. Bai Jian let her.</li>
+      <li><strong>Bai Jian</strong> — up the staircase; <strong>falcata, 23 → Skaveling destroyed</strong>. Jumped off: <strong>3d6 falling, 13</strong>, prone.</li>
+    </ul>
+    <p>Varlario’s persistent vitality kept ticking (11, 7, 6) until <strong>Assisted Recovery</strong> ended it at 9 HP. Panacea’s Treat Wounds healed Bai Jian 25. <span style="color:var(--gold)"><strong>80 XP each.</strong></span></p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian · For a Style Point</h4>
+      <ul>
+        <li><strong>He played the surrender for position.</strong> With Varlario on her knees and the bat out of reach overhead, he spent his turn getting her to call it down — <em>“so that we can jump it”</em> — and sold it with a grin: <em>“I’ll be benevolent. I’ll be a trusting person. You know, Bai Jian has always been a kind person at heart.”</em> The bat answered that it would eat him. When she healed herself next round, he shrugged: <em>“Whatever, it is what it is… I’m going to get this bat down.”</em></li>
+        <li><strong>Then he made the leap.</strong> Up Cyrathul’s spiral staircase, a Strike that killed the last bat, and a deliberate jump off the top: <em>“You see Bai Jian just literally run up the stairs and then jump out and then hit it in the head… I just wanted to do it for fun.”</em> Thirteen falling damage, prone, worth it.</li>
+        <li><strong>He opened the fight.</strong> He’d held the <strong>Bless scroll</strong> through the parley — giving up his parry for it — read it, sent Ren to flank, and crit the first bat for <strong>57</strong>. On Varlario: a natural 1, a hero point, an 18, a <strong>44 crit</strong>. <em>“The duality of man.”</em></li>
+        <li><strong>He stood guard while she cast.</strong> <em>“We have several reactive strikes. I’ll stand here. Go ahead.”</em></li>
+        <li><strong>He trusted the dog.</strong> When the whole party missed the Perception check on the ice, he rolled for Ren anyway — and Ren found the road to the shrine. <em>“Good boy. He’s finally useful, guys.”</em> And earlier, when a bat put 35 into him: <em>“Leave my dog alone.”</em></li>
+        <li><strong>He stayed awake.</strong> The summer mural put everyone down but Bai Jian and Ren; he slapped <em>“the sleeping dragon”</em> and missed the free long rest for passing the save — <em>“He got rewarded for failing?… Well, whatever. I’m martial. I don’t care.”</em> His Survival read the summer mural (Sarenrae, Erastil, Gorum) — and he rolled Ren’s too: <em>“He doesn’t have to tell me.”</em></li>
+        <li><strong>He had the dream.</strong> The woman in white ash bleaching into a wight: <em>“evoke the true goddess of the harvest to cleanse the scythe.”</em> <em>“What the hell was that?”</em></li>
+        <li><strong>He’s frank about his lane</strong>: <em>“My job is not where it looks smart”</em> on research; <em>“Bai Jian’s just gonna be looking around and enjoy things because he doesn’t know anything”</em> at the murals.</li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea · the Steady Hand</h4>
+      <ul>
+        <li><strong>She knew what a war shard was</strong> when nobody else in the party did — a fragment of Gorum, rained down on Golarion when the god of war died.</li>
+        <li><strong>She was the one who stayed on her feet.</strong> The only PC to make the Acrobatics check on the ice, she threw the rope and hauled Bai Jian and Zanthar out — <em>“Panacea is just strong”</em> — then: <em>“You guys are probably getting hypothermia, so probably need to make a fire.”</em></li>
+        <li><strong>She found the grotto.</strong> Cruising the shrine while Elaine picked the lock, she touched a wall and the hidden door slid open. At the winter mural she named <strong>Abadar and Shelyn</strong>, and spotted that the third figure wasn’t who it should be.</li>
+        <li><strong>Her research crit is the party’s plague answer</strong> — the <strong>Pallid Plague</strong> recipe, on her last hero point, and a vaccine they can brew.</li>
+        <li><strong>She fought through a bad start.</strong> Foundry wouldn’t stop targeting Serrafina (<em>“Man, I am doing so bad today”</em>); she reset, delayed, and <strong>put 72 into the two bats with Divine Lance</strong> — including the <strong>38</strong> that left the last one at 4 HP: <em>“I am going to stick to what I know works.”</em> She hero-pointed the shriek to half and kept Life Boost on a mauled Ren.</li>
+        <li><strong>She healed after.</strong> Treat Wounds on Bai Jian (25) while the interrogation ran, and a practical read of the loot: <em>“Honestly, I think we need some Earthbind at this level.”</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III · the Light in the Grotto</h4>
+      <ul>
+        <li><strong>His staff opened the way.</strong> <strong>Bounty’s Light</strong> lit the glowing hand- and footprints into the grotto — and the research says that light now <strong>protects anyone in it from Illcayna’s spells</strong>.</li>
+        <li><strong>He was the one who saw it.</strong> Head under the frozen river, he spotted the shine; his <strong>Air Bubble</strong> scroll put Elaine down there to fetch it. His <strong>Seek</strong> found the locked box behind the altar.</li>
+        <li><strong>He drank first.</strong> When the spectre mimed drinking from the pool, he and Cyrathul went — and he went back for a second drink that cost him a headache.</li>
+        <li><strong>His Slow landed for the full minute</strong> on Varlario; his <strong>Sure Strike Blazing Bolt crit her for 34</strong>; and he threw his maul at the hovering bat — <em>“Thank you, Maul”</em> — then <em>“an Electric Arc type guy.”</em></li>
+        <li><strong>He set the terms of the release</strong>, and asked her name on the way out: <em>“You need to leave and not come back… We treated you well, so remember that if we come across you later.”</em> — and after: <em>“Or come back to bite us.”</em> He argued the shard was worth taking for the cause, and called for burning the dead where no one coming in would see.</li>
+        <li><strong>He was the table’s comic undercut</strong>: <em>“We’re famous”</em>; <em>“Put Life Boost on her to kill her easier,”</em> about a void-healing prisoner; <em>“This place looks like a Pokemon region”</em>; <em>“Is Aklo the language of demons?”</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul · the Diplomat with Teeth</h4>
+      <ul>
+        <li><strong>He ran the parley.</strong> Diplomacy first, the attacks on the road named, and three different requests to leave: <em>“It doesn’t seem very homely. I’m sure you could take a vacation.”</em> When she surrendered: <em><strong>“You could have been on a vacation.”</strong></em></li>
+        <li><strong>He wrote the surrender terms.</strong> <em>“We’ll accept it, but she can’t leave.”</em> On the bat: <em>“Unfortunately, that violates our treaty.”</em> On the manacles: <em>“We said we’d tie you up. I think manacles are similar. Probably more comfortable.”</em></li>
+        <li><strong>He played the interrogation in character.</strong> His Esoteric Lore named the Whispering Way and Tar-Baphon; he linked them to Ezio; when his lore missed the war shard, his player kept what he knew out of it (<em>“Alas, what is this war shard you’re talking about?”</em>); and he asked whether the Wight Mother could be beaten <em>without</em> extracting it. When she asked to cast: <em>“You do anything funny, we’ll kill you.”</em></li>
+        <li><strong>He killed the fiend.</strong> Critical Demoralize, then a jaws crit for 48 that the fear turned from a hit into a crit, then the claw that took its head off — <em>“Yeah, this is why I demoralize.”</em> His Confusion save was a hero-pointed crit success.</li>
+        <li><strong>He built the staircase</strong> — Helpful Steps, 40 feet of spiral stairs, the ones Bai Jian ran up for the kill.</li>
+        <li><strong>He woke the spirits.</strong> He touched the spring mural with the <strong>Lifebloom Glaive</strong>, drank, translated, told the spirit about <em>“a necromancer of sorts… who has a war shard infused in her,”</em> read the autumn mural as <strong>Asmodeus, Rovagug and Lamashtu</strong>, and crit the research that makes Bounty’s Light a shield. Also: <em>“I would help, but unfortunately I’m not that kind of dragon.”</em></li>
+      </ul>
+    </div>
+
+    <div class="spotlight s-elaine">
+      <h4>Elaine Stormfrost · the Rogue Who Reads the Room</h4>
+      <ul>
+        <li><strong>Back at the table, she read the room first.</strong> She relayed the voices through the door, her <strong>Religion</strong> identified Pharasma’s desecrated temple — <em>“Pharasma hates the dead”</em> — and in the huddle: <em>“This being here seems like an abomination to this temple.”</em> She wanted to try diplomacy first.</li>
+        <li><strong>She was the interrogation’s pressure.</strong> <em>“Out with it, please. You’re not in the best situation to keep secrets.”</em> Manacles off? <em>“Not a chance. Definitely not… We know you’re a caster.”</em></li>
+        <li><strong>She read Varlario’s Necril notes aloud</strong> — the 19 Calistril ritual — and the correspondence that showed the town was a wight factory. She dragged the undead out of Pharasma’s temple, wanted an ambush set for the 19th, and worked out why the grotto was never defiled: <em>“it wasn’t open… because she had to touch a wall.”</em></li>
+        <li><strong>She went into the river.</strong> Cold-resistant, roped, on Air Bubble, she brought up the aeon stone and the Devilwing Badge.</li>
+        <li><strong>She picked the shrine’s lock</strong> — four successes and a hero point to save her only tools. <em>“God dang, this thing does not want to be opened.”</em> On the potion of flying: <em>“That doesn’t bode well.”</em></li>
+        <li><strong>Her combat was the first strike on the fiend.</strong> Faux Bulwark frightened it, and her <strong>Thorn Whip crit</strong> for 28 + bleed <strong>slowed it</strong> — after its two-action shriek it had nothing left to fly off with. She whipped Varlario for 17 more, and coached Panacea through Foundry’s targeting.</li>
+        <li><strong>She cracked the last mural.</strong> Working the puzzles while Zanthar talked to the spirits, she put together the <strong>Lifebloom Glaive’s power to make wights flee</strong>.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical">
+      <div class="loot-name">Occult magnet</div>
+      <div class="loot-source">Varlario’s floor cache</div>
+      <div class="loot-note">Will tear the war shard out of the Wight Mother once the correct ritual is performed. Nobody has the ritual.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Varlario’s notes (Necril)</div>
+      <div class="loot-source">Varlario’s floor cache</div>
+      <div class="loot-note">Illcayna’s ritual at dusk, 19 Calistril, through the new Urgathoan temple. Partial work on the extraction ritual.</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Black onyx</div>
+      <div class="loot-source">Houses south of the cathedral</div>
+      <div class="loot-note">Left over from Create Undead rituals.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Aeon stone</div>
+      <div class="loot-source">Corpse on the riverbed</div>
+      <div class="loot-note">A dying-related effect — “pretty niche.”</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Devilwing Badge (Greater)</div>
+      <div class="loot-source">Corpse on the riverbed · Panacea holds it</div>
+      <div class="loot-note">Spellheart, lvl 8, 425 gp: Divine Lance, 1/day Crisis of Faith; armor resist 5 fire and unholy; weapon +1d6 spirit after a cast. Needs the Cast a Spell activity.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Staff of healing (greater)</div>
+      <div class="loot-source">Locked box, desecrated shrine · Elaine holds it</div>
+      <div class="loot-note">Panacea already has one. Elaine can use it with her Faith Tattoo heal.</div>
+    </div>
+    <div class="loot-item magical">
+      <div class="loot-name">Potion of flying</div>
+      <div class="loot-source">Locked box, desecrated shrine</div>
+      <div class="loot-note">“That doesn’t bode well.”</div>
+    </div>
+    <div class="loot-item">
+      <div class="loot-name">Research: four answers</div>
+      <div class="loot-source">The Grotto of Seasons, ~8 hours</div>
+      <div class="loot-note">Pallid Plague vaccine · save bonus vs Illcayna in Bounty’s Light · Lifebloom Glaive makes wights flee (1 action) · summer mural long rest, once per 7 days.</div>
+    </div>
+  </div>
+  <div class="xp-banner">Experience · 80 Varlario’s Court (Extreme) = <strong>80 XP each</strong> · ~80 XP from level 8</div>
+  <div class="log-warning"><strong>Foundry left Panacea off the XP recipient list again</strong> (<code>Recipients: Zanthar Elaine Cyrathul Bai Jian</code>) — the fourth session running.</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Cyrathul:</strong> “It doesn’t seem very homely. I’m sure you could take a vacation.”
+    <span class="attribution">Asking Varlario, politely, to vacate a desecrated temple of Pharasma</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “You could have been on a vacation.”
+    <span class="attribution">When a beaten Varlario protested that she’d said she was an emissary — moments before she begged for her life</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “Unfortunately, that violates our treaty.”
+    <span class="attribution">After the bat announced it would eat Bai Jian</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> “I’ll be benevolent. I’ll be a trusting person. You know, Bai Jian has always been a kind person at heart.”
+    <span class="attribution">Spending his turn getting the surrendered witch to call her bat down within reach — “so that we can jump it”</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> “You see Bai Jian just literally run up the stairs and then jump out and then hit it in the head… I just wanted to do it for fun.”
+    <span class="attribution">The kill on the last Skaveling, off the top of Cyrathul’s staircase. Thirteen falling damage</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> “Wait. He got rewarded for failing?… Well, whatever. I’m martial. I don’t care.”
+    <span class="attribution">The only one to pass the summer mural’s save — and the only one who didn’t get the free long rest</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “You guys are probably getting hypothermia, so probably need to make a fire.”
+    <span class="attribution">After hauling Bai Jian and Zanthar out of the river on her rope</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “I am going to stick to what I know works.”
+    <span class="attribution">Sustaining Life Boost on Ren and throwing the Divine Lance that crit the last bat for 38</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “We treated you well, so you can go and just remember that if we come across you later.”
+    <span class="attribution">Releasing Varlario</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “Put Life Boost on her to kill her easier.”
+    <span class="attribution">On the void-healing prisoner who was dying of Bai Jian’s vitality damage</span></blockquote>
+
+  <blockquote><strong>Elaine:</strong> “Go on. Yeah, out with it, please. You’re not in the best situation to keep secrets.”
+    <span class="attribution">Pressing a manacled Varlario, who was weighing what to tell them</span></blockquote>
+
+  <blockquote><strong>Elaine:</strong> “Not a chance. Definitely not. We will just carry you where we need to go. We know you’re a caster.”
+    <span class="attribution">When Varlario asked to have the manacles taken off</span></blockquote>
+
+  <blockquote><strong>Varlario Demicci:</strong> “The Wight Mother has a war shard that she’s fused with herself. How are you so ignorant of all these things?”
+    <span class="attribution">The interrogation’s turning point</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+    <ul>
+      <li><strong>19 Calistril, at dusk</strong> — Illcayna’s final sacrifice to finalize the curse, at a site reached through the <strong>new Urgathoan temple across the frozen river</strong>. It’s the morning of the 9th. <strong>~10 days.</strong></li>
+      <li><strong>Illcayna — almost certainly the Wight Mother.</strong> The S14 cipher name (<em>“Illcayna will reward you when Isger is hers”</em>, from Lefranek’s costume at the gala) is the name Varlario’s notes and the grotto research use for the witch the party is hunting. Nobody said outright that they are one person.</li>
+      <li><strong>The war shard</strong> — a fragment of <strong>Gorum</strong>, fused into her. Varlario: don’t try to beat her without extracting it. The <strong>occult magnet</strong> will do it, given <strong>the right ritual</strong>.</li>
+      <li><strong>The Whispering Way</strong> — allied with Tar-Baphon, spying on Illcayna, wants the shard. <strong>Varlario walked free</strong>, with the party’s names and faces.</li>
+      <li><strong>The overheard voices</strong> — Varlario was talking with someone before the party came in. What is <strong>“the last piece for her puzzle”</strong>?</li>
+      <li><strong>The woman in white ash</strong> — on the autumn mural with a black scythe, not Urgathoa; in Bai Jian’s dream she became a wight: <em>“evoke the true goddess of the harvest to cleanse the scythe.”</em> The grotto spirit calls the scythe-armed “preacher” <strong>kin</strong>. Urgathoa was once a harvest-mother.</li>
+      <li><strong>The winter mural’s third figure</strong> — should be Zon-Kuthon, and isn’t.</li>
+      <li><strong>More to find</strong> — in town, per the spirit; possibly in Gillamoor or Elidir’s libraries.</li>
+      <li><strong>The army</strong> — still marching from Logos; the party is its scout.</li>
+      <li><strong>Earthbind</strong> — two fliers this session; the party wants scrolls.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax’s Notes — Bai Jian’s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax’s notes only — not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+  <ul>
+    <li>Held the <strong>Bless scroll</strong> in hand through the parley. Gave up the parry for it.</li>
+    <li>Opened the fight: Bless, Ren to the flank, <strong>Snagging Strike crit, 57</strong> on the first bat. The fiend's shriek finished it.</li>
+    <li><strong>Natural 1, hero point, 18 — crit Varlario for 44.</strong></li>
+    <li>Took <strong>24</strong> from the fiend's shriek. Ren took <strong>35</strong> from the other bat.</li>
+    <li>When she surrendered, <strong>spent my turn getting her to call the bat down within reach.</strong> It said it would eat me. She healed herself next round; didn't matter.</li>
+    <li><strong>Ran up Cyrathul's staircase, killed the last bat, jumped off.</strong> 13 falling damage. Worth it.</li>
+    <li>Stood ready with Reactive Strike while she cast to open her cache.</li>
+    <li>Fell through the ice. Hero point didn't save it.</li>
+    <li><strong>Rolled for Ren on the ice when the rest of us missed. He found the road to the shrine.</strong></li>
+    <li>Stayed awake through the summer mural. Missed the long rest for it.</li>
+    <li>Read the summer mural's animals: <strong>Sarenrae, Erastil, Gorum.</strong> Spring mural with Elaine: <strong>Desna, Pharasma.</strong></li>
+    <li>Napped under the summer mural on watch. <strong>Had the dream.</strong></li>
+  </ul>
+
+  <h3>Things Bai Jian knows that the party does not</h3>
+  <ul>
+    <li><strong>The dream.</strong> A woman in white ash, the field after the final harvest, the road out of town from the start of all this. She became a wight and her horse rotted under her. She spoke for a people: <em>"This is what the Isgeri chose to defend their land… evoke the true goddess of the harvest to cleanse the scythe."</em> Then the scythe. The others remember her from the summer-mural sleep; the words came in my dream.</li>
+    <li><strong>The vitalizing rune is what nearly killed Varlario after she surrendered.</strong> Every tick of persistent vitality was mine.</li>
+  </ul>
+
+  <h3>What Bai Jian is thinking about</h3>
+  <ul>
+    <li><strong>"The true goddess of the harvest."</strong> Urgathoa was a harvest-mother before she refused to die. Whoever the true one is, she cleanses the scythe — and the Wight Mother has a scythe for an arm.</li>
+    <li><strong>We let Varlario go.</strong> She has our names, our faces, and the Way behind her. It was the right trade for the magnet — if the ritual exists.</li>
+    <li><strong>The occult magnet is useless without the ritual.</strong> Ten days to find it.</li>
+    <li><strong>Bounty's Light protects against her spells.</strong> Fight her inside Zanthar's light. Keep him close.</li>
+    <li><strong>The Lifebloom Glaive scatters wights.</strong> Someone has to carry it into the fight. Cyrathul drew it from the stash tonight.</li>
+    <li><strong>Two fliers this fight.</strong> No ranged option again; I needed a staircase. <strong>Earthbind</strong>, or the longbow in the stash.</li>
+    <li><strong>Ren took 35 in one turn.</strong> Keep him behind me against big biters.</li>
+  </ul>
+
+  <h3>Open questions for next session</h3>
+  <ul>
+    <li>What is <strong>"the last piece for her puzzle"</strong>, and who was Varlario talking to before we walked in?</li>
+    <li>Who is the <strong>true goddess of the harvest</strong>? Who is the woman in white ash?</li>
+    <li>What is the <strong>extraction ritual</strong> for the magnet — Gillamoor? Elidir's libraries? This town?</li>
+    <li>What waits <strong>through the Urgathoan temple</strong> across the river?</li>
+    <li>Is <strong>Illcayna</strong> the same person who hired Lefranek's false Hellbreakers in Elidir?</li>
+    <li>Who sits in the third seat of the winter mural, if not Zon-Kuthon?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Where It Leaves Off</h2>
+  <div class="cliffhanger">
+    <span class="label">End of Session</span>
+    <p>Five in the morning on the 9th, in a grotto the Urgathoans never found. The party has a magnet with no ritual, a vaccine recipe, a light that shields against her spells, and a blade that makes wights run — and ten days before Illcayna comes back to finish the curse. The witch who told them all of it is somewhere out in the dark with wings. And Bai Jian has a dead woman’s voice in his head telling him to find the true goddess of the harvest.</p>
+    <span class="big-line">“Evoke the true goddess of the harvest to cleanse the scythe.”</span>
+    <span class="speaker">— the woman in white ash, in Bai Jian’s dream</span>
+  </div>
+</section>
+
+</div>
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>

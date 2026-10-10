@@ -22,6 +22,16 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
         └── recap.html    # Styled HTML visual — timeline, character spotlights
 ```
 
+## Campaign viewer (local web app)
+
+`campaign-viewer/` is **Campaign Codex**, a local server-rendered browser and dashboard for all the campaign folders. It renders the Markdown files and serves each session's `recap.html`, and it has search.
+
+- **Run it:** `cd campaign-viewer && npm start` (in the background). It serves **http://localhost:4747** on 127.0.0.1. Override with the `PORT` / `HOST` env vars.
+- **Check whether it's already running first:** `ss -ltnp | grep 4747`. Port 4173 is a different app; don't touch it.
+- **Session recaps:** `/<campaign>/sessions/<session-folder>?f=recap.html` (for example `/revenge-of-the-runelords-cody/sessions/session-13-10-03-2026?f=recap.html`). New session folders show up without a restart, because it reads the filesystem on each request.
+- When Pax says "run the server," he means this one. Use it to screenshot recaps through `http://localhost:4747` as well as by `file://`.
+- Code: `server.js` (routing), `lib/data.js` (campaign discovery), `lib/markdown.js` (uses `marked`), `lib/views.js` (HTML), `public/` (CSS/JS).
+
 ## Campaigns
 
 | Folder | System | Setting | Character |
@@ -36,7 +46,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 | `season-of-ghosts-ande/` | Pathfinder 2e Remastered (Free Archetype, Gradual Boosts, Ancestry Paragon) | Season of Ghosts (Willowshore, Shenmen, Tian Xia) — **AndeGM's paid group** | **Zhen Stillness** — Samsaran (Hungerseed) Animist (Liturgist) — healer/buffer/secondary striker | **JOINED 2026-06-26 @ S1** (new 5th player) |
 | `setting-sun/` | Pathfinder 2e Remastered | Setting Sun, Rising Phoenix (Shades of Blood → Fists of the Ruby Phoenix) | **Sovael** — Pearl Dragonet (Aiuvarin) — Oracle (Flames) / Bard / Sorcerer | **SHADES OF BLOOD COMPLETE 2026-07-12 @ S8 → Ruby Phoenix @ Lv11. Tivael retired; Sovael (his cousin) replaces him** |
 | `revenge-of-the-runelords/` | Pathfinder 2e Remastered (**Mythic**) | Revenge of the Runelords — **Tom Brister's Tuesday group** | Liu Heifeng — Tengu (Sylph) Thaumaturge — falcata + fist, Champion/Spirit Warrior | **LEFT** — scheduling conflict; switched to Cody's Saturday RotR |
-| `revenge-of-the-runelords-cody/` | Pathfinder 2e Remastered (**Mythic**, Free Archetype, Ancestry Paragon, **no ARP, no GAB**) | Revenge of the Runelords — **Cody McGraw's Saturday group** (same DM as `setting-sun/`) | **Sevek** — Human (Sky Dragonblood) **Monk 13**, worshipper of Ashava — bo staff trip/tank, Guardian + Staff Acrobat + Druid + Mortal Herald, Ascended Celestial destiny | **JOINING 2026-08-01 @ Lv13** |
+| `revenge-of-the-runelords-cody/` | Pathfinder 2e Remastered (**Mythic**, Free Archetype, Ancestry Paragon, **no ARP, no GAB**) | Revenge of the Runelords — **Cody McGraw's Saturday group** (same DM as `setting-sun/`) | **Sevek** — Human (Sky Dragonblood) **Monk 13**, worshipper of Ashava — bo staff trip/tank, Guardian + Staff Acrobat + Druid + Mortal Herald, Ascended Celestial destiny | Joined 2026-08-01 @ Lv13 · **Lv18 as of S13 (2026-10-03) — Book Two complete** |
 | `abomination-vault/` | Pathfinder 2e Remastered | Abomination Vaults (Otari, the Gauntlight) | ~~Argon Rath — Orc Barbarian~~ **DIED S4 (2026-07-29)**; new Lv5 PC TBD | **DM ("Lap") runs deliberately over-level; party Lv5** |
 
 ## Discuss it — don't go build it

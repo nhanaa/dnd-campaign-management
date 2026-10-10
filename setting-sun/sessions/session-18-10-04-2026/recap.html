@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 18 — Tear the Veil</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<header class="header">
+  <h1>Tear the Veil</h1>
+  <div class="subtitle">Session 18 · Winter's Roar crushed, the Lightkeepers' wall, level 17 — and the Biting Roses avenged</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-10-04</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 29m</span>
+    <span class="meta-pill">Ruby Phoenix Arena, Goka</span>
+    <span class="meta-pill">Level 16 → 17</span>
+    <span class="meta-pill">4 PCs · Seva absent</span>
+    <span class="meta-pill">3 fights · 2 wins · 1 loss</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:82"></div>
+  <div class="comp-seg comp-social" style="flex:8"></div>
+  <div class="comp-seg comp-rp" style="flex:4"></div>
+  <div class="comp-seg comp-loot" style="flex:6"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · three tournament matches</span>
+  <span><span class="legend-dot comp-social"></span>Debrief · Cody's notes, the bracket</span>
+  <span><span class="legend-dot comp-rp"></span>Roleplay · the arena, the trash talk</span>
+  <span><span class="legend-dot comp-loot"></span>Level 17</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard / Living Nexus / Sorcerer</div>
+    <div class="char-player">Pax · "Mingzhu" · Roaring Applause in all three fights</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · It's Not Over, then two kills</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva the Unerring</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Irorian · four kills, two Moments of Renewal</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch the Rampart</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · the last one standing</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva the Shade</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">absent · out sick · back next week</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>The Nameless are one win from a rematch with the Lightkeepers.</strong> Three matches, three days, one loss — and the loss was the fight Cody said afterward was <em>"not designed for you to be able to win."</em></p>
+
+<p>Cody opened by correcting last week's bracket math: with only eight teams, winning the winners' bracket takes three wins, and the last team knocked out of it is <strong>seeded</strong> into the losers' bracket and needs only two wins to reach the final. Then the semifinal: <strong>Winter's Roar</strong>, Ulfin warriors from the lands of the Linnorm Kings — <strong>Urnak Lostwind</strong> (greataxe, Whirlwind Strike, <em>"a Linnorm King in the making"</em>), <strong>Huldrin Skolsdottir</strong> (trident and spiked shield, Iron Maiden Stance, a second reaction for Shield Block) and the halfling caster <strong>Juspix Rammel</strong>, who opened with a <strong>seventh-rank Haste</strong> on all three. With Seva out, their hobgoblin monk sat out too. Sattva bowed, and his robe began to shine.</p>
+
+<p>Winter's Roar got their reactions in round one — a Reactive Strike on Clutch's potion, two Shield Blocks from Huldrin — and then <strong>Sovael took them away</strong>. Round two: Ancestral Memories on Huldrin and a <strong>sixth-rank Roaring Applause</strong>; Huldrin failed and Urnak failed on a natural 2. Ferrok: <em>"No more Quicken for them."</em> Sovael: <em>"I think the big price is no reaction, because they have pretty strong reactions."</em> For the rest of the match the two warriors were Slowed, had to clap on their own turns, and never reacted again — Cody: <em>"They have not had reactions this whole fight."</em> Clutch held Urnak in a grapple he kept renewing, and when Juspix's Eclipse Burst came in, his Shield Block spread 15 resistance to Sovael and Sattva, with a <strong>Mending Lattice</strong> to repair the shield after. Juspix's thrown fork at Ferrok went wide — <em>"I catch it and break it in half." / "Not how that works, but…"</em> When Juspix's targeted Desiccate came in, Sovael's <strong>eighth-rank Spell Riposte</strong> counteracted it and turned it back on him; Juspix failed his own save for 56.</p>
+
+<p>Clutch wanted to throw Urnak into Huldrin, and, told he could only throw him for distance, threw him anyway: <em>"We'll just throw them away and say we're just getting rid of the trash."</em> Sovael: <em>"Don't say that. Let's be respectful."</em> Clutch took the note in character — <em>"Sovael probably lectured Clutch at some point about his trash talking, and Clutch starts to say something, and then looks over at Sovael and goes, ah, shit."</em> Ferrok went after the caster (<em>"Got to geek the mage. Got to do it"</em>), blinding him with a Briny Bolt and then critting him with Blink Charge. <strong>Sovael finished Urnak with a Quickened Chain Lightning</strong>, Juspix's own Fireball caught Huldrin (<em>"Huldrin will be accepting of this"</em>), <strong>Sattva's Hunted Shot dropped Huldrin</strong>, and <strong>Sovael finished Juspix</strong> with a natural-20 Needle Darts. Emi: <em>"The Nameless win by a landslide."</em></p>
+
+<p>Afterward Cody admitted he had <strong>nerfed Winter's Roar</strong> because his mythic Saturday group had nearly been wiped by them the day before — and that, between that and his own cold dice, the Nameless had <em>"proved me wrong."</em> No more adjustments: <em>"You had very good teamwork… I feel like you know what you're doing."</em></p>
+
+<p>The <strong>winners'-bracket final</strong> was the <strong>Lightkeepers</strong>, the team that beat the party in S11. Ran-to smirked: <em>"I didn't think you bastards would be the ones to get here."</em> Syu Tak-nwa, from the back: <em>"I'll acknowledge you've gotten a bit stronger, but if you think that means this is going to go any differently than last time, you're sorely mistaken."</em> Sattva: <em>"We meet again… Well, let's see about that."</em></p>
+
+<p>For two rounds it was a different fight than the first time. Sovael had Ferrok and Sattva delay behind him and <strong>Hasted the whole party from a scroll</strong>. Sattva put <strong>179 into Blue Viper in his first turn</strong> — a natural-20 Hunted Shot and then a second natural 20 at −10. Clutch's Aeon stone <strong>reflected Syu's Phantasmagoria back at her</strong>. Sovael's second <strong>Roaring Applause</strong> hit hard: Blue Viper failed, Shino crit-failed, Syu failed on a natural 2 — three Slowed, all four without reactions. Ferrok, confused, swung at Ran-to three times and rolled three critical misses (Sovael: <em>"You have to be more specific."</em>), then used <strong>Take Your Places</strong> to teleport Sovael out of Ran-to's grip and nearly kill Blue Viper; <strong>Sattva finished it</strong>.</p>
+
+<p>Then it turned. <strong>Ran-to kept grabbing the dragon</strong> — four grapple attempts on Sovael all fight, every one a critical success — and Syu's Spirit Song stunned him, and <strong>Shino's critical dropped him and ended the Applause</strong>: <em>"They have their reactions back."</em> Clutch's Battle Medicine brought him up, and <strong>Sattva's Moment of Renewal</strong> — a giant palm overhead and the sound of a gong — renewed Clutch and Sovael. Ran-to took him again: <em>"Dude, after the shit you've been doing this fight, he's not letting you go."</em> Sovael: <em>"I think I made a bit of a miscalculation with my skills."</em> Clutch Repositioned him free — <em>"Best I can do is get you un-grabbed and five feet away."</em> Syu laid down Visions of Danger; Shino critted Ferrok to 23 (<em>"Hanging on my thread"</em>); the Visions dropped him at the top of his next turn and he came back with <strong>It's Not Over</strong>. Then Syu: <em>"That's quite enough of this. You fought well, but I think we're done here"</em> — a <strong>tenth-rank Tear the Veil</strong>. Clutch saved on a natural 20; Ferrok and Sattva critically failed for 121 each, and Ferrok dropped again. <em>"You're the first ones who have had to make me use that, so I applaud you."</em></p>
+
+<p>Ran-to headlocked Sovael once more. With nothing left to cast, Sovael <strong>Bon Mot'd the goblin holding him</strong> — and answered the goblin's retort with <em>"Well, I haven't been able to cast because of you."</em> Ran-to whispered in his ear: <em>"All your shit makes it harder for me to actually fight. So fuck you."</em> Sovael: <em>"Well, you make it harder for me to cast spells as well, so…"</em> Cody: <em>"Just a little dragon trash talking while he's headlocked by this goblin."</em> Then Shino's falling knee took Sattva (<em>"I do the Street Fighter death sound and drop to the ground"</em>) and her shuriken took Sovael. Ran-to beckoned Clutch — <em>"Come on, big guy. I know you got some more in you"</em> — and Clutch grabbed <strong>Syu</strong> and hurled her 35 feet. Ferrok stabilised (<em>"I'm going to live forever"</em>). Sattva got up on his fast healing twice to shoot Shino in the back from the floor — <em>"right in the groin… Still hurts"</em> — and was finally put out with a critical. <strong>Clutch was the last one standing</strong>, and gracious about it: <em>"I don't see any reason to burn consumables because I'm pretty sure we all see the way this is going. You got pretty far."</em> In round nine Shino dropped him. <strong>The Lightkeepers won.</strong> Cody gave them a round of applause and named what had bought them their time — <strong>Sovael's Roaring Applause</strong> — and why the enemies kept going for him: <em>"It's just because you do things that shut everybody else down so effectively."</em></p>
+
+<p><strong>Level 17.</strong> After the break, Cody ran the losers' bracket: the Biting Roses beat the Arms of Balance, the Speakers to the Wind beat Winter's Roar, Tino's Toughest beat the Steps of the Sun. The Nameless, seeded, drew <strong>the Biting Roses</strong> — the team that beat them in S14.</p>
+
+<p>Sovael cast a <strong>ninth-rank Sacred Covenant</strong> over the party before the bell. Lantondo opened with Pierce the Sky at everyone but Clutch (<em>"they know what Clutch is about"</em>); Yarrika opened with Phantasmagoria, and Clutch's Aeon stone reflected it again. Ferrok cast Haste. Sovael opened <strong>Dirge of Doom with a critically successful Lingering (four rounds)</strong>, a <strong>critical Talent Envy Demoralize on Grandfather Mantis</strong>, and a <strong>ninth-rank Heroism on Sattva</strong>. In round two Yarrika banished Clutch into a <strong>Quandary</strong> puzzle room and critted Sovael with a Mantis Strike (Wooden Double soaked 25). Ferrok's <strong>Briny Bolt Spellstrike critted her for 210</strong>; Sovael followed with <strong>Wails of the Damned</strong> — Yarrika, the Mantis and Artus all failed, and Lantondo, a Wyrwood, was immune (Sovael caught that the spell hits <em>"each living enemy,"</em> which Cody had read as every creature: <em>"If I had read that right, then Syu would have used Wails of the Damned on all of you way earlier"</em>) — and a <strong>Quickened Roaring Applause</strong>. <strong>Sattva's Hunted Shot killed Yarrika</strong> — <em>"That's for taking out Clutch"</em> — and the Quandary ended with her. Artus critted Sovael, who went invisible off <strong>Dazzling Dragonet Disappearance</strong>; the Mantis had Truesight and clawed him anyway. Round three, striding past the Mantis's announced reactive strike (<em>"Please don't kill me"</em>), Sovael <strong>healed himself for 101</strong>, and Sattva cast his second <strong>Moment of Renewal</strong>. Then Lantondo's Corrosive Muck caught Ferrok on a natural 1 (<em>"Oh, my reflex sucks." / Sovael: "You wore too much armor."</em>). <strong>Ferrok killed Grandfather Mantis</strong>, and next round <strong>critically Disintegrated Artus</strong>. Sovael chased Lantondo with his first <strong>Canticle of Everlasting Grief</strong> and then a <strong>Fire Ray critical for 142</strong> (<em>"Oh, that's without a Sure Strike. Well, I'll just take that."</em>), and <strong>Sattva's Hunted Shot finished Lantondo.</strong> No PC went down.</p>
+
+<p><strong>Next session: the Speakers to the Wind</strong> (Tino's Toughest are eliminated — Sovael: <em>"Oh, Tino, no"</em>), and if the Nameless win, <strong>the Lightkeepers again</strong>. Seva's player is back next week.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Social · Bracket Correction &amp; the Semifinal Draw</div>
+    <div class="act-card">
+      <h3>"Only two more matches need be won"</h3>
+      <ul>
+        <li>Cody corrects last week's math: <strong>eight teams → three wins</strong> takes the winners' bracket; the last team eliminated from it is <strong>seeded</strong> and needs only <strong>two</strong> losers'-bracket wins to reach the final.</li>
+        <li>"Last time on Fists of the Ruby Phoenix": Goka, the Ruby Village, the exhibition, the sweep of the Arms of Balance.</li>
+        <li>A day between matches and the <strong>Endless Market</strong> (level-20 settlement) open. Nobody shops.</li>
+        <li>Across the Seven Dragons Bridge. <strong>Tagata Emi</strong> introduces <strong>Winter's Roar</strong> — <em>"Urnak Lostwind is a Linnorm King in the making"</em> — and the Nameless, <em>"the record for the most defeated monsters on the Isle of Bonmou."</em></li>
+        <li>Seva is out sick; Winter's Roar's <strong>Frostknuckles</strong> sits out to keep it 3v4. Ferrok: <em>"One of them caught the same stomach bug that Seva did."</em></li>
+        <li><strong>Sattva bows and his robe begins to shine</strong> — his new gi, fast healing 9.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Winners' Semifinal · Winter's Roar</div>
+    <div class="act-card">
+      <h3>"No more Quicken for them"</h3>
+      <ul>
+        <li>Juspix Hastes all three. Round 1 belongs to their reactions — two Huldrin Shield Blocks, Urnak's Reactive Strike on Clutch's potion.</li>
+        <li><strong>Ferrok's Disintegrate Spellstrike</strong> lands 72 through Huldrin's block and leaves her shield one point from breaking.</li>
+        <li><strong>Sovael: Ancestral Memories → rank-6 Roaring Applause.</strong> Huldrin and Urnak fail — Slowed, no reactions for the rest of the match.</li>
+        <li>Clutch's Shield Block spreads 15 resistance through Eclipse Burst; a <strong>Mending Lattice</strong> repairs the shield. Clutch intercepts Urnak's <strong>86-point crit on Sovael</strong>.</li>
+        <li><em>"I catch it and break it in half."</em> Fortissimo Anthem at <strong>+3</strong>. <strong>Spell Riposte</strong> turns Desiccate back on Juspix (56).</li>
+        <li>The trash-talk bit: <em>"getting rid of the trash"</em> → <em>"Let's be respectful"</em> → <em>"ah, shit."</em></li>
+        <li><strong>Sovael's Quickened Chain Lightning finishes Urnak.</strong> Juspix's Fireball catches Huldrin. Ferrok's Blink Charge crits Juspix (90).</li>
+        <li><strong>Sattva drops Huldrin. Sovael's natural-20 Needle Darts finishes Juspix.</strong> <em>"The Nameless win by a landslide."</em> Cody: he'd nerfed them — <em>"you guys proved me wrong."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · Winners' Final · The Lightkeepers</div>
+    <div class="act-card">
+      <h3>"That's quite enough of this"</h3>
+      <ul>
+        <li><em>"I didn't think you bastards would be the ones to get here."</em> / <em>"We meet again."</em> Sovael's <strong>scroll Haste</strong> on the party.</li>
+        <li><strong>Sattva's 179 on Blue Viper</strong> in one turn; Clutch's Aeon stone <strong>reflects Phantasmagoria</strong>; Sattva: <em>"I am nameless."</em></li>
+        <li><strong>Roaring Applause</strong>: Blue Viper, Shino and Syu fail — three Slowed, four without reactions. Ferrok, confused: three critical misses. <em>"You have to be more specific."</em></li>
+        <li><strong>Take Your Places</strong> pulls Sovael out of Ran-to's grip; <strong>Sattva kills Blue Viper.</strong></li>
+        <li>Spirit Song stuns Sovael; <strong>Shino's crit drops him and ends the Applause.</strong> Clutch's Battle Medicine; <strong>Sattva's Moment of Renewal</strong> — a giant palm, a gong.</li>
+        <li>Ran-to won't let go — <em>"I think I made a bit of a miscalculation with my skills."</em> Clutch Repositions him free. Sovael heals Clutch for 99 at 9 HP.</li>
+        <li><em>"Hanging on my thread"</em> → <strong>It's Not Over</strong> → <strong>Tear the Veil</strong>: <em>"You're the first ones who have had to make me use that."</em></li>
+        <li>Bon Mot from the headlock — <em>"All your shit makes it harder for me to actually fight."</em> Sattva up twice off fast healing; Clutch throws <strong>Syu</strong> 35 feet; <em>"I'm going to live forever."</em></li>
+        <li><strong>Clutch alone</strong> — <em>"You got pretty far."</em> Shino drops him in round 9. <strong>The Lightkeepers win.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · Debrief &amp; Level 17</div>
+    <div class="act-card">
+      <h3>"Not designed for you to be able to win"</h3>
+      <ul>
+        <li>Cody: the fight wasn't built to be won; Syu is a level above her team.</li>
+        <li>Ferrok: <em>"It was a good fight"</em> — <em>"The image of Clutch fighting everybody off and throwing people around as we're all laying there."</em></li>
+        <li>Cody credits <strong>Sovael's Roaring Applause</strong> with buying the party its time — and explains the focus fire: <em>"you do things that shut everybody else down so effectively… We've got to get you in the air."</em></li>
+        <li>Clutch blames himself — <em>"I didn't reroll it, so I couldn't intercept… which was the snowballing."</em> Sovael names the grab, and the counter he'd prepared and never got to cast.</li>
+        <li><strong>Level 17.</strong> Losers' bracket: Biting Roses def. Arms of Balance; Speakers to the Wind def. Winter's Roar; Tino's Toughest def. Steps of the Sun.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · Losers' Semifinal · The Biting Roses</div>
+    <div class="act-card">
+      <h3>"That's for taking out Clutch"</h3>
+      <ul>
+        <li>Pre-fight <strong>Sacred Covenant</strong>; <em>"I don't have the action economy for that"</em> (on a flying potion).</li>
+        <li>Pierce the Sky at everyone but Clutch; Yarrika's Phantasmagoria, reflected again — Ferrok: <em>"It's okay, I came prepared."</em></li>
+        <li>Sovael: Dirge + <strong>critical Lingering (4 rounds)</strong>, <strong>critical Demoralize on the Mantis</strong>, <strong>rank-9 Heroism on Sattva</strong>.</li>
+        <li>Yarrika's <strong>Quandary</strong> removes Clutch; Wooden Double soaks 25 of her crit. <strong>Ferrok's Briny Bolt crit: 210.</strong></li>
+        <li><strong>Wails of the Damned</strong> (three fail; Lantondo immune) and a <strong>Quickened Roaring Applause</strong>. <strong>Sattva kills Yarrika</strong>; Clutch is back.</li>
+        <li>Dazzling Dragonet Disappearance vs Artus. <em>"Please don't kill me"</em> → self-Heal 101. Sattva's second <strong>Moment of Renewal</strong>.</li>
+        <li><em>"You wore too much armor."</em> <strong>Ferrok kills Grandfather Mantis</strong>, then <strong>Disintegrates Artus</strong>.</li>
+        <li>Canticle of Everlasting Grief (<em>"That's a crazy name"</em>), then the <strong>142 Fire Ray crit</strong>. <strong>Sattva finishes Lantondo.</strong> No PC down.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VI · Social · Wrap</div>
+    <div class="act-card">
+      <h3>"Oh, Tino, no"</h3>
+      <ul>
+        <li>Next: <strong>the Speakers to the Wind</strong>; Tino's Toughest are eliminated. Win, and it's <strong>the Lightkeepers again</strong>.</li>
+        <li>Cody: <em>"I might need to rethink my item policy… Or I might just need to give enemies items."</em> Sovael: <em>"I think that's only fair."</em></li>
+        <li>Cody on Book 2's weak stat blocks (he buffs everything) and its pacing — he cut the Goka sponsor chapter. The tournament <em>is</em> Book 2, and there's more after it.</li>
+        <li>Clutch asks whether the nobles matter later (they don't). Seva's player is back next week.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 1 · Winners' Semifinal · Winter's Roar · ~46 min · 7 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Urnak Lostwind (480; greataxe, Whirlwind Strike) · Huldrin Skolsdottir (375; trident &amp; shield, extra Shield Block reaction) · Juspix Rammel (325; primal caster) — Frostknuckles sat out</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sovael 48 · Urnak 43 · Huldrin 41 · Juspix 41 · Sattva 40 · Clutch 35 · Ferrok 33</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Clutch ~384 · Ferrok ~354 · Sattva ~325 · Sovael ~161 (incl. 56 riposted Desiccate)</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Clutch ~371 (~263 intercepted) · Ferrok ~223 · Sovael ~136 · Sattva 31</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sovael 2 (Urnak, Juspix) · Sattva 1 (Huldrin)</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Clutch 1 (Spinebreaker natural 1, still failed)</span></div>
+</div>
+<h4>Round 1 — Haste and reactions</h4>
+<ul>
+  <li><strong>Sovael</strong>: Dirge → Lingering (success, three rounds) → wand <strong>Heroism on Clutch</strong>; Talent Envy Demoralize on Huldrin crit-fails on a natural 1. <strong>Juspix</strong> casts <strong>seventh-rank Haste on all three</strong>.</li>
+  <li><strong>Urnak</strong> Whirlwind-Strikes the line; <strong>Clutch intercepts</strong> for Sattva (36), bites back (27), Taunts. <strong>Huldrin</strong> enters Iron Maiden Stance and hits Ferrok twice.</li>
+  <li><strong>Sattva</strong> hits Urnak (41) — Huldrin Shield-Blocks for him — and shares his 2d8 gift with Ferrok and Clutch. <strong>Clutch</strong>'s potion draws Urnak's Reactive Strike; he grabs Urnak.</li>
+  <li><strong>Ferrok</strong>: Sure Strike → <strong>Disintegrate Spellstrike</strong> on Huldrin; she blocks with her second reaction and saves — <strong>72 lands</strong>, shield one point above breaking.</li>
+</ul>
+<h4>Round 2 — Roaring Applause</h4>
+<ul>
+  <li><strong>Sovael</strong>: <strong>Ancestral Memories on Huldrin → sixth-rank Roaring Applause.</strong> Huldrin (33) and Urnak (natural 2) fail: Slowed 1, no reactions, a provoking clap every turn.</li>
+  <li><strong>Juspix's Eclipse Burst</strong>: Sovael Absorbs Magic; <strong>Clutch's Shield Block passes 15 to Sovael and Sattva</strong>; a <strong>Mending Lattice</strong> repairs the shield. Juspix's fork misses — <em>"I catch it and break it in half."</em></li>
+  <li><strong>Urnak</strong>, grabbed, throws at Sovael — <strong>Clutch intercepts and crits the counterattack (60)</strong>. <strong>Huldrin</strong> trips Ferrok. <strong>Sattva</strong>: <strong>eighth-rank Heal on Ferrok (102)</strong>, Hunted Shot (50). Clutch's Spinebreakers fail (one hero-pointed). Ferrok ring-teleports to his feet.</li>
+</ul>
+<h4>Round 3 — True Target</h4>
+<ul>
+  <li><strong>Sovael</strong>: sustain, <strong>True Target</strong> for all four on Urnak, Shield. <strong>Juspix</strong> heals Urnak (79).</li>
+  <li><strong>Urnak</strong>'s clap draws Ferrok's Reactive Strike (39); his <strong>critical on Sovael (86)</strong> is <strong>intercepted by Clutch</strong> (to 92/298).</li>
+  <li><strong>Sattva</strong>: scroll Heal on Clutch (91), <strong>True-Targeted crit on Urnak (79)</strong>. <strong>Clutch</strong> Taunts all three at 120 ft, crit-trips and re-grabs Urnak. <strong>Ferrok</strong>: Beheading Buzz Saw (46).</li>
+</ul>
+<h4>Round 4 — Riposte and the trash</h4>
+<ul>
+  <li><strong>Sovael</strong>: <strong>Fortissimo Anthem</strong>, crit by Orchestral Brooch — <strong>+3</strong>. Juspix's Desiccate: <strong>Spell Riposte counteracts it — Juspix fails his own spell (56)</strong>; Ferrok fails too (56).</li>
+  <li><strong>Sattva</strong>: crit + hit on Urnak (82 + 38). <strong>Clutch Whirling-Throws Urnak</strong> — <em>"getting rid of the trash." / "Let's be respectful."</em> <strong>Ferrok</strong>: Briny Bolt Spellstrike on Juspix (59), blinded. <em>"Got to geek the mage."</em></li>
+</ul>
+<h4>Round 5 — Urnak falls</h4>
+<ul>
+  <li><strong>Sovael's Quickened Chain Lightning finishes Urnak</strong> (the last 22).</li>
+  <li><strong>Juspix</strong>'s eighth-rank Fireball catches Huldrin too (48). Huldrin swings at Sovael — Clutch intercepts twice, counterattacks for 25 and a 48 crit. Clutch's Snagging Strike crits her (58). <strong>Ferrok</strong>: <strong>Blink Charge crit on Juspix (90)</strong>.</li>
+</ul>
+<h4>Rounds 6–7 — Clean-up</h4>
+<ul>
+  <li><strong>Sovael</strong>: <strong>Debilitating Dichotomy</strong> on Huldrin (she saves, 34) — he took the full 69 on his own half; the save upgrade wasn't applied.</li>
+  <li><strong>Sattva's Hunted Shot drops Huldrin</strong>; he Battle-Medicines Sovael (73). Clutch Long Jumps to Juspix and grabs him; Ferrok's Echo Jump leaves Juspix at 49.</li>
+  <li><strong>Round 7: Sovael's Sure Strike Needle Darts — natural 20, 56. Juspix down.</strong></li>
+</ul>
+<p style="color:var(--gold)">Winter's Roar had three reactions in round one and none after it. Sovael's Applause, Clutch's grapple chain and ~263 intercepted damage, and Sattva's 290 into Urnak turned a team that nearly wiped Cody's mythic group into a landslide.</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 2 · Winners' Final · The Lightkeepers · ~74 min · 9 rounds · LOSS</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Syu Tak-nwa (425; witch, a level above her team) · Shino Hakusa (375) · Blue Viper (400) · Ran-to (525) — finished at Ran-to 218, Shino 172, Syu 406</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Blue Viper 52 · Ferrok 51 · Syu 47 · Sattva 47 · Sovael 47 · Ran-to 45 · Shino 43 · Clutch 36</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Sattva 379 · Ferrok 311 · Clutch 299 · Sovael 0 direct — Syu took 39 all fight</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Clutch 650 · Sovael 542 (dropped twice) · Sattva 463 (dropped three times) · Ferrok ~380 (dropped twice)</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">~1,000 — Sattva ~473 · Clutch 232 · Sovael 221 · Ferrok 76</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sattva 1 (Blue Viper)</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Sovael 1 · Clutch 2 · Ferrok 2 · Sattva 1</span></div>
+</div>
+<h4>Round 1 — Haste, and 179 on Blue Viper</h4>
+<ul>
+  <li><strong>Blue Viper</strong> crits at Sovael — <strong>Clutch intercepts (51)</strong>. <strong>Sovael</strong>: Anthem → Lingering (hero point) → Talent Envy Demoralize on Ran-to → <strong>scroll Haste on all four</strong>.</li>
+  <li><strong>Ferrok</strong>: Comet Charge Spellstrike on Shino (33 + 40). <strong>Sattva</strong>: Hunted Shot natural 20 (77), Benediction, a second natural 20 at −10 (102) — <strong>179 on Blue Viper</strong>.</li>
+  <li><strong>Syu: Phantasmagoria</strong> — Ferrok confused; <strong>Clutch's Aeon stone reflects it</strong> (27). <strong>Ran-to</strong> Body-Slams Sattva (55); Shino knees him (58). Clutch hero-points a grab onto Blue Viper.</li>
+</ul>
+<h4>Round 2 — Roaring Applause</h4>
+<ul>
+  <li><strong>Sovael</strong>: <strong>Roaring Applause</strong> — Blue Viper fails, <strong>Shino crit-fails, Syu fails on a natural 2</strong>; three Slowed, all four without reactions. Quickened Heal on Sattva (72).</li>
+  <li><strong>Ferrok</strong>, confused: three critical misses on Ran-to. <em>"You have to be more specific."</em> Sattva hits Blue Viper twice. Syu's Telekinetic Bombardment.</li>
+  <li><strong>Ran-to crit-grabs Sovael and crits him (76)</strong>. Ferrok: <em>"Our dragon."</em></li>
+</ul>
+<h4>Round 3 — Blue Viper falls; Sovael falls</h4>
+<ul>
+  <li><strong>Sovael</strong>, restrained: Healing Nexus (50), <strong>critical Demoralize on Shino</strong>. <strong>Ferrok: Take Your Places</strong> frees him and puts Blue Viper on 1 HP. <strong>Sattva kills Blue Viper.</strong></li>
+  <li><strong>Syu: Spirit Song</strong> — Sovael and Clutch stunned. Ran-to re-grabs Sovael; <strong>Shino crits him for 90 — down, and the Applause ends.</strong> Clutch's Battle Medicine brings him back (59).</li>
+</ul>
+<h4>Round 4 — Renewal, and the hold</h4>
+<ul>
+  <li>Shino Nimble-Dodges Ferrok's Briny Bolt. <strong>Sattva: Moment of Renewal</strong> on Clutch and Sovael. <strong>Syu: Spirit Song #2</strong> — Ferrok crit-fails (98, stunned 2).</li>
+  <li>Ran-to holds Sovael — Clutch intercepts twice and crits back twice, then is out of reactions; <strong>a natural-20 crit puts 83 on Sovael</strong>. Escape crit-fails; Scare to Death natural 1. <em>"I think I made a bit of a miscalculation with my skills."</em></li>
+  <li><strong>Clutch Repositions Sovael free</strong> — <em>"Best I can do is get you un-grabbed and five feet away."</em></li>
+</ul>
+<h4>Round 5 — Visions of Danger</h4>
+<ul>
+  <li>Sattva heals Sovael (96). <strong>Syu: Visions of Danger</strong> — Clutch crit-fails (74). Ran-to drops Clutch to 9; <strong>Sovael heals him for 99</strong>.</li>
+  <li><strong>Shino's natural-20 crit on Ferrok (106)</strong> — Planar Sidestep and Shield Block leave him at 23: <em>"Hanging on my thread."</em></li>
+</ul>
+<h4>Round 6 — Tear the Veil</h4>
+<ul>
+  <li>The Visions drop Ferrok; <strong>It's Not Over</strong>; Disintegrate Spellstrike on Shino (76).</li>
+  <li><strong>Syu: Tear the Veil</strong>, rank 10 — Clutch crit-saves; Sovael saves (33); <strong>Ferrok and Sattva crit-fail for 121 — Ferrok drops</strong>. <em>"You're the first ones who have had to make me use that, so I applaud you."</em></li>
+  <li>Ran-to crits Sovael (Bounce Away) and headlocks him: <strong>Bon Mot</strong> and <strong>Evangelize</strong> from the hold. <strong>Shino drops Sattva, then Sovael with a shuriken.</strong> <strong>Clutch grabs Syu and throws her 35 feet.</strong> Ferrok stabilises — <em>"I'm going to live forever."</em></li>
+</ul>
+<h4>Rounds 7–9 — Clutch alone</h4>
+<ul>
+  <li>Syu's Synesthesia; Ran-to's Greater Leaping Catch onto Clutch. <strong>Sattva gets up twice</strong> to shoot Shino from the floor and is put out with a critical.</li>
+  <li><strong>Clutch</strong>: <em>"I don't see any reason to burn consumables… You got pretty far."</em> <strong>Round 9: Shino drops him. The Lightkeepers win.</strong></li>
+</ul>
+<p style="color:var(--gold)">Sovael dealt no direct damage and still shaped the fight: the party's Haste, an Applause that took every Lightkeeper's reactions until his round-3 drop, two Demoralizes, Evangelize and 221 healing. Cody: the Applause is what <em>"definitely bought you guys some time."</em></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 3 · Losers' Semifinal · The Biting Roses · 6 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Yarrika Mulandez (320) · Lantondo (345, Wyrwood, void-immune) · Artus Rodrivan (345) · Grandfather Mantis (420, Truesight)</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Lantondo 52 · Yarrika 52 · Sovael 49 · Ferrok 41 · Sattva 40 · Artus 33 · Mantis 33 · Clutch 25</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Ferrok 588 · Sattva ≈412 · Sovael 281 (+85 max HP drained) · Clutch 64</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Sattva 346 · Ferrok 290 · Sovael ≈242 · Clutch 224 (151 intercepted) — no PC down</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Sattva 2 (Yarrika, Lantondo) · Ferrok 2 (Grandfather Mantis, Artus)</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Sattva 1 (his last, on a Battle Medicine)</span></div>
+</div>
+<h4>Round 1 — Two openers</h4>
+<ul>
+  <li>Pre-fight <strong>Sacred Covenant</strong>; Clutch's Battle Cry on the Mantis. <strong>Pierce the Sky</strong> — Clutch intercepts two bolts. <strong>Yarrika's Phantasmagoria</strong> — Clutch reflects it (36).</li>
+  <li><strong>Ferrok</strong>: Haste, Glass Shield. <strong>Sovael</strong>: Dirge + <strong>critical Lingering (four rounds)</strong>, <strong>critical Talent Envy Demoralize on the Mantis</strong>, <strong>rank-9 Heroism on Sattva</strong>.</li>
+  <li><strong>Sattva</strong> hero-points a Battle Medicine and opens on the Mantis; Cody returns 30 for a weakness it shouldn't have had.</li>
+</ul>
+<h4>Round 2 — Yarrika falls</h4>
+<ul>
+  <li>Lantondo Hastes the Roses. <strong>Yarrika's Quandary removes Clutch</strong>; her Mantis Strike crit on Sovael — Wooden Double soaks 25.</li>
+  <li><strong>Ferrok: Briny Bolt Spellstrike crit on Yarrika (122 + 88).</strong></li>
+  <li><strong>Sovael: Wails of the Damned</strong> — Yarrika, Artus, Mantis fail (41 each, drained); Lantondo immune. <strong>Quickened Roaring Applause</strong>: Artus and the Mantis Slowed; all four lose reactions.</li>
+  <li><strong>Sattva's double crit kills Yarrika</strong> — <em>"That's for taking out Clutch."</em> The Quandary ends.</li>
+  <li>Artus crits Sovael — <strong>Dazzling Dragonet Disappearance</strong>, invisible; the Mantis's Truesight claws him anyway.</li>
+</ul>
+<h4>Round 3 — "Please don't kill me"</h4>
+<ul>
+  <li><strong>Sovael</strong>: past the Mantis's blocked reactive strike — <strong>rank-7 Heal on himself (101)</strong>. <strong>Sattva's second Moment of Renewal</strong>, then a double crit on the grabbed Mantis (168).</li>
+</ul>
+<h4>Round 4 — The Mantis falls</h4>
+<ul>
+  <li><strong>Corrosive Muck</strong> — Ferrok's natural 1. <em>"Oh, my reflex sucks." / "You wore too much armor."</em> <strong>Ferrok crits the Mantis dead</strong> and Time Jumps behind Artus.</li>
+  <li><strong>Sovael</strong>: <strong>Incarnate Ancient Specter</strong> — Artus and Lantondo save and fall prone. Sattva crits Artus (84).</li>
+</ul>
+<h4>Rounds 5–6 — Artus, then Lantondo</h4>
+<ul>
+  <li>Frigid Flurry; Sovael Absorbs Magic. <strong>Ferrok's Disintegrate Spellstrike crit — Artus down.</strong> Sovael's first <strong>Canticle of Everlasting Grief</strong> (Lantondo saves).</li>
+  <li>Polar Ray on Sattva. <strong>Sovael's Fire Ray crit: 142</strong> — <em>"Oh, that's without a Sure Strike."</em> <strong>Sattva's Hunted Shot finishes Lantondo.</strong></li>
+</ul>
+<p style="color:var(--gold)">The S14 rematch, won in six rounds with nobody dropped. Sovael's Wails and Applause set up the Yarrika kill, his self-Heal kept him standing, and his 142 Fire Ray put Lantondo in Sattva's range.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the One They Have to Stop</h4>
+<ul>
+  <li><strong>The fight-shaper, by the DM's own account.</strong> The thing that <em>"definitely bought you guys some time was Sovael's Roaring Applause,"</em> and the reason the Lightkeepers hunted him — <em>"you do things that shut everybody else down so effectively."</em> The Applause landed in all three fights; once it was up, Winter's Roar's warriors never reacted again.</li>
+  <li><strong>Ran the Lightkeepers opener.</strong> <em>"Do you guys want to delay after me? I can cast Haste. I bought a scroll of Haste"</em> — the whole party Quickened for the fight. Then Sacred Covenant over everyone before the Biting Roses.</li>
+  <li><strong>The table's conscience on trash talk.</strong> <em>"Don't say that. Let's be respectful"</em> — and Clutch played the lecture back as a long-standing character beat.</li>
+  <li><strong>Graceful under the goblin.</strong> Headlocked by Ran-to through much of the Lightkeepers fight, he owned it (<em>"I think I made a bit of a miscalculation with my skills"</em>), and when he had nothing left to cast he <strong>trash-talked the goblin holding him</strong> with Bon Mot and Evangelize — drawing Ran-to's whispered <em>"All your shit makes it harder for me to actually fight."</em></li>
+  <li><strong>Honest about the loss.</strong> In the debrief he named the grab, not the dice, and owned that he'd prepared an answer and hadn't gotten to it.</li>
+  <li><strong>Read the rules right when it mattered.</strong> Wails of the Damned hits <em>"each living enemy"</em> — Cody had the old wording, and the call kept the spell ally-safe.</li>
+  <li><strong>Two kills and the setup for a third.</strong> Quickened Chain Lightning on Urnak, a natural-20 Needle Darts on Juspix, and a <strong>142-point Fire Ray crit</strong> that left Lantondo to Sattva. Spell Riposte turned Desiccate back on its caster; 221 healing in the Lightkeepers fight, including the 99 that kept Clutch up.</li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the Unerring</h4>
+<ul>
+  <li><strong>Four kills</strong> — Huldrin, Blue Viper, Yarrika, Lantondo — and the healer who cast <strong>Moment of Renewal twice</strong>, with a giant palm and a gong.</li>
+  <li><strong>The quiet-cool persona, played straight.</strong> The robe that shines as he bows; <em>"We meet again… Well, let's see about that"</em>; <em>"I just start chanting prayers louder"</em> against Spirit Song; and, when Cody forgot his name for a second, <em>"I am nameless."</em></li>
+  <li><strong>Got up twice to spite Shino.</strong> Squinted open from the floor to look at her back, asked if she was <em>"having trouble knocking me out,"</em> and shot her — <em>"right in the groin… Still hurts."</em></li>
+  <li><strong>Avenged Clutch.</strong> <em>"That's for taking out Clutch"</em> on the shot that killed Yarrika.</li>
+  <li><strong>Two natural 20s in one turn</strong> to put 179 into Blue Viper. And the party's sustain all day: Heals for 102, 96 and 81, scroll heals, Battle Medicine (<em>"So we'll take an arrow and try to stab Clutch"</em>), his 2d8 boon shared with Ferrok and Clutch, Benediction.</li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Last One Standing</h4>
+<ul>
+  <li><strong>Carried the Lightkeepers' last rounds alone</strong> — and was gracious about it: <em>"I don't see any reason to burn consumables because I'm pretty sure we all see the way this is going. You got pretty far."</em> On the way out he grabbed <strong>Syu</strong> and threw her 35 feet.</li>
+  <li><strong>The trash-talk bit</strong> — <em>"we're just getting rid of the trash"</em> → Sovael's rebuke → <em>"looks over at Sovael and goes, ah, shit."</em> A relationship beat built on the spot.</li>
+  <li><strong>Took the loss on himself.</strong> <em>"I didn't reroll it, so I couldn't intercept… which was the snowballing."</em></li>
+  <li><strong>Pulled Sovael out of Ran-to's grip</strong> with a Reposition ruled on the spot — <em>"Best I can do is get you un-grabbed and five feet away"</em> — and Battle-Medicined him back up after Shino's crit.</li>
+  <li><strong>The wall.</strong> Held Urnak down for most of Winter's Roar and intercepted ~263 damage for others in that fight alone (including an 86-point crit meant for Sovael); reflected two Phantasmagorias with his Aeon stone; Taunt on three at 120 feet.</li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok · the Unyielding</h4>
+<ul>
+  <li><strong>Two kills against the Biting Roses</strong> — Grandfather Mantis and a critical Disintegrate Spellstrike on Artus — plus the <strong>210-point Briny Bolt crit</strong> that set up Yarrika, and the 41 + 48 that left Blue Viper on 1 HP.</li>
+  <li><strong>Lived up to the name.</strong> <em>"Hanging on my thread"</em> at 23 HP, then <strong>It's Not Over</strong>, then a death save rolled with <em>"I'm going to live forever."</em></li>
+  <li><strong>The table's comedian.</strong> <em>"I catch it and break it in half"</em>; <em>"Got to geek the mage. Got to do it"</em>; <em>"Oh, my reflex sucks"</em>; and after three confused critical misses on Ran-to, <em>"I'm not going to say anything because it makes it worse when I do."</em></li>
+  <li><strong>Team-first.</strong> Used Take Your Places to pull Sovael out of the grab; waved off an intercept with <em>"save it for the squishier ones"</em>; cheered Clutch on alone (<em>"20th ranked Cataclysm Clutch. Come on."</em>); cast Haste for the Roses fight.</li>
+  <li><strong>Generous in defeat.</strong> <em>"It was a good fight"</em> — and the image he took away was Clutch's: <em>"fighting everybody off and throwing people around as we're all laying there."</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Level-Up</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">No fight treasure</div>
+    <div class="loot-source">Cody's rule since S17</div>
+    <div class="loot-note">Tournament matches pay in bracket position, not gold.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">+1 hero point per match</div>
+    <div class="loot-source">Tournament rule</div>
+    <div class="loot-note">Three finished matches — the loss counts too.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Level 17</div>
+    <div class="loot-source">After the Lightkeepers</div>
+    <div class="loot-note">Taken over the mid-session break, before the Biting Roses.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Consumables spent</div>
+    <div class="loot-source">All three matches</div>
+    <div class="loot-note">Sovael's Haste scroll; Clutch's Mending Lattice (twice), Potion of Quickness and Elixir of Life; Sattva's heal scrolls. Cody: <em>"I might need to rethink my item policy."</em></div>
+  </div>
+</div>
+<div class="xp-banner">
+Experience · <strong>Level 17</strong> (milestone), after the winners'-bracket final. Bracket · Nameless 2–1 on the day · <strong>seeded in the losers' bracket — two wins from the final</strong>.
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Clutch:</strong> "We'll just throw them away and say we're just getting rid of the trash."<br>
+<strong>Sovael:</strong> "Don't say that. Let's be respectful."<br>
+<strong>Clutch:</strong> "Sovael probably lectured Clutch at some point about his trash talking, and Clutch starts to say something, and then looks over at Sovael and goes, ah, shit."
+<span class="attribution">Winter's Roar — Clutch's Whirling Throw sends Urnak flying, and the trash talk gets workshopped live.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "I catch it and break it in half."
+<span class="attribution">Juspix's long-range thrown fork whiffs. Cody: "Not how that works, but…"</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I am nameless."
+<span class="attribution">Cody, mid-turn: "I forgot your name for a sec, Sattva." Cody: "We are nameless."</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I think I made a bit of a miscalculation with my skills."
+<span class="attribution">Restrained in Ran-to's grip — after Cody: "Dude, after the shit you've been doing this fight, he's not letting you go."</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Best I can do is get you un-grabbed and five feet away."
+<span class="attribution">Repositioning Sovael out of Ran-to's grip, on a ruling made on the spot.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Hanging on my thread."
+<span class="attribution">At 23 HP after Shino's natural-20 crit.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Well, I haven't been able to cast because of you."<br>
+<strong>Ran-to</strong> <em>(whispering in his ear)</em>: "All your shit makes it harder for me to actually fight. So fuck you."<br>
+<strong>Sovael:</strong> "Well, you make it harder for me to cast spells as well, so…"
+<span class="attribution">Bon Mot, delivered from inside Ran-to's headlock. Cody: "Just a little dragon trash talking while he's headlocked by this goblin."</span>
+</blockquote>
+
+<blockquote>
+<strong>Syu Tak-nwa:</strong> "You're the first ones who have had to make me use that, so I applaud you."
+<span class="attribution">After the tenth-rank Tear the Veil.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I do the Street Fighter death sound and drop to the ground."
+<span class="attribution">Shino's falling knee. He'd be back up on fast healing twice before she put him out.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "I'm going to live forever."
+<span class="attribution">Rolling his death save. (17 — stable.)</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "Well, I don't see any reason to burn consumables because I'm pretty sure we all see the way this is going. You got pretty far."
+<span class="attribution">Last one standing against Syu, Shino and Ran-to.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "That's for taking out Clutch."
+<span class="attribution">The Hunted Shot that killed Yarrika, who had banished Clutch into a Quandary.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Next: the Speakers to the Wind</strong> (Mafika Ayuwari, who wants an artifact of Old-Mage Jatembe). Win, and it's <strong>the Lightkeepers again</strong> for the final.</li>
+  <li><strong>Syu Tak-nwa is a level above her team</strong> and carries Tear the Veil. She said nobody had made her use it before. She took 39 damage all fight.</li>
+  <li><strong>Ran-to's grudge is about Sovael's kit</strong> — <em>"All your shit makes it harder for me to actually fight."</em> Every one of his grapples on Sovael crit.</li>
+  <li><strong>Cody is reconsidering item policy</strong> — or giving enemies items — and has stopped softening fights for a non-mythic party.</li>
+  <li><strong>Seva returns next week.</strong> Her suspicion of the Lightkeepers (S17) is still open.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next · Losers' Bracket Final</span>
+  <p>The Speakers to the Wind stand between the Nameless and a rematch with the team that just put all four of them on the floor — and Syu has already shown them her tenth-rank spell.</p>
+  <div class="big-line">"You're the first ones who have had to make me use that."</div>
+  <span class="speaker">— Syu Tak-nwa, opening the rift</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Winter's Roar</strong>: Dirge + Lingering, wand Heroism on Clutch, Talent Envy Demoralize (crit-failed on Huldrin, natural 1). <strong>Ancestral Memories → rank-6 Roaring Applause</strong> — Huldrin and Urnak failed; no reactions from round 2 on. True Target for four. <strong>Fortissimo Anthem (+3)</strong> off an Orchestral Brooch. <strong>Spell Riposte (rank 8)</strong> turned Desiccate back on Juspix (56). <strong>Quickened Chain Lightning killed Urnak.</strong> Debilitating Dichotomy on Huldrin (34; took 69 himself — forgot to apply the save upgrade). <strong>Natural-20 Needle Darts killed Juspix.</strong></li>
+  <li><strong>Lightkeepers</strong>: Anthem + Lingering (hero point), Talent Envy Demoralize on Ran-to, <strong>scroll Haste on the party</strong>, <strong>Roaring Applause</strong> (Blue Viper, Shino and Syu failed; four without reactions), Quickened Heal on Sattva (72). Crit-grabbed by Ran-to. Healing Nexus (50); critical Demoralize on Shino. Teleported free by Ferrok, re-grabbed, <strong>dropped by Shino's crit</strong> (the Applause ended); revived by Clutch's Battle Medicine; renewed by Sattva's Moment of Renewal (reverted the slots Foundry's rest button gave back). Escape crit-failed; Scare to Death natural 1; Dirge + Lingering. Freed by Clutch's Reposition. <strong>Heal on Clutch (99)</strong> at 9 HP. Saved Tear the Veil (33). Bounce Away on Ran-to's crit; headlocked again; <strong>Bon Mot and Evangelize</strong> from the headlock. Dropped by Shino's shuriken; dying 3.</li>
+  <li><strong>Level 17.</strong></li>
+  <li><strong>Biting Roses</strong>: <strong>Sacred Covenant</strong> on the party. Dirge + <strong>critical Lingering (four rounds)</strong>, <strong>critical Talent Envy Demoralize on Grandfather Mantis</strong>, <strong>rank-9 Heroism on Sattva</strong>. Wooden Double vs Yarrika's crit (25 soaked). <strong>Wails of the Damned</strong> (three failed; Lantondo immune). <strong>Quickened Roaring Applause.</strong> Dazzling Dragonet Disappearance vs Artus. <strong>Rank-7 Heal on himself (101).</strong> Incarnate Ancient Specter (two prone). <strong>Canticle of Everlasting Grief</strong> (Lantondo saved). <strong>Fire Ray crit — 142 into Lantondo</strong> (Sure Strike didn't get applied).</li>
+</ul>
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li><strong>Ran-to told him why he's the target</strong>, in a whisper: Sovael's kit is what makes the goblin's job hard. That's a grudge, and it will carry into the rematch.</li>
+  <li><strong>He had an answer to the grab and didn't get to use it</strong> — Unfettered Movement and a Living Thunderbolt scroll.</li>
+</ul>
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Roaring Applause is the fight.</strong> It won Winter's Roar and bought the Lightkeepers fight its time. It ends when he's knocked out — so it needs him conscious and out of Ran-to's hands.</li>
+  <li><strong>Ran-to's grab is the counter to Sovael.</strong> Every grapple attempt on him crit; Escape DC 48–49 is out of reach. <strong>Pre-cast Unfettered Movement</strong> next time, and keep the <strong>Living Thunderbolt</strong> scroll at hand (it auto-escapes grabs unless the effect is magical and higher rank). Cody: <em>"We've got to get you in the air."</em></li>
+  <li><strong>Debilitating Dichotomy: set his own save one degree higher by hand</strong> — Foundry doesn't apply it.</li>
+  <li><strong>Wails of the Damned is enemies-only</strong> — a safe opener into a melee scrum, except against constructs (Lantondo).</li>
+  <li><strong>Moment of Renewal ≠ a rest.</strong> Don't click the rest button for it, or put the slots back after.</li>
+</ul>
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What does the Speakers to the Wind's lineup look like beyond Mafika?</li>
+  <li>Who takes Ran-to in the rematch — and can Clutch stay adjacent to Sovael the whole time?</li>
+  <li>With Seva back, who takes Shino?</li>
+  <li>Syu took 39 damage all fight. Who goes after her next time?</li>
+</ul>
+</section>
+</body>
+</html>

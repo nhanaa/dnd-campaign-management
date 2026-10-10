@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 10 — There's No Way There's a Town Called Otari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-snagg { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+.char-crew  { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-snagg { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head><body>
+<div class="container">
+
+<header class="header">
+<h1>There's No Way There's a Town Called Otari</h1>
+<div class="subtitle">Abomination Vault — Session 10 · A Mayor's Daughter, Four Roseguard Icons, and the Ghost Who Never Heard of His Own Town</div>
+<div class="meta-row">
+  <span class="meta-pill">October 7, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~3h 52m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">Otari · The Gauntlight, Floors 3–4</span>
+  <span class="meta-pill">DM · Lap</span>
+  <span class="meta-pill">Level 6</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-rp" style="width:45%"></div>
+  <div class="comp-seg comp-explore" style="width:28%"></div>
+  <div class="comp-seg comp-combat" style="width:10%"></div>
+  <div class="comp-seg comp-social" style="width:10%"></div>
+  <div class="comp-seg comp-loot" style="width:7%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay 45%</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration 28%</span>
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat 10%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Rules &amp; Table 10%</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Downtime 7%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-snagg">
+    <div class="char-name">Snagg</div>
+    <div class="char-class">Goblin (Razortooth) Fighter 6 — jaws, sturdy shield, Medic archetype</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human Thaumaturge 6 — chakram + cracked mirror implement</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf Divine Sorcerer 6 of Pharasma</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling Monk 6 — cursed with lycanthropy</div>
+    <div class="char-player">Ben</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The party woke up on the floor of Belcorra's private suite with nothing left. The will-o'-wisp from S9 was gone, but not provably dead: Lap's description this time had its eyes and hands pulled back through <strong>a hole torn into another dimension</strong>, which then closed. Ruben came to and called it <em>"definitely one of our most deadliest encounters,"</em> then put the party back on its feet with two three-action Heals and still had half his spell slots left. Snagg spent the next half hour on Treat Wounds, clearing the Wounded conditions. Xurl carved a <strong>+1 striking composite longbow</strong> and his lost crowbar out of the slime wall, and Ruben dated the trapped bodies to <strong>one or two hundred years ago</strong>, not Belcorra's era. On the way out, Ruben laid his hand on the stairway barrier and read it more clearly than before. His Recall Knowledge says it blocks <strong>the enemies of whoever cast it</strong>, one way only, so whatever is below can come up. His own read is that it was made against the party specifically, out of souls: <em>"I can feel the anguish, the hunger, the sadness radiating from this barrier... It's only meant to keep us out, not made to keep anything in."</em></p>
+<p>A day in Otari turned up a new thread. Wrin bought all seven tapestries for 100 gp, admitted she doesn't recognise the wisp, and said she wants to go down there herself and can't. Snagg, the local, knew why that line didn't add up: Wrin isn't from Otari, she's a very good sorceress, and whatever keeps her out of the Gauntlight isn't fear of monsters. Then <strong>Mayor Oseph</strong> summoned the party. His eldest daughter <strong>Doriana</strong>, already mid-way through a psychic awakening, has started sitting at her window ignoring everyone, and the colourful patchwork man who saves her in her nightmares is now <em>"my savior."</em> Snagg's examination found her in perfect health apart from lack of sleep. Xurl's read was that she was telling the truth and something was still wrong. Ruben's question about the colourful man made her pause before she answered. Snagg's local knowledge filled in the politics: the blacksmith <strong>Carman Rajani</strong>, a Roseguard descendant with a bad reputation, is running for mayor a third time on a working-class platform, and his Founders' Day speech <em>"doesn't sound like him."</em> Ruben's research at the library with Vandy came up empty, and the trail points to the bigger library in Absalom.</p>
+<p>Back underground, the party found that <strong>the dead in the Nhimbaloth shrine had been cleared away too</strong>, the third place the dungeon has been "cleaned" behind them. They poked at a dead, mushroom-covered tentacled thing in a green pond, decided a half-flooded crawlspace was <em>"a great way to die,"</em> and followed a strange light. Snagg boosted Xurl's first jump with a critical success, Xurl wall-jumped onto a small island in an underground stream, and a green-skinned human ghost asked him how he'd got in. His name was <strong>Otari</strong>: the Roseguard rogue the town is named after, dead down here for 500 years of filth fever and a collapsed ceiling, and <strong>he had no idea there was a town</strong>. <em>"There's no way there's a town called Otari. Otari is me."</em></p>
+<p>A pack of flaming skulls interrupted. Their dives and their drain did nothing to the ghost, and their hits barely bothered him (<em>"I've been fighting this for hundreds of years. They never learn"</em>). Otari killed nearly all of them himself. Snagg bit one in half on a critical. Afterwards Snagg filled in the Roseguard's history from what every Otari kid is told, and Otari added two things: a warning that <strong>Belcorra is back, below them, still weak and getting stronger every day</strong>, and a plan for the barrier. Bring together <strong>the four Roseguard icons</strong>: Vol Rajani's sword (in the Dawnflower Library's display case), Zarmavdian's spellbook (Absalom, Alder thinks), Aesephna Menhemes's cloak (the mayor is her descendant) and Otari's own key, which he handed over from his stash with the rest of his belongings. Xurl tried to carry his bones out to free him. It didn't work, because a ghost is bound to the place it died. Xurl then offered to make him a ghost-touch beer. Otari wants a good ghost-touch dagger, and if he gets one he'll share his secrets.</p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act social">
+<div class="act-label">Act I · Rules &amp; Table · 0:00 – 0:08</div>
+<div class="act-card">
+<h3>Lap Rewrites the Hero Point Rules</h3>
+<ul>
+  <li>Lap opened by <strong>withdrawing the S9 compromise</strong> (one hero point at session start if you have none), <em>"for now,"</em> and replacing it with two new rules.</li>
+  <li><strong>Hero Actions</strong> (Paizo's optional Hero Point Deck): whenever a PC gains a hero point, they draw a card from a ~52–54-card deck. The card is an extra way to spend that hero point. Cards can't be traded, and an irrelevant card can be ignored and the hero point spent normally.</li>
+  <li><strong>Heroic Buff</strong>: every PC automatically gets one at the <strong>start of every combat</strong>, and it lasts only that combat. Spend it <strong>before</strong> a roll for advantage (roll twice, take the better) or <strong>after</strong> to reroll (take the second result, even if worse). It <strong>cannot</strong> bump a degree of success.</li>
+  <li>Regular hero points now <strong>also</strong> allow the advantage option, and <strong>keep</strong> Lap's degree-bump house rule. Long-rest hero points continue.</li>
+  <li>Lap's stated goal: <em>"I want you guys have at least one reroll when you get into combat."</em> The table took it. <em>"OK, I think that's fair... I'll take that."</em></li>
+  <li><strong>Ruben</strong> made Lap restate the details before play started. Lap clarified that the buff arrives every combat <strong>no matter how many hero points you hold</strong>, that it is reroll/fortune only, and that degree bumps stay with real hero points.</li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act II · Exploration · Waking Up in Belcorra's Suite · 0:08 – 0:55</div>
+<div class="act-card">
+<h3>"This Was Definitely One of Our Most Deadliest Encounters"</h3>
+<ul>
+  <li>The party started at <strong>Wounded 3/3/1/1</strong> with Snagg and Ruben unconscious. <strong>Xurl</strong>: <em>"I'm about to force feed Snagg a healing potion."</em> <strong>Snagg</strong> came up and went to work on Ruben, starting a Risky Surgery on a Wounded 3 patient and redoing it as a normal Treat Wounds: <em>"I shouldn't do risky shit."</em></li>
+  <li><strong>The wisp's fate, partly answered.</strong> A void hole ripped into another dimension, the eyes and hands sucked back into it, and the hole closed. <em>"You're not sure, did you actually destroy it or did it escape?"</em> <strong>Alder's</strong> Recall Knowledge later classed it as <strong>an apparition, not a creature from this plane</strong>.</li>
+  <li><strong>Ruben</strong>, back on his feet: <em>"We shouldn't stick around for too long."</em> Two three-action rank-3 Heals healed everyone for about 21. Even after both he still had half his slots: <em>"because I was pretty much useless that fight."</em></li>
+  <li><strong>The slime wall.</strong> Ruben tried his tinderbox on the webbing (<em>"I got this item. Just want to use it at least once"</em>); it isn't flammable. <strong>Xurl</strong> spent ten minutes carving out a <strong>+1 striking composite longbow</strong> and his crowbar. A body freed with it <strong>decayed to bone the moment it touched air</strong>. Ruben dated the bodies to <strong>one or two centuries ago</strong>, not Belcorra's time.</li>
+  <li><strong>Snagg's Treat Wounds cycles</strong> cleared the Wounded conditions. He failed the expert DC, re-ran it (<em>"I just need a five"</em>), healed Xurl on a 30, and insisted on treating Alder's Wounded 1 as well (<em>"I don't know, man. In this campaign..."</em>), via Risky Surgery: 2 damage, 24 healed.</li>
+  <li><strong>The barrier, read properly this time.</strong> A thrown rock passed straight through; Ruben's hand met a wall and a wave of fear, despair, hunger and revenge. His Guidance-assisted Recall Knowledge: it blocks <strong>the enemies of whoever cast it</strong>, one way only, and <strong>whatever is below can come up</strong>. His in-character read: <em>"Whoever erected this barrier made it specifically for us... it's possibly created with souls."</em> His two ways through: <em>"either defeat the one who cast the spell itself, or send someone that whoever cast this spell does not know."</em></li>
+  <li><strong>Jaul Mezmin's body is gone</strong> — no body, no blood on the pavilion. Xurl, on the druid job: <em>"there was a secondary job of recovering the body so the druids could bury him."</em> Later, plainly: <em>"We failed to find the corpse."</em></li>
+  <li>Xurl's curse: the full moon has passed; clear for roughly 20–25 days. Back at the base around 8:30 pm the kobolds were partying, but <strong>Fiverr and Eero weren't among them</strong>. Long rest; everyone drew their first Hero Action, and Lap gave <strong>Ruben an extra hero point</strong> without saying why.</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Act III · Roleplay · Wrin's Tent · 0:59 – 1:12</div>
+<div class="act-card">
+<h3>What Snagg Knows About Wrin</h3>
+<ul>
+  <li><strong>All seven tapestries sold to Wrin for 100 gp.</strong> Alder judged a specialist buyer would pay more; nobody wanted to spend time hunting one. Ruben: <em>"I believe it would be best in your hands."</em></li>
+  <li>Wrin didn't recognise the wisp, but agreed it is the figure on tapestry 7. On the barrier: <em>"very powerful,"</em> built to block intruders. Her advice: search the rest of the fourth floor, and bring back anything, however small.</li>
+  <li><em>"I really want to go see myself, but I just could not."</em> <strong>Ruben</strong>: <strong>"No, it is much too dangerous."</strong> <em>"It would be very dangerous for you to venture down there. Especially alone."</em></li>
+  <li><strong>Snagg's local knowledge:</strong> Wrin isn't from Otari. She arrived five or six years ago, she is known as a very, very good sorceress, and <strong>it isn't the monsters she's afraid of — something else keeps her out of the Gauntlight.</strong></li>
+  <li>Snagg didn't say it in front of her. He <strong>pulled Xurl aside to gossip</strong> (Xurl: <em>"Got all kinds of tea to spill"</em>).</li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act IV · Mystery · The Mayor's Daughter · 1:12 – 1:47</div>
+<div class="act-card">
+<h3>"He's My Savior"</h3>
+<ul>
+  <li>A messenger brought the party straight to <strong>Mayor Oseph</strong>: <em>"My daughter's condition is getting worse."</em></li>
+  <li><strong>The background</strong>, from Xurl's memory and the DM: <strong>Doriana</strong>, the eldest of three, is going through a psychic awakening (migraines, objects moving around her) and has nightmares she can't remember, except that <strong>a man dressed in colourful, mismatched fabric</strong> saves her in them. For the past few days she has sat and ignored everyone, <em>"in her own world."</em> <em>(The party first saw her before Snagg joined; not in the campaign files.)</em></li>
+  <li><strong>Snagg, as the town local</strong>, got the mayor's file: mayor for 20–30 years, the richest man in Otari, owner of the lumber company, trusted because he keeps the business and the governing strictly separate, and no rumour has ever stuck.</li>
+  <li><strong>Snagg's Medicine check</strong>: <em>she is in perfect health, apart from lack of sleep.</em> She didn't react to being examined at all, then came round with <em>"oh, sorry, I didn't see all of you guys."</em></li>
+  <li><strong>Ruben</strong>: <strong>"My dear, your father is worried about you. He says that you're not yourself."</strong> She: <em>"I'm fine, father. I'm just thinking about something."</em></li>
+  <li><strong>Xurl's read: she's telling the truth, and something still isn't right.</strong> So he asked: <em>"Usually when you're thinking that hard about something, it's something important."</em> Her answer: her power, the town's future, her friends, <em>"especially Amicia."</em></li>
+  <li><strong>Snagg recognised the name.</strong> Amicia is the blacksmith's daughter. <strong>Carman Rajani</strong>, descendant of Roseguard <strong>Vol Rajani</strong>, drinks and gambles and has been hard to deal with since his wife and younger son died; Amicia keeps the smithy running. He has <strong>lost two mayoral elections to Oseph</strong> and is running a third time. His Founders' Day speech <em>"doesn't sound like him"</em>: the richest man in Otari versus a man of the working class. Election day is very soon.</li>
+  <li>Ruben asked whether she still sees the colourful man. <strong>She paused</strong>, as if she had to place the question. Then: <em>"Oh, right, right. Yes, I still see him... He's my savior."</em> <strong>Ruben is suspicious and kept it to himself</strong>: <em>"I have my suspicions, but I do not have enough information to express them yet."</em></li>
+  <li><strong>Ruben and Vandy at the library</strong> (+2 for her help) confirmed only what they already knew — <strong>a one-off case</strong>. Lap: <em>"There is a bigger library in Absalom. Another reason to go there."</em> The others earned income for half a day; Snagg, as a local, could find level-4 work, the others only level 2. Alder earned a few silver on Esoteric Lore.</li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act V · Exploration · The Cleaned Shrine and the Green Pond · 1:47 – 2:28</div>
+<div class="act-card">
+<h3>"Annoying and Weird"</h3>
+<ul>
+  <li>Back through the Gauntlight. Floor 3 was quiet and <strong>the ghouls in the library hallway are gone</strong>. The bound demon and the weeping scribe-ghost were both left alone. <em>(~13-minute break.)</em></li>
+  <li><strong>The Nhimbaloth shrine has been emptied.</strong> The guardian corpses and the crawling hands from S6 are gone. Xurl: <em>"Definitely magically cleaned up. There should have been chunks of metal and bones scattered around."</em> Lap: <em>"That is the theme of this game. Annoying and weird."</em></li>
+  <li><strong>The lake.</strong> Mushrooms on the shore, some two or three feet high. The three non-goblins kept away. Lap: <em>"Snagg, you have no problem. You just get there, pick one up, put it in your mouth. Tasty."</em> Xurl: <em>"These are snacks."</em></li>
+  <li><strong>The green pond.</strong> Under a dry metal pipe, a swampy pool holding a heap shaped like a tentacled monster and covered in mushrooms. Xurl: <em>"Someone shoot it."</em> Nobody did. <strong>Snagg</strong> wouldn't eat these: <em>"This looks dirty. This doesn't look tasty."</em> <strong>Alder</strong>'s Recall Knowledge: <strong>a creature, dead, type unknown.</strong> Ruben warned against touching the water; Xurl: <em>"That makes me want to touch it more now, honestly."</em></li>
+  <li><strong>The crawlspace.</strong> Snagg was up for it at first (<em>"I'm down to secret tunnel it"</em>), until the stream cave narrowed to a half-submerged crawl with rumbling water beyond. Xurl: <em>"That seems like a great way to die."</em> Unanimous no.</li>
+  <li><strong>Snagg got the lantern</strong> — the only PC without a light source. Xurl handed over the Lantern of Empty Light; it burns <strong>pale blue</strong>.</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Act VI · Roleplay · Otari · 2:28 – 2:44</div>
+<div class="act-card">
+<h3>"Otari Is Me"</h3>
+<ul>
+  <li>A strange light around a bend. Xurl argued time pressure justified <strong>Crane Stance</strong> outside combat; Lap allowed it for a jump. <strong>Snagg gave him a boost and rolled a critical success on the Aid</strong> (<em>"Snagg will help give him a little boost"</em>), and Xurl made the first jump, onto a ledge, easily.</li>
+  <li><strong>Xurl rolled a 20 on Perception</strong>: the light around the corner <strong>looks like the light of the messages</strong> the party keeps finding.</li>
+  <li>Xurl long-jumped and wall-jumped onto a small island with a human-sized skeleton on it, and a <strong>green-skinned human ghost</strong> appeared: <em>"How did you get here?"</em></li>
+  <li><strong>Xurl: "Oh, hi. Sorry. My name's Xurl. I jumped."</strong> Why not swim? <em>"I didn't want my boots wet."</em></li>
+  <li><em>"My name is Otari."</em> Xurl asked if he meant <em>the</em> Otari, the Roseguard, the local hero. <strong>"There's no way there's a town called Otari. Otari is me."</strong> Xurl: <em>"They really like you up there and they named their whole town after you to honor you."</em></li>
+  <li>He's been stuck in the cave for many years and has tried everything. Xurl: <em>"often ghosts are attached to their body, so if we take your body outside the barrier, you might be able to hitch a ride with it."</em> Otari: <em>"Hey, why I never think about it?"</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act VII · Combat · The Flaming Skulls · 2:44 – 3:08</div>
+<div class="act-card">
+<h3>"I've Been Fighting This for Hundreds of Years"</h3>
+<ul>
+  <li><em>"Oh yeah, those guys again. I hate those."</em> Flaming skulls burst out of the chamber and went straight for Xurl.</li>
+  <li><strong>Otari</strong> fought for the party. The skulls dove through him and tried to drain him, and nothing happened; when they actually hit him he only complained (<em>"ouch, Jesus, why?"</em>). <em>"They never learn."</em></li>
+  <li><strong>He killed almost all of them himself.</strong> Xurl: <em>"Shockingly, the guy who can solo this fight and has been doing it for years."</em></li>
+  <li><strong>Snagg bit one in half on a critical.</strong> Lap: <em>"there's no taste, and there's no blood... The mushroom back then tastes way better."</em> Snagg: <em>"Yeah, I'd rather have some more mushroom."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VIII · Roleplay · What Otari Knows · 3:08 – 3:51</div>
+<div class="act-card">
+<h3>The Four Roseguard Icons</h3>
+<ul>
+  <li><strong>Snagg's Medicine diagnosis: Otari died of filth fever.</strong> He explained it carefully, as something he'd come across in his work. Otari heard him out, nodding, then: <em>"Do you think I don't know what happened to myself, huh?"</em></li>
+  <li><strong>The Roseguard history</strong>, as Snagg's local knowledge: they met defending Absalom from a monster attack. <strong>Vol Rajani</strong> stepped up first — the plate-armoured captain whose rose-hilted sword gave the group its name. <strong>Zarmavdian</strong> was a dwarf wizard of unknown origin. <strong>Aesephna</strong> was the healer, good with a bow. <strong>Otari was the brains and the rogue.</strong> Three founded the town and named it for him; Zarmavdian later vanished, the other two lived to old age.</li>
+  <li>What actually happened: he planned the surprise attack on Belcorra (<em>"It works. I just didn't know that the fucking ceiling would collapse on me"</em>). The collapse is why the others thought he was dead; he was chased deeper and died down here, of the fever. Glad Aesephna had a good life, hurt that nobody came: <em>"Maybe they can't afford my corpse? Or, oh, maybe they forgot about me?"</em> Snagg knew how long: <em>"Only 500 years old."</em></li>
+  <li>⭐ <strong>Otari, serious for the only time: "I can feel that Belcorra is back. She is below us right now... still weak... But I assure you, I can feel that she's getting stronger and stronger every day."</strong> Xurl: <em>"Great, a second timeline on our timeline."</em></li>
+  <li><strong>The bones.</strong> Xurl packed the skeleton into his backpack (<em>"is that a bone in my backpack? Are you happy to see me?"</em>). Otari got no further than the cave mouth. Ruben's high <strong>Religion</strong> roll gave the rule: <strong>a ghost is bound to the place it died, not to its bones.</strong></li>
+  <li><strong>He felt the stairway barrier go up two or three days ago</strong> and asked whether the party triggered it. His plan: <strong>gather the four Roseguard icons</strong>. <strong>Vol Rajani's sword</strong> — Snagg knew at once: the <strong>Dawnflower Library</strong>. <strong>Zarmavdian's spellbook</strong> — <strong>Alder</strong> has heard of it, probably in <strong>Absalom</strong>. <strong>Aesephna's cloak</strong> — <strong>the mayor is her descendant</strong>; she's the woman in the portrait over his fireplace. <strong>Otari's key</strong> — handed over from his stash with the rest of his belongings. He thinks the key can become more powerful, but not how.</li>
+  <li><em>"I told you I'm street smart. Books are for nerds."</em> <strong>Alder</strong>: <strong>"I am not. I am exactly that."</strong> Xurl: <strong>"Everyone here is a vibes caster if they cast at all."</strong></li>
+  <li><strong>The ghost-touch negotiation.</strong> A ghost-touch beer, then a mug (<em>"I can now hold a mug, but I cannot drink from it. That is even worse"</em>), then what Otari actually wants: <strong>a good ghost-touch dagger</strong> — <em>"I don't use cheap daggers"</em> — and in exchange, he'll share his secrets. Plus a dig at shields: <em>"You never need a shield."</em> Xurl: <em>"Sometimes it's nice to let the guy with the shield get hit instead of you getting hit."</em></li>
+  <li>Xurl offered to bury the bones properly; Otari wanted them left where they were. Xurl put them back and mostly got it wrong (<em>"Why do you have so many ribs?"</em>). Leaving: <em>"Somebody tells me we have like four different quest lines pointing us that way. Very not subtle."</em> <strong>Road trip.</strong></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat — The Flaming Skulls</h2>
+<div class="combat-box">
+<div class="combat-meta">Otari's island · ~2 rounds · ~25 minutes · No roll log — spoken numbers only</div>
+<h3>The Flaming Skulls</h3>
+<div class="combat-stats">
+  <div class="combat-stat"><div class="label">Rounds</div><div class="value">~2</div></div>
+  <div class="combat-stat"><div class="label">Enemies</div><div class="value">3+ skulls</div></div>
+  <div class="combat-stat"><div class="label">Ally</div><div class="value">Otari's ghost</div></div>
+  <div class="combat-stat"><div class="label">Kills</div><div class="value">Otari most · Snagg 1</div></div>
+  <div class="combat-stat"><div class="label">Damage Taken</div><div class="value">Xurl 20</div></div>
+  <div class="combat-stat"><div class="label">New Rule</div><div class="value">Heroic Buff</div></div>
+</div>
+<p class="combat-note"><strong>Never named at the table.</strong> Lap described them as flaming skulls made of light, <em>"mostly immune to magic"</em> (<em>"that's kind of the theme of this floor, so sorry"</em>), and the party recognised them as something they'd fought before. Snagg's bite found a solid body with no taste and no blood. Otari says they come every few days.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li>A skull went straight for <strong>Xurl</strong>: <strong>20 damage</strong>, then shocked him again. <em>"Do you mind helping me with these guys? They seem kind of, ow, zappy."</em></li>
+  <li><strong>Alder</strong> waded into the shallows, <strong>Exploit Vulnerability</strong>, Strike, <strong>hit for 18</strong>. The check confirmed the magic immunity.</li>
+  <li><strong>Ruben</strong> cast <strong>Benediction</strong> and <strong>Shield</strong>.</li>
+  <li><strong>Xurl</strong> swung away, opening with an attempt to intimidate it (<em>"let's see if we can make it flinch"</em>).</li>
+  <li><strong>Otari</strong> reached into a skull for <strong>18</strong>, then attacked again.</li>
+  <li><strong>Snagg</strong> waded in at a declared 3 ft 6 in, <strong>bit a skull on a critical and killed it</strong> — <em>"your jaws split the thing into two"</em> — then raised his shield.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li>The skulls <strong>turned on Otari</strong>, ignoring Xurl. One dived through his body and back out, another tried to drain him (he rolled his eyes), and one landed a hit (<em>"ouch, Jesus, why?"</em>).</li>
+  <li><strong>Alder</strong>'s flanking Strike rolled a <strong>natural 1</strong>; he spent the <strong>heroic buff</strong> and rerolled into a <strong>hit</strong>, with sympathetic vulnerability damage. His Recall Knowledge: the skulls' Reflex is their best save or their worst.</li>
+  <li><strong>Ruben</strong> stepped back and cast <strong>Rousing Splash</strong> for <strong>9 temp HP</strong>.</li>
+  <li><strong>Xurl</strong>'s heroic-buff reroll came out worse (Lap: <em>"Classic"</em>), he rolled high on his max-MAP Strike, and his <strong>Assurance Demoralize</strong> didn't beat the Will DC.</li>
+  <li><strong>Otari</strong> finished the rest of them himself.</li>
+</ul>
+<p class="combat-note"><strong>Denial-axis note (for the AV review):</strong> no denial this time. The fight didn't test the party and the ally carried it. The magic immunity was real but cost nobody a turn — Ruben spent his on buffs and healing.</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-snagg">
+<h4>Snagg · the Local Who Knows Where Everything Is</h4>
+<ul>
+  <li><strong>He's the party's memory of Otari, and this session leaned on it.</strong> Three times the DM handed the table something only a lifelong local would know, and each time it went through Snagg: <strong>Wrin isn't from here and is afraid of something that isn't monsters</strong>; the mayor's reputation and <strong>Carman Rajani's run for office</strong>; and the moment Otari named the sword, <em>where it is</em>: the Dawnflower Library. He also knew how long the town's namesake has been dead: <em>"About 500. Only 500 years old."</em></li>
+  <li><strong>He handled the Wrin read with judgement.</strong> He didn't announce in her tent that the town's best sorceress is scared of something. He <strong>pulled Xurl aside to gossip</strong> instead.</li>
+  <li><strong>He's still the party's doctor.</strong> He woke Ruben, then ran the Treat Wounds cycles that cleared the party's Wounded conditions after Ruben's Heals, and insisted on treating Alder's Wounded 1 as well: <em>"I don't know, man. In this campaign..."</em> He also examined <strong>Doriana</strong> (perfect health, no sleep) and diagnosed <strong>Otari's filth fever</strong> — to which Otari gave the funniest reply of the night: <em>"Do you think I don't know what happened to myself, huh?"</em></li>
+  <li><strong>He won't let the party walk around hurt.</strong> <em>"I'm like, why are we running around with two of us still at half health? I was planning on just leaving."</em> The party stopped and he healed them.</li>
+  <li><strong>The goblin's appetite is a running bit, and he plays it straight.</strong> He ate a cave mushroom while the humans backed away, flatly refused the ones on the tentacle corpse (<em>"This looks dirty. This doesn't look tasty"</em>), bit a flaming skull in half and preferred the mushroom, and answered a question about his resources by showing off <strong>his cleanly brushed teeth</strong>.</li>
+  <li><strong>He got Xurl started.</strong> Xurl's first jump, to the ledge where he saw the light, ran off <strong>Snagg's critical success on the Aid</strong>, a boost from underneath that took the DC down to ten.</li>
+  <li><strong>Combat: one bite, one kill.</strong> He waded in at a declared 3 ft 6 in (<em>"I'm small"</em>), <strong>crit a flaming skull with his jaws and split it in two</strong>, then raised his shield. The fight ended before his second turn.</li>
+</ul>
+</div>
+
+<div class="spotlight s-xurl">
+<h4>Xurl · the One Who Jumped</h4>
+<ul>
+  <li><strong>He found Otari.</strong> He made the jump nobody else could, landed on a ghost, and opened the most important conversation the campaign has had with deadpan politeness: <strong>"Oh, hi. Sorry. My name's Xurl. I jumped."</strong> <em>"I didn't want my boots wet."</em></li>
+  <li><strong>He told a 500-year-old ghost that his town exists, and did it kindly.</strong> <em>"They really like you up there and they named their whole town after you to honor you."</em> When someone at the table added <em>"Strong, question mark"</em> to <em>"going strong ever since"</em>, Xurl answered <em>"Look, I was being polite."</em></li>
+  <li><strong>His idea drove the second half of the scene.</strong> Carry the bones out and the ghost might hitch a ride. It didn't work, but it got the party the rule, and Otari's <em>"Hey, why I never think about it?"</em></li>
+  <li><strong>His ghost-touch pitch got the party a standing deal.</strong> A beer became a mug and then a dagger, and Otari will share a few things in exchange for a good one.</li>
+  <li><strong>His read on Doriana was the sharpest of the day.</strong> Telling the truth, but something isn't right — so he asked the one question that got an answer: <em>"Usually when you're thinking that hard about something, it's something important."</em> Her answer put Amicia and the Rajanis on the board. He also remembered the daughter's symptoms, and graded himself fairly: <em>"So other than the fact I was entirely wrong, kind of right."</em></li>
+  <li><strong>Rules and table-craft.</strong> Won Crane Stance outside combat for jumps, worked out the Aid DC, and showed Lap how to make the heroic buff expire at the end of combat in Foundry.</li>
+  <li><strong>Funniest person at the table again</strong>: <em>"is that a bone in my backpack? Are you happy to see me?"</em> / <em>"Why do you have so many ribs?"</em> / <em>"Everyone here is a vibes caster if they cast at all."</em> / <em>"Great, a second timeline on our timeline."</em> / <em>"That makes me want to touch it more now, honestly."</em></li>
+  <li><strong>Combat</strong>: the skulls' first target, 20 damage on the opening shock. His heroic-buff reroll came up worse (Lap: <em>"It's even worse. Classic."</em>), and he let Otari finish it.</li>
+</ul>
+</div>
+
+<div class="spotlight s-ruben">
+<h4>Ruben Falmoor · the One Who Reads the Walls</h4>
+<ul>
+  <li><strong>He produced the session's most important read before anyone left the dungeon.</strong> Hand on the stairway barrier, he felt <em>"fears, despair, hunger, revenge"</em> and turned a Guidance-assisted Recall Knowledge into a theory: <strong>one-way, blocking the caster's enemies — and, in his read, aimed at the party specifically and made of souls.</strong> He also laid out the only two ways through: kill the caster, or send someone the caster doesn't know.</li>
+  <li><strong>He ran the Doriana scene.</strong> <em>"My dear, your father is worried about you. He says that you're not yourself."</em> <em>"And what of your nightmares?"</em> <em>"Do you continue to see him?"</em> That last question made her pause. He saw it, <strong>kept his suspicion to himself</strong>, and told the mayor only what he could stand behind: <em>"This is definitely something not normal. But I need to do research."</em> Then he spent his afternoon in the library with Vandy doing it.</li>
+  <li><strong>He refuses to make it about money.</strong> On the tapestries: <em>"Ruben doesn't really care... He's not a very materialistic guy."</em> To the mayor, he does this not for money but so a young girl gets her chance. And about the colourful man: <strong>"I have my suspicions, but I do not have enough information to express them yet."</strong></li>
+  <li><strong>He's the one who tells Wrin no.</strong> <em>"No, it is much too dangerous."</em></li>
+  <li><strong>The table's rules clarifier.</strong> He made Lap walk the new hero-point system through point by point before a single combat used it.</li>
+  <li><strong>The party's healer when he has slots left.</strong> Two three-action Heals put the party back together, with half his slots still left — <em>"because I was pretty much useless that fight."</em> In the skull fight: <strong>Benediction</strong>, <strong>Shield</strong>, then <strong>Rousing Splash</strong> for 9 temp HP.</li>
+  <li><strong>And he named the thing</strong>: <em>"I'm gonna name it the spider wisp."</em> His high <strong>Religion</strong> roll also gave the party the rule on ghosts: bound to where they died.</li>
+</ul>
+</div>
+
+<div class="spotlight s-alder">
+<h4>Alder Ungram · the Nerd, Proudly</h4>
+<ul>
+  <li><strong>He's the party's only book-learner, and he owned it.</strong> Otari announced <em>"Books are for nerds."</em> Alder: <strong>"I am not. I am exactly that."</strong></li>
+  <li><strong>He holds the one lead on the hardest of the four icons.</strong> Zarmavdian's spellbook: Alder has heard of it, probably somewhere in Absalom.</li>
+  <li><strong>He's still the answers guy.</strong> He identified the S9 wisp as <strong>an apparition, not a creature from this plane</strong>, and the heap in the green pond as <strong>a dead creature</strong> (<em>"I'll tell the party. That's a dead creature"</em>).</li>
+  <li><strong>The commercial mind at Wrin's.</strong> His read was that the tapestries were worth more than 100 gp to the right collector; Ruben and Xurl didn't want to hunt one, so the party sold to Wrin.</li>
+  <li><strong>He did the investigating while others healed</strong>: <em>"I'm just investigating around the room because I can't help with healing"</em> — a Recall Knowledge that confirmed the portal-room scene was <strong>teleportation</strong> and the suite was Belcorra's personal rooms. He spent <strong>Scholarly Recollection</strong> on the way back in, and earned his half-day's wage on <strong>Esoteric Lore</strong>.</li>
+  <li><strong>Comedy</strong>: <em>"Can I do esoteric lore to tell him some tips on how to jump?"</em> Lap: <em>"Nope. Nope. Nope. Nope. Nope."</em></li>
+  <li><strong>Combat</strong>: <strong>Exploit Vulnerability</strong> and a hit for 18, then the new heroic buff working as intended — a <strong>natural 1</strong> rerolled into a hit, with sympathetic vulnerability damage.</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">+1 Striking Composite Longbow</div>
+    <div class="loot-source">Trophy-room slime</div>
+    <div class="loot-note">The bow from S9, cut out of the wall with Xurl's crowbar.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Otari's Key</div>
+    <div class="loot-source">Otari's stash</div>
+    <div class="loot-note"><strong>One of the four Roseguard icons.</strong> Can grow more powerful; nobody knows how. Xurl can't use it until expert Thievery.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">A Very Good Dagger</div>
+    <div class="loot-source">Otari's stash</div>
+    <div class="loot-note">Sets the standard for the ghost-touch dagger he wants back.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Otari's Other Belongings</div>
+    <div class="loot-source">Otari's stash</div>
+    <div class="loot-note">Several items, explained by Otari himself, so no identification needed. Contents not read aloud — check Foundry.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Lantern of Empty Light</div>
+    <div class="loot-source">Reassigned · Xurl → Snagg</div>
+    <div class="loot-note">Snagg had no light source. Burns pale blue.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Xurl's Crowbar</div>
+    <div class="loot-source">Trophy-room slime</div>
+    <div class="loot-note">Back again after S9's loss.</div>
+  </div>
+</div>
+<div class="xp-banner">Gold · Seven tapestries sold to Wrin for <strong>100 gp</strong> · Half a day's earned income, <strong>a few silver</strong> · No XP announced</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Otari:</strong> "Is there a town called Otari? There's no way there's a town called Otari. Otari is me. I'm here. What do you mean?"<br>
+<strong>Xurl:</strong> "Yeah, that's why it's crazy, because they really like you up there and they named their whole town after you to honor you."
+<span class="attribution">The town's namesake learning, five centuries late, that the town exists.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "Oh, hi. Sorry. My name's Xurl. I jumped."
+<span class="attribution">Landing on a ghost.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "As Xurl puts his backpack on, he turns, looks Otari dead in the eye and says, is that a bone in my backpack? Are you happy to see me?"
+<span class="attribution">The bones bit.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Yeah, this looks dirty. This doesn't look tasty."
+<span class="attribution">At the mushrooms on the tentacle corpse, minutes after eating one off the lakeshore.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "I think I know what happened to you. I encountered this through my jobs and heard it from some other medics... something called filth fever."<br>
+<strong>Otari:</strong> "Do you think I don't know what happened to myself, huh?"
+<span class="attribution">Snagg's careful medical diagnosis, delivered to the patient.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "Yeah, about 500. Only 500 years old."
+<span class="attribution">The local, putting a number on it.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "It is not normal magic. I have my speculations, but it's possibly created with souls. I can feel the anguish, the hunger, the sadness radiating from this barrier... It's only meant to keep us out, not made to keep anything in."
+<span class="attribution">Hand on the stairway barrier.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "My dear, your father is worried about you. He says that you're not yourself."
+<span class="attribution">Doriana's bedside.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "No, it is much too dangerous."
+<span class="attribution">To Wrin, who wants to go down herself.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I am not. I am exactly that."
+<span class="attribution">Otari: "Books are for nerds."</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Can I do esoteric lore to tell him some tips on how to jump?"<br>
+<strong>DM:</strong> "Nope. Nope. Nope. Nope. Nope."
+<span class="attribution">Aiding Xurl's jump.</span></blockquote>
+
+<blockquote><strong>Otari:</strong> "I can feel that Belcorra is back. She is below us right now... But I assure you, I can feel that she's getting stronger and stronger every day."
+<span class="attribution">The one serious minute from the ghost.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li>⭐ <strong>The four Roseguard icons.</strong> Otari's plan to break the stairway barrier: <strong>Vol Rajani's sword</strong> (Dawnflower Library display case), <strong>Zarmavdian's spellbook</strong> (possibly Absalom), <strong>Aesephna Menhemes's cloak</strong> (ask the mayor, her descendant), and <strong>Otari's key</strong> (in hand). How do you borrow a town's sacred relic from a library?</li>
+  <li>⭐ <strong>Belcorra is back and getting stronger.</strong> Too weak to go far yet, <em>"getting stronger and stronger every day."</em> At full power she can leave. <strong>A second clock</strong>, alongside the Gauntlight's.</li>
+  <li><strong>The barrier blocks its caster's enemies.</strong> One-way, so what's below can come up. Ruben thinks it was built against the party specifically, possibly out of souls. His two ways through: kill the caster, or send someone the caster doesn't know.</li>
+  <li><strong>Doriana and the colourful man.</strong> Truthful about her thoughts, but she pauses when asked about her <em>"savior."</em> A one-off case no book covers. Linked to <strong>Amicia</strong>, whose father is running against hers.</li>
+  <li><strong>Carman Rajani's campaign.</strong> A third run, a speech that <em>"doesn't sound like him,"</em> and election day very soon.</li>
+  <li><strong>What is Wrin afraid of?</strong> A very strong sorceress who stays out of the Gauntlight for a reason that isn't monsters. Snagg and Xurl know; Ruben and Alder don't yet.</li>
+  <li><strong>Otari's dagger deal</strong> — a good ghost-touch dagger for his secrets. <strong>His key can be powered up</strong>, and nobody knows how.</li>
+  <li><strong>The light Xurl saw matches the messages' light.</strong> It came from Otari's chamber. Whether Otari leaves the messages wasn't asked.</li>
+  <li><strong>The dungeon is being cleaned.</strong> The Nhimbaloth shrine and the werewolf's pavilion now, as well as S9's room. Jaul's body is gone, so there's nothing to bring <strong>Waluwin</strong> for the burial.</li>
+  <li><strong>The wisp went through a hole into another dimension.</strong> An apparition, not a creature from this plane. Destroyed or escaped is still unknown.</li>
+  <li><strong>The trophy-room bodies are 100–200 years old.</strong> Someone was down here long after Belcorra.</li>
+  <li><strong>The dead tentacled thing in the green pond</strong>, and the <strong>half-flooded crawlspace</strong> upstream.</li>
+  <li><strong>Fiverr and Eero weren't at the kobold party.</strong> Where are they? And the <strong>bound demon</strong> on floor 3 still wants its contract.</li>
+  <li><strong>Road trip.</strong> The library, the spellbook, the dagger and the daughter all point to Absalom.</li>
+  <li>✅ <strong>Resolved: Otari did not die in the battle.</strong> He died down here of filth fever after a ceiling collapse — settling S9's contradiction with <code>world.md</code>.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where It Ends</span>
+<p>The party leaving a cave on the fourth floor with a key, a dagger, a ghost's shopping list and four quest lines pointing at Absalom. Behind them, the town's namesake drifts back to his island, still talking to himself about the news.</p>
+<p class="big-line">"There's no way there's a town called Otari. Otari is me."</p>
+<span class="speaker">Otari Ilvashti, five hundred years dead, meeting Xurl</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Snagg's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Snagg did this session</h3>
+<ul>
+  <li>Woke up on the floor of Belcorra's suite on Xurl's healing potion. Went straight to Ruben. Started a Risky Surgery on a <strong>Wounded 3</strong> patient and redid it as a normal Treat Wounds.</li>
+  <li>Ran the <strong>Treat Wounds</strong> cycles. Missed the expert DC once, re-ran it, healed Xurl on a 30, <strong>treated Alder's Wounded 1 too</strong> (Risky Surgery: 2 damage, 24 healed).</li>
+  <li>Told Wrin nothing. <strong>Pulled Xurl aside</strong> and told him what the town knows: she isn't local, she's a very good sorceress, and <strong>it isn't monsters she's afraid of</strong>.</li>
+  <li>Gave the party the town's file on <strong>Mayor Oseph</strong> and on <strong>Carman Rajani's</strong> run for mayor.</li>
+  <li><strong>Examined Doriana.</strong> Perfect health. No sleep.</li>
+  <li>Ate a cave mushroom. Did not eat the ones on the tentacle corpse.</li>
+  <li>Took the <strong>Lantern of Empty Light</strong> from Xurl. It burns pale blue.</li>
+  <li><strong>Boosted Xurl's first jump on a critical Aid.</strong> He made the island jump to Otari himself.</li>
+  <li><strong>Bit a flaming skull in half</strong> on a critical. Raised the shield. Let Otari do the rest.</li>
+  <li><strong>Diagnosed Otari: filth fever.</strong> He already knew.</li>
+  <li>Knew where <strong>Vol Rajani's sword</strong> is: the Dawnflower Library display case.</li>
+</ul>
+
+<h3>Things Snagg knows that the party does not</h3>
+<ul>
+  <li><strong>Wrin is afraid of something in or around the Gauntlight that isn't monsters.</strong> Xurl knows. Ruben and Alder don't.</li>
+  <li><strong>Every Otari kid knows the Rose Blade.</strong> It sits in a glass case at the library door. Borrowing it is not a small ask. The library, the priests and the whole town will have an opinion.</li>
+  <li><strong>The Rajanis and the Menhemes are both Roseguard families</strong>, and the two heads are running against each other for mayor. Two of the four icons sit with those two families' history: the sword and the cloak.</li>
+  <li><strong>Otari's legend is wrong.</strong> He didn't fall in the battle. The ceiling came down on him during the attack, the others thought him dead, and he was chased deeper and died alone, of filth fever, by the lake. Nobody in town knows that.</li>
+</ul>
+
+<h3>What Snagg is thinking about</h3>
+<ul>
+  <li><strong>The barrier blocks its caster's enemies.</strong> Ruben's read: made against the party specifically. Whatever is below can come up. Plan for it coming up.</li>
+  <li><strong>Belcorra is getting stronger every day.</strong> That's a clock, and it isn't the Gauntlight's clock.</li>
+  <li><strong>The cleaning.</strong> Three rooms now. Corpses and blood removed, campfires left. <em>Someone</em> did it, and has been behind the party the whole time.</li>
+  <li><strong>The new heroic buff</strong> is one reroll per fight, and it isn't a hero point. Spend it early on anything that matters. Real hero points still bump degrees.</li>
+  <li><strong>The shield</strong> was mocked by a ghost. It still needs repair after S9. Repair Toolkit.</li>
+  <li><strong>Absalom.</strong> Spellbook, dagger, library, the daughter's case. Four threads point there.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>How does the party get the Rose Blade out of the library?</strong> Ask Vandy?</li>
+  <li><strong>Will the mayor lend Aesephna's cloak</strong>, and does he know he has it?</li>
+  <li><strong>What is the colourful man</strong>, and why did Doriana have to stop and think about him?</li>
+  <li><strong>What is Carman Rajani's speech hiding?</strong></li>
+  <li><strong>What is Wrin afraid of?</strong></li>
+  <li><strong>What does Otari's key do when powered up?</strong></li>
+  <li><strong>Is Otari the one leaving the light messages?</strong></li>
+  <li><strong>Who is cleaning the dungeon?</strong></li>
+  <li><strong>Where were Fiverr and Eero?</strong></li>
+</ul>
+</section>
+
+</body>
+</html>

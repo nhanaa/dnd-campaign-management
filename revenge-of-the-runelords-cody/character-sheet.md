@@ -2,6 +2,8 @@
 
 **Name:** **Sevek**
 **Human (Dragonblood — Sky Dragon) · Monk 17 · Local Savior (Roderic's Cove) · Worshipper of Ashava**
+> ⚠️ **Level 18 reached at the end of S13 (2026-10-03).** This sheet is still the level-17 build; level-18 picks not yet recorded.
+
 **Role:** frontline controller / tank — mass Trip, Taunt at 120 ft, highest AC in the party, permanent flight, **Celestial Armaments blind on crit** (16), and as of 17: **Bear Hug** grapples (apex Bracers of Strength)
 
 > Backstory, voice, and party notes: **[character.md](character.md)**

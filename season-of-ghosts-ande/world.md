@@ -325,6 +325,37 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 
 **Carried-forward threads:** the fog-wall passage ritual · two research points left · the Dalgyal Gwishin · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami's nature · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
 
+### Session 10 (2026-10-09) — Within the Wall of Ghosts (fall, week 7, 7108 IC)
+*All five PCs. Party **reached level 5**. Three encounters; the Foundry log survived only for the vulture fight. XP: 80 announced (the ritual); the encounter awards were not said aloud. ⚠️ **Tan Sui Jing** is an audio-only spelling — the GM pasted the real one into a stretch of chat that was lost.*
+
+**The Dalgyal Gwishin** (carried over from S9) attacked only **Iryoku**, as predicted, and was destroyed in two rounds (Kaelen's Flurry of Blows). No weaknesses. **+1 Hope, +1 Northridge.**
+
+**The last research threshold.** One more week of downtime (Mu-Jin's Solo Investigations; **Zhen's Great Willow research, a critical success**) unlocked the final threshold. Town tracks: **18 Hope / 20 Food / 20 Security**. The party learned the ritual **Open the Wall of Ghosts** and that *"more information surely lies beyond the Wall of Ghosts at the ruins of the Tan Sugi Monastery."*
+- **The Wall of Ghosts is NOT the barrier sealing Willowshore.** It only blocks the way to the monastery (Iryoku, reading the research: *"Those are two separate things"*). The S9 "ritual that might allow passage through the fog wall" appears to have been this ritual described loosely — **there is still no known way out of town.**
+- **Ritual facts**: castable only under a crescent or new moon (**fall weeks 7, 8, 11, 12**); primary caster on expert Religion or Occultism (DC 24); three secondary casters minimum on Deception/Diplomacy/Intimidation (DC 19); 60 gp of rice and incense; takes a day, lasts a year.
+- **The vote**: Iryoku wanted to wait and keep preparing the town; Mu-Jin, Kaoru, Zhen and Kaelen voted to go. **Cast in week 7 with Zhen as primary** (Religion), Mu-Jin/Kaoru/Iryoku as secondaries. Success. **80 XP.**
+
+**Within the wall.** The fog closed behind the party — no way back. The terrain matches the monastery's site, but there is no monastery: **the forest is nearly 1,000 years younger than expected**, from before it was built. No animals, no wind, a feeling of being watched. (Mu-Jin: time travel, or a dimension recreating a moment in time. Unresolved.)
+
+**The slab.** In a clearing at the trail's end, a woman's corpse on a stone slab, chest torn open, fog and **silently screaming faces** rising from the wound, left arm pointing north.
+- Mu-Jin (natural 20): **Tan Sui Jing**, *"a legendary heroine said to have defeated a powerful fiend nearly a thousand years ago at the site where the Tan Sugi Monastery was built."*
+- Read out at the table: *"he was a Nindoru defeated by Tan Sui Jing and died in the battle and reincarnated into the towering tree that served as the focal point of the monastery."* The table took "he" as **Kugaptee**; who died and became the tree is ambiguous as spoken (the session's ending suggests her).
+- The word carved under her: **Kugaptee**. The wound: **a large clawed hand**. A Survival check critically failed for everyone trained. A whisper was heard (Kaelen heard *"find the seed"*).
+- Mu-Jin called her the monastery's founding grandmaster. **That is his reading, not the GM's** — the monastery was founded by Zhi Hui in 7020 IC.
+- GM, in passing: **Kugaptee *"is a deity you can worship."***
+
+**The Heart-Eating Vulture.** North, in a mound of bloodied fallen trees: a **talking** giant vulture (*"Leave at once. Lest you find yourselves added to my meals"*), elite, level 5, HP 83, AC 23, with three **Cacodaemons**. Killed in **one round** — Zhen's Fireball (vulture critical failure for 50, two Cacodaemons dead) and Kaoru's Fireball, then Kaelen and Iryoku. Its corpse burst into razor-winged red **nindoru butterflies** (Death Burst). Mu-Jin could not learn why it could talk. In its talon: **a human heart whispering *"save me."***
+
+**The unseen giant.** When Mu-Jin picked up the heart, the forest went dark; something enormous roared (Will saves, frightened) and approached, and the trees lashed out (Reflex saves). By Mu-Jin's Light the fog showed **blood-red**. Mu-Jin called the retreat; Kaoru carried the heart (Loose Time's Arrow) and **put it back in Tan Sui Jing's chest**. The thing *"howl[ed] in pain and frustration"* and fled. **Her body sank into the stone and an immense sugi tree grew nearly a hundred feet from it**, driving off the fog. The party was back on the **Pilgrim's Path**, near the Wall of Ghosts. Per the GM afterward it was a **hazard** (expert Perception, DC 32 to find).
+
+**Loot:** two unidentified consumables from the mound (stash).
+
+**New NPCs/figures:** **Tan Sui Jing** (legendary heroine, ~1,000 years dead; now, apparently, the sugi tree).
+**New creatures:** Heart-Eating Vulture (dead) · Cacodaemons (dead) · the unseen giant (fled, never seen).
+**New locations:** the Wall of Ghosts (opened) · the forest within it · the slab clearing · the vulture's mound.
+
+**Carried-forward threads:** what returning the heart did, and whether the Wall of Ghosts still stands · the Tan Sugi ruins, still unseen · the unseen giant (fled, not destroyed) · why the vulture could talk · the whisper at the slab · the failed Survival check at the slab · the rest of fall downtime · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami's nature · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
+
 ---
 
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

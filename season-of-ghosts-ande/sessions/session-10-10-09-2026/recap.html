@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 10 &mdash; Within the Wall of Ghosts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<header class="header">
+  <h1>Within the Wall of Ghosts</h1>
+  <div class="subtitle">Season of Ghosts &middot; Session 10 &middot; the ritual, the slab, and the heart</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-10-09</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 04m</span>
+    <span class="meta-pill">Fall, week 7 &middot; 7108 IC</span>
+    <span class="meta-pill">Level 4 &rarr; 5 &middot; three encounters</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:34%"></div>
+  <div class="comp-seg comp-social" style="width:22%"></div>
+  <div class="comp-seg comp-mystery" style="width:22%"></div>
+  <div class="comp-seg comp-rp" style="width:14%"></div>
+  <div class="comp-seg comp-explore" style="width:8%"></div>
+</div>
+<div class="composition-legend" style="margin-bottom:36px">
+  <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat &amp; Hazard 34%</span>
+  <span><span class="legend-dot" style="background:var(--lantern)"></span>Downtime &amp; Level-up 22%</span>
+  <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Mystery &amp; Ritual 22%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay &amp; the Vote 14%</span>
+  <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration 8%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-zhen">
+    <div class="char-name">Zhen Stillness</div>
+    <div class="char-class">Samsaran (Hungerseed) Animist 5 &mdash; Liturgist &middot; Druid FA</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kaelen">
+    <div class="char-name">Kaelen Ashford</div>
+    <div class="char-class">Human Monk 5 &mdash; bo staff, Mountain Stance, Staff Acrobat</div>
+    <div class="char-player">cajun_code</div>
+  </div>
+  <div class="char-card char-kaoru">
+    <div class="char-name">Kaoru</div>
+    <div class="char-class">Kitsune Magus 5 &mdash; Aloof Firmament</div>
+    <div class="char-player">magus player</div>
+  </div>
+  <div class="char-card char-mujin">
+    <div class="char-name">Mu-Jin</div>
+    <div class="char-class">Witch 5 &mdash; Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+    <div class="char-player">snotierknave69</div>
+  </div>
+  <div class="char-card char-iryoku">
+    <div class="char-name">Iryoku-Yasha</div>
+    <div class="char-class">Yaksha Kineticist 5 (Wood/Fire)</div>
+    <div class="char-player">legendfather</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-style:italic;margin-top:14px">The Foundry chat log survived for the vulture fight only, and stops when the vulture dies. The other two encounters are rebuilt from the recording, so they carry almost no numbers. <strong>Tan Sui Jing</strong> is an audio-only spelling.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The session opened on the fight S9 left hanging. The <strong>Dalgyal Gwishin</strong> in the bachelor&rsquo;s yard went straight for <strong>Iryoku</strong>, as the research had said it would, and spent two rounds headbutting him while the rest of the party took it apart. Kaoru&rsquo;s Spellstrike left it <em>&ldquo;barely still in existence&rdquo;</em> and <strong>Kaelen</strong> finished it with the first strike of a Flurry of Blows. Zhen&rsquo;s verdict on Iryoku&rsquo;s evening: <em>&ldquo;I guess it&rsquo;s not always good to be charismatic.&rdquo;</em> The town gained a point of Hope and a point of Northridge reputation.</p>
+<p>One more week of downtime closed the fall research. Mu-Jin ran his own investigations and <strong>Zhen took the Great Willow on Nature and critically succeeded</strong>, and the GM announced the final research threshold. With it came a ritual, <strong>Open the Wall of Ghosts</strong>, and the news that everything left to learn about the curse lies beyond that wall, at the ruins of the Tan Sugi Monastery. Then everyone <strong>leveled to 5</strong>. Zhen and Kaoru both came out of it with <strong>Fireball</strong>, Mu-Jin learned <strong>Fear</strong>, and Iryoku&rsquo;s fire junction now gives enemies near him a weakness to his fire. The ritual can only be cast under a crescent or new moon (weeks 7, 8, 11 or 12), and it was week 7. Iryoku wanted to wait and keep preparing the town. Mu-Jin, Kaoru, Zhen and Kaelen wanted to go, and the table went four to one. <strong>Zhen led the ritual as primary caster</strong> on Religion, with Mu-Jin, Kaoru and Iryoku as his secondaries, and it worked.</p>
+<p>The Wall of Ghosts let them in and closed behind them. Inside was a fog-bound forest with no wind and no animal sound. Iryoku recognized the ground as the monastery&rsquo;s site, and Mu-Jin read the trees: this woodland is <strong>nearly a thousand years younger than it should be</strong>, from before the monastery existed. At the end of the trail, on a slab of stone, lay a woman with her chest torn open and fog pouring out of the wound. Mu-Jin named her on a natural 20: <strong>Tan Sui Jing</strong>, the heroine who defeated a fiend here a thousand years ago. The word carved into the stone under her read <strong>Kugaptee</strong>. Her arm pointed north, to a mound of fallen trees and a <strong>talking giant vulture</strong> that told them to leave or be added to its meals.</p>
+<p>That fight is the one Pax asked to have remembered, and the log bears it out. Zhen rolled a natural 20 on initiative and opened with the spell he had learned an hour earlier. <strong>One Fireball: the vulture critically failed for 50, two of the three Cacodaemons died outright, and the third was left on 10 hit points.</strong> Kaoru rolled a natural 20 too, walked up and cast his own. The vulture got exactly one turn. Kaelen killed it, Iryoku picked off the last Cacodaemon, and the whole thing was over inside a single round. Then the vulture&rsquo;s corpse burst into razor-winged red butterflies, and in its talon was a <strong>human heart, whispering <em>&ldquo;save me.&rdquo;</strong></em></p>
+<p>The party already meant to carry the heart back to the body. Mu-Jin picked it up, and the forest went dark. Something enormous began roaring and walking toward them through the trees, and the trees themselves started clawing at the party. Nobody could see it and nobody could identify it. Mu-Jin stopped trying and made the call: everyone back to the slab, now. It became a relay. Kaoru took the heart, Mu-Jin&rsquo;s Loose Time&rsquo;s Arrow gave him the extra stride, and <strong>Kaoru ran a hundred feet and put the heart back in Tan Sui Jing&rsquo;s chest.</strong> The unseen thing howled and fled. Her body sank into the stone, a <strong>sugi tree</strong> grew a hundred feet out of it and drove the fog away, and the party was standing on the Pilgrim&rsquo;s Path again. The GM&rsquo;s reveal afterward: it was a hazard, and nobody could realistically have spotted it.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Prologue &middot; Recap &middot; 0:00&ndash;5:05</div>
+    <div class="act-card">
+      <h3>The story so far</h3>
+      <ul>
+        <li><strong>Mu-Jin gave the recap</strong> (the recording joins it mid-sentence, at Mama Bao&rsquo;s grandfather). He closed on the research: Kugaptee, secrets at Tan Sugi, and a ritual <em>&ldquo;that would allow us to bypass the mist and go investigate the old Tan Sugi Monastery.&rdquo;</em></li>
+        <li>Initiative for the Gwishin was rolled as people settled in.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act I &middot; Combat &middot; The Dalgyal Gwishin &middot; 5:05&ndash;25:40</div>
+    <div class="act-card">
+      <h3>The faceless ghost comes for the Face</h3>
+      <ul>
+        <li>It flew at <strong>Iryoku</strong> and stayed on him. Iryoku explained why: <em>&ldquo;It has stuff that gives it bonuses against things with higher charisma than it.&rdquo;</em></li>
+        <li><strong>Kaelen killed it</strong> with a Flurry of Blows. <strong>+1 Hope, +1 Northridge reputation.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act II &middot; Downtime &middot; The Last Research Threshold &middot; 25:49&ndash;34:43</div>
+    <div class="act-card">
+      <h3>The Great Willow answers, and a ritual is learned</h3>
+      <ul>
+        <li>The party needed two more research points. <strong>Mu-Jin ran Solo Investigations</strong> (Occultism) with a hero point held in reserve; his result wasn&rsquo;t said aloud.</li>
+        <li><strong>Zhen researched the Great Willow on Nature</strong> (<em>&ldquo;I&rsquo;ll go to Great Willow and make a few trips there to gain further insight into the curse by consulting with Kami&rdquo;</em>) and <strong>critically succeeded</strong>. Iryoku noted the crit was more than the track needed. The GM: <em>&ldquo;You&rsquo;ve unlocked the final research threshold.&rdquo;</em></li>
+        <li><strong>Iryoku</strong> wanted to host a ceremony, learned it costs 10 gp, and switched to <strong>Aid Harvest</strong> on Athletics: 2 food with the farmland upgrade. <strong>Kaoru</strong> earned income on Diplomacy and <strong>Kaelen</strong> on Athletics.</li>
+        <li><strong>Town tracks: 18 Hope, 20 Food, 20 Security.</strong></li>
+        <li><strong>The ritual.</strong> The final threshold taught the party <strong>Open the Wall of Ghosts</strong>. The GM: <em>&ldquo;You&rsquo;ve learned everything about the curse that you can in town, and more information surely lies beyond the Wall of Ghosts at the ruins of the Tan Sugi Monastery.&rdquo;</em></li>
+        <li><strong>Ritual planning</strong> started at once. One primary caster on expert Religion or Occultism; <strong>three secondary casters minimum</strong> on Deception, Diplomacy or Intimidation (Iryoku read the minimum rule off Archives of Nethys). Zhen has none of the secondary skills, so <strong>Iryoku proposed Zhen as primary</strong>, which frees Mu-Jin&rsquo;s Deception for a secondary. Mu-Jin: <em>&ldquo;Rituals are a bitch.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act III &middot; Level Up &middot; Level 5 &middot; 34:58&ndash;58:11</div>
+    <div class="act-card">
+      <h3>Two Fireballs, one Fear, and a fire junction</h3>
+      <ul>
+        <li><strong>Zhen</strong>: third-rank spells, <strong>Fireball</strong> among them, and his focus spells heightened (<em>&ldquo;It&rsquo;s heightened by every two levels, which is kind of sucky, but it&rsquo;s good when it does&rdquo;</em>). On the level itself: <em>&ldquo;This is the level where I stop having fun as a martial.&rdquo;</em> He swapped a prepared spell after the GM pointed out to Mu-Jin that Faerie Fire is now <strong>Revealing Light</strong>.</li>
+        <li><strong>Kaelen</strong>: <strong>Clever Improviser</strong> for his ancestry feat (the GM laid out the choice against Incredible Initiative; Kaelen picked skills), a skill increase in <strong>Stealth</strong>, and a partial boost into Strength.</li>
+        <li><strong>Kaoru</strong>: <strong>Fireball</strong>, new innate spells from an ancestry feat (one chosen each day), a skill increase in <strong>Arcana</strong>, and a new language. He first picked Aklo, then took <strong>Halfling</strong> when Iryoku noted it&rsquo;s the one recommended language nobody in the party speaks.</li>
+        <li><strong>Mu-Jin</strong>: <strong>Spectral Blade</strong>, and then he asked the table for a crowd-control pick to Learn. Zhen offered Slow and Roaring Applause; the table landed on <strong>Fear</strong>, which at third rank hits five targets (Iryoku), and Zhen agreed: <em>&ldquo;third rank fear is one of the best spells in the game.&rdquo;</em> Occultism 27 was a critical success, and since Fear is a first-rank spell the GM corrected the cost from 16 gp to <strong>1 gp</strong>. He dropped Noise Blast from his prepared list.</li>
+        <li><strong>Iryoku</strong>: an extra damage die on his blasts, and his gate junction: <em>&ldquo;I give everyone around me fire weakness.&rdquo;</em> He clarified that it only applies to enemies. Separately he has a stance that gives himself and nearby allies fire resistance 5. No proficiency increase until 7.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act IV &middot; Roleplay &middot; The Vote &middot; 58:29&ndash;70:37</div>
+    <div class="act-card">
+      <h3>Prepare the town, or open the door</h3>
+      <ul>
+        <li><strong>The ritual has a window</strong>: a crescent or new moon, so <strong>weeks 7, 8, 11 or 12</strong>. It was week 7. It also needs <strong>60 gp of rice and incense</strong>.</li>
+        <li><strong>DCs</strong>: 19 for each secondary, <strong>24 for the primary</strong>.</li>
+        <li><strong>Iryoku argued for waiting</strong>: <em>&ldquo;I&rsquo;m concerned about our ability to continue preparing the town once we open that door. We know there&rsquo;s some shit on the other side.&rdquo;</em></li>
+        <li><strong>Kaoru asked how much preparation the village still needed</strong>, and <strong>Mu-Jin laid out both sides</strong>: the town is over every minimum and four more weeks could push the tracks toward 30, but the curse may get worse the longer it sits. Then Mu-Jin cast the first vote, to go at once.</li>
+        <li><strong>Iryoku</strong>: <em>&ldquo;at the very least next week, but would prefer longer.&rdquo;</em> <strong>Kaoru</strong> voted now, on the reasoning that it will only get worse.</li>
+        <li><strong>Zhen asked the GM what waiting would actually buy</strong>, and whether the town felt ready for winter. The GM: everything looks good, <em>&ldquo;but you can never be too prepared for winter.&rdquo;</em> Zhen came down on going now.</li>
+        <li>The GM guessed <strong>Kaelen</strong> wanted to see the monastery because of his faith, and Kaelen agreed: <em>&ldquo;Probably so, because we don&rsquo;t know what happened there.&rdquo;</em> Mu-Jin answered him with the legend as the party understood it: Kugaptee came and made a mess, a great master beat it and died sealing it away, the monastery was built to stand watch, and then it fell into ruin.</li>
+        <li><strong>Four to one. They went.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act V &middot; Ritual &middot; Open the Wall of Ghosts &middot; 70:37&ndash;76:40</div>
+    <div class="act-card">
+      <h3>Zhen leads the casting</h3>
+      <ul>
+        <li><strong>Iryoku, reading the research</strong>: the <strong>Wall of Ghosts is not the thing keeping Willowshore sealed</strong>. It only blocks the way to the monastery. <em>&ldquo;Those are two separate things.&rdquo;</em></li>
+        <li>Table talk on the walk: Iryoku&rsquo;s player doubted the party would ever fight Kugaptee directly, and the GM added that <strong>Kugaptee <em>&ldquo;is a deity you can worship, though.&rdquo;</strong></em></li>
+        <li><strong>Secondaries</strong>, per the plan: Mu-Jin on <strong>Deception</strong> (a success), Kaoru on <strong>Diplomacy</strong>, Iryoku on <strong>Intimidation</strong>. One secondary check failed and was hero-pointed; which one isn&rsquo;t clear on the recording. Net result: <strong>+2 circumstance to Zhen&rsquo;s check</strong>.</li>
+        <li><strong>Zhen&rsquo;s Religion primary succeeded</strong>, and would have without the +2. The ritual takes a full day and lasts a year. <strong>80 XP.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VI &middot; Exploration &middot; Within the Wall &middot; 76:45&ndash;84:59</div>
+    <div class="act-card">
+      <h3>A forest a thousand years too young</h3>
+      <ul>
+        <li>The wall still resisted, and once the party stepped through, the fog closed: <strong>they could not go back.</strong></li>
+        <li>Two checks read the place. <strong>Iryoku&rsquo;s</strong>: the terrain matches where the Tan Sugi ruins stand, but there is no monastery. <strong>Mu-Jin&rsquo;s critical success</strong> gave the reason: <strong>the forest is nearly 1,000 years younger than expected</strong>, an era before it was built.</li>
+        <li>No animal calls, no breeze, the sensation of being watched, and a feeling of impending doom.</li>
+        <li><strong>Mu-Jin told the party in character</strong>, pointing at the trees, and offered two readings: <em>&ldquo;I&rsquo;m not sure if we went back in time or if we just went into a dimension trying to recreate a moment in time.&rdquo;</em> Kaelen&rsquo;s player said it felt like Back to the Future, and <strong>Zhen stayed in character</strong>: <em>&ldquo;I wouldn&rsquo;t know what you&rsquo;re talking about, but&hellip; I feel like a dimension sounds more likely.&rdquo;</em> Kaoru, out of character: <em>&ldquo;it feels like Ravenloft.&rdquo;</em> Iryoku: <em>&ldquo;Does anyone have any prophecy spells?&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VII &middot; Mystery &middot; The Slab &middot; 84:59&ndash;95:05</div>
+    <div class="act-card">
+      <h3>Tan Sui Jing, and the word beneath her</h3>
+      <ul>
+        <li>A 50-foot clearing, a smaller trail north, and at the center a slab of stone. <em>&ldquo;A woman&rsquo;s corpse lies atop the slab, her chest a gaping, gory hole. Her left arm seems to point toward the northern path. Curling coils of fog writhe up from the hole in the corpse&rsquo;s chest.&rdquo;</em> Deep furrows in the stone beneath her form a word.</li>
+        <li><strong>Mu-Jin, natural 20</strong>: this is <strong>Tan Sui Jing</strong>, <em>&ldquo;a legendary heroine said to have defeated a powerful fiend nearly a thousand years ago at the site where the Tan Sugi Monastery was built.&rdquo;</em> Kaelen: <em>&ldquo;Mu-Jin is really good at knowledge check.&rdquo;</em></li>
+        <li><strong>Iryoku read out more</strong>, verbatim: <em>&ldquo;he was a Nindoru defeated by Tan Sui Jing and died in the battle and reincarnated into the towering tree that served as the focal point of the monastery.&rdquo;</em> The table took &ldquo;he&rdquo; as Kugaptee. As spoken, the sentence doesn&rsquo;t settle who died and became the tree; the ending of the session suggests it was her.</li>
+        <li>Mu-Jin to Kaelen: <em>&ldquo;pay respect to your ancestor. This is literally the founding grandmaster of your order.&rdquo;</em> Kaelen: <em>&ldquo;I will put the demon back where it belongs.&rdquo;</em> (The &ldquo;founder&rdquo; part is Mu-Jin&rsquo;s reading. The GM called her a heroine who fought at the site; the monastery itself was founded much later.)</li>
+        <li><strong>Perception</strong> (everyone succeeded): the fog rising from her chest carries <strong>distorted, silently screaming faces</strong>.</li>
+        <li><strong>Mu-Jin read the carved word: Kugaptee.</strong></li>
+        <li><strong>Medicine</strong>: the wound was made by <strong>a large clawed hand</strong> that tore through the chest.</li>
+        <li><strong>Survival</strong> (trained only: Kaelen, Mu-Jin, Zhen) <strong>critically failed across the board.</strong> Zhen spent a hero point on his and it was still a failure. What the check was for was never learned.</li>
+        <li>A voice began whispering while they worked. Kaelen asked if it was saying <em>&ldquo;find the seed&rdquo;</em>; the GM appeared to confirm and pasted the text into chat. They followed her arm north.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act VIII &middot; Encounter &middot; The Mound &middot; 95:24&ndash;98:12</div>
+    <div class="act-card">
+      <h3>&ldquo;Leave at once&rdquo;</h3>
+      <ul>
+        <li>A mound of fallen trees with blood on it and an opening at its center that stank of rot. From inside, in Common: <strong><em>&ldquo;Leave at once. Lest you find yourselves added to my meals.&rdquo;</em></strong> Kaelen, straight back at it: <em>&ldquo;Oh, why? Why should we leave?&rdquo;</em> A giant vulture. <strong>Initiative.</strong></li>
+        <li>The GM called the halfway break here and handed out the hourly hero point. Table check: the players were enjoying it. Zhen was <em>&ldquo;liking the new area.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IX &middot; Combat &middot; The Heart-Eating Vulture &middot; 114:05&ndash;131:43</div>
+    <div class="act-card">
+      <h3>One round, two Fireballs</h3>
+      <ul>
+        <li><strong>One round.</strong> Zhen&rsquo;s Fireball, Kaoru&rsquo;s Fireball, Kaelen&rsquo;s kill, Iryoku&rsquo;s cleanup.</li>
+        <li><strong>Mu-Jin&rsquo;s free Recall Knowledge</strong>: a <strong>variant giant vulture</strong>. He wanted to know why an animal could talk (<em>&ldquo;Like those giant centipedes that start talking&rdquo;</em>), but its unique features were beyond his roll. A hero-pointed second check named the small ones: <strong>Cacodaemons</strong> (daemon, fiend, unholy).</li>
+        <li>The corpse <strong>burst into razor-winged red butterflies</strong> at the end of the round.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act X &middot; Mystery &middot; The Heart &middot; 131:43&ndash;135:41</div>
+    <div class="act-card">
+      <h3>&ldquo;Save me&rdquo;</h3>
+      <ul>
+        <li>In the vulture&rsquo;s talon: <strong>a human heart</strong>. Iryoku asked whether it was Tan Sui Jing&rsquo;s. The GM: impossible to tell by looking. Kaoru: <em>&ldquo;It was ripped out by an animal, so nine out of ten odds&hellip;&rdquo;</em></li>
+        <li><strong>A faint voice called from the heart.</strong> The table&rsquo;s plan, before anyone touched it: heal first, then bring the heart back to Tan Sui Jing. Zhen&rsquo;s healing covered everyone. Kaelen: <em>&ldquo;But what happened here? That&rsquo;s my question.&rdquo;</em> Iryoku asked what was in the mound.</li>
+        <li><strong>Mu-Jin picked up the heart</strong> (<em>&ldquo;Do I get cursed? Do I die?&rdquo;</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act XI &middot; Hazard &middot; The Dark &middot; 135:41&ndash;173:13</div>
+    <div class="act-card">
+      <h3>The unseen giant, and the run to the slab</h3>
+      <ul>
+        <li><strong>The forest plunged into darkness.</strong> A growl became a thunderous roar, and then, per the GM, the sound of toppling trees and thunderous footsteps, as if an immense giant had noticed them and was coming.</li>
+        <li><strong>The heart whispered, very weakly: <em>&ldquo;Save me.&rdquo;</strong></em></li>
+        <li><strong>Mu-Jin called the retreat</strong> to the slab, then cast <strong>Light</strong>, and by it Zhen could see the fog had turned <strong>blood-red</strong>. Kaoru took the heart and ran it home.</li>
+        <li><strong>The heart went back in.</strong> <em>&ldquo;You&rsquo;ll hear the creature howl in pain and frustration, and then the sound as if some unseen giant were fleeing into the distance.&rdquo;</em> Tan Sui Jing&rsquo;s body sank into the stone, <strong>an immense sugi tree grew nearly a hundred feet</strong> out of the ground and swallowed the slab, its branches drove off the fog, and everything faded.</li>
+        <li><strong>The party stood on the Pilgrim&rsquo;s Path again</strong>, northwest of Willowshore, near the Wall of Ghosts.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Epilogue &middot; Wrap &middot; 173:41&ndash;176:35</div>
+    <div class="act-card">
+      <h3>What that was</h3>
+      <ul>
+        <li>The mound&rsquo;s treasure, which Iryoku had grabbed on his first turn in the dark: <strong>two unidentified consumables</strong>, into the stash.</li>
+        <li><strong>The GM&rsquo;s reveal: the unseen giant was a hazard.</strong> Zhen asked if it could have been disabled. It could, but only after being found, and seeing it needed <strong>expert Perception at DC 32</strong>. Only Kaelen is expert, at +11, so a natural 20 on a Seek. Zhen: <em>&ldquo;Yeah, no. Not gonna happen.&rdquo;</em> Kaelen: <em>&ldquo;Ah, I should have rolled for perception.&rdquo;</em></li>
+        <li>Kaoru credited Mu-Jin&rsquo;s Light: <em>&ldquo;It gave me sort of a path to run.&rdquo;</em></li>
+        <li>The table liked the session. Zhen: <em>&ldquo;What the hell was that? &hellip; That was interesting.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; The Dalgyal Gwishin &middot; Two Rounds &middot; recording only</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemy</div><div class="combat-stat-value">1 Dalgyal Gwishin (incorporeal undead, unholy)</div></div>
+    <div><div class="combat-stat-label">Target</div><div class="combat-stat-value">Iryoku, every attack</div></div>
+    <div><div class="combat-stat-label">Weaknesses</div><div class="combat-stat-value">None (Mu-Jin&rsquo;s Recall Knowledge)</div></div>
+    <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Kaelen &mdash; Flurry of Blows</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">+1 Hope &middot; +1 Northridge</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">One incorporeal undead in a bachelor&rsquo;s yard. Two rounds. Almost no numbers were read aloud, so this is mostly sequence. Zhen&rsquo;s Vitality Lash damage is from Pax.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>The Gwishin</strong> flew at <strong>Iryoku</strong>. Its presence forced a Will save from everyone, and at least one PC came out frightened. It struck Iryoku, with some of the damage mental, and tried one more strike with its last action (result not said).</li>
+    <li><strong>Kaoru</strong> made two plain strikes (<em>&ldquo;the easy way&rdquo;</em>). He spent a hero point on the second (result not said).</li>
+    <li><strong>Iryoku</strong> threw a two-action melee blast, missed, and raised his shield.</li>
+    <li><strong>Kaelen</strong> moved in and cast <strong>Inner Upheaval</strong> with <strong>Flurry of Blows</strong> for spirit damage; the GM called for damage on both strikes. With one action left, a further strike would have needed a 20.</li>
+    <li><strong>Mu-Jin</strong> used his free Recall Knowledge (success): <strong>no weaknesses</strong>. He cast <strong>Soothe</strong> on Iryoku.</li>
+    <li><strong>Zhen</strong> had delayed to act after Mu-Jin. He cast <strong>Vitality Lash</strong>; the Gwishin failed its save and took <strong>9</strong>. He was slowed 1 this round from a natural 1 on initiative (the table&rsquo;s house rule), so that was his whole turn.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>The Gwishin</strong> tried three headbutts on Iryoku, who <strong>Shield Blocked</strong> one.</li>
+    <li><strong>Kaoru</strong>: <strong>Spellstrike with Ignition</strong>, a solid hit. The GM: <em>&ldquo;It&rsquo;s barely still in existence.&rdquo;</em> A follow-up strike missed. Zhen noted Spellstrike counts as two attacks for the penalty, and the GM confirmed it.</li>
+    <li><strong>Iryoku</strong>: a two-action blast, cheered by the table (<em>&ldquo;Hey, vitality damage&rdquo;</em>), then a third-action attack that missed.</li>
+    <li><strong>Kaelen</strong> tried Inner Upheaval and had no focus point. He went to a plain <strong>Flurry of Blows</strong>, and <strong>the first strike killed it.</strong></li>
+  </ul>
+  <p><strong>Result</strong>: +1 Hope, +1 Northridge reputation.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; The Heart-Eating Vulture &middot; One Round &middot; roll log</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Elite Heart-Eating Vulture (Lv5, HP 83, AC 23) + 3 Cacodaemons (Lv1, HP 22, AC 16)</div></div>
+    <div><div class="combat-stat-label">Enemy HP</div><div class="combat-stat-value">149 total</div></div>
+    <div><div class="combat-stat-label">Zhen&rsquo;s Fireball</div><div class="combat-stat-value">106 damage &middot; 2 kills</div></div>
+    <div><div class="combat-stat-label">Rounds</div><div class="combat-stat-value">1 &mdash; the vulture acted once</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Iryoku 11 + the Death Burst</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Elite Heart-Eating Vulture (level 5 elite, HP 83, AC 23, Reflex +13) and three Cacodaemons (level 1, HP 22, AC 16, Reflex +8). 149 enemy hit points in total. One round. Foundry tagged it a low threat.</p>
+  <p><strong>Initiative</strong>: Zhen 33 (natural 20) &middot; Kaoru 31 (natural 20) &middot; Vulture 27 &middot; Kaelen 23 &middot; Iryoku 23 &middot; Cacodaemon 20 &middot; Mu-Jin 15 &middot; Cacodaemons 14, 13. Under the table&rsquo;s house rule a natural 20 means four actions in round 1.</p>
+  <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:14px">
+    <tr><th style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top"></th><th style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">Zhen&rsquo;s Fireball (25)</th><th style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">Kaoru&rsquo;s Fireball (18)</th></tr>
+    <tr><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top"><strong>Vulture</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">natural 1, <strong>critical failure &rarr; 50</strong> (83 &rarr; 33)</td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">19 vs DC 20, <strong>failed by 1 &rarr; 18</strong> (33 &rarr; 15)</td></tr>
+    <tr><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top"><strong>Cacodaemon A</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">failure &rarr; 25, <strong>dead</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">&mdash;</td></tr>
+    <tr><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top"><strong>Cacodaemon B</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">failure &rarr; 25, <strong>dead</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">&mdash;</td></tr>
+    <tr><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top"><strong>Cacodaemon C</strong></td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">success &rarr; 12 (22 &rarr; 10)</td><td style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top">success &rarr; 9 (10 &rarr; 1)</td></tr>
+  </table></div>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Zhen</strong>: <strong>Fireball</strong>, DC 21. Result as above: <strong>106 damage on a 25-point roll, two kills.</strong> He then declared <strong>Earth&rsquo;s Bile</strong>, moved 30 feet to bring it into range, found it still didn&rsquo;t reach, and cast <strong>Shield</strong> instead. Four actions: Fireball, Stride, Shield.</li>
+    <li><strong>Kaoru</strong>: moved up and cast his own <strong>Fireball</strong>, DC 20, as a plain spell.</li>
+    <li><strong>The vulture</strong> flew down, landed, and hit <strong>Iryoku</strong> with its beak (24 vs AC 22) for <strong>11</strong>. Iryoku&rsquo;s Fortitude save against <strong>Carrion Fever</strong> was a <strong>critical success</strong> (natural 19, 32 vs DC 20).</li>
+    <li><strong>Kaelen</strong>: <strong>Inner Upheaval + Flurry of Blows</strong>. First strike 22 against AC 23, a miss by 1. He spent a <strong>hero point</strong>, and the reroll hit at 25. <strong>19 damage into a vulture on 15: dead.</strong> His second strike was a natural 2. He spent his last action moving toward the remaining Cacodaemon.</li>
+    <li><strong>Iryoku</strong>: moved, and a one-action ranged fire blast <strong>killed the last Cacodaemon</strong>, which had 1 hit point left.</li>
+    <li><strong>Mu-Jin</strong>: moved up to the body, free Recall Knowledge on the vulture, Recall Knowledge on the Cacodaemons (failed, hero-pointed, identified), and <strong>Shield</strong>.</li>
+    <li><strong>End of round, Death Burst</strong>: the vulture&rsquo;s corpse exploded in a 10-foot blast of red nindoru butterflies (5d6+4 slashing, DC 20 basic Reflex). <strong>Kaoru, Mu-Jin, Weaver and Zhen</strong> were in it. Zhen took damage (<em>&ldquo;Not too bad&rdquo;</em>). The individual results aren&rsquo;t in the log.</li>
+  </ul>
+  <p><strong>Damage dealt</strong>: Zhen 106 &middot; Kaoru 27 &middot; Kaelen 15 &middot; Iryoku 1.</p>
+  <p><strong>Kills</strong>: Zhen 2 (Cacodaemons) &middot; Kaelen 1 (the vulture) &middot; Iryoku 1 (Cacodaemon). No Cacodaemon ever acted.</p>
+  <p><strong>Damage taken</strong>: Iryoku 11 (beak). The Death Burst on Kaoru, Mu-Jin, Weaver and Zhen, amounts unrecorded. Afterward Zhen&rsquo;s healing topped everyone up.</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 &middot; The Unseen Giant &middot; Hazard &middot; Three Rounds &middot; recording only</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Trigger</div><div class="combat-stat-value">Mu-Jin picks up the heart</div></div>
+    <div><div class="combat-stat-label">Routine</div><div class="combat-stat-value">Roar (Will) &middot; lashing branches (Reflex)</div></div>
+    <div><div class="combat-stat-label">To find it</div><div class="combat-stat-value">Expert Perception, DC 32</div></div>
+    <div><div class="combat-stat-label">Ended by</div><div class="combat-stat-value">Kaoru returning the heart</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Triggered when Mu-Jin picked up the heart. No creature was ever visible. A roar before initiative, then three rounds.</p>
+  <ul>
+    <li><strong>Before initiative</strong>: darkness, then a roar. Will saves: everyone succeeded except <strong>Kaelen</strong>, who was frightened.</li>
+    <li><strong>Round 1.</strong> A second roar left <strong>Zhen and Iryoku frightened 1</strong> and Kaelen still frightened. Iryoku hero-pointed his. Zhen said he had none left. <strong>Iryoku</strong> ran to the mound and picked up the loot. <strong>Kaelen</strong> readied a Flurry of Blows against anything that came at him. <strong>Zhen and Kaoru delayed</strong> behind Mu-Jin. <strong>Mu-Jin</strong>: free Recall Knowledge (a natural 18, and still nothing), tried to speak to the heart (<em>&ldquo;Save me&rdquo;</em>), called the retreat, cast <strong>Light</strong> (by which the fog showed blood-red), and moved. <strong>Zhen</strong> ran. <strong>Kaoru</strong> took the heart and ran.</li>
+    <li><strong>Round 2.</strong> <strong>The trees came alive</strong> and clawed at everyone: Reflex saves, +1 for most and +4 for Kaoru. Zhen had a reroll available from a samsaran ancestry feat and chose not to use it (<em>&ldquo;Actually, I&rsquo;ll take the damage. That&rsquo;s fine.&rdquo;</em>). Everyone ran. <strong>Mu-Jin</strong> cast <strong>Loose Time&rsquo;s Arrow</strong> on Kaoru, Iryoku and himself; Zhen and Kaelen were out of range. <strong>Zhen</strong> sprinted on toward the slab. <strong>Kaoru</strong> moved a hundred feet.</li>
+    <li><strong>Round 3.</strong> Another roar, and the GM handed out the last hourly hero point of the session as the saves were rolled: <strong>Kaoru</strong> became immune for 24 hours, Iryoku and Zhen were fine, <strong>Kaelen and Mu-Jin</strong> were frightened 1. The branches lashed again. Iryoku ran a hundred feet. <strong>Zhen</strong> moved up, swapped apparitions and cast <strong>Garden of Healing</strong>. <strong>Kaoru put the heart back in the body.</strong></li>
+  </ul>
+  <p><strong>Result</strong>: the hazard ended. It could have been disabled, but only after being found: expert Perception, DC 32 to see it.</p>
+</div>
+
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+  <div class="spotlight s-zhen">
+    <h4>Zhen Stillness &middot; the Primary Caster</h4>
+    <ul>
+      <li><strong>He led the ritual.</strong> With no social skills to offer as a secondary, he took the primary seat on Religion at Iryoku&rsquo;s suggestion and made the DC 24 check with room to spare. Earlier the same session his Great Willow research came up a <strong>critical success</strong> as the last research threshold fell.</li>
+      <li><strong>He asked what waiting would buy before he voted.</strong> Three votes were already in. Zhen asked the GM whether there was anything concrete to gain and whether Willowshore felt ready for winter, got <em>&ldquo;you can never be too prepared,&rdquo;</em> and voted to go.</li>
+      <li><strong>The Fireball.</strong> First turn of the vulture fight, a natural 20 on initiative, and a spell he&rsquo;d had for an hour: <em>&ldquo;Well, no time like the present. Let&rsquo;s debut the new spell.&rdquo;</em> It took 106 of the 149 hit points the enemy side had, and killed two of the four outright. When Kaoru walked up to do the same: <em>&ldquo;Hell yeah, join the gang.&rdquo;</em> And on the turn order: <em>&ldquo;the two caster with AoE spell go first. &hellip; That&rsquo;s a nice recipe.&rdquo;</em></li>
+      <li><strong>He stayed in the fiction when the table didn&rsquo;t.</strong> When the Back to the Future jokes started inside the wall, his answer was Zhen&rsquo;s: <em>&ldquo;I wouldn&rsquo;t know what you&rsquo;re talking about, but&hellip; I feel like a dimension sounds more likely.&rdquo;</em> Then the practical elder: <em>&ldquo;Let&rsquo;s be careful,&rdquo;</em> and at the slab, <em>&ldquo;Let&rsquo;s watch our backs and sides.&rdquo;</em></li>
+      <li><strong>The rules resource, lightly.</strong> He told Kaoru that Spellstrike counts as two attacks for the multiple attack penalty (the GM confirmed it from the text), offered Mu-Jin Slow and Roaring Applause when he asked for crowd control, suggested a flank to Kaelen, prompted the Recall Knowledge on the Gwishin, and when Kaelen was out of focus points and the table was weighing Electric Arc against a ghost: <em>&ldquo;Probably better to just bonk it, honestly.&rdquo;</em></li>
+      <li><strong>Dry about all of it.</strong> <em>&ldquo;I guess it&rsquo;s not always good to be charismatic.&rdquo;</em> On leveling: <em>&ldquo;This is the level where I stop having fun as a martial.&rdquo;</em> When the vulture bit Iryoku: <em>&ldquo;Not against my friend, no.&rdquo;</em></li>
+      <li><strong>In the dark</strong>, he delayed his turn so Mu-Jin&rsquo;s free Recall Knowledge could go first, and ran when the call came. At the slab: <em>&ldquo;So, we&rsquo;re here already. So, might as well do something productive.&rdquo;</em> He swapped apparitions and cast <strong>Garden of Healing</strong>, which caught Mu-Jin and Weaver.</li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-mujin">
+    <h4>Mu-Jin &middot; the One Who Named the Dead</h4>
+    <ul>
+      <li><strong>He named the dead woman.</strong> A natural 20 identified <strong>Tan Sui Jing</strong>, and he was the one who could read the word under her body: <strong>Kugaptee</strong>. His first reaction was that the story they&rsquo;d been told might be wrong: <em>&ldquo;There might be more to the story than we think, folks.&rdquo;</em></li>
+      <li><strong>He dated the forest</strong>, on a critical success, and delivered it in character, pointing at the trees: a growth pattern from a thousand years ago, no animals, no wind. Then the best theory of the night: <em>&ldquo;I&rsquo;m not sure if we went back in time or if we just went into a dimension trying to recreate a moment in time.&rdquo;</em></li>
+      <li><strong>He drove the vote.</strong> He was for going from the first minute and said so, but when Kaoru asked what the town still needed, he set out the case for waiting as carefully as the case for going, counted the town&rsquo;s points against the minimums, and put it to the table. He voted first and didn&rsquo;t hide it. He also dug into the ritual rules (order of checks, how many secondaries, whether townsfolk could help) until the plan was sound.</li>
+      <li><strong>He called the retreat.</strong> With the party blind and something huge approaching, he tried a free Recall Knowledge, tried talking to the heart, and then committed: <em>&ldquo;My best suggestion is for everyone to get the fuck out of here, [run] back to Tan Sui Jing, and try to see if we can put the heart back in there.&rdquo;</em> He cast <strong>Light</strong> to show the path, asked for a faster runner to take the heart off him, and cast <strong>Loose Time&rsquo;s Arrow</strong> to speed the relay.</li>
+      <li><strong>Still funny.</strong> <em>&ldquo;Rituals are a bitch.&rdquo;</em> The Cacodaemons were <em>&ldquo;the ones that look like a demonic Pac-Man.&rdquo;</em> And the horror-movie line as the footsteps got closer: <em>&ldquo;I think this is the point where we&rsquo;re all supposed to run the fuck away from whatever&rsquo;s approaching us.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaoru">
+    <h4>Kaoru &middot; the One Who Carried the Heart</h4>
+    <ul>
+      <li><strong>He ended it.</strong> He offered to take the heart because he was standing next to Mu-Jin, ran a hundred feet in one turn under Loose Time&rsquo;s Arrow, and on his next turn said <em>&ldquo;I&rsquo;m going to put the heart back in.&rdquo;</em> The night&rsquo;s whole mystery resolved on that action.</li>
+      <li><strong>He matched Zhen spell for spell.</strong> Natural 20 on initiative, second in the order, and: <em>&ldquo;Kaoru&rsquo;s gonna come up here, and Kaoru is going to repeat. Or in other words, I&rsquo;m going to copy your step.&rdquo;</em> His Fireball took the vulture to 15 hit points and the last Cacodaemon to 1.</li>
+      <li><strong>The Spellstrike that broke the Gwishin.</strong> After opening that fight with plain strikes (<em>&ldquo;I am going to actually do it the easy way&rdquo;</em>), he came back in round two with Spellstrike and a melee Ignition and left it <em>&ldquo;barely still in existence.&rdquo;</em></li>
+      <li><strong>He asked the question that opened the vote up</strong>: <em>&ldquo;How much do we have to prepare the village?&rdquo;</em> Mu-Jin&rsquo;s whole both-sides breakdown was the answer to it. Kaoru then voted to go, because it would only get worse left alone.</li>
+      <li><strong>Level-up choices made for the party.</strong> He dropped Aklo for <strong>Halfling</strong> the moment he heard it was the one gap in the party&rsquo;s languages. On Fireball: <em>&ldquo;I&rsquo;m going to run fireball through a sword Spellstrike.&rdquo;</em></li>
+      <li><strong>The sharp read and the old catchphrase.</strong> On whose heart it was: <em>&ldquo;It was ripped out by an animal, so nine out of ten odds&hellip;&rdquo;</em> On the place itself, <em>&ldquo;it feels like Ravenloft.&rdquo;</em> And as the ritual checks went around, <em>&ldquo;Keep on sucking until you do succeed&rdquo;</em> was back. His Diplomacy was one of the three secondary checks, from the man who had just said <em>&ldquo;I&rsquo;m not that good at running my mouth.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-kaelen">
+    <h4>Kaelen Ashford &middot; the Pilgrim at Tan Sugi</h4>
+    <ul>
+      <li><strong>This was his pilgrimage.</strong> Kaelen came to Willowshore to honor the Sangpotshi faith at the temple up the Pilgrim&rsquo;s Path, and tonight the party finally went up it. The GM guessed his vote for him (he wants to see the monastery, <em>&ldquo;because of your religion&rdquo;</em>), and he confirmed it: <em>&ldquo;because we don&rsquo;t know what happened there.&rdquo;</em> That question stayed with him all night. Over the vulture&rsquo;s corpse: <em>&ldquo;But what happened here? That&rsquo;s my question.&rdquo;</em></li>
+      <li><strong>He answered the monster.</strong> When the vulture told the party to leave or be eaten, Kaelen was the one who talked back: <em>&ldquo;Oh, why? Why should we leave?&rdquo;</em> At the slab, told the dead woman was the grandmaster of his order: <em>&ldquo;I will put the demon back where it belongs.&rdquo;</em> And looking at the whole clearing: <em>&ldquo;I think we gotta exorcise the demon in this area.&rdquo;</em></li>
+      <li><strong>Both killing blows.</strong> He finished the Dalgyal Gwishin with the first strike of a Flurry after finding he had no focus point left for Inner Upheaval, and he killed the vulture with Inner Upheaval and a hero-pointed strike that turned a miss by 1 into a hit.</li>
+      <li><strong>Generous at the table.</strong> <em>&ldquo;Mu-Jin is really good at knowledge check.&rdquo;</em> When Mu-Jin proposed running the heart back, <em>&ldquo;That sounds appropriate.&rdquo;</em> At the break he said he was having fun.</li>
+      <li><strong>Level 5</strong>: Clever Improviser over Incredible Initiative, because he&rsquo;d rather be able to try everything, plus Stealth. He is now the party&rsquo;s only expert in Perception.</li>
+      <li><strong>In the dark</strong> he couldn&rsquo;t see at all (the GM: <em>&ldquo;You&rsquo;re human&rdquo;</em>), was frightened for most of it, and still thought to ready a Flurry <em>&ldquo;if anything come attack me out of nowhere.&rdquo;</em> <em>&ldquo;Let&rsquo;s adventure forth. &hellip; Before something eats us.&rdquo;</em></li>
+    </ul>
+  </div>
+
+  <div class="spotlight s-iryoku">
+    <h4>Iryoku-Yasha &middot; the One Who Read the Fine Print</h4>
+    <ul>
+      <li><strong>He was the one vote against, and he made the case properly.</strong> <em>&ldquo;I&rsquo;m concerned about our ability to continue preparing the town once we open that door. We know there&rsquo;s some shit on the other side.&rdquo;</em> He asked the GM whether conditions had been changing week to week (not yet), stated his vote plainly, and took his place in the ritual once the table had decided.</li>
+      <li><strong>He built the ritual plan.</strong> He found the minimum-secondaries rule, worked out that Zhen should be primary so Mu-Jin&rsquo;s Deception wasn&rsquo;t wasted, and called the DCs.</li>
+      <li><strong>He caught the distinction everyone had blurred</strong>: the Wall of Ghosts is not what&rsquo;s sealing the town. He recognized the monastery&rsquo;s ground inside the wall, read out the nindoru line at the slab, and was the one to ask whether the heart was Tan Sui Jing&rsquo;s.</li>
+      <li><strong>The Gwishin&rsquo;s target.</strong> It attacked nobody else. He Shield Blocked a headbutt in round two, explained to the table why it wanted him, and answered with a blast.</li>
+      <li><strong>Level 5 toys, and the line of the level-up.</strong> A fire junction that gives enemies near him weakness to his fire, a stance that gives allies resistance, and when the GM said nothing would go wrong in this forest: <em>&ldquo;I&rsquo;ll just regrow it, I got wood too.&rdquo;</em></li>
+      <li><strong>Loot under fire.</strong> On his first turn in the dark, with the forest roaring, he ran to the mound and took what was in it. He also killed the last Cacodaemon and critically succeeded against the vulture&rsquo;s disease.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>2 unidentified consumables</strong></div>
+    <div class="loot-source">The vulture&rsquo;s mound (Iryoku, first turn in the dark)</div>
+    <div class="loot-note">Party stash, to identify.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>Open the Wall of Ghosts</strong> (ritual)</div>
+    <div class="loot-source">Final research threshold</div>
+    <div class="loot-note">Known to the party. Cast once this session; lasts a year.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">&minus;60 gp</div>
+    <div class="loot-source">Party stash</div>
+    <div class="loot-note">Rice and incense for the ritual.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Learn a Spell: Fear</div>
+    <div class="loot-source">Mu-Jin</div>
+    <div class="loot-note">He asked to borrow 16 gp from the stash; the GM then corrected the cost to 1 gp.</div>
+  </div>
+</div>
+<div class="xp-banner">Experience &middot; 80 the ritual = <strong>80 XP announced</strong> &mdash; the three encounters&rsquo; awards were not said aloud &middot; <strong>Level 5</strong></div>
+<p style="color:var(--text-dim)"><strong>Town</strong> &middot; +1 Hope and +1 Northridge reputation for the Dalgyal Gwishin. Tracks after this week&rsquo;s downtime: <strong>18 Hope / 20 Food / 20 Security</strong>. <strong>Level</strong> &middot; <strong>5</strong>.</p>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>What did putting the heart back do?</strong> A sugi tree grew from Tan Sui Jing&rsquo;s body, and the research line Iryoku read speaks of someone reincarnating into the towering tree the monastery was built around. Whether the party watched that happen, caused it, or repaired it is open. So is whether <strong>the Wall of Ghosts is still there</strong>. The party came out <em>near</em> it.</li>
+  <li><strong>The unseen giant fled; it wasn&rsquo;t destroyed.</strong> It howled <em>&ldquo;in pain and frustration.&rdquo;</em> Her wound was made by <strong>a large clawed hand</strong>, and the word under her was <strong>Kugaptee</strong>.</li>
+  <li><strong>Kugaptee is a nindoru, and a deity you can worship</strong> (the GM, in passing). The vulture&rsquo;s Death Burst is described as a blast of <em>nindoru</em> butterflies.</li>
+  <li><strong>Who was Tan Sui Jing to the monastery?</strong> Mu-Jin called her its founding grandmaster. The GM said only that she was a heroine who fought at the site, and the monastery was founded by Zhi Hui in 7020 IC, around an ancient sugi tree.</li>
+  <li><strong>Why could the vulture talk?</strong> It kept her heart and had daemons with it. Mu-Jin couldn&rsquo;t learn what makes it different from an ordinary giant vulture.</li>
+  <li><strong>The whisper at the slab.</strong> <em>&ldquo;Find the seed&rdquo;</em> is Kaelen&rsquo;s hearing of it; the GM&rsquo;s pasted text is lost with the chat.</li>
+  <li><strong>The Survival check everyone critically failed.</strong> Something at the slab was trackable and the party doesn&rsquo;t know what.</li>
+  <li><strong>The monastery itself.</strong> The research said the answers are at the Tan Sugi ruins. The party went through the wall and found a forest from before the monastery existed. They haven&rsquo;t seen the ruins yet.</li>
+  <li><strong>The ritual window</strong>: weeks 7, 8, 11 and 12. It is week 7. Iryoku&rsquo;s concern about leaving the town half-prepared still stands, and the rest of fall downtime is still to play.</li>
+  <li><strong>Is S9&rsquo;s &ldquo;ritual that might allow passage through the fog wall&rdquo; the same ritual?</strong> It looks like it was this one, described loosely. If so, there is still no known way through the barrier sealing the town.</li>
+  <li><strong>Carried forward</strong>: Candora&rsquo;s suspicion of You So-Jin; Mama Bao&rsquo;s grandfather; Yami the bakeneko; the Consecrate ledger (Mu-Jin); who else is an &ldquo;old soul&rdquo;; the missing governor; Mugirou&rsquo;s truce; Shinzo; the wrong-gods lantern secret (S2); &ldquo;blood will rise&rdquo;; the Great Willow&rsquo;s promise and missing friend; the Noppera-Bo Hood, still never used; Weaver&rsquo;s hunting-spider venom (S7); the lumber camp storeroom&rsquo;s hidden trap door; Mu-Jin&rsquo;s Desna adoption.</li>
+</ul>
+</div>
+
+<h2>Memorable Quotes</h2>
+<blockquote><strong>Zhen</strong>: &ldquo;This is the level where I stop having fun as a martial.&rdquo;
+<span class="attribution">Leveling to 5.</span></blockquote>
+
+<blockquote><strong>Zhen</strong>: &ldquo;Well, no time like the present. Let&rsquo;s debut the new spell.&rdquo;
+<span class="attribution">First action of the vulture fight, on a natural 20 for initiative. The Fireball did 106 damage and killed two of the four enemies.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;Kaoru&rsquo;s gonna come up here, and Kaoru is going to repeat. Or in other words, I&rsquo;m going to copy your step.&rdquo;<br>
+<strong>Zhen</strong>: &ldquo;Hell yeah, join the gang.&rdquo;
+<span class="attribution">Second in the order, with the same spell learned the same hour.</span></blockquote>
+
+<blockquote><strong>Kaoru</strong>: &ldquo;I&rsquo;m going to run fireball through a sword Spellstrike.&rdquo;
+<span class="attribution">At level-up. Iryoku&rsquo;s answer: &ldquo;It&rsquo;s fine. I got resistance.&rdquo;</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;I&rsquo;m concerned about our ability to continue preparing the town once we open that door. We know there&rsquo;s some shit on the other side.&rdquo;
+<span class="attribution">The case for waiting. He was outvoted four to one.</span></blockquote>
+
+<blockquote><strong>Iryoku</strong>: &ldquo;I&rsquo;ll just regrow it, I got wood too.&rdquo;
+<span class="attribution">After the GM promised that nothing would go wrong in this forest, to a party that had just learned Fireball twice over.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;I&rsquo;m not sure if we went back in time or if we just went into a dimension trying to recreate a moment in time.&rdquo;
+<span class="attribution">In character, after dating the trees.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;Hey Kaelen, pay respect to your ancestor. This is literally the founding grandmaster of your order.&rdquo;<br>
+<strong>Kaelen</strong>: &ldquo;Oh, shit. &hellip; I will put the demon back where it belongs.&rdquo;
+<span class="attribution">At the slab, once the body had a name.</span></blockquote>
+
+<blockquote><strong>Mu-Jin</strong>: &ldquo;If this is a horror movie, I think this is the point where we&rsquo;re all supposed to run the fuck away from whatever&rsquo;s approaching us.&rdquo;
+<span class="attribution">In the dark, with footsteps and falling trees getting closer.</span></blockquote>
+
+<blockquote><strong>The vulture</strong>: &ldquo;Leave at once. Lest you find yourselves added to my meals.&rdquo;<br>
+<strong>Kaelen</strong>: &ldquo;Oh, why? Why should we leave?&rdquo;
+<span class="attribution">At the mound of bloodied fallen trees, a moment before initiative.</span></blockquote>
+
+
+<section class="pax-notes">
+<h2>Pax&rsquo;s Notes &mdash; Zhen Stillness&rsquo;s Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Zhen did this session</h3>
+<ul>
+  <li>Rolled a natural 1 on initiative against the <strong>Dalgyal Gwishin</strong>: slowed 1. Delayed behind Mu-Jin for the Recall Knowledge, then <strong>Vitality Lash</strong> for <strong>9</strong> on a failed save. Kaelen killed it.</li>
+  <li><strong>Researched the Great Willow on Nature: critical success.</strong> The final research threshold fell that week. The party learned <strong>Open the Wall of Ghosts</strong>.</li>
+  <li><strong>Level 5.</strong> Third-rank spells. <strong>Fireball.</strong></li>
+  <li>Voted to <strong>go now</strong>, after asking the GM what waiting would buy.</li>
+  <li><strong>Primary caster on the ritual.</strong> Religion, DC 24, success. The secondaries gave +2 and it wasn&rsquo;t needed.</li>
+  <li>Stepped through the wall. Passed the Perception check at the slab. <strong>Critically failed the Survival check</strong> with Kaelen and Mu-Jin. Spent a hero point on it: still a failure.</li>
+  <li><strong>Vulture fight: natural 20 initiative, Fireball first.</strong> Vulture critically failed for <strong>50</strong>. Two Cacodaemons dead. Third on 10. Tried for Earth&rsquo;s Bile, out of range even after moving, raised Shield.</li>
+  <li>Caught in the vulture&rsquo;s <strong>Death Burst</strong>. Took the damage. Healed the party afterward.</li>
+  <li>In the dark: frightened 1 on the second roar, no hero points left. Delayed for Mu-Jin. Ran for the slab. Took the branch damage rather than spend the samsaran reroll.</li>
+  <li>At the slab: <strong>swapped apparitions and cast Garden of Healing.</strong></li>
+</ul>
+
+<h3>Things Zhen knows that the party does not</h3>
+<ul>
+  <li>Nothing new was kept from the party this session.</li>
+  <li>Carried forward: he is a <strong>samsaran</strong>, and the cultists wanted Meng-Sung because he was <em>&ldquo;some sort of old soul.&rdquo;</em> The line read at the slab has someone dying and reincarnating into a tree.</li>
+</ul>
+
+<h3>What Zhen is thinking about</h3>
+<ul>
+  <li><strong>Fireball on the first turn works.</strong> High initiative, enemies bunched and far away, nobody in melee yet. Kaoru has it too. Two Fireballs before the enemy moved left the vulture on 15 and one Cacodaemon on 1, and Kaelen and Iryoku finished both in the same round.</li>
+  <li><strong>Iryoku&rsquo;s fire weakness only helps Iryoku.</strong> It applies to enemies, and only against his own fire impulses. It does nothing for Fireball. His stance does give allies near him fire resistance 5.</li>
+  <li><strong>Earth&rsquo;s Bile is 30 feet.</strong> The opening Fireball was thrown from much farther back, and the follow-up didn&rsquo;t reach even after a Stride.</li>
+  <li><strong>Hero points ran out</strong> before the roars started. One went on the Survival check at the slab, which failed anyway.</li>
+  <li><strong>The heart said &ldquo;save me,&rdquo; and the answer was to put it back.</strong> The thing hunting it was never seen.</li>
+  <li><strong>The Wall of Ghosts is not what seals the town.</strong> Opening one says nothing about the other.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Is the Wall of Ghosts still standing</strong>, and is the monastery reachable now?</li>
+  <li><strong>What was the Survival check at the slab for?</strong></li>
+  <li><strong>What exactly did the whisper at the slab say?</strong></li>
+  <li><strong>What made the vulture different</strong> from a giant vulture? Why could it talk?</li>
+  <li><strong>What are the two consumables</strong> from the mound?</li>
+  <li><strong>How much XP</strong> did the three encounters give? Only the ritual&rsquo;s 80 was announced.</li>
+</ul>
+
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Where it ended</span>
+  <p>The heart went back into her chest. Her body sank into the stone, a sugi tree grew a hundred feet out of it and drove off the fog, and the party was standing on the Pilgrim&rsquo;s Path again, near the Wall of Ghosts. Whatever had been hunting the heart was never seen.</p>
+  <div class="big-line">&ldquo;You&rsquo;ll hear the creature howl in pain and frustration, and then the sound as if some unseen giant were fleeing into the distance.&rdquo;</div>
+  <span class="speaker">&mdash; AndeGM</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>
