@@ -17,7 +17,7 @@
    HOW
      1. In Foundry, press F12 -> Console.
      2. Paste EXPORT (below), Enter.
-     3. It prints `undefined`. That is NORMAL — copy() always returns undefined.
+     3. It prints a Promise. That is NORMAL — the clipboard fills a moment later.
      4. Paste the clipboard into rolls.txt (replace the whole file).
 
    ---------------------------------------------------------------------------
@@ -62,7 +62,10 @@
 
    CAVEATS
      - Only messages YOUR client can see. GM blind rolls are excluded.
-     - Foundry prunes old messages. Export at session end, not days later.
+     - Foundry prunes old messages, and GMs clear chat. Run the
+       foundry-macros/chat-recorder.js macro at session START: its copies are
+       merged in here automatically, so cleared/deleted messages still export.
+       The header's `# chat recorder` line says how many were recovered.
      - CHECK FOR DOUBLE-PASTE. Two `#` header blocks means you pasted twice.
      - Sessions are auto-detected by time gap (GAP_HOURS, default 8); clusters
        under MIN_MESSAGES are treated as strays and skipped. SESSION = 0
@@ -78,12 +81,38 @@
 
 /* ============================== EXPORT ==================================== */
 
-copy((() => {
+(async () => {
   const GAP_HOURS    = 8;   // a gap this big means a different session
   const MIN_MESSAGES = 40;  // ignore trailing clusters smaller than this
   const SESSION      = 0;   // 0 = latest real session, 1 = the one before, ...
 
-  const all = [...game.messages.contents]
+  /* --- merge in foundry-macros/chat-recorder.js's copies -----------------
+     Live messages win; a recorded copy is used only for a message the
+     server no longer has (chat cleared, deleted, pruned). Copies are
+     rebuilt as unsaved ChatMessage documents so alias/rolls/flags behave
+     exactly like live ones. No recorder database = live messages only. */
+  const recorded = await new Promise(resolve => {
+    const req = indexedDB.open(`chat-recorder:${game.world.id}`, 1);
+    req.onupgradeneeded = () => {
+      const store = req.result.createObjectStore('messages', { keyPath: '_id' });
+      store.createIndex('timestamp', 'timestamp');
+    };
+    req.onerror = () => resolve([]);
+    req.onsuccess = () => {
+      const get = req.result.transaction('messages').objectStore('messages').getAll();
+      get.onsuccess = () => { req.result.close(); resolve(get.result); };
+      get.onerror = () => { req.result.close(); resolve([]); };
+    };
+  });
+  let recovered = 0, unreadable = 0;
+  const merged = new Map(game.messages.contents.map(m => [m.id, m]));
+  for (const r of recorded) {
+    if (merged.has(r._id)) continue;
+    try { merged.set(r._id, new ChatMessage.implementation(r.data)); recovered++; }
+    catch { unreadable++; }
+  }
+
+  const all = [...merged.values()]
     .filter(m => m.timestamp)
     .sort((a, b) => a.timestamp - b.timestamp);
   if (!all.length) return '(no messages loaded)';
@@ -361,6 +390,8 @@ copy((() => {
     `# ${fmt(kept[0].timestamp)}  ->  ${fmt(kept[kept.length - 1].timestamp)}`,
     `# all sessions found: ` +
       pool.map((c, i) => `[${i + 1}] ${fmt(c[0].timestamp).split(',')[0]} (${c.length})`).join('  '),
+    `# chat recorder: ${recorded.length ? `${recorded.length} stored, ${recovered} recovered (gone from Foundry)` +
+      (unreadable ? `, ${unreadable} unreadable` : '') : 'not running for this world — live messages only'}`,
     `# extractors: CTX=${tally.ctx} COND=${tally.cond} MOD=${tally.mod} MM=${tally.mm}` +
       ` DMG=${tally.dmg} (reverted ${tally.reverted}) HEAL=${tally.heal} HP=${tally.hp} rerolls=${tally.reroll}`,
     `# scenes touched this session: ${scenes.length}` +
@@ -374,7 +405,7 @@ copy((() => {
   ];
 
   return head.concat(body).join('\n');
-})());
+})().then(copy);
 
 
 /* ============================ DIAGNOSTICS ================================

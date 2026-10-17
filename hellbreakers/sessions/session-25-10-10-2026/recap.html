@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 25 — Risk It for the Biscuit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+  --frost: #7aa8c0;
+  --frost-glow: #7aa8c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-elaine { border-left-color: var(--frost); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-elaine { border-left-color: var(--frost); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="container">
+
+<header class="header">
+  <h1>Risk It for the Biscuit</h1>
+  <div class="subtitle">Session 25 · A priestess haunt, a night locked in Elidir’s library, a forgotten goddess’s scythe, and the dead coming up the canyon</div>
+  <div class="meta-row">
+    <span class="meta-pill">10 Oct 2026</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~3h30m</span>
+    <span class="meta-pill">9 → 19 Calistril 4727 AR</span>
+    <span class="meta-pill">Level 7 · 80 XP</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-combat" style="width:30%"></div>
+    <div class="comp-seg comp-rp" style="width:26%"></div>
+    <div class="comp-seg comp-social" style="width:20%"></div>
+    <div class="comp-seg comp-explore" style="width:18%"></div>
+    <div class="comp-seg comp-loot" style="width:6%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Haunt &amp; Battle 30%</span>
+    <span><span class="legend-dot" style="background:var(--violet)"></span>Research &amp; the Library 26%</span>
+    <span><span class="legend-dot" style="background:var(--gold)"></span>Recruiting &amp; NPCs 20%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Travel &amp; Skirmish Setup 18%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Shopping 6%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baijian"><div class="char-name">Bai Jian</div><div class="char-class">Human (Tian, Dragonblood) Fighter (Dueling) · Beastmaster + Hedge Mage · <strong>Lv 7</strong> · led the Bandit Gang</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk Witch (Paradox of Opposites, Divine) · Medic + Living Nexus · <strong>Lv 7</strong> · led the Gnome Cannon Corps</div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome Wizard (generalist) · Blessed One · <strong>Lv 7</strong> · led the Apprentice Magician Clique</div><div class="char-player">Scott</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Lunar Dragon Thaumaturge · Draconic Ravager · <strong>Lv 7</strong> · led the Hellknight Cavalry Brigade</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-elaine"><div class="char-name">Elaine Stormfrost</div><div class="char-class">Arctic Elf Rogue (Mastermind) · Twilight Speaker · written out to the grotto</div><div class="char-player">Storm · absent — not expected back</div></div>
+    <div class="char-card char-ren"><div class="char-name">Ren</div><div class="char-class">Boarhound animal companion · 69 HP · Survival 31 to guide the party to Vordia in the dark</div><div class="char-player">Bai Jian’s companion</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>Ten days on the clock, and the party spent nine of them. The morning started at an old encampment near the centre of Finder’s Gulch with a haunt — a young priestess crying tears of joy and an old one screaming, roped to pillars, both bleeding from long cuts — that tore <strong>46</strong> out of <strong>Cyrathul</strong> in its first pass. His lore couldn’t crack it. <strong>Bai Jian</strong> could: a natural 20 on Recall Knowledge told him it could be pushed back into its own grave, and he did it twice — <em>“Go away. Back to your grave.”</em> — while Cyrathul walked out of its reach and cheered him on. Three rounds of research on the site and the spirits themselves filled in the rest: <strong>how to use Varlario’s magnet</strong> (an Interact, adjacent to Illcayna), the Whispering Way’s counter-ritual, the <strong>White Queen’s Thaw</strong>, and a warning — the haunt will turn on Illcayna if she is ever cut by her own <strong>Reaper’s Scythe</strong>, the one melted into her flesh. At noon <strong>Alceo and Phoebe</strong> marched the army in, Alceo read the notes and said he could perform the Thaw himself, and <strong>Rhokrag</strong> paid out the bet: 100 gold each.</p>
+    <p>What nobody had was a way to get the scythe off her. Alceo’s answer was the library at <strong>Elidir</strong> — the city the party broke out of a few weeks ago. <strong>Bai Jian</strong>: <em>“Risk it for the biscuit.”</em> <strong>Zanthar</strong>’s Shared Invisibility walked them through the lockdown without a roll; <strong>Cyrathul</strong> had them hide in the stacks while a doddering old gnome pinched out the candles and locked up (<em>“There better not be rats in here again”</em>); <strong>Panacea</strong> hero-pointed a natural 1 into a natural 20 on the first shelf and <strong>Bai Jian</strong>’s Perception found the right one; and in the morning the same gnome, now their eager helper, pulled an old tome from behind the row Bai Jian had been searching. The scythe belonged to <strong>Jaidi</strong>, the Azlanti goddess of agriculture and Erastil’s wife, worshipped by the old Isgeri tribes and replaced by Urgathoa after Earthfall — with a shrine in Finder’s Gulch. Invoke her name with the right prayer, one action, and she may <strong>reclaim her scythe</strong>. Panacea wrote it down. 80 XP.</p>
+    <p>The road back was a recruiting drive. <strong>Wolf Point</strong> shrugged off the party’s help and then signed on — again — on <strong>Cyrathul</strong>’s natural-20 Diplomacy. <strong>Ren</strong> led them through the dark to <strong>Vordia</strong>, where <strong>Zanthar</strong> showed the townsfolk how to brace a wall and <strong>Bai Jian</strong> lifted it into place <em>“like Thor”</em> — and a blacksmith took them down a cellar door to a whole <strong>clan of dwarves</strong> the town doesn’t know it has. <strong>Swiftrun</strong>’s mages gave up an <strong>Apprentice Magician Clique</strong> to Panacea’s hero-pointed Society. Back in a fortified Finder’s Gulch, Kaazz read out a message from Storm — Elaine isn’t coming back — handed each PC a troop, and on the afternoon of the 19th the dead came up the canyon with their leader — Illcayna, by every sign — driving them from the rear: <em>“Go, pretties. You take back my town.”</em> Two rounds in, one Wight Battalion is destroyed — by Bai Jian’s Bandit Gang — Cyrathul’s Hellknights are nearly gone, and the session stopped at the top of Round 3.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="log-warning"><strong>Source notes.</strong> (1) Kaazz was split across two diarization labels again, and a good deal of his narration and NPC voice landed under Zanthar’s label after the break. Zanthar’s lines below are only the ones where the content or the roll log pins them to him. (2) <strong>The roll log has a hole from 21:09 to 21:21</strong> (chat cleared) in the middle of the battle. That stretch is reconstructed from the recording; where a number isn’t in the log it is marked <em>(heard)</em> or left out.</div>
+  <div class="timeline">
+
+    <div class="act combat">
+      <div class="act-label">Act I · Combat · Finder’s Gulch, ~5 a.m. 9 Calistril</div>
+      <div class="act-card">
+        <h3>The Priestess Haunt</h3>
+<ul>
+<li>The party crossed the ice one at a time. <strong>Elaine</strong> told Bai Jian she was going back to research at the grotto and vanished — <strong>Bai Jian</strong>: <em>“She disappeared right in front of my face.”</em></li>
+<li>The party came ashore behind the old mercantile district, found it already picked over, and headed for the centre of town. At an encampment there, something burst out of the ground, swirling and screeching: a ghost in a cultist’s robe. Initiative. See Combat Encounters.</li>
+<li><strong>Bai Jian</strong>, first up, asked the right question — <em>“Is it haunt?”</em> — then delayed for Cyrathul’s Recall Knowledge.</li>
+<li>A rules aside: can you retry Recall Knowledge after a failure? Bai Jian looked it up mid-turn and corrected himself — the lockout is for <em>additional</em> knowledge after a success, or on a critical failure.</li>
+<li>Disabled, the haunt showed what it was: <strong>a young priestess crying tears of joy, arms out to accept her fate, pushed back into an elderly priestess crying out in pain</strong>, arms roped to pillars, both bleeding from long cuts. Kaazz tied it to <em>“the pallid priestess.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act mystery">
+      <div class="act-label">Act II · Research · morning → 4 p.m.</div>
+      <div class="act-card">
+        <h3>Research in the Ruins</h3>
+<ul>
+<li><strong>Round 1</strong> (four hours, at the haunt site): Cyrathul’s Esoteric Lore <strong>crit (35)</strong>, Bai Jian’s Occultism (22) and Zanthar’s (26) succeeded; Panacea <em>“kept looking behind her”</em> for the spirit. Playing the magnet against the haunt taught them <strong>how it works: an Interact action, adjacent to Illcayna, wielding the magnet.</strong> <strong>Panacea</strong>: <em>“So it sounds like one of the fighters need to be holding the magnet.”</em> <strong>Cyrathul</strong>: <em>“Need to blitz her.”</em></li>
+<li>Panacea’s Treat Wounds put Cyrathul (29) and Ren (20) back together; Zanthar’s Stupefied from the grotto water wore off.</li>
+<li><strong>The garden</strong>: Zanthar’s Perception (30) turned up poisons nestled in the roots — <strong>Tangle Root Toxin</strong> and <strong>Nettleweed Residue</strong>.</li>
+<li><strong>Round 2</strong>: Zanthar and Panacea on Occultism; <strong>Bai Jian went back to the grave to talk to the spirits</strong> (Diplomacy 29). The spirits are <em>“really agitated”</em> with Illcayna and filled in what Varlario’s notes only started: the Whispering Way’s counter-ritual, the <strong>White Queen’s Thaw</strong> (as heard — possibly <em>Wight</em> Queen’s) — <em>“an anti-wight ritual”</em> that locks Illcayna down and slows her.</li>
+<li><strong>Noon: the army arrived</strong> — goblins chattering, Hellknights calling flanking orders, the Stumpfield saboteurs, <strong>Alceo and Phoebe</strong> at the front. <strong>Panacea</strong> briefed them and showed Alceo the notes. <strong>Alceo</strong>: <em>“I believe I do [know the ritual] with these notes. I will perform this ritual when she arrives to ensure that you can take the fight to her.”</em></li>
+<li>The army dug in; <strong>Finder’s Gulch now counts as a level 3 settlement</strong>. <strong>Rhokrag</strong> paid the bet — <em>“There’s 100 each in there for you.”</em></li>
+<li><strong>Round 3</strong> (to ~4 p.m.): Panacea <strong>crit</strong> (33); Bai Jian (23, exactly the DC) and Cyrathul (30) talked to the spirits again. <strong>The haunt can be turned against Illcayna if she is damaged by Reaper’s Scythe</strong> — the scythe she carries, melted into her flesh. The spirit: <em>“She has found the descendant of the one who turned against her over a thousand years ago.”</em> It must happen before the final sacrifice.</li>
+<li>How do you take a scythe off someone when it’s part of her? Not Disarm. The answer was <em>“an old text”</em> in one of the places she has been — and it was <strong>Panacea</strong> who said <em>“maybe we should look for a library.”</em> <strong>Zanthar</strong> asked how far. Alceo named the nearest — <strong>Elidir</strong>, 74 miles off. Logos’s burned in the Goblinblood Wars; Gillamoor was too far. <strong>Cyrathul</strong> did the arithmetic and made the call, <strong>Bai Jian</strong> seconded it — <em>“Risk it for the biscuit”</em> — and the party slept first.</li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act III · Infiltration · 10–12 Calistril</div>
+      <div class="act-card">
+        <h3>The Library at Elidir</h3>
+<ul>
+<li>A night at the party’s mountain keep (Kaazz: <strong>“High Fort”</strong>). <strong>Sarevial</strong>: undead reports are down to <em>“a third or even a quarter.”</em> <strong>Panacea</strong>: <em>“Have you seen a witch come through here with a shard?”</em> — <em>“I think you’re the only witch I’ve seen recently.”</em></li>
+<li><strong>Elidir is still locked down</strong> — sentries in rowboats checking every vessel in and out. <strong>Zanthar’s Shared Invisibility</strong> got the party in; Kaazz: <em>“I won’t even make you guys roll.”</em></li>
+<li>First research round: <strong>Panacea rolled a natural 1, hero-pointed, and rolled a natural 20</strong> (34, crit); Bai Jian’s Occultism (26) added another success.</li>
+<li>Closing time. <strong>Cyrathul</strong>: <em>“We could hide in the library after they lock up and be invisible while they’re locking it up and then just stay in the library.”</em> <strong>Zanthar</strong>: <em>“We can make a fire. We can have all kinds of fun.”</em> A doddering old gnome pinched out the candles with his bare fingers. Group Stealth — Bai Jian on Follow the Expert rolled a 13, and the gnome stopped right where Zanthar was holding him quiet: <em>“Is there somebody there? … There better not be rats in here again, either.”</em> The lock clicked.</li>
+<li>Second round, near midnight: everyone tired and failing — except <strong>Bai Jian, who switched to Perception (33)</strong> and <em>“narrow[ed] in on some books on a shelf that look promising.”</em> Zanthar took first watch, Cyrathul second; the streets outside were eerily quiet between heavy patrols.</li>
+<li>Morning. <strong>Panacea</strong> raised the problem — reappear out of thin air in a locked library? — and the answer was to step outside and come back in. <strong>Cyrathul</strong> supplied the timing — wait for the key in the lock, then go invisible and slip out as he comes in. The gnome dropped his keys in the cold while the invisibility ran down, lit the candles with a snap of his fingers, and asked if he could help them find anything.</li>
+<li>Asked about a fused <strong>Reaper’s Scythe</strong>, he asked what they knew about the <strong>Azlanti</strong>, made tea, and helped (+2). Third round: Panacea <strong>crit again</strong> (33), Zanthar (31) and Cyrathul (27) succeeded. He pulled a very old tome from <strong>behind the shelf Bai Jian had been searching</strong>:</li>
+<ul>
+<li><strong>Jaidi</strong>, <em>“the Blessing and Bounty”</em> — Azlanti goddess of agriculture, hard work and self-sufficiency; <strong>spouse of Erastil</strong>; worshipped by the old Isgeri tribes; <strong>replaced by Urgathoa after Earthfall</strong>. Pictured as a tall woman on a warhorse with a huge scythe.</li>
+<li>The <strong>Reaper’s Scythe</strong> was hers. There was a <strong>shrine to Jaidi in Finder’s Gulch</strong>.</li>
+<li><em>“If you evoke Jaidi’s name and this prayer, it would purify her scythe.”</em> In play: <strong>one action to implore Jaidi to reclaim her scythe.</strong> <strong>Panacea wrote the prayer down.</strong></li>
+</ul>
+<li><strong>80 XP.</strong> Out through the gate, invisible, alongside a departing caravan.</li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV · Travel &amp; Social · 13–17 Calistril</div>
+      <div class="act-card">
+        <h3>The Recruiting Road</h3>
+<ul>
+<li><strong>Saringallow</strong> (13th): a night at the old HQ; Marie fed them roast pork with apples. Everyone else is <em>“up in the mountains getting ready for something.”</em></li>
+<li><strong>Wolf Point</strong> (14th, 3 p.m.): every Assist check failed and the reception was gruff — <em>“we’ve been defending ourselves from undead for a while now.”</em> Recruiting without the bonus, <strong>Cyrathul rolled a natural 20 (39)</strong>. They’ll march to Logos and on to the Gulch. <em>(Wolf Point’s Steel Circle already signed on in S21; Kaazz ran it as untried — “you have not tried recruiting for the cause yet from Wolf Point” — and this is the pledge that put the Bandit Gang on the field.)</em></li>
+<li>Riding to <strong>Vordia</strong> after dark, Kaazz called for Survival, someone volunteered the dog, and <strong>Bai Jian</strong> took it up: <em>“Come on. You have a good nose.”</em> Ren rolled a 31 and never lost the trail.</li>
+<li><strong>Vordia</strong>: a line of townsfolk failing to stand up a wall. <strong>Zanthar’s Crafting — natural 20</strong> — showed them how to prop it; <strong>Bai Jian’s Athletics crit (36)</strong> lifted it into place <em>“like Thor.”</em> The town remembered the orphanage and handed over <strong>+1 striking handwraps of mighty blows</strong> scavenged from an abandoned monastery.</li>
+<li>Recruiting: <strong>Cyrathul rolled a natural 1, hero-pointed, and made it (34).</strong> The dwarf blacksmith: <em>“Me and mine, we can probably help you.”</em> Down a cellar door under the forge: <strong>a whole clan of dwarves</strong> nobody in Vordia knows is there — <em>“Don’t tell the rest of the town, but me clan likes to stay to ourselves down here.”</em> Stout, lamb, and a battalion in the morning. <strong>Panacea</strong> asked for something with catnip in it and was offered the halflings’ <em>“special weeds”</em> instead.</li>
+<li>15th: bitter, clear cold. Camped by the road; around 10 p.m. the <strong>dwarven battalion marched past in the dark</strong>, hip flasks out, not stopping.</li>
+<li><strong>Swiftrun</strong> (16th): witches and wizards struggling to lay wards. Bai Jian (Survival 29) and Cyrathul (Esoteric Lore 26) cleared the ground for the runes; a grateful mother gave them a <strong>Wand of Mental Purification</strong>. The party explained the cause — <em>“a confrontation with a pseudo, I guess, lich.”</em> Cyrathul’s recruit roll failed; <strong>Panacea hero-pointed hers into a success</strong> and Swiftrun sent an <strong>Apprentice Magician Clique</strong>.</li>
+<li><strong>Logos</strong> (evening, 16th): shopping. Bai Jian asked Cyrathul whether he had his armor potency rune yet (<em>“I can’t get that.”</em> — <em>“You can.”</em>) and asked <em>“Do we want an Earthbind?”</em> — <strong>Cyrathul bought the rune, an Earthbind scroll and five Helpful Steps scrolls.</strong> Bai Jian is <em>“just saving for level eight”</em>; Kaazz confirmed level-8 items wait for level 8.</li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act rp">
+      <div class="act-label">Act V · Roleplay · Finder’s Gulch</div>
+      <div class="act-card">
+        <h3>The Eve of Battle</h3>
+<ul>
+<li>The trail up is now a wide, muddy road. The town has a full board wall where the hillside doesn’t make one, and troops everywhere.</li>
+<li><strong>Kaazz read out a message from Storm</strong> — medical issues, more time needed to rest. <em>“I don’t think Elaine’s coming back.”</em> <strong>Panacea</strong> hoped they feel better soon.</li>
+<li>Skirmish rules (Kaazz’s first time running them): each PC leads a troop and occupies its whole space; <strong>five actions a turn split 3/2 between leader and troop</strong>, no more than three of them movement; a <strong>rout check</strong> (Will, DC 23) when a troop loses a segment.</li>
+<li><strong>Troops</strong>: Bai Jian — <strong>Bandit Gang</strong> (Wolf Point); Cyrathul — <strong>Hellknight Cavalry Brigade</strong> (the twins’); Panacea — <strong>Gnome Cannon Corps</strong>; Zanthar — <strong>Apprentice Magician Clique</strong> (Swiftrun).</li>
+<li><em>(Calendar: the party rode in on the evening of the 17th; Alceo says “tomorrow afternoon” and Kaazz then narrates the afternoon of the 19th. The 18th went by unplayed.)</em></li>
+<li><strong>Alceo</strong>: she comes tomorrow afternoon to finish her ritual — <em>“We all must stop that.”</em> <strong>Rhokrag</strong> has taken command of a unit of hobgoblins. Speeches to the troops: <strong>Zanthar</strong> — <em>“Don’t die.”</em> <strong>Panacea</strong> — <em>“Just keep listening to us and keep with us… We’ll get that shard out and we’ll get that scythe out.”</em> <strong>Cyrathul</strong> — <em>“For the living.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VI · Combat · afternoon, 19 Calistril</div>
+      <div class="act-card">
+        <h3>The Battle of Finder’s Gulch, Rounds 1–2</h3>
+<ul>
+<li>The undead came up the canyon road, <em>“heads and bodies all the way down,”</em> with their leader driving them from the back: <em><strong>“Go, pretties. You take back my town.”</strong></em> Illcayna is not yet on the field.</li>
+<li>See Combat Encounters. <strong>Ends at the top of Round 3.</strong></li>
+</ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>The Cannibalization of the Priestess — haunt</h3>
+    <div class="combat-meta"><code>threat severe</code> · 2 rounds · 0 XP</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Damage taken</div><div class="combat-stat-value">Cyrathul 67 · Ren 32 · Bai Jian 21. <strong>Healing</strong>: Heal 17 in the fight; Treat Wounds after — Cyrathul 29, Ren 20.</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Bai Jian (the Fortitude save).</div></div>
+    </div>
+    <p><strong>Hazard</strong>: a complex haunt, <strong>DC 28</strong> for everything. A reaction (a swarm of spirits, 3d10 slashing, basic Reflex) when it wakes; a routine of 3d6 spirit + 3d6 void (basic Fortitude) on everyone in its radius. Disabled by <strong>Athletics</strong> (push her back into her grave) or <strong>Occultism / Religion</strong> (exorcise her), within about 30 feet of the bones.</p>
+    <p><strong>Initiative</strong>: Bai Jian 34 · Cyrathul 26 · Haunt 22 · Zanthar 18 · Panacea 17.</p>
+    <h4>On waking</h4>
+    <p>the spirits pass through Cyrathul, Bai Jian and Ren (23 slashing rolled): <strong>Cyrathul critically failed — natural 2 — 46.</strong> Bai Jian (Bulwark) and Ren saved, <strong>11</strong> each.</p>
+
+    <h4>Round 1</h4>
+<ul>
+<li><strong>Bai Jian</strong> — delayed for Cyrathul’s lore.</li>
+<li><strong>Cyrathul</strong> — Recall Knowledge with Esoteric Lore, three times: 24, 23, 21. <em>“You can tell it’s undead, but that’s about it.”</em></li>
+<li><strong>Bai Jian</strong> (back in, ahead of the haunt) — <strong>Recall Knowledge, natural 20</strong>: push her into the grave, or exorcise her. <strong>Athletics 29 vs DC 28 — success.</strong> <em>“Go away. Back to your grave.”</em></li>
+<li><strong>Haunt</strong> — the spirit splits and gnaws at their souls, 21: Cyrathul failed (<strong>21</strong> → 11 HP); <strong>Bai Jian rolled a natural 2, hero-pointed, 13 — success by 0 (10)</strong>; Ren failed (<strong>21</strong>).</li>
+<li><strong>Zanthar</strong> (Stupefied 2) — Occultism to exorcise: 16, <strong>critical failure</strong>.</li>
+<li><strong>Panacea</strong> — <strong>Heal on Cyrathul, 17.</strong> The spirits flinch from the vitality.</li>
+</ul>
+    <h4>Round 2</h4>
+<ul>
+<li><strong>Cyrathul</strong> — Athletics 22, failed; walked out of the radius. The spirits chased him as far as Bai Jian and stopped. <em>“You got this, guys.”</em></li>
+<li><strong>Bai Jian</strong> — Guidance on himself; <strong>Athletics 29 — success. Haunt disabled.</strong></li>
+</ul>
+  </div>
+
+  <div class="combat-box">
+    <h3>The Battle of Finder’s Gulch — skirmish</h3>
+    <div class="combat-meta"><code>threat extreme</code> · 2 rounds played · unfinished</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Where it stands</div><div class="combat-stat-value">Wight Battalion A <strong>destroyed</strong> · Wight Battalion B <strong>102 / 150</strong> · Skeleton Mob (Bai Jian’s) <strong>31 / 90</strong> · Skeleton Mob (the other) <strong>64 / 90</strong>. Bandit Gang <strong>69 / 113</strong>, three segments, Drained 1 · Hellknights <strong>about 9 / 115</strong>, two segments · Bai Jian <strong>84 / 106</strong>, Drained 1 · Ren <strong>40 / 69</strong> · Cyrathul <strong>75 / 78</strong>. The cannons and the mages are untouched as far as the log shows.</div></div>
+      <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Wight Battalion A — <strong>the Bandit Gang (Bai Jian’s troop)</strong>, after Zanthar’s Blazing Bolt (27), Cyrathul’s charge and claw (40), Panacea’s cannons and armament (25), the mages (27), Zanthar’s maul (10) and Ren (6).</div></div>
+      <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">Zanthar (Hand of the Apprentice). Bai Jian still holds his.</div></div>
+    </div>
+    <p><strong>Rules</strong>: each PC and their troop share a space and a turn — five actions, split 3/2, at most three spent moving. Troops lose a segment at HP thresholds and make a rout check (Will DC 23).</p>
+    <p><strong>Enemies on the field so far</strong></p>
+<ul>
+<li>2× <strong>Wight Battalion</strong> (lvl 9, <strong>150 HP</strong>, AC 27, Ref +15; weak to area damage 7). <strong>Final Grudge</strong> when a segment falls: 2d4 piercing in an emanation (DC 25 basic Reflex), and anyone damaged saves against <strong>Corrupting Spite</strong> (DC 25 Fortitude) or is Drained.</li>
+<li>2× <strong>Skeleton Mob</strong> (lvl 6, <strong>90 HP</strong>, AC 23; <strong>resists physical 7 and fire 7</strong>, weak to area damage 7). <strong>Rattling Bones</strong> (3d4+10 piercing, DC 21 basic Reflex), <strong>Ossuary Storm</strong> (3d6 piercing, 30 ft).</li>
+<li><strong>Illcayna</strong> — at the rear, not engaged.</li>
+</ul>
+    <p><strong>Allied troops</strong>: Bandit Gang (Bai Jian; 120 HP) · Hellknight Cavalry Brigade (Cyrathul; 115 HP, run <em>weak</em>) · Gnome Cannon Corps (Panacea; 120 HP) · Apprentice Magician Clique (Zanthar; 75 HP).</p>
+    <p><strong>Initiative</strong>: Wight Battalion 37 · Wight Battalion 35 · Cyrathul 26 · Panacea 26 · Zanthar 22 · Skeleton Mob 21 · Bai Jian 18 (natural 1) · Skeleton Mob 13. Troops act on their leader’s turn. In play Panacea went before Cyrathul.</p>
+    <h4>Round 1</h4>
+<ul>
+<li><strong>Wight Battalions</strong> — advanced.</li>
+<li><strong>Panacea</strong> — <strong>Gnome Cannon Corps: Arcane Explosion</strong> (three actions, 200-ft range), 22 force; the battalion saved — <strong>18</strong> with its weakness. <strong>Spiritual Armament</strong> hit (29 vs AC 27), <strong>7</strong>.</li>
+<li><strong>Cyrathul</strong> — <strong>Hellknights: Lance Charge</strong>, 29; saved — <strong>21</strong>. <strong>Draconic Frenzy</strong>: jaws missed by 1; claw missed; <strong>claw hit on a natural 19, exactly AC 27 — 19.</strong> First segment gone. Kaazz put it at about a quarter of the wights gone between Cyrathul and Panacea.</li>
+<li><strong>Zanthar</strong> — moved up; <strong>Apprentice Clique: Barrage of Force</strong>, 12; saved — <strong>13</strong>. <strong>Blazing Bolt</strong>: first ray hit exactly AC 27, <strong>27 fire</strong> — second segment gone (<em>“You see it just disintegrate a bunch of them”</em>). Second ray into the other battalion, <strong>15</strong>.</li>
+<li><strong>Skeleton Mob</strong> — advanced (Kaazz skipped it; Bai Jian caught it).</li>
+<li><strong>Bai Jian</strong> — <strong>Sudden Charge with the troop</strong> into a Skeleton Mob: falcata hit, 18 → <strong>11</strong> after resistance, + persistent vitality. <strong>Bandit Gang: Chop ’em Down!</strong> (three actions), 24 slashing: the mob saved — <strong>12</strong>; the wights <strong>critically saved on a natural 20 — nothing.</strong> Ren bit at the wights and missed. <em>“Damn, I picked the worst troop, guys. I’m sad.”</em></li>
+<li><strong>Final Grudge</strong> (the two fallen segments, resolved late) — on the Hellknights, who failed: <strong>12</strong> and <strong>14</strong>, area weakness included.</li>
+<li><em>Roll log ends here until 21:21. From the recording:</em> the <strong>second Skeleton Mob</strong> closed 25 feet and threw bones — at Cyrathul and the Hellknights, going by who answered: <em>“That kills one of my guys.”</em> <strong>Rout check failed → Hellknights Frightened 1.</strong></li>
+</ul>
+    <h4>Round 2</h4>
+<ul>
+<li><strong>Wight Battalion</strong> (the wounded one) — its emanation attack on Bai Jian, Cyrathul and both their troops. Bai Jian and Ren came out of it down 11 each and the Bandit Gang down 19 (from the HP in the next log).</li>
+<li><strong>Wight Battalion</strong> (the fresh one) — moved to flank the Hellknights; they saved and still took <strong>16</strong> <em>(heard)</em> — <strong>down to two segments.</strong> Second rout check: passed.</li>
+<li><strong>Panacea</strong> — moved the cannons into healing range. Troops can only be healed by area healing — <strong>Bai Jian</strong>: <em>“You have to do AoE heal if you want to heal the troops”</em> — so <strong>Life Boost on Cyrathul</strong>.</li>
+<li><strong>Cyrathul</strong> — the Hellknights’ three-action emanation attack, repositioned first to catch both battalions: <strong>both critically saved — nothing.</strong> <em>“That’s two crit successes. That’s no way.”</em> Then a try at Exploit Vulnerability that told him what the table already knew — <em>“Get this, guys. They’re weak to area damage.”</em> Regalia took the Hellknights’ fear off at end of turn.</li>
+<li><strong>Zanthar</strong> — <strong>Fireball</strong> (rank 4, 26): <strong>the fresh Wight Battalion failed by 2 — 33</strong>; <strong>the second Skeleton Mob failed by 1 — 26.</strong> <strong>Barrage of Force</strong> at the wounded battalion, saved — <strong>14</strong>. <strong>Hand of the Apprentice</strong> with the maul: natural 3, <strong>hero point</strong>, a 6 — the +10 house rule made it a hit — <strong>10</strong>. The battalion stood at 21.</li>
+<li><strong>Skeleton Mob</strong> (Bai Jian’s) — <strong>Rattling Bones</strong>, 17: Bai Jian saved (<strong>8</strong>), <strong>Ren failed (17)</strong>, the Bandit Gang saved (<strong>16</strong>). Its persistent vitality ticked for 4 and then ended on a natural 20 flat check.</li>
+<li><strong>Bai Jian</strong> — <strong>Ren: Jaws hit the wounded battalion, 6</strong> (→ 15 HP). <strong>Bandit Gang: Chop ’em Down!</strong> (two actions), 18: the wights saved, and the half plus their weakness — <strong>16</strong> — was enough. <strong>First Wight Battalion destroyed.</strong></li>
+<ul>
+<li><strong>Final Grudge</strong>: Bai Jian failed (<strong>3</strong>), Ren saved (1), the Bandit Gang saved (<strong>9</strong> — its first segment lost, three left; Bai Jian reminded Kaazz of the rout check a turn later: <strong>27, passed</strong>). Kaazz offered the hero point on the failed Reflex save; Bai Jian kept it.</li>
+<li><strong>Corrupting Spite</strong>: <strong>Bai Jian and the Bandit Gang failed — Drained 1 for a round.</strong> Ren saved.</li>
+<li>Then <strong>Retrieval Prism → scroll of Sure Strike</strong>, and <strong>three Strikes on the Skeleton Mob, all hits</strong>: 27, 24 at −5, 25 at −10 — <strong>9, 10 and 13</strong> after resistance. One of its segments gone. <em>(The log doesn’t say which of the two mobs; taken as the one beside him.)</em></li>
+</ul>
+<li><strong>Skeleton Mob</strong> (the other) — <strong>Ossuary Storm</strong> on Cyrathul (saved, <strong>3</strong>) and the Hellknights (saved, <strong>11</strong>).</li>
+<li><strong>Top of Round 3 — next session.</strong></li>
+</ul>
+    <p>---</p>
+  </div>
+
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baijian">
+      <h4>Bai Jian · Back to Your Grave</h4>
+<ul>
+<li><strong>He solved the haunt.</strong> He asked the right question first (<em>“Is it haunt?”</em>), stepped aside for Cyrathul’s lore, and when that came up empty rolled a <strong>natural 20</strong> himself: it could be shoved back into its grave. Two Athletics checks, each over the DC by one — <em>“Go away. Back to your grave.”</em> … <em>“Please, leave us alone.”</em> … <em>“Get off of us.”</em> — and it was done. Both successes were his. In between he hero-pointed a natural 2 on the haunt’s Fortitude save into a success.</li>
+<li><strong>He went back and talked to it.</strong> In the first research round he rolled Occultism anyway — <em>“I’m not good at it at all. But I’ll try anyway, because I’m trying”</em> — and it landed. After that he went to the source: <em>“I’ll go back after pushing them down and go ask them.”</em> Diplomacy, two for two (29, then 23 on the nose). His were among the successes in the two rounds that produced the Thaw and the Reaper’s Scythe warning. <em>“Hopefully they don’t hit me.”</em></li>
+<li><strong>He put his weight behind Elidir.</strong> Cyrathul made the case; Bai Jian settled it in four words — <em>“Risk it for the biscuit.”</em> — and agreed with the others to rest first and leave in the morning.</li>
+<li><strong>He found the shelf.</strong> The party’s worst Stealth roll nearly got them caught by a gnome with a candle — and by midnight, with everyone else exhausted and failing, he switched to Perception, rolled a 33, and narrowed in on the books. The tome with Jaidi in it was sitting behind that row.</li>
+<li><strong>He lifted the wall.</strong> Athletics crit at Vordia, the wall set in place <em>“like Thor.”</em> <em>“Bai Jian turned into the Super Saiyan.”</em> At Swiftrun his Survival cleared the ground for the wards.</li>
+<li><strong>He trusted the dog, again.</strong> <em>“Come on. You have a good nose.”</em> Ren, 31, straight down the trail in the dark. And when Zanthar’s Tailwind talk turned to the horses: <em>“Maybe you can teach the horse to cast that.”</em> (Panacea: <em>“You’re a beast master, aren’t you?”</em>)</li>
+<li><strong>He looked after the party’s kit.</strong> It was Bai Jian who asked whether Cyrathul had his armor potency rune yet — <em>“I can’t get that.”</em> <em>“You can.”</em> — and who asked whether they wanted an Earthbind. For himself: nothing — <em>“I’m just saving for level eight.”</em></li>
+<li><strong>He commands the Bandit Gang</strong>, and complained about it — <em>“Damn, I picked the worst troop, guys. I’m sad”</em> — right up until it <strong>destroyed the first Wight Battalion</strong>. He Sudden Charged with the whole troop behind him, kept his hero point when the dying wights’ Final Grudge got through, took their curse (Drained 1), and closed the round with a Sure Strike scroll off his Retrieval Prism and <strong>three hits in three swings</strong> on the Skeleton Mob.</li>
+</ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea · the Party’s Voice</h4>
+<ul>
+<li><strong>She was the party’s best researcher by a distance</strong>: three critical successes in the session — on the haunt’s site, in the Elidir stacks (a <strong>natural 1, a hero point, a natural 20</strong>), and with the librarian. When the gnome read out Jaidi’s prayer, she was the one who said <em>“Panacea is going to write down the prayer.”</em></li>
+<li><strong>She spoke for the party.</strong> She gave the opening recap, briefed Alceo — <em>“She has the shard… of the God of War fused to her body, and she’s after doing this big ritual, and we need to stop her”</em> — handed him the notes, and told him which buildings were safe to use and which one had a restless spirit in it.</li>
+<li><strong>She asked the questions that moved the plan</strong>: is there a spell to disarm something that’s part of her? <em>“Maybe we should look for a library”</em> — the idea that sent them to Elidir. Is there one closer? Could someone the city wouldn’t recognize go in for them — <em>“if we had our rogue with us, we could have sent her in.”</em></li>
+<li><strong>She kept everyone standing.</strong> A Heal on Cyrathul at 11 HP (<em>“Never mind. I got you. Don’t worry”</em>), Treat Wounds on him and Ren after, and Life Boost on him again in the battle.</li>
+<li><strong>She was funny with the NPCs.</strong> To Sarevial: <em>“Have you seen a witch come through here with a shard?”</em> — and took the answer in stride. To the dwarves: <em>“It’s always good to have dwarves on your side,”</em> then, <em>“Do you have anything with catnip in it?”</em> Offered halfling weed instead: <em>“We’ll see what it does.”</em></li>
+<li><strong>She kept asking where the fight would be.</strong> From the first edge of town — <em>“So we have high ground for potentially setting our battleground?”</em> — to the army’s arrival: <em>“do we need to start thinking about where we’re going to stage the fight?”</em></li>
+<li><strong>She recruited Swiftrun.</strong> A rough night on the dice, by her own account, and she still stepped up for the Society check she knew she was good at, hero-pointed it, and brought home the Apprentice Magician Clique.</li>
+<li><strong>She gave the real speech</strong>: <em>“Just keep listening to us and keep with us and we’ll get it down. We’ll get that shard out and we’ll get that scythe out.”</em> — and, of the cheer that followed: <em>“That was my troop getting excited.”</em></li>
+<li><strong>Her Gnome Cannon Corps fired the first shot of the battle</strong> — an Arcane Explosion from 70 feet out — with a Spiritual Armament behind it.</li>
+</ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III · the Way In</h4>
+<ul>
+<li><strong>Elidir happened because of his spellbook.</strong> When Panacea said <em>library</em>, he asked how far the nearest one was — <em>“We’ve got some time”</em> — and then cast <strong>Shared Invisibility</strong> again and again: through the lockdown, out the library door, back out the city gate. Kaazz didn’t make the party roll to get in.</li>
+<li><strong>He was the expert</strong>, and said so: <em>“I’m an expert. All right. I don’t act like I’m an expert, but I’m an expert.”</em> He was the one Bai Jian followed into hiding. Locked in for the night: <em>“We can make a fire. We can have all kinds of fun.”</em> He took first watch.</li>
+<li><strong>He found the poisons.</strong> A Perception 30 in the garden turned up the Tangle Root Toxin and Nettleweed Residue everyone had walked past.</li>
+<li><strong>He fixed Vordia’s wall with his head</strong> — a <strong>natural 20</strong> on Crafting, showing the townsfolk they were doing it wrong, while Bai Jian did the lifting.</li>
+<li><strong>His whole speech to the troops was two words</strong>: <em>“Don’t die.”</em></li>
+<li><strong>He was the battle’s artillery.</strong> <em>“Yeah, I got plenty of AOE spells. I’m a wizard.”</em> A Blazing Bolt that took a segment off the first Wight Battalion — Kaazz: <em>“You see it just disintegrate a bunch of them”</em> — then a <strong>Fireball that both targets failed</strong>, his mages’ Barrage of Force, and a hero-pointed thrown maul at the battalion on death’s door. To Panacea, mid-slump: <em>“Bad dice are a curse.”</em></li>
+</ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul · For the Living</h4>
+<ul>
+<li><strong>He set the plan, twice.</strong> On where to go: <em>“I think Elidir might be our best option… even if we get far enough south, it’s four days there, four days back. That leaves us a day to research, maybe less.”</em> On how to stay: <em>“We could hide in the library after they lock up and be invisible while they’re locking it up and then just stay in the library.”</em> And in the morning, the timing that made stepping out and back in work: wait for the key in the lock, then go invisible and slip out past him.</li>
+<li><strong>He recruited two towns.</strong> A <strong>natural 20</strong> at Wolf Point, minutes after the town had waved the party off, and at Vordia a natural 1 that he hero-pointed into a success — the dwarves’ battalion.</li>
+<li><strong>His lore cracked the magnet.</strong> The haunt’s <em>“icy fingernails”</em> shut out three Esoteric Lore checks in the fight; straight afterwards, on the research, the same skill crit (35) and the party knew how to pull the shard: <em>“Need to blitz her.”</em></li>
+<li><strong>He took the haunt’s worst.</strong> A natural 2 on the first save cost him <strong>46</strong>, and the second pass left him on 11. He tried to shove it, failed, and then did the smart thing — walked out of its radius and called back, <em>“You got this, guys.”</em></li>
+<li><strong>He was dry about all of it.</strong> To his troops, the night before: <em>“For the living.”</em> When Panacea couldn’t heal his Hellknights, Bai Jian shrugged — <em>“The Hellknights are just fodders anyway”</em> — Kaazz had them wail <em>“What about us?”</em>, and Cyrathul answered: <em>“You guys fight and die honorably.”</em> Calling in Zanthar’s Fireball: <em>“I’ll yell at him from the chaos. We need a fireball.”</em></li>
+<li><strong>He led the charge.</strong> The Hellknights’ Lance Charge and his own Draconic Frenzy opened the melee, and his Exploit Vulnerability confirmed what the table had worked out — <em>“Get this, guys. They’re weak to area damage.”</em> His brigade also took the brunt: two segments lost and nearly destroyed by the end of Round 2.</li>
+<li><strong>He restocked.</strong> An armor potency rune at last, an Earthbind scroll, and five more Helpful Steps — <em>“because that’s been helpful.”</em></li>
+</ul>
+    </div>
+
+    <div class="spotlight s-elaine">
+      <h4>Elaine Stormfrost</h4>
+<ul>
+<li>Absent. In fiction she told Bai Jian she was going back to research at the grotto and disappeared. Kaazz read out Storm’s message before the battle and doesn’t expect them back.</li>
+</ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item"><div class="loot-name">100 gp each</div><div class="loot-source">Rhokrag</div><div class="loot-note">The bet, paid at Finder’s Gulch.</div></div>
+    <div class="loot-item"><div class="loot-name">Tangle Root Toxin, Nettleweed Residue</div><div class="loot-source">The garden, Finder’s Gulch</div><div class="loot-note">Poisons nestled in the roots; Zanthar found them. In the party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">+1 striking handwraps of mighty blows</div><div class="loot-source">Vordia</div><div class="loot-note">Scavenged from an abandoned mountain monastery; thanks for the wall. In the party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Wand of Mental Purification (1st rank)</div><div class="loot-source">Swiftrun</div><div class="loot-note">From a grateful mother. In the party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">Bought at Logos</div><div class="loot-source">Cyrathul</div><div class="loot-note">armor potency rune · scroll of Earthbind · 5× scroll of Helpful Steps.</div></div>
+    <div class="loot-item"><div class="loot-name">Recruited</div><div class="loot-source">Wolf Point · Vordia · Swiftrun</div><div class="loot-note">Wolf Point (the Bandit Gang) · a dwarven battalion from under Vordia · Swiftrun’s Apprentice Magician Clique.</div></div>
+    <div class="loot-item magical"><div class="loot-name">The magnet</div><div class="loot-source">Research</div><div class="loot-note">an Interact action, adjacent to Illcayna, while wielding it.</div></div>
+    <div class="loot-item magical"><div class="loot-name">The White Queen’s Thaw</div><div class="loot-source">Research · name as heard</div><div class="loot-note">the Whispering Way’s anti-wight counter-ritual; locks Illcayna down and slows her. <strong>Alceo will perform it when she arrives.</strong></div></div>
+    <div class="loot-item magical"><div class="loot-name">The haunt</div><div class="loot-source">Research</div><div class="loot-note">turns on Illcayna if she is damaged by her own <strong>Reaper’s Scythe</strong>.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Jaidi’s prayer</div><div class="loot-source">Research</div><div class="loot-note">one action to implore Jaidi to reclaim her scythe. Panacea has it written down.</div></div>
+  </div>
+  <div class="xp-banner">Experience · 80 research complete (Elidir) · 0 the haunt = <strong>80 XP each</strong></div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Bai Jian:</strong> “Go away. Back to your grave.”
+    <span class="attribution">Shoving a screaming haunt into its own bones on the roll that followed his natural 20</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> “Risk it for the biscuit.”
+    <span class="attribution">The vote for sneaking back into Elidir</span></blockquote>
+
+  <blockquote><strong>Bai Jian:</strong> “Damn, I picked the worst troop, guys. I’m sad.”
+    <span class="attribution">After the Bandit Gang’s first volley bounced off a skeleton’s resistance and a natural-20 save. A round later the same troop destroyed the first Wight Battalion</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “You got this, guys.”
+    <span class="attribution">From safely outside the haunt’s radius, on 28 hit points</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “For the living.”
+    <span class="attribution">His address to the troops</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “You guys fight and die honorably.”
+    <span class="attribution">To his Hellknights, when the healer couldn’t heal a troop and Kaazz had them cry “What about us?”</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “Have you seen a witch come through here with a shard?”<br><strong>Sarevial:</strong> “I think you’re the only witch I’ve seen recently.”
+    <span class="attribution">At the mountain keep</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “Do you have anything with catnip in it?”
+    <span class="attribution">To a cellar full of dwarves</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “Just keep listening to us and keep with us and we’ll get it down. We’ll get that shard out and we’ll get that scythe out.”
+    <span class="attribution">To the army, the night before</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “I’m an expert. All right. I don’t act like I’m an expert, but I’m an expert.”
+    <span class="attribution">When Bai Jian needed an expert to follow for the library lock-in</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “We can make a fire. We can have all kinds of fun.”
+    <span class="attribution">On spending the night locked in a library</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “Don’t die.”
+    <span class="attribution">His address to the troops, in full</span></blockquote>
+
+  <blockquote><strong>The librarian of Elidir:</strong> “Is there somebody there? … There better not be rats in here again, either.”
+    <span class="attribution">Stopping beside two invisible Hellbreakers with a candle between his fingers</span></blockquote>
+
+  <blockquote><strong>The priestess’s spirit:</strong> “She has found the descendant of the one who turned against her over a thousand years ago.”
+    <span class="attribution">On Illcayna’s final sacrifice</span></blockquote>
+
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+<ul>
+<li><strong>THE BATTLE IS MID-FIGHT.</strong> Top of Round 3; one Wight Battalion down, the Hellknights nearly destroyed, and Illcayna still behind her army.</li>
+<li><strong>THE PIECES</strong> (nobody has laid them out as one plan yet) — Alceo performs the <strong>White Queen’s Thaw</strong>; someone adjacent to her <strong>Interacts with the magnet</strong> to tear out the war shard; someone spends an action on <strong>Jaidi’s prayer</strong>, <em>an attempt</em> to have her reclaim the scythe (Panacea: <em>“potentially”</em>); and if Illcayna is <strong>damaged by the Reaper’s Scythe</strong>, the priestess haunt turns on her. <strong>All of it before the final sacrifice.</strong> Who carries the magnet? Who says the prayer? (Kaazz hasn’t written the prayer’s words yet.)</li>
+<li><strong>“THE TRUE GODDESS OF THE HARVEST”</strong> — almost certainly <strong>Jaidi</strong>, the Blessing and Bounty, Erastil’s wife, displaced by Urgathoa. The tome says her name and prayer <em>“would purify her scythe”</em>; Bai Jian’s S24 dream said to evoke the true goddess of the harvest <em>“to cleanse the scythe.”</em> Nobody at the table drew the line out loud.</li>
+<li><strong>“THE DESCENDANT OF THE ONE WHO TURNED AGAINST HER”</strong> — Illcayna’s final sacrifice is a specific person, the heir of someone who betrayed her over a thousand years ago. Who?</li>
+<li><strong>THE SHRINE TO JAIDI IN FINDER’S GULCH</strong> — the tome says there was one. The Grotto of Seasons, or somewhere else?</li>
+<li><strong>THE HAUNT’S NAME</strong> — the spirit gave one; the recording didn’t catch it.</li>
+<li><strong>ELAINE</strong> — written out to the grotto. Storm isn’t expected back; the fifth seat is open again.</li>
+<li><strong>ELIDIR</strong> — still locked down, heavier patrols than before, eerily quiet at night.</li>
+<li><strong>THE UNDEAD ARE THINNING</strong> — Sarevial and Wolf Point both report far fewer.</li>
+<li><strong>LEVEL 8</strong> — the party was about 80 XP short last session and logged 80 more; nobody had levelled by the Logos shopping stop.</li>
+</ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax’s Notes — Bai Jian’s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax’s notes only — not shared with the rest of the party.</p>
+
+  <h3>What Bai Jian did this session</h3>
+<ul>
+<li>Called the haunt for what it was. Let Cy try the lore first. Then <strong>natural 20 on Recall Knowledge</strong> — push her back into the grave.</li>
+<li><strong>Shoved the haunt down twice.</strong> Athletics 29 both times against DC 28. Guidance on the second. Disabled.</li>
+<li><strong>Hero point</strong> on its Fortitude save: natural 2 into a 13, success on the number.</li>
+<li>Talked to the spirits twice. Diplomacy 29 and 23. Both landed.</li>
+<li>Voted for Elidir. Voted to sleep first.</li>
+<li>Rolled a <strong>13 on Stealth</strong> in the library, on Follow the Expert. The gnome stopped right next to me.</li>
+<li><strong>Perception 33</strong> at midnight. Found the shelf. The tome was behind that row.</li>
+<li>Ren led us to Vordia in the dark. <strong>Lifted Vordia’s wall</strong> — Athletics 36.</li>
+<li>Survival 29 at Swiftrun to clear ground for their wards.</li>
+<li><strong>Tailwind off the wand every morning</strong> — Nature by Assurance, 21 against DC 20.</li>
+<li>Asked Cy whether he had his armor potency rune yet; he bought it. Asked for an Earthbind; he bought that too. Bought nothing — <strong>saving for level 8</strong>.</li>
+<li>Took the <strong>Bandit Gang</strong>.</li>
+<li>Round 1: <strong>Sudden Charge with the troop</strong> into a Skeleton Mob. 18 rolled, <strong>11 through</strong>. Chop ’em Down for 24 — 12 to the mob, nothing to the wights.</li>
+<li>Round 2: Ren bit the wounded battalion, <strong>the Bandit Gang finished it.</strong> Failed its Final Grudge save and kept the hero point. Failed <strong>Corrupting Spite — Drained 1.</strong></li>
+<li><strong>Retrieval Prism, Sure Strike scroll, three hits</strong> on the Skeleton Mob: 9, 10, 13 through.</li>
+</ul>
+  <h3>Things Bai Jian knows that the party does not</h3>
+<ul>
+<li>Nothing new this session. Everything was learned at the table together.</li>
+</ul>
+  <h3>What Bai Jian is thinking about</h3>
+<ul>
+<li><strong>The tome and the dream say the same thing.</strong> The dream: <em>“Evoke the true goddess of the harvest to cleanse the scythe.”</em> The tome: Jaidi’s name and prayer <em>“would purify her scythe.”</em> Panacea holds the prayer.</li>
+<li><strong>The Skeleton Mob resists physical 7.</strong> Three clean hits and 32 got through out of 53. I guessed slashing at the table; it is all physical.</li>
+<li><strong>Area damage is what kills troops.</strong> Everything out there is weak to it. My troop’s Chop ’em Down is my area damage; my own Strikes are not.</li>
+<li><strong>The wights’ Final Grudge punishes whoever is standing next to them when a segment falls.</strong> The Hellknights took the first two and are nearly gone. Mine cost me Drained 1.</li>
+<li><strong>The magnet needs someone adjacent to her.</strong> Panacea said one of the fighters. Cy said blitz her.</li>
+<li><strong>Still holding a hero point</strong> going into Round 3.</li>
+<li><strong>Bandit Gang at 69, three segments, Drained 1.</strong> Me at 84, the same. Ren at 40.</li>
+</ul>
+  <h3>Open questions for next session</h3>
+<ul>
+<li>Who carries the <strong>magnet</strong>, and who says <strong>Jaidi’s prayer</strong>?</li>
+<li>Who is <strong>the descendant</strong> she means to sacrifice?</li>
+<li>Where is <strong>Jaidi’s shrine</strong> in this town?</li>
+<li>When does <strong>Illcayna</strong> come forward — and does Alceo’s Thaw land when she does?</li>
+<li>Do the Hellknights hold another round?</li>
+<li>Are we level 8 yet?</li>
+</ul>
+</section>
+
+<section>
+  <h2>Where It Leaves Off</h2>
+  <div class="cliffhanger">
+    <span class="label">End of Session</span>
+    <p>The afternoon of the 19th, top of Round 3. One Wight Battalion is bones on the road. The Hellknights are down to a handful of riders, the Bandit Gang is drained and still swinging, and the cannons and the mages haven’t been touched. Alceo has a ritual ready, Panacea has a prayer to a goddess nobody has spoken to in ten thousand years, someone has to carry a magnet into arm’s reach — and the one they are all for is still at the back of her army.</p>
+    <span class="big-line">“Go, pretties. You take back my town.”</span>
+    <span class="speaker">— the leader at the rear of the dead</span>
+  </div>
+</section>
+
+</div>
+
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>

@@ -356,6 +356,32 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 
 **Carried-forward threads:** what returning the heart did, and whether the Wall of Ghosts still stands · the Tan Sugi ruins, still unseen · the unseen giant (fled, not destroyed) · why the vulture could talk · the whisper at the slab · the failed Survival check at the slab · the rest of fall downtime · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami's nature · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
 
+
+### Session 11 (2026-10-16) — The Girl in the Tree (fall, the two days after the Wall of Ghosts opened, 7108 IC)
+*All five PCs. XP: 48 + 40 + 64 + 40 + 48 + 64 = **304**. Four encounters, no PC downed. ⚠️ **Enko, Iogaka, Yeri, Yuni** are spelled from the GM's chat posts.*
+
+**West along the Pilgrim's Path.** The party came out of the Wall of Ghosts at midnight, realized they had never actually reached the Tan Sugi Monastery, camped, and pushed west for two days.
+
+**Enko and the Storm Mother.**
+- **Enko**, a kappa, was found face-down on the trail with his head-bowl empty (Iryoku refilled it). Only Mu-Jin heard what was tormenting him: a woman's voice promising that when Enko got home she would *"pick him up and drop him off at the edge of the world."*
+- His tormentor: **Iogaka**, *"known as the Storm Mother… a terrible and frightening monster who can hurl lightning and blasts of wind that can strip flesh from bone,"* with *"a peculiar and strange distaste for the scent of burning incense."* Enko doesn't know why she has fixed on him.
+- Mu-Jin's Recall Knowledge surfaced **Voice of the Storm** (a hag ability: a whisper or scream to any place she has seen within 50 miles, usable to Demoralize). The GM withheld the full entry *"because it'll show who she is."* **Implied hag; never named as one; never appeared.**
+- Iryoku rode to Willowshore and back for **10 gp of incense** (carried, unused). Two **amphisbaenas** attacked at Enko's river home. Enko's thanks: **+1 striking silver shortsword** (Kaoru's ninjato by GM ruling), **wand of environmental endurance** (rank 2), **minor sturdy shield**.
+
+**Zhi Hui's pilgrim stations.** Kaelen gets their lore automatically (his faith); Zhen critted the expert Religion check at both.
+- **The Bridge Shrine** — a hexagonal wooden shrine in the middle of the river, reached by a rope bridge. Zhi Hui, after time along **Mirror Lake**, built it so pilgrims *"might see in their reflections a true vision of who they are when unburdened,"* chanting a prayer to the cycle of reincarnation before sleeping above the water. **Mu-Jin's Willowshore Lore crit: it was washed away by a flood a decade ago — and stands in perfect repair.** Haunted by the **Arms of the Drowned** (complex haunt; Kaelen disabled it with Religion) with two **Brood Leech Swarms** that spelled **Kugaptee** across the floor. After a rest there, the dippers refilled themselves and Mu-Jin filled six clay vials → **6 moderate ghost charges** (the stash shows 7 vials), plus **+1 item bonus to Reflex saves** for the party until the GM removes it.
+- **The Garden Shrine** — an ash-strewn clearing, a partly burned cottage, a scorched oak, an overgrown garden, a stone shrine behind three pairs of unlit lanterns. Zhi Hui's station for a simple meal *"while also ensuring that they did not overindulge in food or drink."* Four **Shrine Caretakers** (fire undead, a combusted variant, immune to fire) rose from the ashes; destroyed.
+- Between them, two **mandragoras** (burls *"feverishly whispering the word Kugaptee"*) each died gasping the name and split around a **clot of crystallized blood** (fear-gem talisman; 2 taken).
+
+**Yeri.** In the hollow of a dead tree: a sobbing young woman — *"Big sister, where are you?"* — who gave her name as **Yeri** and her sister's as **Yuni**; *"a plain-looking human woman dressed in filthy clothes and clutching a string of beads tightly."* Mu-Jin's Sense Motive **failed** (DC 26); his Willowshore Lore: **she is from Willowshore and went missing ten years ago**, her sister at about the same time. Mu-Jin relayed it by subtle Message. She traveled with the party. Iryoku: *"We've had time stuff happen so far. The shrine and with the monk."* Kaoru, privately to Mu-Jin: *"My mother disappeared on the same route."* **At nightfall Yeri convulsed and her head came clean off her body.** Iryoku: *"Hey, I know that thing."* Session ended there; what she is was never said aloud.
+
+**New NPCs (in play):** **Enko** (kappa, ally) · **Yeri** (?) · **Yuni** (named, unseen).
+**Named but unmet:** **Iogaka, the Storm Mother**.
+**New creatures:** amphisbaenas · Arms of the Drowned (haunt) · Brood Leech Swarms · mandragoras · Shrine Caretakers.
+**New locations:** Enko's river home · **the Bridge Shrine** · **the Garden Shrine** (Zhi Hui's pilgrim stations on the Pilgrim's Path) · Mirror Lake (named).
+
+**Carried-forward threads:** what Yeri is, and whether Yuni exists · the ten-year pattern (the shrine, Yeri) · Kaoru's mother, gone on the same route · Iogaka and Enko · the Tan Sugi Monastery, still ahead · what returning Tan Sui Jing's heart did · the unseen giant · the rest of fall downtime · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
+
 ---
 
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

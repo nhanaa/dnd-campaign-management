@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 11 — Pharasma May Save Your Soul</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0c1110;
+  --bg-card: #151d1b;
+  --bg-card-hover: #1d2724;
+  --border: #283530;
+  --border-bright: #3a4a43;
+  --text: #e6ede9;
+  --text-dim: #9db0a6;
+  --text-bright: #f4faf6;
+  --shadow: #4fae76;
+  --shadow-bright: #6ccb92;
+  --shadow-glow: #4fae7630;
+  --gold: #cbb079;
+  --gold-dim: #9a8348;
+  --gold-glow: #cbb07928;
+  --blood: #b8455c;
+  --blood-glow: #b8455c24;
+  --silver: #a9b8c2;
+  --silver-glow: #a9b8c222;
+  --teal: #3fa39c;
+  --teal-glow: #3fa39c22;
+  --ember: #d47a3c;
+  --ember-glow: #d47a3c22;
+  --jade: #57a86a;
+  --jade-glow: #57a86a22;
+  --azure: #46b4cc;
+  --azure-glow: #46b4cc22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #4fae7614 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #46b4cc12 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #1a231f10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #4fae7612 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #b8455c10 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--shadow);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--shadow-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4fae7618;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-snagg { border-left-color: var(--ember); }
+.char-alder { border-left-color: var(--gold); }
+.char-ruben { border-left-color: var(--silver); }
+.char-xurl  { border-left-color: var(--azure); }
+.char-crew  { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-box h3 { margin-top: 0; color: var(--text-bright); }
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0 18px;
+}
+
+.combat-stat { text-align: center; }
+.combat-stat .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+.combat-stat .value { font-size: 15px; color: var(--text-bright); font-weight: 600; margin-top: 4px; }
+
+.combat-box ul { margin-bottom: 0; }
+.combat-note { font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 6px; }
+.combat-xp { color: var(--gold); font-size: 14px; margin-top: 12px; margin-bottom: 0; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-snagg { border-left-color: var(--ember); }
+.s-alder { border-left-color: var(--gold); }
+.s-ruben { border-left-color: var(--silver); }
+.s-xurl  { border-left-color: var(--azure); }
+
+.spotlight h4 { margin-top: 0; }
+.spotlight p { color: var(--text); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--shadow-bright);
+}
+
+.cliffhanger {
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #13201b 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--shadow-bright);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head><body>
+<div class="container">
+</head><body>
+<div class="container">
+
+<header class="header">
+<h1>Pharasma May Save Your Soul</h1>
+<div class="subtitle">Abomination Vault — Session 11 · A Poltergeist, the Chain Woman Burned to Ash, and an Empty Case at the Library</div>
+<div class="meta-row">
+  <span class="meta-pill">October 14, 2026</span>
+  <span class="meta-pill">PF2e Remaster</span>
+  <span class="meta-pill">~3h 54m</span>
+  <span class="meta-pill">Book 1 · Ruins of Gauntlight</span>
+  <span class="meta-pill">The Gauntlight, Floor 4 · Otari</span>
+  <span class="meta-pill">DM · Lap</span>
+  <span class="meta-pill">Level 6</span>
+</div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:43%"></div>
+  <div class="comp-seg comp-explore" style="width:28%"></div>
+  <div class="comp-seg comp-rp" style="width:20%"></div>
+  <div class="comp-seg comp-social" style="width:4%"></div>
+  <div class="comp-seg comp-loot" style="width:5%"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot" style="background:var(--blood)"></span>Combat 43%</span>
+  <span><span class="legend-dot" style="background:var(--jade)"></span>Exploration 28%</span>
+  <span><span class="legend-dot" style="background:var(--azure)"></span>Roleplay 20%</span>
+  <span><span class="legend-dot" style="background:var(--gold)"></span>Rules &amp; Table 4%</span>
+  <span><span class="legend-dot" style="background:var(--ember)"></span>Loot &amp; Downtime 5%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-snagg">
+    <div class="char-name">Snagg</div>
+    <div class="char-class">Goblin (Razortooth) Fighter 6 — jaws, sturdy shield, Medic archetype</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-alder">
+    <div class="char-name">Alder Ungram</div>
+    <div class="char-class">Human Thaumaturge 6 — chakram + cracked mirror implement</div>
+    <div class="char-player">Ricardo</div>
+  </div>
+  <div class="char-card char-ruben">
+    <div class="char-name">Ruben Falmoor</div>
+    <div class="char-class">Half-Elf Divine Sorcerer 6 of Pharasma</div>
+    <div class="char-player">Twan</div>
+  </div>
+  <div class="char-card char-xurl">
+    <div class="char-name">Xurl</div>
+    <div class="char-class">Halfling Monk 6 — cursed with lycanthropy</div>
+    <div class="char-player">Ben</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The party finished clearing the fourth floor. Xurl walked a tunnel past Otari's island for ten minutes until it was obviously never going to end. Then the party worked through the dining room's remaining doors: a storeroom, a hatch that turned out to be a waste chute running straight into the green pond, the floor's <strong>teleport circle</strong> (Alder reactivated it), and a wine cellar Xurl looted for ten bottles. The hatch room was haunted. A <strong>poltergeist</strong> frightened half the party before initiative, flung broken knives and plates at them, and turned invisible. Ruben's third Vitality Lash ended it. Back in the lounge, Xurl took down the haunted painting Ruben had told him to leave alone (<em>"Brother, I'm already cursed"</em>), and there was a door behind it. Behind a second hidden door was a round chamber with <strong>the Gauntlight's pale blue beam</strong> rising through it from about four floors below. Beside it stood a stone slab with iron rings in the corners, and burned into it the silhouette of <strong>a dwarf</strong>. Xurl said what everyone was thinking: this is where the cult sacrificed the dwarf the party failed to save.</p>
+<p>Then they went back for <strong>the chain woman</strong>, the S7 fight that cost them 132 HP and dealt her zero. Alder walked in first wearing his Masquerade Scarf disguised as Volluk, the floor boss they beat in S8: <em>"I need you for something. Come here."</em> Lap: <em>"It doesn't matter. She attacks you."</em> It was four rounds of chains from anywhere in the room. Her gaze kept the party Frightened, she put Alder down in round 2 and pinned him bleeding to the floor, and her <strong>regeneration</strong> undid most of what the martials dealt. Xurl and Snagg kept her grabbed, tripped and off-guard. Then the party found her off switch as a relay. <strong>Snagg</strong> kept pushing for it: spend Alder's Recall Knowledge on the regeneration, because <em>"there must be something to turn it off."</em> Lap wouldn't take it as first put; Xurl tightened it to <em>"How do I disable it?"</em>, and Alder's answer was fire or holy (Lap: one true, one a lie; her stat block says holy or silver). Snagg: <em>"Do you have any holy damage?"</em> After the break, Ruben did. <strong>Holy Light</strong>, the light-trait spell the party had been missing since S9, hit, he spent a hero point to make it a critical, and <strong>85 damage</strong> burned her to ash. <em>"Pharasma may save your soul, but I will not."</em></p>
+<p>Alder's mirror showed the dining room in its prime: <strong>Belcorra hosting four giants</strong>, leaving at a whisper, and her servants murdering the guests and then each other, until the head chef killed two more and himself. Everyone got a hero point for it. Back in Otari the next morning, the mayor wasn't home. He was at the Dawnflower Library, standing beside an empty case. <strong>Vol Rajani's sword was stolen last night</strong>, during the one night a week its alarm is down for maintenance. An acolyte blurted out that it has to be <strong>Carman Rajani</strong>. Vandy shut him down for lack of evidence, then admitted she and the mayor think so too. Xurl caught the mayor's face changing when the party said the Roseguard lived happily ever after, and asked. In private, the mayor told them <strong>the Roseguard were cursed</strong>. Zarmavdian left to find a cure and never came back. Ten or fifteen years later the captain lost herself and <strong>Aesephna had to kill her with her own hand</strong>, then sealed herself into a secret tomb rather than risk what she'd become after death. That tomb is the crypt the previous adventurers found under the fishery. <strong>The cloak is in it</strong>, and so is a negative energy that raises anything that dies there. The spellbook's lead is a bookstore owner. Lap: <em>"It is a module, so it's got to happen like this."</em></p>
+</div>
+
+<h2>The Session</h2>
+<div class="timeline">
+
+<div class="act explore">
+<div class="act-label">Act I · Exploration · Loose Ends on Floor Four · 0:00 – 0:19</div>
+<div class="act-card">
+<h3>"Long-Ass Fucking Tunnel"</h3>
+<ul>
+  <li>Lap's opener re-set the board: four Roseguard icons. The <strong>key</strong> is in hand, the <strong>sword</strong> is known (the library), the <strong>cloak</strong> is probably with the mayor's family, and the <strong>spellbook</strong> is probably in Absalom.</li>
+  <li>Ruben tied the cloak to the mayor's family, and Xurl brought up <strong>the huntress's crypt</strong>. The previous party found <strong>Aesephna Menhemes's crypt</strong> under the Otari fishery (while dealing with kobolds and a dragon), reported something strange inside it to the mayor, and no one ever followed up.</li>
+  <li>The party chose to push on. Xurl (<em>"I just need a Battle Medicine or a Lay on Hands and I'm good to keep going"</em>) got Lay on Hands from Ruben.</li>
+  <li><strong>The endless tunnel.</strong> Xurl jumped across the water (Cat Fall made the 15-foot drop moot; Snagg: <em>"Okay, he's fine. See? Monk bullshit."</em>) and followed a passage upward for ten minutes. It never ended, so he came back: <em>"Long-ass fucking tunnel. Ain't shit back there. Except more tunnel."</em> It keeps climbing and might reach the surface.</li>
+  <li><strong>The dining room's other doors.</strong> Xurl rolled a die to pick doors, which visibly upset Ruben (<em>"You're causing my OCD to flare up"</em>). Room one was a storeroom with two skeletons by the barrels and nothing useful. Snagg: <em>"Nothing useful. Story of my life."</em> Room two had an open metal hatch in the floor and bins of broken tools, stones and bones. Ruben made sure the doors behind them wouldn't lock.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act II · Combat · The Poltergeist · 0:19 – 0:53</div>
+<div class="act-card">
+<h3>The Poltergeist</h3>
+<ul>
+  <li>While Xurl leaned over the hatch, a ghostly figure appeared beside him and everyone rolled Will against fear. <strong>Snagg crit-succeeded. Xurl and Ruben were Frightened 2.</strong> Snagg: <em>"I hate ghosts. I hate ghosts."</em></li>
+  <li>Three rounds. Broken knives rose out of the bins at Xurl (21), then a storm of plates and utensils. It turned invisible partway through. Alder's read that a bodiless thing's <strong>lowest save is Fortitude</strong> kept Ruben on Vitality Lash, which ignores its resistance. Snagg's ghost-touch jaws grabbed it on a natural 19, Alder crit with the chakram, and <strong>Ruben's third Lash</strong> finished it. See Combat Encounters.</li>
+  <li>Afterwards, Ruben lit the hatch. <strong>The pipe below is a waste chute</strong> running west, and it drops out into the <strong>green pond</strong> with the dead tentacled thing from S10. Xurl climbed down, looked, and shut the hatch: <em>"because it makes me nervous."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act III · Exploration · The Teleporter, the Wine, and the Beam · 0:53 – 1:22</div>
+<div class="act-card">
+<h3>The Beam and the Dwarf</h3>
+<ul>
+  <li>A room with a dusty washtub and a skeleton half inside it. Then <strong>the floor-4 teleport circle</strong>. Alder reactivated it later, during Snagg's healing break.</li>
+  <li><strong>The wine cellar.</strong> Ten old sealed bottles. Xurl wanted to load up until he was nearly encumbered, and Lap capped him at ten: <em>"Xurl doesn't really know shit about alcohol."</em> Snagg wanted to check whether it was poisonous; Xurl: <em>"Definitionally alcohol is a poison… it's just a poison that people like the effects of."</em></li>
+  <li>The last door opened onto a staircase that comes out on <strong>floor 3 by the library</strong>, which is already explored.</li>
+  <li><strong>The haunted painting.</strong> Xurl wanted the graveyard painting from the lounge that Ruben had told him to leave (<em>"I'm the designated thing toucher. I see a thing, I touch the thing."</em> / <em>"Brother, I'm already cursed. Let's see how many curses we can stack in this baby"</em>). He touched it, something happened and then nothing did, and <strong>there was a door behind it</strong>. <em>"At this point, I've stolen every other painting I've touched."</em></li>
+  <li><strong>The beam chamber.</strong> Xurl found a second hidden door at the corridor's dead end. Behind it was a round grey room with <strong>the Gauntlight's pale blue energy</strong> running floor to ceiling. Alder's <strong>Scholarly Recollection</strong> Recall Knowledge: undead that touch it heal, and it rises <strong>from about four floors below</strong> to the lighthouse. On a stone slab with <strong>metal rings in the corners</strong> is a black silhouette of a body, <strong>a dwarf</strong> by the wide shoulders.</li>
+  <li>Xurl: <em>"This is probably where they sacrificed the dwarf we failed to save."</em> Ruben felt pure evil magic, which Lap confirmed: <em>"Let us leave this place. It sickens me."</em> Alder read the rings for what they were (<em>"I think that's how they chained him to the center"</em>): <em>"Well, don't stay in the light, guys."</em></li>
+  <li>Snagg slipped while searching a wall, banged his head on a washtub, and took 4.</li>
+</ul>
+</div>
+</div>
+
+<div class="act social">
+<div class="act-label">Act IV · Plan · Going Back for the Chain Woman · 1:22 – 1:32</div>
+<div class="act-card">
+<h3>"I Need You for Something. Come Here."</h3>
+<ul>
+  <li>Alder: <em>"Well, let's deal with the chain lady."</em> Snagg had already been game (<em>"Why not? We can try again"</em>), but <strong>not hurt</strong>: <em>"Hold on. We can spend time healing first… Let's spend 20 minutes so I can heal."</em> Alder: <em>"Are you about to stab me as I walk away?"</em> Snagg's Risky Surgery cycles (critical successes on Alder and on himself) topped them off, and Alder reactivated the circle in the same ten minutes.</li>
+  <li>The plan. Snagg pointed out that she can attack from anywhere in the room, so sneaking buys little. Xurl had to turn off his bioluminescent stripes (<em>"it is mechanically impossible for me to be hidden while using stripes"</em>). Everyone agreed there was no surprise round to win.</li>
+  <li><strong>Alder's idea:</strong> the <strong>Masquerade Scarf</strong>, disguised as <em>"that thing that we killed that was the boss of this place"</em> (Volluk, Discorporated in S8 and due to re-form). <em>"Oh, God, I'm not good at lying."</em> Ruben read the full Illusory Disguise text aloud and put the effect on him in Foundry (+4 status, plus his level while untrained). Alder walked in. She paused: <em>"What are you doing here?"</em> Alder: <strong>"I need you for something. Come here."</strong> His Impersonate checks came to 24 and 23. Lap: <em>"It doesn't matter. She attacks you."</em> 15 damage and bleed, then initiative.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V · Combat · Vaulgrist · 1:32 – 2:48, break 2:23 – 2:38</div>
+<div class="act-card">
+<h3>Vaulgrist</h3>
+<ul>
+  <li>Four rounds. Her chain reaches anywhere in the room, her gaze (<strong>Unnerving Gaze</strong>, DC 23 Will) re-Frightened someone every turn, and <strong>regeneration 10</strong> healed her each round. In round 2, when her gaze landed on Snagg, <strong>her face became his father's</strong>. Snagg: <em>"Hey, yo. The hell?"</em> While he stayed Frightened she was Concealed to him.</li>
+  <li><strong>Alder went down in round 2.</strong> A hit and a crit, and the chain bound him to the floor: grabbed, prone, and unable to recover from the bleed while anchored. Snagg's <strong>Battle Medicine</strong> critical (27) stood him up, and Ruben's two-action Heal (41) refilled him.</li>
+  <li>Xurl and Snagg kept her locked down: <strong>Dirty Trick</strong> (Clumsy 1), <strong>Combat Grab</strong> three times, Xurl's reaction punch each time she escaped (<em>"I punch her in the face for the audacity"</em>). In round 3 Snagg's <strong>Slam Down</strong> hit for 20 (max damage), and the trip failed until he spent a <strong>hero point</strong> to bump it: prone <em>and</em> grabbed.</li>
+  <li><strong>The question.</strong> Alder was chained and still had his Recall Knowledge. Snagg pushed him to spend it on the regeneration: <em>"Ask about the fast healing… there must be something to turn it off."</em> Lap said they already knew it regenerates and wanted a different question; Xurl reworded it (<em>"How do I disable it? No numbers required?"</em>), and Lap took that. The answer: an underworld creature whose regeneration <strong>fire or holy damage</strong> shuts down. Lap framed it as <em>"one true and one lie"</em>; her block says <strong>holy or silver</strong>, so fire was the lie, and silver, the other true answer, was on Snagg's handwraps all along. Alder: <em>"I'm pretty sure it's either fire or it's holy."</em> Snagg: <strong>"Do you have any holy damage?"</strong></li>
+  <li>In round 4 she crit Xurl on a natural 20 (Critical Hit Deck: <strong>Clumsy 1 until healed</strong>). <strong>Ruben's Protector's Sacrifice</strong> took 9 of it. Lap called the break as Ruben's turn came up.</li>
+  <li><strong>The kill.</strong> After the break Ruben played his <strong>Class Might</strong> hero card, Lay on Hands'd Xurl, and cast <strong>Holy Light</strong>: 31, a hit. <em>"I'm popping a hero point to make that into a critical."</em> <strong>85 damage</strong> into her last 66 HP. Ruben's narration: <em>"He summons the power of Pharasma deep within his soul as a beam of light shoots down through the ceiling… similar to how the evil from the bottom up of the lighthouse."</em> She burned to ash. <strong>"Pharasma may save your soul, but I will not."</strong> Lap: <em>"Why didn't you do that sooner?"</em> Xurl: <em>"That shit was rad."</em></li>
+  <li>Lap afterwards: she isn't unique. <strong>She's one of a type, a people from the underworld</strong>, and the party will meet more of them, regeneration and all. Ruben: <em>"Then I will grow stronger to make sure they all suffer to the same fate."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VI · Mystery · The Chain Room and the Mirror · 2:48 – 3:13</div>
+<div class="act-card">
+<h3>Belcorra's Dinner</h3>
+<ul>
+  <li>Three cages, all empty. The north one holds <strong>an inactive magic circle</strong>, the same kind as the teleporters. The Scalathrax she let out in S7 are <strong>not here</strong>. Chains, manacles, dried blood. Xurl: <em>"When would we ever need to teleport into the prison?"</em> Snagg: <em>"The safest place is the one where you least anticipate it."</em> The party left it off.</li>
+  <li>On the table, <strong>a whip</strong>. Xurl took it (<em>"I touched the probably cursed whip"</em>).</li>
+  <li>Snagg's post-fight surgery. Xurl crit for 41 (<em>"41? I mean, thanks, but ow"</em>). Alder got two natural 1s in a row and then a 19. Xurl: <em>"We need to give this man medical training."</em> Snagg: <strong>"I have medical training. How do you think I'm keeping you alive?"</strong></li>
+  <li><strong>The lantern debate.</strong> Snagg argued for selling the Lantern of Empty Light. The incorporeal-undead mode is 4d8 against a fixed DC 20 basic Will, once a day (about 16 after saves, by his math), and <em>"it's like a cantrip from Ruben."</em> Xurl suggested holding it for an Absalom collector. Alder's <strong>natural-20 Esoteric Lore</strong>: an Absalom buyer would pay more, but <strong>it's probably cursed</strong>, and a wealthy buyer will have it examined and cut the price. Xurl: <em>"We now have five quests leading to Absalom."</em></li>
+  <li><strong>The mirror.</strong> Alder used it in the dining room. In the vision it was in perfect condition: <strong>Belcorra at the head of the table with four nine- or ten-foot guests</strong>, servants bringing dishes. Someone whispered in her ear and she left. Then about ten servants came out of every door and killed the four giants, then chased and killed each other, and <strong>the head chef killed two more and then himself</strong>. <em>"Well, that's concerning."</em> Alder: <em>"Which way did Belcorra walk?"</em> and, looking at the room: <em>"Pretty sure these bodies have just been lying here ever since."</em> <strong>Everyone got a hero point.</strong></li>
+  <li>The new circle took them to floor 2, and they reached the surface near midnight and took a long rest.</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Act VII · Roleplay · The Empty Case · 3:13 – 3:52</div>
+<div class="act-card">
+<h3>The Empty Case</h3>
+<ul>
+  <li>In the morning Xurl raised the <strong>+1 armour potency rune</strong> from the studded leather. Snagg, saving up for his own, handed it over: <em>"You can take it since you're broke."</em></li>
+  <li><strong>The mayor's house.</strong> The butler (Lap: <strong>Ichabod</strong>) said the mayor had urgent business at the library. Xurl stayed behind to sell him the wine. Ichabod held each bottle to the light, called them older than he is, <strong>took two, and said the rest had gone bad. 40 gp.</strong> Xurl: <em>"Xurl is not what you might call trade savvy. He'll take the first offer and be happy about it."</em></li>
+  <li><strong>The library.</strong> Two acolytes guarding a door that is always open. Lap put it to Snagg: as a local, he has never seen that, so something is wrong. Ruben pushed (<em>"This cannot wait"</em>), Vandy waved them in, and <strong>the sword's case was empty</strong>. Ruben: <em>"I sense foul malevolence."</em></li>
+  <li><strong>Vandy's account.</strong> An alarm spell protects the case. <strong>Once a week it is disabled for maintenance, and few people know when.</strong> Last night was that night. The acolyte on duty stepped away for a moment, and the sword was gone when he came back. Ruben: <em>"That is incredibly unfortunate timing."</em></li>
+  <li>Ruben told them everything: Otari, the four icons, the plan. Xurl showed the key (<em>"I probably won't fully hand it over"</em>). Alder asked to read their reactions as Ruben talked, and the others joined in. <strong>Xurl's was the only Perception roll that succeeded.</strong> Both were genuinely surprised that Otari didn't die in the battle, and <strong>both clearly had a suspect</strong>. Then an acolyte blurted: <em>"It's got to be Carman, the blacksmith."</em> Vandy: <em>"Calm yourself. We don't have any evidence."</em></li>
+  <li><strong>Snagg's local memory.</strong> Four years ago, the last election, Carman lost and there was a rumour about him and the sword. Vandy filled in the rest. The sword was his ancestor <strong>Vol Rajani's</strong>, it is the Menhemes family's now, and few people know the maintenance timing, so the thief learned it somewhere or is close to someone who knows.</li>
+  <li>Xurl to Ruben, after divination came up empty: <em>"Magic boy. You got any magic?"</em></li>
+  <li><strong>The mayor's secret.</strong> Xurl caught the look when the party said the Roseguard lived happily ever after, and asked. The mayor sent the acolytes away and lowered his voice. <strong>The happily-ever-after is a lie.</strong> After the battle the Roseguard believed they were cursed, and it got worse in body and mind. <strong>Zarmavdian</strong> left to find a cure and never returned. Ten or fifteen years on, <strong>the captain lost control, and Aesephna had to kill her with her own hand.</strong> (S10 has Vol Rajani as the captain, which would make it Carman's ancestor; Lap didn't name her this session.) Aesephna held out against the curse with her faith (in a deity Lap named, unclear on the recording), but feared what would happen after she died, so <strong>she sealed herself into a burial place no one knew</strong>. The family lost its location until the previous adventurers found it. <em>"Please just keep it to yourself."</em> Ruben: <em>"Only to be done in by curses. It is a horrible tragedy."</em></li>
+  <li>The mayor added the sword's history. The Rajanis lost it many years ago, and <strong>his great-grandfather recovered it</strong>, so it belongs to the Menhemes now. Ruben pressed: <em>"And what makes you think that he is the one who stole it?"</em> The mayor: Carman, drunk after losing the last election, said that if he got his family's sword back it would win him the mayoralty.</li>
+  <li><strong>The cloak is buried with her.</strong> Vandy and the mayor went to look after the last party's report. <strong>A strong negative energy fills the crypt, and anything that dies there comes back.</strong> During their fight with skeletons, a gecko killed by accident got up as a skeleton. Vandy: <em>"I don't think I can deal with it… but you guys might have a chance."</em> Ruben: <em>"I believe we can handle it."</em> Alder: <em>"We'll take it on."</em></li>
+  <li><strong>The spellbook:</strong> the mayor suggests one of the bookstore owners may know.</li>
+  <li>Ruben, half out of character: <em>"I don't think Paizo would make it that easy… it could be somebody framing him."</em> Xurl: <em>"First answer, crime."</em> Snagg: <em>"I don't know about the first answer."</em> Xurl: <em>"First step, get a preemptive pardon from the mayor. Second answer, crime."</em></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat — The Poltergeist</h2>
+<div class="combat-box">
+<div class="combat-meta">Hatch room, floor 4 · 3 rounds · ~33 minutes</div>
+<h3>The Poltergeist — the hatch room, 3 rounds</h3>
+<div class="combat-stats">
+  <div class="combat-stat"><div class="label">Pre-fight</div><div class="value">Frighten (DC 23 Will): <strong>Snagg critical success</strong>, Alder success, <strong>Xurl and Ruben Frightened 2</strong></div></div>
+  <div class="combat-stat"><div class="label">Initiative</div><div class="value">Ruben 29 · Snagg 27 · Poltergeist 23 · Alder 19 · Xurl 14</div></div>
+  <div class="combat-stat"><div class="label">Outcome</div><div class="value">Destroyed. <strong>Ruben kill</strong> (Vitality Lash)</div></div>
+  <div class="combat-stat"><div class="label">Damage dealt (75)</div><div class="value">Snagg 28 · Ruben 20 · Alder 19 · Xurl 8</div></div>
+  <div class="combat-stat"><div class="label">Damage taken</div><div class="value">Xurl 28 · Alder 5</div></div>
+</div>
+<p class="combat-note">Never named at the table. Foundry: <strong>Poltergeist</strong>, level 6 elite (75 HP, AC 24, Fort +11, <strong>resist all damage 5 except force, ghost touch, spirit and vitality</strong>, immune to bleed, naturally invisible). The roll log flags <strong>rejuvenation</strong> (it reforms in 2d4 days unless whatever keeps it from resting is set right), <strong>but this was never said at the table</strong>.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li><strong>Ruben</strong>: Vitality Lash. It saved, so half damage: 6. Shield.</li>
+  <li><strong>Snagg</strong>: Snagging Strike rolled a natural 1. He spent the <strong>Heroic Buff</strong> and the reroll still missed (Alder: <em>"Love having to use the hero point on the first action"</em>). Then <strong>Combat Grab on a natural 19 (31): 19 damage, grabbed</strong> (<em>"I would have preferred the 19 to be on the first strike"</em>). Raised his shield.</li>
+  <li><strong>Poltergeist</strong>: broken knives at <strong>Xurl, 21</strong>. Snagg's Reactive Strike off the ranged attack missed. The second throw missed, but the storm of debris still clipped Xurl for 7.</li>
+  <li><strong>Alder</strong>: Exploit Vulnerability succeeded (personal antithesis) and his <strong>lowest save is Fortitude</strong>. Alder: <em>"keep trying to grab it."</em> His chakram tied the AC but missed to cover, and his Demoralize rolled a natural 1.</li>
+  <li><strong>Xurl</strong>: Crane Stance, stepped round the corner, Flurry: one hit for 6 through the resistance, one miss. The Stunning Blows save succeeded.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li><strong>Ruben</strong>: Vitality Lash, failed Fortitude, <strong>11</strong>. Shield.</li>
+  <li><strong>Snagg</strong>: Snagging Strike rolled a <strong>natural 1</strong>. Critical Fumble card: he bit his own jaw, <strong>Wounded 1</strong>.</li>
+  <li><strong>Poltergeist</strong>: faded to invisible. <strong>Xurl</strong> tracked it, spent his <strong>Heroic Buff</strong> for advantage on his reaction strike and hit (2 through the resistance). Plates and utensils missed <strong>Alder</strong> but clipped him for 5 anyway.</li>
+  <li><strong>Alder</strong>: stepped in, passed the hidden flat check, and <strong>stabbed it with the chakram for a critical, 19</strong>. Minimum damage, and its bleed was wasted on an immune target.</li>
+  <li><strong>Xurl</strong>: <strong>Tumble Through</strong>. The poltergeist's Telekinetic Defense throw at him missed, and <strong>Snagg's Reactive Strike off it hit for 9</strong>. <strong>Tumbling Teamwork</strong> let Alder step into flank, and Xurl's Flurry missed twice.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+  <li><strong>Ruben</strong>: Vitality Lash, failed Fortitude, 17 into its last 3. <strong>Destroyed</strong>: <em>"whatever this thing is disappeared."</em></li>
+</ul>
+</div>
+
+<h2>Combat — Vaulgrist (the chain woman)</h2>
+<div class="combat-box">
+<div class="combat-meta">Chain room, floor 4 · 4 rounds · ~60 minutes of play + a 15-minute break</div>
+<h3>Vaulgrist (the chain woman) — the chain room, 4 rounds</h3>
+<div class="combat-stats">
+  <div class="combat-stat"><div class="label">Opening</div><div class="value">Alder entered disguised (Impersonate 24 / 23); she attacked anyway for 15 + bleed before initiative</div></div>
+  <div class="combat-stat"><div class="label">Initiative</div><div class="value">Vaulgrist 31 · Xurl 30 · Snagg 18 · Alder 17 · Ruben 13</div></div>
+  <div class="combat-stat"><div class="label">Outcome</div><div class="value">Destroyed. <strong>Ruben kill</strong>: Holy Light, hero-point critical, <strong>85 damage</strong></div></div>
+  <div class="combat-stat"><div class="label">Damage dealt</div><div class="value">Ruben 66 (85 applied) · Xurl 44 · Snagg 28. She regenerated <strong>28</strong> back over three turns</div></div>
+  <div class="combat-stat"><div class="label">Damage taken</div><div class="value">Xurl ~70 (incl. bleed) · Alder ~75 (incl. bleed), <strong>down once</strong> · Ruben 9 (Protector's Sacrifice)</div></div>
+  <div class="combat-stat"><div class="label">Hero points</div><div class="value">Snagg (Slam Down trip, failure → success) · Ruben (Holy Light, hit → critical) · Alder (Escape reroll, still failed)</div></div>
+</div>
+<p class="combat-note">Never named at the table; Foundry calls her <strong>Vaulgrist</strong> (level 7 elite, 110 HP, chain +19 with 10-ft reach striking anywhere in the room, <strong>regeneration 10 deactivated by holy or silver</strong>, weak holy 5 / silver 5). Lap after the fight: she's one of a people from the underworld, not a unique creature. Expect more.</p>
+
+<h4>Round 1</h4>
+<ul>
+  <li><strong>Vaulgrist</strong>: chain at <strong>Alder</strong>, a miss and then a hit for 13 + bleed. <strong>Focus Gaze</strong>: Alder Frightened 2.</li>
+  <li><strong>Xurl</strong>: Crane Stance, moved in; passed the Will save.</li>
+  <li><strong>Snagg</strong>: moved in, <strong>Snagging Strike hit for 8</strong>, off-guard. Failed the gaze save (Bravery → Frightened 1).</li>
+  <li><strong>Alder</strong>: <strong>Scroll of Paralyze</strong>. She's level 7 and the scroll is rank 3, so <strong>incapacitation upgraded her success to a critical success</strong>. He passed his bleed check. His gaze save rolled a natural 2 (Frightened 3); he spent the <strong>Heroic Buff</strong> on it and got Frightened 2.</li>
+  <li><strong>Ruben</strong>: <strong>Benediction</strong>; passed the gaze save.</li>
+</ul>
+
+<h4>Round 2</h4>
+<ul>
+  <li><strong>Vaulgrist</strong>: regenerated to full. <em>"She particularly doesn't like you, Alder."</em> A hit for 15, then a <strong>critical</strong>: <strong>Alder down</strong>, dropping his chakram and Everlight Crystal, and <strong>Impaling Chain</strong> binds him to the floor (grabbed, prone, can't recover from the bleed). Gaze on Snagg: failed, and the image in front of him became <strong>his father's face</strong>. She's Concealed to him while he's Frightened.</li>
+  <li><strong>Xurl</strong>: Dirty Trick (a manipulate action) drew her chain reaction for 19, and the trick failed. <strong>Combat Grab hit for 10: grabbed.</strong> His Flurry missed.</li>
+  <li><strong>Snagg</strong>: <strong>Battle Medicine critical, 27: Alder back up.</strong> His Snagging Strike missed on a Heroic Buff reroll. Raised his shield; failed the gaze save again.</li>
+  <li><strong>Ruben</strong>: <strong>two-action Heal (rank 3) on Alder, 41.</strong> Shield.</li>
+</ul>
+
+<h4>Round 3</h4>
+<ul>
+  <li><strong>Alder</strong>: Escape rolled a natural 1. He spent a <strong>hero point</strong> to reroll and it still failed. Mirror's Reflection lost to the grabbed flat check.</li>
+  <li><strong>Vaulgrist</strong>: regenerated 10, escaped Xurl's grab (Xurl's reaction punch, 9), hit Xurl for 16 + bleed, and rolled a critical miss on her second.</li>
+  <li><strong>Xurl</strong>: <strong>Dirty Trick succeeded: Clumsy 1.</strong> Her reaction missed. <strong>Combat Grab hit for 8: grabbed again.</strong> The Flurry missed.</li>
+  <li><strong>Snagg</strong>: <strong>Slam Down hit for 20 (max).</strong> The trip failed; <strong>hero point</strong> → <strong>prone and grabbed</strong>. Failed the gaze save again (<em>"I haven't succeeded in this will save for forever"</em>).</li>
+  <li><strong>Ruben</strong>: <strong>two-action Heal (rank 2) on Xurl, 30.</strong></li>
+</ul>
+
+<h4>Round 4</h4>
+<ul>
+  <li><strong>Alder</strong>: Exploit Vulnerability failed. Then the Recall Knowledge Snagg pushed for, worded Xurl's way: <strong>the regeneration stops on fire or holy</strong> (one true, one a lie; it was holy, and silver, per her block). Snagg: <em>"Do you have any holy damage?"</em></li>
+  <li><strong>Vaulgrist</strong>: regenerated 10, escaped (Xurl's reaction punch, 10) and stood. Snagg's Reactive Strike on the Stand missed now that she wasn't off-guard. Then a <strong>natural-20 crit on Xurl</strong>: Critical Hit Deck, <strong>Clumsy 1 until healed</strong>. <strong>Ruben's Protector's Sacrifice took 9</strong>, and Xurl took 25 + 2d6 bleed.</li>
+  <li><strong>Xurl</strong>: Dirty Trick drew her reaction, which missed. <strong>Combat Grab hit for 7: grabbed.</strong> Gaze save: natural 1, <strong>Heroic Buff</strong> → 29.</li>
+  <li><strong>Snagg</strong>: Slam Down missed by 1 (a natural 6), then the MAP swing missed on another 6. <em>(15-minute break.)</em></li>
+  <li><strong>Ruben</strong>: played <strong>Class Might</strong> (+2 CHA checks), <strong>Lay on Hands on Xurl (18)</strong>, then <strong>Holy Light</strong>: 31 against AC 23, a hit. <strong>Hero point → critical. 85 damage</strong> into her last 66. Ash.</li>
+</ul>
+<p class="combat-note"><em>Combat note: silver never registered. Snagg's handwraps are silver (bought in S7 for exactly this creature, and set on the handwraps in Foundry), but the jaws attacks didn't carry the silver trait, so neither hit applied her silver weakness. Foundry also doesn't automate switching off regeneration; the GM has to do it by hand. Nothing flagged it, so nobody caught it. Had it applied, it's worth about 28 HP: 10 from weakness, and two skipped regeneration ticks. It didn't change the outcome, since Holy Light had 19 to spare.</em></p>
+<p class="combat-note"><em>Denial-axis note (for the AV review): the denial here was <strong>positional and conditional</strong>. She hits from anywhere, so there's no tank position; there's a Frightened tax every turn; and the Impaling Chain took Alder out of the fight while alive. But the regeneration had an answer, the party found it with a Recall Knowledge question, and a divine caster owned it. This is the S9 lesson ("have it in your repertoire") paying off.</em></p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-snagg">
+<h4>Snagg · the One Who Kept Asking</h4>
+<ul>
+  <li><strong>He kept pushing for the chain woman's off switch.</strong> With Alder pinned and the party losing ground to her regeneration, Snagg read it as the fight's gimmick and pushed Alder to spend his Recall Knowledge on it: <em>"Ask about the fast healing… there must be something to turn it off."</em> Xurl sharpened the wording into a question Lap would take, and the answer came back holy or fire (one of them a lie, Lap said; holy was real). Snagg turned it straight into the next question: <em>"Do you have any holy damage?"</em> Ruben's Holy Light was the answer.</li>
+  <li><strong>He refuses to fight hurt, and he's right.</strong> Before the rematch, with everyone ready to walk in: <em>"Hold on. We can spend time healing first."</em> He ran the Risky Surgery cycles before the rematch (Alder: <em>"Are you about to stab me as I walk away?"</em>), stood Alder back up mid-fight with a critical <strong>Battle Medicine</strong> for 27 while he lay chained and bleeding, then patched everyone again afterwards. When Xurl suggested he needs medical training: <strong>"I have medical training. How do you think I'm keeping you alive?"</strong></li>
+  <li><strong>He helped keep her down.</strong> He opened the rematch with a Snagging Strike for off-guard. In round 3 he landed <strong>Slam Down for maximum damage (20)</strong>, then spent his <strong>hero point</strong> to turn the failed trip into a success, so she was prone <em>and</em> grabbed.</li>
+  <li><strong>He called the approach.</strong> She attacks from anywhere in the room, so stealth buys little; after an untrained Stealth roll came up a natural 1: <em>"Why don't you guys stealth? I'm going to go gung-ho about it."</em></li>
+  <li><strong>He's still the party's memory of Otari.</strong> At the library, Lap put it to him that the guards were wrong, because this door is always open. And it was Snagg who remembered the four-year-old rumour about Carman and the sword.</li>
+  <li><strong>He's generous.</strong> Saving for his own armour rune, he handed Xurl the party's spare +1: <em>"You can take it since you're broke."</em></li>
+  <li><strong>He played the money straight on the lantern.</strong> About 16 after saves, once a day, against a fixed DC isn't worth more than its sale price. Alder's natural 20 then showed it's probably cursed.</li>
+  <li><strong>Comedy</strong>: <em>"I hate ghosts. I hate ghosts."</em> / <em>"Nothing useful. Story of my life."</em> / <em>"Okay, he's fine. See? Monk bullshit."</em> / <em>"The safest place is the one where you least anticipate it."</em></li>
+  <li><strong>Against the poltergeist</strong>: ghost touch did its job. A natural-19 Combat Grab for 19 grabbed it, and a <strong>Reactive Strike off its own ranged attack</strong> added 9. He also crit-succeeded the opening fear save. The vision gaze showing him his father's face got exactly the reaction it deserved: <em>"Hey, yo. The hell?"</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ruben">
+<h4>Ruben Falmoor · Pharasma's Beam</h4>
+<ul>
+  <li><strong>He killed the chain woman, and he wrote the scene.</strong> Holy Light hit, he spent a hero point to make it a critical, and 85 damage turned her to ash. Then he narrated it like the end of a chapter: <em>"As he tires of the rattling of this woman's chains, as well as constantly trying to keep his comrades up, he summons the power of Pharasma deep within his soul as a beam of light shoots down through the ceiling."</em> The closer: <strong>"Pharasma may save your soul, but I will not."</strong> And when Lap said there are more like her: <em>"Then I will grow stronger to make sure they all suffer to the same fate."</em></li>
+  <li><strong>He also killed the poltergeist.</strong> Three Vitality Lashes, the last two on Alder's Fortitude read, and the third for the kill.</li>
+  <li><strong>He kept the party upright.</strong> He healed Alder for 41 right after Snagg got him up, Xurl for 30, and Lay on Hands'd Xurl twice. He took 9 of Xurl's critical with <strong>Protector's Sacrifice</strong>, and kept Shield up against the poltergeist and Benediction up against the chain woman.</li>
+  <li><strong>He's the party's face in Otari.</strong> <em>"We've come to speak to the mayor. We have important information."</em> <em>"This cannot wait."</em> He told the mayor and Vandy the whole story: Otari, the four icons, and what the party needs. When the mayor finished the Roseguard's real ending: <em>"Only to be done in by curses. It is a horrible tragedy."</em></li>
+  <li><strong>He reads the room's evil.</strong> At the slab: <em>"It is rife with evil magic… Let us leave this place. It sickens me."</em> At the empty case: <em>"I sense foul malevolence."</em> And on the theft, half out of character, he was already a step ahead: <em>"it could be somebody framing him."</em></li>
+  <li><strong>He's the table's rules desk.</strong> He read Illusory Disguise aloud and put the effect on Alder so the +4 applied, and sorted out the hidden/invisible condition automation for Lap.</li>
+  <li><strong>Comedy</strong>: the door-dice bit (<em>"You're causing my OCD to flare up"</em> / <em>"Trying to trigger my OCD again"</em>), <em>"Ruben can't swim. He can't even doggy paddle,"</em> and the closing <em>"I cast extra quests."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-xurl">
+<h4>Xurl · the Designated Thing Toucher</h4>
+<ul>
+  <li><strong>He found the floor's two secrets.</strong> He took the haunted painting Ruben told him to leave (<em>"I'm the designated thing toucher. I see a thing, I touch the thing"</em> / <em>"Brother, I'm already cursed. Let's see how many curses we can stack in this baby"</em>), and there was a door behind it. Then he found the hidden door at the dead end and put words to the slab inside: <em>"This is probably where they sacrificed the dwarf we failed to save."</em></li>
+  <li><strong>He's the party's memory as well as its scout.</strong> He brought up <strong>the huntress's crypt</strong> the previous party found and nobody followed up. That is now where the cloak is. He walked the endless tunnel alone, and dropped down the chute to find where it goes.</li>
+  <li><strong>He opened the mayor up.</strong> His was the only Perception check that succeeded at the library. He saw both suspected someone and asked. When the mayor's face changed at the happily-ever-after, he asked about that too: <em>"What's with the look there, Mr. Mayor man?"</em> That question got the Roseguard's real history.</li>
+  <li><strong>He's the control half of the chain-woman fight.</strong> Dirty Trick for Clumsy, Combat Grab three times, a reaction punch every time she escaped, and he soaked the worst of her attention (a 19, a 16, and a natural-20 crit). In the poltergeist fight, his <strong>Tumble Through</strong> drew its reaction throw into Snagg's Reactive Strike, and <strong>Tumbling Teamwork</strong> stepped Alder into flank.</li>
+  <li><strong>He sold the wine, badly and happily.</strong> Two bottles for 40 gp from Ichabod: <em>"Xurl is not what you might call trade savvy. He'll take the first offer and be happy about it."</em> The money went into the stash.</li>
+  <li><strong>Funniest person at the table, again</strong>: <em>"Long-ass fucking tunnel. Ain't shit back there. Except more tunnel."</em> / <em>"Definitionally alcohol is a poison… it's just a poison that people like the effects of."</em> / <em>"it is mechanically impossible for me to be hidden while using stripes."</em> / <em>"Magic boy. You got any magic?"</em> / <em>"First step, get a preemptive pardon from the mayor. Second answer, crime."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-alder">
+<h4>Alder Ungram · the Man in the Dead Man's Face</h4>
+<ul>
+  <li><strong>He walked into the chain woman's room wearing the floor boss's face.</strong> Masquerade Scarf, disguised as Volluk, and a line with real nerve: <strong>"I need you for something. Come here."</strong> It didn't work (Lap: <em>"It doesn't matter. She attacks you."</em>). But it was the session's boldest play, and he paid for it first: 15 before initiative, down in round 2, and chained bleeding to the floor for the rest of the fight.</li>
+  <li><strong>He supplied the answer that killed her, from the floor.</strong> Pinned, prone and Frightened, he made the Recall Knowledge Snagg pushed for and came back with fire or holy, one of them true and one a lie by Lap's rule. <em>"I'm pretty sure it's either fire or it's holy."</em> Ruben's Holy Light proved which.</li>
+  <li><strong>He reads things.</strong> He read the slab's corner rings as how they chained the dwarf down. His Scholarly Recollection on the beam room got the Gauntlight's source (about four floors down) and the <strong>dwarf's silhouette</strong>. His <strong>natural-20 Esoteric Lore</strong> found the lantern is probably cursed. <em>"I know a little bit about everything."</em> (Xurl: <em>"Most of the things you know are wrong, however, which makes it funny."</em>)</li>
+  <li><strong>His mirror is the campaign's history book.</strong> He remembered it hadn't been used that day and spent it in the dining room, which gave the party <strong>Belcorra's dinner massacre</strong> and <strong>a hero point for everyone</strong>. Then the follow-ups: <em>"Which way did Belcorra walk?"</em> / <em>"Pretty sure these bodies have just been lying here ever since."</em></li>
+  <li><strong>He's the party's infrastructure.</strong> He reactivated the floor-4 teleport circle, which is how they got home, argued them into going back for the chain lady (<em>"Maybe there's treasure in there"</em>), started the reaction read on the mayor and Vandy, and pitched the lighthouse at night on the way out.</li>
+  <li><strong>Combat, the poltergeist</strong>: his Exploit Vulnerability check told the party <strong>its lowest save is Fortitude</strong>, which is the call Ruben's three Lashes ran on. Then he stepped in and <strong>stabbed it with the chakram for a critical, 19</strong>. His Demoralize rolled a natural 1, and Lap narrated the ghost frightening <em>him</em> instead.</li>
+  <li><strong>Comedy</strong>: <em>"Oh, God, I'm not good at lying."</em> / <em>"I thought you were doing monk bullshit."</em> / <em>"Well, don't stay in the light, guys."</em> / <em>"Are you about to stab me as I walk away?"</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">10 bottles of old wine</div>
+    <div class="loot-source">Floor-4 wine cellar</div>
+    <div class="loot-note"><strong>2 sold to Ichabod for 40 gp</strong>; he called the other 8 bad. Foundry split it <strong>10 gp each</strong></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">A whip</div>
+    <div class="loot-source">Chain-room table</div>
+    <div class="loot-note"><em>(possibly cursed)</em> <strong>Xurl</strong>. Unidentified</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">The graveyard painting</div>
+    <div class="loot-source">Lounge</div>
+    <div class="loot-note">Taken by Xurl; it was hiding a door</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">+1 armour potency rune</div>
+    <div class="loot-source">From the studded leather (earlier)</div>
+    <div class="loot-note"><strong>→ Xurl</strong>, with Snagg's blessing</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Floor-4 teleport circle</div>
+    <div class="loot-source">Reactivated by Alder</div>
+    <div class="loot-note">Links to floor 2</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Hero point (all four)</div>
+    <div class="loot-source">Alder's mirror vision</div>
+    <div class="loot-note"></div>
+  </div>
+</div>
+<div class="xp-banner">Gold · 2 bottles of old wine to Ichabod = <strong>40 gp</strong> · split <strong>10 gp each</strong> · hero point for all from the mirror</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Snagg:</strong> "Do you have any holy damage?"
+<span class="attribution">Round 4, right after the Recall Knowledge he'd been pushing for came back "fire or holy." Ruben did.</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "I have medical training. How do you think I'm keeping you alive?"
+<span class="attribution">Xurl, mid-Risky Surgery: "We need to give this man medical training."</span></blockquote>
+
+<blockquote><strong>Snagg:</strong> "The safest place is the one where you least anticipate it."
+<span class="attribution">On switching on the teleporter inside a prison cage.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Then I will grow stronger to make sure they all suffer to the same fate."
+<span class="attribution">Told there are more of her kind.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "Pharasma may save your soul, but I will not."
+<span class="attribution">Over the ash.</span></blockquote>
+
+<blockquote><strong>Ruben:</strong> "I sense foul malevolence."
+<span class="attribution">At the empty case.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "I'm the designated thing toucher. I see a thing, I touch the thing."<br>
+<strong>Ruben:</strong> "If you want to go ahead and get cursed, that's on you."<br>
+<strong>Xurl:</strong> "Brother, I'm already cursed. Let's see how many curses we can stack in this baby."
+<span class="attribution">The haunted painting. There was a door behind it.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "This is probably where they sacrificed the dwarf we failed to save."
+<span class="attribution">The slab in the beam chamber.</span></blockquote>
+
+<blockquote><strong>Xurl:</strong> "First step, get a preemptive pardon from the mayor. Second answer, crime."
+<span class="attribution">The plan for Carman.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I need you for something. Come here."<br>
+<strong>DM:</strong> "It doesn't matter. She attacks you."
+<span class="attribution">Disguised as Volluk, walking into the chain room.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "Well, don't stay in the light, guys."
+<span class="attribution">On the dwarf.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "You look like you're chained up."
+<span class="attribution">Unrolling the Scroll of Paralyze at the chain woman.</span></blockquote>
+
+<blockquote><strong>Alder:</strong> "I know a little bit about everything."<br>
+<strong>Xurl:</strong> "Most of the things you know are wrong, however, which makes it funny."
+<span class="attribution">Before the natural 20 on the lantern.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li>⭐ <strong>Vol Rajani's sword was stolen.</strong> Taken last night during the weekly maintenance window on its alarm spell, which few people know about. <strong>Carman Rajani</strong> is the suspect: his family's sword, his drunken claim it would win him the election, election day close. Vandy and the mayor think it's him but have no evidence. Ruben floated a frame.</li>
+  <li>⭐ <strong>The Roseguard were cursed.</strong> Zarmavdian left to find a cure and never came back. The captain lost herself and Aesephna killed her. Aesephna held out by faith and sealed herself away. Kept from the town on purpose. <strong>Does it still run in the Rajani and Menhemes lines?</strong> And if the captain was Vol Rajani (S10's account), Aesephna killed Carman's ancestor. And what does it mean that the town's founders believed they were cursed by what they fought?</li>
+  <li>⭐ <strong>Aesephna's crypt, under the Otari fishery.</strong> The cloak is buried with her. Strong negative energy raises anything that dies inside (a gecko got up as a skeleton). Ruben's worry: <em>"definitely not fighting the reanimated legendary hero."</em></li>
+  <li><strong>Zarmavdian's spellbook.</strong> The mayor's lead is a bookstore owner.</li>
+  <li><strong>The sacrifice slab.</strong> The Gauntlight's beam runs up from about four floors below, through a room with a dwarf's silhouette burned into a stone slab with chain rings. The red-haired dwarf from S5 is confirmed dead in all but name.</li>
+  <li><strong>The missing Scalathrax.</strong> The chain room's cages are empty. Whatever she let out in S7 isn't there.</li>
+  <li><strong>More like the chain woman.</strong> A people from the underworld, regeneration included, and the party will meet more.</li>
+  <li><strong>The prison teleporter.</strong> An inactive circle in the north cage of the chain room. Where does it go?</li>
+  <li><strong>The endless tunnel</strong> beyond Otari's island keeps climbing and may reach the surface.</li>
+  <li><strong>Belcorra's dinner.</strong> Four giants murdered by her servants after she left at a whisper, and the servants then killed each other. Who were the giants, and what was whispered?</li>
+  <li><strong>The lantern is probably cursed.</strong> An Absalom collector would still pay, at a cut.</li>
+  <li><strong>The whip</strong> is unidentified, and Xurl calls it "probably cursed."</li>
+  <li><strong>The bound demon</strong> on a higher floor still wants its contract (Xurl: <em>"Fuck them"</em>).</li>
+  <li><strong>The poltergeist</strong>: Foundry says it rejuvenates in 2d4 days unless its unrest is resolved. Not said at the table.</li>
+  <li><strong>Road trip</strong>: Absalom now has <em>"five quests"</em> pointing at it (Xurl).</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where It Ends</span>
+<p>The party standing at an empty display case in the Dawnflower Library, with a key in Xurl's pocket, a cursed founding family's secret in their ears, a crypt that raises the dead waiting under the fishery, and a blacksmith everyone already suspects.</p>
+<p class="big-line">"Pharasma may save your soul, but I will not."</p>
+<span class="speaker">Ruben Falmoor, over the chain woman's ashes</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+
+<section class="pax-notes">
+<h2>Pax's Notes — Snagg's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+
+<h3>What Snagg did this session</h3>
+<ul>
+  <li>Crit-succeeded the poltergeist's fear. <strong>Grabbed it with ghost-touch jaws</strong> on a natural 19 for 19. Reactive Strike off its ranged attack for 9.</li>
+  <li>Bit my own jaw on a fumble. Wounded 1. Moving on.</li>
+  <li><strong>Made the party heal before the rematch.</strong> Two Risky Surgery crits. Alder asked if I was about to stab him.</li>
+  <li>Told them stealth was pointless against something that hits from anywhere in the room. Walked in loud.</li>
+  <li><strong>Stood Alder up off the floor</strong> with a critical Battle Medicine, 27, while he was chained.</li>
+  <li><strong>Slam Down for 20, hero point on the trip.</strong> She ended up prone and grabbed.</li>
+  <li><strong>Pushed Alder to spend his Recall Knowledge on the regeneration.</strong> Xurl got the wording past Lap. Fire or holy, one of them a lie. Asked who had holy. Ruben did.</li>
+  <li>Argued to sell the lantern. Alder's natural 20 says it's probably cursed anyway.</li>
+  <li><strong>Gave Xurl the +1 armour rune.</strong> He's broke. I'm saving for mine.</li>
+  <li>Noticed the library guards. That door is never guarded.</li>
+  <li>Remembered Carman and the sword from the last election.</li>
+</ul>
+
+<h3>Things Snagg knows that the party does not</h3>
+<ul>
+  <li><strong>Her gaze showed me my father's face.</strong> Nobody else saw it.</li>
+  <li><strong>Her regeneration stops on holy or silver. My handwraps are silver. They did nothing to her regeneration.</strong> It should have stopped twice. The silver is set on the handwraps but the bite didn't carry it, and nothing turns regeneration off automatically, so call it out loud next time.</li>
+  <li><strong>Few people know the alarm goes down once a week.</strong> Whoever took the sword knows someone inside the library, or is someone inside the library.</li>
+</ul>
+
+<h3>What Snagg is thinking about</h3>
+<ul>
+  <li><strong>Ask the gimmick question first.</strong> Every boss on this floor has had one: the worm's fast healing, the wisp's magic immunity, her regeneration. The answer to the chain woman was in the Recall Knowledge the whole time. Next time, round one, and word it as <em>how do we turn it off</em>.</li>
+  <li><strong>Ruben has holy now.</strong> That changes the undead math, and the underworld math. There are more of her.</li>
+  <li><strong>The mayor's family has kept the Roseguard's ending from the town</strong>, and asked us to keep it quiet. Fine. But if the Roseguard were cursed, are their descendants? The mayor is one. Carman is one.</li>
+  <li><strong>Carman is the obvious answer.</strong> Drunk threat, family sword, an acolyte who blurts the name. Ruben thinks it could be a frame.</li>
+  <li><strong>The crypt raises anything that dies in it.</strong> That means no one goes down in there. Healing has to be ahead, not behind.</li>
+  <li><strong>The dwarf.</strong> We were four hours out at sea. Nothing to be done now except stop the light.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li><strong>Who knew about the maintenance night?</strong></li>
+  <li><strong>Where is Carman, and does he have the sword?</strong></li>
+  <li><strong>Is the curse still in the families?</strong></li>
+  <li><strong>What's in Aesephna's crypt besides the cloak?</strong></li>
+  <li><strong>Which bookstore, and what do they know about Zarmavdian?</strong></li>
+  <li><strong>Fix the silver on the jaws attack in Foundry</strong> so the trait actually lands. And say "silver" out loud on hits against anything with regeneration.</li>
+  <li><strong>Where does the prison teleporter go?</strong></li>
+</ul>
+
+</section>
+
+</body>
+</html>

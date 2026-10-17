@@ -1,10 +1,10 @@
 # Character Sheet — Revenge of the Runelords (Cody's table)
 
 **Name:** **Sevek**
-**Human (Dragonblood — Sky Dragon) · Monk 17 · Local Savior (Roderic's Cove) · Worshipper of Ashava**
-> ⚠️ **Level 18 reached at the end of S13 (2026-10-03).** This sheet is still the level-17 build; level-18 picks not yet recorded.
+**Human (Dragonblood — Sky Dragon) · Monk 18 · Local Savior (Roderic's Cove) · Worshipper of Ashava**
+> ✅ **Reconciled to the level-18 Foundry export (2026-10-10, post-S14).** Level-18 picks: **Diamond Fists** (class), **Glory on High** (Mortal Herald), **Channel Divine Spark** (mythic), **Slippery Prey** (skill). Apex item is now **Bracers of Hammers**; the staff is **+3 Major Striking Greater Flaming Greater Thundering Greater Crushing**; the spellheart is a **Jolt Coil (Major)**. Numbers below are checked against the S14 roll log. Older paragraphs further down still describe S4–S13 history at the numbers of the time.
 
-**Role:** frontline controller / tank — mass Trip, Taunt at 120 ft, highest AC in the party, permanent flight, **Celestial Armaments blind on crit** (16), and as of 17: **Bear Hug** grapples (apex Bracers of Strength)
+**Role:** frontline controller / tank — mass Trip, Taunt at 120 ft, highest AC in the party, permanent flight, **Celestial Armaments blind on crit** (16), and as of 17: **Bear Hug** grapples (S12–S13, with the Bracers of Strength; the apex is Bracers of Hammers from S14)
 
 > Backstory, voice, and party notes: **[character.md](character.md)**
 > Hired muscle out of **Roderic's Cove** — a small port on the Varisian Gulf that exists because merchants won't dock at Riddleport. He collected debts for the people squeezing his own town, then stopped, and kept stopping. Took his devotions at **Ashava's side shrine** in the Temple of the Stars and Roads. *Lead the lost; cast light in places of darkness; dance even when there is no music.*
@@ -31,13 +31,13 @@
 
 | | Value | Source |
 |---|---|---|
-| **AC** | **43** → **45 in Fused Stance** | 10 + 17 + **8 (legendary unarmored, *Graceful Legend* at 17)** + 3 Dex (Scaly Hide cap) + **3 potency** (**+3 Greater Resilient Explorer's Clothing**, taken off Dream Aethusa in S12; AC read 43 in the Shantak fight) + **2 Scaly Hide** |
-| HP | **263** | 8 human + 17×(10 monk + 4 Con) + 17 Toughness — matches the export exactly |
-| **Fort** | **+31** | Con +4, master +23, Greater Resilient +2, **Peerless Form +2 status** — **Path to Perfection: success → crit** |
-| Reflex | **+29** | Dex +4, **master +23**, Greater Resilient +2 — ✅ **Canny Acumen (Reflex) upgraded to master at 17**, as scheduled. This was the weak save: S10 saw a natural 2 cost a Mythic Point and still eat 75 |
-| **Will** | **+33** | Wis +4, **legendary** +25, Greater Resilient +2, **Peerless Form +2 status** — **Third Path to Perfection (15)**: crit fail → fail; failed save vs damage → half. Plus the Ascended Celestial 1/hr reroll. ⚠️ S5 receipts: the reroll failed *twice* in one session — it's insurance, not immunity |
-| Perception | **+25** · +27 w/ goggles → **+29 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | Wis +4, expert +21 |
-| **Class DC** | **39** | 10 + 17 + **master 6 (*Graceful Legend*)** + Str 6. ⚠️ **This is a jump of 4 from S10's 35** — two of it proficiency, one level, one the apex item |
+| **AC** | **44** → **46 in Fused Stance** | 10 + 18 + 8 (legendary unarmored) + 3 Dex (Scaly Hide cap) + 3 potency (+3 Greater Resilient Greater Advancing Explorer's Clothing) + 2 Scaly Hide. S14 log: 44 out of stance, 46 in stance, 47 with Mithtirith's Protection |
+| HP | **278** | 8 human + 18×(10 monk + 4 Con) + 18 Toughness — matches the S14 log |
+| **Fort** | **+32** | Con +4, master +24, Greater Resilient +2, **Peerless Form +2 status** — **Path to Perfection: success → crit**. S14: the vorpal save rolled at +32, and at +36 on the Mythic Point reroll (mythic proficiency +28) |
+| Reflex | **+30** | Dex +4, master +24 (Canny Acumen), Greater Resilient +2 |
+| **Will** | **+34** | Wis +4, **legendary** +26, Greater Resilient +2, **Peerless Form +2 status** — **Third Path to Perfection (15)**: crit fail → fail; failed save vs damage → half. Plus the Ascended Celestial 1/hr reroll |
+| Perception | **+26** · +28 w/ goggles → **+30 initiative** (Incredible Initiative; **Pilgrim's Token** wins ties) | Wis +4, expert +22 |
+| **Class DC** | **40** | 10 + 18 + master 6 (*Graceful Legend*) + Str 6. Glory on High rolled against DC 40 in S14 |
 
 **Peerless Form (14)** is a *status* bonus to Fort/Will — it won't stack with other status bonuses to saves (Protection, Bless-style effects). He also no longer ages.
 
@@ -60,13 +60,13 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 
 ## Offense
 
-**+3 Greater Striking Greater Flaming Astral Greater Crushing Bo Staff** + **Jolt Coil** spellheart — 1d8 B, traits **monk, parry, reach, trip**; Foundry also tags it **cold iron + silver**
+**+3 Major Striking Greater Flaming Greater Thundering Greater Crushing Bo Staff** + **Jolt Coil (Major)** spellheart — 1d8 B, traits **monk, parry, reach, trip**; Foundry also tags it adamantine + cold iron + silver, and since level 18 **deadly d10 and forceful** (see Diamond Fists). **Astral is off the staff** as of S14, replaced by Greater Thundering; the Major Striking rune came from Paya's old bec de corbin for 3,100 gp.
 
-- **Attack +32** (Str +6, master +23, potency +3)
-- **Damage 3d8 + 12** (Str +6, Greater Weapon Specialization +6) **+ 1d6 fire** (Greater Flaming; **+2d10 persistent fire on a crit**) **+ 1d6 spirit** (Astral) **+ 1d8 spirit** (Celestial Armaments) — ≈ 36 per hit, ≈ 39 with Jolt Coil live
+- **Attack +33** (Str +6, master +24, potency +3)
+- **Damage 4d8 + 12** (Major Striking; Str +6, Greater Weapon Specialization +6) **+ 1d6 fire** (Greater Flaming; **+2d10 persistent fire on a crit**) **+ 1d6 sonic** (Greater Thundering; on a crit, Fort DC 34 or deafened; ignores sonic resistance) **+ 1d8 spirit** (Celestial Armaments) — plus **1d8 electricity** while the Jolt Coil is live. On a crit, **deadly d10 adds 3d10**.
 - Greater Weapon Specialization (15): **+6** damage at master
 - **Greater Crushing** *(new since S9)*: on a critical hit the target is **Clumsy 2 and Enfeebled 2 until the end of your next turn.** This is a **party debuff engine, not a damage rider** — Clumsy 2 is −2 AC for everyone swinging. S10 receipts: against the **mindless** Chromatic Oozes, where Aureys' Feint/Demoralize kit was ruled out entirely, it was the party's only source of AC reduction (28 → 26, with Taunt's off-guard taking it to 24). Nine of the party's seventeen crits that fight came off it.
-- **Jolt Coil (Greater)** *(spellheart)*: cast an electricity spell by activating the coil (in practice, **Electric Arc**) and your Strikes deal **+1d6 electricity until the end of your next turn**. ✅ **The 1d4-vs-1d6 question is settled — the slotted item is the *Greater* Jolt Coil, and 1d6 is correct.** (The base version is the one that reads 1d4.) Pairs with **Chromatic Shift**-style adaptive resistances: S10's Electric Arc into a freshly-shifted ooze landed 42 off a 22.
+- **Jolt Coil (Major)** *(spellheart, upgraded for S14)*: cast an electricity spell by activating the coil (in practice, **Electric Arc**) and Strikes deal **+1d8 electricity until the end of your next turn** (the S14 log rolls 1d8). The Major coil also carries **Lightning Bolt** (rank 3) and **Draw the Lightning** (rank 4), neither used yet.
 - **Celestial Armaments (16)**: the staff sheds torchlight, deals **+1d8 spirit**, and grants **critical specialization** (staff crit spec = free prone). On crit: **Fort save vs class DC — now 39** (10 + 17 + master 6 + Str 6).
   ⚠️ **Do not quote 35 to Cody any more.** *Graceful Legend* took the class DC to master and the apex item added a Strength point, so the S10/S11 argument (class DC 35 vs Foundry's occult spell DC 34) is **obsolete, not resolved**. In S11 the macro fired at **three different values — 34, 35 and 37** across five triggers, including 35 and 34 on the same target in the same fight, so it is not reading a fixed statistic at all. **Re-check what it points at against the new 39.** Sevek also critted noticeably more often than the blind save was rolled, so the trigger itself is being missed some of the time.
 - **Phantasmal Doorknob (Greater)**: on crit: **dazzled** until end of next turn (superseded by the blind if they fail the save)
@@ -74,27 +74,29 @@ Knocked out of the sky costs ~1 action total, four layers deep:
 - **parry** is what the fused stance requires; **monk** is what Monastic Weaponry needs for Flurry
 - **Herald's Weapon** (1/hr, 1 action): the staff goes **all-spirit + sanctified + 2d4 spirit** for a minute — bypasses physical resistance and points holy damage at an AP full of unholy Risen
 
-**Crit stack:** prone (staff crit spec) + **blinded 1d4 rounds** (Celestial Armaments, **Fort DC 39**) + **1d6 bludgeoning if the Trip crits** (core Trip rule) + dazzled (Doorknob, redundant if blinded). A blinded creature is off-guard to everyone and flat-checks DC 11 to target anything.
+**Crit stack:** prone (staff crit spec) + **blinded 1d4 rounds** (Celestial Armaments, **Fort DC 40**) + **1d6 bludgeoning if the Trip crits** (core Trip rule) + dazzled (Doorknob, redundant if blinded). A blinded creature is off-guard to everyone and flat-checks DC 11 to target anything.
 
-**Trip: +35** — 17 + 8 (legendary Athletics) + **6 Str** + 3 item + 1 circumstance
-*Item bonuses don't stack, and he now carries three sources: the staff's **potency +3**, the **Bracers of Strength +3**, and the **Sash of Prowess +2**. Take one — it's +3 either way. Circumstance: **Reflective Ripple +1**.*
+**Trip: +36** — 18 + 8 (legendary Athletics) + **6 Str** + 3 item + 1 circumstance (S14 log: 1d20 + 36; **+38 on a Mythic Point reroll** at mythic proficiency)
+*Item bonuses don't stack, and he carries three sources: the staff's **potency +3**, the **Bracers of Hammers +3**, and the **Sash of Prowess +2**. Take one — it's +3 either way. Circumstance bonuses don't stack either: **Reflective Ripple +1** and the **Bracers' +1 to Trip and Disarm** are the same type, so the Bracers' +1 only matters out of stance.*
 
-### Bracers of Strength — the apex item (17)
+### Bracers of Hammers — the apex item (S14)
 
-> ⚠️ **Corrected S12 (2026-09-26).** The sheet previously listed **Bracers of Hammers**. Those are **rare**, and Cody ruled them a **level-27 purchase in level-20 Absalom**: they can be tracked down with time but not auto-bought. **Foundry shows Sevek wearing Bracers of Strength** (GM Core). The S12 log confirms it: the Athletics modifier reads *Bracers of Strength +3*, Bear Hug fired off them, and his crit Trips dealt only the core-rules 1d6.
+> ✅ **Bought before S14 (2026-10-10)**, when Cody ruled *"in this specific case, for Apex items, you guys can go rare."* This reverses the S12 ruling that made them untrackable in Absalom. **Bracers of Strength (S12–S13) are gone, and Bear Hug went with them.**
 
-**Invested. Str +5 → +6.**
-- **+3 item bonus to Athletics.** This is genuinely new on **Grapple, Shove, Climb, Swim and High Jump** (the staff's potency only reaches Trip and Disarm) and replaces the Sash's +2. Athletics is now **+34**.
-- **+2 circumstance** to Athletics checks to lift a heavy object, Escape, and Force Open.
-- ⭐ **Activate — Bear Hug** (1 action, manipulate): Grapple a creature. On a success it takes bludgeoning equal to your **Strength modifier (6)**; on a critical success, **double (12)**, and it **suffocates** for as long as it stays Grabbed or Restrained by you. **First used S12 on Dream Aethusa** (success: 6 + 1 Courageous Anthem = 7, grabbed).
-- **No Trip damage rider, no +1 circumstance to Trip, no 1/day 10d6 Trip.** Those were the Hammers. A **critical** Trip still deals **1d6 bludgeoning**, but that is the core Trip rule.
+**Invested. Str stays +6.**
+- **+3 item bonus to Athletics** (Grapple, Shove, Climb, Swim, High Jump; on Trip and Disarm it overlaps the staff's potency).
+- **+1 circumstance to Athletics checks to Disarm and Trip** (does not stack with Reflective Ripple's +1).
+- ⭐ **Every successful Trip deals 1d6 bludgeoning, 4d6 on a critical success.** First fired S14: a Rippling Spin Trip on a runic warmaw, 2 damage.
+- A plain success on Disarm lasts until the start of his next turn.
+- ⭐ **Activate (2 actions, 1/day)**: Trip a creature in reach for **10d6 bludgeoning** (double on a critical success); if it goes prone, **Reflex DC 35 or it drops everything it is holding.** Not used in S14.
+- **No Bear Hug any more.** Grapples go back to the Constricting Whip Tail.
 
 ## Skills
 
-**Legendary:** Athletics **+34** (17 + 8 + Str 6 + **3 item, Bracers**) · **Acrobatics +31** (17 + 8 + Dex 4 + 2 item, Sash) — ⭐ **new at 17**, and it switches on **Nimble Crawl**: he is **no longer off-guard while prone**
-**Master:** **Religion +27** (+2 more from Shining Symbol (Greater) on checks)
+**Legendary:** Athletics **+35** (18 + 8 + Str 6 + 3 item, Bracers) · **Acrobatics +32** (18 + 8 + Dex 4 + 2 item, Sash) — **Nimble Crawl**: not off-guard while prone; **Slippery Prey**: no multiple attack penalty between his own Escape attempts; **Quick Climb**: climb Speed equal to his Speed
+**Master:** **Religion +28** (+2 more from Shining Symbol (Greater) on checks: the S14 log rolls it at +30)
 **Trained:** Intimidation, Nature, Occultism, Society, Stealth, Survival *(Arcana, Crafting, and Medicine dropped to untrained in the resolved rebuild — mythic-proficiency rerolls are the emergency key for out-of-lane checks, proven in the S5 hazard)*
-**Lores:** **Warfare** (master, *Additional Lore*) · **Art** *(Local Savior)*
+**Lores:** **Art** *(Local Savior)*. ⚠️ The level-18 export has no Warfare lore and no Additional Lore feat; earlier versions of this sheet listed Warfare at master.
 
 **Languages:** Common · **Thassilonian** · Azlanti · Aklo · Wildsong *(Druid Dedication)*
 
@@ -111,24 +113,26 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 **Graceful Legend (17)** — unarmored defense → **legendary** (+2 AC) and monk **class DC → master** (+2). This is the single biggest number change of the level-up: it drives **AC 42/44** and **class DC 39**, which in turn moves the **Celestial Armaments blind DC**.
 ⭐ **Adamantine Strikes (17)** — **unarmed** attacks count as adamantine. Note the boundary: this is his **fists on a Flurry, not the bo staff**. It quietly answers the S8 hardness problem — the Rune Sentry fight where hardness 28 ate the whole party's weapon damage and Kreebnock's Imaginary Weapon outdamaged every melee PC combined. **Live from S12.**
 
-**Class feats:** Monastic Weaponry · **Reflective Ripple Stance** (Natural Ambition) · **Qi Spells** (2) · **Flurry of Maneuvers** (4) · **Stand Still** (6) · **Rippling Spin** (8) · **Prevailing Position** (12) · **Peerless Form** (14) · **Fuse Stance** (16) · **Celestial Armaments** (16)
+**Class feats:** Monastic Weaponry · **Reflective Ripple Stance** (Natural Ambition) · **Qi Spells** (2) · **Flurry of Maneuvers** (4) · **Stand Still** (6) · **Rippling Spin** (8) · **Prevailing Position** (12) · **Peerless Form** (14) · **Fuse Stance** (16) · **Celestial Armaments** (16) · **Diamond Fists** (18)
 
 **Fuse Stance (16)** — Reflective Ripple + Whirlwind fused. One action entry gets the +1 circ to Trip (Ripple), the +2 circ AC (Whirlwind), and the Rippling Spin reaction. The Whirlwind sweep attack is dropped from the fusion.
 **Celestial Armaments (16)** — the staff sheds torchlight, adds 1d8 spirit, grants crit spec, and on crit: **Fort DC 39** (class DC at 17) or **blinded 1d4 rounds**. See Offense.
 **Prevailing Position (12)** — reaction: targeted by an attack or making a Reflex save vs damage while in a stance → leave the stance for **+4 circumstance to AC or that save**. S5 debut: blanked a +33 bec de corbin hit at effective AC 41. S7: used **four times** in one session (tsunami crit→hit, caller hit→miss, Maddenmist jaws miss at AC 44, scythe Reflex). The cost is real (stance gone until re-entered), so it's for the hit that would actually connect.
 **Peerless Form (14)** — +2 status to Fort and Will, permanently; he stops aging.
 
-**Ancestry (Paragon):** **Scaly Hide** · Natural Ambition (1) · General Training (3) · **Nimble Elf** (5) · **Unwavering Mien** (7 — mental effects lasting 2+ rounds lose a round; sleep saves one degree better) · **Elf Step** (9) · **Ancestral Suspicion** (11 — +2 circumstance vs Controlled effects, success → crit) · **Majestic Presence** (13) · **Multitalented** (13 → Druid Dedication) · **Heroic Presence (17)**
+**Ancestry (Paragon):** **Scaly Hide** · Natural Ambition (1) · General Training (3) · **Nimble Elf** (5) · **Unwavering Mien** (7 — mental effects lasting 2+ rounds lose a round; sleep saves one degree better) · **Elf Step** (9) · **Ancestral Suspicion** (11 — +2 circumstance vs Controlled effects, success → crit) · **Multitalented** (13 → Druid Dedication) · **Cold Iron Stomach** (15, paragon — every Sickened he gains is reduced by 1) · **Heroic Presence (17)**. ⚠️ The level-18 export has no Majestic Presence, which earlier versions of this sheet listed at 13
 
 ⭐ **Heroic Presence (17)** — 1/day, 1 action: up to **ten willing creatures within 30 feet** gain a **6th-rank *Zealous Conviction***. That is a party-wide buff on a five-PC table — **the biggest single action he has ever carried.** It ends on a target if he orders them to do something repugnant. **Live from S12.**
 
 **General:** Adopted Ancestry (Elf) · Fleet · Toughness · **Incredible Initiative** · **Canny Acumen (Reflex)** (15 — ✅ **master as of 17**)
-**Skill:** Pilgrim's Token (2) · **Additional Lore (Warfare)** (4) · Quick Jump (6) · **Cat Fall** (8) · Kip Up (10) · Aerobatics Mastery (12) · **Trick Magic Item** (14) · **Cloud Jump** (15) · **Nimble Crawl** — ⚠️ a level-2 feat that only came online at **17**, when Acrobatics hit legendary: **no longer off-guard while prone**
-**Level 17 skill increase:** Acrobatics → **legendary**
+**Skill (level-18 export):** Pilgrim's Token (2) · Quick Jump (4) · **Cat Fall** (6) · **Quick Climb** (8) · Kip Up (10) · **Nimble Crawl** (12) · **Trick Magic Item** (14) · **Cloud Jump** (16) · **Slippery Prey** (18). ⚠️ Earlier versions of this sheet listed Additional Lore (Warfare) and Aerobatics Mastery; neither is in the export.
+**Level 17 skill increase:** Acrobatics → **legendary**. Level 18 has no skill increase. Ranks in the export: Athletics and Acrobatics legendary, Religion master, six trained.
 
-### Invested items (the level-17 export)
+### Invested items (the level-18 export)
 
-**Bracers of Strength** (apex — Str, Athletics, Bear Hug) · **Explorer's Clothing** (**+3** potency, +2 resilient — S12 upgrade; ⚠️ the S12 log doesn't show whether Stanching/Advancing carried over) · **Sash of Prowess** (+2 item Acrobatics/Athletics — ⚠️ **its Athletics half is now superseded by the Bracers' +3**; the Acrobatics +2 still stands, plus a 1/day Effortless Mastery) · **Shining Symbol (Greater)** (+2 item Religion) · **Obsidian Goggles (Greater)** (+2 Perception) · **Boots of Bounding (Greater)** (+10 Speed) · **Constricting Whip Tail** · **Retrieval Belt (Greater)** · **Ring of Primal Might**
+**Bracers of Hammers** (apex) · **Explorer's Clothing** (+3 potency, Greater Resilient, **Greater Advancing**) · **Sash of Prowess** · **Boots of Bounding (Greater)** · **Obsidian Goggles (Greater)** · **Ring of Primal Might** · **Shining Symbol (Greater)** · **Constricting Whip Tail** (implanted). Eight invested.
+
+*Previous note (level-17 export):* **Bracers of Strength** (apex — Str, Athletics, Bear Hug) · **Explorer's Clothing** (**+3** potency, +2 resilient — S12 upgrade; ⚠️ the S12 log doesn't show whether Stanching/Advancing carried over) · **Sash of Prowess** (+2 item Acrobatics/Athletics — ⚠️ **its Athletics half is now superseded by the Bracers' +3**; the Acrobatics +2 still stands, plus a 1/day Effortless Mastery) · **Shining Symbol (Greater)** (+2 item Religion) · **Obsidian Goggles (Greater)** (+2 Perception) · **Boots of Bounding (Greater)** (+10 Speed) · **Constricting Whip Tail** · **Retrieval Belt (Greater)** · **Ring of Primal Might**
 
 ⚠️ **The Ring of Primal Might only helps one of his two traditions.** It gives **+1 item to Primal spell DCs and Primal spell attack rolls** — which covers **Electric Arc and Frostbite** (Druid Dedication, primal), and does **nothing** for his **occult** qi spells. Worth remembering when comparing his Electric Arc numbers to anything else he casts.
 
@@ -148,8 +152,8 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 ## Focus & spells
 
 **Focus pool 2** — **Inner Upheaval** (qi): +1 status to flurry attacks, +2d6 of **force/spirit/vitality/void chosen per Strike**. Vitality is the regeneration off-switch (killed Siktempora A with it). S5 proof of the "save it" line: held all fight, then stacked with Herald's Weapon for the Gavergash kill. S7: hit in every fight except the Baolen finale (crit miss).
-**Spells:** **Guidance** (divine cantrip, at-will — Local Savior) · Electric Arc, Frostbite, **Spout** (primal cantrips — Druid) · **Heal** (divine, 1/day, self — Mortal Herald; **one action, scales to 96 HP at 16**) · **Figment + Vision of Death** (Phantasmal Doorknob, Greater)
-**Wand suite (daily preps, with Trick Magic Item as the fallback caster):** See the Unseen r5 (8 hr) · Water Breathing r3 · 2× Lucky Number r2 · Life Connection r3 · Mind of Menace r3 — the contingency layer that runs before every dungeon day.
+**Spells:** **Guidance** (divine cantrip, at-will — Local Savior) · Electric Arc, Frostbite, **Spout** (primal cantrips — Druid) · **Heal** (divine, 1/day, self — Mortal Herald; **one action, scales to 96 HP at 16**) · **Zealous Conviction** (rank 6, via Heroic Presence, 1/day) · **Lightning Bolt** r3 and **Draw the Lightning** r4 (Jolt Coil, Major). ⚠️ The level-18 export has no Phantasmal Doorknob, so Figment and Vision of Death are gone with it
+**Wand suite (level-18 export):** See the Unseen r5 · Water Breathing r3 · 2× Lucky Number r2 · Life Connection r3 · **Energy Aegis r7** — the contingency layer that runs before every dungeon day. Mind of Menace is no longer carried. **Consumables:** 3× Scroll of Heal (rank 7), 4× Ghost Oil, Potion Patch (Greater), Healing Potion (Major), Elixir of Life (Moderate). **30,374 gp** on hand after the S14 shopping.
 
 *(The Otherworldly Magic / Otherworldly Acumen innate line — Light, Enlarge, Warp Step — is out in the resolved rebuild; Unwavering Mien and Ancestral Suspicion took those paragon slots.)*
 
@@ -161,13 +165,16 @@ Thassilonian is the one ancient language the guide says actually **gates communi
 
 **Destiny: Ascended Celestial** — **kept, after a full Eternal Legend evaluation** (see progression.md). 1/hr Will reroll; 30-ft moonlight nimbus, +1 status vs fear for allies inside; Bless Ally.
 
-**Mythic feats:** Ears That Hear the Truth (2) · **Fiery Rebirth** (4) · Correct the Story (6) · **Summon Mythic Power** (8) · **Become Destiny** (10) · Ascended Celestial Dedication (12) · **Ascend** (14) · **Celestial Armaments** (16)
+**Mythic feats:** Ears That Hear the Truth (2) · **Fiery Rebirth** (4) · Correct the Story (6) · **Summon Mythic Power** (8) · **Become Destiny** (10) · Ascended Celestial Dedication (12) · **Ascend** (14) · **Celestial Armaments** (16) · **Channel Divine Spark** (18)
+> **Level 18 additions.** **Glory on High** (Mortal Herald 18, 1 action, 1/hr per target): fly straight up to his fly Speed; every enemy in a 60-foot emanation makes a Will save against class DC 40 — success: dazzled 1 minute; failure: blinded 1 round, dazzled 1 minute, 20d6 mental; critical failure: blinded 1 minute, dazzled 1 hour, and the damage. The flight provokes. S14 debut: a Knight of Malice rolled a natural 1 and fought blind for three rounds. **Channel Divine Spark** (Ascended Celestial, 1 action, 1/hr): nimbus doubles, temporary HP equal to level, resistance to physical damage equal to half level, **quickened (Strike or Stride only)**, and **a free Shove or Trip every time a melee Strike deals damage**, for 1 minute. Not used in S14. **Diamond Fists** (monk 18): unarmed attacks gain forceful and deadly d10; Foundry is applying both traits to the bo staff, and every S14 crit rolled the deadly dice. **Slippery Prey** (skill): at legendary, no penalty for repeated Escape attempts in a turn.
 
 > **Ascend is the level-14 anchor**: permanent fly = Speed, **Flyby Attack**, and the 1/day 140-ft burst.
 > **Celestial Armaments (16)** is the level-16 anchor: +1d8 spirit per hit, crit spec on every crit, and **Fort DC 39** (class DC at 17) or blinded 1d4 rounds. Combined with the Phantasmal Doorknob, every crit is a potential fight-ender.
 > **MP economy note:** recurring costs are only Become Destiny, rerolls, and (at 18) Shining Glory — roughly 2 discretionary points per fight against 3/day + Summon + this AP's kill refunds. Don't add more MP mouths.
 
 ## Gear
+
+> ✅ **Level-18 export (2026-10-10):** +3 Major Striking Greater Flaming Greater Thundering Greater Crushing Bo Staff with a Jolt Coil (Major) · +3 Greater Resilient Greater Advancing Explorer's Clothing · Bracers of Hammers · Sash of Prowess · Boots of Bounding (Greater) · Obsidian Goggles (Greater) · Shining Symbol (Greater) · Ring of Primal Might · Constricting Whip Tail · Retrieval Belt (Greater) · Pilgrim's Token · wooden religious symbol. **Not in the export:** Phantasmal Doorknob, Charm of Fire Resistance, Bracers of Strength. The line below is the level-17 list.
 
 **+3 Greater Striking Greater Flaming Astral Greater Crushing Bo Staff** with a **Jolt Coil** spellheart (Celestial Armaments applied daily) · **+3 Greater Resilient Explorer's Clothing** (from Dream Aethusa, S12; the previous +2 set carried Stanching and Advancing — confirm whether they moved over) · **Sash of Prowess** · **Greater Boots of Bounding** (+10 Speed, +3 High/Long Jump) · **Obsidian Goggles (Greater)** (+2 Perception/initiative) · **Phantasmal Doorknob (Greater)** (crit rider: Fort save vs class DC **39** or blind — house-ruled, no Foundry automation; grants Figment + Vision of Death) · **Shining Symbol (Greater)** (+2 Religion) · **Retrieval Belt (Greater)** · **Ring of Primal Might** · **Constricting Whip Tail** (tail graft — Grapple without a free hand, +2 item; twice proven *not* to work on Huge trolls) · **Charm of Fire Resistance (Greater)** · Pilgrim's Token · the wand suite (see Spells) · Cat's Eye Elixir · Potion of Quickness
 

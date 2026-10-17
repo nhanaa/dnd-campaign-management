@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 19 — The Final King</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Final King</h1>
+  <div class="subtitle">Session 19 · The Speakers to the Wind fall, the final never starts, and a kaiju walks into Goka</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-10-11</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">4h 14m</span>
+    <span class="meta-pill">Ruby Phoenix Arena → Goka Docks → Main Street</span>
+    <span class="meta-pill">Level 17</span>
+    <span class="meta-pill">5 PCs · Seva back</span>
+    <span class="meta-pill">3 fights · 3 wins</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:84"></div>
+  <div class="comp-seg comp-rp" style="flex:8"></div>
+  <div class="comp-seg comp-social" style="flex:5"></div>
+  <div class="comp-seg comp-explore" style="flex:3"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · one match, two street fights</span>
+  <span><span class="legend-dot comp-rp"></span>Story · finals day, Hao Jin, Mogaru</span>
+  <span><span class="legend-dot comp-social"></span>Table talk · pre-game, wrap</span>
+  <span><span class="legend-dot comp-explore"></span>The chase through Goka · a ten-minute rest</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard / Living Nexus / Sorcerer</div>
+    <div class="char-player">Pax · "Mingzhu" · Sacred Covenant ×3, Breath of Life, two kills</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · at zero four times, then the Goring Charge</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva the Unerring</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Irorian · two Moments of Renewal, one long backflip</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch the Rampart</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · "I must break you" · drained to the edge of death</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva the Shade</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">Wayang · back this week · killed Mafika, remembered the egg</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>The Nameless reached the final of the Ruby Phoenix Tournament, and the final did not happen.</strong> The Lightkeepers never walked out. A kaiju did.</p>
+
+<p>The losers'-bracket final came first: <strong>the Speakers to the Wind</strong>, led by <strong>Mafika Ayuwari</strong>, a professor of the Magaambya, with four of his students. <em>"I've been eager to face you all since we met on Bonmou. I hope you'll not disappoint."</em> Clutch: <em>"I've been looking forward to it."</em> Sovael: <em>"You were very formidable the one time I had the chance to observe you."</em> Before the bell Sovael had told the table what he was casting — a <strong>ninth-rank Sacred Covenant</strong> on everyone — and Ferrok had told him not to draw all the fire. Sovael: <em>"It's kind of like, damn you do, damn you don't, because I need to do my stuff as well."</em></p>
+
+<p>Mafika smiled — <em>"As I understand it, you're all fans of rather large spells. Then let's open this with a bang, shall we?"</em> — and dropped a ninth-rank <strong>Falling Stars</strong> on the whole party <strong>and two of his own students</strong>. Cody, out of character: <em>"I've already declared it. I can't just walk back now that I see the math."</em> It cost his side 264 hit points; the archer Surjit lost half his health to his own professor, took one turn all fight, and was dead to Clutch's jaws by the end of round one. (<em>"Man, Surjit's not having a good day, you guys."</em>) What followed was the longest fight of the tournament: eight rounds, an hour and forty minutes. Three times Mafika chained a big spell straight into a flurry of fists in a single turn — Cody: <em>"He is Muscle Wizard, very much so… If Bruce Lee was a wizard."</em> Sovael put a <strong>ninth-rank Heroism on Sattva</strong> (<em>"I'm betting on you"</em>) and went in with a ninth-rank Wails of the Damned; <strong>Mafika burned a tenth-rank Nullify to stop it</strong> and took 39 damage for the privilege. In round three a ninth-rank <strong>Pierce the Sky</strong> critted Sovael for 104 and Sattva for 124, deafening both, and the follow-up spells put both at zero inside one enemy round. <strong>Sacred Covenant held them both at 1 HP.</strong> That left four of the five deaf, the Courageous Anthem playing to a front line that couldn't hear it, and the table played it: Seva — <em>"I'm the only one with hearing right now."</em> Ferrok — <em>"Are they cheering for us?"</em> Sovael — <em>"Why is the stadium so empty?"</em> Sattva shot Akila dead on the same turn: <em>"The lack of sound made me focus."</em></p>
+
+<p>Ferrok hit zero <strong>four times</strong> — Sacred Covenant, an actual knockout that Seva's Battle Medicine reversed, It's Not Over, and finally Living for the Applause — while naming every attack like an anime protagonist (<em>"Ferrok raises his sword and shouts, 1,000-Year Slash"</em>). Clutch finally got to say the line he has been rehearsing since the Ruby Palace: <em>"Clutch is going to put all his practice to use and say, I must break you. And hope it sounds good, because he can't hear himself."</em> When Clutch landed a natural-20 Demoralize on Mafika, the professor's <strong>Brilliant Wordplay</strong> turned it around and landed it on Seva instead. <strong>Seva killed Umbasi and then Mafika</strong> — <em>"With that strike, he falls to his knees and cannot rise again."</em> Boundless Hummingbird, last one standing on 2 HP, teleported 120 feet away and turned to face them: <em>"Come on, then."</em> Sovael: <em>"I commend your spirit. Let's end this one."</em> <strong>Ferrok</strong>, at 1 HP, ran 70 feet and ended it with a <strong>Goring Charge</strong>. <em>"With that, the Nameless are the victors."</em></p>
+
+<p>A day passed. <strong>Finals day</strong>: Tagata Emi in attendance, <strong>Hao Jin herself presiding</strong> — <em>"Well fought, Nameless. This will be the final battle."</em> And then nothing. The Lightkeepers were not there. Neither, the party noticed, were <strong>Tino's Toughest</strong>, missing from the competitors' stands. Sattva gave Seva a nervous look — she has suspected the Lightkeepers since the party in the Ruby Village. <em>"I didn't do anything. Not yet."</em> Ten minutes; the crowd turning restless; the Lightkeepers about to be disqualified.</p>
+
+<p>Then the pavilion shook. A shape taller than any building in Goka rose out of the bay to the west — <em>"a nightmare of saurian scales and fiery breath"</em> — and Halspin the Stung shouted its name from the stands: <strong><em>"That's Mogaru, the Final King!"</em></strong> From the east came the screech of a bow across strings, a hundred times too loud, and a haunting melody under it. Hao Jin had been watching the chaos without expression. At the music she snapped rigid and muttered a name: <strong><em>"Syndara, you fool."</em></strong> Then, to every competitor in the arena: <em>"Mogaru is not here by chance. I will deal with the one who sent him here. Please, warriors all, do what you can to divert Mogaru's attention away from the people. But do not try to fight him. Even I don't dare face the Final King directly."</em> The prize stands — <em>"We will settle the matter later."</em> She gave the Nameless a drake-drawn chariot, told them to start at the docks and <em>"for the love of Abadar, please find out where that infernal melody is coming from,"</em> and vanished in crimson flame.</p>
+
+<p>Seva, heading out: <em>"I think it's looking for this. It was in my notes. We found an egg in Bonmou."</em> Sovael: <em>"Wait, what?"</em> Seva: <em>"We found an egg in Bonmou and we couldn't figure out what it was."</em> (The house-sized eggshell from the hex crawl. Sovael did not remember it.) A Recall Knowledge got only this much: a very large egg, from the bottom of the ocean.</p>
+
+<p><strong>At the docks</strong>, three-eyed musicians ten feet tall were playing Mogaru on — <em>"Dance to the sweet melody, Final King. Destroy, burn, crush"</em> — while mule-sized things dropped off the kaiju's hide into the bay. <strong>Halspin</strong> ran up to help (Ferrok: <em>"He thought we knew what we were doing"</em>) and offered Sovael a duet: both of them opened with <strong>Spirit Song</strong>. Sovael followed with a ninth-rank <strong>Wails of the Damned</strong> for 264 — and Cody warned him to <em>"be careful with your budget. This is not the only thing you're doing today."</em> At the top of round three <strong>Mogaru's footfall sent a wave across the docks</strong>, friend and foe alike, and one of the Shadow Oni was dragged out to sea and under. Sovael: <em>"A watery grave."</em> Sattva had just explained that earthquakes can't affect you if you're in the air doing a backflip; he critically succeeded the save. Five rounds, nobody down. <em>"Good work, Halspin. Thank you for the help."</em></p>
+
+<p><strong>On the main street</strong> it was worse: more Rivka, two enormous floating fish, and two <strong>jiang-shi</strong> in bright robes that never touched the ground — <strong>wearing faces the party recognised from the Fallen Moon</strong>, the mob they fought at the Ruby Palace gates. <strong>Urnak Lostwind</strong> of Winter's Roar rounded a corner, already bloodied: <em>"Well, at least this tournament's ending with a little excitement, eh?"</em> The first spell thrown at Sovael was a Polar Ray; <strong>his Spell Riposte counteracted it and sent it back</strong>, and after a rules argument over what "a spell you're aware of" means, Cody ruled for him: <em>"Rules as written… So, you're good."</em> Then the jiang-shi went to work. They cannot be tripped, which Seva and Clutch each learned the hard way. They grab, and then they <strong>Drain Qi</strong> — and one of them drained <strong>Clutch to Drained 5, which kills outright</strong>, with Clutch still on 127 hit points and Sacred Covenant no help at all. <strong>Sovael's Breath of Life caught it.</strong> <em>"Honestly, now it becomes useful. Because now we can actually die."</em> A round later his <strong>Fire Ray critted for 156</strong> and dropped the jiang-shi holding Clutch. Urnak took three kills, Seva finally landed the Spell Swipe she has been trying to set up for weeks (<em>"It finally happened"</em>), and Clutch's jaws ended it.</p>
+
+<p>Cody: <em>"Math-wise, that one wasn't supposed to be that intense, but I was rolling hot."</em> Healing happens next session. <strong>Two weeks off — then "the conclusion of Book Two of Ruby Phoenix."</strong></p>
+
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Social · Before the Bell</div>
+    <div class="act-card">
+      <h3>"Damn you do, damn you don't"</h3>
+      <ul>
+        <li>Pre-game: Cody on his mythic Saturday group's Lightkeepers (<em>"they have Phase 2, basically"</em>) and why he is done running Mythic outside <em>Revenge</em>. Ferrok has Take Your Places; Seva drops a teleport of her own because his is better.</li>
+        <li><strong>No more prize money</strong> for matches. Seva is broke (<em>"I spent my money on dumb stuff?"</em>), Ferrok bought shiny armor, Clutch's Major Rooting rune was <em>"my splurge."</em></li>
+        <li><strong>Sovael announces Sacred Covenant</strong> for the whole party. Ferrok: <em>"Just don't attract all the attention so they have to focus you."</em> Sovael: <em>"damn you do, damn you don't."</em></li>
+        <li>Cody's recap: Winter's Roar beaten, the Lightkeepers lost to, the Biting Roses beaten. Two teams left in the losers' bracket. Tino's Toughest are out.</li>
+        <li>The arena. <strong>Mafika Ayuwari</strong>, <em>"a professor of the Magaambya and captain of the Speakers to the Wind."</em> Clutch and Sovael answer his greeting in character.</li>
+        <li>Cody has never seen Clutch's new level-17 Kholo feat, <strong>Legendary Laugh</strong> (Demoralize at 60 feet, with mental damage). Seva gets a level-17 ancestry feat too.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Losers' Bracket Final: the Speakers to the Wind</div>
+    <div class="act-card">
+      <h3>"Then let's open this with a bang, shall we?"</h3>
+      <ul>
+        <li>Surjit opens on Seva; <strong>Clutch intercepts</strong> the first arrow. Ferrok: <em>"For the team, Haste."</em></li>
+        <li><strong>Mafika's Falling Stars</strong> lands on the party and on his own students Akila and Surjit (Surjit crit-fails for 176). <em>"That was a tactical error on my part, but that is how it goes. Worth it to get all of you."</em> Then three fists with no penalty between them.</li>
+        <li>Sattva's <strong>Heroic Presence</strong>; Seva's Doctor's Visitation on Sovael. Seva crits Surjit and apologises to him (<em>"This is a lesson you will have to learn"</em>); <strong>Clutch's jaws finish him</strong> in round one.</li>
+        <li>Umbasi's <strong>Visions of Danger</strong> — jaguars, elephants and hippopotami for a full minute. Sovael disbelieves it on the first try.</li>
+        <li><strong>Sovael: ninth-rank Heroism on Sattva</strong> and a Quickened Divine Wrath (all three targets save).</li>
+        <li>Ferrok starts naming his attacks. <strong>"1,000-Year Slash"</strong> is a Disintegrate Spellstrike.</li>
+        <li>Mafika punches Ferrok fifteen feet backward. Ferrok: <em>"I don't want to mess with the professor, so…"</em> Cody: <em>"Soloing him, I will say, is not advisable."</em></li>
+        <li>Sattva's <strong>ninth-rank Heal on Ferrok</strong> (121): <em>"It manifests as a golden bolt that fires into you. So I stab you again, basically."</em></li>
+        <li>Sovael flies into range for his big spell — <em>"this is really gonna make me a target."</em> Clutch, in chat: <em>"I can help with a somber Kholo song of rememberance at your wake?"</em> Ferrok: <em>"We'll build him a statue."</em></li>
+        <li><strong>Sovael's Wails of the Damned is Nullified</strong> — a tenth-rank reaction that costs Mafika 39 HP. <em>"It was either this or Cataclysm."</em></li>
+        <li>The Anthem goes up for a front line that has just been deafened. Sovael takes back the Lingering Composition he'd put on it; the Anthem itself stands. <em>"Well, I already casted it." / "It is what it is."</em></li>
+        <li><strong>Pierce the Sky</strong>: crits on Sovael (104) and Sattva (124). <strong>Arrow Salvo drops Sovael; Visions of Danger drops Sattva. Sacred Covenant stands both at 1 HP.</strong></li>
+        <li>The whole party is deaf except Seva, who proposes they play it — <em>"We should roleplay this"</em> — and answers Ferrok's <em>"Are they cheering for us?"</em> with <em>"No, it's not good. The crowd is kind of against us right now. But I give you a thumbs up."</em> <strong>Sattva kills Akila</strong> — <em>"The lack of sound made me focus."</em></li>
+        <li>Seva's Reactive Strike crits Umbasi (<em>"I can still hear your song, Sovael. It'll never die"</em>). Sovael: Healing Nexus, then a <strong>ninth-rank Heal on Ferrok</strong> (101).</li>
+        <li><strong>Clutch: "I must break you."</strong></li>
+        <li>Ferrok's <strong>"Wrath of the Sea God"</strong> (Briny Bolt) blinds Umbasi; <strong>Seva kills Umbasi</strong>, then runs out of actions one short of the Part the Veil she has been setting up. <em>"One day."</em></li>
+        <li>Sovael's Ancestral Memories + <strong>Spirit Song</strong> on Mafika — stunned, no reactions.</li>
+        <li>Mafika's <strong>Frigid Flurry</strong> crit-fails Ferrok for 140 (<em>"My arm falls off and shatters"</em>); <strong>Sovael calls out his own expired Anthem</strong>, which takes a crit away from Seva. Hummingbird's Arctic Rift puts Ferrok at zero — <strong>Sacred Covenant again</strong>.</li>
+        <li><strong>Sattva's Moment of Renewal</strong> (<em>"Miss Hummingbird, you will hear the Dragon Ball Z teleportation sound behind you"</em>). Seva has moved out of touch range and misses it.</li>
+        <li>Seva's <strong>Rend Magic</strong> Spellstrike: Mafika now takes force damage every time he casts. Sovael's own <strong>Frigid Flurry</strong> from the staff, and Foretell Harm on Hummingbird.</li>
+        <li>Clutch's <em>"quick spine adjustment"</em> on Hummingbird, then a natural-20 Demoralize on Mafika — <strong>Brilliant Wordplay</strong> redirects it onto Seva. Cody: <em>"I didn't think I'd get to use that one this whole fight."</em></li>
+        <li>Mafika's meteorite and fist put <strong>Ferrok down, dying 2</strong>; Seva brings him back. Sovael's <strong>eighth-rank Chain Lightning</strong> leaves Mafika on 18.</li>
+        <li>Ferrok's <em>"signature spell,"</em> Beheading Buzz Saw — both targets critically succeed. Cody: <em>"That was a sad turn."</em></li>
+        <li>Mafika drops Ferrok again — <strong>It's Not Over</strong> — and <strong>Clutch lets go of Hummingbird to intercept the next two punches</strong>.</li>
+        <li><strong>Seva's Sure Strike + Spellstrike drops Mafika</strong>, by exactly 1. Sovael's last Focus Point: Sure Strike + Fire Ray on Hummingbird (64).</li>
+        <li>Hummingbird teleports 120 feet. <em>"Come on, then."</em> Sovael: <em>"I commend your spirit. Let's end this one."</em></li>
+        <li>Ferrok starts his turn in acid and drops — <strong>Living for the Applause</strong> — then runs 70 feet and lands the <strong>Goring Charge</strong>. <strong>The Nameless are in the final.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act III · Story · The Final That Never Started</div>
+    <div class="act-card">
+      <h3>"That's Mogaru, the Final King!"</h3>
+      <ul>
+        <li>A day passes. Finals day; a full arena; Tagata Emi present; <strong>Hao Jin presiding in person</strong>. <em>"Well fought, Nameless. This will be the final battle. I trust you're ready?"</em> Sattva: <em>"We are."</em> Thanked for the opportunity, she answers that they fought their way here by their own strength.</li>
+        <li><strong>The Lightkeepers do not appear.</strong> Neither are <strong>Tino's Toughest</strong> in the competitors' stands. Seva: <em>"I didn't do anything. Not yet."</em></li>
+        <li>Ten minutes. The Lightkeepers are about to be disqualified. Clutch's player, in chat: <em>"win by default lets goooo!"</em></li>
+        <li>The pavilion rumbles. <strong>Mogaru rises from the bay to the west.</strong> Halspin: <em>"That's Mogaru, the Final King!"</em></li>
+        <li>A screech of bowstrings and a haunting melody <strong>from the east</strong>. Hao Jin: <strong><em>"Syndara, you fool."</em></strong></li>
+        <li>Her charge to the competitors: divert Mogaru from the people, <strong>do not fight him</strong>, the prize stands and will be settled later. <em>"I will deal with the one who sent him here."</em></li>
+        <li>A chariot drawn by riding drakes. <em>"Get a read on the situation across the city. We need to figure out what brought Mogaru here… Start at the docks."</em> She vanishes in crimson flame.</li>
+        <li><strong>Seva remembers the egg from Bonmou.</strong> Clutch asks for a Recall Knowledge: very large, from the bottom of the ocean.</li>
+        <li>Five in one chariot, one of them a minotaur. Ferrok: <em>"Yeah, we're super crowded in there."</em> Sovael: <em>"I don't take much space."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV · Combat · Goka Docks (with Halspin the Stung)</div>
+    <div class="act-card">
+      <h3>"Hope you don't mind if I make this a duet"</h3>
+      <ul>
+        <li>Three-eyed musicians, ten feet tall, playing Mogaru on. <em>"Destroy, burn, crush."</em> Mule-sized <strong>Rivka</strong> drop off the kaiju into the bay.</li>
+        <li>Ferrok asks whether this counts as fighting before an audience. It does not.</li>
+        <li><strong>Halspin the Stung</strong> runs up, out of breath, and offers to make it six. Seva: <em>"Yes, always."</em></li>
+        <li>Shadow Oni Sound Burst; a Sonic Missile crit on Ferrok (84). <em>"Ferrok spits out a couple of teeth."</em></li>
+        <li>Seva realises what's changed: <em>"Oh god, I think we can die in this fight… It's not a tournament."</em></li>
+        <li><strong>Sovael's Spirit Song</strong>, then Halspin's: <em>"Hope you don't mind if I make this a duet."</em></li>
+        <li>Clutch yells <em>"Limit Break"</em> and drinks a Potion of Quickness. Three <strong>Kaiju Rays</strong> in one round. Cody: <em>"If they had a sponsor it would be Ray-Ban."</em></li>
+        <li>Ferrok's <strong>"Dragon Fang Crescent"</strong>; Seva's Spellstrike crit.</li>
+        <li><strong>Sovael's ninth-rank Wails of the Damned</strong> — 264, Rivka B Drained 4. Cody: <em>"Be careful with your budget."</em></li>
+        <li>Halspin's Phantasmal Calamity crit-fails two Rivka. <strong>Clutch kills Rivka B</strong> on a natural 20 and <strong>intercepts a claw meant for Sovael</strong>.</li>
+        <li><strong>Top of round three — Mogaru's quake.</strong> Everyone rolls, enemies included; Ferrok fails. <strong>Shadow Oni B is swept out to sea.</strong> Clutch intercepts Sovael's share.</li>
+        <li>Sovael's <strong>Fortissimo</strong> Anthem succeeds (+2), then a Fireball: <em>"I have never casted this ability on a flame oracle."</em> It meets fire resistance. <em>"Oh, the resistance."</em></li>
+        <li><strong>Halspin's Telekinetic Bombardment kills Rivka A; Ferrok's "Flash Coil" kills Rivka C.</strong></li>
+        <li>Sovael's Dirge + <strong>Debilitating Dichotomy</strong> on Rivka D (71) — and this time he applies his own save upgrade.</li>
+        <li>Rivka D throws five claws at Seva and misses with all five. <strong>Seva kills it</strong>, then goes invisible to close on the last Oni.</li>
+        <li>Sovael's Sure Strike + Fire Ray (67); <strong>Halspin's arrows finish the last Oni.</strong> He heads back to his own team.</li>
+        <li>Ten minutes: Sattva's Treat Wounds, delivered as five arrows falling on everyone's head; potions (<em>"Sippy Cups"</em>); Sovael's Heal; refocus.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · Goka Main Street (with Urnak Lostwind)</div>
+    <div class="act-card">
+      <h3>"Now we can actually die"</h3>
+      <ul>
+        <li>Mogaru speeds up, <em>"swatting buildings out of the way as though they were simply paper."</em></li>
+        <li>More Rivka, giant floating fish (<strong>Kun</strong>), and undead in bright flowing robes who never touch the ground — <strong>several wearing the faces of the Fallen Moon</strong>.</li>
+        <li><strong>Urnak Lostwind</strong> joins. Seva watches him crit three times in a row: <em>"You guys fought him?!"</em> Cody: <em>"You got real fucking lucky when you fought him is the thing."</em> Ferrok: <em>"He got shut down early. That's how we got him."</em></li>
+        <li>Sattva's Recall Knowledge: <strong>jiang-shi</strong>, a kind of vampire, resistant to physical damage except duskwood. His <strong>Bow of Seven Hues</strong> turns to spirit damage.</li>
+        <li>Sovael: Lingering Anthem (four rounds) — Clutch, in chat: <em>"I can hear it! I'm not deafened… yet!"</em>; <em>"Ferrok hums along with the song"</em> — then a critical Talent Envy Demoralize and a <strong>Chain Lightning for 203</strong>.</li>
+        <li><strong>Kun B's Polar Ray → Spell Riposte.</strong> The "aware of" argument; counteract 45; the ray hits the Kun instead. Ruled in Sovael's favour seven minutes later.</li>
+        <li><strong>Rigor mortis.</strong> Seva chooses "prone" over a free grab on a jiang-shi that cannot be knocked prone: <em>"You just baited me."</em> Sattva: <em>"Objection, leading language."</em> Clutch trips one anyway — <em>"It's instinct for him. It's his bread and butter."</em></li>
+        <li>Cody: <em>"We will wrap things up with this fight."</em></li>
+        <li>Sattva spends his last two hero points. Sovael's <strong>Scare to Death</strong> on a Rivka; his second Chain Lightning is cut short at 81 by a natural 20.</li>
+        <li>A Kun bites and restrains Sattva — three rounds running. <em>"It's just a big fish." / "Big fish that's got you restrained."</em></li>
+        <li><strong>Drain Qi</strong> begins on Clutch and Seva. It has no attack trait; they do it twice a turn.</li>
+        <li>Sovael's <strong>Living Thunderbolt</strong> from a scroll — <em>"Once you got critically grabbed by Ran-to three times, you know to prepare some spell like this."</em></li>
+        <li>A Kun's Lightning Bolt hits its own side. <em>"Anybody has some Duskwood?" / "Who carries Duskwood?"</em></li>
+        <li><strong>Ferrok kills Rivka D</strong> ("Dragon Fang Crescent"). Sovael's third Chain Lightning, on a jiang-shi with 37 HP: natural 20, no damage. <em>"You're kidding."</em> He Heals Ferrok instead.</li>
+        <li><strong>Urnak kills Kun B.</strong> Sattva rolls a natural 20 to escape the fish and a natural 19 at −10 to <strong>drop Risen Combatant A</strong>.</li>
+        <li><strong>Clutch reaches Drained 5 — lethal. Sovael's Breath of Life.</strong></li>
+        <li><strong>Sattva's Moment of Renewal</strong>, and the argument over whether it is eight hours of rest or twenty-four. Cody rules eight.</li>
+        <li><strong>Sovael's Fire Ray crit — 156 — drops Risen Combatant B.</strong> Clutch is free. Seva: <em>"The tides have turned."</em></li>
+        <li>Seva teleports out of the Kun's jaws. Sattva: <em>"More slippery than me."</em> On Urnak and the fish: <em>"Make some sashimi, please."</em></li>
+        <li>Sovael's Living Thunderbolt takes Rivka C's last hit point; Dirge of Doom. <strong>Seva's Spell Swipe finally lands</strong> on two targets. <strong>Urnak kills Kun A.</strong> <strong>Clutch's jaws end it.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VI · Wrap · Wrap</div>
+    <div class="act-card">
+      <h3>"I was rolling hot"</h3>
+      <ul>
+        <li>Out of combat; healing next session. Clutch is still Drained 4, Seva Drained 1.</li>
+        <li>Cody: if the first target hadn't critically saved one of Sovael's Chain Lightnings, <em>"that fight would have ended like two rounds ago."</em> <em>"Math-wise, that one wasn't supposed to be that intense, but I was rolling hot."</em></li>
+        <li><strong>Two weeks until the next session</strong> — <em>"the conclusion of book two of Ruby Phoenix."</em></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 1 · Losers' Bracket Final · Speakers to the Wind · 1h 41m · 8 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value"><strong>Mafika Ayuwari</strong> (525 HP, AC 43; Halcyon Surge — an arcane spell and a druid focus spell in three actions — Falling Stars, Desiccate, Pierce the Sky, Explosive Barrage, Frigid Flurry, Metallic Meteorite, <strong>Nullify</strong>, <strong>Brilliant Wordplay</strong>, fists at +38), <strong>Boundless Hummingbird</strong> (365, AC 38; Haste, Explosive Barrage, Arrow Salvo, Arctic Rift, Telekinetic Bombardment, Corrosive Muck, Translocate, Heal), <strong>Umbasi</strong> (350; Visions of Danger, Spirit Song ×2, longbow), <strong>Akila Stormheel</strong> (350; katar, Feint, sneak attack), <strong>Surjit Hamelan</strong> (345; shortbow, 10-ft ranged reaction)</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Surjit 52 · Ferrok 52 · Mafika 51 · Hummingbird 45 · Sattva 40 · Seva 39 · Umbasi 36 · Sovael 35 · Akila 33 · Clutch 29</span></div>
+  <div><span class="stat-label">Duration</span><span class="stat-value">8 rounds, 1h41m. <strong>Result: win.</strong> All five opponents dropped.</span></div>
+  <div><span class="stat-label">Pre-fight</span><span class="stat-value">Sovael's ninth-rank <strong>Sacred Covenant</strong> on the party and False Vitality on himself. Clutch's Battle Cry Demoralizes Akila (Legendary Laugh, 13).</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Seva 2 (Umbasi, Mafika) · Clutch 1 (Surjit) · Sattva 1 (Akila) · Ferrok 1 (Hummingbird).</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Seva 483 · Ferrok 427 · Sovael 310 (185 of it on Hummingbird) · Clutch 243 · Sattva 200. Mafika did 264 to his own team and took 39 from his own Nullify.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Ferrok 616 · Clutch 581 · Sovael 314 · Sattva ~305 · Seva 189.</span></div>
+  <div><span class="stat-label">At zero</span><span class="stat-value">Ferrok four times (one real knockout) · Sovael once · Sattva once (both held by Sacred Covenant).</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">Sattva 507 (+ a potion) · Seva 241 · Clutch 188 (+ an elixir) · Sovael 101 on Ferrok and 50 on himself.</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Clutch 2 logged (a grapple, kept; a counterattack, still a miss). Sattva re-rolled two Battle Medicines and Ferrok two saves by their own account; Seva considered one.</span></div>
+</div>
+<h4>Round 1 — Falling Stars on his own students</h4>
+<ul>
+  <li><strong>Surjit</strong> shoots Seva twice; <strong>Clutch intercepts</strong> the first. <strong>Ferrok</strong>: Haste on the party, Arcane Cascade, Glass Shield. <strong>Mafika: Halcyon Surge — Falling Stars</strong> (88, Reflex DC 43): Sattva crit-saves; Sovael and Seva save; Clutch and Ferrok fail behind shields; <strong>Akila fails (88) and Surjit crit-fails (176)</strong>. Then Unfolding Wind Blitz: fists crit Clutch (63) and Sovael (74), hit Sattva (44).</li>
+  <li><strong>Hummingbird</strong> Hastes her team. <strong>Sattva</strong>: Battle Medicine on Clutch (85), <strong>Heroic Presence</strong>, a natural-20 crit on Surjit (85). <strong>Seva</strong>: Doctor's Visitation on Sovael (66); Surjit's reactive shot misses; natural-20 crit on Surjit (46).</li>
+  <li><strong>Umbasi: Visions of Danger</strong>; Sovael fails the first save. <strong>Sovael</strong>: crit-saves at his turn start and disbelieves it; <strong>ninth-rank Heroism on Sattva</strong>; Quickened Divine Wrath — Akila, Mafika and Umbasi all save (14 each).</li>
+  <li><strong>Akila</strong> Feints and stabs Seva. <strong>Clutch</strong>: Doctor's Visitation on Seva (64); <strong>Jaws crit — Surjit down.</strong></li>
+</ul>
+<h4>Round 2 — Nullify</h4>
+<ul>
+  <li><strong>Ferrok</strong>: Sure Strike → "1,000-Year Slash," a Disintegrate Spellstrike on Mafika (80). <strong>Mafika</strong>: Desiccate on the whole party (Ferrok's Reactive Strike, 39; only Clutch fails), then three fists into Ferrok, who crit-fails the push and is flung back into the Visions.</li>
+  <li><strong>Hummingbird's Explosive Barrage</strong> deafens Clutch and Ferrok. <strong>Sattva</strong>: <strong>ninth-rank Heal on Ferrok (121)</strong>; two hits on Akila. <strong>Seva</strong>: Gouging Claw Spellstrike and a follow-up on Akila.</li>
+  <li><strong>Umbasi: Spirit Song</strong> — Sovael saves but loses his reaction. <strong>Sovael: Wails of the Damned (rank 9) → Mafika's Nullify</strong>; Mafika takes 39. Courageous Anthem, not lingered.</li>
+  <li><strong>Clutch</strong>: Doctor's Visitation on himself; <strong>critical Demoralize on Akila</strong> (Laugh, 38); Jaws leaves her on 2 HP.</li>
+</ul>
+<h4>Round 3 — Pierce the Sky and the Covenant</h4>
+<ul>
+  <li><strong>Ferrok</strong> stands and hits Umbasi (46). <strong>Mafika: Pierce the Sky</strong> — <strong>crit on Sovael (104, to 11 HP), natural-20 crit on Sattva (124, to 37)</strong>, hit on Ferrok; both crits deafen.</li>
+  <li><strong>Hummingbird: Arrow Salvo</strong> — Sovael fails by 1 and goes to 0; <strong>Sacred Covenant: 1 HP, 50 temporary HP, wounded 1.</strong> <strong>Sattva</strong>'s Visions save fails and takes his last 19 — <strong>Sacred Covenant again</strong>. He Battle-Medicines himself (77), scroll-Heals Sovael (88), and <strong>crits Akila dead</strong>.</li>
+  <li><strong>Seva</strong>: Battle Medicine on Sattva (59); Strike on Umbasi. <strong>Umbasi</strong> moves — <strong>Seva's Reactive Strike crits (60)</strong>, the Anthem's +1 making the difference — and casts a second Spirit Song through Ferrok's Reactive Strike (30): <strong>Ferrok fails (53, stunned 1)</strong>; Sovael saves, no reaction again.</li>
+  <li><strong>Sovael</strong>: <strong>Healing Nexus (50)</strong>, <strong>ninth-rank Heal on Ferrok (101)</strong>. <strong>Clutch</strong>: Taunts all three at range; Doctor's Visitation on himself (73); <em>"I must break you."</em></li>
+</ul>
+<h4>Round 4 — Umbasi falls</h4>
+<ul>
+  <li><strong>Ferrok</strong>: "Wrath of the Sea God" — Briny Bolt Spellstrike on Umbasi (97), blinded. <strong>Mafika</strong>: Explosive Barrage on everyone (<em>"Everyone's deaf"</em>); three fists at Clutch — a natural-20 crit through a Shield Block and his last Mending Lattice; a second Shield Block is disallowed.</li>
+  <li><strong>Hummingbird</strong>: Metallic Meteorite on Sattva, Sovael and Clutch. <strong>Sattva</strong> drinks a potion and switches prey. <strong>Seva's Spellstrike kills Umbasi.</strong> <strong>Sovael</strong>: Ancestral Memories → <strong>Spirit Song on Mafika — fails: 45, stunned 1, no reactions.</strong></li>
+  <li><strong>Clutch</strong>: Elixir of Life; trips and grabs Hummingbird.</li>
+</ul>
+<h4>Round 5 — Frigid Flurry, Renewal, Brilliant Wordplay</h4>
+<ul>
+  <li><strong>Ferrok</strong>: Blink Charge misses on both dice; a hit after (48). <strong>Mafika</strong> punches Seva (41), then <strong>Frigid Flurry</strong> through Reactive Strikes from Ferrok (46) and Seva (31, after Sovael flags the expired Anthem) — <strong>Ferrok crit-fails for 140</strong>.</li>
+  <li><strong>Hummingbird: Arctic Rift</strong> — Ferrok to 0, <strong>Sacred Covenant (third trigger)</strong>, slowed; she Heals Mafika (24). <strong>Sattva</strong>: Qi Rush, <strong>Moment of Renewal</strong> on Ferrok and himself (68 each; clears deafened, slowed and wounded); a hit on Mafika.</li>
+  <li><strong>Seva</strong>: Rapid Recharge → <strong>Rend Magic Spellstrike</strong> (55). <strong>Sovael</strong>: <strong>Frigid Flurry</strong> from the staff — Hummingbird saves on the exact DC (30), Mafika crit-saves; <strong>Foretell Harm</strong> on Hummingbird.</li>
+  <li><strong>Clutch</strong>: Demoralize and Spinebreaker on Hummingbird; <strong>natural-20 Demoralize on Mafika → Brilliant Wordplay</strong> bounces it onto Seva (24 mental, Frightened 2).</li>
+</ul>
+<h4>Round 6 — Ferrok down</h4>
+<ul>
+  <li><strong>Ferrok</strong>: Sure Strike, Time Jump, a hit (35). <strong>Hummingbird</strong>: Foretell Harm lands (14); Telekinetic Bombardment through Seva's Reactive Strike; <strong>Clutch intercepts</strong> Seva's share and crits the counterattack (52); a 7-point Heal on Mafika (<em>"Bad heal"</em>).</li>
+  <li><strong>Mafika</strong>: Metallic Meteorite — 20 back from Rend Magic; Ferrok crit-fails; Clutch intercepts for Seva again; then a <strong>fist crit: Ferrok down, dying 2.</strong></li>
+  <li><strong>Sattva</strong>: Gravity Weapon; four misses. <strong>Seva</strong>: Battle Medicine on <strong>Ferrok (59, back up)</strong> and Clutch (57); her Sure Strike misses by 1, the Frightened from Brilliant Wordplay making the difference.</li>
+  <li><strong>Sovael</strong>: Ancestral Memories → <strong>eighth-rank Chain Lightning</strong>: Hummingbird fails (77), Mafika saves (38) — <strong>Mafika on 18</strong>. <strong>Clutch</strong> hero-points a natural 1 to keep his grab.</li>
+</ul>
+<h4>Round 7 — It's Not Over — Mafika falls</h4>
+<ul>
+  <li><strong>Hummingbird: Corrosive Muck</strong>. <strong>Ferrok</strong>: Beheading Buzz Saw — both crit-save. <strong>Mafika</strong>, too hurt to risk provoking with a spell, punches: <strong>Ferrok to 0 — It's Not Over</strong>; <strong>Clutch drops the grapple and intercepts the next two fists</strong> (for Ferrok, then Seva); his hero-pointed counterattack still misses.</li>
+  <li><strong>Sattva</strong>: four more misses — eight in a row on Mafika. <strong>Seva: Sure Strike + Gouging Claw Spellstrike — Mafika down.</strong> <strong>Sovael: Sure Strike + Fire Ray</strong> (his last Focus Point) on Hummingbird: 64.</li>
+  <li><strong>Clutch</strong> crit-fails the muck (62), bites Hummingbird to 29, and fails three times to re-grab her.</li>
+</ul>
+<h4>Round 8 — The Goring Charge</h4>
+<ul>
+  <li><strong>Hummingbird: Translocate</strong>, through Seva's Reactive Strike (24) — 120 feet away on 2 HP. <strong>Ferrok</strong> crit-fails the muck — <strong>Living for the Applause</strong>, 1 HP — Strides 70 feet, <strong>Goring Charge: Hummingbird down.</strong></li>
+</ul>
+<h4>After the bell</h4>
+<ul>
+  <li><strong>Sovael's contribution.</strong> <strong>Sacred Covenant triggered three times.</strong> <strong>Heroism on Sattva turned three failed saves into critical successes</strong> (Desiccate, Explosive Barrage, the first Spirit Song — about 160 damage, a stun and a deafen); it changed none of his attacks. <strong>Absorb Magic's +2 decided two of his own saves</strong>: the critical success that let him disbelieve Visions of Danger, and Hummingbird's Explosive Barrage, which he passed on the exact DC instead of being deafened in round 2. Wails cost Mafika his tenth-rank spell and 39 HP. The Anthem made Seva's Reactive Strike on Umbasi a crit, and the clumsy from that crit is what let Ferrok's next two hits on Umbasi land (30 and 97, both on the exact number). Spirit Song stunned Mafika and took his reactions for a round. Chain Lightning left Mafika on 18. Ancestral Memories changed neither save it was used on; Divine Wrath did 42.</li>
+  <li><strong>Rulings.</strong> One reaction per activity (no second Shield Block inside Unfolding Wind Buffet). Frigid Flurry stops at the arena wall, for Mafika and Sovael alike. Moment of Renewal does not end Haste. Brilliant Wordplay was run as triggering on auditory effects rather than linguistic ones — Cody's own change, made in advance. <strong>No mid-fight changes to any enemy's numbers.</strong></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 2 · Goka Docks · with Halspin the Stung · 38 min · 5 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">4 <strong>Rivka</strong> (350 HP each, AC 36; claws, <strong>Eviscerate</strong> — four claws in two actions — <strong>Kaiju Ray</strong>, a 60-ft line of fire; fire resistance 10), 2 <strong>Shadow Oni</strong> (325 each, AC 39; Sound Burst, Sonic Missile, glaive; regeneration 15, switched off by acid or fire)</span></div>
+  <div><span class="stat-label">Ally</span><span class="stat-value"><strong>Halspin the Stung</strong> (Steps of the Sun; 370 HP)</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Oni B 48 · Sovael 48 · Sattva 46 · Halspin 46 · Clutch 43 · Rivka B 40 · Rivka A 40 · Oni A 38 · Rivka D 37 · Rivka C 35 · Ferrok 29 · Seva 28</span></div>
+  <div><span class="stat-label">Duration</span><span class="stat-value">5 rounds, 38 minutes. <strong>Result: win.</strong> No PC dropped; the lowest anyone got was Ferrok at 78/235.</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Halspin 2 (Rivka A, Oni A) · Clutch 1 (Rivka B) · Ferrok 1 (Rivka C) · Seva 1 (Rivka D) · Mogaru 1 (Oni B).</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value"><strong>Sovael 580</strong> · Halspin 573 · Ferrok 270 · Sattva 181 · Seva 151 · Clutch 129 · Mogaru's quake 165.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Ferrok 248 (low 78/235) · Seva 110 · Sattva 98 · Sovael 90 (35 of it his own Dichotomy) · Clutch 72 (27 intercepted for Sovael). Halspin 111.</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">none logged.</span></div>
+</div>
+<h4>Round 1 — A duet</h4>
+<ul>
+  <li><strong>Oni B: Sound Burst</strong> (Sattva fails, deafened); <strong>Sonic Missile crit on Ferrok (84)</strong>. <strong>Sovael</strong>: repositions; <strong>Spirit Song</strong> — three Rivka save (29 each), <strong>Oni A fails (58, stunned 1)</strong>; none of the four can react until its turn.</li>
+  <li><strong>Sattva</strong>: Hunted Shot on Oni A; Healer's Gloves on Ferrok. <strong>Halspin: Spirit Song</strong> — Rivka B and Oni B stunned 1, <strong>Rivka C crit-fails (82, stunned 2)</strong>.</li>
+  <li><strong>Clutch</strong>: "Limit Break" — Potion of Quickness, Paragon's Guard. <strong>Rivka B's Kaiju Ray</strong>: Clutch fails, Shield-Blocks (takes 37) and passes 15 to Ferrok.</li>
+  <li><strong>Rivka A's Kaiju Ray</strong>. <strong>Oni A: Sound Burst</strong> — Sovael, Ferrok and Sattva fail and are deafened. <strong>Rivka D's Kaiju Ray</strong>. <strong>Ferrok</strong>: "Dragon Fang Crescent" — Ignition Spellstrike on Oni B (77).</li>
+  <li><strong>Seva</strong>: Gouging Claw Spellstrike <strong>crit on Rivka B (86)</strong>.</li>
+</ul>
+<h4>Round 2 — Wails of the Damned</h4>
+<ul>
+  <li><strong>Oni B</strong> hits Ferrok with its glaive (Ferrok at 78, his low). <strong>Sovael: Wails of the Damned (rank 9)</strong> — 44 each to four targets, <strong>Rivka B crit-fails (88, Drained 4)</strong>, Rivka C and Oni B Drained 1 — 264 in all.</li>
+  <li><strong>Sattva</strong>: a hit on Oni B; his Battle Medicine on Ferrok fails by 1. <strong>Halspin: Phantasmal Calamity</strong> — Rivka A and D crit-fail (84 each); Sovael Absorbs Magic.</li>
+  <li><strong>Clutch</strong>: Taunt; <strong>a natural-20 claw kills Rivka B.</strong> <strong>Rivka A</strong> claws Sovael — <strong>Clutch intercepts</strong> and crits the counterattack (54). <strong>Rivka C</strong> crits Seva (62).</li>
+  <li><strong>Ferrok</strong>: Shielding Strike crit on Oni B (72), Frightened 2. <strong>Seva</strong>: natural-20 Battle Medicine on Ferrok (65).</li>
+</ul>
+<h4>Round 3 — Mogaru's quake</h4>
+<ul>
+  <li><strong>Mogaru's quake</strong>: Sattva crit-saves; Sovael, Clutch, Seva and Halspin save; Ferrok fails (34); <strong>Clutch intercepts Sovael's share</strong>. Three enemies fail, and <strong>Shadow Oni B crit-fails and is swept out to sea</strong> (it had 46 HP left; the wave was worth 68).</li>
+  <li><strong>Sovael</strong>: <strong>Fortissimo + Courageous Anthem (success, +2)</strong>, then a <strong>Fireball</strong> — 33 total into fire resistance. <strong>Sattva</strong>: two hits on Rivka A. <strong>Halspin's Telekinetic Bombardment kills Rivka A.</strong></li>
+  <li><strong>Clutch</strong>: two natural 1s (<em>"We're just going to keep digging"</em>). <strong>Rivka D's Kaiju Ray</strong> down a five-person line: four crit-saves and Ferrok's save.</li>
+  <li><strong>Rivka C</strong> Eviscerates Halspin (one hit). <strong>Ferrok: "Flash Coil" — Live Wire Spellstrike crit — Rivka C dead.</strong></li>
+</ul>
+<h4>Round 4 — Five claws, five misses</h4>
+<ul>
+  <li><strong>Sovael</strong>: Dirge of Doom → <strong>Debilitating Dichotomy</strong> on Rivka D — it fails (71); his own save fails, upgraded to a success (35). <strong>Sattva</strong>: a hit on Oni A; feeds Ferrok a potion.</li>
+  <li><strong>Halspin</strong>: one hit in three. <strong>Clutch</strong>: Taunt; a Trip that fails by 1. <strong>Oni A</strong> hits Halspin once in three (33). <strong>Rivka D</strong> throws <strong>five claws at Seva and misses with all five</strong>.</li>
+  <li><strong>Ferrok's Goring Charge</strong> misses. <strong>Seva's Spellstrike crit kills Rivka D</strong>; she goes invisible with Dimensional Disappearance.</li>
+</ul>
+<h4>Round 5 — Halspin's arrows</h4>
+<ul>
+  <li><strong>Sovael</strong>: Sure Strike → <strong>Fire Ray</strong> on Oni A (67). <strong>Sattva</strong> misses twice. <strong>Halspin's second arrow drops Oni A.</strong></li>
+</ul>
+<h4>After the bell</h4>
+<ul>
+  <li><strong>Environment.</strong> At the top of round 3, <strong>Mogaru's quake</strong> — DC 42 Reflex, everyone including enemies; a critical failure is swept out to sea.</li>
+  <li><strong>Sovael's contribution.</strong> <strong>top PC damage</strong> — Wails 264 (plus about 90 hit points of drain), Spirit Song 145, Dichotomy 71, Fire Ray 67, Fireball 33. Spirit Song cost Oni A an action. The Fortissimo +2 and the Dirge changed no rolls in this fight. His pre-cast Energy Aegis took 5 off each of the two Sound Bursts.</li>
+  <li><strong>Notes.</strong> The Oni's regeneration ticked four times after they had taken fire or acid (60 HP that shouldn't have come back; both died to overkill anyway). The Rivka's fire resistance was only found when the Fireball landed. <strong>No mid-fight changes to enemy numbers.</strong></li>
+  <li><strong>Ten-minute rest.</strong> Sattva's Risky Surgery Treat Wounds on all five (84 each); Sovael's Healing Nexus and a three-action Heal; potions; refocus. Everyone at or near full.</li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 3 · Goka Main Street · with Urnak Lostwind · 73 min · 7 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">4 <strong>Rivka</strong> (350 each), 2 <strong>Kun</strong> — giant floating fish (345 each, AC 41; Jaws +35 with Grab, Polar Ray, Lightning Bolt), 2 <strong>Risen Combatants</strong> — jiang-shi with the faces of the Fallen Moon (300 each, AC 40; physical resistance 10 except duskwood, fast healing 10, <strong>Drain Qi</strong>, <strong>Rigor Mortis</strong> — can't be knocked prone)</span></div>
+  <div><span class="stat-label">Ally</span><span class="stat-value"><strong>Urnak Lostwind</strong> (Winter's Roar; 500 HP, greataxe)</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Sattva 47 · Sovael 47 · Kun B 47 · Rivka B 38 · Kun A 37 · Seva 36 · Urnak 35 · Risen B 35 · Risen A 34 · Rivka D 32 · Ferrok 32 · Clutch 29 · Rivka A 28 · Rivka C 26</span></div>
+  <div><span class="stat-label">Duration</span><span class="stat-value">7 rounds, 73 minutes. <strong>Result: win.</strong> No PC dropped. Clutch ends Drained 4, Seva Drained 1.</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Urnak 3 (Rivka B, Kun B, Kun A) · <strong>Sovael 2</strong> (Risen B, Rivka C) · Ferrok 1 (Rivka D) · Sattva 1 (Risen A) · Clutch 1 (Rivka A).</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Urnak 797 · Ferrok 588 · <strong>Sovael 472</strong> (+58 from the reflected Polar Ray) · Seva 445 · Sattva 264 · Clutch 87. The enemies did 129 to each other.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Seva 414 (low 30) · Ferrok 308 (low 36) · Sattva 223 (low 40; all of it Kun A's jaws) · Clutch 119, plus 85 hit points of drain · Sovael 35. Urnak 324.</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">Sattva 444 (Moment of Renewal 319) · Seva 164 · Sovael 146 (Heals 60 and 56, Breath of Life 30).</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Sattva 2 · Ferrok 1. (Seva's re-roll was her Lucky Number, not a hero point.)</span></div>
+</div>
+<h4>Round 1 — Spell Riposte</h4>
+<ul>
+  <li><strong>Sattva</strong>: Bow of Seven Hues to spirit; two hits on Risen A. <strong>Sovael</strong>: <strong>Lingering Courageous Anthem (critical, four rounds)</strong>; <strong>critical Talent Envy Demoralize on Rivka C</strong>; <strong>Chain Lightning (rank 6): 203</strong> across four targets.</li>
+  <li><strong>Kun B: Polar Ray</strong> hits Sovael (51 cold, Drained 2) — <strong>Spell Riposte</strong>: counteract 45, success; the ray is re-rolled against Kun B and hits: <strong>41 and Drained 2 on the Kun.</strong></li>
+  <li><strong>Seva</strong>: Spellstrike crit on Rivka B (120). <strong>Urnak</strong>: natural 19, 20, 19 — <strong>three greataxe crits, Rivka B dead.</strong> <strong>Risen B</strong> claws Sattva — <strong>Clutch intercepts</strong> and is grabbed in his place.</li>
+  <li><strong>Risen A</strong> crits Seva (78); its grab crit-fails, and Seva's "prone" is wasted on Rigor Mortis. <strong>Rivka D's Kaiju Ray</strong>: Seva fails (60). <strong>Ferrok</strong>: "Wrath of the Sea God" — Briny Bolt on Rivka D (66), blinded.</li>
+  <li><strong>Clutch</strong> trips Risen B — negated. Two more Kaiju Rays.</li>
+</ul>
+<h4>Round 2 — Drain Qi begins</h4>
+<ul>
+  <li><strong>Sattva</strong>: Battle Medicine on Seva (82, re-rolled) and a hero-pointed hit on Risen A — his last two hero points. <strong>Sovael</strong>: <strong>Scare to Death</strong> on Rivka A (Frightened 2); <strong>Chain Lightning</strong>: 81 before Rivka A's natural 20 ends the chain.</li>
+  <li><strong>Kun B</strong> crits Ferrok (67 through his shield). <strong>Kun A</strong> bites and <strong>restrains Sattva</strong>. <strong>Urnak</strong>: two hits on Kun B. <strong>Risen B: Drain Qi — Clutch Drained 1.</strong></li>
+  <li><strong>Risen A</strong> grabs Seva; her Swallow-Spike answers; <strong>Drain Qi — Seva Drained 1.</strong> <strong>Rivka D</strong> crits Ferrok (52). <strong>Clutch</strong>: Jaws (a hit only because of the Anthem) and Combat Grab on Risen B.</li>
+</ul>
+<h4>Round 3 — Living Thunderbolt</h4>
+<ul>
+  <li><strong>Sattva</strong> escapes; two hits on Risen A. <strong>Sovael: Living Thunderbolt</strong> from a scroll — flies through three enemies (36). <strong>Kun B: Lightning Bolt</strong> — Urnak and Clutch fail; it also hits Rivka A (66) and Kun A (33). Sovael Absorbs Magic.</li>
+  <li><strong>Kun A crits Sattva (94)</strong>, restrained again. <strong>Risen B: Clutch Drained 2. Risen A: Seva Drained 2.</strong> <strong>Rivka D</strong> wipes its eyes — <strong>Ferrok's Reactive Strike crits (84)</strong>.</li>
+  <li><strong>Ferrok</strong>: Force Fang → "Dragon Fang Crescent" crit — <strong>Rivka D dead.</strong> <strong>Clutch</strong>: Escape on a natural 1, no hero points left; Spinebreaker. <strong>Rivka A</strong> Eviscerates Sovael: four misses, the first by 1.</li>
+</ul>
+<h4>Round 4 — A natural 20, and Drained 4</h4>
+<ul>
+  <li><strong>Sattva</strong> escapes again; a hit; a potion for Seva. <strong>Sovael: Chain Lightning (rank 7)</strong> opens on Risen A at 37 HP — <strong>natural 20, no damage</strong>; a Quickened two-action <strong>Heal on Ferrok (60)</strong>.</li>
+  <li><strong>Kun A crits Sattva again (94)</strong> and tail-whips Seva (47). <strong>Seva</strong>: Spellstrike leaves <strong>Risen A on 1 HP</strong>. <strong>Urnak kills Kun B.</strong> <strong>Risen B: Clutch Drained 3, then 4.</strong></li>
+  <li><strong>Rivka C</strong> crits Ferrok (72).</li>
+</ul>
+<h4>Round 5 — Breath of Life</h4>
+<ul>
+  <li><strong>Sattva</strong>: natural-20 Escape, then <strong>a natural 19 at −10 — Risen A down.</strong> <strong>Sovael</strong>: a Thunderbolt pass (60; two fail by 1 and are dazzled); <strong>Heal on Sattva (56)</strong>.</li>
+  <li><strong>Kun A: Lightning Bolt</strong> (Ferrok hero-points his save) and a <strong>crit on Seva</strong> — Interstitial Escape, but she is at 30. <strong>Seva</strong>: critical Battle Medicine on herself (63) and Sattva (62); a crit on Rivka A.</li>
+  <li><strong>Urnak</strong>: natural-20 crit on Risen B (100). <strong>Risen B</strong> claws, crit-grabs and restrains Clutch, then <strong>Drain Qi on a natural 20 — Clutch Drained 5, which kills. Sovael: Breath of Life</strong> — Clutch lives.</li>
+  <li><strong>Ferrok</strong> hits Risen B. <strong>Clutch</strong> fails two Escapes. <strong>Rivka C</strong> hits Ferrok — <strong>Planar Sidestep</strong>, 1 damage.</li>
+</ul>
+<h4>Round 6 — The Fire Ray</h4>
+<ul>
+  <li><strong>Sattva: Moment of Renewal</strong> on all five (68 each, 80 for Clutch, after the ruling); Clutch to Drained 4, Seva to Drained 1. <strong>Sovael</strong>: a Thunderbolt pass (40; Rivka C dazzled); <strong>Fire Ray, natural 19 — crit, 156 into 31 HP. Risen B down. Clutch is free.</strong></li>
+  <li><strong>Kun A</strong> bites and restrains Seva on a natural 20; she <strong>Dimensional Assaults out</strong>. <strong>Urnak</strong>: two hits on Kun A. <strong>Ferrok</strong>: Force Fang → "Flash Coil" crit on Rivka C (112).</li>
+  <li><strong>Clutch</strong> trips Kun A and <strong>intercepts a claw for Seva</strong>. <strong>Rivka C</strong>'s one hit on Ferrok is lost to the dazzle.</li>
+</ul>
+<h4>Round 7 — Spell Swipe, and the end</h4>
+<ul>
+  <li><strong>Sattva</strong> leaves Rivka C on 1 HP. <strong>Sovael's Thunderbolt pass kills Rivka C</strong>; Dirge of Doom; Shield. <strong>Kun A</strong> stands into <strong>Urnak's Reactive Strike crit (96)</strong> and crits him back (94).</li>
+  <li><strong>Seva: Spell Swipe</strong> on Rivka A (a natural 2 that hits only because of the Dirge — 66) and Kun A (49). <strong>Urnak's natural 20 kills Kun A.</strong> <strong>Ferrok</strong>: two hits; Rivka A in single digits.</li>
+  <li><strong>Clutch: Jaws crit — Rivka A dead.</strong></li>
+</ul>
+<h4>After the bell</h4>
+<ul>
+  <li><strong>Sovael's contribution.</strong> Chain Lightning 203 + 81 + 0. <strong>Spell Riposte</strong> kept 51 damage and Drained 2 off him; the Kun took 41 and the Drained 2 instead. Living Thunderbolt: 157 over four passes (rounds 3, 5, 6, 7), each a single action, and its dazzle cost Rivka C a hit on Ferrok. <strong>Breath of Life prevented a PC death.</strong> The Fire Ray freed Clutch. Dirge turned Seva's Spell Swipe from a miss into 66 damage; the lingering Anthem turned one of Clutch's bites; the Frightened left over from Scare to Death turned a claw on Sovael into a miss.</li>
+  <li><strong>Rulings.</strong> <strong>Spell Riposte</strong> works on any spell he can see coming — <em>"rules as written."</em> <strong>Drain Qi</strong> can be repeated in a turn; a critical success still drains only one step. <strong>Moment of Renewal</strong> was ruled as eight hours of rest (Con × level) over Clutch's objection; the spell says twenty-four. <strong>One More Breath</strong> — the jiang-shi's card says it is not destroyed at 0 HP and wakes a minute later unless dealt with — was posted both times and not discussed. <strong>No mid-fight changes to enemy numbers.</strong></li>
+  <li><strong>The dice.</strong> The enemies' attacks averaged 10.3 on the d20 — ordinary. The heat was Kun A (four Jaws crits; grab rolls of 18, 16, 19, 20) and Reflex saves against Sovael's spells (eight of twenty at 15 or better, two natural 20s that each ended a Chain Lightning).</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Net Under the Party</h4>
+<ul>
+  <li><strong>The net under the party, twice.</strong> Sacred Covenant — announced to the table before the first bell — stood three people back up at 1 HP against the Speakers. Breath of Life, which he said himself <em>"would be useless because we were fighting in tournaments,"</em> turned out to be the only thing between Clutch and an outright death on the main street: <em>"Honestly, now it becomes useful. Because now we can actually die."</em> And the Living Thunderbolt scroll he had been holding for Ran-to got him through two jiang-shi and a fish instead.</li>
+  <li><strong>Courteous to every opponent and ally.</strong> To Mafika before the bell: <em>"You were very formidable the one time I had the chance to observe you."</em> To Boundless Hummingbird, alone on 2 HP and still beckoning them on: <em>"I commend your spirit. Let's end this one."</em> To Halspin after the docks: <em>"Good work, Halspin. Thank you for the help."</em></li>
+  <li><strong>Played the rules straight, including against himself.</strong> He told the table his Anthem had expired when Foundry was still applying it — which cost Seva a crit. When Cody balked at Spell Riposte's "a spell you're aware of," he answered <em>"Well, it's still Counteract check, though,"</em> rolled it, and Cody ruled for him a few turns later. He applied Debilitating Dichotomy's save upgrade this time and noted that it <em>"doesn't double dip."</em></li>
+  <li><strong>Dry all session.</strong> Deafened in a packed arena: <em>"Why is the stadium so empty?"</em> In an overloaded chariot: <em>"I don't take much space."</em> On the Oni dragged under: <em>"A watery grave."</em> On his first Fireball as a Flames oracle: <em>"I have never casted this ability on a flame oracle. So let's fix that"</em> — into fire resistance. To Sattva, mid-heal: <em>"This is a fortitude, so I don't think you can backflip this one."</em> To Sattva's Dragon Ball Z teleport sound: <em>"I have bad news for you, man. I don't hear shit."</em> And at the docks, deafened again: <em>"That's why I don't use Courageous Anthem, because I know we're all just gonna be this."</em> And when Ferrok asked him not to draw all the fire: <em>"damn you do, damn you don't."</em></li>
+  <li><strong>Bet on Sattva, and teased him for it.</strong> A ninth-rank Heroism — <em>"I'm betting on you"</em> — and, the moment Sattva failed his next save, <em>"I invested in you."</em> The investment paid anyway: it turned three of Sattva's saves in that fight.</li>
+  <li><strong>The numbers.</strong> Top PC damage at the docks (580, most of it one Wails of the Damned and one Spirit Song). 472 on the main street plus a reflected Polar Ray, and <strong>two kills</strong> there — the 156-point Fire Ray on the jiang-shi holding Clutch, and a Rivka's last hit point. 310 against the Speakers, more than half of it on Hummingbird. Ninth-rank Heal on Ferrok for 101. He was dropped to zero once all day, and Covenant caught it.</li>
+</ul>
+</div>
+
+<div class="spotlight s-seva">
+<h4>Seva · the One Who Kept the Notes</h4>
+<ul>
+  <li><strong>She remembered the egg.</strong> Nobody else connected a kaiju rising from the sea to a house-sized eggshell found on a beach seven sessions ago. <em>"I think it's looking for this. It was in my notes."</em> And she was the one who got the party moving: <em>"Alright, you heard the Grandmaster. Let's go."</em></li>
+  <li><strong>Still watching the Lightkeepers.</strong> When they failed to show and Sattva looked her way: <em>"I didn't do anything. Not yet."</em></li>
+  <li><strong>The table's heart — and the one who started the deaf bit.</strong> <em>"We should roleplay this."</em> She apologised to Surjit while critting him. To Ferrok before a Spellstrike: <em>"I believe in you, my fellow magi."</em> To Sovael, the only one who could still hear the Anthem: <em>"I can still hear your song, Sovael. It'll never die."</em> To Hummingbird, healing her professor with all three classmates already down: <em>"You should have been healing your team."</em> And to Ferrok, the third time he hit zero: <em>"Why are you a walking punching bag?!"</em></li>
+  <li><strong>First to say what the docks meant:</strong> <em>"Oh god, I think we can die in this fight… It's not a tournament."</em></li>
+  <li><strong>Two long-running set-ups, one payoff.</strong> The Part the Veil combo fell one action short again (<em>"One day"</em>); the Spell Swipe finally landed on two targets in the last round of the session — <em>"It finally happened."</em> In between, she was baited by a jiang-shi's rigor mortis and took it well: <em>"You said, or prone. That was a choice."</em></li>
+  <li><strong>Kill leader against the Speakers</strong> — Umbasi and Mafika himself, plus the most damage of any PC in that fight (483) — and Rivka D at the docks. She also brought Ferrok back from dying 2, and ended the main street on 70 HP having been bitten, grabbed and drained for seven rounds: <em>"Fuck it, we ball."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok · the Unyielding</h4>
+<ul>
+  <li><strong>Found a new bit and committed.</strong> <em>"Should I use anime-style attack names every time I attack?"</em> — and then did: <strong>1,000-Year Slash</strong>, <strong>Wrath of the Sea God</strong>, <strong>Dragon Fang Crescent</strong>, <strong>Flash Coil</strong>. Sattva: <em>"I like this new era of Ferrok announcing his attacks."</em> Seva: <em>"I like how he loves attention."</em> Ferrok: <em>"It's what he lives for, you know?"</em></li>
+  <li><strong>Went to zero four times in one fight and still ended it.</strong> Sacred Covenant, a real knockout, It's Not Over, Living for the Applause — and then, at 1 HP, a 70-foot run and the Goring Charge that put the Nameless in the final. Clutch: <em>"I think that's the first time the horns have hit, right?"</em> (Cody: <em>"It's like the second time or third time."</em>)</li>
+  <li><strong>Narrates himself in chat the whole time.</strong> <em>"Ferrok spits out a couple of teeth." "Ferrok calls for a timeout." "Ferrok stumbles around covered in blood and half frozen." "Ferrok high fives Halspin."</em> And, before the final that didn't happen: <em>"Ferrok spends 30 minutes signing autographs before the match."</em></li>
+  <li><strong>The driest line of the session</strong>, on why a musician ran into a kaiju fight to help them: <em>"He thought we knew what we were doing."</em> Also <em>"It's comfortable down here"</em> (prone), <em>"My arm falls off and shatters,"</em> and <em>"Who carries Duskwood?"</em></li>
+  <li><strong>Team-first.</strong> Opened the Speakers fight with <em>"For the team, Haste,"</em> and held his second Haste back at the docks because more was coming.</li>
+  <li><strong>Always the showman.</strong> With Goka falling down around them, his first question at the docks was whether this counted as fighting in front of an audience.</li>
+  <li><strong>Top PC damage on the main street (588)</strong> and three kills on the day: Hummingbird, Rivka C at the docks, Rivka D on the main street.</li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the Still Point</h4>
+<ul>
+  <li><strong>The backflip.</strong> It started as a dodge off Clutch's shield and became a running gag for four hours — onto Ferrok's shoulders, out of the way of a heal, and, as Mogaru's wave came in, <em>"You know, earthquakes can't affect you if you're in the air doing a backflip."</em> He critically succeeded that save. Asked for a cartwheel next time: <em>"I can't. It's like Dark Souls. I need to roll to get invincibility phase."</em> (Seva: <em>"Stop making it a thing."</em> A Kun eventually caught him mid-air.) And for Qi Rush: <em>"Miss Hummingbird, you will hear the Dragon Ball Z teleportation sound behind you."</em></li>
+  <li><strong>Every heal is a small scene.</strong> The ninth-rank Heal is <em>"a golden bolt that fires into you. So I stab you again, basically."</em> Treat Wounds is five arrows fired into the air <em>"so that they fall on top of your head."</em> A potion is splashed into Ferrok's mouth.</li>
+  <li><strong>Irorian composure, still.</strong> Deafened, and a moment after Sacred Covenant had caught him at 1 HP, he shot Akila dead: <em>"The lack of sound made me focus."</em> When Hao Jin asked if the Nameless were ready, he was the one who answered: <em>"We are."</em></li>
+  <li><strong>Read the room and adapted.</strong> His Recall Knowledge named the jiang-shi and their resistance, and his <strong>Bow of Seven Hues</strong> was dealing spirit damage before his first shot. <em>"Objection, leading language"</em> when Cody's phrasing sent Seva after a prone that couldn't happen.</li>
+  <li><strong>Two Moments of Renewal</strong> — and he read the card aloud to keep Haste running through the first.</li>
+  <li><strong>Kills on Akila and Risen Combatant A</strong> — the second on a natural 19 at −10, straight after a natural 20 to escape a fish that had critted him twice. Largest healer of the day by a wide margin.</li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Rampart</h4>
+<ul>
+  <li><strong>Paid off a line he's been practising since the Ruby Palace.</strong> <em>"Clutch is going to put all his practice to use and say, I must break you. And hope it sounds good, because he can't hear himself."</em></li>
+  <li><strong>Nearly died doing his job, and kept doing it.</strong> Held by a jiang-shi and drained one step at a time to Drained 5 — which kills — with 127 hit points left. Breath of Life kept him alive; he spent the next two rounds still trying to Taunt things off everyone else.</li>
+  <li><strong>Held the pin, then gave it up.</strong> Against the Speakers he had Hummingbird locked down. When Sovael asked whether he could intercept for Ferrok too, he was honest about the cost — <em>"I would have to move, and I've got Hummingbird grappled"</em> — and Ferrok went down. Next round he let her go, because that was the only way to reach Ferrok and Seva in time. He intercepted for Seva four times in that fight and for Sovael twice at the docks, including Sovael's share of Mogaru's wave.</li>
+  <li><strong>Asks the next question.</strong> When Seva mentioned the egg he was the one who asked for a roll on it. When Cody halved Moment of Renewal he read the spell back: <em>"The target regains HP… as if they've taken 24 hours of rest. So where does the eight hours come from?"</em></li>
+  <li><strong>Funny in his own key.</strong> <em>"That was my splurge."</em> <em>"Clutch will yell a Limit Break."</em> <em>"A quick spine adjustment."</em> Tripping an untrippable corpse because <em>"It's instinct for him. It's his bread and butter"</em> — then, <em>"Well, we can't trip it, so I guess we'll just yell at it instead."</em> And in chat: on Surjit, <em>"Existed, a mistake Surjit will never recover from"</em>; to Sovael, flying into the middle of the Speakers, <em>"I can help with a somber Kholo song of rememberance at your wake?"</em>; and, when the Anthem finally reached him on the main street, <em>"I can hear it! I'm not deafened… yet!"</em></li>
+  <li><strong>First kill of the session and the last</strong> — Surjit in round one, Rivka A to end the night — with Rivka B on a natural 20 in between.</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Rewards</h2>
+<div class="loot-grid">
+  <div class="loot-item">
+    <div class="loot-name">No fight treasure</div>
+    <div class="loot-source">Cody's rule since S17</div>
+    <div class="loot-note">And no more prize money for matches. Seva: <em>"I spent my money on dumb stuff?"</em></div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">+1 hero point</div>
+    <div class="loot-source">Tournament rule</div>
+    <div class="loot-note">For the finished match against the Speakers to the Wind.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Hao Jin's prize — still on the table</div>
+    <div class="loot-source">The Ruby Phoenix, finals day</div>
+    <div class="loot-note"><em>"Your departure won't disqualify you from winning my prize. We will settle the matter later."</em></div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Consumables spent</div>
+    <div class="loot-source">All three fights</div>
+    <div class="loot-note">Sovael's Living Thunderbolt scroll; Clutch's last Mending Lattice, an Elixir of Life and a Potion of Quickness; Ferrok's last potion patch; Sattva's Heal scroll and several healing potions.</div>
+  </div>
+</div>
+<div class="xp-banner">
+Experience · milestone — <strong>still level 17</strong>. Bracket · Nameless def. Speakers to the Wind · <strong>the final against the Lightkeepers was never fought</strong>.
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Mafika Ayuwari:</strong> "As I understand it, you're all fans of rather large spells. Then let's open this with a bang, shall we?"
+<span class="attribution">Round one of the losers'-bracket final, immediately before dropping Falling Stars on the Nameless and on two of his own students.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "OK. And then should I use anime-style attack names every time I attack?… Then Ferrok raises his sword and shouts, 1,000-year slash."
+<span class="attribution">The birth of 1,000-Year Slash, Wrath of the Sea God, Dragon Fang Crescent and Flash Coil.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "I'm the only one with hearing right now."<br>
+<strong>Ferrok:</strong> "Are they cheering for us?"<br>
+<strong>Sovael:</strong> "Why is the stadium so empty?"<br>
+<strong>Sattva:</strong> "The lack of sound made me focus."
+<span class="attribution">Round three against the Speakers, with four of five Nameless deafened. Sattva's line came with the arrow that killed Akila.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "I can still hear your song, Sovael. It'll never die."
+<span class="attribution">The only frontliner the Courageous Anthem could still reach — and it had just made her Reactive Strike a crit.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "And Clutch is going to put all his practice to use and say, I must break you. And hope it sounds good, because he can't hear himself."
+<span class="attribution">Round three, deafened, Taunting all three remaining Speakers. He has been rehearsing the line since the Ruby Palace.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch <em>(in chat)</em>:</strong> "I can help with a somber Kholo song of rememberance at your wake?"<br>
+<strong>Ferrok <em>(in chat)</em>:</strong> "We'll build him a statue."
+<span class="attribution">As Sovael flew into the middle of the Speakers to cast — "this is really gonna make me a target."</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "Miss Hummingbird, you will hear the Dragon Ball Z teleportation sound behind you."<br>
+<strong>Sovael:</strong> "I have bad news for you, man. I don't hear shit."
+<span class="attribution">Qi Rush, round five. Everyone was still deaf.</span>
+</blockquote>
+
+<blockquote>
+<strong>Hao Jin:</strong> "Mogaru is not here by chance. I will deal with the one who sent him here… Even I don't dare face the Final King directly."
+<span class="attribution">The Ruby Phoenix to every competitor in her arena, as the kaiju came ashore.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "We found an egg in Bonmou and we couldn't figure out what it was."
+<span class="attribution">Thirty seconds after Hao Jin vanished. It was in her notes.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "He thought we knew what we were doing."
+<span class="attribution">On why Halspin the Stung had run toward the docks to join them.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "You know, earthquakes can't affect you if you're in the air doing a backflip."
+<span class="attribution">As Mogaru's wave came in. He critically succeeded the save.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Once you got critically grabbed by Ran-to three times, you know to prepare some spell like this."
+<span class="attribution">To Seva, just after casting Living Thunderbolt from a scroll on the main street.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "It's instinct for him. It's his bread and butter."
+<span class="attribution">On tripping a jiang-shi that had been shown, two turns earlier, to be immune to it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Honestly, now it becomes useful. Because now we can actually die."
+<span class="attribution">Breath of Life, as a jiang-shi drained Clutch to the point of death.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Where are the Lightkeepers?</strong> They did not show for the final. <strong>Tino's Toughest</strong> were missing from the stands as well. Seva's suspicion of the Lightkeepers (S17) has not gone away.</li>
+  <li><strong>"Syndara, you fool."</strong> Hao Jin knows who sent Mogaru and has gone to deal with them. The party has only the name.</li>
+  <li><strong>The melody from the east.</strong> Hao Jin's standing request: find out where it is coming from. The Shadow Oni at the docks were playing along with it.</li>
+  <li><strong>Mogaru, the Final King</strong>, is still walking through Goka. The instruction is to divert him, not fight him.</li>
+  <li><strong>The Bonmou eggshell (S12).</strong> Seva thinks Mogaru is looking for it. Known: very large, from the bottom of the ocean.</li>
+  <li><strong>The Fallen Moon's faces on the jiang-shi.</strong> The mob from the Ruby Palace gate, now undead in Goka.</li>
+  <li><strong>The two jiang-shi may not be finished.</strong> Nothing was done to keep them down.</li>
+  <li><strong>Clutch is Drained 4 and Seva Drained 1</strong>, with healing deferred to next session.</li>
+  <li><strong>The tournament has no result.</strong> The final was never fought.</li>
+  <li><strong>Next session in two weeks</strong> — the end of Book Two.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next · in two weeks · the conclusion of Book Two</span>
+  <p>The final was never fought. The Lightkeepers are missing, a kaiju is walking through Goka to somebody's music, and the Ruby Phoenix has gone to deal with the one who sent it.</p>
+  <div class="big-line">"Even I don't dare face the Final King directly."</div>
+  <span class="speaker">— Hao Jin, the Ruby Phoenix</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Speakers to the Wind</strong>: <strong>Sacred Covenant (rank 9)</strong> on the party — it triggered on himself, Sattva and Ferrok. False Vitality. Disbelieved Visions of Danger on his first turn. <strong>Heroism (rank 9) on Sattva.</strong> Quickened Divine Wrath (three saves, 14 each). <strong>Wails of the Damned (rank 9) — Nullified by Mafika</strong> (cost him a rank-10 spell and 39 HP). Courageous Anthem, not lingered, into a deafened front line. Critted by Pierce the Sky (104) with no reaction to answer — Umbasi's Spirit Song had taken it. <strong>Dropped by Arrow Salvo; Covenant held at 1 HP.</strong> Healing Nexus (50); <strong>Heal (rank 9) on Ferrok (101)</strong>. Ancestral Memories → <strong>Spirit Song on Mafika</strong> (45, stunned, no reactions). Flagged his own expired Anthem. <strong>Frigid Flurry</strong> from the staff (30 on Hummingbird) + Foretell Harm (14). Ancestral Memories → <strong>Chain Lightning (rank 8)</strong>: Hummingbird 77, Mafika 38. Sure Strike + <strong>Fire Ray</strong> on Hummingbird (64).</li>
+  <li><strong>Finals day</strong>: re-cast Sacred Covenant; Energy Aegis.</li>
+  <li><strong>Docks</strong>: <strong>Spirit Song</strong> (145; Oni A stunned). <strong>Wails of the Damned (rank 9): 264</strong>, three drained. Absorb Magic off Halspin's spell. <strong>Fortissimo Anthem — success, +2.</strong> Fireball into fire resistance (33). Dirge + <strong>Debilitating Dichotomy</strong> on Rivka D (71; took 35 himself with the upgrade applied). Sure Strike + Fire Ray on Oni A (67). Clutch intercepted a claw and the quake for him. Energy Aegis took 10 sonic off the two Sound Bursts. After: Healing Nexus, a three-action Heal.</li>
+  <li><strong>Main street</strong>: Lingering Anthem (critical, four rounds); critical Talent Envy Demoralize on Rivka C; <strong>Chain Lightning (rank 6): 203</strong>. <strong>Spell Riposte (rank 7) on Kun B's Polar Ray</strong> — counteract 45; the Kun took 41 and Drained 2. Scare to Death on Rivka A (Frightened 2). Chain Lightning (81; ended by a natural 20). <strong>Living Thunderbolt</strong> from a scroll — 157 over four passes. Chain Lightning (rank 7): natural 20 on the first target, nothing. Quickened Heal on Ferrok (60), Heal on Sattva (56). <strong>Breath of Life on Clutch.</strong> <strong>Fire Ray crit, 156 — dropped Risen Combatant B.</strong> Thunderbolt finished Rivka C. Dirge of Doom; Shield.</li>
+</ul>
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li>Nothing private this session — it all happened in the open.</li>
+  <li><strong>He did not remember the Bonmou egg.</strong> Seva did; it is in her notes, not his.</li>
+</ul>
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>The tournament safety net is gone.</strong> The docks and the street were not sanctioned bouts. Breath of Life — <em>"useless because we were fighting in tournaments"</em> — is the spell that kept Clutch alive.</li>
+  <li><strong>Sacred Covenant does not cover everything.</strong> It answers being reduced to 0 HP. <strong>Drain Qi kills at Drained 5 with hit points to spare</strong> — Covenant did nothing there. Only Breath of Life did.</li>
+  <li><strong>Jiang-shi</strong>: physical resistance unless it's duskwood; can't be tripped; grab, then Drain Qi twice a turn; and their own card says they get back up a minute after falling. Nobody in the party carries duskwood.</li>
+  <li><strong>Rivka resist fire</strong> (10). The Shadow Oni do not — and <strong>fire or acid turns off their regeneration</strong>, but the suppression was never applied at the docks, even after Ferrok's and his own fire landed.</li>
+  <li><strong>These enemies roll Reflex well.</strong> Two Chain Lightnings ended on natural 20s — a Rivka and a jiang-shi. One rank-7 slot bought nothing.</li>
+  <li><strong>Mafika answered the first big spell with Nullify.</strong> A caster of that tier can simply delete a rank-9 slot.</li>
+  <li><strong>Umbasi's Spirit Song took his reaction twice</strong>, and the 104-point crit landed in that window. A success on that spell still costs the reaction.</li>
+  <li><strong>Deafened allies get nothing from the Anthem.</strong> It cost him a cast against the Speakers; at the docks he held it until the deafness wore off.</li>
+  <li><strong>Heroism on Sattva paid on his saves, not his attacks.</strong></li>
+  <li><strong>The Living Thunderbolt scroll was for Ran-to.</strong> It's spent.</li>
+  <li><strong>Cody warned him about his spell budget</strong> at the docks, after the rank-9 Wails. He still had one rank-9 left.</li>
+</ul>
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who is <strong>Syndara</strong>, and what are they to Hao Jin?</li>
+  <li>Where is the melody coming from — and is it what's driving Mogaru?</li>
+  <li>Where are the Lightkeepers and Tino's Toughest?</li>
+  <li>Is Mogaru after the egg, as Seva thinks?</li>
+  <li>Why are the Fallen Moon's faces on the jiang-shi?</li>
+  <li>Do the two jiang-shi get back up?</li>
+  <li>How do Clutch's Drained 4 and Seva's Drained 1 get cleared — he has Restoration scrolls.</li>
+  <li>With the final never fought, how does Hao Jin <em>"settle the matter"</em>?</li>
+</ul>
+</section>
+</body>
+</html>

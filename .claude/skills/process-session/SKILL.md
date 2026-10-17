@@ -148,9 +148,16 @@ python dnd-transcription/transcribe.py <audio-path> --min-speakers <N> --max-spe
 
 ### Step 2: Speaker Identification
 
-After transcription completes, show the user a sample of each speaker's dialogue (first 2-3 lines per speaker) and ask them to map SPEAKER_XX labels to character/player names.
+**Map the speakers yourself — do NOT ask Pax to do it, and do not show him samples to pick from.** He has said so directly (2026-10-11): "You can make better judgement anyway. Do it, don't ask me."
 
-Use the campaign's `dynamics.md` to show the expected party roster for reference.
+After transcription completes:
+
+1. Pull the expected roster (players + DM, each PC's class and signature abilities) from the campaign's `dynamics.md` / `world.md` / `character-sheet.md`.
+2. For each SPEAKER_XX, sample longer lines spread across the whole session (not just the first few) along with segment count and total talk time.
+3. Assign each label by content: the DM is the highest-volume speaker who narrates and voices NPCs; each player is identified by class mechanics only their PC has (e.g. Hunt Prey → the Ranger, Spellstrike + Doctor's Visitation → the Medic Magus, Intercept/Taunt → the Guardian), by first-person references to their own PC's events, and by other speakers addressing them by name.
+4. State the mapping and the evidence for it in one short line per speaker, then proceed straight to cleanup.
+
+Only ask (AskUserQuestion) if two labels genuinely can't be separated after this — e.g. two PCs of the same class with no distinguishing lines, or a label that looks like a merge of two players. An extra detected speaker with a handful of segments (a pyannote split or UNKNOWN) is not a reason to ask; note it and fold it in during cleanup.
 
 ### Step 2.5: Transcript Cleanup (subagent)
 

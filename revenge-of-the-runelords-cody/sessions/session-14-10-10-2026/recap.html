@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 14 — The Battle for Xin-Eurythnia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Battle for Xin-Eurythnia</h1>
+<div class="subtitle">Session 14 &middot; Revenge of the Runelords &middot; Liralarue wakes, and three strikes on a fallen city in one day</div>
+<div class="meta-row">
+<span class="meta-pill">2026-10-10</span>
+<span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+<span class="meta-pill">4h 03m</span>
+<span class="meta-pill">Level 18</span>
+<span class="meta-pill">4 fights &middot; 10 kills</span>
+<span class="meta-pill">Book Three begins</span>
+</div>
+</header>
+
+<div class="composition-bar">
+<div class="comp-seg comp-combat" style="width:60%"></div>
+<div class="comp-seg comp-social" style="width:13%"></div>
+<div class="comp-seg comp-rp" style="width:9%"></div>
+<div class="comp-seg comp-loot" style="width:8%"></div>
+<div class="comp-seg comp-explore" style="width:10%"></div>
+</div>
+<div class="composition-legend">
+<span><span class="legend-dot" style="background:var(--blood)"></span>Combat 60%</span>
+<span><span class="legend-dot" style="background:var(--gold)"></span>Liralarue &amp; the war council 13%</span>
+<span><span class="legend-dot" style="background:var(--azure)"></span>Banter &amp; between-fight scenes 9%</span>
+<span><span class="legend-dot" style="background:var(--ember)"></span>Shopping &amp; loot 8%</span>
+<span><span class="legend-dot" style="background:var(--jade)"></span>Technical delay &amp; break 10%</span>
+</div>
+
+<h2>Party</h2>
+<div class="party-grid">
+<div class="char-card char-sevek">
+<div class="char-name"><strong>Sevek</strong></div>
+<div class="char-class">Human (Sky Dragonblood) Monk 18 &mdash; Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+<div class="char-player">Pax</div>
+</div>
+<div class="char-card char-aureys">
+<div class="char-name"><strong>Aureys Hollow</strong></div>
+<div class="char-class">Fey Dragonet Rogue (Scoundrel) 18 &mdash; fighting fan + claws, Draconic Acolyte, Eternal Legend</div>
+<div class="char-player">Anna</div>
+</div>
+<div class="char-card char-paya">
+<div class="char-name"><strong>Paya</strong></div>
+<div class="char-class">Leshy Fighter 18 &mdash; warshard halberd, kineticist healing impulses</div>
+<div class="char-player">Kelsie</div>
+</div>
+<div class="char-card char-mith">
+<div class="char-name"><strong>Mithtirith</strong></div>
+<div class="char-class">Elf Cleric of Nethys 18 &mdash; Hedge Mage, Staff of Healing (True)</div>
+<div class="char-player">Jesse</div>
+</div>
+<div class="char-card char-kreebnock">
+<div class="char-name"><strong>Kreebnock</strong></div>
+<div class="char-class">Gnome Psychic 18 &mdash; Bard archetype, Unleash Psyche</div>
+<div class="char-player">"Arrakis"</div>
+</div>
+</div>
+<div class="note-banner">DM: Cody McGraw ("Ryu" in Foundry)<br><br><strong>Mithtirith missed most of two fights to a technical problem.</strong> Two of the night's maps rendered as a black screen on Jesse's machine. Cody took Mithtirith out of the Shoggoth fight after the first round, and started the City Gates fight without him (removing one rune giant to compensate). The gates map finally loaded for Jesse during round one, and he chose to stay out because the fight had already been rebalanced (in Foundry chat: <em>"I can now can see the screen but can sit out until the next fight since it was adjusted"</em>). He was back for the Temple Plaza and the Ancient Ones. Cache clears, a reboot, a server restart and a switch from the lightweight client to regular Forge were all tried; nobody worked out which of them fixed it.<br><br><strong>Paya is back</strong> after missing S13, and will be out again next week (Kelsie is travelling).</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Liralarue wakes, and the first twenty minutes are hers. She takes the party through a green portal that smells of wildflowers to the meadow where she first spoke to them, the place where they gained their mythic destinies. She is a dream now, part of the plane. Her gift and her curse is that she sees every possible future and can never know which are true. In many of them the party stands against Xanderghul, <em>"and in all of them, you oppose him."</em> When Mithtirith asks whether she was the one who showed them the worst of those futures, she says no: that was <strong>the Ashen Man</strong>, one of the <strong>Ancient Ones</strong>, beings from the dimension of time who claim to predate the universe. He represents the end of time for individual worlds, is tied to the energies of <strong>Jandelay</strong>, and has lent Xanderghul his aid because he wants Golarion <em>"returned to Jandelay."</em> <strong>Sorshen is not a prisoner there. She and Xanderghul are fighting, right now</strong>, in a pocket where time runs slow. The battle will last some weeks, and in every future Liralarue has seen, Sorshen falls. <em>"With your help, the tide might turn."</em></p>
+<p>A mirage of <strong>Ayavah</strong> interrupts: <strong>Runelord Belimarius has invaded the ruins of Xin-Eurythnia and brought a warshard with her.</strong> Liralarue sends the party off with three things. The first is a lead: no planar key to Jandelay is known to exist, but Sorshen's archive in the <strong>Blood Moon Palace</strong> might point the way. The second is a fact that changes the campaign: Xanderghul's ability to jump into the bodies of the Risen runs through the Dreamlands, and <strong>so long as she is awake, he can be killed.</strong> The third is a field of treasure collected over millennia, <strong>200,000 gp</strong> of it. Foundry briefly reads it as four million. Aureys, who has just learned Hidden Hoard, dives in like Scrooge McDuck.</p>
+<p>After a rest and a shopping trip to Absalom (41,850 gp each, and Cody opens <strong>rare apex items</strong> to the table), the party teleports to <strong>Vekr's Crossing</strong>, where a small war camp has grown beside the refugee tents. Ayavah, <strong>Kandirvek</strong> and an enormous rime dragon, <strong>Galasodia, Keeper of Records</strong> (name as heard), lay out the war. Belimarius' rune giants escorted a fragment of Gorum out of the Red Mountains. Ayavah's visions show her on a scallop-shell throne beside three pitchers pouring into a pool, which <strong>Mithtirith's critical Arcana</strong> identifies as the <strong>Eye of Desire, Sorshen's own Runewell of Lust</strong>. The allied forces can hold the rank and file. The party is asked to hit <strong>three strike points in one day</strong>: the trapped locals, the rune giants at the city gates, and the Temple Plaza, where a rune-giant commander guards the sinkhole over the open Doomsday Door. Aureys argues for the people first, Kreebnock backs her, and everyone agrees.</p>
+<p>It is four fights. <strong>Three Shoggoths</strong> ooze out of the residential ruins: crit-immune, reach 30, and they grab. Aureys is snatched out of the air and Paya is restrained and slammed, but Kreebnock, Paya and Aureys each put one down. The grateful locals hand over gear, including <strong>+3 Greater Winged half plate</strong> that Paya puts on behind some rubble (<em>"Now you're a flying pineapple"</em>). At the <strong>City Gates</strong>, two rune giants and two runic warmaws breathe fire and lightning down a too-narrow street. With no cleric the party comes out of it visibly hurt, and Cody remarks on it. Persistent bleed and void finish the giants, and Aureys and Sevek take a warmaw each. At the <strong>Temple Plaza</strong>, <strong>Commander Yrasthura</strong> is waiting with a larger warmaw and two winged envyspawn, the <strong>Knights of Malice</strong>. Sevek opens with his new <strong>Glory on High</strong> and blinds a knight for the whole fight. Then Yrasthura's Wide Swing crits both Sevek and Paya for over a hundred each, and her sword is <strong>vorpal</strong>. <strong>Sevek's Fortitude save fails by one. He burns a Mythic Point, rerolls, and keeps his head.</strong> Two turns later Aureys crits Yrasthura twice in a row and the commander collapses. Aureys scares one knight into flying away for good, Paya cuts down the warmaw, and Mithtirith's Tempest Surge finishes the blind knight.</p>
+<p>The party gets one round. Sevek finally spends <strong>Heroic Presence</strong>. Then two robed figures with faces of shadow and starlight rise out of the sinkhole, and a familiar voice arrives in everyone's head: <em>"And here you stand again."</em> <strong>Ancient Ones</strong>, each teleporting as a free action on Mythic Points. <strong>Paya rolls three natural 20s in one round</strong>, the third on a reaction Kreebnock hands him, and the first Ancient One goes down, spends <strong>Undying Myth</strong>, and answers with a 10th-rank Spirit Song that stuns most of the party. <strong>Sevek kills it for good on a natural 20.</strong> The second one keeps slithering to Mithtirith, who answers with a <strong>Spirit Blast it critically fails for 118</strong>, and <strong>Sevek's last natural 20 of the night turns it to mist.</strong> That is where the session stops.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act social">
+<div class="act-label">Act I &middot; Social &middot; Good Morning (0:07–0:25)</div>
+<div class="act-card">
+<h3>Liralarue, the Ashen Man, and a field of treasure</h3>
+<ul>
+<li><strong>Liralarue wakes</strong>: <em>"A bit drowsy, but otherwise whole of mind and body, no doubt thanks to you all."</em> Aureys points out they are still in the plane of dreams. <em>"I am a dream, you understand. This plane is my home. But I'm not suppressed as I was."</em> She opens a bright green portal that smells of wildflowers.
+</li>
+<li><strong>The meadow.</strong> Emerald plains, blue snow-capped mountains, a cloudless sky: where she first spoke to the party when they gained their mythic destinies. <em>"It's good to finally meet you all in person."</em> She was of the Material Plane once, but has been here so long she is simply part of this one.
+</li>
+<li><strong>Aureys makes the ask</strong>, carefully: <em>"We need your help, of course. Not for this dream world, but for... I won't say the real world, because this world is real to you. But to the other world. The world where you were born."</em> Xanderghul means to destroy Golarion to ascend to godhood. Liralarue: <em>"And he's made terrible progress, I'm sorry to say. His goal is already within his reach."</em>
+</li>
+<li><strong>Her gift and curse.</strong> <em>"Before me, I can see every possible future. I can see futures where you are victorious, and futures where you fall. Futures where you are heroes and futures where you are villains… I am cursed in the sense that I may never know whether these recollections are true. I just know that in many of the futures around Xanderghul's plans, I see you all. And in all of them, you oppose him."</em>
+</li>
+<li><strong>Mithtirith asks the question that opens it up</strong>: <em>"You said when you first talked to us that this was the, you showed us the worst possible of all futures?"</em> &mdash; <em>"No, that was the doing of the Ashen Man."</em>
+</li>
+<li><strong>The Ashen Man and the Ancient Ones.</strong> He belongs to <em>"a group known as the Ancient Ones, beings from the dimension of time, who claim to have been here before the universe itself burst forth into existence."</em> He <em>"seems to represent the end of time, at least for individual worlds,"</em> is tied heavily to the energies of <strong>Jandelay</strong>, and wants Golarion destroyed, <em>"returned to Jandelay, as they would put it."</em> To that end he has given his aid to Xanderghul.
+</li>
+<li><strong>Sorshen.</strong> Aureys raises her: the party believes she is held prisoner in Jandelay. <em>"Not as prisoner. Combatant."</em> She was drawn through the Doomsday Door beneath Xin-Eurythnia, and the door then locked, in the sense that nothing can pass through, though its energies still leak out. <strong>Sorshen and Xanderghul are battling in Jandelay as they speak</strong>, time flowing slowly around them. <em>"I expect it will be some weeks before their battle reaches the conclusion. But in every vision of the future I've seen, Sorshen falls in the end."</em> Aureys: <em>"Even with our help?"</em> &mdash; <em>"With your help, the tide might turn."</em>
+</li>
+<li><strong>Ayavah's mirage</strong> cuts in, floating in the dreamscape: <em>"Runelord Belimarius has invaded the ruins of Xin-Eurythnia. She brings with her a warshard… I fear she seeks a way to weaponize that shard and unlock its deific power. Come quickly, please. Vekr's Crossing. I shall meet you there."</em>
+</li>
+<li><strong>Liralarue's advice.</strong> Rest first: Belimarius <em>"might not reach the heights of Sorshen or Xanderghul, but she is still a full runelord."</em> And an opportunity: <em>"You must get to Jandelay to defeat Xanderghul. But breaching that plane is nigh impossible… No planar key is known to exist."</em> Sorshen, one of the oldest living runelords, might know something, and <strong>her archive is in the Blood Moon Palace of Xin-Eurythnia.</strong>
+</li>
+<li><strong>Why she matters.</strong> <em>"Xanderghul, though he would never admit it openly, fears my power."</em> She cannot match him in might. <em>"But his connection, his ability to spring forth from those runelords, should his body be destroyed, that is tied to the Dreamlands. He cannot destroy me. My body would just reform, like any of the dreams of this place. But as long as I am awake, in a sense, he cannot use the Risen to jump between bodies. <strong>So long as I am awake, he can be killed.</strong>"</em>
+</li>
+<li>Aureys: <em>"And keep yourself well hidden."</em> &mdash; <em>"I intend to."</em> &mdash; <em>"And drink a lot of coffee."</em> Liralarue takes it literally; Aureys explains the joke, twitching her fingers: <em>"thanks to these little puppies."</em> &mdash; <em>"Your reputation precedes you."</em>
+</li>
+<li><strong>The trove.</strong> With a wave of her hand: <em>"Sculptures, paintings, gemstones, gleaming gold and platinum coins. It is a treasure trove fit for a monarch… Odds and ends that I've collected over the millennia."</em> <strong>200,000 gp.</strong> Foundry adds it twice and reports four million (Paya: <em>"We are rich. Perhaps overly rich for Foundry"</em>). Aureys has <strong>Hidden Hoard</strong> as of this level and starts shovelling statues into it: <em>"She's like Scrooge McDuck diving."</em> Paya: <em>"We always talk about that in Sandpoint."</em> Sevek and Aureys both think of the cauldron they had to leave behind.
+</li>
+<li>Out of character, Cody explains the dry stretch: the Dreamlands chapter gives out no loot at all for a full level, and the table's verdict is that the sisters were stingy. Sevek: <em>"They hid all the loot."</em>
+</li>
+<li>The party takes a long rest in the dreamscape.
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Act II &middot; Downtime &middot; Absalom (0:26–0:39)</div>
+<div class="act-card">
+<h3>Absalom, with 42,000 gp each</h3>
+<ul>
+<li>Paya runs the stash as loot master. The <strong>Spindle Key</strong> is sold (Sevek: <em>"You never know."</em> Paya: <em>"You never know, but 7,000 gold might really help"</em>), along with the spare Greater Bands of Force and Aethusa's bec de corbin. The <strong>Dream Hunter's Lodge</strong> is kept (<em>"instant cozy cabin"</em>), as are the interplanar and teleport scrolls.
+</li>
+<li><strong>41,850 gp each</strong>, then another 1,000 each.
+</li>
+<li><strong>Paya breaks up the bec de corbin's runes at a tenth of cost.</strong> Quickstrike goes to Aureys, who volunteers for it; Sevek agrees it suits her better than him (<em>"I already have Flurry of Blows"</em> / <em>"Aureys usually spend her action as debuff and stuff as well"</em>). Greater Astral goes to Aureys. <strong>Major Striking goes to Sevek</strong>, who asks for it (<em>"I would love a major striking"</em>) and then, when Paya says that is what he plans to buy for himself, offers it back: <em>"I mean, you can take it and save money. I can spend it on myself."</em> Paya: <strong><em>"You already gave me the first plus three in the party. I'm fully okay with this."</em></strong>
+</li>
+<li><strong>Kreebnock asks how a rare apex item gets bought.</strong> Cody: <em>"I'd say in this specific case, for Apex items, you guys can go rare."</em> Sevek: <em>"Oh, really?"</em> (His <strong>Bracers of Hammers</strong> are on his sheet by the second fight.)
+</li>
+<li>Aureys buys a Major Striking rune she can share between fan and handwraps, then asks around for a 2,000 gp loan to upgrade her Daredevil Boots. Cody: <em>"Everybody talks about how rich they suddenly are, and then what happens?"</em> Aureys: <em>"My hoard is gone!"</em>
+</li>
+<li>Cody: <em>"I feel like Absalom is one of the only cities where you can show up, shop this way, and not totally wreck the economy."</em> Purchases can be made retroactively until the start of next session.
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act social">
+<div class="act-label">Act III &middot; Social &middot; The War Council at Vekr's Crossing (0:39–0:52)</div>
+<div class="act-card">
+<h3>The war council and three strike points</h3>
+<ul>
+<li>The tent city has shrunk a little; some refugees have moved on. Beside it is a small, well-fortified <strong>war camp</strong> and a pavilion. <strong>Ayavah</strong>, bundled in winter clothes: <em>"You made it! Wonderful!"</em> Following the party's advice, she and her allies have kept any more Doomsday Doors from opening. <em>"I don't know how long that will last, though."</em>
+</li>
+<li>Inside are <strong>Kandirvek</strong> and a second dragon, an enormous <strong>rime dragon</strong> the party saw speaking with Sorshen just before the attack on Xin-Eurythnia. Aureys: <em>"Hello, brother. And brother."</em> &mdash; <em>"Sister, if you please."</em> &mdash; <em>"Oh, no, it's a little hard to tell. I'm a sister, too. Welcome. It's like a family reunion."</em> Kandirvek: <em>"One I wish was under better circumstances."</em>
+</li>
+<li><strong>Galasodia, Keeper of Records</strong> (spelling unconfirmed): <em>"Sorshen was greatly impressed by you. It's my dearest hope that I, too, might come to be so impressed."</em>
+</li>
+<li><strong>The briefing.</strong> Galasodia learned of rune giants marching east from the Red Mountains escorting something precious. Ayavah's Read Omens showed Belimarius' army uncovering <em>"something jagged, dark, and red, a fragment of metal in the mountains"</em>: <strong>a warshard, a piece of Gorum.</strong> Her visions show Belimarius risen to new arcane heights on <strong>a glittering scallop-shell throne, three delicate pitchers pouring water into a pool around her.</strong>
+</li>
+<li><strong>Mithtirith's Arcana</strong> (a critical success; Sevek: <em>"No idea. What is this?"</em>): throne and pitchers are symbols of <strong>the Eye of Desire, Sorshen's own Runewell of Lust.</strong> Nobody knows where it is, but Sorshen would have kept it close.
+</li>
+<li><strong>The city.</strong> Creatures from the Darklands crawled up into Xin-Eurythnia after the evacuation, and Belimarius' army had to fight through them. The damage is extensive, and <strong>the sinkhole in the Temple Plaza has kept growing.</strong>
+</li>
+<li><strong>The plan.</strong> Galasodia: <em>"Your might is uncontested, Ayavah and Kandirvek tell me. Belimarius's troops are powerful enough to serve runelords. Most of our forces are outmatched."</em> The allies will hold the lesser forces. The party hits three strike points, which should also turn up where Belimarius is hiding. <em>"If she falls, this whole operation crumbles."</em>
+<ul>
+<li><strong>The city gates</strong>, held by a squadron of rune giants.
+</li>
+<li><strong>Rescue the locals</strong> who stayed behind and are now trapped between the army and the Darklands monsters.
+</li>
+<li><strong>The Temple Plaza</strong> outside Midnight's Gallery, where a rune-giant commander guards the sinkhole. Beneath it, the Doomsday Door is still open.
+</li>
+</ul></li>
+<li>Aureys brings up Sorshen's archive. Kandirvek: it is deep in the Blood Moon Palace, which is crawling with Belimarius' people. <em>"If we can get rid of her, you should be able to explore it."</em>
+</li>
+<li><strong>Aureys picks the order</strong>: <em>"Although of course it's up for our collective decision, I would think that we should try to free those refugees that are potentially at risk. We don't know how long they may hold out."</em> Kreebnock: <em>"Kreebnock's in agreement."</em> Cody's warning: <strong>all of these fights happen in one day.</strong> <em>"So, budget wisely."</em> Sevek: <em>"Let's do this."</em>
+</li>
+<li>Kandirvek flies them in on dragonback. A few hours, not the ten days the evacuation took.
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act IV &middot; Combat &middot; Rescue the Locals: Three Shoggoths (0:52–1:31)</div>
+<div class="act-card">
+<h3>Eyes and teeth in the ruins</h3>
+<ul>
+<li>Xin-Eurythnia from the air: crumbling buildings, rifts through the streets, rune giants dotting the landscape. The residential district looks like the safest part of the city, until the whispers start. <em>"You see an awful assortment of eyes and mouths leering out at you from behind broken architecture… great black gobs of gel, eyes, and teeth."</em> Aureys: <em>"That's a gross. I don't even know if Aureys would eat that."</em>
+</li>
+<li>Full breakdown under <strong>Combat Encounters</strong>. Highlights:
+<ul>
+<li>Aureys' Battle Cry crits Shoggoth B (frightened 2). When its Grab critically fails she chooses to dump it prone: <em>"No, get off me, yuck."</em>
+</li>
+<li><strong>They are immune to critical hits</strong>, which Paya finds out on a natural 15. Aureys has to walk Cody through <strong>Powerful Sneak</strong> twice: her sneak attack ignores their precision immunity.
+</li>
+<li>Shoggoth A clips Mithtirith, and his new <strong>Inviolable</strong> answers for the first time: <em>"Awesome. Where's my mythic stuff? I have a new mythic thing… No, it was my cleric thing."</em>
+</li>
+<li><strong>Jesse's map is a black screen.</strong> He tries casting Darkvision on Mithtirith in case it is a lighting issue, then a cache clear. Cody removes Mithtirith from the fight after round one.
+</li>
+<li>Shoggoth B's second Grab is a natural 20 and <strong>snatches Aureys out of the air</strong>. <strong>Kreebnock's Telekinetic Projectile kills it</strong>, <em>"reduced to a pile of mush, eyes and teeth."</em> Aureys: <em>"I'm free."</em> Kreebnock: <em>"My last action is to restore your mind after watching that thing."</em>
+</li>
+<li>Shoggoth A restrains Paya and slams him into the ground. He reaches for Deflecting Wave and Sevek points out he can't: restrained means off-guard. Aureys, arriving: <em>"Ah, that's my pineapple lord."</em> Paya <strong>escapes on a Mythic Point reroll</strong> and kills it on a MAP −10 natural 19.
+</li>
+<li>Shoggoth C swings at Sevek four times across the fight and never connects.
+</li>
+<li>Aureys <strong>Scares to Death</strong> the last one (a success, frightened 2), and her two reactions finish it after Sevek's Flurry. <em>"Aureys is now a blur of attacks and saying silly things to monsters."</em>
+</li>
+</ul></li>
+<li><strong>Aftermath.</strong> Aureys asks Paya for healing and Sevek joins in: <em>"Oh, Lord Paya."</em> Paya's healing impulses and Kreebnock's last two rounds of Restore the Mind top everyone off, and Paya makes Aureys food (<em>"I'm starving"</em>).
+</li>
+<li><strong>The locals' thanks.</strong> They hand over gear seized from Belimarius' troops or dug out of the noble estates, and Aureys calls it: <em>"Put it in the hoard!"</em> <strong>Paya takes the +3 Greater Winged half plate</strong> (<em>"Paya will find a quiet corner of the rubble to change in."</em> &mdash; Aureys: <em>"We've seen the leaves before, buddy."</em> &mdash; <em>"Now you're a flying pineapple."</em>).
+</li>
+<li><strong>Mithtirith hands out Energy Aegis</strong>: 9th rank for Paya, 7th for Aureys and Kreebnock. Sevek already has his own.
+</li>
+<li>There is no time to question the locals. They report to the allied army; <em>"think of this as one step closer."</em>
+</li>
+<li><strong>Gates or sinkhole?</strong> Aureys: <em>"It would seem like it would make sense to do the gates before we do the sinkhole."</em> Kreebnock: <em>"Clear the path behind us."</em> Sevek: <em>"I agree. Let's do the gates."</em>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V &middot; Combat &middot; The City Gates: Rune Giants and Runic Warmaws (1:38–2:38)</div>
+<div class="act-card">
+<h3>Fire and lightning down a narrow street</h3>
+<ul>
+<li>The rank and file are no match for the party. The targets are the <strong>rune giants</strong> posted at the gates and the <strong>runic warmaws</strong> beside them, <em>"a cross between hounds and horses, their eyes glowing with bright green light, the runes of envy engraved on their fur over and over."</em> Aureys: <em>"Cute puppies."</em> Cody: <em>"Let's see if you still feel that way."</em> Mithtirith: <em>"I would have thought a Maltese would be an envy one."</em>
+</li>
+<li><strong>The map won't load for Jesse again.</strong> Cody restarts the server, calls the break early, and has everyone log back in one at a time. It still isn't working when the break ends. Jesse: <em>"Why don't you guys move on without me while we see if I can fix it on my end."</em> <strong>Mithtirith is parked in a corner of the map and Cody removes one giant to balance it.</strong> The map loads for Jesse a few turns in, and he stays out rather than have the fight rebalanced again. (During the wait the table talks about Anna's presentation on AI and insurance coverage, Cody's Daggerheart stat blocks, and Kreebnock's player on roleplay: <em>"I always want to get more into the roleplay side of things, but it's hard to keep a flow going."</em>)
+</li>
+<li>The fight (see <strong>Combat Encounters</strong>) runs four rounds without a healer on the field:
+<ul>
+<li>Both warmaws open with <strong>Howl of Ash and Ember</strong>. Kreebnock fails the second one even on a Mythic Point reroll and is sickened. Cody: <em>"It's always Kreebnock who gets picked on."</em>
+</li>
+<li>Aureys feints a giant (<em>"Oh, aren't you so big and strong? Look at those muscles of yours and your steamy flames"</em>) and stacks clumsy, enfeebled, stupefied and frightened on it. Cody: <em>"You can complete the ring of debuffs on these guys. The prophecy will be fulfilled."</em>
+</li>
+<li><strong>Sevek's opening Flurry is a natural 1 and a miss.</strong> Paya, asked whether the giant got hit: <em>"Sevek did not. Paya intends to."</em>
+</li>
+<li>Paya's Needle in the Gods' Eyes eats a Reactive Strike on the way in (<em>"probably won't be using this ability again, but nice to learn"</em>), then lands a hit and a crit. Aureys' backstab is a natural 20. <strong>Kreebnock's Daze leaves the giant on 2 HP</strong> (<em>"Aw, that's rude"</em>), and the persistent damage finishes it a turn later.
+</li>
+<li><strong>Sevek's Prevailing Position</strong> turns a giant's Wide Swing into a miss.
+</li>
+<li><strong>Sevek's Inner Upheaval Flurry</strong> (crit and hit, 152) plus Aureys' natural-19 backstab kill the first warmaw.
+</li>
+<li>Kreebnock uses <strong>Now You See Me</strong> (Paya: <em>"Such a well-named ability for the character"</em>).
+</li>
+<li>A warmaw bites Sevek, and his <strong>Rippling Spin trips it</strong>, the first appearance of the <strong>Bracers of Hammers</strong> rider.
+</li>
+<li>The second giant is left on single digits by another Kreebnock Daze, crits Aureys for 68 anyway, and dies to Paya's persistent void.
+</li>
+<li>Aureys to the last warmaw: <em>"Aren't you so pretty, pretty puppy. Let me come and give you a scratch behind the ears."</em> <strong>Fan crit, claw crit, 187.</strong> <em>"Das is good!"</em> <strong>Sevek's Electric Arc and Flurry finish it.</strong>
+</li>
+</ul></li>
+<li>Cody: <em>"Man, I'm not used to seeing you guys all hurt like this after combat. Shows how potent Mithtirith is with healing."</em> Kreebnock agrees that the healer was missed. Then: <strong><em>"Kreebnock throws up and then refocuses."</em></strong>
+</li>
+<li>Aureys, to Paya: <em>"Dinner time? Snack time?"</em> Paya: <em>"I don't think the plane of wood has any eyeballs."</em> &mdash; <em>"Can they make it look a little bit like an eyeball?"</em> &mdash; <em>"Paya will use base kinesis to shape this fruit into an eyeball."</em> Cody: <em>"Just hand her a peeled grape."</em>
+</li>
+<li><strong>The giants' gear</strong> goes into the hoard for sale: +3 Greater Striking longspears and greatswords and +2 Greater Resilient splint mail.
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act VI &middot; Combat &middot; The Temple Plaza: Commander Yrasthura (2:40–3:24)</div>
+<div class="act-card">
+<h3>The vorpal sword and the greatest of dragons</h3>
+<ul>
+<li>The sinkhole that swallowed Sorshen has only grown, and its pale green light with it. At its edge stands a rune giant, <em>"her burning red eyes staring out to you, the rune of envy carved at multitudes into her flesh,"</em> with a larger warmaw at her side and two winged <strong>envyspawn</strong> moving to flank: the strongest sinspawn the party has seen.
+</li>
+<li><strong>Commander Yrasthura</strong>: <em>"I see. So, you're the ones Lograsi meant, back on those plains of the Horselords. Not content to stay to your own little quest, are you?"</em> Aureys: <em>"Nope. We've come here to kill you."</em> &mdash; <em>"Is that right? I suppose it'll break up the mundanity of this place. Haven't had a challenge since I got here."</em> &mdash; <strong><em>"Well, you know, I am the greatest of dragons, so… challenge accepted."</em></strong>
+</li>
+<li>Mithtirith can see this map. The fight (see <strong>Combat Encounters</strong>):
+<ul>
+<li>Aureys' Battle Cry crits the warmaw. It would flee, but <strong>Fearful Loyalty</strong> keeps it beside Yrasthura.
+</li>
+<li><strong>Sevek debuts Glory on High</strong>: <em>"Let's use a new thing that I got. Hopefully it worked out well."</em> Yrasthura critically succeeds. <strong>Knight of Malice A rolls a natural 1: 56 damage and blinded for a minute.</strong> The other knight and the warmaw are dazzled.
+</li>
+<li>Knight B crits Mithtirith for 74, and <strong>Inviolable</strong> bites back. Cody: <em>"I would just keep this Inviolable on your hot bar."</em>
+</li>
+<li><strong>Yrasthura's turn.</strong> Her Invoke Rune cone catches Paya and Sevek, and Sevek spends <strong>Prevailing Position</strong> on the save. Then a Wide Swing at both. Sevek: <em>"That will crit me."</em> &mdash; <em>"That crits you?"</em> &mdash; <em>"Yeah, because I'm out of stance because of Prevailing Position."</em> <strong>112 to Sevek, 104 to Paya</strong> (through Deflecting Wave).
+</li>
+<li><strong>The vorpal sword.</strong> Cody: <em>"I'm pretty sure you won't fail this, but… this is a Vorpal Sword."</em> Fortitude DC 37. Paya rolls 47. <strong>Sevek rolls 36.</strong> <em>"Ah, shit."</em> Cody: <em>"I think someone needs to burn a mythic point."</em> Paya: <em>"I would definitely recommend it, because you will die."</em> <strong>The Mythic Point reroll comes up 43.</strong> Cody: <strong><em>"Sevek, you keep your head because of that."</em></strong>
+</li>
+<li>Paya whiffs all three of his swings: <em>"Some days you kick ass. Some days you get your ass kicked."</em>
+</li>
+<li>The warmaw's Howl catches its own blind knight. Cody: <em>"Acceptable losses."</em> Paya: <em>"It is even funnier that the runic warmaw just would not give a crap."</em>
+</li>
+<li><strong>Mithtirith's first act back is a 9th-rank Heal on Sevek for 136.</strong>
+</li>
+<li>Aureys puts clumsy, enfeebled and stupefied on Yrasthura <em>"for the rest of her life."</em> <strong>Sevek trips her</strong> (a natural 1, rerolled on a Mythic Point into a success by exactly 1).
+</li>
+<li>Yrasthura casts Arctic Rift through the warmaw's <strong>Share Runes</strong>; Paya's Reactive Strike punishes it. Paya spends a Mythic Point on <strong>Divide and Conquer</strong> and sickens both Yrasthura and the blind knight.
+</li>
+<li>The warmaw crits Mithtirith for 76 and heals itself. Sevek: <em>"Jerks."</em> <strong>Mithtirith's escape</strong> takes the whole table: Anna, Kelsie and Pax all plot routes for him (<em>"Hopefully it doesn't down you"</em>), he eats one Reactive Strike, and it is a natural 1. All that worrying, as Paya puts it, for a one.
+</li>
+<li><strong>Kreebnock's Phantasmagoria</strong> confuses the blind knight and the warmaw. Cody: <em>"Oh cool, the blind knight is confused. That'll be interesting."</em> Then his amped Message: <em>"Sevek, why don't you take a shot at the commander there?"</em> Sevek rolls a 3. <strong><em>"Sorry, I betrayed your expectations."</em></strong> Kreebnock: <em>"Startled you. It was my fault."</em>
+</li>
+<li><strong>Aureys kills Yrasthura</strong>: a natural-20 fan crit on her Speed of Arms reaction, then a natural-19 crit on the Overwhelming Combination. Cody: <em>"As this enormous giant collapses to the ground."</em>
+</li>
+<li><strong>Scare to Death on Knight B.</strong> Aureys: <em>"I'm not making it visual. I'm just chirping in his ear. Hey, go kill yourself. It'll be easier on you."</em> Cody: <em>"Well, that's not a sentence I thought I would hear when I woke up today, but okay."</em> A critical success. The knight makes the Fortitude save that follows, so it lives, frightened and fleeing. Cody: <em>"B is flying away and is not coming back."</em> Aureys gives it <em>"that royal wave right from the wrist."</em> Paya: <em>"Elbow, elbow, wrist, wrist."</em>
+</li>
+<li>Sevek on the warmaw: natural 1, then a natural 19 for 115. <em>"Not my day."</em> Cody: <em>"Not your day, he says."</em> Then: <em>"You know what? I'm going to do the dumb thing and I'm going to do two MAP ten."</em> Both miss.
+</li>
+<li><strong>Paya's Whirlwind Strike</strong> (<em>"Hit because of Aureys. Like most of my strikes in this game"</em>) and a MAP −10 natural 19 kill the warmaw. <strong>Mithtirith's Tempest Surge kills the blind knight</strong>: <em>"Decisions, decisions."</em>
+</li>
+</ul></li>
+<li><em>"Commander Yrasthura and her entourage lie dead around you. However, we're not done yet. As they fall, you see something beginning to rise up and out of the sinkhole."</em> Aureys: <em>"It couldn't be that easy, boys."</em>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VII &middot; Combat &middot; Out of the Sinkhole: the Ancient Ones (3:24–4:06)</div>
+<div class="act-card">
+<h3>"And here you stand again"</h3>
+<ul>
+<li><strong>One round to prepare</strong>, in initiative order. Aureys drinks a major healing potion and hides in Paya's square. Paya spends an AoE heal and channels elements. Kreebnock heals Paya and Sevek. Mithtirith casts <strong>Foresight</strong>. <strong>Sevek spends Heroic Presence</strong>, a 6th-rank Zealous Conviction on the whole party: <em>"I might as well. It lasts ten minutes. Because I'll never do it either way."</em>
+</li>
+<li><em>"You will watch as two tall, robed figures rise up and out of the pit, each of them wielding a curved sword in one hand. Their faces are hidden between swirling vortexes of shadow and starlight. And you hear a familiar voice creep into your minds: <strong>'And here you stand again.'</strong>"</em>
+</li>
+<li>Haste and Aureys' Legend of Combat are still running from the last fight. The fight (see <strong>Combat Encounters</strong>):
+<ul>
+<li>Anything that ends a move within 10 feet of an Ancient One triggers <strong>Unified Timeline</strong>: a Will save, and the Ancient One teleports 10 feet regardless. They are <strong>immune to emotion effects</strong>, so Aureys' fear kit is off the table.
+</li>
+<li><strong>Mithtirith's first action is for Sevek</strong>: <em>"Quick question, Sevek. Do you have any status bonuses to your AC?"</em> Then a Protection wand.
+</li>
+<li><strong>Sevek's first Strike comes up on his lucky number.</strong> <em>"Oh, my lucky number. I'll use That's My Number and reroll."</em> It hits. He lights <strong>Herald's Weapon</strong> (<em>"I should have used this beforehand"</em>) and Taunts both.
+</li>
+<li>Ancient One B spends a Mythic Point to <strong>Slither Between Worlds</strong> as a free action and puts a crit and a hit into Sevek: <strong>129</strong>.
+</li>
+<li>Cody loses track of Paya: <em>"Wait, I just realized something. Where the hell is Paya?"</em> Under Aureys' spectral dragon. Paya: <em>"That's what I get for hiding under a dragon."</em>
+</li>
+<li><strong>Paya's Needle in the Gods' Eyes: a natural 20.</strong> Cody: <em>"It's starting to get a bit much, I'm going to be honest. Guys, I killed a character in my Saturday night group last week. You're going to let it all build up."</em> <strong>Then a second natural 20.</strong> Paya: <strong><em>"I am a statistics major and I have no explanation for this. But yeah, I'll keep hitting."</em></strong>
+</li>
+<li>Kreebnock, after a missed Needle Darts: <em>"Since you're on a roll there, Paya, you should strike."</em> <strong>A third natural 20.</strong> The Ancient One is destroyed. Cody: <em>"This is the kind of shit that makes me paranoid that people are modifying dice."</em> <strong>It spends Undying Myth and returns at half health.</strong> Kreebnock: <em>"That was like 400 damage in that round."</em>
+</li>
+<li>It casts a <strong>10th-rank Spirit Song</strong>. Paya's Reactive Strike is merely a hit, and then he fails the save (<em>"Okay, dice have turned on me. That I can explain with statistics"</em>). Sevek, Paya and Aureys are stunned 1; Kreebnock crit-fails for 116 and is stunned 2.
+</li>
+<li><strong>Mithtirith's three-action Heal</strong> skips Aureys, who is standing in the enemy's square. <em>"If I did you, I would do somebody I didn't want to do. Stop hanging out in enemy squares."</em> Aureys: <em>"That's what I do, though."</em> Paya: <strong><em>"It's bad company hanging out with Ancients of Time."</em></strong>
+</li>
+<li><strong>Sevek, stunned, still has a Flurry: a hit and a natural-20 crit, 180 between them. The first Ancient One is gone for good.</strong> Cody awards two Mythic Points for the kill and one to everyone else.
+</li>
+<li>The second Spirit Song fares worse: Mithtirith and Kreebnock roll natural 20s (<em>"Hey, I got a crit that time"</em>), Sevek crit-saves, Aureys rerolls into one. Only Paya fails. Sevek: <em>"Well, I guess at least we have Mythic Points."</em>
+</li>
+<li>B keeps slithering to <strong>Mithtirith</strong>: a hit that Taunt's −1 kept from being a crit, then a crit for 84 anyway.
+</li>
+<li>Mithtirith, after another Paya crit: <strong><em>"I have a confession to make. I've been giving all of my criticals to Paya. I think the stats will prove it."</em></strong>
+</li>
+<li>Sevek pulls a Focus Point out of his Sash for an Inner Upheaval, and Unified Timeline teleports the target away from him before he can swing. A natural 2, then a hit. <em>"Well, well, well, that doesn't go well."</em>
+</li>
+<li>Paya's next three swings: natural 1, natural 2, miss. <em>"It's all right with me. Three 20s in a round was a bit much."</em> Kreebnock's Weight of the World is critically saved: <em>"Wow, that's just rude."</em>
+</li>
+<li><strong>Mithtirith's Spirit Blast: the Ancient One rolls a natural 1. 118.</strong> Cody: <em>"They're still up, but not by much after that. Point, like, perfect in the chest."</em>
+</li>
+<li><strong>Sevek: Electric Arc, then a natural 20.</strong> <em>"As the last of the Ancient Ones vanish into mist, we are out of combat, and that is where we will call this session."</em>
+</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Table business &middot; Table</div>
+<div class="act-card">
+<h3>The vote, the schedule, and the dice</h3>
+<ul>
+<li><strong>Next campaign vote.</strong> Starfinder is leading, Dead God's Hand second. Hellbreakers is out, since two people at the table are already in Hellbreakers games. <strong>Jesse hasn't voted and may be the tiebreaker</strong>; Cody tallies at the top of next session. If it is Starfinder: Free Archetype and Ancestry Paragon carry over, Pathfinder archetypes are fine, Pathfinder classes case by case. Kreebnock's player is already planning <em>"a four-armed mutant goblin."</em>
+</li>
+<li><strong>Book Three is about as long as Book One.</strong> Cody expects the campaign to wrap around <strong>mid-November</strong> and wants everyone present for the finale.
+</li>
+<li><strong>Absences</strong>: Kelsie (Paya) is out next Wednesday and Saturday. Anna and Jesse are out the first Saturday of November. Cody will understand if people have Halloween plans.
+</li>
+<li>Cody, on the dice: <em>"Good god, the crits tonight, though."</em> Aureys has a Keen rune and Paya has Savage Critical, so both crit on a 19.
+</li>
+<li>Cody promised to <em>"make sure we get our time"</em> after the technical delays, and the session ran to 5:08.
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 &middot; 1:56 PM – 2:32 PM · 3 rounds</div>
+<h3>Rescue the Locals: Three Shoggoths</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Shoggoths A, B &amp; C</strong> &mdash; 425 HP each, AC 39, pseudopod +37 (4d10+25 bludgeoning, <strong>reach 30</strong>, Grab), fast healing 20, <strong>immune to critical hits and precision</strong> (Aureys' Powerful Sneak ignores the precision immunity)</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Shoggoth B 47 · Paya 45 · Kreebnock 42 · Shoggoth A 41 · Aureys 41 (Battle Cry) · Shoggoth C 37 · Sevek 34 · Mithtirith 32</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Shoggoth B &mdash; <strong>Kreebnock</strong> · Shoggoth A &mdash; <strong>Paya</strong> · Shoggoth C &mdash; <strong>Aureys</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free): Battle Cry <strong>Demoralize on B &mdash; critical success, frightened 2</strong> (it does not tick down while it keeps hitting her, and <strong>Terrifying Mien</strong> gives her resistance 8 to its Strikes while it is frightened 2).
+</li>
+<li><strong>Shoggoth B</strong>: pseudopod on Aureys (47). <strong>Grab critically fails (natural 1)</strong>, and Aureys drops it prone.
+</li>
+<li><strong>Paya</strong>: Needle in the Gods' Eyes on B &mdash; hit 48, <strong>crit downgraded (immune) 48</strong> + persistent void and fire; Spear Dancer MAP strike hits by 1 (52).
+</li>
+<li><strong>Kreebnock</strong>: <strong>Haste</strong> on the party.
+</li>
+<li><strong>Shoggoth A</strong>: pseudopod on Paya (48) and Mithtirith (33); <strong>Inviolable</strong> returns 8.
+</li>
+<li><strong>Aureys</strong>: Absorb Magic off the Haste. <strong>Legend of Combat</strong> (Mythic Point). Sneaks into B's square (misses the DC by 1). Earth to Heavens Strike: fan 19, claw 30 &mdash; clumsy, enfeebled, stupefied. Quickened fan misses.
+</li>
+<li><strong>Shoggoth C</strong>: pseudopod on Kreebnock (hit by 0, 44); on Sevek, miss.
+</li>
+<li><strong>Sevek</strong>: stances, hasted Stride, Flurry on B &mdash; <strong>two hits, 63</strong>. <strong>Taunt on all three.</strong> Aureys' Opportune Backstab: fan crit-roll (35) + bleed.
+</li>
+<li><strong>Mithtirith</strong>: no map. Casts Darkvision to test it. Turn skipped.
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Shoggoth B</strong> (stays prone): miss, hit on Aureys (43), <strong>Grab natural 20 &mdash; Aureys restrained.</strong> Persistent void, fire and bleed tick (22 comes off).
+</li>
+<li><strong>Paya</strong>: strike on B (58), Needle &mdash; B (44), then two rolls at A (one hit that was not applied, one miss); hasted MAP −10 <strong>natural 19 on A (56)</strong>.
+</li>
+<li><strong>Kreebnock</strong>: flies up 20, Unleash Psyche, <strong>Telekinetic Projectile &mdash; Shoggoth B destroyed</strong> (50 into its last 26). Restore the Mind on Aureys (38).
+</li>
+<li><strong>Shoggoth A</strong>: pseudopod on Paya (54), <strong>Grab critical success &mdash; Paya restrained</strong>, second pseudopod (42; Deflecting Wave is not available while he is off-guard).
+</li>
+<li><strong>Aureys</strong>: sneaks to A (51). Demoralize (rolled by hand, 52 &mdash; a success, frightened 1). Overwhelming Combination: fan hit (36), claw misses; quickened claw misses. Legend of Combat reaction: claw hits (50).
+</li>
+<li><strong>Shoggoth C</strong>: three pseudopods at Sevek &mdash; natural 1, miss by 4, miss by 2.
+</li>
+<li><strong>Sevek</strong>: hasted Stride, <strong>Electric Arc</strong> (A 16, C 32), <strong>Inner Upheaval Flurry on A &mdash; two hits, 110.</strong> Aureys' backstab (39).
+</li>
+<li><em>Mithtirith removed from combat.</em>
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Paya</strong>: <strong>Escape on a Mythic Point reroll</strong> (natural 6 → 18 at mythic proficiency, critical success). Vicious Swing on A (55), hasted MAP −10 <strong>natural 19 &mdash; Shoggoth A destroyed (65).</strong> Sevek: <em>"One's down."</em>
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, Telekinetic Projectile on C (53).
+</li>
+<li><strong>Aureys</strong>: hasted move. Feint fails. <strong>Scare to Death &mdash; success, frightened 2.</strong> Overwhelming Combination: fan crit-roll and claw hit, 107.
+</li>
+<li><strong>Shoggoth C</strong>: three pseudopods on Aureys &mdash; 43, 33 (a natural 19 that frightened 2 and Sevek's Taunt together held to a hit), natural 1.
+</li>
+<li><strong>Sevek</strong>: Electric Arc on C (16). <strong>Flurry &mdash; two crit rolls, applied as hits: 148</strong>, and the first puts Greater Crushing's clumsy 2 and enfeebled 2 on it. Aureys' two reactions: <strong>fan natural 20 (40), claw &mdash; Shoggoth C destroyed.</strong>
+</li>
+</ul>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Shoggoth B &mdash; <strong>Kreebnock</strong> · Shoggoth A &mdash; <strong>Paya</strong> · Shoggoth C &mdash; <strong>Aureys</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 &middot; 3:07 PM – 3:39 PM · 4 rounds</div>
+<h3>The City Gates: Rune Giants and Runic Warmaws</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Rune Giants A &amp; B</strong> &mdash; 375 HP, AC 38, greatsword +33 (3d12+20 slashing, + 3d6 fire after Invoke Rune, reach 20, <strong>Wide Swing</strong> at two targets), <strong>Reactive Strike</strong>, <strong>Invoke Rune</strong> (cone, Reflex DC 37) · <strong>Runic Warmaws A &amp; B</strong> &mdash; 350 HP, AC 38, jaws (4d10+20), <strong>Howl of Ash and Ember</strong> (60-foot cone, 15d6 fire, Reflex DC 39, sickened on a failure), Searing Ray</span></div>
+<div><span class="stat-label">Mithtirith was not in this fight.</span><span class="stat-value">Cody removed a third giant (Rune Giant C) to balance it.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Warmaw B 45 · Rune Giant B 42 · Aureys 38 (Battle Cry) · Sevek 37 · Warmaw A 37 · Paya 34 (natural 1) · Kreebnock 30 · Rune Giant A 29 (natural 1)</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Rune Giant B &mdash; persistent damage (<strong>Aureys'</strong> bleed and <strong>Paya's</strong> void on the same tick) · Warmaw A &mdash; <strong>Aureys</strong> · Rune Giant A &mdash; <strong>Paya</strong> (persistent void) · Warmaw B &mdash; <strong>Sevek</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free): Battle Cry Demoralize on Rune Giant A (success).
+</li>
+<li><strong>Warmaw B</strong>: strides in, <strong>Howl of Ash and Ember</strong> &mdash; Paya and Aureys crit-save; Sevek and Kreebnock succeed (13 each).
+</li>
+<li><strong>Rune Giant B</strong>: two Strides, <strong>Invoke Rune</strong> cone &mdash; Sevek natural 20; Paya fails (15); Kreebnock <strong>Sidesteps Through Time</strong>.
+</li>
+<li><strong>Aureys</strong>: <strong>Feint critical success</strong> on Giant B. Earth to Heavens Strike: fan 39, claw 42 (first applied to A by mistake, corrected to B). Quickstrike fan 36.
+</li>
+<li><strong>Sevek</strong>: stances, Elf Step, Flurry on Giant B &mdash; <strong>natural 1, miss.</strong>
+</li>
+<li><strong>Warmaw A</strong>: Howl &mdash; <strong>Kreebnock fails even on a reroll: 36 and sickened</strong>; the other three crit-save. Searing Ray at Sevek misses.
+</li>
+<li><strong>Paya</strong>: Needle in the Gods' Eyes &mdash; <strong>Giant B's Reactive Strike hits (38)</strong>. Hit (45), <strong>crit (88)</strong>. Aureys' backstab: <strong>natural 20, 96</strong> + bleed. MAP −10 misses by 1.
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, <strong>Daze on Giant B</strong> (success, 27) &mdash; it is on 2 HP.
+</li>
+<li><strong>Rune Giant A</strong>: strides to Kreebnock, Wide Swing at Kreebnock and Paya &mdash; hits Kreebnock (35; Instinctive Obfuscation's flat check doesn't save him), misses Paya.
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Warmaw B</strong>: steps, two jaws at Sevek &mdash; both miss.
+</li>
+<li><strong>Rune Giant B</strong>: Wide Swing at Sevek and Paya &mdash; <strong>Sevek's Prevailing Position turns his into a miss</strong>; Paya takes 47. Two more Wide Swings at Aureys and Paya miss. <strong>Aureys' bleed and Paya's void tick together &mdash; Rune Giant B destroyed.</strong>
+</li>
+<li><strong>Aureys</strong>: <strong>Feint critical success</strong> on Warmaw A. <strong>Majestic Presence</strong>: Warmaw A frightened 1 (success), Giant A frightened 2 (failure). Overwhelming Combination on Warmaw A: fan 36, claw 44; Quickstrike fan 41.
+</li>
+<li><strong>Sevek</strong>: stances, Stride, <strong>Inner Upheaval Flurry on Warmaw A &mdash; crit (natural 17) and hit, 152 applied.</strong> Aureys' backstab: <strong>natural 19 crit, 99 &mdash; Warmaw A destroyed.</strong>
+</li>
+<li><strong>Paya</strong>: Step, Spear Dancer twice on Giant A &mdash; hit (34), <strong>crit (82)</strong>.
+</li>
+<li><strong>Kreebnock</strong>: <strong>Now You See Me</strong>, Unleash Psyche, Telekinetic Projectile on Giant A (60).
+</li>
+<li><strong>Rune Giant A</strong>: Invoke Rune cone &mdash; Paya and Aureys crit-save, Sevek succeeds (10), Kreebnock sidesteps again. Two Wide Swings miss.
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Warmaw B</strong>: jaws on Sevek (31) → <strong>Rippling Spin: Trip succeeds, the warmaw is prone</strong> (Bracers of Hammers, 2).
+</li>
+<li><strong>Aureys</strong>: <strong>Frightening Power</strong> &mdash; Warmaw B fails (frightened 2), Giant A saves. Feint on Giant A (out of reach on the first try) succeeds on exactly the DC. Quickstrike fan (34).
+</li>
+<li><strong>Sevek</strong>: Electric Arc &mdash; <strong>Giant A's Reactive Strike hits (49)</strong>. Warmaw B critically fails (32), Giant A fails (16). Flurry on Warmaw B: hit by 0 (50), miss.
+</li>
+<li><strong>Paya</strong>: Needle &mdash; natural 1, <strong>crit (74)</strong>; Aureys' backstab (34); MAP −10 misses.
+</li>
+<li><strong>Kreebnock</strong>: Daze on Giant A (success, 31) &mdash; single digits again. Restore the Mind on himself.
+</li>
+<li><strong>Rune Giant A</strong>: Wide Swing at Paya and Aureys &mdash; <strong>crit on Aureys (68)</strong>, a normal hit on Paya (38). Two more miss. <strong>Paya's persistent void ticks &mdash; Rune Giant A destroyed.</strong>
+</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Warmaw B</strong>: Howl recharged &mdash; Paya and Aureys crit-save; Sevek succeeds (20; he spends <strong>Prevailing Position</strong>, and would have saved without it). Jaws on Kreebnock (hit by 0, 42).
+</li>
+<li><strong>Aureys</strong>: flies 30. <strong>Feint critical success.</strong> Overwhelming Combination: <strong>fan crit, claw crit (natural 19) &mdash; 187.</strong> Quickstrike fan misses.
+</li>
+<li><strong>Sevek</strong>: <strong>Electric Arc (30), Flurry &mdash; two hits, 84. Warmaw B destroyed.</strong>
+</li>
+</ul>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Rune Giant B &mdash; persistent damage (<strong>Aureys'</strong> bleed and <strong>Paya's</strong> void on the same tick) · Warmaw A &mdash; <strong>Aureys</strong> · Rune Giant A &mdash; <strong>Paya</strong> (persistent void) · Warmaw B &mdash; <strong>Sevek</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 3 &middot; 3:46 PM – 4:26 PM · 3 rounds</div>
+<h3>The Temple Plaza: Commander Yrasthura</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Commander Yrasthura</strong> &mdash; rune giant, 500 HP, AC 43, Perception DC 45, greatsword +38 (4d12+24 slashing + 3d6 fire, <strong>vorpal</strong>), longspear, Wide Swing, Invoke Rune (Reflex DC 43) · <strong>Runic Warmaw</strong> &mdash; 370 HP, AC 38, Howl of Ash and Ember, Searing Ray, <strong>Invigorating Bite</strong> (heals 30 on a jaws crit), <strong>Share Runes</strong> (Yrasthura can cast its spells), <strong>Fearful Loyalty</strong> · <strong>Knights of Malice A &amp; B</strong> &mdash; winged envyspawn, 350 HP, AC 40, halberd (3d10+21 piercing + 1d6 fire, reach 10), Reactive Strike, +4 status to saves against mental, mental resistance 15</span></div>
+<div><span class="stat-label">Scaling</span><span class="stat-value">all four ran above the book's level-16 blocks from the first roll (Yrasthura: AC 43 / 500 HP / +38 against the printed AC 38 / 330 HP / +34).</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Kreebnock 45 (<strong>Prescience</strong>) · Knight A 43 · Aureys 43 (Battle Cry) · Sevek 40 · Knight B 40 · Yrasthura 40 · Paya 40 · Warmaw 39 · Mithtirith 33</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Commander Yrasthura &mdash; <strong>Aureys</strong> · Runic Warmaw &mdash; <strong>Paya</strong> · Knight of Malice A &mdash; <strong>Mithtirith</strong> · Knight of Malice B &mdash; <strong>fled</strong> (Aureys' Scare to Death)</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free): Battle Cry <strong>Demoralize on the warmaw &mdash; critical success, frightened 2</strong> (Fearful Loyalty: it does not flee).
+</li>
+<li><strong>Kreebnock</strong>: <strong>Haste</strong>, Courageous Anthem.
+</li>
+<li><strong>Knight A</strong>: flies in, two halberd Strikes at Sevek &mdash; miss, hit (41).
+</li>
+<li><strong>Aureys</strong>: hasted fly into the warmaw's square, Absorb Magic, <strong>Legend of Combat</strong> (Mythic Point). Earth to Heavens Strike on the warmaw: fan 36, claw 44.
+</li>
+<li><strong>Sevek</strong>: stances. ⭐ <strong>Glory on High</strong> (Will DC 40) &mdash; Yrasthura critically succeeds; <strong>Knight A natural 1: 56 mental, blinded 1 minute</strong>; Knight B and the warmaw succeed (dazzled 1 minute). The flight provokes Knight A's Reactive Strike, resolved before the blind: miss. Hasted Strike on Knight A (39).
+</li>
+<li><strong>Knight B</strong>: flies to Mithtirith &mdash; <strong>crit, 74.</strong> Inviolable returns 11.
+</li>
+<li><strong>Yrasthura</strong>: Stride, <strong>Invoke Rune</strong> (Rune of Flames onto her greatsword) cone &mdash; Paya fails (53); <strong>Sevek succeeds with Prevailing Position</strong> (24 instead of 58); Kreebnock sidesteps. <strong>Wide Swing at Paya and Sevek: 55 on a natural 17 &mdash; a critical hit on both.</strong> Sevek 112; Paya 104 after Deflecting Wave. ⭐ <strong>Vorpal, Fortitude DC 37</strong>: Paya 47. <strong>Sevek 36 &mdash; fails by 1 → Mythic Point reroll at mythic proficiency: 43, success.</strong>
+</li>
+<li><strong>Paya</strong>: Spear Dancer at Yrasthura &mdash; miss; at Knight A &mdash; miss, miss.
+</li>
+<li><strong>Warmaw</strong>: Stride, <strong>Howl of Ash and Ember</strong> (catching Knight A for 27) &mdash; Paya crit-saves; Sevek and Mithtirith succeed (17 each); <strong>Kreebnock fails (45)</strong>. Searing Ray on Aureys (hit by 0, 34).
+</li>
+<li><strong>Mithtirith</strong>: steps clear, <strong>9th-rank Heal on Sevek &mdash; 136</strong>; Communal Healing 13 to Paya.
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Kreebnock</strong>: Unleash Psyche, floats up 20, <strong>Soothe on Paya (49)</strong>.
+</li>
+<li><strong>Knight A</strong> (blind): three Strikes at Sevek &mdash; one beats his AC and fails the DC 11 flat check; two miss.
+</li>
+<li><strong>Aureys</strong>: Feint on Yrasthura fails. Earth to Heavens Strike: fan 40, <strong>claw crit 108</strong> + bleed &mdash; clumsy, enfeebled, stupefied.
+</li>
+<li><strong>Sevek</strong>: stances, Step. Flurry of Maneuvers: ⭐ <strong>Trip &mdash; natural 1, Mythic Point reroll, success by 1. Yrasthura is prone.</strong> Strike hits (43). Aureys' reaction fan (35). Hasted MAP −10 Strike: natural 1.
+</li>
+<li><strong>Knight B</strong> (dazzled): two Strikes at Mithtirith &mdash; both miss.
+</li>
+<li><strong>Yrasthura</strong>: Stands. Wide Swing at Aureys and Sevek &mdash; misses Sevek, hits Aureys (66). <strong>Arctic Rift (8th rank, via Share Runes)</strong> &mdash; it provokes: <strong>Paya's Reactive Strike hits (55)</strong>, Aureys' claw misses; she passes the stupefied flat check. Paya crit-saves; Kreebnock succeeds (22). Bleed 7.
+</li>
+<li><strong>Paya</strong>: ⭐ <strong>Divide and Conquer</strong> (Mythic Point) &mdash; hits Yrasthura (42) and Knight A (45) at mythic proficiency; <strong>both sickened 2</strong>. Two MAP −10 Strikes on Knight A: miss, hit (47).
+</li>
+<li><strong>Warmaw</strong>: flanks Mithtirith &mdash; <strong>jaws crit, 76</strong>; <strong>Invigorating Bite</strong> heals it 30. Second jaws beats his AC and is lost to the dazzled flat check. Inviolable returns 8.
+</li>
+<li><strong>Mithtirith</strong>: moves out, eating Knight B's Reactive Strike &mdash; <strong>natural 1</strong>. <strong>8th-rank Heal on himself (116)</strong>; 12 to Kreebnock.
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Kreebnock</strong>: ⭐ <strong>Phantasmagoria (9th rank)</strong> &mdash; Yrasthura succeeds (39, no reactions); <strong>Knight A fails (64, confused)</strong>; Knight B succeeds (24); <strong>the warmaw fails (79, confused)</strong>. <strong>Amped Message to Sevek</strong> &mdash; reaction Strike at Yrasthura: natural 3, miss.
+</li>
+<li><strong>Knight A</strong> (blind, confused): three Strikes at Sevek &mdash; critical miss, miss by 1, then a <strong>natural 20</strong> that passes its flat check (51). Shakes off the confusion.
+</li>
+<li><strong>Aureys</strong>: <strong>Speed of Arms</strong> reaction &mdash; <strong>fan natural 20, crit 76.</strong> Overwhelming Combination: <strong>fan natural 19, crit 103 &mdash; Commander Yrasthura is destroyed.</strong> <strong>Majestic Presence</strong>: the warmaw fails; Knight B rolls a natural 20; the blind Knight A cannot see it. ⭐ <strong>Scare to Death on Knight B &mdash; critical success</strong>; it passes the Fortitude save (only a critical failure kills), so it is <strong>frightened 2 and fleeing</strong>.
+</li>
+<li><strong>Sevek</strong>: hasted Stride, <strong>Inner Upheaval Flurry on the warmaw &mdash; natural 1, then natural 19: crit, 115.</strong> Aureys' Opportune Backstab (a crit, 60; rolled against Knight B by mistake and applied to the warmaw). Two MAP −10 Strikes: miss, miss.
+</li>
+<li><strong>Knight B</strong>: flees the map and does not return.
+</li>
+<li><strong>Paya</strong>: <strong>Whirlwind Strike</strong> &mdash; Knight A (hit by 0, 44), warmaw (52). Hasted MAP −10 Strike: <strong>natural 19, crit 106 &mdash; the Runic Warmaw is destroyed.</strong>
+</li>
+<li><strong>Mithtirith</strong>: <strong>Tempest Surge on Knight A &mdash; fails, 43. Knight of Malice A is destroyed.</strong>
+</li>
+</ul>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Commander Yrasthura &mdash; <strong>Aureys</strong> · Runic Warmaw &mdash; <strong>Paya</strong> · Knight of Malice A &mdash; <strong>Mithtirith</strong> · Knight of Malice B &mdash; <strong>fled</strong> (Aureys' Scare to Death)</p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 4 &middot; 4:31 PM – 5:08 PM · 4 rounds</div>
+<h3>Out of the Sinkhole: Two Ancient Ones</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Ancient Ones A &amp; B</strong> &mdash; 470 HP each, AC 43, Perception DC 44, Timeflaying Blade +40 (4d8+23 slashing + 3d6 acid), <strong>Slither Between Worlds</strong> (teleport 100 feet; a free action for a Mythic Point), <strong>Unified Timeline</strong> (reaction when a creature ends its move within 10 feet: Will DC 40, and the Ancient One teleports 10 feet regardless), <strong>Spirit Song (10th rank, Fortitude DC 43)</strong>, Vision of Lost Meaning, <strong>immune to emotion effects</strong>, <strong>Undying Myth</strong></span></div>
+<div><span class="stat-label">Prep round</span><span class="stat-value">(in initiative, before they surfaced): Paya &mdash; Torrent in the Blood; Kreebnock &mdash; Restore the Mind on Paya, Soothe on Sevek (50); Mithtirith &mdash; <strong>Foresight</strong>; <strong>Sevek &mdash; Heroic Presence (Zealous Conviction on all five, 12 temporary HP each)</strong>, stances; Aureys &mdash; major healing potion (66), hides in Paya's square.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Aureys 54 · Ancient One B 50 · Sevek 50 (natural 20) · Mithtirith 50 · Paya 42 · Kreebnock 41 · Ancient One A 39. Haste and Legend of Combat carried over from the Plaza. <em>(The table's turn order ran Aureys, Mithtirith, Sevek, B, Paya, Kreebnock, A.)</em></span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Ancient One A &mdash; <strong>Paya</strong> (first life, on the reaction Kreebnock gave him) and <strong>Sevek</strong> (after Undying Myth) · Ancient One B &mdash; <strong>Sevek</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong>: quickened move toward A &mdash; <strong>Unified Timeline</strong>: she crit-saves, it teleports 10 feet. <strong>Feint: natural 1, critical failure.</strong> Earth to Heavens Strike: fan 42, <strong>fan crit (natural 19) 92</strong> + bleed.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Protection (wand) on Sevek.</strong>
+</li>
+<li><strong>Sevek</strong>: hasted Stride. Flurry on A &mdash; first Strike comes up on <strong>his lucky number (7) → That's My Number → hit (28)</strong>; second is a natural 2. Aureys' reaction claw misses. <strong>Herald's Weapon.</strong> <strong>Taunt on both.</strong>
+</li>
+<li><strong>Ancient One B</strong>: <strong>Slither Between Worlds</strong> (Mythic Point). Timeflaying Blade on Sevek &mdash; <strong>crit (natural 19) 90, hit 39.</strong> <strong>Vision of Lost Meaning on Paya</strong> &mdash; critical success.
+</li>
+<li><strong>Paya</strong>: hasted Stride at B &mdash; Unified Timeline (success; it teleports away). Switches to A: <strong>Needle in the Gods' Eyes &mdash; natural 20 (104), natural 20 (106).</strong> Aureys' reaction claw (49). MAP −10 misses.
+</li>
+<li><strong>Kreebnock</strong>: Block Manipulation (Trusty Helmet). Needle Darts at A misses. <strong>Amped Message to Paya &mdash; reaction Strike: natural 20. Ancient One A is destroyed → ⭐ Undying Myth: back at half health.</strong>
+</li>
+<li><strong>Ancient One A</strong>: Steps back. <strong>Spirit Song (10th rank)</strong> &mdash; Paya's Reactive Strike hits (46). <strong>Paya, Aureys and Sevek fail (58, stunned 1); Kreebnock critically fails (116, stunned 2).</strong> Bleed and fire tick 18.
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Aureys</strong> (stunned 1): quickened move into A's square. Earth to Heavens Strike: fan and claw both miss.
+</li>
+<li><strong>Mithtirith</strong>: <strong>three-action Heal (9th rank) &mdash; 59 to Paya, Kreebnock, Sevek and himself.</strong> Aureys, in the enemy's square, is left out.
+</li>
+<li><strong>Sevek</strong> (stunned 1): hasted Stride. <strong>Flurry on A &mdash; hit, then natural-20 crit: 180 for the pair, one more than it had left. Ancient One A is destroyed for good.</strong> (Cody pays out the kill: +2 Mythic Points, +1 to everyone else.) <strong>Taunt on B.</strong>
+</li>
+<li><strong>Ancient One B</strong>: <strong>Spirit Song (10th rank)</strong> &mdash; Mithtirith natural 20, Kreebnock natural 20, Sevek critical success, <strong>Aureys Mythic Point reroll → critical success</strong>; <strong>Paya fails (63)</strong>. Slither Between Worlds (Mythic Point). Timeflaying Blade on Mithtirith: a hit by 9 for 43, which is a crit without Taunt's −1. Inviolable returns 9.
+</li>
+<li><strong>Paya</strong> (stunned 1): two Strides, Strike on B &mdash; <strong>crit (natural 18), 118.</strong>
+</li>
+<li><strong>Kreebnock</strong> (stunned 2, one action): one-action Disorienting Flash on B (success, 17).
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Aureys</strong>: Speed of Arms move, quickened move (her mobility avoids Unified Timeline). Earth to Heavens Strike on B: fan 40, claw 41 &mdash; clumsy, stupefied.
+</li>
+<li><strong>Mithtirith</strong>: steps away. <strong>6th-rank Heal on Sevek (98)</strong>; Communal Healing 10 to Kreebnock. (A first cast went to every token he still had targeted and was reverted.)
+</li>
+<li><strong>Sevek</strong>: hasted Stride. <strong>Reserves of Inner Strength</strong> (Sash of Prowess) for a Focus Point, <strong>Inner Upheaval</strong>. Unified Timeline &mdash; he crit-saves, B teleports away, and he spends an action following. Flurry: natural 2, <strong>hit (65)</strong>. <strong>Taunt.</strong>
+</li>
+<li><strong>Ancient One B</strong>: Strike at Sevek misses by 1 (AC 47 in stance with Protection). Steps, <strong>Slither Between Worlds</strong> (Mythic Point), <strong>crit on Mithtirith (84)</strong> with Taunt's penalty applied. Inviolable returns 6. Persistent fire 12.
+</li>
+<li><strong>Paya</strong>: hasted Stride, Needle in the Gods' Eyes &mdash; natural 1, natural 2, MAP −10 miss.
+</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche. <strong>Weight of the World</strong> &mdash; critical success, no effect. Restore the Mind on Mithtirith (38).
+</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Aureys</strong>: Speed of Arms move. Feint fails. Earth to Heavens Strike: first fan misses by 1 (and was mis-targeted anyway), second hits (32); MAP Strike is a natural 2.
+</li>
+<li><strong>Mithtirith</strong>: Elf Step. ⭐ <strong>Spirit Blast (6th rank) &mdash; B rolls a natural 1: critical failure, 118.</strong> B is on about a dozen hit points.
+</li>
+<li><strong>Sevek</strong>: Electric Arc (critically saved, but it lights the Jolt Coil). <strong>Strike &mdash; natural 20, crit 149 into its last 12. Ancient One B is destroyed.</strong>
+</li>
+</ul>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Ancient One A &mdash; <strong>Paya</strong> (first life, on the reaction Kreebnock gave him) and <strong>Sevek</strong> (after Undying Myth) · Ancient One B &mdash; <strong>Sevek</strong></p>
+</div>
+
+<h2>Damage Ledger</h2>
+<div style="overflow-x:auto">
+<table class="contrib-table">
+<tr><th></th><th>Shoggoths</th><th>City Gates</th><th>Temple Plaza</th><th>Ancient Ones</th><th><strong>Total dealt</strong></th><th>Damage taken</th></tr>
+<tr><td><strong>Aureys</strong></td><td>393</td><td>666</td><td>461</td><td>304</td><td><strong>~1,820</strong></td><td>~390</td></tr>
+<tr><td><strong>Paya</strong></td><td>450</td><td>333</td><td>291</td><td>396</td><td><strong>~1,470</strong></td><td><strong>~560</strong></td></tr>
+<tr><td><strong>Sevek</strong></td><td>385</td><td>331</td><td>253</td><td>284</td><td><strong>~1,250</strong></td><td>~555</td></tr>
+<tr><td><strong>Kreebnock</strong></td><td>79</td><td>118</td><td>206</td><td>17</td><td><strong>~420</strong></td><td>~355</td></tr>
+<tr><td><strong>Mithtirith</strong></td><td>8</td><td>&mdash;</td><td>47</td><td>133</td><td><strong>~190</strong></td><td>~325</td></tr>
+</table></div>
+<div class="note-banner">Hit points actually removed, per the roll log: reverted Foundry applications are left out, overkill on a killing blow is not counted, and persistent damage is credited to whoever inflicted it. Paya's third natural 20 on Ancient One A rolled 100 into its last 49 and was never applied, so it is not in his total.<br><br><strong>Kills</strong>: Aureys 3 · Sevek 3 · Paya 2 (+ Ancient One A's first life) · Kreebnock 1 · Mithtirith 1. Rune Giant A fell to Paya's persistent void, and Rune Giant B to a tick of Aureys' bleed and Paya's void together. One enemy fled. <strong>Nobody dropped.</strong><br><br><strong>Healing</strong>: Paya about 820 rolled (after the two fights Mithtirith missed, and before the Ancient Ones) · Mithtirith about 620 in two fights · Kreebnock about 330.</div>
+
+<h2>Mythic Economy</h2>
+<div class="summary">
+<ul>
+<li><strong>Sevek</strong>: one point on the <strong>vorpal Fortitude reroll</strong> (36 → 43), one on the <strong>Trip reroll</strong> against Yrasthura (natural 1 → success). <strong>+2</strong> for the kill on Ancient One A (Cody's sentence is half-garbled on the recording; the killing blow was Sevek's). The Ascended Celestial reroll was not needed.
+</li>
+<li><strong>Aureys</strong>: <strong>Legend of Combat</strong> twice (she recovered the first with an action between fights), a reroll on the second Spirit Song.
+</li>
+<li><strong>Paya</strong>: the Escape reroll against the Shoggoth, <strong>Divide and Conquer</strong> on Yrasthura.
+</li>
+<li><strong>Kreebnock</strong>: a reroll on the warmaw's Howl (still failed), <strong>Prescience</strong> on the Plaza initiative, <strong>Now You See Me</strong> at the gates.
+</li>
+<li><strong>The Ancient Ones</strong> spent theirs on mobility: B used <strong>Slither Between Worlds</strong> as a free action three times; A spent <strong>Undying Myth</strong> and had nothing left to slither with.
+</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+<h4>Sevek &middot; the One Who Kept His Head</h4>
+<ul>
+<li><strong>A Mythic Point was the difference between Sevek and a decapitation.</strong> Yrasthura's Wide Swing landed as a crit because he had just spent Prevailing Position on her rune cone and was out of stance. He called that himself before Cody had finished the math: <em>"That will crit me… because I'm out of stance because of Prevailing Position."</em> The sword was vorpal, the save was DC 37, and his roll was 36. <em>"Ah, shit."</em> The reroll came up 43.
+</li>
+<li><strong>He closed the night.</strong> Both Ancient Ones died to his staff, each on a natural 20: a stunned-turn Flurry for 180 that ended the first one after its Undying Myth, and the last roll of the session for 149. Three kills in all, with the last runic warmaw at the gates.
+</li>
+<li><strong>Two new tools, both used on their first chance.</strong> <strong>Glory on High</strong> opened the Plaza fight (<em>"Let's use a new thing that I got. Hopefully it worked out well"</em>) and blinded a Knight of Malice for the entire fight. Blind, that knight made six Strikes at him and landed one, on a natural 20. And <strong>Heroic Presence</strong>, unused since level 17, finally went off in the free round before the Ancient Ones: <em>"I might as well. It lasts ten minutes. Because I'll never do it either way."</em>
+</li>
+<li><strong>An old favour came back to him.</strong> He wanted the Major Striking rune off Paya's old weapon, but when Paya said he was about to buy one himself, Sevek offered to leave it with him: <em>"I mean, you can take it and save money. I can spend it on myself."</em> Paya wouldn't hear it: <em>"You already gave me the first plus three in the party."</em> He also agreed Quickstrike belonged with Aureys, whose actions go to debuffs, rather than with a monk who already has Flurry.
+</li>
+<li><strong>The trip lock still taxes bosses.</strong> He tripped Yrasthura (a natural 1 rescued by a Mythic Point), and she had to stand up beside Paya and Aureys. A warmaw that bit him got tripped by <strong>Rippling Spin</strong>, with the new <strong>Bracers of Hammers</strong> damage on top. <strong>Prevailing Position</strong> went off three times: it erased a rune giant's Wide Swing and turned Yrasthura's cone from a failure into a success (24 damage instead of 58). The third, on a warmaw's Howl, turned out not to be needed.
+</li>
+<li><strong>Dry and self-aware about his dice.</strong> His first Flurry at the gates was a natural 1 and a miss (<em>"Oh boy, unfortunate"</em>). Handed a free reaction Strike by Kreebnock, he rolled a 3: <strong><em>"Sorry, I betrayed your expectations."</em></strong> <em>"Not my day"</em> came one roll before a natural 19 for 115. Then: <em>"You know what? I'm going to do the dumb thing and I'm going to do two MAP ten."</em> Both missed. And to an Ancient One teleporting out of his Inner Upheaval: <em>"Well, well, well, that doesn't go well."</em>
+</li>
+<li><strong>He helped other people's turns.</strong> He caught that the restrained Paya was off-guard, talked Mithtirith through his escape from two reach enemies (<em>"You can stride instead… Hopefully it doesn't down you"</em>), and checked on Kreebnock's fly speed under Haste.
+</li>
+<li>A quiet night for him in the story scenes. He left the talking with Liralarue and the council to Aureys and Mithtirith, backed the rescue-first plan (<em>"Let's do this"</em>) and the gates-before-sinkhole order (<em>"I agree. Let's do the gates"</em>).
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-aureys">
+<h4>Aureys Hollow &middot; the Greatest of Dragons</h4>
+<ul>
+<li><strong>She spoke for the party all night.</strong> She made the ask of Liralarue with real care for who she was talking to (<em>"I won't say the real world, because this world is real to you"</em>), raised Sorshen, asked the question that got the only hopeful answer of the scene (<em>"Even with our help?"</em>), and remembered to push the council on Sorshen's archive. When there were three objectives on the table she put the people first: <em>"I would think that we should try to free those refugees that are potentially at risk. We don't know how long they may hold out."</em>
+</li>
+<li><strong>She told a rune-giant commander to her face why they were there.</strong> <em>"Nope. We've come here to kill you."</em> And when Yrasthura said she hadn't had a challenge yet: <strong><em>"Well, you know, I am the greatest of dragons, so… challenge accepted."</em></strong> Three rounds later Aureys killed her, on a natural 20 and a natural 19 back to back.
+</li>
+<li><strong>Top damage of the night (~1,820) and three kills</strong>: the last Shoggoth, the first warmaw at the gates, and <strong>Commander Yrasthura</strong>. Her bleed was also on the tick that finished a rune giant. Her new <strong>Legend of Combat</strong> gave her an extra reaction every turn, and she used nearly all of them.
+</li>
+<li><strong>The debuffs were everyone's crits.</strong> Earth to Heavens Strike put clumsy, enfeebled and stupefied on a target in every fight. Paya said so out loud (<em>"Hit because of Aureys. Like most of my strikes in this game"</em>). Her frightened 2, together with Sevek's Taunt, held a Shoggoth's natural 19 on her to a plain hit, and she noticed: <em>"My Frightened helped, because otherwise it would have been a crit."</em>
+</li>
+<li><strong>Scare to Death, new this level.</strong> A success on a Shoggoth, and a critical success on Knight of Malice B that sent it flying off the map for good: <em>"I'm just chirping in his ear. Hey, go kill yourself. It'll be easier on you."</em> Then the royal wave.
+</li>
+<li><strong>The flattery Feints</strong>, in character every time. To a Shoggoth: <em>"You seem like you're super gross, but maybe not as gross as those other ones. So hey, maybe we can be friends."</em> To a rune giant: <em>"Aren't you so big and strong? Look at those muscles of yours and your steamy flames."</em> To a wounded one: <em>"Oh, did you hurt yourself? I'm sorry. I'll come and help you."</em> To the warmaws: <em>"Aw, pretty puppy. You're so awesome. I just want to be your friend."</em> To an Ancient One: <em>"Aren't you so wise and wonderful?"</em>
+</li>
+<li><strong>The hoard.</strong> She has Hidden Hoard now, and everything goes in it: Liralarue's statues (<em>"my hoard!"</em>), the locals' gifts (<em>"Put it in the hoard!"</em>), the giants' weapons (<em>"That's our stash now"</em>). Then Absalom: <em>"My hoard is gone!"</em>
+</li>
+<li><strong>Dragon family.</strong> <em>"Hello, brother. And brother."</em> &mdash; <em>"Sister, if you please."</em> &mdash; <em>"I'm a sister, too. Welcome. It's like a family reunion."</em> And the coffee joke that Liralarue took seriously.
+</li>
+<li>She also covered for Jesse at the table, relaying what he was trying from the next room and getting Mithtirith's turn skipped so the fight could keep moving.
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-paya">
+<h4>Paya &middot; Three Twenties</h4>
+<ul>
+<li><strong>Three natural 20s in one round.</strong> Two on Needle in the Gods' Eyes and a third on the reaction Strike Kreebnock set up, which killed an Ancient One and forced its Undying Myth. <strong><em>"I am a statistics major and I have no explanation for this. But yeah, I'll keep hitting."</em></strong> When the dice turned: <em>"That I can explain with statistics."</em> And when a later turn opened on a natural 1 and a natural 2: <em>"It's all right with me. Three 20s in a round was a bit much."</em>
+</li>
+<li><strong>Loot master, and generous with it.</strong> He ran the stash sale, called the Spindle Key (<em>"You never know, but 7,000 gold might really help"</em>), and gave away the runes off his old bec de corbin at a tenth of cost: Quickstrike and Greater Astral to Aureys, Major Striking to Sevek. <em>"You already gave me the first plus three in the party. I'm fully okay with this. I got to use the fun weapon before we had money for it, and now I have money for it, so it's all good."</em>
+</li>
+<li><strong>The party's healer for half the day.</strong> With Mithtirith off the map he healed after the Shoggoths and after the gates (Ocean's Balm, Dash of Herbs, Fresh Produce), added a Torrent in the Blood before the Ancient Ones, and fed Aureys on request: <em>"I don't think the plane of wood has any eyeballs,"</em> followed by a fruit shaped into an eyeball.
+</li>
+<li><strong>Two kills and the second-highest damage (~1,470).</strong> A Shoggoth and the Plaza warmaw, both on MAP −10 natural 19s (<em>"it's just the fact that I keep getting 19s on the MAP 10"</em>). His persistent void finished one rune giant and shared the tick that finished the other, and his third 20 took the first Ancient One's first life.
+</li>
+<li><strong>He took the most damage at the table (~560) and stayed level about it.</strong> Restrained and slammed by a Shoggoth (he got out on a <strong>Mythic Point</strong> Escape), a Reactive Strike on the way to a giant, and 104 from Yrasthura's crit, with a vorpal save he passed. After a turn of three misses: <strong><em>"Some days you kick ass. Some days you get your ass kicked."</em></strong>
+</li>
+<li><strong>He gave the credit away.</strong> <em>"Paya rolls very well, but a lot of hits I've had have been from your debuffs. I know that for sure."</em>
+</li>
+<li><strong>Voice.</strong> The new winged armor (<em>"Paya will find a quiet corner of the rubble to change in"</em>). Caught hiding under Aureys' spectral dragon: <em>"That's what I get for hiding under a dragon. It's not a very effective hiding place, I imagine."</em> On Aureys in the enemy's square: <strong><em>"It's bad company hanging out with Ancients of Time."</em></strong> On Kreebnock's Now You See Me: <em>"Such a well-named ability for the character."</em>
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-kreebnock">
+<h4>Kreebnock &middot; Setting the Table</h4>
+<ul>
+<li><strong>He handed out turns.</strong> Haste in every fight that needed it. An amped Message to Sevek for a free swing at Yrasthura, and another to Paya (<em>"Since you're on a roll there, Paya, you should strike"</em>), which became the third natural 20 and the kill. He had been about to turn his own spells on the other Ancient One; Aureys said it was better to take the wounded one down first, and he agreed: <em>"We should actually focus fire."</em>
+</li>
+<li><strong>His Phantasmagoria was the biggest spell of the Plaza fight.</strong> 206 damage across all four enemies. Two failed outright: the warmaw confused, and the already-blind knight confused on top of it, which Cody enjoyed (<em>"That'll be interesting"</em>). Yrasthura saved and still lost her reactions.
+</li>
+<li><strong>One kill, and two that got away by a hair.</strong> His Telekinetic Projectile turned Shoggoth B into <em>"a pile of mush, eyes and teeth"</em> and freed Aureys from its grab. Twice at the gates his Daze left a rune giant on single-digit hit points. Cody: <em>"Aw, that's rude. He's had two hit points."</em>
+</li>
+<li><strong>He backed the rescue.</strong> <em>"Kreebnock's in agreement. That's what he wants to do as well."</em> And the gates next: <em>"Clear the path behind us."</em> He also asked the question that opened rare apex items to the whole table.
+</li>
+<li><strong>The punching bag, cheerfully.</strong> He failed a warmaw's Howl at the gates even on a reroll, shook the sickness off afterward, and then failed the next warmaw's Howl at the Plaza. Cody: <em>"Again with Kreebnock, the only one failing saves."</em> Kreebnock: <em>"It's very consistent at the very least."</em> When a rune giant had nobody else in reach, Cody apologised and Kreebnock said, <em>"It's alright, I can take it."</em> He crit-failed the Spirit Song for 116 and lost most of a turn to stunned 2. After the gates: <strong><em>"Kreebnock throws up and then refocuses."</em></strong>
+</li>
+<li><strong>Healing lane.</strong> Restore the Mind during and after the fights (his new feat stretches an unleashed psyche to four rounds), and Soothe on Paya and on Sevek: about 330 points across the day.
+</li>
+<li><strong>Voice.</strong> <em>"My last action is to restore your mind after watching that thing."</em> Rolling a natural 20 on the second Spirit Song: <em>"Hey, I got a crit that time."</em> On Cody's dead PC in another group: <em>"Doesn't bode well for the Sunday Phoenix."</em> And the one honest line about himself at the table: <em>"I always want to get more into the roleplay side of things, but it's hard to keep a flow going."</em>
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-mith">
+<h4>Mithtirith &middot; the Healer They Missed</h4>
+<ul>
+<li><strong>He asked the question that named the enemy.</strong> In Liralarue's meadow: <em>"You said when you first talked to us that this was the, you showed us the worst possible of all futures?"</em> That got <em>"No, that was the doing of the Ashen Man"</em> and everything about the Ancient Ones that followed. At the council, <strong>his critical Arcana</strong> read the scallop throne and the three pitchers as <strong>Sorshen's Runewell of Lust</strong>, and he followed up straight away: <em>"We don't know where that is, though, right?"</em>
+</li>
+<li><strong>Most of two fights on the bench, and the party felt it.</strong> His map was black for the Shoggoths and for the start of the gates. He handled it without fuss (<em>"Why don't you guys move on without me while we see if I can fix it on my end"</em>), tried casting Darkvision in case it was lighting, sat the gates out once Cody had rebalanced it rather than make him do it twice, and was funny about it: <em>"Starting to wonder if I should have a seance for this computer."</em> When the party limped out of the gates, Cody said it for him: <em>"Shows how potent Mithtirith is with healing."</em>
+</li>
+<li><strong>Back for the Plaza, and his first action was 136 hit points into Sevek</strong>, one turn after the vorpal crit. Over the last two fights he put out roughly 620 points of healing: 9th-, 8th- and 6th-rank Heals with Communal Healing on top, and a three-action Heal on four people.
+</li>
+<li><strong>Still the enemy magnet.</strong> Knight B crit him for 74, the warmaw crit him for 76, and the second Ancient One teleported to him twice. His new <strong>Inviolable</strong> hit every one of them back.
+</li>
+<li><strong>He finished two fights.</strong> A <strong>Tempest Surge</strong> killed the blind Knight of Malice (<em>"Decisions, decisions"</em>). Against the last Ancient One, a <strong>Spirit Blast it critically failed for 118</strong> left it on a dozen hit points for Sevek.
+</li>
+<li><strong>He prepped the tank.</strong> <em>"Quick question, Sevek. Do you have any status bonuses to your AC?"</em> Then a Protection wand on him, and <strong>Foresight</strong> on himself in the free round. Between fights he handed out Energy Aegis to Paya, Aureys and Kreebnock.
+</li>
+<li><strong>Deadpan.</strong> On the three-action Heal that had to skip Aureys: <em>"If I did you, I would do somebody I didn't want to do. Stop hanging out in enemy squares."</em> On Paya's dice: <strong><em>"I have a confession to make. I've been giving all of my criticals to Paya. I think the stats will prove it."</em></strong> On the envy hounds: <em>"I would have thought a Maltese would be an envy one."</em> Planning his way out from between two reach weapons: <em>"Well, if I screwed that up, you'll hurt me."</em>
+</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+<div class="loot-item">
+<div class="loot-name"><strong>Liralarue's trove &mdash; 200,000 gp</strong></div>
+<div class="loot-source">Liralarue, in thanks</div>
+<div class="loot-note">Distributed with the stash sales as <strong>41,850 gp each</strong>, then <strong>1,000 gp each</strong>.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>+3 Greater Winged half plate</strong> (Greater Resilient)</div>
+<div class="loot-source">The rescued locals</div>
+<div class="loot-note"><strong>Paya</strong>, worn from the second fight on. He can fly now.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>The locals' other gifts</strong></div>
+<div class="loot-source">The rescued locals</div>
+<div class="loot-note">A second Quickstrike rune and an item "of disappearance" were read out; the rest went into Aureys' hoard unlisted.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Rune giant gear</strong></div>
+<div class="loot-source">City Gates</div>
+<div class="loot-note">+3 Greater Striking longspears, +3 Greater Striking greatswords, +2 Greater Resilient splint mail. For sale.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Quickstrike, Greater Astral</strong></div>
+<div class="loot-source">Paya's old bec de corbin</div>
+<div class="loot-note">To <strong>Aureys</strong>, at a tenth of cost.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Major Striking</strong></div>
+<div class="loot-source">Paya's old bec de corbin</div>
+<div class="loot-note">To <strong>Sevek</strong>, 3,100 gp.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Bracers of Hammers</strong></div>
+<div class="loot-source">Absalom</div>
+<div class="loot-note"><strong>Sevek's</strong> apex item, once Cody opened rare apex items.</div>
+</div>
+<div class="loot-item">
+<div class="loot-name"><strong>Sold</strong></div>
+<div class="loot-source">Party stash</div>
+<div class="loot-note">Spindle Key, Greater Bands of Force, Aethusa's +3 Greater Striking bec de corbin.</div>
+</div>
+</div>
+<div class="xp-banner">Treasure &middot; 200,000 gp trove + stash sales = <strong>42,850 gp each</strong> &middot; milestone levelling, no XP &middot; shopping open until next session</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Liralarue (Cody)</strong>: "He cannot destroy me. My body would just reform, like any of the dreams of this place. But as long as I am awake, in a sense, he cannot use the Risen to jump between bodies. So long as I am awake, he can be killed."
+<span class="attribution">Why Xanderghul fears her.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "We need your help, of course. Not for this dream world, but for... I won't say the real world, because this world is real to you. But to the other world. The world where you were born."
+<span class="attribution">Asking a dream for help against Xanderghul.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "I mean, you can take it and save money. I can spend it on myself."<br><strong>Paya</strong>: "You already gave me the first plus three in the party. I'm fully okay with this."
+<span class="attribution">Paya handing over a Major Striking rune at a tenth of its price.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "Kreebnock throws up and then refocuses."
+<span class="attribution">Sickened since round one of the gates fight, finally getting ten minutes.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "No problem. My last action is to restore your mind after watching that thing."
+<span class="attribution">Having just turned the Shoggoth holding Aureys into a pile of mush, eyes and teeth.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "Well, you know, I am the greatest of dragons, so… challenge accepted."
+<span class="attribution">Commander Yrasthura: "Haven't had a challenge since I got here."</span>
+</blockquote>
+
+<blockquote>
+<strong>Cody</strong>: "I think someone needs to burn a mythic point."<br><strong>Paya</strong>: "I would definitely recommend it, because you will die."<br><strong>Cody</strong>: "Sevek, you keep your head because of that."
+<span class="attribution">Sevek's Fortitude save against the vorpal greatsword: 36 against DC 37, then 43 on the reroll.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "Sevek, why don't you take a shot at the commander there?"<br><strong>Sevek</strong>: "Sorry, I betrayed your expectations."
+<span class="attribution">An amped Message, a free reaction Strike at Yrasthura, and a natural 3.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "I'm not making it visual. I'm just chirping in his ear. Hey, go kill yourself. It'll be easier on you."
+<span class="attribution">Scare to Death on a Knight of Malice. It missed dying by 1 and fled the map.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "I might as well. It lasts ten minutes. Because I'll never do it either way."
+<span class="attribution">Spending Heroic Presence for the first time, one round before the Ancient Ones surfaced.</span>
+</blockquote>
+
+<blockquote>
+<strong>Paya</strong>: "I am a statistics major and I have no explanation for this. But yeah, I'll keep hitting."
+<span class="attribution">Two natural 20s into an Ancient One. The third came a minute later.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "If I did you, I would do somebody I didn't want to do. Stop hanging out in enemy squares."<br><strong>Aureys</strong>: "That's what I do, though."
+<span class="attribution">A three-action Heal that had to leave her out.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "I have a confession to make. I've been giving all of my criticals to Paya. I think the stats will prove it."
+<span class="attribution">After Paya's fourth crit of the fight.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+<li><strong>The sinkhole is open.</strong> Yrasthura and both Ancient Ones are dead at its edge, and the Doomsday Door beneath it is still open. The session stopped the moment combat ended; nothing has been searched and nobody has gone down.
+</li>
+<li><strong>"And here you stand again."</strong> The voice that came with the Ancient Ones was <em>"familiar."</em> The Ashen Man is one of the Ancient Ones. Whether that was him, and what "again" means to a being from the dimension of time, was not explained.
+</li>
+<li><strong>Belimarius has a warshard</strong>, a fragment of Gorum, and is hiding somewhere in Xin-Eurythnia. All three strike points are now hit; the intelligence on where she is has not come in yet.
+</li>
+<li><strong>Sorshen's Runewell of Lust, the Eye of Desire</strong>, is what Ayavah's vision shows Belimarius sitting beside. Its location is unknown; Sorshen would have kept it close.
+</li>
+<li><strong>Sorshen's archive in the Blood Moon Palace</strong> may hold a way into Jandelay. It cannot be reached until Belimarius is dealt with.
+</li>
+<li><strong>The clock.</strong> Sorshen and Xanderghul are fighting in Jandelay. <em>"Some weeks,"</em> and in every future Liralarue has seen, Sorshen falls.
+</li>
+<li><strong>Liralarue must stay awake.</strong> As long as she is, Xanderghul cannot jump into a Risen body and can be killed. She intends to stay hidden.
+</li>
+<li><strong>Knight of Malice B got away</strong>, frightened and flying.
+</li>
+<li><strong>Mithtirith's map problem</strong> was never explained. Two maps were black for Jesse and fine for everyone else; the second one came good partway through the fight.
+</li>
+<li><strong>Kreebnock's apex item</strong>: he asked about a rare Charisma apex item and Cody approved rare apex items. Whether he bought it wasn't said.
+</li>
+<li><strong>Next campaign vote</strong> closes at the start of next session; Jesse's vote is likely the tiebreaker. Campaign end expected mid-November.
+</li>
+<li><strong>Paya is out next session.</strong>
+</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where it leaves off</span>
+<p>Commander Yrasthura is dead at the lip of the sinkhole. Two Ancient Ones rose out of it behind her and are mist. The Doomsday Door below is still open, and nobody has looked down yet.</p>
+<div class="big-line">"And here you stand again."</div>
+<span class="speaker">&mdash; a familiar voice, as the Ancient Ones rose &middot; three strike points hit in one day</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+<li>Let Aureys and Mithtirith do the talking with <strong>Liralarue</strong> and the war council. Backed rescue-first and gates-before-sinkhole.
+</li>
+<li><strong>Shopping</strong>: took <strong>Major Striking</strong> from Paya (3,100 gp) after offering to let him keep it. Passed Quickstrike to Aureys. <strong>Bracers of Hammers</strong> once Cody opened rare apex items. Staff now reads +3 Major Striking Greater Flaming Greater Thundering Greater Crushing.
+</li>
+<li>Daily prep: Energy Aegis, See the Unseen, Life Connection, <strong>Lucky Number (7)</strong>.
+</li>
+<li><strong>Shoggoths</strong>: Taunt on all three. 63 on B, 110 on A with Inner Upheaval, 148 on C (both crit rolls, downgraded by crit immunity), 64 more from two Electric Arcs. Shoggoth C attacked him four times and missed four times. No damage taken.
+</li>
+<li><strong>City Gates</strong>: opened on a natural 1. <strong>Prevailing Position</strong> blanked a rune giant's Wide Swing. <strong>Inner Upheaval Flurry, 152</strong> on Warmaw A. <strong>Rippling Spin trip</strong> on the warmaw that bit him. Cast Electric Arc inside a giant's reach knowing it would provoke (49); with that reaction gone, Paya went in with Needle in the Gods' Eyes. <strong>Killed Warmaw B.</strong>
+</li>
+<li><strong>Temple Plaza</strong>: <strong>Glory on High</strong> &mdash; Knight A blinded for a minute, Knight B and the warmaw dazzled. Prevailing Position on Yrasthura's cone, then <strong>crit for 112 while out of stance</strong>. <strong>Vorpal save: 36 vs DC 37. Mythic Point reroll: 43.</strong> <strong>Tripped Yrasthura</strong> on a second Mythic Point reroll. Missed Kreebnock's Message strike. Natural-19 crit on the warmaw for 115. Two MAP −10 swings, both missed.
+</li>
+<li><strong>Prep round</strong>: <strong>Heroic Presence</strong> &mdash; Zealous Conviction on all five.
+</li>
+<li><strong>Ancient Ones</strong>: <strong>That's My Number</strong> on the first Strike. <strong>Herald's Weapon.</strong> Taunt every round. Took 129 from B's opening turn. <strong>Killed Ancient One A</strong> while stunned (hit + natural-20 crit, 180 against its last 179) &mdash; <strong>+2 Mythic Points</strong>. Reserves of Inner Strength → Inner Upheaval, then lost the first swing to Unified Timeline. <strong>Killed Ancient One B</strong> (natural 20, 149 into its last 12).
+</li>
+<li><strong>Three kills. ~1,250 damage dealt, ~555 taken</strong> (Paya took ~560). Two Mythic Points spent, two earned back on one kill.
+</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+<li><strong>The vorpal save failed by exactly 1.</strong> First roll 4 + 32 = 36 against DC 37. The reroll was 7 + 36 = 43 at mythic proficiency; a 7 would have cleared it at normal proficiency too.
+</li>
+<li><strong>Yrasthura's vorpal crit was a natural 17</strong>, not a natural 20 (55 against AC 44). The vorpal rune only triggers on a natural 20 that also crits. Her printed greatsword carries the standard vorpal rune with no custom text, so by the book that save should not have been called.
+</li>
+<li><strong>The crit itself was Prevailing Position's bill.</strong> 55 against AC 46 in stance is a hit by 9. Out of stance at 44 it is a crit by 11. The reaction turned her cone from a failure into a success (34 saved) and cost roughly 56 on the swing, plus the vorpal save.
+</li>
+<li><strong>The Trip on Yrasthura needed the Mythic Point twice over.</strong> Natural 1 first. The reroll was a 4: 42 against DC 41, and without mythic proficiency's +2 it fails.
+</li>
+<li><strong>Glory on High's blind held for all three rounds.</strong> Blind, Knight A made six Strikes at Sevek and landed one, on a natural 20. The flat check cancelled one other hit outright.
+</li>
+<li><strong>Bracers of Hammers fired once</strong>: 2 bludgeoning on the Rippling Spin trip. The once-a-day two-action flip was not used.
+</li>
+<li><strong>Taunt did not keep Ancient One B off Mithtirith</strong>, but it paid once. B teleported to him twice as a free action. The first Strike hit by 9 for 43 and is a crit without Taunt's −1; the second crit anyway for 84.
+</li>
+<li><strong>Every Plaza enemy was scaled up from its printed block</strong>, consistently from the first roll (Yrasthura AC 43 / 500 HP against a printed 38 / 330).
+</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+<li><strong>Prevailing Position before a boss's Strike.</strong> Three uses tonight. One blanked a Wide Swing, one wasn't needed, and the third is the reason he needed a Mythic Point to stay alive.
+</li>
+<li><strong>Heroic Presence is used.</strong> One action for five people. It went off in a free round, which is the cheapest it will ever be.
+</li>
+<li><strong>Unified Timeline eats setup.</strong> Ending a move within 10 feet moves the target. Reach 10 means stopping at 15 does not help; Aureys' mobility got around it, his did not.
+</li>
+<li><strong>One day, three objectives, done.</strong> Focus Points refreshed between fights, both Mythic Point spends were rerolls.
+</li>
+<li><strong>Liralarue stays awake, or Xanderghul can't die.</strong>
+</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+<li>What is at the bottom of the <strong>sinkhole</strong>, now that its guards are dead?
+</li>
+<li>Whose voice was <em>"And here you stand again"</em> &mdash; the <strong>Ashen Man's</strong>?
+</li>
+<li>Where is <strong>Belimarius</strong>, and what does she mean to do with the <strong>warshard</strong>?
+</li>
+<li>Where is the <strong>Runewell of Lust</strong>?
+</li>
+<li>Does Sorshen's <strong>archive</strong> actually have a way into <strong>Jandelay</strong>?
+</li>
+<li>Ask Cody about the vorpal save: the crit was a natural 17, and the rune asks for a natural 20.
+</li>
+<li>When to spend <strong>Channel Divine Spark</strong> (level 18, unused so far) and the Bracers' once-a-day flip?
+</li>
+</ul>
+
+</section>
+
+</div>
+</body>
+</html>

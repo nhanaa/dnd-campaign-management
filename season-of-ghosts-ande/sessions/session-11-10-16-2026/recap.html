@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 11 &mdash; The Girl in the Tree</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>The Girl in the Tree</h1>
+  <div class="subtitle">Season of Ghosts &middot; Session 11 &middot; Enko, the pilgrim shrines, and Yeri</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-10-16</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 16m</span>
+    <span class="meta-pill">Fall &middot; two days on the Pilgrim&rsquo;s Path &middot; 7108 IC</span>
+    <span class="meta-pill">Level 5 &middot; four encounters &middot; 304 XP</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:55%"></div>
+  <div class="comp-seg comp-rp" style="width:16%"></div>
+  <div class="comp-seg comp-mystery" style="width:10%"></div>
+  <div class="comp-seg comp-explore" style="width:19%"></div>
+</div>
+<div class="composition-legend" style="margin-bottom:36px">
+  <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat &amp; Hazard 55%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Roleplay &amp; NPCs 16%</span>
+  <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Shrines &amp; Lore 10%</span>
+  <span><span class="legend-dot" style="background:var(--cyan)"></span>Travel, Rest &amp; Break 19%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-zhen">
+    <div class="char-name">Zhen Stillness</div>
+    <div class="char-class">Samsaran (Hungerseed) Animist 5 &mdash; Liturgist &middot; Druid FA</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kaelen">
+    <div class="char-name">Kaelen Ashford</div>
+    <div class="char-class">Human Monk 5 &mdash; bo staff, Mountain Stance, Staff Acrobat</div>
+    <div class="char-player">cajun_code</div>
+  </div>
+  <div class="char-card char-kaoru">
+    <div class="char-name">Kaoru</div>
+    <div class="char-class">Kitsune Magus 5 &mdash; Aloof Firmament</div>
+    <div class="char-player">magus player</div>
+  </div>
+  <div class="char-card char-mujin">
+    <div class="char-name">Mu-Jin</div>
+    <div class="char-class">Witch 5 &mdash; Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+    <div class="char-player">snotierknave69</div>
+  </div>
+  <div class="char-card char-iryoku">
+    <div class="char-name">Iryoku-Yasha</div>
+    <div class="char-class">Yaksha Kineticist 5 (Wood/Fire)</div>
+    <div class="char-player">legendfather</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-style:italic;margin-top:14px">The recording and the Foundry log both cover the whole session. Combat numbers are from the log. Kaelen&rsquo;s and Kaoru&rsquo;s players shared one voice track, so their lines were separated by whose turn it was and by class kit; lines that couldn&rsquo;t be separated are left out. <strong>Enko</strong>, <strong>Iogaka</strong>, <strong>Yeri</strong> and <strong>Yuni</strong> are spelled from the GM&rsquo;s chat posts.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The party came out of the Wall of Ghosts at midnight, still on the Pilgrim&rsquo;s Path. They had opened the wall, but they had never reached the Tan Sugi Monastery, so they made camp and went on west in the morning. The first thing on the road was a kappa lying face-down with an empty head-bowl. Iryoku topped it up from a waterskin, and Mu-Jin read him with a critical-success Sense Motive. His name was <strong>Enko</strong>, and something was tormenting him: a voice only Mu-Jin heard, a woman&rsquo;s anguished cry promising that when Enko got home she would pick him up and drop him off the edge of the world. Enko named her <strong>Iogaka, the Storm Mother</strong>, a creature of lightning and flesh-stripping wind who hates the smell of burning incense. Mu-Jin&rsquo;s Recall Knowledge turned up the ability she was using, a hag&rsquo;s <strong>Voice of the Storm</strong>, which carries a whisper or a scream fifty miles. The party sent Iryoku back to Willowshore on horseback for 10 gp of incense and walked Enko home. At the river, two <strong>amphisbaenas</strong> came out to meet them. Kaelen, whose laptop was still on a black loading screen, opened the fight on a natural 20 the GM rolled for him; he and Zhen killed one snake each in two rounds. Enko dove into the water and came back with thanks: a silver shortsword the GM re-flavored as a ninjato for Kaoru, a wand and a sturdy shield.</p>
+<p>Further on, a rope bridge led to a hexagonal shrine standing in the middle of the river. It was one of <strong>Master Zhi Hui&rsquo;s pilgrim stations</strong>, the GM said, built so that pilgrims could see who they really were reflected in the water, and Kaelen knew its story without a check: it belongs to his faith. Mu-Jin&rsquo;s Willowshore Lore turned up the strange part. This shrine was washed away in a flood ten years ago, and it was standing there in perfect repair. When the party stepped onto it, ghostly arms rose from the river and two leech swarms poured onto the floor, spelling <strong>Kugaptee</strong> over and over as they moved. <strong>Kaelen disabled the haunt with a prayer</strong>, a Religion check in a shrine to his own faith, and the casters burned the swarms out inside a round and a half. The party slept above the river. In the morning the dippers had filled themselves, and Mu-Jin, moved to fill six clay vials instead of drinking, came away with six <strong>ghost charges</strong> and a shrine blessing on everyone&rsquo;s Reflex saves.</p>
+<p>The next day brought two twisted burls that unfolded into <strong>mandragoras</strong> whispering <em>Kugaptee</em>. They landed the biggest single hit of the night: one shriek left Kaelen sickened 2, and a bite crit him for 28 and grabbed him. Kaoru and Iryoku killed them. Then, in the hollow of a dead tree, the party found a sobbing young woman calling for her big sister. She said her name was <strong>Yeri</strong> and her sister was <strong>Yuni</strong>. Mu-Jin&rsquo;s Willowshore Lore said Yeri was from Willowshore and had gone missing <strong>ten years ago</strong>, the same span as the vanished shrine. Mu-Jin kept that to himself and relayed it to the party one by one with a subtle Message cantrip. They let Yeri come along. On the walk, Iryoku connected the two: <em>&ldquo;We&rsquo;ve had time stuff happen so far. The shrine and with the monk.&rdquo;</em> Then Kaoru took Mu-Jin aside: <em>&ldquo;Keep watchful. My mother disappeared on the same route.&rdquo;</em></p>
+<p>At the Garden Shrine, a burned cottage at a second Zhi Hui station, four <strong>Shrine Caretakers</strong> rose out of the ashes, undead burning alive and immune to fire. Iryoku&rsquo;s <strong>Extract Element</strong> stripped that immunity off three of them, and the party took all four down over three rounds, with one kill each for Mu-Jin, Iryoku, Zhen and Kaelen. Then night fell. Yeri began to writhe and convulse, and her head came clean off her body. Iryoku: <em>&ldquo;Hey, I know that thing.&rdquo;</em> That was where the GM ended the session.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Prologue &middot; Recap &amp; Camp &middot; 0:00&ndash;13:45</div>
+    <div class="act-card">
+      <h3>Midnight on the Pilgrim&rsquo;s Path</h3>
+      <ul>
+        <li><strong>Mu-Jin gave the recap</strong>, correcting himself once in the telling: <em>&ldquo;Note to self, the Wall of Ghosts is not a part of the Mist Wall. It is a separate thing.&rdquo;</em></li>
+        <li>Midnight in the Willowshore Hinterlands. <strong>Zhen</strong> asked whether the party had healed after the hazard (assumed yes) and weighed the six-to-seven-hour ride home against resting where they stood.</li>
+        <li><strong>Mu-Jin</strong> and <strong>Iryoku</strong> settled it: they never actually reached the monastery. The party camped and pushed on west in the morning.</li>
+        <li>Kaelen&rsquo;s laptop was slow to wake up, and stayed a problem into the first fight.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act I &middot; Roleplay &middot; Enko the Kappa &middot; 13:46&ndash;32:48</div>
+    <div class="act-card">
+      <h3>The kappa with the empty bowl</h3>
+      <ul>
+        <li>A kappa face-down on the trail, his <strong>head-bowl empty</strong>. <strong>Iryoku</strong> offered his waterskin: <em>&ldquo;Maybe his bowl is why he&rsquo;s prone in the first place.&rdquo;</em> The party lifted him and refilled it.</li>
+        <li><strong>Mu-Jin&rsquo;s Sense Motive</strong> on the kappa: a critical success. <strong>Only Mu-Jin heard the scream</strong>: a woman&rsquo;s voice promising that when the kappa got home she would <em>&ldquo;pick him up and drop him off at the edge of the world.&rdquo;</em></li>
+        <li>He introduced himself as <strong>Enko</strong>. His tormentor: <strong>Iogaka</strong>, <em>&ldquo;known as the Storm Mother&hellip; a terrible and frightening monster who can hurl lightning and blasts of wind that can strip flesh from bone,&rdquo;</em> with <em>&ldquo;a peculiar and strange distaste for the scent of burning incense.&rdquo;</em></li>
+        <li><strong>Mu-Jin&rsquo;s Recall Knowledge</strong> brought up <strong>Voice of the Storm</strong>: a hag can send a whisper or a scream to any place she has seen within 50 miles, and Demoralize with it. The GM held back the full entry <em>&ldquo;because it&rsquo;ll show who she is.&rdquo;</em> Mu-Jin and Iryoku worked out it targets <em>places</em>; Iryoku wondered about a Sigil on Enko.</li>
+        <li><strong>The incense.</strong> Iryoku raised it, <strong>Zhen</strong> suggested Willowshore and then proposed splitting up (<em>&ldquo;We don&rsquo;t have to all come. Just some of us.&rdquo;</em>). Iryoku did the horse math and rode back. <strong>10 gp</strong> from the stash.</li>
+        <li>Mu-Jin, on whether a threat on the wind means anything: people say that kind of thing all the time. Zhen: <em>&ldquo;It also doesn&rsquo;t mean they won&rsquo;t.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II &middot; Combat &middot; The Amphisbaenas &middot; 32:53&ndash;63:00</div>
+    <div class="act-card">
+      <h3>Two-headed snakes at Enko&rsquo;s river</h3>
+      <ul>
+        <li>Mu-Jin: <em>&ldquo;Oh, giant snakes. I wonder if they talk,&rdquo;</em> then the CatDog question: <em>&ldquo;Where does the poop come out from?&rdquo;</em></li>
+        <li><strong>Kaelen</strong>&rsquo;s laptop was on a black screen; the GM rolled him a natural 20 and played his first turn. Mu-Jin rolled a natural 20 too.</li>
+        <li><strong>Iryoku</strong> did the most damage (56, including a 34-point crit). <strong>Kaelen</strong> killed one snake with a round-two Flurry crit, and <strong>Zhen</strong> killed the other with Tempest Surge. <strong>48 XP.</strong></li>
+        <li>Mu-Jin, on Elemental Betrayal and Iryoku&rsquo;s fire weakness together: <em>&ldquo;we should totally nerf this, but I am liking it too much.&rdquo;</em></li>
+        <li><strong>Enko&rsquo;s thanks</strong>: a <strong>+1 striking silver shortsword</strong> (Kaoru&rsquo;s ninjato by GM ruling), a <strong>wand of environmental endurance</strong> (Kaoru&rsquo;s identify was a crit), and a <strong>minor sturdy shield</strong>. <strong>40 XP.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III &middot; Mystery &amp; Combat &middot; The Bridge Shrine &middot; 63:09&ndash;91:50</div>
+    <div class="act-card">
+      <h3>A shrine that should not be standing</h3>
+      <ul>
+        <li>A rope bridge to a hexagonal wooden shrine in the middle of the river: dippers, six delicate clay vials, six wicker sleeping mats around a viewing hole.</li>
+        <li><strong>The shrine&rsquo;s story came to Kaelen automatically</strong>; <strong>Zhen</strong> critically succeeded on the expert Religion check too. Master <strong>Zhi Hui</strong> built it so that pilgrims <em>&ldquo;might see in their reflections a true vision of who they are when unburdened,&rdquo;</em> chanting a prayer to the cycle of reincarnation before sleeping above the water.</li>
+        <li><strong>Mu-Jin&rsquo;s Willowshore Lore crit</strong>: the shrine <strong>washed away in a flood a decade ago</strong>. Mu-Jin, in character: <em>&ldquo;it&rsquo;s here and in pristine condition.&rdquo;</em> Zhen wondered whether someone had rebuilt it.</li>
+        <li>Ghostly arms rose from the water and two <strong>leech swarms</strong> spelled <strong>Kugaptee</strong> across the floor. <strong>Kaelen prayed the haunt down</strong> (Religion 22 vs DC 20); Zhen&rsquo;s Earth&rsquo;s Bile and Kaoru&rsquo;s Fireball did the rest. <strong>64 XP.</strong></li>
+        <li><strong>Zhen</strong>: Treat Wounds on Kaelen, then Garden of Healing.</li>
+        <li><strong>The rest.</strong> In the morning the dippers were full. <strong>Mu-Jin</strong> felt the urge to fill the clay vials instead of drinking: <strong>six moderate ghost charges</strong> and a <strong>+1 item bonus to Reflex</strong> for everyone. <strong>40 XP.</strong></li>
+        <li>The GM called an early break (91:24&ndash;106:26). At daily preps, <strong>Mu-Jin</strong> got Weaver ruled off his shoulder at the start of every fight.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act IV &middot; Combat &middot; The Mandragoras &middot; 110:42&ndash;135:01</div>
+    <div class="act-card">
+      <h3>Burls that whisper Kugaptee</h3>
+      <ul>
+        <li>Two broken burls twisted to life on the path, <em>&ldquo;feverishly whispering the word Kugaptee.&rdquo;</em> Zhen and one mandragora both rolled natural 20s on initiative.</li>
+        <li>One <strong>Piercing Shriek</strong>: Kaelen sickened 2, Zhen and Iryoku sickened 1. A bite crit Kaelen for 28, and the sickness is why the Grab held.</li>
+        <li><strong>Kaoru</strong> (hero-pointed Ignition) and <strong>Iryoku</strong> (hero-pointed crit) took the kills. Kaelen threw off Blood Drain on a natural 20: <em>&ldquo;You can&rsquo;t drink my blood.&rdquo;</em></li>
+        <li>Each died gasping <em>Kugaptee</em> and split around <strong>a clot of crystallized blood</strong>. Zhen: <em>&ldquo;It&rsquo;s becoming a theme at this point.&rdquo;</em></li>
+        <li><strong>Iryoku</strong> identified the clots as fear gems and suggested the strikers, Kaelen and Kaoru, carry them. <strong>48 XP.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act V &middot; Roleplay &middot; The Girl in the Tree &middot; 135:46&ndash;148:40</div>
+    <div class="act-card">
+      <h3>&ldquo;Big sister, where are you?&rdquo;</h3>
+      <ul>
+        <li>Sobbing from a hollow at the foot of a dead tree: <em>&ldquo;Big sister, where are you? Big sister, help me.&rdquo;</em> She gave her name as <strong>Yeri</strong> and her sister&rsquo;s as <strong>Yuni</strong>: <em>&ldquo;a plain-looking human woman dressed in filthy clothes and clutching a string of beads tightly.&rdquo;</em></li>
+        <li><strong>Mu-Jin&rsquo;s Sense Motive failed</strong> (20 vs DC 26); the GM&rsquo;s <em>&ldquo;she seems to be telling the truth&rdquo;</em> is what a failed check gets. Zhen&rsquo;s Society failed by 2.</li>
+        <li><strong>Mu-Jin&rsquo;s Willowshore Lore</strong> (DC 20, exactly): she is from Willowshore and <strong>went missing ten years ago</strong>, her sister at about the same time.</li>
+        <li><strong>Mu-Jin kept it to himself</strong> and relayed it to each PC by <strong>subtle Message</strong>, after checking with the GM that the casting wouldn&rsquo;t be noticed.</li>
+        <li>Iryoku warned her the road ahead likely had fiends; Mu-Jin: <em>&ldquo;come with us and we&rsquo;ll search for your sister together.&rdquo;</em> She came, and Mu-Jin kept her talking and consoled her.</li>
+        <li><strong>Iryoku</strong>: <em>&ldquo;We&rsquo;ve had time stuff happen so far. The shrine and with the monk.&rdquo;</em></li>
+        <li><strong>Kaoru took Mu-Jin aside</strong>: <em>&ldquo;Keep watchful. My mother disappeared on the same route.&rdquo;</em> Mu-Jin nodded, answered by Message, and noted it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI &middot; Combat &middot; The Garden Shrine &middot; 148:44&ndash;193:44</div>
+    <div class="act-card">
+      <h3>The caretakers burning in the ashes</h3>
+      <ul>
+        <li>An ash-strewn clearing: a burned cottage, a scorched oak, an overgrown garden, a small stone shrine behind three pairs of unlit lanterns.</li>
+        <li><strong>Zhen&rsquo;s Religion crit</strong> (Kaelen knew it automatically again): Zhi Hui made this a place for a simple meal, <em>&ldquo;while also ensuring that they did not overindulge in food or drink.&rdquo;</em></li>
+        <li>Iryoku looked through the windows; <strong>Zhen</strong> pushed in, and <strong>four Shrine Caretakers</strong> rose from the ashes, <em>&ldquo;almost burning alive.&rdquo;</em></li>
+        <li><strong>Iryoku</strong>&rsquo;s Extract Element stripped the fire immunity off three of them. <strong>Kaelen</strong> did 101 damage and faced nine Fire Fists without one landing. Zhen healed him for 22 mid-fight.</li>
+        <li>One kill each: <strong>Mu-Jin</strong>, <strong>Iryoku</strong>, <strong>Zhen</strong>, <strong>Kaelen</strong>. Three rounds. <strong>64 XP.</strong></li>
+        <li>Zhen to Kaelen in the aura: <em>&ldquo;Be the hero that you are meant to be.&rdquo;</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Epilogue &middot; Mystery &middot; Nightfall &middot; 193:44&ndash;196:35</div>
+    <div class="act-card">
+      <h3>Her head comes clean off</h3>
+      <ul>
+        <li><em>&ldquo;The innocent woman that [was] coming with you to help suddenly begins writhing in pain&hellip; She begins to convulse. Her head comes clean off of her body.&rdquo;</em></li>
+        <li><strong>Iryoku: <em>&ldquo;Hey, I know that thing.&rdquo;</em></strong> The GM posted something to chat and ended the session.</li>
+        <li>Wrap: the GM had pushed through feeling tired; Mu-Jin asked after his bronchitis, which is better.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 &middot; The Amphisbaenas &middot; Two Rounds &middot; scene B2</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Amphisbaenas (Lv4, HP 70, AC 21)</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Kaelen &middot; Zhen</div></div>
+    <div><div class="combat-stat-label">Top damage</div><div class="combat-stat-value">Iryoku 56</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Kaelen 16 &middot; Kaoru 15 &middot; Zhen 9</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">48 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Two Amphisbaenas (level 4, HP 70, AC 21, venom DC 18 Fortitude). Enko was on the field. Two rounds. Foundry: low threat. <strong>48 XP.</strong></p>
+  <p><strong>Initiative</strong>: Kaelen 33 (natural 20, rolled by the GM) &middot; Mu-Jin 31 (natural 20) &middot; Iryoku 21 &middot; Amphisbaenas 20, 20 &middot; Zhen 19 &middot; Enko 17 &middot; Kaoru 13. A natural 20 means four actions in round 1. Kaoru had four as well, still quickened from last session&rsquo;s Loose Time&rsquo;s Arrow.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Kaelen</strong> (the GM played the turn while Kaelen&rsquo;s laptop loaded): Inner Upheaval with Flurry of Blows on the nearer snake, 17. The second strike was a natural 4; the GM offered a hero point and the table said save it (Mu-Jin: <em>&ldquo;These are just regular snakes, man&rdquo;</em>). A third strike critically missed, then Parry.</li>
+    <li><strong>Mu-Jin</strong>: free Recall Knowledge on a natural 1, hero-pointed and set to 10, a success: amphisbaenas, venomous, DC 18. Needle Darts missed. Nudge Fate on Kaoru, Shield on himself.</li>
+    <li><strong>Iryoku</strong>: Thermal Nimbus (fire), then a melee Elemental Blast into the same snake, 14 with his aura&rsquo;s fire weakness.</li>
+    <li><strong>Amphisbaenas</strong>: the first bit Kaoru for 15 (he made the venom save) and missed with the second bite. The second took 4 from the Nimbus, slithered out of the heat (<em>&ldquo;it doesn&rsquo;t like being on fire&rdquo;</em>) and bit Zhen for 9. Zhen&rsquo;s venom save was a natural 20.</li>
+    <li><strong>Zhen</strong>: Tempest Surge on the wounded snake (it saved, 9), then Apparition&rsquo;s Enhancement and the nodachi, 9 more. That left it on 17.</li>
+    <li><strong>Enko</strong>: clawed at a snake, missed, and got back to safety.</li>
+    <li><strong>Kaoru</strong>: Spellstrike with Shocking Grasp on the fresh snake, 27 (6 blade, 21 lightning). Dueling Parry.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Kaelen</strong>: Flurry of Blows on a natural 20, a crit for 36 that knocked the snake back and killed it (it had 17 left). He hero-pointed the second strike&rsquo;s miss and rolled the same 10 again. Then he moved up to flank the last snake with Kaoru.</li>
+    <li><strong>Mu-Jin</strong>: Elemental Betrayal on the last snake, choosing <strong>air</strong> for Zhen&rsquo;s Tempest Surge. Weaver dropped its AC by one. Needle Darts missed again: <em>&ldquo;I am whiffing this session.&rdquo;</em></li>
+    <li><strong>Iryoku</strong>: a two-action reach blast, a crit for 34. The Nimbus tick put the snake on 5.</li>
+    <li><strong>Amphisbaena</strong>: crit Kaelen on a natural 20 for 16, and he critically succeeded on the venom save. The second bite missed.</li>
+    <li><strong>Zhen</strong>: Tempest Surge, the air trait taking the weakness. It saved, took 12, and died.</li>
+  </ul>
+  <ul>
+    <li><strong>Kills</strong>: Kaelen (Flurry crit, 36), Zhen (Tempest Surge, finishing the second on 5).</li>
+    <li><strong>Damage dealt</strong>: Iryoku 56 &middot; Kaelen 34 &middot; Kaoru 27 &middot; Zhen 23 &middot; Mu-Jin 0.</li>
+    <li><strong>Damage taken</strong>: Kaelen 16 (crit) &middot; Kaoru 15 &middot; Zhen 9. Every venom save succeeded.</li>
+    <li><strong>Hero points</strong>: Mu-Jin (Recall Knowledge), Kaelen (Flurry reroll).</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 &middot; Arms of the Drowned &amp; Brood Leech Swarms &middot; Round and a Half &middot; scene B3</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Complex haunt + 2 Brood Leech Swarms (Lv4, HP 50, AC 19)</div></div>
+    <div><div class="combat-stat-label">Haunt</div><div class="combat-stat-value">Disabled by Kaelen &mdash; Religion 22 vs DC 20</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zhen &middot; Mu-Jin</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Kaelen 7</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">64 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">A complex haunt (disabled by Religion DC 20 or Intimidation DC 23, two actions) and two Brood Leech Swarms (level 4, HP 50, AC 19, weak to area damage 5, resist physical). About a round and a half. Foundry: moderate threat. <strong>64 XP.</strong></p>
+  <p><strong>Initiative order</strong> (after the GM added the forgotten Scout bonus): Mu-Jin, Kaelen, the haunt, Iryoku, Zhen, swarm A, Kaoru, swarm B.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Mu-Jin</strong> recalled the haunt (a complex haunt: pray to it or frighten it off), then tried to <strong>Intimidate</strong> it: 22 against 23. <em>&ldquo;I could have done Nudge Fate on myself. Oh, well.&rdquo;</em></li>
+    <li><strong>Kaelen</strong> walked up to a shrine of his own faith and prayed: <strong>Religion 22 vs DC 20. The haunt went quiet</strong> before it took a turn.</li>
+    <li><strong>Iryoku</strong> caught both swarms in a <strong>Blazing Wave</strong> without touching Kaelen (11 each through the area weakness), relit his aura with Channel Elements and blasted swarm A for 8 more.</li>
+    <li><strong>Zhen</strong> dropped <strong>Earth&rsquo;s Bile</strong> between them. Swarm A rolled a natural 1 and took 30, leaving it on 1 HP; swarm B took 13. <em>&ldquo;We don&rsquo;t want it to get a turn.&rdquo;</em> His <strong>Electric Arc</strong> finished swarm A and burned swarm B down to 20.</li>
+    <li><strong>Kaoru</strong>: <em>&ldquo;I don&rsquo;t care how big the room is&hellip; I still cast Fireball.&rdquo;</em> He placed it to miss Kaelen; 18 damage left the last swarm on 2. <strong>Dueling Parry.</strong></li>
+    <li><strong>Swarm B</strong> went for Kaelen twice with <strong>Blood Draining Bites</strong>. He made the first save, and <strong>hero-pointed</strong> the second from a natural 4 into a save: 7 damage in all.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Mu-Jin</strong>&rsquo;s <strong>Needle Darts</strong> finished the last swarm through its piercing resistance.</li>
+  </ul>
+  <ul>
+    <li><strong>Kills</strong>: Zhen (swarm A), Mu-Jin (swarm B).</li>
+    <li><strong>Damage dealt</strong>: Zhen 50, Iryoku 30, Kaoru 18, Mu-Jin 2.</li>
+    <li><strong>Damage taken</strong>: Kaelen 7. Zhen&rsquo;s Treat Wounds healed 5, and a full-duration Garden of Healing covered the rest.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 &middot; The Mandragoras &middot; Two Rounds &middot; scene C1</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Mandragoras (Lv4, HP 60, AC 21)</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Kaoru &middot; Iryoku &mdash; both on hero points</div></div>
+    <div><div class="combat-stat-label">Sickened</div><div class="combat-stat-value">Kaelen 2 &middot; Zhen 1 &middot; Iryoku 1</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Kaelen 28 (crit) &middot; Iryoku 18</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">48 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Two twisted burls on the road unfold into Mandragoras, whispering &ldquo;Kugaptee&rdquo; (level 4, 60 HP, AC 21; weak to fire 5, resist bludgeoning 5 and electricity 5; Piercing Shriek DC 23 Will; Jaws with Grab, Blood Drain DC 21 Fortitude). Two rounds. <strong>48 XP.</strong></p>
+  <p><strong>Initiative</strong>: <strong>Zhen 33 (nat 20, four actions)</strong>, Mandragora A 31 (nat 20, four actions), Iryoku 26, Kaoru 20, Mu-Jin 17, Kaelen 17, Mandragora B 13.</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Zhen</strong> closed in and dropped <strong>Earth&rsquo;s Bile</strong> on both. A saved and took 8; B failed (nat 2) and took 11 plus persistent fire. Then <strong>Shield</strong>.</li>
+    <li><strong>Mandragora A</strong> used its extra action for a <strong>Piercing Shriek</strong>. <strong>Zhen</strong> and <strong>Iryoku</strong> both failed and hero-pointed up to <strong>Sickened 1</strong>. <strong>Kaelen</strong> hero-pointed and still failed: <strong>Sickened 2</strong>. Then A went for Iryoku: <strong>Jaws for 18</strong>, and the Grab missed.</li>
+    <li><strong>Iryoku</strong> hit both with <strong>Blazing Wave</strong> (A took 10, B crit-saved). He reopened his gate with <strong>Channel Elements</strong> into a <strong>nat-20 fire blast</strong> on A for 33. A at 9.</li>
+    <li><strong>Kaoru</strong> walked up and <strong>Ignition</strong>ed A. It missed, he spent a <strong>hero point</strong>, it hit. <strong>Kills mandragora A</strong>, which hisses Kugaptee&rsquo;s name and splits around a clot of crystallized blood.</li>
+    <li><strong>Mu-Jin</strong> sent Weaver in and cast <strong>Elemental Betrayal</strong> on B, choosing <strong>air</strong>. Weaver&rsquo;s Balanced Luck took 1 off its AC, and Weaver&rsquo;s free <strong>Recall Knowledge</strong> named the thing a mandragora. Then <strong>Shield</strong>.</li>
+    <li><strong>Kaelen</strong>, at Sickened 2, lit <strong>Inner Upheaval</strong> as fire through <strong>Elemental Fist</strong> and <strong>Flurried</strong>. A <strong>hero point</strong> turned the first miss into a hit, and the pair did 33. Then <strong>Parry</strong>.</li>
+    <li><strong>Mandragora B</strong> <strong>crit Kaelen for 28</strong>, and the Grab held on exactly the two points Sickened cost him. Kaelen threw off <strong>Blood Drain</strong> with a <strong>nat 20</strong>. Persistent fire left B at 9.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Zhen</strong> Sustained <strong>Earth&rsquo;s Bile</strong> on B alone, keeping Kaelen and Weaver out of it, and B crit-saved on a nat 20. Then <strong>Tempest Surge</strong>: B saved on exactly 20, a save it only made because sickened had lowered Zhen&rsquo;s DC by 1. Mu-Jin&rsquo;s air weakness and B&rsquo;s electricity resistance both applied, for 7. B at 2.</li>
+    <li><strong>Iryoku</strong> moved into a flank and fired a two-action blast. It came up a nat 2, he spent a <strong>hero point</strong>, and it <strong>crit</strong>. <strong>Kills mandragora B</strong>, Kugaptee&rsquo;s name the last thing out of it.</li>
+  </ul>
+  <p>The party retched off the sickness. Zhen ran <strong>Garden of Healing</strong> to full duration, bringing Iryoku back to full, and said <em>&ldquo;We should just make a macro for this, actually.&rdquo;</em> Each mandragora left a <strong>clot of crystallized blood</strong>, a fear-gem talisman; Iryoku pointed them at the strikers, Kaelen and Kaoru.</p>
+  <ul>
+    <li><strong>Kills</strong>: Kaoru (mandragora A, Ignition), Iryoku (mandragora B, crit blast). Both on hero-point rerolls.</li>
+    <li><strong>Damage dealt</strong>: Iryoku 45, Zhen 33 (3 of it from Mu-Jin&rsquo;s air weakness), Kaelen 33, Kaoru 9.</li>
+    <li><strong>Damage taken</strong>: Kaelen 28 (crit), Iryoku 18. Sickened from the shriek: Kaelen 2, Zhen and Iryoku 1.</li>
+    <li><strong>Hero points</strong>: 6. Iryoku 2, Kaelen 2, Zhen 1, Kaoru 1.</li>
+  </ul>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 4 &middot; The Shrine Caretakers &middot; Three Rounds &middot; scene G3</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">4 Shrine Caretakers (Lv3, HP 65, AC 19, immune fire)</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Mu-Jin &middot; Iryoku &middot; Zhen &middot; Kaelen</div></div>
+    <div><div class="combat-stat-label">Top damage</div><div class="combat-stat-value">Kaelen 101</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Kaelen 35 &middot; Iryoku 16 &middot; Zhen 13</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">64 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Four Shrine Caretakers (level 3, HP 65, AC 19; fire, undead, unholy; immune to fire; weak to cold and water 5; Intense Heat aura DC 17 Reflex; Blazing Howl DC 17 Will). Three rounds. Foundry: moderate threat. <strong>64 XP.</strong></p>
+  <p><strong>Initiative</strong>: Zhen 29 &middot; Iryoku 25 (hero point) &middot; Caretaker A 20 &middot; Kaelen 20 (rolled by the GM; Kaelen was BRB) &middot; Kaoru 17 &middot; Mu-Jin 16 &middot; Caretakers B 15, C 15 &middot; Caretaker D 7 (slowed).</p>
+  <h4>Round 1</h4>
+  <ul>
+    <li><strong>Zhen</strong>&rsquo;s Tempest Surge was wasted on a natural-20 save. He hero-pointed a nodachi miss into a hit for 11.</li>
+    <li><strong>Iryoku</strong> used <strong>Extract Element</strong> on the same caretaker (<em>&ldquo;I bypass immunity to the fire trait&rdquo;</em>). He opened <strong>Thermal Nimbus in cold</strong>, so every caretaker that started a turn near him took 7 through its cold weakness, then blasted it for 9 more.</li>
+    <li>A caretaker closed on Iryoku and Zhen. Zhen&rsquo;s aura save landed on exactly 17 thanks to the <strong>Bridge Shrine +1</strong>. Both Fire Fists missed Iryoku.</li>
+    <li><strong>Kaelen</strong> came back from his break, moved in to flank with Iryoku at Mu-Jin&rsquo;s suggestion, and passed three aura saves on the way. At the GM&rsquo;s tip he picked <strong>Inner Upheaval</strong> with <strong>water</strong>, which is cold damage with the water trait and hits both weaknesses: a Flurry for <strong>42</strong>. Then Parry: <em>&ldquo;Just like the Witcher&hellip;&ldquo;</em></li>
+    <li><strong>Kaoru</strong> couldn&rsquo;t reach and set Dueling Parry.</li>
+    <li><strong>Mu-Jin</strong> cast Nudge Fate, set Weaver to shave the caretaker&rsquo;s AC, and hero-pointed a Needle Darts miss into a natural-19 <strong>crit for 24</strong>: <strong>first caretaker destroyed.</strong> His free Recall Knowledge, also hero-pointed, named them: a variant of the combusted.</li>
+    <li>Then the other three each used <strong>Blazing Howl</strong>, back to back. Kaelen failed the first and took 14, then 7 more. Iryoku used <strong>Withstand the Storm</strong> against one and failed the last for 14. Zhen crit-succeeded two of the three. Every Fire Fist missed Kaelen.</li>
+  </ul>
+  <h4>Round 2</h4>
+  <ul>
+    <li><strong>Zhen</strong> cast a two-action <strong>Heal</strong> on Kaelen for 22 (40 to 62) and cut another caretaker for 16.</li>
+    <li><strong>Iryoku</strong> switched the nimbus to <strong>fire</strong> for the party&rsquo;s resistance 5, used Extract Element on a second caretaker, and finished the first one he&rsquo;d extracted with a fire blast: <strong>second caretaker destroyed.</strong></li>
+    <li><strong>Kaelen</strong> shrugged off two auras (Zhen: <em>&ldquo;Kaelen, stand there. Be the hero that you are meant to be&rdquo;</em>). He hero-pointed a Flurry miss into a <strong>crit</strong>, hit with the second blow for <strong>42</strong> more, and the crit knocked the caretaker 10 feet back into the cottage (Iryoku: <em>&ldquo;Why? You just made life harder for all of us.&rdquo;</em>).</li>
+    <li><strong>Kaoru</strong> hit the last fresh caretaker with <strong>Ray of Frost</strong> for 12 through its cold weakness and raised Shield. <strong>Mu-Jin</strong> put 10 into it with Force Barrage.</li>
+    <li>Five more Fire Fists at Kaelen, five more misses. <strong>Parry</strong> turned one 22 into a miss (<em>&ldquo;I am really&hellip; unhittable&rdquo;</em>).</li>
+  </ul>
+  <h4>Round 3</h4>
+  <ul>
+    <li><strong>Zhen</strong> used <strong>Vitality Lash</strong> on the last caretaker for 12, then rolled a <strong>natural 1</strong> on the nodachi against the one Kaelen had knocked away. He hero-pointed it into a hit: <strong>third caretaker destroyed.</strong></li>
+    <li><strong>Iryoku</strong> used Extract Element on the last one (<em>&ldquo;the only one I have not done it on&rdquo;</em>) and blasted it for 8.</li>
+    <li><strong>Kaelen</strong> finished it with a 34-point crit: <strong>fourth caretaker destroyed.</strong> Then night fell.</li>
+  </ul>
+  <ul>
+    <li><strong>Kills</strong>: Mu-Jin (A, Needle Darts crit), Iryoku (C, fire blast), Zhen (B, nodachi), Kaelen (D, 34 crit).</li>
+    <li><strong>Damage dealt</strong>: Kaelen 101, Iryoku 78 (25 of it Thermal Nimbus), Zhen 43, Mu-Jin 26, Kaoru 12.</li>
+    <li><strong>Damage taken</strong>: Kaelen 35, Iryoku 16, Zhen 13, all from the aura and three Blazing Howls. <strong>None of the 11 Fire Fists hit.</strong> Zhen healed Kaelen for 22.</li>
+  </ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+  <div class="spotlight s-zhen">
+    <h4>Zhen Stillness &middot; the Steady Hand</h4>
+  <ul>
+    <li><strong>The healer, all night.</strong> He asked about healing in the first minute of the session, used Treat Wounds on Kaelen after the leeches, cast <strong>Garden of Healing</strong> after the snakes, after the leeches and after the mandragoras, and used his two-action <strong>Heal</strong> on Kaelen mid-fight at the Garden Shrine when the burning caretakers were working him over. His line between Kaelen&rsquo;s aura saves, once Iryoku&rsquo;s fire resistance was on him: <em>&ldquo;Kaelen, stand there. Be the hero that you are meant to be.&rdquo;</em></li>
+    <li><strong>The practical voice on the road.</strong> He weighed camping against the ride home, and when the incense question came up, he was the first to say Willowshore would have some and then proposed splitting the party instead of turning everyone around: <em>&ldquo;We don&rsquo;t have to all come. Just some of us.&rdquo;</em> Iryoku took the errand.</li>
+    <li><strong>He took the threat seriously.</strong> When Mu-Jin argued that a threat on the wind isn&rsquo;t the same as a threat carried out: <em>&ldquo;It also doesn&rsquo;t mean they won&rsquo;t.&rdquo;</em></li>
+    <li><strong>The Religion hand at both shrines.</strong> He critically succeeded on the expert Religion Recall Knowledge at the Bridge Shrine and again at the Garden Shrine.</li>
+    <li><strong>Two kills.</strong> He finished the second amphisbaena with Tempest Surge, and he finished a Shrine Caretaker with a hero-pointed nodachi strike after a natural 1 (his Vitality Lash that turn went into another one). His Earth&rsquo;s Bile critically failed one leech swarm for 30 into its area weakness, and his Electric Arc finished it. He hero-pointed the mandragora&rsquo;s shriek into a save.</li>
+    <li><strong>Dry throughout.</strong> On the paralysis stage of the snake venom: <em>&ldquo;Love that.&rdquo;</em> On the leech geyser: <em>&ldquo;That&rsquo;s disgusting.&rdquo;</em> On the second mandragora gasping <em>Kugaptee</em>: <em>&ldquo;It&rsquo;s becoming a theme at this point,&rdquo;</em> and after rolling a full-duration Garden of Healing by hand: <em>&ldquo;We should just make a macro for this, actually.&rdquo;</em></li>
+  </ul>
+  </div>
+  <div class="spotlight s-mujin">
+    <h4>Mu-Jin &middot; the Keeper of Secrets</h4>
+  <ul>
+    <li><strong>He ran both conversations.</strong> He asked Enko the right first question (<em>&ldquo;are you afflicted under a curse right now?&rdquo;</em>), heard the voice only he could hear, and turned his Recall Knowledge into the read on Iogaka&rsquo;s ability. With Yeri, he did the asking, kept her talking down the road and consoled her (<em>&ldquo;don&rsquo;t worry, we&rsquo;ll find your sister&rdquo;</em>), while privately trying to work out whether she was a victim or a trap.</li>
+    <li><strong>He kept the secret and still told everyone.</strong> When the Willowshore Lore came back that Yeri had been missing ten years, he didn&rsquo;t say it aloud in front of her. He relayed it to each PC by subtle <strong>Message</strong> and checked with the GM first that nobody would notice the casting.</li>
+    <li><strong>He found the impossible shrine.</strong> His Willowshore Lore crit is the reason anyone knows the Bridge Shrine washed away a decade ago. He delivered it in character.</li>
+    <li><strong>The shrine&rsquo;s gift was his.</strong> He went to drink, filled the clay vials instead, and the party has six ghost charges for it. He also got the GM to start Weaver off his shoulder in every fight.</li>
+    <li><strong>The Elemental Betrayal player.</strong> He worked out that he can open a weakness to <em>any</em> element alongside Iryoku&rsquo;s fire (air for Zhen&rsquo;s Tempest Surge on the snakes, then on a mandragora), and said it out loud: <em>&ldquo;for game balancing reasons, we should totally nerf this, but I am liking it too much.&rdquo;</em></li>
+    <li><strong>Two kills</strong>: the last leech swarm with Needle Darts, and the first Shrine Caretaker with a hero-pointed cold-iron Needle Darts crit.</li>
+    <li><strong>Funny.</strong> The CatDog bit (<em>&ldquo;If anyone remembers that cartoon and watches it, you&rsquo;re old&hellip; I&rsquo;d like to spread the misery&rdquo;</em>), <em>&ldquo;These are just regular snakes, man. You might want to save your points for later,&rdquo;</em> and <em>&ldquo;Damn, these are chunky snakes.&rdquo;</em></li>
+  </ul>
+  </div>
+  <div class="spotlight s-kaoru">
+    <h4>Kaoru &middot; the Watchful Son</h4>
+  <ul>
+    <li><strong>His best beat of the night.</strong> With Yeri walking beside the party, he pulled Mu-Jin aside: <em>&ldquo;Keep watchful. My mother disappeared on the same route.&rdquo;</em> (Kaoru&rsquo;s mother vanished when he was about fifteen; it&rsquo;s the centre of his backstory.) Mu-Jin answered him by Message and made a note of it.</li>
+    <li><strong>He got a sword out of it.</strong> Enko&rsquo;s silver shortsword became Kaoru&rsquo;s ninjato by the GM&rsquo;s ruling, with Mu-Jin presenting it: <em>&ldquo;There&rsquo;s a blade you might be interested in.&rdquo;</em> He also critically succeeded at identifying the wand.</li>
+    <li><strong>Fireball, regardless.</strong> In a small shrine full of leeches: <em>&ldquo;I don&rsquo;t care how big the room is&hellip; I still cast Fireball,&rdquo;</em> placed carefully <em>&ldquo;to make sure I don&rsquo;t hit Kaelen.&rdquo;</em> It left the last swarm on 2 hit points for Mu-Jin.</li>
+    <li><strong>Spellstrike and a kill.</strong> Shocking Grasp through the blade for 27 into an amphisbaena in round one, and a hero-pointed Ignition that finished the first mandragora.</li>
+  </ul>
+  </div>
+  <div class="spotlight s-kaelen">
+    <h4>Kaelen Ashford &middot; the Pilgrim&rsquo;s Prayer</h4>
+  <ul>
+    <li><strong>He calmed the haunt with a prayer.</strong> The Bridge Shrine was a station of his own faith, the GM told him its story outright, and when ghostly arms rose from the river and leech swarms poured across its floor spelling <em>Kugaptee</em>, Kaelen walked up to the swarm (<em>&ldquo;I&rsquo;m sorry, I&rsquo;m gonna need you to leave&rdquo;</em>) and offered the prayer (Religion 22 vs DC 20) that put the haunt down. The GM: <em>&ldquo;put your religion of the deity that you&rsquo;ve always worshipped this entire game to use.&rdquo;</em> He got the Garden Shrine&rsquo;s story automatically too.</li>
+    <li><strong>The front line, and he took it.</strong> Of all the damage the party took tonight, more than half landed on Kaelen: a mandragora shriek left him sickened 2, the bite crit for 28 and grabbed him, and the caretakers&rsquo; aura and howls kept burning him. He critically succeeded on the Blood Drain save (<em>&ldquo;Basically everybody should say no. You can&rsquo;t drink my blood&rdquo;</em>) and then stood in front of the caretakers&rsquo; fists: nine Fire Fists swung at him, and not one landed (Parry turned one of them). <em>&ldquo;Oh, you&rsquo;re back for more, aren&rsquo;t you?&rdquo;</em> &hellip; <em>&ldquo;I am really&hellip; unhittable.&rdquo;</em></li>
+    <li><strong>Kills and big hits.</strong> The round-two Flurry crit on an amphisbaena (36) that killed it, 33 on a mandragora with Inner Upheaval through Elemental Fist for fire, 42 on a caretaker twice (once with Inner Upheaval as water, into both of its weaknesses), and the last caretaker on a 34-point crit.</li>
+    <li><strong>Good-humored through the tech.</strong> His laptop sat on a black screen through the start of the first fight, so the GM ran his turn (and rolled him a natural 20). He came back from stepping away at the start of the last fight with <em>&ldquo;those jalapenos on the pizza aren&rsquo;t [sitting] with me.&rdquo;</em> On parrying: <em>&ldquo;Just like the Witcher, once you get attacked, you immediately guard yourself because you know you&rsquo;re going to be attacked again.&rdquo;</em> And on the snakes: <em>&ldquo;Why does it have to be snakes?&rdquo;</em></li>
+  </ul>
+  </div>
+  <div class="spotlight s-iryoku">
+    <h4>Iryoku-Yasha &middot; the One Who Knew That Thing</h4>
+  <ul>
+    <li><strong>He did the errand.</strong> He raised the incense first, did the horse math, and rode three hours to Willowshore and back so the party wouldn&rsquo;t all have to turn around.</li>
+    <li><strong>He made the connection.</strong> When Yeri turned out to be ten years missing: <em>&ldquo;We&rsquo;ve had time stuff happen so far. The shrine and with the monk.&rdquo;</em> He was also the one to warn her that where the party was going likely had fiends.</li>
+    <li><strong>He solved the caretakers.</strong> Fire-immune undead are a bad matchup for a fire kineticist. He used <strong>Extract Element</strong> on three of the four to strip the fire immunity and lower their saves and AC against his impulses, opened with his Thermal Nimbus in cold, used his reaction (Withstand the Storm) for fire resistance when the howls started, and in round two switched the Nimbus to fire to give the party fire resistance 5. He killed one caretaker and a mandragora (the latter on a hero-pointed crit).</li>
+    <li><strong>Running commentary.</strong> <em>&ldquo;I&rsquo;m losing my religion,&rdquo;</em> when an expert Religion check came up. On the leeches: <em>&ldquo;they&rsquo;re spelling out the name of the demon lord we foiled multiple times.&rdquo;</em> And when someone asked whether Kaelen would rather make friends with them, the S6 joke came back: <em>&ldquo;Wouldn&rsquo;t be the worst. Someone he&rsquo;s tried to make friends with has done.&rdquo;</em> When Kaelen&rsquo;s crit shoved a caretaker away: <em>&ldquo;Why? You just made life harder for all of us.&rdquo;</em></li>
+    <li><strong>The last PC line of the night</strong>: <em>&ldquo;Hey, I know that thing.&rdquo;</em></li>
+  </ul>
+  </div>
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>+1 striking silver shortsword</strong></div>
+    <div class="loot-source">Enko</div>
+    <div class="loot-note">Re-flavored as a ninjato for Kaoru (GM ruling). In the stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>Wand of environmental endurance</strong> (rank 2)</div>
+    <div class="loot-source">Enko</div>
+    <div class="loot-note">Mu-Jin picked it up; identified by Mu-Jin and Kaoru (crit).</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>Sturdy shield (minor)</strong></div>
+    <div class="loot-source">Enko</div>
+    <div class="loot-note">Hardness 8, HP 64, BT 32. Stash.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>6 moderate ghost charges</strong></div>
+    <div class="loot-source">The Bridge Shrine&rsquo;s clay vials</div>
+    <div class="loot-note">Filled by Mu-Jin. Six per the GM; the stash shows seven vials.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>Bridge Shrine blessing</strong></div>
+    <div class="loot-source">The Bridge Shrine</div>
+    <div class="loot-note">+1 item bonus to Reflex saves, until the GM removes it.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name"><strong>2 clots of crystallized blood</strong></div>
+    <div class="loot-source">The mandragoras</div>
+    <div class="loot-note">Fear-gem talismans. Iryoku proposed Kaelen and Kaoru.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Incense</div>
+    <div class="loot-source">Willowshore</div>
+    <div class="loot-note">&minus;10 gp from the stash. Carried; not used.</div>
+  </div>
+</div>
+<div class="xp-banner">Experience &middot; 48 amphisbaenas &middot; 40 Enko &middot; 64 haunt &amp; leeches &middot; 40 the shrine &middot; 48 mandragoras &middot; 64 caretakers = <strong>304 XP each</strong></div>
+
+<h2>Memorable Quotes</h2>
+<blockquote><strong>Kaoru</strong>: &ldquo;Keep watchful. My mother disappeared on the same route.&rdquo;
+<span class="attribution">Pulling Mu-Jin aside, with Yeri, ten years missing, walking beside the party.</span></blockquote>
+<blockquote><strong>Iryoku</strong>: &ldquo;We&rsquo;ve had time stuff happen so far. The shrine and with the monk.&rdquo;
+<span class="attribution">On why a woman missing ten years might turn up on this road.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: &ldquo;I think Mu-Jin will keep that to himself, but tell you guys later.&rdquo;
+<span class="attribution">Then he told everyone, by subtle Message, without Yeri knowing.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: &ldquo;I&rsquo;ll be honest, for game balancing reasons, we should totally nerf this, but I am liking it too much.&rdquo;
+<span class="attribution">After the table worked out how Elemental Betrayal and Iryoku&rsquo;s fire weakness interact.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: &ldquo;Oh, giant snakes. I wonder if they talk.&rdquo; &hellip; &ldquo;Where does the poop come out from?&rdquo;
+<span class="attribution">The amphisbaenas, and the CatDog question.</span></blockquote>
+<blockquote><strong>Zhen</strong>: &ldquo;It also doesn&rsquo;t mean they won&rsquo;t.&rdquo;
+<span class="attribution">After Mu-Jin argued that people make death threats all the time without meaning them.</span></blockquote>
+<blockquote><strong>Zhen</strong>: &ldquo;Kaelen, stand there. Be the hero that you are meant to be.&rdquo;
+<span class="attribution">Kaelen in the caretakers&rsquo; aura, with Iryoku&rsquo;s fire resistance now on him.</span></blockquote>
+<blockquote><strong>Zhen</strong>: &ldquo;It&rsquo;s becoming a theme at this point.&rdquo;
+<span class="attribution">The second mandragora gasping &ldquo;Kugaptee&rdquo; as it split open.</span></blockquote>
+<blockquote><strong>Kaelen</strong>: &ldquo;Basically everybody should say no. You can&rsquo;t drink my blood.&rdquo;
+<span class="attribution">After critically succeeding on the mandragora&rsquo;s Blood Drain.</span></blockquote>
+<blockquote><strong>Kaelen</strong>: &ldquo;Oh, you&rsquo;re back for more, aren&rsquo;t you?&rdquo; &hellip; &ldquo;I am really&hellip; unhittable.&rdquo;
+<span class="attribution">Nine Fire Fists, and not one landed.</span></blockquote>
+<blockquote><strong>Kaoru</strong>: &ldquo;I don&rsquo;t care how big the room is&hellip; I still cast Fireball.&rdquo;
+<span class="attribution">A small shrine, the last leech swarm, and Kaelen in the middle of it.</span></blockquote>
+<blockquote><strong>Iryoku</strong>: &ldquo;Hey, I know that thing.&rdquo;
+<span class="attribution">Yeri&rsquo;s head coming off her body. The last PC line of the session.</span></blockquote>
+<blockquote><strong>Andy (as narrator)</strong>: &ldquo;Her head comes clean off of her body.&rdquo;
+<span class="attribution">Nightfall.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Yeri&rsquo;s head came off.</strong> At nightfall, the woman the party had agreed to protect convulsed and her head detached from her body. Iryoku recognized it; nobody else said what it was. Mu-Jin&rsquo;s Sense Motive on her had <strong>failed</strong> (20 vs DC 26), so the GM&rsquo;s <em>&ldquo;she seems to be telling the truth&rdquo;</em> is the answer a failed check gets either way. It is not a read on her.</li>
+  <li><strong>Yuni</strong>, the big sister Yeri was calling for. Missing about as long as Yeri. Real or bait, unknown.</li>
+  <li><strong>Ten years.</strong> The Bridge Shrine was washed away a decade ago and stands untouched. Yeri went missing a decade ago and was found on the road. Iryoku&rsquo;s read: <em>&ldquo;time stuff.&rdquo;</em> Inside the Wall of Ghosts the forest was a thousand years younger. Something on the Pilgrim&rsquo;s Path is out of step with time.</li>
+  <li><strong>Kaoru&rsquo;s mother</strong> disappeared on this same route. He told Mu-Jin, and only Mu-Jin.</li>
+  <li><strong>Iogaka, the Storm Mother.</strong> Still tormenting Enko from somewhere; her Voice of the Storm carries fifty miles. Never seen. The party carries incense against her and never used it. Why she fixed on Enko is unknown.</li>
+  <li><strong>Kugaptee, everywhere.</strong> The leeches spelled it, the mandragoras whispered it and died saying it. The road to Tan Sugi is saturated with the name.</li>
+  <li><strong>Zhi Hui&rsquo;s pilgrim stations.</strong> Two shrines so far (the Bridge Shrine in the river, the Garden Shrine), each a lesson in the faith Kaelen follows. Presumably more along the way to the monastery.</li>
+  <li><strong>The Tan Sugi Monastery</strong> is still ahead.</li>
+  <li><strong>Carried forward</strong>: what returning Tan Sui Jing&rsquo;s heart did; the unseen giant (fled); why the S10 vulture could talk; the rest of fall downtime; Candora&rsquo;s suspicion of You So-Jin; Mama Bao&rsquo;s grandfather; Yami the bakeneko; the Consecrate ledger (Mu-Jin); who else is an &ldquo;old soul&rdquo;; the missing governor; Mugirou&rsquo;s truce; Shinzo; the wrong-gods lantern secret (S2); &ldquo;blood will rise&rdquo;; the Great Willow&rsquo;s promise and missing friend; the Noppera-Bo Hood, still never used; Weaver&rsquo;s hunting-spider venom (S7); the lumber camp storeroom&rsquo;s hidden trap door; Mu-Jin&rsquo;s Desna adoption.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax&rsquo;s Notes &mdash; Zhen Stillness&rsquo;s Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax&rsquo;s notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Zhen did this session</h3>
+  <ul>
+    <li>Weighed resting at the wall against riding home. The party camped.</li>
+    <li>Proposed splitting up for the incense rather than everyone turning back. Iryoku went.</li>
+    <li><strong>Amphisbaenas</strong>: Tempest Surge (half on a success) and the nodachi with Apparition&rsquo;s Enhancement in round one. Bitten once for 9; the venom save was a natural 20. <strong>A second Tempest Surge in round two killed the other snake</strong> (on 5).</li>
+    <li><strong>Bridge Shrine</strong>: expert Religion Recall Knowledge, critical success. <strong>Earth&rsquo;s Bile</strong> on both leech swarms: one critically failed for 30. Electric Arc finished it. Treat Wounds on Kaelen; Garden of Healing.</li>
+    <li><strong>Mandragoras</strong>: Earth&rsquo;s Bile on both, Shield. Failed the shriek&rsquo;s Will save; hero-pointed it to a success. Earth&rsquo;s Bile and Tempest Surge in round two.</li>
+    <li>Society on Yeri: failed by 2.</li>
+    <li><strong>Garden Shrine</strong>: Religion Recall Knowledge, critical success. Tempest Surge (it critically saved), a hero-pointed nodachi hit. Two-action Heal on Kaelen (22). Vitality Lash for 12 into one caretaker, then a hero-pointed nodachi strike after a natural 1: <strong>killed another, on 4 HP.</strong></li>
+  </ul>
+
+<h3>Things Zhen knows that the party does not</h3>
+  <ul>
+    <li>Nothing new was kept from the party this session. Mu-Jin&rsquo;s Message reached everyone.</li>
+    <li>Carried forward: he is a <strong>samsaran</strong>. The Bridge Shrine&rsquo;s pilgrims chanted a prayer to the cycle of reincarnation.</li>
+  </ul>
+
+<h3>What Zhen is thinking about</h3>
+  <ul>
+    <li><strong>Yeri.</strong> <em>(Player-side, from the roll log.)</em> Mu-Jin&rsquo;s Sense Motive failed. &ldquo;Telling the truth&rdquo; is the answer a failed check gets, so it isn&rsquo;t a reading either way.</li>
+    <li><strong>Ten years, twice.</strong> The shrine that washed away and the woman who went missing. Same span.</li>
+    <li><strong>Sickened is the mandragoras&rsquo; real weapon.</strong> The shriek&rsquo;s sickened 2 lowered Kaelen&rsquo;s Fortitude DC, and that is why the Grab after the 28-point crit landed. It also lowered Zhen&rsquo;s spell DC by 1, and the second mandragora saved on exactly 20.</li>
+    <li><strong>Fire-immune undead</strong>: Iryoku&rsquo;s Extract Element strips the immunity. Vitality Lash and cold or water damage (Kaelen&rsquo;s Elemental Fist) work regardless.</li>
+    <li><strong>Earth&rsquo;s Bile and the leeches.</strong> Area weakness 5 made it the right spell.</li>
+  </ul>
+
+<h3>Open questions for next session</h3>
+  <ul>
+    <li><strong>What is Yeri?</strong> What did Iryoku recognize? What did the GM post to chat?</li>
+    <li><strong>Is Yuni real?</strong></li>
+    <li><strong>Why ten years</strong>, and why is the shrine still standing?</li>
+    <li><strong>Who is Iogaka</strong>, and will the incense matter?</li>
+    <li><strong>How far is Tan Sugi</strong> from the Garden Shrine?</li>
+  </ul>
+
+</section>
+
+<div class="cliffhanger">
+  <span class="label">Where it ended</span>
+  <p>Night fell at the Garden Shrine with the last caretaker in the ashes. Yeri, the Willowshore woman ten years missing whom the party had agreed to protect, began to writhe and convulse. Iryoku recognized what happened next; nobody else said what it was.</p>
+  <div class="big-line">&ldquo;Her head comes clean off of her body.&rdquo;</div>
+  <span class="speaker">&mdash; AndeGM</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>

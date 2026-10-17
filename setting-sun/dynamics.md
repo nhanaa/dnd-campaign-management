@@ -9,7 +9,7 @@
 | **Tank** | Clutch (Guardian / Wrestler dedication) | Ferrok (Bastion) |
 | **Striker** | Ferrok (Magus, Sparkling Targe) · Seva (Magus, Laughing Shadow) | Sattva (Precision Ranger) · Clutch (top damage in S10's hardest fight) |
 | **Ranged damage** | Sattva (Precision Ranger) | Sovael |
-| **Healer** | **Sattva** (Master Medicine, Risky Surgery, Ward Medic, healer's gloves) · **Seva** (Medic Dedication, Ward Medic, Risky Surgery, Doctor's Visitation) | **Sovael** (signature Heal, Staff of Healing, scrolls) · Clutch & Ferrok (Battle Medicine) |
+| **Healer** | **Sattva** (Master Medicine, Risky Surgery, Ward Medic, healer's gloves) · **Seva** (Medic Dedication, Ward Medic, Risky Surgery, Doctor's Visitation) | **Sovael** (signature Heal, scrolls, Breath of Life) · **Clutch** (Medic Dedication, Doctor's Visitation — seen S19) · Ferrok (Battle Medicine) |
 | **Buffer** | Sovael (Courageous Anthem, Lingering, Beseech the Sphinx) | — |
 | **Debuffer** | Sovael (Roaring Applause, Fear, Manifestation of Spirits, Bon Mot, Evangelize) | — |
 | **AoE Damage** | Sovael (Fireball, Divine Wrath, Chain Lightning, Radiant Beam) | — |
@@ -468,3 +468,26 @@
 - **True Target's best cast yet.** Both Thrasfyr A finishing blows were flipped by it: Ferrok rolled **20 and 1** (critical miss → crit, 105 damage) and Clutch **20 and 15** (non-lethal hit → the killing crit). About 118 HP that turn, and the fight ended a round early, with three PCs immobilised and Clutch on 33 (dice per Pax; the export keeps only the higher die).
 - **Performer teams target Sovael.** The Steps of the Sun's skirmisher went straight for him, and the musicians put him in every AoE (*"I took all the AoE spells this fight"*). Fly first; stay near Clutch.
 - **Cody's S17 notes**: Steps of the Sun run at level 16 / AC 38; tournament is one fight per day, so spend resources freely; +1 hero point per finished match. StartPlaying applications closed — the five-player roster is final.
+
+## Character Relationships (Session 19 Observations)
+
+- **Sovael (Pax) was the net under the party.** Sacred Covenant, announced before the bell, stood three people back up at 1 HP against the Speakers, and Breath of Life — which he called *"useless because we were fighting in tournaments"* — was the only thing between Clutch and an outright death on the main street: *"Honestly, now it becomes useful. Because now we can actually die."* He was courteous to everyone across the ring (to Mafika: *"You were very formidable the one time I had the chance to observe you"*; to Hummingbird, alone on 2 HP: *"I commend your spirit. Let's end this one"*; to Halspin: *"Good work… Thank you for the help"*), flagged his own expired Anthem at Seva's expense, and won the Spell Riposte ruling by simply rolling the counteract. Top PC damage at the docks (580); two kills on the main street. Dry throughout — *"Why is the stadium so empty?"*
+- **Seva came back and led.** Kill leader against the Speakers (Umbasi and Mafika, 483 damage). **She was the only one who remembered the Bonmou egg** and tied it to Mogaru, she got the party moving (*"You heard the Grandmaster. Let's go"*), and she started the deaf role-play (*"We should roleplay this"*). Still watching the Lightkeepers — *"I didn't do anything. Not yet."* Two long-running combos: Part the Veil fell an action short again; **Spell Swipe finally landed.**
+- **Ferrok found a new bit**: anime attack names (1,000-Year Slash, Wrath of the Sea God, Dragon Fang Crescent, Flash Coil), on top of narrating himself in Foundry chat. Hit zero four times against the Speakers and ended the match with a Goring Charge at 1 HP. On Halspin running in to help: *"He thought we knew what we were doing."*
+- **Sattva's backflip became a four-hour running gag** — and every heal he casts is a small scene (the golden bolt, arrows falling on your head). Two Moments of Renewal. *"The lack of sound made me focus."* Largest healer of the day.
+- **Clutch paid off "I must break you"** (rehearsed at the Ruby Palace in S16) — *"and hope it sounds good, because he can't hear himself."* He held Hummingbird pinned when asked to cover Ferrok, then gave the pin up the next round to intercept for Ferrok and Seva. **Drained to 5 by a jiang-shi and would have died.** Read the Moment of Renewal text back at Cody: *"So where does the eight hours come from?"* His typed chat lines are where a lot of his humour lives (*"I can help with a somber Kholo song of rememberance at your wake?"*).
+
+## Session 19 — Key Patterns / Lessons
+
+- **The tournament safety net is gone.** The docks and the main street were real fights — Seva: *"Oh god, I think we can die in this fight… It's not a tournament."*
+- **Sacred Covenant only answers being reduced to 0 HP.** It caught three knockouts against the Speakers and could do nothing about **Drain Qi's kill at Drained 5**. **Breath of Life** is the answer to that.
+- **Jiang-shi**: physical resistance unless duskwood (nobody carries any), immune to prone (two wasted trips), grab → Drain Qi twice a turn, and they get back up a minute after falling unless dealt with. Pry the grabbed PC loose first.
+- **Heroism on Sattva paid on his saves, not his attacks** — three failed saves became critical successes; no attack roll changed.
+- **Deafened allies get nothing from Courageous Anthem.** Sound Burst, Explosive Barrage and Pierce the Sky crits all deafen. Check before singing.
+- **A success against Spirit Song still costs your reaction** — that window is where Mafika's 104-point Pierce the Sky crit landed on Sovael.
+- **Nullify exists at this tier.** A rank-10 caster can delete a rank-9 slot outright (at a cost to themselves).
+- **Spell Riposte ruling (Cody, S19):** it works on any spell Sovael can see coming — *"rules as written."* A reflected spell attack is re-rolled against the caster's own AC.
+- **Shadow Oni regeneration is switched off by fire or acid** and Cody did not apply it — call it out (same pattern as the Thrasfyrs in S17). **Rivka resist fire (10).**
+- **Kun and Rivka roll Reflex well**; two Chain Lightnings ended on natural 20s (a Rivka, a jiang-shi). Open the chain on the target least likely to crit-save.
+- **Cody's S19 rulings**: Moment of Renewal run as **8 hours of rest** (Con × level), not the 24 the spell says; Drain Qi is repeatable and a crit drains only one step; one reaction per activity (no second Shield Block inside one multi-strike spell); Frigid Flurry stops at a wall. **No mid-fight enemy stat changes in any of the three fights.**
+- **Going into next session: Clutch Drained 4, Seva Drained 1**, healing deferred. Sovael carries Restoration scrolls.
