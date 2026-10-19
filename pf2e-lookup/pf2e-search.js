@@ -162,7 +162,11 @@ function applyFilters(entries, filters) {
     result = result.filter(e => e.wpnGrp === filters.wpnGrp);
   }
   if (filters.act) {
-    result = result.filter(e => String(e.act) === filters.act);
+    // Numeric values match the action count for feats/actions and the cast time for spells.
+    const f = filters.act;
+    result = result.filter(e =>
+      String(e.act) === f ||
+      (/^[123]$/.test(f) && e.act === 'action' && String(e.acts) === f));
   }
   if (filters.subcat) {
     result = result.filter(e => e.sc?.toLowerCase().includes(filters.subcat));
@@ -226,7 +230,7 @@ function formatEntry(entry, detail) {
   if (entry.dmg && entry.c === 'equipment') meta.push(`**Damage:** ${entry.dmg}`);
 
   // Feat-specific
-  if (entry.act && entry.c === 'feats') meta.push(`**Action:** ${entry.act}`);
+  if (entry.act && (entry.c === 'feats' || entry.c === 'actions')) meta.push(`**Action:** ${actionCost(entry)}`);
   if (entry.prereqs?.length) meta.push(`**Prerequisites:** ${entry.prereqs.join('; ')}`);
 
   // Creature-specific
@@ -252,6 +256,17 @@ function formatEntry(entry, detail) {
   return parts.join('\n');
 }
 
+// Action cost for feats/actions. The index stores actionType in `act`
+// ('action' | 'reaction' | 'free' | 'passive') and the count in `acts`.
+// Never print bare 'action': it hides whether something is 1, 2 or 3 actions.
+function actionCost(entry) {
+  if (entry.act === 'action') {
+    const n = entry.acts || '?';
+    return `${n} action${n === 1 ? '' : 's'}`;
+  }
+  return entry.act;
+}
+
 function formatCompact(entry) {
   const rarity = entry.r !== 'common' ? ` [${entry.r}]` : '';
   const level = entry.l !== null && entry.l !== undefined ? ` (${entry.c === 'spells' ? 'rank' : 'lvl'} ${entry.l})` : '';
@@ -260,6 +275,7 @@ function formatCompact(entry) {
   if (entry.trad?.length) extra.push(`trad:${entry.trad.join('/')}`);
   if (entry.dmg) extra.push(entry.dmg);
   if (entry.act && entry.c === 'spells') extra.push(`${entry.act}A`);
+  if (entry.act && (entry.c === 'feats' || entry.c === 'actions') && entry.act !== 'passive') extra.push(actionCost(entry));
   if (entry.sav) extra.push(`save:${entry.sav}`);
   if (entry.eqCat) extra.push(entry.eqCat);
   if (entry.wpnCat) extra.push(entry.wpnCat);
@@ -277,10 +293,24 @@ function formatCompact(entry) {
 
 const ARCHETYPES_PATH = path.join(__dirname, '..', 'pf2e', 'journals', 'archetypes.json');
 
-function cleanJournalText(t) {
+// Embedded feats carry no text in the journal. Resolve them against the index so
+// the listing shows the action cost and traits instead of a bare placeholder —
+// "(see feat entry)" is how a 3-action feat once got read as 1 action.
+function embedSummary(id, byId) {
+  const e = byId && byId.get(id);
+  if (!e) return '(see feat entry)';
+  const bits = [];
+  if (e.act) bits.push(actionCost(e));
+  if (e.t?.length) bits.push(e.t.join(', '));
+  if (e.prereqs?.length) bits.push(`prereq: ${e.prereqs.join('; ')}`);
+  return `(${bits.join(' · ')} — full text: "${e.n}" -d)`;
+}
+
+function cleanJournalText(t, byId) {
   return t
     .replace(/@UUID\[[^\]]*\]\{([^}]*)\}/g, '$1')
     .replace(/@UUID\[[^\]]*\.([^.\]]+)\]/g, '$1')
+    .replace(/@Embed\[[^\]]*?Item\.([A-Za-z0-9]+)[^\]]*\]/g, (_, id) => embedSummary(id, byId))
     .replace(/@Embed\[[^\]]*\]/g, '(see feat entry)')
     .replace(/<(br|\/p|\/h\d|\/li|\/tr)[^>]*>/gi, '\n')
     .replace(/<[^>]+>/g, '')
@@ -310,9 +340,14 @@ function showArchetypes(name) {
     console.log(`No archetype matching "${name}". Run --archetype with no value to list all.`);
     return;
   }
+  let byId = null;
+  if (fs.existsSync(INDEX_PATH)) {
+    const index = JSON.parse(fs.readFileSync(INDEX_PATH, 'utf8'));
+    byId = new Map((index.entries || []).map(e => [e.id, e]));
+  }
   for (const p of hits) {
     console.log(`\n${'='.repeat(70)}\n### ${p.name}\n${'='.repeat(70)}`);
-    console.log(cleanJournalText(p.text?.content || '(no text)'));
+    console.log(cleanJournalText(p.text?.content || '(no text)', byId));
   }
 }
 

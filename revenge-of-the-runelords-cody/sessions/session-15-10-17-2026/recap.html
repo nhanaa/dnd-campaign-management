@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 15 — The Last Runelord of Envy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Last Runelord of Envy</h1>
+<div class="subtitle">Session 15 &middot; Revenge of the Runelords &middot; Lograsi walks away, and Belimarius falls in the Eye of Desire</div>
+<div class="meta-row">
+<span class="meta-pill">2026-10-17</span>
+<span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+<span class="meta-pill">3h 25m</span>
+<span class="meta-pill">Level 18 &rarr; 19</span>
+<span class="meta-pill">2 fights &middot; 6 kills</span>
+<span class="meta-pill">Belimarius falls</span>
+</div>
+</header>
+
+<div class="composition-bar">
+<div class="comp-seg comp-combat" style="width:61%"></div>
+<div class="comp-seg comp-social" style="width:13%"></div>
+<div class="comp-seg comp-rp" style="width:12%"></div>
+<div class="comp-seg comp-loot" style="width:5%"></div>
+<div class="comp-seg comp-explore" style="width:9%"></div>
+</div>
+<div class="composition-legend">
+<span><span class="legend-dot" style="background:var(--blood)"></span>Combat 61%</span>
+<span><span class="legend-dot" style="background:var(--gold)"></span>The Doomsday Door &amp; Lograsi 13%</span>
+<span><span class="legend-dot" style="background:var(--azure)"></span>Banter &amp; table business 12%</span>
+<span><span class="legend-dot" style="background:var(--ember)"></span>Selling &amp; loot 5%</span>
+<span><span class="legend-dot" style="background:var(--jade)"></span>Technical delay &amp; break 9%</span>
+</div>
+
+<h2>Party</h2>
+<div class="party-grid">
+<div class="char-card char-sevek">
+<div class="char-name"><strong>Sevek</strong></div>
+<div class="char-class">Human (Sky Dragonblood) Monk 18 &mdash; Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+<div class="char-player">Pax</div>
+</div>
+<div class="char-card char-aureys">
+<div class="char-name"><strong>Aureys Hollow</strong></div>
+<div class="char-class">Fey Dragonet Rogue (Scoundrel) 18 &mdash; fighting fan + claws, Draconic Acolyte, Eternal Legend</div>
+<div class="char-player">Anna</div>
+</div>
+<div class="char-card char-mith">
+<div class="char-name"><strong>Mithtirith</strong></div>
+<div class="char-class">Elf Cleric of Nethys 18 &mdash; Hedge Mage, Staff of Healing (True)</div>
+<div class="char-player">Jesse</div>
+</div>
+<div class="char-card char-kreebnock">
+<div class="char-name"><strong>Kreebnock</strong></div>
+<div class="char-class">Gnome Psychic 18 &mdash; Bard archetype, Unleash Psyche</div>
+<div class="char-player">"Arrakis"</div>
+</div>
+<div class="char-card char-paya">
+<div class="char-name"><strong>Paya</strong></div>
+<div class="char-class">Leshy Fighter 18 &mdash; absent this session</div>
+<div class="char-player">Kelsie</div>
+</div>
+</div>
+<div class="note-banner">DM: Cody McGraw ("Ryu" in Foundry)<br><br><strong>Sevek and Mithtirith played both maps on a black screen.</strong> The Foundry rendering problem from S14 came back for the two of them (tokens visible, map black). Cody updated The Forge mid-session, which didn't fix it, and posted a screenshot of the Belimarius map to Discord so they had a frame of reference.<br><br><strong>Paya was absent</strong> (Kelsie); he is back next week.</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The session opened where S14 stopped, at the edge of the Temple Plaza sinkhole. The party went down and, between them, <strong>closed the Doomsday Door</strong> beneath Xin-Eurythnia. Closing it gave them a vision. The door was the link <strong>Xanderghul</strong> used to reach across from <strong>Jandelay</strong> ("the Apocalypse Archive", a demiplane of ruined worlds) and pull Sorshen through. The <strong>Oliphaunt of Jandelay</strong> was once summoned to Golarion at <strong>Spindlehorn</strong>, a spiral tower in the Wyvern Mountains said to be the Runelord <strong>Gimmel</strong>'s work, and it left something of itself behind there. Prisoners and intelligence put <strong>Belimarius</strong> in the atrium of Sorshen's <strong>Blood Moon Palace</strong>. The party rested, sold off the rune giants' gear (13,292 gp each), and kept the Ancient Ones' <strong>Timeflaying Blade</strong>.</p>
+<p>Kandirvek flew them to the palace and stepped aside: <em>"The battles you'll be facing are beyond him by this point."</em> In the atrium, <strong>General Lograsi</strong> (last seen in S8) was waiting with two other generals and a glass of wine. He asked the party to convince him. Aureys took him apart: he did not want freedom, he wanted pleasures, and he wanted to know what the party would give him for betraying Belimarius. <em>"Now you're catching on."</em> His price was the party's word that they would ask <strong>Sorshen to pardon</strong> him and his generals once all of this was over. Aureys gave it. Lograsi, his generals and their armies left the Blood Moon Palace, and he pointed the party at the fountain: the entrance to Sorshen's <strong>Runewell of Lust</strong>, where Belimarius was using the warshard to take control of it.</p>
+<p>The fountain's defences rose first as three <strong>Phantoms of Desire</strong>. They died in five rounds (two to Aureys, one to Mithtirith's Frostbite), the highlight being <strong>Kreebnock's Daze for 155 on a natural 1</strong>. Then the party anointed themselves and sank into the <strong>Eye of Desire</strong>, a seaside grotto with a pearl-shell throne, where <strong>Belimarius, last Runelord of Envy</strong>, stood with two Knights of Malice. The fight ran eleven rounds. <strong>Sevek's Glory on High blinded both knights on two natural 1s</strong>, Aureys and Sevek killed one each, and then the party spent nine rounds wearing down a 600-HP runelord who forced rerolls with Foresight, countered spells with Spell Riposte and Nullify, and teleported away from the melee. <strong>Mithtirith went down to dying 3</strong> (his Contingency could not carry the Heal he had prepared) and <strong>Aureys went down</strong> taking hits meant for him. Kreebnock picked up both of them. <strong>Sevek took both of Belimarius' lives</strong>: a natural-20 crit forced her <strong>Undying Myth</strong>, and the last Strike of the fight finished her. The party reached <strong>level 19</strong>.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act mystery">
+<div class="act-label">Act I &middot; Mystery &middot; Closing the Door (0:00–0:10)</div>
+<div class="act-card">
+<h3>The Doomsday Door, closed</h3>
+<ul>
+<li><strong>The Timeflaying Blade</strong> was left behind by the Ancient Ones: a mythic orichalcum bastard sword (Cody read out +3, major striking and greater corrosive; the item card also carries keen and quickstrike) with <strong>Flay Time</strong> (once a minute, a Mythic Point: a creature within 120 feet attempts a DC 43 Will save against being cut out of time; incapacitation). Nobody wields a longsword, but Cody pointed out that <em>"even if you don't use a longsword, it doesn't mean you can't use its effect."</em> The party kept it.
+</li>
+<li><strong>The Doomsday Door</strong> under the sinkhole can't be used as a portal to Jandelay; it is a conduit for Jandelay's energies. It took <em>"the combined physical and magical forces"</em> of all of them, but they <strong>re-closed it</strong>, and the planar link Xanderghul built through it is severed.
+</li>
+<li><strong>What they learned in closing it</strong>: every Doomsday Door leads to <strong>Jandelay</strong>, <em>"an ancient demi-plane hidden within the folds of the Maelstrom"</em> that holds the remains of ruined worlds. <strong>Xanderghul</strong> was the spellcaster on the other side who reached through this one and pulled Sorshen into Jandelay. Its herald, <strong>the Oliphaunt of Jandelay</strong>, appears when a world's destruction is imminent. It was summoned to Golarion long ago at <strong>Spindlehorn</strong>, an enormous spiral tower hidden in the <strong>Wyvern Mountains</strong> of the Saga Lands, <em>"said to be a project by Runelord of Greed, Gimmel, thousands of years ago,"</em> for a purpose since lost, and it <strong>left something of itself behind there</strong>.
+</li>
+<li>Who might know more: <strong>Sorshen</strong>, and the <strong>Blood Moon Palace</strong>.
+</li>
+<li>From rescued locals, captives and intelligence, the party learned that <strong>Belimarius is hiding in the palace's atrium</strong>. <em>"One last thread to tie up before your battle with Xanderghul."</em>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Act II &middot; Downtime &middot; Selling Up (0:10–0:16)</div>
+<div class="act-card">
+<h3>Selling up, and a sword nobody wields</h3>
+<ul>
+<li>Long rest at the war camp, then a sale. The rune giants' armor and weapons went, except a few runes: <strong>Aureys</strong> took the <strong>+3 potency</strong> off a greater resilient chain shirt and the <strong>acid resistance</strong> rune from the plate; <strong>Sevek</strong> took the <strong>fire resistance</strong> rune. About <strong>60,000 gp</strong> in all, <strong>13,292 gp each</strong>.
+</li>
+<li>Cody, again: <em>"Mythic runes, they will come into play in this game, but you will not be paying for them. Don't save money in anticipation."</em> Sevek bought <strong>Major Resilient</strong> for his explorer's clothing during the break.
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act social">
+<div class="act-label">Act III &middot; Social &middot; Lograsi (0:16–0:31)</div>
+<div class="act-card">
+<h3>General Lograsi and a glass of wine</h3>
+<ul>
+<li>Kandirvek flew them to the <strong>Blood Moon Palace</strong>, once built as a training academy for giants, still standing, crawling with giants and sinspawn none of whom posed a threat. <strong>Kandirvek stepped aside</strong>; the fights ahead are beyond him now. Aureys: <em>"Who's the best dragon here?"</em> &mdash; Cody: <em>"Was that ever in contest?"</em>
+</li>
+<li><strong>Sorshen's atrium</strong>: wrecked gardens around a fountain no damage has touched, three pitchers pouring endlessly into it, red energy flickering around it. Three figures watched it: a sinspawn Knight of Malice with a green-flamed halberd (<strong>General Nonomanalia</strong> ⚠️), a rune giant in heavy armor with crackling hands (<strong>General Asvorag</strong> ⚠️), and <strong>General Lograsi</strong>, leaning on a gazebo pillar, pouring himself wine. <em>"Well met, well met. After I heard of Yrasthura's fall, I anticipated it would only be a short time before you came here."</em>
+</li>
+<li><strong>Aureys answered in kind</strong>: <em>"Indeed, you are odd… quite well-mannered and very diplomatic in your approach. No need to be uncivilized."</em> Then the terms: <em>"Well, then you stand in our way, so you can either step aside and let us pass, or we can get down to business."</em> &mdash; <em>"There is wisdom to your words, little dragon."</em> &mdash; <em>"I am the greatest dragon here, the greatest dragon you'll ever meet."</em>
+</li>
+<li><strong>The ask</strong>: <em>"Convince me… why we should let you stand aside… And please, don't just say you'll kill us or make threats of violence. It's also mundane."</em> Belimarius has the warshard and <em>"a source of mythic power"</em>, and means to deal with Sorshen and Xanderghul personally.
+</li>
+<li><strong>Aureys ran the parley.</strong> <em>"And so you believe that trading one master for another is true freedom, as opposed to being your own master?"</em> He said rulership was not one of his pleasures. She pushed again (<em>"To be one's own master is to choose one's destiny"</em>), then named it: <strong><em>"I think you seek pleasure. You do not seek responsibility of any sort, and you wish to know what pleasures we could offer you in exchange for you betraying Belimarius."</em></strong> &mdash; <em>"Now you're catching on."</em> He conceded that Belimarius had let her army crumble while she worked on the Runewell: <em>"A bit irresponsible, if you ask me."</em>
+</li>
+<li><strong>Kreebnock</strong> tried fate: <em>"Surely you can see you're on the wrong side of fate here… These attempts are not going to end well for Belimarius, Xanderghul, yourself. You're destined to lose."</em> Lograsi: <em>"How easy to preach of control of one's destiny when you're able to bend destiny to your will."</em> <strong>Sevek</strong> offered to keep him fed and indulged, and added that history <em>"has always been unpleasant to the ones trying to destroy the world."</em> Lograsi: <em>"That's only because those who have succeeded left no one alive to speak of their own conquests."</em>
+</li>
+<li><strong>The deal</strong>: Aureys asked what he wanted. When the party has dealt with Belimarius and found Sorshen, <em>"you will have her pardon us."</em> And, should she be willing, he and his would <em>"more than eagerly enter the service of one with a more rational head on their shoulders."</em> <em>"She'll have need of powerful allies when all of this is over. Someone will need to rebuild."</em> Sevek: <em>"Sounds sensible to me."</em> Aureys: <strong><em>"We can speak to her on your behalf. We give you our word."</em></strong>
+</li>
+<li>Lograsi drained the goblet into an extradimensional space and told them the fountain is the entrance to the <strong>Runewell of Lust</strong>, that Belimarius is using the warshard to take control of it, and that her efforts had activated its defences, and <em>"I doubt it can differentiate between friend or foe."</em> <strong>Lograsi, Nonomanalia, Asvorag and their armies left the Blood Moon Palace.</strong>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act IV &middot; Combat &middot; The Phantoms of Desire (0:38–1:12)</div>
+<div class="act-card">
+<h3>Three Phantoms of Desire</h3>
+<ul>
+<li>At the fountain, ruby-red liquid poured from the three jugs and rose into three mirage-shapes of <strong>Queen Sorshen</strong>: <strong>Phantoms of Desire</strong>.
+</li>
+<li><strong>Mithtirith's critical Recall Knowledge</strong>: illusions made manifest, the Runewell's defences tripped into lashing out at anything nearby; <strong>weak to mental, immune to spirit, vitality and void</strong>. That ruled out most of his own damage spells; Kreebnock's mental cantrips became the fight's weapon.
+</li>
+<li><strong>Sevek</strong> opened with <strong>Channel Divine Spark</strong> (first use) and a natural-20 crit that blinded Phantom C. <strong>Kreebnock's Daze on Phantom A: natural 1, 155 damage, stunned.</strong> Cody: <em>"That might be the most intense daze I've ever seen."</em>
+</li>
+<li><strong>Aureys killed C</strong> (Opportune Backstab, natural 20) <strong>and B</strong> (a quickened fan Strike). <strong>Mithtirith's Frostbite</strong> finished A on a natural-1 Fortitude save: <em>"a million shards of ice."</em>
+</li>
+<li>After: Mithtirith did <strong>Treat Wounds</strong> himself for the first time in a long while (<em>"Do we all remember Mithtirith's early experiments with treat wounds?"</em> &mdash; Aureys: <em>"It was really terrible"</em>) and crit it. Aureys searched; nothing, they were illusions. Kreebnock: <em>"First I carve my initials into this statue."</em> Sevek said <em>"one last prayer to my deity before going on."</em>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V &middot; Combat &middot; The Eye of Desire: Belimarius (1:32–3:11)</div>
+<div class="act-card">
+<h3>Belimarius, last Runelord of Envy</h3>
+<ul>
+<li>Anointed from each jug, the party sank through warm, breathable water for minutes and surfaced in <strong>a sunlit sea grotto</strong>: a pool of seawater, a <strong>giant pearlized seashell throne</strong>, a hot-spring bath, a half-toppled statue of a beautiful woman, stepping stones, and <strong>thousands of red runes</strong> across the walls, each one shimmering <em>"as if something in the area were trying and failing to erase them."</em> Two <strong>Knights of Malice</strong> flanked the throne. <strong>Belimarius</strong> stood on it.
+</li>
+<li>Belimarius: <em>"If it isn't the ones who have been laying siege to my forces these past few days. Come to witness history, have we?"</em> &mdash; Aureys: <em>"Or to make it."</em> &mdash; <em>"You face a real runelord here, children."</em> &mdash; Aureys: <em>"And you face the greatest dragon you'll ever know or even imagine in your nightmares."</em> &mdash; <em>"I have known and killed more dragons than you will ever meet, little one."</em> &mdash; Aureys: <em>"I will take your power and destroy you with it."</em> Sevek, to Aureys: <em>"You gotta avenge your fellow dragonkins for what she just said."</em> &mdash; <em>"Exactly."</em> 
+</li>
+<li>Eleven rounds; see Combat Encounters. <strong>Glory on High</strong> blinded both knights; <strong>Aureys</strong> killed Knight B and <strong>Sevek</strong> Knight A; then Belimarius. Mithtirith dropped to <strong>dying 3</strong>, Aureys to <strong>dying 2</strong>, and Kreebnock brought both back. <strong>Sevek's natural 20 forced Undying Myth</strong>, and <strong>Sevek's Jolt Coil Strike</strong> ended it: <em>"And with that, Belimarius, last runelord of envy, was no more."</em>
+</li>
+<li>Aureys tore out Belimarius' eyeball and ate it: <strong><em>"I said I would feast on your bones. This is what I have to do for an appetizer."</em></strong> Kreebnock: <em>"Like a crow?"</em> Sevek: <em>"Sevek will look away."</em>
+</li>
+<li><strong>Cody's reveal</strong>: <em>"This is the one fucking fight in which you never grab anything? I had contingency ready to go."</em> Belimarius had a <strong>Contingency: Translocate if grabbed</strong>. Sevek: <em>"I did try, yeah."</em> (He did, once; the Grapple failed.)
+</li>
+<li>Mithtirith: <em>"Wait, does this make Sevek now the new Runelord? I feel like it does."</em> &mdash; Sevek: <strong><em>"I'm just a humble man. I'm no Runelord."</em></strong> &mdash; Aureys: <em>"I am not a humble dragon."</em>
+</li>
+<li><strong>Loot</strong> off Belimarius (see Loot). <strong>Mithtirith took the Robes of Xin-Edasseril</strong> after Kreebnock offered to defer. <strong>Level 19.</strong> Sevek: <em>"I can't roll below a 10 anymore for my first attack. Let's go."</em>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Table &middot; Table business (3:14–3:25)</div>
+<div class="act-card">
+<h3>Three or four sessions left</h3>
+<ul>
+<li><strong>Three or four sessions left</strong>, wrapping in <strong>November</strong>. The next game is <strong>Starfinder</strong>: the link goes up in Discord next week, starting again at <strong>level 1</strong>; the first ten levels are an AP, then homebrew, run at <strong>$25 a session</strong>. Any game Cody starts after next July will be at that rate. Cody: <em>"I found it's the only way I'm going to be able to do this continuously without doing 70-hour weeks."</em>
+</li>
+<li><strong>Cody: "After this game, no more Mythic unless it's another Mythic AP."</strong> The counters he has available <em>"involve completely shutting down PC's abilities… that's just not fun, in my opinion."</em> Kreebnock: <em>"Yeah, it's a lot of hard counters."</em> <em>"Given the choice, I won't go for a Mythic AP again."</em>
+</li>
+<li>Cody modified Belimarius heavily from the book (<em>"stat blocks and current APs are not tailored for people who know the system very well"</em>), and explained her spell list: the sin of envy forbids harming with elemental magic, which is why Envy wizards <em>"spam Telekinetic Bombardment."</em>
+</li>
+<li>Kreebnock is <em>"a big sci-fi nerd"</em> and asked about starship combat; Cody plans real (not cinematic) starship combat in the homebrew half. Aureys is looking at the Mechanic and Technomancer.
+</li>
+<li>Cody's <strong>Combatant Codex</strong>: <em>Fighters</em> is two sales from a bestseller medal, <em>Rogues</em> five.
+</li>
+<li>Paya is back next week. Aureys: <em>"Fun to have our pineapple back."</em>
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 &middot; 1:47 PM – 2:21 PM &middot; 5 rounds</div>
+<h3>The Phantoms of Desire</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Phantoms of Desire A, B &amp; C</strong> &mdash; 325 HP each, AC 42, flying; Intrusive Thought (ranged, 4d6+22 mental, DC 38 Will or stupefied 1), Illusory Scratch (4d12+16 mental + 3d6 bleed), <strong>Phantasmal Calamity</strong> (8th rank, 15d6 mental, 30-ft burst), Fear. <strong>Weak to mental (15); immune to spirit, vitality and void.</strong></span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Phantom A 50 &middot; Mithtirith 49 &middot; Sevek 43 &middot; Phantom C 42 &middot; Phantom B 39 &middot; Aureys 38 (Battle Cry) &middot; Kreebnock 32</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Phantom C &mdash; <strong>Aureys</strong> &middot; Phantom B &mdash; <strong>Aureys</strong> &middot; Phantom A &mdash; <strong>Mithtirith</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free): Battle Cry <strong>Demoralize on C &mdash; critical success, frightened 2.</strong> Channel Draconic Essence.
+</li>
+<li><strong>Phantom A</strong>: flies back, <strong>Intrusive Thought crit on Mithtirith (70)</strong>; he crit-saves the stupefy.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Recall Knowledge &mdash; critical success</strong> (weak to mental; immune to spirit, vitality, void). <strong>Fireball</strong> on B and C (C 14; B crit-saves).
+</li>
+<li><strong>Sevek</strong>: stances, <strong>Channel Divine Spark</strong> (quickened, 18 temp HP). Flurry on C: natural 2, then <strong>natural 20 &mdash; crit, 105</strong> + persistent fire; <strong>Celestial Armaments: C fails, blinded for a round</strong>; Greater Crushing clumsy 2, enfeebled 2. Aureys' Absorb Magic.
+</li>
+<li><strong>Phantom C</strong>: <strong>Phantasmal Calamity</strong> &mdash; Aureys fails (58); Mithtirith and Sevek crit-save; the statue blocks Kreebnock.
+</li>
+<li><strong>Phantom B</strong>: <strong>Phantasmal Calamity</strong> &mdash; Mithtirith fails (49), Aureys fails (49); Sevek crit-saves.
+</li>
+<li><strong>Aureys</strong>: Feint on C (exactly the DC). Earth to Heavens Strike: <strong>fan crit, 77</strong> + bleed; the second fan Strike misses. <strong>Legend of Combat</strong> (Mythic Point).
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, amped <strong>Daze on A</strong> (37).
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Phantom A</strong>: <strong>Fear</strong> &mdash; Kreebnock fails (frightened 2); the rest crit-save.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Fear on B and C &mdash; both fail.</strong>
+</li>
+<li><strong>Sevek</strong>: quickened Stride, <strong>Electric Arc</strong> (C 18; A crit-saves), Jolt Coil. Flurry on C: hit (47), miss. <strong>Aureys' Opportune Backstab: natural 20, crit &mdash; Phantom C destroyed.</strong>
+</li>
+<li><strong>Phantom B</strong>: Illusory Scratch on Kreebnock &mdash; <strong>crit (82), wiped out by Instinctive Obfuscation's flat check</strong>; second Scratch hits (33 + bleed).
+</li>
+<li><strong>Aureys</strong>: Speed of Arms Stride. Earth to Heavens Strike on B: fan 38, claw 46. Overwhelming Combination and quickened Strike: three misses.
+</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, Courageous Anthem. ★ <strong>Amped Daze on A &mdash; natural 1, critical failure: 155, stunned 1.</strong>
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Phantom A</strong> (stunned): two Scratches at Sevek &mdash; natural 4, natural 1.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Heal on Aureys (86)</strong>, Communal Healing's 10 to Sevek.
+</li>
+<li><strong>Sevek</strong>: Electric Arc (A 13, B 26). <strong>Inner Upheaval</strong> Flurry on B: hit (51), miss. <strong>Aureys' backstab: crit, 95.</strong> Quickened Strike misses.
+</li>
+<li><strong>Phantom B</strong>: Scratches at Aureys &mdash; miss, hit (38 + bleed).
+</li>
+<li><strong>Aureys</strong>: <strong>Aether Beam</strong> (31). Feint fails. <strong>Quickened fan Strike (34) &mdash; Phantom B destroyed.</strong>
+</li>
+<li><strong>Kreebnock</strong>: Daze on A (28).
+</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Phantom A</strong>: <strong>Phantasmal Calamity</strong> &mdash; Sevek, Kreebnock and Aureys all crit-save. Scratch at Sevek misses.
+</li>
+<li><strong>Mithtirith</strong>: Needle Darts misses.
+</li>
+<li><strong>Sevek</strong>: Electric Arc (A crit-saves). Flurry and quickened Strike: three misses.
+</li>
+<li><strong>Aureys</strong>: Speed of Arms into A's square; five attacks, one hit (45, after Cody corrected for flanking).
+</li>
+<li><strong>Kreebnock</strong>: <strong>Shatter Mind</strong> (36) &mdash; A is on 11.
+</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Phantom A</strong>: three Scratches at Sevek, all miss.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Frostbite &mdash; A critically fails (natural 1). Phantom of Desire A destroyed.</strong>
+</li>
+</ul>
+<p><strong>After</strong>: Mithtirith's Treat Wounds (critical success: 84 to Aureys and himself with Robust Health, 66 to Kreebnock); Kreebnock's Restore the Mind on Mithtirith.</p>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Phantom C &mdash; <strong>Aureys</strong> &middot; Phantom B &mdash; <strong>Aureys</strong> &middot; Phantom A &mdash; <strong>Mithtirith</strong></p>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 &middot; 2:45 PM – 4:18 PM &middot; 11 rounds</div>
+<h3>The Eye of Desire: Belimarius, Last Runelord of Envy</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Runelord Belimarius</strong> &mdash; level 21, <strong>600 HP</strong>, AC 40 base (46 as run), Will +39, Reflex +36, Fort +37, resist mental 20 / cold 10; <strong>Belimarius's Invidious Halberd</strong> (+41, 4d10+25 piercing + 2d6 force, reach), <strong>Foresight</strong> (reaction: force a reroll), <strong>Spell Riposte</strong>, <strong>Nullify</strong> (counter a spell; she takes 1d8 × its rank), <strong>Contingency (Translocate if grabbed)</strong> (never triggered), <strong>Undying Myth</strong>, Mythic Points. Spells: Incarnate Archmage, Phantasmagoria, Implosion, Telekinetic Bombardment, Sudden Transposition, Force Rain, Arrow Salvo, Time Jump, Translocate, Roaring Applause, Haste, Sure Strike. &middot; <strong>Knights of Malice A &amp; B</strong> &mdash; 350 HP, AC 40, halberd, Reactive Strike, flying, +4 status to saves against mental.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Belimarius 55 &middot; Kreebnock 50 (<strong>Prescience</strong>) &middot; Sevek 40 &middot; Aureys 39 &middot; Mithtirith 37 &middot; Knight B 37 &middot; Knight A 36</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Knight of Malice B &mdash; <strong>Aureys</strong> &middot; Knight of Malice A &mdash; <strong>Sevek</strong> &middot; <strong>Belimarius</strong> &mdash; <strong>Sevek</strong> (both lives: the natural-20 crit that forced Undying Myth, and the final Strike)</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Belimarius</strong>: <strong>Incarnate Archmage</strong>: 12 force to everyone on arrival (Energy Aegis takes most of it).
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, <strong>Haste</strong>. Aureys' Absorb Magic.
+</li>
+<li><strong>Sevek</strong>: stances. ★ <strong>Glory on High</strong>: Knight B's Reactive Strike on the flight misses; <strong>Belimarius crit-saves; Knights A and B both roll natural 1: 55 mental each, blinded for 1 minute.</strong>
+</li>
+<li><strong>Aureys</strong>: <strong>Legend of Combat</strong> (Mythic Point), flies in. Earth to Heavens Strike on Knight B: fan 41, claw misses.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Divine Wrath</strong>: Belimarius 13. <strong>Recall Knowledge on the Knights: natural 20.</strong>
+</li>
+<li><strong>Knights</strong>: B steps to Sevek, two Strikes, both miss; A flies off.
+</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Belimarius</strong>: <strong>Phantasmagoria (68)</strong>: Sevek, Kreebnock and Mithtirith crit-save; <strong>Aureys fails, rerolls (Mythic Point), fails again: 68, confused.</strong> Quickened <strong>Haste</strong> on herself.
+</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche. <strong>Begone</strong> on Knight A (success: pushed 5 feet, still in reach). <em>(The Incarnate Archmage departs: Will DC 46. <strong>Kreebnock rerolls on a Mythic Point: natural 19, critical success. Sevek rerolls on a Mythic Point and fails again</strong>: stupefied for a round; Cody ends his Energy Aegis, then restores it because it was 9th rank.)</em> Courageous Anthem; <strong>amped Message to Sevek: reaction Strike on Knight B (38).</strong>
+</li>
+<li><strong>Sevek</strong>: Flurry on Knight B: hit, <strong>hit (82)</strong>. Hasted MAP −10: natural 1. <strong>Taunt on all three.</strong> MAP −10: natural 19, hit (49).
+</li>
+<li><strong>Aureys</strong> (confused, ends up Striking the right target anyway): <strong>fan crit, 79</strong> + bleed; <strong>claw: Knight of Malice B destroyed.</strong> Flat check ends the confusion.
+</li>
+<li><strong>Mithtirith</strong>: Elf Step. <strong>Wall of Force (wand)</strong> between Knight A and himself and Kreebnock.
+</li>
+<li><strong>Knight A</strong> (blind): up and over the wall; <strong>natural 20 on Kreebnock, fails the flat check.</strong>
+</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Belimarius</strong>: steps in, <strong>Implosion on Aureys: natural 19, critical success, no damage.</strong> Cody: <em>"She wasn't kidding when she said greatest dragon ever."</em> Strides back.
+</li>
+<li><strong>Sevek</strong> (Kreebnock delays behind him): flies back to flank, eats Knight A's Reactive Strike (blind, misses). <strong>Electric Arc</strong> on A (14; passes the stupefied flat check). Flurry: hit, <strong>hit (81)</strong>.
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem. ★ <strong>Weight of the World on Belimarius → she Spell Ripostes, and rolls a natural 1 on the counteract.</strong> She succeeds at the save: <strong>dazzled and stunned 1</strong>, persistent bleed.
+</li>
+<li><strong>Aureys</strong>: Feint fails. <strong>Scare to Death</strong>: critical failure (incapacitation; she is unaffected). Overwhelming Combination: miss, miss; <strong>quickened fan natural 20: crit, 99</strong> + bleed; frightened.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Cloak of the Bat (Greater)</strong>, flies away from the fight.
+</li>
+<li><strong>Knight A</strong> (blind): three Strikes at Sevek, all miss.
+</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Belimarius</strong> (stunned 1): halberd on Aureys (52). <strong>Telekinetic Bombardment</strong> on Mithtirith and Kreebnock: Kreebnock <strong>Sidesteps Through Time</strong>; Mithtirith answers with <strong>Vindictive Thoughts</strong> (Mythic Point: the save at mythic proficiency turns a critical failure into a failure, 60 and prone), and she crit-saves its mental backlash. Bleed 5.
+</li>
+<li><strong>Sevek</strong>: <strong>Herald's Weapon, Inner Upheaval.</strong> Flurry on Knight A: <strong>natural 20 crit and a hit, 208: Knight of Malice A destroyed.</strong> Hasted Stride; MAP −10 at Belimarius misses.
+</li>
+<li><strong>Kreebnock</strong>: Restore the Mind on Aureys (38). <strong>Slow on Belimarius → Spell Riposte; Kreebnock fails his own save and is slowed 1.</strong>
+</li>
+<li><strong>Aureys</strong>: Legend of Combat reaction Strike at mythic proficiency: <strong>hit (39)</strong>. <strong>Majestic Presence</strong> (frightened 1). Earth to Heavens Strike and quickened Strike: misses.
+</li>
+<li><strong>Mithtirith</strong>: stands, <strong>Heal on Aureys (110)</strong> (Cody calls Nullify, then withdraws it: her reaction already went on the Spell Riposte), 12 to himself. <em>"I can heal them all day."</em> &mdash; <em>"You'll need to."</em>
+</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Belimarius</strong>: <strong>Sure Strike</strong> on Sevek: <strong>crit, 94</strong>. <strong>Rippling Spin</strong>: Trip fails. <strong>Sudden Transposition</strong> on Aureys and Sevek: <strong>both fail after Mythic Point rerolls: 46 each, teleported apart.</strong> Bleed 12.
+</li>
+<li><strong>Sevek</strong>: ★ <strong>Bracers of Hammers' 2-action Trip: success, prone, 29 bludgeoning</strong>; she crit-saves the disarm. Flurry: miss, miss.
+</li>
+<li><strong>Kreebnock</strong> (slowed): <strong>Force Rain → Nullify; Belimarius takes 40.</strong>
+</li>
+<li><strong>Aureys</strong>: Speed of Arms move. <strong>Aether Beam</strong> (29). Shifts into her square. Overwhelming Combination: fan hit (37), claw misses.
+</li>
+<li><strong>Mithtirith</strong>: <strong>Heal on Sevek (78)</strong>, 10 to himself.
+</li>
+</ul>
+<h4>Round 6</h4>
+<ul>
+<li><strong>Belimarius</strong>: <strong>Mythic Point to remove prone without provoking.</strong> Quickened halberd: <strong>crit on Aureys, 113.</strong> <strong>Translocates behind the Wall of Force.</strong>
+</li>
+<li><strong>Sevek</strong>: Strides around; Flurry misses twice. <strong>Taunt.</strong>
+</li>
+<li><strong>Kreebnock</strong>: Trusty Helmet (Block Manipulation). <strong>Force Rain</strong> behind the wall; she crit-saves.
+</li>
+<li><strong>Mithtirith</strong> (Aureys delays behind him): moves up. <strong>Heal on Aureys (123)</strong>, 13 to himself.
+</li>
+<li><strong>Aureys</strong>: moves 30 + 30 + 30, over the wall. <strong><em>"Mirror, mirror on the wall. Who's the fairest of them all?"</em></strong> <strong>Feint natural 20, critical success</strong>, off-guard to everyone. Overwhelming Combination: a fan hit → <strong>Belimarius' Foresight forces a reroll → miss</strong>; claw misses.
+</li>
+</ul>
+<h4>Round 7</h4>
+<ul>
+<li><strong>Belimarius</strong>: <strong>Force Rain (9th rank)</strong>: Aureys crit-saves; <strong>Sevek spends Prevailing Position: success, 24</strong> (a success even without it). Quickened halberd: <strong>crit on Aureys, 107.</strong>
+</li>
+<li><strong>Sevek</strong>: stances, <strong>Reserves of Inner Strength, Inner Upheaval.</strong> Flurry: <strong>hit, 54</strong> (Foresight forced a reroll: 49, then 46, still a hit); miss. <strong>Taunt.</strong>
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, one-action <strong>Disorienting Flash</strong> (12).
+</li>
+<li><strong>Mithtirith</strong>: <strong>Heal on Aureys (120)</strong>, 13 to himself. <em>"Hey Belimarius, this is why smart people hang out with healers."</em>
+</li>
+<li><strong>Aureys</strong>: reaction into her square. <strong>Frightening Power.</strong> Earth to Heavens Strike: fan misses, <strong>claw hits (35)</strong>; quickened Strike misses.
+</li>
+</ul>
+<h4>Round 8</h4>
+<ul>
+<li><strong>Belimarius</strong>: ★ <strong>Time Jump</strong> (two moves that trigger nothing) <strong>to Mithtirith. Halberd: crit, 84; crit, 96;</strong> third Strike a natural 1.
+</li>
+<li><strong>Sevek</strong>: <strong>Grapple: failure.</strong> Flurry of Maneuvers: two Trips, both fail. <strong>Taunt.</strong>
+</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, Courageous Anthem, <strong>9th-rank Disorienting Flash</strong> (catches Sevek, who crit-saves): <strong>33</strong>.
+</li>
+<li><strong>Mithtirith</strong>: Elf Step and Stride to get clear: <strong>Belimarius' Reactive Strike hits (36): Mithtirith drops.</strong> His <strong>Contingency</strong> can't carry a Heal of the rank he has prepared, so it doesn't fire. <strong>Dying 1</strong>, and he moves to just before Belimarius in initiative.
+</li>
+<li><strong>Aureys</strong>: reaction into her square. Earth to Heavens Strike: <strong>fan hits (42)</strong>, claw misses. <strong>Demoralize: natural 20, critical success.</strong> Quickened Strike misses.
+</li>
+</ul>
+<h4>Round 9</h4>
+<ul>
+<li><strong>Mithtirith</strong>: recovery check fails: <strong>dying 2</strong>.
+</li>
+<li><strong>Belimarius</strong>: <strong>Arrow Salvo</strong>: Kreebnock and Aureys crit-save; <strong>Sevek's Prevailing Position turns a critical failure into a failure (45 instead of 90)</strong>; <strong>Mithtirith critically fails: dying 3.</strong> Quickened halberd on Sevek: <strong>56</strong>.
+</li>
+<li><strong>Sevek</strong>: <strong>Potion Patch (Greater): Healing Potion (Major), 69.</strong> Flurry: natural 2, <strong>hit (56)</strong>. ★ <strong>Hasted Strike: natural 20, crit, 110: Belimarius at 0. Undying Myth: back to 300, all her Mythic Points spent.</strong> Re-enters stance.
+</li>
+<li><strong>Kreebnock</strong>: ★ <strong>Soothe on Mithtirith (55): he is back up.</strong>
+</li>
+<li><strong>Aureys</strong>: <strong>Aether Beam inside her reach (a manipulate action, on purpose): Belimarius' Reactive Strike, natural 20, crit, 113</strong>, and the beam is disrupted. Quickened Strike: <strong>hit (39)</strong>.
+</li>
+</ul>
+<h4>Round 10</h4>
+<ul>
+<li><strong>Mithtirith</strong>: stands, hasted move out. <strong>Heal on himself (133)</strong>, 13 to Aureys. <em>"She does hit like a freight train."</em> Aureys: <em>"I did that on purpose so you could get up and get away."</em>
+</li>
+<li><strong>Belimarius</strong>: <strong>Telekinetic Bombardment</strong> (Mithtirith fails, 52, prone; Kreebnock sidesteps). Halberd on Aureys: <strong>crit → Sevek spends a Mythic Point on Correct the Story → the reroll crits again (101). Aureys drops, dying 2.</strong> Strike at Sevek misses.
+</li>
+<li><strong>Sevek</strong>: delays until after Kreebnock.
+</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche. ★ <strong>Scroll of Soothe on Aureys (63): she is back up.</strong>
+</li>
+<li><strong>Sevek</strong>: <strong>Guidance</strong> on himself. <strong>Trip: success, prone.</strong> MAP Strike misses. <strong>Taunt.</strong>
+</li>
+</ul>
+<h4>Round 11</h4>
+<ul>
+<li><strong>Mithtirith</strong>: <strong>Heal on Aureys (144)</strong>, 13 more. <strong>Glass Shield.</strong>
+</li>
+<li><strong>Aureys</strong> (prone, wounded 1): Legend of Combat reaction Strike at mythic proficiency: <strong>fan crit, 86</strong> + bleed. Earth to Heavens Strike: fan misses, <strong>claw hits (49)</strong>. Overwhelming Combination: <strong>fan hits (35)</strong>, claw misses; quickened Strike misses.
+</li>
+<li><strong>Belimarius</strong> (prone): <strong>Roaring Applause on Sevek</strong> (lost to her stupefied flat check). Two Strikes on Aureys from the ground: hit (41), miss. Bleed 4.
+</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem; <strong>amped Message to Sevek: reaction Strike, hit (51).</strong> Aureys' Opportune Backstab: natural 2.
+</li>
+<li><strong>Sevek</strong>: <strong>Electric Arc inside her reach</strong>: her Reactive Strike hits (52); the Arc does 12. <strong>Jolt Coil Strike: hit, and Belimarius is destroyed</strong> (50 into her last 24).
+</li>
+</ul>
+<p style="color:var(--gold)"><strong>Kill credits:</strong> Knight of Malice B &mdash; <strong>Aureys</strong> &middot; Knight of Malice A &mdash; <strong>Sevek</strong> &middot; <strong>Belimarius</strong> &mdash; <strong>Sevek</strong> (both lives: the natural-20 crit that forced Undying Myth, and the final Strike)</p>
+</div>
+
+<h2>Damage Ledger</h2>
+<div style="overflow-x:auto">
+<table class="contrib-table">
+<tr><th></th><th>Phantoms</th><th>Belimarius fight</th><th><strong>Total dealt</strong></th><th>Damage taken</th><th>Healing given</th></tr>
+<tr><td><strong>Sevek</strong></td><td>267</td><td>854</td><td><strong>~1,120</strong></td><td>~320</td><td>69 (himself)</td></tr>
+<tr><td><strong>Aureys</strong></td><td>427</td><td>620</td><td><strong>~1,050</strong></td><td><strong>~810</strong></td><td>—</td></tr>
+<tr><td><strong>Kreebnock</strong></td><td>256</td><td>113</td><td><strong>~370</strong></td><td>~60</td><td>~215</td></tr>
+<tr><td><strong>Mithtirith</strong></td><td>25</td><td>13</td><td><strong>~40</strong></td><td>~450</td><td><strong>~1,250</strong></td></tr>
+</table></div>
+<div class="note-banner">Hit points actually removed, per the roll log: reverted Foundry applications are left out, overkill on a killing blow is not counted, and persistent damage is credited to whoever inflicted it. Sevek's natural-20 crit that forced Undying Myth has no damage line in the log; the 54 it removed is counted. Healing includes Treat Wounds and Communal Healing.<br><br><strong>Kills</strong>: Sevek 2 (Knight A, Belimarius &mdash; both lives) &middot; Aureys 3 (Phantoms C and B, Knight B) &middot; Mithtirith 1 (Phantom A). <strong>Two PCs dropped</strong> (Mithtirith to dying 3, Aureys to dying 2), both picked up by Kreebnock.</div>
+
+<h2>Mythic Economy</h2>
+<div class="summary">
+<ul>
+<li><strong>Sevek</strong>: rerolls on the Incarnate Archmage's departure and on Sudden Transposition (both still failed); <strong>Correct the Story</strong> on the crit that dropped Aureys (the reroll crit again). <strong>Channel Divine Spark</strong> (once per hour, no point) in the first fight.
+</li>
+<li><strong>Aureys</strong>: <strong>Legend of Combat</strong> in both fights (she got one point back with <strong>Summon Mythic Power</strong> between them); rerolls on Phantasmagoria and Sudden Transposition (both still failed).
+</li>
+<li><strong>Mithtirith</strong>: <strong>Vindictive Thoughts</strong> on Telekinetic Bombardment (critical failure → failure, and mental damage back at her, which she crit-saved).
+</li>
+<li><strong>Kreebnock</strong>: <strong>Prescience</strong> on the Belimarius initiative, and apparently a reroll on the Incarnate Archmage's departure (<em>"I'm going to reroll that"</em>; it logged at mythic proficiency, natural 19, critical success).
+</li>
+<li><strong>Belimarius</strong>: one point to stand from Sevek's Bracers trip without provoking; <strong>Undying Myth (all the rest)</strong> on Sevek's natural 20.
+</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+<h4>Sevek &middot; Both Lives</h4>
+<ul>
+<li><strong>He took both of Belimarius' lives.</strong> At 54 HP she ate his hasted MAP Strike on a <strong>natural 20, a crit for 110</strong>. Cody: <em>"So that would bring her down, but that'll activate Undying Myth. She returns to half hit points, and that is all her mythic points gone."</em> Two rounds later, with her on 36, he cast <strong>Electric Arc</strong> inside her reach on purpose (<em>"I have the AC to gamble that, so might as well"</em>), ate the Reactive Strike, lit the <strong>Jolt Coil</strong>, and the next Strike took her last 24.
+</li>
+<li><strong>Glory on High, again the opener.</strong> Flown up in range of all three on turn one: Belimarius crit-saved, and <strong>both Knights of Malice rolled natural 1s against DC 40</strong> &mdash; 55 mental each and <strong>blinded for a minute</strong>. Cody: <em>"The only reason they crit failed is because they both natted."</em> Blind, the knights made seven Strikes at Sevek and Kreebnock between them and landed none.
+</li>
+<li><strong>He killed Knight A</strong> with a <strong>natural-20 crit for 208</strong> (Herald's Weapon, Inner Upheaval: <em>"Oh my god. Nice."</em>). In the first fight he opened with <strong>Channel Divine Spark</strong> for the first time (quickened, 18 temporary HP) and a natural-20 crit that blinded a Phantom.
+</li>
+<li><strong>First use of the Bracers of Hammers' once-a-day Trip</strong>: <em>"I've never done this, so… Now this is the time."</em> Belimarius went prone and took 29; she crit-saved the disarm, and spent a <strong>Mythic Point to stand up without provoking</strong>.
+</li>
+<li><strong>He tried to save Aureys with Correct the Story</strong> (<em>"It's a gamble, though"</em>). Belimarius' reroll was a crit again, and Aureys went down. Two more Mythic Points went on rerolls that also failed: the Incarnate Archmage's departure (stupefied 2 for a round) and Sudden Transposition.
+</li>
+<li><strong>The tank, in the numbers</strong>: <strong>~1,120 damage dealt, top at the table</strong> (Aureys ~1,050), and ~320 taken, including a Sure Strike crit for 94. Prevailing Position twice: on the Arrow Salvo it turned a critical failure into a failure (45 instead of 90); on the Force Rain he would have succeeded anyway. With Mithtirith at dying 3, he topped himself up with a <strong>Potion Patch</strong> and kept swinging.
+</li>
+<li><strong>In the parley</strong> he asked Lograsi what Belimarius' "important matters" were, offered to keep him fed and indulged (<em>"We can keep you fed and indulge in your whatever that you like as well"</em>), told him history <em>"has always been unpleasant to the ones trying to destroy the world,"</em> and agreed to the pardon: <em>"Sounds sensible to me."</em>
+</li>
+<li><strong>Voice</strong>: <em>"I'm just a humble man. I'm no Runelord."</em> &middot; <em>"Sevek will look away"</em> (from the eyeball) &middot; <em>"You gotta avenge your fellow dragonkins for what she just said"</em> (after Belimarius called Aureys an insignificant speck) &middot; and, on Cody's grab-contingency reveal, a straight <em>"I did try, yeah."</em>
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-aureys">
+<h4>Aureys Hollow &middot; The Greatest Dragon You'll Ever Know</h4>
+<ul>
+<li><strong>She won the palace without a fight.</strong> Lograsi asked for a reason, not a threat, and she read him: <strong><em>"I think you seek pleasure. You do not seek responsibility of any sort, and you wish to know what pleasures we could offer you in exchange for you betraying Belimarius."</em></strong> Cody, as Lograsi: <em>"Now you're catching on."</em> She asked his price and gave the party's word: <em>"We can speak to her on your behalf. We give you our word."</em> Two generals and an army walked out of the city.
+</li>
+<li><strong>She met a runelord on her own terms.</strong> <em>"Or to make it."</em> &middot; <em>"And you face the greatest dragon you'll ever know or even imagine in your nightmares."</em> &middot; <em>"I will take your power and destroy you with it."</em> &middot; Mid-fight: <em>"Yeah, and I'll remind you at every opportunity. I am the greatest dragon you've ever seen."</em> And then she ate the eyeball.
+</li>
+<li><strong>She spent herself on Mithtirith.</strong> He had just come back from dying 3, prone in Belimarius' reach. Aureys, standing in her square, cast <strong>Aether Beam</strong> knowing it was a manipulate action (<em>"Yeah, I wanted to make sure you were aware of it"</em>) and drew the Reactive Strike: a natural-20 crit for 113. With the reaction gone, Mithtirith stood and walked out. Aureys: <em>"I did that on purpose so you could get up and get away."</em> Two more crits and she was at dying 2. Afterwards: <em>"Didn't you see? I sacrificed myself for Mithtirith."</em>
+</li>
+<li><strong>Three kills, ~1,050 damage, second only to Sevek</strong> (Phantoms C and B, Knight of Malice B, the last while confused), and <strong>~810 taken, the most at the table by far</strong>. Belimarius crit her four times with the halberd, for 101 to 113 each.
+</li>
+<li><strong>The flattery feints, aimed at envy this time.</strong> <em>"You're so illusionary awesome."</em> &middot; <em>"No need to be envious. No need whatsoever."</em> &middot; <strong><em>"Mirror, mirror on the wall. Who's the fairest of them all?"</em></strong> (a critical Feint; Cody: <em>"I feel like you're saying this with your face pressed up against the Wall of Force"</em>). Belimarius' Foresight then forced a reroll of the hit it set up.
+</li>
+<li><strong>Engine notes</strong>: Legend of Combat in both fights; Summon Mythic Power to get the point back; Earth to Heavens Strike as the staple attack; a natural-20 Demoralize and Frightening Power on Belimarius. <strong>Scare to Death bounced off her</strong> (incapacitation), and Implosion bounced off Aureys (a natural-19 critical save).
+</li>
+<li><strong>Kandirvek left and she checked the ranking</strong>: <em>"Who's the best dragon here?"</em>
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-mith">
+<h4>Mithtirith &middot; Hang Out With Healers</h4>
+<ul>
+<li><strong>About 1,250 hit points of healing</strong> across the day, most of it into Aureys while Belimarius hit her: 110, 120, 123, 144, plus two critical Treat Wounds. <strong><em>"Hey Belimarius, this is why smart people hang out with healers."</em></strong> Aureys: <em>"Smart people have friends."</em> Belimarius: <em>"Your own magic is so pathetic, it's useless in an actual battle."</em> Earlier: <em>"I can heal them all day."</em> &mdash; <em>"You'll need to."</em> He made it a running bit with Aureys, too: <em>"That gets me within 30 feet of my always bleeding friend."</em> &mdash; <em>"I am down a little less than 100."</em> &mdash; <em>"What else is new?"</em> And when Belimarius held her reaction for him as he tried to step away: <em>"Saving it just for me, are you? I can understand that."</em> After <em>"Run away and nurse your wounds. It's all you're good for,"</em> his next turn opened: <em>"Yeah, let me show you how bad healing is."</em> (a 9th-rank Heal for 144).
+</li>
+<li><strong>He read the Phantoms.</strong> A critical Recall Knowledge gave the party their weakness (mental) and immunities, and he <strong>finished Phantom A himself with a Frostbite</strong> it critically failed.
+</li>
+<li><strong>Wall of Force</strong> cut the blind Knight A off from him and Kreebnock (<em>"Since he's blind, I'm assuming the wall will give him some time"</em>); it cost the knight its movement for a turn and, later, Belimarius Translocated behind it to escape the melee.
+</li>
+<li><strong>Belimarius hunted him.</strong> She <strong>Time Jumped to him</strong> and crit him twice (84, 96), and when he stepped away her Reactive Strike dropped him. His <strong>Contingency</strong> couldn't save him: Cody ruled that Contingency caps the rank of the spell it carries; with his Runelord-granted Contingency heightened by level, the cap came out at 7th, and he had no 7th-rank Heal left. <em>"I'll just go unconscious."</em> Arrow Salvo pushed him to <strong>dying 3</strong>; Kreebnock's Soothe brought him back.
+</li>
+<li><strong>New item</strong>: a <strong>Cloak of the Bat (Greater)</strong>, for flight. He also took the <strong>Robes of Xin-Edasseril</strong>.
+</li>
+<li><strong>Voice</strong>: <em>"Wait, does this make Sevek now the new Runelord? I feel like it does."</em> &middot; <em>"Do we all remember Mithtirith's early experiments with treat wounds?"</em>
+</li>
+</ul>
+</div>
+
+<div class="spotlight s-kreebnock">
+<h4>Kreebnock &middot; Owed a Win</h4>
+<ul>
+<li><strong>The biggest single hit of the session: a Daze for 155.</strong> Phantom A rolled a natural 1 against his amped Daze, with its weakness to mental. Cody: <em>"That might be the most intense daze I've ever seen… You know what? I think your money's worth out of that one."</em> ~256 damage in that fight, nearly all of it mental cantrips into weakness.
+</li>
+<li><strong>His Weight of the World stunned a runelord.</strong> Belimarius answered it with <strong>Spell Riposte</strong> and rolled a <strong>natural 1</strong> on the counteract. Cody: <em>"So she's dazzled for a round and stunned one. That is absolutely ridiculous… I will say Kreebnock is owed a win."</em> &mdash; <em>"All those failed will saves."</em>
+</li>
+<li><strong>He picked up both fallen PCs.</strong> <strong>Soothe</strong> on Mithtirith at dying 3 (55), then a <strong>Scroll of Soothe</strong> pulled from his belt for Aureys at dying 2 (63). Plus Restore the Mind, Haste on the party for the Belimarius fight, Courageous Anthem most rounds, and two amped Messages that gave Sevek free Strikes, the second one in the final round (<em>"Go get her"</em>).
+</li>
+<li><strong>He made a runelord pay for a counter.</strong> His Force Rain drew <strong>Nullify</strong>, and Nullify cost Belimarius 40.
+</li>
+<li><strong>He tried fate on Lograsi</strong>: <em>"Surely you can see you're on the wrong side of fate here… You're destined to lose."</em> In the Phantoms fight: <em>"Kreebnock will keep reciting poems about battle."</em>
+</li>
+<li><strong>He took 2 damage in the Belimarius fight.</strong> Two Sidesteps Through Time, a blind knight's natural-20 that failed its flat check, a Will save he finally made. His own account: <strong><em>"I slowed myself, but I managed to take no damage the entire fight."</em></strong> (The slow was hers: Spell Riposte turned his Slow back on him.)
+</li>
+<li><strong>Voice</strong>: <em>"I'll take the statue with me when we're done"</em> (the statue that blocked both Phantasmal Calamities for him) &middot; <em>"First I carve my initials into this statue"</em> &middot; <em>"Like a crow?"</em> &middot; <em>"It's a team effort."</em> At the table: <em>"Given the choice, I won't go for a Mythic AP again."</em>
+</li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+<div class="loot-item magical">
+<div class="loot-name"><strong>Timeflaying Blade</strong> (mythic orichalcum bastard sword; +3, greater corrosive, keen, quickstrike &mdash; Cody said major striking, the card says greater)</div>
+<div class="loot-source">The Ancient Ones (S14)</div>
+<div class="loot-note"><strong>Kept</strong> by the party for <strong>Flay Time</strong> (Mythic Point, DC 43 Will).</div>
+</div>
+<div class="loot-item">
+<div class="loot-name"><strong>Stash sale</strong></div>
+<div class="loot-source">Rune giant gear and the rest</div>
+<div class="loot-note">Cody: <em>"about 60,000 gold overall"</em>; Foundry paid <strong>13,292 gp each</strong> (five shares).  Aureys kept a +3 potency rune and an acid-resistance rune; Sevek kept a fire-resistance rune.</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Belt of Long Life</strong> (apex)</div>
+<div class="loot-source">Belimarius</div>
+<div class="loot-note"></div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Aeon Stones: Preserving, Nourishing, Amplifying</strong></div>
+<div class="loot-source">Belimarius</div>
+<div class="loot-note"></div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Robes of Xin-Edasseril</strong></div>
+<div class="loot-source">Belimarius</div>
+<div class="loot-note">The raiment of the Runelord of Envy: +3 greater resilient antimagic greater energy-resistant explorer's clothing, pockets work as a Retrieval Belt (Major). <strong>Mithtirith</strong> (Kreebnock offered to wait).</div>
+</div>
+<div class="loot-item magical">
+<div class="loot-name"><strong>Belimarius's Invidious Halberd</strong></div>
+<div class="loot-source">Belimarius</div>
+<div class="loot-note">+3 greater striking keen spell-reservoir high-grade dawnsilver halberd (holding Slow); acts on its own (three actions and a reaction), absorbs arcane spells, hates arcane casters. <strong>It is destroyed if hurled under the feet of the Oliphaunt of Jandelay while no runelord of envy lives</strong> &mdash; which, as of today, is true. Unassigned.</div>
+</div>
+</div>
+<div class="xp-banner">Treasure &middot; stash sale = <strong>13,292 gp each</strong> &middot; Belimarius' hoard unassigned &middot; milestone levelling: <strong>level 19</strong></div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Aureys</strong>: "I think you seek pleasure. You do not seek responsibility of any sort, and you wish to know what pleasures we could offer you in exchange for you betraying Belimarius."<br><strong>Lograsi (Cody)</strong>: "Now you're catching on."
+<span class="attribution">The parley in Sorshen's atrium. It ended with Lograsi's army leaving the city.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "All these things aside, surely you can see you're on the wrong side of fate here… You're destined to lose."
+<span class="attribution">To Lograsi, who answered that destiny is easy to preach when you can bend it.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sevek</strong>: "History has always been unpleasant to the ones trying to destroy the world."<br><strong>Lograsi (Cody)</strong>: "That's only because those who have succeeded left no one alive to speak of their own conquests."
+<span class="attribution">Lograsi asking for one more reason to stand aside.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "I'll take the statue with me when we're done."
+<span class="attribution">The statue that blocked both Phantasmal Calamities from reaching him.</span>
+</blockquote>
+
+<blockquote>
+<strong>Cody</strong>: "That might be the most intense daze I've ever seen. Dazed him for 155 points of damage."
+<span class="attribution">Kreebnock's amped Daze, on a natural-1 Will save, into a weakness to mental.</span>
+</blockquote>
+
+<blockquote>
+<strong>Belimarius (Cody)</strong>: "I have known and killed more dragons than you will ever meet, little one."<br><strong>Aureys</strong>: "I will take your power and destroy you with it."
+<span class="attribution">Before initiative in the Eye of Desire.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "Saving it just for me, are you? I can understand that."
+<span class="attribution">Belimarius holding her reaction while he tried to step out of her reach. It dropped him.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "Hey Belimarius, this is why smart people hang out with healers."<br><strong>Aureys</strong>: "Smart people have friends."
+<span class="attribution">Mid-fight, after a 120-point Heal on Aureys.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "You're so pretty. Mirror, mirror on the wall. Who's the fairest of them all?"
+<span class="attribution">A critical Feint against the Runelord of Envy, after flying over Mithtirith's Wall of Force to reach her.</span>
+</blockquote>
+
+<blockquote>
+<strong>Cody</strong>: "I will say Kreebnock is owed a win after some of the shenanigans that have happened."
+<span class="attribution">Belimarius rolled a natural 1 trying to riposte his Weight of the World.</span>
+</blockquote>
+
+<blockquote>
+<strong>Aureys</strong>: "I said I would feast on your bones. This is what I have to do for an appetizer."<br><strong>Sevek</strong>: "Sevek will look away."
+<span class="attribution">Belimarius' eyeball.</span>
+</blockquote>
+
+<blockquote>
+<strong>Mithtirith</strong>: "Wait, does this make Sevek now the new Runelord? I feel like it does."<br><strong>Sevek</strong>: "I'm just a humble man. I'm no Runelord."<br><strong>Aureys</strong>: "I am not a humble dragon."
+<span class="attribution">After Sevek's Strike killed Belimarius.</span>
+</blockquote>
+
+<blockquote>
+<strong>Kreebnock</strong>: "I slowed myself, but I managed to take no damage the entire fight."
+<span class="attribution">He took 2, from the Incarnate Archmage's arrival.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+<li><strong>Spindlehorn.</strong> The Oliphaunt of Jandelay was once summoned there, and <em>"left something of itself behind."</em> A spiral tower in the Wyvern Mountains, said to be Gimmel's. Its purpose is lost. (Belimarius' halberd can be destroyed under the Oliphaunt's feet.)
+</li>
+<li><strong>Sorshen's archive</strong> in the Blood Moon Palace is now reachable, with Belimarius dead and the palace emptied.
+</li>
+<li><strong>The Eye of Desire.</strong> Belimarius was trying to seize Sorshen's Runewell of Lust with the warshard. What happened to the <strong>warshard</strong> and the Runewell after she died wasn't said.
+</li>
+<li><strong>The pardon.</strong> The party gave its word to ask Sorshen to pardon <strong>Lograsi, Nonomanalia ⚠️ and Asvorag ⚠️</strong>. Lograsi wants to serve her afterwards.
+</li>
+<li><strong>Jandelay.</strong> The door under Xin-Eurythnia is closed and was never a portal. The way in is still unknown. Sorshen and Xanderghul are still fighting there, and the clock from S14 (<em>"some weeks"</em>) is still running.
+</li>
+<li><strong>The end of the campaign</strong>: three or four sessions, November. Starfinder after.
+</li>
+<li><strong>Paya is back next week.</strong>
+</li>
+<li><strong>Mithtirith's Contingency</strong>: Cody ruled it heightens with his level but caps the companion spell at 7th rank. He needs a Heal prepared at a legal rank for it to fire.
+</li>
+<li><strong>The Foundry black-screen problem</strong> hit Sevek and Mithtirith this time. The Forge update didn't fix it.
+</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where it leaves off</span>
+<p>Belimarius lies dead on the floor of Sorshen's grotto, beside the pearl-shell throne, and Aureys is eating her eye. Lograsi's army has left the Blood Moon Palace. The Doomsday Door is closed, Spindlehorn is waiting, and Sorshen is still fighting Xanderghul in Jandelay.</p>
+<div class="big-line">"And with that, Belimarius, last runelord of envy, was no more."</div>
+<span class="speaker">&mdash; Cody, on Sevek's last Strike &middot; level 19</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+<li>Helped close the <strong>Doomsday Door</strong>. Took the <strong>fire-resistance</strong> rune from the sale; bought <strong>Major Resilient</strong> during the break. 13,292 gp from the sale.
+</li>
+<li>At <strong>Lograsi's</strong> parley: asked what Belimarius' "important matters" were; offered him food and indulgence, and the line about history. Agreed to the pardon deal.
+</li>
+<li><strong>Phantoms of Desire</strong>: first <strong>Channel Divine Spark</strong>. Natural-20 crit on Phantom C for 105, which blinded it. Three Electric Arcs. ~270 damage. Took none.
+</li>
+<li><strong>Belimarius fight</strong>: <strong>Glory on High</strong> &mdash; both knights natural 1, blinded for the fight. <strong>Killed Knight A</strong> (natural-20 crit, 208). <strong>First Bracers of Hammers activation</strong> (prone, 29). Prevailing Position twice. Correct the Story for Aureys; it didn't change the result. <strong>Natural-20 crit for 110 forced her Undying Myth. Killed her</strong> with the Jolt Coil Strike after eating a Reactive Strike for the Electric Arc.
+</li>
+<li><strong>~1,120 damage dealt (top at the table), ~320 taken.</strong> Three Mythic Points spent, all on rerolls that didn't change the outcome.
+</li>
+<li><strong>Level 19.</strong>
+</li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+<li><strong>The knights' blindness did all the work.</strong> Blind, they made seven Strikes at him and Kreebnock, none landed (an eighth, Knight B's Reactive Strike on the Glory on High flight, came before the blind and also missed); one was a natural 20 that failed the flat check.
+</li>
+<li><strong>His second Trip in Round 8 was a critical failure</strong> (36 against her Reflex DC 46), which should have left him prone. Nobody applied it.
+</li>
+<li><strong>Foresight reached him once</strong>: his Inner Upheaval hit was rerolled from 49 to 46 and still hit.
+</li>
+<li><strong>One halberd hit on him was logged as a miss.</strong> Her quickened Strike after the Arrow Salvo came up 43 against AC 44 with Taunt's −1 applied; Cody removed the penalty (it doesn't apply to attacks on him), and 44 hit for 56.
+</li>
+<li><strong>The Bracers' disarm needs her to fail a Reflex 35.</strong> Her Reflex is +36; she crit-saved on a natural 18. Against a boss it's the prone and the 10d6, not the disarm.
+</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+<li><strong>Grab-to-teleport contingencies.</strong> Cody said it's a standard caster answer to grapples (<em>"People like to do is translocate on grab because it shuts down mages so hard"</em>). Worth expecting from the next caster boss.
+</li>
+<li><strong>Electric Arc inside reach</strong> is a deliberate gamble at his AC. It paid off on the last turn.
+</li>
+<li><strong>Prevailing Position against saves</strong>: on the Arrow Salvo it turned a crit failure into a failure (45 saved); on the Force Rain it wasn't needed.
+</li>
+<li>Three or four sessions left.
+</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+<li>What did the <strong>Oliphaunt</strong> leave at <strong>Spindlehorn</strong>?
+</li>
+<li>What does <strong>Sorshen's archive</strong> say about getting into <strong>Jandelay</strong>?
+</li>
+<li>What happened to <strong>Belimarius' warshard</strong> and the <strong>Runewell of Lust</strong>?
+</li>
+<li>What does <strong>level 19</strong> bring? (<em>"I can't roll below a 10 anymore for my first attack."</em>)
+</li>
+</ul>
+
+</section>
+
+</div>
+</body>
+</html>
