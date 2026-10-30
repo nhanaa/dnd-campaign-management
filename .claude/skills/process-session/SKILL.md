@@ -7,6 +7,8 @@ description: Process a DnD/PF2e session recording into a transcribed, diarized r
 
 End-to-end pipeline: transcribe a session recording, generate a styled HTML recap and markdown session notes, then propose updates to the campaign's world.md and dynamics.md.
 
+> **RUN END-TO-END WITHOUT QUESTIONS (Pax, 2026-10-25).** *"No need to ask me just go ahead… If I need to correct something I'll do it at the end when looking at the final recap."* **Do not use AskUserQuestion anywhere in this pipeline** — not for inputs, speaker mapping, ambiguous attributions, unstated damage, cameo pronouns, or reviewer `[CONFIRM]` flags. Wherever a step below used to say "ask," instead: make the best-evidenced call (capability matrix > roll log > transcript label), write the recap so it doesn't assert more than the evidence supports (drop or soften the unverifiable detail rather than guessing a specific), and list every judgement call in a short **"Calls I made"** section of the final report so Pax can correct them on review. The only hard stop is a failure you can't route around (no recording exists for the day and no roll log either, or transcription errors out).
+
 ## Usage
 
 ```
@@ -26,7 +28,7 @@ Pax very often invokes this with **no filename** — he'll say things like "proc
 1. **List the recordings dir newest-first:** `ls -lat "/mnt/c/Users/nhanp/Videos/"`. Files are named `YYYY-MM-DD HH-MM-SS.wav` (OBS default) — the name IS the recording's start date/time.
 2. **Match to the session.** If Pax said "today," pick the file whose date is today. Cross-check against the roll log if one was provided — the `rolls.txt` export header (`# <DD>/<MM>/<YYYY>, HH:MM:SS -> …`) and the recording's filename timestamp should line up (the `.wav` start time is usually a few minutes *before* the first roll). That match is your confirmation you grabbed the right file.
 3. **If exactly one recording matches the target day and it lines up with the rolls, use it** — mention which file you picked, then proceed. Don't ask.
-4. **Only ask (AskUserQuestion)** if: no recording matches the day, or several plausibly do and the roll log can't disambiguate. Show the candidate filenames.
+4. If no recording matches the day, or several plausibly do and the roll log can't disambiguate, pick the one whose start time best fits the roll log (closest start before the first roll, longest file) and say which you picked in the final report. Only if there is no recording at all for the day, proceed from the roll log and say so.
 
 **The roll log is a supplement to the recording, not a replacement for it.** Transcribe first; use `rolls.txt` for combat attribution/math per the roll-log guidance. If Pax genuinely wants a rolls-only recap he'll say so explicitly ("no recording", "rolls only").
 
@@ -35,7 +37,7 @@ Pax very often invokes this with **no filename** — he'll say things like "proc
 These are concrete errors that have happened in real sessions. Scan this list every time you generate a recap. If any of these patterns shows up in your draft, stop and fix it before continuing.
 
 **Identity / pronouns:**
-- **Never infer a PC's pronouns from their name** — read the character-sheet Backstory/Personality section and use those pronouns (androgynous-sounding names mislead). Ask the player for cameo-NPC pronouns if the transcript doesn't state them.
+- **Never infer a PC's pronouns from their name** — read the character-sheet Backstory/Personality section and use those pronouns (androgynous-sounding names mislead). If the transcript doesn't state a cameo NPC's pronouns, use the DM's narration pronouns, else they/them, and note it under "Calls I made."
 
 **Class-mechanic mismatches** (the diarization label is a *hint*, not authority — every quoted ability use must match the character's actual class):
 - Before attributing any quoted spell/ability, confirm the speaker's class can actually use it. Build a per-PC ability list from the character sheets and check each quoted cast against it.
@@ -47,12 +49,12 @@ These are concrete errors that have happened in real sessions. Scan this list ev
 - If a PC says "remember the X you promised" later in the scene, the X was won — don't frame it as a loss.
 
 **Initiative & combat structure:**
-- **Ask the player for the VTT initiative tracker** (or roll log) before reconstructing combat. The transcript's "who spoke when" is unreliable — DMs flex tie-breaks, mis-call turns, and abandon partial rounds when players join late.
+- **Use the roll log's initiative lines** (`rolls.txt`) as the tracker before reconstructing combat. The transcript's "who spoke when" is unreliable — DMs flex tie-breaks, mis-call turns, and abandon partial rounds when players join late.
 - For late-joining cameo NPCs: "back at the top of the initiative" = restart from existing order with the new PC slotted at their actual roll. NOT a full re-roll. NOT "slotted at the top."
 - Common bug: inverting two PCs at adjacent initiative values — verify the order against the tracker.
 
 **Damage numbers:**
-- If a damage tick number is "unstated" in the transcript (e.g. a sustained-spell tick on the cast turn), ASK THE PLAYER rather than writing "unstated" — players track their own damage.
+- If a damage tick number is "unstated" in the transcript (e.g. a sustained-spell tick on the cast turn), check `rolls.txt` for the number; if it isn't there either, describe the effect without a number (never invent one) and note it under "Calls I made."
 
 **Roleplay representation (the most common failure — see Foundational Principle #2):**
 - The pipeline reliably nails combat math and under-serves roleplay. Much of the table is RP; the recap must reflect that. Build every Character Spotlight from the **Roleplay Inventory** (Step 5), not from whatever lines were loudest.
@@ -95,9 +97,9 @@ Every attribution in the recap (a spell cast, a skill check, a damage number, a 
 - **Pyannote diarization** can split one speaker across two SPEAKER_xx labels (especially if their cadence shifts), or merge two speakers into one. Check segment counts against expected player count; investigate any discrepancy.
 - **The rolls log is global, not per-speaker.** The player pastes the whole VTT dump. Attribution-by-proximity ("this PC got the gold callout, so they also rolled the Lore check logged next to it") is wrong — back-derive from stat fingerprints.
 
-### When ambiguous: ask, don't guess
+### When ambiguous: don't guess a specific — and don't ask
 
-If after running the five capability tests an attribution is still ambiguous between two PCs, use **AskUserQuestion** rather than picking. The cost of a wrong attribution (Pax has to correct it, sometimes multiple times) is much higher than the cost of one extra question.
+If after running the five capability tests an attribution is still ambiguous between two PCs, do not pick one at random and do not ask mid-run. Either write the beat without the contested attribution ("the party", the effect itself), or cut it if it only matters as an attribution. Record it under "Calls I made" in the final report so Pax can fix it on review.
 
 ### Concrete error patterns this prevents (illustrative, not exhaustive)
 
@@ -157,7 +159,7 @@ After transcription completes:
 3. Assign each label by content: the DM is the highest-volume speaker who narrates and voices NPCs; each player is identified by class mechanics only their PC has (e.g. Hunt Prey → the Ranger, Spellstrike + Doctor's Visitation → the Medic Magus, Intercept/Taunt → the Guardian), by first-person references to their own PC's events, and by other speakers addressing them by name.
 4. State the mapping and the evidence for it in one short line per speaker, then proceed straight to cleanup.
 
-Only ask (AskUserQuestion) if two labels genuinely can't be separated after this — e.g. two PCs of the same class with no distinguishing lines, or a label that looks like a merge of two players. An extra detected speaker with a handful of segments (a pyannote split or UNKNOWN) is not a reason to ask; note it and fold it in during cleanup.
+If two labels genuinely can't be separated (two PCs of the same class with no distinguishing lines, or a merge of two players), split by roll-log timestamps and class-mechanic carve-outs, quote neither label's ambiguous lines, and note it under "Calls I made." An extra detected speaker with a handful of segments (a pyannote split or UNKNOWN) is not a reason to ask; note it and fold it in during cleanup.
 
 ### Step 2.5: Transcript Cleanup (subagent)
 
@@ -239,19 +241,15 @@ Before generating the recap, read these files for context:
 - `<campaign>/character-sheet.md` — The user's character details
 - `<campaign>/style-guide.md` — Visual theme for HTML (if it exists)
 
-### Step 4.5: Gather Session-Specific Facts from Pax
+### Step 4.5: Gather Session-Specific Facts (no questions)
 
-**Before generating the recap, ask Pax for the inputs you'll need.** Doing this upfront prevents the grind-back-through cycle of correcting a recap after the fact.
+**Do not ask Pax for inputs.** Gather them yourself:
 
-Use **AskUserQuestion** (not free-form text) and bundle these into a single question with multi-select:
+1. **Initiative + combat log** — `/home/nhanp/dnd-campaign-management/rolls.txt` (Pax updates it each session; check `git status`). Read it before reconstructing combat and pass it to the Step 5.6 combat-review subagents. **If it's in the `foundry-export.js` format (lines beginning `[HH:MM:SS] Name ::`), it is speaker-attributed** — use the speaker directly, and it also carries target AC, hit/miss margins, initiative and encounter splits. Older un-attributed dumps require stat-fingerprint back-derivation. **Always check for double-paste before computing anything** — a duplicated log silently doubles every HP figure.
+2. **Cameo NPC details** — from the transcript, `world.md` and `dynamics.md`. Use canonical spellings from the AP data where a name was misheard.
+3. **Pax's PC emphasis** — Pax has historically been under-represented in recaps. Without asking, scan his PC's lines individually and make sure his strongest beats (persuasion wins, character moments, clutch plays) are on the page.
 
-1. **Initiative tracker screenshot** — Foundry/Roll20 init order if any combat happened. Treat as authoritative for round structure.
-2. **Combat damage / HP tracking** — does Pax have a damage log or HP-per-round notes for any of the PCs? If so, ask him to paste/screenshot it. **Default location: `/home/nhanp/dnd-campaign-management/rolls.txt`** (Pax updates it each session; check `git status`). Read it before reconstructing combat and pass it to the Step 5.6 combat-review subagents. **If it's in the `foundry-export.js` format (lines beginning `[HH:MM:SS] Name ::`), it is speaker-attributed** — use the speaker directly, and it also carries target AC, hit/miss margins, and encounter splits. Older un-attributed dumps require stat-fingerprint back-derivation. **Always check for double-paste before computing anything** — a duplicated log silently doubles every HP figure.
-3. **Ambiguous moments** — anything from this session that was confusing in the moment (a teleport's intent, an NPC's full name, who actually got a contested item).
-4. **Cameo NPC details** — pronouns, last names, anything not in dynamics.md.
-5. **Anything Pax wants to make sure is captured** — high-impact moments he wants the recap to land correctly (his persuasion wins, his character beats, etc.). This is a deliberate carve-out — Pax has historically been under-represented in recaps; ask him directly what he wants emphasized.
-
-If Pax says "skip / no extras," proceed. If he provides items, store them locally and reference them throughout Step 5.
+Anything still uncertain goes in the final report's **"Calls I made"** list.
 
 ### Step 5: Generate Session Recap (Markdown)
 
@@ -266,11 +264,11 @@ If Pax says "skip / no extras," proceed. If he provides items, store them locall
 
 Before declaring outcomes, applying pronouns, or framing scenes:
 
-1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (androgynous-sounding names mislead; trust the sheet). When in doubt about a cameo NPC's pronouns, ask Pax.
+1. **Pronouns and basic character facts** — read each PC's `<campaign>/character-sheet.md` Backstory/Personality sections to confirm pronouns and self-presentation. Do NOT default to gendered pronouns from name vibes (androgynous-sounding names mislead; trust the sheet). When in doubt about a cameo NPC's pronouns, use the DM's narration pronouns, else they/them.
 
 2. **High rolls and negotiation outcomes** — when a PC makes a high check (Persuasion, Insight, etc.) or any pivotal roll, **read the full in-fiction exchange** before framing the result. Patrons and NPCs frequently re-frame an ask as a *separate* deal (e.g. "I won't pay more for the original deal, *but* for a long-term contract a signing bonus is acceptable"). One PC's refusal to renegotiate one thread does NOT close other threads. The earliest "no" is often not the final word — keep reading until the scene actually ends.
 
-3. **Initiative and combat structure** — if Pax can share the Foundry/Roll20 initiative tracker (screenshot or roll log), use it as the authoritative order. Do NOT infer init order from "who spoke when" in the transcript — DMs flex order on ties, mis-call turns, and abandon partial rounds when a player joins late. Ask Pax for the tracker if combat is ambiguous (per `feedback_dice_log.md`).
+3. **Initiative and combat structure** — if Pax can share the Foundry/Roll20 initiative tracker (screenshot or roll log), use it as the authoritative order. Do NOT infer init order from "who spoke when" in the transcript — DMs flex order on ties, mis-call turns, and abandon partial rounds when a player joins late. The roll log is the tracker.
 
 4. **Cameo / late-joining NPCs** — confirm whether the DM re-rolled initiative or just slotted them in at their actual roll. Check the transcript for the DM saying "back at the top of the initiative" (= restart from existing order) vs. "everyone re-roll" (= full re-roll). These produce very different round structures.
 
@@ -428,7 +426,7 @@ For each item below, scan the recap.md you just wrote:
 
 8. **Late-joiner placement:** Did anyone join combat partway through? Verify their actual init number, not "slotted at the top." Search the transcript for the DM's exact phrasing.
 
-9. **Damage numbers pass:** If you wrote "damage unstated" or "tick number not announced" anywhere, ask Pax (he tracks his own damage) before locking the section.
+9. **Damage numbers pass:** If you wrote "damage unstated" or "tick number not announced" anywhere, pull the number from `rolls.txt`; if it isn't there, describe the effect without a number and log it under "Calls I made."
 
 10. **Quote section count + diversity:**
     - Count total quotes — must be 10-14.
@@ -588,7 +586,7 @@ Format:
 After the subagent returns its review:
 1. **The review is advisory, not authoritative.** Do not blindly apply fixes — verify each finding against the cleaned transcript yourself before changing the recap. The reviewer can also miss things or mis-suggest (e.g. propose attributing a divine-caster line to the wrong PC).
 2. Fix all confirmed errors in the recap.
-3. For flagged/ambiguous items, use **AskUserQuestion** to ask the user before committing.
+3. For flagged/ambiguous items, make the best-evidenced call (or write around the contested detail) and log it under "Calls I made." Do not ask.
 4. Rebalance quotes and spotlights based on the distribution check.
 5. After applying fixes, re-scan for collateral damage: when you change one attribution, check that you didn't break a related sentence elsewhere (e.g. moving a quote from one PC to another may also require updating a spotlight bullet that references the same moment).
 
@@ -674,7 +672,7 @@ Read the recap's Combat Encounters section AND any combat mentions in Character 
 8. **Missing kills** — did a character kill multiple enemies but only get credit for one?
 9. **Hero point omissions or over-counts** — every hero point spent in combat must be noted, but Foundry low-reroll automation is NOT a hero point spend. Distinguish carefully: explicit "I hero point that" = spent; automatic reroll on low result = Foundry feature, not hero point.
 10. **Condition tracking** — were conditions (off-guard, frightened, etc.) correctly attributed to the right source? Status-bonus stacking rules apply (don't double-count two same-type bonuses).
-11. **Damage numbers** — do the numbers in the recap match what the DM said? Don't invent specific damage numbers when the DM said "barely alive" or similar narrative-only descriptions; mark them as unstated and ask the user.
+11. **Damage numbers** — do the numbers in the recap match what the DM said? Don't invent specific damage numbers when the DM said "barely alive" or similar narrative-only descriptions; describe them narratively and don't invent a number.
 12. **Action economy violations** — does the recap describe more actions than the system allows per turn? PF2e is 3 actions + 1 reaction; 5e is 1 action + 1 bonus action + 1 reaction + movement. Free actions and reactions don't count against the action total.
 13. **Round count** — does the recap say "quick 2-round fight" when it was actually 3 rounds?
 14. **Initiative order** — if the user can share a Foundry/Roll20 tracker screenshot, treat it as authoritative. The transcript "who spoke when" can mislead due to DM tie-flexing, mis-called turns, and abandoned partial rounds. Common mistake: inverting two PCs at adjacent inits.
@@ -718,7 +716,7 @@ After the per-encounter subagents return (collect all N reports):
 1. Work the **FLAGS** list from every encounter report (see the mandatory flag-resolution gate in Step 5.7 below — do not skip flags).
 2. Replace each encounter's Combat Encounters block with its corrected version.
 3. Fix any combat-related errors the flags surface in Character Spotlight, Key Events, and Pax's Notes.
-4. For every `[CONFIRM]` flag, use **AskUserQuestion** before committing.
+4. For every `[CONFIRM]` flag, make the best-evidenced call (or write around it) and log it under "Calls I made." Do not ask.
 
 Then resolve the non-combat review (Step 5.6b) as well — **all the per-encounter combat reviews + Step 5.5 + Step 5.6b gate HTML generation together** (Step 5.7).
 
@@ -784,11 +782,11 @@ The review subagents (the per-encounter combat agents, the attribution agent, an
 
 1. **Apply it** — after verifying the fix against the transcript / `rolls.txt` / character sheet yourself (the reviewer can mis-suggest; confirm before editing).
 2. **Override it** — only with a specific, stated, verified reason, checked against the source. Write the override reason down (in your working notes / the report to Pax). "I think the transcript label is right" is **not** a verified reason.
-3. **Ask** — if it's still ambiguous after you check, use **AskUserQuestion**. A question costs less than a wrong recap.
+3. **Write around it** — if it's still ambiguous after you check, keep the beat without the contested detail (or cut it), and log it under "Calls I made" for Pax's review. Do not ask.
 
 > **Cautionary tale (real):** a combat reviewer flagged that "Interstellar Void" read as the Oracle's spell, not the Kineticist's. The main agent overrode it on the Whisper speaker label alone — and was wrong; the player had to catch it. A capability-based flag (a class can't cast that / the math doesn't fit) **beats the diarization label every time.** When a flag cites capability or roll-math, default to trusting the flag, not the transcript.
 
-Make a quick checklist of all flags across all reports and confirm each is Applied / Overridden-with-reason / Asked before moving on. **Collateral check:** when you apply one flag, re-scan for sentences elsewhere (Spotlight, Key Events, Pax's Notes, Quotes) that referenced the same beat and fix them too.
+Make a quick checklist of all flags across all reports and confirm each is Applied / Overridden-with-reason / Written-around-and-logged before moving on. **Collateral check:** when you apply one flag, re-scan for sentences elsewhere (Spotlight, Key Events, Pax's Notes, Quotes) that referenced the same beat and fix them too.
 
 **Do NOT proceed to HTML generation until every flag from every review subagent (all per-encounter combat reviews + Step 5.5 + Step 5.6b) is resolved via Step 5.7.**
 
@@ -924,4 +922,4 @@ When complete, report:
 
 - If transcription fails, report the error and stop
 - If no style-guide.md exists for the campaign, note this and use a default theme
-- If speaker mapping is ambiguous, ask the user to clarify
+- If speaker mapping is ambiguous, make the call from class mechanics and roll-log timestamps and log it under "Calls I made"

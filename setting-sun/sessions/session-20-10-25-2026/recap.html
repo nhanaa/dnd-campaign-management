@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 20 — The Maestro's Exit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #12111a;
+  --bg-card: #1e1c2a;
+  --bg-card-hover: #28253a;
+  --border: #3a3650;
+  --border-bright: #504a6a;
+  --text: #e8e4f0;
+  --text-dim: #a89cb8;
+  --text-bright: #f8f4ff;
+  --shadow: #7040b0;
+  --shadow-bright: #9060d0;
+  --shadow-glow: #7040b030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #40a0a0;
+  --teal-glow: #40a0a022;
+  --ember: #d06030;
+  --ember-glow: #d0603022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #7040b014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #d4a84814 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a253a10 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #7040b012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sovael { border-left-color: var(--shadow-bright); }
+.char-clutch { border-left-color: var(--silver); }
+.char-ferrok { border-left-color: var(--ember); }
+.char-sattva { border-left-color: var(--blood); }
+.char-seva { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sovael { border-left-color: var(--shadow-bright); }
+.s-clutch { border-left-color: var(--silver); }
+.s-ferrok { border-left-color: var(--ember); }
+.s-sattva { border-left-color: var(--blood); }
+.s-seva { border-left-color: var(--teal); }
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #160f12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<header class="header">
+  <h1>The Maestro's Exit</h1>
+  <div class="subtitle">Session 20 · The music stops, Book Two ends, and the chime points at an island upside down in the sky</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-10-25</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">3h 44m</span>
+    <span class="meta-pill">Seven Dragon Bridge → Empress Yin Opera House → Iron Mountain</span>
+    <span class="meta-pill">Level 17 → 18</span>
+    <span class="meta-pill">5 PCs</span>
+    <span class="meta-pill">3 fights · 3 wins · Book Two complete</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="flex:54"></div>
+  <div class="comp-seg comp-rp" style="flex:14"></div>
+  <div class="comp-seg comp-social" style="flex:12"></div>
+  <div class="comp-seg comp-loot" style="flex:12"></div>
+  <div class="comp-seg comp-explore" style="flex:8"></div>
+</div>
+<div class="composition-legend">
+  <span><span class="legend-dot comp-combat"></span>Combat · the bridge, the opera house, the summit</span>
+  <span><span class="legend-dot comp-rp"></span>Story · Razu, the Empress, Ysoren</span>
+  <span><span class="legend-dot comp-social"></span>Table talk · pre-game, the grappling debate, wrap</span>
+  <span><span class="legend-dot comp-loot"></span>The 200,000 gp shopping trip</span>
+  <span><span class="legend-dot comp-explore"></span>Three days north · the inverted island</span>
+</div>
+
+<h2>The Nameless</h2>
+<div class="party-grid">
+  <div class="char-card char-sovael">
+    <div class="char-name">Sovael</div>
+    <div class="char-class">Oracle (Flames) / Bard / Living Nexus / Sorcerer</div>
+    <div class="char-player">Pax · "Mingzhu" · "I'll compose a song once we beat the shit out of you"</div>
+  </div>
+  <div class="char-card char-ferrok">
+    <div class="char-name">Ferrok the Unyielding</div>
+    <div class="char-class">Magus (Sparkling Targe) / Bastion / Gladiator</div>
+    <div class="char-player">Talos Minotaur · Dragon Fang Crescent, his signature move · two kills</div>
+  </div>
+  <div class="char-card char-sattva">
+    <div class="char-name">Sattva the Unerring</div>
+    <div class="char-class">Ranger (Precision) / Medic</div>
+    <div class="char-player">Irorian · never moved, then grappled the Maestro</div>
+  </div>
+  <div class="char-card char-clutch">
+    <div class="char-name">Clutch the Rampart</div>
+    <div class="char-class">Guardian (Wrestler / Medic)</div>
+    <div class="char-player">Kholo · new Bear Hug · looked at his toe beans</div>
+  </div>
+  <div class="char-card char-seva">
+    <div class="char-name">Seva the Shade</div>
+    <div class="char-class">Magus (Laughing Shadow) / Medic</div>
+    <div class="char-player">Wayang · three kills · asked the Empress the right question</div>
+  </div>
+</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p><strong>Book Two of <em>Fists of the Ruby Phoenix</em> ended with the music stopping.</strong> Cody opened by promising it — <em>"we will absolutely be finishing Book 2 of Ruby Phoenix today… prepare to level up mid-session"</em> — and the party picked up in Goka, cleaning up after the last fight on the main street: Sovael spent both of his Restoration scrolls on Clutch (Drained 4 → 2) and Seva, and Sattva offered Clutch an hour of acupuncture the city did not have time for.</p>
+
+<p><strong>On the Seven Dragon Bridge</strong>, three Portal Eaters — iridescent, phoenix-shaped things with eighty-foot wingspans and forty feet of reach on their cloaks — were tearing up the bridge between the arena and the city. <strong>Mafika Ayuwari</strong>, the professor they had beaten in the losers' final, flew in to help (<em>"Hope you don't mind if I lend my aid"</em>; Ferrok: <em>"Yes, Mafika. We got a ringer"</em>). The birds grabbed, pushed and pulled; Clutch spent the first two rounds being shoved twenty feet, restrained, and intercepting for Ferrok and Sattva. Nobody knew what hurt them until the party tested it. Sattva guessed after a crit (<em>"Maybe force?"</em>), Seva put force on her Arcane Cascade to check (<em>"Why can't we roll RK? Why are we guessing here?"</em>), and Sovael's <strong>Aether Beam</strong> and Ferrok's Force Fang confirmed it: <strong>force weakness.</strong> Clutch then caught a rule the party had missed all campaign — Aether Beam pushes 10 feet on a failed save — and the push pulled a Portal Eater off Sattva. Then, at the top of round four, Mogaru turned and looked at the bridge, and a <strong>240-foot cone of fire</strong> washed over everyone on it. Sattva backflipped (<em>"It's not Cataclysm. This is what Sattva has been training for"</em>) and crit-saved; Sovael failed and took the persistent fire — <em>"Thank you, Mogaru."</em> Mafika killed two of the birds — a Chain Lightning and a punch — and <strong>Ferrok's Force Fang</strong> put the third into the boiling sea. Mafika pointed them across the city: the music was coming from <strong>the opera house.</strong></p>
+
+<p><strong>In the Empress Yin Opera House</strong> a tengu in fine performer's robes was stringing an erhu bow. <em>"Maestro Razu, at your service… this is my stage debut, after all."</em> He blamed Hao Jin — <em>"She's simply reaping the seed she's sown so long ago"</em> — and Sovael would not have it: <em>"Well, I don't think the people here have to suffer from that."</em> Razu offered to compose a song in their name, then remembered they'd been <em>"utterly trounced by the Lightkeepers… Sorry, I don't compose songs about losers."</em> Sovael: <strong><em>"Don't worry, you don't have to compose. I'll compose a song once that we beat the shit out of you."</em></strong></p>
+
+<p>Razu was Sovael's mirror again — a bard on Dirge of Doom and Lingering Composition, with <strong>Incredible Volume</strong> stretching every song to three hundred feet — and his opener was a ninth-rank <strong>Phantasmagoria</strong> that left Ferrok, Sattva and Sovael confused (Seva saved with her Aeon Stone; Clutch crit-saved). Ferrok, his hero-point reroll no better, stepped forward <em>"glaring at Sovael as I try to dismember him"</em> — and his first hit forced the flat check that <strong>snapped Sovael out of it</strong>. Sattva, <em>"scared, so his hands are shaking,"</em> shot Sovael too. Sovael, clear-headed and 90 hit points lighter: <em>"I should heal myself, but what's the fun in that?"</em> — and put a <strong>ninth-rank Heroism on Ferrok</strong>, the man who had just hit him. Clutch <strong>long-jumped</strong> clear across the theatre twice (<em>"the good old Hulk jump"</em>), Noise Blast and Pierce the Sky deafened most of the party (which, Cody ruled, also switched off the Dirge's frighten), and Sattva found out how to <em>"fight air with air"</em>: a crit on a Melodic Squall. <strong>Seva killed both Squalls.</strong> Ferrok's Blink Charge drew Razu's first blood.</p>
+
+<p>When Clutch finally grabbed him, Razu's <strong>Contingency</strong> fired a Translocate a hundred and twenty feet away — straight to Sattva, who had not moved all fight. Sattva grappled him, burned his <strong>Sash of Prowess</strong> for the first time to turn it into a critical success, and held him restrained. Sovael's Whispers of Weakness (weakest save Fortitude, no weakness) and a <strong>Fire Ray (75)</strong> followed, then Foretell Harm; Seva's <strong>Rend Magic</strong> Spellstrike (<em>"no funny business"</em>). At the top of his turn Razu took the eighteen, smiled — <em>"Well, aren't you all just something? I suppose there's some worth to you… But I've played my part, as have you. Adieu, everyone"</em> — and <strong>dissolved into prismatic slime</strong> on Sattva's fingers. He had taken about 164 of his 520 hit points. Ferrok stomped on the slime.</p>
+
+<p>With the music gone, <strong>Mogaru looked around as if waking from a daze, walked back the way he had come, and sank beneath the bay.</strong> <em>"And so concludes Book Two of Fists of the Ruby Phoenix. Congratulations, you all reach level 18."</em></p>
+
+<p><strong>The next morning</strong>, with ash still falling on the arena, <strong>Empress Nai Yan Fei</strong> addressed the finalists. Hao Jin has not been seen since; the glow on the southern horizon that night was her, casting. The Lightkeepers and Tino's Toughest still have not reported, and the Empress thinks the disappearances are connected. <strong>Without its Grand Judge the tournament cannot continue</strong> — <em>"I beg of you all, seek out and bring back the Ruby Phoenix."</em> Sovael asked what the teams would have to work with; Seva asked whether anyone had found the Lightkeepers, and then whether the Empress knew Razu, <em>"because Razu seems to be familiar who Hao Jin is. Like, personally."</em> She did not: <em>"whoever he serves must be terrifyingly powerful."</em> The finalists were given <strong>plover chimes</strong> — glass wind chimes Hao Jin made from axiomite dust and phoenix flame, meant as mementos, now modified to point toward her — and a grant. <strong>The Nameless' share was 200,000 gp</strong>, plus the finalists' regalia: the use of a ship and its pilot.</p>
+
+<p>A shopping trip at the Empress's favour followed (uncommon items to level 20, rare to 15), and so did an argument about grappling. Clutch had just bought <strong>Bracers of Strength</strong> for <strong>Bear Hug</strong> when Cody said he thinks grappling is too strong; Clutch argued that martials have nothing else built up to that level; Sovael agreed the feat support is grapple-centric, and pointed out that Freedom of Movement does nothing once you're restrained and can't cast it. Ferrok took the major striking and greater shock runes, Clutch the +3 armour rune, and Clutch handed Seva 7,400 gp so she could afford her major striking rune. When Seva asked how on earth Sovael had afforded an apex item: <em>"Well, I saved my money. I don't have to spend money on weapon runes."</em> He upgraded his Ring of Divine Might and his armour to +3 instead, and bought an Aeon Stone against confusion.</p>
+
+<p><strong>Ysoren</strong>, a middle-aged Minkaian pilot, was waiting at the Ruby Village with his family's flying yacht, the <strong><em>Solar Geon II</em></strong> — a gift from his great-great-grandmother to his great-great-grandfather, returned to the family by Hao Jin, lent to the tournament's victory parade each decade. He had watched the finals (<em>"what a damn match against the Speakers to the Wind"</em>) and he wanted them to know the ship has no cannons. Sovael: <em>"That's what we're here for. Getting rid of trouble."</em> Other teams scattered into the sky and the wilderness after the same goal — the Arms of Balance on elemental horses, Winter's Roar on an elven ship, the Steps of the Sun riding a flying rock, the Speakers to the Wind running barefoot at impossible speed.</p>
+
+<p>Three days north, the chime led them to <strong>Iron Mountain</strong> in the Flying Mountains, where <strong>an island floats upside down above the summit</strong>, ringed by its own ocean. Flying at it got them no closer, and the mirage around it turned into a hall of infinite reflections — a Will save that hit Clutch for 50 mental (<em>"Clutch howls with pain like he's experiencing a very bad brain freeze"</em>). The chime swung downward. At the summit — a sulfur lake that will not freeze, twin vermilion shrine gates, twelve Tian zodiac statues — <strong>three Island Oni</strong> with twenty-foot electrified spears came out from behind the statues. Sattva's free Recall Knowledge got one fact: <em>"they are Oni. And you at least know from the previous Oni that Oni do not like beans."</em> (Clutch, in chat: <em>"Clutch looks at his toe beans."</em>) Sovael's Whispers of Weakness got the real answer: <strong>spirit</strong>. Clutch's new Bear Hug and a crit Spine Breaker pinned one; <strong>Ferrok's Goring Charge</strong> rooted another with the horns; <strong>Seva, Clutch and Ferrok</strong> each took one down, Clutch on an Intercept counter-strike. Cody stopped there: <em>"next session is going to start with a bit of exposition."</em></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act social">
+    <div class="act-label">Act I · Social · Before the Bridge</div>
+    <div class="act-card">
+      <h3>"Prepare to level up mid-session"</h3>
+      <ul>
+        <li>Pre-game: Halloween (Ferrok hasn't dressed up since he was eleven; Seva: <em>"I didn't know there was an age limit"</em>), Cody's Castlevania and Hellraiser, his first finished Starfinder 1–20 campaign, and the Revenge table voting Starfinder next.</li>
+        <li><strong>Cody: Book 2 ends today; level up mid-session.</strong> After today he posts four candidate games for this slot (from the end of November / start of December) to be ranked 4-3-2-1.</li>
+        <li>Moment of Renewal's healing is settled between sessions.</li>
+        <li><strong>Sovael's two Restoration scrolls</strong>: Clutch <strong>Drained 4 → 2</strong>, and Seva's Drained cleared.</li>
+        <li>Sattva's arrow-in-the-air Treat Wounds (<em>"As is the custom"</em>) — a critical success for 92 on Ferrok and Seva. He offers Clutch an hour of acupuncture, and there isn't an hour. Clutch, eyes wide: <em>"no, no, we don't have the time."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Seven Dragon Bridge: the Portal Eaters</div>
+    <div class="act-card">
+      <h3>"Yep, Force Weakness"</h3>
+      <ul>
+        <li>Three iridescent phoenix-like things with <strong>80-ft wingspans</strong> tear up the bridge. <strong>Mafika Ayuwari</strong> flies in to help. Ferrok: <em>"Yes, Mafika. We got a ringer."</em> Sovael: <em>"Do they eat dragon?"</em> In chat, Clutch: <em>"Birds aren't real"</em>; Ferrok: <em>"Don't trust their beady bird eyes."</em></li>
+        <li>B crits Ferrok; <strong>Clutch intercepts</strong> and is pushed 20 feet (<em>"Clutch digs his claws into the ground to slow his momentum"</em>). C's Chromatic Ray at Sattva — <strong>Energy Interceptor</strong>. A grabs Clutch: restrained.</li>
+        <li>Sovael asks Ferrok and Sattva to <strong>delay</strong> so he can buff first: <strong>Courageous Anthem + Lingering Composition</strong>, Talent Envy, <strong>Benediction</strong>. Then his <strong>last Heal scroll</strong> on a pinned Clutch.</li>
+        <li>Round 2: a beak restrains Ferrok; a cloak <strong>pulls Sattva 20 feet</strong> (<em>"Does he say, get over here?"</em>). <em>"I guess it's pick on the Guardian Day."</em> Ferrok: <em>"Clutch is going to look like Deadpool at the end of this campaign."</em></li>
+        <li><strong>Finding the weakness</strong>: Sattva's crit — <em>"Maybe force?"</em>; Seva's force cascade — <em>"Why can't we roll RK? Why are we guessing here?"</em>; <strong>Sovael's Aether Beam</strong> — <em>"Yep, Force Weakness."</em> Clutch catches the forgotten Aether Beam push; it frees Sattva. <em>"Have we been doing that this whole game?" "We have not."</em></li>
+        <li>Mafika's Chain Lightning kills A. Seva's critical Gouging Claw: <em>"73! We're so back!"</em></li>
+        <li><strong>Mogaru's breath</strong>: a 240-foot cone over the whole bridge. Sattva's backflip; Sovael: <em>"As if I don't already have a way to burn myself. Thank you, Mogaru."</em></li>
+        <li>Mafika punches B to death (<em>"Feathers everywhere"</em>); <strong>Ferrok's Force Fang</strong> drops C into the sea. Mafika points to <strong>the opera house</strong>. Sovael: <em>"You shouldn't be using music to destroy places like that."</em> Ferrok: <em>"The boss is going to be named the Conductor."</em></li>
+        <li>The rest: Ferrok carves his name into the bridge; Clutch draws a curly villain mustache on a statue; Sattva: <em>"Ferrok was here."</em> Seva: <em>"We've drawn the line right there."</em> Ferrok: <em>"We're the heroes they deserve."</em> Seva: <em>"I'm starting to doubt that."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act III · Combat · The Empress Yin Opera House: Maestro Razu</div>
+    <div class="act-card">
+      <h3>"I don't compose songs about losers"</h3>
+      <ul>
+        <li>A tengu with an erhu bow: <em>"Maestro Razu, at your service."</em> Sattva: <em>"Who are you? What's your goal?… Well, I don't think I like your play."</em> Ferrok: <em>"The whole thing's a little tacky, to be honest."</em></li>
+        <li>Razu blames <strong>the Ruby Phoenix</strong> — <em>"reaping the seed she's sown so long ago."</em> Sovael: <em>"Well, I don't think the people here have to suffer from that."</em> And: <strong><em>"I'll compose a song once that we beat the shit out of you."</em></strong></li>
+        <li>Two <strong>Melodic Squalls</strong>. Sattva: <em>"Maybe we need to fight air with air."</em> Razu's <strong>Dirge of Doom</strong> stretched to 300 feet, then <strong>Phantasmagoria</strong>: Ferrok, Sattva and Sovael confused.</li>
+        <li>Confused Ferrok and Sattva both go for Sovael — <em>"glaring at Sovael as I try to dismember him"</em> — and Ferrok's hit snaps him out of it. Sovael: <em>"I should heal myself, but what's the fun in that?"</em> — <strong>Heroism (rank 9) on Ferrok</strong>.</li>
+        <li>Clutch's <strong>Hulk jump</strong>. Noise Blast and Pierce the Sky deafen the party; Cody rules deafness switches off the Dirge's frighten — and re-runs a Squall's escape because of it.</li>
+        <li><strong>Seva kills Squall B</strong>, then vaults the mahogany (Cody: <em>"some noble just being like, that's mahogany!"</em> Sovael: <em>"We're saving your life right here."</em>). Seva: <em>"you have not moved from that spawn."</em> Sattva: <em>"Sattva is not going to move this combat."</em></li>
+        <li>Sattva's crit — <em>"This is how you fight air with air."</em> Ferrok's Time Jump + Blink Charge: first blood on Razu. <strong>Seva finishes Squall A.</strong> <em>"Show's over, Razu." "Au contraire, I think it's just beginning."</em></li>
+        <li>Clutch grabs Razu — <strong>Contingency: Translocate</strong>, next to Sattva (<em>"And Sattva looks that much smarter for never moving"</em>). <strong>Sattva's Sash of Prowess crit grapple</strong>; Sovael's <strong>Fire Ray (75)</strong> and Foretell Harm; Seva's Rend Magic.</li>
+        <li><em>"I've played my part, as have you. Adieu, everyone."</em> <strong>Prismatic slime.</strong> <em>"Ferrok goes over and starts stomping on the slime."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act IV · Story · The End of Book Two</div>
+    <div class="act-card">
+      <h3>"And so concludes Book Two"</h3>
+      <ul>
+        <li>The music stops. A roar rips through Goka.</li>
+        <li><strong>Mogaru looks around as if in a daze</strong>, then walks back along his own trail of wreckage and sinks into the western bay, <em>"not to reemerge."</em></li>
+        <li><em>"And so concludes Book Two of Fists of the Ruby Phoenix. Congratulations, you all reach level 18."</em></li>
+        <li>An extended level-up break.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Act V · Story · The Empress's Charge</div>
+    <div class="act-card">
+      <h3>"Seek out and bring back the Ruby Phoenix"</h3>
+      <ul>
+        <li>Long rest; <strong>Clutch's new Legendary Medic</strong>, with Sattva's aid, clears his Drained.</li>
+        <li><strong>Empress Nai Yan Fei</strong> at the arena: the Lightkeepers and Tino's Toughest still missing; Hao Jin unseen; the southern glow was <strong>her spellcasting</strong>. <strong>No Grand Judge, no tournament.</strong></li>
+        <li>Sovael asks what resources the teams get — a grant for all, and for the Nameless, as finalists, <strong>the finalists' regalia</strong>.</li>
+        <li>Seva asks about the Lightkeepers (the Empress: <em>"I don't think it's unreasonable to suspect that Hao Jin's disappearance and theirs are connected"</em>) and whether she knows Razu — <em>"Razu seems to be familiar who Hao Jin is. Like, personally."</em> She doesn't: <em>"whoever he serves must be terrifyingly powerful."</em></li>
+        <li><em>"Hao Jin is an immortal sorcerer who walks between worlds the way you or I walk between rooms."</em> <strong>Eight plover chimes</strong>, now tuned to track her. <em>"Ferrok nods along like he knows what all of that means."</em></li>
+        <li>The magic came from the <strong>Flying Mountains</strong> in the Wall of Heaven.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act VI · Loot &amp; Table Talk · 200,000 Gold</div>
+    <div class="act-card">
+      <h3>"I saved my money"</h3>
+      <ul>
+        <li><strong>200,000 gp</strong> to the party, plus the Shadow Oni's and Razu's gear — <strong>47,750 gp each</strong>. Ferrok: <em>"That's good, because Ferrok was down to 175 gold."</em></li>
+        <li>Ferrok takes the <strong>major striking + greater shock</strong> runes; Clutch, on the striking rune: <em>"Seva's a magus too, right? So we got to make sure everybody's equally represented."</em> Ferrok steers the <strong>+3 armour rune</strong> to Clutch.</li>
+        <li>Seva on Sovael's apex item: <em>"Wait, how could you afford an Apex item?"</em> Sovael: <em>"Well, I saved my money. I don't have to spend money on weapon runes."</em></li>
+        <li>Clutch buys <strong>Bracers of Strength</strong> for Bear Hug — and the <strong>grappling debate</strong>: Cody thinks it's too strong; Clutch: <em>"everything is so grapple-centric"</em>; Sovael agrees on the feat support, and notes Freedom of Movement is no help once you're restrained.</li>
+        <li>Clutch gives Seva <strong>7,400 gp</strong>; Seva offers Sattva 1,500 for scrolls. Sattva, broke, <em>"goes deep into meditation and unlocks a power to heal himself for free."</em></li>
+        <li>Ferrok's <strong>Fight Choreography</strong>. Sattva: <em>"You're telling me I can backflip even if it's not a reflex save?"</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act VII · Exploration · The Solar Geon II</div>
+    <div class="act-card">
+      <h3>"That's what we're here for. Getting rid of trouble."</h3>
+      <ul>
+        <li><strong>Ysoren</strong>, a middle-aged Minkaian pilot, and his family's flying yacht. <em>"No cannons or anything like that… I'm counting on you all to bail us out."</em> Sovael: <em>"That's what we're here for. Getting rid of trouble."</em> Ferrok: <em>"Would you like our autographs?"</em> Sattva: <em>"How confident are you in dodging kaiju attacks?"</em></li>
+        <li>Sovael casts <strong>Sacred Covenant (rank 9)</strong> on the party.</li>
+        <li>Other teams leave by every means available: elemental horses, an elven ship, a flying rock, the Speakers running barefoot.</li>
+        <li>On the Flying Mountains: <em>"a lot of people go there to train… most don't come back."</em> Sattva: <em>"I should visit it sometime. Solo."</em></li>
+        <li>Three days aboard: Sattva trains his self-heal; Ferrok poses; Sovael: <em>"…write a song about how we defeat Razu. And he has to run away, as he said."</em></li>
+        <li><strong>An island upside down above Iron Mountain.</strong> The ship gets no closer; the mirage — infinite reflections — and a Will save: <strong>Clutch takes 50 mental</strong> (<em>"a very bad brain freeze"</em>). The chime swings down to the summit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VIII · Combat · Iron Mountain: the Island Oni</div>
+    <div class="act-card">
+      <h3>"Oni do not like beans"</h3>
+      <ul>
+        <li>A steaming sulfur lake, twin vermilion shrine gates, twelve zodiac statues — and <strong>three Island Oni</strong> with 20-ft electrified spears.</li>
+        <li>Sattva's free RK: <em>"Oni do not like beans."</em> Clutch, in chat: <em>"Clutch looks at his toe beans."</em> <em>"Ferrok enjoys a sandwich while waiting for his turn."</em></li>
+        <li>Clutch intercepts crits on Seva twice and Sattva twice; his <strong>first Bear Hug</strong>. Sovael's Dirge + Lingering and a successful Talent Envy.</li>
+        <li>Sovael's <strong>hero-pointed Fire Ray</strong> (72) on Oni A; Clutch's <strong>Spine Breaker crit</strong>; <strong>Seva kills Oni A</strong>.</li>
+        <li><strong>Whispers of Weakness: spirit.</strong> <em>"I don't have any Spirit Reflex saves."</em> <strong>Spirit Blast, 80.</strong></li>
+        <li>Ferrok's <strong>Goring Charge</strong> — natural-20 horns, greater rooting. Seva: <em>"Truly a fan favorite."</em> Ferrok drops to 25.</li>
+        <li><strong>Clutch's Intercept counter-strike kills Oni C.</strong> Seva: <em>"Spell strike! You're a Magus!"</em> Sovael: <em>"You gotta do the thing. The signature."</em> <strong>Ferrok's natural-20 Dragon Fang Crescent kills Oni B.</strong></li>
+        <li>Cody calls it: <em>"next session is going to start with a bit of exposition."</em> The game vote goes up; Ferrok's player is out next week.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 1 · Seven Dragon Bridge · Portal Eaters, with Mafika Ayuwari · 33 min · 4 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Three <strong>Portal Eaters</strong> (500 HP, AC 41; beak + Improved Grab, claws + Improved Push 20 ft, 40-ft cloak that pulls 20 ft, Sure Strike Chromatic Ray; <strong>force weakness 15</strong>; resist fire and electricity). Hazard: <strong>Mogaru's Volcanic Breath</strong> — 240-ft cone, 25d6 fire, DC 44 basic Reflex, 6d6 persistent.</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Portal Eater B 52 · C 51 · Mafika 49 · A 44 · Ferrok 44 · Sattva 42 · Sovael 31 · Seva 30 · Clutch 26. Ferrok and Sattva delayed until after Sovael.</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value">Mafika 2 (A — Chain Lightning; B — crit fist) · <strong>Ferrok 1</strong> (C — Force Fang).</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Mafika 437 · Sattva 304 · Ferrok 252 · Seva 231 · Mogaru's breath 128 · Sovael 90 · Clutch 58.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Clutch 269 (109 Intercepted) · Sattva 128 · Ferrok 125 · Seva 91 · Sovael 88.</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">In the fight 130, all on Clutch (Sovael's Heal scroll 71, Seva's Battle Medicine 59). Afterwards Sattva's two critical Treat Wounds: 563.</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Seva (a Strike, 6 → 16). Clutch's Escape shows a reroll (10 → 18), not called aloud.</span></div>
+</div>
+<h4>Round 1 — Pushed, pinned, intercepted</h4>
+<ul>
+  <li><strong>B</strong> crits Ferrok (78); <strong>Clutch intercepts</strong> (69) and is shoved 20 feet. <strong>C</strong>'s Sure Strike Chromatic Ray on Sattva — <strong>Clutch's Energy Interceptor</strong> takes the 40 acid.</li>
+  <li><strong>Mafika: Halcyon Surge</strong> — Desiccate (C 44, A 17, B crit-saves), Tempest Surge on B (crit-saved). <strong>Sovael's Absorb Magic</strong> fires off the Desiccate.</li>
+  <li><strong>A</strong>'s beak and Improved Grab: <strong>Clutch restrained.</strong></li>
+  <li><strong>Sovael</strong>: Courageous Anthem + <strong>Lingering Composition</strong> (3 rounds), Talent Envy (failed), <strong>Benediction</strong>.</li>
+  <li><strong>Ferrok</strong>: Stretching Reach; Dragon Fang Crescent misses B. <strong>Sattva</strong>: golden-arrow Battle Medicine on Clutch fails; Hunted Shots on A (43, 52). <strong>Seva</strong>: Battle Medicine on Clutch (59); Ignition Spellstrike on A (41). <strong>Clutch</strong>: Paragon's Guard, Taunt on all three, Escape fails by 1.</li>
+</ul>
+<h4>Round 2 — "Maybe force?"</h4>
+<ul>
+  <li><strong>B</strong> restrains <strong>Ferrok</strong>. <strong>C</strong>'s cloak pulls Sattva 20 feet. <strong>Mafika's Unfolding Wind Buffet</strong> breaks B's grab. <strong>A</strong> keeps Clutch pinned — a natural-20 claw through his Shield Block (44).</li>
+  <li><strong>Sovael</strong>: his <strong>last Heal scroll (rank 6)</strong> on Clutch, 71.</li>
+  <li><strong>Ferrok</strong>: Running Recharge, Ignition Spellstrike on B (62). <strong>Sattva</strong>: 61 and a <strong>natural-20 crit for 88</strong> on A — <em>"Maybe force?"</em> — then shares Hunt Prey's 2d8 with Clutch and Seva.</li>
+  <li><strong>Seva</strong> tests force on Arcane Cascade, hero-points a miss, hits (34). <strong>Clutch</strong> escapes, <strong>crits A (58)</strong>, roots and grabs it.</li>
+</ul>
+<h4>Round 3 — The weakness, and the push nobody used</h4>
+<ul>
+  <li><strong>C</strong> crits Sattva (92) and grabs him; its next claw hits by 0 — <strong>Taunt makes it a miss</strong>.</li>
+  <li><strong>Mafika: Chain Lightning</strong> — <strong>A dies</strong>; B 55, C 120.</li>
+  <li><strong>Sovael</strong>: <strong>Aether Beam on C, 56</strong> — <em>"Yep, Force Weakness."</em> Absorb Magic again off Ferrok's spell.</li>
+  <li><strong>Ferrok</strong>: <strong>Force Fang</strong> (33) and a <strong>critical Dragon Fang Crescent</strong> on B (124 with Ignition), frightened 2.</li>
+  <li><strong>Clutch catches the rule</strong>: Aether Beam pushes 10 feet on a failed save. Applied retroactively, <strong>it pulls C off Sattva.</strong></li>
+  <li><strong>Sattva</strong> hits B (60). <strong>Clutch</strong> grapples C. <strong>Seva: critical Gouging Claw — 73 and 54.</strong></li>
+</ul>
+<h4>Round 4 — Mogaru's breath</h4>
+<ul>
+  <li><strong>Mogaru breathes on the bridge</strong>: 91 fire. <strong>Sattva crit-saves</strong>; Clutch and Mafika save; <strong>Sovael, Seva and Ferrok fail</strong> (81, 91, 91 + persistent). The eaters take 35 and 81.</li>
+  <li>B, frightened 2, misses Ferrok three times; C misses Clutch three times.</li>
+  <li><strong>Mafika's crit fist kills B.</strong> <strong>Sovael's second Aether Beam</strong> leaves C on 6. <strong>Ferrok's Force Fang kills C.</strong></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 2 · Empress Yin Opera House · Maestro Razu and the Melodic Squalls · 50 min · 5 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value"><strong>Maestro Razu</strong> (tengu bard, 520 HP, AC 44; Dirge of Doom + Lingering, <strong>Incredible Volume</strong>, <strong>Phantasmagoria</strong>, Pierce the Sky ×2, Phantasmal Calamity, Spirit Song, erhu bow; <strong>Contingency: Translocate when grabbed</strong>) and two <strong>Melodic Squalls</strong> (air elementals, 345 HP; Wind Gust + shove, Lightning Bolt, Noise Blast).</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Razu 52 · Squall A 52 (delayed after Sattva) · Ferrok 44 (delayed after Sattva from R2) · Clutch 44 · Sattva 41 · Sovael 39 · Squall B 37 · Seva 27.</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value"><strong>Seva 2</strong> (both Squalls). <strong>Razu not killed</strong> — 164 taken (≈356/520 left), restrained, dissolved.</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Ferrok 262 · Seva 225 · Sattva 196 · Sovael 93 (all on Razu) · Clutch 78.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Sattva 385 · Sovael 265 (90 friendly fire) · Ferrok 242 · Clutch 139 · Seva 108.</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">Sattva 257 · Sovael 190 · Seva 135 · Clutch 67 · Ferrok 61.</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value">Ferrok (Phantasmagoria save — same result). Seva's killing Spellstrike on Squall B shows a reroll (3 → 19, crit).</span></div>
+</div>
+<h4>Round 1 — Phantasmagoria</h4>
+<ul>
+  <li><strong>Razu</strong>: Dirge of Doom, critical Lingering, Incredible Volume. <strong>Phantasmagoria</strong>: <strong>Ferrok, Sovael and Sattva confused</strong>; Seva saves with her Aeon Stone; Clutch crit-saves.</li>
+  <li><strong>Clutch</strong>: the Hulk jump; Paragon's Guard; Taunt on all three.</li>
+  <li><strong>Ferrok, confused</strong>, hits Sovael for 37 and 30 — the first hit's flat check <strong>clears Sovael's confusion</strong>. <strong>Sattva, confused</strong>, shoots Sovael: one hit (23), two critical misses.</li>
+  <li><strong>Squall A</strong>: Wind Gust on Clutch (Shield Block), Lightning Bolt on Seva, Sovael and Sattva.</li>
+  <li><strong>Sovael</strong>: <strong>Heroism (rank 9) on Ferrok</strong>; Quickened Heal (rank 7) on himself, 93.</li>
+  <li><strong>Squall B</strong>: Noise Blast — Ferrok, Sovael, Sattva deafened. <strong>Cody: deafened creatures don't take the Dirge's frightened.</strong> <strong>Seva</strong>: Battle Medicine on herself, Hasted Assault, a hit on B (24).</li>
+</ul>
+<h4>Round 2 — Dragon Fang Crescent</h4>
+<ul>
+  <li><strong>Razu: Pierce the Sky</strong> — Clutch 43, Sattva 78; Ferrok, taunted, is missed.</li>
+  <li><strong>Clutch</strong>: Snagging Strike, Combat Grab on Squall A. <strong>Sattva</strong>: Battle Medicine on Sovael (53) and Ferrok (60).</li>
+  <li><strong>Ferrok: critical Dragon Fang Crescent on Squall B — 74 and 82</strong>, persistent fire, frightened 2.</li>
+  <li><strong>Squall A's escape is retconned</strong> — Clutch was deafened, so the Dirge hadn't lowered his DC. It Noise-Blasts Clutch (30).</li>
+  <li><strong>Sovael</strong>: a potion into Sattva (47); Healing Nexus (50). <strong>Squall B</strong> strides through Ferrok's reactive Strike (39); Lightning Bolt — Sattva's backflip crit-save, Sovael 44.</li>
+  <li><strong>Seva: critical Gouging Claw — Squall B dispersed.</strong> Doctor's Visitation on Sattva (73).</li>
+</ul>
+<h4>Round 3 — The last ninth-rank slot</h4>
+<ul>
+  <li><strong>Razu: Pierce the Sky</strong> — <strong>crits Sattva (122) and Ferrok (130)</strong>; Seva critically dodges.</li>
+  <li><strong>Clutch</strong>: Spinebreaker on Squall A; Battle Medicine on himself (67). <strong>Sattva</strong>: Battle Medicine on himself; hits on A (38, 40). <strong>Ferrok</strong>: potion and Battle Medicine on himself.</li>
+  <li><strong>Sovael</strong>: 65 feet out — <strong>Heroism (rank 3) on Sattva</strong>. <strong>Seva</strong>: Dimensional Assault on A (20).</li>
+</ul>
+<h4>Round 4 — Air with air</h4>
+<ul>
+  <li><strong>Razu</strong>: Phantasmal Calamity (Sattva 45; Ferrok crit-saves); a bow shot at Seva misses.</li>
+  <li><strong>Sattva</strong>: Heal scroll (rank 7) on himself (84); <strong>a crit on Squall A (86)</strong> — deafened, so not frightened. <em>"This is how you fight air with air."</em></li>
+  <li><strong>Ferrok</strong>: Time Jump + <strong>Blink Charge — first blood on Razu (31).</strong></li>
+  <li><strong>Sovael</strong>: Sure Strike Needle Darts misses — no hero point on a fortune roll. <strong>Seva: Gouging Claw — Squall A down.</strong></li>
+</ul>
+<h4>Round 5 — The contingency</h4>
+<ul>
+  <li><strong>Razu: Spirit Song</strong> — Seva and Ferrok crit-save.</li>
+  <li><strong>Clutch</strong> jumps in and <strong>grabs Razu → Translocate</strong>, 120 feet, next to Sattva. <strong>Sattva's Sash of Prowess crit grapple — restrained.</strong> <strong>Ferrok</strong>: Take Your Places.</li>
+  <li><strong>Sovael</strong>: Whispers of Weakness (Fortitude), <strong>Fire Ray (75)</strong>, Foretell Harm. <strong>Seva</strong>: Rend Magic Spellstrike (40).</li>
+</ul>
+<h4>Round 6 — Exit</h4>
+<ul>
+  <li>Foretell Harm, 18. <em>"Adieu, everyone."</em> <strong>Prismatic slime.</strong> Mogaru returns to the sea. <strong>Book Two ends — level 18.</strong></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Fight 3 · Iron Mountain summit · three Island Oni · 32 min · 4 rounds · WIN</div>
+<div class="combat-stats">
+  <div><span class="stat-label">Opposition</span><span class="stat-value">Three <strong>Island Oni</strong>, run elite (410 HP, AC 40; longspear +36, 20-ft reach, Reactive Strike, Electrifying Pierce DC 39; <strong>immune to electricity</strong>, <strong>weak to spirit</strong>).</span></div>
+  <div><span class="stat-label">Initiative</span><span class="stat-value">Oni B 50 · Sattva 48 · Oni C 46 · Oni A 45 · Clutch 35 · Sovael 34 · Seva 32 · Ferrok 30 (Sovael acted before Clutch).</span></div>
+  <div><span class="stat-label">Kills</span><span class="stat-value"><strong>Seva</strong> (A) · <strong>Clutch</strong> (C) · <strong>Ferrok</strong> (B).</span></div>
+  <div><span class="stat-label">Damage dealt</span><span class="stat-value">Seva 366 · Ferrok 285 · Sattva 221 · Sovael 208 · Clutch 156.</span></div>
+  <div><span class="stat-label">Damage taken</span><span class="stat-value">Ferrok 219 (down to 25) · Clutch 209 (187 through four Intercepts) · Sovael 71 · Sattva 41 · <strong>Seva 0</strong>.</span></div>
+  <div><span class="stat-label">Healing</span><span class="stat-value">Seva 135 · Sattva 35 in the fight + two Treat Wounds after · Sovael's Healing Nexus (55).</span></div>
+  <div><span class="stat-label">Hero points</span><span class="stat-value"><strong>Sovael — Fire Ray on A (4 → 14: a miss into 72)</strong> · Ferrok — Dragon Fang Crescent (4 → 8, a hit by 1).</span></div>
+</div>
+<h4>Round 1 — Beans</h4>
+<ul>
+  <li><strong>Oni B</strong> stabs Ferrok, standing alone. <strong>Sattva</strong>: Hunt Prey on C (shared), two Hunted Shots (57, 53); his RK: <em>"Oni do not like beans."</em></li>
+  <li><strong>C</strong> stabs Sattva and <strong>A</strong> crits Seva — <strong>Clutch intercepts both</strong>.</li>
+  <li><strong>Sovael</strong>: Dirge of Doom + Lingering; <strong>Talent Envy succeeds on A</strong>; Elf Step; Shield.</li>
+  <li><strong>Clutch</strong>: Taunt, Paragon's Guard, <strong>first Bear Hug</strong> — two Reactive Strikes, the grab lands on A.</li>
+  <li><strong>Seva</strong>: Doctor's Visitation on Clutch (61); <strong>critical Ignition Spellstrike on A — 100 and 66</strong>.</li>
+  <li><strong>Ferrok</strong>: Emergency Targe on a Reactive Strike crit; hero-pointed Dragon Fang Crescent on B (54 + 37).</li>
+</ul>
+<h4>Round 2 — Oni A falls</h4>
+<ul>
+  <li><strong>B</strong> stabs Ferrok; Electrifying Pierce — crit-saved. <strong>C</strong> hits Sovael (41) and Sattva (41). <strong>A</strong> crits Sattva — <strong>Clutch intercepts</strong> (55).</li>
+  <li><strong>Sovael</strong> moves through a Reactive Strike (30); <strong>hero-pointed Fire Ray on A (72)</strong>; Foretell Harm.</li>
+  <li><strong>Clutch: Spinebreaker crit — A restrained</strong>; claw crit (70). <strong>Seva kills Oni A.</strong> <strong>Ferrok</strong>: Dragon Fang Crescent on B (66) — <em>"Major striking is so much fun."</em></li>
+</ul>
+<h4>Round 3 — Spirit</h4>
+<ul>
+  <li><strong>Sattva</strong> back on C (67); healer's gloves on Clutch (35).</li>
+  <li><strong>Sovael: Whispers of Weakness — spirit, weakest Reflex.</strong> <strong>Spirit Blast on C: 80.</strong></li>
+  <li><strong>Clutch</strong>, ferried by Seva's taxi, Bear Hugs C. <strong>Seva</strong>: astral-rune Gouging Claw, 69.</li>
+  <li><strong>Ferrok: Sure Strike + Goring Charge</strong> through a 76-point Reactive Strike crit — <strong>natural-20 horns, 64, B immobilized.</strong></li>
+</ul>
+<h4>Round 4 — Clutch and Ferrok finish it</h4>
+<ul>
+  <li><strong>B</strong>, rooted, puts <strong>Ferrok on 25</strong>.</li>
+  <li><strong>C</strong> crits Seva — <strong>Clutch intercepts; his counter-strike Jaws crit kills Oni C.</strong></li>
+  <li><strong>Sovael</strong>: Whispers for the +2; Fire Ray on B (56). <strong>Seva</strong>: Doctor's Visitation on Ferrok (74); natural-20 crit on B (75).</li>
+  <li><strong>Ferrok: Force Fang, then a natural-20 Dragon Fang Crescent — Oni B down.</strong></li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sovael">
+<h4>Sovael · the Composer</h4>
+<ul>
+  <li><strong>Answered the villain in kind.</strong> When Razu pinned the rampage on Hao Jin, Sovael was the one who said the city shouldn't pay for it — <em>"Well, I don't think the people here have to suffer from that"</em> — and when Razu sneered that he doesn't write songs about losers, Sovael had the line of the session: <strong><em>"Don't worry, you don't have to compose. I'll compose a song once that we beat the shit out of you."</em></strong> Three days later, on the airship, it was how he spent the trip: <em>"…write a song about how we defeat Razu. And he has to run away, as he said."</em></li>
+  <li><strong>Heroism for the man who had just hit him.</strong> Phantasmagoria confused him too, and it was Ferrok's sword that snapped him out of it — 67 of the 90 points of friendly fire he took that round. He took one look — <em>"I should heal myself, but what's the fun in that?"</em> — and put a <strong>ninth-rank Heroism on Ferrok</strong>. Then a Quickened seventh-rank Heal on himself. Later a third-rank Heroism on Sattva, the other one who'd shot him: <em>"Since I can't buff with Courageous Anthem, might as well use the morale buff."</em> And a potion force-fed to Sattva, too.</li>
+  <li><strong>Ran the support lane from the first minute.</strong> Both Restoration scrolls before the bridge, his last Heal scroll on a restrained Clutch, and the call to have Ferrok and Sattva delay so the Anthem, Lingering Composition and Benediction landed before they swung. Sacred Covenant on the party before Iron Mountain.</li>
+  <li><strong>Confirmed the weaknesses.</strong> Sattva guessed force and Seva tested it; Sovael's Aether Beam proved it (<em>"Yep, Force Weakness"</em>) and fired twice off his own Absorb Magic. Whispers of Weakness named the Island Oni's spirit weakness after Sattva's Recall Knowledge crit-failed (<em>"I don't have any Spirit Reflex saves"</em> — so Spirit Blast, 80), and gave the Fortitude read on Razu before the Fire Ray.</li>
+  <li><strong>Asked the Empress the practical question</strong> — what would the teams have to work with — and got the answer: a grant, the regalia, a ship. Told the pilot what he'd hired: <em>"That's what we're here for. Getting rid of trouble."</em></li>
+  <li><strong>Playful all session.</strong> <em>"Do they eat dragon?"</em> On Mogaru's fire: <em>"As if I don't already have a way to burn myself. Thank you, Mogaru."</em> Leaving the bridge: <em>"Running to the chariot. Fly! Fly!"</em> To Ferrok's <em>"You want to see how it was in action?"</em>: <em>"Yes. Not like literally though."</em> On Ferrok's <em>"just a little bit of damage"</em>: <em>"I don't know about just a little bit."</em> To the noble whose mahogany Seva just vaulted: <em>"We're saving your life right here."</em> On the apex item that surprised the table: <em>"I saved my money. I don't have to spend money on weapon runes."</em> In the grappling argument he agreed the feat support is grapple-centric — and that Freedom of Movement is no help once you're restrained and can't cast it.</li>
+  <li><strong>The numbers.</strong> 391 damage on the day: 90 on the bridge (two Aether Beams), <strong>93 of the 164 Razu took</strong> (the Fire Ray and Foretell Harm, the last hits before he left), and 208 on the Oni — two Fire Rays, one hero-pointed from a miss into 72, and the 80-point Spirit Blast. 190 healing against Razu, 71 on Clutch with his last scroll on the bridge, Sacred Covenant on the party for Book Three.</li>
+</ul>
+</div>
+
+<div class="spotlight s-seva">
+<h4>Seva · the One Asking the Right Questions</h4>
+<ul>
+  <li><strong>Wanted the information before the swing.</strong> <em>"Why can't we roll RK? Why are we guessing here?"</em> on the bridge, and again on Iron Mountain — <em>"We can RK, guys. We don't have to test."</em> When the Empress spoke, Seva asked the two questions that mattered: had anyone found the Lightkeepers — and <strong>did the Empress know Razu, <em>"because Razu seems to be familiar who Hao Jin is. Like, personally."</em></strong> Nobody else had caught that.</li>
+  <li><strong>Three kills, the most of anyone.</strong> Both Melodic Squalls and Island Oni A. The Rend Magic Spellstrike on a restrained Razu — <em>"no funny business"</em> — and the line before his last turn: <em>"Show's over, Razu."</em> (<em>"Au contraire, I think it's just beginning."</em>)</li>
+  <li><strong>Medic first when it counted.</strong> Battle Medicine on a pinned Clutch on the bridge, Doctor's Visitation on Sattva after vaulting the opera's mahogany, on Clutch and Ferrok on the mountain. <em>"Honestly, it's been pretty bad whenever Clutch gets isolated because he can't do his intercept attack."</em></li>
+  <li><strong>The table's conscience and its cheerleader.</strong> Called time on the vandalism (<em>"We've drawn the line right there. Let us just go"</em>), and when Ferrok said they were the heroes Goka deserved: <em>"I'm starting to doubt that."</em> Then to Ferrok, holding back a Spellstrike: <em>"Spell strike! You're a Magus!"</em>; on the Goring Charge: <em>"Truly a fan favorite."</em> <em>"We're so back!"</em> on a 73-point Gouging Claw. And, honestly, out of position: <em>"I just want to be in the spotlight."</em></li>
+  <li><strong>Kept the table moving and teased it.</strong> She started the <em>Sattva never moves</em> bit — <em>"Oh my god, you have not moved from that spawn"</em> — and shut down a joke mid-confusion: <em>"No, it's not the time for jokes."</em></li>
+  <li><strong>Opened the session</strong> with Halloween — <em>"I'm the only one dressing up? What the heck?"</em> — and offered Sattva money for scrolls once Clutch had covered her rune.</li>
+</ul>
+</div>
+
+<div class="spotlight s-ferrok">
+<h4>Ferrok · the Signature Move</h4>
+<ul>
+  <li><strong>"Dragon Fang Crescent, his signature move."</strong> The anime-attack bit from S19 is now standard. <em>"More concise attack name, that was easier to land."</em> <em>"Time Jump… nothing personnel, kid."</em> Sovael and Seva egging him on to do <em>"the thing."</em></li>
+  <li><strong>The one who got confused at the worst moment</strong> — the hero-point reroll came up the same — and played it: <em>"stepping forward and glaring at Sovael as I try to dismember him… Just a little bit of damage."</em> After the fight: <em>"I totally had the Aeon Stone to fight confused. I'm an idiot."</em></li>
+  <li><strong>Kills on Portal Eater C and Island Oni B</strong>, first blood on Razu with Blink Charge, and <strong>the horns finally rooted something</strong> — Sure Strike, Goring Charge, adamantine horns, greater rooting.</li>
+  <li><strong>Narrates himself in chat</strong>: carving his name into the cooling stone of the bridge, stomping on Razu's slime, <em>"Ferrok nods along like he knows what all of that means"</em> while the Empress explained the chimes, <em>"Ferrok enjoys a sandwich while waiting for his turn."</em></li>
+  <li><strong>The best throwaways of the session.</strong> <em>"Yes, Mafika. We got a ringer."</em> <em>"Clutch is going to look like Deadpool at the end of this campaign."</em> <em>"The boss is going to be named the Conductor."</em> <em>"The whole thing's a little tacky, to be honest."</em> <em>"This theater doesn't accommodate minotaurs."</em> <em>"We're not the heroes they need. We're the heroes they deserve."</em> To Ysoren: <em>"Would you like our autographs, or should we just keep going?"</em> On Battle Medicine: <em>"I just never use it because I'm a terrible person."</em> His running reaction to every Reactive Strike: <em>"Rude."</em> And to a Clutch fresh from the mirage: <em>"Your eyes are bleeding. Anyway, let's go on."</em></li>
+  <li><strong>Moved the team.</strong> Take Your Places to bring Clutch, Seva and himself 60 feet up to Razu. Took the major striking and greater shock runes — <em>"Major striking is so much fun."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-sattva">
+<h4>Sattva · the One Who Never Moved</h4>
+<ul>
+  <li><strong>"Fight air with air."</strong> He set it up before initiative — <em>"I've heard you need to fight fire with fire. Maybe we need to fight air with air"</em> — and cashed it with a crit on a Squall: <em>"This is how you fight air with air."</em></li>
+  <li><strong>Stood still all fight and won it anyway.</strong> Cody: <em>"He's playing the Black Mage."</em> Sattva: <em>"Sattva is not going to move this combat."</em> So when Razu's Contingency teleported him a hundred and twenty feet, he teleported to Sattva — who grappled him and <strong>used his Sash of Prowess for the first time</strong> to turn it into a critical success: restrained, and held there for Sovael and Seva. <em>"Got them in a chokehold."</em></li>
+  <li><strong>Spoke for the party to Razu.</strong> <em>"Who are you? What's your goal?"</em> — <em>"Well, I don't think I like your play."</em> — <em>"Oh, this is the part where we stop you."</em></li>
+  <li><strong>Confused, and played it.</strong> <em>"Sattva is scared, so his hands are shaking. He misses."</em> Then, of a half-dead Squall: <em>"I look at the small thing, and I wonder why it isn't dead yet."</em></li>
+  <li><strong>Felt bad about shooting Sovael</strong> — <em>"seeing that I attacked Sovael… Sattva will feel bad"</em> — and Battle-Medicined him the next turn. Read Ferrok's bridge graffiti aloud: <em>"Ferrok was here."</em></li>
+  <li><strong>The backflip continues.</strong> Over Mogaru's breath — <em>"It's not Cataclysm. This is what Sattva has been training for. Backflip"</em> — and over a Lightning Bolt that then hit Sovael. When Ferrok explained Fight Choreography: <em>"You're telling me I can backflip even if it's not a reflex save?"</em></li>
+  <li><strong>Every heal is still a small scene</strong>: the arrow fired into the air (<em>"As is the custom"</em>), the golden arrow (<em>"Both cheeks pierced"</em>), the acupuncture offer, the healer's-gloves fist bump. After the shopping trip left him broke he <em>"goes deep into meditation and unlocks a power to heal himself for free."</em></li>
+  <li><strong>Shared Hunt Prey all session</strong> — the 2d8 to Clutch and Seva on the bridge, to Seva on the mountain <em>"for the rest of its life."</em> The Oni free RK: they don't like beans. 304 damage on the bridge, the most of any PC.</li>
+</ul>
+</div>
+
+<div class="spotlight s-clutch">
+<h4>Clutch · the Bear Hug</h4>
+<ul>
+  <li><strong>Took everything first.</strong> Pushed twenty feet on the opening crit, restrained by a beak, grabbed again — Cody: <em>"I guess it's pick on the Guardian Day."</em> He intercepted Ferrok's crit, Sattva's Chromatic Ray with Energy Interceptor, and Sattva and Seva again on the mountain, renewing Taunt on three targets every turn.</li>
+  <li><strong>Argued his corner.</strong> In the grappling debate with the GM, Clutch made the case for martials — <em>"there's not too much else that martials really get… everything is so grapple-centric"</em> — politely, with specifics; Sovael agreed the feats are grapple-centric. He had bought <strong>Bear Hug</strong> minutes earlier.</li>
+  <li><strong>Generous.</strong> Made sure Seva, the other magus, got her say on the striking rune — <em>"we got to make sure everybody's equally represented"</em> — and then handed her 7,400 gp so she could afford one.</li>
+  <li><strong>Kill on Island Oni C</strong> — an Intercept and the counter-strike. Four Intercepts on the mountain (187 damage), and <strong>Seva finished that fight untouched.</strong> A crit Spine Breaker restrained another, and the new Bear Hug's first grab landed despite two Reactive Strikes. He also caught the Aether Beam push rule that freed Sattva on the bridge.</li>
+  <li><strong>The Hulk jump</strong> — two long jumps across the opera house, the second ending in the grab that set off Razu's Contingency. <em>"And Sattva looks that much smarter for never moving."</em></li>
+  <li><strong>Funny in his own key</strong>, mostly in chat: <em>"Birds aren't real."</em> <em>"Clutch digs his claws into the ground to slow his momentum."</em> The curly villain mustache on a Goka statue, <em>"inspired by Ferrok"</em>. After the mirage: <em>"Clutch howls with pain like he's experiencing a very bad brain freeze."</em> After the Oni-don't-like-beans RK: <em>"Clutch looks at his toe beans."</em> With Sattva drawing a bead past him: <em>"takes an involuntary gulp."</em> And when Phantasmagoria went off, he looked around <em>"like, all right, let's go get him, and then sees everybody's eyes red, looking at him."</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot &amp; Rewards</h2>
+<div class="loot-grid">
+  <div class="loot-item magical">
+    <div class="loot-name">200,000 gp</div>
+    <div class="loot-source">Empress Nai Yan Fei's grant</div>
+    <div class="loot-note">With the sold gear, <strong>47,750 gp each</strong>. <em>"I wouldn't dream of sending you away without equipping you."</em></div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">The Solar Geon II &amp; Ysoren</div>
+    <div class="loot-source">The finalists' regalia</div>
+    <div class="loot-note">A flying yacht and its pilot, for as long as needed (names as heard). More of Hao Jin's vault is owed until the tournament formally ends.</div>
+  </div>
+  <div class="loot-item magical">
+    <div class="loot-name">Plover chime</div>
+    <div class="loot-source">Hao Jin's make, the Empress's scholars</div>
+    <div class="loot-note">Axiomite dust and phoenix flame, one of eight; tuned to track the Ruby Phoenix.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Razu's gear</div>
+    <div class="loot-source">Opera house</div>
+    <div class="loot-note">+3 greater resilient studded leather (<strong>+3 armour rune → Clutch</strong>); greater maestro's erhu (sold); +3 major striking greater shock erhu bow (<strong>runes → Ferrok</strong>).</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Shadow Oni gear</div>
+    <div class="loot-source">S19, the docks</div>
+    <div class="loot-note">Three +3 greater striking glaives, three +2 greater resilient leather armours — sold.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Shopping (Empress's Favour)</div>
+    <div class="loot-source">Goka · uncommon to 20, rare to 15</div>
+    <div class="loot-note">Clutch — Bracers of Strength (Bear Hug). Seva — major striking (7,400 gp from Clutch). Sovael — Ring of Divine Might upgrade (13,000), +3 armour, Olivine Pendeloque Aeon Stone. Ferrok — +3 armour, potions (<em>"I'm going to live forever"</em>). Sattva — major striking.</div>
+  </div>
+  <div class="loot-item">
+    <div class="loot-name">Consumables spent</div>
+    <div class="loot-source">All three fights</div>
+    <div class="loot-note">Sovael's two Restoration scrolls and last Heal scroll; Sattva's rank-7 Heal scroll; Ferrok's potions; Seva's potion patch.</div>
+  </div>
+</div>
+<div class="xp-banner">
+Experience · milestone — <strong>Book Two complete · level 18</strong>. The tournament is suspended; the Nameless remain finalists.
+</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote>
+<strong>Sovael:</strong> "Don't worry, you don't have to compose. I'll compose a song once that we beat the shit out of you."
+<span class="attribution">To Razu, who doesn't write songs about losers.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "I should heal myself, but what's the fun in that?"
+<span class="attribution">Ferrok's confused sword had just snapped him out of Phantasmagoria — and he answered with a ninth-rank Heroism on Ferrok.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sovael:</strong> "Well, I don't think the people here have to suffer from that."
+<span class="attribution">Razu blamed the Ruby Phoenix for the rampage.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "Would the Empress also be familiar who Razu is? Because Razu seems to be familiar who Hao Jin is. Like, personally."
+<span class="attribution">The question nobody else asked.</span>
+</blockquote>
+
+<blockquote>
+<strong>Seva:</strong> "We've drawn the line right there. Let us just go."<br>
+<strong>Ferrok:</strong> "We're not the heroes they need. We're the heroes they deserve."<br>
+<strong>Seva:</strong> "I'm starting to doubt that."
+<span class="attribution">Ferrok carving his name into the bridge; Clutch adding a mustache to a statue.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Alright, stepping forward and glaring at Sovael as I try to dismember him."
+<span class="attribution">Confused by Phantasmagoria.</span>
+</blockquote>
+
+<blockquote>
+<strong>Ferrok:</strong> "Clutch is going to look like Deadpool at the end of this campaign."
+<span class="attribution">Clutch grabbed, pushed and clawed on the bridge.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "I've heard you need to fight fire with fire. Maybe we need to fight air with air."<br>
+<strong>Sattva:</strong> "This is how you fight air with air."
+<span class="attribution">Before initiative against the Melodic Squalls — and forty minutes later, critting one.</span>
+</blockquote>
+
+<blockquote>
+<strong>Sattva:</strong> "It's not Cataclysm. This is what Sattva has been training for. Backflip."
+<span class="attribution">Mogaru's 240-foot breath. He crit-saved.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch:</strong> "And Sattva looks that much smarter for never moving."
+<span class="attribution">Razu's Contingency teleported him right next to the one PC who hadn't moved all fight.</span>
+</blockquote>
+
+<blockquote>
+<strong>Clutch</strong> (in chat): "Clutch looks at his toe beans."
+<span class="attribution">After the Recall Knowledge that Oni do not like beans.</span>
+</blockquote>
+
+<blockquote>
+<strong>Razu:</strong> "Well, aren't you all just something? I suppose there's some worth to you… But I've played my part, as have you. Adieu, everyone."
+<span class="attribution">Restrained, then gone.</span>
+</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Who was Razu, and who does he serve?</strong> A tengu bard calling himself Maestro, who knew Hao Jin and blamed her, drove Mogaru with music, and <strong>left as prismatic slime</strong> after taking a third of his hit points. The Empress: <em>"whoever he serves must be terrifyingly powerful."</em></li>
+  <li><strong>Where is Hao Jin?</strong> A massive display of her spellcasting lit the southern horizon the night of the rampage. The chime pointed to the Flying Mountains and then to Iron Mountain's summit.</li>
+  <li><strong>The inverted island</strong> above Iron Mountain — unreachable by flying, guarded by a mirage that does mental damage. The chime pointed up at it first.</li>
+  <li><strong>The Island Oni</strong> on the summit, at a shrine with twelve zodiac statues.</li>
+  <li><strong>The Lightkeepers and Tino's Toughest</strong> are still missing. The Empress thinks it's connected.</li>
+  <li><strong>"Syndara, you fool"</strong> (Hao Jin, S19) — not mentioned this session. Is Razu Syndara's?</li>
+  <li><strong>Mogaru went back into the sea</strong> when the music stopped. The Bonmou egg (Seva's theory) is unaddressed.</li>
+  <li><strong>The tournament is suspended</strong>, not over. The Nameless remain finalists.</li>
+  <li><strong>Other finalist teams are hunting Hao Jin too</strong> — the Arms of Balance, Winter's Roar, the Steps of the Sun and the Speakers to the Wind were all seen leaving Goka.</li>
+  <li><strong>Next session starts with exposition</strong> at the summit. Ferrok's player is out next week.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+  <span class="label">Next · Book Three · the summit of Iron Mountain</span>
+  <p>The music has stopped and the kaiju is gone, but the Ruby Phoenix is missing, the tournament is suspended, and the chime that tracks her points at an island hanging upside down in the sky.</p>
+  <div class="big-line">"I've played my part, as have you."</div>
+  <span class="speaker">— Maestro Razu</span>
+</div>
+
+</div>
+
+<style>
+.pax-notes {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  position: relative;
+  z-index: 1;
+}
+.pax-notes .pax-intro {
+  color: var(--text-dim);
+  font-style: italic;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 20px;
+}
+.pax-notes h2 {
+  color: var(--text-bright);
+  border-bottom: 1px solid var(--border);
+}
+.pax-notes h3 {
+  color: var(--gold);
+  margin: 24px 0 12px;
+}
+.pax-notes ul { padding-left: 24px; }
+.pax-notes li { margin-bottom: 8px; color: var(--text); }
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes — Sovael's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only — not shared with the rest of the party.</p>
+<h3>What Sovael did this session</h3>
+<ul>
+  <li><strong>Before the bridge</strong>: both <strong>Restoration (rank 4) scrolls</strong> — Clutch Drained 4 → 2, Seva cleared.</li>
+  <li><strong>Portal Eaters</strong>: had Ferrok and Sattva delay; <strong>Courageous Anthem + Lingering Composition</strong>, Talent Envy (failed), <strong>Benediction</strong>; <strong>last Heal scroll (rank 6) on Clutch</strong>; Demoralize; <strong>Aether Beam</strong> twice (confirmed the force weakness, 56 and 34; the push rider had been forgotten all campaign). Failed Mogaru's breath save (81 + persistent fire).</li>
+  <li><strong>Razu</strong>: failed Phantasmagoria — confused, until Ferrok's first hit broke it (90 friendly fire from Ferrok and Sattva). <strong>Heroism (rank 9) on Ferrok</strong>; <strong>Quickened Heal (rank 7) on himself</strong>; Absorb Magic; potion into Sattva; <strong>Healing Nexus (50)</strong>; <strong>Heroism (rank 3) on Sattva</strong>; Sure Strike + Needle Darts (missed — fortune, so no hero point); <strong>Whispers of Weakness → Fire Ray (75) → Foretell Harm (18)</strong> on a restrained Razu.</li>
+  <li><strong>The Empress</strong>: asked what resources the teams would get.</li>
+  <li><strong>Shopping</strong>: Ring of Divine Might upgraded; armour to +3; Olivine Pendeloque Aeon Stone.</li>
+  <li><strong>Before leaving</strong>: <strong>Sacred Covenant (rank 9)</strong>, Energy Aegis, Tailwind.</li>
+  <li><strong>Island Oni</strong>: Dirge of Doom + Lingering, Talent Envy (succeeded on Oni A), Elf Step, Shield; <strong>hero-pointed Fire Ray</strong> on Oni A (4 → 14) + Foretell Harm; <strong>Whispers of Weakness → spirit / Reflex</strong>; <strong>Spirit Blast</strong>; second Fire Ray on Oni B.</li>
+</ul>
+<h3>Things Sovael knows that the party does not</h3>
+<ul>
+  <li>Nothing private this session.</li>
+</ul>
+<h3>What Sovael is thinking about</h3>
+<ul>
+  <li><strong>Razu ran my playbook at me</strong> — Dirge of Doom, Lingering Composition, a composition stretched to 300 feet. Second bard team to do it (the Steps of the Sun, S17).</li>
+  <li><strong>Confusion turned the party on me.</strong> I was the nearest creature to both confused attackers — 90 damage. Ferrok's hit was also what ended my own confusion. Heroism on him was still the right call. The new Aeon Stone is the answer next time.</li>
+  <li><strong>Deafness cuts both ways.</strong> It blanked my Anthem, but Cody ruled it also blanked Razu's Dirge frighten.</li>
+  <li><strong>Fortune rolls can't be hero-pointed.</strong> Sure Strike's miss stood.</li>
+  <li><strong>No spirit Reflex save in my kit.</strong> Spirit Blast (Fort) was the best I had against the Oni's spirit weakness.</li>
+  <li><strong>Aether Beam pushes 10 feet on a failed save.</strong> We've never applied it.</li>
+  <li><strong>The Nameless are still finalists.</strong> Hao Jin's vault prize is owed.</li>
+</ul>
+<h3>Open questions for next session</h3>
+<ul>
+  <li>Who does Razu serve? Was he even real, or a construct of slime?</li>
+  <li>Is Razu connected to Syndara?</li>
+  <li>What is on the inverted island, and how do we get to it?</li>
+  <li>Is Hao Jin on the summit — and is she a prisoner or fighting someone?</li>
+  <li>Where are the Lightkeepers and Tino's Toughest?</li>
+  <li>The song about Razu — finish it.</li>
+</ul>
+</section>
+</body>
+</html>

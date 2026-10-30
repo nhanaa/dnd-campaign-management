@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 16 — Sorshen's Archives</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>Sorshen's Archives</h1>
+<div class="subtitle">Session 16 &middot; Revenge of the Runelords &middot; A dragon robs a Runelord, a table fights back, and the road to Jandelay runs under Spindlehorn</div>
+<div class="meta-row">
+<span class="meta-pill">2026-10-24</span>
+<span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+<span class="meta-pill">3h 40m</span>
+<span class="meta-pill">Level 19</span>
+<span class="meta-pill">2 fights &middot; 7 kills</span>
+<span class="meta-pill">A week of research</span>
+</div>
+</header>
+
+<div class="composition-bar">
+<div class="comp-seg comp-combat" style="width:44%"></div>
+<div class="comp-seg comp-explore" style="width:31%"></div>
+<div class="comp-seg comp-social" style="width:10%"></div>
+<div class="comp-seg comp-loot" style="width:6%"></div>
+<div class="comp-seg comp-rp" style="width:9%"></div>
+</div>
+<div class="composition-legend">
+<span><span class="legend-dot" style="background:var(--blood)"></span>Combat 44%</span>
+<span><span class="legend-dot" style="background:var(--jade)"></span>Exploring &amp; looting the archives 31%</span>
+<span><span class="legend-dot" style="background:var(--gold)"></span>Astelaur &amp; the research 10%</span>
+<span><span class="legend-dot" style="background:var(--ember)"></span>Sale &amp; shopping 6%</span>
+<span><span class="legend-dot" style="background:var(--azure)"></span>Break &amp; table business 9%</span>
+</div>
+
+<h2>Party</h2>
+<div class="party-grid">
+<div class="char-card char-sevek">
+<div class="char-name"><strong>Sevek</strong></div>
+<div class="char-class">Human (Sky Dragonblood) Monk 19 &mdash; Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+<div class="char-player">Pax</div>
+</div>
+<div class="char-card char-paya">
+<div class="char-name"><strong>Paya</strong></div>
+<div class="char-class">Leshy Fighter 19 &mdash; Medic, kineticist healing</div>
+<div class="char-player">Kelsie</div>
+</div>
+<div class="char-card char-aureys">
+<div class="char-name"><strong>Aureys Hollow</strong></div>
+<div class="char-class">Fey Dragonet Rogue (Scoundrel) 19 &mdash; fighting fan + claws, Draconic Acolyte, Living Nexus, Eternal Legend</div>
+<div class="char-player">Anna</div>
+</div>
+<div class="char-card char-mith">
+<div class="char-name"><strong>Mithtirith</strong></div>
+<div class="char-class">Elf Cleric of Nethys 19 &mdash; Hedge Mage, Staff of Healing (True)</div>
+<div class="char-player">Jesse</div>
+</div>
+<div class="char-card char-kreebnock">
+<div class="char-name"><strong>Kreebnock</strong></div>
+<div class="char-class">Gnome Psychic 19 &mdash; Bard archetype, Unleash Psyche</div>
+<div class="char-player">"Arrakis"</div>
+</div>
+</div>
+<div class="note-banner">DM: Cody McGraw ("Ryu" in Foundry)<br><br><strong>Paya is back.</strong> <strong>Mithtirith's connection fought him all day</strong>: the black-screen map problem at the start of the archives, a Discord drop in the perfumery fight (he rejoined by phone and Cody rolled his save), and a Foundry dropout in the sitting room that cost him the roll on Jatembe's wand.</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Belimarius' <strong>spellbook</strong> was mostly a cipher that would take months to break, but the notes at the back were plain. She had been hunting for a way to reach Sorshen, and she believed <strong>Sorshen knew how to reach the Apocalypse Archive</strong>, Jandelay. The answer was in <strong>Sorshen's archives</strong>, deep under the Blood Moon Palace. After a sale (10,642 gp each) and a shopping run in Absalom, where Aureys turned into a huge dragon and strutted down the street with Paya on her shoulder, the party went down.</p>
+<p>The archives were Sorshen's private wing: closets, guest rooms, baths, a kitchen staffed by polite constructs, and a great deal of very expensive furniture. <strong>Aureys robbed it</strong>, cheerfully and in character: the clothes, the chandeliers, Sorshen's desk, an art vault and a vault of antiques worth about 30,000 gp. The table went along with the chandeliers and pushed back at the desk and the vaults, and Cody warned her twice (<em>"there is no situation in which Aureys gets away with this"</em>). Her search also turned up <strong>Sorshen's Scintillating Garment</strong>, the Runelord's own apex robes, behind a false wall, and <strong>Kreebnock</strong> "borrowed" them. Two fights interrupted the looting. Six <strong>Abysium Sentinels</strong> came off the hallway statues and were destroyed in six rounds; <strong>Sevek took three of them</strong>, Paya two, Aureys one. Then a <strong>Malfunctioning Perfumery</strong>, a complex mechanical hazard whose disable checks turned out to be <strong>DC 47–50</strong>, beat the party up for seven rounds. It confused Paya into swinging at Sevek ten times, missing every one, and it took Mithtirith to 8 hit points. Nobody disabled it; they broke it, and <strong>Sevek landed the last hit</strong>.</p>
+<p>Deeper in, they met <strong>Astelaur</strong>, Sorshen's four-eyed cat, who had been waiting weeks for <em>"mother"</em> to come back, and who was not at all frightened of Belimarius but very worried about Xanderghul. Then came a week of research in the library. <strong>Gimmel</strong>, the third Runelord of Greed, once summoned the <strong>Oliphaunt of Jandelay</strong> to Golarion at <strong>Spindlehorn</strong>. When it left, it planted an <strong>apocalypse seed</strong> in the ground, most likely deep under the tower in the sealed <strong>Prosperity Vault</strong>, if it exists at all. The way down is through the <strong>Netherworld</strong>, where Spindlehorn's mirror is a pit; Umbral Journey or Interplanar Teleport gets you there, and Sorshen's collection had scrolls of both. With the seed and Lissala's runes, the party could repeat Gimmel's ritual. Next week: the Prosperity Vault. Cody thinks three sessions remain.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act rp">
+<div class="act-label">Act I &middot; Downtime &middot; Spoils and Shopping (0:00–0:13)</div>
+<div class="act-card">
+<h3>Belimarius' notes, and a dragon on an Absalom street</h3>
+<ul>
+<li><strong>Belimarius' spellbook</strong>: the spellwork is a cipher <em>"so complex and so magically sealed away that deciphering it could well take months."</em> The notes at the back trace her search for Sorshen, her plan to deal with the Runelords of Lust and Pride after Xin-Eurythnia, and her belief that <strong>Sorshen knew how to reach the Apocalypse Archive</strong> and that the answer was in her <strong>archives</strong>. Belimarius thought them guarded by constructs and never mounted the assault.</li>
+<li><strong>Paya ran the loot table</strong> and <strong>took the Timeflaying Blade</strong>, resized: <em>"With level 19, Paya very well might take a Timeflaying Blade, and that is really cool."</em></li>
+<li><strong>Aureys took the Ten Day's Breath</strong> (a Mythic Point, regained the next day, and she <em>"won't have to breathe for a year"</em>; Paya: <em>"I've decided breathing is optional"</em>). <strong>Mithtirith took Belimarius' Invidious Halberd</strong> for its spell absorption. The rest was sold: <strong>10,642 gp each</strong>.</li>
+<li><strong>Sevek bought a Ring of Primal Might (Greater)</strong>. Paya: <em>"I got some really cool sunglasses with all this money."</em></li>
+<li><strong>Aureys turned into a huge dragon and strutted down an Absalom street</strong>, Paya on her shoulder. Cody: <em>"Absalom might be the only city you can do that in and not cause like a mass panic."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act II &middot; Exploration &middot; Into the Archives (0:13–0:29)</div>
+<div class="act-card">
+<h3>Shoes, gowns, and a garment behind a false wall</h3>
+<ul>
+<li>A 20-foot hall lit blue-green from alcoves of statues of a beautiful woman. Paya opened every door (<em>"You said people with OCD open every door, right?"</em>); Aureys: <em>"I stare at doors first."</em> — <em>"You stare at them and signal them open."</em> It became the night's ritual: <em>"Open her up, Paya!"</em>, a dozen times over.</li>
+<li><strong>The shoe closet</strong>: thousands of shoes, nothing magical; Aureys searched it twice for secret doors. Sevek: <strong><em>"Sometimes it's just shoes."</em></strong> Kreebnock: <em>"Just picturing Belimarius waiting in line at every shoe drop for like the last several hundred years."</em></li>
+<li><strong>The great closet</strong>: gowns, coats, suits, top hats. Kreebnock took a hat and, in Foundry chat, <strong>"Kreebnock leaves 50 gold on the counter for the tophat he took."</strong> Aureys poured the rest into her hoard. Cody: <em>"there's a difference between taking magic items because they help you and then robbing clothes."</em> — <em>"This is Aureys you're talking about."</em></li>
+<li><strong>Aureys' search found a false wall</strong>, and behind it <strong>Sorshen's Scintillating Garment</strong>, a unique apex artifact. Sevek: <em>"We want to take that… This is all for the cause."</em> <strong>Kreebnock</strong>: <em>"I'll just borrow it."</em> Aureys: <em>"Mine's just for the money."</em> Sevek: <strong><em>"Let's assume borrow, not gift it."</em></strong></li>
+<li>Paya: <em>"We robbed the strongest person we know."</em> — Sevek: <em>"Who's we?"</em> — <em>"That's fair. Aureys has robbed the strongest person we know. I'm going to leave before it rubs off on me. We didn't see nothing."</em> Aureys: <em>"Those damn looters."</em></li>
+<li><strong>The first chandelier</strong>: 24 crystals at 1,000 gp each. Cody ruled crystals only; Aureys held it a minute and hoarded the whole thing. <strong><em>"I am now a thief of legend, I'm just saying."</em></strong></li>
+<li>Mithtirith, fixing his black screen: <em>"Try not to get in a fight for the next five minutes."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act III &middot; Combat &middot; The Abysium Sentinels (0:29–1:20)</div>
+<div class="act-card">
+<h3>Six heads come off the statues</h3>
+<ul>
+<li>The statues' heads glowed a sickening green, detached, and attacked: <strong>six Abysium Sentinels</strong>, constructs with physical resistance and no use for spirit damage. Paya: <em>"We waited exactly five minutes."</em></li>
+<li>Paya, with a bastard sword: <em>"Paya, for the first time in I think 19 levels, does not have reach. We are evolving, folks."</em></li>
+<li><strong>Sevek killed A, C and F</strong> (an Electric Arc, a natural-20 Inner Upheaval, and a crit that opened a three-crit turn); <strong>Paya killed B and D</strong>; <strong>Aureys killed E</strong> with an Aether Beam. Kreebnock narrated it all as <em>"a poem about not trusting crab people."</em></li>
+<li>After: Sevek tried out <strong>Majestic Presence</strong> (<em>"Because I'm also a dragon plus… not as good as Aureys', but I'll take it"</em>). <strong>Paya healed the whole party</strong>; Mithtirith handed out <strong>Energy Aegis</strong> (<em>"Sevek gets hit all the time on the front lines"</em>).</li>
+<li><strong>Mithtirith recast Contingency at 10th rank</strong> to carry a legal 7th-rank Heal, the fix for last session. Then: <em>"Send Aureys to go trigger more encounters."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act explore">
+<div class="act-label">Act IV &middot; Exploration &middot; The Guest Wing (1:24–1:37)</div>
+<div class="act-card">
+<h3>Fermented zombie eyeballs and a turkey sandwich</h3>
+<ul>
+<li><strong>Another chandelier.</strong> Cody: <em>"Most expensive chandelier collection of all time."</em> Paya: <em>"Major striking runes worth of chandelier."</em> Aureys: <em>"Mightiest and greediest dragon."</em></li>
+<li><strong>The kitchen</strong>: constructs with a pink eye in their torsos. <em>"Welcome, guests of Queen Sorshen… We can prepare anything you would like."</em> Aureys: <strong><em>"Do you have any fermented zombie eyeballs?"</em></strong> — <em>"Ah, you must be a ghoul."</em> She asked whether anyone had come through (no one, in months) and the way to the library, and left them be: <em>"Those were really nice constructs, so I didn't see any need to be antagonistic."</em> Sevek ordered a <strong>turkey sandwich</strong>; Paya, <strong>bottled sunlight</strong>.</li>
+<li>Baths, a crate of bedding (into the hoard), a third chandelier. Kreebnock: <em>"I'm really bothered that all the rugs are crooked."</em></li>
+<li><strong>The perfume laboratory</strong>: a <strong>Pungent Cloud</strong> burst out as Paya opened the door; he and Aureys failed the DC 45 save, sickened 1. Inside, perfume-distilling machinery <em>"going absolutely haywire."</em> Break.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V &middot; Combat &middot; The Malfunctioning Perfumery (1:53–2:43)</div>
+<div class="act-card">
+<h3>Golarion's Finest vs The Sturdiest Table</h3>
+<ul>
+<li>A <strong>complex mechanical hazard</strong>: a five-action routine of stun, poison, mental, fire and confusion, losing one action at each quarter of its HP. Disable with five successes on Crafting, Thievery or Arcana, or break it.</li>
+<li><strong>All six disable attempts failed</strong>: Mithtirith's legendary Arcana by one (<em>"So much for Legendary"</em>), Aureys' legendary Thievery five times (<em>"I am the greatest thief in the history of Golarion"</em>).</li>
+<li><strong>Mithtirith went to 8 HP</strong> on a critically failed Nozzle Spray (150) and an Oil Spill (61), just after rejoining by phone: <em>"I think I did." — "But your contingency went off." — "It did."</em> Cody: <strong><em>"You're not down, though."</em></strong></li>
+<li><strong>Paya, confused, swung at Sevek ten times and missed every one.</strong> <em>"Sevek, I promise I'm not trying."</em> Sevek: <strong><em>"Alright, Paya. I have a plan… I'll punch Paya."</em></strong> The punch landed; the flat check it bought was a natural 1. Paya came out of it on his own next turn. Sevek: <em>"I realize I could have just done this. I'm going to walk over you."</em></li>
+<li><strong>Kreebnock's war on furniture</strong>: poems <em>"talking about the evils of tables,"</em> <em>"A sneaky table,"</em> <em>"How did the table dodge?"</em>, and in chat, <strong>"Golarian's Finest vs The Sturdiest Table."</strong> He discovered mid-fight that Sorshen's garment lets him choose immunity to mental effects.</li>
+<li><strong>Sevek broke it</strong> on two natural 19s: <em>"Sevek regains two mythic points. Everybody else regains one."</em> Cody's reveal: the disable DCs were <strong>47 and 50 after he'd lowered them by 5</strong>. Kreebnock: <em>"That's pretty much only 20s."</em></li>
+<li>Inside: a <strong>true elixir of life</strong> and an <strong>elixir of rejuvenation</strong>. Kreebnock: <strong><em>"That was probably worth getting thoroughly humiliated by a table of four."</em></strong></li>
+</ul>
+</div>
+</div>
+
+<div class="act social">
+<div class="act-label">Act VI &middot; Exploration &amp; Social &middot; Jatembe's Wand, the Cat, and the Office (2:44–3:24)</div>
+<div class="act-card">
+<h3>Astelaur, and the desk</h3>
+<ul>
+<li><strong>A wand on a sitting-room table</strong>, its rune identified (Paya's Arcana 40, Sevek's Society 38) as the sigil of <strong>Old Mage Jatembe</strong>, <em>"credited with bringing magic back to humans after Earthfall."</em> A <strong>Wand of Manifestation (10th rank)</strong>. Mithtirith: <strong><em>"I try to pretend I don't as I greedily grab it."</em></strong> Kreebnock passed: <em>"better for our Supreme Healer to have as a backup."</em></li>
+<li>The servants delivered: Aureys ate the eyeballs, Paya poured bottled sunlight over his head, and Sevek: <em>"I feel revitalized now. That's a good turkey sandwich."</em> A toy room (chew toys, not what Aureys guessed), latrines (Cody on privacy partitions), a <strong>locked teleportation circle</strong>, a workshop.</li>
+<li><strong>Astelaur</strong>: a very large four-eyed cat with glowing pink eyes, mauling a stuffed peacock. <em>"I was hoping you'd be mother returning."</em> <strong>Aureys did the talking</strong>, asked after him (<em>"Have you been eating well?"</em>), and got the way: library east, museum south, <strong>mother's office west</strong>. <em>"As if mother would be frightened of Belimarius."</em> Sevek: <strong><em>"Well, it's not Belimarius. It's Xanderghul."</em></strong> — <em>"Oh, that's… That's much worse."</em> Aureys: <em>"I am the greatest dragon in the world."</em> — <em>"You look a bit tiny for a dragon."</em> She gave back his toys.</li>
+<li><strong>Sorshen's office</strong>: a duskwood desk, a claw-scarred chair, a great many scrolls, among them <strong>Summon Oliphaunt of Jandelay</strong> (Kreebnock: <em>"I can use that one, actually"</em>). <strong>Aureys took the desk</strong>, and the table pushed back. Sevek: <strong><em>"Maybe we don't want to anger her so much."</em></strong> Kreebnock: <em>"How about we buy you a better desk?"</em> Aureys: <em>"If she wants it back, I might give it to her."</em> Sevek: <em>"Once we find solution, you can ask for it."</em></li>
+<li><strong>The art vault and the antiques vault (~30,000 gp)</strong>: into the hoard. <strong><em>"I'm gonna steal from a Runelord. Go big or go home."</em></strong> Paya: <em>"I am voting no on it, but I don't think Aureys is taking votes."</em> Sevek: <em>"I just need three meals a day and a nice home."</em> Cody: <strong><em>"There is no situation in which Aureys gets away with this."</em></strong> Aureys: <em>"I'm protecting it from looters."</em></li>
+<li><strong>The library</strong>: Sorshen's collection from ancient Thassilon to the present, <em>"multiple bookcases of romance novels"</em> included. Paya: <em>"Please, please wait until after we have to read them all. We are here to do research."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VII &middot; Mystery &middot; A Week of Research (3:24–3:38)</div>
+<div class="act-card">
+<h3>Gimmel, the Oliphaunt, and the apocalypse seed</h3>
+<ul>
+<li>The relics Aureys had hoarded turned out to be part of the research. <strong><em>"See? There was a reason I was collecting everything."</em></strong> Astelaur: <strong><em>"You know Mother's going to be very, very angry at the little dragon."</em></strong></li>
+<li><strong>Gimmel, the third Runelord of Greed, conjured the Oliphaunt of Jandelay</strong> in −6301 AR, in a war with Azlant. <strong>Jandelay</strong> sits at the centre of the Maelstrom, built of every place an apocalypse destroys; no planar keys are known for it.</li>
+<li><strong>The Watchers</strong>, gargantuan one-eyed keepers of Jandelay, are the spider-limbed figures the party saw on the Kodar peaks. Sevek: <em>"Yeah, we saw them before. Creepy."</em></li>
+<li>Gimmel's ritual at <strong>Spindlehorn</strong> split Golarion's timelines (in one, Alaznist pulled the Oliphaunt into modern Korvosa). The tower stands on the <strong>Prosperity Vault</strong> of the first Runelords of Greed, and <em>The Epic of Jandelay</em> is inscribed at its base.</li>
+<li>⭐ <strong>The apocalypse seed</strong>: the Oliphaunt left <em>"something terrible behind… as a promise of future devastation,"</em> <em>"if indeed it even exists,"</em> most likely under Spindlehorn's roots. What it left, it might take back: a way into Jandelay.</li>
+<li>⭐ <strong>The route</strong>: Spindlehorn's mirror in the <strong>Netherworld</strong> is a pit. Umbral Journey or Interplanar Teleport, down the pit, and out <strong>2,000 feet under Golarion, inside the Prosperity Vault</strong>. Lissala's runes plus the seed could replicate Gimmel's conjuration.</li>
+<li>Sorshen had also researched meeting an alternate self from another timeline. Aureys summed up the plan; Sorshen's collection had both scrolls. Cody: <strong><em>"I think we've got three sessions left of this game overall."</em></strong></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 &middot; 1:37 PM – 2:27 PM &middot; 6 rounds</div>
+<h3>The Abysium Sentinels</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Abysium Sentinels A–F</strong> &mdash; flying statue heads. 333 HP each, AC 42, Perception +30, Fort +33, Ref +30, Will +28; claw +37 (2d6 poison + 3d6+20 slashing), <strong>Toxic Bolt</strong> +36 at range (6d8+12 poison). Constructs: physical resistance, no spirit damage, immune to sickened.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Sentinel A 47 &middot; Sentinels B &amp; C 46 &middot; Sevek 41 (delayed) &middot; Aureys 41 (Battle Cry) &middot; Paya 38 &middot; Kreebnock 38 &middot; Mithtirith 37 &middot; Sentinel F 36 &middot; Sentinel E 35 &middot; Sentinel D 33</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">A, C, F &mdash; <strong>Sevek</strong> &middot; B, D &mdash; <strong>Paya</strong> &middot; E &mdash; <strong>Aureys</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free, Battle Cry): Demoralize on B — critical failure (natural 1).</li>
+<li><strong>Sentinel A</strong>: <strong>crit on Mithtirith (70)</strong>, hit (34).</li>
+<li><strong>Sentinel C</strong>: <strong>crit on Kreebnock (72)</strong> (he couldn't find his Instinctive Obfuscation in time), miss, hit (42).</li>
+<li><strong>Sentinel B</strong>: Paya, hit (35), hit (35), critical miss.</li>
+<li><strong>Sevek</strong>: delays to after Kreebnock.</li>
+<li><strong>Aureys</strong>: <strong>Majestic Presence</strong> — two critical failures and a success. <strong>Feint on A</strong> (<em>"you're so weirdly creepy. So awesome"</em>). Overwhelming Combination on A (47); Quickstrike misses.</li>
+<li><strong>Paya</strong>: <strong>Divide and Conquer</strong> (Mythic Point): <strong>crit on A (89)</strong>, hit on B (28). Two MAP Strikes miss. Aureys' Opportune Backstab on A (15).</li>
+<li><strong>Kreebnock</strong>: Now You See Me, Courageous Anthem, <strong>amped Message to Sevek: reaction Strike, natural 20, crit on C (104).</strong></li>
+<li><strong>Sevek</strong>: fused stance, <strong>Group Taunt</strong>. Flurry on C: hit, hit (83).</li>
+<li><strong>Mithtirith</strong>: Heal (77 to himself, 6 to Kreebnock).</li>
+<li><strong>Sentinels F, E, D</strong>: six Toxic Bolts at Sevek: <strong>E hits (43)</strong>; <strong>D hits (39) and hits (44)</strong> (the second logged as a miss by 1 with Taunt's −1 wrongly applied; Cody overruled it).</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Sentinel A</strong>: Aureys, hit (28). <strong>C</strong>: three claws at Sevek, two natural 1s. <strong>B</strong>: Paya, hit (30).</li>
+<li><strong>Aureys</strong>: <strong>Legend of Combat</strong> (Mythic Point). Earth to Heavens on A: hit (21), <strong>crit (61)</strong>.</li>
+<li><strong>Paya</strong>: <strong>Doctor's Visitation — critical Battle Medicine on Kreebnock (66).</strong> Needle in the Gods' Eyes: <strong>crit on A (67)</strong>; Aureys' backstab (16); B hit (29), Quickstrike <strong>crit (65)</strong>.</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, <strong>Force Rain — D critically fails (90), F 22.</strong></li>
+<li><strong>Sevek</strong>: <strong>Electric Arc — A critically fails on its last 6 HP: Sentinel A destroyed.</strong> <strong>Inner Upheaval</strong> Flurry on C: hit, <strong>natural 20, crit: Sentinel C destroyed</strong>, all 333 of its HP his.</li>
+<li><strong>Mithtirith</strong>: Recall Knowledge fails; <strong>Tempest Surge</strong> on B (33).</li>
+<li><strong>Sentinel F</strong>: Aureys, <strong>crit (62)</strong>, hit (33). <strong>E</strong>: Paya, hit (42), hit (41). <strong>D</strong>: two misses at Sevek.</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Sentinel B</strong>: <strong>crit on Mithtirith (70)</strong>.</li>
+<li><strong>Aureys</strong>: Overwhelming Combination on B: <strong>crit (86)</strong>; 16; 16.</li>
+<li><strong>Paya</strong>: <strong>crit on B (85): Sentinel B destroyed.</strong> Ocean's Balm (49). Needle on F: 21, 18.</li>
+<li><strong>Kreebnock</strong>: <strong>Restore the Mind</strong> on Sevek (40) and Aureys (40).</li>
+<li><strong>Sevek</strong>: Flurry on F: a natural 2 raised to 10 by <strong>Perfected Form</strong> (first use), hit (39); hit (46). Taunt.</li>
+<li><strong>Mithtirith</strong>: <strong>Electric Arc</strong>: E 32, F 16.</li>
+<li><strong>Sentinel F</strong>: Paya, hit (31). <strong>E</strong>, <strong>D</strong>: all miss.</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Aureys</strong>: Feint on F. <strong>Majestic Presence — E and F critically fail (frightened 4).</strong> Overwhelming Combination on F (57).</li>
+<li><strong>Paya</strong>: Needle on F (38); Aureys' backstab (21).</li>
+<li><strong>Kreebnock</strong>: Restore the Mind on Paya, twice (40, 40).</li>
+<li><strong>Sevek</strong>: ⭐ <strong>Crit on F (104): Sentinel F destroyed. MAP Strikes on E: crit (100), MAP −10 natural 20 crit (105).</strong> <em>"I'm feeling lucky so let's do a map 10… that's crazy, this actually is crazy."</em></li>
+<li><strong>Mithtirith</strong>: <strong>Electric Arc</strong> — E critically fails (54); D 27.</li>
+<li><strong>Sentinel E</strong>: <strong>crit on Kreebnock — Instinctive Obfuscation's flat check makes it miss.</strong> <strong>D</strong>: Paya, hit (29), hit (51).</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Aureys</strong>: <strong>Aether Beam — E critically fails: Sentinel E destroyed.</strong></li>
+<li><strong>Paya</strong>: Needle on D: miss, critical miss, miss.</li>
+<li><strong>Kreebnock</strong>: amped Message to Paya (<em>"actually stab it this time"</em>): reaction Strike misses by 1. Cody: <em>"Is this the beginning of Paya's miss arc?"</em></li>
+<li><strong>Sevek</strong>: Flurry on D: a natural 3 raised by <strong>Perfected Form</strong>, hit; hit; 74 (<em>"I literally was waiting for level 19 just for this"</em>).</li>
+<li><strong>Mithtirith</strong>: <strong>Tempest Surge</strong> on D (35).</li>
+<li><strong>Sentinel D</strong>: Sevek, hit (41) → <strong>Rippling Spin Trip: D prone</strong>; hit (43).</li>
+</ul>
+<h4>Round 6</h4>
+<ul>
+<li><strong>Aureys</strong>: <strong>Majestic Presence — D critically fails.</strong> Aether Beam (31).</li>
+<li><strong>Paya</strong>: <strong>Vicious Swing</strong> (53), then <strong>crit (109): Sentinel D destroyed.</strong> <em>"Paya's miss arc is over. Cody, I'm very sorry."</em></li>
+</ul>
+</div>
+
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 &middot; 3:00 PM – 3:46 PM &middot; 7 rounds</div>
+<h3>The Malfunctioning Perfumery</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Hazard</span><span class="stat-value"><strong>Malfunctioning Perfumery</strong> &mdash; complex mechanical hazard, <strong>150 HP</strong>, AC 48, hardness, immune to crits and precision. Routine: <strong>Crushing Notes</strong> (stun), <strong>Nozzle Spray</strong> (20d6 poison), <strong>Silage</strong> (22d6 mental), <strong>Oil Spill</strong> (20d6 fire + 8d6 persistent), <strong>Boiling Beaker</strong> (confusion); all DC 45, losing one action at each quarter of its HP.</span></div>
+<div><span class="stat-label">Disable</span><span class="stat-value">Five successes: Crafting DC 47, Arcana/Thievery DC 50 (already lowered by 5). Six attempts, none succeeded.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Perfumery 53 &middot; Kreebnock 49 &middot; Mithtirith 47 &middot; Paya 44 &middot; Aureys 42 &middot; Sevek 32</span></div>
+<div><span class="stat-label">Before initiative</span><span class="stat-value"><strong>Pungent Cloud</strong> (Fort DC 45): Aureys and Paya sickened 1.</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Perfumery</strong>: Crushing Notes — <strong>Paya and Aureys stunned 1</strong>. Nozzle Spray on Mithtirith (36). Silage on Paya (Mythic Point reroll → critical success). Oil Spill on Aureys and Boiling Beaker on Kreebnock, both critically saved.</li>
+<li><strong>Kreebnock</strong>: Telekinetic Projectile (10). <strong>Mithtirith</strong>: Arcana, 49 against DC 50 (<em>"So much for Legendary"</em>). <strong>Paya</strong>: 6 through hardness. <strong>Aureys</strong>: Thievery fails, Mythic reroll fails. <strong>Sevek</strong>: Guidance on Aureys; two misses.</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Perfumery</strong>: Crushing Notes (four fail). <strong>Nozzle Spray on Mithtirith: critical failure, 150.</strong> Silage on Sevek (39). <strong>Oil Spill on Mithtirith (61 + persistent): 8 HP left.</strong> Cody: <em>"You're not down, though."</em> Boiling Beaker on Kreebnock: fails, Mythic reroll fails, <strong>Still Earth negates the confusion</strong>.</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, <strong>Restore the Mind on Mithtirith (40)</strong>. <strong>Mithtirith</strong>: <strong>Heal on himself (121).</strong></li>
+<li><strong>Paya</strong>: <strong>Vicious Swing for 33 — below ¾, no more Crushing Notes.</strong> <strong>Aureys</strong>: Thievery fails. <strong>Sevek</strong>: Inner Upheaval Flurry, one hit (13).</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Perfumery</strong>: Paya critically saves three times. <strong>Oil Spill on Kreebnock: critical failure, 125 + double persistent fire.</strong></li>
+<li><strong>Kreebnock</strong>: Emotional Surge, Telekinetic Projectile (16) — <strong>below ½, no more Nozzle Spray.</strong> <strong>Mithtirith</strong>: Heal (96 to Kreebnock). <strong>Paya</strong>: 11 through. <strong>Aureys</strong>: retch, Thievery, Strike all fail. <strong>Sevek</strong>: Electric Arc (critically saved); misses.</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Perfumery</strong>: Oil Spill on Aureys (55 + persistent). <strong>Boiling Beaker on Paya: critical failure, confused.</strong></li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, Telekinetic Projectile (24) — <strong>below ¼, no more Silage.</strong> <strong>Mithtirith</strong>: Cry of Destruction (<em>"None of my allies. Time for my sudden betrayal"</em>), critically saved.</li>
+<li><strong>Paya</strong> (confused): <strong>three Strikes at Sevek, all miss.</strong> <em>"Paya's timely miss arc returned."</em> <strong>Aureys</strong>: Thievery fails. <strong>Sevek</strong>: <strong>Electric Arc on Paya and the perfumery</strong> (both critically save); 1 damage.</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Perfumery</strong>: Oil Spill on Kreebnock (30 + persistent); Boiling Beaker rolls Paya, already confused.</li>
+<li><strong>Kreebnock</strong>: <em>"Another poem… talking about the evils of tables."</em> <strong>Mithtirith</strong>: <strong>Clear Mind on Paya — automatic failure</strong> (a rank-10 effect). <em>"Jesus."</em> Guidance to Sevek.</li>
+<li><strong>Paya</strong> (confused): three more at Sevek, all miss. <em>"Sevek, I promise I'm not trying."</em> Cody: <em>"It's the power of friendship."</em> <strong>Aureys</strong>: <em>"I am the greatest thief in the history of Golarion"</em> — Thievery fails.</li>
+<li><strong>Sevek</strong>: ⭐ <strong><em>"Alright, Paya. I have a plan."</em></strong> Punches Paya (16 nonlethal) for a flat check against the confusion: <strong>natural 1</strong>.</li>
+</ul>
+<h4>Round 6</h4>
+<ul>
+<li><strong>Perfumery</strong>: Oil Spill on Mithtirith (28 + persistent). Boiling Beaker on Kreebnock: fails — <strong><em>"I have these robes now that say I'm immune to mental."</em></strong></li>
+<li><strong>Mithtirith</strong>: <strong>three-action Heal, 44 to all five.</strong></li>
+<li><strong>Paya</strong>: four more at Sevek, all miss; <strong>flat check succeeds, confusion over.</strong> Kreebnock: <em>"Hey, you made it. You're back."</em></li>
+<li><strong>Aureys</strong>: Aether Beam (8). <strong>Sevek</strong>: walks over Paya (<em>"I realize I could have just done this"</em>); 2 through.</li>
+</ul>
+<h4>Round 7</h4>
+<ul>
+<li><strong>Perfumery</strong>: Oil Spill on Mithtirith (71 + persistent).</li>
+<li><strong>Kreebnock</strong>: Murder of Crows misses (<em>"A sneaky table"</em>). <strong>Mithtirith</strong>: <strong>Heal on himself (124).</strong></li>
+<li><strong>Aureys</strong>: <strong>Aether Beam for 78 — critically saved on a natural 20</strong> (Kreebnock: <em>"How did the table dodge?"</em>).</li>
+<li><strong>Sevek</strong>: <strong>two natural 19s, 26 through hardness: the perfumery is destroyed.</strong> Sevek +2 Mythic Points, everyone else +1.</li>
+</ul>
+<p style="color:var(--gold)"><strong>Damage to the perfumery:</strong> Kreebnock 50 &middot; Paya 50 &middot; Sevek 42 (last hit) &middot; Aureys 8.</p>
+</div>
+
+<h2>Damage Ledger</h2>
+<div style="overflow-x:auto">
+<table class="contrib-table">
+<tr><th></th><th>Sentinels</th><th>Perfumery</th><th><strong>Total dealt</strong></th><th>Damage taken</th><th>Kills</th></tr>
+<tr><td><strong>Sevek</strong></td><td>771</td><td>42</td><td><strong>~813</strong></td><td>~249</td><td>A, C, F, the perfumery</td></tr>
+<tr><td><strong>Paya</strong></td><td>502</td><td>50</td><td><strong>~552</strong></td><td>~310</td><td>B, D</td></tr>
+<tr><td><strong>Aureys</strong></td><td>416</td><td>8</td><td><strong>~424</strong></td><td>~274</td><td>E</td></tr>
+<tr><td><strong>Mithtirith</strong></td><td>197</td><td>0</td><td><strong>~197</strong></td><td><strong>~602</strong></td><td>—</td></tr>
+<tr><td><strong>Kreebnock</strong></td><td>112</td><td>50</td><td><strong>~162</strong></td><td>~380</td><td>—</td></tr>
+</table></div>
+<div class="note-banner">Hit points actually removed, per the roll log: reverted applications left out, no overkill, persistent damage credited to whoever inflicted it, and only what got through the perfumery's hardness. <strong>Nobody dropped</strong>; Mithtirith's low point was 8 HP.</div>
+
+<h2>Mythic Economy</h2>
+<div class="summary">
+<ul>
+<li><strong>Paya</strong>: Divide and Conquer (Sentinels); a reroll on the perfumery's first Silage (critical success).</li>
+<li><strong>Aureys</strong>: Legend of Combat, then Summon Mythic Power to get it back; a Thievery reroll (failed).</li>
+<li><strong>Kreebnock</strong>: a Will reroll against the Boiling Beaker (failed; Still Earth covered it).</li>
+<li><strong>Refund</strong>: the perfumery paid <strong>Sevek +2</strong> for the last hit, everyone else +1.</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+
+<div class="spotlight s-sevek">
+<h4>Sevek &middot; The Last Hit</h4>
+<ul>
+<li><strong>Three Sentinels and the perfumery.</strong> <strong>A</strong> fell to his <strong>Electric Arc</strong> on its last 6 HP; <strong>C</strong> was his alone, all 333 HP, finished on a <strong>natural-20</strong> Inner Upheaval; <strong>F</strong> to a crit for 104 that opened his best turn of the night, followed by <strong>two MAP crits on Sentinel E for 100 and 105</strong>: <em>"I'm feeling lucky so let's do a map 10… that's crazy, this actually is crazy."</em> The perfumery broke on his back-to-back natural 19s. <strong>~813 damage, the most at the table.</strong></li>
+<li><strong>The level-19 debut.</strong> <strong>Perfected Form</strong> turned two misses into hits against the Sentinels: <em>"I literally was waiting for level 19 just for this."</em> He squared the <strong>Diamond Fists</strong> ruling with Cody on the spot (Monastic Weaponry carries it onto the staff; <em>"fair enough"</em>). New: a <strong>Ring of Primal Might (Greater)</strong>, and <strong>Majestic Presence</strong>.</li>
+<li><strong>The plan to save Paya from himself.</strong> With Paya confused and swinging at him, he Electric Arced the perfumery and Paya together, then: <strong><em>"Alright, Paya. I have a plan… I will change my grip so I have a free hand and then I'll punch Paya."</em></strong> The flat check it bought came up a natural 1. A turn later: <em>"I realize I could have just done this. I'm going to walk over you."</em></li>
+<li><strong>His line on the heist: take what helps the mission.</strong> He wanted the garment for the fight (<em>"We want to take that… This is all for the cause"</em>), as a loan (<em>"Let's assume borrow, not gift it"</em>). He drew the line at the desk (<em>"Maybe we don't want to anger her so much… With the robe, at least we can say it helps us"</em>), offered Aureys a fair way to it (<em>"Once we find solution, you can ask for it"</em>), and left the vaults on her account (<em>"You'll be responsible to talk to Sorshen"</em>). His own price: <strong><em>"I just need three meals a day and a nice home, that's it for me."</em></strong></li>
+<li><strong>He told Astelaur who the enemy really is</strong>: <em>"Well, it's not Belimarius. It's Xanderghul."</em> He routed the archive and backed Aureys' Thievery with Guidance.</li>
+<li><strong>The tank</strong>: Group Taunt, and six Toxic Bolts came for him in round one anyway; three hit, for 126. Rippling Spin tripped Sentinel D. Cody caught Taunt's −1 on an attack against him and applied the hit.</li>
+<li><strong>Voice</strong>: <em>"Sometimes it's just shoes."</em> &middot; <em>"I feel revitalized now. That's a good turkey sandwich"</em> &middot; <em>"Yeah, we saw them before. Creepy"</em> (the Watchers).</li>
+</ul>
+</div>
+
+<div class="spotlight s-paya">
+<h4>Paya &middot; We Are Evolving, Folks</h4>
+<ul>
+<li><strong>The Timeflaying Blade's first night, and two kills.</strong> No reach for the first time in nineteen levels (<em>"We are evolving, folks"</em>). A Mythic Point <strong>Divide and Conquer</strong> to open, then <strong>Sentinel B</strong> (crit, 85) and <strong>Sentinel D</strong> (crit, 109) after a stretch Cody named <em>"Paya's miss arc"</em>: <strong><em>"Paya's miss arc is over. Cody, I'm very sorry."</em></strong> On the blade: <em>"It's from the Dimension of Time… forged around a shattered paradox. It makes sense it'd be hard to use."</em> <strong>~550 damage, second at the table.</strong></li>
+<li><strong>Healers deserve healing.</strong> A critical <strong>Doctor's Visitation</strong> picked up Kreebnock for 66 mid-fight: <strong><em>"Healers deserve healing. Even off healers. Especially off healers. Have you met Paya?"</em></strong> After the Sentinels he healed the whole party: 73 to all five, then Dash of Herbs, Torrent in the Blood and Ocean's Balm.</li>
+<li><strong>The table's straight man to the heist.</strong> He ran the loot table, then: <em>"Aureys has robbed the strongest person we know. I'm going to leave before it rubs off on me. We didn't see nothing."</em> On the art vault: <em>"I am voting no on it, but I don't think Aureys is taking votes."</em> In the library: <em>"Please, please wait until after we have to read them all. We are here to do research."</em> And the way home: <em>"With interplanar teleport, you can always go to the plane you were just on."</em></li>
+<li><strong>Confused, and loyal anyway.</strong> Ten Strikes at Sevek; none landed. <em>"Sevek, I promise I'm not trying."</em> Afterward: <em>"Like, gee, I wonder how I could get further away from Paya."</em></li>
+<li><strong>Voice</strong>: <em>"I've decided breathing is optional"</em> &middot; <em>"Nocticula probably appreciates that"</em> &middot; <em>"You said Paya, not I"</em> &middot; <em>"No rest for a weary pineapple"</em> &middot; bottled sunlight, poured over his own head.</li>
+</ul>
+</div>
+
+<div class="spotlight s-aureys">
+<h4>Aureys Hollow &middot; Thief of Legend</h4>
+<ul>
+<li><strong>She robbed a Runelord, on purpose and in character.</strong> Every gown and shoe, three chandeliers, Sorshen's desk, the art vault and a 30,000-gp vault of antiques, into a hundred-bulk hoard. <strong><em>"I am now a thief of legend, I'm just saying."</em></strong> &middot; <em>"Mightiest and greediest dragon."</em> &middot; <strong><em>"I'm gonna steal from a Runelord. Go big or go home."</em></strong> &middot; <em>"Is it ever enough?"</em> Then the research made the relics relevant: <strong><em>"See? There was a reason I was collecting everything."</em></strong> Out of character, Anna said why: it's something Aureys would do.</li>
+<li><strong>A dragon with a hoard, not a vandal.</strong> She left the couches and the winged statue, gave Astelaur back his toys, and offered to return the desk (<em>"If she wants it back, I might give it to her"</em> — <em>"I can make a shameless request"</em>). <em>"I'm protecting it from looters."</em> &middot; <em>"We haven't sold anything yet."</em> &middot; <em>"Money's good. I don't know why you think that I'm above money."</em></li>
+<li><strong>She ran both conversations.</strong> The kitchen constructs (<em>"Do you have any fermented zombie eyeballs?"</em> — <em>"Ah, you must be a ghoul"</em>), whom she asked for news and directions and left alone. And <strong>Astelaur</strong>, whom she told about Sorshen, asked after (<em>"Have you been eating well?"</em>), and charmed: <em>"I am the greatest dragon in the world."</em> — <em>"You look a bit tiny for a dragon."</em> — <em>"We come in all sizes."</em> After the research, she summed up the plan.</li>
+<li><strong>She found the garment</strong>: her search turned up the false wall; Kreebnock wore what was behind it.</li>
+<li><strong>Combat</strong>: <strong>Majestic Presence</strong> drew five critical failures (frightened 4; Cody briefly stacked one to 8: <em>"you just have a heart attack"</em>); the flattery Feint (<em>"you're so weirdly creepy. So awesome"</em> — <em>"You're terrifying him and you're complimenting him"</em>); and she <strong>killed Sentinel E</strong> with an Aether Beam it critically failed. The perfumery beat her: DC 50 against <em>"the best thievery you could possibly have,"</em> five times.</li>
+</ul>
+</div>
+
+<div class="spotlight s-kreebnock">
+<h4>Kreebnock &middot; Poet Against Tables</h4>
+<ul>
+<li><strong>He paid for his hat and borrowed the Runelord's robes.</strong> In Foundry chat: <strong><em>"Kreebnock leaves 50 gold on the counter for the tophat he took."</em></strong> Then <strong>Sorshen's Scintillating Garment</strong>: <em>"I'll just borrow it."</em> Mid-perfumery: <strong><em>"I forgot. I have these robes now that say I'm immune to mental."</em></strong> And on Aureys' desk: <em>"I'm gonna show up wearing Sorshen's robes and take the blame for everything."</em></li>
+<li><strong>He narrated the night in verse.</strong> A poem <em>"about not trusting crab people,"</em> then <em>"the evils of tables,"</em> <em>"A sneaky table,"</em> <em>"How did the table dodge?"</em>, and in chat, <em>"Golarian's Finest vs The Sturdiest Table."</em> Verdict: <strong><em>"That was probably worth getting thoroughly humiliated by a table of four."</em></strong></li>
+<li><strong>The support night.</strong> An amped <strong>Message</strong> sent Sevek into a reaction crit on Sentinel C for 104 (<em>"I will tell Sevek it's time to strike the evil crab people"</em>); another went to Paya (<em>"actually stab it this time"</em> — <em>"Sorry, no can do. I've only got worse"</em>). <strong>Force Rain</strong> for 90; Courageous Anthem; <strong>Restore the Mind</strong> five times, including on Mithtirith at 8 HP; <strong>Instinctive Obfuscation</strong> made a crit miss. His Telekinetic Projectiles took the perfumery past half and past a quarter.</li>
+<li><strong>He kept his head when he could.</strong> A Mythic reroll failed against the confusion, so he fired <strong>Still Earth</strong>: <em>"because I didn't want to murder Mithtirith."</em></li>
+<li><strong>He came round on the heist.</strong> <em>"Keep it in the hoard, yeah"</em> at the first chandelier; by the vaults, <em>"Famously not vindictive, the Runelords. I'm sure they'll be fine with it"</em> and <em>"It really seems like a bad idea."</em> The practical fix: <em>"How about we buy you a better desk?"</em></li>
+<li><strong>Voice</strong>: <em>"Tip my hat out. Ouch. Shouldn't have done that… It just exposed my head and thus was a bad idea"</em> &middot; <em>"I'm really bothered that all the rugs are crooked"</em> &middot; <em>"He's Prometheus"</em> &middot; <em>"I hang out with a cat half the time."</em></li>
+</ul>
+</div>
+
+<div class="spotlight s-mith">
+<h4>Mithtirith &middot; Still Standing at 8</h4>
+<ul>
+<li><strong>The magnet, and he stayed up.</strong> Two Sentinel crits for 70 each; the perfumery chose him for Nozzle Spray twice and Oil Spill three times, one critically failed Nozzle Spray for 150. With the Oil Spill after it he was at <strong>8 HP</strong>, just back on the call by phone: <em>"I think I did." — "But your contingency went off." — "It did."</em> Cody: <em>"You're not down, though."</em> And: <em>"I feel like I've picked on Tirith harder than anybody else."</em> <strong>~600 damage taken, the most at the table by a distance.</strong></li>
+<li><strong>He kept everyone standing anyway.</strong> Heals of 77, 121, 96 and 124; a three-action Heal for 44 to all five; <strong>Energy Aegis for everyone</strong> (<em>"Sevek gets hit all the time on the front lines"</em>); two Tempest Surges and two Electric Arcs (~200 damage). And he <strong>recast Contingency at 10th rank</strong> so it carries a legal Heal.</li>
+<li><strong>Jatembe's wand.</strong> <strong><em>"I try to pretend I don't as I greedily grab it"</em></strong>, then offered it to Kreebnock, who handed it back to <em>"our Supreme Healer."</em> He read the locked teleportation circle, came within one point on the perfumery (<em>"So much for Legendary"</em>), and asked the night's last right question: <em>"I just want to make sure we get the key to… teleport back."</em></li>
+<li><strong>He tried to clear Paya's confusion</strong> with Clear Mind and Fortunate Relief: automatic failure against a rank-10 effect. <em>"Jesus."</em></li>
+<li><strong>Voice</strong>: <em>"Send Aureys to go trigger more encounters"</em> &middot; the mic-dip gag (his "heal myself" came out darker, and Cody told him: <em>"I'll let you guess"</em>) &middot; aiming Cry of Destruction: <em>"None of my allies. Time for my sudden betrayal"</em> &middot; <em>"Try not to get in a fight for the next five minutes."</em></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+<div class="loot-item"><div class="loot-name"><strong>Sale of Belimarius' and the Knights' gear</strong></div><div class="loot-source">S15</div><div class="loot-note"><strong>10,642 gp each.</strong></div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Timeflaying Blade</strong></div><div class="loot-source">The Ancient Ones (S14)</div><div class="loot-note"><strong>Paya</strong>, resized.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Ten Day's Breath</strong></div><div class="loot-source">Stash</div><div class="loot-note"><strong>Aureys</strong> (with a Mythic Point, no breathing for a year).</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Belimarius' Invidious Halberd</strong></div><div class="loot-source">Belimarius (S15)</div><div class="loot-note"><strong>Mithtirith</strong>, held for its spell absorption.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Ring of Primal Might (Greater)</strong></div><div class="loot-source">Bought in Absalom</div><div class="loot-note"><strong>Sevek.</strong> +2 item to primal spell DCs and spell attacks.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Sorshen's Scintillating Garment</strong></div><div class="loot-source">Hidden panel, Sorshen's closet (Aureys' search)</div><div class="loot-note"><strong>Kreebnock</strong> ("borrowed"). Unique apex artifact; +3 to saves; immune to mental effects unless he chooses otherwise.</div></div>
+<div class="loot-item"><div class="loot-name"><strong>A top hat</strong></div><div class="loot-source">Sorshen's closet</div><div class="loot-note">Kreebnock; he left 50 gold on the counter.</div></div>
+<div class="loot-item"><div class="loot-name"><strong>Sorshen's wardrobe</strong></div><div class="loot-source">Closets</div><div class="loot-note">50 noble gowns, 10 exemplary garments, 2 masterful gowns, the shoes. Aureys' hoard.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Chandeliers</strong></div><div class="loot-source">Guest rooms</div><div class="loot-note">24 Everlight Crystals at 1,000 gp each in the first; at least two more after. Aureys' hoard.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>True Elixir of Life</strong>, <strong>Elixir of Rejuvenation</strong></div><div class="loot-source">Perfume laboratory</div><div class="loot-note">Plus money and alchemical materials.</div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Wand of Manifestation (10th rank)</strong></div><div class="loot-source">Sitting room &middot; Old Mage Jatembe's sigil</div><div class="loot-note"><strong>Mithtirith.</strong></div></div>
+<div class="loot-item magical"><div class="loot-name"><strong>Scrolls</strong>: Summon Oliphaunt of Jandelay (rank 10), Interplanar Teleport (rank 7), Umbral Journey</div><div class="loot-source">Sorshen's office and collection</div><div class="loot-note">The way into the Netherworld.</div></div>
+<div class="loot-item"><div class="loot-name"><strong>Sorshen's desk</strong></div><div class="loot-source">Her office</div><div class="loot-note">"A few thousand gold." Aureys' hoard.</div></div>
+<div class="loot-item"><div class="loot-name"><strong>The art vault</strong>; <strong>the antiques and relics vault</strong></div><div class="loot-source">Archives &middot; ~30,000 gp</div><div class="loot-note">Aureys' hoard. She will not sell any of it.</div></div>
+</div>
+<div class="xp-banner">Treasure &middot; sale = <strong>10,642 gp each</strong> &middot; Sorshen's things in Aureys' hoard, unsold &middot; <strong>level 19</strong>, three sessions left</div>
+
+<h2>Memorable Quotes</h2>
+
+<blockquote><strong>Sevek</strong>: "Sometimes it's just shoes."<span class="attribution">After Aureys searched Sorshen's shoe closet for secret doors, twice.</span></blockquote>
+
+<blockquote><strong>Paya</strong>: "Paya, for the first time in I think 19 levels, does not have reach. We are evolving, folks."<span class="attribution">The Timeflaying Blade's first swing.</span></blockquote>
+
+<blockquote><strong>Aureys</strong>: "I am now a thief of legend, I'm just saying."<span class="attribution">Having put an entire chandelier into her hoard.</span></blockquote>
+
+<blockquote><strong>Paya</strong>: "We robbed the strongest person we know."<br><strong>Sevek</strong>: "Who's we?"<br><strong>Paya</strong>: "That's fair. Aureys has robbed the strongest person we know. I'm going to leave before it rubs off on me. We didn't see nothing."</blockquote>
+
+<blockquote><strong>Paya</strong>: "Healers deserve healing. Even off healers. Especially off healers. Have you met Paya?"<span class="attribution">A critical Doctor's Visitation on Kreebnock.</span></blockquote>
+
+<blockquote><strong>Kreebnock</strong>: "Tip my hat out. Ouch. Shouldn't have done that… It just exposed my head and thus was a bad idea."<span class="attribution">Critted by a Sentinel before he'd moved.</span></blockquote>
+
+<blockquote><strong>Aureys</strong>: "Do you have any fermented zombie eyeballs?"<br><strong>Kitchen construct (Cody)</strong>: "Ah, you must be a ghoul."</blockquote>
+
+<blockquote><strong>Mithtirith</strong>: "I think I did."<br><strong>Aureys</strong>: "But your contingency went off."<br><strong>Mithtirith</strong>: "It did."<br><strong>Cody</strong>: "You're not down, though."<span class="attribution">The perfumery had just taken him to 8 HP, a minute after he rejoined by phone.</span></blockquote>
+
+<blockquote><strong>Sevek</strong>: "Alright, Paya. I have a plan… I will change my grip so I have a free hand and then I'll punch Paya."<span class="attribution">Paya, confused, had just swung at him three times.</span></blockquote>
+
+<blockquote><strong>Kreebnock</strong>: "That was probably worth getting thoroughly humiliated by a table of four."<span class="attribution">The perfumery's loot: a true elixir of life.</span></blockquote>
+
+<blockquote><strong>Mithtirith</strong>: "I try to pretend I don't as I greedily grab it."<span class="attribution">Old Mage Jatembe's wand.</span></blockquote>
+
+<blockquote><strong>Sevek</strong>: "Well, it's not Belimarius. It's Xanderghul."<br><strong>Astelaur (Cody)</strong>: "Oh, that's… That's much worse than some past Alaznist coming back."</blockquote>
+
+<blockquote><strong>Aureys</strong>: "My name is Aureys. I am the greatest dragon in the world."<br><strong>Astelaur (Cody)</strong>: "You look a bit tiny for a dragon."</blockquote>
+
+<blockquote><strong>Aureys</strong>: "I'm gonna steal from a Runelord. Go big or go home."<br><strong>Cody</strong>: "I'm going to warn you, there is no situation in which Aureys gets away with this."</blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+<li><strong>The Prosperity Vault.</strong> Through the Netherworld pit beneath Spindlehorn's mirror, out 2,000 feet under Golarion, to find the <strong>apocalypse seed</strong> (if it exists), then Lissala's runes and Gimmel's ritual to reach Jandelay. Next week.</li>
+<li><strong>Three sessions left</strong>, by Cody's count.</li>
+<li><strong>Sorshen is going to be angry.</strong> Her wardrobe, desk, art and antiques are in Aureys' hoard and her robes are on Kreebnock. And the party still owes her a pardon request for Lograsi.</li>
+<li><strong>Sorshen and her alternate self.</strong> Her research feared meeting a version of herself from another timeline; the Oliphaunt's summoning split Golarion's timelines.</li>
+<li><strong>The Watchers</strong> answer an S4 mystery: the spider-limbed figures on the Kodar peaks serve the Oliphaunt and keep Jandelay.</li>
+<li><strong>Astelaur</strong>, Sorshen's cat, is still in the archives.</li>
+<li><strong>The Scroll of Summon Oliphaunt of Jandelay</strong> — Kreebnock can cast it.</li>
+<li><strong>The locked teleportation circle</strong> in the archives; destination unknown.</li>
+<li><strong>Belimarius' spellbook</strong> — the cipher would take months.</li>
+<li><strong>Mithtirith's Contingency</strong>: recast at 10th rank. The table thought it fired at the perfumery; he never dropped, and the log shows no Contingency heal.</li>
+<li><strong>The Taunt −1 on attacks against Sevek is back</strong> (nine instances; one mattered, corrected live).</li>
+<li><strong>Starfinder</strong> sign-ups are open; Pax, Arrakis and Kelsie are in.</li>
+</ul>
+</div>
+
+<div class="cliffhanger">
+<span class="label">Where it leaves off</span>
+<p>A week in Sorshen's archives, with her robes on Kreebnock and her desk in Aureys' hoard. The way to Jandelay runs down a pit in the Netherworld, into a vault 2,000 feet under Spindlehorn, toward a seed the Oliphaunt may have left behind.</p>
+<div class="big-line">"You know Mother's going to be very, very angry at the little dragon."</div>
+<span class="speaker">&mdash; Astelaur &middot; three sessions left</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+
+<h3>What Sevek did this session</h3>
+<ul>
+<li>Bought a <strong>Ring of Primal Might (Greater)</strong>. Took two Major Healing Potions from the stash.</li>
+<li>Archives: backed taking the garment (<em>"all for the cause"</em>) as a loan; argued against the desk; told Aureys she answers to Sorshen for the vaults. Routed office → museum → library.</li>
+<li><strong>Sentinels</strong>: delayed behind Kreebnock; reaction crit on C off Kreebnock's Message (104); killed <strong>A</strong> (Electric Arc), <strong>C</strong> (natural-20 crit; all 333 of its HP were his), <strong>F</strong> (crit, 104); two MAP crits on E (100, 105). <strong>Perfected Form</strong> turned two misses into hits. Rippling Spin trip on D. ~771 damage.</li>
+<li><strong>Perfumery</strong>: Guidance for Aureys. Electric Arc on confused Paya and the hazard. Punched Paya to give him a flat check (natural 1). <strong>Last hit on the perfumery</strong>: +2 Mythic Points.</li>
+<li>Told <strong>Astelaur</strong> the enemy is Xanderghul.</li>
+<li><strong>Majestic Presence</strong> tried out after the first fight (the party is now immune to it for 24 hours).</li>
+<li><strong>~813 damage dealt (top at the table), ~249 taken.</strong></li>
+</ul>
+
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+<li><strong>The Taunt −1 is back on attacks against him.</strong> Nine Sentinel attacks on him carried it; one (D's second bolt in round 1, a miss by 1) changed the result, and Cody caught it. S11 had none. The fix (dragging Taunt from his own card) needs checking.</li>
+<li><strong>The punch didn't end Paya's confusion.</strong> The flat check it triggered was a natural 1. Paya ended it on his own flat check his next turn.</li>
+<li><strong>The disable route was never live.</strong> DC 50 Thievery/Arcana and DC 47 Crafting were already 5 lower than printed. Breaking it was the only plan.</li>
+<li><strong>Mithtirith never went down at the perfumery.</strong> He bottomed out at 8 HP; the log has no Contingency heal.</li>
+</ul>
+
+<h3>What Sevek is thinking about</h3>
+<ul>
+<li><strong>Perfected Form</strong> turns the first Strike's floor into a 10. It paid twice against the Sentinels.</li>
+<li><strong>Electric Arc on a confused ally</strong> is safe when they can't take reactions.</li>
+<li>Sorshen will want her things back. The party needs her help.</li>
+<li>Three sessions left.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+<li>What is in the <strong>Prosperity Vault</strong>, and what guards the <strong>apocalypse seed</strong>, if it's there?</li>
+<li>Who casts <strong>Umbral Journey</strong> or <strong>Interplanar Teleport</strong>, and how do they get back?</li>
+<li>What does the <strong>Epic of Jandelay</strong> at Spindlehorn's base say?</li>
+<li>What will Sorshen do about the hoard?</li>
+</ul>
+
+</section>
+
+</div>
+</body>
+</html>

@@ -491,3 +491,22 @@
 - **Kun and Rivka roll Reflex well**; two Chain Lightnings ended on natural 20s (a Rivka, a jiang-shi). Open the chain on the target least likely to crit-save.
 - **Cody's S19 rulings**: Moment of Renewal run as **8 hours of rest** (Con × level), not the 24 the spell says; Drain Qi is repeatable and a crit drains only one step; one reaction per activity (no second Shield Block inside one multi-strike spell); Frigid Flurry stops at a wall. **No mid-fight enemy stat changes in any of the three fights.**
 - **Going into next session: Clutch Drained 4, Seva Drained 1**, healing deferred. Sovael carries Restoration scrolls.
+
+## Character Relationships (Session 20 Observations)
+
+- **Sovael (Pax) answered the villain and backed the man who hit him.** Told Razu the people of Goka shouldn't pay for Hao Jin's mistakes, then the line of the session: *"I'll compose a song once that we beat the shit out of you"* — and spent the airship trip on the song. Confused by Phantasmagoria until Ferrok's sword snapped him out of it (90 friendly fire from Ferrok and Sattva), he put a **ninth-rank Heroism on Ferrok** (*"I should heal myself, but what's the fun in that?"*). Asked the Empress what the teams would get; told Ysoren *"That's what we're here for. Getting rid of trouble."* 93 of the 164 Razu took; 208 on the Oni, including a hero-pointed Fire Ray (miss → 72).
+- **Seva asked the questions that mattered.** *"Why can't we roll RK?"* (twice), and to the Empress: does she know Razu, *"because Razu seems to be familiar who Hao Jin is. Like, personally."* Three kills (both Squalls, Oni A), most of the day. Started the "Sattva never moves" bit and shut down jokes mid-confusion.
+- **Ferrok's "Dragon Fang Crescent, his signature move"** is now standard; two kills, first blood on Razu, the horns finally rooted something. Chat narration continues (carving his name in the bridge, stomping Razu's slime, eating a sandwich). Confused into attacking Sovael — *"glaring at Sovael as I try to dismember him."*
+- **Sattva never moved — and it won the fight.** Razu's Contingency teleported him next to Sattva, who used his **Sash of Prowess** for the first time to crit the grapple. Set up and cashed *"fight air with air."* Felt bad about shooting Sovael and healed him. Top PC damage on the bridge (304).
+- **Clutch took everything first** (pushed, restrained, four Intercepts on the mountain — Seva took 0) and killed Oni C on a counter-strike. Bought **Bear Hug** and argued martials' case in a grappling debate with Cody. Gave Seva 7,400 gp for her rune. Chat: *"Clutch looks at his toe beans."*
+
+## Session 20 — Key Patterns / Lessons
+
+- **Confusion turns the party on whoever is nearest — and that was Sovael.** Phantasmagoria confused three of five; Ferrok and Sattva did 90 to him. Sovael and Ferrok now carry an **Olivine Pendeloque** Aeon Stone (anti-confusion); Ferrok had one in S20 and forgot it.
+- **Aether Beam pushes 10 ft on a failed save (20 on a crit fail).** Never applied before S20. The push can break an enemy's grab on an ally.
+- **Probe weaknesses cheaply.** Force (Portal Eaters) was found by guess-and-test; spirit (Island Oni) was already landing via astral runes before Whispers of Weakness named it. Seva's point stands — roll the RK first.
+- **A grab-triggered Contingency** means the first grappler loses the target. Grab with someone near where it will land, or expect the teleport.
+- **Clutch's Intercepts decide fights against reach-20 brutes**: 187 damage absorbed on the mountain, Seva untouched.
+- **Cody's S20 rulings**: **deafened creatures don't take Dirge of Doom's frightened** (cuts both ways — it flipped a Sattva shot into a crit and undid a Squall's escape); Phantasmagoria's confusion lasts until the start of the caster's next turn, and confused PCs also flat-check at the end of their own turn; **no hero point on a fortune roll**; no unarmed Strike with both hands occupied (grapple + bow); Take Your Places can include the caster.
+- **Cody conduct check: clean.** Portal Eaters dropped 520 → 500 HP before the first action (in the party's favour); no enemy stat increased mid-fight. Island Oni ran elite but applied spirit weakness at 10, not the book's 20.
+- **Going into next session: level 18, full HP, Sacred Covenant up**, at the Iron Mountain summit.
