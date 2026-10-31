@@ -9,12 +9,13 @@ Everything here is meant to carry over to the next game Pax runs.
 | `foundry-macros/gm/ask-for-a-check.js` | Opens PF2e's Check Prompt Generator (skill/save + level DC ± difficulty, simple DC, or custom) |
 | `gm-toolkit/foundry-module/` | Source for the **Pax's GM Toolkit** Foundry module (macros compendium) + `build-pack.cjs` |
 | `gm-toolkit/music/loop_tool.py` | Turns a soundtrack file into a seamless intro + loop pair of OGGs |
+| `map-maker/` | Code-drawn SVG battlemaps (exact grid, any resolution, walls JSON) for APs and homebrew when no map exists. See its README |
 
 ---
 
 ## Starting a new world (checklist)
 
-1. **Create the world.** System pf2e. Enable: *Pax's GM Toolkit*, Workbench, PF2e HUD, Toolbelt, Dailies, Dice So Nice (+ libWrapper, socketlib).
+1. **Create the world.** System pf2e. Enable: *Pax's GM Toolkit*, Workbench, PF2e HUD, Toolbelt, Dailies, Dice So Nice (+ libWrapper, socketlib). For `map-maker` maps no module is needed: `node map-maker/export-foundry.js <map>`, then Create Scene → right-click → Import Data → the `.foundry-scene.json` (secret doors, see-through portcullises and lights included).
    Drag *Fade out music* and *Ask for a Check* from the **Pax GM Toolkit: Macros** compendium to the hotbar.
 2. **Users.** Two GM users: **Pax** (you) and **Gamemaster** (left for the Foundry MCP). Foundry allows one session per user, so sharing one seat kicks someone out.
 3. **Import the adventure**, then fix its scenes (see *Imported adventures* below).

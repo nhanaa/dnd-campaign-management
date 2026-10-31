@@ -15,7 +15,7 @@ node maps/palace-keep.js          # writes output/palace-keep.svg and output/pal
 - Maps use **100 SVG units per 5-ft square**. The second argument to `render.sh` is pixels per square. Foundry maps usually want 100 to 140.
 - Each script takes an optional seed: `node maps/forest-shrine.js 12` gives a different random layout of the same scene. The default seed is 7.
 - `output/` is git-ignored because everything in it can be regenerated. `gallery/` keeps a copy of each map's SVG, which opens in any browser.
-- Needs Node and Google Chrome. No npm packages.
+- Needs Node and Chrome. No npm packages. `render.sh` runs on macOS and Linux/WSL: it uses Google Chrome on a Mac, `google-chrome`/`chromium` on PATH, or the Chrome that `agent-browser` installed (`~/.agent-browser/browsers/chrome-*/chrome`). Set `CHROME=/path/to/chrome` to override.
 
 ## The maps
 
@@ -38,11 +38,60 @@ The keep is built so the party clears it in layers and can rest between them.
 
 The keep is drawn on a square grid (`grid[y][x]` holds a floor material or `null` for rock). Walls are drawn wherever floor meets rock, so the wall data is exact.
 
-## Walls for Foundry
+## Into Foundry
 
-Every script also writes a `*-walls.json` with wall segments in SVG units (divide by 100 for squares, multiply by pixels-per-square for pixels). The keep's file also lists doors.
+Every script writes `output/<map>-walls.json` as `{walls, doors, lights}`:
 
-Not done yet: converting that JSON into a **UVTT file**. UVTT is the format that bundles a map image with its walls, doors and lights. The **Universal Battlemap Importer** module (`dd-import`, verified on Foundry v14) imports it, so a map would drop into Foundry with walls already placed.
+- **walls**: segments in SVG units. The exporter joins segments that share an end into long wall lines.
+- **doors**: `[x, y, horizontal, length, kind]` in squares along a cell edge. `kind` is optional: `great`, `secret`, `portcullis`.
+- **lights**: `{x, y, range, color, anim?}`. `x`/`y` in SVG units, `range` in squares (dim radius; bright is half), `color` as `AARRGGBB`, `anim` an optional Foundry light animation. The scripts record one wherever they draw a fire, brazier, candle or glow.
+
+### Native Foundry scene (use this)
+
+```sh
+node maps/palace-keep.js
+node export-foundry.js palace-keep 140          # add --dark 0.6 for real darkness, --name "..." to rename
+```
+
+This writes `output/palace-keep.foundry-scene.json` and copies the map image to `~/foundrydata/Data/map-maker/palace-keep-140px.webp` (`--data-dir` to change). In Foundry: Scenes sidebar → **Create Scene** (any name) → right-click it → **Import Data** → pick the JSON. No modules needed.
+
+The scene arrives with its size, grid, background, walls, lights and **every door type**:
+
+| Kind in the walls JSON | Becomes in Foundry |
+|---|---|
+| normal, great | Door, starts **open** (the art draws them standing open) |
+| secret | **Secret door** (only the GM sees it), closed |
+| portcullis | Door, closed, **see-through**: sight, light and sound pass the bars; movement is blocked |
+
+- **Lighting:** the maps have their light and dark painted in, so scenes import fully lit. `--dark 0.6` turns global light off and sets darkness so only the map's light sources (and darkvision) light it.
+- **Lights:** braziers and fires get Foundry's `torch` animation; a light can name its own (`anim: 'pulse'` on the keep's arcane ring). They are kept **faint** (alpha 0.1, luminosity 0.2) because the art already paints each glow; at Foundry's default strength they stacked on the painted glow and bleached the throne room's arcane ring to white. This works lit (warm glow, flicker) and with `--dark` (pools of light in a dark keep).
+- **Image** is WebP (about 1.2 MB for the 44 x 32 keep at 140 px, against ~30 MB as PNG), which matters when players load it from a remote server.
+- The image must be in the data folder of the Foundry that imports the scene. For a remote server, copy `Data/map-maker/` across with the world.
+- **Import quirk:** v14 keeps the background on the scene's level, but Import Data still migrates the old top-level `background` into the level and blanks the level's image when that field is missing. The exporter writes both.
+
+**Tested in Foundry v14 (2026-10-30):** the palace keep imported through Import Data with 103 walls, the secret door as a GM-only secret door on the drawn seam, both portcullises see-through on the drawn bars, the other 8 doors open, and 28 lights. Light strength was then compared across five versions (lit/dark × default/faint/no lights) and Pax picked faint lights, lit by default and `--dark 0.6` for dungeons where darkness matters.
+
+### UVTT (.dd2vtt) for other VTTs
+
+```sh
+node maps/palace-keep.js
+node export-uvtt.js palace-keep 140     # writes output/palace-keep-140px.png and output/palace-keep.dd2vtt
+```
+
+The `.dd2vtt` file is the map image plus its walls, doors and lights in one file (the Universal VTT format). In Foundry, enable the **Universal Battlemap Importer** module (`dd-import`, v6.1.1 is verified on v14), click its button in the Scenes sidebar, and pick the file. The scene arrives with walls, doors and lights placed.
+
+How the importer reads the file (checked against its source, `ddimport.js`):
+
+- Light **range** is the dim radius in squares; bright light is half of it. Braziers use 8 (40 ft dim, 20 ft bright, like a torch), candles 2.
+- Every door imports as a normal closed door. **It has no secret-door type**, so after importing the keep, switch its secret door (captain's quarters into the throne room) to *Secret* in Foundry. The portcullises also come in as plain doors.
+- Doors the art shows standing open still import closed. Open them in Foundry if you want them open.
+- It never reads `objects_line_of_sight`, so anything solid has to go in the walls.
+- It ignores `environment`, so set the scene's darkness yourself. The night maps already have their darkness painted in.
+- The importer shrinks any map wider or taller than 11,000 px. The 44 x 32 keep at 140 px per square is 6,160 x 4,480, well inside.
+
+The exporter was checked against the walls JSON: every wall point in all three maps lands on an exported wall line and nothing extra was added.
+
+**Tested in Foundry v14 with dd-import 6.1.1 (2026-10-30):** the palace keep imported with all 103 walls (no zero-length ones), 11 openable doors sitting exactly in the drawn doorways, and 28 lights (braziers 40/20 ft orange, the arcane ring 30/15 ft purple). On screen the wall lines follow the stone edges of the art.
 
 ## What we tried and learned
 
@@ -92,6 +141,4 @@ The result had richer textures, but Pax preferred the original SVG style. It als
 
 ## Ideas not done yet
 
-- UVTT export so walls and doors import into Foundry automatically.
 - Turning the keep's grid into a reusable layout format, so a new dungeon is just a list of rooms and corridors.
-- Light sources in the walls JSON (braziers, candles) for Foundry lighting.

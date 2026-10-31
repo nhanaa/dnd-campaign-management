@@ -121,8 +121,12 @@ function stone(x, y, r, opts = {}) {
   return (opts.noShadow ? '' : shadowOf(poly(pts), r * 0.3, r * 0.35, 0.5)) +
     `<path d="${poly(pts)}" fill="${hsl(hue, sat, lit - 14)}" stroke="${INK}" stroke-width="${opts.sw || 3}" stroke-linejoin="round"/><path d="${poly(top)}" fill="${hsl(hue, sat, lit)}"/>`;
 }
+// Light sources for Foundry export: {x, y} in SVG units, range in squares (dim radius; bright is half), color AARRGGBB,
+// optional anim (a Foundry light animation such as 'torch' or 'pulse'; the Foundry exporter defaults to torch).
+const lights = [];
 // flame cluster: dark red base -> orange -> yellow -> white core, displaced into tongues
 function fire(x, y, r, out = layer('fire')) {
+  lights.push({ x: Math.round(x), y: Math.round(y), range: Math.max(3, Math.min(8, Math.round(r / 9))), color: 'ffff8a30' });
   const g = [];
   g.push(`<g filter="url(#flame)">`);
   g.push(`<path d="${blob(x, y, r, r * 0.85, 0.35, 14)}" fill="#7a1408"/>`);
@@ -491,5 +495,5 @@ const body = order.map((k) => {
 // flames drawn again above the lighting so they read as light sources
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs>${defs.join('')}</defs>${body}<g>${(L.fire || []).join('')}${(L.roofFire || []).join('')}</g></svg>`;
 fs.writeFileSync(OUT + '/burning-palace.svg', svg);
-fs.writeFileSync(OUT + '/burning-palace-walls.json', JSON.stringify(wallSegs.map(([a, b]) => [a.map(Math.round), b.map(Math.round)])));
-console.log('svg bytes', svg.length, 'wall segments', wallSegs.length);
+fs.writeFileSync(OUT + '/burning-palace-walls.json', JSON.stringify({ walls: wallSegs.map(([a, b]) => [a.map(Math.round), b.map(Math.round)]), doors: [], lights }));
+console.log('svg bytes', svg.length, 'wall segments', wallSegs.length, 'lights', lights.length);

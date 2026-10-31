@@ -558,5 +558,5 @@ const order = ['ground', 'ringPave', 'stream', 'rocks', 'scatter', 'ferns', 'cha
 const body = order.map((k) => `<g id="${k}"${k === 'walls' || k === 'standing' || k === 'rubble' ? ' filter="url(#rough)"' : k === 'wallShadow' ? ' filter="url(#soft6)" opacity="0.85"' : ''}>${(L[k] || []).join('\n')}</g>`).join('\n');
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs>${defs.join('')}</defs>${body}</svg>`;
 fs.writeFileSync(OUT + '/forest-shrine.svg', svg);
-fs.writeFileSync(OUT + '/forest-shrine-walls.json', JSON.stringify(wallSegs.map(([a, b]) => [a.map(Math.round), b.map(Math.round)])));
+fs.writeFileSync(OUT + '/forest-shrine-walls.json', JSON.stringify({ walls: wallSegs.map(([a, b]) => [a.map(Math.round), b.map(Math.round)]), doors: [], lights: [] }));  // daylight: no light sources
 console.log('svg bytes', svg.length, 'trees', trees.length, 'wall segments', wallSegs.length);

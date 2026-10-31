@@ -139,7 +139,11 @@ defs.push(`
 const sh = (d, dx = 18, dy = 22, op = 0.5, b = 's6') => `<path d="${d}" transform="translate(${dx},${dy})" fill="#000" opacity="${op}" filter="url(#${b})"/>`;
 const rect = (x, y, w, h) => `M${f(x)},${f(y)}h${f(w)}v${f(h)}h${f(-w)}Z`;
 const cells = (pred) => { const d = []; for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) if (pred(x, y)) d.push(rect(x * 100, y * 100, 100, 100)); return d.join(''); };
+// Light sources for Foundry export: {x, y} in SVG units, range in squares (dim radius; bright is half), color AARRGGBB,
+// optional anim (a Foundry light animation such as 'torch' or 'pulse'; the Foundry exporter defaults to torch).
+const lights = [];
 function fire(x, y, r) {
+  lights.push({ x: Math.round(x), y: Math.round(y), range: 8, color: 'ffffa040' });
   layer('fire').push(`<g filter="url(#flame)"><path d="${blob(x, y, r, r * 0.85, 0.35, 12)}" fill="#8a1a08"/><path d="${blob(x - r * 0.05, y - r * 0.08, r * 0.75, r * 0.64, 0.35, 11)}" fill="#e2420e"/><path d="${blob(x - r * 0.08, y - r * 0.12, r * 0.5, r * 0.42, 0.35, 10)}" fill="#ff9a1f"/><path d="${blob(x - r * 0.1, y - r * 0.15, r * 0.26, r * 0.22, 0.35, 9)}" fill="#ffe27a"/></g>`);
   layer('glow').push(`<circle cx="${f(x)}" cy="${f(y)}" r="${f(r * 6)}" fill="url(#glow)"/>`);
 }
@@ -151,6 +155,7 @@ function candles(x, y, n = 3) {
   const P = layer('props');
   for (let i = 0; i < n; i++) { const cx = x + rr(-18, 18), cy = y + rr(-18, 18); P.push(`<circle cx="${f(cx)}" cy="${f(cy)}" r="7" fill="#efe6cf" stroke="${INK}" stroke-width="2"/><circle cx="${f(cx)}" cy="${f(cy)}" r="2.5" fill="#ffb347"/>`); }
   layer('glow').push(`<circle cx="${x}" cy="${y}" r="150" fill="url(#candle)"/>`);
+  lights.push({ x, y, range: 2, color: 'ffffd27a' });
 }
 function box(x, y, w, h, rot, fill, opts = {}) {
   const P = layer(opts.layer || 'props');
@@ -360,6 +365,7 @@ const wallEdges = edges.filter(([[ax, ay], [bx, by]]) => !(ay === H2 && by === H
   for (let i = 0; i < 24; i++) { const a = (i / 24) * Math.PI * 2; ring.push(`<path d="M${f(cx + Math.cos(a) * 278)},${f(cy + Math.sin(a) * 278)}l${f(Math.cos(a + 1.2) * 12)},${f(Math.sin(a + 1.2) * 12)}l${f(Math.cos(a + 2.4) * 10)},${f(Math.sin(a + 2.4) * 10)}" stroke="#e2d8ff" stroke-width="2.5" fill="none"/>`); }
   layer('arcane').push(`<g>${ring.join('')}</g>`);
   layer('glow').push(`<circle cx="${cx}" cy="${cy}" r="460" fill="url(#arcane)"/>`);
+  lights.push({ x: cx, y: cy, range: 6, color: 'ffb48cff', anim: 'pulse' });
   // pillars ring the room, leaving the middle open for movement
   for (const y of [300, 550, 800, 1000]) { column(1350, y); column(3150, y); }
   for (const x of [1700, 2800]) column(x, 1000);
@@ -517,5 +523,5 @@ const body = order.map((k) => {
 const allFloor = `<clipPath id="allFloor"><path d="${cells(isFloor)}"/></clipPath>`;
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W2}" height="${H2}" viewBox="0 0 ${W2} ${H2}"><defs>${defs.join('')}${allFloor}</defs>${body}<g>${(L.fire || []).join('')}</g><g style="mix-blend-mode:screen" opacity="0.35">${(L.arcane || []).join('')}</g></svg>`;
 fs.writeFileSync(OUT + '/palace-keep.svg', svg);
-fs.writeFileSync(OUT + '/palace-keep-walls.json', JSON.stringify({ walls: wallEdges, doors }));
+fs.writeFileSync(OUT + '/palace-keep-walls.json', JSON.stringify({ walls: wallEdges, doors, lights }));
 console.log('svg bytes', svg.length, 'wall runs', wallEdges.length);
