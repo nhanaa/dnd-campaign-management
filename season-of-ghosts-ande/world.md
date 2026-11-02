@@ -382,6 +382,29 @@ The party finished clearing monster-held downtown Willowshore and ran the "long-
 
 **Carried-forward threads:** what Yeri is, and whether Yuni exists · the ten-year pattern (the shrine, Yeri) · Kaoru's mother, gone on the same route · Iogaka and Enko · the Tan Sugi Monastery, still ahead · what returning Tan Sui Jing's heart did · the unseen giant · the rest of fall downtime · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
 
+### Session 12 (2026-10-30) — The Storm Mother (fall, the Garden Shrine night → the Mountain Shrine, 7108 IC)
+*All five PCs. XP: 48 + 48 + 48 + 56 = **200**. Four encounters; Kaoru downed once (Yeri). **The party reached level 6.** The adventure runs to level 12.*
+
+**Yeri was an elite penanggalan** (Mu-Jin's Recall Knowledge, mid-fight): a floating head trailing its lungs and entrails. By her own reckoning only days had passed and the year was **7098**, ten years ago. She dropped Kaoru in her opening turn and was killed at the Garden Shrine. On her body: a **Charm of Mental Resistance**, a bracelet stamped with the **wheel of Sangpotshi** (resistance 5 to mental), taken by Kaelen, the party's monk of that faith. **Yuni is still unaccounted for.**
+
+**The shrine blessings are permanent** — the GM confirmed they last for all of Season of Ghosts (levels 1–12):
+- **The Bridge Shrine** — +1 item bonus to Reflex saves (S11).
+- **The Garden Shrine** — +1 item bonus to Will saves. The stone lanterns burn the cottage's lavender incense for protection (Zhen's Religion); lit by Iryoku. The blue orchids under the burned oak were **lesser healing vapors**.
+- **The Mountain Shrine** — bathe in the lake and rest at the shrine. The blessing's type was not stated on the recording; Iryoku's *"we can save 340 gold on our runes"* suggests Fortitude.
+
+**On the Pilgrim's Path:**
+- **D1 "A Voice in the Fog"** — a **will-o'-wisp** lured the party with a woman's cry (*"Help me. I fell. I think I broke my leg"*), a dim lantern in the fog, and **blood-red butterflies** around it (Iryoku tied them to the red moths of S8). Killed by Kaelen.
+- **D2 "A Whisper in the Woods"** — **dozens of decayed human heads hanging by their hair** from the branches either side of the road, whispering *"We welcome you to our family"* and afterward *"join our voices and become one with Kugaptee."* A **Taunting Monk's Skull** (Foundry ability: *Behold the Promises of Kugaptee*, an emotion effect) attacked; weak to vitality; killed by Iryoku. **Kaoru looked for his mother among the heads**; they were too decayed to tell.
+- **D3 The Mountain Shrine** — **Zhi Hui's third pilgrim shrine**, a lake below a fifty-foot waterfall, set to parallel the Bridge Shrine: where river waters *"gather and linger,"* the pilgrim contemplates each life *"as something to be enjoyed."* The party climbed the escarpment rather than cross the rickety bridge. A **gondola-like rope cart** crosses the lake (Iryoku: probably another shrine beyond).
+
+**Iogaka, the Storm Mother, is dead.** Mu-Jin's Recall Knowledge: *"air, electricity, hag, human."* She came at the party at the Mountain Shrine in a thunderstorm with two **spark moths**, spoke a language none of them knew (the GM posted it to chat), and opened with Lightning Bolt. Mu-Jin killed her with Sure Strike and cold-iron Needle Darts. Her room was full of blood and dead flesh. Loot: **thurible of revelation (lesser)** (+1 Religion) and **invigorating soap** (×4, Mu-Jin). **Whether her death frees Enko is unconfirmed.**
+
+**New creatures:** penanggalan (elite) · will-o'-wisp · Taunting Monk's Skull · spark moths.
+**New locations:** **the Mountain Shrine** (third of Zhi Hui's stations) · the hanging-heads stretch of the Pilgrim's Path.
+**Resolved:** what Yeri is · Iogaka.
+
+**Carried-forward threads:** Yuni · why Yeri wore Sangpotshi's wheel · the hanging heads and Kugaptee's "family" · the red butterflies · Enko, now free? · the rope cart across the lake · the ten-year pattern · Kaoru's mother · the Tan Sugi Monastery, still ahead · what returning Tan Sui Jing's heart did · the unseen giant · the rest of fall downtime · Candora's suspicion of You So-Jin · Mama Bao's grandfather · Yami · the Consecrate ledger · who else is an "old soul" · the missing governor · Mugirou's truce · Shinzo · the wrong-gods lantern secret (S2) · "blood will rise" · the Great Willow's promise and missing friend · the Noppera-Bo Hood, still never used · Weaver's hunting-spider venom (S7) · the lumber camp storeroom's hidden trap door · Mu-Jin's Desna adoption.
+
 ---
 
 *Update after each session. Keep AP-spoiler content out until it's revealed in play.*

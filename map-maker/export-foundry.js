@@ -14,6 +14,7 @@
 // Door kinds (from the walls JSON) and what they become:
 //   normal, great -> Door, starts OPEN (the art draws them standing open)
 //   secret        -> Secret door (GM-only), closed
+//   locked        -> Door, locked (players can't open it; the GM unlocks it)
 //   portcullis    -> Door, closed, sight/light/sound pass through the bars
 // Lighting: the maps have light and dark painted in, so scenes import fully lit (global light on).
 // --dark 0.6 turns global light off and sets darkness, so only the map's light sources light it.
@@ -43,7 +44,7 @@ for (const line of chainWalls(map.walls)) {
 }
 
 // Doors.
-const DOOR = { normal: { door: 1, ds: 1 }, great: { door: 1, ds: 1 }, secret: { door: 2, ds: 0 }, portcullis: { door: 1, ds: 0, seeThrough: true } };
+const DOOR = { normal: { door: 1, ds: 1 }, great: { door: 1, ds: 1 }, secret: { door: 2, ds: 0 }, locked: { door: 1, ds: 2 }, portcullis: { door: 1, ds: 0, seeThrough: true } };
 for (const { a, b, kind } of doorSegments(map.doors)) {
   const t = DOOR[kind] ?? DOOR.normal;
   const sense = t.seeThrough ? SENSE.NONE : SENSE.NORMAL;

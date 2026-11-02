@@ -10,6 +10,7 @@ Everything here is meant to carry over to the next game Pax runs.
 | `gm-toolkit/foundry-module/` | Source for the **Pax's GM Toolkit** Foundry module (macros compendium) + `build-pack.cjs` |
 | `gm-toolkit/music/loop_tool.py` | Turns a soundtrack file into a seamless intro + loop pair of OGGs |
 | `map-maker/` | Code-drawn SVG battlemaps (exact grid, any resolution, walls JSON) for APs and homebrew when no map exists. See its README |
+| `gm-toolkit/map-catalog/` | Catalogue of the Battle Maps Collection (Matthew.W): `CATALOG.md` lists every map by place, setting and use. Visual version: `_Catalog/index.html` inside the collection folder. Art stays out of git. |
 
 ---
 

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 17 — The Prosperity Vault</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #14101a;
+  --bg-card: #211a26;
+  --bg-card-hover: #2b2232;
+  --border: #3f3348;
+  --border-bright: #584764;
+  --text: #ece5f0;
+  --text-dim: #b0a2ba;
+  --text-bright: #fbf6ff;
+  --shadow: #7a4bc0;
+  --shadow-bright: #a274e4;
+  --shadow-glow: #7a4bc030;
+  --gold: #d4a848;
+  --gold-dim: #a07830;
+  --gold-glow: #d4a84828;
+  --blood: #b03040;
+  --blood-glow: #b0304024;
+  --silver: #a8b8cc;
+  --silver-glow: #a8b8cc22;
+  --teal: #45a6b8;
+  --teal-glow: #45a6b822;
+  --ember: #d8632c;
+  --ember-glow: #d8632c22;
+  --rose: #c85f80;
+  --rose-glow: #c85f8022;
+  --jade: #50a060;
+  --jade-glow: #50a06022;
+  --azure: #4080c0;
+  --azure-glow: #4080c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #50a06014 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #7a4bc014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #2a213010 0%, transparent 60%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #50a06012 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #d4a84812 0%, transparent 50%);
+  animation: shadow-pulse 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes shadow-pulse {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '✦';
+  display: block;
+  color: var(--gold);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #d4a84818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-bright);
+  margin: 56px 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.3px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gold);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-bright);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; }
+ul { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text); }
+
+.note-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--shadow-bright);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.note-banner strong { color: var(--shadow-bright); }
+
+.composition-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.comp-seg { height: 100%; }
+.comp-combat { background: var(--blood); }
+.comp-rp { background: var(--azure); }
+.comp-explore { background: var(--jade); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.char-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.char-sevek { border-left-color: var(--silver); }
+.char-paya { border-left-color: var(--jade); }
+.char-aureys { border-left-color: var(--gold); }
+.char-mith { border-left-color: var(--shadow-bright); }
+.char-kreebnock { border-left-color: var(--teal); }
+
+.char-name { font-weight: 600; color: var(--text-bright); font-size: 15px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.char-player { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+.summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.summary p { color: var(--text); }
+
+.timeline {
+  border-left: 2px solid var(--border);
+  padding-left: 0;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.act {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.act::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.act.combat::before { background: var(--blood); border-color: var(--blood); }
+.act.rp::before { background: var(--azure); border-color: var(--azure); }
+.act.explore::before { background: var(--jade); border-color: var(--jade); }
+.act.social::before { background: var(--gold); border-color: var(--gold); }
+.act.mystery::before { background: var(--shadow); border-color: var(--shadow); }
+
+.act-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.act-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.act-card h3 { margin-top: 0; }
+
+.combat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.combat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px 20px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+.combat-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+.stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; line-height: 1.45; }
+
+.spotlight-grid { margin-bottom: 40px; }
+
+.spotlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--shadow);
+}
+
+.s-sevek { border-left-color: var(--silver); }
+.s-paya { border-left-color: var(--jade); }
+.s-aureys { border-left-color: var(--gold); }
+.s-mith { border-left-color: var(--shadow-bright); }
+.s-kreebnock { border-left-color: var(--teal); }
+
+.spotlight .lede {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loot-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.loot-item.magical { border-left: 3px solid var(--gold); }
+
+.loot-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.loot-source { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.loot-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+.xp-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.xp-banner strong { color: var(--gold); }
+
+.contrib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contrib-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.contrib-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table td:first-child { color: var(--text-bright); font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--shadow);
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+blockquote strong { color: var(--gold); font-style: normal; }
+
+.attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+.threads ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.threads li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.threads li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.cliffhanger {
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #241d16 100%);
+}
+
+.cliffhanger .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cliffhanger p { color: var(--text); margin: 12px 0; }
+
+.cliffhanger .big-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin: 16px 0;
+}
+
+.cliffhanger .speaker {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+<h1>The Prosperity Vault</h1>
+<div class="subtitle">Session 17 &middot; Revenge of the Runelords &middot; Down through the Netherworld, three Runelords in a row, and a vault built to make gold forever</div>
+<div class="meta-row">
+<span class="meta-pill">2026-10-31 &middot; Halloween</span>
+<span class="meta-pill">PF2e Remastered &middot; Mythic</span>
+<span class="meta-pill">3h 45m</span>
+<span class="meta-pill">Level 19</span>
+<span class="meta-pill">4 fights &middot; 18 kills</span>
+<span class="meta-pill">One day underground</span>
+</div>
+</header>
+
+<div class="composition-bar">
+<div class="comp-seg comp-combat" style="width:80%"></div>
+<div class="comp-seg comp-explore" style="width:8%"></div>
+<div class="comp-seg comp-rp" style="width:6%"></div>
+<div class="comp-seg comp-social" style="width:6%"></div>
+</div>
+<div class="composition-legend">
+<span><span class="legend-dot" style="background:var(--blood)"></span>Combat 80%</span>
+<span><span class="legend-dot" style="background:var(--jade)"></span>Netherworld &amp; the Vault 8%</span>
+<span><span class="legend-dot" style="background:var(--azure)"></span>Break &amp; table business 6%</span>
+<span><span class="legend-dot" style="background:var(--gold)"></span>Recap &amp; the Runelords' parley 6%</span>
+</div>
+
+<h2>Party</h2>
+<div class="party-grid">
+<div class="char-card char-sevek">
+<div class="char-name"><strong>Sevek</strong></div>
+<div class="char-class">Human (Sky Dragonblood) Monk 19 &mdash; Guardian / Staff Acrobat / Druid / Mortal Herald, Ascended Celestial</div>
+<div class="char-player">Pax</div>
+</div>
+<div class="char-card char-paya">
+<div class="char-name"><strong>Paya</strong></div>
+<div class="char-class">Leshy Fighter 19 &mdash; Medic, kineticist healing, Timeflaying Blade</div>
+<div class="char-player">Kelsie</div>
+</div>
+<div class="char-card char-aureys">
+<div class="char-name"><strong>Aureys Hollow</strong></div>
+<div class="char-class">Fey Dragonet Rogue (Scoundrel) 19 &mdash; fighting fan + claws, Draconic Acolyte, Living Nexus, Eternal Legend</div>
+<div class="char-player">Anna</div>
+</div>
+<div class="char-card char-mith">
+<div class="char-name"><strong>Mithtirith</strong></div>
+<div class="char-class">Elf Cleric of Nethys 19 &mdash; Hedge Mage, Staff of Healing (True)</div>
+<div class="char-player">Jesse</div>
+</div>
+<div class="char-card char-kreebnock">
+<div class="char-name"><strong>Kreebnock</strong></div>
+<div class="char-class">Gnome Psychic 19 &mdash; Bard archetype, Unleash Psyche, Sorshen's Scintillating Garment</div>
+<div class="char-player">"Arrakis"</div>
+</div>
+</div>
+<div class="note-banner">DM: Cody McGraw ("Ryu" in Foundry)<br><br><strong>Mithtirith's Forge wouldn't load at the start</strong>, so Cody ran him for the first round of the Urveth fight (a 9th-rank Heal on Kreebnock for 121). He was back by round two.</div>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>The plan from last week held. At the base of <strong>Spindlehorn</strong>, an enormous needle-like tower that <em>"almost seems to sway in the breeze"</em> (<em>"You'll be climbing up there later"</em>), <strong>Kreebnock</strong> read the party's <strong>Umbral Journey</strong> scroll and the world went grey. In the <strong>Netherworld</strong> the Storval Deep was a graveyard of ash and bone, and an iron gate swung in perfect silence over a bottomless pit. Down a staircase thousands of feet deep, three <strong>Urveth</strong> (gargantuan flying undead worms with human arms) came up out of the dark. One caught Aureys in its jaws on a natural 20 and held her there through a failed Escape and a Mythic Point reroll that came up a natural 1, until <strong>Sevek Shoved it off her</strong>. <strong>Paya killed all three</strong>, each on a Timeflaying Blade crit.</p>
+<p>At the bottom the party stepped back into the Material Plane, inside the buried <strong>Prosperity Vault</strong>, and the room's guardians manifested: eight wolf-headed <strong>Adamantine Sentinels</strong>. It was a six-round brawl. Kreebnock hasted the party, Aureys and Sevek both opened with <strong>Majestic Presence</strong>, and Paya's hasted <strong>Whirlwind Strike</strong> landed four crits in one turn, then took the most punishment at the table and <strong>went down</strong> before Kreebnock's Soothe brought him back. Aureys killed three, Paya two, and Sevek, Kreebnock and Mithtirith one each; Cody: <em>"You overkilled 90% of them."</em></p>
+<p>After the break, a stairwell down, and three people waiting: <strong>Risen Runelord Aethusa</strong> of Gluttony, <strong>Jurah</strong> of Envy, and <strong>Alaznist</strong> of Wrath with her fiery ranseur (<em>"No further. Your little dungeon delve ends here."</em>). Aureys answered for the party: <strong><em>"Well, I am Aureys Hollow, greatest dragon of Golarion. You could surrender if you like."</em></strong> Sevek's <strong>Celestial Armaments</strong> crit blinded Aethusa for four rounds, she spent her <strong>Undying Myth</strong> on a Paya crit, and <strong>Aureys</strong> finished her. Paya's Reactive Strike crit Jurah mid-Haste, and the spell never took hold; then <strong>Alaznist killed her own ally</strong> with an Arctic Rift he critically failed (Kreebnock: <em>"Your lack of faith disturbs her"</em>). Kreebnock <strong>Nullified</strong> her Eclipse Burst, Aureys forced her Undying Myth and survived her answer at 23 HP, and <strong>Paya</strong>, sent in by Mithtirith (<em>"Let me send in someone much better than me at killing people"</em>) and a Kreebnock Message, struck the blow that made her <em>"vanish into light."</em></p>
+<p>Deeper in, the vault itself: black statues of a gold-eyed man, claw-gouged tunnels, and a plug of solid gold blocking the way north (Mithtirith: <em>"That seems inflationary"</em>). Four <strong>Goldgorgers</strong>, elementals of whirling gold, burst out of the walls. Sevek's <strong>Glory on High</strong> blinded all three in range, and <strong>not one of their melee hits got through</strong> the flat checks after that. Paya killed two, Kreebnock's Daze a third, and Aureys's Opportune Backstab the last. They fell to piles of gold shards, and Aureys started picking them up. No game next week; <strong>the penultimate session is November 14.</strong></p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+<div class="act explore">
+<div class="act-label">Act I &middot; Exploration &middot; Spindlehorn and the Netherworld (0:00–0:08)</div>
+<div class="act-card">
+<h3>A swaying tower, a grey world, and a pit with an iron gate</h3>
+<ul>
+<li><strong>Cody's recap</strong>: Sorshen and <strong>Xanderghul</strong> are fighting in <strong>Jandelay</strong>. The way there is the <strong>Oliphaunt of Jandelay</strong>, which Gimmel summoned at Spindlehorn and which left an <strong>apocalypse seed</strong> in the <strong>Prosperity Vault</strong>, the original Runelord of Greed's attempt <em>"to turn rock and mud into an endless supply of gold."</em> Take the seed, repeat the ritual, <em>"and ride it back to Jandelay."</em></li>
+<li><strong>Spindlehorn</strong>: an enormous needle-like tower hundreds of feet high. <em>"You'll be climbing up there later. But for now, your objective rests with its base."</em></li>
+<li><strong>Kreebnock</strong> organised the crossing (<em>"Everybody ready?"</em> / <em>"Where's the scroll? Is it in the stash?"</em>), took the <strong>Umbral Journey</strong> scroll and read it while Mithtirith fought Forge.</li>
+<li><strong>The Netherworld</strong>: a low grey sky <em>"like a ceiling covering the world,"</em> the <strong>Storval Deep</strong> drained to <em>"a graveyard of ash and soot and bone,"</em> and an <strong>iron gate at the mouth of a pit</strong>, swinging <em>"in perfect, slow silence."</em></li>
+<li>Down a winding staircase thousands of feet into the earth. Sevek prepped <strong>Life Connection</strong> and <strong>Lucky Number</strong>.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act II &middot; Combat &middot; The Urveth (0:08–0:50)</div>
+<div class="act-card">
+<h3>Three worms with human arms, and a dragon in a mouth</h3>
+<ul>
+<li>Three gargantuan worm-things rose out of the pit and opened with three <strong>Eclipse Bursts</strong>. Sevek: <strong><em>"I feel like we're in a war zone. It's just being bombarded."</em></strong></li>
+<li><strong>Paya found their Reactive Strike the old way</strong> (Cody: <em>"This is Paya's best recall knowledge skill"</em>): <em>"It's been my joke ever since the pit."</em> Sevek reminded him he had a quickened Strike; Paya: <em>"it shouldn't be up to Sevek to remember that for me, but I do appreciate it."</em> On Kreebnock's amped Message: <em>"This is really cool."</em></li>
+<li><strong>Aureys in the jaws.</strong> Urveth C crit her on a natural 20 and critically grabbed her: Restrained. Her Escape failed by two; her <strong>Mythic Point reroll came up a natural 1</strong>. <em>"I'm dying!"</em> Paya: <em>"It's definitely feeling indigestion now."</em></li>
+<li><strong>Sevek got her out.</strong> He asked whether a Shove would break the hold (<em>"technically yes"</em>), then Flurry of Maneuvers: <strong>Shove</strong> — Aureys free — and <strong>Trip</strong>. <em>"That's how you know I never shove."</em> When C stood, <strong>Stand Still crit it for 120</strong>.</li>
+<li><strong>Mithtirith</strong> escaped his own grab on Acrobatics, checked for Reactive Strike, and healed with <strong>subtle (Humble) spells</strong> (Paya: <em>"It's a really cool use of spell shape"</em>).</li>
+<li><strong>Kreebnock's Containment</strong> bought Mithtirith room; an Urveth crit him for 94; his amped <strong>Imaginary Weapon</strong> crit back for <strong>194</strong>.</li>
+<li><strong>Paya killed all three</strong>, C on a natural 20 at MAP −10 after two Aureys backstabs. Aureys: <strong><em>"I knew you could do it, pie-ass-hole."</em></strong></li>
+<li>After: Kreebnock: <em>"Dragon's greatest fear of being eaten alive."</em> Paya refocused on <em>"A handful of raisins."</em> <strong>Energy Aegis</strong> for all; <strong>Contingency</strong> recast.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act III &middot; Combat &middot; The Adamantine Sentinels (0:53–1:54)</div>
+<div class="act-card">
+<h3>Eight wolf-headed guardians, four crits in one turn</h3>
+<ul>
+<li>Back on the Material Plane, inside the Vault: mosaics, black marble statues of men with <strong>wolf skulls</strong> for heads. <em>"This room's own guardians manifest."</em> Kreebnock: <strong><em>"That's cool. I want one of those."</em></strong> Paya, headbutted: <em>"Paya will headbutt it back… armor clanging on armor."</em></li>
+<li><strong>Haste</strong> on the party from Kreebnock. <strong>Majestic Presence</strong> from Aureys, then Sevek: <strong><em>"I'll take a page out of Aureys and also use Majestic Presence"</em></strong> (seven targets, two critical failures).</li>
+<li>⭐ <strong>Paya's hasted Whirlwind Strike: four crits, Sentinel F dead.</strong> <em>"I wouldn't have been able to do it without you."</em> Kreebnock: <em>"That's what I'm here for."</em> Paya: <strong><em>"Four crits. Not all I do. That is the total of what I do."</em></strong></li>
+<li><strong>Paya went down</strong> in round three, circled by Sentinels (dying 1). <strong>Kreebnock's Soothe</strong> brought him back. He took 471, the most at the table.</li>
+<li><strong>Kreebnock</strong>: Force Rain for 160 on a critical failure; an oversized-helmet <strong>Imaginary Weapon crit for 198</strong> that destroyed A. Paya: <strong><em>"Turnabout is fair play."</em></strong></li>
+<li><strong>Mithtirith's Divine Wrath</strong>: three critical failures, no damage (<em>"They're golems, basically"</em> — <strong><em>"Oh, I deserve that one"</em></strong>). He asked if vitality would heal constructs; Paya: <em>"I think you're good to do a three-action heal."</em> 58 to all five.</li>
+<li><strong>Sevek killed Sentinel H</strong> (Stand Still crit for 82, then a Flurry crit); Electric Arc on four turns; Rippling Spin trips on B and C. <strong>Aureys killed three</strong>: <em>"Come on, big boy, don't be afraid of me."</em></li>
+<li><em>"Bring us home, Mithtirith."</em> <strong>Tempest Surge finished the last one.</strong> Paya: <strong><em>"Overkill is fun. I have learned that from these creatures."</em></strong></li>
+</ul>
+</div>
+</div>
+
+<div class="act social">
+<div class="act-label">Act IV &middot; Parley &middot; Three Runelords (2:09–2:16)</div>
+<div class="act-card">
+<h3>"Your little dungeon delve ends here"</h3>
+<ul>
+<li>After the break, Paya's healing round; no loot on the Sentinels. <strong>Aureys scouted the stair</strong>: no traps, <em>"but there are people waiting for you."</em></li>
+<li>Kreebnock: <em>"Maybe they're friendly."</em> Paya: <em>"I'm gonna bet they're not friendly, but I do appreciate the optimism, Kreebnock."</em></li>
+<li>A ruined room, a hole dug in the floor, and <strong>three Risen Runelords</strong>: <strong>Aethusa</strong> (Gluttony), <strong>Jurah</strong> (Envy), and <strong>Alaznist</strong> (Wrath), <em>"fiery ranseur brandished, hand crackling with fiery energy."</em></li>
+<li><strong>Alaznist</strong>: <em>"No further. Your little dungeon delve ends here."</em> <strong>Aureys</strong>: <strong><em>"Well, I am Aureys Hollow, greatest dragon of Golarion. You could surrender if you like."</em></strong></li>
+<li>Alaznist: <em>"You should have surrendered this folly a long time ago, and now you'll pay the price for it."</em> Kreebnock: <em>"We're nowhere near done. We're definitely not stopping here."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act V &middot; Combat &middot; The Risen Runelords (2:16–3:09)</div>
+<div class="act-card">
+<h3>Three Runelords, one of them killed by her own side</h3>
+<ul>
+<li><strong>Paya's Flay Time</strong> slowed Aethusa on her critical success. <strong>Pierce the Sky</strong> crit Mithtirith for 108; Paya pointed out it deals half on a miss, <strong>against himself</strong>. Cody: <em>"I've been using this spell and just not caught that."</em></li>
+<li>Sevek, newly unmuted (<em>"I was muted the whole time. Oh my god"</em>): <strong>Herald's Weapon</strong>, 161 on Aethusa, and <strong><em>"So that actually fails because my class DC is 41."</em></strong> <strong>Blinded four rounds.</strong> Her next Eclipse Burst caught Jurah and herself.</li>
+<li><strong>Aureys killed Aethusa</strong> after her Undying Myth. Paya's Reactive Strike crit Jurah mid-Haste, and it never took hold.</li>
+<li>Cody: <strong><em>"If I hadn't played with you for as long as I have, I'd be looking for your dice rolls because this is some bullshit."</em></strong> Mithtirith: <strong><em>"I have a confession to make. I gave you all my criticals."</em></strong> Paya: <em>"If I have to play a Technomancer in Starfinder, that is a price I will willingly pay."</em></li>
+<li>Aureys to Jurah: <em>"I used to look up to Runelords…"</em> — failed — <strong><em>"You were right. I was wrong. Can we make up, sweetie?"</em></strong></li>
+<li><strong>Alaznist's Arctic Rift killed Jurah.</strong> Mithtirith: <strong><em>"So this is like Darth Vader striking you down for failing?"</em></strong> Kreebnock: <strong><em>"Your lack of faith disturbs her."</em></strong></li>
+<li>Kreebnock: <em>"Wait, are you a monk?"</em> Sevek: <strong><em>"How did you know? I tried so hard to hide it."</em></strong> Three MAP −10 Strikes, then: <strong><em>"Be yourself. Don't be like me."</em></strong> Kreebnock <strong>Nullified</strong> her Eclipse Burst (35 HP of feedback).</li>
+<li>Aureys forced Alaznist's Undying Myth and ate her answer to 23 HP. Sevek: <em>"I'll avenge you, Aureys."</em> — <strong><em>"I won't be avenged. That sounds like I'm dead."</em></strong></li>
+<li>Mithtirith: <strong><em>"Let me send in someone much better than me at killing people."</em></strong> Guidance, Vicious Swing, Kreebnock's Message: <strong>Alaznist vanished into light.</strong> Aureys: <em>"That was a lot of recently not dead runelords."</em> Mithtirith: <em>"I feel like I'm coming in at the end of Highlander."</em></li>
+</ul>
+</div>
+</div>
+
+<div class="act mystery">
+<div class="act-label">Act VI &middot; Exploration &middot; The Vault Proper (3:10–3:15)</div>
+<div class="act-card">
+<h3>A place made to generate endless gold</h3>
+<ul>
+<li>Four black statues of a man with <strong>gold eyes and gold hands</strong> (welcoming, stern, observant, triumphant), burrowed tunnels, and <strong>an immense plug of solid gold</strong> to the north. <strong>Aureys's eyes bugged out.</strong> Mithtirith: <strong><em>"That seems inflationary."</em></strong></li>
+<li>No traps; the tunnels were <em>"gouged out by claws or teeth"</em> (Kreebnock: <em>"Oh, those worms"</em>; Aureys: <em>"Or the Oliphaunt"</em>).</li>
+<li>Aureys asked what a Runelord of Greed casts; Paya: <em>"The general school is transmutation, hence the turning into gold."</em></li>
+<li>She tested the plug: <em>"Completely airtight."</em> Mithtirith: <strong><em>"I don't suppose this means you have to give Sorshen back all of her stuff to make room."</em></strong> Aureys: <em>"I could, you know. It looks like it's heavier than ten [Bulk], though."</em></li>
+<li>Paya picked the way north through the tunnels.</li>
+</ul>
+</div>
+</div>
+
+<div class="act combat">
+<div class="act-label">Act VII &middot; Combat &middot; The Goldgorgers (3:15–3:42)</div>
+<div class="act-card">
+<h3>Creatures after Aureys's own heart</h3>
+<ul>
+<li>Chewing <em>"like machinery or an excavator,"</em> then <em>"whirling shards of elemental energy infused with solid gold."</em> Aureys: <strong><em>"There are creatures after my own heart."</em></strong> Paya: <em>"They would steal from Runelord Sorshen… I mean, they might just eat it, to be fair."</em></li>
+<li>Sevek: <em>"I'll take the initiative from the lesson I learned from Aureys"</em> — Majestic Presence, a natural-20 crit on C. Three Searing Spews into him.</li>
+<li>⭐ <strong>Glory on High</strong>: fail, critical failure, fail — all three blinded. <strong>No Goldgorger melee hit got through after that.</strong> Cody: <em>"Blinded saved quite a bit."</em></li>
+<li>Aureys to the blind one: <strong><em>"So sorry you can't see my magnificence, but, you know, it's okay. You're still awesome."</em></strong></li>
+<li>Kreebnock: <strong><em>"Kreebnock will spit into either palm as he summons Giant Mining Pick. Starts digging for gold."</em></strong> His Daze killed D.</li>
+<li>Sevek: <em>"I'll focus on Gold Roger A."</em> Paya killed C and B; <strong>Aureys's Opportune Backstab</strong> the last. <strong>Piles of gold shards</strong>, and Aureys started picking them up.</li>
+</ul>
+</div>
+</div>
+
+<div class="act rp">
+<div class="act-label">Table &middot; Business (3:42–3:44)</div>
+<div class="act-card">
+<h3>Two more sessions</h3>
+<ul>
+<li><strong>No game next week</strong> (three players out). <strong>The penultimate session is November 14.</strong></li>
+<li>Paya: <em>"Sevek, you said Gold Roger A, and it's stuck in my brain ever since. As someone who's getting a One Piece tattoo next week, it's very funny."</em></li>
+<li>Cody, with a third of the manga on his shelf, wants the anime remade for pacing.</li>
+<li>Happy Halloween.</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+<div class="combat-box">
+<div class="combat-meta">Encounter 1 &middot; 1:14 PM – 1:56 PM &middot; 5 rounds</div>
+<h3>The Urveth</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Urveth A, B, C</strong> &mdash; gargantuan flying undead worms with human arms, run Elite: 480 HP, AC 42, Fort +34 / Ref +31 / Will +36; Jaws +38 (reach 15, Improved Grab), Claws, Stinger, <strong>Frenzy</strong>, <strong>Eclipse Burst</strong> (rank 7, DC 42 Reflex); Reactive Strike; resistance cold 15, <strong>weakness silver 15 and holy 15</strong>. Swallow Whole on the block, never used.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Aureys 54 (delayed until after B) &middot; Urveth B 52 &middot; Paya 51 &middot; Kreebnock 47 &middot; Sevek 43 &middot; Urveth A 39 &middot; Urveth C 39 (delayed to after A) &middot; Mithtirith 35 (Cody ran him in round 1)</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">B, C, A &mdash; <strong>Paya</strong> (all on Timeflaying Blade crits; C on a natural 20 at MAP −10)</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Urveth B</strong>: <strong>Eclipse Burst</strong>: Kreebnock 78, Sevek 78, Paya 68, Mithtirith 24; Aureys critically succeeds.</li>
+<li><strong>Aureys</strong>: <strong>Legend of Combat</strong> (Mythic Point); two Strides, the second kept to 15 ft.</li>
+<li><strong>Paya</strong>: <strong>Sudden Charge</strong>; B's Reactive Strike bites him (31) (Cody: <em>"This is Paya's best recall knowledge skill"</em>). <strong>Crit on B (92)</strong>; quickened Strike after Sevek's reminder, hit (44).</li>
+<li><strong>Kreebnock</strong>: <strong>amped Message to Paya: reaction Strike, crit on B (102)</strong>. Courageous Anthem.</li>
+<li><strong>Sevek</strong>: stance; <strong>Inner Upheaval Flurry on B</strong>: hit, hit (115, silver weakness included).</li>
+<li><strong>Urveth A</strong>: <strong>Eclipse Burst</strong>: Sevek's <strong>Prevailing Position</strong> for a success (32); Kreebnock 32, Mithtirith 49; Paya critically succeeds.</li>
+<li><strong>Urveth C</strong>: <strong>Eclipse Burst</strong>: Sevek 33, Kreebnock 33, Mithtirith 18. Sevek: <em>"I feel like we're in a war zone."</em></li>
+<li><strong>Mithtirith</strong> (Cody): <strong>Heal, rank 9, on Kreebnock (121)</strong>.</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Urveth B</strong>: Frenzy: claw misses Paya; <strong>natural-20 claw crit on Sevek (82)</strong>; stinger misses.</li>
+<li><strong>Aureys</strong>: Speed of Arms Stride; <strong>Feint on B</strong> (<em>"You're so big and you've got a beautiful smile"</em>); Overwhelming Combination: fan hits (29); Quickstrike misses.</li>
+<li><strong>Paya</strong>: <strong>Ocean's Balm on Sevek (47)</strong>. Step. <strong>Crit on B (98): Urveth B destroyed.</strong> Ocean's Balm on himself (49).</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, Anthem, <strong>Restore the Mind on Mithtirith (40)</strong>.</li>
+<li><strong>Sevek</strong>: back into stance; <strong>Scroll of Heal on himself (104)</strong>.</li>
+<li><strong>Urveth A</strong>: flies in; jaws on Mithtirith (32): <strong>grabbed</strong>.</li>
+<li><strong>Urveth C</strong>: flies in; <strong>jaws on Aureys, natural 20, crit (113); critical Grapple: Restrained</strong> in its jaws.</li>
+<li><strong>Mithtirith</strong> (Jesse back): <strong>Escapes on Acrobatics (48)</strong>. <strong>Humble Spell + Heal</strong> on himself (35), subtle, so no Reactive Strike.</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Aureys</strong> (Restrained): Majestic Presence on C: critical success, no effect. Escape fails (45 vs 47); <strong>Mythic Point reroll: natural 1, critical failure</strong> (<em>"I'm dying!"</em>). Demoralize fails.</li>
+<li><strong>Paya</strong>: <strong>Needle in the Gods' Eyes</strong>; C's Reactive Strike misses. C: hit (48), hit (41); MAP −10 misses.</li>
+<li><strong>Kreebnock</strong>: <strong>Containment on A</strong> (A saves, so it is a 10-HP field).</li>
+<li><strong>Sevek</strong>: <strong>Flurry of Maneuvers on C</strong>: <strong>Shove &mdash; Aureys is free</strong> (Cody: <em>"technically yes"</em>); <strong>Trip: C prone</strong>.</li>
+<li><strong>Urveth A</strong>: bites through the Containment; <strong>natural-20 claw crit on Kreebnock (94)</strong>; Instinctive Obfuscation's flat check fails.</li>
+<li><strong>Urveth C</strong> (prone): jaws misses Sevek; it Stands, and <strong>Sevek's Stand Still crits it (120)</strong>.</li>
+<li><strong>Mithtirith</strong>: Heal on Kreebnock (77; 6 to himself).</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Aureys</strong>: Speed of Arms Stride; <strong>Distracting Feint on C</strong>; <strong>Aether Beam through A and C</strong> (28 each); quickened fan on C (35).</li>
+<li><strong>Paya</strong>: C: hit (57) + <strong>Aureys's Opportune Backstab</strong> (40); hit (50) + <strong>a second Backstab</strong> (36); MAP −10, <strong>natural 20, crit (114): Urveth C destroyed.</strong> Aureys: <strong><em>"I knew you could do it, pie-ass-hole."</em></strong></li>
+<li><strong>Kreebnock</strong>: <strong>amped Imaginary Weapon</strong> (A's Reactive Strike: natural 1) <strong>crits A for 194.</strong> Anthem.</li>
+<li><strong>Sevek</strong>: Tumble Through A; Flurry: a natural 2 raised to 10 by <strong>Perfected Form</strong>, hit (67); miss. <strong>Taunt.</strong></li>
+<li><strong>Urveth A</strong>: jaws misses Sevek; Frenzy: claw hits Kreebnock (49); stinger critically misses Mithtirith.</li>
+<li><strong>Mithtirith</strong>: <strong>Frostbite on A: 16 after cold resistance</strong> (Foundry first aimed it at him; reverted).</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Aureys</strong>: <strong>Majestic Presence: A rolls a natural 1, frightened 4.</strong></li>
+<li><strong>Paya</strong>: <strong>Sudden Charge</strong> (A's Reactive Strike: natural 1). Hit (54); MAP −5 <strong>crit (126): Urveth A destroyed.</strong></li>
+</ul>
+<p style="color:var(--gold)"><strong>After</strong>: Paya's Refocus (69 to everyone) and Dash of Herbs (48); Aureys's Summon Mythic Power; Energy Aegis and Contingency from Mithtirith.</p>
+</div>
+<div class="combat-box">
+<div class="combat-meta">Encounter 2 &middot; 2:00 PM – 2:59 PM &middot; 6 rounds</div>
+<h3>The Adamantine Sentinels</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Adamantine Sentinels A–H</strong> &mdash; wolf-headed constructs; 300 HP each, AC 39, Perception +29, all saves +27; Headbutt +34 (3d12+22), Claw +35 agile (3d10+20), Electrical Bolt +33 at range. No Reactive Strike. Divine Wrath did nothing.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Sentinel G 47 &middot; Paya 44 &middot; Aureys 43 (Battle Cry) &middot; A 42 &middot; H 40 &middot; B 39 &middot; Kreebnock 39 (Prescience) &middot; E 38 &middot; Mithtirith 34 &middot; F 34 &middot; Sevek 33 &middot; C 32 &middot; D 32</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">E, F &mdash; <strong>Paya</strong> &middot; G, D, C &mdash; <strong>Aureys</strong> &middot; H &mdash; <strong>Sevek</strong> &middot; A &mdash; <strong>Kreebnock</strong> &middot; B &mdash; <strong>Mithtirith</strong></span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Sentinel G</strong>: Paya, miss, hit (40).</li>
+<li><strong>Paya</strong>: Vicious Swing on G (40); hit (43); natural 1.</li>
+<li><strong>Aureys</strong>: <strong>Majestic Presence &mdash; E critically fails (frightened 4)</strong>, F and G frightened 2. Feint on E (critical success). <strong>Overwhelming Combination on E: two crits (134).</strong></li>
+<li><strong>Sentinel A</strong>: Sevek's Stand Still misses. <strong>Crit on Mithtirith (86).</strong></li>
+<li><strong>Sentinel H</strong>: Kreebnock, hit (39; Unexpected Shift critically fails), hit (46).</li>
+<li><strong>Sentinel B</strong>: Mithtirith, hit (39), miss.</li>
+<li><strong>Kreebnock</strong>: <strong>Haste on the party.</strong></li>
+<li><strong>Sentinel E</strong>: two misses at Aureys. <strong>Cunning Dodge</strong>: she steps and Strikes (14).</li>
+<li><strong>Mithtirith</strong>: Heal on himself (109). A halberd swing Foundry aimed at himself; it missed.</li>
+<li><strong>Sentinel F</strong>: <strong>natural-20 crit on Aureys (64)</strong>, hit (19).</li>
+<li><strong>Sevek</strong>: stances. <strong>Majestic Presence on seven: D and F critically fail (frightened 4).</strong> Flurry on F (78).</li>
+<li><strong>Sentinel C</strong>: Sevek's Stand Still misses; two critical misses at Sevek.</li>
+<li><strong>Sentinel D</strong>: Sevek, miss, then a <strong>natural 20, "crit by zero" (76).</strong></li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Sentinel G</strong>: Paya, hit (35), <strong>natural-20 crit (67).</strong></li>
+<li><strong>Paya</strong>: Needle in the Gods' Eyes on E: <strong>crit (73)</strong>; Aureys's backstab (10); <strong>crit (69): Sentinel E destroyed.</strong> MAP −10 on D (35).</li>
+<li><strong>Aureys</strong>: Feint on F. Overwhelming Combination on F (93).</li>
+<li><strong>Sentinels A, H, B</strong>: A misses Sevek three times; H hits Paya (32); B misses Mithtirith twice.</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche. <strong>Force Rain: A critically fails (160)</strong>, D fails (80), C succeeds (40). Restore the Mind on Paya (40).</li>
+<li><strong>Mithtirith</strong>: <strong>Divine Wrath: three critical failures, no damage.</strong> <strong><em>"Oh, I deserve that one."</em></strong></li>
+<li><strong>Sevek</strong>: <strong>Electric Arc</strong>: F critically fails (48), A 24. Flurry on F: hit (44), miss.</li>
+<li><strong>Sentinels F, C, D</strong>: F and C miss Sevek four times; D hits Paya (46), then two critical misses.</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Sentinel G</strong>: Paya, hit (36), miss.</li>
+<li><strong>Paya</strong>: hasted Stride, ⭐ <strong>Whirlwind Strike &mdash; four crits: D (87), H (95), G (95), and F: Sentinel F destroyed.</strong></li>
+<li><strong>Aureys</strong>: Feint on G. <strong>Frightening Power</strong>. <strong>Overwhelming Combination on G (97).</strong></li>
+<li><strong>Sentinel H</strong>: Paya, hit (44 → <strong>25, Deflecting Wave</strong>), two misses.</li>
+<li><strong>Sentinel B</strong>: Sevek, miss, hit (44). <strong>Rippling Spin: Trip, B prone.</strong></li>
+<li><strong>Kreebnock</strong>: Restore the Mind on Paya (40). <strong>Shadow Blast</strong> (the save didn't automate; he added Unleash Psyche's +12 by hand): <strong>H fails (44)</strong>, D rolls a natural 20.</li>
+<li><strong>Mithtirith</strong>: Tempest Surge on A (27). Recall Knowledge fails.</li>
+<li><strong>Sevek</strong>: Electric Arc: B 32, C 16. <strong>Inner Upheaval</strong> Flurry on prone B: hit, hit (110).</li>
+<li><strong>Sentinel C</strong>: Paya, hit (33), hit (33).</li>
+<li><strong>Sentinel D</strong>: Paya, miss, <strong>hit (31): Paya is down, dying 1.</strong> Electrical Bolt at Sevek: critical miss.</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Sentinel G</strong>: Aureys, miss, hit (27).</li>
+<li><strong>Aureys</strong>: Overwhelming Combination on G: <strong>crit, Sentinel G destroyed.</strong></li>
+<li><strong>Sentinel A</strong>: Kreebnock, hit (43; Unexpected Shift critically fails again), miss.</li>
+<li><strong>Sentinel H</strong>: strides in. ⭐ <strong>Sevek's Stand Still crit (82)</strong>: clumsy 2, enfeebled 2, deafened. H critically misses Sevek.</li>
+<li><strong>Sentinel B</strong>: stands; misses Sevek.</li>
+<li><strong>Kreebnock</strong>: <strong>Soothe on Paya (53): Paya is back up</strong>, wounded 1.</li>
+<li><strong>Mithtirith</strong>: three-action <strong>Heal, 58 to all five.</strong></li>
+<li><strong>Sevek</strong>: Electric Arc: A 18, H 18. ⭐ <strong>Flurry: crit on H: Sentinel H destroyed</strong>; hit on A (42).</li>
+<li><strong>Sentinel C</strong>: Sevek, hit (48). <strong>Rippling Spin: Trip, critical success by 19, C prone.</strong></li>
+<li><strong>Paya</strong>: stands. Needle in the Gods' Eyes: D (25) with Aureys's backstab crit (21); C (38). MAP −10 on D (26).</li>
+<li><strong>Sentinel D</strong>: two misses at Paya.</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Aureys</strong>: Overwhelming Combination on D: <strong>crit, Sentinel D destroyed.</strong> Distracting Feint on C (<em>"hey, don't leave me out of your party. You're too cool for that!"</em>); hit (14).</li>
+<li><strong>Sentinels A, B</strong>: A hits Kreebnock (42); B misses Sevek three times.</li>
+<li><strong>Kreebnock</strong>: Emotional Surge. ⭐ <strong>Imaginary Weapon</strong>, an oversized helmet to the face: <strong>crit, Sentinel A destroyed.</strong> Paya: <strong><em>"Turnabout is fair play."</em></strong></li>
+<li><strong>Mithtirith</strong>: Tempest Surge on B (23). Healer's Gloves on Paya (30).</li>
+<li><strong>Sevek</strong>: Electric Arc: B 29, C 29. Flurry on C: hit, hit (76); Aureys's backstab (16).</li>
+<li><strong>Sentinel C</strong>: two misses at Aureys.</li>
+<li><strong>Paya</strong>: hasted <strong>Whirlwind Strike: crit on B (69), crit on C (63).</strong></li>
+</ul>
+<h4>Round 6</h4>
+<ul>
+<li><strong>Aureys</strong>: Feint on B. <strong>Aether Beam: Sentinel C destroyed</strong>; B 26.</li>
+<li><strong>Sentinel B</strong>: Paya, hit (45 → <strong>26, Deflecting Wave</strong>), hit (33), hit (39). Persistent fire leaves it at 2 HP.</li>
+<li><strong>Kreebnock</strong>: Imaginary Weapon misses by 1. <em>"Bring us home, Mithtirith."</em></li>
+<li><strong>Mithtirith</strong>: <strong>Tempest Surge: Sentinel B destroyed.</strong></li>
+</ul>
+<p style="color:var(--gold)"><strong>After</strong>: Paya ended at 43/293, wounded 1, after taking 471. Cody: <em>"You overkilled 90% of them."</em> Then the break.</p>
+</div>
+<div class="combat-box">
+<div class="combat-meta">Encounter 3 &middot; 3:18 PM – 4:12 PM &middot; 6 rounds</div>
+<h3>The Risen Runelords</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Risen Runelord Aethusa</strong> (Gluttony; 475 HP, AC 43; Desiccate, Eclipse Burst, Howling Blizzard, Quickened Casting), <strong>Risen Runelord Jurah</strong> (Envy; 475 HP, AC 43; polearm, Phantasmagoria, Haste), <strong>Risen Runelord Alaznist</strong> (Wrath; 550 HP, AC 47; ranseur, <strong>Reactive Strike</strong>, Pierce the Sky, Fireball, Cataclysm, Arctic Rift, Eclipse Burst). Each with <strong>Undying Myth</strong> (spend all Mythic Points → back to half HP, once).</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Mithtirith 51 &middot; Paya 51 &middot; Aethusa 47 &middot; Aureys 47 (Battle Cry; delayed until after Kreebnock) &middot; Kreebnock 46 (Prescience) &middot; Alaznist 40 &middot; Sevek 38 &middot; Jurah 36</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">Aethusa &mdash; <strong>Aureys</strong> &middot; Jurah &mdash; <strong>Alaznist</strong> (Arctic Rift, critical failure) &middot; Alaznist &mdash; <strong>Paya</strong> (Message reaction Strike)</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free, Battle Cry): Demoralize on Aethusa, frightened 1.</li>
+<li><strong>Mithtirith</strong>: Spirit Blast on Aethusa (27).</li>
+<li><strong>Paya</strong>: Needle in the Gods' Eyes on Aethusa: miss, hit (44). <strong>Flay Time</strong> (Mythic Point): she critically succeeds and is <strong>slowed 1</strong> anyway.</li>
+<li><strong>Aethusa</strong>: <strong>Desiccate</strong>: Kreebnock 46, Mithtirith 20, Paya 20; Sevek critically succeeds; Aureys's reaction turns her failure into a critical success.</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem, <strong>Haste on the party</strong>.</li>
+<li><strong>Aureys</strong>: Channel Draconic Essence, <strong>Legend of Combat</strong> (Mythic Point), Overwhelming Combination on Aethusa (37).</li>
+<li><strong>Alaznist</strong>: <strong>Pierce the Sky</strong>: misses Paya, <strong>natural-20 crit on Mithtirith (108, deafened)</strong>, misses Sevek. Paya points out it still deals half on a miss and takes 8; Sevek takes 5. <strong>Quickened Fireball</strong>: Paya 43, Sevek 38, Mithtirith 21.</li>
+<li><strong>Sevek</strong> (<em>"I was muted the whole time"</em>): stances, <strong>Herald's Weapon</strong>, Flurry on Aethusa: <strong>crit + hit (161)</strong>. <strong>Celestial Armaments</strong>: Foundry rolled against 39; <em>"my class DC is 41"</em>. Her 39 fails: <strong>blinded 4 rounds</strong>. <strong>Aureys's Opportune Backstab crits (88).</strong></li>
+<li><strong>Jurah</strong>: <strong>Phantasmagoria</strong>: Paya 26; Mithtirith, Sevek and Aureys critically succeed; <strong>Kreebnock is immune</strong> (Sorshen's garment).</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Mithtirith</strong>: Heal on himself (104), Shield.</li>
+<li><strong>Paya</strong>: hit on Aethusa (50). Needle: <strong>crit, which forces Aethusa's Undying Myth</strong>, then a hit (40).</li>
+<li><strong>Aethusa</strong> (blind): <strong>Eclipse Burst</strong> catches Jurah (23) and herself (23); Paya 33, Kreebnock 13. <strong>Quickened Howling Blizzard</strong>: Kreebnock 8, Mithtirith 3, Sevek 3.</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, <strong>Restore the Mind</strong> on Paya (40). <strong>Weight of the World</strong> on Alaznist: <strong>stunned 1</strong>, dazzled, bleed. <strong>Razzle-Dazzle</strong>.</li>
+<li><strong>Aureys</strong>: Speed of Arms fan (37). <strong>Earth to Heavens Strike</strong>: fan (35), claw (50, stupefied 1). Quickened fan (38). <strong>Claw: Aethusa destroyed.</strong> Aureys +2 Mythic Points, everyone else +1.</li>
+<li><strong>Alaznist</strong> (stunned, two actions): <strong>Cataclysm</strong>: Paya fails (80), Kreebnock 40, Aureys critically succeeds. <strong>Sevek's Prevailing Position still fails; his Mythic Point reroll makes it 46 vs 46</strong> (42).</li>
+<li><strong>Sevek</strong>: Flurry on Jurah: natural 5 raised to 10 by <strong>Perfected Form</strong>, hit (53); miss. <strong>Taunt.</strong></li>
+<li><strong>Jurah</strong>: polearm hit on Sevek (41) → <strong>Rippling Spin Trip: Jurah prone</strong>. Casts <strong>Haste on Alaznist</strong>; <strong>Paya's Reactive Strike crits (108)</strong>, and the Haste never takes hold.</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Mithtirith</strong>: <strong>Howling Blizzard</strong> on both: Alaznist critically succeeds, Jurah 15.</li>
+<li><strong>Paya</strong>: Needle on Jurah: <strong>crit (92), crit (114, natural 20)</strong>. Quickened Strike hits, which forces <strong>Jurah's Undying Myth</strong>. MAP Strike: natural 1.</li>
+<li><strong>Kreebnock</strong>: Restore the Mind on Paya (40), Anthem. <strong>Message → Paya's reaction Strike: crit on Jurah (94).</strong></li>
+<li><strong>Aureys</strong>: Feint on Jurah fails, then succeeds (<em>"Can we make up, sweetie?"</em>). Overwhelming Combination: <strong>crit (75)</strong>.</li>
+<li><strong>Alaznist</strong>: <strong>Arctic Rift</strong> through her own ally: <strong>Jurah critically fails and is destroyed.</strong> Everyone +1 Mythic Point. <strong>Demoralize on Paya: critical success, frightened 2.</strong></li>
+<li><strong>Sevek</strong>: <strong>Electric Arc</strong> on Alaznist (9); her <strong>Reactive Strike misses</strong>. Flurry: hit (49), miss.</li>
+</ul>
+<h4>Round 4</h4>
+<ul>
+<li><strong>Mithtirith</strong>: three-action Heal, 37 to all.</li>
+<li><strong>Paya</strong>: Needle on Alaznist: hit (56), miss. Quickened Strike: <strong>natural-20 crit (106)</strong>.</li>
+<li><strong>Kreebnock</strong>: Anthem. Telekinetic Projectile misses.</li>
+<li><strong>Aureys</strong>: Majestic Presence (critical success). Earth to Heavens: hit (40), miss.</li>
+<li><strong>Alaznist</strong>: ranseur on Aureys (47). <strong>Eclipse Burst</strong>: Paya's Reactive Strike misses, and <strong>Kreebnock Nullifies it</strong> for 35 HP of feedback.</li>
+<li><strong>Sevek</strong>: <strong>Inner Upheaval</strong> Flurry: Perfected Form makes it <em>"exactly hit"</em> (62); miss. <em>"Now we're gonna strike at MAP 10 three times"</em>: three critical misses.</li>
+</ul>
+<h4>Round 5</h4>
+<ul>
+<li><strong>Mithtirith</strong>: Frostbite (14).</li>
+<li><strong>Paya</strong>: <strong>Vicious Swing</strong> (73). Two misses.</li>
+<li><strong>Kreebnock</strong>: Anthem. <strong>Painful Vibrations</strong>: she fails (31), sickened 1, deafened.</li>
+<li><strong>Aureys</strong>: Earth to Heavens: miss, then <strong>claw crit, which forces Alaznist's Undying Myth</strong>.</li>
+<li><strong>Alaznist</strong>, full melee on Aureys: <strong>54, 56, 56. Aureys at 23/236.</strong></li>
+<li><strong>Sevek</strong> (<em>"I'll avenge you, Aureys"</em>): Electric Arc; <strong>her Reactive Strike misses again</strong>. Flurry: <strong>natural-20 crit (84)</strong>, hit (49). Aureys's backstab (36).</li>
+</ul>
+<h4>Round 6</h4>
+<ul>
+<li><strong>Mithtirith</strong>: Tempest Surge (critical success). <strong>Guidance on Paya</strong>: <em>"Let me send in someone much better than me at killing people."</em></li>
+<li><strong>Paya</strong>: <strong>Vicious Swing (87). Alaznist at 6.</strong></li>
+<li><strong>Kreebnock</strong>: Anthem. Restore the Mind on Aureys (40). <strong>Message → Paya's reaction Strike: Alaznist vanishes into light.</strong> Paya +2 Mythic Points, everyone else +1.</li>
+</ul>
+<p style="color:var(--gold)"><strong>After</strong>: Paya's healing (72 to all five, then Ocean's Balm, Dash of Herbs, Torrent in the Blood). Nobody dropped. No loot: the Runelords vanished.</p>
+</div>
+<div class="combat-box">
+<div class="combat-meta">Encounter 4 &middot; 4:21 PM – 4:47 PM &middot; 3 rounds</div>
+<h3>The Goldgorgers</h3>
+<div class="combat-stats">
+<div><span class="stat-label">Enemies</span><span class="stat-value"><strong>Goldgorgers A–D</strong> &mdash; elite gold-metal elementals; 355 HP, AC 43; Adamantine Jaws, claws, <strong>Searing Spew</strong> (10-ft cube, acid + slashing, Reflex DC 40–42); resist acid and electricity 20; best save Fortitude.</span></div>
+<div><span class="stat-label">Initiative</span><span class="stat-value">Sevek 47 &middot; Goldgorger B 47 &middot; Goldgorger A 42 &middot; Kreebnock 41 (Prescience) &middot; Goldgorger C 41 &middot; Aureys 39 &middot; Paya 38 &middot; Goldgorger D 37 &middot; Mithtirith 34</span></div>
+<div><span class="stat-label">Kill credits</span><span class="stat-value">C, B &mdash; <strong>Paya</strong> &middot; D &mdash; <strong>Kreebnock</strong> (Daze) &middot; A &mdash; <strong>Aureys</strong> (Opportune Backstab)</span></div>
+</div>
+<h4>Round 1</h4>
+<ul>
+<li><strong>Aureys</strong> (free, Battle Cry): Demoralize on B &mdash; natural 1.</li>
+<li><strong>Sevek</strong>: stance. <strong>Majestic Presence</strong> &mdash; C and B frightened 2, A frightened 1; D out of range. Flurry on C: <strong>natural-20 crit (102)</strong>, persistent fire; second Strike misses.</li>
+<li><strong>Goldgorger B</strong>: <strong>Searing Spew &mdash; Sevek fails on a natural 2 (83)</strong>, Aureys critically succeeds. Jaws on Aureys miss.</li>
+<li><strong>Goldgorger A</strong>: Searing Spew &mdash; Paya fails (37), Sevek succeeds (16).</li>
+<li><strong>Goldgorger C</strong>: Searing Spew &mdash; Sevek and Paya both critically succeed.</li>
+<li><strong>Kreebnock</strong>: Courageous Anthem. <strong>Amped Daze on D &mdash; critical failure (94).</strong></li>
+<li><strong>Aureys</strong>: Distracting Feint on B. <strong>Earth to Heavens Strike: crit (66)</strong>, claw hit; Quickstrike misses.</li>
+<li><strong>Paya</strong>: <strong>Needle in the Gods' Eyes on C: hit (53), crit (108)</strong>; two more Strikes, 44 and 55 &mdash; <strong>Goldgorger C destroyed.</strong></li>
+<li><strong>Goldgorger D</strong>: Searing Spew &mdash; Kreebnock succeeds (39), <strong>Mithtirith fails (83)</strong>.</li>
+<li><strong>Mithtirith</strong>: Humble Spell <strong>Tempest Surge on D</strong> (44 after resistance), clumsy 2.</li>
+</ul>
+<h4>Round 2</h4>
+<ul>
+<li><strong>Sevek</strong>: ⭐ <strong>Glory on High</strong> &mdash; fail, <strong>critical failure</strong>, fail (<em>"it should be DC 41"</em>: Foundry rolled 39; at 41 B's 30 is a critical failure). A 36, D 36, <strong>B 68</strong>; A and D blinded for the round, B for a minute. Flurry on B: hit, hit (80). Aureys's Opportune Backstab (39).</li>
+<li><strong>Goldgorger B</strong> (blind): jaws on Aureys hit, then a natural-20 crit &mdash; <strong>both lost to the flat check.</strong> Cody: <em>"Blinded saved quite a bit."</em></li>
+<li><strong>Goldgorger A</strong> (blind): jaws and two claws at Sevek all miss.</li>
+<li><strong>Kreebnock</strong>: Unleash Psyche, Anthem, <strong><em>"Kreebnock will spit into either palm as he summons Giant Mining Pick"</em></strong> &mdash; <strong>Imaginary Weapon on D (100).</strong></li>
+<li><strong>Aureys</strong>: <strong><em>"So sorry you can't see my magnificence… You're still awesome"</em></strong> &mdash; Feint. Overwhelming Combination: miss, hit (33); MAP Strike (23); Quickstrike (22).</li>
+<li><strong>Paya</strong>: Stride, Needle in the Gods' Eyes &mdash; <strong>hit (64): Goldgorger B destroyed.</strong></li>
+<li><strong>Goldgorger D</strong> (blind): three jaws hit Kreebnock &mdash; <strong>all three lost to the flat check.</strong></li>
+<li><strong>Mithtirith</strong>: Recall Knowledge (metal elementals; resist acid and electricity; best save Fortitude). Needle Darts on D: natural 1, Mythic reroll hits; no damage rolled.</li>
+</ul>
+<h4>Round 3</h4>
+<ul>
+<li><strong>Sevek</strong>: Frostbite on D &mdash; critical success (<em>"Should not have done that"</em>). <strong>Inner Upheaval</strong> Flurry on <strong>"Gold Roger A"</strong>: natural 5 raised to 10 by <strong>Perfected Form</strong> &mdash; hit (51; Foundry applied it to D, still targeted from the Frostbite); hit (67).</li>
+<li><strong>Goldgorger A</strong> (dazzled): jaws hit Sevek but fail the flat check; claws miss.</li>
+<li><strong>Kreebnock</strong>: Anthem, <strong>amped Daze on D: Goldgorger D destroyed.</strong> Cody: <em>"And D is down. One remaining."</em></li>
+<li><strong>Aureys</strong>: <strong>Earth to Heavens Strike on A: crit (78), claw (51)</strong>; Quickstrike (44). Cody: <em>"Almost there."</em></li>
+<li><strong>Paya</strong>: Tumble Through A; miss, hit (49). <strong>Aureys's Opportune Backstab (42): Goldgorger A destroyed.</strong> Cody: <em>"That is gonna bring it down."</em></li>
+</ul>
+<p style="color:var(--gold)"><strong>After</strong>: <em>"As these things are just reduced to piles of gold shards around you, we are out of combat."</em> All damage the party took came from Searing Spew.</p>
+</div>
+<h2>Damage Ledger</h2>
+<div style="overflow-x:auto">
+<table class="contrib-table">
+<tr><th></th><th>Urveth</th><th>Sentinels</th><th>Runelords</th><th>Goldgorgers</th><th><strong>Total dealt</strong></th><th>Damage taken</th><th>Kills</th></tr>
+<tr><td><strong>Paya</strong></td><td>728</td><td>850</td><td>1,043</td><td>313</td><td><strong>~2,930</strong></td><td><strong>~820</strong> (dropped once)</td><td>3 Urveth, Sentinels E &amp; F, <strong>Alaznist</strong>, Goldgorgers C &amp; B</td></tr>
+<tr><td><strong>Sevek</strong></td><td>306</td><td>683</td><td>470</td><td>453</td><td><strong>~1,910</strong></td><td>~620</td><td>Sentinel H</td></tr>
+<tr><td><strong>Aureys</strong></td><td>196</td><td>462</td><td>488</td><td>386</td><td><strong>~1,530</strong></td><td>~440</td><td>Sentinels G, D, C, <strong>Aethusa</strong>, Goldgorger A</td></tr>
+<tr><td><strong>Kreebnock</strong></td><td>194</td><td>353</td><td>78</td><td>224</td><td><strong>~850</strong></td><td>~640</td><td>Sentinel A, Goldgorger D</td></tr>
+<tr><td><strong>Mithtirith</strong></td><td>16</td><td>52</td><td>56</td><td>44</td><td><strong>~170</strong></td><td>~480</td><td>Sentinel B</td></tr>
+</table></div>
+<div class="note-banner">Hit points actually removed, per the roll log: reverted applications left out, no overkill, persistent damage credited to whoever inflicted it. Sevek's Goldgorger figure includes the 51 Foundry applied to D instead of A. <strong>Alaznist killed Jurah.</strong> <strong>Paya dropped once</strong> (Sentinels); Aureys's low point was 23 HP against Alaznist.</div>
+
+<h2>Mythic Economy</h2>
+<div class="summary">
+<ul>
+<li><strong>Aureys</strong>: Legend of Combat (Urveth, Runelords); the Escape reroll (natural 1); Summon Mythic Power after the Urveth.</li>
+<li><strong>Paya</strong>: Flay Time on Aethusa.</li>
+<li><strong>Sevek</strong>: a reroll against Alaznist's Cataclysm (46 vs 46).</li>
+<li><strong>Kreebnock</strong>: Prescience for initiative.</li>
+<li><strong>Mithtirith</strong>: a Needle Darts reroll that hit and did nothing.</li>
+<li><strong>Refunds</strong>: Aethusa (Aureys +2, everyone else +1), Jurah (everyone +1), Alaznist (Paya +2, everyone else +1).</li>
+</ul>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+<div class="spotlight s-sevek">
+<h4>Sevek &middot; I Tried So Hard to Hide It</h4>
+<ul>
+<li><strong>He got Aureys out of the Urveth's jaws.</strong> She was restrained, had failed her Escape and burned a Mythic Point on a natural-1 reroll. He asked Cody whether a Shove would break the hold (<em>"technically yes"</em>), changed grip, and Flurried two maneuvers into C: the <strong>Shove</strong> freed her and the <strong>Trip</strong> put it on the ground. <em>"That's how you know I never shove."</em> When it stood, <strong>Stand Still crit it for 120</strong>.</li>
+<li><strong>He caught the number twice, and both times it mattered.</strong> Foundry showed <strong>39</strong> on Aethusa's Celestial Armaments save and on his Glory on High; his DC is <strong>41</strong> (<em>"So that actually fails because my class DC is 41. I don't know why it shows a 39"</em>). Aethusa was <strong>blinded for four rounds</strong>. At the Goldgorgers it turned B's save into a <strong>critical failure</strong>, and the three blind Goldgorgers landed nothing in melee for the rest of the fight. Cody: <em>"Blinded saved quite a bit."</em></li>
+<li><strong>He learned from Aureys out loud.</strong> <em>"I'll take a page out of Aureys and also use Majestic Presence"</em> against the Sentinels (two critical failures), and against the Goldgorgers <em>"I'll take the initiative from the lesson I learned from Aureys."</em> Aureys: <em>"Show everybody how awesome you are."</em></li>
+<li><strong>The monk bit with Kreebnock.</strong> <em>"Wait, are you a monk? I'm just kidding."</em> &mdash; <strong><em>"How did you know? I tried so hard to hide it."</em></strong> &mdash; <em>"I love being a monk."</em> Then <em>"Gonna do something… real stupid"</em> (three MAP −10 Strikes), and when Paya followed his example: <strong><em>"Be yourself. Don't be like me. I think that's a better idea."</em></strong></li>
+<li><strong>Small catches for the table</strong>: reminded Paya he had a quickened Strike; tested Alaznist for Reactive Strike with an Electric Arc in her face (<em>"The more you know"</em>); <em>"I'll avenge you, Aureys"</em> &mdash; <em>"I won't be avenged. That sounds like I'm dead."</em></li>
+<li><strong>Combat</strong>: <strong>killed Sentinel H</strong> (a Stand Still crit for 82, then a Flurry crit); Herald's Weapon and a 161-point turn on Aethusa; <strong>Perfected Form</strong> turned four low first Strikes into hits; Rippling Spin trips on two Sentinels and Jurah; Prevailing Position and a Mythic Point against Alaznist's Cataclysm. ~1,910 damage, second at the table; ~620 taken, three of the four Searing Spews among it.</li>
+<li><strong>Voice</strong>: <em>"I feel like we're in a war zone. It's just being bombarded."</em> &middot; <em>"I was muted the whole time. Oh my god."</em> &middot; <em>"Gold Roger A."</em></li>
+</ul></div>
+<div class="spotlight s-paya">
+<h4>Paya &middot; The Total of What I Do</h4>
+<ul>
+<li><strong>Eight kills</strong>: all three Urveth, two Sentinels (E, and F on the fourth crit of a hasted Whirlwind Strike), <strong>Alaznist</strong> (+2 Mythic Points) and two Goldgorgers. <strong>~2,930 damage, the most at the table by a thousand.</strong> <strong><em>"Four crits. Not all I do. That is the total of what I do."</em></strong> Cody: <em>"If I hadn't played with you for as long as I have, I'd be looking for your dice rolls because this is some bullshit."</em> &mdash; <em>"I'm banning you from martial classes after this game."</em> &mdash; <strong><em>"If I have to play a Technomancer in Starfinder, that is a price I will willingly pay for having played Paya."</em></strong> His own theory: <em>"Maybe it's just a fighter unified theory type deal."</em></li>
+<li><strong>He corrected a rule against himself.</strong> Alaznist's Pierce the Sky missed him; he told Cody the spell still deals half damage on a miss and took it. Cody had been running it wrong at both his tables.</li>
+<li><strong>His Reactive Strike finally disrupted something.</strong> Jurah cast Haste on Alaznist; Paya crit him for 108 in the middle of the casting, and the Haste never took hold.</li>
+<li><strong>He went down for it.</strong> The Sentinels circled him; he took 471 in that fight and dropped to dying 1 before Kreebnock's Soothe picked him up. ~820 taken across the session, the most at the table.</li>
+<li><strong>Gracious about help.</strong> On Sevek's Quick Strike reminder: <em>"it shouldn't be up to Sevek to remember that for me, but I do appreciate it."</em> On Haste: <em>"I wouldn't have been able to do it without you."</em> On amped Message: <em>"This is really cool."</em> On Mithtirith's subtle heals: <em>"It's a really cool use of spell shape."</em></li>
+<li><strong>The table's rules and route brain, and the healer.</strong> He answered Mithtirith's vitality question, walked Aureys through the Escape macro, gave the Runelord of Greed's school (transmutation), and picked the way north. Ocean's Balm, Dash of Herbs, Torrent in the Blood and Fresh Produce after every fight.</li>
+<li><strong>Voice</strong>: <em>"It's been my joke ever since the pit"</em> &middot; <em>"Paya will headbutt it back… armor clanging on armor"</em> &middot; <em>"Overkill is fun. I have learned that from these creatures"</em> &middot; <em>"They would steal from Runelord Sorshen… I mean, they might just eat it, to be fair"</em> &middot; <em>"A handful of raisins, I like that better."</em></li>
+</ul></div>
+<div class="spotlight s-aureys">
+<h4>Aureys Hollow &middot; Greatest Dragon of Golarion</h4>
+<ul>
+<li><strong>She spoke for the party to three Runelords.</strong> <strong><em>"Well, I am Aureys Hollow, greatest dragon of Golarion. You could surrender if you like."</em></strong> And then she <strong>killed Aethusa</strong>, and forced Alaznist's Undying Myth with a claw crit.</li>
+<li><strong>She took Alaznist's whole answer.</strong> Three ranseur hits, 166 damage, and she was standing at 23 HP: <em>"I'm still up. I'm still standing."</em> Then, to Sevek's <em>"I'll avenge you, Aureys"</em>: <strong><em>"I won't be avenged. That sounds like I'm dead."</em></strong> And she handed the kill to the cleric: <em>"You could steal this kill, bud."</em></li>
+<li><strong>The Feint patter ran every fight</strong>, and its joke is comforting the creatures she has just terrified: to an Urveth, <em>"You're so big and you've got a beautiful smile"</em>; to the Sentinels, <em>"those canines look very sharp. I'm so frightened"</em>, <em>"Come on, big boy, don't be afraid of me. You've got nothing to be afraid of"</em> and <em>"hey, don't leave me out of your party. You're too cool for that!"</em>; to Jurah, <em>"I used to look up to Runelords… but you're so awesome,"</em> then, failed, <strong><em>"You were right. I was wrong. Can we make up, sweetie?"</em></strong>; to a blinded Goldgorger, <strong><em>"So sorry you can't see my magnificence, but, you know, it's okay. You're still awesome."</em></strong></li>
+<li><strong>A dragon in a gold vault.</strong> Her eyes bugged out at the gold plug, she tested it for <em>"even a tiny way"</em> through, wondered if it would fit in the hoard (<em>"It looks like it's heavier than ten [Bulk], though"</em>), called the Goldgorgers <strong><em>"creatures after my own heart,"</em></strong> and picked up the gold shards they left. She scouted every stair for traps and found the Runelords waiting.</li>
+<li><strong>In the jaws, and funny about it.</strong> Restrained on a natural 20, a failed Escape and a natural-1 Mythic reroll (<em>"I'm dying!"</em>), then <em>"thanks for saving me there, guys."</em> To Paya on the Urveth kill: <em>"I knew you could do it, pie-ass-hole."</em></li>
+<li><strong>Combat</strong>: <strong>five kills</strong> (three Sentinels, Aethusa, and the last Goldgorger on an Opportune Backstab); Majestic Presence and Frightening Power; Earth to Heavens Strike's clumsy and stupefied; Distracting Feint for the party. ~1,530 damage.</li>
+<li><strong>Voice</strong>: <em>"That was a lot of recently not dead runelords"</em> &middot; <em>"I love you, my pineapple"</em> &middot; <em>"Whisper into her ear."</em></li>
+</ul></div>
+<div class="spotlight s-kreebnock">
+<h4>Kreebnock &middot; Your Lack of Faith</h4>
+<ul>
+<li><strong>He got the party moving and cast the way in.</strong> <em>"Everybody ready?"</em> &mdash; found the scroll in the stash and read <strong>Umbral Journey</strong>. At the stair: <em>"Maybe they're friendly."</em> To Alaznist: <strong><em>"We're nowhere near done. We're definitely not stopping here."</em></strong></li>
+<li><strong>The setup man for Paya, again.</strong> <strong>Haste</strong> on everyone in two fights (it fed the four-crit Whirlwind Strike; <em>"That's what I'm here for"</em>), offered so Aureys could delay into it; <strong>amped Messages</strong> that became a 102 crit on an Urveth, a 94 crit on Jurah, and <strong>the Strike that killed Alaznist</strong>; and the one that set up Cody's martial-class ban: <em>"because he's definitely due, let's tell Paya to Strike."</em> <strong>His Soothe picked Paya up from dying 1.</strong></li>
+<li><strong>The big hits</strong>: amped Imaginary Weapon crits for <strong>194</strong> (Urveth A) and <strong>198</strong> (the oversized helmet that destroyed Sentinel A), <strong>Force Rain</strong> for 160 on a critical failure, an amped Daze for 94 and the Daze that killed Goldgorger D. <strong>Two kills.</strong> He narrated them: <strong><em>"Kreebnock will spit into either palm as he summons Giant Mining Pick. Starts digging for gold."</em></strong></li>
+<li><strong>Control</strong>: <strong>Containment</strong> on Urveth A to give Mithtirith room; <strong>Weight of the World</strong> stunning Alaznist; <strong>Nullify</strong> on her Eclipse Burst for 35 HP of feedback. Sorshen's robes made Jurah's Phantasmagoria nothing (<em>"I'll just ignore it"</em>). Courageous Anthem every round; <strong>Restore the Mind</strong> on whoever was hurt.</li>
+<li><strong>Voice</strong>: <strong><em>"Your lack of faith disturbs her"</em></strong> &middot; <em>"Wait, are you a monk? I'm just kidding"</em> &middot; <em>"That's cool. I want one of those"</em> &middot; <em>"Dragon's greatest fear of being eaten alive"</em> &middot; <em>"Bring us home, Mithtirith."</em></li>
+</ul></div>
+<div class="spotlight s-mith">
+<h4>Mithtirith &middot; Someone Much Better at Killing People</h4>
+<ul>
+<li><strong>He set up the last kill for Paya.</strong> His Tempest Surge on Alaznist was critically saved; with Aureys offering him the kill (<em>"You could steal this kill, bud"</em>), he asked whether Paya could still take Guidance, cast it on him, and: <strong><em>"Let me send in someone much better than me at killing people."</em></strong> Paya landed it.</li>
+<li><strong>Driest voice at the table again.</strong> <strong><em>"I have a confession to make. I gave you all my criticals."</em></strong> &middot; <strong><em>"So this is like Darth Vader striking you down for failing?"</em></strong> &middot; <strong><em>"That seems inflationary"</em></strong> &middot; <strong><em>"I don't suppose this means you have to give Sorshen back all of her stuff to make room"</em></strong> &middot; <strong><em>"I feel like I'm coming in at the end of Highlander."</em></strong> &middot; Anna: <em>"Jesse, are you thinking?"</em> &mdash; <em>"No, I'm sleeping."</em></li>
+<li><strong>He asked the story question</strong>: whether any Runelords besides Xanderghul are still alive. Cody's answer: Sorshen, fighting him in Jandelay right now.</li>
+<li><strong>Healing under Reactive Strike</strong>: he checked for Reactive Strike first, then healed with subtle (Humble) spells so the Urveth couldn't punish them; a three-action Heal for 58 to all five against the Sentinels (after asking whether it would heal the constructs) and 37 to all against the Runelords; <strong>Energy Aegis</strong> for the party; <strong>Contingency</strong> recast. Escaped an Urveth's grab on Acrobatics.</li>
+<li><strong>He took the hits</strong>: an Urveth grab, a Sentinel crit for 86, Alaznist's Pierce the Sky crit for 108 and deafened, and a Searing Spew for 83.</li>
+<li><strong>One kill: Tempest Surge on the last Sentinel</strong> (Cody: <em>"You didn't need to use a focus spell. Fun, though"</em>). Elsewhere the targets didn't cooperate: Divine Wrath on constructs (<em>"Oh, I deserve that one"</em>), Frostbite into cold-resistant Urveth, a Mythic reroll that hit with Needle Darts and rolled no damage, and the halberd Foundry swung at himself.</li>
+</ul></div>
+</div>
+<h2>Loot</h2>
+<div class="loot-grid">
+<div class="loot-item"><div class="loot-name"><strong>Gold shards</strong></div><div class="loot-source">The Goldgorgers</div><div class="loot-note">Aureys started gathering them. Amount not stated.</div></div>
+<div class="loot-item"><div class="loot-name"><strong>Nothing</strong></div><div class="loot-source">Sentinels, Runelords</div><div class="loot-note"><em>"They do vanish into light."</em></div></div>
+</div>
+<div class="xp-banner">Treasure &middot; gold shards &middot; no level-up &middot; <strong>level 19</strong>, two sessions left</div>
+
+<h2>Memorable Quotes</h2>
+<blockquote><strong>Aureys</strong>: "Well, I am Aureys Hollow, greatest dragon of Golarion. You could surrender if you like."<span class="attribution">To Alaznist, Jurah and Aethusa.</span></blockquote>
+<blockquote><strong>Aureys</strong>: "You were right. I was wrong. Can we make up, sweetie?"<span class="attribution">Her second Feint at Jurah, after the first failed.</span></blockquote>
+<blockquote><strong>Sevek</strong>: "I'll avenge you, Aureys."<br><strong>Aureys</strong>: "I won't be avenged. That sounds like I'm dead."<span class="attribution">Alaznist had just put her at 23 HP.</span></blockquote>
+<blockquote><strong>Kreebnock</strong>: "Wait, are you a monk? I'm just kidding."<br><strong>Sevek</strong>: "How did you know? I tried so hard to hide it."</blockquote>
+<blockquote><strong>Paya</strong>: "Truly following Sevek's example."<br><strong>Sevek</strong>: "Be yourself. Don't be like me. I think that's a better idea."<span class="attribution">After three Strikes at MAP −10.</span></blockquote>
+<blockquote><strong>Cody</strong>: "Kelsie, I'm being genuine. If I hadn't played with you for as long as I have, I'd be looking for your dice rolls because this is some bullshit."<br><strong>Mithtirith</strong>: "I have a confession to make. I gave you all my criticals."</blockquote>
+<blockquote><strong>Paya</strong>: "If I have to play a Technomancer in Starfinder, that is a price I will willingly pay for having played Paya."<span class="attribution">Answering Cody's ban from martial classes.</span></blockquote>
+<blockquote><strong>Paya</strong>: "Four crits. Not all I do. That is the total of what I do."<span class="attribution">A hasted Whirlwind Strike against the Sentinels.</span></blockquote>
+<blockquote><strong>Mithtirith</strong>: "So this is like Darth Vader striking you down for failing?"<br><strong>Kreebnock</strong>: "Your lack of faith disturbs her."<span class="attribution">Alaznist had just killed Jurah with her own Arctic Rift.</span></blockquote>
+<blockquote><strong>Mithtirith</strong>: "Let me send in someone much better than me at killing people."<span class="attribution">Setting up Paya for the Alaznist kill.</span></blockquote>
+<blockquote><strong>Mithtirith</strong>: "That seems inflationary."<span class="attribution">Cody: "A place that was made to generate endless gold."</span></blockquote>
+<blockquote><strong>Kreebnock</strong>: "Kreebnock will spit into either palm as he summons Giant Mining Pick. Starts digging for gold."<span class="attribution">Imaginary Weapon, against the Goldgorgers.</span></blockquote>
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+<li><strong>The apocalypse seed</strong> is still somewhere ahead in the Prosperity Vault. The way north is plugged with solid gold; the party took the claw-gouged tunnels.</li>
+<li><strong>Spindlehorn</strong>: <em>"You'll be climbing up there later."</em></li>
+<li><strong>The Runelords left</strong>: Xanderghul, and Sorshen fighting him in Jandelay. Three Risen Runelords died here.</li>
+<li><strong>Schedule</strong>: no game next week; <strong>penultimate session November 14</strong>, then the finale.</li>
+<li><strong>Sorshen's things</strong>: still in Aureys's hoard (Mithtirith: <em>"give Sorshen back all of her stuff to make room"</em>).</li>
+</ul>
+</div>
+<div class="cliffhanger">
+<span class="label">Where it leaves off</span>
+<p>Three Risen Runelords are gone, the Goldgorgers are piles of gold, and the party stands in the tunnels of a vault built to make gold forever. The apocalypse seed is somewhere ahead. Two sessions remain, the next on November 14.</p>
+<div class="big-line">"That was a lot of recently not dead runelords."</div>
+<span class="speaker">&mdash; Aureys Hollow</span>
+</div>
+
+<style>
+.pax-notes {
+  margin-top: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.pax-notes h2 {
+  margin-top: 0;
+  border-bottom-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.pax-notes h3 {
+  color: var(--gold);
+  margin-top: 26px;
+}
+
+.pax-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 8px;
+}
+
+.pax-notes ul { padding-left: 22px; }
+.pax-notes li { margin-bottom: 9px; }
+.pax-notes code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: #170f14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+</style>
+<section class="pax-notes">
+<h2>Pax's Notes &mdash; Sevek's Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax's notes only &mdash; not shared with the rest of the party.</p>
+<h3>What Sevek did this session</h3>
+<ul>
+<li>Prepped <strong>Life Connection</strong> and <strong>Lucky Number</strong> before the descent.</li>
+<li><strong>Urveth</strong>: Inner Upheaval Flurry on B (115). Prevailing Position on A's Eclipse Burst. Scroll of Heal on himself. <strong>Shoved Urveth C off Aureys</strong> (Flurry of Maneuvers) and tripped it; <strong>Stand Still crit for 120</strong> when it stood. Perfected Form hit on A.</li>
+<li><strong>Sentinels</strong>: <strong>Majestic Presence</strong> (two critical failures). Electric Arc on four turns. Rippling Spin trips on B and C (C a critical success). <strong>Killed Sentinel H</strong>: Stand Still crit for 82, then a Flurry crit.</li>
+<li><strong>Runelords</strong>: unmuted mid-turn. <strong>Herald's Weapon</strong> → crit on Aethusa (161) → <strong>blinded four rounds</strong> after he corrected the save DC. Rippling Spin trip on Jurah. Prevailing Position and a Mythic Point on Alaznist's Cataclysm. Electric Arc into Alaznist to test for Reactive Strike (it missed, twice). Three MAP −10 Strikes. Natural-20 crit on Alaznist.</li>
+<li><strong>Goldgorgers</strong>: first in initiative; Majestic Presence; natural-20 crit on C; <strong>Glory on High</strong> &mdash; all three in range blinded (B critically failed at DC 41); not one of their melee hits got through afterward.</li>
+<li><strong>~1,910 damage dealt (second at the table), ~620 taken. One kill.</strong></li>
+</ul>
+<h3>Things Sevek knows that the party does not</h3>
+<ul>
+<li><strong>His DC is 41.</strong> Foundry sometimes shows 39; it's a display quirk, and Cody went with 41 both times. It mattered twice: Aethusa's blind and Goldgorger B's critical failure.</li>
+<li><strong>Glory on High is 2 actions</strong>, not 1, and does 10d6 on a failure, 20d6 on a critical failure (the log rolled exactly that). It has no frequency limit; each target is immune for an hour. `character-sheet.md` has the action count and damage wrong.</li>
+<li><strong>A Perfected Form hit landed on the wrong Goldgorger.</strong> His first Strike on A did 51, and Foundry applied it to D (still targeted from his Frostbite). It's why D died to Kreebnock's Daze and A to Aureys's backstab.</li>
+<li><strong>Alaznist had Reactive Strike; most of the Risen don't.</strong> Cody: <em>"Most of them don't because it's cheap."</em> Both of hers into him missed.</li>
+<li><strong>Cody, on this module</strong>: <em>"Beside the Runelords, literally everything in this module has its low save as Will."</em></li>
+</ul>
+<h3>What Sevek is thinking about</h3>
+<ul>
+<li><strong>Glory on High</strong> opened the Goldgorger fight and erased their melee. Majestic Presence worked twice. Both are worth leading with.</li>
+<li><strong>The Shove</strong> is in the kit for grabs. Flurry of Maneuvers made it a one-action rescue.</li>
+<li>Paya took 820 and went down once. The tank wasn't where the damage went.</li>
+</ul>
+<h3>Open questions for next session</h3>
+<ul>
+<li>Where is the <strong>apocalypse seed</strong>, and what is behind the gold plug?</li>
+<li>What does Spindlehorn's climb have to do with the ritual?</li>
+</ul></section>
+
+</div>
+</body>
+</html>

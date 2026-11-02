@@ -28,7 +28,7 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 
 - **Run it:** `cd campaign-viewer && npm start` (in the background). It serves **http://localhost:4747** on 127.0.0.1. Override with the `PORT` / `HOST` env vars.
 - **Check whether it's already running first:** `ss -ltnp | grep 4747`. Port 4173 is a different app; don't touch it.
-- **Session recaps:** `/<campaign>/sessions/<session-folder>?f=recap.html` (for example `/revenge-of-the-runelords-cody/sessions/session-13-10-03-2026?f=recap.html`). New session folders show up without a restart, because it reads the filesystem on each request.
+- **Session recaps:** `/c/<campaign>/s/<session-folder>?f=recap.html` (for example `/c/revenge-of-the-runelords-cody/s/session-13-10-03-2026?f=recap.html`). Campaign pages are `/c/<campaign>`. New session folders show up without a restart, because it reads the filesystem on each request.
 - When Pax says "run the server," he means this one. Use it to screenshot recaps through `http://localhost:4747` as well as by `file://`.
 - Code: `server.js` (routing), `lib/data.js` (campaign discovery), `lib/markdown.js` (uses `marked`), `lib/views.js` (HTML), `public/` (CSS/JS).
 

@@ -43,7 +43,7 @@ The keep is drawn on a square grid (`grid[y][x]` holds a floor material or `null
 Every script writes `output/<map>-walls.json` as `{walls, doors, lights}`:
 
 - **walls**: segments in SVG units. The exporter joins segments that share an end into long wall lines.
-- **doors**: `[x, y, horizontal, length, kind]` in squares along a cell edge. `kind` is optional: `great`, `secret`, `portcullis`.
+- **doors**: `[x, y, horizontal, length, kind]` in squares along a cell edge. `kind` is optional: `great`, `secret`, `locked`, `portcullis`.
 - **lights**: `{x, y, range, color, anim?}`. `x`/`y` in SVG units, `range` in squares (dim radius; bright is half), `color` as `AARRGGBB`, `anim` an optional Foundry light animation. The scripts record one wherever they draw a fire, brazier, candle or glow.
 
 ### Native Foundry scene (use this)
@@ -61,6 +61,7 @@ The scene arrives with its size, grid, background, walls, lights and **every doo
 |---|---|
 | normal, great | Door, starts **open** (the art draws them standing open) |
 | secret | **Secret door** (only the GM sees it), closed |
+| locked | Door, **locked**: players can't open it until the GM unlocks it |
 | portcullis | Door, closed, **see-through**: sight, light and sound pass the bars; movement is blocked |
 
 - **Lighting:** the maps have their light and dark painted in, so scenes import fully lit. `--dark 0.6` turns global light off and sets darkness so only the map's light sources (and darkvision) light it.
@@ -92,6 +93,20 @@ How the importer reads the file (checked against its source, `ddimport.js`):
 The exporter was checked against the walls JSON: every wall point in all three maps lands on an exported wall line and nothing extra was added.
 
 **Tested in Foundry v14 with dd-import 6.1.1 (2026-10-30):** the palace keep imported with all 103 walls (no zero-length ones), 11 openable doors sitting exactly in the drawn doorways, and 28 lights (braziers 40/20 ft orange, the arcane ring 30/15 ft purple). On screen the wall lines follow the stone edges of the art.
+
+## Matching another map set's colours
+
+`tools/color_match.py` measures colours so a new map can sit next to published maps (it needs numpy, scipy and Pillow; the `dnd-transcription/.venv` has them):
+
+```sh
+PY=dnd-transcription/.venv/bin/python
+$PY -I map-maker/tools/color_match.py stats ref1.jpg ref2.jpg map-maker/output/guild-hall-140px.png   # brightness, saturation, contrast side by side
+$PY -I map-maker/tools/color_match.py palette ref1.jpg --k 12                                          # main colours as hex
+$PY -I map-maker/tools/color_match.py sample ref1.jpg 1640 1640 14 14                                  # exact colour of a spot (x y w h)
+$PY -I map-maker/tools/color_match.py materials map-maker/output/guild-hall-140px.png --ref ref1.jpg   # each of our colours vs the nearest ref colour
+```
+
+The guild hall (`maps/guild-hall.js`) was matched to Snowy's Five Toe Cove maps this way. The first draft was about 50% more saturated (chroma 32 vs 21) and lighter (L 60 vs 49–54); after swapping in sampled material colours it measured L 54, chroma 20.6. Snowy's style: thin wobbly black ink, flat watercolour fills, earthy muted colours (grass `#6a8b59`, dirt `#bda07e`, table wood `#a88963`, stone `#79776c`).
 
 ## What we tried and learned
 

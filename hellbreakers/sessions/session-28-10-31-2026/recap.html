@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 28 — Traveling Names</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #1d151a;
+  --bg-card: #2a1e24;
+  --bg-card-hover: #342630;
+  --border: #4a3640;
+  --border-bright: #6a4650;
+  --text: #ece4e0;
+  --text-dim: #b4a49c;
+  --text-bright: #faf2ec;
+  --rose: #c03048;
+  --rose-bright: #e04060;
+  --rose-glow: #c0304830;
+  --gold: #c89050;
+  --gold-dim: #9a6c38;
+  --gold-glow: #c8905028;
+  --ember: #d65a28;
+  --ember-glow: #d65a2824;
+  --amber: #e8b560;
+  --amber-glow: #e8b56022;
+  --violet: #8a5aa4;
+  --violet-glow: #8a5aa422;
+  --teal: #4a9088;
+  --teal-glow: #4a908822;
+  --jade: #5a9060;
+  --jade-glow: #5a906022;
+  --rust: #b06030;
+  --rust-glow: #b0603022;
+  --ivory: #d8cab0;
+  --ivory-glow: #d8cab022;
+  --frost: #7aa8c0;
+  --frost-glow: #7aa8c022;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, #c0304814 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, #c8905014 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #3a2a2e10 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 95%, #d65a2812 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 5%, #c0304810 0%, transparent 50%);
+  animation: ember-flicker 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ember-flicker {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.85; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2726';
+  display: block;
+  color: var(--rose);
+  font-size: 20px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--rose-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #c0304818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2726'; color: var(--rose); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--rose); }
+.comp-explore { background: var(--teal); }
+.comp-social { background: var(--gold); }
+.comp-loot { background: var(--ember); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-baijian { border-left-color: var(--ivory); }
+.char-cyrathul { border-left-color: var(--violet); }
+.char-panacea { border-left-color: var(--teal); }
+.char-zanthar { border-left-color: var(--ember); }
+.char-elaine { border-left-color: var(--frost); }
+.char-ren { border-left-color: var(--gold); }
+.char-leoz { border-left-color: var(--rust); }
+.char-baifeng { border-left-color: var(--jade); }
+.char-card .new-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--jade); letter-spacing: 1.2px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000030; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.act.social::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.act.mystery::before { background: var(--ember); box-shadow: 0 0 10px var(--ember-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #2a1e24, #32202a); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px #c0304814; }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #160f12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+.log-warning { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: #160f12; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 12px 16px; margin: 14px 0 18px; line-height: 1.6; letter-spacing: 0.3px; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000040; }
+.spotlight.s-baijian { border-left-color: var(--ivory); }
+.spotlight.s-cyrathul { border-left-color: var(--violet); }
+.spotlight.s-panacea { border-left-color: var(--teal); }
+.spotlight.s-zanthar { border-left-color: var(--ember); }
+.spotlight.s-elaine { border-left-color: var(--frost); }
+.spotlight.s-leoz { border-left-color: var(--rust); }
+.spotlight.s-ren { border-left-color: var(--gold); }
+.spotlight.s-baifeng { border-left-color: var(--jade); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--gold-dim); background: linear-gradient(135deg, #2a1e24, #2f2418); box-shadow: inset 0 0 20px var(--gold-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--gold-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--gold-dim); background: #c0304808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\27A4'; position: absolute; left: 0; color: var(--rose); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #2a1418, #3a181c); border: 1px solid var(--rose); border-left: 4px solid var(--rose); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--rose-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #d65a2810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--rose-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--rose-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+</head>
+
+
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Traveling Names</h1>
+  <div class="subtitle">Session 28 · A mercenary camp talked into a grave, an Isgeri commander talked out of Caeto’s army, and a diabolist’s manor entered by the front door</div>
+  <div class="meta-row">
+    <span class="meta-pill">31 Oct 2026 · Halloween</span>
+    <span class="meta-pill">PF2e Remastered</span>
+    <span class="meta-pill">~2h57m</span>
+    <span class="meta-pill">~12 → 13 Pharast 4727 AR</span>
+    <span class="meta-pill">Level 8 · 160 XP</span>
+  </div>
+</header>
+
+<section>
+  <h2>Session Composition</h2>
+  <div class="composition-bar">
+    <div class="comp-seg comp-social" style="width:45%"></div>
+    <div class="comp-seg comp-explore" style="width:28%"></div>
+    <div class="comp-seg comp-combat" style="width:22%"></div>
+    <div class="comp-seg comp-loot" style="width:5%"></div>
+  </div>
+  <div class="composition-legend">
+    <span><span class="legend-dot" style="background:var(--gold)"></span>The Camps &amp; Nixa 45%</span>
+    <span><span class="legend-dot" style="background:var(--teal)"></span>Infiltrating the Manor 28%</span>
+    <span><span class="legend-dot" style="background:var(--rose)"></span>Plan B &amp; the Roof 22%</span>
+    <span><span class="legend-dot" style="background:var(--ember)"></span>Loot 5%</span>
+  </div>
+</section>
+
+<section>
+  <h2>The Party</h2>
+  <div class="party-grid">
+    <div class="char-card char-baifeng"><div class="char-name">Bai Feng</div><div class="char-class">Human (Sovereign Dragonblood) <strong>Exemplar 8</strong> · Champion + Marshal · the party’s ears; nat-20 crit on the roof</div><div class="char-player">Pax</div></div>
+    <div class="char-card char-cyrathul"><div class="char-name">Cyrathul</div><div class="char-class">Lunar Dragon Thaumaturge 8 · Draconic Ravager · the face of the infiltration; turned Nixa with a Diplomacy 39</div><div class="char-player">Snowgeen</div></div>
+    <div class="char-card char-panacea"><div class="char-name">Panacea</div><div class="char-class">Catfolk Witch 8 (Paradox of Opposites, Divine) · Medic + Living Nexus · <em>“We want to recruit these guys”</em></div><div class="char-player">Bog Witch</div></div>
+    <div class="char-card char-zanthar"><div class="char-name">Zanthar Melodune III</div><div class="char-class">Gnome Wizard 8 (generalist) · Blessed One · four kills; not a halfling</div><div class="char-player">Scott</div></div>
+    <div class="char-card char-elaine"><div class="char-name">Elaine Stormfrost</div><div class="char-class">Arctic Elf Mastermind Rogue · <strong>Storm has left the campaign</strong></div><div class="char-player">Storm · departed</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Session Summary</h2>
+  <div class="summary">
+    <p>The party spent the morning disguised as ranch hands at the <strong>Vulaunex Ranch</strong>, delivering calves for an old cowboy, until the cart they had escaped Saringallow in came up the road with League scouting news. Two groups of new recruits were camped a few miles south and were due at the <strong>Sereni Manor</strong> in the morning: a disciplined contingent of Isgeri soldiers from Elidir, and a band of mercenaries. Replace one of them and the party walks in the front door. The rancher’s parting advice was to stay off the south road. The League used to treat with the Fae there, but they have been at war with them since the Chelaxians took over.</p>
+    <p>They picked the mercenaries, some of them wearing the insignia of the broken <strong>Azri</strong> house, and walked in by the road with a story about missing the rendezvous. <strong>Cyrathul</strong> carried it. Asked <em>“Are you a freaking dragon?”</em> he said <em>“Yes, I get that a lot,”</em> and when the camp took them for Fae he cut his own palm on the sergeant’s iron dagger to prove otherwise. His missed-rendezvous story landed. Then he rolled three 3s in a row, the Drill Sergeant went to check the story with <strong>Nixa Volsetti</strong>, the Elidir commander, and Cyrathul stepped into her path: <em>“I can’t let you do that.”</em> Two rounds later the sergeant and the whole mercenary band were dead, the last of them cut down by <strong>Zanthar’s</strong> Lightning Bolt as they ran screaming for the other camp. Nixa came marching over to find bodies in the road. Cyrathul told her there had been a mole among them, claimed <strong>Colonel Rithert</strong> had sent the party, and offered to take the dead men’s posts: <em>“evidently we’re a little better at guarding than these people were.”</em> She handed them shovels.</p>
+    <p>It didn’t hold. Before long Nixa had worked out that Rithert <em>“was not at liberty to send out anyone.”</em> <strong>Bai Feng</strong>, keeping watch, overheard her soldiers cursing Caeto for leaving the south to the undead and turning the army on Saringallow, and <strong>Panacea</strong> saw the opening: <em>“We want to recruit these guys.”</em> Nixa already knew who they were. A dragon walking into camp <em>“really fit the parameters of those we were told had defeated Illcayna.”</em> Panacea asked her straight (<em>“Is your loyalty with Caeto or with Isger?”</em>), Cyrathul’s nat-20 lore turned up her history (rescued from the <strong>demon bile</strong> incident as a child by <strong>Caeto</strong> himself), and his Diplomacy 39 found her answer. <em>“He’s doing exactly what he said he wouldn’t do. He’s becoming one of them.”</em> She sealed a letter saying her contingent had been called away and these mercenaries sent in its place, marched her troops to <strong>High Fort</strong>, gave the League <strong>two heavy cavalry</strong>, and left the party a lesser reinforcing rune, two greater smoke balls and a Swift Block Cabochon. 80 XP, and the first three edge points of the infiltration.</p>
+    <p>At the Sereni Manor a watchmage and a <strong>Draconic Fumecrux</strong> guard the door, and the banner over the bell tower is <strong>Sephone Haugini’s</strong>. The captain of the guard toured the new hires through a house lit to banish every shadow. They learned the shift rotation and the guard posts, and that the second floor is off limits. A research team of <strong>Kylixes and Zealots of Asmodeus</strong> is in the library pulling books on teleportation and hellish summoning for <em>“the ritual for the mistress,”</em> and indentured servants and conjured demons are digging in the garden for an old basement. The Fae took the manor after Illcayna fell, <em>“calling it like an overdue payment”</em>. Sephone drove them out, but they still come at night, and the <strong>redcaps</strong> are said to be under the thumb of a pukwudgie named <strong>Rustflesh</strong>. Sephone has offered climbing armbands to anyone who will clear the <strong>breathless thicket</strong> off the roof. The party took the bounty. Cyrathul built a Helpful Steps staircase. One thicket grabbed Cyrathul, and Bai Feng’s nat-20 crit killed it. The other two grabbed Bai Feng and tried to suffocate him, and Zanthar burned them both off the roof. Among the ash: a pair of Boots of Bounding, and written on the wall in rust-coloured letters, <em>“Rustflesh’s house. Stay out.”</em> The session ended at five in the afternoon on the roof of a diabolist’s manor, the party waiting for dark.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="log-warning"><strong>Source notes.</strong> (1) Kaazz split across two diarization labels again, and his bucket picked up a run of short player lines. None of those are quoted here. (2) The roll log is the speaker-attributed export. One header, so no double paste. (3) This table’s hero-point house rule applies: a reroll of 10 or lower gets +10. (4) Four PCs. Storm (Elaine) has left the campaign.</div>
+  <div class="timeline">
+
+    <div class="act explore">
+      <div class="act-label">Act I · Exploration · The Vulaunex Ranch, morning of ~12 Pharast</div>
+      <div class="act-card">
+        <h3>Ranch Hands</h3>
+<ul>
+<li>The party was disguised as <strong>ranch hands</strong> at the Vulaunex Ranch, delivering calves with a helpful old cowboy. Ethran pitched in one-armed. <strong>Zanthar</strong>: <em>“We’re doing ranch hand activities.”</em> <strong>Cyrathul</strong>: <em>“Why are we hiding as ranch hands? Get in the manor.”</em></li>
+<li>The cart they had escaped Saringallow in arrived with a League contact and the scouting report: <strong>two groups of new recruits</strong>, due at the Sereni Manor the next morning — a well-trained <strong>contingent from Elidir</strong> and a band of <strong>mercenaries</strong>. <em>“Infiltrate one or both of them, maybe intercept or replace one of the groups.”</em> Asked how they were fitting in, <strong>Zanthar</strong>: <em>“Well, no one’s died yet.”</em></li>
+<li><strong>The south road belongs to the Fae.</strong> The area <em>“used to belong to the Fae. We used to treat with them a long time ago,”</em> but since the Chelaxians took over the two have been at war, and there are supposedly Fae in the manor itself too.</li>
+<li><strong>Cyrathul</strong> wanted to treat with them (<em>“They’re fighting the Cheliax, you said, right?”</em>). The rancher spat on the ground: <em>“I don’t know if I’d trust in a Fae.”</em></li>
+<li><strong>Zanthar</strong>: <em>“We never followed instructions.”</em> <strong>Cyrathul</strong>: <em>“Yeah, we’re real bad at that.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act II · Social · The two camps</div>
+      <div class="act-card">
+        <h3>Plan A</h3>
+<ul>
+<li><strong>Stealth.</strong> <strong>Bai Feng</strong> followed the expert on Cyrathul, whose regalia makes it work even though he’s only trained. With the bonus he rolled the party’s best Stealth, a <strong>29</strong>.</li>
+<li>Two camps: the northern one loud and boisterous, the southern one quiet, mismatched and disorganized, its shields embossed with odd crests. A few of the southerners wore <strong>Azri</strong> family insignia. <strong>Bai Feng</strong> was the only one who could make out their whispers (Perception 31): the loud northerners would <em>“attract the Fae,”</em> and the redcaps would <em>“come out and try to gobble them up.”</em></li>
+<li><strong>The plan.</strong> <strong>Cyrathul</strong> proposed passing as late hires who’d missed the rendezvous, with the masquerade scarves from the gala as a fallback (<em>“see, I have a piece of the insignia here”</em>). For a name to drop, he put Recall Knowledge (Esoteric Lore 31) into the gala’s guest list. Kaazz supplied Caeto, the <strong>Azris</strong> and <strong>Colonel Rithert</strong>, and <strong>Panacea</strong>, digging through her notes (<em>“Man, that’s so far back in my notes”</em>), added <strong>Sasatoli</strong> and <strong>Lezinia</strong>. The Azri house has broken up since <strong>Rencelos</strong>, which is likely why its men are selling their swords now.</li>
+<li><strong>Walking in.</strong> A lone merc: <em>“Are you a freaking dragon?”</em> — <strong>Cyrathul</strong>: <em>“Yes, I get that a lot. A wizard cursed me after I…”</em> — <em>“Look alive, boys. The Fae are here.”</em> — <strong>Panacea</strong>: <em>“We are not the Fae.”</em> — <strong>Bai Feng</strong>: <em>“You ever seen the Fae looking like a dragon?”</em> Cyrathul asked for iron to prove it, and the <strong>Drill Sergeant</strong> handed him a dagger hilt-first. He drew a claw across it, let it bleed, and handed it back.</li>
+<li>The mercenaries sneered at non-humans. <strong>Bai Feng</strong>: <em>“I’m a human here.”</em> <strong>Cyrathul</strong>: <em>“I’ll vouch for them… normally it’s my kind looking down on you.”</em></li>
+<li>The rendezvous story itself landed (Deception 33). Then the questions kept coming. <em>“This is the rendezvous.”</em> Cyrathul rolled a 3, then put a <strong>hero point</strong> into the reroll, another 3 that took the +10 and came in at 30. <em>“Who hired you?”</em> — <em>“Yes, I’m afraid that’s confidential with our clients.”</em> Another 3 (<em>“That was three times in a row I got a three”</em>).</li>
+<li><em>“Where are you from?”</em> — <strong>Cyrathul</strong>: <em>“The moon.”</em> <strong>Bai Feng</strong>: <em>“I am from a land far away.”</em> <strong>Zanthar</strong>: <em>“We’re here for gold.”</em> — <em>“Yeah, ain’t we all?”</em> Then a 25 that still wasn’t enough. <strong>Bai Feng</strong>: <em>“The more we lie, the more in trouble we are.”</em></li>
+<li>The sergeant went to verify the story with <strong>Nixa</strong> in the northern camp. Every hand in the mercenary camp went to a sword. <strong>Cyrathul</strong> stepped into her path: <em>“I can’t let you do that. I’m sorry.”</em> <strong>Bai Feng</strong>: <em>“We’re activating Plan B.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act III · Combat · The mercenary camp</div>
+      <div class="act-card">
+        <h3>Plan B</h3>
+<ul>
+<li>Two rounds. <strong>The Drill Sergeant and the whole Mercenary Band dead.</strong> See Combat Encounters below.</li>
+<li><strong>Zanthar</strong> took both kills: a Blazing Bolt <em>“straight through the side of their ear”</em> and a Lightning Bolt through the routing band. <strong>Cyrathul’s</strong> Draconic Frenzy did the heaviest damage, including a 44-point crit.</li>
+<li><strong>Bai Feng’s</strong> first fight as an Exemplar: <em>“I don’t usually hit people, but I guess we gotta do what we gotta do.”</em> Out of character: <em>“This character is a lot. Oh my god.”</em></li>
+<li>He entered his Marshal Stance with <em>“Alright, guys. Follow my lead,”</em> and Kaazz: <em>“See, Bai Feng, look how regal on the battlefield.”</em></li>
+<li><strong>80 XP</strong> (Moderate).</li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act IV · Social · The northern camp, noon</div>
+      <div class="act-card">
+        <h3>Nixa Volsetti</h3>
+<ul>
+<li><em>“What the fuck is going on over there? I knew those mercenaries gonna be up to no good.”</em> <strong>Nixa</strong> marched out to find dead men in the road. <strong>Bai Feng</strong> deferred to Cyrathul: <em>“I’m not used to deal with these situations.”</em> <strong>Cyrathul’s</strong> first Fae story missed (23). The second landed (34): <em>“There was a mole among them and when we accused them, they attacked us.”</em></li>
+<li><em>“Who exactly sent you?”</em> <strong>Cyrathul</strong> went through the gala guest list out loud, ruled out Caeto, and said <strong>Colonel Rithert</strong>. <em>“The dandy?”</em> Then he offered the dead men’s jobs: <em>“We did just finish our contract”</em> (gesturing at the bodies) <em>“and evidently we’re a little better at guarding than these people were”</em> (Diplomacy 31). <strong>Bai Feng</strong> offered to Aid and then thought better of it, since Bai Feng wouldn’t know any of this. She re-sheathed her sword, tossed down shovels and walked off without a word.</li>
+<li><strong>The bodies.</strong> <strong>Panacea</strong>: <em>“Got to start digging.”</em> <strong>Zanthar</strong> crit-identified the sergeant’s <em>“unusual”</em> sword (Arcana 36) as a +1 striking longsword, and <strong>Cyrathul</strong> found the sergeant’s tent and <strong>600 gp</strong> of pay in it, 150 each.</li>
+<li>While they searched the camp, <strong>Bai Feng</strong>: <em>“I’m supposed to be a hunter, not a killer.”</em> <strong>Cyrathul</strong>: <em>“War is hell. We tried to do this the peaceful way.”</em></li>
+<li><strong>The second interview went worse.</strong> <em>“Who might you all be?”</em> The party realized they had no group name, and no names they could use. <strong>Cyrathul</strong>: <em>“You may call me Rem”</em> (nat 1 on the Deception). <em>“It’s not personal. It’s more safety-wise.”</em> <em>“We all have alliances.”</em> <strong>Bai Feng</strong>, backing him: <em>“We all have alliances. You know, in this line of work.”</em> <strong>Cyrathul</strong>: <em>“We’d rather go by traveling names… like a stage name of sorts.”</em></li>
+<li>Then Nixa: <em>“Colonel Rithert was not at liberty to send out anyone.”</em> That Deception failed too.</li>
+<li>The retreat. <strong>Panacea</strong>, setting up her own joke: <em>“Should we go to bed? It’s time for bed, isn’t it? Don’t we have an early morning?”</em> … <em>“It’s noon.”</em> <strong>Bai Feng</strong>: <em>“We’re tired after drinking all those grapes.”</em> <strong>Cyrathul</strong>: <em>“I am a moon dragon. We’re a bit nocturnal.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act social">
+      <div class="act-label">Act V · Social · The northern camp, afternoon</div>
+      <div class="act-card">
+        <h3>Turning the Contingent</h3>
+<ul>
+<li><strong>Bai Feng and Zanthar</strong> (Perception 34 and 32) overheard Nixa as she walked away: <em>“I was really hoping they were here to alleviate the problem in Saringallow, but I wonder what they’re doing.”</em> <strong>Zanthar</strong> proposed ambushing them asleep (<em>“Maybe we need to ambush them when they’re asleep”</em>), and <strong>Bai Feng</strong> was for it (<em>“We can wait until they get all drunk and ambush them”</em>).</li>
+<li>Then <strong>Bai Feng</strong> caught the soldiers on the next listen: <em>“It’s not like Caeto sent anybody down to stop the undead uprising… This is supposed to be Isger, not at the whim of some turncoat Chelaxian dog.”</em></li>
+<li><strong>Panacea</strong> saw it first: <em>“Oh, maybe we want to turn them. We want to recruit these guys.”</em> <strong>Cyrathul</strong>: <em>“Yeah, the one lady was ostracized too.”</em> <strong>Bai Feng</strong> turned the party around: <em>“Well, it’s time to go talk.”</em> Then <strong>Panacea’s</strong> Perception (30) caught Nixa herself, to her men: <em>“Time and time again the Isger army is turned against its own people… when the southern towns asked for help against the undead, we sent no one. No one!”</em></li>
+<li>They walked back in and were handed mead. <strong>Panacea’s Make an Impression</strong> came up 6, and she spent a <strong>hero point</strong> on it. She rerolled a 10, and the +10 made it 30. Nixa: <em>“I was to understand that the Hellbreakers were the ones that defeated the undead, supposedly finding a war shard in the process.”</em> <strong>Bai Feng</strong>: <em>“You have a reliable source of information.”</em></li>
+<li><strong>Panacea</strong>: <em>“But we also are here to befriend you… Saringallow is a travesty.”</em> Her Diplomacy came up 3. A second hero point brought it to 23, still short. <em>“We need Sai to be doing these diplomacy checks.”</em> <strong>Bai Feng</strong> pushed Sai forward.</li>
+<li>Nixa: <em>“A large dragon walk into the camp… really fit the parameters of those we were told had defeated Illcayna. So, tell me what you want from us.”</em> <strong>Cyrathul</strong>: <em>“Why don’t you join us? … I think the administration has proven time and time again that they cannot rule justly or effectively.”</em> His Diplomacy came up 24, two short, and the table broke for ten minutes.</li>
+<li><strong>After the break.</strong> <em>“I want to help. I do… I’m a good soldier… Whether I like it or not, I do owe Caeto.”</em> <strong>Cyrathul</strong>: <em>“Don’t you owe your country more than him?”</em> <strong>Panacea</strong>: <em>“Is your loyalty with Caeto or with Isger?”</em></li>
+<li><strong>Recall Knowledge.</strong> <strong>Cyrathul’s nat 20 (Esoteric Lore 37)</strong>: Nixa was caught up in the <strong>demon bile incident</strong> as a child, <strong>rescued by Caeto</strong> and left at an orphanage, and she is <em>“Isgeri through and through.”</em> <strong>Zanthar’s</strong> Society (32) succeeded as well. <strong>Bai Feng rolled an untrained nat 20</strong>, and Kaazz: <em>“Somehow Bai Feng, who’s never been in Isger in his entire life until he woke up here just a week ago.”</em> Pax had an answer ready: he’d heard about it from someone he talked to after he woke up.</li>
+<li><strong>Cyrathul</strong>: <em>“You know it isn’t right what’s going on.”</em> <strong>Diplomacy 39, a crit.</strong> A single tear rolled off the tip of Nixa’s nose, and she wiped it away the way a proud person does. <em>“He’s doing exactly what he said he wouldn’t do. He’s becoming one of them. He is one of them now… I will not arrive tomorrow with you… I want to free Isger.”</em></li>
+<li><strong>The letter.</strong> She wrote it on her standard bearer’s back, then sealed and stamped it: her contingent has been <em>“called away on an important mission”</em> and has sent these mercenaries in its place (with a wink). <em>“Don’t break the seal.”</em> Her troops are going to <strong>High Fort</strong>. Panacea said Logos first and Kaazz pointed them to High Fort instead. The party sent a message ahead to High Fort the night before (retconned in at the table), so <strong>Jenverick</strong> would expect them.</li>
+<li>Nixa warned them: <em>“You know that it’s Diabolist there, right? … very wicked?”</em> <strong>Panacea</strong>: <em>“We’ve met a lot of wicked people on our travels, so we will do what we can.”</em></li>
+<li><strong>+2 Heavy Cavalry</strong> for the League army. Nixa’s reward: a <strong>lesser reinforcing rune</strong>, <strong>two greater smoke balls</strong> and a <strong>Swift Block Cabochon</strong>. <strong>80 XP</strong> for handling Nixa without a fight, and <strong>3 edge points</strong> by morning, with no awareness gained. <strong>Edge points</strong> (Kaazz): spend one to turn any failed skill check outside combat into a success.</li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act explore">
+      <div class="act-label">Act VI · Infiltration · The Sereni Manor, 13 Pharast</div>
+      <div class="act-card">
+        <h3>The New Hires</h3>
+<ul>
+<li>Thirty minutes through the woods: a stone wall, a huge manor with part of its roof caved in and braced up, and a lot of activity. At the door, a robed <strong>watchmage</strong> and <em>“a massive demon looking thing”</em>, the <strong>Draconic Fumecrux</strong>. The mage wouldn’t touch the letter (<em>“I’m sure that’s not for me”</em>) and sent the demon in, in Diabolic, which only <strong>Panacea</strong> understood. It came back: <em>“the mistress is sleeping.”</em> Then, in Common: <em>“But away from me. You look like you stink.”</em></li>
+<li>The <strong>captain of the guard</strong> looked down the road for the soldiers who should have been with them, read the letter, and handed out shoddy uniforms bearing a seal none of them had seen before. The same flag flies over the bell tower. <strong>Zanthar</strong>: <em>“Do you have anything of my size?”</em> — <em>“Of course. We have many halflings here.”</em> — <em>“Calling me a halfling is an insult.”</em></li>
+<li><strong>The tour</strong> ran as victory-point rounds. The house is <strong>lit everywhere</strong>: candles, lanterns and magical light <em>“to keep shadows out of certain areas.”</em> The doors are in poor shape. <strong>Shifts</strong> run 8 a.m.–4 p.m., 4 p.m.–midnight and midnight–8 a.m., one per guard. Two meals a day. <strong>Cyrathul</strong> heard that slacking is common and guards often miss their posts.</li>
+<li><strong>Panacea</strong> got the guard posts. Each shift there is one <strong>line infantry</strong> and one <strong>elite watch officer</strong> covering the entrance and the downstairs hall, the same again in the <strong>second-floor corridor</strong>, and the <strong>Draconic Fumecrux and a watchmage</strong> out front and in the garden at all times. The east wing is collapsed rubble. <strong>No one is allowed on the second floor.</strong></li>
+<li><em>“You must, must, must stay out of Sephone’s way.”</em> Her <strong>private research team</strong> of <strong>two Kylixes and three Zealots of Asmodeus</strong>, <em>“the Lord’s chain around their neck”</em>, works mostly in the library. <em>“I just know that there’s something here that they’re looking for. I know they’re digging in the garden.”</em></li>
+<li>The Fae <em>“took over the entire manor”</em> right after the heroes killed the wight who wanted to be a god, <em>“calling it like an overdue payment or something.”</em> Sephone drove them off, but they hide upstairs and come out at night.</li>
+<li>A guard told <strong>Cyrathul</strong> about the old Kellid tribes who set out treats and trinkets for the Fae, who turned angry when the tributes stopped. There are pixies and draxies about, and some trinkets would probably keep them friendly. The <strong>redcaps</strong> kill on sight. <em>“You ever seen a redcap before?”</em> — <em>“Oh, yeah. Nasty buggers.”</em> He’d heard the redcaps are oppressed by a pukwudgie named <strong>Rustflesh</strong>, and that if Rustflesh were gone they might turn friendly.</li>
+<li>In the garden, demons and indentured humanoids are digging a huge hole. <strong>Zanthar</strong>: <em>“I’m glad we’re not digging.”</em> Sephone has offered <em>“special armbands”</em> that make climbing easier to whoever clears the <strong>breathless thicket</strong> on the roof. <strong>Zanthar</strong>: <em>“How much is the bounty?”</em></li>
+<li><strong>Asking around.</strong> <strong>Zanthar</strong>: <em>“Why don’t we find out what they’re looking for?”</em> A malnourished servant in the pit said it’s <em>“some sort of old basement,”</em> and that’s all he’s been told.</li>
+<li><strong>The library.</strong> <strong>Zanthar</strong> read the spines: <strong>teleportation, conjuration and summoning, especially hellish summoning.</strong> <strong>Panacea</strong>: <em>“Probably in this basement that we’re digging for.”</em> <strong>Cyrathul</strong>: <em>“What are you guys transcribing?”</em> — <em>“Oh, just the ritual for the mistress, you know, the usual.”</em> The researcher put a hand to his temple to shut Cyrathul out, and Cyrathul slapped him on the back, hard, on the way out. <strong>Bai Feng</strong> noticed the ancient shelves could easily be rigged to collapse on the researchers: <em>“I don’t know if I want to… do anything with that information.”</em></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="act combat">
+      <div class="act-label">Act VII · Combat · The manor roof, ~4–5 p.m.</div>
+      <div class="act-card">
+        <h3>The Roof</h3>
+<ul>
+<li>The guards turned them back at the stairs (<em>“No one’s allowed upstairs”</em>) and at the rubble. <strong>Bai Feng</strong>: <em>“We have Helpful Steps, surely.”</em> <strong>Cyrathul</strong> cast it outside, a staircase to the roof, and the watchmage let them go once <strong>Zanthar</strong> told him it was for the bounty.</li>
+<li>Up top was a ten-foot patch of dead shrubs with wilted flowers: <strong>three breathless thickets</strong>. Barely two rounds. <strong>Bai Feng’s nat-20 crit killed the first</strong>, and <strong>Zanthar’s two-ray Blazing Bolt</strong> burned the other two off the roof.</li>
+<li>Tangled in the burnt vines: <strong>Boots of Bounding</strong>, which went to <strong>Cyrathul</strong> (<em>“Extra speed never hurts”</em>).</li>
+<li>On the wall, in rust-coloured letters that might be blood: <strong><em>“Rustflesh’s house. Stay out.”</em></strong> <strong>Panacea</strong> read it (she knows Fey): <em>“That’s the guy that has the oppression spell on the redcaps.”</em></li>
+<li>Almost 5 p.m. and the sun setting. The Fae only come out after dark, and the party stayed on the roof to wait. <strong>Bai Feng</strong>: <em>“Our Halloween is destroying these plants.”</em></li>
+</ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Combat Encounters</h2>
+
+  <div class="combat-box">
+    <h3>Encounter 1 — Plan B (the mercenary camp)</h3>
+    <div class="combat-meta">Moderate · 2 rounds · 80 XP</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Drill Sergeant (120 HP, AC 25) · Mercenary Band (troop, run weak: 160 HP, AC 24)</div></div>
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Panacea 32 · Bai Feng 23 · Cyrathul 19 · Band 18 · Sergeant 18 · Zanthar 15</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zanthar 2</div></div>
+      <div><div class="combat-stat-label">Damage dealt</div><div class="combat-stat-value">Cyrathul 163 · Bai Feng 69 · Zanthar 60 · Panacea 27</div></div>
+      <div><div class="combat-stat-label">Taken</div><div class="combat-stat-value">16 (one Let ’em Have It!)</div></div>
+    </div>
+    <p><strong>Opening.</strong> Cyrathul’s <strong>Battle Cry</strong> Demoralized the Drill Sergeant at initiative (39 vs Will DC 31, <strong>Frightened 1</strong>).</p>
+    <h4>Round 1 — The Sergeant Falls</h4>
+<ul>
+<li><strong>Panacea</strong> cast <strong>Calm</strong> on the mercenaries. The band <strong>critically succeeded</strong> (30), so no effect.</li>
+<li><strong>Bai Feng</strong> shifted immanence to the Gleaming Blade as initiative was rolled, strode around to flank the sergeant, and <strong>Sparked Transcendence into Flowing Spirit Strike</strong>: 29 hit and 22 hit (exactly her flanked, frightened AC) for <strong>21 + 24 = 45 spirit</strong>. He shifted immanence to the Mirrored Aegis.</li>
+<li><strong>Cyrathul</strong> rolled a Demoralize on the troop (crit), but Bai Feng caught it (<em>“I think there are troops. I don’t think that works”</em>) and Cyrathul agreed and moved on. <strong>Draconic Frenzy</strong> on the sergeant: jaws hit for <strong>25</strong>, claw <strong>crit (32) for 44</strong>, claw miss. The sergeant was down to 6 HP.</li>
+<li><strong>Mercenary Band</strong> moved in and used <strong>Let ’em Have It!</strong> (2 actions, 17 bludgeoning, DC 23 basic Reflex). Cyrathul made the save (23) and took 8. <strong>Bai Feng rolled a nat 1, spent a hero point, rerolled an 11 (25, no bonus)</strong>, made it, and took 8.</li>
+<li><strong>Drill Sergeant</strong> rallied her men (<em>“come on boys, you got this”</em>) and swung twice at Cyrathul. Both missed (23, 18).</li>
+<li><strong>Zanthar</strong> cast a two-ray <strong>Blazing Bolt</strong>. The first ray hit the sergeant (31), and the bolt went <em>“straight through the side of their ear and blows out the other side of their head.”</em> <strong>Killed.</strong> The second ray crit-missed the band on a nat 1.</li>
+</ul>
+    <h4>Round 2 — The Band Breaks</h4>
+<ul>
+<li><strong>Panacea</strong>: <strong>Divine Lance</strong> on the band (28) for 18, then <strong>Trade Death for Life</strong> (band failed, 9 void). The fast healing went to Bai Feng (+4).</li>
+<li><strong>Bai Feng</strong> sparked <strong>Raise the Walls</strong> on himself and Cyrathul (+1 status to AC and Reflex). <strong>The Radiant</strong> rolled 18 of healing on Cyrathul, and 8 of it landed because that was all he was down. He entered <strong>Inspiring Marshal Stance</strong> (Assurance 22 vs DC 22) for a +1 status bonus to the party’s attacks: <em>“Alright, guys. Follow my lead.”</em> Then he struck the band (28) for 24.</li>
+<li><strong>Cyrathul</strong>: <strong>Exploit Vulnerability crit (37)</strong>, exploiting the band’s area-damage weakness (+10 on each of his hits). He asked for the weakest save (Will) and the band’s favorite cupcake flavor (vanilla, strawberry frosting). Then a <strong>Draconic Frenzy</strong>: jaws hit (33 taken), claw hit (34), claw crit-miss. <em>“We got this, boys!”</em> Bai Feng: <em>“I’m not too sure about that.”</em></li>
+<li><strong>Mercenary Band</strong> broke and ran around the party for the northern camp, screaming for help. Bai Feng’s <strong>Reactive Strike</strong> missed (23) and Cyrathul’s <strong>Twisting Tail</strong> hit (27 taken).</li>
+<li><strong>Zanthar</strong>: <strong>Lightning Bolt</strong> through the fleeing troop (failed save, 33). <strong>Killed.</strong> Bai Feng: <em>“You actually just really hate these guys.”</em></li>
+</ul>
+    <p style="color:var(--gold)"><strong>80 XP</strong> (Moderate). Damage figures are after the troop’s weakness. Zanthar’s two finishing blows rolled 60, of which 21 was needed.</p>
+  </div>
+
+  <div class="combat-box">
+    <h3>Encounter 2 — The Roof (breathless thickets)</h3>
+    <div class="combat-meta">Low · 1 round plus Zanthar’s opening turn of round 2 · XP not yet awarded</div>
+    <div class="combat-stats">
+      <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">3 × Breathless Thicket (58 HP, AC 21, grab, Suffocate DC 26 Fort, weakness fire 15)</div></div>
+      <div><div class="combat-stat-label">Initiative</div><div class="combat-stat-value">Zanthar 32 · Cyrathul 31 · Bai Feng 26 · Thickets 19/17/16 · Panacea 15</div></div>
+      <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zanthar 2 · Bai Feng 1</div></div>
+      <div><div class="combat-stat-label">Taken</div><div class="combat-stat-value">Bai Feng 8 (healed by Life Boost)</div></div>
+    </div>
+    <p><strong>Opening.</strong> Bai Feng went in on Defend and started the fight with his Sapling Shield raised.</p>
+    <h4>Round 1 — Grabbed</h4>
+<ul>
+<li><strong>Zanthar</strong>: <strong>Lightning Bolt</strong> (rank 4, 35) through two thickets. Both failed but only took <strong>20 each</strong>: <em>“it doesn’t work as well as you would think.”</em></li>
+<li><strong>Cyrathul</strong>: <strong>Exploit Vulnerability</strong> (31) turned up <strong>fire 15</strong>, which his esoterica triggers on every hit. <strong>Draconic Frenzy</strong>: the nearest thicket lashed out first with a reaction (26, exactly his AC) and <strong>grabbed</strong> him. Jaws, claw and claw all hit. The physical damage was mostly soaked, but the fire weakness landed every time. <em>“Thaumaturge for the win.”</em></li>
+<li><strong>Bai Feng</strong> sparked <strong>Raise the Walls</strong> on himself and Cyrathul, shifted to the Gleaming Blade, and strode past the first thicket. It had already used its reaction. He struck: <strong>nat 20, 38, crit for 43</strong> (his strike carries fire). <strong>Killed</strong>, and Cyrathul was free. Cyrathul had already done 51 of its 58 HP, most of it fire weakness that Kaazz added by hand. <em>“And you know what’s funny? I do deal fire damage.”</em></li>
+<li><strong>Thickets.</strong> Kaazz resolved both grab reactions after Bai Feng’s turn. One missed (25) and the next <strong>grabbed</strong> him (36). <strong>Suffocate</strong>: he made the Fort save (35; Foundry raised it a step) for no damage, and Kaazz let him Escape right away (35, a success). The other survivor grabbed him again (37) and Suffocated. His 20 was raised a step to a success, so he took half of 17, <strong>8 bludgeoning</strong>, dizzy and stupefied. A duplicated token briefly <em>“came back alive”</em> until Kaazz deleted it.</li>
+<li><strong>Panacea</strong>: Divine Lance hit, but spirit damage did nothing to it. She cast <strong>Life Boost</strong> on Bai Feng (fast healing).</li>
+</ul>
+    <h4>Round 2 — The Roof Burns</h4>
+<ul>
+<li><strong>Zanthar</strong>: two-ray <strong>Blazing Bolt</strong>, hits on 30 and 24, for <strong>25 and 33</strong> plus the weakness. <strong>Both remaining thickets killed.</strong> Kaazz: <em>“You guys set the rooftop on fire.”</em> Zanthar: <em>“Well, that was… That worked.”</em></li>
+</ul>
+    <p style="color:var(--gold)"><strong>Hero points this session</strong>: Cyrathul ×1 (Deception, 3 → 3+10 = 30) · Panacea ×2 (Make an Impression 6 → 10+10 = 30; Diplomacy 3 → 13 = 23) · Bai Feng ×1 (Reflex, 1 → 11 = 25). At this table a reroll of 10 or lower gets +10.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Character Spotlight</h2>
+  <div class="spotlight-grid">
+
+    <div class="spotlight s-baifeng">
+      <h4>Bai Feng · Follow My Lead</h4>
+<ul>
+<li><strong>He’s a hunter, not a killer, and he said so.</strong> He went into his first fight with <em>“I don’t usually hit people, but I guess we gotta do what we gotta do,”</em> and told the mercenary band <em>“I would advise you to stand down”</em> in the middle of it. Searching the dead men’s camp, he said it plainly: <em>“I’m supposed to be a hunter, not a killer.”</em> In the library he spotted that the old shelves could be brought down on the researchers, and he didn’t want it: <em>“I don’t know if I want to… do anything with that information.”</em></li>
+<li><strong>He was the party’s ears.</strong> He alone made out the mercenaries’ whispers about the Fae and the redcaps (Perception 31), and he took the report back to the party under his breath. That afternoon he was ready to ambush the drunk camp, until he caught Nixa’s soldiers cursing Caeto (<em>“some turncoat Chelaxian dog”</em>). Once Panacea said <em>recruit</em>, he was the one who got everyone moving: <em>“Well, it’s time to go talk.”</em></li>
+<li><strong>He knew who the face was.</strong> Cornered by Nixa: <em>“I’m not used to deal with these situations.”</em> He let Cyrathul handle it, echoed him with <em>“We all have alliances. You know, in this line of work,”</em> and when Panacea’s checks kept missing, he pushed Sai forward himself. He started to Aid Cyrathul’s pitch and stopped, because Bai Feng wouldn’t know any of it. Pax plays what his character knows.</li>
+<li><strong>He brought the dry humour along.</strong> <em>“You ever seen the Fae looking like a dragon?”</em> <em>“I’m a human here.”</em> <em>“The more we lie, the more in trouble we are.”</em> <em>“We’re tired after drinking all those grapes.”</em> And when an untrained nat 20 got him the Recall Knowledge on Nixa, Kaazz asked how a man who’d never set foot in Isger knew that, and Pax had a story ready.</li>
+<li><strong>His first real fight as an Exemplar, and it looked like a marshal.</strong> He opened with Flowing Spirit Strike on the sergeant (both hits, <strong>45 spirit damage</strong>). The next round he put Raise the Walls over himself and Cyrathul, healed Cyrathul with the Radiant, and took his <strong>Inspiring Marshal Stance</strong>: <em>“Alright, guys. Follow my lead.”</em> Kaazz: <em>“look how regal on the battlefield.”</em> Pax, out of character: <em>“This character is a lot. Oh my god.”</em> On the roof he crit a thicket on a <strong>nat 20</strong> for <strong>43</strong> and killed it, freeing Cyrathul. Then two thickets grabbed him and tried to suck the air out of him. He made the first Suffocate save with no damage, broke out of the grab (Escape 35), got grabbed again, and took 8 from the second Suffocate.</li>
+</ul>
+    </div>
+
+    <div class="spotlight s-cyrathul">
+      <h4>Cyrathul · Yes, I Get That a Lot</h4>
+<ul>
+<li><strong>He was the face of the whole infiltration, and he kept the party in the game through a historic run of bad dice.</strong> He cut his own palm on the sergeant’s iron dagger to prove he wasn’t Fae. He invented a missed rendezvous, kept the clients <em>“confidential,”</em> and said he was from <em>“the moon.”</em> Then he rolled a 3 three times in a row and kept going.</li>
+<li><strong>He talked the party out of a massacre.</strong> Standing over the dead band, he gave Nixa a mole story she believed, picked Colonel Rithert from the gala guest list out loud, and then offered her the dead men’s jobs. <em>“We did just finish our contract… and evidently we’re a little better at guarding than these people were.”</em> When the names question came: <em>“You may call me Rem… It’s not personal. It’s more safety-wise… a stage name of sorts.”</em></li>
+<li><strong>He won Nixa.</strong> <em>“Why don’t you join us? … I think the administration has proven time and time again that they cannot rule justly or effectively.”</em> <em>“Don’t you owe your country more than him?”</em> His nat-20 lore found her past with Caeto, and his Diplomacy 39 turned her. Two heavy cavalry, a sealed letter and the front door followed.</li>
+<li><strong>He’s still a dragon about it.</strong> To the mercs sneering at non-humans: <em>“I’ll vouch for them… normally it’s my kind looking down on you.”</em> Asked to justify a nap at noon: <em>“I am a moon dragon. We’re a bit nocturnal.”</em> His Exploit Vulnerability crit got him two questions, and the second was <em>“In aggregate, what would be their favorite cupcake flavor?”</em> (Vanilla, with strawberry frosting.) He slapped the rude researcher on the back on his way out of the library.</li>
+<li><strong>And he made the heaviest hits.</strong> <strong>69 damage</strong> to the Drill Sergeant in one Draconic Frenzy, including a <strong>44-point crit</strong>, and about <strong>94 into the Mercenary Band</strong>. On the roof he took the thicket’s grab, triggered its fire weakness with every claw, and celebrated: <em>“Thaumaturge for the win.”</em> He built the Helpful Steps staircase that got them up there.</li>
+</ul>
+    </div>
+
+    <div class="spotlight s-panacea">
+      <h4>Panacea · Is Your Loyalty With Caeto or With Isger?</h4>
+<ul>
+<li><strong>She saw the recruitment before anyone else did.</strong> The party was talking about an ambush on a drunk camp when Bai Feng brought back the soldiers’ grumbling, and Panacea said it first: <em>“Oh, maybe we want to turn them. We want to recruit these guys.”</em> That idea is why the Elidir contingent is marching to High Fort and not into the Sereni Manor.</li>
+<li><strong>She asked Nixa the question that mattered.</strong> <em>“Is your loyalty with Caeto or with Isger?”</em> She spent both of her hero points getting Nixa to the table, opened with <em>“we also are here to befriend you,”</em> told her <em>“Saringallow is a travesty,”</em> and then admitted the obvious with good grace: <em>“We need Sai to be doing these diplomacy checks.”</em></li>
+<li><strong>She did the homework.</strong> She dug names out of her notes from the gala (<em>“Man, that’s so far back in my notes”</em>) to give Cyrathul more to work with: Sasatoli and Lezinia. Her Perception caught Nixa’s <em>“we sent no one”</em> speech to her men, and on the roof she was the one who could read Fey. On the tour she came away with the guard posts for every shift. She was the one who understood the demon at the door in Diabolic. She also made sure the party actually went back and reported to Nixa (<em>“The bodies are buried. They’re gone”</em>).</li>
+<li><strong>Her answer to Nixa’s warning about the diabolist:</strong> <em>“We’ve met a lot of wicked people on our travels, so we will do what we can.”</em> And she got the party out of the tent at noon by proposing a nap and then puncturing it herself: <em>“It’s time for bed, isn’t it?”</em> … <em>“It’s noon.”</em></li>
+<li><strong>In the fights</strong> her Calm met a troop that crit the save. She landed a Divine Lance and a Trade Death for Life on the band, which kept Bai Feng on fast healing, and on the roof she put <strong>Life Boost</strong> on Bai Feng while the thickets were choking him. That brought his HP back, and the dizziness cleared once he could breathe again.</li>
+</ul>
+    </div>
+
+    <div class="spotlight s-zanthar">
+      <h4>Zanthar Melodune III · We’re Here for Gold</h4>
+<ul>
+<li><strong>He took every kill but one.</strong> He put a Blazing Bolt <em>“straight through the side of [the sergeant’s] ear,”</em> and dropped a Lightning Bolt through the Mercenary Band as it ran for the other camp. Bai Feng: <em>“You actually just really hate these guys.”</em> On the roof his opening Lightning Bolt caught two thickets, and his two-ray Blazing Bolt burned both survivors off the building. <em>“Well, that was… That worked.”</em></li>
+<li><strong>He kept the cover simple.</strong> <em>“We’re here for gold.”</em> <em>“We’ve been paid already also.”</em> And he raised the problem with Plan A early: <em>“They may turn us in as soon as they go over to the other group.”</em></li>
+<li><strong>He drove the investigation.</strong> He crit-identified the sergeant’s sword. At the manor he asked the captain what the research was for and what the bounty paid, and once the tour was over he pushed to keep going: <em>“Why don’t we find out what they’re looking for?”</em> He read the library’s spines (teleportation, conjuration, hellish summoning) and suggested asking the researchers directly. Then he wanted those armbands.</li>
+<li><strong>His comedy is dry and gnomish.</strong> <em>“Well, no one’s died yet.”</em> <em>“We never followed instructions.”</em> At the uniform handout: <em>“Do you have anything of my size?”</em> — <em>“Of course. We have many halflings here.”</em> — <em>“Calling me a halfling is an insult.”</em> At the excavation: <em>“I’m glad we’re not digging.”</em></li>
+</ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Loot</h2>
+  <div class="loot-grid">
+    <div class="loot-item magical"><div class="loot-name">+1 Striking Longsword</div><div class="loot-source">Drill Sergeant</div><div class="loot-note">Crit-identified by Zanthar (Arcana 36). Party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">Chain shirt · 6 javelins</div><div class="loot-source">Drill Sergeant</div><div class="loot-note">Party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">600 gp</div><div class="loot-source">The sergeant’s tent · Cyrathul found it</div><div class="loot-note">The band’s pay. <strong>150 gp each.</strong></div></div>
+    <div class="loot-item magical"><div class="loot-name">Reinforcing Rune (Lesser)</div><div class="loot-source">Nixa Volsetti</div><div class="loot-note">Shield rune: +3 Hardness, +52 HP. Party stash. Bai Feng’s Sapling Shield is the only shield in the party. <em>“It’s not very much, but hopefully it will help you in the battles to come.”</em></div></div>
+    <div class="loot-item magical"><div class="loot-name">2 × Smoke Ball (Greater)</div><div class="loot-source">Nixa Volsetti</div><div class="loot-note">Party stash.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Swift Block Cabochon</div><div class="loot-source">Nixa Volsetti</div><div class="loot-note">Single-use shield talisman: when you’d take damage from a physical attack, Shield Block even with the shield lowered, +5 Hardness. Party stash.</div></div>
+    <div class="loot-item"><div class="loot-name">2 × Heavy Cavalry</div><div class="loot-source">Nixa Volsetti</div><div class="loot-note">For the League army.</div></div>
+    <div class="loot-item"><div class="loot-name">Nixa’s sealed letter</div><div class="loot-source">Nixa Volsetti</div><div class="loot-note">Delivered at the Sereni Manor. The party’s way in.</div></div>
+    <div class="loot-item magical"><div class="loot-name">Boots of Bounding</div><div class="loot-source">The breathless thickets · from someone who tried before</div><div class="loot-note"><strong>Cyrathul.</strong> +5 ft Speed. <em>“Extra speed never hurts.”</em></div></div>
+    <div class="loot-item"><div class="loot-name">Manor guard uniforms</div><div class="loot-source">The captain of the guard</div><div class="loot-note">Sephone’s seal.</div></div>
+    <div class="loot-item"><div class="loot-name">Climbing armbands (pending)</div><div class="loot-source">Sephone Haugini’s bounty</div><div class="loot-note">Promised to whoever clears the thicket. The party has proof but hasn’t claimed yet.</div></div>
+  </div>
+  <div class="xp-banner">Experience · 80 the mercenary camp · 80 Nixa, without a fight = <strong>160 XP each</strong> · the roof not yet awarded · 3 edge points, 0 awareness</div>
+</section>
+
+<section>
+  <h2>Memorable Quotes</h2>
+
+  <blockquote><strong>Cyrathul:</strong> “Yes, I get that a lot.”
+    <span class="attribution">To a mercenary’s “Are you a freaking dragon?”</span></blockquote>
+
+  <blockquote><strong>Bai Feng:</strong> “You ever seen the Fae looking like a dragon?”
+    <span class="attribution">Backing Cyrathul’s case that they weren’t Fae</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “We’re here for gold.”
+    <span class="attribution">The cover story, in full. The merc: “Yeah, ain’t we all?”</span></blockquote>
+
+  <blockquote><strong>Bai Feng:</strong> “I don’t usually hit people, but I guess we gotta do what we gotta do.”
+    <span class="attribution">His first combat turn as an Exemplar</span></blockquote>
+
+  <blockquote><strong>Bai Feng:</strong> “I’m supposed to be a hunter, not a killer.”
+    <span class="attribution">While searching the mercenary camp, before the burial</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “I am a moon dragon. We’re a bit nocturnal.”
+    <span class="attribution">Playing along with Panacea’s noon-nap exit</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “Is your loyalty with Caeto or with Isger?”
+    <span class="attribution">Pressing Nixa on where she stood, before Cyrathul’s nat 20 and Diplomacy 39 turned her</span></blockquote>
+
+  <blockquote><strong>Cyrathul:</strong> “I think the administration has proven time and time again that they cannot rule justly or effectively.”
+    <span class="attribution">The recruitment pitch</span></blockquote>
+
+  <blockquote><strong>Nixa Volsetti:</strong> “He’s doing exactly what he said he wouldn’t do. He’s becoming one of them. He is one of them now.”
+    <span class="attribution">About Caeto, the man who rescued her as a child, after Cyrathul’s Diplomacy 39</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “We’ve met a lot of wicked people on our travels, so we will do what we can.”
+    <span class="attribution">To Nixa’s warning that the diabolist is “very wicked”</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “Calling me a halfling is an insult.”
+    <span class="attribution">At the uniform handout. “Of course. We have many halflings here.”</span></blockquote>
+
+  <blockquote><strong>Zanthar:</strong> “We never followed instructions.”
+    <span class="attribution">Cyrathul: “Yeah, we’re real bad at that.”</span></blockquote>
+
+  <blockquote><strong>Panacea:</strong> “It’s noon.”
+    <span class="attribution">Her own punchline, a beat after “It’s time for bed, isn’t it?”</span></blockquote>
+</section>
+
+<section>
+  <h2>Open Threads</h2>
+  <div class="threads">
+<ul>
+<li><strong>RUSTFLESH’S HOUSE. STAY OUT.</strong> It’s written in blood-coloured letters on the manor roof. Rustflesh is the pukwudgie who holds the redcaps under <em>“tyrannical rule,”</em> and a guard thinks the redcaps might turn friendly with him gone. The Fae come out after dark. The party is on the roof at sunset.</li>
+<li><strong>SEPHONE HAUGINI’S RITUAL.</strong> Two Kylixes and three Zealots of Asmodeus are working on <em>“the ritual for the mistress”</em> from books on teleportation, conjuration and hellish summoning. Something is buried in the garden, and <em>“some sort of old basement”</em> is being dug for. <strong>The demon bile source</strong> from S27 sits on the same ground. The party hasn’t met Sephone; she was <em>“sleeping.”</em></li>
+<li><strong>THE SECOND FLOOR</strong> is off limits to the new guards, and the Fae hide up there. There’s a line infantry and an elite watch officer in its corridor every shift.</li>
+<li><strong>DAY SHIFT AT 8 A.M.</strong> — the party’s first watch. Edge points: 3. Awareness: 0.</li>
+<li><strong>THE ARMBANDS.</strong> Sephone’s bounty for clearing the thicket. They have the vines as proof.</li>
+<li><strong>THE PIXIES WANT TRINKETS.</strong> One guard has been leaving them buttons in secret.</li>
+<li><strong>NIXA VOLSETTI</strong> is marching the Elidir contingent to High Fort, and the party sent word ahead so Jenverick will expect them. Caeto rescued her as a child, and she still feels she owes him.</li>
+<li><strong>THE LIBRARY SHELVES</strong> could be brought down on the researchers. Bai Feng spotted it. The table talked about rigging it with Thievery or Crafting and left it alone.</li>
+<li><strong>CAETO</strong> is still at sea fetching the Chelaxian interrogator. <strong>Rhokrag</strong> and the others are still held in Saringallow.</li>
+<li><strong>THE THICKET XP</strong> hasn’t been awarded yet.</li>
+</ul>
+  </div>
+</section>
+
+<section class="pax-notes">
+  <h2>Pax’s Notes — Bai Feng’s Journal</h2>
+  <p class="pax-intro">Private notes, observations, and things to think about. Pax’s notes only — not shared with the rest of the party.</p>
+
+  <h3>What Bai Feng did this session</h3>
+<ul>
+<li>Ranch hand for a morning. Calves.</li>
+<li>Followed the dragon through the trees. 29. Heard the mercenaries whispering about Fae and redcaps.</li>
+<li><em>“You ever seen the Fae looking like a dragon?”</em></li>
+<li>The dragon’s lies ran out. Plan B. Two Strikes on the sergeant, 45. Raise the Walls on me and Sai, healed him, took the stance. <em>Follow my lead.</em></li>
+<li>A nat 1 on the band’s swords. Hero point. Made it.</li>
+<li>Searched their camp. <em>I’m supposed to be a hunter, not a killer.</em> Then buried them.</li>
+<li>Heard the soldiers curse Caeto. That turned it from an ambush into a talk. Let the dragon talk.</li>
+<li>Knew something about Nixa I had no business knowing.</li>
+<li>Saw the library shelves could come down on the researchers. Didn’t want it.</li>
+<li>Roof: nat 20, killed the first thicket. Grabbed twice. They tried to take my breath. The second time it took some.</li>
+</ul>
+  <h3>Things Bai Feng knows that the party does not</h3>
+<ul>
+<li>Nothing much. I told them what I heard in both camps.</li>
+</ul>
+  <h3>What Bai Feng is thinking about</h3>
+<ul>
+<li><em>I’m supposed to be a hunter, not a killer.</em></li>
+<li>Nixa’s gifts are for a shield. I carry the only one.</li>
+<li>Nixa owes Caeto her life and walked away from him anyway.</li>
+<li>The house is lit so there are no shadows anywhere.</li>
+<li>They’re reading about summoning and digging for a basement.</li>
+</ul>
+  <h3>Open questions for next session</h3>
+<ul>
+<li>Who is Rustflesh, and where does he sleep?</li>
+<li>What is under the garden?</li>
+<li>What’s on the second floor that the guards aren’t allowed to see?</li>
+<li>What does Sephone want to summon?</li>
+<li>Who told me Jian was dead?</li>
+</ul>
+</section>
+
+<section>
+  <h2>Where It Leaves Off</h2>
+  <div class="cliffhanger">
+    <span class="label">End of Session</span>
+    <p>Almost five in the afternoon on the roof of the Sereni Manor. The thickets are ash, the shift starts at eight tomorrow morning, and the Fae only come out after dark. The sun is going down. On the wall beside them, in rust-coloured letters that might be blood:</p>
+    <span class="big-line">“Rustflesh’s house. Stay out.”</span>
+    <span class="speaker">— written on the roof wall</span>
+  </div>
+</section>
+
+</div>
+
+
+<style>
+.pax-notes { background: #3a2a30; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 26px 30px; box-shadow: inset 0 0 32px var(--gold-glow), 0 4px 20px #00000040; }
+.pax-notes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 18px; }
+.pax-notes .pax-intro { color: var(--text-dim); border-bottom: 1px dashed var(--border-bright); padding-bottom: 14px; margin-bottom: 18px; }
+.pax-notes h3 { color: var(--amber); margin-top: 22px; }
+.pax-notes h3:first-of-type { margin-top: 0; }
+.pax-notes ul { margin-left: 20px; }
+.pax-notes li { color: var(--text); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; color: var(--amber); background: #160f12; padding: 1px 5px; border-radius: 3px; }
+</style>
+
+</body>
+</html>
