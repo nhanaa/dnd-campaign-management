@@ -32,6 +32,10 @@ Each campaign lives in its own root-level folder. All content is in Markdown.
 - When Pax says "run the server," he means this one. Use it to screenshot recaps through `http://localhost:4747` as well as by `file://`.
 - Code: `server.js` (routing), `lib/data.js` (campaign discovery), `lib/markdown.js` (uses `marked`), `lib/views.js` (HTML), `public/` (CSS/JS).
 
+## GM work lives in `~/foundry-gm`
+
+When Pax is the **GM** (Foundry prep, GM macros, map-maker, homebrew, GM lessons), that work belongs in the separate project **`~/foundry-gm`**, which has its own CLAUDE.md and memory. This repo keeps the player campaigns, `pf2e-lookup/` and `pf2e/` (foundry-gm symlinks to them), and the player macros in `foundry-macros/`.
+
 ## Campaigns
 
 | Folder | System | Setting | Character |
