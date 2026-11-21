@@ -5,7 +5,7 @@ description: Process a DnD/PF2e session recording into a transcribed, diarized r
 
 # Process Session
 
-End-to-end pipeline: transcribe a session recording, generate a styled HTML recap and markdown session notes, then propose updates to the campaign's world.md and dynamics.md.
+End-to-end pipeline: transcribe a session recording, generate a styled HTML recap and markdown session notes, then apply updates to the campaign's world.md and dynamics.md directly (no confirmation step).
 
 > **RUN END-TO-END WITHOUT QUESTIONS (Pax, 2026-10-25).** *"No need to ask me just go ahead… If I need to correct something I'll do it at the end when looking at the final recap."* **Do not use AskUserQuestion anywhere in this pipeline** — not for inputs, speaker mapping, ambiguous attributions, unstated damage, cameo pronouns, or reviewer `[CONFIRM]` flags. Wherever a step below used to say "ask," instead: make the best-evidenced call (capability matrix > roll log > transcript label), write the recap so it doesn't assert more than the evidence supports (drop or soften the unverifiable detail rather than guessing a specific), and list every judgement call in a short **"Calls I made"** section of the final report so Pax can correct them on review. The only hard stop is a failure you can't route around (no recording exists for the day and no roll log either, or transcription errors out).
 
@@ -899,24 +899,29 @@ Before finishing the HTML, verify:
 - [ ] All Pax's Notes subsections and bullets are included
 - [ ] The file renders correctly with no missing CSS classes
 
-### Step 7: Propose Campaign File Updates
+### Step 7: Apply Campaign File Updates (auto-write — no confirmation)
 
-After generating the recap, propose updates to:
+> **AUTO-APPLY (Pax, 2026-11-14):** *"change the skill so it auto applies world and dynamics. Kinda tired of having to confirm everytime."* Write the updates directly. Do not show a diff and wait, and do not ask. He corrects on review, the same as the recap.
 
-1. **`<campaign>/world.md`** — Add new NPCs, locations, lore, story developments
-2. **`<campaign>/dynamics.md`** — Update party status, NPC relationships, plot threads
+After the recap has passed Step 5.7, write the updates to:
 
-**Important:** Do NOT auto-write these updates. Instead:
-- Show the user the proposed additions as a diff
-- Ask for confirmation before writing
-- Only add genuinely new information (don't duplicate what's already there)
+1. **`<campaign>/world.md`** — new NPCs, locations, creatures encountered, lore, story developments; refresh **Current State & Trackers** (demote the old block to "Prior State"); append the **Session Log** entry.
+2. **`<campaign>/dynamics.md`** — the "Current through Session N" header with an in-brief line, party-row kit/gear changes, NPC relationships, and the ACTIVE plot-thread block for the current arc (rewrite it to the new state; mark resolved threads).
+
+Rules:
+- **Only post-review facts.** Everything written must already be in the finalized recap (after every reviewer flag is resolved). Never carry a fact that a reviewer corrected, and never write an unresolved "Calls I made" item as settled. Say it's uncertain, or leave it out.
+- Only add genuinely new information; update existing entries in place rather than duplicating them.
+- Never record a decision Pax hasn't made (build plans, character choices). Campaign facts from the session are fine.
+- After writing, `grep` for each new section and a key phrase to confirm every edit landed (a dropped string concatenation once silently lost a whole session-log entry).
+- In the final report, list what changed in each file in a few bullets so Pax can review it.
 
 ## Output Summary
 
 When complete, report:
 - Transcript location (JSON + SRT)
 - Session recap location (MD + HTML)
-- Proposed updates to world.md and dynamics.md (show inline, await approval)
+- What was written to world.md and dynamics.md (short bullet list per file — already applied)
+- "Calls I made"
 
 ## Error Handling
 

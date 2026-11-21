@@ -178,6 +178,21 @@ The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks
 
 **Iron Mountain** (three days north, the Flying Mountains in the Wall of Heaven) — **an island floats upside down above the summit** with its own ocean; flying at it gets no closer, and its mirage did 50 mental to Clutch. The chime then pointed down to the summit: a sulfur lake, twin vermilion shrine gates, twelve Tian zodiac statues, and **three Island Oni**. Kills: Seva, Clutch, Ferrok. **Next session opens with exposition at the summit.** Ferrok's player is out next week.
 
+### Book 4, Session 22 — The Intercessor's Mantle (2026-11-15)
+**All three ritual components gathered → Ferrok named Celestial Intercessor → the Celestial Dragon's wish → the way to the inverted island is open → level 19.** Four fights, four wins, nobody down. All five PCs (Ferrok back). *(Session 21's world/dynamics updates were never applied; see its recap.)*
+
+**The lava tubes** — two **Magma Worms** (weak to cold 10). Kills: Sattva (A), Sovael (B, crit Ray of Frost off a Sure Strike scroll).
+
+**The Blasted Lands** — the caldera of two kaiju (a purple manta ray that seeds obsidian forests; a gargantuan emerald-lightning ooze that tramples them). The party is beneath their notice. **Leydroths** (anti-magic beasts) had the **Speakers to the Wind** cornered, four of five unconscious. Fought beside **Mafika Ayuwari**. Kills: **Seva** (Leydroth A, bleed), **Mafika** (Leydroth B). Mafika ceded the Cypress and retreated with his students. **The Boundary Cypress** — a lone white-flowered tree; **Sattva** asked it for a branch (Nature 45, Sovael's Guidance, Ferrok's Aid). Left around it: Dispelling Sliver, Staff of Nature's Vengeance (Major), Wand of Force Barrage (rank 8), Impenetrable Scale.
+
+**Off the coast** (en route to Kaifen Bay, after a long rest aboard the *Solar Geon II*) — the **Winter's Roar** down, **Urnak Lostwind** fighting one linnorm, the party took a second **Cairn Linnorm**. **Sovael killed it with Debilitating Dichotomy** (it failed by one, through Ferrok's Frightened 2) and **critically saved against the Curse of the Crooked Cane**. Urnak thanked them; the Winter's Roar will be at the ritual.
+
+**Kaifen Bay** — the **Biting Roses** were already there (stowaways thrown overboard leaving Goka, carried inland by whales, washed ashore by a rogue wave), preparing **Yarrika**'s ritual to glimpse the boundary of the afterlife at sunset, and folded the party in. Only one PC can be Intercessor, who must also dance: **dance-off, Sovael 44, Ferrok 40.** Sovael declined the title. At sunset the beach stepped out of time: **Jin-hae**, the last Intercessor, a phantom who died on this beach and wanted one more real fight — *"Face me in battle. Win, and the title's yours."* She fought mounted on **Cloudsplitter** (kirin). **Ferrok killed both** (Thousand Year Slash on Cloudsplitter; a Reactive Strike on Jin-hae's Roaring-Applause clap). Jin-hae named **Ferrok Intercessor** (*"Only fitting you earned the killing blow… I relinquish my mantle. May my successor burn bright"*) and vanished at sunset. Back in the present, **Grandfather Mantis turned into an old human man resembling Yarrika, and vanished.** Washed ashore: major Dragon's Tongue spear, +3 major striking vorpal kama, Greater Storm Flash, black stardust (25,000 gp).
+
+**Iron Mountain — the ritual.** Every finalist team at the peak. Ferrok danced the **Kagura of Invocation** with the Cypress branch (Performance crit / crit / success), each team holding a part of it: the Steps of the Sun played (+2 for having been rescued), the Biting Roses warded off drawn spirits, the Winter's Roar shattered a boulder blown at the dais, the Arms of Balance relit the braziers and gave a bonus, the Speakers to the Wind shored the gate. Every team then **pledged its strength to the Nameless**. The **Celestial Dragon** (black and white; *"it has been only 11 years"*) came anyway; Ferrok asked in Draconic for Hao Jin. A black-and-white pearl passed through each PC and struck the *Solar Geon II*: **a dragon-headed lance on each prow.** *"I have granted your wish. It now falls to you to see it through."* **The way to the island is open.**
+
+**Level 19** and a new feature, **Affinity Ablaze** (once per day; invoke one allied team — macros in Foundry). Shopping in Goka (teleport assumed); the sale came to **29,574 gp each**. **Next session: the penultimate chapter of Ruby Phoenix.** Cody's next campaign: ***Dead God's Hand*** (link next week).
+
 ## The Tournament Proper — structure (from S16–S17)
 
 - **Double elimination.** All eight teams start in the winners' bracket. A loss drops a team to the losers' bracket; a loss there eliminates it. The losers'-bracket survivor meets the winners'-bracket winner in the final.
@@ -351,6 +366,18 @@ The last loop found the remaining team bases (a **shrine of Tsukiyo** with docks
 - **Ysoren** (spelling as heard) — middle-aged Minkaian pilot, effusive fan (watched the Speakers final). Family airship ***Solar Geon II*** (as heard): a pleasure yacht his great-great-grandmother built as a wedding gift, returned to the family by Hao Jin, lent to the tournament's victory parade each decade. Fast, weather-proof, **no weapons** — *"I'm counting on you all to bail us out."* Waits with the ship while the party explores.
 - **Mafika Ayuwari** (update) — fought alongside the Nameless on the Seven Dragon Bridge (two kills), then found the opera house via Hummingbird and went to rejoin his team.
 
+### New NPCs — Session 22 (2026-11-15)
+
+- **Jin-hae** — the last **Celestial Intercessor** (of the Rai Sho line). A phantom (not undead, not incorporeal) who was cut down on Kaifen Bay long ago and never moved on; *"War is war, but there's nothing like a real battle."* Hook swords that lock into one blade, then a Dragon's Tongue spear. Thought Hao Jin was still missing (*"How time flies in the void"*). **Passed the mantle to Ferrok** and vanished at sunset. Her companion **Cloudsplitter**, a floating stag-like kirin, fought under her.
+- **The Celestial Dragon** — black and white, vast enough to coil around Iron Mountain, grey eyes *"bright as the moon."* Speaks as *"we"*; came at eleven years rather than twelve because of the gathered energy. Granted the wish: the *Solar Geon II*'s lances and the way to the island.
+- **Grandfather Mantis** (update) — the Biting Roses' giant mantis became ethereal at Jin-hae's departure, turned into an **older human man who resembles Yarrika**, and vanished. At the ritual Yarrika's phantom **bore a human face**, and she told the party they had *"brought me closer to my own heritage."*
+- **Yarrika Mulandez** (update) — Biting Roses leader and spiritualist; came to Kaifen Bay to *"answer some questions about the afterlife."*
+- **Mafika Ayuwari** (update) — fought beside the Nameless again against the Leydroths and killed one; the Speakers owe the party their rescue (*"You saved us in the caldera"*).
+- **Urnak Lostwind** (update) — the Winter's Roar's true goal is **a kingdom of their own**; the linnorm hunt brought them a step closer. *"You will always be welcome among us, Nameless."*
+- **Usvani** (update) — at the ritual: *"It falls to you now, Nameless, to conclude this tournament."*
+- **Yoh Souran** — waited with the *Solar Geon II* at the lava tubes; got the Speakers' autographs.
+- **The kaiju of the Blasted Lands** — a purple manta ray scattering black orbs that bloom into obsidian/basalt forests, and a gargantuan green-ooze behemoth emitting emerald lightning that tramples them (names as heard: "Alru and Toriloa").
+
 ## Key Locations
 
 - **Isle of Bonmou** ("Danger Island"): remote island hosting the Ruby Phoenix prequalifier. Vast, full of ancient ruins and sites untouched for centuries, deliberately stocked with dangerous wildlife as part of the test. Hao Jin reclaimed it and assigned each of the 32 teams a residence somewhere on it. *(Published AP spells it Bonmu; the GM says "Bonmou.")*
@@ -401,7 +428,8 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 - **Ancestry**: Dragonet (Aiuvarin heritage → Pearl Dragonet via Ascended Dragonet Heritage)
 - **Role**: Primary healer + AoE artillery + buff/debuff engine + the party's only counteract magic
 - **Replaces**: Tivael (retired to the Azlanti excavation). **Tivael's cousin** — took the phoenix-sealed invitation that was addressed to Tivael.
-- **Level 16 as of S17 (2026-09-27).** Necklace of Allure → CHA +6, spell DC 39.
+- **Level 19 as of S22 (2026-11-15).** Legendary Spellcaster: divine spell DC 45; one 10th-rank slot (Conquering Soldiers / Nullify). Guise of the Smirking Devil (Greater) replaced the Ash Gown.
+- Won the S22 dance-off and **declined the Intercessor title**.
 - **See**: `character-sheet.md`
 
 ### Clutch — Guardian — *(Bargrum's player)*
@@ -415,6 +443,7 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 
 ### Ferrok the Unyielding — Magus (Sparkling Targe) / Bastion — **continuing**
 - **Talos Minotaur.** The only character carried over from Shades of Blood. Ignition Spellstrike kill-leader; historically the party's aggro magnet (enemies focus-fired him nearly every fight from S3 onward).
+- **The Celestial Intercessor as of S22** — named by Jin-hae for the killing blow; danced the Kagura at Iron Mountain and spoke the wish to the Celestial Dragon in Draconic.
 
 ### ~~Alastor — Monk~~ — **DEPARTED S9 (2026-07-19)**
 - Tian human, middle-aged. A finalist from **last decade's** Ruby Phoenix, estranged from his old team and given a second chance with strangers. Monk: **Battle Cry**, **Clinging Shadows Stance**, **Shadow Grasp**, Combat Grab.
@@ -624,6 +653,13 @@ Near-total roster turnover at the AP transition. Only the players carry over; mo
 - **Maestro Razu** (520 HP, AC 44, Perception +36, Performance +39) — bard: Dirge of Doom + Lingering, **Incredible Volume** (auditory ranges/emanations ≤60 ft become 300 ft), **Phantasmagoria** (rank 9, Will DC 44, confusion), **Pierce the Sky** (rank 9, three targets, sonic + electricity, deafens on a crit), Phantasmal Calamity, Spirit Song, erhu bow (+39, 20-ft thrown). **Contingency: Translocate when grabbed.** Weakest save Fortitude, no weaknesses.
 - **Melodic Squall** (345 HP, AC 39–40) — air elementals; Wind Gust (shove), Solid Refrain (ranged), Lightning Bolt (rank 7, DC 39), Noise Blast (rank 7, deafens). Fly 100 ft. Not immune to electricity; Reflex is the best save.
 - **Island Oni** (run elite: 410 HP, AC 40, longspear +36, 20-ft reach) — pale-blue, shark-toothed oni in aquatic silk. Reactive Strike, **Electrifying Pierce** (Fort DC 39 or grabbed), **immune to electricity**, **weak to spirit** (applied as +10 per hit; the book says 20). GM said weakest save Reflex. Oni dislike beans (Bean Panic).
+
+### Session 22 New Enemies (Ruby Phoenix, Book 4)
+- **Magma Worm** (525 HP, AC 40–41) — Fire Breath 20d6 in a 60-ft cone (DC 40–42, 1d4-round recharge), Thrash (a Strike on everything in reach), Improved Grab (swallow), stinger venom (Drained). **Weakness cold 10**; immune to fire; fast healing 20 in magma. Big enough to move while grabbed. No Reactive Strike.
+- **Leydroth** (500 HP, AC 43, +39 to hit; book level 17 is 315 HP / AC 40) — **Dispelling Roar**: a 10th-rank counteract on every magical effect within 30 ft plus a Demoralize; **Menace to Magic**: a counteract reaction against spells. Jaws/claw with bleed, Horn Sweep. Cantrips heighten to rank 10 and can beat its counteract.
+- **Cairn Linnorm** (600 HP, AC 44, +39, Will +29) — acid breath 25d6 (DC 44 Reflex) with a delayed drain save; venom; tail with Improved Grab and Trip; Attack of Opportunity (tail only). **Regeneration 15, deactivated by cold iron; weakness cold iron 15.** **Curse of the Crooked Cane** on whoever kills it: DC 42 Will or permanent Enfeebled 2 and a year of aging per day.
+- **Cloudsplitter** (kirin, 500 HP, AC 44, Will +33, Fort +31) — **Pierce the Sky** (rank 9, three thunderbolt arrows, deafens, leaves hazardous lightning lines), fire Breath Weapon 24d6 (DC 43), horn and hoof. **Immune to fire.** Rider's reach counts from its square.
+- **Jin-hae** (phantom; ~570 → ~630 HP) — linked hook swords +38 (Swipe hits two adjacent foes), then a Dragon's Tongue (Major) spear +41/+43 with Lunge (15 ft). Reactive Strike plus a high-level fighter's extra reaction each turn, Savage Criticals (crits on a 19), Whirlwind Attack. Doesn't take precision damage (spirit). **Roaring Applause shut her down.** Her numbers rose twice mid-fight (see the S22 recap).
 
 ### The action-economy lesson from S14
 Three of the five wins were decided by **denying enemy actions, not by damage**:

@@ -42,7 +42,7 @@ There was no festival. The Hellknights had taken Saringallow. Rabbit and Cole me
 
 ### Act II — Two Resurrections
 - **Cyrathul first.** Eight hours of chanting to Pharasma. In death he drifted down the **River Styx** to a figure *"looking in two directions at once,"* and psychopomps lifted him into her hands: *"You may not yet be done… very peculiar for your time, for your kind to be so selfless."*
-  - **Panacea** called him back: *"Sai, if you can hear us, we need you on this side. We need you over here. You're not done yet."* **Cyrathul**: *"I'll ponder for a moment, and then I'll head towards the voice."* (Alceo's Religion 34, Panacea's Medicine 20, Zanthar's Society 31.)
+  - **Panacea** called him back: *"Cy, if you can hear us, we need you on this side. We need you over here. You're not done yet."* **Cyrathul**: *"I'll ponder for a moment, and then I'll head towards the voice."* (Alceo's Religion 34, Panacea's Medicine 20, Zanthar's Society 31.)
   - He tried to get up and collapsed — *"How long have I been on the ground?"* — *"Almost too long."* — *"Is everyone okay?"*
 - **The summer mural.** Alceo needed rest before a second ritual. Panacea and Cyrathul remembered the Grotto of Seasons' summer mural (*"a magic place that we can do long rests in short amount of time"*), Zanthar touched it with **Bounty's Light**, and the whole party took a full long rest in a minute.
 - **Bai Jian.** Alceo chanted through the night again (Religion 26). Pharasma's word to Bai Jian was *"Redeemed,"* and he woke on a cliff in Elysium, his horse behind him.
@@ -118,7 +118,7 @@ There was no festival. The Hellknights had taken Saringallow. Rabbit and Cole me
 - **He followed them even after he was gone.** Phoebe's rose: *"He really was a friend of the rose."* The goblins' story of the crow's-nest kill. Ethran: *"Your brother helped us very much."* And the Bai Jian actor that kept rolling Bai Feng's Athletics checks in the chase: *"The ghost of Bai Jian is haunting us."* Panacea: *"He's just with now Bai Feng all the time."* Kaazz: *"Like a guardian angel."*
 
 ### Panacea · Sometimes You Got to Choose Family
-- **She brought Cyrathul back.** She took the ritual's Medicine, *"I'm not good enough to have saved them this time, but I've saved many others,"* and when the moment came she was the voice in Pharasma's hall: *"Sai, if you can hear us, we need you on this side. We need you over here. You're not done yet."* He followed it.
+- **She brought Cyrathul back.** She took the ritual's Medicine, *"I'm not good enough to have saved them this time, but I've saved many others,"* and when the moment came she was the voice in Pharasma's hall: *"Cy, if you can hear us, we need you on this side. We need you over here. You're not done yet."* He followed it.
 - **She took care of Bai Feng from the first minute.** Treat Wounds to get him up. *"He fell trying to save you. He's over here. Follow me."* At the body, a paw on him. On the way out she offered him a place: *"We can be your family now… Sometimes you got to choose family."* She is the one who introduced him, at HQ (*"you can meet Bai Feng here, which is Bai Jian's brother"*) and to the goblins.
 - **She remembered the summer mural** that got the whole party a long rest in a minute, and she crit-identified the Bleeding Heart that Bai Feng now wears.
 - **She owned the night at the Waterspout.** Moob still has the scar from S4. *"Remember I killed you?"* Then a flash of claws and a slight smile: *"It was an accident, and I was a young medic. I have kept my nails much shorter these days."* She bought him the butter rum to make it up, staggered back to the boat (*"I was just running into the walls a little bit. That was fun"*), refused the hair of the dog the next morning (*"No, sir. Let's go"*), and on the goblins' drinking: *"I mean, I'm not his mom."*
@@ -217,7 +217,7 @@ There was no festival. The Hellknights had taken Saringallow. Rabbit and Cole me
 > **Bai Feng**: "That was a great battle. Okay, so I did all that, huh? … Yeah, I totally did all that. See, I told you."
 *Taking credit for his brother's crow's-nest kill, because the goblins didn't know Bai Jian had a brother.*
 
-> **Panacea**: "Sai, if you can hear us, we need you on this side. We need you over here. You're not done yet."
+> **Panacea**: "Cy, if you can hear us, we need you on this side. We need you over here. You're not done yet."
 *The crescendo of Cyrathul's resurrection.*
 
 > **Panacea**: "It was an accident, and I was a young medic. I have kept my nails much shorter these days."

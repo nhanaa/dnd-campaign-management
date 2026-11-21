@@ -90,7 +90,7 @@ She was waiting forty feet above the water. Beside her a man with long dark hair
 - **Out of the fight, he cheered them on.** Once the table ruled him dead: *"At least make our sacrifice worth it. Come on, guys. Just kill her. She's so close."* Panacea did. When the man came down from the pool, Pax out of character: *"This is such drama. I can't believe it. This is so poetic… I love this."*
 
 ### Panacea · She Brought Her Down
-- **She killed Illcayna.** Vitality Lash on the turn after both martials died. Her own account: *"I threw some angry tentacles right at her little shard spot that she keeps trying to pull, and I pull her down and kill her. Right on top of Sai."* Kaazz took the image straight into the narration.
+- **She killed Illcayna.** Vitality Lash on the turn after both martials died. Her own account: *"I threw some angry tentacles right at her little shard spot that she keeps trying to pull, and I pull her down and kill her. Right on top of Cy."* Kaazz took the image straight into the narration.
 - **She was the voice of the room.** She answered Illcayna's *"It's already too late"* with *"It's not too late. It's just begun."* After the prayer took the scythe she said *"Now that we got that, let's kill this bitch,"* then caught herself: *"Wait, wait, no. We've got the magnet. We've got to take that shard out of her, too."* She had written the prayer down (*"in case we have to use it later"*), and when the table brought it up mid-fight she pushed it: *"We need to take that scythe off of her."*
 - **She did the hardest talking of the night.** She told a man who had just woken from some sort of stasis that his brother had found him and died doing it — gently, and in full: *"He actually fell just now fighting for you. We've been on a quest to look for you."* She got the one dark laugh too — *"Well, he is now."* — and then pulled him onto the shore — *"You just need to rest, and we'll get everything to you as we can."* To Alceo: *"It was at a very high cost… We have lost two of our very good comrades here."*
 - **She held the healing up the whole fight.** A rank-3 Heal over everyone in Round 1. Doctor's Visitation on Cyrathul and later on Bai Jian, which put him back on his feet after the fall. Battle Medicine on herself and Zanthar. Life Boost. And a **Cloak of Light** she sustained from Round 4 to the end.
@@ -254,7 +254,7 @@ She was waiting forty feet above the water. Beside her a man with long dark hair
 > **Panacea**: "It's not too late. It's just begun."
 *To Illcayna's "It's already too late."*
 
-> **Panacea**: "I threw some angry tentacles right at her little shard spot that she keeps trying to pull, and I pull her down and kill her. Right on top of Sai."
+> **Panacea**: "I threw some angry tentacles right at her little shard spot that she keeps trying to pull, and I pull her down and kill her. Right on top of Cy."
 *Narrating her killing blow.*
 
 > **Panacea**: "Are you Bai Jian's brother?"

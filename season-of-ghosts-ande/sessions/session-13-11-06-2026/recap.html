@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 13 &mdash; Time Itself Has Been Stolen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --bg-deep: #0f1418;
+  --bg-card: #171f26;
+  --bg-card-hover: #1f2832;
+  --border: #2a3540;
+  --border-bright: #3e4a58;
+  --text: #e2e8ee;
+  --text-dim: #a0a8b2;
+  --text-bright: #f0f4f8;
+  --crimson: #a82840;
+  --crimson-bright: #c83858;
+  --crimson-glow: #a8284030;
+  --cyan: #4a7088;
+  --cyan-bright: #6890a8;
+  --cyan-glow: #4a708824;
+  --lantern: #d4a050;
+  --lantern-dim: #a07838;
+  --lantern-glow: #d4a05024;
+  --amber: #e8be78;
+  --amber-glow: #e8be7822;
+  --violet: #7a5a98;
+  --violet-glow: #7a5a9822;
+  --jade: #5a8870;
+  --jade-glow: #5a887022;
+  --shadow: #46506a;
+  --shadow-glow: #46506a22;
+  --blood-orange: #c46838;
+  --blood-orange-glow: #c4683822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 10% 5%, #4a708818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a8284018 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, #1a232c14 0%, transparent 60%);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 90%, #4a708814 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 10%, #a8284010 0%, transparent 50%);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes fog-breathe {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header::before {
+  content: '\2740';
+  display: block;
+  color: var(--lantern);
+  font-size: 22px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--lantern-glow);
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.2;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #4a708818;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--lantern);
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--text-bright);
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  position: relative;
+}
+
+h2::before { content: '\2740'; color: var(--lantern); margin-right: 10px; font-size: 14px; }
+
+h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 12px; letter-spacing: 0.3px; }
+h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-bright); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+section { margin-bottom: 56px; }
+p { margin-bottom: 14px; color: var(--text); }
+ul { margin: 10px 0 18px 22px; }
+li { padding: 7px 0; color: var(--text); }
+strong { color: var(--text-bright); font-weight: 600; }
+em { color: var(--text-dim); font-style: italic; }
+
+.composition-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 14px; }
+.comp-seg { height: 100%; }
+.comp-rp { background: var(--violet); }
+.comp-combat { background: var(--crimson); }
+.comp-explore { background: var(--cyan); }
+.comp-social { background: var(--lantern); }
+.comp-mystery { background: var(--blood-orange); }
+
+.composition-legend { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+.party-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.char-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 18px 20px; transition: all 0.2s ease; }
+.char-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.char-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-bright); margin-bottom: 3px; }
+.char-class { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.char-player { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; padding-top: 8px; border-top: 1px solid var(--border); }
+.char-zhen { border-left-color: var(--shadow); }
+.char-iryoku { border-left-color: var(--jade); }
+.char-kaelen { border-left-color: var(--cyan); }
+.char-kaoru { border-left-color: var(--violet); }
+.char-mujin { border-left-color: var(--blood-orange); }
+.char-card.absent { opacity: 0.6; }
+.char-absent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
+
+.summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 28px 30px; box-shadow: 0 2px 16px #00000040; }
+.summary p { font-size: 16px; line-height: 1.75; }
+
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+.act { position: relative; margin-bottom: 38px; }
+.act::before { content: ''; position: absolute; left: -36px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); border: 2px solid var(--bg-deep); }
+.act.combat::before { background: var(--crimson); box-shadow: 0 0 10px var(--crimson-glow); }
+.act.rp::before { background: var(--violet); box-shadow: 0 0 10px var(--violet-glow); }
+.act.explore::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }
+.act.social::before { background: var(--lantern); box-shadow: 0 0 10px var(--lantern-glow); }
+.act.mystery::before { background: var(--blood-orange); box-shadow: 0 0 10px var(--blood-orange-glow); }
+.act-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 6px; }
+.act-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; }
+.act-card ul { margin-left: 18px; }
+
+.combat-box { background: linear-gradient(135deg, #171f26, #1c1a22); border: 1px solid var(--border); border-left: 3px solid var(--crimson); border-radius: 6px; padding: 22px 26px; margin: 20px 0; box-shadow: inset 0 0 24px var(--crimson-glow); }
+.combat-box h3 { color: var(--text-bright); }
+.combat-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1.2px; }
+.combat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0 18px; padding: 14px 16px; background: #0a0e12; border: 1px solid var(--border); border-radius: 4px; }
+.combat-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.combat-stat-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+.spotlight-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.spotlight { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--lantern-dim); border-radius: 6px; padding: 22px 26px; transition: all 0.2s ease; }
+.spotlight:hover { background: var(--bg-card-hover); border-color: var(--border-bright); box-shadow: 0 4px 18px #00000060; }
+.spotlight.s-zhen { border-left-color: var(--shadow); }
+.spotlight.s-iryoku { border-left-color: var(--jade); }
+.spotlight.s-kaelen { border-left-color: var(--cyan); }
+.spotlight.s-kaoru { border-left-color: var(--violet); }
+.spotlight.s-mujin { border-left-color: var(--blood-orange); }
+.spotlight h4 { font-size: 18px; }
+
+.loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.loot-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+.loot-item.magical { border-color: var(--lantern-dim); background: linear-gradient(135deg, #171f26, #20231a); box-shadow: inset 0 0 20px var(--lantern-glow); }
+.loot-name { font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.loot-item.magical .loot-name { color: var(--amber); }
+.loot-source { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
+.loot-note { font-size: 13px; color: var(--text-dim); }
+
+.xp-banner { margin-top: 20px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--lantern-dim); border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lantern); text-transform: uppercase; letter-spacing: 1.4px; box-shadow: 0 0 20px var(--lantern-glow); }
+.xp-banner strong { color: var(--amber); font-size: 16px; font-family: 'Inter', sans-serif; }
+
+blockquote { border-left: 3px solid var(--lantern-dim); background: #4a708808; padding: 16px 22px; margin: 14px 0; border-radius: 0 4px 4px 0; color: var(--text); font-style: italic; }
+blockquote strong { font-style: normal; }
+blockquote .attribution { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; margin-top: 8px; font-style: normal; }
+
+.threads { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; }
+.threads ul { margin-left: 20px; list-style: none; padding-left: 0; }
+.threads li { position: relative; padding: 9px 0 9px 26px; }
+.threads li::before { content: '\2740'; position: absolute; left: 0; color: var(--crimson); font-size: 12px; top: 11px; }
+
+.cliffhanger { background: linear-gradient(135deg, #1c1014, #251018); border: 1px solid var(--crimson); border-left: 4px solid var(--crimson); border-radius: 6px; padding: 28px 30px; box-shadow: 0 0 40px var(--crimson-glow); position: relative; overflow: hidden; }
+.cliffhanger::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #c4683810 0%, transparent 70%); pointer-events: none; }
+.cliffhanger .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.cliffhanger p { color: var(--text); position: relative; z-index: 1; }
+.cliffhanger .big-line { font-family: 'Cinzel Decorative', serif; font-size: 22px; color: var(--text-bright); line-height: 1.4; margin: 18px 0 10px; display: block; text-shadow: 0 0 20px var(--crimson-glow); }
+.cliffhanger .speaker { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.4px; display: block; }
+</style>
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Time Itself Has Been Stolen</h1>
+  <div class="subtitle">Season of Ghosts · Session 13 · the Tan Sugi Monastery, Zhi Hui, the monks’ tea, and Yen Rui’s library</div>
+  <div class="meta-row">
+    <span class="meta-pill">2026-11-06</span>
+    <span class="meta-pill">Pathfinder 2e Remastered</span>
+    <span class="meta-pill">~3h 33m</span>
+    <span class="meta-pill">Fall · the end of the Pilgrim’s Path to the hidden library · 7108 IC</span>
+    <span class="meta-pill">Level 6 · three encounters · 312 XP</span>
+  </div>
+</header>
+
+<div class="composition-bar">
+  <div class="comp-seg comp-combat" style="width:38%"></div>
+  <div class="comp-seg comp-mystery" style="width:24%"></div>
+  <div class="comp-seg comp-social" style="width:12%"></div>
+  <div class="comp-seg comp-explore" style="width:15%"></div>
+  <div class="comp-seg comp-rp" style="width:11%"></div>
+</div>
+<div class="composition-legend" style="margin-bottom:36px">
+  <span><span class="legend-dot" style="background:var(--crimson)"></span>Combat 38%</span>
+  <span><span class="legend-dot" style="background:var(--blood-orange)"></span>Ghosts &amp; Lore 24%</span>
+  <span><span class="legend-dot" style="background:var(--lantern)"></span>The Monks’ Tea 12%</span>
+  <span><span class="legend-dot" style="background:var(--cyan)"></span>Exploration &amp; Loot 15%</span>
+  <span><span class="legend-dot" style="background:var(--violet)"></span>Recap &amp; Table Talk 11%</span>
+</div>
+
+<h2>The Party</h2>
+<div class="party-grid">
+  <div class="char-card char-zhen">
+    <div class="char-name">Zhen Stillness</div>
+    <div class="char-class">Samsaran (Hungerseed) Animist 6 — Liturgist · Druid FA</div>
+    <div class="char-player">Pax</div>
+  </div>
+  <div class="char-card char-kaelen">
+    <div class="char-name">Kaelen Ashford</div>
+    <div class="char-class">Human Monk 6 — bo staff, Staff Acrobat; monk of Sangpotshi</div>
+    <div class="char-player">cajun_code</div>
+  </div>
+  <div class="char-card char-kaoru">
+    <div class="char-name">Kaoru</div>
+    <div class="char-class">Kitsune Magus 6 — Aloof Firmament</div>
+    <div class="char-player">magus player</div>
+  </div>
+  <div class="char-card char-mujin">
+    <div class="char-name">Mu-Jin</div>
+    <div class="char-class">Witch 6 — Spinner of Threads (occult); familiar <strong>Weaver</strong></div>
+    <div class="char-player">snotierknave69</div>
+  </div>
+  <div class="char-card char-iryoku">
+    <div class="char-name">Iryoku-Yasha</div>
+    <div class="char-class">Yaksha Kineticist 6 (Wood/Fire)</div>
+    <div class="char-player">legendfather (Patrick)</div>
+  </div>
+</div>
+<p style="color:var(--text-dim);font-style:italic;margin-top:14px">The recording and the Foundry log both cover the whole session. Combat numbers are from the log. Kaelen’s and Kaoru’s players shared one voice track again, so their lines were separated by whose turn it was and by class kit; lines that couldn’t be separated are left out or marked “the shared mic.” <strong>Yuni</strong>, <strong>Zhi Hui</strong>, <strong>Yen Rui</strong> and <strong>Xin Yue</strong> are spelled from Foundry and the GM’s chat; <strong>Guhdggi</strong>, <strong>Meokdan</strong>, <strong>Fungus Leshy</strong> and <strong>Slime Mold</strong> are Foundry token names.</p>
+
+<h2>Session Summary</h2>
+<div class="summary">
+<p>Iryoku gave the recap, and the GM walked the party over the last crest of the Pilgrim’s Path into the caldera of a long-dormant volcano. At a small shrine by the final wooden arch they found <strong>seven magic items</strong> (among them a monk’s <strong>Spirit Fan</strong>, which Kaelen took, a <strong>Ghost Scarf</strong> for Mu-Jin, <strong>Root Boots</strong> for Iryoku, and a <strong>Resolute Mind Wrap</strong> for Zhen). Then they came to the <strong>Tan Sugi Monastery</strong>, the temple of Kaelen’s own faith, Sangpotshi. It is in ruins under the giant sugi tree. The protective fulus on the gate had been deliberately shredded, and Mu-Jin was the one who asked.</p>
+<p>At the first mold-covered shrine a ghost rose, lamented her death, and loosed ghostly tigers on the party (16 to each of Zhen, Mu-Jin and Iryoku). Mu-Jin’s Recall Knowledge named her: <strong>Yuni, Yeri’s sister.</strong> Zhen critted her with the nodachi on a natural 20, and Kaelen’s Inner Upheaval Flurry destroyed her in one round. As she faded she reached for <strong>Kaelen</strong>, who was carrying the Sangpotshi charm taken off Yeri. To lay her to rest, the party has to give her the charm and tell her what became of her sister, but only after she re-forms in <strong>six days</strong>.</p>
+<p>Mu-Jin scraped the black mold off a <strong>Kodama Kami</strong> statue, and the ghost of the monastery’s founder, <strong>Zhi Hui</strong>, appeared and told them the truth of the Willowshore curse: <em>“It is no mere curse that traps you in Willowshore. Time itself has been stolen from you.”</em> Willowshore is a <strong>cycling mindscape</strong> that repeats every year from the first day of summer to the last day of spring, with everyone’s memory reset. The governor, <strong>Heh Shan-Bao</strong>, tried to bolster the Tan Sugi, cracked <strong>Kugaptee’s</strong> grave instead, and was whisked out of the loop himself. <em>Something is different this cycle.</em> Mu-Jin: <em>“Okay, so just to summarize, we’re in a fucking time loop.”</em></p>
+<p>In the refectory, three <strong>monks of Kugaptee</strong> (Mu-Jin: <em>“Kaelen’s future if he keeps messing up his vows”</em>) asked only for tea. Zhen’s Sense Motive said they meant no harm, and Zhen alone found the hidden cache in the pantry. Mu-Jin weighed poisoning the tea with ghost charges, then chose to do it honestly. His tea ceremony, aided by Iryoku and boosted by a Tin of Rare Tea, was a <strong>critical success</strong>. The monks crumbled to dust after telling the party where they had hidden the <strong>head of Pharasma’s statue: in the upper boughs of the sugi tree.</strong> <strong>96 XP</strong> for no combat.</p>
+<p>The dormitory held a toad-spider with a woman’s head in its cage-mouth (<strong>Guhdggi</strong>) and five fawning underlings (<strong>Meokdan</strong>). Nobody could identify them. Mu-Jin told them the party’s story, <em>“a tale for a tale,”</em> while Iryoku and Kaelen saw them licking their lips. Iryoku’s Blazing Wave opened. <strong>Zhen’s Earth’s Bile and Fireball killed four of the five underlings</strong>, Kaoru’s Fireball the fifth, and Kaelen teleported in with his new <strong>Shrink the Span</strong> and finished the big one. No enemy ever acted, and Mu-Jin never got a turn. Zhen: <em>“We literally just burned down this place.”</em> A <strong>Spiritsight Ring</strong> from the room went to Zhen.</p>
+<p>The greenhouse was the long fight: two <strong>slime molds</strong> and six <strong>fungus leshies</strong> that heal each other when they die, in difficult terrain everywhere. It took four rounds and nine hero points, the leshies punched the monk (<em>“How’s it going to beat me in my own damn game?”</em>), and the kills were spread across all five PCs. The stag statue there brought Zhi Hui back once more. Asked how to escape, she said: <strong>find Heh Shan-Bao</strong> once Kugaptee’s influence is weakened, and <em>“Take the hidden library. My friend Yen Rui can help.”</em></p>
+<p>Behind a secret door, the disembodied <strong>Yen Rui</strong>, the last loyal monk, who died of thirst after traitors sealed her in, told the rest. <strong>Kugaptee is a Nindoru fiend</strong> opposed to everything Sangpotshi teaches (the GM: <em>“Kaelen’s effective mortal enemy”</em>). He was defeated by <strong>Tan Sui Jing</strong>, whose soul became the sugi tree that seals him. The tree is sickening as he strives for rebirth. Zhi Hui’s student <strong>Xin Yue</strong> was corrupted and <em>“toils below in his grave to see the fiend’s soul reborn,”</em> and the fiends here are desecrating the monastery’s statues to amplify him. The library is safe to rest in. It also held a haul of rare rank-4 scrolls. The session ended with the plan set: get Pharasma’s head out of the sugi tree, then the remaining statues. Afterwards the table talked about raising the difficulty, and the GM agreed to start adjusting encounters.</p>
+</div>
+
+<h2>Timeline</h2>
+<div class="timeline">
+
+  <div class="act rp">
+    <div class="act-label">Prologue · Recap &amp; the Last Shrine · 0:00–13:10</div>
+    <div class="act-card">
+      <h3>Seven gifts at the end of the road</h3>
+      <ul>
+        <li><strong>Iryoku gave the recap</strong>: the Garden Shrine, the wisp, the waterfall climb, the storm hag, and the three shrine blessings, <em>“making resilient runes useless.”</em></li>
+        <li>A small shrine by the last wooden arch. Mu-Jin: <em>“It would seem part of this pilgrimage is that we need to cleanse every shrine before we hit the Tan Sugi Monastery.”</em></li>
+        <li><strong>Seven rare items</strong>: Branch of the Great Sugi, Ghost Scarf, Hairpin of Blooming Flowers, Red Thread Knot, Resolute Mind Wrap, Root Boots, Spirit Fan.</li>
+        <li><strong>Kaelen</strong> went back and forth on the <strong>Spirit Fan</strong> (<em>“Ooh, is that a monk weapon?”</em> … <em>“never mind. It’s a fan.”</em>) and took it: <em>“See where that goes.”</em> The GM ruled his temple sword magical too.</li>
+        <li><strong>Mu-Jin</strong> claimed the <strong>Ghost Scarf</strong> for the haunts (<em>“We go up against those a lot”</em>); <strong>Iryoku</strong> the <strong>Root Boots</strong>; <strong>Zhen</strong> the <strong>Resolute Mind Wrap</strong>. Iryoku argued the Hairpin’s dazzle suits Kaoru, a full melee, better than himself.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act explore">
+    <div class="act-label">Act I · Exploration · The Tan Sugi Monastery · 13:10–22:16</div>
+    <div class="act-card">
+      <h3>A temple to Kaelen’s deity, in ruins</h3>
+      <ul>
+        <li><em>“A religious monastery and a temple to [Sangpotshi]. In other words, Kaelen’s deity.”</em> <em>“A gloomy compound set in the shadow of the grove’s giant sugi tree.”</em></li>
+        <li><strong>Mu-Jin</strong> asked whether the gate’s shredded fulus were wear or deliberate. <strong>Deliberate.</strong> An escape fulu and a stumbling fulu came off it (Mu-Jin crit-identified the first).</li>
+        <li>Kaelen hesitated at the gatehouse: <em>“And it’s a door. Who locked me outside?”</em> (It was just closed.)</li>
+        <li>The courtyard: polluted ponds, sugi trees under black mold, small stone shrines. Zhen’s Seek was the party’s best (28). Mu-Jin chose the <strong>southwest shrine</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act II · Combat · Yuni · 22:16–53:37</div>
+    <div class="act-card">
+      <h3>Yeri’s sister</h3>
+      <ul>
+        <li>A ghost lamented her death and loosed ghostly tigers: <strong>16 each</strong> to Zhen, Mu-Jin and Iryoku.</li>
+        <li><strong>Mu-Jin</strong>’s Recall Knowledge: <em>“Yuni. You’ve heard that name.”</em> — <em>“This is Yeri’s sister.”</em> Zhen: <em>“That’s a sad story.”</em></li>
+        <li><strong>Zhen</strong>’s nodachi: natural 20, crit for 30. <strong>Kaelen</strong>, slowed, Inner Upheaval into Flurry: crit, destroyed. One round. <strong>48 XP.</strong></li>
+        <li>As she faded she reached toward <strong>Kaelen</strong>. <strong>Iryoku</strong> made the connection: <em>“Oh, the charm of mental resistance. That was on her sister, wasn’t it?”</em></li>
+        <li>Mu-Jin: <em>“And if we give it to her, does that seem like it will put her spirit at peace?”</em> Yes — and <em>“you also have to tell her what happened to her sister.”</em> She <strong>re-forms in six days</strong>.</li>
+        <li>A penanggalan can <strong>bride a corpse</strong>, wearing a humanoid body by putting its entrails inside.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act III · Lore · Zhi Hui at the Kodama Kami Statue · 53:53–69:03</div>
+    <div class="act-card">
+      <h3>“Time itself has been stolen from you”</h3>
+      <ul>
+        <li><strong>Kaelen felt the statue’s call strongest.</strong> <strong>Mu-Jin</strong> purified it with Crafting (26), scraping the mold off by hand; Zhen and Kaelen passed Religion. A blast of loathing hit Mu-Jin for 2.</li>
+        <li>A non-hostile ghost. Every Recall Knowledge on who she was failed. Zhen learned her saves, Mu-Jin her rejuvenation, Kaoru that she has no weaknesses.</li>
+        <li>Her answer: a <strong>cycling mindscape</strong>, first day of summer to last day of spring, memories reset. The governor <strong>Heh Shan-Bao</strong> tried to bolster the Tan Sugi and cracked <strong>Kugaptee’s</strong> grave; he alone was whisked out. <em>“Something has changed this time.”</em> <strong>40 XP.</strong></li>
+        <li>Mu-Jin: <em>“Okay, so just to summarize, we’re in a fucking time loop that covers all of Willowshore and most of the Hinterlands.”</em> Iryoku corrected him: <em>“he attempted to bolster the Tan Sugi.”</em></li>
+        <li>The shared mic: <em>“Something unleashed into this world that shouldn’t be.”</em> Iryoku: <em>“Like a monk.”</em> On the governor: <em>“No, he’s off getting his own spanking.”</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act social">
+    <div class="act-label">Act IV · Social · The Monks of Kugaptee · 69:09–93:33</div>
+    <div class="act-card">
+      <h3>Tea for the dead</h3>
+      <ul>
+        <li>Three undead monks asked the party’s favourite food — Zhen: <em>“Turkey sandwich.”</em> — then for tea. <strong>Zhen</strong>: <em>“Why can’t you do it yourself?”</em> (<em>“We do not know how to make tea properly.”</em>)</li>
+        <li>Mu-Jin’s Recall Knowledge: <strong>monks of Kugaptee</strong>, <em>“the opposite of Kaelen.”</em> <em>“This is going to be Kaelen’s future if he keeps messing up his vows.”</em> The GM: Kaelen’s very first vow is <em>live selflessly</em>.</li>
+        <li><strong>Zhen’s Sense Motive</strong>: not hostile. <strong>Iryoku</strong> asked why they want it: <em>“You remind us of what it’s like to be alive.”</em> Then he pushed back: <em>“Are we just going to do what they say?”</em> — his Yaksha backstory fought the last undead incursion here.</li>
+        <li><strong>Only Zhen</strong> passed the DC 27 pantry search (31): a hidden cache of <strong>200 gp</strong> in stolen jewelry and art, and a <strong>Spacious Pouch</strong>. Mu-Jin took the <strong>Tin of Rare Tea</strong>.</li>
+        <li><strong>Mu-Jin</strong> weighed poisoning them with ghost charges, then chose honesty. Kaelen, in the kitchen: <em>“Watch it. I’m not trying to have a dark future right now.”</em> Iryoku: <em>“The rate you’re going, you probably will.”</em></li>
+        <li><em>“Mu-Jin in his walking cauldron makes a big pot of tea.”</em> Iryoku aided (Performance 27), Mu-Jin hero-pointed a natural 2, and the Tin’s +2 made it a <strong>critical success</strong>.</li>
+        <li><em>“After they swallow, the tea simply leaks out through the holes in their chests.”</em> They had cut the <strong>head from Pharasma’s statue</strong> and hidden it in the <strong>sugi tree’s upper boughs</strong>. Then they crumbled to dust. <strong>96 XP.</strong> Iryoku: <em>“Hey, ideal solution.”</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act V · Combat · The Guhdggi &amp; the Meokdan · 95:24–118:38</div>
+    <div class="act-card">
+      <h3>A tale for a tale</h3>
+      <ul>
+        <li>A toad-spider with a woman’s head in its mouth, and five fawning underlings. Mu-Jin: <em>“That’s fucked up.”</em> Zhen: <em>“Well, time to do some cleanup.”</em></li>
+        <li>Every Recall Knowledge failed. Zhen: <em>“I’m just an old man. What do I know?”</em></li>
+        <li>It wanted stories; <strong>Zhen and Kaoru</strong> read it as sincere. Mu-Jin, after checking with the party by Message: <em>“Only if you reply in kind. A tale for a tale.”</em></li>
+        <li><strong>Iryoku and Kaelen</strong> saw them licking their lips. Iryoku: <em>“Kill, kill, kill, kill. Time to kill.”</em> Mu-Jin: <em>“Y’all might be just really superficial right now.”</em></li>
+        <li>Blazing Wave; <strong>Zhen’s Earth’s Bile and Fireball, four dead</strong>; Kaoru’s Fireball, the fifth; Kaelen’s first Shrink the Span and a 45-point Flurry on the Guhdggi. No enemy acted. <strong>64 XP.</strong></li>
+        <li>Zhen: <em>“We literally just burned down this place.”</em> The GM: <em>“Fireball in ancient Sangpotshi Monastery.”</em> Iryoku: <em>“It’s in a time loop, it’s fine.”</em></li>
+        <li>The room search turned up a ring; Zhen crit-identified the <strong>Spiritsight Ring</strong> on a natural 20 and, as the party’s best Perception, took it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act combat">
+    <div class="act-label">Act VI · Combat · The Greenhouse · 119:53–167:16</div>
+    <div class="act-card">
+      <h3>Four rounds of mushrooms</h3>
+      <ul>
+        <li>Two slime molds and six fungus leshies that heal each other when they die; the whole room difficult terrain.</li>
+        <li><strong>Zhen</strong>: the first leshy with Earth’s Bile, a slime mold with a hero-pointed nodachi (<em>“Not if I roll a one, but I’m gonna rectify that”</em>), the other with the bile’s persistent fire.</li>
+        <li><strong>Kaelen</strong> teleported over the terrain (<em>“Say hello to my little friend”</em>), took a punch (<em>“How’s it going to beat me in my own damn game?”</em>), and killed two leshies, the second with his fist.</li>
+        <li><strong>Mu-Jin</strong>’s Loose Time’s Arrow quickened the party; <strong>Kaoru</strong>, <strong>Mu-Jin</strong> and <strong>Iryoku</strong> each took a leshy, Iryoku the last. <strong>64 XP.</strong></li>
+        <li>The retrospective. Mu-Jin, hedging first: <em>“You should have saved at least one of those fireballs.”</em> Kaoru: <em>“I’ll switch my next day and start putting two Fireballs in my mix.”</em></li>
+        <li>Loot: a <strong>Verdant Staff</strong> (Iryoku identified it on a natural 20) and <strong>Primeval Mistletoe</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mystery">
+    <div class="act-label">Act VII · Lore · The Stag Statue &amp; Yen Rui’s Library · 169:49–195:44</div>
+    <div class="act-card">
+      <h3>The hidden library</h3>
+      <ul>
+        <li><strong>Zhen</strong> purified the stag statue, singing a prayer (Religion 29); the Mind Wrap ate the backlash (<em>“OK. Resistance.”</em>). Mu-Jin took 7.</li>
+        <li>Zhi Hui again. Mu-Jin saved the Kugaptee question and asked <em>“how do we escape the time loop?”</em> — <em>“If anyone does, it would be Heh Shan-Bao… Take the hidden library. My friend Yen Rui can help.”</em></li>
+        <li>A secret door; a skeleton over an open book; a voice from every corner: <em>“Welcome.”</em> <em>“There was a traitor.”</em> Mu-Jin named her: <strong>Yen Rui</strong>.</li>
+        <li><strong>Iryoku</strong> placed the statue ghost as <strong>Zhi Hui, the monastery’s founder</strong>. Kaelen: <em>“Sir, do you know about the dark future? Monks.”</em> The GM: <em>“the future Kaelens.”</em> Iryoku: <em>“The Kaelens of future past.”</em></li>
+        <li>The lore: <strong>Kugaptee is a Nindoru fiend</strong> opposed to Sangpotshi, sealed by <strong>Tan Sui Jing</strong>, whose soul became the sugi, now sickening. <strong>Xin Yue</strong>, Zhi Hui’s student, toils below for his rebirth.</li>
+        <li>Six rare rank-4 scrolls, two Sangpotshi books, Yen Rui’s notes. The library is safe to rest in. Plan: Pharasma’s head from the sugi tree, then the last two statues.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act rp">
+    <div class="act-label">Epilogue · Table Talk · Difficulty · 195:52–212:37</div>
+    <div class="act-card">
+      <h3>“There’s a balance”</h3>
+      <ul>
+        <li>Mu-Jin opened it: <em>“Most of these guys are really weak, though.”</em> Iryoku: <em>“I think this is the easiest AP.”</em> The GM: Paizo toned the combat down to let the story shine.</li>
+        <li><strong>Zhen</strong>: <em>“if it’s a single boss, don’t make it harder by buff it… adding some like mobs is better,”</em> and more weak mobs do nothing. Abomination Vaults is <em>“too much on the other spectrum. There’s a balance.”</em></li>
+        <li>Iryoku trusts the GM to bump encounters a step and offered a creatures-to-players ratio rule.</li>
+        <li>The GM will start with a five-player budget, more creatures or the Elite template, and wants feedback as it happens.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h2>Combat Encounters</h2>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 1 · Yuni · One Round · the southwest shrine</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemy</div><div class="combat-stat-value">Yuni, ghost (Lv7, HP 82, AC 23, resist 5)</div></div>
+    <div><div class="combat-stat-label">Kill</div><div class="combat-stat-value">Kaelen</div></div>
+    <div><div class="combat-stat-label">Top damage</div><div class="combat-stat-value">Zhen 33</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Zhen, Mu-Jin, Iryoku 16 each · Weaver 8</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">48 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Yuni (Foundry: level 7 ghost, HP 82, AC 23, resist all damage 5, rejuvenation; Frightful Moan DC 25 Will, Tiger Attack DC 25 basic Reflex 4d6 slashing). Foundry: low threat.</p>
+  <p><strong>Initiative</strong>: Yuni 35 (natural 20) · Zhen 26 · Iryoku 26 · Kaoru 24 · Mu-Jin 20 · Kaelen 15. The GM: <em>“Three out of five ones, and then I roll a nat 20.”</em> Zhen and Iryoku hero-pointed their natural 1s (rerolls floored to 10), clearing the house-rule slowed. Kaelen kept his (<em>“I might need that later”</em>) and started <strong>slowed 1</strong>.</p>
+  <h4>Round 1 — Tigers, Then Gone</h4>
+  <ul>
+    <li><strong>Yuni</strong> (quickened): <strong>Frightful Moan</strong> — Iryoku (by 1) and Weaver frightened 2; Zhen and Mu-Jin saved; Kaelen was out of range. <strong>Tiger Attack</strong> on the four in range: Zhen, Mu-Jin, Iryoku <strong>16 each</strong>; Weaver 8. By Mu-Jin’s turn she had flown behind a trunk.</li>
+    <li><strong>Zhen</strong>: <strong>Earth’s Bile</strong> (her resistance ate it; the GM later added 3), <strong>Apparition’s Enhancement</strong>, nodachi <strong>natural 20, crit for 30</strong>, off-guard.</li>
+    <li><strong>Iryoku</strong>: Thermal Nimbus (fire), a melee fire blast for 8.</li>
+    <li><strong>Kaoru</strong>: <strong>Sky Laughs at Waves</strong>, a ninjato hit for 4, <strong>Spellstrike (Shocking Grasp)</strong> — a natural 3 hero-pointed and floored to 10, exactly 21 against AC 21 — for 5 and 3.</li>
+    <li><strong>Mu-Jin</strong>: a free Recall Knowledge (Investigate) named her; <strong>cold-iron Needle Darts</strong> for 8.</li>
+    <li><strong>Kaelen</strong> (slowed): flank, <strong>Inner Upheaval</strong> into Flurry, crit (34) and a miss: <strong>22 (her last 21). Yuni destroyed.</strong></li>
+  </ul>
+  <ul>
+    <li><strong>Damage dealt</strong>: Zhen 33 · Kaelen 21 · Kaoru 12 · Mu-Jin 8 · Iryoku 8 (her 82 exactly).</li>
+    <li><strong>Hero points</strong>: 3 — Zhen and Iryoku (initiative), Kaoru (Spellstrike).</li>
+    <li><strong>After</strong>: Zhen’s Garden of Healing (79 rolled) topped up everyone.</li>
+  </ul>
+  <p style="color:var(--amber)">48 XP</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 2 · The Guhdggi &amp; Five Meokdan · One Round · the dormitory</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">Guhdggi (Lv5, HP 80, AC 21) · 5 Meokdan (Lv2, HP 32, AC 17)</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zhen 4 · Kaoru 1 · Kaelen the Guhdggi</div></div>
+    <div><div class="combat-stat-label">Top damage</div><div class="combat-stat-value">Zhen 109</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">None — no enemy acted</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">64 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Never identified in play. Foundry: moderate threat. Mu-Jin and every enemy never acted.</p>
+  <p><strong>Initiative</strong>: Zhen 34 · Iryoku 32 (hero-pointed from 19) · Kaoru 27 · Kaelen 26 · a Meokdan 26 · Mu-Jin 25 · Guhdggi 19 · Meokdan 19, 18, 10, 10.</p>
+  <h4>Round 1 — The Two AoE Turns</h4>
+  <ul>
+    <li><strong>Zhen</strong>: <strong>Delayed</strong> to let Iryoku go first.</li>
+    <li><strong>Iryoku</strong>: <strong>Blazing Wave</strong>, a 30-foot cone over all six; one Meokdan critically failed (26, prone). His last action reactivated the aura Overflow had shut off, Thermal Nimbus the free impulse.</li>
+    <li><strong>Zhen</strong> (returned): <strong>Earth’s Bile</strong> finished the Meokdan Iryoku had left on 6 and put 14 into the Guhdggi; <strong>Fireball</strong>: <strong>three more Meokdan dead</strong>, 12 more into the Guhdggi.</li>
+    <li><strong>Kaoru</strong>: <strong>Fireball</strong> on the last two — <strong>the last Meokdan dead</strong>, 12 into the Guhdggi. Shield.</li>
+    <li><strong>Kaelen</strong>: <strong>Shrink the Span</strong> for the first time, <strong>Inner Upheaval</strong> into Flurry: crit (34) and hit, 45. <strong>Guhdggi dead.</strong> Mu-Jin: <em>“you’re already fucking dead.”</em></li>
+  </ul>
+  <ul>
+    <li><strong>Damage dealt</strong> (HP removed): Zhen 109 · Iryoku 79 · Kaelen 33 (45 rolled) · Kaoru 19.</li>
+    <li><strong>Hero points</strong>: 1 (Iryoku, initiative). Before the fight Mu-Jin spent one on a Recall Knowledge that still failed.</li>
+  </ul>
+  <p style="color:var(--amber)">64 XP</p>
+</div>
+
+<div class="combat-box">
+  <div class="combat-meta">Encounter 3 · Slime Molds &amp; Fungus Leshies · Four Rounds · the greenhouse</div>
+  <div class="combat-stats">
+    <div><div class="combat-stat-label">Enemies</div><div class="combat-stat-value">2 Slime Molds (Lv2, HP 60, AC 12) · 6 Fungus Leshies (Lv2, HP 30, AC 19)</div></div>
+    <div><div class="combat-stat-label">Kills</div><div class="combat-stat-value">Zhen 3 · Kaelen 2 · Kaoru 1 · Mu-Jin 1 · Iryoku 1</div></div>
+    <div><div class="combat-stat-label">Hero points</div><div class="combat-stat-value">9 spent</div></div>
+    <div><div class="combat-stat-label">PC damage taken</div><div class="combat-stat-value">Kaelen 26 · nobody else hit</div></div>
+    <div><div class="combat-stat-label">Reward</div><div class="combat-stat-value">64 XP</div></div>
+  </div>
+  <p style="color:var(--text-dim);font-style:italic">Slime molds: Reflex +3, immune to critical hits and precision. Fungus leshies: Spore Cloud DC 16 Fortitude; Verdant Burst heals every fungus within 30 feet 2d8 when one dies. The whole room is difficult terrain.</p>
+  <p><strong>Initiative</strong>: Iryoku 32 (hero-pointed from 17) · a leshy · Kaoru 22 · Mu-Jin 21 · Zhen 21 · the other leshies and the slime molds · Kaelen 16 · two leshies.</p>
+  <h4>Round 1 — Spores and Bile</h4>
+  <ul>
+    <li><strong>Iryoku</strong>: <strong>Blazing Wave</strong>, 12–28 to five leshies; one slime mold critically saved.</li>
+    <li><strong>Leshy</strong>: <strong>Spore Cloud</strong>. Kaelen hero-pointed a failure into a critical success; Mu-Jin spent one on Weaver (<em>“Eh, I’m attached to a little dude”</em>). Hourly hero points arrived mid-round.</li>
+    <li><strong>Kaoru</strong>: <strong>Spellstrike (Widow’s Bite)</strong> on a slime mold, a natural 1 hero-pointed into a hit: persistent poison, <strong>enfeebled 1</strong>.</li>
+    <li><strong>Mu-Jin</strong>: Needle Darts missed; <strong>Nudge Fate</strong> on Kaelen; Weaver’s <strong>Balanced Luck</strong> (+1 AC).</li>
+    <li><strong>Zhen</strong>: <strong>Earth’s Bile</strong> — a slime mold critically failed (20), and it <strong>killed a leshy</strong> Blazing Wave had left on 2. Then the nodachi: a natural 1, hero-pointed (<em>“Not if I roll a one, but I’m gonna rectify that”</em>) into 21, then the last 12. <strong>Slime mold dead.</strong></li>
+    <li><strong>Leshies</strong>: punches at Iryoku and spore pods at Kaelen, all misses.</li>
+    <li><strong>Kaelen</strong>: <strong>Shrink the Span</strong> (<em>“Say hello to my little friend”</em>), <strong>Inner Upheaval</strong> (fire) into Flurry on the second slime mold for 33, then 17 (<em>“How did I get a critical?”</em> — Kaoru: <em>“You rolled a 19, dude”</em>).</li>
+    <li><strong>Leshies</strong>: six spore pods at Kaelen, all critical misses.</li>
+  </ul>
+  <h4>Round 2 — Quickened</h4>
+  <ul>
+    <li><strong>Iryoku</strong>: a hero-pointed thrown blast (14), <strong>Flying Flame</strong> on three.</li>
+    <li><strong>Kaoru</strong>: two ninjato crits, the first hero-pointed off a natural 2, 10 and 8. <strong>Leshy dead.</strong> Dueling Parry.</li>
+    <li><strong>Mu-Jin</strong>: <strong>Loose Time’s Arrow</strong>, quickening the party within 30 feet (Kaelen was 35 away).</li>
+    <li><strong>Zhen</strong> (quickened): sustained <strong>Earth’s Bile</strong>, 9 into the second slime mold, leaving it on <strong>1 HP</strong>. <strong>Electric Arc</strong>: 6 to a leshy; the slime mold rolled a natural 20 (<em>“That’s two this turn alone”</em>).</li>
+    <li><strong>Leshy</strong> punched Kaelen for 5 (the GM: <em>“It’s going to beat you with your own game”</em>). <strong>Zhen’s persistent fire burned the last 1 HP. Second slime mold dead.</strong></li>
+    <li><strong>Kaelen</strong>: a Flurry of two crits for <strong>46. Leshy dead.</strong> <em>“How’s it going to beat me in my own damn game?”</em></li>
+    <li><strong>Leshies</strong>: two punches on Kaelen, 3 and 8.</li>
+  </ul>
+  <h4>Round 3 — Fists</h4>
+  <ul>
+    <li><strong>Iryoku</strong> (quickened): <strong>Flying Flame</strong> on three, Thermal Nimbus.</li>
+    <li><strong>Kaoru</strong> (quickened): two ninjato hits, 4 and 6; difficult terrain cost two actions.</li>
+    <li><strong>Mu-Jin</strong> (quickened): Nudge Fate on Iryoku, <strong>Needle Darts for 12. Leshy dead.</strong> <em>“I got to kill one.”</em></li>
+    <li><strong>Zhen</strong>: <strong>Earth’s Bile</strong> on two leshies (one critically failed, 16), catching <strong>Kaelen</strong> (<em>“Well, Kaelen. You’ll be fine.”</em> — 4). <strong>Tempest Surge</strong> for 10 left that leshy on 2.</li>
+    <li><strong>Kaelen</strong>: one hand off the staff, a <strong>punch</strong> — <strong>leshy dead</strong>. A Flurry of fists, one hero-pointed hit for 5. A final punch on him for 6.</li>
+  </ul>
+  <h4>Round 4 — The Last One</h4>
+  <ul>
+    <li><strong>Iryoku</strong>: a two-action melee fire blast, hero-pointed off a natural 3, <strong>14. Last leshy dead.</strong></li>
+  </ul>
+  <ul>
+    <li><strong>Hero points</strong>: nine (Iryoku 3, Kaelen 2, Kaoru 2, Zhen 1, Mu-Jin 1 on Weaver).</li>
+    <li><strong>Damage taken</strong>: Kaelen 26 (four punches and Zhen’s bile). Zhen’s Garden of Healing (83 rolled) put him back to full.</li>
+  </ul>
+  <p style="color:var(--amber)">64 XP</p>
+</div>
+
+<h2>Character Spotlight</h2>
+<div class="spotlight-grid">
+  <div class="spotlight s-zhen">
+    <h4>Zhen Stillness · the Eyes in the Dark Rooms</h4>
+  <ul>
+    <li><strong>The one who found things.</strong> The only one to pass the pantry search, which turned up the hidden 200 gp cache and the Spacious Pouch. He crit-identified the <strong>Spiritsight Ring</strong> on a natural 20; Mu-Jin and Iryoku handed it to him for the best Perception. His <strong>Sense Motive</strong> read the monks of Kugaptee as harmless, which opened the way to the tea, and (with Kaoru) read the Guhdggi’s wish for stories as sincere.</li>
+    <li><strong>The Religion hand.</strong> He purified the stag statue, singing a prayer (29), the check that brought Zhi Hui back with the answer about escape. He passed the Religion check at the Kodama Kami statue too.</li>
+    <li><strong>Dry, practical voice.</strong> To undead monks asking for tea: <em>“Why can’t you do it yourself?”</em> Their favourite-food question: <em>“Turkey sandwich.”</em> At a toad-spider with a head in its mouth: <em>“Well, time to do some cleanup.”</em> After the whole party whiffed on identifying it: <em>“I’m just an old man. What do I know?”</em> Surveying the dormitory: <em>“We literally just burned down this place.”</em></li>
+    <li><strong>The session’s biggest single turn.</strong> In the dormitory he delayed until Iryoku’s Blazing Wave had softened the room, then dropped Earth’s Bile and a <strong>Fireball and killed four of the five Meokdan</strong>. Against Yuni, a <strong>natural-20 nodachi crit for 30</strong>. In the greenhouse he killed the first leshy and both slime molds. Garden of Healing after each real fight.</li>
+    <li><strong>Out of game:</strong> his read on difficulty was the specific one — don’t buff a lone boss you already can’t hit, add bodies to it; more weak mobs do nothing.</li>
+  </ul>
+  </div>
+  <div class="spotlight s-mujin">
+    <h4>Mu-Jin · the One Who Poured the Tea</h4>
+  <ul>
+    <li><strong>The session’s social engine, again.</strong> He named Yuni and asked what would put her to rest (<em>“if we give it to her, does that seem like it will put her spirit at peace?”</em>), asked the library voice if it was Yen Rui, and asked Zhi Hui the escape question while saving the Kugaptee one for later.</li>
+    <li><strong>The tea.</strong> He considered poisoning undead monks with ghost charges, then chose honesty, <em>“seeing if maybe that can help them go on peacefully.”</em> He brewed it himself (<em>“Mu-Jin in his walking cauldron makes a big pot of tea”</em>), hero-pointed a natural 2, and with Iryoku’s aid and the Tin got a <strong>critical success</strong>: three monks at rest, 96 XP, and the location of Pharasma’s head, with no fight.</li>
+    <li><strong>A tale for a tale.</strong> He warned the party by Message (<em>“Comrades, I have no idea what that thing is. Be cautious”</em>), checked with them before sharing anything, then told the Guhdggi their story. When the others saw lip-licking, he stood up for the ugly: <em>“Y’all might be just really superficial right now.”</em></li>
+    <li><strong>The summarizer.</strong> <em>“Okay, so just to summarize, we’re in a fucking time loop that covers all of Willowshore and most of the Hinterlands.”</em> And he tied the corrupted monks to Kaelen: <em>“This is going to be Kaelen’s future if he keeps messing up his vows.”</em></li>
+    <li>Purified the Kodama Kami statue by hand. <strong>Loose Time’s Arrow</strong>, Nudge Fate and Balanced Luck, Needle Darts on Yuni, a leshy kill. Spent a hero point on Weaver (<em>“he’s a big part of my class features”</em>). Opened the after-session talk on difficulty.</li>
+  </ul>
+  </div>
+  <div class="spotlight s-iryoku">
+    <h4>Iryoku-Yasha · the Lore-Reader Who Asked Why</h4>
+  <ul>
+    <li><strong>The one asking the questions.</strong> He spotted that Yuni’s charm was Yeri’s and proposed the Recall Knowledge that found how to lay her to rest. He asked the monks <em>“Why do you want it?”</em> and got <em>“You remind us of what it’s like to be alive.”</em></li>
+    <li><strong>The skeptic with a reason.</strong> <em>“Even though we know they’re being honest, we now know that these are evil, unholy, undead monks. Are we just going to do what they say?”</em> His backstory fought the last undead incursion here. He still <strong>aided Mu-Jin’s tea ceremony</strong> (Performance 27) to make the crit possible.</li>
+    <li><strong>The eyes in the dormitory.</strong> He and Kaelen saw the hungry lip-licking (Sense Motive 27): <em>“Kill, kill, kill, kill. Time to kill.”</em> He opened that fight with Blazing Wave across all six.</li>
+    <li><strong>Lore and quartermaster.</strong> Gave the recap, sorted the shrine items, identified <strong>Zhi Hui as the founder</strong> from her memoir, crit-identified the Verdant Staff, read out every scroll, and corrected the record on the governor.</li>
+    <li><strong>The one-liners.</strong> <em>“Like a monk.”</em> <em>“No, he’s off getting his own spanking.”</em> <em>“It’s in a time loop, it’s fine.”</em> <em>“My fireballs are infinite… I have no resources.”</em> <em>“The Kaelens of future past.”</em> And the greenhouse’s last kill.</li>
+  </ul>
+  </div>
+  <div class="spotlight s-kaelen">
+    <h4>Kaelen Ashford · the Monk in His Own Temple</h4>
+  <ul>
+    <li><strong>Walking into his faith’s ruined home.</strong> Kaelen felt the Kodama Kami statue’s call <strong>strongest of anyone</strong>, the dying Yuni reached for him and the Sangpotshi charm he carries, and Yen Rui’s lore made <strong>Kugaptee the fiend opposed to everything Sangpotshi is</strong>, <em>“Kaelen’s effective mortal enemy.”</em></li>
+    <li><strong>The dark future.</strong> When the monks of Kugaptee turned out to be what a vow-breaking monk becomes: <em>“Watch it. I’m not trying to have a dark future right now,”</em> and later, to the library ghost, <em>“Sir, do you know about the dark future? Monks.”</em> He stayed to talk with the monks, <em>“trying to understand his possible future”</em> (the GM).</li>
+    <li><strong>Two big kills.</strong> Yuni, Inner Upheaval into Flurry while slowed. The <strong>Guhdggi</strong>, teleporting in with his brand-new <strong>Shrink the Span</strong> and Flurrying it for 45. Two fungus leshies besides (a 46-damage double crit, and a fist).</li>
+    <li><strong>The comedy.</strong> <em>“And it’s a door. Who locked me outside?”</em> <em>“Say hello to my little friend, my counter to a difficult terrain.”</em> <em>“How’s it going to beat me in my own damn game?”</em> Then he took a hand off the staff and punched back.</li>
+    <li>Took the <strong>Spirit Fan</strong>. Took all of the greenhouse’s damage, 26.</li>
+  </ul>
+  </div>
+  <div class="spotlight s-kaoru">
+    <h4>Kaoru · the Quiet Blade</h4>
+  <ul>
+    <li><strong>Low volume tonight</strong>, as usual off his own turns, and his voice shares a track with Kaelen’s, so few lines can be pinned to him. What is clearly his is in the play.</li>
+    <li><strong>In the fights:</strong> Sky Laughs at Waves and a hero-pointed Shocking Grasp Spellstrike on Yuni; a <strong>Fireball that finished the fifth Meokdan</strong>; a Widow’s Bite Spellstrike that enfeebled a slime mold; <strong>a leshy kill</strong> on a pair of ninjato crits; Dueling Parry. To Kaelen’s <em>“How did I get a critical?”</em>: <em>“You rolled a 19, dude.”</em></li>
+    <li><strong>In the investigation:</strong> the “any weaknesses?” question on Zhi Hui’s ghost; read the Guhdggi’s sincerity with Zhen; identified the escape fulu and two rare scrolls (Sacred Nimbus, Tomorrow’s Dawn).</li>
+    <li>Already planning the next fight: <em>“I’ll switch my next day and start putting two Fireballs in my mix.”</em></li>
+  </ul>
+  </div>
+</div>
+
+<h2>Loot</h2>
+<div class="loot-grid">
+  <div class="loot-item magical"><div class="loot-name"><strong>Spirit Fan</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">+1 striking fighting fan (monk); lights when it drops a creature, then Release Life Energy. Kaelen.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Ghost Scarf</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">+1 Perception vs haunts; Ghost Slayer’s Caress. Mu-Jin.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Root Boots</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">+1 Stealth in forests; Root Walk. Iryoku.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Resolute Mind Wrap</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">Mental resistance 5; Shield Thoughts. Zhen.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Branch of the Great Sugi</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">+1 striking whip; grows a healing sugi tree from an unholy corpse (3d8+8, 10-ft burst). Holder not confirmed.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Hairpin of Blooming Flowers</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">+1 Diplomacy; Scatter Petals. Suggested for Kaoru.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Red Thread Knot</strong></div><div class="loot-source">End-of-path shrine</div><div class="loot-note">Six knots: a critically failed save becomes a failure. Holder not confirmed.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Escape &amp; stumbling fulus</strong></div><div class="loot-source">The gatehouse</div><div class="loot-note">Consumables.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>200 gp</strong> of jewelry, statues, art</div><div class="loot-source">Pantry cache (Zhen’s search)</div><div class="loot-note">Stolen about a month before the last day of spring.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Spacious Pouch (Type II)</strong></div><div class="loot-source">Pantry cache</div><div class="loot-note"></div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Tin of Rare Tea</strong></div><div class="loot-source">The pantry</div><div class="loot-note">140 gp. +2 to Host a Tea Ceremony. Mu-Jin.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Sterling artisan’s tools</strong> (tea)</div><div class="loot-source">The kitchen</div><div class="loot-note">+1 item to Crafting. Mu-Jin.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>5 unusual liquids</strong></div><div class="loot-source">Revealed early by the GM</div><div class="loot-note">Unidentified. Mu-Jin.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Spiritsight Ring</strong></div><div class="loot-source">The dormitory</div><div class="loot-note">Senses incorporeal creatures. Zhen.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Verdant Staff</strong></div><div class="loot-source">The greenhouse</div><div class="loot-note">Tangle Vine, Runic Body/Weapon, Entangling Flora, Oaken Resilience, One with Plants, Shape Wood.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Primeval Mistletoe</strong></div><div class="loot-source">The greenhouse</div><div class="loot-note">+1 Nature; primal locus; Anoint, Bind.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Yen Rui’s Notes</strong></div><div class="loot-source">The hidden library</div><div class="loot-note">How to put the library’s poltergeists to rest.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Collection of the Teachings of Sangpotshi</strong></div><div class="loot-source">The hidden library</div><div class="loot-note">600 gp. +2 to Sangpotshi Lore, Nindoru Lore, Religion on the philosophy.</div></div>
+  <div class="loot-item"><div class="loot-name"><strong>Watchers of the Cycle</strong></div><div class="loot-source">The hidden library</div><div class="loot-note">+1 Sangpotshi/reincarnation RK; ritual formulas.</div></div>
+  <div class="loot-item magical"><div class="loot-name"><strong>Six rank-4 scrolls</strong></div><div class="loot-source">The hidden library</div><div class="loot-note">Entangle Fate · Life’s Fresh Bloom · Prophet’s Luck · Sacred Nimbus · Tomorrow’s Dawn · Wall of Mirrors.</div></div>
+</div>
+<div class="xp-banner">Experience · 48 Yuni · 40 Zhi Hui · 96 the monks’ tea · 64 dormitory · 64 greenhouse = <strong>312 XP each</strong></div>
+
+<h2>Memorable Quotes</h2>
+<blockquote><strong>Zhi Hui</strong>: “It is no mere curse that traps you in Willowshore. Time itself has been stolen from you.”
+<span class="attribution">At the Kodama Kami statue, answering what the curse is.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: “Okay, so just to summarize, we’re in a fucking time loop that covers all of Willowshore and most of the Hinterlands.”
+<span class="attribution">The debrief, right after.</span></blockquote>
+<blockquote><strong>Iryoku</strong>: “Like a monk.”
+<span class="attribution">After the shared mic’s “Something unleashed into this world that shouldn’t be.”</span></blockquote>
+<blockquote><strong>Zhen</strong>: “Why can’t you do it yourself?”
+<span class="attribution">To three undead monks asking him to fetch tea from the pantry.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: “Okay, so this is going to be Kaelen’s future if he keeps messing up his vows. Literally means black monk.”
+<span class="attribution">Learning what the monks of Kugaptee are.</span></blockquote>
+<blockquote><strong>Kaelen</strong>: “Watch it. I’m not trying to have a dark future right now.” — <strong>Iryoku</strong>: “The rate you’re going, you probably will.”
+<span class="attribution">Ten minutes later, in the kitchen, during the poison-the-tea debate.</span></blockquote>
+<blockquote><strong>Iryoku</strong>: “Even though we know they’re being honest, we now know that these are evil, unholy, undead monks. Are we just going to do what they say?”
+<span class="attribution">Before the tea.</span></blockquote>
+<blockquote><strong>Zhen</strong>: “I’m just an old man. What do I know?”
+<span class="attribution">After every Recall Knowledge on the Guhdggi failed.</span></blockquote>
+<blockquote><strong>Mu-Jin</strong>: “Only if you reply in kind. A tale for a tale.”
+<span class="attribution">Answering the Guhdggi’s invitation to share stories.</span></blockquote>
+<blockquote><strong>Zhen</strong>: “We literally just burned down this place.”
+<span class="attribution">Right after his Fireball in the dormitory, in a monastery of Kaelen’s faith, with Kaoru’s still to come.</span></blockquote>
+<blockquote><strong>Kaelen</strong>: “How’s it going to beat me in my own damn game?”
+<span class="attribution">After the GM: “It’s going to beat you with your own game,” when a fungus leshy punched him.</span></blockquote>
+<blockquote><strong>Kaoru</strong>: “You rolled a 19, dude.”
+<span class="attribution">To Kaelen’s “How did I get a critical?”</span></blockquote>
+<blockquote><strong>Kaoru</strong>: “I’ll switch my next day and start putting two Fireballs in my mix.”
+<span class="attribution">After the greenhouse slog.</span></blockquote>
+
+<h2>Open Threads</h2>
+<div class="threads">
+<ul>
+  <li><strong>Yuni re-forms in six days.</strong> Give her Yeri’s charm (Kaelen has it) and tell her what happened to her sister.</li>
+  <li><strong>The head of Pharasma’s statue</strong> is in the upper boughs of the sugi tree in the central courtyard.</li>
+  <li><strong>Two statues left</strong>: the <strong>Main Hall</strong>, and <strong>Pharasma’s</strong>. Each purification so far brought Zhi Hui back.</li>
+  <li><strong>Heh Shan-Bao</strong> cracked Kugaptee’s grave trying to bolster the tree, was pulled out of the loop, and is <em>“trapped within his own mindscape.”</em> Trails will appear once Kugaptee’s influence is weakened.</li>
+  <li><strong>Xin Yue</strong>, Zhi Hui’s corrupted student, <em>“toils below in his grave.”</em></li>
+  <li><strong>“Something has changed this time.”</strong> Kugaptee’s growing strength, or outside forces. Mu-Jin’s candidates: Kugaptee, or Shinzo.</li>
+  <li><strong>The loop’s clock.</strong> First day of summer to last day of spring. It is fall now.</li>
+  <li><strong>The traitors</strong> who sealed Yen Rui in, and <strong>the interlopers</strong> whose magic cut the head from Pharasma’s statue.</li>
+  <li><strong>The library’s poltergeists</strong>, and Yen Rui’s notes on laying them to rest.</li>
+  <li><strong>The Guhdggi and Meokdan</strong> were never identified. Iryoku suggested Nindoru Lore.</li>
+  <li><strong>Kaelen’s “dark future”</strong>: the Kurobozu are what vow-breaking monks become.</li>
+  <li><strong>Difficulty</strong>: the GM will adjust toward a five-player budget (more creatures or the Elite template) and wants feedback.</li>
+</ul>
+</div>
+
+<section class="pax-notes">
+<h2>Pax’s Notes — Zhen Stillness’s Journal</h2>
+<p class="pax-intro">Private notes, observations, and things to think about. Pax’s notes only — not shared with the rest of the party.</p>
+
+<h3>What Zhen did this session</h3>
+<ul>
+  <li><strong>Yuni</strong>: natural 1 on initiative, hero-pointed it. Took the tigers for 16. Earth’s Bile did 3 through her resistance. Nodachi crit on a natural 20 for 30.</li>
+  <li><strong>The Kodama Kami statue</strong>: passed the Religion check. Chose her saves when we learned about her (Will +17).</li>
+  <li><strong>The monks</strong>: Sense Motive, no hostility. Asked them why they can’t make their own tea. <strong>Only one to find the pantry cache</strong> (200 gp of stolen goods, a Spacious Pouch).</li>
+  <li><strong>The dormitory</strong>: delayed behind Iryoku’s Blazing Wave, then Earth’s Bile and <strong>Fireball: four Meokdan dead.</strong> Sense Motive on the Guhdggi: sincere. Critical success on the room search, then crit-identified the <strong>Spiritsight Ring</strong> on a natural 20. Took it.</li>
+  <li><strong>The greenhouse</strong>: Earth’s Bile three times. Killed the first leshy and both slime molds (one with a hero-pointed nodachi, one with Earth’s Bile’s persistent fire on its last 1 HP). Caught Kaelen in the bile once (4). Tempest Surge.</li>
+  <li><strong>The stag statue</strong>: purified it with a sung prayer (Religion 29). Took no damage from the backlash; the <strong>Resolute Mind Wrap</strong> from the end-of-path shrine ate it.</li>
+  <li>Garden of Healing twice.</li>
+</ul>
+
+<h3>Things Zhen knows that the party does not</h3>
+<ul>
+  <li>Nothing held back. Everything this session was said aloud.</li>
+</ul>
+
+<h3>What Zhen is thinking about</h3>
+<ul>
+  <li><strong>Time itself was stolen.</strong> A year, repeating, memories reset. <em>“Something has changed this time.”</em> What is it that let us come here at all?</li>
+  <li><strong>Zhi Hui keeps coming back when a statue is cleansed.</strong> Two statues left. The fiends desecrate them to amplify Kugaptee; each one cleansed has been another answer.</li>
+  <li><strong>Yuni.</strong> Six days. The charm, and the truth about Yeri. Penanggalans bride a corpse.</li>
+  <li><strong>Kaelen and the monks.</strong> The monks of Kugaptee are what a broken vow makes. The dead here were his faith’s.</li>
+  <li><strong>Pacing.</strong> Two fights this session lasted one round; the third was four rounds of punching mushrooms. The GM is going to add bodies or Elite templates.</li>
+</ul>
+
+<h3>Open questions for next session</h3>
+<ul>
+  <li>What did <strong>Heh Shan-Bao</strong> actually do, and where is <em>“his own mindscape”</em>?</li>
+  <li>Who are <strong>the traitors</strong>, and who are <strong>the interlopers</strong> whose magic cut the head from Pharasma’s statue?</li>
+  <li>What is <strong>Xin Yue</strong> doing below, and how close is the rebirth?</li>
+  <li>What were the <strong>Guhdggi</strong> and the <strong>Meokdan</strong>?</li>
+  <li>What does the <strong>Main Hall</strong> statue hold?</li>
+</ul>
+</section>
+
+</div>
+
+<style>
+.pax-notes {
+  background: #1f2832;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lantern);
+  border-radius: 6px;
+  padding: 28px 30px;
+  box-shadow: inset 0 0 32px var(--lantern-glow), 0 4px 20px #00000060;
+}
+.pax-notes h2 { border-bottom-color: var(--lantern-dim); }
+.pax-notes h2::before { color: var(--lantern); }
+.pax-notes h3 { color: var(--amber); margin-top: 24px; }
+.pax-notes .pax-intro { color: var(--text-dim); font-style: italic; padding-bottom: 16px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+</style>
+</body>
+</html>
